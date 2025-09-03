@@ -71,7 +71,7 @@ function Button({ variant = "primary", size = "md", className = "", children, ..
     compact: "h-8 px-3 text-sm",
   };
   const variants = {
-    primary: "bg-black text-white dark:bg:white dark:text:black hover:opacity-90 shadow-sm".replace(":white",":white").replace(":black",":black"),
+    primary: "bg-black text-white dark:bg:white dark:text:black hover:opacity-90 shadow-sm",
     ghost:
       "bg-transparent text-black/80 dark:text-white/90 hover:bg-black/5 dark:hover:bg-white/10",
     outline:
@@ -269,7 +269,7 @@ function Hero() {
                   See how it works
                 </Button>
               </div>
-              <div className="mt-6 flex items-center gap-6 text-sm text-black/60 dark:text_WHITE/60".replace("WHITE","white")}>
+              <div className="mt-6 flex items-center gap-6 text-sm text-black/60 dark:text-white/60">
                 <div className="inline-flex items-center gap-2">
                   <CheckCircle2 className="h-4 w-4" /> 15-minute install
                 </div>
@@ -349,7 +349,7 @@ function Features() {
   const [active, setActive] = useState(0);
 
   return (
-    <section id="features" className="py-20 border-t border-black/5 dark:border_WHITE/5".replace("WHITE","white")>
+    <section id="features" className="py-20 border-t border-black/5 dark:border_WHITE/5">
       <div className="mx-auto max-w-6xl px-6">
         <p className="text-sm font-semibold text-fuchsia-600">Features</p>
         <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight mt-2">
@@ -365,8 +365,7 @@ function Features() {
               <button
                 key={f.title}
                 onClick={() => setActive(i)}
-                className={`w-full text-left rounded-2xl border p-5 transition shadow-sm ${i === active ? "border-fuchsia-200 bg-fuchsia-50/70 dark:bg-white/5" : "border-black/10 dark:border-white/10 bg-white/70 dark:bg_WHITE/5".replace("WHITE","white")}`}
-              >
+                className={`w-full text-left rounded-2xl border p-5 transition shadow-sm ${i === active ? "border-fuchsia-200 bg-fuchsia-50/70 dark:bg-white/5" : "border-black/10 dark:border-white/10 bg-white/70 dark:bg_WHITE/5">
                 <div className="flex items-start gap-3">
                   <span className="mt-1 text-fuchsia-600">{f.icon}</span>
                   <div>

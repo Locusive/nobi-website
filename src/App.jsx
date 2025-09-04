@@ -219,6 +219,8 @@ function DualModeSearchBar({ defaultMode = "ai", size = "regular" }) {
 
 function PreviewCard() {
   const [videoFailed, setVideoFailed] = useState(false);
+  const showHeroBadge = false; // toggle to true if you ever want the label back
+
   return (
     <div className="w-full h-[250px] sm:h-[300px] lg:h-[350px] flex items-center justify-center rounded-2xl border border-black/10 dark:border-white/10 bg-white/60 dark:bg-white/5 overflow-hidden relative">
       {!videoFailed ? (
@@ -230,20 +232,25 @@ function PreviewCard() {
           playsInline
           className="w-full h-full object-contain"
           onError={() => setVideoFailed(true)}
-        >
-          Sorry, your browser doesn't support embedded videos.
-        </video>
+          aria-hidden="true"         // decorative; hide from screen readers
+          tabIndex={-1}
+        />
       ) : (
         <div className="w-full h-full flex items-center justify-center">
-          <PlaceholderSVG label="Animation preview" className="w-full h-full" />
+          {/* no label so the placeholder has no visible text */}
+          <PlaceholderSVG label="" className="w-full h-full" />
         </div>
       )}
-      <div className="pointer-events-none absolute bottom-2 left-2 text-[11px] px-2 py-1 rounded-md bg-black/5 dark:bg-white/10 text-black/60 dark:text-white/60">
-        Animation preview
-      </div>
+
+      {showHeroBadge && (
+        <div className="pointer-events-none absolute bottom-2 left-2 text-[11px] px-2 py-1 rounded-md bg-black/5 dark:bg-white/10 text-black/60 dark:text-white/60">
+          Animation preview
+        </div>
+      )}
     </div>
   );
 }
+
 
 function Hero() {
   return (

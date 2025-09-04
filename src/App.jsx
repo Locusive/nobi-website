@@ -61,7 +61,7 @@ function isVideoSource(src = "") {
 function MediaBox({ src, alt = "" }) {
   const [failed, setFailed] = useState(false);
 
-  // Reset when the source changes so we don't stay in a "failed" state
+  // reset any previous error when the src changes
   useEffect(() => setFailed(false), [src]);
 
   if (!src) return <PlaceholderSVG label="" className="w-full h-full" />;
@@ -69,12 +69,12 @@ function MediaBox({ src, alt = "" }) {
   if (isVideoSource(src) && !failed) {
     return (
       <video
-        key={src}                              // force a fresh player per source
+        key={src}                          // <— forces a fresh element per src
         src={src}
         autoPlay
-        loop                                   // keep if you want looping
         muted
         playsInline
+        loop                                // remove this if you DON'T want looping
         className="w-full h-full object-cover object-top"
         onError={() => setFailed(true)}
       />

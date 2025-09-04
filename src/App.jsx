@@ -271,7 +271,7 @@ function Hero() {
 </div>
 
               </div>
-              <div className="mt-6 flex items-center gap-6 text-sm text-black/60 dark:text-white/60">
+              <div className="mt-6 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-black/60 dark:text-white/60">
                 <div className="inline-flex items-center gap-2">
                   <CheckCircle2 className="h-4 w-4" /> 15-minute install
                 </div>
@@ -351,7 +351,7 @@ function Features() {
   const [active, setActive] = useState(0);
 
   return (
-    <section id="features" className="py-20 border-t border-black/5 dark:border_WHITE/5">
+    <section id="features" className="py-20 border-t border-black/5 dark:border_white/5">
       <div className="mx-auto max-w-6xl px-6">
         <p className="text-sm font-semibold text-fuchsia-600">Features</p>
         <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight mt-2">

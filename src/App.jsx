@@ -80,22 +80,22 @@ function MediaBox({ src, alt = "", restartKey }) {
   if (!src) return <PlaceholderSVG label="" className="w-full h-full" />;
 
   if (isVideoSource(src) && !failed) {
-    return (
-      <video
-        key={restartKey || src}           // force a fresh element
-        ref={vidRef}
-        src={src}
-        autoPlay
-        muted
-        playsInline
-        // remove "loop" if you want it to stop at the end
-        className="w-full h-full object-cover object-top"
-        onError={() => setFailed(true)}
-        aria-hidden="true"
-        tabIndex={-1}
-      />
-    );
-  }
+  return (
+    <video
+      key={restartKey || src}
+      ref={vidRef}
+      src={src}
+      autoPlay
+      muted
+      playsInline
+      loop                     // ← add this
+      className="w-full h-full object-cover object-top"
+      onError={() => setFailed(true)}
+      aria-hidden="true"
+      tabIndex={-1}
+    />
+  );
+}
 
   return (
     <AssetImage

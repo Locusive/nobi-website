@@ -58,25 +58,41 @@ function isVideoSource(src = "") {
   return /\.(mp4|webm|ogg)(\?.*)?$/i.test(src);
 }
 
-function MediaBox({ src, alt = "" }) {
+function MediaBox({ src, alt = "", restartKey }) {
   const [failed, setFailed] = useState(false);
+  const vidRef = useRef(null);
 
-  // reset any previous error when the src changes
+  // clear any previous error when the src changes
   useEffect(() => setFailed(false), [src]);
+
+  // whenever restartKey or src changes, reset and play from the start
+  useEffect(() => {
+    const v = vidRef.current;
+    if (v) {
+      try {
+        v.currentTime = 0;
+        const p = v.play();
+        if (p && typeof p.then === "function") p.catch(() => {});
+      } catch {}
+    }
+  }, [restartKey, src]);
 
   if (!src) return <PlaceholderSVG label="" className="w-full h-full" />;
 
   if (isVideoSource(src) && !failed) {
     return (
       <video
-        key={src}                          // <— forces a fresh element per src
+        key={restartKey || src}           // force a fresh element
+        ref={vidRef}
         src={src}
         autoPlay
         muted
         playsInline
-        loop                                // remove this if you DON'T want looping
+        // remove "loop" if you want it to stop at the end
         className="w-full h-full object-cover object-top"
         onError={() => setFailed(true)}
+        aria-hidden="true"
+        tabIndex={-1}
       />
     );
   }
@@ -89,6 +105,7 @@ function MediaBox({ src, alt = "" }) {
     />
   );
 }
+
 
 function AssetImage({ src, alt, className = "", labelForPlaceholder }) {
   const [failed, setFailed] = useState(false);
@@ -371,37 +388,41 @@ function Logos() {
 }
 
 function Features() {
-  // ... your items
+  const items = [ /* …your items… */ ];
   const [active, setActive] = useState(0);
-  const [mediaNonce, setMediaNonce] = useState(0);   // <— NEW
+  const [restartKey, setRestartKey] = useState(0);   // NEW
+
+  // Build a cache-busted src so the browser always re-fetches the video
+  const rawSrc = items[active]?.media?.src || "";
+  const bustSrc =
+    rawSrc && `${rawSrc}${rawSrc.includes("?") ? "&" : "?"}r=${restartKey}`;
 
   return (
     <section id="features" className="py-20 border-t border-black/5 dark:border-white/5">
       <div className="mx-auto max-w-6xl px-6">
-        {/* ... headings ... */}
-
+        {/* … */}
         <div className="mt-8 grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
           <div className="space-y-4">
             {items.map((f, i) => (
               <button
                 key={f.title}
-                onClick={() => { setActive(i); setMediaNonce(n => n + 1); }}  // <— change
+                onClick={() => { setActive(i); setRestartKey(k => k + 1); }} // bump on every click
                 className={`w-full text-left rounded-2xl border p-5 transition shadow-sm ${
                   i === active
                     ? "border-fuchsia-200 bg-fuchsia-50/70 dark:bg-white/5"
                     : "border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/5"
                 }`}
               >
-                {/* ...content... */}
+                {/* … */}
               </button>
             ))}
           </div>
 
-          {/* Right: large preview panel */}
           <div className="h-full rounded-3xl border border-black/10 dark:border-white/10 bg-white/60 dark:bg-white/5 shadow-inner overflow-hidden">
             <MediaBox
-              key={`${items[active]?.media?.src}-${mediaNonce}`}      // <— NEW
-              src={items[active]?.media?.src}
+              key={restartKey}                 // ensures remount
+              restartKey={restartKey}          // tells MediaBox to reset/play
+              src={bustSrc}                    // cache-busted src
               alt={items[active]?.media?.alt || ""}
             />
           </div>

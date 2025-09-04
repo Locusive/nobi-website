@@ -370,14 +370,14 @@ function Features() {
     {
       title: "AI Mode your Search",
       desc:
-        "Let users who want the ChatGPT experience on your site 'Ask AI'. Keep your default keyword search for everyone else.",
+        "Let users who want the ChatGPT experience from your search 'Ask AI'. Keep your default keyword search for everyone else.",
       icon: <Sparkles className="h-4 w-4" />,
       media: { src: "/media/feature-ai-mode.mp4?v=2", alt: "" },
     },
     {
       title: "Simplify Collections Pages",
       desc:
-        "Empower your customers to drill down from 100s of SKUs to the perfect fit in seconds, simply by asking.",
+        "Empower customers to drill down from 100s of SKUs to the perfect fit in seconds, simply by asking.",
       icon: <Filter className="h-4 w-4" />,
       media: { src: "/media/feature-collections.mp4", alt: "Collections assistant demo" },
     },
@@ -388,13 +388,6 @@ function Features() {
       icon: <MousePointerClick className="h-4 w-4" />,
       media: { src: "/media/feature-capture.mp4", alt: "Capture bouncers demo" },
     },
-    {
-      title: "Analytics Built-In",
-      desc:
-        "See how Nobi drives revenue impact versus your default experience. Analyze trends in what customers are shopping for and why.",
-      icon: <BarChart3 className="h-4 w-4" />,
-      media: { src: "/media/feature-analytics.png", alt: "Analytics demo" },
-    },
   ];
   const [active, setActive] = useState(0);
   const showPreviewCaption = false; // set to true if you ever want the label back
@@ -404,10 +397,10 @@ function Features() {
       <div className="mx-auto max-w-6xl px-6">
         <p className="text-sm font-semibold text-fuchsia-600">Features</p>
         <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight mt-2">
-          One seamless experience, wherever you want in your store.
+          One seamless experience, anywhere in your store.
         </h2>
         <p className="mt-3 text-black/70 dark:text-white/70 max-w-3xl">
-          Nobi makes it easy to test whether conversational AI is right for your brand.
+          Test conversational AI on your PLPs, search, PDP and anywhere else you think is right for your brand.
         </p>
 
         <div className="mt-8 grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">

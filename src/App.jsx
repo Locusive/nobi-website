@@ -217,30 +217,40 @@ function DualModeSearchBar({ defaultMode = "ai", size = "regular" }) {
   );
 }
 
+function AspectBox({ ratio = 16 / 9, className = "", children }) {
+  // 16/9 -> padding-top: 56.25%
+  return (
+    <div className={`relative w-full ${className}`} style={{ paddingTop: `${100 / ratio}%` }}>
+      <div className="absolute inset-0">{children}</div>
+    </div>
+  );
+}
+
 function PreviewCard() {
   const [videoFailed, setVideoFailed] = useState(false);
-  const showHeroBadge = false; // toggle to true if you ever want the label back
+  const showHeroBadge = false; // toggle if you want the label back
 
   return (
-    <div className="w-full h-[250px] sm:h-[300px] lg:h-[350px] flex items-center justify-center rounded-2xl border border-black/10 dark:border-white/10 bg-white/60 dark:bg-white/5 overflow-hidden relative">
-      {!videoFailed ? (
-        <video
-          src="/media/preview-animation.mp4"
-          autoPlay
-          loop
-          muted
-          playsInline
-          className="w-full h-full object-contain"
-          onError={() => setVideoFailed(true)}
-          aria-hidden="true"         // decorative; hide from screen readers
-          tabIndex={-1}
-        />
-      ) : (
-        <div className="w-full h-full flex items-center justify-center">
-          {/* no label so the placeholder has no visible text */}
-          <PlaceholderSVG label="" className="w-full h-full" />
-        </div>
-      )}
+    <div className="w-full rounded-2xl border border-black/10 dark:border-white/10 bg-white/60 dark:bg-white/5 overflow-hidden relative">
+      <AspectBox ratio={16/9}>
+        {!videoFailed ? (
+          <video
+            src="/media/preview-animation.mp4"
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="w-full h-full object-cover"   // use object-contain if you prefer no cropping
+            onError={() => setVideoFailed(true)}
+            aria-hidden="true"
+            tabIndex={-1}
+          />
+        ) : (
+          <div className="w-full h-full flex items-center justify-center">
+            <PlaceholderSVG label="" className="w-full h-full" />
+          </div>
+        )}
+      </AspectBox>
 
       {showHeroBadge && (
         <div className="pointer-events-none absolute bottom-2 left-2 text-[11px] px-2 py-1 rounded-md bg-black/5 dark:bg-white/10 text-black/60 dark:text-white/60">
@@ -250,6 +260,7 @@ function PreviewCard() {
     </div>
   );
 }
+
 
 
 function Hero() {

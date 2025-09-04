@@ -45,6 +45,45 @@ function PlaceholderSVG({ label = "Image", className = "w-full h-full" }) {
   );
 }
 
+// --- Responsive aspect-ratio wrapper and media helpers ---
+function AspectBox({ ratio = 16 / 9, className = "", children }) {
+  return (
+    <div className={`relative w-full ${className}`} style={{ paddingTop: `${100 / ratio}%` }}>
+      <div className="absolute inset-0">{children}</div>
+    </div>
+  );
+}
+function isVideoSource(src = "") {
+  return /\.(mp4|webm|ogg)(\?.*)?$/i.test(src);
+}
+function MediaBox({ src, alt = "" }) {
+  const [failed, setFailed] = useState(false);
+  if (!src) return <PlaceholderSVG label="" className="w-full h-full" />;
+  if (isVideoSource(src) && !failed) {
+    return (
+      <video
+        src={src}
+        autoPlay
+        loop
+        muted
+        playsInline
+        className="w-full h-full object-cover"
+        onError={() => setFailed(true)}
+        aria-hidden="true"
+        tabIndex={-1}
+      />
+    );
+  }
+  return (
+    <AssetImage
+      src={failed ? undefined : src}
+      alt={alt || ""}
+      className="w-full h-full object-contain"
+    />
+  );
+}
+
+
 function AssetImage({ src, alt, className = "", labelForPlaceholder }) {
   const [failed, setFailed] = useState(false);
   if (!src || failed) {
@@ -341,21 +380,21 @@ function Features() {
       desc:
         "Let users who want the ChatGPT experience on your site 'Ask AI'. Keep your default keyword search for everyone else.",
       icon: <Sparkles className="h-4 w-4" />,
-      media: { src: "/media/feature-ai-mode.png", alt: "AI Mode your Search demo" },
+      media: { src: "/media/feature-ai-mode.mp4", alt: "AI Mode your Search demo" },
     },
     {
       title: "Simplify Collections Pages",
       desc:
         "Empower your customers to drill down from 100s of SKUs to the perfect fit in seconds, simply by asking.",
       icon: <Filter className="h-4 w-4" />,
-      media: { src: "/media/feature-collections.png", alt: "Collections assistant demo" },
+      media: { src: "/media/feature-collections.mp4", alt: "Collections assistant demo" },
     },
     {
       title: "Capture Bouncers",
       desc:
         "Prevent customers from leaving your search result pages by offering them the ability try again with Nobi.",
       icon: <MousePointerClick className="h-4 w-4" />,
-      media: { src: "/media/feature-capture.png", alt: "Capture bouncers demo" },
+      media: { src: "/media/feature-capture.mp4", alt: "Capture bouncers demo" },
     },
     {
       title: "Analytics Built-In",
@@ -404,21 +443,17 @@ function Features() {
           </div>
 
           {/* Right: large preview panel */}
-          <div className="rounded-3xl border border-black/10 dark:border-white/10 bg-white/60 dark:bg-white/5 shadow-inner min-h-[420px] flex items-center justify-center relative overflow-hidden">
-            {items[active]?.media?.src ? (
-              <AssetImage
-                src={items[active].media.src}
-                alt={items[active].media.alt}
-                labelForPlaceholder={items[active].title}
-                className="max-w-full max-h-full object-contain"
-              />
-            ) : null}
-            {showPreviewCaption && (
-  <span className="absolute bottom-4 left-1/2 -translate-x-1/2 text-xs px-2 py-1 rounded-full bg-black/5 dark:bg-white/10">
-    {items[active].media?.alt || items[active].title}
-  </span>
-)}
-          </div>
+          <div className="rounded-3xl border border-black/10 dark:border-white/10 bg-white/60 dark:bg-white/5 shadow-inner relative overflow-hidden">
+  <AspectBox ratio={16/9}>
+    <MediaBox src={items[active]?.media?.src} alt={items[active]?.media?.alt || ""} />
+  </AspectBox>
+  {/* caption disabled; flip to true if you want it back */}
+  {false && (
+    <span className="absolute bottom-4 left-1/2 -translate-x-1/2 text-xs px-2 py-1 rounded-full bg-black/5 dark:bg-white/10">
+      {items[active].media?.alt || items[active].title}
+    </span>
+  )}
+</div>
         </div>
       </div>
     </section>

@@ -439,12 +439,6 @@ function Features() {
   <AspectBox ratio={16/9}>
     <MediaBox src={items[active]?.media?.src} alt={items[active]?.media?.alt || ""} />
   </AspectBox>
-  {/* caption disabled; flip to true if you want it back */}
-  {false && (
-    <span className="absolute bottom-4 left-1/2 -translate-x-1/2 text-xs px-2 py-1 rounded-full bg-black/5 dark:bg-white/10">
-      {items[active].media?.alt || items[active].title}
-    </span>
-  )}
 </div>
         </div>
       </div>

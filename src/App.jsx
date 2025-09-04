@@ -69,7 +69,7 @@ function MediaBox({ src, alt = "" }) {
         loop
         muted
         playsInline
-        className="w-full h-full object-cover"
+        className="w-full h-full object-cover object-top"
         onError={() => setFailed(true)}
         aria-hidden="true"
         tabIndex={-1}
@@ -271,7 +271,7 @@ function PreviewCard() {
             loop
             muted
             playsInline
-            className="w-full h-full object-cover"   // use object-contain if you prefer no cropping
+            className="w-full h-full object-cover object-top"   // use object-contain if you prefer no cropping
             onError={() => setVideoFailed(true)}
             aria-hidden="true"
             tabIndex={-1}

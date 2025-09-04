@@ -372,7 +372,7 @@ function Features() {
       desc:
         "Let users who want the ChatGPT experience on your site 'Ask AI'. Keep your default keyword search for everyone else.",
       icon: <Sparkles className="h-4 w-4" />,
-      media: { src: "/media/feature-ai-mode.mp4", alt: "AI Mode your Search demo" },
+      media: { src: "/media/feature-ai-mode.mp4?v=2", alt: "" },
     },
     {
       title: "Simplify Collections Pages",

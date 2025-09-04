@@ -362,19 +362,25 @@ function Features() {
         <div className="mt-8 grid grid-cols-1 lg:grid-cols-2 gap-8">
           <div className="space-y-4">
             {items.map((f, i) => (
-              <button
-                key={f.title}
-                onClick={() => setActive(i)}
-                className={`w-full text-left rounded-2xl border p-5 transition shadow-sm ${i === active ? "border-fuchsia-200 bg-fuchsia-50/70 dark:bg-white/5" : "border-black/10 dark:border-white/10 bg-white/70 dark:bg_WHITE/5">
-                <div className="flex items-start gap-3">
-                  <span className="mt-1 text-fuchsia-600">{f.icon}</span>
-                  <div>
-                    <div className="font-semibold">{f.title}</div>
-                    <p className="mt-1 text-sm text-black/70 dark:text-white/70">{f.desc}</p>
-                  </div>
-                </div>
-              </button>
-            ))}
+  <button
+    key={f.title}
+    onClick={() => setActive(i)}
+    className={`w-full text-left rounded-2xl border p-5 transition shadow-sm ${
+      i === active
+        ? "border-fuchsia-200 bg-fuchsia-50/70 dark:bg-white/5"
+        : "border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/5"
+    }`}
+  >
+    <div className="flex items-start gap-3">
+      <span className="mt-1 text-fuchsia-600">{f.icon}</span>
+      <div>
+        <div className="font-semibold">{f.title}</div>
+        <p className="mt-1 text-sm text-black/70 dark:text-white/70">{f.desc}</p>
+      </div>
+    </div>
+  </button>
+))}
+
           </div>
 
           <div className="rounded-3xl border border-black/10 dark:border-white/10 bg-white/60 dark:bg-white/5 shadow-inner min-h-[420px] flex items-center justify-center relative overflow-hidden">

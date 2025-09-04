@@ -388,41 +388,78 @@ function Logos() {
 }
 
 function Features() {
-  const items = [ /* …your items… */ ];
-  const [active, setActive] = useState(0);
-  const [restartKey, setRestartKey] = useState(0);   // NEW
+  const items = [
+    {
+      title: "AI Mode your Search",
+      desc:
+        "Let users who want the ChatGPT experience from your search 'Ask AI'. Keep your default keyword search for everyone else.",
+      icon: <Sparkles className="h-4 w-4" />,
+      media: { src: "/media/feature-ai-mode.mp4", alt: "" }, // alt: "" so no overlay text
+    },
+    {
+      title: "Simplify Collections Pages",
+      desc:
+        "Empower customers to drill down from 100s of SKUs to the perfect fit in seconds, simply by asking.",
+      icon: <Filter className="h-4 w-4" />,
+      media: { src: "/media/feature-collections.mp4", alt: "" },
+    },
+    {
+      title: "Capture Bouncers",
+      desc:
+        "Prevent customers from leaving your search result pages by offering them the ability try again with Nobi.",
+      icon: <MousePointerClick className="h-4 w-4" />,
+      media: { src: "/media/feature-capture.mp4", alt: "" },
+    },
+  ];
 
-  // Build a cache-busted src so the browser always re-fetches the video
+  const [active, setActive] = useState(0);
+  const [restartKey, setRestartKey] = useState(0);
+
+  // Always re-fetch/restart the video when selection changes
   const rawSrc = items[active]?.media?.src || "";
-  const bustSrc =
-    rawSrc && `${rawSrc}${rawSrc.includes("?") ? "&" : "?"}r=${restartKey}`;
+  const bustSrc = rawSrc && `${rawSrc}${rawSrc.includes("?") ? "&" : "?"}r=${restartKey}`;
 
   return (
     <section id="features" className="py-20 border-t border-black/5 dark:border-white/5">
       <div className="mx-auto max-w-6xl px-6">
-        {/* … */}
+        <p className="text-sm font-semibold text-fuchsia-600">Features</p>
+        <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight mt-2">
+          One seamless experience, anywhere in your store.
+        </h2>
+        <p className="mt-3 text-black/70 dark:text-white/70 max-w-3xl">
+          Test conversational AI on your PLPs, search, PDP and anywhere else you think is right for your brand.
+        </p>
+
         <div className="mt-8 grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+          {/* Left: stacked feature bullets */}
           <div className="space-y-4">
             {items.map((f, i) => (
               <button
                 key={f.title}
-                onClick={() => { setActive(i); setRestartKey(k => k + 1); }} // bump on every click
+                onClick={() => { setActive(i); setRestartKey(k => k + 1); }}
                 className={`w-full text-left rounded-2xl border p-5 transition shadow-sm ${
                   i === active
                     ? "border-fuchsia-200 bg-fuchsia-50/70 dark:bg-white/5"
                     : "border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/5"
                 }`}
               >
-                {/* … */}
+                <div className="flex items-start gap-3">
+                  <span className="mt-1 text-fuchsia-600">{f.icon}</span>
+                  <div>
+                    <div className="font-semibold">{f.title}</div>
+                    <p className="mt-1 text-sm text-black/70 dark:text-white/70">{f.desc}</p>
+                  </div>
+                </div>
               </button>
             ))}
           </div>
 
+          {/* Right: preview panel */}
           <div className="h-full rounded-3xl border border-black/10 dark:border-white/10 bg-white/60 dark:bg-white/5 shadow-inner overflow-hidden">
             <MediaBox
-              key={restartKey}                 // ensures remount
-              restartKey={restartKey}          // tells MediaBox to reset/play
-              src={bustSrc}                    // cache-busted src
+              key={restartKey}
+              restartKey={restartKey}
+              src={bustSrc}
               alt={items[active]?.media?.alt || ""}
             />
           </div>

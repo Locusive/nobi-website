@@ -348,6 +348,7 @@ function Features() {
     },
   ];
   const [active, setActive] = useState(0);
+  const showPreviewCaption = false; // set to true if you ever want the label back
 
   return (
     <section id="features" className="py-20 border-t border-black/5 dark:border-white/5">

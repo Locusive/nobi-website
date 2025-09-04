@@ -261,28 +261,27 @@ function Hero() {
               Nobi gets your customers the right products faster with conversational AI.
             </p>
             <div className="mt-8">
-              <div className="mt-4 flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4">
-  <Button size="lg" className="w-full sm:w-auto">
-    Try it on your store <ArrowRight className="h-4 w-4 shrink-0" />
-  </Button>
-  <Button size="lg" variant="ghost" className="w-full sm:w-auto">
-    See how it works
-  </Button>
-</div>
+  <div className="mt-4 flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4">
+    <Button size="lg" className="w-full sm:w-auto">
+      Try it on your store <ArrowRight className="h-4 w-4 shrink-0" />
+    </Button>
+    <Button size="lg" variant="ghost" className="w-full sm:w-auto">
+      See how it works
+    </Button>
+  </div>
 
-              </div>
-              <div className="mt-6 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-black/60 dark:text-white/60">
-                <div className="inline-flex items-center gap-2">
-                  <CheckCircle2 className="h-4 w-4" /> 15-minute install
-                </div>
-                <div className="inline-flex items-center gap-2">
-                  <CheckCircle2 className="h-4 w-4" /> Shopify & headless
-                </div>
-                <div className="inline-flex items-center gap-2">
-                  <CheckCircle2 className="h-4 w-4" /> A/B testing & reporting
-                </div>
-              </div>
-            </div>
+  <div className="mt-6 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-black/60 dark:text-white/60">
+    <div className="inline-flex items-center gap-2">
+      <CheckCircle2 className="h-4 w-4" /> 15-minute install
+    </div>
+    <div className="inline-flex items-center gap-2">
+      <CheckCircle2 className="h-4 w-4" /> Shopify & headless
+    </div>
+    <div className="inline-flex items-center gap-2">
+      <CheckCircle2 className="h-4 w-4" /> A/B testing & reporting
+    </div>
+  </div>
+</div>  {/* ← close mt-8 here */}
           </div>
           <div className="relative">
             <div className="mb-4 p-4 rounded-2xl border border-fuchsia-200 bg-gradient-to-r from-fuchsia-50 to-pink-50 shadow-md">

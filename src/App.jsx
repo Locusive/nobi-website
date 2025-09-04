@@ -69,7 +69,8 @@ function MediaBox({ src, alt = "" }) {
         loop
         muted
         playsInline
-        className="w-full h-full object-cover object-top"
+-       className="w-full h-full object-cover"
++       className="w-full h-full object-cover object-top"
         onError={() => setFailed(true)}
         aria-hidden="true"
         tabIndex={-1}
@@ -80,7 +81,8 @@ function MediaBox({ src, alt = "" }) {
     <AssetImage
       src={failed ? undefined : src}
       alt={alt || ""}
-      className="w-full h-full object-contain"
+-     className="w-full h-full object-contain"
++     className="w-full h-full object-contain"
     />
   );
 }
@@ -428,10 +430,8 @@ function Features() {
           </div>
 
           {/* Right: large preview panel */}
-          <div className="rounded-3xl border border-black/10 dark:border-white/10 bg-white/60 dark:bg-white/5 shadow-inner relative overflow-hidden self-start">
-  <AspectBox ratio={16/9}>
-    <MediaBox src={items[active]?.media?.src} alt={items[active]?.media?.alt || ""} />
-  </AspectBox>
+ <div className="h-full rounded-3xl border border-black/10 dark:border-white/10 bg-white/60 dark:bg-white/5 shadow-inner overflow-hidden">
+   <MediaBox src={items[active]?.media?.src} alt={items[active]?.media?.alt || ""} />
 </div>
         </div>
       </div>

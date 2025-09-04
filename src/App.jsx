@@ -395,9 +395,11 @@ function Features() {
                 className="max-w-full max-h-full object-contain"
               />
             ) : null}
-            <span className="absolute bottom-4 left-1/2 -translate-x-1/2 text-xs px-2 py-1 rounded-full bg-black/5 dark:bg-white/10">
-              {items[active].media?.alt || items[active].title}
-            </span>
+            {showPreviewCaption && (
+  <span className="absolute bottom-4 left-1/2 -translate-x-1/2 text-xs px-2 py-1 rounded-full bg-black/5 dark:bg-white/10">
+    {items[active].media?.alt || items[active].title}
+  </span>
+)}
           </div>
         </div>
       </div>

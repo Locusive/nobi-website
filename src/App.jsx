@@ -351,7 +351,7 @@ function Features() {
   const [active, setActive] = useState(0);
 
   return (
-    <section id="features" className="py-20 border-t border-black/5 dark:border_white/5">
+    <section id="features" className="py-20 border-t border-black/5 dark:border-white/5">
       <div className="mx-auto max-w-6xl px-6">
         <p className="text-sm font-semibold text-fuchsia-600">Features</p>
         <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight mt-2">
@@ -362,29 +362,30 @@ function Features() {
         </p>
 
         <div className="mt-8 grid grid-cols-1 lg:grid-cols-2 gap-8">
+          {/* Left: stacked feature bullets */}
           <div className="space-y-4">
             {items.map((f, i) => (
-  <button
-    key={f.title}
-    onClick={() => setActive(i)}
-    className={`w-full text-left rounded-2xl border p-5 transition shadow-sm ${
-      i === active
-        ? "border-fuchsia-200 bg-fuchsia-50/70 dark:bg-white/5"
-        : "border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/5"
-    }`}
-  >
-    <div className="flex items-start gap-3">
-      <span className="mt-1 text-fuchsia-600">{f.icon}</span>
-      <div>
-        <div className="font-semibold">{f.title}</div>
-        <p className="mt-1 text-sm text-black/70 dark:text-white/70">{f.desc}</p>
-      </div>
-    </div>
-  </button>
-))}
-
+              <button
+                key={f.title}
+                onClick={() => setActive(i)}
+                className={`w-full text-left rounded-2xl border p-5 transition shadow-sm ${
+                  i === active
+                    ? "border-fuchsia-200 bg-fuchsia-50/70 dark:bg-white/5"
+                    : "border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/5"
+                }`}
+              >
+                <div className="flex items-start gap-3">
+                  <span className="mt-1 text-fuchsia-600">{f.icon}</span>
+                  <div>
+                    <div className="font-semibold">{f.title}</div>
+                    <p className="mt-1 text-sm text-black/70 dark:text-white/70">{f.desc}</p>
+                  </div>
+                </div>
+              </button>
+            ))}
           </div>
 
+          {/* Right: large preview panel */}
           <div className="rounded-3xl border border-black/10 dark:border-white/10 bg-white/60 dark:bg-white/5 shadow-inner min-h-[420px] flex items-center justify-center relative overflow-hidden">
             {items[active]?.media?.src ? (
               <AssetImage

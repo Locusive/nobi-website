@@ -69,8 +69,8 @@ function MediaBox({ src, alt = "" }) {
         loop
         muted
         playsInline
--       className="w-full h-full object-cover"
-+       className="w-full h-full object-cover object-top"
+       className="w-full h-full object-cover"
+       className="w-full h-full object-cover object-top"
         onError={() => setFailed(true)}
         aria-hidden="true"
         tabIndex={-1}
@@ -81,8 +81,8 @@ function MediaBox({ src, alt = "" }) {
     <AssetImage
       src={failed ? undefined : src}
       alt={alt || ""}
--     className="w-full h-full object-contain"
-+     className="w-full h-full object-contain"
+     className="w-full h-full object-contain"
+     className="w-full h-full object-contain"
     />
   );
 }

@@ -60,29 +60,32 @@ function isVideoSource(src = "") {
 
 function MediaBox({ src, alt = "" }) {
   const [failed, setFailed] = useState(false);
+
+  // Reset when the source changes so we don't stay in a "failed" state
+  useEffect(() => setFailed(false), [src]);
+
   if (!src) return <PlaceholderSVG label="" className="w-full h-full" />;
+
   if (isVideoSource(src) && !failed) {
     return (
       <video
+        key={src}                              // force a fresh player per source
         src={src}
         autoPlay
-        loop
+        loop                                   // keep if you want looping
         muted
         playsInline
-       className="w-full h-full object-cover"
-       className="w-full h-full object-cover object-top"
+        className="w-full h-full object-cover object-top"
         onError={() => setFailed(true)}
-        aria-hidden="true"
-        tabIndex={-1}
       />
     );
   }
+
   return (
     <AssetImage
       src={failed ? undefined : src}
-      alt={alt || ""}
-     className="w-full h-full object-contain"
-     className="w-full h-full object-contain"
+      alt={alt}
+      className="w-full h-full object-contain"
     />
   );
 }
@@ -368,71 +371,40 @@ function Logos() {
 }
 
 function Features() {
-  const items = [
-    {
-      title: "AI Mode your Search",
-      desc:
-        "Let users who want the ChatGPT experience from your search 'Ask AI'. Keep your default keyword search for everyone else.",
-      icon: <Sparkles className="h-4 w-4" />,
-      media: { src: "/media/feature-ai-mode.mp4?v=2", alt: "" },
-    },
-    {
-      title: "Simplify Collections Pages",
-      desc:
-        "Empower customers to drill down from 100s of SKUs to the perfect fit in seconds, simply by asking.",
-      icon: <Filter className="h-4 w-4" />,
-      media: { src: "/media/feature-collections.mp4", alt: "Collections assistant demo" },
-    },
-    {
-      title: "Capture Bouncers",
-      desc:
-        "Prevent customers from leaving your search result pages by offering them the ability try again with Nobi.",
-      icon: <MousePointerClick className="h-4 w-4" />,
-      media: { src: "/media/feature-capture.mp4", alt: "Capture bouncers demo" },
-    },
-  ];
+  // ... your items
   const [active, setActive] = useState(0);
-  const showPreviewCaption = false; // set to true if you ever want the label back
+  const [mediaNonce, setMediaNonce] = useState(0);   // <— NEW
 
   return (
     <section id="features" className="py-20 border-t border-black/5 dark:border-white/5">
       <div className="mx-auto max-w-6xl px-6">
-        <p className="text-sm font-semibold text-fuchsia-600">Features</p>
-        <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight mt-2">
-          One seamless experience, anywhere in your store.
-        </h2>
-        <p className="mt-3 text-black/70 dark:text-white/70 max-w-3xl">
-          Test conversational AI on your PLPs, search, PDP and anywhere else you think is right for your brand.
-        </p>
+        {/* ... headings ... */}
 
         <div className="mt-8 grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
-          {/* Left: stacked feature bullets */}
           <div className="space-y-4">
             {items.map((f, i) => (
               <button
                 key={f.title}
-                onClick={() => setActive(i)}
+                onClick={() => { setActive(i); setMediaNonce(n => n + 1); }}  // <— change
                 className={`w-full text-left rounded-2xl border p-5 transition shadow-sm ${
                   i === active
                     ? "border-fuchsia-200 bg-fuchsia-50/70 dark:bg-white/5"
                     : "border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/5"
                 }`}
               >
-                <div className="flex items-start gap-3">
-                  <span className="mt-1 text-fuchsia-600">{f.icon}</span>
-                  <div>
-                    <div className="font-semibold">{f.title}</div>
-                    <p className="mt-1 text-sm text-black/70 dark:text-white/70">{f.desc}</p>
-                  </div>
-                </div>
+                {/* ...content... */}
               </button>
             ))}
           </div>
 
           {/* Right: large preview panel */}
- <div className="h-full rounded-3xl border border-black/10 dark:border-white/10 bg-white/60 dark:bg-white/5 shadow-inner overflow-hidden">
-   <MediaBox src={items[active]?.media?.src} alt={items[active]?.media?.alt || ""} />
-</div>
+          <div className="h-full rounded-3xl border border-black/10 dark:border-white/10 bg-white/60 dark:bg-white/5 shadow-inner overflow-hidden">
+            <MediaBox
+              key={`${items[active]?.media?.src}-${mediaNonce}`}      // <— NEW
+              src={items[active]?.media?.src}
+              alt={items[active]?.media?.alt || ""}
+            />
+          </div>
         </div>
       </div>
     </section>

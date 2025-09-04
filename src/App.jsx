@@ -410,7 +410,7 @@ function Features() {
           Nobi makes it easy to test whether conversational AI is right for your brand.
         </p>
 
-        <div className="mt-8 grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <div className="mt-8 grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
           {/* Left: stacked feature bullets */}
           <div className="space-y-4">
             {items.map((f, i) => (
@@ -435,7 +435,7 @@ function Features() {
           </div>
 
           {/* Right: large preview panel */}
-          <div className="rounded-3xl border border-black/10 dark:border-white/10 bg-white/60 dark:bg-white/5 shadow-inner relative overflow-hidden">
+          <div className="rounded-3xl border border-black/10 dark:border-white/10 bg-white/60 dark:bg-white/5 shadow-inner relative overflow-hidden self-start">
   <AspectBox ratio={16/9}>
     <MediaBox src={items[active]?.media?.src} alt={items[active]?.media?.alt || ""} />
   </AspectBox>

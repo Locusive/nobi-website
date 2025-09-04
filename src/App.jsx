@@ -53,9 +53,11 @@ function AspectBox({ ratio = 16 / 9, className = "", children }) {
     </div>
   );
 }
+
 function isVideoSource(src = "") {
   return /\.(mp4|webm|ogg)(\?.*)?$/i.test(src);
 }
+
 function MediaBox({ src, alt = "" }) {
   const [failed, setFailed] = useState(false);
   if (!src) return <PlaceholderSVG label="" className="w-full h-full" />;
@@ -82,7 +84,6 @@ function MediaBox({ src, alt = "" }) {
     />
   );
 }
-
 
 function AssetImage({ src, alt, className = "", labelForPlaceholder }) {
   const [failed, setFailed] = useState(false);
@@ -252,15 +253,6 @@ function DualModeSearchBar({ defaultMode = "ai", size = "regular" }) {
           <span className={`truncate max-w-[60ch]`}>{submitted.query}</span>
         </motion.div>
       )}
-    </div>
-  );
-}
-
-function AspectBox({ ratio = 16 / 9, className = "", children }) {
-  // 16/9 -> padding-top: 56.25%
-  return (
-    <div className={`relative w-full ${className}`} style={{ paddingTop: `${100 / ratio}%` }}>
-      <div className="absolute inset-0">{children}</div>
     </div>
   );
 }

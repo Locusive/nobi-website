@@ -875,40 +875,50 @@ function Insights() {
               </div>
             </div>
 
-            {/* Product × Attribute affinity (heatmap) */}
-            <div className="rounded-3xl border border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/5 p-6 shadow-sm">
-              <div className="font-semibold">Attribute affinity by product</div>
-              <p className="mt-1 text-xs text-black/60 dark:text-white/60">
-                Likelihood a shopper will request an attribute when browsing a product type.
-              </p>
+          {/* Attribute affinity by product (heatmap) */}
+<div className="rounded-3xl border border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/5 p-6 shadow-sm">
+  <div className="font-semibold">Attribute affinity by product</div>
+  <p className="mt-1 text-xs text-black/60 dark:text-white/60">
+    Likelihood a shopper will request an attribute when browsing a product type.
+  </p>
 
-              <div className="mt-4 overflow-x-auto">
-                <div className="min-w-[520px]">
-                  <div
-                    className="grid"
-                    style={{ gridTemplateColumns: `160px repeat(${attrs.length}, minmax(72px, 1fr))` }}
-                  >
-                    <div />
-                    {attrs.map((a) => (
-                      <div key={a} className="px-2 py-1 text-xs sm:text-sm text-center text-black/70 dark:text-white/70">
-                        {a}
-                      </div>
-                    ))}
-                    {products.map((p) => (
-                      <React.Fragment key={p}>
-                        <div className="px-2 py-2 text-sm font-medium text-black/80 dark:text-white/90 flex items-center">
-                          {p}
-                        </div>
-                        {attrs.map((a) => (
-                          <HeatCell key={`${p}-${a}`} v={affinity[p][a] || 0} />
-                        ))}
-                      </React.Fragment>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </div>
+  {/* Grid */}
+  <div className="mt-4 overflow-x-auto [-webkit-overflow-scrolling:touch]">
+    <div className="w-full">
+      <div
+        className="grid gap-2 sm:gap-3"
+        style={{
+          // left label column + N attribute columns (each with a clamped min)
+          gridTemplateColumns: `clamp(112px, 20vw, 140px) repeat(${attrs.length}, minmax(clamp(58px, 8vw, 84px), 1fr))`,
+        }}
+      >
+        {/* top-left empty corner */}
+        <div />
+        {/* column headers */}
+        {attrs.map((a) => (
+          <div
+            key={a}
+            className="px-2 py-1 text-xs sm:text-sm text-center text-black/70 dark:text-white/70"
+          >
+            {a}
           </div>
+        ))}
+
+        {/* rows */}
+        {products.map((p) => (
+          <React.Fragment key={p}>
+            <div className="px-2 py-2 text-sm font-medium text-black/80 dark:text-white/90 flex items-center">
+              {p}
+            </div>
+            {attrs.map((a) => (
+              <HeatCell key={`${p}-${a}`} v={affinity[p][a] || 0} />
+            ))}
+          </React.Fragment>
+        ))}
+      </div>
+    </div>
+  </div>
+</div>
 
           {/* Right column */}
           <div className="space-y-6">
@@ -939,17 +949,17 @@ function Insights() {
               </div>
               <div className="mt-3 space-y-3 text-sm text-black/80 dark:text-white/90">
                 <blockquote className="rounded-xl p-3 bg-black/5 dark:bg-white/10">
-                  “Need waterproof boots that still look dressy for work — calf is the issue.”
+                  “Need waterproof boots that still look dressy for work.”
                 </blockquote>
                 <blockquote className="rounded-xl p-3 bg-black/5 dark:bg-white/10">
                   {/* use &quot; to avoid smart-quote paste issues */}
                   Vegan leather tote, zip top, fits 16&quot; laptop, under $200.
                 </blockquote>
                 <blockquote className="rounded-xl p-3 bg-black/5 dark:bg-white/10">
-                  Looking for running shoes with real arch support; neutral colors only.
+                  Need a linen dress appropriate for a beach wedding in Mexico.
                 </blockquote>
                 <blockquote className="rounded-xl p-3 bg-black/5 dark:bg-white/10">
-                  Looking for running shoes with real arch support; neutral colors only.
+                  I loved the drawstring pants you used to sell. Do you have anything like that?
                 </blockquote>
               </div>
             </div>

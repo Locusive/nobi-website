@@ -805,13 +805,12 @@ function Bar({ value, maxValue }) {
 }
 
 function HeatCell({ v = 0 }) {
-  // v is 0..1
-  const bg = `rgba(139, 92, 246, ${0.15 + v * 0.45})`; // violet w/ variable opacity
-  const border = `rgba(0,0,0,0.06)`;
+  // v is 0..1. Keep text readable, scale background by value.
+  const bg = `rgba(139, 92, 246, ${0.12 + v * 0.45})`; // violet with variable opacity
   return (
     <div
-      className="h-10 sm:h-12 md:h-14 flex items-center justify-center rounded-lg text-xs sm:text-sm font-medium"
-      style={{ backgroundColor: bg, border: `1px solid ${border}` }}
+      className="h-9 sm:h-10 flex items-center justify-center rounded-md text-[11px] sm:text-xs font-medium leading-none"
+      style={{ backgroundColor: bg, border: "1px solid rgba(0,0,0,0.06)" }}
       aria-label={`affinity ${Math.round(v * 100)}%`}
     >
       {Math.round(v * 100)}%
@@ -854,12 +853,10 @@ function Insights() {
           <div>
             <p className="text-sm font-semibold text-fuchsia-600">Insights</p>
             <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight mt-2">
-              Insights your team can act on
+              Insights your team can act on.
             </h2>
             <p className="mt-3 text-black/70 dark:text-white/70 max-w-2xl">
-              Nobi turns real conversations into structured signals — intents, attribute affinities,
-              objections, and quotes — so merchandising, creative, CX, and growth can move faster
-              with clarity.
+              Nobi turns real conversations into structured signals. Your merchandising, creative, CX, and growth teams have never moved faster.
             </p>
           </div>
         </div>
@@ -888,37 +885,60 @@ function Insights() {
             </div>
 
             {/* Product × Attribute affinity (heatmap) */}
-            <div className="rounded-3xl border border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/5 p-6 shadow-sm">
-              <div className="font-semibold">Attribute affinity by product</div>
-              <p className="mt-1 text-xs text-black/60 dark:text-white/60">
-                Likelihood a shopper will request an attribute when browsing a product type.
-              </p>
+<div className="rounded-3xl border border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/5 p-6 shadow-sm overflow-hidden">
+  <div className="font-semibold">Attribute affinity by product</div>
+  <p className="mt-1 text-xs text-black/60 dark:text-white/60">
+    Likelihood a shopper will request an attribute when browsing a product type.
+  </p>
 
-              {/* Axis labels */}
-              <div className="mt-4 overflow-x-auto">
-                <div className="min-w-[560px]">
-                  <div className="grid" style={{ gridTemplateColumns: `160px repeat(${attrs.length}, minmax(80px, 1fr))` }}>
-                    <div />
-                    {attrs.map((a) => (
-                      <div key={a} className="px-2 py-1 text-xs sm:text-sm text-center text-black/70 dark:text-white/70">
-                        {a}
-                      </div>
-                    ))}
-                    {products.map((p) => (
-                      <React.Fragment key={p}>
-                        <div className="px-2 py-2 text-sm font-medium text-black/80 dark:text-white/90 flex items-center">
-                          {p}
-                        </div>
-                        {attrs.map((a) => (
-                          <HeatCell key={`${p}-${a}`} v={affinity[p][a] || 0} />
-                        ))}
-                      </React.Fragment>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </div>
+  <div className="mt-4">
+    {/* No hard min-width; let the grid shrink to the card */}
+    <div className="w-full">
+      {/* Tighter, responsive columns:
+          - product col clamps 110–160px
+          - each attribute col clamps 56–96px
+      */}
+      <div
+        className="grid"
+        style={{
+          gridTemplateColumns: `minmax(110px,160px) repeat(${attrs.length}, minmax(56px,96px))`,
+          columnGap: "8px",
+          rowGap: "8px",
+        }}
+      >
+        {/* top-left spacer */}
+        <div />
+
+        {/* column headers */}
+        {attrs.map((a) => (
+          <div
+            key={a}
+            className="px-1 py-1 text-[11px] sm:text-xs text-center text-black/70 dark:text-white/70 leading-tight truncate"
+            title={a}
+          >
+            {a}
           </div>
+        ))}
+
+        {/* rows */}
+        {products.map((p) => (
+          <React.Fragment key={p}>
+            <div
+              className="px-2 py-2 text-[13px] sm:text-sm font-medium text-black/80 dark:text-white/90 leading-tight truncate"
+              title={p}
+            >
+              {p}
+            </div>
+            {attrs.map((a) => (
+              <HeatCell key={`${p}-${a}`} v={affinity[p][a] || 0} />
+            ))}
+          </React.Fragment>
+        ))}
+      </div>
+    </div>
+  </div>
+</div>
+
 
           {/* Right column */}
           <div className="space-y-6">
@@ -966,9 +986,6 @@ function Insights() {
         <div className="mt-8 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
           <Button size="lg" className="w-full sm:w-auto">
             Get a sample insights report
-          </Button>
-          <Button size="lg" variant="ghost" className="w-full sm:w-auto">
-            See how insights are generated
           </Button>
         </div>
       </div>

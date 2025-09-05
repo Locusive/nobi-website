@@ -956,7 +956,6 @@ function Insights() {
         {/* CTA row */}
         <div className="mt-8 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
           <Button size="lg" className="w-full sm:w-auto">Get a sample insights report</Button>
-          <Button size="lg" variant="ghost" className="w-full sm:w-auto">See how insights are generated</Button>
         </div>
       </div>
     </section>

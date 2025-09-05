@@ -62,19 +62,30 @@ function MediaBox({ src, alt = "", restartKey }) {
   const [failed, setFailed] = useState(false);
   const vidRef = useRef(null);
 
-  // Clear error when the source changes
+  // Clear previous error when source changes
   useEffect(() => setFailed(false), [src]);
 
-  // On restartKey/src change: seek to 0 and play
+  // Seek to 0 and play whenever src/restartKey changes
   useEffect(() => {
     const v = vidRef.current;
-    if (v) {
-      try {
-        v.currentTime = 0;
-        const p = v.play();
-        if (p && typeof p.then === "function") p.catch(() => {});
-      } catch {}
-    }
+    if (!v) return;
+    try {
+      v.currentTime = 0;
+      const p = v.play();
+      if (p && typeof p.then === "function") p.catch(() => {});
+    } catch {}
+  }, [restartKey, src]);
+
+  // Pause when scrolled off-screen (battery-friendly on mobile)
+  useEffect(() => {
+    const v = vidRef.current;
+    if (!v) return;
+    const io = new IntersectionObserver(
+      ([e]) => { if (e.isIntersecting) v.play?.(); else v.pause?.(); },
+      { threshold: 0.5 }
+    );
+    io.observe(v);
+    return () => io.disconnect();
   }, [restartKey, src]);
 
   if (!src) return <PlaceholderSVG label="" className="w-full h-full" />;
@@ -82,11 +93,12 @@ function MediaBox({ src, alt = "", restartKey }) {
   if (isVideoSource(src) && !failed) {
     return (
       <video
-        key={restartKey || src}     // force fresh mount when restartKey increments
+        key={restartKey || src}      // force remount on reselect
         ref={vidRef}
         src={src}
+        preload="metadata"
         autoPlay
-        loop                         // <-- ensures it loops when it finishes
+        loop                         // make feature videos loop
         muted
         playsInline
         className="w-full h-full object-cover object-top"
@@ -96,6 +108,15 @@ function MediaBox({ src, alt = "", restartKey }) {
       />
     );
   }
+
+  return (
+    <AssetImage
+      src={failed ? undefined : src}
+      alt={alt}
+      className="w-full h-full object-contain"
+    />
+  );
+}
 
   return (
     <AssetImage
@@ -220,18 +241,18 @@ function DualModeSearchBar({ defaultMode = "ai", size = "regular" }) {
       >
         <div
           ref={toggleRef}
-          className="relative isolate inline-flex rounded-xl bg-black/5 dark:bg-white/10 overflow-hidden"
+          className="relative isolate inline-flex rounded-xl bg-black/5 dark:bg-white/10 overflow-hidden shrink-0"
         >
           <button
             ref={siteBtnRef}
-            className={`relative z-[1] rounded-lg px-4 py-2 text-sm font-medium transition-colors duration-300 ${mode === "site" ? "text-black dark:text-white" : "text-black/60 dark:text-white/60"}`}
+            className={`relative z-[1] rounded-lg px-3 py-1.5 text-xs sm:px-4 sm:py-2 sm:text-sm font-medium transition-colors duration-300 ${mode === "site" ? "text-black dark:text-white" : "text-black/60 dark:text-white/60"}`}
             onClick={() => setMode("site")}
           >
             Default
           </button>
           <button
             ref={aiBtnRef}
-            className={`relative z-[1] rounded-lg px-4 py-2 text-sm font-medium transition-colors duration-300 ${mode === "ai" ? "text-black dark:text-white" : "text-black/60 dark:text-white/60"}`}
+            className={`relative z-[1] rounded-lg px-3 py-1.5 text-xs sm:px-4 sm:py-2 sm:text-sm font-medium transition-colors duration-300 ${mode === "ai" ? "text-black dark:text-white" : "text-black/60 dark:text-white/60"}`}
             onClick={() => setMode("ai")}
           >
             AI
@@ -244,17 +265,22 @@ function DualModeSearchBar({ defaultMode = "ai", size = "regular" }) {
           />
         </div>
 
-        <div className="flex-1 flex items-center gap-2">
+        <div className="flex-1 min-w-0 flex items-center gap-2">{/* min-w-0 is key on Safari */}
           <input
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             onKeyDown={(e) => e.key === "Enter" && submit()}
             placeholder={placeholder}
-            className="w-full bg-transparent outline-none text-[15px] placeholder:text-black/40 dark:placeholder:text-white/40"
+            className="min-w-0 w-full bg-transparent outline-none text-[15px] placeholder:text-black/40 dark:placeholder:text-white/40"
           />
         </div>
 
-        <Button onClick={submit} variant={mode === "ai" ? "ai" : "primary"} size="compact" className="whitespace-nowrap">
+        <Button
+          onClick={submit}
+          variant={mode === "ai" ? "ai" : "primary"}
+          size="compact"
+          className="whitespace-nowrap px-3 h-9 sm:h-8"
+        >
           {mode === "ai" ? <Sparkles className="h-4 w-4" /> : <SearchIcon className="h-4 w-4" />}
           <span className="hidden sm:inline">{ctaLabel}</span>
         </Button>
@@ -271,7 +297,7 @@ function DualModeSearchBar({ defaultMode = "ai", size = "regular" }) {
             {submitted.mode === "ai" ? <Sparkles className="h-4 w-4" /> : <SearchIcon className="h-4 w-4" />} {submitted.mode === "ai" ? "AI" : "Default"}
           </span>
           <span className="opacity-80">•</span>
-          <span className={`truncate max-w-[60ch]`}>{submitted.query}</span>
+          <span className="truncate max-w-[60ch]">{submitted.query}</span>
         </motion.div>
       )}
     </div>
@@ -370,14 +396,14 @@ function Logos() {
     <section id="logos" className="py-16 border-t border-black/5 dark:border-white/5">
       <div className="mx-auto max-w-6xl px-6 text-center">
         <p className="text-sm font-semibold text-fuchsia-600 mb-6">Trusted by modern commerce</p>
-        <div className="flex flex-wrap items-center justify-center gap-12 opacity-80">
+        <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-4 opacity-80">
           {[1, 2, 3, 4, 5].map((i) => (
             <AssetImage
               key={i}
               src={`/media/logo-placeholder-${i}.png`}
               alt={`Brand logo ${i}`}
               labelForPlaceholder={`Brand logo ${i}`}
-              className="h-8 w-auto grayscale opacity-70 hover:opacity-100 transition"
+              className="h-6 w-auto grayscale opacity-70 hover:opacity-100 transition"
             />
           ))}
         </div>
@@ -414,15 +440,15 @@ function Features() {
   const [active, setActive] = useState(0);
   const [restartKey, setRestartKey] = useState(0);
 
-  // Cache-bust so the browser always refreshes the video source
+  // Cache-bust so we always refresh the video source
   const rawSrc = items[active]?.media?.src || "";
   const bustSrc = rawSrc && `${rawSrc}${rawSrc.includes("?") ? "&" : "?"}r=${restartKey}`;
 
   return (
-    <section id="features" className="py-20 border-t border-black/5 dark:border-white/5">
+    <section id="features" className="scroll-mt-20 py-20 border-t border-black/5 dark:border-white/5">
       <div className="mx-auto max-w-6xl px-6">
         <p className="text-sm font-semibold text-fuchsia-600">Features</p>
-        <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight mt-2">
+        <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight mt-2 text-balance">
           One seamless experience, anywhere in your store.
         </h2>
         <p className="mt-3 text-black/70 dark:text-white/70 max-w-3xl">
@@ -430,13 +456,31 @@ function Features() {
         </p>
 
         <div className="mt-8 grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
-          {/* Left: stacked feature bullets */}
-          <div className="space-y-4">
+          {/* Preview first on mobile */}
+          <div
+            className="order-1 lg:order-2 rounded-3xl border border-black/10 dark:border-white/10 bg-white/60 dark:bg-white/5 shadow-inner overflow-hidden aspect-[4/3] sm:aspect-video lg:aspect-auto lg:h-full"
+            role="tabpanel"
+            id="feature-preview"
+            aria-labelledby={`feature-tab-${active}`}
+          >
+            <MediaBox
+              key={restartKey}
+              restartKey={restartKey}
+              src={bustSrc}
+              alt={items[active]?.media?.alt || ""}
+            />
+          </div>
+
+          {/* Bullets second on mobile */}
+          <div className="order-2 lg:order-1 space-y-4" role="tablist" aria-controls="feature-preview">
             {items.map((f, i) => (
               <button
                 key={f.title}
+                id={`feature-tab-${i}`}
+                role="tab"
+                aria-selected={i === active}
                 onClick={() => { setActive(i); setRestartKey(k => k + 1); }}
-                className={`w-full text-left rounded-2xl border p-5 transition shadow-sm ${
+                className={`w-full text-left rounded-2xl border p-5 transition shadow-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-black/10 dark:focus-visible:ring-white/20 ${
                   i === active
                     ? "border-fuchsia-200 bg-fuchsia-50/70 dark:bg-white/5"
                     : "border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/5"
@@ -451,16 +495,6 @@ function Features() {
                 </div>
               </button>
             ))}
-          </div>
-
-          {/* Right: preview panel */}
-          <div className="rounded-3xl border border-black/10 dark:border-white/10 bg-white/60 dark:bg-white/5 shadow-inner overflow-hidden">
-            <MediaBox
-              key={restartKey}
-              restartKey={restartKey}
-              src={bustSrc}
-              alt={items[active]?.media?.alt || ""}
-            />
           </div>
         </div>
       </div>

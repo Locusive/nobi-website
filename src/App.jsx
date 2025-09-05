@@ -783,7 +783,7 @@ function Footer() {
   );
 }
 
-/* ========= Insights helpers ========= */
+// Simple horizontal bar
 function Bar({ value, maxValue }) {
   const pct = Math.max(0, Math.min(100, Math.round((value / maxValue) * 100)));
   return (
@@ -796,12 +796,12 @@ function Bar({ value, maxValue }) {
   );
 }
 
+// Heatmap cell (v is 0..1)
 function HeatCell({ v = 0 }) {
-  // v is 0..1. Keep text readable, scale background by value.
-  const bg = `rgba(139, 92, 246, ${0.12 + v * 0.45})`; // violet with variable opacity
+  const bg = `rgba(139, 92, 246, ${0.15 + v * 0.45})`; // violet w/ variable opacity
   return (
     <div
-      className="h-9 sm:h-10 flex items-center justify-center rounded-md text-[11px] sm:text-xs font-medium leading-none"
+      className="h-10 sm:h-12 md:h-14 flex items-center justify-center rounded-lg text-xs sm:text-sm font-medium"
       style={{ backgroundColor: bg, border: "1px solid rgba(0,0,0,0.06)" }}
       aria-label={`affinity ${Math.round(v * 100)}%`}
     >
@@ -855,6 +855,7 @@ function Insights() {
         </div>
 
         <div className="mt-8 grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+          {/* Left column */}
           <div className="space-y-6">
             {/* Intents */}
             <div className="rounded-3xl border border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/5 p-6 shadow-sm">
@@ -875,7 +876,7 @@ function Insights() {
               </div>
             </div>
 
-            {/* Attribute affinity by product (heatmap) */}
+            {/* Product × Attribute affinity (heatmap) */}
             <div className="rounded-3xl border border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/5 p-6 shadow-sm">
               <div className="font-semibold">Attribute affinity by product</div>
               <p className="mt-1 text-xs text-black/60 dark:text-white/60">
@@ -883,8 +884,11 @@ function Insights() {
               </p>
 
               <div className="mt-4 overflow-x-auto">
-                <div className="min-w-[560px]">
-                  <div className="grid" style={{ gridTemplateColumns: `160px repeat(${attrs.length}, minmax(80px, 1fr))` }}>
+                <div className="min-w-[520px]">
+                  <div
+                    className="grid"
+                    style={{ gridTemplateColumns: `160px repeat(${attrs.length}, minmax(72px, 1fr))` }}
+                  >
                     <div />
                     {attrs.map((a) => (
                       <div key={a} className="px-2 py-1 text-xs sm:text-sm text-center text-black/70 dark:text-white/70">
@@ -939,24 +943,16 @@ function Insights() {
                   “Need waterproof boots that still look dressy for work — calf is the issue.”
                 </blockquote>
                 <blockquote className="rounded-xl p-3 bg-black/5 dark:bg-white/10">
-                  “Vegan leather tote, zip top, fits 16&quot; laptop, under $200.”
+                  {/* use &quot; to avoid smart-quote paste issues */}
+                  Vegan leather tote, zip top, fits 16&quot; laptop, under $200.
                 </blockquote>
                 <blockquote className="rounded-xl p-3 bg-black/5 dark:bg-white/10">
-                  “Looking for running shoes with real arch support; neutral colors only.”
+                  Looking for running shoes with real arch support; neutral colors only.
                 </blockquote>
               </div>
             </div>
           </div>
         </div>
-
-        <div className="mt-8 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
-          <Button size="lg" className="w-full sm:w-auto">Get a sample insights report</Button>
-          <Button size="lg" variant="ghost" className="w-full sm:w-auto">See how insights are generated</Button>
-        </div>
-      </div>
-    </section>
-  );
-}
 
         {/* CTA row */}
         <div className="mt-8 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
@@ -967,7 +963,6 @@ function Insights() {
     </section>
   );
 }
-
 
 export default function App() {
 const [isVideoOpen, setIsVideoOpen] = useState(false);  

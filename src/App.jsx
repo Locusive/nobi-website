@@ -1,17 +1,16 @@
 
-import React, { useState, useEffect, useRef } from "react";
-import { motion } from "framer-motion";
-import {
-  Sparkles,
-  Search as SearchIcon,
-  ArrowRight,
-  CheckCircle2,
-  ShoppingCart,
-  Filter,
-  MousePointerClick,
-  BarChart3,
-  Quote,
-} from "lucide-react";
+ import {
+   Sparkles,
+   Search as SearchIcon,
+   ArrowRight,
+   CheckCircle2,
+   ShoppingCart,
+   Filter,
+   MousePointerClick,
+   BarChart3,
+   Quote,
+  PlayCircle,
+ } from "lucide-react";
 
 // -------------------- NOTE --------------------
 // This file mirrors the Canvas version, adapted for Vite.
@@ -330,9 +329,78 @@ function PreviewCard() {
   );
 }
 
+function VideoModal({ open, onClose, src = "/media/how-it-works.mp4", poster = "" }) {
+  const dialogRef = useRef(null);
+
+  // Close on ESC and lock background scroll
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e) => e.key === "Escape" && onClose?.();
+    document.addEventListener("keydown", onKey);
+
+    const prevOverflow = document.documentElement.style.overflow;
+    document.documentElement.style.overflow = "hidden";
+    return () => {
+      document.removeEventListener("keydown", onKey);
+      document.documentElement.style.overflow = prevOverflow;
+    };
+  }, [open, onClose]);
+
+  if (!open) return null;
+
+  return (
+    <div
+      className="fixed inset-0 z-[100] flex items-center justify-center p-4"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="howitworks-title"
+    >
+      {/* Backdrop */}
+      <button
+        className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+        aria-label="Close video"
+        onClick={onClose}
+      />
+
+      {/* Modal card */}
+      <div
+        ref={dialogRef}
+        className="relative w-full max-w-3xl rounded-2xl bg-black overflow-hidden shadow-2xl"
+      >
+        <div className="relative w-full aspect-video">
+          <video
+            src={src}
+            poster={poster}
+            autoPlay
+            controls
+            playsInline
+            preload="metadata"
+            className="absolute inset-0 h-full w-full object-contain bg-black"
+          />
+        </div>
+
+        {/* Header / title row */}
+        <div className="absolute top-2 left-2 right-2 flex items-center justify-between pointer-events-none">
+          <h2 id="howitworks-title" className="sr-only">
+            How it works video
+          </h2>
+          <span className="pointer-events-none" />
+          <button
+            onClick={onClose}
+            className="pointer-events-auto inline-flex items-center rounded-full bg-white/10 text-white hover:bg-white/20 active:scale-[.98] p-2"
+            aria-label="Close"
+            title="Close"
+          >
+            ✕
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 
-function Hero() {
+function Hero({ onOpenVideo }) {
   return (
     <section id="home" className="relative overflow-hidden mb-3">
       <div className="mx-auto max-w-6xl px-6 pt-16 sm:pt-24">
@@ -352,9 +420,16 @@ function Hero() {
     <Button size="lg" className="w-full sm:w-auto">
       Try it on your store <ArrowRight className="h-4 w-4 shrink-0" />
     </Button>
-    <Button size="lg" variant="ghost" className="w-full sm:w-auto">
-      See how it works
-    </Button>
+     <Button
+size="lg"
+variant="ghost"
+className="w-full sm:w-auto"
+onClick={onOpenVideo}
+type="button"
+>
+<PlayCircle className="h-5 w-5" />
+<span className="ml-1">How it works in 60 seconds</span>
+</Button>
   </div>
 
   <div className="mt-6 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-black/60 dark:text-white/60">
@@ -688,7 +763,8 @@ function Footer() {
 }
 
 export default function App() {
-  return (
+const [isVideoOpen, setIsVideoOpen] = useState(false);  
+return (
     <div className="min-h-screen bg-gradient-to-b from-white to-slate-50 dark:from-[#0a0a0a] dark:to-black text-black dark:text-white">
       <header className="sticky top-0 z-40 border-b border-black/10 dark:border-white/10 backdrop-blur bg-white/70 dark:bg-black/40">
         <div className="mx-auto max-w-6xl px-6 h-16 flex items-center justify-between">
@@ -699,7 +775,7 @@ export default function App() {
         </div>
       </header>
 
-      <Hero />
+<Hero onOpenVideo={() => setIsVideoOpen(true)} />
       <Logos />
       <Features />
       <Results />
@@ -708,6 +784,13 @@ export default function App() {
       <Pricing />
       <FAQ />
       <Footer />
+{/* Video modal */}
+      <VideoModal
+        open={isVideoOpen}
+        onClose={() => setIsVideoOpen(false)}
+        src="/media/how-it-works.mp4"
+        // poster="/media/how-it-works-poster.jpg"
+      />
     </div>
   );
 }

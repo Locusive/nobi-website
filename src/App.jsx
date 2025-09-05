@@ -782,6 +782,7 @@ function Footer() {
         </div>
         <div className="flex items-center gap-4 text-sm">
           <a href="#features" className="hover:opacity-80">Features</a>
+         <a href="#insights" className="hover:opacity-80">Insights</a>
           <a href="#pricing" className="hover:opacity-80">Pricing</a>
           <a href="#faq" className="hover:opacity-80">FAQ</a>
         </div>
@@ -789,6 +790,193 @@ function Footer() {
     </footer>
   );
 }
+
+/* ========= Insights helpers ========= */
+function Bar({ value, maxValue }) {
+  const pct = Math.max(0, Math.min(100, Math.round((value / maxValue) * 100)));
+  return (
+    <div className="h-2 w-full rounded-full bg-black/5 dark:bg-white/10">
+      <div
+        className="h-2 rounded-full bg-gradient-to-r from-indigo-500 via-violet-500 to-fuchsia-500"
+        style={{ width: `${pct}%` }}
+      />
+    </div>
+  );
+}
+
+function HeatCell({ v = 0 }) {
+  // v is 0..1
+  const bg = `rgba(139, 92, 246, ${0.15 + v * 0.45})`; // violet w/ variable opacity
+  const border = `rgba(0,0,0,0.06)`;
+  return (
+    <div
+      className="h-10 sm:h-12 md:h-14 flex items-center justify-center rounded-lg text-xs sm:text-sm font-medium"
+      style={{ backgroundColor: bg, border: `1px solid ${border}` }}
+      aria-label={`affinity ${Math.round(v * 100)}%`}
+    >
+      {Math.round(v * 100)}%
+    </div>
+  );
+}
+
+/* ========= Insights section ========= */
+function Insights() {
+  // Mock data — adjust as you like
+  const intents = [
+    { label: "Gift-finding", value: 124 },
+    { label: "Bundle building", value: 96 },
+    { label: "Problem/need → solution", value: 88 },
+    { label: "Complement current purchase", value: 54 },
+  ];
+
+  const objections = [
+    { label: "Unsure about sizing/fit", value: 63 },
+    { label: "Shipping cost/timing", value: 49 },
+    { label: "Material care/durability", value: 31 },
+    { label: "Out of stock / color", value: 24 },
+  ];
+
+  // Attribute affinity by product (0..1)
+  const products = ["Chelsea boots", "Totes", "Rain jackets", "Running shoes"];
+  const attrs = ["Waterproof", "Vegan leather", "Arch support", "Petite fit"];
+  const affinity = {
+    "Chelsea boots": { Waterproof: 0.78, "Vegan leather": 0.32, "Arch support": 0.55, "Petite fit": 0.12 },
+    Totes: { Waterproof: 0.22, "Vegan leather": 0.81, "Arch support": 0.08, "Petite fit": 0.04 },
+    "Rain jackets": { Waterproof: 0.93, "Vegan leather": 0.05, "Arch support": 0.06, "Petite fit": 0.18 },
+    "Running shoes": { Waterproof: 0.28, "Vegan leather": 0.03, "Arch support": 0.87, "Petite fit": 0.09 },
+  };
+
+  const max = (arr) => Math.max(...arr.map((d) => d.value));
+
+  return (
+    <section id="insights" className="scroll-mt-20 py-20 border-t border-black/5 dark:border-white/5">
+      <div className="mx-auto max-w-6xl px-6">
+        <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
+          <div>
+            <p className="text-sm font-semibold text-fuchsia-600">Insights</p>
+            <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight mt-2">
+              Insights your team can act on
+            </h2>
+            <p className="mt-3 text-black/70 dark:text-white/70 max-w-2xl">
+              Nobi turns real conversations into structured signals — intents, attribute affinities,
+              objections, and quotes — so merchandising, creative, CX, and growth can move faster
+              with clarity.
+            </p>
+          </div>
+        </div>
+
+        {/* Grid */}
+        <div className="mt-8 grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+          {/* Left column */}
+          <div className="space-y-6">
+            {/* Intents */}
+            <div className="rounded-3xl border border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/5 p-6 shadow-sm">
+              <div className="font-semibold flex items-center gap-2">
+                <Sparkles className="h-4 w-4 text-fuchsia-600" />
+                Top customer intents
+              </div>
+              <div className="mt-4 space-y-3">
+                {intents.map((d) => (
+                  <div key={d.label}>
+                    <div className="flex items-center justify-between text-sm">
+                      <span className="text-black/80 dark:text-white/90">{d.label}</span>
+                      <span className="tabular-nums text-black/60 dark:text-white/60">{d.value}</span>
+                    </div>
+                    <Bar value={d.value} maxValue={max(intents)} />
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Product × Attribute affinity (heatmap) */}
+            <div className="rounded-3xl border border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/5 p-6 shadow-sm">
+              <div className="font-semibold">Attribute affinity by product</div>
+              <p className="mt-1 text-xs text-black/60 dark:text-white/60">
+                Likelihood a shopper will request an attribute when browsing a product type.
+              </p>
+
+              {/* Axis labels */}
+              <div className="mt-4 overflow-x-auto">
+                <div className="min-w-[560px]">
+                  <div className="grid" style={{ gridTemplateColumns: `160px repeat(${attrs.length}, minmax(80px, 1fr))` }}>
+                    <div />
+                    {attrs.map((a) => (
+                      <div key={a} className="px-2 py-1 text-xs sm:text-sm text-center text-black/70 dark:text-white/70">
+                        {a}
+                      </div>
+                    ))}
+                    {products.map((p) => (
+                      <React.Fragment key={p}>
+                        <div className="px-2 py-2 text-sm font-medium text-black/80 dark:text-white/90 flex items-center">
+                          {p}
+                        </div>
+                        {attrs.map((a) => (
+                          <HeatCell key={`${p}-${a}`} v={affinity[p][a] || 0} />
+                        ))}
+                      </React.Fragment>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Right column */}
+          <div className="space-y-6">
+            {/* Objections */}
+            <div className="rounded-3xl border border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/5 p-6 shadow-sm">
+              <div className="font-semibold flex items-center gap-2">
+                <BarChart3 className="h-4 w-4 text-fuchsia-600" />
+                Common objections & barriers
+              </div>
+              <div className="mt-4 space-y-3">
+                {objections.map((d) => (
+                  <div key={d.label}>
+                    <div className="flex items-center justify-between text-sm">
+                      <span className="text-black/80 dark:text-white/90">{d.label}</span>
+                      <span className="tabular-nums text-black/60 dark:text-white/60">{d.value}</span>
+                    </div>
+                    <Bar value={d.value} maxValue={max(objections)} />
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Voice of customer */}
+            <div className="rounded-3xl border border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/5 p-6 shadow-sm">
+              <div className="font-semibold flex items-center gap-2">
+                <Quote className="h-4 w-4 text-fuchsia-600" />
+                Voice of customer
+              </div>
+              <div className="mt-3 space-y-3 text-sm text-black/80 dark:text-white/90">
+                <blockquote className="rounded-xl p-3 bg-black/5 dark:bg-white/10">
+                  “Need waterproof boots that still look dressy for work — calf is the issue.”
+                </blockquote>
+                <blockquote className="rounded-xl p-3 bg-black/5 dark:bg-white/10">
+                  “Vegan leather tote, zip top, fits 16&quot; laptop, under $200.”
+                </blockquote>
+                <blockquote className="rounded-xl p-3 bg-black/5 dark:bg-white/10">
+                  “Looking for running shoes with real arch support; neutral colors only.”
+                </blockquote>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* CTA row */}
+        <div className="mt-8 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+          <Button size="lg" className="w-full sm:w-auto">
+            Get a sample insights report
+          </Button>
+          <Button size="lg" variant="ghost" className="w-full sm:w-auto">
+            See how insights are generated
+          </Button>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 
 export default function App() {
 const [isVideoOpen, setIsVideoOpen] = useState(false);  
@@ -807,6 +995,7 @@ return (
       <Logos />
       <Features />
       <Results />
+     <Insights />
       <Testimonial />
       <HowItWorks />
       <Pricing />

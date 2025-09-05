@@ -159,21 +159,21 @@ function Button({ variant = "primary", size = "md", className = "", children, ..
   );
 }
 
-function Logo({ className = "h-8" }) {        // default a bit larger
+function Logo({ className = "h-6" }) {
   const [failed, setFailed] = useState(false);
   return (
-    <div className={`flex items-center ${className}`}>   {/* container height controls logo */}
+    <div className={`flex items-center gap-2 ${className}`}>
       {!failed ? (
         <img
           src="/media/nobi-logo.svg"
           srcSet="/media/nobi-logo.svg 1x, /media/nobi-logo@2x.png 2x"
           alt="Nobi logo"
-          className="h-full w-auto"                        // ⬅️ use container height
+          className="w-auto h-full"     // ← was "h-6"
           onError={() => setFailed(true)}
         />
       ) : (
-        <svg className="h-full w-auto" viewBox="0 0 120 24" aria-label="Nobi logo placeholder">
-          {/* …existing gradient + shapes… */}
+        <svg className="w-auto h-full" viewBox="0 0 120 24" aria-label="Nobi logo placeholder">
+          {/* ... */}
         </svg>
       )}
     </div>
@@ -811,6 +811,32 @@ function HeatCell({ v = 0 }) {
 }
 
 /* ========= Insights section ========= */
+function Bar({ value, maxValue }) {
+  const pct = Math.max(0, Math.min(100, Math.round((value / maxValue) * 100)));
+  return (
+    <div className="h-2 w-full rounded-full bg-black/5 dark:bg-white/10">
+      <div
+        className="h-2 rounded-full bg-gradient-to-r from-indigo-500 via-violet-500 to-fuchsia-500"
+        style={{ width: `${pct}%` }}
+      />
+    </div>
+  );
+}
+
+function HeatCell({ v = 0 }) {
+  const bg = `rgba(139, 92, 246, ${0.15 + v * 0.45})`;
+  const border = `rgba(0,0,0,0.06)`;
+  return (
+    <div
+      className="h-9 sm:h-10 md:h-11 flex items-center justify-center rounded-lg text-xs sm:text-sm font-medium"
+      style={{ backgroundColor: bg, border: `1px solid ${border}` }}
+      aria-label={`affinity ${Math.round(v * 100)}%`}
+    >
+      {Math.round(v * 100)}%
+    </div>
+  );
+}
+
 function Insights() {
   const intents = [
     { label: "Gift-finding", value: 124 },
@@ -826,12 +852,14 @@ function Insights() {
     { label: "Out of stock / color", value: 24 },
   ];
 
-  const products = ["Chelsea", "Roper", "Chukka"];
-  const attrs = ["Ostrich", "Suede", "Tall"];
+  // Attribute affinity by product (0..1)
+  const products = ["Chelsea boots", "Totes", "Rain jackets", "Running shoes"];
+  const attrs = ["Waterproof", "Vegan leather", "Arch support", "Petite fit"];
   const affinity = {
-    "Chelsea": { Ostrich: 0.78, "Suede": 0.32, "Tall": 0.55 },
-    Roper: { Ostrich: 0.22, "Suede": 0.81, "Tall": 0.08 },
-    "Chukka": { Ostrich: 0.93, "Suede": 0.05, "Tall": 0.06 },
+    "Chelsea boots": { Waterproof: 0.78, "Vegan leather": 0.32, "Arch support": 0.55, "Petite fit": 0.12 },
+    Totes: { Waterproof: 0.22, "Vegan leather": 0.81, "Arch support": 0.08, "Petite fit": 0.04 },
+    "Rain jackets": { Waterproof: 0.93, "Vegan leather": 0.05, "Arch support": 0.06, "Petite fit": 0.18 },
+    "Running shoes": { Waterproof: 0.28, "Vegan leather": 0.03, "Arch support": 0.87, "Petite fit": 0.09 },
   };
 
   const max = (arr) => Math.max(...arr.map((d) => d.value));
@@ -853,6 +881,7 @@ function Insights() {
           </div>
         </div>
 
+        {/* Grid */}
         <div className="mt-8 grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
           {/* Left column */}
           <div className="space-y-6">
@@ -875,50 +904,45 @@ function Insights() {
               </div>
             </div>
 
-          {/* Attribute affinity by product (heatmap) */}
-<div className="rounded-3xl border border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/5 p-6 shadow-sm">
-  <div className="font-semibold">Attribute affinity by product</div>
-  <p className="mt-1 text-xs text-black/60 dark:text-white/60">
-    Likelihood a shopper will request an attribute when browsing a product type.
-  </p>
+            {/* Attribute affinity by product (heatmap) */}
+            <div className="rounded-3xl border border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/5 p-6 shadow-sm">
+              <div className="font-semibold">Attribute affinity by product</div>
+              <p className="mt-1 text-xs text-black/60 dark:text-white/60">
+                Likelihood a shopper will request an attribute when browsing a product type.
+              </p>
 
-  {/* Grid */}
-  <div className="mt-4 overflow-x-auto [-webkit-overflow-scrolling:touch]">
-    <div className="w-full">
-      <div
-        className="grid gap-2 sm:gap-3"
-        style={{
-          // left label column + N attribute columns (each with a clamped min)
-          gridTemplateColumns: `clamp(112px, 20vw, 140px) repeat(${attrs.length}, minmax(clamp(58px, 8vw, 84px), 1fr))`,
-        }}
-      >
-        {/* top-left empty corner */}
-        <div />
-        {/* column headers */}
-        {attrs.map((a) => (
-          <div
-            key={a}
-            className="px-2 py-1 text-xs sm:text-sm text-center text-black/70 dark:text-white/70"
-          >
-            {a}
-          </div>
-        ))}
-
-        {/* rows */}
-        {products.map((p) => (
-          <React.Fragment key={p}>
-            <div className="px-2 py-2 text-sm font-medium text-black/80 dark:text-white/90 flex items-center">
-              {p}
+              <div className="mt-4 overflow-x-auto [-webkit-overflow-scrolling:touch]">
+                <div className="w-full">
+                  <div
+                    className="grid gap-2 sm:gap-3"
+                    style={{
+                      gridTemplateColumns: `clamp(112px, 20vw, 140px) repeat(${attrs.length}, minmax(clamp(58px, 8vw, 84px), 1fr))`,
+                    }}
+                  >
+                    <div />
+                    {attrs.map((a) => (
+                      <div
+                        key={a}
+                        className="px-2 py-1 text-xs sm:text-sm text-center text-black/70 dark:text-white/70"
+                      >
+                        {a}
+                      </div>
+                    ))}
+                    {products.map((p) => (
+                      <React.Fragment key={p}>
+                        <div className="px-2 py-2 text-sm font-medium text-black/80 dark:text-white/90 flex items-center">
+                          {p}
+                        </div>
+                        {attrs.map((a) => (
+                          <HeatCell key={`${p}-${a}`} v={affinity[p][a] || 0} />
+                        ))}
+                      </React.Fragment>
+                    ))}
+                  </div>
+                </div>
+              </div>
             </div>
-            {attrs.map((a) => (
-              <HeatCell key={`${p}-${a}`} v={affinity[p][a] || 0} />
-            ))}
-          </React.Fragment>
-        ))}
-      </div>
-    </div>
-  </div>
-</div>
+          </div>
 
           {/* Right column */}
           <div className="space-y-6">
@@ -949,17 +973,13 @@ function Insights() {
               </div>
               <div className="mt-3 space-y-3 text-sm text-black/80 dark:text-white/90">
                 <blockquote className="rounded-xl p-3 bg-black/5 dark:bg-white/10">
-                  “Need waterproof boots that still look dressy for work.”
+                  “Need waterproof boots that still look dressy for work — calf is the issue.”
                 </blockquote>
                 <blockquote className="rounded-xl p-3 bg-black/5 dark:bg-white/10">
-                  {/* use &quot; to avoid smart-quote paste issues */}
-                  Vegan leather tote, zip top, fits 16&quot; laptop, under $200.
+                  “Vegan leather tote, zip top, fits 16&quot; laptop, under $200.”
                 </blockquote>
                 <blockquote className="rounded-xl p-3 bg-black/5 dark:bg-white/10">
-                  Need a linen dress appropriate for a beach wedding in Mexico.
-                </blockquote>
-                <blockquote className="rounded-xl p-3 bg-black/5 dark:bg-white/10">
-                  I loved the drawstring pants you used to sell. Do you have anything like that?
+                  “Looking for running shoes with real arch support; neutral colors only.”
                 </blockquote>
               </div>
             </div>
@@ -969,6 +989,7 @@ function Insights() {
         {/* CTA row */}
         <div className="mt-8 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
           <Button size="lg" className="w-full sm:w-auto">Get a sample insights report</Button>
+          <Button size="lg" variant="ghost" className="w-full sm:w-auto">See how insights are generated</Button>
         </div>
       </div>
     </section>
@@ -981,10 +1002,9 @@ return (
     <div className="min-h-screen bg-gradient-to-b from-white to-slate-50 dark:from-[#0a0a0a] dark:to-black text-black dark:text-white">
       <header className="sticky top-0 z-40 h-14 sm:h-16 border-b border-black/10 dark:border-white/10 backdrop-blur bg-white/70 dark:bg-black/40">
   <div className="mx-auto max-w-6xl px-6 h-full flex items-center justify-between">
-    <a href="#home" className="flex items-center gap-3">
-      {/* control size here */}
-      <Logo className="h-8 sm:h-9" />
-    </a>
+   <a href="#home" className="flex items-center gap-3">
+  <Logo className="h-8 sm:h-9" />
+</a>
     <div className="hidden md:flex items-center gap-3">
       <Button variant="ghost"><ShoppingCart className="h-4 w-4" /> Install Nobi</Button>
     </div>

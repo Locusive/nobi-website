@@ -62,10 +62,10 @@ function MediaBox({ src, alt = "", restartKey }) {
   const [failed, setFailed] = useState(false);
   const vidRef = useRef(null);
 
-  // clear any previous error when the src changes
+  // Clear error when the source changes
   useEffect(() => setFailed(false), [src]);
 
-  // whenever restartKey or src changes, reset and play from the start
+  // On restartKey/src change: seek to 0 and play
   useEffect(() => {
     const v = vidRef.current;
     if (v) {
@@ -80,22 +80,22 @@ function MediaBox({ src, alt = "", restartKey }) {
   if (!src) return <PlaceholderSVG label="" className="w-full h-full" />;
 
   if (isVideoSource(src) && !failed) {
-  return (
-    <video
-      key={restartKey || src}
-      ref={vidRef}
-      src={src}
-      autoPlay
-      muted
-      playsInline
-      loop                     // ← add this
-      className="w-full h-full object-cover object-top"
-      onError={() => setFailed(true)}
-      aria-hidden="true"
-      tabIndex={-1}
-    />
-  );
-}
+    return (
+      <video
+        key={restartKey || src}     // force fresh mount when restartKey increments
+        ref={vidRef}
+        src={src}
+        autoPlay
+        loop                         // <-- ensures it loops when it finishes
+        muted
+        playsInline
+        className="w-full h-full object-cover object-top"
+        onError={() => setFailed(true)}
+        aria-hidden="true"
+        tabIndex={-1}
+      />
+    );
+  }
 
   return (
     <AssetImage
@@ -105,7 +105,6 @@ function MediaBox({ src, alt = "", restartKey }) {
     />
   );
 }
-
 
 function AssetImage({ src, alt, className = "", labelForPlaceholder }) {
   const [failed, setFailed] = useState(false);
@@ -394,28 +393,28 @@ function Features() {
       desc:
         "Let users who want the ChatGPT experience from your search 'Ask AI'. Keep your default keyword search for everyone else.",
       icon: <Sparkles className="h-4 w-4" />,
-      media: { src: "/media/feature-ai-mode.mp4", alt: "" }, // alt: "" so no overlay text
+      media: { src: "/media/feature-ai-mode.mp4", alt: "" },
     },
     {
       title: "Simplify Collections Pages",
       desc:
         "Empower customers to drill down from 100s of SKUs to the perfect fit in seconds, simply by asking.",
       icon: <Filter className="h-4 w-4" />,
-      media: { src: "/media/feature-collections.mp4", alt: "" },
+      media: { src: "/media/feature-collections.mp4", alt: "Collections assistant demo" },
     },
     {
       title: "Capture Bouncers",
       desc:
         "Prevent customers from leaving your search result pages by offering them the ability try again with Nobi.",
       icon: <MousePointerClick className="h-4 w-4" />,
-      media: { src: "/media/feature-capture.mp4", alt: "" },
+      media: { src: "/media/feature-capture.mp4", alt: "Capture bouncers demo" },
     },
   ];
 
   const [active, setActive] = useState(0);
   const [restartKey, setRestartKey] = useState(0);
 
-  // Always re-fetch/restart the video when selection changes
+  // Cache-bust so the browser always refreshes the video source
   const rawSrc = items[active]?.media?.src || "";
   const bustSrc = rawSrc && `${rawSrc}${rawSrc.includes("?") ? "&" : "?"}r=${restartKey}`;
 
@@ -455,7 +454,7 @@ function Features() {
           </div>
 
           {/* Right: preview panel */}
-          <div className="h-full rounded-3xl border border-black/10 dark:border-white/10 bg-white/60 dark:bg-white/5 shadow-inner overflow-hidden">
+          <div className="rounded-3xl border border-black/10 dark:border-white/10 bg-white/60 dark:bg-white/5 shadow-inner overflow-hidden">
             <MediaBox
               key={restartKey}
               restartKey={restartKey}

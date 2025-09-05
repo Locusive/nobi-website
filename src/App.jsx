@@ -506,7 +506,7 @@ function Results() {
       <div className="mx-auto max-w-6xl px-6">
         <p className="text-sm font-semibold text-fuchsia-600">Results</p>
         <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight mt-2">
-          Conversational shopping works
+          Conversational shopping works.
         </h2>
         <p className="mt-3 text-black/70 dark:text-white/70 max-w-2xl">
           Nobi has outperformed the default shopping experience in every A/B test we've ever run.
@@ -595,7 +595,7 @@ function Testimonial() {
 
 function HowItWorks() {
   const steps = [
-    { h: "Install the code", p: "Paste two snippets of code into your site. Nobi reads your catalog and adopts your branding." },
+    { h: "Install the code", p: "Paste two snippets of code into your store. Nobi reads your catalog and adopts your branding." },
     { h: "Ramp up traffic", p: "Pick pages to enable and control what percent of traffic sees Nobi." },
     { h: "Measure the lift", p: "Track conversion, AOV and qualitative insights in a simple dashboard." },
   ];

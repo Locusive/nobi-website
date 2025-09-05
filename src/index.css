@@ -4,3 +4,9 @@
 
 /* smooth fonts */
 body { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+
+@supports (text-wrap: balance) {
+  .text-balance { text-wrap: balance; }
+}
+
+html { scroll-behavior: smooth; }

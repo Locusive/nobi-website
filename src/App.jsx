@@ -948,6 +948,9 @@ function Insights() {
                 <blockquote className="rounded-xl p-3 bg-black/5 dark:bg-white/10">
                   Looking for running shoes with real arch support; neutral colors only.
                 </blockquote>
+                <blockquote className="rounded-xl p-3 bg-black/5 dark:bg-white/10">
+                  Looking for running shoes with real arch support; neutral colors only.
+                </blockquote>
               </div>
             </div>
           </div>

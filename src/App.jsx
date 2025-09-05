@@ -331,20 +331,35 @@ function PreviewCard() {
   );
 }
 
-function VideoModal({ open, onClose, src = "/media/how-it-works.mp4", poster = "" }) {
-  const dialogRef = useRef(null);
+function VideoModal({ open, onClose, youtube, src, poster = "" }) {
+  // Accept either a full YouTube URL or just the ID
+  function getYouTubeId(input = "") {
+    if (!input) return "";
+    // If it's already an ID, return it
+    if (/^[a-zA-Z0-9_-]{11}$/.test(input)) return input;
+    // Try to parse common YouTube URL formats
+    const m =
+      input.match(/(?:v=|\/embed\/|youtu\.be\/)([a-zA-Z0-9_-]{11})/) ||
+      input.match(/^([a-zA-Z0-9_-]{11})$/);
+    return m ? m[1] : "";
+  }
+
+  const ytId = getYouTubeId(youtube);
+  const ytSrc = ytId
+    ? `https://www.youtube.com/embed/${ytId}?autoplay=1&rel=0&modestbranding=1&playsinline=1`
+    : "";
 
   // Close on ESC and lock background scroll
-  useEffect(() => {
+  const dialogRef = React.useRef(null);
+  React.useEffect(() => {
     if (!open) return;
     const onKey = (e) => e.key === "Escape" && onClose?.();
     document.addEventListener("keydown", onKey);
-
-    const prevOverflow = document.documentElement.style.overflow;
+    const prev = document.documentElement.style.overflow;
     document.documentElement.style.overflow = "hidden";
     return () => {
       document.removeEventListener("keydown", onKey);
-      document.documentElement.style.overflow = prevOverflow;
+      document.documentElement.style.overflow = prev;
     };
   }, [open, onClose]);
 
@@ -368,17 +383,29 @@ function VideoModal({ open, onClose, src = "/media/how-it-works.mp4", poster = "
       <div
         ref={dialogRef}
         className="relative w-full max-w-3xl rounded-2xl bg-black overflow-hidden shadow-2xl"
+        onClick={(e) => e.stopPropagation()} // don't close when clicking inside
       >
         <div className="relative w-full aspect-video">
-          <video
-            src={src}
-            poster={poster}
-            autoPlay
-            controls
-            playsInline
-            preload="metadata"
-            className="absolute inset-0 h-full w-full object-contain bg-black"
-          />
+          {ytSrc ? (
+            <iframe
+              title="How it works video"
+              src={ytSrc}
+              className="absolute inset-0 h-full w-full"
+              frameBorder="0"
+              allow="autoplay; encrypted-media; picture-in-picture; web-share"
+              allowFullScreen
+            />
+          ) : (
+            <video
+              src={src}
+              poster={poster}
+              autoPlay
+              controls
+              playsInline
+              preload="metadata"
+              className="absolute inset-0 h-full w-full object-contain bg-black"
+            />
+          )}
         </div>
 
         {/* Header / title row */}
@@ -400,7 +427,6 @@ function VideoModal({ open, onClose, src = "/media/how-it-works.mp4", poster = "
     </div>
   );
 }
-
 
 function Hero({ onOpenVideo }) {
   return (
@@ -787,12 +813,11 @@ return (
       <FAQ />
       <Footer />
 {/* Video modal */}
-      <VideoModal
-        open={isVideoOpen}
-        onClose={() => setIsVideoOpen(false)}
-        src="/media/how-it-works.mp4"
-        // poster="/media/how-it-works-poster.jpg"
-      />
+<VideoModal
+  open={isVideoOpen}
+  onClose={() => setIsVideoOpen(false)}
+  youtube="https://www.youtube.com/watch?v=RKqGC3CVZd0"
+/>
     </div>
   );
 }

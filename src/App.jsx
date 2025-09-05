@@ -838,11 +838,11 @@ function Insights() {
 
   // Attribute affinity by product (0..1)
   const products = ["Chelsea boots", "Totes", "Rain jackets"];
-  const attrs = ["Waterproof", "Vegan leather", "Arch support", "Petite fit"];
+  const attrs = ["Waterproof", "Vegan", "Tall"];
   const affinity = {
-    "Chelsea boots": { Waterproof: 0.78, "Vegan leather": 0.32, "Arch support": 0.55, "Petite fit": 0.12 },
-    Totes: { Waterproof: 0.22, "Vegan leather": 0.81, "Arch support": 0.08, "Petite fit": 0.04 },
-    "Rain jackets": { Waterproof: 0.93, "Vegan leather": 0.05, "Arch support": 0.06, "Petite fit": 0.18 },
+    "Chelsea boots": { Waterproof: 0.78, "Vegan": 0.32, "Tall": 0.55 },
+    Totes: { Waterproof: 0.22, "Vegan": 0.81, "Tall": 0.08 },
+    "Rain jackets": { Waterproof: 0.93, "Vegan": 0.05, "Tall": 0.06 },
   };
 
   const max = (arr) => Math.max(...arr.map((d) => d.value));

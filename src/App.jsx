@@ -159,29 +159,21 @@ function Button({ variant = "primary", size = "md", className = "", children, ..
   );
 }
 
-function Logo({ className = "h-6" }) {
+function Logo({ className = "h-8" }) {        // default a bit larger
   const [failed, setFailed] = useState(false);
   return (
-    <div className={`flex items-center gap-2 ${className}`}>
+    <div className={`flex items-center ${className}`}>   {/* container height controls logo */}
       {!failed ? (
         <img
-          src="/media/nobi-logo.png"
-          srcSet="/media/nobi-logo.png 1x, /media/nobi-logo@2x.png 2x"
+          src="/media/nobi-logo.svg"
+          srcSet="/media/nobi-logo.svg 1x, /media/nobi-logo@2x.png 2x"
           alt="Nobi logo"
-          className="h-6 w-auto"
+          className="h-full w-auto"                        // ⬅️ use container height
           onError={() => setFailed(true)}
         />
       ) : (
-        <svg className="h-6 w-auto" viewBox="0 0 120 24" aria-label="Nobi logo placeholder">
-          <defs>
-            <linearGradient id="lg" x1="0" y1="0" x2="1" y2="0">
-              <stop offset="0%" stopColor="#6366F1" />
-              <stop offset="50%" stopColor="#8B5CF6" />
-              <stop offset="100%" stopColor="#EC4899" />
-            </linearGradient>
-          </defs>
-          <circle cx="12" cy="12" r="10" fill="url(#lg)" />
-          <rect x="28" y="6" width="86" height="12" rx="6" fill="#111827" />
+        <svg className="h-full w-auto" viewBox="0 0 120 24" aria-label="Nobi logo placeholder">
+          {/* …existing gradient + shapes… */}
         </svg>
       )}
     </div>
@@ -820,7 +812,6 @@ function HeatCell({ v = 0 }) {
 
 /* ========= Insights section ========= */
 function Insights() {
-  // Mock data — adjust as you like
   const intents = [
     { label: "Gift-finding", value: 124 },
     { label: "Bundle building", value: 96 },
@@ -835,13 +826,13 @@ function Insights() {
     { label: "Out of stock / color", value: 24 },
   ];
 
-  // Attribute affinity by product (0..1)
-  const products = ["Chelsea boots", "Totes", "Rain jackets"];
-  const attrs = ["Waterproof", "Vegan", "Tall"];
+  const products = ["Chelsea boots", "Totes", "Rain jackets", "Running shoes"];
+  const attrs = ["Waterproof", "Vegan leather", "Arch support", "Petite fit"];
   const affinity = {
-    "Chelsea boots": { Waterproof: 0.78, "Vegan": 0.32, "Tall": 0.55 },
-    Totes: { Waterproof: 0.22, "Vegan": 0.81, "Tall": 0.08 },
-    "Rain jackets": { Waterproof: 0.93, "Vegan": 0.05, "Tall": 0.06 },
+    "Chelsea boots": { Waterproof: 0.78, "Vegan leather": 0.32, "Arch support": 0.55, "Petite fit": 0.12 },
+    Totes: { Waterproof: 0.22, "Vegan leather": 0.81, "Arch support": 0.08, "Petite fit": 0.04 },
+    "Rain jackets": { Waterproof: 0.93, "Vegan leather": 0.05, "Arch support": 0.06, "Petite fit": 0.18 },
+    "Running shoes": { Waterproof: 0.28, "Vegan leather": 0.03, "Arch support": 0.87, "Petite fit": 0.09 },
   };
 
   const max = (arr) => Math.max(...arr.map((d) => d.value));
@@ -853,17 +844,17 @@ function Insights() {
           <div>
             <p className="text-sm font-semibold text-fuchsia-600">Insights</p>
             <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight mt-2">
-              Insights your team can act on.
+              Insights your team can act on
             </h2>
             <p className="mt-3 text-black/70 dark:text-white/70 max-w-2xl">
-              Nobi turns real conversations into structured signals. Your merchandising, creative, CX, and growth teams have never moved faster.
+              Nobi turns real conversations into structured signals — intents, attribute affinities,
+              objections, and quotes — so merchandising, creative, CX, and growth can move faster
+              with clarity.
             </p>
           </div>
         </div>
 
-        {/* Grid */}
         <div className="mt-8 grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
-          {/* Left column */}
           <div className="space-y-6">
             {/* Intents */}
             <div className="rounded-3xl border border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/5 p-6 shadow-sm">
@@ -884,61 +875,37 @@ function Insights() {
               </div>
             </div>
 
-            {/* Product × Attribute affinity (heatmap) */}
-<div className="rounded-3xl border border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/5 p-6 shadow-sm overflow-hidden">
-  <div className="font-semibold">Attribute affinity by product</div>
-  <p className="mt-1 text-xs text-black/60 dark:text-white/60">
-    Likelihood a shopper will request an attribute when browsing a product type.
-  </p>
+            {/* Attribute affinity by product (heatmap) */}
+            <div className="rounded-3xl border border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/5 p-6 shadow-sm">
+              <div className="font-semibold">Attribute affinity by product</div>
+              <p className="mt-1 text-xs text-black/60 dark:text-white/60">
+                Likelihood a shopper will request an attribute when browsing a product type.
+              </p>
 
-  <div className="mt-4">
-    {/* No hard min-width; let the grid shrink to the card */}
-    <div className="w-full">
-      {/* Tighter, responsive columns:
-          - product col clamps 110–160px
-          - each attribute col clamps 56–96px
-      */}
-      <div
-        className="grid"
-        style={{
-          gridTemplateColumns: `minmax(110px,160px) repeat(${attrs.length}, minmax(56px,96px))`,
-          columnGap: "8px",
-          rowGap: "8px",
-        }}
-      >
-        {/* top-left spacer */}
-        <div />
-
-        {/* column headers */}
-        {attrs.map((a) => (
-          <div
-            key={a}
-            className="px-1 py-1 text-[11px] sm:text-xs text-center text-black/70 dark:text-white/70 leading-tight truncate"
-            title={a}
-          >
-            {a}
-          </div>
-        ))}
-
-        {/* rows */}
-        {products.map((p) => (
-          <React.Fragment key={p}>
-            <div
-              className="px-2 py-2 text-[13px] sm:text-sm font-medium text-black/80 dark:text-white/90 leading-tight truncate"
-              title={p}
-            >
-              {p}
+              <div className="mt-4 overflow-x-auto">
+                <div className="min-w-[560px]">
+                  <div className="grid" style={{ gridTemplateColumns: `160px repeat(${attrs.length}, minmax(80px, 1fr))` }}>
+                    <div />
+                    {attrs.map((a) => (
+                      <div key={a} className="px-2 py-1 text-xs sm:text-sm text-center text-black/70 dark:text-white/70">
+                        {a}
+                      </div>
+                    ))}
+                    {products.map((p) => (
+                      <React.Fragment key={p}>
+                        <div className="px-2 py-2 text-sm font-medium text-black/80 dark:text-white/90 flex items-center">
+                          {p}
+                        </div>
+                        {attrs.map((a) => (
+                          <HeatCell key={`${p}-${a}`} v={affinity[p][a] || 0} />
+                        ))}
+                      </React.Fragment>
+                    ))}
+                  </div>
+                </div>
+              </div>
             </div>
-            {attrs.map((a) => (
-              <HeatCell key={`${p}-${a}`} v={affinity[p][a] || 0} />
-            ))}
-          </React.Fragment>
-        ))}
-      </div>
-    </div>
-  </div>
-</div>
-
+          </div>
 
           {/* Right column */}
           <div className="space-y-6">
@@ -982,11 +949,19 @@ function Insights() {
           </div>
         </div>
 
+        <div className="mt-8 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+          <Button size="lg" className="w-full sm:w-auto">Get a sample insights report</Button>
+          <Button size="lg" variant="ghost" className="w-full sm:w-auto">See how insights are generated</Button>
+        </div>
+      </div>
+    </section>
+  );
+}
+
         {/* CTA row */}
         <div className="mt-8 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
-          <Button size="lg" className="w-full sm:w-auto">
-            Get a sample insights report
-          </Button>
+          <Button size="lg" className="w-full sm:w-auto">Get a sample insights report</Button>
+          <Button size="lg" variant="ghost" className="w-full sm:w-auto">See how insights are generated</Button>
         </div>
       </div>
     </section>
@@ -998,14 +973,17 @@ export default function App() {
 const [isVideoOpen, setIsVideoOpen] = useState(false);  
 return (
     <div className="min-h-screen bg-gradient-to-b from-white to-slate-50 dark:from-[#0a0a0a] dark:to-black text-black dark:text-white">
-      <header className="sticky top-0 z-40 border-b border-black/10 dark:border-white/10 backdrop-blur bg-white/70 dark:bg-black/40">
-        <div className="mx-auto max-w-6xl px-6 h-16 flex items-center justify-between">
-          <a href="#home" className="flex items-center gap-3"><Logo /></a>
-          <div className="hidden md:flex items-center gap-3">
-            <Button variant="ghost"><ShoppingCart className="h-4 w-4" /> Install Nobi</Button>
-          </div>
-        </div>
-      </header>
+      <header className="sticky top-0 z-40 h-14 sm:h-16 border-b border-black/10 dark:border-white/10 backdrop-blur bg-white/70 dark:bg-black/40">
+  <div className="mx-auto max-w-6xl px-6 h-full flex items-center justify-between">
+    <a href="#home" className="flex items-center gap-3">
+      {/* control size here */}
+      <Logo className="h-8 sm:h-9" />
+    </a>
+    <div className="hidden md:flex items-center gap-3">
+      <Button variant="ghost"><ShoppingCart className="h-4 w-4" /> Install Nobi</Button>
+    </div>
+  </div>
+</header>
 
 <Hero onOpenVideo={() => setIsVideoOpen(true)} />
       <Logos />

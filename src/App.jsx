@@ -118,15 +118,6 @@ function MediaBox({ src, alt = "", restartKey }) {
   );
 }
 
-  return (
-    <AssetImage
-      src={failed ? undefined : src}
-      alt={alt}
-      className="w-full h-full object-contain"
-    />
-  );
-}
-
 function AssetImage({ src, alt, className = "", labelForPlaceholder }) {
   const [failed, setFailed] = useState(false);
   if (!src || failed) {

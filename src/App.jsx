@@ -839,10 +839,10 @@ function InsightsHeatCell({ v = 0 }) {
 
 function Insights() {
   const intents = [
-    { label: "Gift-finding", value: 124 },
-    { label: "Bundle building", value: 96 },
-    { label: "Problem/need → solution", value: 88 },
-    { label: "Complement current purchase", value: 54 },
+    { label: "Buying a Gift", value: 124 },
+    { label: "Shopping for an upcoming trip", value: 96 },
+    { label: "Requesting sizing/fit", value: 88 },
+    { label: "Shopping by product type", value: 54 },
   ];
 
   const objections = [
@@ -852,12 +852,12 @@ function Insights() {
     { label: "Out of stock / color", value: 24 },
   ];
 
-  const products = ["Chelsea boots", "Totes", "Rain jackets"];
-  const attrs = ["Waterproof", "Vegan leather", "Arch support"];
+  const products = ["Button downs", "Polos", "Dresses"];
+  const attrs = ["Linen", "Gauze", "Terry"];
   const affinity = {
-    "Chelsea boots": { Waterproof: 0.78, "Vegan leather": 0.32, "Arch support": 0.55 },
-    Totes: { Waterproof: 0.22, "Vegan leather": 0.81, "Arch support": 0.08 },
-    "Rain jackets": { Waterproof: 0.93, "Vegan leather": 0.05, "Arch support": 0.06 },
+    "Button downs": { Linen: 0.78, "Gauze": 0.32, "Terry": 0.55 },
+    Polos: { Linen: 0.22, "Gauze": 0.81, "Terry": 0.08 },
+    "Dresses": { Linen: 0.93, "Gauze": 0.05, "Terry": 0.06 },
   };
 
   const max = (arr) => Math.max(...arr.map((d) => d.value));
@@ -872,9 +872,7 @@ function Insights() {
               Insights your team can act on
             </h2>
             <p className="mt-3 text-black/70 dark:text-white/70 max-w-2xl">
-              Nobi turns real conversations into structured signals — intents, attribute affinities,
-              objections, and quotes — so merchandising, creative, CX, and growth can move faster
-              with clarity.
+              Nobi turns real conversations into structured signals. Your merchandising, creative, and growth teams have never moved faster.
             </p>
           </div>
         </div>
@@ -968,16 +966,16 @@ function Insights() {
               </div>
               <div className="mt-3 space-y-3 text-sm text-black/80 dark:text-white/90">
                 <blockquote className="rounded-xl p-3 bg-black/5 dark:bg-white/10">
-                  “Need waterproof boots that still look dressy for work — calf is the issue.”
+                  “Shirts and pants for a boy going off to college (probably a large).”
                 </blockquote>
                 <blockquote className="rounded-xl p-3 bg-black/5 dark:bg-white/10">
-                  “Vegan leather tote, zip top, fits 16&quot; laptop, under $200.”
+                  “Outfits for a trip to Puerto Vallarta for a girlfriend's 30th.”
                 </blockquote>
                 <blockquote className="rounded-xl p-3 bg-black/5 dark:bg-white/10">
-                  “Looking for running shoes with real arch support; neutral colors only.”
+                  “Will the Legend shirt shrink in the wash?”
                 </blockquote>
                  <blockquote className="rounded-xl p-3 bg-black/5 dark:bg-white/10">
-                  “Need waterproof boots that still look dressy for work — calf is the issue.”
+                  “Men's sale items in sizes small and medium and pants size 32.”
                 </blockquote>
               </div>
             </div>
@@ -986,8 +984,7 @@ function Insights() {
 
         {/* CTA row */}
         <div className="mt-8 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
-          <Button size="lg" className="w-full sm:w-auto">Get a sample insights report</Button>
-          <Button size="lg" variant="ghost" className="w-full sm:w-auto">See how insights are generated</Button>
+          <Button size="lg" className="w-full sm:w-auto">See how insights are generated</Button>
         </div>
       </div>
     </section>

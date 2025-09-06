@@ -159,22 +159,30 @@ function Button({ variant = "primary", size = "md", className = "", children, ..
   );
 }
 
-function Logo({ className = "h-6" }) {
+function Logo({ className = "h-9 sm:h-10 md:h-11" }) {   // tweak these to taste
   const [failed, setFailed] = useState(false);
   return (
-    <div className={`flex items-center gap-2 ${className}`}>
+    <div className={`flex items-center gap-2 ${className} shrink-0`}>
       {!failed ? (
         <img
           src="/media/nobi-logo.png"
           srcSet="/media/nobi-logo.png 1x, /media/nobi-logo@2x.png 2x"
-          alt="Nobi logo"
-          className="w-auto h-full"     // ← was "h-6"
+          alt="Nobi"
+          className="h-full w-auto"          // <-- key: scale from wrapper
           onError={() => setFailed(true)}
         />
       ) : (
-        <png className="w-auto h-full" viewBox="0 0 120 24" aria-label="Nobi logo placeholder">
-          {/* ... */}
-        </png>
+        <svg className="h-full w-auto" viewBox="0 0 120 24" aria-label="Nobi logo placeholder">
+          <defs>
+            <linearGradient id="lg" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0%" stopColor="#6366F1" />
+              <stop offset="50%" stopColor="#8B5CF6" />
+              <stop offset="100%" stopColor="#EC4899" />
+            </linearGradient>
+          </defs>
+          <circle cx="12" cy="12" r="10" fill="url(#lg)" />
+          <rect x="28" y="6" width="86" height="12" rx="6" fill="#111827" />
+        </svg>
       )}
     </div>
   );
@@ -995,11 +1003,11 @@ export default function App() {
 const [isVideoOpen, setIsVideoOpen] = useState(false);  
 return (
     <div className="min-h-screen bg-gradient-to-b from-white to-slate-50 dark:from-[#0a0a0a] dark:to-black text-black dark:text-white">
-      <header className="sticky top-0 z-40 h-14 sm:h-16 border-b border-black/10 dark:border-white/10 backdrop-blur bg-white/70 dark:bg-black/40">
-  <div className="mx-auto max-w-6xl px-6 h-full flex items-center justify-between">
-   <a href="#home" className="flex items-center gap-3">
-  <Logo className="h-8 sm:h-9" />
-</a>
+      <header className="sticky top-0 z-40 border-b border-black/10 dark:border-white/10 backdrop-blur bg-white/70 dark:bg-black/40">
+  <div className="mx-auto max-w-6xl px-6 h-16 flex items-center justify-between">
+    <a href="#home" className="flex items-center gap-3">
+      <Logo className="h-10 sm:h-11 md:h-12" />   {/* <-- increase here */}
+    </a>
     <div className="hidden md:flex items-center gap-3">
       <Button variant="ghost"><ShoppingCart className="h-4 w-4" /> Install Nobi</Button>
     </div>

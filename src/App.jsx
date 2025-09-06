@@ -782,7 +782,7 @@ function Footer() {
         </div>
         <div className="flex items-center gap-4 text-sm">
           <a href="#features" className="hover:opacity-80">Features</a>
-         <a href="#insights" className="hover:opacity-80">Insights</a>
+         <a href="#how" className="hover:opacity-80">How it Works</a>
           <a href="#pricing" className="hover:opacity-80">Pricing</a>
           <a href="#faq" className="hover:opacity-80">FAQ</a>
         </div>
@@ -1012,8 +1012,6 @@ return (
     {/* Nav (unchanged) */}
     <nav className="hidden md:flex items-center gap-6 text-sm">
       <a href="#features" className="hover:opacity-80">Features</a>
-      <a href="#results" className="hover:opacity-80">Results</a>
-      <a href="#insights" className="hover:opacity-80">Insights</a>
       <a href="#how" className="hover:opacity-80">How it works</a>
       <a href="#pricing" className="hover:opacity-80">Pricing</a>
       <a href="#faq" className="hover:opacity-80">FAQ</a>

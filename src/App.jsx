@@ -811,7 +811,7 @@ function HeatCell({ v = 0 }) {
 }
 
 /* ========= Insights section ========= */
-function Bar({ value, maxValue }) {
+function InsightsBar({ value, maxValue }) {
   const pct = Math.max(0, Math.min(100, Math.round((value / maxValue) * 100)));
   return (
     <div className="h-2 w-full rounded-full bg-black/5 dark:bg-white/10">
@@ -823,7 +823,7 @@ function Bar({ value, maxValue }) {
   );
 }
 
-function HeatCell({ v = 0 }) {
+function InsightsHeatCell({ v = 0 }) {
   const bg = `rgba(139, 92, 246, ${0.15 + v * 0.45})`;
   const border = `rgba(0,0,0,0.06)`;
   return (
@@ -852,7 +852,6 @@ function Insights() {
     { label: "Out of stock / color", value: 24 },
   ];
 
-  // Attribute affinity by product (0..1)
   const products = ["Chelsea boots", "Totes", "Rain jackets", "Running shoes"];
   const attrs = ["Waterproof", "Vegan leather", "Arch support", "Petite fit"];
   const affinity = {
@@ -898,7 +897,7 @@ function Insights() {
                       <span className="text-black/80 dark:text-white/90">{d.label}</span>
                       <span className="tabular-nums text-black/60 dark:text-white/60">{d.value}</span>
                     </div>
-                    <Bar value={d.value} maxValue={max(intents)} />
+                    <InsightsBar value={d.value} maxValue={max(intents)} />
                   </div>
                 ))}
               </div>
@@ -921,10 +920,7 @@ function Insights() {
                   >
                     <div />
                     {attrs.map((a) => (
-                      <div
-                        key={a}
-                        className="px-2 py-1 text-xs sm:text-sm text-center text-black/70 dark:text-white/70"
-                      >
+                      <div key={a} className="px-2 py-1 text-xs sm:text-sm text-center text-black/70 dark:text-white/70">
                         {a}
                       </div>
                     ))}
@@ -934,7 +930,7 @@ function Insights() {
                           {p}
                         </div>
                         {attrs.map((a) => (
-                          <HeatCell key={`${p}-${a}`} v={affinity[p][a] || 0} />
+                          <InsightsHeatCell key={`${p}-${a}`} v={affinity[p][a] || 0} />
                         ))}
                       </React.Fragment>
                     ))}
@@ -959,7 +955,7 @@ function Insights() {
                       <span className="text-black/80 dark:text-white/90">{d.label}</span>
                       <span className="tabular-nums text-black/60 dark:text-white/60">{d.value}</span>
                     </div>
-                    <Bar value={d.value} maxValue={max(objections)} />
+                    <InsightsBar value={d.value} maxValue={max(objections)} />
                   </div>
                 ))}
               </div>

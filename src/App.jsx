@@ -605,7 +605,7 @@ function Results() {
   ];
 
   return (
-    <section id="results" className="py-20 border-t border-black/5 dark:border-white/5">
+    <section id="results" className="scroll-mt-20 py-20 border-t border-black/5 dark:border-white/5">
       <div className="mx-auto max-w-6xl px-6">
         <p className="text-sm font-semibold text-fuchsia-600">Results</p>
         <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight mt-2">
@@ -703,7 +703,7 @@ function HowItWorks() {
     { h: "Measure the lift", p: "Track conversion, AOV and qualitative insights in a simple dashboard." },
   ];
   return (
-    <section id="how" className="py-20 border-t border-black/5 dark:border-white/5">
+    <section id="how" className="scroll-mt-20 py-20 border-t border-black/5 dark:border-white/5">
       <div className="mx-auto max-w-6xl px-6">
         <h2 className="text-3xl font-semibold mb-8">How it works</h2>
         <ol className="grid grid-cols-1 md:grid-cols-3 gap-6 list-decimal list-inside">
@@ -726,7 +726,7 @@ function Pricing() {
     { name: "Enterprise", price: "Custom", blurb: "Scale & SSO", points: ["Unlimited queries", "Priority SLAs", "Custom models"], cta: "Talk to sales" },
   ];
   return (
-    <section id="pricing" className="py-20 border-t border-black/5 dark:border-white/5">
+    <section id="pricing" className="scroll-mt-20 py-20 border-t border-black/5 dark:border-white/5">
       <div className="mx-auto max-w-6xl px-6">
         <h2 className="text-3xl font-semibold mb-8">Simple plans that scale with you</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch">
@@ -756,7 +756,7 @@ function FAQ() {
     { q: "Can we A/B test it?", a: "Yes. The snippet includes an A/B framework to measure impact." },
   ];
   return (
-    <section id="faq" className="py-20 border-t border-black/5 dark:border-white/5">
+    <section id="faq" className="scroll-mt-20 py-20 border-t border-black/5 dark:border-white/5">
       <div className="mx-auto max-w-6xl px-6">
         <h2 className="text-3xl font-semibold mb-8">You're not the first to ask</h2>
         <div className="space-y-4">
@@ -1003,11 +1003,26 @@ export default function App() {
 const [isVideoOpen, setIsVideoOpen] = useState(false);  
 return (
     <div className="min-h-screen bg-gradient-to-b from-white to-slate-50 dark:from-[#0a0a0a] dark:to-black text-black dark:text-white">
-      <header className="sticky top-0 z-40 border-b border-black/10 dark:border-white/10 backdrop-blur bg-white/70 dark:bg-black/40">
+      <header className="sticky top-0 z-50 border-b border-black/10 dark:border-white/10
+                    bg-white/80 dark:bg-black/60 backdrop-blur
+                    supports-[backdrop-filter]:bg-white/60">
   <div className="mx-auto max-w-6xl px-6 h-16 flex items-center justify-between">
+    {/* Left: logo */}
     <a href="#home" className="flex items-center gap-3">
-      <Logo className="h-10 sm:h-11 md:h-12" />   {/* <-- increase here */}
+      <Logo className="h-6 sm:h-7" />
     </a>
+
+    {/* Center: section links (desktop only) */}
+    <nav className="hidden md:flex items-center gap-5 text-sm">
+      <a href="#features" className="hover:opacity-80">Features</a>
+      <a href="#results" className="hover:opacity-80">Results</a>
+      <a href="#insights" className="hover:opacity-80">Insights</a>
+      <a href="#how" className="hover:opacity-80">How it works</a>
+      <a href="#pricing" className="hover:opacity-80">Pricing</a>
+      <a href="#faq" className="hover:opacity-80">FAQ</a>
+    </nav>
+
+    {/* Right: CTA */}
     <div className="hidden md:flex items-center gap-3">
       <Button variant="ghost"><ShoppingCart className="h-4 w-4" /> Install Nobi</Button>
     </div>

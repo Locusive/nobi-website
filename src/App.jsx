@@ -159,20 +159,22 @@ function Button({ variant = "primary", size = "md", className = "", children, ..
   );
 }
 
-function Logo({ className = "h-9 sm:h-10 md:h-11" }) {   // tweak these to taste
+function Logo({ className = "h-8" }) {
   const [failed, setFailed] = useState(false);
   return (
-    <div className={`flex items-center gap-2 ${className} shrink-0`}>
+    <div className={`flex items-center gap-2 ${className}`}>
       {!failed ? (
         <img
+          /* use your PNGs; falls back to @1x if @2x isn’t supported */
           src="/media/nobi-logo.png"
           srcSet="/media/nobi-logo.png 1x, /media/nobi-logo@2x.png 2x"
           alt="Nobi"
-          className="h-full w-auto"          // <-- key: scale from wrapper
+          className="h-full w-auto"          {/* <-- key change */}
           onError={() => setFailed(true)}
         />
       ) : (
-        <svg className="h-full w-auto" viewBox="0 0 120 24" aria-label="Nobi logo placeholder">
+        /* simple placeholder */
+        <svg className="h-full w-auto" viewBox="0 0 120 24" aria-label="Nobi">
           <defs>
             <linearGradient id="lg" x1="0" y1="0" x2="1" y2="0">
               <stop offset="0%" stopColor="#6366F1" />
@@ -1008,9 +1010,9 @@ return (
                     supports-[backdrop-filter]:bg-white/60">
   <div className="mx-auto max-w-6xl px-6 h-16 flex items-center justify-between">
     {/* Left: logo */}
-    <a href="#home" className="flex items-center gap-3">
-      <Logo className="h-6 sm:h-7" />
-    </a>
+   <a href="#home" className="flex items-center gap-3 shrink-0 leading-none">
+  <Logo className="h-8 sm:h-9 md:h-10" />   {/* adjust to taste */}
+</a>
 
     {/* Center: section links (desktop only) */}
     <nav className="hidden md:flex items-center gap-5 text-sm">

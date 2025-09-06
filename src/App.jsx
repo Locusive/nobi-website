@@ -690,7 +690,7 @@ function Testimonial() {
 
 function HowItWorks() {
   const steps = [
-    { h: "Install the code", p: "Paste two snippets of code into your store. Nobi reads your catalog and adopts your branding." },
+    { h: "Install the code", p: "Paste two snippets of code in your store. Nobi reads your catalog and adopts your branding." },
     { h: "Ramp up traffic", p: "Pick pages to enable and control what percent of traffic sees Nobi." },
     { h: "Measure the lift", p: "Track conversion, AOV and qualitative insights in a simple dashboard." },
   ];

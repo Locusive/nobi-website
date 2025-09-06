@@ -159,22 +159,20 @@ function Button({ variant = "primary", size = "md", className = "", children, ..
   );
 }
 
-function Logo({ className = "h-8" }) {
+function Logo({ className = "h-7 md:h-9 lg:h-10" }) {
   const [failed, setFailed] = useState(false);
   return (
     <div className={`flex items-center gap-2 ${className}`}>
       {!failed ? (
         <img
-          /* use your PNGs; falls back to @1x if @2x isn’t supported */
-          src="/media/nobi-logo.png"
+          src="/media/nobi-logo.png"                     // your PNG route
           srcSet="/media/nobi-logo.png 1x, /media/nobi-logo@2x.png 2x"
           alt="Nobi"
-          className="h-full w-auto"          {/* <-- key change */}
+          className="h-full w-auto"                      // ← scale to wrapper height
           onError={() => setFailed(true)}
         />
       ) : (
-        /* simple placeholder */
-        <svg className="h-full w-auto" viewBox="0 0 120 24" aria-label="Nobi">
+        <svg className="h-full w-auto" viewBox="0 0 120 24" aria-label="Nobi logo">
           <defs>
             <linearGradient id="lg" x1="0" y1="0" x2="1" y2="0">
               <stop offset="0%" stopColor="#6366F1" />
@@ -1005,17 +1003,14 @@ export default function App() {
 const [isVideoOpen, setIsVideoOpen] = useState(false);  
 return (
     <div className="min-h-screen bg-gradient-to-b from-white to-slate-50 dark:from-[#0a0a0a] dark:to-black text-black dark:text-white">
-      <header className="sticky top-0 z-50 border-b border-black/10 dark:border-white/10
-                    bg-white/80 dark:bg-black/60 backdrop-blur
-                    supports-[backdrop-filter]:bg-white/60">
-  <div className="mx-auto max-w-6xl px-6 h-16 flex items-center justify-between">
-    {/* Left: logo */}
-   <a href="#home" className="flex items-center gap-3 shrink-0 leading-none">
-  <Logo className="h-8 sm:h-9 md:h-10" />   {/* adjust to taste */}
-</a>
+      <header className="sticky top-0 z-40 border-b backdrop-blur bg-white/70 dark:bg-black/40">
+  <div className="mx-auto max-w-7xl px-6 h-16 flex items-center justify-between">
+    <a href="#home" className="flex items-center gap-3">
+      <Logo className="h-8 md:h-9 lg:h-10" />            {/* bigger on desktop */}
+    </a>
 
-    {/* Center: section links (desktop only) */}
-    <nav className="hidden md:flex items-center gap-5 text-sm">
+    {/* Nav (unchanged) */}
+    <nav className="hidden md:flex items-center gap-6 text-sm">
       <a href="#features" className="hover:opacity-80">Features</a>
       <a href="#results" className="hover:opacity-80">Results</a>
       <a href="#insights" className="hover:opacity-80">Insights</a>
@@ -1024,7 +1019,6 @@ return (
       <a href="#faq" className="hover:opacity-80">FAQ</a>
     </nav>
 
-    {/* Right: CTA */}
     <div className="hidden md:flex items-center gap-3">
       <Button variant="ghost"><ShoppingCart className="h-4 w-4" /> Install Nobi</Button>
     </div>

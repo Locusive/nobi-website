@@ -165,16 +165,16 @@ function Logo({ className = "h-6" }) {
     <div className={`flex items-center gap-2 ${className}`}>
       {!failed ? (
         <img
-          src="/media/nobi-logo.svg"
-          srcSet="/media/nobi-logo.svg 1x, /media/nobi-logo@2x.png 2x"
+          src="/media/nobi-logo.png"
+          srcSet="/media/nobi-logo.png 1x, /media/nobi-logo@2x.png 2x"
           alt="Nobi logo"
           className="w-auto h-full"     // ← was "h-6"
           onError={() => setFailed(true)}
         />
       ) : (
-        <svg className="w-auto h-full" viewBox="0 0 120 24" aria-label="Nobi logo placeholder">
+        <png className="w-auto h-full" viewBox="0 0 120 24" aria-label="Nobi logo placeholder">
           {/* ... */}
-        </svg>
+        </png>
       )}
     </div>
   );

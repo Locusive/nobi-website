@@ -699,7 +699,7 @@ function Testimonial() {
 function HowItWorks() {
   const steps = [
     { h: "Install the code", p: "Paste two snippets of code in your store. Nobi reads your catalog and adopts your branding." },
-    { h: "Ramp up traffic", p: "Pick pages to enable and control what percent of traffic sees Nobi." },
+    { h: "Ramp up traffic", p: "Pick entry points (i.e. PLPs, search) and control what percent of traffic you want to see Nobi." },
     { h: "Measure the lift", p: "Track conversion, AOV and qualitative insights in a simple dashboard." },
   ];
   return (
@@ -877,7 +877,7 @@ function Insights() {
           <div>
             <p className="text-sm font-semibold text-fuchsia-600">Insights</p>
             <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight mt-2">
-              Insights your team can act on
+              Insights your team can act on.
             </h2>
             <p className="mt-3 text-black/70 dark:text-white/70 max-w-2xl">
               Nobi turns real conversations into structured signals. Your merchandising, creative, and growth teams have never moved faster.

@@ -12,6 +12,7 @@ import { motion } from "framer-motion";
    BarChart3,
    Quote,
   PlayCircle,
+ ChevronDown,
  } from "lucide-react";
 
 // -------------------- NOTE --------------------
@@ -755,15 +756,33 @@ function FAQ() {
     { q: "How long does install take?", a: "Typically ~15 minutes for Shopify themes. Headless installs depend on your stack." },
     { q: "Can we A/B test it?", a: "Yes. The snippet includes an A/B framework to measure impact." },
   ];
+
   return (
-    <section id="faq" className="scroll-mt-20 py-20 border-t border-black/5 dark:border-white/5">
+    <section id="faq" className="py-20 border-t border-black/5 dark:border-white/5">
       <div className="mx-auto max-w-6xl px-6">
         <h2 className="text-3xl font-semibold mb-8">You're not the first to ask</h2>
+
         <div className="space-y-4">
           {qas.map((f) => (
-            <details key={f.q} className="rounded-2xl border border-black/10 dark:border-white/10 p-5 bg-white/70 dark:bg-white/5">
-              <summary className="cursor-pointer font-medium list-none">{f.q}</summary>
-              <p className="mt-2 text-sm text-black/70 dark:text-white/70">{f.a}</p>
+            <details
+              key={f.q}
+              className="group rounded-2xl border border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/5 shadow-sm"
+            >
+              {/* summary row */}
+              <summary
+                className="list-none cursor-pointer flex items-center justify-between gap-4 px-5 py-4 font-medium"
+              >
+                <span>{f.q}</span>
+                <ChevronDown
+                  className="h-5 w-5 text-black/40 dark:text-white/60 transition-transform duration-300 group-open:rotate-180"
+                  aria-hidden="true"
+                />
+              </summary>
+
+              {/* answer */}
+              <div className="px-5 pb-5 -mt-1">
+                <p className="text-sm text-black/70 dark:text-white/70">{f.a}</p>
+              </div>
             </details>
           ))}
         </div>

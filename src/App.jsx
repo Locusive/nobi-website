@@ -756,7 +756,7 @@ function FAQ() {
   const qas = [
     { q: "Does Nobi replace my current search?", a: "No. Nobi layers on top so you can keep your existing keyword engine and optionally enable AI." },
     { q: "How long does install take?", a: "Typically ~15 minutes for Shopify themes. Headless installs depend on your stack." },
-    { q: "Can we A/B test it?", a: "Yes. The snippet includes an A/B framework to measure impact." },
+    { q: "Can we A/B test it?", a: "Yes. The snippet includes an A/B framework to measure impact vs your default shop experience." },
   ];
 
   return (

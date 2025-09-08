@@ -430,7 +430,7 @@ function VideoModal({ open, onClose, youtube, src, poster = "" }) {
   );
 }
 
-function Hero({ onOpenVideo }) {
+function Hero({ onOpenVideo, onOpenForm }) {
   return (
     <section id="home" className="relative overflow-hidden mb-3">
       <div className="mx-auto max-w-6xl px-6 pt-16 sm:pt-24">
@@ -1218,7 +1218,6 @@ return (
 </header>
 
      <Hero onOpenForm={() => setIsFormOpen(true)} onOpenVideo={() => setIsVideoOpen(true)} />
-<Hero onOpenVideo={() => setIsVideoOpen(true)} />
       <Logos />
       <Features />
       <Results />

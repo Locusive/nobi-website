@@ -447,9 +447,9 @@ function Hero({ onOpenVideo }) {
             </p>
             <div className="mt-8">
   <div className="mt-4 flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4">
-    <Button size="lg" className="w-full sm:w-auto">
-      Try it on your store <ArrowRight className="h-4 w-4 shrink-0" />
-    </Button>
+    <Button size="lg" className="w-full sm:w-auto" onClick={onOpenForm}>
+  Try it on your store <ArrowRight className="h-4 w-4 shrink-0" />
+</Button>
      <Button
 size="lg"
 variant="ghost"
@@ -1020,8 +1020,181 @@ function Insights() {
   );
 }
 
+function RequestDemoModal({ open, onClose }) {
+  const [form, setForm] = React.useState({
+    name: "",
+    email: "",
+    company: "",
+    website: "",
+    platform: "Shopify",
+    message: "",
+    honey: "", // honeypot
+  });
+  const [submitting, setSubmitting] = React.useState(false);
+  const [done, setDone] = React.useState(false);
+  const [error, setError] = React.useState("");
+
+  React.useEffect(() => {
+    if (!open) return;
+    const onKey = (e) => e.key === "Escape" && onClose?.();
+    document.addEventListener("keydown", onKey);
+    const prev = document.documentElement.style.overflow;
+    document.documentElement.style.overflow = "hidden";
+    return () => {
+      document.removeEventListener("keydown", onKey);
+      document.documentElement.style.overflow = prev;
+    };
+  }, [open, onClose]);
+
+  if (!open) return null;
+
+  const update = (e) => setForm((f) => ({ ...f, [e.target.name]: e.target.value }));
+
+  async function submit(e) {
+    e.preventDefault();
+    setSubmitting(true);
+    setError("");
+    try {
+      const r = await fetch("/api/request-demo", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+      const j = await r.json().catch(() => ({}));
+      if (!r.ok || !j.ok) throw new Error(j.error || "Something went wrong.");
+      setDone(true);
+    } catch (err) {
+      setError(err.message || "Failed to submit.");
+    } finally {
+      setSubmitting(false);
+    }
+  }
+
+  return (
+    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4" role="dialog" aria-modal="true">
+      <button className="absolute inset-0 bg-black/60 backdrop-blur-sm" aria-label="Close form" onClick={onClose} />
+      <div className="relative w-full max-w-xl rounded-2xl bg-white dark:bg-zinc-900 p-6 shadow-2xl">
+        <div className="flex items-center justify-between">
+          <h2 className="text-xl font-semibold">Try it on your store</h2>
+          <button
+            onClick={onClose}
+            className="inline-flex items-center rounded-full bg-black/5 dark:bg-white/10 px-2 py-1 hover:opacity-80"
+            aria-label="Close"
+          >
+            ✕
+          </button>
+        </div>
+
+        {!done ? (
+          <form onSubmit={submit} className="mt-4 space-y-4">
+            {/* honeypot */}
+            <input type="text" name="honey" value={form.honey} onChange={update} className="hidden" tabIndex={-1} autoComplete="off" />
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div>
+                <label className="text-sm block mb-1">Name</label>
+                <input
+                  name="name"
+                  value={form.name}
+                  onChange={update}
+                  required
+                  className="w-full rounded-xl border border-black/10 dark:border-white/10 bg-transparent px-3 py-2 outline-none"
+                />
+              </div>
+              <div>
+                <label className="text-sm block mb-1">Email</label>
+                <input
+                  name="email"
+                  type="email"
+                  value={form.email}
+                  onChange={update}
+                  required
+                  className="w-full rounded-xl border border-black/10 dark:border-white/10 bg-transparent px-3 py-2 outline-none"
+                />
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div>
+                <label className="text-sm block mb-1">Company</label>
+                <input
+                  name="company"
+                  value={form.company}
+                  onChange={update}
+                  className="w-full rounded-xl border border-black/10 dark:border-white/10 bg-transparent px-3 py-2 outline-none"
+                />
+              </div>
+              <div>
+                <label className="text-sm block mb-1">Website</label>
+                <input
+                  name="website"
+                  value={form.website}
+                  onChange={update}
+                  placeholder="https://yourstore.com"
+                  className="w-full rounded-xl border border-black/10 dark:border-white/10 bg-transparent px-3 py-2 outline-none"
+                />
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div>
+                <label className="text-sm block mb-1">Platform</label>
+                <select
+                  name="platform"
+                  value={form.platform}
+                  onChange={update}
+                  className="w-full rounded-xl border border-black/10 dark:border-white/10 bg-transparent px-3 py-2 outline-none"
+                >
+                  <option>Shopify</option>
+                  <option>Headless</option>
+                  <option>Magento</option>
+                  <option>BigCommerce</option>
+                  <option>Other</option>
+                </select>
+              </div>
+            </div>
+
+            <div>
+              <label className="text-sm block mb-1">Anything else?</label>
+              <textarea
+                name="message"
+                rows={4}
+                value={form.message}
+                onChange={update}
+                className="w-full rounded-xl border border-black/10 dark:border-white/10 bg-transparent px-3 py-2 outline-none"
+                placeholder="Goal, timeline, questions…"
+              />
+            </div>
+
+            {error && <div className="text-sm text-red-600 dark:text-rose-400">{error}</div>}
+
+            <div className="flex items-center gap-3 pt-2">
+              <Button type="submit" disabled={submitting}>
+                {submitting ? "Sending…" : "Submit"}
+              </Button>
+              <Button type="button" variant="ghost" onClick={onClose}>
+                Cancel
+              </Button>
+            </div>
+          </form>
+        ) : (
+          <div className="mt-4">
+            <p className="text-black/80 dark:text-white/90">
+              Thanks! We’ve received your request and will reach out shortly.
+            </p>
+            <div className="mt-4">
+              <Button onClick={onClose}>Close</Button>
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
 export default function App() {
-const [isVideoOpen, setIsVideoOpen] = useState(false);  
+const [isFormOpen, setIsFormOpen] = useState(false);
+ const [isVideoOpen, setIsVideoOpen] = useState(false);  
 return (
     <div className="min-h-screen bg-gradient-to-b from-white to-slate-50 dark:from-[#0a0a0a] dark:to-black text-black dark:text-white">
       <header className="sticky top-0 z-40 border-b backdrop-blur bg-white/70 dark:bg-black/40">
@@ -1044,6 +1217,7 @@ return (
   </div>
 </header>
 
+     <Hero onOpenForm={() => setIsFormOpen(true)} onOpenVideo={() => setIsVideoOpen(true)} />
 <Hero onOpenVideo={() => setIsVideoOpen(true)} />
       <Logos />
       <Features />
@@ -1055,6 +1229,7 @@ return (
       <FAQ />
       <Footer />
 {/* Video modal */}
+      <RequestDemoModal open={isFormOpen} onClose={() => setIsFormOpen(false)} />
 <VideoModal
   open={isVideoOpen}
   onClose={() => setIsVideoOpen(false)}

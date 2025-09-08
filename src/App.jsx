@@ -203,8 +203,8 @@ function useTypingDemo({ mode, setQuery, setPlaceholder, enabled = true }) {
     setQuery("");
 
     const startDelay = 800;     // wait before typing starts
-    const baseSpeed = 55;       // ms per char
-    const jitter = 60;          // randomness
+    const baseSpeed = 30;       // ms per char
+    const jitter = 32;          // randomness
 
     let startTimer;
     const timers = [];

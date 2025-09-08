@@ -1,5 +1,0 @@
-{
-  "functions": {
-    "api/request-demo.js": { "runtime": "nodejs18.x" }
-  }
-}

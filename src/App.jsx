@@ -120,7 +120,7 @@ function MediaBox({ src, alt = "", restartKey }) {
   );
 }
 
-function AssetImage({ src, alt, className = "", labelForPlaceholder }) {
+function AssetImage({ src, alt, className = "", labelForPlaceholder, ...imgProps }) {
   const [failed, setFailed] = useState(false);
   if (!src || failed) {
     return <PlaceholderSVG label={labelForPlaceholder || alt || "Image"} className={className} />;
@@ -132,6 +132,7 @@ function AssetImage({ src, alt, className = "", labelForPlaceholder }) {
       className={className}
       onError={() => setFailed(true)}
       loading="lazy"
+      {...imgProps}     // 👈 allow srcSet, width/height, etc.
     />
   );
 }
@@ -682,15 +683,16 @@ function Testimonial() {
             </div>
           </div>
           <div className="flex items-center justify-center">
-            <div className="rounded-2xl border border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/5 p-6">
-              <AssetImage
-                src="/media/logo-placeholder-1.png"
-                alt="Brand logo"
-                labelForPlaceholder="Brand logo"
-                className="h-10 w-auto grayscale opacity-70"
-              />
-            </div>
-          </div>
+  <div className="rounded-2xl border border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/5
+                  p-6 md:p-8 lg:p-10 min-w-[180px] min-h-[120px] flex items-center justify-center">
+    <AssetImage
+      src="/media/lucchese-logo.png"
+      srcSet="/media/lucchese-logo.png 1x, /media/lucchese-logo@2x.png 2x"
+      alt="Lucchese logo"
+      className="h-16 md:h-20 w-auto object-contain"
+    />
+  </div>
+</div>
         </div>
       </div>
     </section>

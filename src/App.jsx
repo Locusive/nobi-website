@@ -190,8 +190,15 @@ function Logo({ className = "h-7 md:h-9 lg:h-10" }) {
   );
 }
 
-function DualModeSearchBar({ defaultMode = "ai", size = "regular" }) {
-  const [mode, setMode] = useState(defaultMode);
+function DualModeSearchBar({
+  defaultMode = "ai",
+  size = "regular",
+  mode: controlledMode,
+  onModeChange,
+}) {
+  const [internalMode, setInternalMode] = useState(defaultMode);
+  const mode = controlledMode ?? internalMode;
+
   const [query, setQuery] = useState("");
   const [submitted, setSubmitted] = useState(null);
 
@@ -202,11 +209,18 @@ function DualModeSearchBar({ defaultMode = "ai", size = "regular" }) {
   const siteBtnRef = useRef(null);
   const aiBtnRef = useRef(null);
   const [thumb, setThumb] = useState({ left: 0, width: 0 });
+
+  const setMode = (m) => {
+    if (controlledMode === undefined) setInternalMode(m);
+    onModeChange?.(m);
+  };
+
   const measureThumb = () => {
     const btn = mode === "ai" ? aiBtnRef.current : siteBtnRef.current;
     if (!btn) return;
     setThumb({ left: btn.offsetLeft, width: btn.offsetWidth });
   };
+
   useEffect(() => {
     measureThumb();
     const ro = new ResizeObserver(measureThumb);
@@ -259,7 +273,7 @@ function DualModeSearchBar({ defaultMode = "ai", size = "regular" }) {
           />
         </div>
 
-        <div className="flex-1 min-w-0 flex items-center gap-2">{/* min-w-0 is key on Safari */}
+        <div className="flex-1 min-w-0 flex items-center gap-2">
           <input
             value={query}
             onChange={(e) => setQuery(e.target.value)}
@@ -298,21 +312,25 @@ function DualModeSearchBar({ defaultMode = "ai", size = "regular" }) {
   );
 }
 
-function PreviewCard() {
+function PreviewCard({ mode = "ai" }) {
   const [videoFailed, setVideoFailed] = useState(false);
-  const showHeroBadge = false; // toggle if you want the label back
+
+  const src = mode === "ai"
+    ? "/media/preview-ai.mp4"
+    : "/media/preview-default.mp4";
 
   return (
     <div className="w-full rounded-2xl border border-black/10 dark:border-white/10 bg-white/60 dark:bg-white/5 overflow-hidden relative">
       <AspectBox ratio={16/9}>
         {!videoFailed ? (
           <video
-            src="/media/preview-animation.mp4"
+            key={mode}                 // remount when mode changes so it restarts
+            src={src}
             autoPlay
             loop
             muted
             playsInline
-            className="w-full h-full object-cover object-top"   // use object-contain if you prefer no cropping
+            className="w-full h-full object-cover object-top"
             onError={() => setVideoFailed(true)}
             aria-hidden="true"
             tabIndex={-1}
@@ -323,12 +341,6 @@ function PreviewCard() {
           </div>
         )}
       </AspectBox>
-
-      {showHeroBadge && (
-        <div className="pointer-events-none absolute bottom-2 left-2 text-[11px] px-2 py-1 rounded-md bg-black/5 dark:bg-white/10 text-black/60 dark:text-white/60">
-          Animation preview
-        </div>
-      )}
     </div>
   );
 }
@@ -431,6 +443,8 @@ function VideoModal({ open, onClose, youtube, src, poster = "" }) {
 }
 
 function Hero({ onOpenVideo, onOpenForm }) {
+  const [searchMode, setSearchMode] = useState("ai"); // default = AI
+
   return (
     <section id="home" className="relative overflow-hidden mb-3">
       <div className="mx-auto max-w-6xl px-6 pt-16 sm:pt-24">
@@ -443,43 +457,50 @@ function Hero({ onOpenVideo, onOpenForm }) {
               </span>
             </h1>
             <p className="mt-4 text-lg text-black/70 dark:text-white/70 max-w-xl">
-              Nobi gets your customers the products they want faster with conversational AI.
+              Nobi gets your customers the right products faster with conversational AI.
             </p>
-            <div className="mt-8">
-  <div className="mt-4 flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4">
-    <Button size="lg" className="w-full sm:w-auto" onClick={onOpenForm}>
-  Try it on your store <ArrowRight className="h-4 w-4 shrink-0" />
-</Button>
-     <Button
-size="lg"
-variant="ghost"
-className="w-full sm:w-auto"
-onClick={onOpenVideo}
-type="button"
->
-<PlayCircle className="h-5 w-5" />
-<span className="ml-1">How it works in 60 seconds</span>
-</Button>
-  </div>
 
-  <div className="mt-6 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-black/60 dark:text-white/60">
-    <div className="inline-flex items-center gap-2">
-      <CheckCircle2 className="h-4 w-4" /> 15-minute install
-    </div>
-    <div className="inline-flex items-center gap-2">
-      <CheckCircle2 className="h-4 w-4" /> Shopify & headless
-    </div>
-    <div className="inline-flex items-center gap-2">
-      <CheckCircle2 className="h-4 w-4" /> A/B testing & reporting
-    </div>
-  </div>
-</div>  {/* ← close mt-8 here */}
+            <div className="mt-8">
+              <div className="mt-4 flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4">
+                <Button size="lg" className="w-full sm:w-auto" onClick={onOpenForm}>
+                  Try it on your store <ArrowRight className="h-4 w-4 shrink-0" />
+                </Button>
+                <Button
+                  size="lg"
+                  variant="ghost"
+                  className="w-full sm:w-auto"
+                  onClick={onOpenVideo}
+                  type="button"
+                >
+                  <PlayCircle className="h-5 w-5" />
+                  <span className="ml-1">How it works in 60 seconds</span>
+                </Button>
+              </div>
+
+              <div className="mt-6 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-black/60 dark:text-white/60">
+                <div className="inline-flex items-center gap-2">
+                  <CheckCircle2 className="h-4 w-4" /> 15-minute install
+                </div>
+                <div className="inline-flex items-center gap-2">
+                  <CheckCircle2 className="h-4 w-4" /> Shopify & headless
+                </div>
+                <div className="inline-flex items-center gap-2">
+                  <CheckCircle2 className="h-4 w-4" /> A/B testing & reporting
+                </div>
+              </div>
+            </div>
           </div>
+
           <div className="relative">
             <div className="mb-4 p-4 rounded-2xl border border-fuchsia-200 bg-gradient-to-r from-fuchsia-50 to-pink-50 shadow-md">
-              <DualModeSearchBar size="compact" />
+              <DualModeSearchBar
+                size="compact"
+                mode={searchMode}
+                onModeChange={setSearchMode}
+              />
             </div>
-            <PreviewCard />
+
+            <PreviewCard mode={searchMode} />
           </div>
         </div>
       </div>

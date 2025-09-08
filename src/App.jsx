@@ -664,7 +664,7 @@ function Testimonial() {
             <div className="rounded-3xl border border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/5 p-8 shadow-sm">
               <Quote className="h-6 w-6 text-fuchsia-600 mb-4" />
               <p className="text-2xl leading-snug font-medium text-black/90 dark:text-white">
-                “If you want to learn and be inspired, you should look to implement a tool like Nobi. We've seen great results, where conversion rates have been significantly higher than on our binary search. But the biggest reason a brand should implement a tool like this is that you have the opportunity to apply more information towards optimizing broader campaigns and your broader brand and e-comm goals.”
+                “If you want to learn and be inspired, you should implement a tool like Nobi. We've seen great results, where conversion rates have been significantly higher than on our binary search. But the biggest reason a brand should implement this is that you have the opportunity to apply more information towards optimizing broader campaigns and your broader brand and e-comm goals.”
               </p>
               <div className="mt-6 flex items-center gap-4">
                 <AssetImage

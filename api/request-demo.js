@@ -1,57 +1,57 @@
-// api/request-demo.js
-// Vercel Function: receives your form, emails you via Resend, returns {ok:true}
+// /api/request-demo.js
+import { Resend } from "resend";
 
-const esc = (s) =>
-  String(s || "").replace(/[&<>"']/g, (c) => ({ "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;", "'":"&#39;" }[c]));
+export default async function handler(req, res) {
+  // Quick health check in the browser: /api/request-demo?health=1
+  if (req.method === "GET") {
+    return res.status(200).json({ ok: true, message: "request-demo is alive" });
+  }
 
-module.exports = async (req, res) => {
-  if (req.method !== "POST") return res.status(405).json({ ok: false, error: "Method not allowed" });
+  if (req.method !== "POST") {
+    return res.status(405).json({ ok: false, error: "Method not allowed" });
+  }
 
   try {
-    const body = typeof req.body === "string" ? JSON.parse(req.body) : (req.body || {});
-    // simple bot trap
-    if (body.honey) return res.status(200).json({ ok: true });
+    const { name, email, company, website, platform, message, honey } = req.body || {};
 
-    const {
-      name = "", email = "", company = "", website = "",
-      platform = "", message = ""
-    } = body;
+    // Honeypot: if a bot fills this hidden field, pretend all is fine.
+    if (honey) return res.status(200).json({ ok: true });
 
-    // Email content
-    const html = `
-      <h2>New “Try it on your store” submission</h2>
-      <ul>
-        <li><b>Name:</b> ${esc(name)}</li>
-        <li><b>Email:</b> ${esc(email)}</li>
-        <li><b>Company:</b> ${esc(company)}</li>
-        <li><b>Website:</b> ${esc(website)}</li>
-        <li><b>Platform:</b> ${esc(platform)}</li>
-      </ul>
-      <p><b>Message:</b><br>${esc(message).replace(/\n/g, "<br>")}</p>
-    `;
-
-    // Send the email via Resend (no extra packages needed)
-    const r = await fetch("https://api.resend.com/emails", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${process.env.RESEND_API_KEY}`,
-      },
-      body: JSON.stringify({
-        from: process.env.EMAIL_FROM,        // e.g. "Nobi <onboarding@resend.dev>"
-        to: process.env.EMAIL_TO,            // your email
-        subject: "New Nobi demo request",
-        html,
-      }),
-    });
-
-    if (!r.ok) {
-      const txt = await r.text().catch(() => "");
-      return res.status(500).json({ ok: false, error: `Send failed: ${txt}` });
+    if (!process.env.RESEND_API_KEY) {
+      return res.status(500).json({ ok: false, error: "Missing RESEND_API_KEY" });
     }
+    if (!process.env.TO_EMAIL) {
+      return res.status(500).json({ ok: false, error: "Missing TO_EMAIL env var" });
+    }
+
+    const resend = new Resend(process.env.RESEND_API_KEY);
+
+    // TIP: While testing with Resend, use a verified domain or the
+    // sandbox sender: "Acme <onboarding@resend.dev>" and a verified recipient.
+    const from = process.env.MAIL_FROM || "Nobi Site <onboarding@resend.dev>";
+
+    const text = [
+      `New request from the website:`,
+      `Name:    ${name || "-"}`,
+      `Email:   ${email || "-"}`,
+      `Company: ${company || "-"}`,
+      `Website: ${website || "-"}`,
+      `Platform:${platform || "-"}`,
+      "",
+      `Message:`,
+      message || "-",
+    ].join("\n");
+
+    await resend.emails.send({
+      from,
+      to: process.env.TO_EMAIL, // your inbox
+      subject: "Nobi – Try it on your store",
+      text,
+    });
 
     return res.status(200).json({ ok: true });
   } catch (err) {
-    return res.status(500).json({ ok: false, error: err?.message || "Server error" });
+    // Surface the real error so the UI can show it
+    return res.status(500).json({ ok: false, error: err?.message || "Email failed" });
   }
-};
+}

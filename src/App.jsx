@@ -190,37 +190,93 @@ function Logo({ className = "h-7 md:h-9 lg:h-10" }) {
   );
 }
 
+function useTypingDemo({ mode, setQuery, setPlaceholder, enabled = true }) {
+  useEffect(() => {
+    if (!enabled) return;
+
+    let cancelled = false;
+    const initialPlaceholder =
+      mode === "ai" ? "Describe what you want..." : "Search products...";
+    const toType = "Linen shirt for a wedding";
+
+    setPlaceholder(initialPlaceholder);
+    setQuery("");
+
+    const startDelay = 800;     // wait before typing starts
+    const baseSpeed = 55;       // ms per char
+    const jitter = 60;          // randomness
+
+    let startTimer;
+    const timers = [];
+
+    startTimer = setTimeout(() => {
+      let i = 0;
+      const step = () => {
+        if (cancelled) return;
+        setQuery(toType.slice(0, i + 1));
+        i++;
+        if (i < toType.length) {
+          const t = setTimeout(step, baseSpeed + Math.random() * jitter);
+          timers.push(t);
+        }
+      };
+      step();
+    }, startDelay);
+
+    return () => {
+      cancelled = true;
+      clearTimeout(startTimer);
+      timers.forEach(clearTimeout);
+    };
+  }, [mode, enabled, setQuery, setPlaceholder]);
+}
+
 function DualModeSearchBar({
   defaultMode = "ai",
   size = "regular",
   mode: controlledMode,
   onModeChange,
 }) {
+  // controlled/uncontrolled support
   const [internalMode, setInternalMode] = useState(defaultMode);
   const mode = controlledMode ?? internalMode;
 
   const [query, setQuery] = useState("");
+  const [placeholder, setPlaceholder] = useState(
+    mode === "ai" ? "Describe what you want..." : "Search products..."
+  );
   const [submitted, setSubmitted] = useState(null);
 
-  const ctaLabel = mode === "ai" ? "Ask AI" : "Search";
-  const placeholder = mode === "ai" ? "Describe what you want..." : "Search products...";
+  // demo typing: replays when mode changes unless the user has interacted
+  const [demoEnabled, setDemoEnabled] = useState(true);
+  useTypingDemo({ mode, setQuery, setPlaceholder, enabled: demoEnabled });
 
+  // when user toggles mode, replay the demo
+  const setMode = (m) => {
+    if (controlledMode === undefined) setInternalMode(m);
+    onModeChange?.(m);
+    setDemoEnabled(true);
+  };
+
+  // cancel demo on any user interaction
+  const stopDemoAnd = (next) => (e) => {
+    if (demoEnabled) setDemoEnabled(false);
+    next?.(e);
+  };
+
+  const ctaLabel = mode === "ai" ? "Ask AI" : "Search";
+  const height = size === "regular" ? "h-14" : "h-11";
+
+  // thumb animation setup (unchanged from your version)
   const toggleRef = useRef(null);
   const siteBtnRef = useRef(null);
   const aiBtnRef = useRef(null);
   const [thumb, setThumb] = useState({ left: 0, width: 0 });
-
-  const setMode = (m) => {
-    if (controlledMode === undefined) setInternalMode(m);
-    onModeChange?.(m);
-  };
-
   const measureThumb = () => {
     const btn = mode === "ai" ? aiBtnRef.current : siteBtnRef.current;
     if (!btn) return;
     setThumb({ left: btn.offsetLeft, width: btn.offsetWidth });
   };
-
   useEffect(() => {
     measureThumb();
     const ro = new ResizeObserver(measureThumb);
@@ -234,8 +290,6 @@ function DualModeSearchBar({
     };
   }, [mode]);
 
-  const height = size === "regular" ? "h-14" : "h-11";
-
   function submit() {
     if (!query.trim()) return;
     setSubmitted({ mode, query });
@@ -247,6 +301,7 @@ function DualModeSearchBar({
       <div
         className={`flex items-center gap-2 rounded-2xl border border-black/10 dark:border-white/15 bg-white/70 dark:bg-white/5 backdrop-blur px-2 ${height} shadow-sm`}
       >
+        {/* Toggle */}
         <div
           ref={toggleRef}
           className="relative isolate inline-flex rounded-xl bg-black/5 dark:bg-white/10 overflow-hidden shrink-0"
@@ -273,18 +328,22 @@ function DualModeSearchBar({
           />
         </div>
 
+        {/* Input */}
         <div className="flex-1 min-w-0 flex items-center gap-2">
           <input
             value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            onKeyDown={(e) => e.key === "Enter" && submit()}
+            onChange={stopDemoAnd((e) => setQuery(e.target.value))}
+            onFocus={stopDemoAnd()}
+            onKeyDown={stopDemoAnd((e) => e.key === "Enter" && submit())}
             placeholder={placeholder}
             className="min-w-0 w-full bg-transparent outline-none text-[15px] placeholder:text-black/40 dark:placeholder:text-white/40"
+            aria-label={mode === "ai" ? "Ask AI" : "Search"}
           />
         </div>
 
+        {/* CTA */}
         <Button
-          onClick={submit}
+          onClick={stopDemoAnd(submit)}
           variant={mode === "ai" ? "ai" : "primary"}
           size="compact"
           className="whitespace-nowrap px-3 h-9 sm:h-8"
@@ -294,6 +353,7 @@ function DualModeSearchBar({
         </Button>
       </div>
 
+      {/* Little toast after submit (optional) */}
       {submitted && (
         <motion.div
           initial={{ opacity: 0, y: 6 }}

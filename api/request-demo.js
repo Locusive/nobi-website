@@ -1,57 +1,73 @@
-// /api/request-demo.js
+// api/request-demo.js
 import { Resend } from "resend";
 
+export const config = { runtime: "nodejs20.x" }; // ensures a modern Node runtime
+
 export default async function handler(req, res) {
-  // Quick health check in the browser: /api/request-demo?health=1
-  if (req.method === "GET") {
-    return res.status(200).json({ ok: true, message: "request-demo is alive" });
-  }
-
-  if (req.method !== "POST") {
-    return res.status(405).json({ ok: false, error: "Method not allowed" });
-  }
-
   try {
-    const { name, email, company, website, platform, message, honey } = req.body || {};
+    if (req.method !== "POST") {
+      return res.status(405).json({ ok: false, error: "Method not allowed" });
+    }
 
-    // Honeypot: if a bot fills this hidden field, pretend all is fine.
+    // Required server config
+    const API_KEY = process.env.RESEND_API_KEY;
+    const TO_EMAIL = process.env.TO_EMAIL;
+    if (!API_KEY) {
+      console.error("Missing RESEND_API_KEY.");
+      return res
+        .status(500)
+        .json({ ok: false, error: "Server not configured (RESEND_API_KEY missing)." });
+    }
+    if (!TO_EMAIL) {
+      console.error("Missing TO_EMAIL.");
+      return res
+        .status(500)
+        .json({ ok: false, error: "Server not configured (TO_EMAIL missing)." });
+    }
+
+    // Body parsing fallback (handles both parsed and raw JSON)
+    let data = req.body;
+    if (!data || typeof data !== "object") {
+      try { data = JSON.parse(req.body || "{}"); } catch { data = {}; }
+    }
+
+    const { name, email, company, website, platform, message, honey } = data;
+
+    // Honeypot: if filled, silently succeed to discard bots
     if (honey) return res.status(200).json({ ok: true });
 
-    if (!process.env.RESEND_API_KEY) {
-      return res.status(500).json({ ok: false, error: "Missing RESEND_API_KEY" });
-    }
-    if (!process.env.TO_EMAIL) {
-      return res.status(500).json({ ok: false, error: "Missing TO_EMAIL env var" });
+    if (!name || !email) {
+      return res.status(400).json({ ok: false, error: "Name and email are required." });
     }
 
-    const resend = new Resend(process.env.RESEND_API_KEY);
+    const resend = new Resend(API_KEY);
 
-    // TIP: While testing with Resend, use a verified domain or the
-    // sandbox sender: "Acme <onboarding@resend.dev>" and a verified recipient.
-    const from = process.env.MAIL_FROM || "Nobi Site <onboarding@resend.dev>";
-
+    const subject = `New Nobi request from ${name}`;
     const text = [
-      `New request from the website:`,
-      `Name:    ${name || "-"}`,
-      `Email:   ${email || "-"}`,
+      `Name: ${name}`,
+      `Email: ${email}`,
       `Company: ${company || "-"}`,
       `Website: ${website || "-"}`,
-      `Platform:${platform || "-"}`,
+      `Platform: ${platform || "-"}`,
       "",
       `Message:`,
-      message || "-",
+      `${message || "-"}`,
     ].join("\n");
 
+    // You can keep onboarding@resend.dev for dev/testing.
     await resend.emails.send({
-      from,
-      to: process.env.TO_EMAIL, // your inbox
-      subject: "Nobi – Try it on your store",
+      from: "Nobi <onboarding@resend.dev>",
+      to: TO_EMAIL,
+      reply_to: email,
+      subject,
       text,
     });
 
     return res.status(200).json({ ok: true });
   } catch (err) {
-    // Surface the real error so the UI can show it
-    return res.status(500).json({ ok: false, error: err?.message || "Email failed" });
+    console.error("request-demo error:", err);
+    return res
+      .status(500)
+      .json({ ok: false, error: err?.message || "Email send failed." });
   }
 }

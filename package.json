@@ -13,6 +13,7 @@
     "react-dom": "^18.2.0",
     "framer-motion": "^11.2.6",
     "lucide-react": "^0.460.0"
+    "resend": "^3.2.0"
   },
   "devDependencies": {
     "vite": "^5.3.3",
@@ -22,3 +23,4 @@
     "@vitejs/plugin-react": "^4.3.1"
   }
 }
+

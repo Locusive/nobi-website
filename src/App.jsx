@@ -443,7 +443,7 @@ function Hero({ onOpenVideo, onOpenForm }) {
               </span>
             </h1>
             <p className="mt-4 text-lg text-black/70 dark:text-white/70 max-w-xl">
-              Nobi gets your customers the products they need faster with conversational AI.
+              Nobi gets your customers the products they want faster with conversational AI.
             </p>
             <div className="mt-8">
   <div className="mt-4 flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4">

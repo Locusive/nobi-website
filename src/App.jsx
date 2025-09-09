@@ -608,7 +608,7 @@ function Features() {
     {
       title: "Capture Bouncers",
       desc:
-        "Prevent customers from leaving your search result pages by offering them the ability try again with Nobi.",
+        "Prevent customers from leaving your search result pages by offering them the ability to try again with Nobi.",
       icon: <MousePointerClick className="h-4 w-4" />,
       media: { src: "/media/feature-capture.mp4", alt: "Capture bouncers demo" },
     },

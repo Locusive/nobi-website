@@ -65,36 +65,69 @@ function HeroProductCard({ title = "Oxford Shirt", price = "$168", img }) {
   );
 }
 
-function ConversationDemo() {
-  const [step, setStep] = React.useState(0);
+/* ===================== Preview + One-shot Conversation ===================== */
 
-  // Progress through the little story then loop
+/** Wrapper that keeps the API you already render: <PreviewCard mode={searchMode} /> */
+function PreviewCard({ mode }) {
+  // Remount on mode change so the animation restarts automatically (no loop afterward).
+  return <ConversationDemo mode={mode} key={mode} />;
+}
+
+/**
+ * Runs a single sequence:
+ *   step 0: show user message
+ *   step 1: show AI reply
+ *   step 2: show product cards and auto-scroll to them
+ * Stops there (no looping). If you mount with a new key, it replays from the top.
+ */
+function ConversationDemo({ mode }) {
+  const [step, setStep] = React.useState(0); // 0=user, 1=ai, 2=products (done)
+  const scrollerRef = React.useRef(null);
+  const productsRef = React.useRef(null);
+
+  // When remounted (because parent changes key), start fresh and reset scroll.
   React.useEffect(() => {
-    const durations = [900, 1100, 1600, 1400, 1500]; // ms between steps
-    const id = setTimeout(
-      () => setStep((s) => (s + 1) % durations.length),
-      durations[step % durations.length]
-    );
-    return () => clearTimeout(id);
+    setStep(0);
+    scrollerRef.current?.scrollTo({ top: 0 });
+  }, []); // runs on mount
+
+  // Advance steps once, then stop.
+  React.useEffect(() => {
+    const delays = [900, 1100, 1600]; // ms from 0→1, 1→2
+    if (step >= 2) return;            // finished; do not loop
+    const t = setTimeout(() => setStep((s) => Math.min(2, s + 1)), delays[step]);
+    return () => clearTimeout(t);
+  }, [step]);
+
+  // Smooth-scroll to products when they render.
+  React.useEffect(() => {
+    if (step === 2 && scrollerRef.current && productsRef.current) {
+      const id = setTimeout(() => {
+        const top = productsRef.current.offsetTop - 12; // small padding
+        scrollerRef.current.scrollTo({ top, behavior: "smooth" });
+      }, 60); // allow layout to paint
+      return () => clearTimeout(id);
+    }
   }, [step]);
 
   const showUser1 = step >= 0;
   const showAi1 = step >= 1;
   const showProducts = step >= 2;
-  const showAi2 = step >= 3;
 
   return (
     <div className="w-full rounded-2xl border border-black/10 dark:border-white/10 bg-white/60 dark:bg-white/5 overflow-hidden shadow-inner">
-      {/* Make it a bit shorter so it aligns with the left column better */}
-      <AspectBox ratio={16 / 7}>
-        <div className="absolute inset-0 p-3 sm:p-4 md:p-5 flex flex-col gap-3">
-          {/* conversation area */}
-          <div className="flex-1">
+      <AspectBox ratio={16 / 9}>
+        <div className="absolute inset-0 p-4 sm:p-5 md:p-6 flex flex-col gap-3 sm:gap-4">
+          {/* Scrollable conversation area */}
+          <div
+            ref={scrollerRef}
+            className="flex-1 overflow-y-auto rounded-xl bg-white/70 dark:bg-white/5 border border-black/10 dark:border-white/10 p-3 sm:p-4"
+          >
             <div className="flex h-full flex-col gap-2.5 sm:gap-3">
               {showUser1 && (
                 <motion.div initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }}>
                   <ChatBubble from="user">
-                    Looking for <b>leggings for my wife</b> — she’s 5'4" and likes hot yoga. Something with pockets under $90.
+                    Looking for <b>leggings for my wife</b> — she’s 5'4", likes pockets, under $90.
                   </ChatBubble>
                 </motion.div>
               )}
@@ -102,38 +135,25 @@ function ConversationDemo() {
               {showAi1 && (
                 <motion.div initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }}>
                   <ChatBubble from="ai">
-                    Got it! Here are a few options with pockets that fit your budget and are in her size <b>(S)</b>.
+                    Got it! Here are a few options that fit your budget and include <b>pockets</b>.
                   </ChatBubble>
                 </motion.div>
               )}
 
               {showProducts && (
                 <motion.div
+                  ref={productsRef}
                   initial={{ opacity: 0, y: 8 }}
                   animate={{ opacity: 1, y: 0 }}
-                  className="grid grid-cols-3 gap-2.5 sm:gap-3"
+                  className="grid grid-cols-3 gap-2.5 sm:gap-3 pt-1"
                 >
                   <HeroProductCard title="High-Rise Pocket Legging" price="$78" img="/media/prod-1.png" />
                   <HeroProductCard title="7/8 Performance Legging" price="$69" img="/media/prod-2.png" />
                   <HeroProductCard title="Everyday Cotton Legging" price="$59" img="/media/prod-3.png" />
                 </motion.div>
               )}
-
-              {showAi2 && (
-                <motion.div initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }}>
-                  <ChatBubble from="ai">
-                    Prefer <b>cotton</b> or <b>performance</b> fabric?
-                    <span className="ml-2 inline-flex gap-2">
-                      <span className="px-2 py-1 text-xs rounded-md bg-black/5 dark:bg-white/10">Cotton</span>
-                      <span className="px-2 py-1 text-xs rounded-md bg-black/5 dark:bg-white/10">Performance</span>
-                    </span>
-                  </ChatBubble>
-                </motion.div>
-              )}
             </div>
           </div>
-
-          {/* ⛔️ Removed the bottom "typing" input bar */}
         </div>
       </AspectBox>
     </div>

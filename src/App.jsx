@@ -570,11 +570,11 @@ function Hero({ onOpenVideo, onOpenForm }) {
 
 function Logos() {
   const brands = [
-    { name: "Lucchese",   src: "/media/logos/lucchese.png" },
-    { name: "Faherty",    src: "/media/logos/faherty.png" },
-    { name: "UNTUCKit",   src: "/media/logos/untuckit.png" },
-    { name: "St. Bernard",src: "/media/logos/stbernard.png" },
-    { name: "Kilte",      src: "/media/logos/kilte.png" },
+    { name: "Lucchese",   src: "/media/logos/lucchese.svg" },
+    { name: "Faherty",    src: "/media/logos/faherty.svg" },
+    { name: "UNTUCKit",   src: "/media/logos/untuckit.svg" },
+    { name: "St. Bernard",src: "/media/logos/stbernard.svg" },
+    { name: "Kilte",      src: "/media/logos/kilte.svg" },
   ];
 
   return (

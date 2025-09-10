@@ -594,45 +594,44 @@ function BrandMark({ src, label, className = "" }) {
   );
 }
 
+// ⬇️ Replace your existing function Logos() with this
 function Logos() {
+  // Put these SVGs in /public/media (or update the paths)
+  const small = "max-h-6 sm:max-h-7";  // smaller (Lucchese, UNTUCKit)
+  const base  = "max-h-8 sm:max-h-9";  // default (Faherty, Toolup, St. Bernard)
+
   const brands = [
-    { src: "/media/logos/lucchese.svg", label: "Lucchese" },
-    { src: "/media/logos/untuckit.svg", label: "UNTUCKit" },
-   { src: "/media/logos/faherty.svg", label: "Faherty" },
-   { src: "/media/logos/toolup.svg", label: "Tool Up" }, 
-   { src: "/media/logos/stbernard.svg", label: "St. Bernard" },
+    { src: "/media/lucchese.svg", alt: "Lucchese Bootmaker", h: small },
+    { src: "/media/untuckit.svg", alt: "UNTUCKit",           h: small },
+    { src: "/media/faherty.svg",  alt: "Faherty",            h: base  },
+    { src: "/media/toolup.svg",   alt: "Toolup",             h: base  },
+    { src: "/media/stbernard.svg",alt: "St. Bernard",        h: base  },
   ];
 
   return (
-    <section id="logos" className="py-16 border-t border-black/5 dark:border-white/5">
-  <div className="mx-auto max-w-6xl px-6">
-    <p className="text-center text-sm font-semibold text-fuchsia-600 mb-8">
-      Trusted by modern commerce
-    </p>
+    <section id="logos" className="py-14 border-t border-black/5 dark:border-white/5">
+      <div className="mx-auto max-w-6xl px-6 text-center">
+        <p className="text-sm font-semibold text-fuchsia-600 mb-6">
+          Trusted by modern commerce
+        </p>
 
-    <div className="grid grid-cols-2 sm:grid-cols-5 items-center justify-items-center gap-x-10 gap-y-6">
-      {[
-        { src: "/media/logos/lucchese.svg", alt: "Lucchese" },
-        { src: "/media/logos/untuckit.svg", alt: "UNTUCKit" },
-             { src: "/media/logos/faherty.svg", alt: "Faherty" },
-        { src: "/media/logos/toolup.svg", alt: "Tool Up" },
-        { src: "/media/logos/stbernard.svg", alt: "St. Bernard" },
-      ].map((logo) => (
-        <div key={logo.alt} className="flex items-center justify-center w-full">
-          <img
-            src={logo.src}
-            alt={`${logo.alt} logo`}
-            loading="lazy"
-            className="block h-8 sm:h-10 w-auto grayscale opacity-70 hover:opacity-100 transition"
-          />
-        </div>
-      ))}
-    </div>
-  </div>
-</section>
+        {/* Even spacing on all breakpoints */}
+        <ul className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-x-10 gap-y-8 place-items-center">
+          {brands.map(({ src, alt, h }) => (
+            <li key={alt} className="opacity-70 hover:opacity-90 transition">
+              <img
+                src={src}
+                alt={alt}
+                loading="lazy"
+                className={`w-auto ${h} object-contain filter grayscale`}
+              />
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
   );
 }
-
 
 function Features() {
   const items = [

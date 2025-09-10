@@ -591,11 +591,11 @@ function Logos() {
 
         {/* Equal-width cells at every breakpoint */}
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 items-center gap-x-10 sm:gap-x-12 lg:gap-x-16 gap-y-8">
-          <BrandLogo src="/media/brands/lucchese-logo.png"  alt="Lucchese" />
-          <BrandLogo src="/media/brands/faherty-logo.png"   alt="Faherty" />
-          <BrandLogo src="/media/brands/untuckit-logo.png"  alt="UNTUCKit" />
-          <BrandLogo src="/media/brands/stbernard-logo.png" alt="St. Bernard" />
-          <BrandLogo src="/media/brands/kilte-logo.png"     alt="Kilte" />
+          <BrandLogo src="/media/brands/lucchese.svg"  alt="Lucchese" />
+          <BrandLogo src="/media/brands/faherty.svg"   alt="Faherty" />
+          <BrandLogo src="/media/brands/untuckit.svg"  alt="UNTUCKit" />
+          <BrandLogo src="/media/brands/stbernard.svg" alt="St. Bernard" />
+          <BrandLogo src="/media/brands/kilte.svg"     alt="Kilte" />
         </div>
       </div>
     </section>

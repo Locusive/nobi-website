@@ -570,29 +570,38 @@ function Hero({ onOpenVideo, onOpenForm }) {
 
 function Logos() {
   const brands = [
-    { alt: "Lucchese",  src: "/media/logos/lucchese.svg" },
-    { alt: "Faherty",   src: "/media/logos/faherty.svg" },
-    { alt: "UNTUCKit",  src: "/media/logos/untuckit.svg" },
-    { alt: "St. Bernard", src: "/media/logos/stbernard.svg" },
-    { alt: "Kilte",     src: "/media/logos/kilte.svg" },
+    { name: "Lucchese",   src: "/media/logos/lucchese.png" },
+    { name: "Faherty",    src: "/media/logos/faherty.png" },
+    { name: "UNTUCKit",   src: "/media/logos/untuckit.png" },
+    { name: "St. Bernard",src: "/media/logos/stbernard.png" },
+    { name: "Kilte",      src: "/media/logos/kilte.png" },
   ];
 
   return (
-    <section id="logos" className="py-14 border-t border-black/5 dark:border-white/5">
+    <section id="logos" className="py-16 border-t border-black/5 dark:border-white/5">
       <div className="mx-auto max-w-6xl px-6">
-        <p className="text-center text-sm font-semibold text-fuchsia-600">
+        <p className="text-sm font-semibold text-fuchsia-600 text-center">
           Trusted by modern commerce
         </p>
 
-        <div className="mt-6 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-x-8 gap-y-8 place-items-center">
-          {brands.map((b) => (
-            <div key={b.alt} className="w-full flex items-center justify-center">
+        {/* Uniform grid; each cell is a same-height box */}
+        <div className="mt-6 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 place-items-center gap-x-8 gap-y-8">
+          {brands.map(b => (
+            <div
+              key={b.name}
+              className="h-10 sm:h-12 md:h-14 w-full max-w-[180px] flex items-center justify-center"
+              aria-label={b.name}
+              title={b.name}
+            >
               <img
                 src={b.src}
-                alt={b.alt}
-                className="block mx-auto h-[22px] sm:h-[26px] md:h-[32px] lg:h-[36px] w-auto object-contain
-                           opacity-80 hover:opacity-100 transition"
+                alt={b.name}
                 loading="lazy"
+                className="
+                  max-h-full w-auto object-contain block
+                  grayscale opacity-70 hover:opacity-100 transition
+                  [filter:grayscale(100%)_contrast(110%)_brightness(95%)]
+                "
               />
             </div>
           ))}

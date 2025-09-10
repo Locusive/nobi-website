@@ -12,7 +12,7 @@ import stbernard from "/media/logos/stbernard.svg";
 
 /* ===================== Hero Conversation Demo ===================== */
 
-function TypingDots({ className = "" }) {
+function HeroTypingDots({ className = "" }) {
   return (
     <span className={`inline-flex gap-1 ${className}`} aria-hidden>
       <span className="w-1.5 h-1.5 rounded-full bg-black/40 dark:bg-white/60 animate-bounce [animation-delay:-0.2s]" />
@@ -40,23 +40,37 @@ function ChatBubble({ from = "user", children }) {
   );
 }
 
-function ProductCard({ title = "High-Rise Pocket Legging", price = "$78", img }) {
-  return (
-    <div className="rounded-xl overflow-hidden border border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/5">
-      <div className="aspect-[3/4] bg-black/5 dark:bg-white/10">
-        <AssetImage
-          src={img}                          // optional real image
-          alt={title}
-          className="w-full h-full object-cover"
-          labelForPlaceholder="Product image"
-        />
-      </div>
-      <div className="p-3">
-        <div className="text-sm font-medium text-black/90 dark:text-white/90 line-clamp-1">
-          {title}
+function HeroProductCard({ title = "Oxford Shirt", price = "$168", img }) {
+  const hasImage = Boolean(img);
+
+  if (hasImage) {
+    // Image variant (uses AssetImage)
+    return (
+      <div className="rounded-xl overflow-hidden border border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/5">
+        <div className="aspect-[3/4] bg-black/5 dark:bg-white/10">
+          <AssetImage
+            src={img}
+            alt={title}
+            className="w-full h-full object-cover"
+            labelForPlaceholder="Product image"
+          />
         </div>
-        <div className="text-sm text-black/60 dark:text-white/60">{price}</div>
+        <div className="p-3">
+          <div className="text-sm font-medium text-black/90 dark:text-white/90 line-clamp-1">
+            {title}
+          </div>
+          <div className="text-sm text-black/60 dark:text-white/60">{price}</div>
+        </div>
       </div>
+    );
+  }
+
+  // Simple (no image provided)
+  return (
+    <div className="rounded-xl border border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/5 p-3">
+      <div className="aspect-[3/4] w-full rounded-lg bg-black/5 dark:bg-white/10" />
+      <div className="mt-2 text-sm font-medium text-black/80 dark:text-white/90">{title}</div>
+      <div className="text-xs text-black/50 dark:text-white/60">{price}</div>
     </div>
   );
 }
@@ -110,9 +124,9 @@ function ConversationDemo() {
                   animate={{ opacity: 1, y: 0 }}
                   className="grid grid-cols-3 gap-2.5 sm:gap-3"
                 >
-                  <ProductCard title="High-Rise Pocket Legging" price="$78" img="/media/prod-1.png" />
-                  <ProductCard title="7/8 Performance Legging" price="$69" img="/media/prod-2.png" />
-                  <ProductCard title="Everyday Cotton Legging" price="$59" img="/media/prod-3.png" />
+                  <HeroProductCard title="High-Rise Pocket Legging" price="$78" img="/media/prod-1.png" />
+                  <HeroProductCard title="7/8 Performance Legging" price="$69" img="/media/prod-2.png" />
+                  <HeroProductCard title="Everyday Cotton Legging" price="$59" img="/media/prod-3.png" />
                 </motion.div>
               )}
 
@@ -139,7 +153,7 @@ function ConversationDemo() {
             <div className="text-sm text-black/50 dark:text-white/60">
               {showPrompt ? "Search or ask anything…" : "Leggings for my wife"}
             </div>
-            {!showPrompt ? <TypingDots /> : null}
+            {!showPrompt ? <HeroTypingDots /> : null}
           </div>
         </div>
       </AspectBox>
@@ -564,7 +578,7 @@ function DualModeSearchBar({
   );
 }
 
-function SkeletonLine({ w = "60%" }) {
+function HeroSkeletonLine({ w = "60%" }) {
   return (
     <div
       className="h-3 rounded bg-black/5 dark:bg-white/10"
@@ -573,18 +587,8 @@ function SkeletonLine({ w = "60%" }) {
   );
 }
 
-function ProductCard({ title = "Oxford Shirt", price = "$168" }) {
-  return (
-    <div className="rounded-xl border border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/5 p-3">
-      <div className="aspect-[3/4] w-full rounded-lg bg-black/5 dark:bg-white/10" />
-      <div className="mt-2 text-sm font-medium text-black/80 dark:text-white/90">{title}</div>
-      <div className="text-xs text-black/50 dark:text-white/60">{price}</div>
-    </div>
-  );
-}
-
 /** Small “…” typing indicator */
-function TypingDots() {
+function HeroTypingDots() {
   return (
     <div className="inline-flex gap-[3px] items-center">
       <span className="w-1.5 h-1.5 rounded-full bg-black/50 dark:bg-white/60 animate-bounce [animation-delay:-120ms]" />
@@ -617,8 +621,6 @@ function TypeText({ text, speed = 22, onDone }) {
  * Scripted hero demo that replaces the old video preview.
  * Props: mode = "ai" | "site"
  */
-export default function PreviewCard({ mode = "ai" }) {
-  const [step, setStep] = React.useState(0);
 
   // Reset the sequence whenever the mode changes
   React.useEffect(() => {
@@ -660,7 +662,7 @@ export default function PreviewCard({ mode = "ai" }) {
                   className="space-y-3 max-w-xl"
                 >
                   <div className="inline-flex items-center gap-2 rounded-full px-3 py-1.5 bg-black/5 dark:bg-white/10 text-sm">
-                    <TypingDots />
+                    <HeroTypingDots />
                     <span className="text-black/60 dark:text-white/70">
                       Typing…
                     </span>
@@ -669,8 +671,8 @@ export default function PreviewCard({ mode = "ai" }) {
                     <TypeText text="Linen shirt for a wedding" />
                   </div>
                   <div className="space-y-2">
-                    <SkeletonLine w="78%" />
-                    <SkeletonLine w="62%" />
+                    <HeroSkeletonLine w="78%" />
+                    <HeroSkeletonLine w="62%" />
                   </div>
                 </motion.div>
               )}
@@ -687,8 +689,8 @@ export default function PreviewCard({ mode = "ai" }) {
                     “Linen shirt for a wedding”
                   </div>
                   <div className="space-y-2">
-                    <SkeletonLine w="72%" />
-                    <SkeletonLine w="58%" />
+                    <HeroSkeletonLine w="72%" />
+                    <HeroSkeletonLine w="58%" />
                   </div>
                 </motion.div>
               )}
@@ -720,8 +722,8 @@ export default function PreviewCard({ mode = "ai" }) {
                     </div>
                   </div>
                   <div className="space-y-2">
-                    <SkeletonLine w="65%" />
-                    <SkeletonLine w="50%" />
+                    <HeroSkeletonLine w="65%" />
+                    <HeroSkeletonLine w="50%" />
                   </div>
                 </motion.div>
               )}
@@ -734,9 +736,9 @@ export default function PreviewCard({ mode = "ai" }) {
                   animate={{ opacity: 1, y: 0 }}
                   className="grid grid-cols-3 gap-3 sm:gap-4"
                 >
-                  <ProductCard title="Legend Oxford" price="$168" />
-                  <ProductCard title="Coastal Linen" price="$178" />
-                  <ProductCard title="Classic Button-down" price="$148" />
+                  <HeroProductCard title="Legend Oxford" price="$168" />
+                  <HeroProductCard title="Coastal Linen" price="$178" />
+                  <HeroProductCard title="Classic Button-down" price="$148" />
                 </motion.div>
               )}
             </div>
@@ -846,7 +848,7 @@ function VideoModal({ open, onClose, youtube, src, poster = "" }) {
 
 // --- HERO PREVIEW HELPERS (names are unique to avoid clashes) ---
 
-function SkeletonLine({ w = "60%" }) {
+function HeroSkeletonLine({ w = "60%" }) {
   return <div className="h-2 rounded bg-black/10 dark:bg-white/10" style={{ width: w }} />;
 }
 

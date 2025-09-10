@@ -71,32 +71,42 @@ function HeroConversationPreview({ mode }) {
   return <HeroConversationDemo mode={mode} key={mode} />;
 }
 
-function HeroConversationDemo({ mode }) {
+function HeroConversationDemo({ script }) {
+  const {
+    userText = "Looking for a linen shirt for a wedding — breathable, under $150.",
+    aiText   = "Got it! Here are dress-appropriate linen options in white, cream and eggshell.",
+    products = [
+      { title: "Legend Oxford", price: "$168", img: "/media/prod-1.png" },
+      { title: "Coastal Linen", price: "$178", img: "/media/prod-2.png" },
+      { title: "Classic Button-down", price: "$148", img: "/media/prod-3.png" },
+    ],
+  } = script || {};
+
   const [step, setStep] = React.useState(0); // 0=user, 1=ai, 2=products (stop)
   const scrollerRef = React.useRef(null);
   const productsRef = React.useRef(null);
 
-  // On mount: start fresh and reset scroll
+  // start fresh and reset scroll
   React.useEffect(() => {
     setStep(0);
     scrollerRef.current?.scrollTo({ top: 0 });
   }, []);
 
-  // Advance steps once, then stop (no loop)
+  // advance steps once, then stop (no loop)
   React.useEffect(() => {
-    const delays = [1100, 1600, 1900]; // 0→1, 1→2
+    const delays = [900, 1100, 1600];
     if (step >= 2) return;
     const t = setTimeout(() => setStep((s) => Math.min(2, s + 1)), delays[step]);
     return () => clearTimeout(t);
   }, [step]);
 
-  // Smooth scroll to products when they appear
+  // smooth scroll to products when they appear
   React.useEffect(() => {
     if (step === 2 && scrollerRef.current && productsRef.current) {
       const id = setTimeout(() => {
         const top = productsRef.current.offsetTop - 12;
         scrollerRef.current.scrollTo({ top, behavior: "smooth" });
-      }, 60); // allow layout to paint
+      }, 60);
       return () => clearTimeout(id);
     }
   }, [step]);
@@ -109,7 +119,6 @@ function HeroConversationDemo({ mode }) {
     <div className="w-full rounded-2xl border border-black/10 dark:border-white/10 bg-white/60 dark:bg-white/5 overflow-hidden shadow-inner">
       <AspectBox ratio={16 / 9}>
         <div className="absolute inset-0 p-4 sm:p-5 md:p-6 flex flex-col gap-3 sm:gap-4">
-          {/* Scrollable conversation area */}
           <div
             ref={scrollerRef}
             className="flex-1 overflow-y-auto rounded-xl bg-white/70 dark:bg-white/5 border border-black/10 dark:border-white/10 p-3 sm:p-4"
@@ -118,7 +127,7 @@ function HeroConversationDemo({ mode }) {
               {showUser1 && (
                 <motion.div initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }}>
                   <ChatBubble from="user">
-                    Looking for <b>leggings for my wife</b> — she’s 5'4", likes pockets, under $90.
+                    {userText}
                   </ChatBubble>
                 </motion.div>
               )}
@@ -126,7 +135,7 @@ function HeroConversationDemo({ mode }) {
               {showAi1 && (
                 <motion.div initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }}>
                   <ChatBubble from="ai">
-                    Got it! Here are a few options that fit your budget and include <b>pockets</b>.
+                    {aiText}
                   </ChatBubble>
                 </motion.div>
               )}
@@ -138,9 +147,9 @@ function HeroConversationDemo({ mode }) {
                   animate={{ opacity: 1, y: 0 }}
                   className="grid grid-cols-3 gap-2.5 sm:gap-3 pt-1"
                 >
-                  <HeroProductCard title="High-Rise Pocket Legging" price="$78" img="/media/prod-1.png" />
-                  <HeroProductCard title="7/8 Performance Legging" price="$69" img="/media/prod-2.png" />
-                  <HeroProductCard title="Everyday Cotton Legging" price="$59" img="/media/prod-3.png" />
+                  {products.map((p) => (
+                    <HeroProductCard key={p.title} title={p.title} price={p.price} img={p.img} />
+                  ))}
                 </motion.div>
               )}
             </div>
@@ -386,45 +395,44 @@ function Logo({ className = "h-7 md:h-9 lg:h-10" }) {
   );
 }
 
-function useTypingDemo({ mode, setQuery, setPlaceholder, enabled = true }) {
-  useEffect(() => {
+function useTypingDemo({ mode, text, setQuery, setPlaceholder, onDone, enabled = true }) {
+  React.useEffect(() => {
     if (!enabled) return;
 
     let cancelled = false;
-    const initialPlaceholder =
-      mode === "ai" ? "Describe what you want..." : "Search products...";
-    const toType = "Linen shirt for a wedding";
-
+    const timers = [];
+    const initialPlaceholder = mode === "ai" ? "Describe what you want..." : "Search products...";
     setPlaceholder(initialPlaceholder);
     setQuery("");
 
-    const startDelay = 800;     // wait before typing starts
-    const baseSpeed = 30;       // ms per char
-    const jitter = 32;          // randomness
+    const startDelay = 650;
+    const baseSpeed = 28;
+    const jitter = 30;
 
-    let startTimer;
-    const timers = [];
-
-    startTimer = setTimeout(() => {
+    const startTimer = setTimeout(() => {
       let i = 0;
       const step = () => {
         if (cancelled) return;
-        setQuery(toType.slice(0, i + 1));
+        setQuery(text.slice(0, i + 1));
         i++;
-        if (i < toType.length) {
+        if (i < text.length) {
           const t = setTimeout(step, baseSpeed + Math.random() * jitter);
           timers.push(t);
+        } else {
+          // brief beat to feel like a submit click
+          const doneT = setTimeout(() => onDone?.(), 240);
+          timers.push(doneT);
         }
       };
       step();
     }, startDelay);
 
+    timers.push(startTimer);
     return () => {
       cancelled = true;
-      clearTimeout(startTimer);
       timers.forEach(clearTimeout);
     };
-  }, [mode, enabled, setQuery, setPlaceholder]);
+  }, [mode, text, enabled, setQuery, setPlaceholder, onDone]);
 }
 
 function DualModeSearchBar({
@@ -432,29 +440,35 @@ function DualModeSearchBar({
   size = "regular",
   mode: controlledMode,
   onModeChange,
+  autoType,           // <-- NEW: string to auto-type
+  onTypingDone,       // <-- NEW: callback after typing finishes
 }) {
-  // controlled/uncontrolled support
-  const [internalMode, setInternalMode] = useState(defaultMode);
+  const [internalMode, setInternalMode] = React.useState(defaultMode);
   const mode = controlledMode ?? internalMode;
 
-  const [query, setQuery] = useState("");
-  const [placeholder, setPlaceholder] = useState(
+  const [query, setQuery] = React.useState("");
+  const [placeholder, setPlaceholder] = React.useState(
     mode === "ai" ? "Describe what you want..." : "Search products..."
   );
-  const [submitted, setSubmitted] = useState(null);
+  const [submitted, setSubmitted] = React.useState(null);
 
   // demo typing: replays when mode changes unless the user has interacted
-  const [demoEnabled, setDemoEnabled] = useState(true);
-  useTypingDemo({ mode, setQuery, setPlaceholder, enabled: demoEnabled });
+  const [demoEnabled, setDemoEnabled] = React.useState(true);
+  useTypingDemo({
+    mode,
+    text: autoType || "Linen shirt for a wedding",
+    setQuery,
+    setPlaceholder,
+    onDone: () => onTypingDone?.({ mode, query: autoType || "Linen shirt for a wedding" }),
+    enabled: demoEnabled,
+  });
 
-  // when user toggles mode, replay the demo
   const setMode = (m) => {
     if (controlledMode === undefined) setInternalMode(m);
     onModeChange?.(m);
-    setDemoEnabled(true);
+    setDemoEnabled(true); // restart demo typing when mode toggles
   };
 
-  // cancel demo on any user interaction
   const stopDemoAnd = (next) => (e) => {
     if (demoEnabled) setDemoEnabled(false);
     next?.(e);
@@ -463,17 +477,16 @@ function DualModeSearchBar({
   const ctaLabel = mode === "ai" ? "Ask AI" : "Search";
   const height = size === "regular" ? "h-14" : "h-11";
 
-  // thumb animation setup (unchanged from your version)
-  const toggleRef = useRef(null);
-  const siteBtnRef = useRef(null);
-  const aiBtnRef = useRef(null);
-  const [thumb, setThumb] = useState({ left: 0, width: 0 });
+  const toggleRef = React.useRef(null);
+  const siteBtnRef = React.useRef(null);
+  const aiBtnRef = React.useRef(null);
+  const [thumb, setThumb] = React.useState({ left: 0, width: 0 });
   const measureThumb = () => {
     const btn = mode === "ai" ? aiBtnRef.current : siteBtnRef.current;
     if (!btn) return;
     setThumb({ left: btn.offsetLeft, width: btn.offsetWidth });
   };
-  useEffect(() => {
+  React.useEffect(() => {
     measureThumb();
     const ro = new ResizeObserver(measureThumb);
     if (toggleRef.current) ro.observe(toggleRef.current);
@@ -489,19 +502,14 @@ function DualModeSearchBar({
   function submit() {
     if (!query.trim()) return;
     setSubmitted({ mode, query });
-    setTimeout(() => setSubmitted(null), 2000);
+    setTimeout(() => setSubmitted(null), 1600);
   }
 
   return (
     <div className="w-full max-w-3xl">
-      <div
-        className={`flex items-center gap-2 rounded-2xl border border-black/10 dark:border-white/15 bg-white/70 dark:bg-white/5 backdrop-blur px-2 ${height} shadow-sm`}
-      >
+      <div className={`flex items-center gap-2 rounded-2xl border border-black/10 dark:border-white/15 bg-white/70 dark:bg-white/5 backdrop-blur px-2 ${height} shadow-sm`}>
         {/* Toggle */}
-        <div
-          ref={toggleRef}
-          className="relative isolate inline-flex rounded-xl bg-black/5 dark:bg-white/10 overflow-hidden shrink-0"
-        >
+        <div ref={toggleRef} className="relative isolate inline-flex rounded-xl bg-black/5 dark:bg-white/10 overflow-hidden shrink-0">
           <button
             ref={siteBtnRef}
             className={`relative z-[1] rounded-lg px-3 py-1.5 text-xs sm:px-4 sm:py-2 sm:text-sm font-medium transition-colors duration-300 ${mode === "site" ? "text-black dark:text-white" : "text-black/60 dark:text-white/60"}`}
@@ -538,25 +546,14 @@ function DualModeSearchBar({
         </div>
 
         {/* CTA */}
-        <Button
-          onClick={stopDemoAnd(submit)}
-          variant={mode === "ai" ? "ai" : "primary"}
-          size="compact"
-          className="whitespace-nowrap px-3 h-9 sm:h-8"
-        >
+        <Button onClick={stopDemoAnd(submit)} variant={mode === "ai" ? "ai" : "primary"} size="compact" className="whitespace-nowrap px-3 h-9 sm:h-8">
           {mode === "ai" ? <Sparkles className="h-4 w-4" /> : <SearchIcon className="h-4 w-4" />}
           <span className="hidden sm:inline">{ctaLabel}</span>
         </Button>
       </div>
 
-      {/* Little toast after submit (optional) */}
       {submitted && (
-        <motion.div
-          initial={{ opacity: 0, y: 6 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: 6 }}
-          className="mt-3 inline-flex items-center gap-2 rounded-full bg-black/90 text-white px-3 py-1 text-xs"
-        >
+        <motion.div initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 6 }} className="mt-3 inline-flex items-center gap-2 rounded-full bg-black/90 text-white px-3 py-1 text-xs">
           <span className="inline-flex items-center gap-1">
             {submitted.mode === "ai" ? <Sparkles className="h-4 w-4" /> : <SearchIcon className="h-4 w-4" />} {submitted.mode === "ai" ? "AI" : "Default"}
           </span>

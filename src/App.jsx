@@ -82,7 +82,7 @@ function HeroConversationDemo({ script, startKey }) {
     ],
   } = script || {};
 
-  const [step, setStep] = React.useState(-1); // -1 idle, 0 user, 1 ai, 2 products
+  const [step, setStep] = React.useState(-1);   // -1 idle, 0 user, 1 ai, 2 products
   const scrollerRef = React.useRef(null);
   const productsRef = React.useRef(null);
 
@@ -114,7 +114,7 @@ function HeroConversationDemo({ script, startKey }) {
     <div className="w-full rounded-2xl border border-black/10 dark:border-white/10 bg-white/60 dark:bg-white/5 overflow-hidden shadow-inner">
       <AspectBox ratio={16 / 9}>
         <div className="absolute inset-0 p-4 sm:p-5 md:p-6 flex flex-col gap-3 sm:gap-4">
-          {/* NOTE: inner rounded box removed for more space */}
+          {/* inner box REMOVED to gain space */}
           <div ref={scrollerRef} className="flex-1 overflow-y-auto">
             <div className="flex h-full flex-col gap-2.5 sm:gap-3">
               {showUser1 && (
@@ -171,9 +171,7 @@ function buildScript(mode, q = "linen shirt for a wedding") {
   };
 }
 
-function ConversationDemo({ mode, playKey }) {
-  return <HeroConversationDemo script={buildScript(mode)} startKey={playKey} />;
-}
+
 
 function makeScript(mode, q = "linen shirt for a wedding") {
   if (mode === "ai") {
@@ -200,9 +198,7 @@ function makeScript(mode, q = "linen shirt for a wedding") {
   };
 }
 
-function ConversationDemo({ mode, playKey }) {
-  return <HeroConversationDemo script={makeScript(mode)} startKey={playKey} />;
-}
+
 
 function BrandsRow() {
   const brands = [
@@ -781,10 +777,7 @@ function Hero({ onOpenForm, onOpenVideo }) {
                 onDemoSubmit={kickOffPreview}            // auto after typing demo
                 onSubmit={kickOffPreview}                // real clicks/Enter
               />
-            </div>
-
-            <ConversationDemo mode={searchMode} playKey={playKey} />
-          </div>
+           
         </div>
       </div>
     </section>

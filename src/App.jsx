@@ -600,7 +600,7 @@ function Logos() {
     { src: "/media/logos/faherty.svg", label: "Faherty" },
     { src: "/media/logos/untuckit.svg", label: "UNTUCKit" },
    { src: "/media/logos/toolup.svg", label: "Tool Up" }, 
-   { src: "/media/logos/kilte.svg", label: "Kilte" },
+   { src: "/media/logos/stbernard.svg", label: "St. Bernard" },
   ];
 
   return (
@@ -616,7 +616,7 @@ function Logos() {
         { src: "/media/logos/faherty.svg", alt: "Faherty" },
         { src: "/media/logos/untuckit.svg", alt: "UNTUCKit" },
         { src: "/media/logos/toolup.svg", alt: "Tool Up" },
-        { src: "/media/logos/kilte.svg", alt: "Kilte" },
+        { src: "/media/logos/stbernard.svg", alt: "St. Bernard" },
       ].map((logo) => (
         <div key={logo.alt} className="flex items-center justify-center w-full">
           <img

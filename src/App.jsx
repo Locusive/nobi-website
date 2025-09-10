@@ -568,60 +568,59 @@ function Hero({ onOpenVideo, onOpenForm }) {
   );
 }
 
-function BrandLogo({ src, alt }) {
+function BrandMark({ src, label, className = "" }) {
+  // Renders the SVG as a mask so the shape fills the box exactly
   return (
-    <div className="flex items-center justify-center">
-      {/* Works for SVGs too */}
-      <img
-        src={src}
-        alt={alt}
-        loading="lazy"
-        className="h-8 sm:h-10 lg:h-12 w-auto object-contain grayscale opacity-60 hover:opacity-90 transition"
-      />
-    </div>
+    <span
+      role="img"
+      aria-label={label}
+      title={label}
+      className={[
+        // size: tweak these to taste
+        "block h-8 sm:h-10 w-36 sm:w-40",
+        // grayscale + subtle hover
+        "opacity-70 hover:opacity-100 transition",
+        // make the mask show a solid gray; in dark mode use white
+        "bg-black/70 dark:bg-white/85",
+        // the magic: scale the SVG shape to the box, no whitespace issues
+        "[mask-repeat:no-repeat] [mask-position:center] [mask-size:contain]",
+        className,
+      ].join(" ")}
+      style={{
+        WebkitMaskImage: `url(${src})`,
+        maskImage: `url(${src})`,
+      }}
+    />
   );
 }
 
 function Logos() {
-  const logos = [
-    { src: "/media/logos/lucchese.svg", alt: "Lucchese" },
-    { src: "/media/logos/faherty.svg", alt: "Faherty" },
-    { src: "/media/logos/untuckit.svg", alt: "UNTUCKit" },
-    { src: "/media/logos/stbernard.svg", alt: "St. Bernard" },
-   { src: "/media/logos/kilte.svg", alt: "Kilte Collection" }, 
-   // add more here if you want
+  const brands = [
+    { src: "/media/logos/lucchese.svg", label: "Lucchese" },
+    { src: "/media/logos/faherty.svg", label: "Faherty" },
+    { src: "/media/logos/untuckit.svg", label: "UNTUCKit" },
+    { src: "/media//logos/stbernard.svg", label: "St. Bernard" },
+    { src: "/media/logos/kilte.svg", label: "Kilte" },
   ];
 
   return (
     <section id="logos" className="py-16 border-t border-black/5 dark:border-white/5">
-      {/* slightly wider than the rest of the page so the row breathes */}
-      <div className="mx-auto max-w-7xl px-6">
-        <p className="text-sm font-semibold text-fuchsia-600 text-center">
-          Trusted by modern commerce
-        </p>
+      <div className="mx-auto max-w-6xl px-6 text-center">
+        <p className="text-sm font-semibold text-fuchsia-600">Trusted by modern commerce</p>
 
-        {/* Flex distributes space evenly regardless of count */}
-        <div className="mt-8 flex flex-wrap md:flex-nowrap items-center md:justify-between justify-center gap-x-10 gap-y-10">
-          {logos.map((l) => (
-            <div
-              key={l.alt}
-              className="flex-1 basis-0 min-w-[140px] flex items-center justify-center"
-            >
-              <img
-                src={l.src}
-                alt={l.alt}
-                className="h-10 md:h-12 lg:h-14 w-auto object-contain
-                           filter grayscale opacity-60 transition
-                           hover:opacity-90 hover:grayscale-0"
-              />
-              {/* If you ever inline real <svg>, give it the same classes: h-10 md:h-12 lg:h-14 w-auto */}
-            </div>
+        {/* Even spacing on every breakpoint */}
+        <ul className="mt-6 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 items-center gap-x-10 gap-y-8">
+          {brands.map((b) => (
+            <li key={b.label} className="flex justify-center">
+              <BrandMark src={b.src} label={b.label} />
+            </li>
           ))}
-        </div>
+        </ul>
       </div>
     </section>
   );
 }
+
 
 function Features() {
   const items = [

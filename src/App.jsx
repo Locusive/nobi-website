@@ -568,43 +568,34 @@ function Hero({ onOpenVideo, onOpenForm }) {
   );
 }
 
-function Logos() {
-  const brands = [
-    { name: "Lucchese",   src: "/media/logos/lucchese.svg" },
-    { name: "Faherty",    src: "/media/logos/faherty.svg" },
-    { name: "UNTUCKit",   src: "/media/logos/untuckit.svg" },
-    { name: "St. Bernard",src: "/media/logos/stbernard.svg" },
-    { name: "Kilte",      src: "/media/logos/kilte.svg" },
-  ];
+function BrandLogo({ src, alt }) {
+  return (
+    <div className="flex items-center justify-center">
+      <img
+        src={src}
+        alt={alt}
+        loading="lazy"
+        className="h-8 sm:h-10 lg:h-12 w-auto object-contain grayscale opacity-60 hover:opacity-90 transition"
+      />
+    </div>
+  );
+}
 
+function Logos() {
   return (
     <section id="logos" className="py-16 border-t border-black/5 dark:border-white/5">
-      <div className="mx-auto max-w-6xl px-6">
-        <p className="text-sm font-semibold text-fuchsia-600 text-center">
+      <div className="mx-auto max-w-6xl px-6 text-center">
+        <p className="text-sm font-semibold text-fuchsia-600 mb-6">
           Trusted by modern commerce
         </p>
 
-        {/* Uniform grid; each cell is a same-height box */}
-        <div className="mt-6 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 place-items-center gap-x-8 gap-y-8">
-          {brands.map(b => (
-            <div
-              key={b.name}
-              className="h-10 sm:h-12 md:h-14 w-full max-w-[180px] flex items-center justify-center"
-              aria-label={b.name}
-              title={b.name}
-            >
-              <img
-                src={b.src}
-                alt={b.name}
-                loading="lazy"
-                className="
-                  max-h-full w-auto object-contain block
-                  grayscale opacity-70 hover:opacity-100 transition
-                  [filter:grayscale(100%)_contrast(110%)_brightness(95%)]
-                "
-              />
-            </div>
-          ))}
+        {/* Equal-width cells at every breakpoint */}
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 items-center gap-x-10 sm:gap-x-12 lg:gap-x-16 gap-y-8">
+          <BrandLogo src="/media/brands/lucchese-logo.png"  alt="Lucchese" />
+          <BrandLogo src="/media/brands/faherty-logo.png"   alt="Faherty" />
+          <BrandLogo src="/media/brands/untuckit-logo.png"  alt="UNTUCKit" />
+          <BrandLogo src="/media/brands/stbernard-logo.png" alt="St. Bernard" />
+          <BrandLogo src="/media/brands/kilte-logo.png"     alt="Kilte" />
         </div>
       </div>
     </section>

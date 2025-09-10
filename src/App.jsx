@@ -65,45 +65,36 @@ function HeroProductCard({ title = "Oxford Shirt", price = "$168", img }) {
   );
 }
 
-/* ===================== Preview + One-shot Conversation ===================== */
-
-/** Wrapper that keeps the API you already render: <PreviewCard mode={searchMode} /> */
-function PreviewCard({ mode }) {
-  // Remount on mode change so the animation restarts automatically (no loop afterward).
-  return <ConversationDemo mode={mode} key={mode} />;
+// --- One-shot hero conversation preview (renamed to avoid clashes) ---
+function HeroConversationPreview({ mode }) {
+  // Remount on mode change so the animation restarts (no loop after finish)
+  return <HeroConversationDemo mode={mode} key={mode} />;
 }
 
-/**
- * Runs a single sequence:
- *   step 0: show user message
- *   step 1: show AI reply
- *   step 2: show product cards and auto-scroll to them
- * Stops there (no looping). If you mount with a new key, it replays from the top.
- */
-function ConversationDemo({ mode }) {
-  const [step, setStep] = React.useState(0); // 0=user, 1=ai, 2=products (done)
+function HeroConversationDemo({ mode }) {
+  const [step, setStep] = React.useState(0); // 0=user, 1=ai, 2=products (stop)
   const scrollerRef = React.useRef(null);
   const productsRef = React.useRef(null);
 
-  // When remounted (because parent changes key), start fresh and reset scroll.
+  // On mount: start fresh and reset scroll
   React.useEffect(() => {
     setStep(0);
     scrollerRef.current?.scrollTo({ top: 0 });
-  }, []); // runs on mount
+  }, []);
 
-  // Advance steps once, then stop.
+  // Advance steps once, then stop (no loop)
   React.useEffect(() => {
-    const delays = [900, 1100, 1600]; // ms from 0→1, 1→2
-    if (step >= 2) return;            // finished; do not loop
+    const delays = [900, 1100, 1600]; // 0→1, 1→2
+    if (step >= 2) return;
     const t = setTimeout(() => setStep((s) => Math.min(2, s + 1)), delays[step]);
     return () => clearTimeout(t);
   }, [step]);
 
-  // Smooth-scroll to products when they render.
+  // Smooth scroll to products when they appear
   React.useEffect(() => {
     if (step === 2 && scrollerRef.current && productsRef.current) {
       const id = setTimeout(() => {
-        const top = productsRef.current.offsetTop - 12; // small padding
+        const top = productsRef.current.offsetTop - 12;
         scrollerRef.current.scrollTo({ top, behavior: "smooth" });
       }, 60); // allow layout to paint
       return () => clearTimeout(id);

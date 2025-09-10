@@ -749,50 +749,74 @@ function Results() {
   );
 }
 
+// make sure you already import useState/useEffect/useRef at the top of App.jsx
+// import React, { useState, useEffect, useRef } from "react";
+
 function Testimonial() {
+  const leftRef = useRef(null);
+  const [leftHeight, setLeftHeight] = useState(0);
+
+  useEffect(() => {
+    if (!leftRef.current) return;
+
+    const el = leftRef.current;
+    // Measure now and whenever the quote changes size
+    const ro = new ResizeObserver(() => {
+      setLeftHeight(el.getBoundingClientRect().height);
+    });
+    ro.observe(el);
+    // Initial measure
+    setLeftHeight(el.getBoundingClientRect().height);
+
+    return () => ro.disconnect();
+  }, []);
+
   return (
     <section id="testimonial" className="py-20 border-t border-black/5 dark:border-white/5">
       <div className="mx-auto max-w-6xl px-6">
-        {/* stretch both columns to the same height on lg+ */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:items-stretch">
-          {/* Left: the quote card */}
-          <div className="lg:col-span-2 h-full">
-            <div className="h-full rounded-3xl border border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/5 p-8 shadow-sm flex flex-col">
-              <Quote className="h-6 w-6 text-fuchsia-600 mb-4" />
-              <p className="text-2xl leading-snug font-medium text-black/90 dark:text-white">
-                “If you want to learn and be inspired, you should look to implement a tool like
-                Nobi. We've seen great results, where conversion rates have been significantly
-                higher than on our binary search. But the biggest reason a brand should implement
-                a tool like this is that you have the opportunity to apply more information
-                towards optimizing broader campaigns and your broader brand and e-comm goals.”
-              </p>
-
-              <div className="mt-6 flex items-center gap-4">
-                <AssetImage
-                  src="/media/avatar-placeholder.png"
-                  alt="Customer avatar"
-                  labelForPlaceholder="Customer avatar"
-                  className="h-10 w-10 rounded-full object-cover bg-black/10 dark:bg-white/10"
-                />
-                <div>
-                  <div className="font-semibold">Lourdes Servin</div>
-                  <div className="text-sm text-black/60 dark:text-white/60">
-                    Senior Dr. Digital & E-Commerce, Lucchese
-                  </div>
+        {/* Do NOT stretch children; align them to the start */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
+          {/* Quote card — natural height, not stretched */}
+          <div
+            ref={leftRef}
+            className="lg:col-span-2 self-start rounded-3xl border border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/5 p-8 shadow-sm"
+          >
+            <Quote className="h-6 w-6 text-fuchsia-600 mb-4" />
+            <p className="text-2xl leading-snug font-medium text-black/90 dark:text-white">
+              “If you want to learn and be inspired, you should look to implement a tool like Nobi.
+              We've seen great results, where conversion rates have been significantly higher than
+              on our binary search. But the biggest reason a brand should implement a tool like this
+              is that you have the opportunity to apply more information towards optimizing broader
+              campaigns and your broader brand and e-comm goals.”
+            </p>
+            <div className="mt-6 flex items-center gap-4">
+              <img
+                src="/media/avatar-placeholder.png"
+                alt="Customer avatar"
+                className="h-10 w-10 rounded-full object-cover bg-black/10 dark:bg-white/10"
+              />
+              <div>
+                <div className="font-semibold">Lourdes Servin</div>
+                <div className="text-sm text-black/60 dark:text-white/60">
+                  Senior Dr. Digital & E-Commerce, Lucchese
                 </div>
               </div>
             </div>
           </div>
 
-          {/* Right: full-bleed image, same height as the quote card */}
-          <div className="lg:col-span-1 h-full">
-            <div className="h-full rounded-3xl border border-black/10 dark:border-white/10 overflow-hidden">
-              <AssetImage
-                src="/media/lucchese-testimonial-image.png"   // <- put your photo here
-                alt="Lifestyle photo"
-                className="w-full h-full object-cover" // full-bleed, no padding
-              />
-            </div>
+          {/* Photo card — height follows the quote, no inner padding, image covers */}
+          <div
+            className="self-start rounded-3xl border border-black/10 dark:border-white/10 overflow-hidden bg-white/70 dark:bg-white/5"
+            style={{
+              // Match the quote's height on desktop; give a safe minimum before we measure
+              height: leftHeight || 320,
+            }}
+          >
+            <img
+              src="/media/testimonial-photo.jpg" // <-- put your photo here
+              alt="Customer lifestyle"
+              className="h-full w-full object-cover"
+            />
           </div>
         </div>
       </div>

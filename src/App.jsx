@@ -599,9 +599,7 @@ function Logos() {
     { src: "/media/logos/lucchese.svg", label: "Lucchese" },
     { src: "/media/logos/faherty.svg", label: "Faherty" },
     { src: "/media/logos/untuckit.svg", label: "UNTUCKit" },
-    { src: "/media/logos/stbernard.svg", label: "St. Bernard" },
     { src: "/media/logos/kilte.svg", label: "Kilte" },
-   { src: "/media/logos/toolup.svg", label: "ToolUp" },
   ];
 
   return (

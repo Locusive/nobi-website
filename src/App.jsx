@@ -572,16 +572,22 @@ function Logos() {
   return (
     <section id="logos" className="py-16 border-t border-black/5 dark:border-white/5">
       <div className="mx-auto max-w-6xl px-6 text-center">
-        <p className="text-sm font-semibold text-fuchsia-600 mb-6">Trusted by modern commerce</p>
-        <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-4 opacity-80">
+        <p className="text-sm font-semibold text-fuchsia-600 mb-6">
+          Trusted by modern commerce
+        </p>
+
+        {/* Bigger logos + better spacing */}
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-x-10 gap-y-8 justify-items-center items-center opacity-90">
           {[1, 2, 3, 4, 5].map((i) => (
-            <AssetImage
-              key={i}
-              src={`/media/logo-placeholder-${i}.png`}
-              alt={`Brand logo ${i}`}
-              labelForPlaceholder={`Brand logo ${i}`}
-              className="h-6 w-auto grayscale opacity-70 hover:opacity-100 transition"
-            />
+            <div key={i} className="h-10 md:h-12 lg:h-14 flex items-center">
+              <AssetImage
+                src={`/media/logo-placeholder-${i}.png`}
+                // If you add retina assets later, uncomment this:
+                // srcSet={`/media/logo-placeholder-${i}.png 1x, /media/logo-placeholder-${i}@2x.png 2x`}
+                alt={`Brand logo ${i}`}
+                className="max-h-full w-auto object-contain grayscale opacity-70 hover:opacity-100 transition"
+              />
+            </div>
           ))}
         </div>
       </div>

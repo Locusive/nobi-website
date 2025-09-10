@@ -570,11 +570,11 @@ function Hero({ onOpenVideo, onOpenForm }) {
 
 function Logos() {
   const brands = [
-    { alt: "Lucchese",  src: "/media/logo-placeholder-2.png",  src2x: "/media/logo-placeholder-2@2x.png" },
-    { alt: "Faherty",   src: "/media/logo-placeholder-1.png",   src2x: "/media/logo-placeholder-1@2x.png" },
-    { alt: "UNTUCKit",  src: "/media/logo-placeholder-3.png",  src2x: "/media/logo-placeholder-3@2x.png" },
-    { alt: "St. Bernard", src: "/media/logo-placeholder-4.png", src2x: "/media/logo-placeholder-4@2x.png" },
-    { alt: "Kilte",     src: "/media/logo-placeholder-5.png",     src2x: "/media/logo-placeholder-5@2x.png" },
+    { alt: "Lucchese",  src: "/media/logos/lucchese.svg" },
+    { alt: "Faherty",   src: "/media/logos/faherty.svg" },
+    { alt: "UNTUCKit",  src: "/media/logos/untuckit.svg" },
+    { alt: "St. Bernard", src: "/media/logos/stbernard.svg" },
+    { alt: "Kilte",     src: "/media/logos/kilte.svg" },
   ];
 
   return (
@@ -584,17 +584,14 @@ function Logos() {
           Trusted by modern commerce
         </p>
 
-        {/* Responsive, even grid; place-items-center avoids weird vertical alignment */}
-        <div className="mt-6 grid grid-cols-2 xs:grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-x-8 gap-y-8 place-items-center">
+        <div className="mt-6 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-x-8 gap-y-8 place-items-center">
           {brands.map((b) => (
             <div key={b.alt} className="w-full flex items-center justify-center">
               <img
                 src={b.src}
-                srcSet={`${b.src} 1x, ${b.src2x || b.src} 2x`}
                 alt={b.alt}
-                /* One consistent line-height across all logos; scales at breakpoints */
-                className="block mx-auto h-[22px] sm:h-[26px] md:h-[30px] lg:h-[34px] w-auto object-contain
-                           grayscale opacity-80 hover:opacity-100 transition"
+                className="block mx-auto h-[22px] sm:h-[26px] md:h-[32px] lg:h-[36px] w-auto object-contain
+                           opacity-80 hover:opacity-100 transition"
                 loading="lazy"
               />
             </div>

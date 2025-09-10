@@ -780,9 +780,9 @@ function Testimonial() {
   <div className="rounded-2xl border border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/5
                   p-6 md:p-8 lg:p-10 min-w-[180px] min-h-[120px] flex items-center justify-center">
     <AssetImage
-      src="/media/logo-placeholder-1.png"
-      srcSet="/media/logo-placeholder-1.png 1x, /media/logo-placeholder-1@2x.png 2x"
-      alt="Lucchese logo"
+      src="/media/lucchese-testimonial-image.png"
+      srcSet="/media/lucchese-testimonial-image.png 1x, /media/lucchese-testimonial-image@2x.png 2x"
+      alt="Lucchese footage"
       className="h-16 md:h-20 w-auto object-contain"
     />
   </div>

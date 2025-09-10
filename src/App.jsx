@@ -71,7 +71,7 @@ function HeroConversationPreview({ mode }) {
   return <HeroConversationDemo mode={mode} key={mode} />;
 }
 
-function HeroConversationDemo({ script }) {
+function HeroConversationDemo({ script, startKey }) {
   const {
     userText = "Looking for a linen shirt for a wedding — breathable, under $150.",
     aiText   = "Got it! Here are dress-appropriate linen options in white, cream and eggshell.",
@@ -82,25 +82,20 @@ function HeroConversationDemo({ script }) {
     ],
   } = script || {};
 
-  const [step, setStep] = React.useState(0); // 0=user, 1=ai, 2=products (stop)
+  const [step, setStep] = React.useState(-1); // -1 idle, 0 user, 1 ai, 2 products
   const scrollerRef = React.useRef(null);
   const productsRef = React.useRef(null);
 
-  // start fresh and reset scroll
+  // (Re)start sequence whenever startKey or script changes
   React.useEffect(() => {
     setStep(0);
-    scrollerRef.current?.scrollTo({ top: 0 });
-  }, []);
+    scrollerRef.current?.scrollTo({ top: 0, behavior: "auto" });
+    const t1 = setTimeout(() => setStep(1), 900);
+    const t2 = setTimeout(() => setStep(2), 2100);
+    return () => { clearTimeout(t1); clearTimeout(t2); };
+  }, [startKey, userText, aiText, products]);
 
-  // advance steps once, then stop (no loop)
-  React.useEffect(() => {
-    const delays = [900, 1100, 1600];
-    if (step >= 2) return;
-    const t = setTimeout(() => setStep((s) => Math.min(2, s + 1)), delays[step]);
-    return () => clearTimeout(t);
-  }, [step]);
-
-  // smooth scroll to products when they appear
+  // Smooth scroll to products
   React.useEffect(() => {
     if (step === 2 && scrollerRef.current && productsRef.current) {
       const id = setTimeout(() => {
@@ -119,24 +114,18 @@ function HeroConversationDemo({ script }) {
     <div className="w-full rounded-2xl border border-black/10 dark:border-white/10 bg-white/60 dark:bg-white/5 overflow-hidden shadow-inner">
       <AspectBox ratio={16 / 9}>
         <div className="absolute inset-0 p-4 sm:p-5 md:p-6 flex flex-col gap-3 sm:gap-4">
-          <div
-            ref={scrollerRef}
-            className="flex-1 overflow-y-auto rounded-xl bg-white/70 dark:bg-white/5 border border-black/10 dark:border-white/10 p-3 sm:p-4"
-          >
+          {/* Inner box REMOVED → more space */}
+          <div ref={scrollerRef} className="flex-1 overflow-y-auto">
             <div className="flex h-full flex-col gap-2.5 sm:gap-3">
               {showUser1 && (
                 <motion.div initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }}>
-                  <ChatBubble from="user">
-                    {userText}
-                  </ChatBubble>
+                  <ChatBubble from="user">{userText}</ChatBubble>
                 </motion.div>
               )}
 
               {showAi1 && (
                 <motion.div initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }}>
-                  <ChatBubble from="ai">
-                    {aiText}
-                  </ChatBubble>
+                  <ChatBubble from="ai">{aiText}</ChatBubble>
                 </motion.div>
               )}
 
@@ -158,6 +147,35 @@ function HeroConversationDemo({ script }) {
       </AspectBox>
     </div>
   );
+}
+
+function makeScript(mode, q = "linen shirt for a wedding") {
+  if (mode === "ai") {
+    return {
+      userText: `Looking for ${q} — breathable, under $150.`,
+      aiText:
+        "Got it! Here are dress-appropriate linen options in white, cream and eggshell.",
+      products: [
+        { title: "Legend Oxford", price: "$168", img: "/media/prod-1.png" },
+        { title: "Coastal Linen", price: "$178", img: "/media/prod-2.png" },
+        { title: "Classic Button-down", price: "$148", img: "/media/prod-3.png" },
+      ],
+    };
+  }
+  // Default mode
+  return {
+    userText: `“${q}”`,
+    aiText: "Showing top results (best match, in stock).",
+    products: [
+      { title: "Washed Linen Shirt", price: "$129", img: "/media/prod-1.png" },
+      { title: "Summer Oxford", price: "$138", img: "/media/prod-2.png" },
+      { title: "Classic Button-down", price: "$148", img: "/media/prod-3.png" },
+    ],
+  };
+}
+
+function ConversationDemo({ mode, playKey }) {
+  return <HeroConversationDemo script={makeScript(mode)} startKey={playKey} />;
 }
 
 function BrandsRow() {
@@ -352,7 +370,7 @@ function Button({ variant = "primary", size = "md", className = "", children, ..
     compact: "h-8 px-3 text-sm",
   };
   const variants = {
-    primary: "bg-black text-white dark:bg:white dark:text:black hover:opacity-90 shadow-sm",
+    primary: "bg-black text-white dark:bg-white dark:text-black hover:opacity-90 shadow-sm",
     ghost:
       "bg-transparent text-black/80 dark:text-white/90 hover:bg-black/5 dark:hover:bg-white/10",
     outline:

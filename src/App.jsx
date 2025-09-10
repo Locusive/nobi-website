@@ -114,7 +114,7 @@ function HeroConversationDemo({ script, startKey }) {
     <div className="w-full rounded-2xl border border-black/10 dark:border-white/10 bg-white/60 dark:bg-white/5 overflow-hidden shadow-inner">
       <AspectBox ratio={16 / 9}>
         <div className="absolute inset-0 p-4 sm:p-5 md:p-6 flex flex-col gap-3 sm:gap-4">
-          {/* Inner box REMOVED → more space */}
+          {/* NOTE: inner rounded box removed for more space */}
           <div ref={scrollerRef} className="flex-1 overflow-y-auto">
             <div className="flex h-full flex-col gap-2.5 sm:gap-3">
               {showUser1 && (
@@ -122,13 +122,11 @@ function HeroConversationDemo({ script, startKey }) {
                   <ChatBubble from="user">{userText}</ChatBubble>
                 </motion.div>
               )}
-
               {showAi1 && (
                 <motion.div initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }}>
                   <ChatBubble from="ai">{aiText}</ChatBubble>
                 </motion.div>
               )}
-
               {showProducts && (
                 <motion.div
                   ref={productsRef}
@@ -147,6 +145,34 @@ function HeroConversationDemo({ script, startKey }) {
       </AspectBox>
     </div>
   );
+}
+
+function buildScript(mode, q = "linen shirt for a wedding") {
+  if (mode === "ai") {
+    return {
+      userText: `Looking for ${q} — breathable, under $150.`,
+      aiText: "Got it! Here are dress-appropriate linen options in white, cream and eggshell.",
+      products: [
+        { title: "Legend Oxford", price: "$168", img: "/media/prod-1.png" },
+        { title: "Coastal Linen", price: "$178", img: "/media/prod-2.png" },
+        { title: "Classic Button-down", price: "$148", img: "/media/prod-3.png" },
+      ],
+    };
+  }
+  // Default mode
+  return {
+    userText: `“${q}”`,
+    aiText: "Showing top results (best match, in stock).",
+    products: [
+      { title: "Washed Linen Shirt", price: "$129", img: "/media/prod-1.png" },
+      { title: "Summer Oxford", price: "$138", img: "/media/prod-2.png" },
+      { title: "Classic Button-down", price: "$148", img: "/media/prod-3.png" },
+    ],
+  };
+}
+
+function ConversationDemo({ mode, playKey }) {
+  return <HeroConversationDemo script={buildScript(mode)} startKey={playKey} />;
 }
 
 function makeScript(mode, q = "linen shirt for a wedding") {

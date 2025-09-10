@@ -650,38 +650,37 @@ function BrandMark({ src, label, className = "" }) {
 }
 
 function Logos() {
-  // Put these SVGs in /public/media (or update the paths)
-  const small = "max-h-6 sm:max-h-7";  // smaller (Lucchese, UNTUCKit)
-  const base  = "max-h-8 sm:max-h-9";  // default (Faherty, Toolup, St. Bernard)
-
-  const brands = [
-    { src: "/media/logos/lucchese.svg", alt: "Lucchese Bootmaker", h: small },
-    { src: "/media/logos/untuckit.svg", alt: "UNTUCKit",           h: small },
-    { src: "/media/logos/faherty.svg",  alt: "Faherty",            h: base  },
-    { src: "/media/logos/toolup.svg",   alt: "Toolup",             h: base  },
-    { src: "/media/logos/stbernard.svg", alt: "St. Bernard",       h: base  },
+  const logos = [
+    { name: "Lucchese",  src: "/media/logos/lucchese.svg" },
+    { name: "UNTUCKit",  src: "/media/logos/untuckit.svg" },
+    { name: "Faherty",   src: "/media/logos/faherty.svg" },
+    { name: "Toolup",    src: "/media/logos/toolup.svg" },
+    { name: "St. Bernard", src: "/media/logos/stbernard.svg" }, // ← ensure this filename & case
   ];
 
   return (
     <section id="logos" className="py-14 border-t border-black/5 dark:border-white/5">
-      <div className="mx-auto max-w-6xl px-6 text-center">
-        <p className="text-sm font-semibold text-fuchsia-600 mb-6">
+      <div className="mx-auto max-w-6xl px-6">
+        <p className="text-center text-sm font-semibold text-fuchsia-600 mb-8">
           Trusted by modern commerce
         </p>
 
-        {/* Even spacing on all breakpoints */}
-        <ul className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-x-10 gap-y-8 place-items-center">
-          {brands.map(({ src, alt, h }) => (
-            <li key={alt} className="opacity-70 hover:opacity-90 transition">
+        {/* 2 cols (xs), 3 cols (sm), 4 cols (md), 5 cols (lg+) */}
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-x-10 gap-y-8 place-items-center">
+          {logos.map((logo) => (
+            <div
+              key={logo.name}
+              className="flex items-center justify-center w-full"
+            >
               <img
-                src={src}
-                alt={alt}
+                src={logo.src}
+                alt={logo.name}
+                className="h-8 sm:h-9 md:h-10 w-auto object-contain grayscale opacity-70 hover:opacity-100 transition"
                 loading="lazy"
-                className={`w-auto ${h} object-contain filter grayscale`}
               />
-            </li>
+            </div>
           ))}
-        </ul>
+        </div>
       </div>
     </section>
   );

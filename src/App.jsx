@@ -874,22 +874,21 @@ function Hero({ onOpenForm, onOpenVideo }) {
               </Button>
             </div>
 
-            {/* Bullets */}
-            <div className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-3 text-sm text-black/60 dark:text-white/60">
-              <span className="inline-flex items-center gap-2">
-                <span className="h-1.5 w-1.5 rounded-full bg-current" />
-                15-minute install
-              </span>
-              <span className="inline-flex items-center gap-2">
-                <span className="h-1.5 w-1.5 rounded-full bg-current" />
-                Shopify & headless
-              </span>
-              <span className="inline-flex items-center gap-2">
-                <span className="h-1.5 w-1.5 rounded-full bg-current" />
-                A/B testing & reporting
-              </span>
-            </div>
-          </div>
+            {/* Feature checkmarks */}
+<div className="mt-4 flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-black/60 dark:text-white/60">
+  <span className="inline-flex items-center gap-2">
+    <CheckCircle2 className="h-4 w-4 text-fuchsia-600 shrink-0" />
+    15-minute install
+  </span>
+  <span className="inline-flex items-center gap-2">
+    <CheckCircle2 className="h-4 w-4 text-fuchsia-600 shrink-0" />
+    Shopify & headless
+  </span>
+  <span className="inline-flex items-center gap-2">
+    <CheckCircle2 className="h-4 w-4 text-fuchsia-600 shrink-0" />
+    A/B testing & reporting
+  </span>
+</div>
 
           {/* RIGHT: search bar above the animation */}
           <div className="order-1 lg:order-2">

@@ -166,14 +166,10 @@ function makeScript(mode, q = "linen shirt for a wedding") {
   };
 }
 
-function ConversationPreview({ mode, playKey }) {
-  return <HeroConversationDemo script={makeScript(mode)} startKey={playKey} />;
+function ConversationPreview({ mode, playKey, query }) {
+  // feed the typed query into the script
+  return <HeroConversationDemo script={makeScript(mode, query)} startKey={playKey} />;
 }
-
-function ConversationPreview({ mode, playKey }) {
-  return <HeroConversationDemo script={makeScript(mode)} startKey={playKey} />;
-}
-
 
 function BrandsRow() {
   const brands = [
@@ -727,12 +723,14 @@ function VideoModal({ open, onClose, youtube, src, poster = "" }) {
 
 
 function Hero({ onOpenForm, onOpenVideo }) {
-  const [searchMode, setSearchMode] = useState("ai");  // "ai" | "site"
-  const [playKey, setPlayKey] = useState(0);          // bump to restart preview
+  const [searchMode, setSearchMode] = useState("ai");   // "ai" | "site"
+  const [playKey, setPlayKey] = useState(0);           // bump to start/restart preview
+  const [lastQuery, setLastQuery] = useState("linen shirt for a wedding"); // default seed
 
-  const kickOffPreview = ({ mode /*, query*/ }) => {
+  const kickOffPreview = ({ mode, query }) => {
     setSearchMode(mode);
-    setPlayKey((k) => k + 1); // triggers HeroConversationDemo via startKey
+    if (query) setLastQuery(query);   // capture what was typed
+    setPlayKey((k) => k + 1);         // <-- triggers the conversation preview
   };
 
   return (
@@ -767,21 +765,23 @@ function Hero({ onOpenForm, onOpenVideo }) {
           </div>
 
           {/* RIGHT column: search bar (types first) + preview that starts afterwards */}
-          <div className="relative">
-            <div className="mb-4 p-4 rounded-2xl border border-fuchsia-200 bg-gradient-to-r from-fuchsia-50 to-pink-50 shadow-md">
-              <DualModeSearchBar
-                mode={searchMode}
-                onModeChange={setSearchMode}
-                defaultMode="ai"
-                size="compact"
-                onDemoSubmit={kickOffPreview} // auto after typing demo
-                onSubmit={kickOffPreview}     // real clicks/Enter
-              />
-            </div>
+         <div className="relative">
+  <div className="mb-4 p-4 rounded-2xl border border-fuchsia-200 bg-gradient-to-r from-fuchsia-50 to-pink-50 shadow-md">
+    <DualModeSearchBar
+      mode={searchMode}
+      onModeChange={setSearchMode}
+      defaultMode="ai"
+      size="compact"
+      onDemoSubmit={kickOffPreview}   // called after the typing demo finishes
+      onSubmit={kickOffPreview}       // called on real click/Enter
+    />
+  </div>
 
-            {/* Conversation preview; restarts when playKey increments */}
-            <ConversationPreview mode={searchMode} playKey={playKey} />
-          </div>
+  {/* Render preview only after first submit (playKey > 0) */}
+  {playKey > 0 && (
+    <ConversationPreview mode={searchMode} playKey={playKey} query={lastQuery} />
+  )}
+</div>
         </div>
       </div>
     </section>

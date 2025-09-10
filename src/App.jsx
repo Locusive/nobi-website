@@ -604,7 +604,7 @@ function Logos() {
     { src: "/media/logos/untuckit.svg", alt: "UNTUCKit",           h: small },
     { src: "/media/logos/faherty.svg",  alt: "Faherty",            h: base  },
     { src: "/media/logos/toolup.svg",   alt: "Toolup",             h: base  },
-    { src: "/media/logos/stbernard.svg", alt: "St. Bernard",        h: base  },
+    { src: "/media/logos/stbernard.svg", alt: "St. Bernard",       h: base  },
   ];
 
   return (

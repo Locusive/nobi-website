@@ -599,7 +599,6 @@ function Logos() {
     { src: "/media/logos/lucchese.svg", label: "Lucchese" },
     { src: "/media/logos/faherty.svg", label: "Faherty" },
     { src: "/media/logos/untuckit.svg", label: "UNTUCKit" },
-       { src: "/media/logos/stbernard.svg", label: "St. Bernard" }, 
    { src: "/media/logos/toolup.svg", label: "Tool Up" }, 
    { src: "/media/logos/kilte.svg", label: "Kilte" },
   ];
@@ -616,7 +615,6 @@ function Logos() {
         { src: "/media/logos/lucchese.svg", alt: "Lucchese" },
         { src: "/media/logos/faherty.svg", alt: "Faherty" },
         { src: "/media/logos/untuckit.svg", alt: "UNTUCKit" },
-        { src: "/media/logos/stbernard.svg", alt: "St. Bernard" },
         { src: "/media/logos/toolup.svg", alt: "Tool Up" },
         { src: "/media/logos/kilte.svg", alt: "Kilte" },
       ].map((logo) => (

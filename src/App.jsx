@@ -1,6 +1,61 @@
 import React, { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 
+// at the top of your file (e.g., App.jsx or the component where logos render)
+import lucchese from "/media/logos/lucchese.svg";
+import untuckit from "/media/logos/untuckit.svg";
+import faherty from "/media/logos/faherty.svg";
+import toolup from "/media/logos/toolup.svg";
+import stbernard from "/media/logos/stbernard.svg";
+
+// …
+
+function BrandsRow() {
+  const brands = [
+    { alt: "Lucchese", src: lucchese },
+    { alt: "UNTUCKit", src: untuckit },
+    { alt: "Faherty", src: faherty },
+    { alt: "TOOLUP", src: toolup },
+    { alt: "St. Bernard", src: stbernard },
+  ];
+
+  return (
+    <section id="logos" className="py-12 border-t border-black/5 dark:border-white/5">
+      <div className="mx-auto max-w-6xl px-6">
+        <p className="text-center text-sm font-semibold text-fuchsia-600 mb-6">
+          Trusted by modern commerce
+        </p>
+
+        {/* Even spacing, consistent height, grayscale */}
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-x-10 gap-y-8 items-center justify-items-center">
+          {brands.map((b) => (
+            <img
+              key={b.alt}
+              src={b.src}
+              alt={b.alt}
+              height={28}
+              className="block h-7 w-auto object-contain select-none grayscale opacity-60 hover:opacity-100"
+              loading="lazy"
+              decoding="async"
+              onError={(e) => {
+                // helpful fallback so a missing asset doesn't disappear silently
+                e.currentTarget.replaceWith(
+                  Object.assign(document.createElement("span"), {
+                    textContent: b.alt,
+                    className:
+                      "text-sm text-black/40 dark:text-white/40 tracking-wide",
+                  })
+                );
+              }}
+            />
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+
  import {
    Sparkles,
    Search as SearchIcon,

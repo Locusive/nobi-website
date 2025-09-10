@@ -581,12 +581,16 @@ function Logos() {
           {[1, 2, 3, 4, 5].map((i) => (
             <div key={i} className="h-12 md:h-14 lg:h-16 flex items-center">
               <AssetImage
-                src={`/media/logo-placeholder-${i}.png`}
-                // If you add retina assets later, uncomment this:
-                // srcSet={`/media/logo-placeholder-${i}.png 1x, /media/logo-placeholder-${i}@2x.png 2x`}
-                alt={`Brand logo ${i}`}
-                className="max-h-full w-auto object-contain grayscale opacity-70 hover:opacity-100 transition"
-              />
+  key={i}
+  src={`/media/logo-placeholder-${i}.png`}
+  srcSet={`/media/logo-placeholder-${i}.png 1x, /media/logo-placeholder-${i}@2x.png 2x`}
+  alt={`Brand logo ${i}`}
+  labelForPlaceholder={`Brand logo ${i}`}
+  className="h-10 sm:h-12 md:h-14 w-auto object-contain"
+  /* optional: width/height hints help layout & crispness */
+  width={160}
+  height={56}
+/>
             </div>
           ))}
         </div>

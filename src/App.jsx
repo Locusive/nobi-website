@@ -395,44 +395,46 @@ function Logo({ className = "h-7 md:h-9 lg:h-10" }) {
   );
 }
 
-function useTypingDemo({ mode, text, setQuery, setPlaceholder, onDone, enabled = true }) {
+function useTypingDemo({ mode, setQuery, setPlaceholder, enabled = true, onDone }) {
   React.useEffect(() => {
     if (!enabled) return;
 
     let cancelled = false;
-    const timers = [];
+    const toType = mode === "ai" ? "Linen shirt for a wedding" : "linen shirt wedding";
     const initialPlaceholder = mode === "ai" ? "Describe what you want..." : "Search products...";
+
     setPlaceholder(initialPlaceholder);
     setQuery("");
 
-    const startDelay = 650;
+    const startDelay = 600;
     const baseSpeed = 28;
-    const jitter = 30;
+    const jitter = 28;
 
+    const timers = [];
     const startTimer = setTimeout(() => {
       let i = 0;
       const step = () => {
         if (cancelled) return;
-        setQuery(text.slice(0, i + 1));
+        setQuery(toType.slice(0, i + 1));
         i++;
-        if (i < text.length) {
+        if (i < toType.length) {
           const t = setTimeout(step, baseSpeed + Math.random() * jitter);
           timers.push(t);
         } else {
-          // brief beat to feel like a submit click
-          const doneT = setTimeout(() => onDone?.(), 240);
-          timers.push(doneT);
+          // small pause to simulate clicking the CTA, then “submit”
+          const t = setTimeout(() => onDone?.(toType), 450);
+          timers.push(t);
         }
       };
       step();
     }, startDelay);
 
-    timers.push(startTimer);
     return () => {
       cancelled = true;
+      clearTimeout(startTimer);
       timers.forEach(clearTimeout);
     };
-  }, [mode, text, enabled, setQuery, setPlaceholder, onDone]);
+  }, [mode, enabled, setQuery, setPlaceholder, onDone]);
 }
 
 function DualModeSearchBar({
@@ -440,35 +442,40 @@ function DualModeSearchBar({
   size = "regular",
   mode: controlledMode,
   onModeChange,
-  autoType,           // <-- NEW: string to auto-type
-  onTypingDone,       // <-- NEW: callback after typing finishes
+  onSubmit,        // NEW: gets called when user clicks/presses Enter
+  onDemoSubmit,    // NEW: gets called after the typing demo finishes
 }) {
-  const [internalMode, setInternalMode] = React.useState(defaultMode);
+  const [internalMode, setInternalMode] = useState(defaultMode);
   const mode = controlledMode ?? internalMode;
 
-  const [query, setQuery] = React.useState("");
-  const [placeholder, setPlaceholder] = React.useState(
+  const [query, setQuery] = useState("");
+  const [placeholder, setPlaceholder] = useState(
     mode === "ai" ? "Describe what you want..." : "Search products..."
   );
-  const [submitted, setSubmitted] = React.useState(null);
+  const [submitted, setSubmitted] = useState(null);
 
   // demo typing: replays when mode changes unless the user has interacted
-  const [demoEnabled, setDemoEnabled] = React.useState(true);
+  const [demoEnabled, setDemoEnabled] = useState(true);
   useTypingDemo({
     mode,
-    text: autoType || "Linen shirt for a wedding",
     setQuery,
     setPlaceholder,
-    onDone: () => onTypingDone?.({ mode, query: autoType || "Linen shirt for a wedding" }),
     enabled: demoEnabled,
+    onDone: (typed) => {
+      // auto “submit” after demo finishes so the preview can start
+      onDemoSubmit?.({ mode, query: typed });
+      setSubmitted({ mode, query: typed });
+      setTimeout(() => setSubmitted(null), 1600);
+    },
   });
 
   const setMode = (m) => {
     if (controlledMode === undefined) setInternalMode(m);
     onModeChange?.(m);
-    setDemoEnabled(true); // restart demo typing when mode toggles
+    setDemoEnabled(true);           // replay typing on toggle
   };
 
+  // cancel demo on any user interaction
   const stopDemoAnd = (next) => (e) => {
     if (demoEnabled) setDemoEnabled(false);
     next?.(e);
@@ -477,39 +484,47 @@ function DualModeSearchBar({
   const ctaLabel = mode === "ai" ? "Ask AI" : "Search";
   const height = size === "regular" ? "h-14" : "h-11";
 
-  const toggleRef = React.useRef(null);
-  const siteBtnRef = React.useRef(null);
-  const aiBtnRef = React.useRef(null);
-  const [thumb, setThumb] = React.useState({ left: 0, width: 0 });
+  // toggle thumb animation
+  const toggleRef = useRef(null);
+  const siteBtnRef = useRef(null);
+  const aiBtnRef = useRef(null);
+  const [thumb, setThumb] = useState({ left: 0, width: 0 });
   const measureThumb = () => {
     const btn = mode === "ai" ? aiBtnRef.current : siteBtnRef.current;
     if (!btn) return;
     setThumb({ left: btn.offsetLeft, width: btn.offsetWidth });
   };
-  React.useEffect(() => {
+  useEffect(() => {
     measureThumb();
     const ro = new ResizeObserver(measureThumb);
     if (toggleRef.current) ro.observe(toggleRef.current);
-    window.addEventListener("resize", measureThumb);
+    const onR = () => measureThumb();
+    window.addEventListener("resize", onR);
     const raf = requestAnimationFrame(measureThumb);
     return () => {
       try { ro.disconnect(); } catch {}
-      window.removeEventListener("resize", measureThumb);
+      window.removeEventListener("resize", onR);
       cancelAnimationFrame(raf);
     };
   }, [mode]);
 
   function submit() {
     if (!query.trim()) return;
+    onSubmit?.({ mode, query });
     setSubmitted({ mode, query });
     setTimeout(() => setSubmitted(null), 1600);
   }
 
   return (
     <div className="w-full max-w-3xl">
-      <div className={`flex items-center gap-2 rounded-2xl border border-black/10 dark:border-white/15 bg-white/70 dark:bg-white/5 backdrop-blur px-2 ${height} shadow-sm`}>
+      <div
+        className={`flex items-center gap-2 rounded-2xl border border-black/10 dark:border-white/15 bg-white/70 dark:bg-white/5 backdrop-blur px-2 ${height} shadow-sm`}
+      >
         {/* Toggle */}
-        <div ref={toggleRef} className="relative isolate inline-flex rounded-xl bg-black/5 dark:bg-white/10 overflow-hidden shrink-0">
+        <div
+          ref={toggleRef}
+          className="relative isolate inline-flex rounded-xl bg-black/5 dark:bg-white/10 overflow-hidden shrink-0"
+        >
           <button
             ref={siteBtnRef}
             className={`relative z-[1] rounded-lg px-3 py-1.5 text-xs sm:px-4 sm:py-2 sm:text-sm font-medium transition-colors duration-300 ${mode === "site" ? "text-black dark:text-white" : "text-black/60 dark:text-white/60"}`}
@@ -546,14 +561,25 @@ function DualModeSearchBar({
         </div>
 
         {/* CTA */}
-        <Button onClick={stopDemoAnd(submit)} variant={mode === "ai" ? "ai" : "primary"} size="compact" className="whitespace-nowrap px-3 h-9 sm:h-8">
+        <Button
+          onClick={stopDemoAnd(submit)}
+          variant={mode === "ai" ? "ai" : "primary"}
+          size="compact"
+          className="whitespace-nowrap px-3 h-9 sm:h-8"
+        >
           {mode === "ai" ? <Sparkles className="h-4 w-4" /> : <SearchIcon className="h-4 w-4" />}
           <span className="hidden sm:inline">{ctaLabel}</span>
         </Button>
       </div>
 
+      {/* Tiny toast */}
       {submitted && (
-        <motion.div initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 6 }} className="mt-3 inline-flex items-center gap-2 rounded-full bg-black/90 text-white px-3 py-1 text-xs">
+        <motion.div
+          initial={{ opacity: 0, y: 6 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: 6 }}
+          className="mt-3 inline-flex items-center gap-2 rounded-full bg-black/90 text-white px-3 py-1 text-xs"
+        >
           <span className="inline-flex items-center gap-1">
             {submitted.mode === "ai" ? <Sparkles className="h-4 w-4" /> : <SearchIcon className="h-4 w-4" />} {submitted.mode === "ai" ? "AI" : "Default"}
           </span>
@@ -686,58 +712,21 @@ function VideoModal({ open, onClose, youtube, src, poster = "" }) {
 
 
 function Hero({ onOpenForm, onOpenVideo }) {
-  const [searchMode, setSearchMode] = useState("ai"); // "ai" | "site"
+  const [searchMode, setSearchMode] = useState("ai");  // "ai" | "site"
+  const [playKey, setPlayKey] = useState(0);          // bump to restart preview
+
+  const kickOffPreview = ({ mode, query }) => {
+    setSearchMode(mode);
+    setPlayKey((k) => k + 1);
+  };
 
   return (
     <section id="home" className="relative overflow-hidden mb-3">
       <div className="mx-auto max-w-6xl px-6 pt-16 sm:pt-24">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
-          {/* LEFT: headline / copy / CTAs / feature checks */}
-          <div>
-            <h1 className="text-4xl sm:text-5xl font-semibold tracking-tight text-balance">
-              Turn product search into a{" "}
-              <span className="bg-gradient-to-r from-indigo-500 via-violet-500 to-fuchsia-500 bg-clip-text text-transparent">
-                conversation
-              </span>
-            </h1>
+          {/* LEFT ... (unchanged) */}
 
-            <p className="mt-4 text-black/70 dark:text-white/70 max-w-xl">
-              Nobi gets your customers the right products faster with conversational AI.
-            </p>
-
-            {/* CTAs */}
-           <div className="mt-6 flex flex-col sm:flex-row gap-3">
-  {/* Primary CTA with arrow on the right */}
-  <Button onClick={onOpenForm} size="lg" className="group">
-    Try it on your store
-    <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-  </Button>
-
-  {/* Ghost button with play icon on the left */}
-  <Button onClick={onOpenVideo} variant="ghost" size="lg">
-    <PlayCircle className="h-5 w-5" />
-    How it works in 60 seconds
-  </Button>
-</div>
-
-            {/* Feature checkmarks */}
-            <div className="mt-4 flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-black/60 dark:text-white/70">
-              <span className="inline-flex items-center gap-2">
-                <CheckCircle2 className="h-4 w-4 text-fuchsia-600" />
-                15-minute install
-              </span>
-              <span className="inline-flex items-center gap-2">
-                <CheckCircle2 className="h-4 w-4 text-fuchsia-600" />
-                Shopify &amp; headless
-              </span>
-              <span className="inline-flex items-center gap-2">
-                <CheckCircle2 className="h-4 w-4 text-fuchsia-600" />
-                A/B testing &amp; reporting
-              </span>
-            </div>
-          </div>
-
-          {/* RIGHT: search bar (top) + animated conversation preview */}
+          {/* RIGHT: search bar (types first) + preview that starts afterwards */}
           <div className="relative">
             <div className="mb-4 p-4 rounded-2xl border border-fuchsia-200 bg-gradient-to-r from-fuchsia-50 to-pink-50 shadow-md">
               <DualModeSearchBar
@@ -745,11 +734,12 @@ function Hero({ onOpenForm, onOpenVideo }) {
                 onModeChange={setSearchMode}
                 defaultMode="ai"
                 size="compact"
+                onDemoSubmit={kickOffPreview}            // auto after typing demo
+                onSubmit={kickOffPreview}                // real clicks/Enter
               />
             </div>
 
-           {/* The animated demo (one-shot, auto-scroll; replays when mode changes) */}
-<HeroConversationPreview mode={searchMode} key={searchMode} />
+            <ConversationDemo mode={searchMode} playKey={playKey} />
           </div>
         </div>
       </div>

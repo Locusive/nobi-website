@@ -843,73 +843,71 @@ function VideoModal({ open, onClose, youtube, src, poster = "" }) {
 
 
 function Hero({ onOpenForm, onOpenVideo }) {
-  const [searchMode, setSearchMode] = React.useState("ai"); // "ai" | "site"
+  const [searchMode, setSearchMode] = useState("ai"); // "ai" | "site"
 
   return (
     <section id="home" className="relative overflow-hidden mb-3">
       <div className="mx-auto max-w-6xl px-6 pt-16 sm:pt-24">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
-          {/* LEFT: headline, copy, CTAs, bullets */}
-          <div className="order-2 lg:order-1">
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-semibold leading-tight tracking-tight text-balance">
+          {/* LEFT: headline / copy / CTAs / feature checks */}
+          <div>
+            <h1 className="text-4xl sm:text-5xl font-semibold tracking-tight text-balance">
               Turn product search into a{" "}
               <span className="bg-gradient-to-r from-indigo-500 via-violet-500 to-fuchsia-500 bg-clip-text text-transparent">
                 conversation
               </span>
             </h1>
 
-            <p className="mt-4 text-lg text-black/70 dark:text-white/70 max-w-xl">
-              Nobi gets your customers the right products faster with
-              conversational AI.
+            <p className="mt-4 text-black/70 dark:text-white/70 max-w-xl">
+              Nobi gets your customers the right products faster with conversational AI.
             </p>
 
             {/* CTAs */}
-            <div className="mt-6 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
-              <Button onClick={onOpenForm} className="w-full sm:w-auto">
+            <div className="mt-6 flex flex-col sm:flex-row gap-3">
+              <Button onClick={onOpenForm} size="lg">
                 Try it on your store
               </Button>
-
-              <Button variant="ghost" onClick={onOpenVideo} className="w-full sm:w-auto">
+              <Button onClick={onOpenVideo} variant="ghost" size="lg">
                 How it works in 60 seconds
               </Button>
-            </section>
+            </div>
 
             {/* Feature checkmarks */}
-<div className="mt-4 flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-black/60 dark:text-white/60">
-  <span className="inline-flex items-center gap-2">
-    <CheckCircle2 className="h-4 w-4 text-fuchsia-600 shrink-0" />
-    15-minute install
-  </span>
-  <span className="inline-flex items-center gap-2">
-    <CheckCircle2 className="h-4 w-4 text-fuchsia-600 shrink-0" />
-    Shopify & headless
-  </span>
-  <span className="inline-flex items-center gap-2">
-    <CheckCircle2 className="h-4 w-4 text-fuchsia-600 shrink-0" />
-    A/B testing & reporting
-  </span>
-</div>
+            <div className="mt-4 flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-black/60 dark:text-white/70">
+              <span className="inline-flex items-center gap-2">
+                <CheckCircle2 className="h-4 w-4 text-fuchsia-600" />
+                15-minute install
+              </span>
+              <span className="inline-flex items-center gap-2">
+                <CheckCircle2 className="h-4 w-4 text-fuchsia-600" />
+                Shopify &amp; headless
+              </span>
+              <span className="inline-flex items-center gap-2">
+                <CheckCircle2 className="h-4 w-4 text-fuchsia-600" />
+                A/B testing &amp; reporting
+              </span>
+            </div>
+          </div>
 
-          {/* RIGHT: search bar above the animation */}
-          <div className="order-1 lg:order-2">
-            <div className="mb-4 p-3 sm:p-4 rounded-2xl border border-fuchsia-200 bg-gradient-to-r from-fuchsia-50 to-pink-50 shadow-sm">
+          {/* RIGHT: search bar (top) + animated conversation preview */}
+          <div className="relative">
+            <div className="mb-4 p-4 rounded-2xl border border-fuchsia-200 bg-gradient-to-r from-fuchsia-50 to-pink-50 shadow-md">
               <DualModeSearchBar
                 mode={searchMode}
                 onModeChange={setSearchMode}
                 defaultMode="ai"
-                size="regular"
+                size="compact"
               />
             </div>
 
-            {/* Use your existing animation demo */}
-            <ConversationDemo mode={searchMode} />
+            {/* The animated demo */}
+            <ConversationDemo />
           </div>
         </div>
       </div>
     </section>
   );
 }
-
 
 function BrandMark({ src, label, className = "" }) {
   // Renders the SVG as a mask so the shape fills the box exactly

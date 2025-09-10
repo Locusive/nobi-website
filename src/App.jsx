@@ -597,8 +597,8 @@ function BrandMark({ src, label, className = "" }) {
 function Logos() {
   const brands = [
     { src: "/media/logos/lucchese.svg", label: "Lucchese" },
-    { src: "/media/logos/faherty.svg", label: "Faherty" },
     { src: "/media/logos/untuckit.svg", label: "UNTUCKit" },
+   { src: "/media/logos/faherty.svg", label: "Faherty" },
    { src: "/media/logos/toolup.svg", label: "Tool Up" }, 
    { src: "/media/logos/stbernard.svg", label: "St. Bernard" },
   ];
@@ -613,8 +613,8 @@ function Logos() {
     <div className="grid grid-cols-2 sm:grid-cols-5 items-center justify-items-center gap-x-10 gap-y-6">
       {[
         { src: "/media/logos/lucchese.svg", alt: "Lucchese" },
-        { src: "/media/logos/faherty.svg", alt: "Faherty" },
         { src: "/media/logos/untuckit.svg", alt: "UNTUCKit" },
+             { src: "/media/logos/faherty.svg", alt: "Faherty" },
         { src: "/media/logos/toolup.svg", alt: "Tool Up" },
         { src: "/media/logos/stbernard.svg", alt: "St. Bernard" },
       ].map((logo) => (

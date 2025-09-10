@@ -569,23 +569,33 @@ function Hero({ onOpenVideo, onOpenForm }) {
 }
 
 function Logos() {
+  const brands = [
+    { alt: "Lucchese",  src: "/media/lucchese-logo.png",  src2x: "/media/lucchese-logo@2x.png" },
+    { alt: "Faherty",   src: "/media/faherty-logo.png",   src2x: "/media/faherty-logo@2x.png" },
+    { alt: "UNTUCKit",  src: "/media/untuckit-logo.png",  src2x: "/media/untuckit-logo@2x.png" },
+    { alt: "St. Bernard", src: "/media/stbernard-logo.png", src2x: "/media/stbernard-logo@2x.png" },
+    { alt: "Kilte",     src: "/media/kilte-logo.png",     src2x: "/media/kilte-logo@2x.png" },
+  ];
+
   return (
-    <section id="logos" className="py-16 border-t border-black/5 dark:border-white/5">
-      <div className="mx-auto max-w-6xl px-6 text-center">
-        <p className="text-sm font-semibold text-fuchsia-600 mb-6">
+    <section id="logos" className="py-14 border-t border-black/5 dark:border-white/5">
+      <div className="mx-auto max-w-6xl px-6">
+        <p className="text-center text-sm font-semibold text-fuchsia-600">
           Trusted by modern commerce
         </p>
 
-        {/* Bigger logos + better spacing */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-x-10 gap-y-8 justify-items-center items-center opacity-90">
-          {[1, 2, 3, 4, 5].map((i) => (
-            <div key={i} className="h-10 md:h-12 lg:h-14 flex items-center">
-              <AssetImage
-                src={`/media/logo-placeholder-${i}.png`}
-                // If you add retina assets later, uncomment this:
-                // srcSet={`/media/logo-placeholder-${i}.png 1x, /media/logo-placeholder-${i}@2x.png 2x`}
-                alt={`Brand logo ${i}`}
-                className="max-h-full w-auto object-contain grayscale opacity-70 hover:opacity-100 transition"
+        {/* Responsive, even grid; place-items-center avoids weird vertical alignment */}
+        <div className="mt-6 grid grid-cols-2 xs:grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-x-8 gap-y-8 place-items-center">
+          {brands.map((b) => (
+            <div key={b.alt} className="w-full flex items-center justify-center">
+              <img
+                src={b.src}
+                srcSet={`${b.src} 1x, ${b.src2x || b.src} 2x`}
+                alt={b.alt}
+                /* One consistent line-height across all logos; scales at breakpoints */
+                className="block mx-auto h-[22px] sm:h-[26px] md:h-[30px] lg:h-[34px] w-auto object-contain
+                           grayscale opacity-80 hover:opacity-100 transition"
+                loading="lazy"
               />
             </div>
           ))}

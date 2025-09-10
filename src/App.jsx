@@ -594,18 +594,17 @@ function BrandMark({ src, label, className = "" }) {
   );
 }
 
-// ⬇️ Replace your existing function Logos() with this
 function Logos() {
   // Put these SVGs in /public/media (or update the paths)
   const small = "max-h-6 sm:max-h-7";  // smaller (Lucchese, UNTUCKit)
   const base  = "max-h-8 sm:max-h-9";  // default (Faherty, Toolup, St. Bernard)
 
   const brands = [
-    { src: "/media/lucchese.svg", alt: "Lucchese Bootmaker", h: small },
-    { src: "/media/untuckit.svg", alt: "UNTUCKit",           h: small },
-    { src: "/media/faherty.svg",  alt: "Faherty",            h: base  },
-    { src: "/media/toolup.svg",   alt: "Toolup",             h: base  },
-    { src: "/media/stbernard.svg",alt: "St. Bernard",        h: base  },
+    { src: "/media/logos/lucchese.svg", alt: "Lucchese Bootmaker", h: small },
+    { src: "/media/logos/untuckit.svg", alt: "UNTUCKit",           h: small },
+    { src: "/media/logos/faherty.svg",  alt: "Faherty",            h: base  },
+    { src: "/media/logos/toolup.svg",   alt: "Toolup",             h: base  },
+    { src: "/media/logos/stbernard.svg",alt: "St. Bernard",        h: base  },
   ];
 
   return (

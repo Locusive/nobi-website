@@ -583,19 +583,40 @@ function BrandLogo({ src, alt }) {
 }
 
 function Logos() {
+  const logos = [
+    { src: "/media/logos/lucchese.svg", alt: "Lucchese" },
+    { src: "/media/logos/faherty.svg", alt: "Faherty" },
+    { src: "/media/logos/untuckit.svg", alt: "UNTUCKit" },
+    { src: "/media/logos/stbernard.svg", alt: "St. Bernard" },
+   { src: "/media/logos/kilte.svg", alt: "Kilte Collection" }, 
+   // add more here if you want
+  ];
+
   return (
     <section id="logos" className="py-16 border-t border-black/5 dark:border-white/5">
-      <div className="mx-auto max-w-6xl px-6 text-center">
-        <p className="text-sm font-semibold text-fuchsia-600 mb-6">
+      {/* slightly wider than the rest of the page so the row breathes */}
+      <div className="mx-auto max-w-7xl px-6">
+        <p className="text-sm font-semibold text-fuchsia-600 text-center">
           Trusted by modern commerce
         </p>
 
-        {/* Equal-width columns so spacing is perfectly even */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 items-center gap-x-10 sm:gap-x-12 lg:gap-x-16 gap-y-8">
-          <BrandLogo src="/media/logos/lucchese.svg"  alt="Lucchese" />
-          <BrandLogo src="/media/logos/faherty.svg"   alt="Faherty" />
-          <BrandLogo src="/media/logos/untuckit.svg"  alt="UNTUCKit" />
-          <BrandLogo src="/media/logos/stbernard.svg" alt="St. Bernard" />
+        {/* Flex distributes space evenly regardless of count */}
+        <div className="mt-8 flex flex-wrap md:flex-nowrap items-center md:justify-between justify-center gap-x-10 gap-y-10">
+          {logos.map((l) => (
+            <div
+              key={l.alt}
+              className="flex-1 basis-0 min-w-[140px] flex items-center justify-center"
+            >
+              <img
+                src={l.src}
+                alt={l.alt}
+                className="h-10 md:h-12 lg:h-14 w-auto object-contain
+                           filter grayscale opacity-60 transition
+                           hover:opacity-90 hover:grayscale-0"
+              />
+              {/* If you ever inline real <svg>, give it the same classes: h-10 md:h-12 lg:h-14 w-auto */}
+            </div>
+          ))}
         </div>
       </div>
     </section>

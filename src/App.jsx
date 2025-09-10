@@ -601,6 +601,7 @@ function Logos() {
     { src: "/media/logos/untuckit.svg", label: "UNTUCKit" },
     { src: "/media/logos/stbernard.svg", label: "St. Bernard" },
     { src: "/media/logos/kilte.svg", label: "Kilte" },
+   { src: "/media/logos/toolup.svg", label: "ToolUp" },
   ];
 
   return (

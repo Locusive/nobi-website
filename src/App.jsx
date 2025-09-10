@@ -94,7 +94,7 @@ function ConversationDemo() {
               {showUser1 && (
                 <motion.div initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }}>
                   <ChatBubble from="user">
-                    Looking for <b>leggings for my wife</b> — she’s 5'4", likes pockets, under $90.
+                    Looking for <b>leggings for my wife</b> — she’s 5'4" and likes hot yoga. Something with pockets under $90.
                   </ChatBubble>
                 </motion.div>
               )}

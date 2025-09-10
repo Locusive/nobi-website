@@ -102,7 +102,7 @@ function ConversationDemo() {
               {showAi1 && (
                 <motion.div initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }}>
                   <ChatBubble from="ai">
-                    Got it! Here are a few options with pockets that fit your budget and are <b>in her size</b>.
+                    Got it! Here are a few options with pockets that fit your budget and are in her size <b>(S)</b>.
                   </ChatBubble>
                 </motion.div>
               )}

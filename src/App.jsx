@@ -674,7 +674,7 @@ function Features() {
           One seamless experience, anywhere in your store.
         </h2>
         <p className="mt-3 text-black/70 dark:text-white/70 max-w-3xl">
-          Test conversational AI on your PLPs, search, PDP and anywhere else you think is right for your brand.
+          Test conversational AI on your PLPs, search, PDPs and anywhere else you think is right for your brand.
         </p>
 
         <div className="mt-8 grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">

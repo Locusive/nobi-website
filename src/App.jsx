@@ -89,7 +89,7 @@ function ConversationDemo() {
       <AspectBox ratio={16 / 7}>
         <div className="absolute inset-0 p-3 sm:p-4 md:p-5 flex flex-col gap-3">
           {/* conversation area */}
-          <div className="flex-1>
+          <div className="flex-1">
             <div className="flex h-full flex-col gap-2.5 sm:gap-3">
               {showUser1 && (
                 <motion.div initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }}>

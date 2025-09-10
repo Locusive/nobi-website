@@ -863,14 +863,19 @@ function Hero({ onOpenForm, onOpenVideo }) {
             </p>
 
             {/* CTAs */}
-            <div className="mt-6 flex flex-col sm:flex-row gap-3">
-              <Button onClick={onOpenForm} size="lg">
-                Try it on your store
-              </Button>
-              <Button onClick={onOpenVideo} variant="ghost" size="lg">
-                How it works in 60 seconds
-              </Button>
-            </div>
+           <div className="mt-6 flex flex-col sm:flex-row gap-3">
+  {/* Primary CTA with arrow on the right */}
+  <Button onClick={onOpenForm} size="lg" className="group">
+    Try it on your store
+    <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+  </Button>
+
+  {/* Ghost button with play icon on the left */}
+  <Button onClick={onOpenVideo} variant="ghost" size="lg">
+    <PlayCircle className="h-5 w-5" />
+    How it works in 60 seconds
+  </Button>
+</div>
 
             {/* Feature checkmarks */}
             <div className="mt-4 flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-black/60 dark:text-white/70">

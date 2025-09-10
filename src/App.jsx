@@ -65,12 +65,6 @@ function HeroProductCard({ title = "Oxford Shirt", price = "$168", img }) {
   );
 }
 
-// --- One-shot hero conversation preview (renamed to avoid clashes) ---
-function HeroConversationPreview({ mode }) {
-  // Remount on mode change so the animation restarts (no loop after finish)
-  return <HeroConversationDemo mode={mode} key={mode} />;
-}
-
 function HeroConversationDemo({ script, startKey }) {
   const {
     userText = "Looking for a linen shirt for a wedding — breathable, under $150.",
@@ -147,32 +141,6 @@ function HeroConversationDemo({ script, startKey }) {
   );
 }
 
-function buildScript(mode, q = "linen shirt for a wedding") {
-  if (mode === "ai") {
-    return {
-      userText: `Looking for ${q} — breathable, under $150.`,
-      aiText: "Got it! Here are dress-appropriate linen options in white, cream and eggshell.",
-      products: [
-        { title: "Legend Oxford", price: "$168", img: "/media/prod-1.png" },
-        { title: "Coastal Linen", price: "$178", img: "/media/prod-2.png" },
-        { title: "Classic Button-down", price: "$148", img: "/media/prod-3.png" },
-      ],
-    };
-  }
-  // Default mode
-  return {
-    userText: `“${q}”`,
-    aiText: "Showing top results (best match, in stock).",
-    products: [
-      { title: "Washed Linen Shirt", price: "$129", img: "/media/prod-1.png" },
-      { title: "Summer Oxford", price: "$138", img: "/media/prod-2.png" },
-      { title: "Classic Button-down", price: "$148", img: "/media/prod-3.png" },
-    ],
-  };
-}
-
-
-
 function makeScript(mode, q = "linen shirt for a wedding") {
   if (mode === "ai") {
     return {
@@ -198,6 +166,9 @@ function makeScript(mode, q = "linen shirt for a wedding") {
   };
 }
 
+function ConversationPreview({ mode, playKey }) {
+  return <HeroConversationDemo script={makeScript(mode)} startKey={playKey} />;
+}
 
 
 function BrandsRow() {
@@ -755,18 +726,19 @@ function Hero({ onOpenForm, onOpenVideo }) {
   const [searchMode, setSearchMode] = useState("ai");  // "ai" | "site"
   const [playKey, setPlayKey] = useState(0);          // bump to restart preview
 
-  const kickOffPreview = ({ mode, query }) => {
+  const kickOffPreview = ({ mode /*, query*/ }) => {
+    // query is available if you want to display it somewhere
     setSearchMode(mode);
-    setPlayKey((k) => k + 1);
+    setPlayKey((k) => k + 1); // triggers HeroConversationDemo via startKey
   };
 
   return (
     <section id="home" className="relative overflow-hidden mb-3">
       <div className="mx-auto max-w-6xl px-6 pt-16 sm:pt-24">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
-          {/* LEFT ... (unchanged) */}
+          {/* LEFT column could hold your headline/CTA/etc. */}
 
-          {/* RIGHT: search bar (types first) + preview that starts afterwards */}
+          {/* RIGHT: search bar (types first) + conversation preview starts afterwards */}
           <div className="relative">
             <div className="mb-4 p-4 rounded-2xl border border-fuchsia-200 bg-gradient-to-r from-fuchsia-50 to-pink-50 shadow-md">
               <DualModeSearchBar
@@ -774,10 +746,14 @@ function Hero({ onOpenForm, onOpenVideo }) {
                 onModeChange={setSearchMode}
                 defaultMode="ai"
                 size="compact"
-                onDemoSubmit={kickOffPreview}            // auto after typing demo
-                onSubmit={kickOffPreview}                // real clicks/Enter
+                onDemoSubmit={kickOffPreview} // auto after typing demo
+                onSubmit={kickOffPreview}     // real clicks/Enter
               />
-           
+            </div>
+
+            {/* Conversation preview; restarts when playKey increments */}
+            <ConversationPreview mode={searchMode} playKey={playKey} />
+          </div>
         </div>
       </div>
     </section>

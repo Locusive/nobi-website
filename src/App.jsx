@@ -872,7 +872,7 @@ function Hero({ onOpenForm, onOpenVideo }) {
               <Button variant="ghost" onClick={onOpenVideo} className="w-full sm:w-auto">
                 How it works in 60 seconds
               </Button>
-            </div>
+            </section>
 
             {/* Feature checkmarks */}
 <div className="mt-4 flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-black/60 dark:text-white/60">

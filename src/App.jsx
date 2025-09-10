@@ -650,33 +650,37 @@ function BrandMark({ src, label, className = "" }) {
 }
 
 function Logos() {
-  const logos = [
-    { name: "Lucchese",  src: "/media/logos/lucchese.svg" },
-    { name: "UNTUCKit",  src: "/media/logos/untuckit.svg" },
-    { name: "Faherty",   src: "/media/logos/faherty.svg" },
-    { name: "Toolup",    src: "/media/logos/toolup.svg" },
-    { name: "St. Bernard", src: "/media/logos/stbernard.svg" }, // ← ensure this filename & case
+  // Give Lucchese and UNTUCKit a smaller max-width so they don’t dominate
+  const brands = [
+    { src: "/media/logos/lucchese.svg", alt: "Lucchese", widthHint: "max-w-[140px] md:max-w-[160px]" },
+    { src: "/media/logos/untuckit.svg", alt: "UNTUCKit", widthHint: "max-w-[140px] md:max-w-[160px]" },
+    { src: "/media/logos/faherty.svg", alt: "Faherty", widthHint: "max-w-[180px]" },
+    { src: "/media/logos/toolup.svg", alt: "TOOLUP", widthHint: "max-w-[180px]" },
+    { src: "/media/logos/stbernard.svg", alt: "St. Bernard", widthHint: "max-w-[180px]" },
   ];
 
   return (
-    <section id="logos" className="py-14 border-t border-black/5 dark:border-white/5">
+    <section id="logos" className="py-16 border-t border-black/5 dark:border-white/5">
       <div className="mx-auto max-w-6xl px-6">
-        <p className="text-center text-sm font-semibold text-fuchsia-600 mb-8">
+        <p className="text-sm font-semibold text-fuchsia-600 mb-6 text-center">
           Trusted by modern commerce
         </p>
 
-        {/* 2 cols (xs), 3 cols (sm), 4 cols (md), 5 cols (lg+) */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-x-10 gap-y-8 place-items-center">
-          {logos.map((logo) => (
-            <div
-              key={logo.name}
-              className="flex items-center justify-center w-full"
-            >
+        {/* Even spacing, consistent height; grayscale until hover */}
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-x-10 gap-y-8 items-center justify-items-center">
+          {brands.map((b) => (
+            <div key={b.alt} className="flex items-center justify-center w-full">
               <img
-                src={logo.src}
-                alt={logo.name}
-                className="h-8 sm:h-9 md:h-10 w-auto object-contain grayscale opacity-70 hover:opacity-100 transition"
-                loading="lazy"
+                src={b.src}
+                alt={b.alt}
+                className={[
+                  // same visual height for all, grayscale + nice smoothing
+                  "h-7 sm:h-8 md:h-9 w-auto object-contain grayscale opacity-70 hover:opacity-100 transition",
+                  // brand-specific width hint to make wide logos look balanced
+                  b.widthHint,
+                ].join(" ")}
+                // helps crisp rendering of thin strokes on some devices
+                style={{ imageRendering: "auto" }}
               />
             </div>
           ))}

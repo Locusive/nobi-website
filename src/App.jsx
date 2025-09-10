@@ -82,12 +82,11 @@ function ConversationDemo() {
   const showAi1 = step >= 1;
   const showProducts = step >= 2;
   const showAi2 = step >= 3;
-  const showPrompt = step >= 4;
 
   return (
     <div className="w-full rounded-2xl border border-black/10 dark:border-white/10 bg-white/60 dark:bg-white/5 overflow-hidden shadow-inner">
-      {/* Keep the same aspect as your video so layout doesn't shift */}
-      <AspectBox ratio={16 / 9}>
+      {/* Make it a bit shorter so it aligns with the left column better */}
+      <AspectBox ratio={16 / 7}>
         <div className="absolute inset-0 p-4 sm:p-5 md:p-6 flex flex-col gap-3 sm:gap-4">
           {/* conversation area */}
           <div className="flex-1 overflow-hidden rounded-xl bg-white/70 dark:bg-white/5 border border-black/10 dark:border-white/10 p-3 sm:p-4">
@@ -125,12 +124,8 @@ function ConversationDemo() {
                   <ChatBubble from="ai">
                     Prefer <b>cotton</b> or <b>performance</b> fabric?
                     <span className="ml-2 inline-flex gap-2">
-                      <span className="px-2 py-1 text-xs rounded-md bg-black/5 dark:bg-white/10">
-                        Cotton
-                      </span>
-                      <span className="px-2 py-1 text-xs rounded-md bg-black/5 dark:bg-white/10">
-                        Performance
-                      </span>
+                      <span className="px-2 py-1 text-xs rounded-md bg-black/5 dark:bg-white/10">Cotton</span>
+                      <span className="px-2 py-1 text-xs rounded-md bg-black/5 dark:bg-white/10">Performance</span>
                     </span>
                   </ChatBubble>
                 </motion.div>
@@ -138,13 +133,7 @@ function ConversationDemo() {
             </div>
           </div>
 
-          {/* “typing” in the input bar so it feels alive */}
-          <div className="rounded-full border border-black/10 dark:border-white/10 bg-white/80 dark:bg-white/10 h-10 px-3 flex items-center justify-between">
-            <div className="text-sm text-black/50 dark:text-white/60">
-              {showPrompt ? "Search or ask anything…" : "Leggings for my wife"}
-            </div>
-            {!showPrompt ? <HeroTypingDots /> : null}
-          </div>
+          {/* ⛔️ Removed the bottom "typing" input bar */}
         </div>
       </AspectBox>
     </div>

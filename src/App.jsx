@@ -571,6 +571,7 @@ function Hero({ onOpenVideo, onOpenForm }) {
 function BrandLogo({ src, alt }) {
   return (
     <div className="flex items-center justify-center">
+      {/* Works for SVGs too */}
       <img
         src={src}
         alt={alt}
@@ -589,7 +590,7 @@ function Logos() {
           Trusted by modern commerce
         </p>
 
-        {/* Equal-width cells at every breakpoint */}
+        {/* Equal-width columns so spacing is perfectly even */}
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 items-center gap-x-10 sm:gap-x-12 lg:gap-x-16 gap-y-8">
           <BrandLogo src="/media/brands/lucchese.svg"  alt="Lucchese" />
           <BrandLogo src="/media/brands/faherty.svg"   alt="Faherty" />

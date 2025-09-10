@@ -170,6 +170,10 @@ function ConversationPreview({ mode, playKey }) {
   return <HeroConversationDemo script={makeScript(mode)} startKey={playKey} />;
 }
 
+function ConversationPreview({ mode, playKey }) {
+  return <HeroConversationDemo script={makeScript(mode)} startKey={playKey} />;
+}
+
 
 function BrandsRow() {
   const brands = [
@@ -727,7 +731,6 @@ function Hero({ onOpenForm, onOpenVideo }) {
   const [playKey, setPlayKey] = useState(0);          // bump to restart preview
 
   const kickOffPreview = ({ mode /*, query*/ }) => {
-    // query is available if you want to display it somewhere
     setSearchMode(mode);
     setPlayKey((k) => k + 1); // triggers HeroConversationDemo via startKey
   };
@@ -736,9 +739,34 @@ function Hero({ onOpenForm, onOpenVideo }) {
     <section id="home" className="relative overflow-hidden mb-3">
       <div className="mx-auto max-w-6xl px-6 pt-16 sm:pt-24">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
-          {/* LEFT column could hold your headline/CTA/etc. */}
+          {/* LEFT column (restored) */}
+          <div className="space-y-5">
+            <p className="inline-flex items-center gap-2 text-sm font-semibold text-fuchsia-600">
+              <Sparkles className="h-4 w-4" /> Conversational commerce
+            </p>
+            <h1 className="text-4xl sm:text-5xl font-semibold tracking-tight leading-tight">
+              Let shoppers just ask.
+            </h1>
+            <p className="text-black/70 dark:text-white/70 max-w-xl">
+              Keep your default keyword search for everyone else. For the rest, “Ask AI” guides them
+              to the right products faster — and learns what they actually want.
+            </p>
 
-          {/* RIGHT: search bar (types first) + conversation preview starts afterwards */}
+            <div className="flex flex-col sm:flex-row gap-3">
+              <Button onClick={onOpenForm} className="sm:w-auto w-full">
+                Install Nobi
+              </Button>
+              <Button onClick={onOpenVideo} variant="ghost" className="sm:w-auto w-full">
+                <PlayCircle className="h-4 w-4" /> Watch how it works
+              </Button>
+            </div>
+
+            <div className="text-sm text-black/60 dark:text-white/60">
+              No rebuilds • A/B ready • Shopify & headless
+            </div>
+          </div>
+
+          {/* RIGHT column: search bar (types first) + preview that starts afterwards */}
           <div className="relative">
             <div className="mb-4 p-4 rounded-2xl border border-fuchsia-200 bg-gradient-to-r from-fuchsia-50 to-pink-50 shadow-md">
               <DualModeSearchBar

@@ -605,19 +605,31 @@ function Logos() {
 
   return (
     <section id="logos" className="py-16 border-t border-black/5 dark:border-white/5">
-      <div className="mx-auto max-w-6xl px-6 text-center">
-        <p className="text-sm font-semibold text-fuchsia-600">Trusted by modern commerce</p>
+  <div className="mx-auto max-w-6xl px-6">
+    <p className="text-center text-sm font-semibold text-fuchsia-600 mb-8">
+      Trusted by modern commerce
+    </p>
 
-        {/* Even spacing on every breakpoint */}
-        <ul className="mt-6 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 items-center gap-x-10 gap-y-8">
-          {brands.map((b) => (
-            <li key={b.label} className="flex justify-center">
-              <BrandMark src={b.src} label={b.label} />
-            </li>
-          ))}
-        </ul>
-      </div>
-    </section>
+    <div className="grid grid-cols-2 sm:grid-cols-5 items-center justify-items-center gap-x-10 gap-y-6">
+      {[
+        { src: "/media/lucchese.svg", alt: "Lucchese" },
+        { src: "/media/faherty.svg", alt: "Faherty" },
+        { src: "/media/untuckit.svg", alt: "UNTUCKit" },
+        { src: "/media/stbernard.svg", alt: "St. Bernard" },
+        { src: "/media/kilte.svg", alt: "Kilte" },
+      ].map((logo) => (
+        <div key={logo.alt} className="flex items-center justify-center w-full">
+          <img
+            src={logo.src}
+            alt={`${logo.alt} logo`}
+            loading="lazy"
+            className="block h-8 sm:h-10 w-auto grayscale opacity-70 hover:opacity-100 transition"
+          />
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
   );
 }
 

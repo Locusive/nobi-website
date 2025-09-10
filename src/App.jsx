@@ -813,7 +813,7 @@ function Testimonial() {
             }}
           >
             <img
-              src="/media/testimonial-photo.jpg" // <-- put your photo here
+              src="/media/lucchese-testimonial-image.png" // <-- put your photo here
               alt="Customer lifestyle"
               className="h-full w-full object-cover"
             />

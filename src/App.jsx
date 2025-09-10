@@ -87,10 +87,10 @@ function ConversationDemo() {
     <div className="w-full rounded-2xl border border-black/10 dark:border-white/10 bg-white/60 dark:bg-white/5 overflow-hidden shadow-inner">
       {/* Make it a bit shorter so it aligns with the left column better */}
       <AspectBox ratio={16 / 7}>
-        <div className="absolute inset-0 p-4 sm:p-5 md:p-6 flex flex-col gap-3 sm:gap-4">
+        <div className="absolute inset-0 p-3 sm:p-4 md:p-5 flex flex-col gap-3">
           {/* conversation area */}
-          <div className="flex-1 overflow-hidden rounded-xl bg-white/70 dark:bg-white/5 border border-black/10 dark:border-white/10 p-3 sm:p-4">
-            <div className="flex flex-col gap-2.5 sm:gap-3">
+          <div className="flex-1>
+            <div className="flex h-full flex-col gap-2.5 sm:gap-3">
               {showUser1 && (
                 <motion.div initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }}>
                   <ChatBubble from="user">

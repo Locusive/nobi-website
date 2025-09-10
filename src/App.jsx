@@ -596,7 +596,6 @@ function Logos() {
           <BrandLogo src="/media/logos/faherty.svg"   alt="Faherty" />
           <BrandLogo src="/media/logos/untuckit.svg"  alt="UNTUCKit" />
           <BrandLogo src="/media/logos/stbernard.svg" alt="St. Bernard" />
-          <BrandLogo src="/media/logos/kilte.svg"     alt="Kilte" />
         </div>
       </div>
     </section>
@@ -754,13 +753,20 @@ function Testimonial() {
   return (
     <section id="testimonial" className="py-20 border-t border-black/5 dark:border-white/5">
       <div className="mx-auto max-w-6xl px-6">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-center">
-          <div className="lg:col-span-2">
-            <div className="rounded-3xl border border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/5 p-8 shadow-sm">
+        {/* stretch both columns to the same height on lg+ */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:items-stretch">
+          {/* Left: the quote card */}
+          <div className="lg:col-span-2 h-full">
+            <div className="h-full rounded-3xl border border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/5 p-8 shadow-sm flex flex-col">
               <Quote className="h-6 w-6 text-fuchsia-600 mb-4" />
               <p className="text-2xl leading-snug font-medium text-black/90 dark:text-white">
-                “If you want to learn and be inspired, you should implement a tool like Nobi. We've seen great results, where conversion has been significantly higher than on our binary search. But the biggest reason a brand should implement this is that you have the opportunity to apply more information towards optimizing campaigns and your broader brand and e-comm goals.”
+                “If you want to learn and be inspired, you should look to implement a tool like
+                Nobi. We've seen great results, where conversion rates have been significantly
+                higher than on our binary search. But the biggest reason a brand should implement
+                a tool like this is that you have the opportunity to apply more information
+                towards optimizing broader campaigns and your broader brand and e-comm goals.”
               </p>
+
               <div className="mt-6 flex items-center gap-4">
                 <AssetImage
                   src="/media/avatar-placeholder.png"
@@ -777,17 +783,17 @@ function Testimonial() {
               </div>
             </div>
           </div>
-          <div className="flex items-center justify-center">
-  <div className="rounded-2xl border border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/5
-                  p-6 md:p-8 lg:p-10 min-w-[180px] min-h-[120px] flex items-center justify-center">
-    <AssetImage
-      src="/media/lucchese-testimonial-image.png"
-      srcSet="/media/lucchese-testimonial-image.png 1x, /media/lucchese-testimonial-image@2x.png 2x"
-      alt="Lucchese footage"
-      className="h-16 md:h-20 w-auto object-contain"
-    />
-  </div>
-</div>
+
+          {/* Right: full-bleed image, same height as the quote card */}
+          <div className="lg:col-span-1 h-full">
+            <div className="h-full rounded-3xl border border-black/10 dark:border-white/10 overflow-hidden">
+              <AssetImage
+                src="/media/lucchese-testimonial-image.png"   // <- put your photo here
+                alt="Lifestyle photo"
+                className="w-full h-full object-cover" // full-bleed, no padding
+              />
+            </div>
+          </div>
         </div>
       </div>
     </section>

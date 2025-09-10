@@ -84,7 +84,7 @@ function HeroConversationDemo({ mode }) {
 
   // Advance steps once, then stop (no loop)
   React.useEffect(() => {
-    const delays = [900, 1100, 1600]; // 0→1, 1→2
+    const delays = [1100, 1600, 1900]; // 0→1, 1→2
     if (step >= 2) return;
     const t = setTimeout(() => setStep((s) => Math.min(2, s + 1)), delays[step]);
     return () => clearTimeout(t);
@@ -588,160 +588,6 @@ function HeroTypingDots() {
   );
 }
 
-/** Very small typewriter for a single line of text */
-function TypeText({ text, speed = 22, onDone }) {
-  const [s, setS] = React.useState("");
-  React.useEffect(() => {
-    setS("");
-    let i = 0;
-    const id = setInterval(() => {
-      i++;
-      setS(text.slice(0, i));
-      if (i >= text.length) {
-        clearInterval(id);
-        onDone?.();
-      }
-    }, speed);
-    return () => clearInterval(id);
-  }, [text, speed, onDone]);
-  return <span>{s}</span>;
-}
-
-/**
- * Scripted hero demo that replaces the old video preview.
- * Props: mode = "ai" | "site"
- */
-
-function PreviewCard({ mode = "ai" }) {
-  const [step, setStep] = React.useState(0);
-
-  // Reset the sequence whenever the mode changes
-  React.useEffect(() => {
-    setStep(0);
-    const timers = [
-      setTimeout(() => setStep(1), 900),   // show “user typed” state
-      setTimeout(() => setStep(2), 2100),  // show assistant/output header
-      setTimeout(() => setStep(3), 3600),  // show results
-    ];
-    return () => timers.forEach(clearTimeout);
-  }, [mode]);
-
-  const isAI = mode === "ai";
-
-  return (
-    <div className="w-full rounded-2xl border border-black/10 dark:border-white/10 bg-white/60 dark:bg-white/5 overflow-hidden relative">
-      {/* 16:9 box, same as before */}
-      <div className="relative w-full" style={{ paddingTop: "56.25%" }}>
-        <div className="absolute inset-0 p-3 sm:p-4 md:p-5">
-          <div className="h-full w-full rounded-xl bg-white/80 dark:bg-white/5 border border-black/10 dark:border-white/10 p-3 sm:p-4 flex flex-col">
-            {/* Header / small chrome */}
-            <div className="flex items-center gap-2 text-xs text-black/50 dark:text-white/60">
-              <div className="w-2 h-2 rounded-full bg-black/10 dark:bg-white/15" />
-              <div className="w-2 h-2 rounded-full bg-black/10 dark:bg-white/15" />
-              <div className="w-2 h-2 rounded-full bg-black/10 dark:bg-white/15" />
-              <div className="ml-auto">
-                {isAI ? "AI mode" : "Default mode"}
-              </div>
-            </div>
-
-            {/* Content area */}
-            <div className="mt-3 sm:mt-4 flex-1 rounded-xl border border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/5 p-3 sm:p-4 overflow-hidden">
-              {/* STEP 0 — user is “typing” a query */}
-              {step === 0 && (
-                <motion.div
-                  key="typing"
-                  initial={{ opacity: 0, y: 6 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className="space-y-3 max-w-xl"
-                >
-                  <div className="inline-flex items-center gap-2 rounded-full px-3 py-1.5 bg-black/5 dark:bg-white/10 text-sm">
-                    <HeroTypingDots />
-                    <span className="text-black/60 dark:text-white/70">
-                      Typing…
-                    </span>
-                  </div>
-                  <div className="rounded-full bg-black/5 dark:bg-white/10 px-4 py-2.5 w-full max-w-md text-sm">
-                    <TypeText text="Linen shirt for a wedding" />
-                  </div>
-                  <div className="space-y-2">
-                    <HeroSkeletonLine w="78%" />
-                    <HeroSkeletonLine w="62%" />
-                  </div>
-                </motion.div>
-              )}
-
-              {/* STEP 1 — show the submitted search bubble */}
-              {step === 1 && (
-                <motion.div
-                  key="submitted"
-                  initial={{ opacity: 0, y: 6 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className="space-y-3 max-w-xl"
-                >
-                  <div className="rounded-full bg-black/5 dark:bg-white/10 px-4 py-2.5 text-sm inline-block">
-                    “Linen shirt for a wedding”
-                  </div>
-                  <div className="space-y-2">
-                    <HeroSkeletonLine w="72%" />
-                    <HeroSkeletonLine w="58%" />
-                  </div>
-                </motion.div>
-              )}
-
-              {/* STEP 2 — header result (AI vs Default wording) */}
-              {step === 2 && (
-                <motion.div
-                  key="header"
-                  initial={{ opacity: 0, y: 6 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className="space-y-3"
-                >
-                  <div className="rounded-xl border border-black/10 dark:border-white/10 bg-white/80 dark:bg-white/5 p-3">
-                    <div className="text-sm font-medium text-black/80 dark:text-white/90">
-                      {isAI
-                        ? "Got it! A navy jacket would look great with a linen long-sleeve shirt in white, cream or eggshell."
-                        : "Results for “linen shirt for a wedding”"}
-                    </div>
-                    <div className="mt-2 flex gap-2 text-xs">
-                      <span className="px-2 py-1 rounded-full bg-black/5 dark:bg-white/10">
-                        White
-                      </span>
-                      <span className="px-2 py-1 rounded-full bg-black/5 dark:bg-white/10">
-                        Cream
-                      </span>
-                      <span className="px-2 py-1 rounded-full bg-black/5 dark:bg-white/10">
-                        Eggshell
-                      </span>
-                    </div>
-                  </div>
-                  <div className="space-y-2">
-                    <HeroSkeletonLine w="65%" />
-                    <HeroSkeletonLine w="50%" />
-                  </div>
-                </motion.div>
-              )}
-
-              {/* STEP 3 — product cards */}
-              {step === 3 && (
-                <motion.div
-                  key="cards"
-                  initial={{ opacity: 0, y: 6 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className="grid grid-cols-3 gap-3 sm:gap-4"
-                >
-                  <HeroProductCard title="Legend Oxford" price="$168" />
-                  <HeroProductCard title="Coastal Linen" price="$178" />
-                  <HeroProductCard title="Classic Button-down" price="$148" />
-                </motion.div>
-              )}
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
 function VideoModal({ open, onClose, youtube, src, poster = "" }) {
   // Accept either a full YouTube URL or just the ID
   function getYouTubeId(input = "") {
@@ -905,8 +751,8 @@ function Hero({ onOpenForm, onOpenVideo }) {
               />
             </div>
 
-            {/* The animated demo */}
-            <ConversationDemo />
+           {/* The animated demo (one-shot, auto-scroll; replays when mode changes) */}
+<HeroConversationPreview mode={searchMode} key={searchMode} />
           </div>
         </div>
       </div>

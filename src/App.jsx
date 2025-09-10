@@ -564,9 +564,6 @@ function DualModeSearchBar({
   );
 }
 
-import { motion } from "framer-motion";
-import React from "react";
-
 function SkeletonLine({ w = "60%" }) {
   return (
     <div
@@ -847,6 +844,33 @@ function VideoModal({ open, onClose, youtube, src, poster = "" }) {
   );
 }
 
+// --- HERO PREVIEW HELPERS (names are unique to avoid clashes) ---
+
+function SkeletonLine({ w = "60%" }) {
+  return <div className="h-2 rounded bg-black/10 dark:bg-white/10" style={{ width: w }} />;
+}
+
+function HeroProductCard({ title = "Oxford Shirt", price = "$168" }) {
+  return (
+    <div className="rounded-xl border border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/5 p-3">
+      <div className="aspect-[3/4] rounded-lg bg-black/5 dark:bg-white/10 mb-2" />
+      <div className="text-sm font-medium text-black/80 dark:text-white/90">{title}</div>
+      <div className="text-sm text-black/60 dark:text-white/60">{price}</div>
+    </div>
+  );
+}
+
+function HeroTypingDots() {
+  return (
+    <div className="inline-flex gap-[3px] items-center">
+      <span className="inline-block w-1.5 h-1.5 rounded-full bg-black/50 dark:bg-white/60 animate-bounce [animation-delay:-0.2s]" />
+      <span className="inline-block w-1.5 h-1.5 rounded-full bg-black/50 dark:bg-white/60 animate-bounce [animation-delay:-0.1s]" />
+      <span className="inline-block w-1.5 h-1.5 rounded-full bg-black/50 dark:bg-white/60 animate-bounce" />
+    </div>
+  );
+}
+
+
 function Hero() {
   // single source of truth for search mode
   const [searchMode, setSearchMode] = useState("ai"); // "ai" | "site"
@@ -1093,8 +1117,6 @@ function Results() {
   );
 }
 
-// make sure you already import useState/useEffect/useRef at the top of App.jsx
-// import React, { useState, useEffect, useRef } from "react";
 
 function Testimonial() {
   const leftRef = useRef(null);

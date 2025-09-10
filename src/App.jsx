@@ -12,16 +12,6 @@ import stbernard from "/media/logos/stbernard.svg";
 
 /* ===================== Hero Conversation Demo ===================== */
 
-function HeroTypingDots({ className = "" }) {
-  return (
-    <span className={`inline-flex gap-1 ${className}`} aria-hidden>
-      <span className="w-1.5 h-1.5 rounded-full bg-black/40 dark:bg-white/60 animate-bounce [animation-delay:-0.2s]" />
-      <span className="w-1.5 h-1.5 rounded-full bg-black/40 dark:bg-white/60 animate-bounce" />
-      <span className="w-1.5 h-1.5 rounded-full bg-black/40 dark:bg-white/60 animate-bounce [animation-delay:0.2s]" />
-    </span>
-  );
-}
-
 function ChatBubble({ from = "user", children }) {
   const isUser = from === "user";
   return (

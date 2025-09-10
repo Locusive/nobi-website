@@ -10,6 +10,143 @@ import stbernard from "/media/logos/stbernard.svg";
 
 // …
 
+/* ===================== Hero Conversation Demo ===================== */
+
+function TypingDots({ className = "" }) {
+  return (
+    <span className={`inline-flex gap-1 ${className}`} aria-hidden>
+      <span className="w-1.5 h-1.5 rounded-full bg-black/40 dark:bg-white/60 animate-bounce [animation-delay:-0.2s]" />
+      <span className="w-1.5 h-1.5 rounded-full bg-black/40 dark:bg-white/60 animate-bounce" />
+      <span className="w-1.5 h-1.5 rounded-full bg-black/40 dark:bg-white/60 animate-bounce [animation-delay:0.2s]" />
+    </span>
+  );
+}
+
+function ChatBubble({ from = "user", children }) {
+  const isUser = from === "user";
+  return (
+    <div className={`flex ${isUser ? "justify-start" : "justify-end"}`}>
+      <div
+        className={[
+          "max-w-[85%] rounded-2xl px-4 py-3 shadow-sm text-[15px] leading-6",
+          isUser
+            ? "bg-black/5 dark:bg-white/10 text-black/80 dark:text-white/90"
+            : "bg-white dark:bg-zinc-900 border border-black/10 dark:border-white/10",
+        ].join(" ")}
+      >
+        {children}
+      </div>
+    </div>
+  );
+}
+
+function ProductCard({ title = "High-Rise Pocket Legging", price = "$78", img }) {
+  return (
+    <div className="rounded-xl overflow-hidden border border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/5">
+      <div className="aspect-[3/4] bg-black/5 dark:bg-white/10">
+        <AssetImage
+          src={img}                          // optional real image
+          alt={title}
+          className="w-full h-full object-cover"
+          labelForPlaceholder="Product image"
+        />
+      </div>
+      <div className="p-3">
+        <div className="text-sm font-medium text-black/90 dark:text-white/90 line-clamp-1">
+          {title}
+        </div>
+        <div className="text-sm text-black/60 dark:text-white/60">{price}</div>
+      </div>
+    </div>
+  );
+}
+
+function ConversationDemo() {
+  const [step, setStep] = React.useState(0);
+
+  // Progress through the little story then loop
+  React.useEffect(() => {
+    const durations = [900, 1100, 1600, 1400, 1500]; // ms between steps
+    const id = setTimeout(
+      () => setStep((s) => (s + 1) % durations.length),
+      durations[step % durations.length]
+    );
+    return () => clearTimeout(id);
+  }, [step]);
+
+  const showUser1 = step >= 0;
+  const showAi1 = step >= 1;
+  const showProducts = step >= 2;
+  const showAi2 = step >= 3;
+  const showPrompt = step >= 4;
+
+  return (
+    <div className="w-full rounded-2xl border border-black/10 dark:border-white/10 bg-white/60 dark:bg-white/5 overflow-hidden shadow-inner">
+      {/* Keep the same aspect as your video so layout doesn't shift */}
+      <AspectBox ratio={16 / 9}>
+        <div className="absolute inset-0 p-4 sm:p-5 md:p-6 flex flex-col gap-3 sm:gap-4">
+          {/* conversation area */}
+          <div className="flex-1 overflow-hidden rounded-xl bg-white/70 dark:bg-white/5 border border-black/10 dark:border-white/10 p-3 sm:p-4">
+            <div className="flex flex-col gap-2.5 sm:gap-3">
+              {showUser1 && (
+                <motion.div initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }}>
+                  <ChatBubble from="user">
+                    Looking for <b>leggings for my wife</b> — she’s 5'4", likes pockets, under $90.
+                  </ChatBubble>
+                </motion.div>
+              )}
+
+              {showAi1 && (
+                <motion.div initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }}>
+                  <ChatBubble from="ai">
+                    Got it! Here are a few options that fit your budget and include <b>pockets</b>.
+                  </ChatBubble>
+                </motion.div>
+              )}
+
+              {showProducts && (
+                <motion.div
+                  initial={{ opacity: 0, y: 8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="grid grid-cols-3 gap-2.5 sm:gap-3"
+                >
+                  <ProductCard title="High-Rise Pocket Legging" price="$78" img="/media/prod-1.png" />
+                  <ProductCard title="7/8 Performance Legging" price="$69" img="/media/prod-2.png" />
+                  <ProductCard title="Everyday Cotton Legging" price="$59" img="/media/prod-3.png" />
+                </motion.div>
+              )}
+
+              {showAi2 && (
+                <motion.div initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }}>
+                  <ChatBubble from="ai">
+                    Prefer <b>cotton</b> or <b>performance</b> fabric?
+                    <span className="ml-2 inline-flex gap-2">
+                      <span className="px-2 py-1 text-xs rounded-md bg-black/5 dark:bg-white/10">
+                        Cotton
+                      </span>
+                      <span className="px-2 py-1 text-xs rounded-md bg-black/5 dark:bg-white/10">
+                        Performance
+                      </span>
+                    </span>
+                  </ChatBubble>
+                </motion.div>
+              )}
+            </div>
+          </div>
+
+          {/* “typing” in the input bar so it feels alive */}
+          <div className="rounded-full border border-black/10 dark:border-white/10 bg-white/80 dark:bg-white/10 h-10 px-3 flex items-center justify-between">
+            <div className="text-sm text-black/50 dark:text-white/60">
+              {showPrompt ? "Search or ask anything…" : "Leggings for my wife"}
+            </div>
+            {!showPrompt ? <TypingDots /> : null}
+          </div>
+        </div>
+      </AspectBox>
+    </div>
+  );
+}
+
 function BrandsRow() {
   const brands = [
     { alt: "Lucchese", src: lucchese },
@@ -427,35 +564,188 @@ function DualModeSearchBar({
   );
 }
 
-function PreviewCard({ mode = "ai" }) {
-  const [videoFailed, setVideoFailed] = useState(false);
+import { motion } from "framer-motion";
+import React from "react";
 
-  const src = mode === "ai"
-    ? "/media/preview-ai.mp4"
-    : "/media/preview-default.mp4";
+function SkeletonLine({ w = "60%" }) {
+  return (
+    <div
+      className="h-3 rounded bg-black/5 dark:bg-white/10"
+      style={{ width: w }}
+    />
+  );
+}
+
+function ProductCard({ title = "Oxford Shirt", price = "$168" }) {
+  return (
+    <div className="rounded-xl border border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/5 p-3">
+      <div className="aspect-[3/4] w-full rounded-lg bg-black/5 dark:bg-white/10" />
+      <div className="mt-2 text-sm font-medium text-black/80 dark:text-white/90">{title}</div>
+      <div className="text-xs text-black/50 dark:text-white/60">{price}</div>
+    </div>
+  );
+}
+
+/** Small “…” typing indicator */
+function TypingDots() {
+  return (
+    <div className="inline-flex gap-[3px] items-center">
+      <span className="w-1.5 h-1.5 rounded-full bg-black/50 dark:bg-white/60 animate-bounce [animation-delay:-120ms]" />
+      <span className="w-1.5 h-1.5 rounded-full bg-black/50 dark:bg-white/60 animate-bounce [animation-delay:-60ms]" />
+      <span className="w-1.5 h-1.5 rounded-full bg-black/50 dark:bg-white/60 animate-bounce" />
+    </div>
+  );
+}
+
+/** Very small typewriter for a single line of text */
+function TypeText({ text, speed = 22, onDone }) {
+  const [s, setS] = React.useState("");
+  React.useEffect(() => {
+    setS("");
+    let i = 0;
+    const id = setInterval(() => {
+      i++;
+      setS(text.slice(0, i));
+      if (i >= text.length) {
+        clearInterval(id);
+        onDone?.();
+      }
+    }, speed);
+    return () => clearInterval(id);
+  }, [text, speed, onDone]);
+  return <span>{s}</span>;
+}
+
+/**
+ * Scripted hero demo that replaces the old video preview.
+ * Props: mode = "ai" | "site"
+ */
+export default function PreviewCard({ mode = "ai" }) {
+  const [step, setStep] = React.useState(0);
+
+  // Reset the sequence whenever the mode changes
+  React.useEffect(() => {
+    setStep(0);
+    const timers = [
+      setTimeout(() => setStep(1), 900),   // show “user typed” state
+      setTimeout(() => setStep(2), 2100),  // show assistant/output header
+      setTimeout(() => setStep(3), 3600),  // show results
+    ];
+    return () => timers.forEach(clearTimeout);
+  }, [mode]);
+
+  const isAI = mode === "ai";
 
   return (
     <div className="w-full rounded-2xl border border-black/10 dark:border-white/10 bg-white/60 dark:bg-white/5 overflow-hidden relative">
-      <AspectBox ratio={16/9}>
-        {!videoFailed ? (
-          <video
-            key={mode}                 // remount when mode changes so it restarts
-            src={src}
-            autoPlay
-            loop
-            muted
-            playsInline
-            className="w-full h-full object-cover object-top"
-            onError={() => setVideoFailed(true)}
-            aria-hidden="true"
-            tabIndex={-1}
-          />
-        ) : (
-          <div className="w-full h-full flex items-center justify-center">
-            <PlaceholderSVG label="" className="w-full h-full" />
+      {/* 16:9 box, same as before */}
+      <div className="relative w-full" style={{ paddingTop: "56.25%" }}>
+        <div className="absolute inset-0 p-3 sm:p-4 md:p-5">
+          <div className="h-full w-full rounded-xl bg-white/80 dark:bg-white/5 border border-black/10 dark:border-white/10 p-3 sm:p-4 flex flex-col">
+            {/* Header / small chrome */}
+            <div className="flex items-center gap-2 text-xs text-black/50 dark:text-white/60">
+              <div className="w-2 h-2 rounded-full bg-black/10 dark:bg-white/15" />
+              <div className="w-2 h-2 rounded-full bg-black/10 dark:bg-white/15" />
+              <div className="w-2 h-2 rounded-full bg-black/10 dark:bg-white/15" />
+              <div className="ml-auto">
+                {isAI ? "AI mode" : "Default mode"}
+              </div>
+            </div>
+
+            {/* Content area */}
+            <div className="mt-3 sm:mt-4 flex-1 rounded-xl border border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/5 p-3 sm:p-4 overflow-hidden">
+              {/* STEP 0 — user is “typing” a query */}
+              {step === 0 && (
+                <motion.div
+                  key="typing"
+                  initial={{ opacity: 0, y: 6 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="space-y-3 max-w-xl"
+                >
+                  <div className="inline-flex items-center gap-2 rounded-full px-3 py-1.5 bg-black/5 dark:bg-white/10 text-sm">
+                    <TypingDots />
+                    <span className="text-black/60 dark:text-white/70">
+                      Typing…
+                    </span>
+                  </div>
+                  <div className="rounded-full bg-black/5 dark:bg-white/10 px-4 py-2.5 w-full max-w-md text-sm">
+                    <TypeText text="Linen shirt for a wedding" />
+                  </div>
+                  <div className="space-y-2">
+                    <SkeletonLine w="78%" />
+                    <SkeletonLine w="62%" />
+                  </div>
+                </motion.div>
+              )}
+
+              {/* STEP 1 — show the submitted search bubble */}
+              {step === 1 && (
+                <motion.div
+                  key="submitted"
+                  initial={{ opacity: 0, y: 6 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="space-y-3 max-w-xl"
+                >
+                  <div className="rounded-full bg-black/5 dark:bg-white/10 px-4 py-2.5 text-sm inline-block">
+                    “Linen shirt for a wedding”
+                  </div>
+                  <div className="space-y-2">
+                    <SkeletonLine w="72%" />
+                    <SkeletonLine w="58%" />
+                  </div>
+                </motion.div>
+              )}
+
+              {/* STEP 2 — header result (AI vs Default wording) */}
+              {step === 2 && (
+                <motion.div
+                  key="header"
+                  initial={{ opacity: 0, y: 6 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="space-y-3"
+                >
+                  <div className="rounded-xl border border-black/10 dark:border-white/10 bg-white/80 dark:bg-white/5 p-3">
+                    <div className="text-sm font-medium text-black/80 dark:text-white/90">
+                      {isAI
+                        ? "Got it! A navy jacket would look great with a linen long-sleeve shirt in white, cream or eggshell."
+                        : "Results for “linen shirt for a wedding”"}
+                    </div>
+                    <div className="mt-2 flex gap-2 text-xs">
+                      <span className="px-2 py-1 rounded-full bg-black/5 dark:bg-white/10">
+                        White
+                      </span>
+                      <span className="px-2 py-1 rounded-full bg-black/5 dark:bg-white/10">
+                        Cream
+                      </span>
+                      <span className="px-2 py-1 rounded-full bg-black/5 dark:bg-white/10">
+                        Eggshell
+                      </span>
+                    </div>
+                  </div>
+                  <div className="space-y-2">
+                    <SkeletonLine w="65%" />
+                    <SkeletonLine w="50%" />
+                  </div>
+                </motion.div>
+              )}
+
+              {/* STEP 3 — product cards */}
+              {step === 3 && (
+                <motion.div
+                  key="cards"
+                  initial={{ opacity: 0, y: 6 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="grid grid-cols-3 gap-3 sm:gap-4"
+                >
+                  <ProductCard title="Legend Oxford" price="$168" />
+                  <ProductCard title="Coastal Linen" price="$178" />
+                  <ProductCard title="Classic Button-down" price="$148" />
+                </motion.div>
+              )}
+            </div>
           </div>
-        )}
-      </AspectBox>
+        </div>
+      </div>
     </div>
   );
 }
@@ -557,71 +847,37 @@ function VideoModal({ open, onClose, youtube, src, poster = "" }) {
   );
 }
 
-function Hero({ onOpenVideo, onOpenForm }) {
-  const [searchMode, setSearchMode] = useState("ai"); // default = AI
+function Hero() {
+  // single source of truth for search mode
+  const [searchMode, setSearchMode] = useState("ai"); // "ai" | "site"
 
   return (
     <section id="home" className="relative overflow-hidden mb-3">
       <div className="mx-auto max-w-6xl px-6 pt-16 sm:pt-24">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
           <div>
-            <h1 className="text-4xl sm:text-5xl font-semibold tracking-tight leading-tight">
-              Turn product search into a{" "}
-              <span className="bg-gradient-to-r from-indigo-500 via-violet-500 to-fuchsia-500 bg-clip-text text-transparent">
-                conversation
-              </span>
-            </h1>
-            <p className="mt-4 text-lg text-black/70 dark:text-white/70 max-w-xl">
-              Nobi gets your customers the products they need faster with conversational AI.
-            </p>
+            {/* ...heading / copy... */}
 
-            <div className="mt-8">
-              <div className="mt-4 flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4">
-                <Button size="lg" className="w-full sm:w-auto" onClick={onOpenForm}>
-                  Try it on your store <ArrowRight className="h-4 w-4 shrink-0" />
-                </Button>
-                <Button
-                  size="lg"
-                  variant="ghost"
-                  className="w-full sm:w-auto"
-                  onClick={onOpenVideo}
-                  type="button"
-                >
-                  <PlayCircle className="h-5 w-5" />
-                  <span className="ml-1">How it works in 60 seconds</span>
-                </Button>
-              </div>
-
-              <div className="mt-6 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-black/60 dark:text-white/60">
-                <div className="inline-flex items-center gap-2">
-                  <CheckCircle2 className="h-4 w-4" /> 15-minute install
-                </div>
-                <div className="inline-flex items-center gap-2">
-                  <CheckCircle2 className="h-4 w-4" /> Shopify & headless
-                </div>
-                <div className="inline-flex items-center gap-2">
-                  <CheckCircle2 className="h-4 w-4" /> A/B testing & reporting
-                </div>
-              </div>
+            <div className="mb-4 p-4 rounded-2xl border border-fuchsia-200 bg-gradient-to-r from-fuchsia-50 to-pink-50 shadow-md">
+              <DualModeSearchBar
+                mode={searchMode}                 // <— controlled
+                onModeChange={setSearchMode}      // <— parent gets notified
+                defaultMode="ai"
+                size="compact"
+              />
             </div>
           </div>
 
           <div className="relative">
-            <div className="mb-4 p-4 rounded-2xl border border-fuchsia-200 bg-gradient-to-r from-fuchsia-50 to-pink-50 shadow-md">
-              <DualModeSearchBar
-                size="compact"
-                mode={searchMode}
-                onModeChange={setSearchMode}
-              />
-            </div>
-
-            <PreviewCard mode={searchMode} />
+            {/* Whatever renders your hero preview/animation */}
+            <PreviewCard mode={searchMode} />      {/* <— stays in sync */}
           </div>
         </div>
       </div>
     </section>
   );
 }
+
 
 function BrandMark({ src, label, className = "" }) {
   // Renders the SVG as a mask so the shape fills the box exactly

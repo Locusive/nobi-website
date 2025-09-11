@@ -136,7 +136,7 @@ function HeroConversationDemo({ script, startKey, ratio = 4 / 3 }) {
               )}
               {showProducts && (
                 <motion.div
-                  key={`prods-${startKey}-${mode}`}
+                  key={`prods-${startKey}`}
                   ref={productsRef}
                   initial={{ opacity: 0, y: 8 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -631,7 +631,8 @@ React.useEffect(() => {
             value={query}
             onChange={stopDemoAnd((e) => setQuery(e.target.value))}
             onKeyDown={stopDemoAnd((e) => e.key === "Enter" && submit())}
-            onFocus={stopDemoAnd()}
+   onMouseDown={stopDemoAnd()}      // user click/touch cancels
+   onTouchStart={stopDemoAnd()}     // mobile tap cancels
             placeholder={placeholder}
             className="min-w-0 w-full bg-transparent outline-none text-[15px] placeholder:text-black/40 dark:placeholder:text-white/40"
             aria-label={mode === "ai" ? "Ask AI" : "Search"}

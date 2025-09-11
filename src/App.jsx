@@ -35,6 +35,156 @@ function ChatBubble({ from = "user", children }) {
   );
 }
 
+function DualModeSearchBar({
+  defaultMode = "ai",
+  size = "regular",
+  mode: controlledMode,
+  onModeChange,
+  onSubmit,
+  onDemoSubmit, // fires after the typing demo completes
+}) {
+  const [internalMode, setInternalMode] = React.useState(defaultMode);
+  const mode = controlledMode ?? internalMode;
+
+  const [query, setQuery] = React.useState("");
+  const [placeholder, setPlaceholder] = React.useState(
+    mode === "ai" ? "Describe what you want..." : "Search products..."
+  );
+
+  // replay typing demo whenever mode changes (until the user interacts)
+  const [demoEnabled, setDemoEnabled] = React.useState(true);
+  React.useEffect(() => {
+    setDemoEnabled(true);
+    setQuery("");
+  }, [mode]);
+
+  // type the demo query, then call onDemoSubmit
+  useTypingDemo({
+    mode,
+    setQuery,
+    setPlaceholder,
+    enabled: demoEnabled,
+    textForMode: () => DEMO_QUERY,
+    onDone: (typed) => onDemoSubmit?.({ mode, query: typed }),
+  });
+
+  const setMode = (m) => {
+    if (controlledMode === undefined) setInternalMode(m);
+    onModeChange?.(m);
+    setDemoEnabled(true);   // retrigger demo when toggled
+    setQuery("");           // clear current input
+  };
+
+  // cancel demo on any user interaction
+  const stopDemoAnd = (next) => (e) => {
+    if (demoEnabled) setDemoEnabled(false);
+    next?.(e);
+  };
+
+  const ctaLabel = mode === "ai" ? "Ask AI" : "Search";
+  const height = size === "regular" ? "h-14" : "h-11";
+
+  function submit() {
+    if (!query.trim()) return;
+    onSubmit?.({ mode, query });
+  }
+
+  // animated toggle thumb
+  const toggleRef = React.useRef(null);
+  const siteBtnRef = React.useRef(null);
+  const aiBtnRef = React.useRef(null);
+  const [thumb, setThumb] = React.useState({ left: 0, width: 0 });
+
+  const measureThumb = React.useCallback(() => {
+    const btn = mode === "ai" ? aiBtnRef.current : siteBtnRef.current;
+    if (!btn) return;
+    setThumb({ left: btn.offsetLeft, width: btn.offsetWidth });
+  }, [mode]);
+
+  React.useEffect(() => {
+    measureThumb();
+    const ro = new ResizeObserver(measureThumb);
+    if (toggleRef.current) ro.observe(toggleRef.current);
+    const onR = () => measureThumb();
+    window.addEventListener("resize", onR);
+    const raf = requestAnimationFrame(measureThumb);
+    return () => {
+      try { ro.disconnect(); } catch {}
+      window.removeEventListener("resize", onR);
+      cancelAnimationFrame(raf);
+    };
+  }, [measureThumb]);
+
+  return (
+    <div className="w-full max-w-3xl">
+      <div
+        className={`flex items-center gap-2 rounded-2xl border border-black/10 dark:border-white/15 bg-white/70 dark:bg-white/5 backdrop-blur px-2 ${height} shadow-sm`}
+      >
+        {/* Toggle */}
+        <div
+          ref={toggleRef}
+          className="relative isolate inline-flex rounded-xl bg-black/5 dark:bg-white/10 overflow-hidden shrink-0"
+        >
+          <button
+            ref={siteBtnRef}
+            className={`relative z-[1] rounded-lg px-3 py-1.5 text-xs sm:px-4 sm:py-2 sm:text-sm font-medium transition-colors duration-300 ${
+              mode === "site" ? "text-black dark:text-white" : "text-black/60 dark:text-white/60"
+            }`}
+            onClick={() => setMode("site")}
+          >
+            Default
+          </button>
+          <button
+            ref={aiBtnRef}
+            className={`relative z-[1] rounded-lg px-3 py-1.5 text-xs sm:px-4 sm:py-2 sm:text-sm font-medium transition-colors duration-300 ${
+              mode === "ai" ? "text-black dark:text-white" : "text-black/60 dark:text-white/60"
+            }`}
+            onClick={() => setMode("ai")}
+          >
+            AI
+          </button>
+
+          <motion.span
+            layout
+            transition={{ type: "spring", stiffness: 350, damping: 30 }}
+            className={`absolute inset-y-1 rounded-full shadow-sm ${
+              mode === "ai"
+                ? "bg-gradient-to-r from-fuchsia-500/20 to-pink-500/20"
+                : "bg-black/10 dark:bg-white/20"
+            }`}
+            style={{ left: thumb.left, width: thumb.width }}
+          />
+        </div>
+
+        {/* Input */}
+        <div className="flex-1 min-w-0 flex items-center gap-2">
+          <input
+            value={query}
+            onChange={stopDemoAnd((e) => setQuery(e.target.value))}
+            onKeyDown={stopDemoAnd((e) => e.key === "Enter" && submit())}
+            onFocus={stopDemoAnd()}
+            placeholder={placeholder}
+            className="min-w-0 w-full bg-transparent outline-none text-[15px] placeholder:text-black/40 dark:placeholder:text-white/40"
+            aria-label={mode === "ai" ? "Ask AI" : "Search"}
+          />
+        </div>
+
+        {/* CTA */}
+        <Button
+          onClick={stopDemoAnd(submit)}
+          variant={mode === "ai" ? "ai" : "primary"}
+          size="compact"
+          className="whitespace-nowrap px-3 h-9 sm:h-8"
+        >
+          {mode === "ai" ? <Sparkles className="h-4 w-4" /> : <SearchIcon className="h-4 w-4" />}
+          <span className="hidden sm:inline">{ctaLabel}</span>
+        </Button>
+      </div>
+    </div>
+  );
+}
+
+
 function HeroProductCard({ title = "Oxford Shirt", price = "$168", img }) {
   const hasImage = Boolean(img);
 
@@ -425,20 +575,23 @@ function useTypingDemo({
   onDone,
   textForMode, // string or (mode) => string
 }) {
+  // keep the latest onDone without retriggering the typing effect
+  const doneRef = React.useRef(onDone);
+  React.useEffect(() => { doneRef.current = onDone; }, [onDone]);
+
   React.useEffect(() => {
     if (!enabled) return;
 
     const toType =
       typeof textForMode === "function" ? textForMode(mode) : textForMode || "";
 
-    // Show the standard placeholders until we start typing
+    // show normal placeholders first, then type actual value in black
     setPlaceholder(mode === "ai" ? "Describe what you want..." : "Search products...");
-    setQuery(""); // start empty so value text (black) replaces placeholder
+    setQuery("");
 
-    // typing cadence
-    const startDelay = 600;
-    const baseSpeed = 24; // ms per char
-    const jitter = 20;
+    const startDelay = 600; // ms before first char
+    const baseSpeed = 24;   // ms per char
+    const jitter = 20;      // random variation
 
     let cancelled = false;
     const timers = [];
@@ -453,7 +606,7 @@ function useTypingDemo({
           const t = setTimeout(step, baseSpeed + Math.random() * jitter);
           timers.push(t);
         } else {
-          const t = setTimeout(() => onDone?.(toType), 450);
+          const t = setTimeout(() => doneRef.current?.(toType), 450);
           timers.push(t);
         }
       };
@@ -465,145 +618,8 @@ function useTypingDemo({
       clearTimeout(startTimer);
       timers.forEach(clearTimeout);
     };
-  }, [mode, enabled, setQuery, setPlaceholder, onDone, textForMode]);
-}
-
-function DualModeSearchBar({
-  defaultMode = "ai",
-  size = "regular",
-  mode: controlledMode,
-  onModeChange,
-  onSubmit,
-  onDemoSubmit, // called when the demo finishes typing
-}) {
-  const [internalMode, setInternalMode] = useState(defaultMode);
-  const mode = controlledMode ?? internalMode;
-
-  const [query, setQuery] = useState("");
-  const [placeholder, setPlaceholder] = useState(
-    mode === "ai" ? "Describe what you want..." : "Search products..."
-  );
-
-  // replay the typing demo whenever mode changes
-  const [demoEnabled, setDemoEnabled] = useState(true);
-  useEffect(() => {
-    setDemoEnabled(true);
-    setQuery("");
-  }, [mode]);
-
-  useTypingDemo({
-    mode,
-    setQuery,
-    setPlaceholder,
-    enabled: demoEnabled,
-    textForMode: () => DEMO_QUERY, // sentence to type
-    onDone: (typed) => {
-      onDemoSubmit?.({ mode, query: typed }); // kick off the card
-    },
-  });
-
-  const setMode = (m) => {
-    if (controlledMode === undefined) setInternalMode(m);
-    onModeChange?.(m);
-    setDemoEnabled(true);
-  };
-
-  // cancel demo on any user interaction
-  const stopDemoAnd = (next) => (e) => {
-    if (demoEnabled) setDemoEnabled(false);
-    next?.(e);
-  };
-
-  const ctaLabel = mode === "ai" ? "Ask AI" : "Search";
-  const height = size === "regular" ? "h-14" : "h-11";
-
-  // animated toggle thumb
-  const toggleRef = useRef(null);
-  const siteBtnRef = useRef(null);
-  const aiBtnRef = useRef(null);
-  const [thumb, setThumb] = useState({ left: 0, width: 0 });
-  const measureThumb = () => {
-    const btn = mode === "ai" ? aiBtnRef.current : siteBtnRef.current;
-    if (!btn) return;
-    setThumb({ left: btn.offsetLeft, width: btn.offsetWidth });
-  };
-  useEffect(() => {
-    measureThumb();
-    const ro = new ResizeObserver(measureThumb);
-    toggleRef.current && ro.observe(toggleRef.current);
-    const onR = () => measureThumb();
-    window.addEventListener("resize", onR);
-    const raf = requestAnimationFrame(measureThumb);
-    return () => {
-      try { ro.disconnect(); } catch {}
-      window.removeEventListener("resize", onR);
-      cancelAnimationFrame(raf);
-    };
-  }, [mode]);
-
-  function submit() {
-    if (!query.trim()) return;
-    onSubmit?.({ mode, query });
-  }
-
-  return (
-    <div className="w-full max-w-3xl">
-      <div
-        className={`flex items-center gap-2 rounded-2xl border border-black/10 dark:border-white/15 bg-white/70 dark:bg-white/5 backdrop-blur px-2 ${height} shadow-sm`}
-      >
-        {/* Toggle */}
-        <div
-          ref={toggleRef}
-          className="relative isolate inline-flex rounded-xl bg-black/5 dark:bg-white/10 overflow-hidden shrink-0"
-        >
-          <button
-            ref={siteBtnRef}
-            className={`relative z-[1] rounded-lg px-3 py-1.5 text-xs sm:px-4 sm:py-2 sm:text-sm font-medium transition-colors duration-300 ${mode === "site" ? "text-black dark:text-white" : "text-black/60 dark:text-white/60"}`}
-            onClick={() => setMode("site")}
-          >
-            Default
-          </button>
-          <button
-            ref={aiBtnRef}
-            className={`relative z-[1] rounded-lg px-3 py-1.5 text-xs sm:px-4 sm:py-2 sm:text-sm font-medium transition-colors duration-300 ${mode === "ai" ? "text-black dark:text-white" : "text-black/60 dark:text-white/60"}`}
-            onClick={() => setMode("ai")}
-          >
-            AI
-          </button>
-          <motion.span
-            layout
-            transition={{ type: "spring", stiffness: 350, damping: 30 }}
-            className={`absolute inset-y-1 rounded-full shadow-sm ${mode === "ai" ? "bg-gradient-to-r from-fuchsia-500/20 to-pink-500/20" : "bg-black/10 dark:bg-white/20"}`}
-            style={{ left: thumb.left, width: thumb.width }}
-          />
-        </div>
-
-        {/* Input */}
-        <div className="flex-1 min-w-0 flex items-center gap-2">
-          <input
-            value={query}
-            onChange={stopDemoAnd((e) => setQuery(e.target.value))}
-            onKeyDown={stopDemoAnd((e) => e.key === "Enter" && submit())}
-            onFocus={stopDemoAnd()}
-            placeholder={placeholder}
-            className="min-w-0 w-full bg-transparent outline-none text-[15px] placeholder:text-black/40 dark:placeholder:text-white/40"
-            aria-label={mode === "ai" ? "Ask AI" : "Search"}
-          />
-        </div>
-
-        {/* CTA */}
-        <Button
-          onClick={stopDemoAnd(submit)}
-          variant={mode === "ai" ? "ai" : "primary"}
-          size="compact"
-          className="whitespace-nowrap px-3 h-9 sm:h-8"
-        >
-          {mode === "ai" ? <Sparkles className="h-4 w-4" /> : <SearchIcon className="h-4 w-4" />}
-          <span className="hidden sm:inline">{ctaLabel}</span>
-        </Button>
-      </div>
-    </div>
-  );
+  // ❗ do NOT include `onDone` here; we use doneRef instead
+  }, [mode, enabled, setQuery, setPlaceholder, textForMode]);
 }
 
 function HeroSkeletonLine({ w = "60%" }) {
@@ -728,13 +744,14 @@ function VideoModal({ open, onClose, youtube, src, poster = "" }) {
 
 function Hero({ onOpenForm, onOpenVideo }) {
   const [searchMode, setSearchMode] = React.useState("ai");  // "ai" | "site"
-  const [playKey, setPlayKey] = React.useState(-1);          // ⬅️ gated start
+  const [playKey, setPlayKey] = React.useState(-1);          // start gated
   const [lastQuery, setLastQuery] = React.useState(DEMO_QUERY);
 
+  // fires after typing demo OR manual submit
   const kickOffPreview = ({ mode, query }) => {
     setSearchMode(mode);
     setLastQuery(query || DEMO_QUERY);
-    setPlayKey((k) => k + 1); // from -1 → 0 triggers the card
+    setPlayKey((k) => k + 1); // -1 → 0 kicks off card animation
   };
 
   return (
@@ -758,12 +775,7 @@ function Hero({ onOpenForm, onOpenVideo }) {
               <Button size="lg" onClick={onOpenForm} className="w-full sm:w-auto">
                 Try it on your store
               </Button>
-              <Button
-                size="lg"
-                variant="ghost"
-                onClick={onOpenVideo}
-                className="w-full sm:w-auto"
-              >
+              <Button size="lg" variant="ghost" onClick={onOpenVideo} className="w-full sm:w-auto">
                 <PlayCircle className="h-5 w-5" />
                 How it works in 60 seconds
               </Button>
@@ -785,7 +797,7 @@ function Hero({ onOpenForm, onOpenVideo }) {
             </div>
           </div>
 
-          {/* RIGHT: search bar then preview */}
+          {/* RIGHT: search first, preview after it */}
           <div className="relative">
             <div className="mb-4 p-4 rounded-2xl border border-fuchsia-200 bg-gradient-to-r from-fuchsia-50 to-pink-50 shadow-md">
               <DualModeSearchBar
@@ -793,12 +805,11 @@ function Hero({ onOpenForm, onOpenVideo }) {
                 onModeChange={setSearchMode}
                 defaultMode="ai"
                 size="compact"
-                onDemoSubmit={kickOffPreview}  // after typing demo
-                onSubmit={kickOffPreview}      // manual submit
+                onDemoSubmit={kickOffPreview}   // auto after typing demo
+                onSubmit={kickOffPreview}       // real clicks/Enter
               />
             </div>
 
-            {/* Preview card (script uses lastQuery). It will animate only after playKey >= 0 */}
             <ConversationPreview mode={searchMode} playKey={playKey} query={lastQuery} />
           </div>
         </div>

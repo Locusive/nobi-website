@@ -84,8 +84,8 @@ function HeroConversationDemo({ script, startKey }) {
   React.useEffect(() => {
     setStep(0);
     scrollerRef.current?.scrollTo({ top: 0, behavior: "auto" });
-    const t1 = setTimeout(() => setStep(1), 900);
-    const t2 = setTimeout(() => setStep(2), 2100);
+    const t1 = setTimeout(() => setStep(1), 1500);
+    const t2 = setTimeout(() => setStep(2), 3300);
     return () => { clearTimeout(t1); clearTimeout(t2); };
   }, [startKey, userText, aiText, products]);
 
@@ -95,7 +95,7 @@ function HeroConversationDemo({ script, startKey }) {
       const id = setTimeout(() => {
         const top = productsRef.current.offsetTop - 12;
         scrollerRef.current.scrollTo({ top, behavior: "smooth" });
-      }, 60);
+      }, 140);
       return () => clearTimeout(id);
     }
   }, [step]);
@@ -112,7 +112,7 @@ function HeroConversationDemo({ script, startKey }) {
           <div ref={scrollerRef} className="flex-1 overflow-y-auto">
             <div className="flex h-full flex-col gap-2.5 sm:gap-3">
               {showUser1 && (
-                <motion.div initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }}>
+                <motion.div initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.55 }}>
                   <ChatBubble from="user">{userText}</ChatBubble>
                 </motion.div>
               )}
@@ -126,6 +126,7 @@ function HeroConversationDemo({ script, startKey }) {
                   ref={productsRef}
                   initial={{ opacity: 0, y: 8 }}
                   animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.55 }}
                   className="grid grid-cols-3 gap-2.5 sm:gap-3 pt-1"
                 >
                   {products.map((p) => (
@@ -422,9 +423,9 @@ function useTypingDemo({ mode, setQuery, setPlaceholder, enabled = true, onDone 
     setPlaceholder(initialPlaceholder);
     setQuery("");
 
-    const startDelay = 600;
-    const baseSpeed = 28;
-    const jitter = 28;
+    const startDelay = 1200;
+    const baseSpeed = 75;
+    const jitter = 35;
 
     const timers = [];
     const startTimer = setTimeout(() => {

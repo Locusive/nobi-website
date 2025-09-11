@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, MotionConfig } from "framer-motion";
 
 // at the top of your file (e.g., App.jsx or the component where logos render)
 import lucchese from "/media/logos/lucchese.svg";
@@ -189,7 +189,7 @@ function ConversationDemo({ mode, playKey, query }) {
 
 function ConversationPreview({ mode, playKey, query }) {
 return (
-<AnimatePresence mode="wait" initial={false}>
+<AnimatePresence mode="wait">
      <HeroConversationDemo
        key={`${mode}-${playKey}`}   // 👈 forces fresh mount → animations replay
        script={makeScript(mode, query)}
@@ -752,6 +752,16 @@ function VideoModal({ open, onClose, youtube, src, poster = "" }) {
         </div>
 
         {/* Header / title row */}
+        <div className="p-6">
+  <motion.div
+    initial={{ opacity: 0, y: 20 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.6 }}
+    style={{ width: 120, height: 40 }}
+    className="rounded-xl bg-fuchsia-500/30 border border-fuchsia-300"
+  />
+</div>
+
         <div className="absolute top-2 left-2 right-2 flex items-center justify-between pointer-events-none">
           <h2 id="howitworks-title" className="sr-only">
             How it works video
@@ -1623,6 +1633,7 @@ export default function App() {
 const [isFormOpen, setIsFormOpen] = useState(false);
  const [isVideoOpen, setIsVideoOpen] = useState(false);  
 return (
+  <MotionConfig reducedMotion="never">
     <div className="min-h-screen bg-gradient-to-b from-white to-slate-50 dark:from-[#0a0a0a] dark:to-black text-black dark:text-white">
       <header className="sticky top-0 z-40 border-b backdrop-blur bg-white/70 dark:bg-black/40">
   <div className="mx-auto max-w-7xl px-6 h-16 flex items-center justify-between">
@@ -1662,6 +1673,7 @@ return (
   youtube="https://www.youtube.com/watch?v=RKqGC3CVZd0"
 />
     </div>
+    </MotionConfig>
   );
 }
 

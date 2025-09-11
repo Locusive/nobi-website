@@ -151,7 +151,7 @@ function HeroConversationDemo({ script, startKey, ratio = 16 / 9 }) {
 function makeScript(mode, q = "linen shirt for a wedding") {
   if (mode === "ai") {
     return {
-      userText: `Linen shirt under $100 for a wedding. It's on the beach and I'll be wearing a navy jacket.`,
+      userText: `Linen shirt under $100 for a beach wedding that goes with a navy jacket.`,
       aiText:
         "Got it! Here are beach-appropriate linen options in white, cream and eggshell, which would go great with a navy jacket.",
       products: [
@@ -162,8 +162,7 @@ function makeScript(mode, q = "linen shirt for a wedding") {
     };
   }
   return {
-    userText: `“${q}”`,
-    aiText: "Showing top results (best match, in stock).",
+    userText: `Linen shirt`,
     products: [
       { title: "Washed Linen Shirt", price: "$129", img: "/media/prod-1.png" },
       { title: "Summer Oxford", price: "$138", img: "/media/prod-2.png" },

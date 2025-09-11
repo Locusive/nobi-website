@@ -1605,15 +1605,6 @@ function TestPulse() {
   );
 }
 
-function TestPulse() {
-  return (
-    <div
-      aria-label="render-ok"
-      className="fixed bottom-3 right-3 h-3 w-3 rounded-full bg-fuchsia-500 animate-pulse z-[9999] pointer-events-none"
-    />
-  );
-}
-
 export default function App() {
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [isVideoOpen, setIsVideoOpen] = useState(false);
@@ -1658,7 +1649,7 @@ export default function App() {
         youtube="https://www.youtube.com/watch?v=RKqGC3CVZd0"
       />
 
-      {/* Tiny heartbeat to confirm rendering */}
+      {/* Tiny pulse so you can confirm the app is rendering */}
       <TestPulse />
     </div>
   );

@@ -510,29 +510,79 @@ function DualModeSearchBar({
   // re-run the typing demo whenever the mode toggles
   const [demoEnabled, setDemoEnabled] = React.useState(true);
   React.useEffect(() => {
-  // Run once to place the thumb
-  measureThumb();
+    setDemoEnabled(true);
+    setQuery("");
+  }, [mode]);
 
-  const hasWindow = typeof window !== "undefined";
-  const hasRO = hasWindow && typeof window.ResizeObserver !== "undefined";
+  // Type the canned sentence, then notify the hero to start the card
+  useTypingDemo({
+    mode,
+    setQuery,
+    setPlaceholder,
+    enabled: demoEnabled,
+    textForMode: (m) => (m === "ai" ? DEMO_QUERY : "Linen shirt"),
+    onDone: (typed) => onDemoSubmit?.({ mode, query: typed }),
+  });
 
-  let ro;
-  if (hasRO && toggleRef.current) {
-    ro = new ResizeObserver(() => measureThumb());
-    try { ro.observe(toggleRef.current); } catch {}
-  }
-
-  const onResize = () => measureThumb();
-  if (hasWindow) window.addEventListener("resize", onResize);
-
-  const raf = hasWindow ? requestAnimationFrame(measureThumb) : null;
-
-  return () => {
-    if (ro) { try { ro.disconnect(); } catch {} }
-    if (hasWindow) window.removeEventListener("resize", onResize);
-    if (raf && hasWindow) cancelAnimationFrame(raf);
+  const setMode = (m) => {
+    if (controlledMode === undefined) setInternalMode(m);
+    onModeChange?.(m);
+    setDemoEnabled(true); // restart demo when switching tabs
   };
-}, [measureThumb]);
+
+  // cancel demo on any user interaction
+  const stopDemoAnd =
+    (next) =>
+    (e) => {
+      if (demoEnabled) setDemoEnabled(false);
+      next?.(e);
+    };
+
+  const ctaLabel = mode === "ai" ? "Ask AI" : "Search";
+  const height = size === "compact" ? "h-11" : "h-14";
+
+  // Animated toggle thumb (measured to match the active button)
+  const toggleRef = React.useRef(null);
+  const siteBtnRef = React.useRef(null);
+  const aiBtnRef = React.useRef(null);
+  const [thumb, setThumb] = React.useState({ left: 0, width: 0 });
+
+  const measureThumb = React.useCallback(() => {
+    const btn = mode === "ai" ? aiBtnRef.current : siteBtnRef.current;
+    if (!btn) return;
+    setThumb({ left: btn.offsetLeft, width: btn.offsetWidth });
+  }, [mode]);
+
+  React.useEffect(() => {
+    // place the thumb initially
+    measureThumb();
+
+    const hasWindow = typeof window !== "undefined";
+    const hasRO = hasWindow && typeof window.ResizeObserver !== "undefined";
+
+    let ro;
+    if (hasRO && toggleRef.current) {
+      ro = new ResizeObserver(() => measureThumb());
+      try {
+        ro.observe(toggleRef.current);
+      } catch {}
+    }
+
+    const onResize = () => measureThumb();
+    if (hasWindow) window.addEventListener("resize", onResize);
+
+    const raf = hasWindow ? requestAnimationFrame(measureThumb) : null;
+
+    return () => {
+      if (ro) {
+        try {
+          ro.disconnect();
+        } catch {}
+      }
+      if (hasWindow) window.removeEventListener("resize", onResize);
+      if (raf && hasWindow) cancelAnimationFrame(raf);
+    };
+  }, [measureThumb]);
 
   function submit() {
     if (!query.trim()) return;
@@ -581,16 +631,16 @@ function DualModeSearchBar({
 
         {/* Input */}
         <div className="flex-1 min-w-0 flex items-center gap-2">
-         <input
-  value={query}
-  onChange={stopDemoAnd((e) => setQuery(e.target.value))}
-  onKeyDown={stopDemoAnd((e) => e.key === "Enter" && submit())}
-  onMouseDown={stopDemoAnd()}
-  onTouchStart={stopDemoAnd()}
-  placeholder={placeholder}
-  className="min-w-0 w-full bg-transparent outline-none text-[15px] placeholder:text-black/40 dark:placeholder:text-white/40"
-  aria-label={mode === "ai" ? "Ask AI" : "Search"}
-/>
+          <input
+            value={query}
+            onChange={stopDemoAnd((e) => setQuery(e.target.value))}
+            onKeyDown={stopDemoAnd((e) => e.key === "Enter" && submit())}
+            onMouseDown={stopDemoAnd()}
+            onTouchStart={stopDemoAnd()}
+            placeholder={placeholder}
+            className="min-w-0 w-full bg-transparent outline-none text-[15px] placeholder:text-black/40 dark:placeholder:text-white/40"
+            aria-label={mode === "ai" ? "Ask AI" : "Search"}
+          />
         </div>
 
         {/* CTA */}

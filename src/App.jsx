@@ -861,17 +861,17 @@ function Logos() {
           {brands.map((b) => (
             <div key={b.alt} className="flex items-center justify-center w-full">
               <img
-                src={b.src}
-                alt={b.alt}
-                className={[
-                  // same visual height for all, grayscale + nice smoothing
-                  "h-7 sm:h-8 md:h-9 w-auto object-contain grayscale opacity-70 hover:opacity-100 transition",
-                  // brand-specific width hint to make wide logos look balanced
-                  b.widthHint,
-                ].join(" ")}
-                // helps crisp rendering of thin strokes on some devices
-                style={{ imageRendering: "auto" }}
-              />
+  src={b.src}
+  alt={b.alt}
+  className={[
+    // default height
+    "h-7 sm:h-8 md:h-9 w-auto object-contain grayscale opacity-70 hover:opacity-100 transition",
+    // per-logo overrides
+    b.widthHint,
+    b.heightHint || ""
+  ].join(" ")}
+  style={{ imageRendering: "auto" }}
+/>
             </div>
           ))}
         </div>

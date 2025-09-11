@@ -188,6 +188,7 @@ function ConversationDemo({ mode, playKey, query }) {
 function ConversationPreview({ mode, playKey, query }) {
 return (
 <HeroConversationDemo
+key={`${mode}-${playKey}`}     // ← ensures fresh mount → animations replay
 script={makeScript(mode, query)}
 startKey={playKey}
 ratio={4 / 3}     // try 4/3 or 16/10 for a taller feel

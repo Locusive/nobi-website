@@ -506,42 +506,9 @@ function DualModeSearchBar({
   const [placeholder, setPlaceholder] = React.useState(
     mode === "ai" ? "Describe what you want..." : "Search products..."
   );
-
-  // re-run the typing demo whenever the mode toggles
   const [demoEnabled, setDemoEnabled] = React.useState(true);
-  React.useEffect(() => {
-    setDemoEnabled(true);
-    setQuery("");
-  }, [mode]);
 
-  // Type the canned sentence, then notify the hero to start the card
-  useTypingDemo({
-    mode,
-    setQuery,
-    setPlaceholder,
-    enabled: demoEnabled,
-    textForMode: (m) => (m === "ai" ? DEMO_QUERY : "Linen shirt"),
-    onDone: (typed) => onDemoSubmit?.({ mode, query: typed }),
-  });
-
-  const setMode = (m) => {
-    if (controlledMode === undefined) setInternalMode(m);
-    onModeChange?.(m);
-    setDemoEnabled(true); // restart demo when switching tabs
-  };
-
-  // cancel demo on any user interaction
-  const stopDemoAnd =
-    (next) =>
-    (e) => {
-      if (demoEnabled) setDemoEnabled(false);
-      next?.(e);
-    };
-
-  const ctaLabel = mode === "ai" ? "Ask AI" : "Search";
-  const height = size === "compact" ? "h-11" : "h-14";
-
-  // Animated toggle thumb (measured to match the active button)
+  // ---- toggle thumb measurement (for the “Default / AI” pills) ----
   const toggleRef = React.useRef(null);
   const siteBtnRef = React.useRef(null);
   const aiBtnRef = React.useRef(null);
@@ -554,35 +521,52 @@ function DualModeSearchBar({
   }, [mode]);
 
   React.useEffect(() => {
-    // place the thumb initially
     measureThumb();
-
-    const hasWindow = typeof window !== "undefined";
-    const hasRO = hasWindow && typeof window.ResizeObserver !== "undefined";
-
-    let ro;
-    if (hasRO && toggleRef.current) {
-      ro = new ResizeObserver(() => measureThumb());
-      try {
-        ro.observe(toggleRef.current);
-      } catch {}
-    }
-
-    const onResize = () => measureThumb();
-    if (hasWindow) window.addEventListener("resize", onResize);
-
-    const raf = hasWindow ? requestAnimationFrame(measureThumb) : null;
-
-    return () => {
-      if (ro) {
-        try {
-          ro.disconnect();
-        } catch {}
+    if (typeof window !== "undefined") {
+      const onResize = () => measureThumb();
+      window.addEventListener("resize", onResize);
+      let ro;
+      if ("ResizeObserver" in window && toggleRef.current) {
+        ro = new ResizeObserver(() => measureThumb());
+        try { ro.observe(toggleRef.current); } catch {}
       }
-      if (hasWindow) window.removeEventListener("resize", onResize);
-      if (raf && hasWindow) cancelAnimationFrame(raf);
-    };
+      return () => {
+        window.removeEventListener("resize", onResize);
+        ro?.disconnect?.();
+      };
+    }
   }, [measureThumb]);
+
+  // ---- restart the typing demo whenever the mode toggles ----
+  React.useEffect(() => {
+    setDemoEnabled(true);
+    setQuery("");
+    setPlaceholder(mode === "ai" ? "Describe what you want..." : "Search products...");
+  }, [mode]);
+
+  // ---- type the canned sentence, then notify the hero to start the card ----
+  useTypingDemo({
+    mode,
+    setQuery,
+    setPlaceholder,
+    enabled: demoEnabled,
+    textForMode: (m) => (m === "ai" ? DEMO_QUERY : "Linen shirt"),
+    onDone: (typed) => onDemoSubmit?.({ mode, query: typed }),
+  });
+
+  const setMode = (m) => {
+    if (controlledMode === undefined) setInternalMode(m);
+    onModeChange?.(m);
+  };
+
+  // cancel demo on any user interaction
+  const stopDemoAnd = (next) => (e) => {
+    if (demoEnabled) setDemoEnabled(false);
+    next?.(e);
+  };
+
+  const ctaLabel = mode === "ai" ? "Ask AI" : "Search";
+  const height = size === "compact" ? "h-11" : "h-14";
 
   function submit() {
     if (!query.trim()) return;
@@ -657,6 +641,7 @@ function DualModeSearchBar({
     </div>
   );
 }
+
 
 function HeroSkeletonLine({ w = "60%" }) {
   return (

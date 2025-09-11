@@ -581,16 +581,16 @@ function DualModeSearchBar({
 
         {/* Input */}
         <div className="flex-1 min-w-0 flex items-center gap-2">
-          <input
-            value={query}
-            onChange={stopDemoAnd((e) => setQuery(e.target.value))}
-            onKeyDown={stopDemoAnd((e) => e.key === "Enter" && submit())}
-   onMouseDown={stopDemoAnd()}      {/* user click/touch cancels */}
-   onTouchStart={stopDemoAnd()}     {/* mobile tap cancels */}
-            placeholder={placeholder}
-            className="min-w-0 w-full bg-transparent outline-none text-[15px] placeholder:text-black/40 dark:placeholder:text-white/40"
-            aria-label={mode === "ai" ? "Ask AI" : "Search"}
-          />
+         <input
+  value={query}
+  onChange={stopDemoAnd((e) => setQuery(e.target.value))}
+  onKeyDown={stopDemoAnd((e) => e.key === "Enter" && submit())}
+  onMouseDown={stopDemoAnd()}
+  onTouchStart={stopDemoAnd()}
+  placeholder={placeholder}
+  className="min-w-0 w-full bg-transparent outline-none text-[15px] placeholder:text-black/40 dark:placeholder:text-white/40"
+  aria-label={mode === "ai" ? "Ask AI" : "Search"}
+/>
         </div>
 
         {/* CTA */}
@@ -1605,6 +1605,14 @@ function TestPulse() {
   );
 }
 
+function TestPulse() {
+  return (
+    <div
+      aria-label="render-ok"
+      className="fixed bottom-3 right-3 h-3 w-3 rounded-full bg-fuchsia-500 animate-pulse z-[9999] pointer-events-none"
+    />
+  );
+}
 
 export default function App() {
   const [isFormOpen, setIsFormOpen] = useState(false);

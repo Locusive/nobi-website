@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { MotionConfig } from "framer-motion"
+
 
 // at the top of your file (e.g., App.jsx or the component where logos render)
 import lucchese from "/media/logos/lucchese.svg";
@@ -190,7 +190,7 @@ function ConversationDemo({ mode, playKey, query }) {
 
 function ConversationPreview({ mode, playKey, query }) {
   return (
-    <AnimatePresence mode="wait">
+    <AnimatePresence initial={false} mode="wait">
       <HeroConversationDemo
         key={`${mode}-${playKey}`}
         script={makeScript(mode, query)}
@@ -200,8 +200,6 @@ function ConversationPreview({ mode, playKey, query }) {
     </AnimatePresence>
   );
 }
-
-
 
 function BrandsRow() {
   const brands = [
@@ -512,67 +510,21 @@ function DualModeSearchBar({
   // re-run the typing demo whenever the mode toggles
   const [demoEnabled, setDemoEnabled] = React.useState(true);
   React.useEffect(() => {
-    setDemoEnabled(true);
-    setQuery("");
-  }, [mode]);
-
-  // Type the canned sentence, then notify the hero to start the card
-  useTypingDemo({
-    mode,
-    setQuery,
-    setPlaceholder,
-    enabled: demoEnabled,
-    textForMode: (m) => (m === "ai" ? DEMO_QUERY : "Linen shirt"),
-    onDone: (typed) => onDemoSubmit?.({ mode, query: typed }),
-  });
-
-  const setMode = (m) => {
-    if (controlledMode === undefined) setInternalMode(m);
-    onModeChange?.(m);
-    setDemoEnabled(true); // restart demo when switching tabs
-  };
-
-  // cancel demo on any user interaction
-  const stopDemoAnd = (next) => (e) => {
-    if (demoEnabled) setDemoEnabled(false);
-    next?.(e);
-  };
-
-  const ctaLabel = mode === "ai" ? "Ask AI" : "Search";
-  const height = size === "compact" ? "h-11" : "h-14";
-
-  // Animated toggle thumb (measured to match the active button)
-const toggleRef = React.useRef(null);
-const siteBtnRef = React.useRef(null);
-const aiBtnRef = React.useRef(null);
-const [thumb, setThumb] = React.useState({ left: 0, width: 0 });
-
-const measureThumb = React.useCallback(() => {
-  const btn = (mode === "ai" ? aiBtnRef.current : siteBtnRef.current);
-  if (!btn) return;
-  setThumb({ left: btn.offsetLeft, width: btn.offsetWidth });
-}, [mode]);
-
-React.useEffect(() => {
   // Run once to place the thumb
   measureThumb();
 
-  // Guard for SSR / old browsers
   const hasWindow = typeof window !== "undefined";
-  const hasRO = hasWindow && "ResizeObserver" in window;
+  const hasRO = hasWindow && typeof window.ResizeObserver !== "undefined";
 
-  // ResizeObserver (optional)
   let ro;
   if (hasRO && toggleRef.current) {
     ro = new ResizeObserver(() => measureThumb());
     try { ro.observe(toggleRef.current); } catch {}
   }
 
-  // Window resize (optional)
   const onResize = () => measureThumb();
   if (hasWindow) window.addEventListener("resize", onResize);
 
-  // Next frame (optional)
   const raf = hasWindow ? requestAnimationFrame(measureThumb) : null;
 
   return () => {
@@ -633,8 +585,8 @@ React.useEffect(() => {
             value={query}
             onChange={stopDemoAnd((e) => setQuery(e.target.value))}
             onKeyDown={stopDemoAnd((e) => e.key === "Enter" && submit())}
-   onMouseDown={stopDemoAnd()}      // user click/touch cancels
-   onTouchStart={stopDemoAnd()}     // mobile tap cancels
+   onMouseDown={stopDemoAnd()}      {/* user click/touch cancels */}
+   onTouchStart={stopDemoAnd()}     {/* mobile tap cancels */}
             placeholder={placeholder}
             className="min-w-0 w-full bg-transparent outline-none text-[15px] placeholder:text-black/40 dark:placeholder:text-white/40"
             aria-label={mode === "ai" ? "Ask AI" : "Search"}
@@ -1079,19 +1031,24 @@ function Testimonial() {
   const [leftHeight, setLeftHeight] = useState(0);
 
   useEffect(() => {
-    if (!leftRef.current) return;
+  if (!leftRef.current) return;
+  const el = leftRef.current;
 
-    const el = leftRef.current;
-    // Measure now and whenever the quote changes size
-    const ro = new ResizeObserver(() => {
-      setLeftHeight(el.getBoundingClientRect().height);
-    });
-    ro.observe(el);
-    // Initial measure
+  // If ResizeObserver isn't supported, measure once and exit
+  if (typeof window === "undefined" || typeof window.ResizeObserver === "undefined") {
+    setLeftHeight(el.getBoundingClientRect().height || 320);
+    return;
+  }
+
+  const ro = new ResizeObserver(() => {
     setLeftHeight(el.getBoundingClientRect().height);
+  });
+  ro.observe(el);
+  // Initial measure
+  setLeftHeight(el.getBoundingClientRect().height);
 
-    return () => ro.disconnect();
-  }, []);
+  return () => ro.disconnect();
+}, []);
 
   return (
     <section id="testimonial" className="py-20 border-t border-black/5 dark:border-white/5">
@@ -1639,72 +1596,62 @@ function RequestDemoModal({ open, onClose }) {
   );
 }
 
+function TestPulse() {
+  return (
+    <div
+      aria-label="render-ok"
+      className="fixed bottom-3 right-3 h-3 w-3 rounded-full bg-fuchsia-500 animate-pulse z-[9999] pointer-events-none"
+    />
+  );
+}
+
+
 export default function App() {
-const [isFormOpen, setIsFormOpen] = useState(false);
- const [isVideoOpen, setIsVideoOpen] = useState(false);  
-return (
-  <MotionConfig reducedMotion="never">
+  const [isFormOpen, setIsFormOpen] = useState(false);
+  const [isVideoOpen, setIsVideoOpen] = useState(false);
+
+  return (
     <div className="min-h-screen bg-gradient-to-b from-white to-slate-50 dark:from-[#0a0a0a] dark:to-black text-black dark:text-white">
       <header className="sticky top-0 z-40 border-b backdrop-blur bg-white/70 dark:bg-black/40">
-  <div className="mx-auto max-w-7xl px-6 h-16 flex items-center justify-between">
-    <a href="#home" className="flex items-center gap-3">
-      <Logo className="h-8 md:h-9 lg:h-10" />            {/* bigger on desktop */}
-    </a>
+        <div className="mx-auto max-w-7xl px-6 h-16 flex items-center justify-between">
+          <a href="#home" className="flex items-center gap-3">
+            <Logo className="h-8 md:h-9 lg:h-10" />
+          </a>
 
-    {/* Nav (unchanged) */}
-    <nav className="hidden md:flex items-center gap-6 text-sm">
-      <a href="#features" className="hover:opacity-80">Features</a>
-      <a href="#how" className="hover:opacity-80">How it works</a>
-      <a href="#pricing" className="hover:opacity-80">Pricing</a>
-      <a href="#faq" className="hover:opacity-80">FAQ</a>
-    </nav>
+          <nav className="hidden md:flex items-center gap-6 text-sm">
+            <a href="#features" className="hover:opacity-80">Features</a>
+            <a href="#how" className="hover:opacity-80">How it works</a>
+            <a href="#pricing" className="hover:opacity-80">Pricing</a>
+            <a href="#faq" className="hover:opacity-80">FAQ</a>
+          </nav>
 
-    <div className="hidden md:flex items-center gap-3">
-      <Button variant="ghost"><ShoppingCart className="h-4 w-4" /> Install Nobi</Button>
-    </div>
-  </div>
-</header>
+          <div className="hidden md:flex items-center gap-3">
+            <Button variant="ghost"><ShoppingCart className="h-4 w-4" /> Install Nobi</Button>
+          </div>
+        </div>
+      </header>
 
-     <Hero onOpenForm={() => setIsFormOpen(true)} onOpenVideo={() => setIsVideoOpen(true)} />
+      <Hero onOpenForm={() => setIsFormOpen(true)} onOpenVideo={() => setIsVideoOpen(true)} />
       <Logos />
       <Features />
       <Results />
-     <Insights />
+      <Insights />
       <Testimonial />
       <HowItWorks />
       <Pricing />
       <FAQ />
       <Footer />
-{/* Video modal */}
+
+      {/* Modals */}
       <RequestDemoModal open={isFormOpen} onClose={() => setIsFormOpen(false)} />
-<VideoModal open={isVideoOpen} onClose={() => setIsVideoOpen(false)} youtube="https://www.youtube.com/watch?v=RKqGC3CVZd0" />
-      </div>
-    const TestPulse = () => (
-  <motion.div
-    aria-label="framer-ok"
-    initial={{ scale: 0.8, opacity: 0.6 }}
-    animate={{ scale: 1.1, opacity: 1 }}
-    transition={{ repeat: Infinity, repeatType: "mirror", duration: 0.8 }}
-    className="fixed bottom-3 right-3 h-3 w-3 rounded-full bg-fuchsia-500 z-[9999] pointer-events-none"
-  />
-);
+      <VideoModal
+        open={isVideoOpen}
+        onClose={() => setIsVideoOpen(false)}
+        youtube="https://www.youtube.com/watch?v=RKqGC3CVZd0"
+      />
 
-// inside App() JSX, at the very bottom:
-<TestPulse />
-
-    </MotionConfig>
+      {/* Tiny heartbeat to confirm rendering */}
+      <TestPulse />
+    </div>
   );
-}
-
-// tests (basic vnodes)
-export function runSmokeTests() {
-  try {
-    const page = React.createElement(App, null);
-    if (!page || typeof page !== "object") throw new Error("App vnode");
-    const features = React.createElement(Features, null);
-    const results = React.createElement(Results, null);
-    const footer = React.createElement(Footer, null);
-    if (![features, results, footer].every(x => x && typeof x === "object")) throw new Error("child vnodes");
-    console.log("Smoke tests passed.");
-  } catch (e) { console.error("Smoke tests failed", e); }
 }

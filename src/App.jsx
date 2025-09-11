@@ -776,7 +776,7 @@ function Hero({ onOpenForm, onOpenVideo }) {
               </div>
               <div className="flex items-center gap-2">
                 <CheckCircle2 className="h-4 w-4 text-fuchsia-600" />
-                A/B testing & reporting
+                Insights reporting
               </div>
             </div>
           </div>

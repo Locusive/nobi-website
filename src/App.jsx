@@ -473,6 +473,12 @@ function DualModeSearchBar({
 
   // demo typing: replays when mode changes unless the user has interacted
   const [demoEnabled, setDemoEnabled] = useState(true);
+// If parent toggles between AI / Default, replay the typing demo
+useEffect(() => {
+  setDemoEnabled(true);
+  setQuery("");            // clear before re-typing
+}, [mode]);
+
   useTypingDemo({
     mode,
     setQuery,
@@ -569,7 +575,6 @@ function DualModeSearchBar({
           <input
             value={query}
             onChange={stopDemoAnd((e) => setQuery(e.target.value))}
-            onFocus={stopDemoAnd()}
             onKeyDown={stopDemoAnd((e) => e.key === "Enter" && submit())}
             placeholder={placeholder}
             className="min-w-0 w-full bg-transparent outline-none text-[15px] placeholder:text-black/40 dark:placeholder:text-white/40"

@@ -498,12 +498,15 @@ useEffect(() => {
   setQuery("");            // clear before re-typing
 }, [mode]);
 
+// stable reference so the typing effect doesn't restart on every render
+const demoTextForMode = React.useCallback(() => DEMO_QUERY, []);
+
   useTypingDemo({
   mode,
   setQuery,
   setPlaceholder,
   enabled: demoEnabled,
-  textForMode: () => DEMO_QUERY,   // the long sentence
+  textForMode: demoTextForMode,   // the long sentence
   onDone: (typed) => {
     onDemoSubmit?.({ mode, query: typed });
     setSubmitted({ mode, query: typed });
@@ -830,11 +833,7 @@ function Hero({ onOpenForm, onOpenVideo }) {
             </div>
 
             {/* Preview card */}
-            <ConversationDemo
-              mode={searchMode}
-              playKey={playKey}
-              query={lastQuery}
-            />
+            <ConversationPreview mode={searchMode} playKey={playKey} query={lastQuery} />
           </div>
         </div>
       </div>

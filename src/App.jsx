@@ -73,7 +73,7 @@ function HeroProductCard({ title = "Oxford Shirt", price = "$168", img }) {
 function HeroConversationDemo({ script, startKey }) {
   const {
     userText = "Looking for a linen shirt under $100 for a wedding — it's on the beach and I'll be wearing a navy jacket.",
-    aiText   = "Got it! Here are beach-appropriate linen options in white, cream and eggshell, which would go great with a navy jacket.",
+    aiText   = "Got it! Here are beach-appropriate linen options in white, cream and eggshell, which go well with a navy jacket.",
     products = [
       { title: "Legend Oxford", price: "$68", img: "/media/prod-1.png" },
       { title: "Coastal Linen", price: "$78", img: "/media/prod-2.png" },
@@ -81,13 +81,13 @@ function HeroConversationDemo({ script, startKey }) {
     ],
   } = script || {};
 
-  const [step, setStep] = React.useState(-1);   // -1 idle, 0 user, 1 ai, 2 products
+  const [step, setStep] = React.useState(-1); // -1 idle, 0 user, 1 ai, 2 products
   const scrollerRef = React.useRef(null);
   const productsRef = React.useRef(null);
 
-  // (Re)start sequence whenever startKey or script changes
+  // Start sequence ONLY when startKey becomes >= 0
   React.useEffect(() => {
-    if (startKey < 0) return;
+    if (startKey < 0) return; // gate on initial mount
     setStep(0);
     scrollerRef.current?.scrollTo({ top: 0, behavior: "auto" });
     const t1 = setTimeout(() => setStep(1), 1500);
@@ -114,7 +114,6 @@ function HeroConversationDemo({ script, startKey }) {
     <div className="w-full rounded-2xl border border-black/10 dark:border-white/10 bg-white/60 dark:bg-white/5 overflow-hidden shadow-inner">
       <AspectBox ratio={16 / 9}>
         <div className="absolute inset-0 p-4 sm:p-5 md:p-6 flex flex-col gap-3 sm:gap-4">
-          {/* inner box REMOVED to gain space */}
           <div ref={scrollerRef} className="flex-1 overflow-y-auto">
             <div className="flex h-full flex-col gap-2.5 sm:gap-3">
               {showUser1 && (
@@ -123,7 +122,7 @@ function HeroConversationDemo({ script, startKey }) {
                 </motion.div>
               )}
               {showAi1 && (
-                <motion.div initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }}>
+                <motion.div initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.55 }}>
                   <ChatBubble from="ai">{aiText}</ChatBubble>
                 </motion.div>
               )}
@@ -179,9 +178,9 @@ function ConversationDemo({ mode, playKey, query }) {
 }
 
 function ConversationPreview({ mode, playKey, query }) {
-  // feed the typed query into the script
   return <HeroConversationDemo script={makeScript(mode, query)} startKey={playKey} />;
 }
+
 
 function BrandsRow() {
   const brands = [
@@ -426,26 +425,20 @@ function useTypingDemo({
   onDone,
   textForMode, // string or (mode) => string
 }) {
-  // keep the latest onDone without forcing the effect to re-run
-  const doneRef = React.useRef(onDone);
-  React.useEffect(() => { doneRef.current = onDone; }, [onDone]);
-
   React.useEffect(() => {
     if (!enabled) return;
 
     const toType =
-      typeof textForMode === "function" ? textForMode(mode) : (textForMode || "");
+      typeof textForMode === "function" ? textForMode(mode) : textForMode || "";
 
-    // show the normal placeholders before typing begins
-    const initialPlaceholder =
-      mode === "ai" ? "Describe what you want..." : "Search products...";
-    setPlaceholder(initialPlaceholder);
-    setQuery(""); // value (black text) replaces the placeholder
+    // Show the standard placeholders until we start typing
+    setPlaceholder(mode === "ai" ? "Describe what you want..." : "Search products...");
+    setQuery(""); // start empty so value text (black) replaces placeholder
 
-    // speed controls
+    // typing cadence
     const startDelay = 600;
-    const baseSpeed  = 24; // ms/char
-    const jitter     = 20;
+    const baseSpeed = 24; // ms per char
+    const jitter = 20;
 
     let cancelled = false;
     const timers = [];
@@ -460,7 +453,7 @@ function useTypingDemo({
           const t = setTimeout(step, baseSpeed + Math.random() * jitter);
           timers.push(t);
         } else {
-          const t = setTimeout(() => doneRef.current?.(toType), 450);
+          const t = setTimeout(() => onDone?.(toType), 450);
           timers.push(t);
         }
       };
@@ -472,8 +465,7 @@ function useTypingDemo({
       clearTimeout(startTimer);
       timers.forEach(clearTimeout);
     };
-  // ⬇︎ intentionally NOT depending on onDone (we use doneRef instead)
-  }, [mode, enabled, setQuery, setPlaceholder, textForMode]);
+  }, [mode, enabled, setQuery, setPlaceholder, onDone, textForMode]);
 }
 
 function DualModeSearchBar({
@@ -481,8 +473,8 @@ function DualModeSearchBar({
   size = "regular",
   mode: controlledMode,
   onModeChange,
-  onSubmit,        // NEW: gets called when user clicks/presses Enter
-  onDemoSubmit,    // NEW: gets called after the typing demo finishes
+  onSubmit,
+  onDemoSubmit, // called when the demo finishes typing
 }) {
   const [internalMode, setInternalMode] = useState(defaultMode);
   const mode = controlledMode ?? internalMode;
@@ -492,36 +484,28 @@ function DualModeSearchBar({
     mode === "ai" ? "Describe what you want..." : "Search products..."
   );
 
-  // demo typing: replays when mode changes unless the user has interacted
+  // replay the typing demo whenever mode changes
   const [demoEnabled, setDemoEnabled] = useState(true);
-// If parent toggles between AI / Default, replay the typing demo
-useEffect(() => {
-  setDemoEnabled(true);
-  setQuery("");            // clear before re-typing
-}, [mode]);
+  useEffect(() => {
+    setDemoEnabled(true);
+    setQuery("");
+  }, [mode]);
 
-// stable references so the effect doesn't restart every render
-const demoTextForMode = React.useCallback(() => DEMO_QUERY, []);
-const handleDemoDone  = React.useCallback((typed) => {
-onDone: (typed) => {
-  onDemoSubmit?.({ mode, query: typed });
-setSubmitted({ mode, query: typed });
-setTimeout(() => setSubmitted(null), 1600);
-}, [onDemoSubmit, mode]);
-
-useTypingDemo({
-mode,
-setQuery,
-setPlaceholder,
-enabled: demoEnabled,
-textForMode: demoTextForMode,
-onDone: handleDemoDone,
-});
+  useTypingDemo({
+    mode,
+    setQuery,
+    setPlaceholder,
+    enabled: demoEnabled,
+    textForMode: () => DEMO_QUERY, // sentence to type
+    onDone: (typed) => {
+      onDemoSubmit?.({ mode, query: typed }); // kick off the card
+    },
+  });
 
   const setMode = (m) => {
     if (controlledMode === undefined) setInternalMode(m);
     onModeChange?.(m);
-    setDemoEnabled(true);           // replay typing on toggle
+    setDemoEnabled(true);
   };
 
   // cancel demo on any user interaction
@@ -533,7 +517,7 @@ onDone: handleDemoDone,
   const ctaLabel = mode === "ai" ? "Ask AI" : "Search";
   const height = size === "regular" ? "h-14" : "h-11";
 
-  // toggle thumb animation
+  // animated toggle thumb
   const toggleRef = useRef(null);
   const siteBtnRef = useRef(null);
   const aiBtnRef = useRef(null);
@@ -546,7 +530,7 @@ onDone: handleDemoDone,
   useEffect(() => {
     measureThumb();
     const ro = new ResizeObserver(measureThumb);
-    if (toggleRef.current) ro.observe(toggleRef.current);
+    toggleRef.current && ro.observe(toggleRef.current);
     const onR = () => measureThumb();
     window.addEventListener("resize", onR);
     const raf = requestAnimationFrame(measureThumb);
@@ -600,6 +584,7 @@ onDone: handleDemoDone,
             value={query}
             onChange={stopDemoAnd((e) => setQuery(e.target.value))}
             onKeyDown={stopDemoAnd((e) => e.key === "Enter" && submit())}
+            onFocus={stopDemoAnd()}
             placeholder={placeholder}
             className="min-w-0 w-full bg-transparent outline-none text-[15px] placeholder:text-black/40 dark:placeholder:text-white/40"
             aria-label={mode === "ai" ? "Ask AI" : "Search"}
@@ -617,8 +602,6 @@ onDone: handleDemoDone,
           <span className="hidden sm:inline">{ctaLabel}</span>
         </Button>
       </div>
-
-      {/* Tiny toast */}
     </div>
   );
 }
@@ -744,23 +727,21 @@ function VideoModal({ open, onClose, youtube, src, poster = "" }) {
 
 
 function Hero({ onOpenForm, onOpenVideo }) {
-  
-  const [searchMode, setSearchMode] = React.useState("ai"); // "ai" | "site"
-  const [playKey, setPlayKey] = React.useState(-1);          // bump to restart preview
+  const [searchMode, setSearchMode] = React.useState("ai");  // "ai" | "site"
+  const [playKey, setPlayKey] = React.useState(-1);          // ⬅️ gated start
   const [lastQuery, setLastQuery] = React.useState(DEMO_QUERY);
 
-  // Called both when the typing demo finishes and when the user manually submits
   const kickOffPreview = ({ mode, query }) => {
     setSearchMode(mode);
     setLastQuery(query || DEMO_QUERY);
-    setPlayKey((k) => k + 1);
+    setPlayKey((k) => k + 1); // from -1 → 0 triggers the card
   };
 
   return (
     <section id="home" className="relative overflow-hidden mb-3">
       <div className="mx-auto max-w-6xl px-6 pt-16 sm:pt-24">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
-          {/* LEFT: headline, value prop, CTAs */}
+          {/* LEFT */}
           <div className="space-y-6">
             <h1 className="text-5xl sm:text-6xl font-semibold tracking-tight text-balance">
               Turn product search into a{" "}
@@ -804,7 +785,7 @@ function Hero({ onOpenForm, onOpenVideo }) {
             </div>
           </div>
 
-          {/* RIGHT: search bar (types first) + preview that starts afterwards */}
+          {/* RIGHT: search bar then preview */}
           <div className="relative">
             <div className="mb-4 p-4 rounded-2xl border border-fuchsia-200 bg-gradient-to-r from-fuchsia-50 to-pink-50 shadow-md">
               <DualModeSearchBar
@@ -812,12 +793,12 @@ function Hero({ onOpenForm, onOpenVideo }) {
                 onModeChange={setSearchMode}
                 defaultMode="ai"
                 size="compact"
-                onDemoSubmit={kickOffPreview}   // auto after typing demo
-                onSubmit={kickOffPreview}       // real clicks/Enter
+                onDemoSubmit={kickOffPreview}  // after typing demo
+                onSubmit={kickOffPreview}      // manual submit
               />
             </div>
 
-            {/* Preview card */}
+            {/* Preview card (script uses lastQuery). It will animate only after playKey >= 0 */}
             <ConversationPreview mode={searchMode} playKey={playKey} query={lastQuery} />
           </div>
         </div>
@@ -825,8 +806,6 @@ function Hero({ onOpenForm, onOpenVideo }) {
     </section>
   );
 }
-
-
 
 function BrandMark({ src, label, className = "" }) {
   // Renders the SVG as a mask so the shape fills the box exactly

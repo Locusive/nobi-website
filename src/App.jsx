@@ -12,7 +12,7 @@ import stbernard from "/media/logos/stbernard.svg";
 
 // Demo sentence that should be typed into the search bar for both modes
 const DEMO_QUERY =
-  "Looking for a linen shirt under $100 for a wedding — it's on the beach and I'll be wearing a navy jacket";
+  "Linen shirt under $100 for a wedding — it's on the beach and I'll be wearing a navy jacket";
 
 
 /* ===================== Hero Conversation Demo ===================== */
@@ -72,7 +72,7 @@ function HeroProductCard({ title = "Oxford Shirt", price = "$168", img }) {
 
 function HeroConversationDemo({ script, startKey }) {
   const {
-    userText = "Looking for a linen shirt under $100 for a wedding — it's on the beach and I'll be wearing a navy jacket.",
+    userText = "Linen shirt under $100 for a wedding — it's on the beach and I'll be wearing a navy jacket.",
     aiText   = "Got it! Here are beach-appropriate linen options in white, cream and eggshell, which go well with a navy jacket.",
     products = [
       { title: "Legend Oxford", price: "$68", img: "/media/prod-1.png" },
@@ -151,7 +151,7 @@ function HeroConversationDemo({ script, startKey }) {
 function makeScript(mode, q = "linen shirt for a wedding") {
   if (mode === "ai") {
     return {
-      userText: `Looking for a linen shirt under $100 for a wedding — it's on the beach and I'll be wearing a navy jacket.`,
+      userText: `Linen shirt under $100 for a wedding — it's on the beach and I'll be wearing a navy jacket.`,
       aiText:
         "Got it! Here are beach-appropriate linen options in white, cream and eggshell, which would go great with a navy jacket.",
       products: [

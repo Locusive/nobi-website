@@ -806,21 +806,7 @@ function Hero({ onOpenForm, onOpenVideo }) {
             </Button>
           </div>
 
-          {/* Badges */}
-          <div className="flex flex-wrap items-center justify-center gap-5 text-sm text-black/60 dark:text-white/60">
-            <span className="inline-flex items-center gap-2">
-              <CheckCircle2 className="h-4 w-4 text-fuchsia-600" />
-              15-minute install
-            </span>
-            <span className="inline-flex items-center gap-2">
-              <CheckCircle2 className="h-4 w-4 text-fuchsia-600" />
-              Shopify & headless
-            </span>
-            <span className="inline-flex items-center gap-2">
-              <CheckCircle2 className="h-4 w-4 text-fuchsia-600" />
-              A/B testing & reporting
-            </span>
-          </div>
+        
         </div>
 
         {/* Search bar */}

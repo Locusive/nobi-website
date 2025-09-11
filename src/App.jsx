@@ -70,7 +70,7 @@ function HeroProductCard({ title = "Oxford Shirt", price = "$168", img }) {
   );
 }
 
-function HeroConversationDemo({ script, startKey, ratio = 16 / 9 }) {
+function HeroConversationDemo({ script, startKey, ratio = 4 / 3 }) {
   const {
     userText = "Linen shirt under $100 for a beach wedding that goes with a navy jacket.",
     aiText   = "Got it! Here are beach-appropriate linen options in white, cream and eggshell, which go well with a navy jacket.",
@@ -88,11 +88,19 @@ function HeroConversationDemo({ script, startKey, ratio = 16 / 9 }) {
   // Start sequence ONLY when startKey becomes >= 0
   React.useEffect(() => {
     if (startKey < 0) return; // gate on initial mount
-    setStep(0);
+    const hasUser = Boolean(userText?.trim());
+    const hasAi   = Boolean(aiText?.trim());
+    // If no bubbles at all, jump straight to products
+    if (!hasUser && !hasAi) {
+      setStep(2);
+      return;
+    }
+    // Otherwise, step through what exists
+    setStep(hasUser ? 0 : 1);
     scrollerRef.current?.scrollTo({ top: 0, behavior: "auto" });
-    const t1 = setTimeout(() => setStep(1), 1500);
-    const t2 = setTimeout(() => setStep(2), 3300);
-    return () => { clearTimeout(t1); clearTimeout(t2); };
+    const t1 = hasAi ? setTimeout(() => setStep(1), 1200) : null;
+    const t2 = setTimeout(() => setStep(2), hasAi ? 3000 : 1200);
+    return () => { if (t1) clearTimeout(t1); clearTimeout(t2); };
   }, [startKey, userText, aiText, products]);
 
   // Smooth scroll to products
@@ -106,8 +114,8 @@ function HeroConversationDemo({ script, startKey, ratio = 16 / 9 }) {
     }
   }, [step]);
 
-  const showUser1 = step >= 0;
-  const showAi1 = step >= 1;
+  const showUser1 = step >= 0 && Boolean(userText?.trim());
+  const showAi1   = step >= 1 && Boolean(aiText?.trim());
   const showProducts = step >= 2;
 
   return (
@@ -116,12 +124,12 @@ function HeroConversationDemo({ script, startKey, ratio = 16 / 9 }) {
         <div className="absolute inset-0 p-4 sm:p-5 md:p-6 flex flex-col gap-3 sm:gap-4">
           <div ref={scrollerRef} className="flex-1 overflow-y-auto">
             <div className="flex h-full flex-col gap-2.5 sm:gap-3">
-              {showUser1 && (
+              {showUser1 && userText && (
                 <motion.div initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.55 }}>
                   <ChatBubble from="user">{userText}</ChatBubble>
                 </motion.div>
               )}
-              {showAi1 && (
+              {showAi1 && aiText && (
                 <motion.div initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.55 }}>
                   <ChatBubble from="ai">{aiText}</ChatBubble>
                 </motion.div>
@@ -162,11 +170,12 @@ function makeScript(mode, q = "linen shirt for a wedding") {
     };
   }
   return {
-    userText: `Linen shirt`,
+    userText: "",
+    aiText: "",
     products: [
-      { title: "Washed Linen Shirt", price: "$129", img: "/media/prod-1.png" },
-      { title: "Summer Oxford", price: "$138", img: "/media/prod-2.png" },
-      { title: "Classic Button-down", price: "$148", img: "/media/prod-3.png" },
+      { title: "Washed Linen Shirt",  price: "$129", img: "/media/prod-1.png" },
+      { title: "Summer Oxford",       price: "$138", img: "/media/prod-2.png" },
+      { title: "Classic Button-down", price: "$148", img: "/media/prod-3.png" }
     ],
   };
 }
@@ -506,10 +515,8 @@ function DualModeSearchBar({
     setQuery,
     setPlaceholder,
     enabled: demoEnabled,
-    textForMode: DEMO_QUERY,
-    onDone: (typed) => {
-      onDemoSubmit?.({ mode, query: typed });
-    },
+    textForMode: (m) => (m === "ai" ? DEMO_QUERY : "Linen shirt"),
+    onDone: (typed) => onDemoSubmit?.({ mode, query: typed }),
   });
 
   const setMode = (m) => {

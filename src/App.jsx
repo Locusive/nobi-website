@@ -173,8 +173,8 @@ function makeScript(mode, q = "linen shirt for a wedding") {
 }
 
 // Adapter so the hero can pass mode + a restart key
-function ConversationDemo({ mode, playKey }) {
-  return <HeroConversationDemo script={makeScript(mode)} startKey={playKey} />;
+function ConversationDemo({ mode, playKey, query }) {
+  return <HeroConversationDemo script={makeScript(mode, query)} startKey={playKey} />;
 }
 
 function ConversationPreview({ mode, playKey, query }) {
@@ -423,26 +423,28 @@ function useTypingDemo({
   setPlaceholder,
   enabled = true,
   onDone,
-  textForMode,        // <-- new: string or (mode) => string
+  textForMode, // string or (mode) => string
 }) {
+  // keep the latest onDone without forcing the effect to re-run
+  const doneRef = React.useRef(onDone);
+  React.useEffect(() => { doneRef.current = onDone; }, [onDone]);
+
   React.useEffect(() => {
     if (!enabled) return;
 
-    // What to type (same text for both modes here)
     const toType =
-      typeof textForMode === "function" ? textForMode(mode) : textForMode || "";
+      typeof textForMode === "function" ? textForMode(mode) : (textForMode || "");
 
-    // Show the normal placeholders before typing begins
+    // show the normal placeholders before typing begins
     const initialPlaceholder =
       mode === "ai" ? "Describe what you want..." : "Search products...";
-
     setPlaceholder(initialPlaceholder);
-    setQuery(""); // start empty so the value (black text) replaces the placeholder
+    setQuery(""); // value (black text) replaces the placeholder
 
-    // ⏱ tweak these two to change speed
+    // speed controls
     const startDelay = 600;
-    const baseSpeed = 24;  // milliseconds per char
-    const jitter = 20;     // random variation
+    const baseSpeed  = 24; // ms/char
+    const jitter     = 20;
 
     let cancelled = false;
     const timers = [];
@@ -451,14 +453,13 @@ function useTypingDemo({
       let i = 0;
       const step = () => {
         if (cancelled) return;
-        setQuery(toType.slice(0, i + 1)); // value renders in black
+        setQuery(toType.slice(0, i + 1));
         i++;
         if (i < toType.length) {
           const t = setTimeout(step, baseSpeed + Math.random() * jitter);
           timers.push(t);
         } else {
-          // short pause to feel like a click/submit
-          const t = setTimeout(() => onDone?.(toType), 450);
+          const t = setTimeout(() => doneRef.current?.(toType), 450);
           timers.push(t);
         }
       };
@@ -470,7 +471,8 @@ function useTypingDemo({
       clearTimeout(startTimer);
       timers.forEach(clearTimeout);
     };
-  }, [mode, enabled, setQuery, setPlaceholder, onDone, textForMode]);
+  // ⬇︎ intentionally NOT depending on onDone (we use doneRef instead)
+  }, [mode, enabled, setQuery, setPlaceholder, textForMode]);
 }
 
 function DualModeSearchBar({
@@ -498,20 +500,21 @@ useEffect(() => {
   setQuery("");            // clear before re-typing
 }, [mode]);
 
-// stable reference so the typing effect doesn't restart on every render
+// stable references so the effect doesn't restart every render
 const demoTextForMode = React.useCallback(() => DEMO_QUERY, []);
+const handleDemoDone  = React.useCallback((typed) => {
+onDemoSubmit?.({ mode, query: typed });
+setSubmitted({ mode, query: typed });
+setTimeout(() => setSubmitted(null), 1600);
+}, [onDemoSubmit, mode]);
 
-  useTypingDemo({
-  mode,
-  setQuery,
-  setPlaceholder,
-  enabled: demoEnabled,
-  textForMode: demoTextForMode,   // the long sentence
-  onDone: (typed) => {
-    onDemoSubmit?.({ mode, query: typed });
-    setSubmitted({ mode, query: typed });
-    setTimeout(() => setSubmitted(null), 1600);
-  },
+useTypingDemo({
+mode,
+setQuery,
+setPlaceholder,
+enabled: demoEnabled,
+textForMode: demoTextForMode,
+onDone: handleDemoDone,
 });
 
   const setMode = (m) => {
@@ -756,10 +759,7 @@ function VideoModal({ open, onClose, youtube, src, poster = "" }) {
 
 
 function Hero({ onOpenForm, onOpenVideo }) {
-  // The sentence we want typed into the search bar before the preview runs
-  const DEMO_QUERY =
-    "Looking for a linen shirt under $100 for a wedding — it's on the beach and I'll be wearing a navy jacket";
-
+  
   const [searchMode, setSearchMode] = React.useState("ai"); // "ai" | "site"
   const [playKey, setPlayKey] = React.useState(0);          // bump to restart preview
   const [lastQuery, setLastQuery] = React.useState(DEMO_QUERY);

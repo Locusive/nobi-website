@@ -112,7 +112,7 @@ function HeroConversationDemo({ script, startKey }) {
 
   return (
     <div className="w-full rounded-2xl border border-black/10 dark:border-white/10 bg-white/60 dark:bg-white/5 overflow-hidden shadow-inner">
-      <AspectBox ratio={16 / 9}>
+      <AspectBox ratio={ratio}>
         <div className="absolute inset-0 p-4 sm:p-5 md:p-6 flex flex-col gap-3 sm:gap-4">
           <div ref={scrollerRef} className="flex-1 overflow-y-auto">
             <div className="flex h-full flex-col gap-2.5 sm:gap-3">
@@ -178,7 +178,13 @@ function ConversationDemo({ mode, playKey, query }) {
 }
 
 function ConversationPreview({ mode, playKey, query }) {
-  return <HeroConversationDemo script={makeScript(mode, query)} startKey={playKey} />;
+return (
+<HeroConversationDemo
+script={makeScript(mode, query)}
+startKey={playKey}
+ratio={4 / 3}     // try 4/3 or 16/10 for a taller feel
+/>
+);
 }
 
 
@@ -742,79 +748,81 @@ function VideoModal({ open, onClose, youtube, src, poster = "" }) {
 
 function Hero({ onOpenForm, onOpenVideo }) {
   const [searchMode, setSearchMode] = React.useState("ai");  // "ai" | "site"
-  const [playKey, setPlayKey] = React.useState(-1);          // start gated
+  const [playKey, setPlayKey] = React.useState(-1);
   const [lastQuery, setLastQuery] = React.useState(DEMO_QUERY);
 
   // fires after typing demo OR manual submit
   const kickOffPreview = ({ mode, query }) => {
     setSearchMode(mode);
     setLastQuery(query || DEMO_QUERY);
-    setPlayKey((k) => k + 1); // -1 → 0 kicks off card animation
+    setPlayKey((k) => k + 1);
   };
 
   return (
-    <section id="home" className="relative overflow-hidden mb-3">
-      <div className="mx-auto max-w-6xl px-6 pt-16 sm:pt-24">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
-          {/* LEFT */}
-          <div className="space-y-6">
-            <h1 className="text-5xl sm:text-6xl font-semibold tracking-tight text-balance">
-              Turn product search into a{" "}
-              <span className="bg-gradient-to-r from-indigo-500 via-violet-500 to-fuchsia-500 bg-clip-text text-transparent">
-                conversation
-              </span>
-            </h1>
+    <section id="home" className="relative overflow-hidden">
+      <div className="mx-auto max-w-7xl px-6 pt-16 sm:pt-24 pb-6">
+        {/* Headline + subhead */}
+        <div className="max-w-4xl mx-auto text-center space-y-6">
+          <h1 className="text-5xl sm:text-6xl font-semibold tracking-tight text-balance">
+            Turn product search into a{" "}
+            <span className="bg-gradient-to-r from-indigo-500 via-violet-500 to-fuchsia-500 bg-clip-text text-transparent">
+              conversation
+            </span>
+          </h1>
 
-            <p className="text-lg text-black/70 dark:text-white/70 max-w-2xl">
-              Nobi gets your customers the right products faster with conversational AI.
-            </p>
+          <p className="text-lg text-black/70 dark:text-white/70">
+            Nobi gets your customers the right products faster with conversational AI.
+          </p>
 
-            <div className="flex flex-col sm:flex-row gap-3">
-              <Button size="lg" onClick={onOpenForm} className="w-full sm:w-auto">
-                Try it on your store
-              </Button>
-              <Button size="lg" variant="ghost" onClick={onOpenVideo} className="w-full sm:w-auto">
-                <PlayCircle className="h-5 w-5" />
-                How it works in 60 seconds
-              </Button>
-            </div>
-
-            <div className="flex flex-wrap items-center gap-5 text-sm text-black/60 dark:text-white/60">
-              <span className="inline-flex items-center gap-2">
-                <CheckCircle2 className="h-4 w-4 text-fuchsia-600" />
-                15-minute install
-              </span>
-              <span className="inline-flex items-center gap-2">
-                <CheckCircle2 className="h-4 w-4 text-fuchsia-600" />
-                Shopify & headless
-              </span>
-              <span className="inline-flex items-center gap-2">
-                <CheckCircle2 className="h-4 w-4 text-fuchsia-600" />
-                A/B testing & reporting
-              </span>
-            </div>
+          {/* CTAs */}
+          <div className="flex flex-wrap justify-center gap-3">
+            <Button size="lg" onClick={onOpenForm}>Try it on your store</Button>
+            <Button size="lg" variant="ghost" onClick={onOpenVideo}>
+              <PlayCircle className="h-5 w-5" />
+              How it works in 60 seconds
+            </Button>
           </div>
 
-          {/* RIGHT: search first, preview after it */}
-          <div className="relative">
-            <div className="mb-4 p-4 rounded-2xl border border-fuchsia-200 bg-gradient-to-r from-fuchsia-50 to-pink-50 shadow-md">
-              <DualModeSearchBar
-                mode={searchMode}
-                onModeChange={setSearchMode}
-                defaultMode="ai"
-                size="compact"
-                onDemoSubmit={kickOffPreview}   // auto after typing demo
-                onSubmit={kickOffPreview}       // real clicks/Enter
-              />
-            </div>
-
-            <ConversationPreview mode={searchMode} playKey={playKey} query={lastQuery} />
+          {/* Badges */}
+          <div className="flex flex-wrap items-center justify-center gap-5 text-sm text-black/60 dark:text-white/60">
+            <span className="inline-flex items-center gap-2">
+              <CheckCircle2 className="h-4 w-4 text-fuchsia-600" />
+              15-minute install
+            </span>
+            <span className="inline-flex items-center gap-2">
+              <CheckCircle2 className="h-4 w-4 text-fuchsia-600" />
+              Shopify & headless
+            </span>
+            <span className="inline-flex items-center gap-2">
+              <CheckCircle2 className="h-4 w-4 text-fuchsia-600" />
+              A/B testing & reporting
+            </span>
           </div>
+        </div>
+
+        {/* Search bar */}
+        <div className="mt-8 max-w-4xl mx-auto">
+          <div className="p-4 rounded-2xl border border-fuchsia-200 bg-gradient-to-r from-fuchsia-50 to-pink-50 shadow-md">
+            <DualModeSearchBar
+              mode={searchMode}
+              onModeChange={setSearchMode}
+              defaultMode="ai"
+              size="regular"                 // bigger than "compact"
+              onDemoSubmit={kickOffPreview}
+              onSubmit={kickOffPreview}
+            />
+          </div>
+        </div>
+
+        {/* Preview card (bigger width) */}
+        <div className="mt-4 max-w-5xl mx-auto">
+          <ConversationPreview mode={searchMode} playKey={playKey} query={lastQuery} />
         </div>
       </div>
     </section>
   );
 }
+
 
 function BrandMark({ src, label, className = "" }) {
   // Renders the SVG as a mask so the shape fills the box exactly

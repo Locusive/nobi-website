@@ -87,6 +87,7 @@ function HeroConversationDemo({ script, startKey }) {
 
   // (Re)start sequence whenever startKey or script changes
   React.useEffect(() => {
+    if (startKey < 0) return;
     setStep(0);
     scrollerRef.current?.scrollTo({ top: 0, behavior: "auto" });
     const t1 = setTimeout(() => setStep(1), 1500);
@@ -490,7 +491,6 @@ function DualModeSearchBar({
   const [placeholder, setPlaceholder] = useState(
     mode === "ai" ? "Describe what you want..." : "Search products..."
   );
-  const [submitted, setSubmitted] = useState(null);
 
   // demo typing: replays when mode changes unless the user has interacted
   const [demoEnabled, setDemoEnabled] = useState(true);
@@ -503,7 +503,8 @@ useEffect(() => {
 // stable references so the effect doesn't restart every render
 const demoTextForMode = React.useCallback(() => DEMO_QUERY, []);
 const handleDemoDone  = React.useCallback((typed) => {
-onDemoSubmit?.({ mode, query: typed });
+onDone: (typed) => {
+  onDemoSubmit?.({ mode, query: typed });
 setSubmitted({ mode, query: typed });
 setTimeout(() => setSubmitted(null), 1600);
 }, [onDemoSubmit, mode]);
@@ -559,8 +560,6 @@ onDone: handleDemoDone,
   function submit() {
     if (!query.trim()) return;
     onSubmit?.({ mode, query });
-    setSubmitted({ mode, query });
-    setTimeout(() => setSubmitted(null), 1600);
   }
 
   return (
@@ -620,20 +619,6 @@ onDone: handleDemoDone,
       </div>
 
       {/* Tiny toast */}
-      {submitted && (
-        <motion.div
-          initial={{ opacity: 0, y: 6 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: 6 }}
-          className="mt-3 inline-flex items-center gap-2 rounded-full bg-black/90 text-white px-3 py-1 text-xs"
-        >
-          <span className="inline-flex items-center gap-1">
-            {submitted.mode === "ai" ? <Sparkles className="h-4 w-4" /> : <SearchIcon className="h-4 w-4" />} {submitted.mode === "ai" ? "AI" : "Default"}
-          </span>
-          <span className="opacity-80">•</span>
-          <span className="truncate max-w-[60ch]">{submitted.query}</span>
-        </motion.div>
-      )}
     </div>
   );
 }
@@ -761,7 +746,7 @@ function VideoModal({ open, onClose, youtube, src, poster = "" }) {
 function Hero({ onOpenForm, onOpenVideo }) {
   
   const [searchMode, setSearchMode] = React.useState("ai"); // "ai" | "site"
-  const [playKey, setPlayKey] = React.useState(0);          // bump to restart preview
+  const [playKey, setPlayKey] = React.useState(-1);          // bump to restart preview
   const [lastQuery, setLastQuery] = React.useState(DEMO_QUERY);
 
   // Called both when the typing demo finishes and when the user manually submits

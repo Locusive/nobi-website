@@ -51,14 +51,14 @@ function DualModeSearchBar({
     mode === "ai" ? "Describe what you want..." : "Search products..."
   );
 
-  // replay typing demo whenever mode changes (until the user interacts)
+  // replay typing demo whenever mode changes (until user interacts)
   const [demoEnabled, setDemoEnabled] = React.useState(true);
   React.useEffect(() => {
     setDemoEnabled(true);
     setQuery("");
   }, [mode]);
 
-  // type the demo query, then call onDemoSubmit
+  // type DEMO_QUERY, then kick off the preview
   useTypingDemo({
     mode,
     setQuery,
@@ -71,8 +71,8 @@ function DualModeSearchBar({
   const setMode = (m) => {
     if (controlledMode === undefined) setInternalMode(m);
     onModeChange?.(m);
-    setDemoEnabled(true);   // retrigger demo when toggled
-    setQuery("");           // clear current input
+    setDemoEnabled(true);
+    setQuery("");
   };
 
   // cancel demo on any user interaction
@@ -117,41 +117,27 @@ function DualModeSearchBar({
 
   return (
     <div className="w-full max-w-3xl">
-      <div
-        className={`flex items-center gap-2 rounded-2xl border border-black/10 dark:border-white/15 bg-white/70 dark:bg-white/5 backdrop-blur px-2 ${height} shadow-sm`}
-      >
+      <div className={`flex items-center gap-2 rounded-2xl border border-black/10 dark:border-white/15 bg-white/70 dark:bg-white/5 backdrop-blur px-2 ${height} shadow-sm`}>
         {/* Toggle */}
-        <div
-          ref={toggleRef}
-          className="relative isolate inline-flex rounded-xl bg-black/5 dark:bg-white/10 overflow-hidden shrink-0"
-        >
+        <div ref={toggleRef} className="relative isolate inline-flex rounded-xl bg-black/5 dark:bg-white/10 overflow-hidden shrink-0">
           <button
             ref={siteBtnRef}
-            className={`relative z-[1] rounded-lg px-3 py-1.5 text-xs sm:px-4 sm:py-2 sm:text-sm font-medium transition-colors duration-300 ${
-              mode === "site" ? "text-black dark:text-white" : "text-black/60 dark:text-white/60"
-            }`}
+            className={`relative z-[1] rounded-lg px-3 py-1.5 text-xs sm:px-4 sm:py-2 sm:text-sm font-medium transition-colors duration-300 ${mode === "site" ? "text-black dark:text-white" : "text-black/60 dark:text-white/60"}`}
             onClick={() => setMode("site")}
           >
             Default
           </button>
           <button
             ref={aiBtnRef}
-            className={`relative z-[1] rounded-lg px-3 py-1.5 text-xs sm:px-4 sm:py-2 sm:text-sm font-medium transition-colors duration-300 ${
-              mode === "ai" ? "text-black dark:text-white" : "text-black/60 dark:text-white/60"
-            }`}
+            className={`relative z-[1] rounded-lg px-3 py-1.5 text-xs sm:px-4 sm:py-2 sm:text-sm font-medium transition-colors duration-300 ${mode === "ai" ? "text-black dark:text-white" : "text-black/60 dark:text-white/60"}`}
             onClick={() => setMode("ai")}
           >
             AI
           </button>
-
           <motion.span
             layout
             transition={{ type: "spring", stiffness: 350, damping: 30 }}
-            className={`absolute inset-y-1 rounded-full shadow-sm ${
-              mode === "ai"
-                ? "bg-gradient-to-r from-fuchsia-500/20 to-pink-500/20"
-                : "bg-black/10 dark:bg-white/20"
-            }`}
+            className={`absolute inset-y-1 rounded-full shadow-sm ${mode === "ai" ? "bg-gradient-to-r from-fuchsia-500/20 to-pink-500/20" : "bg-black/10 dark:bg-white/20"}`}
             style={{ left: thumb.left, width: thumb.width }}
           />
         </div>
@@ -183,7 +169,6 @@ function DualModeSearchBar({
     </div>
   );
 }
-
 
 function HeroProductCard({ title = "Oxford Shirt", price = "$168", img }) {
   const hasImage = Boolean(img);

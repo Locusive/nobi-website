@@ -12,7 +12,7 @@ import stbernard from "/media/logos/stbernard.svg";
 
 // Demo sentence that should be typed into the search bar for both modes
 const DEMO_QUERY =
-  "Linen shirt under $100 for a wedding. It's on the beach and I'll be wearing a navy jacket.";
+  "Linen shirt under $100 for a beach wedding that goes with a navy jacket.";
 
 
 /* ===================== Hero Conversation Demo ===================== */
@@ -72,7 +72,7 @@ function HeroProductCard({ title = "Oxford Shirt", price = "$168", img }) {
 
 function HeroConversationDemo({ script, startKey, ratio = 16 / 9 }) {
   const {
-    userText = "Linen shirt under $100 for a wedding. It's on the beach and I'll be wearing a navy jacket.",
+    userText = "Linen shirt under $100 for a beach wedding that goes with a navy jacket.",
     aiText   = "Got it! Here are beach-appropriate linen options in white, cream and eggshell, which go well with a navy jacket.",
     products = [
       { title: "Legend Oxford", price: "$68", img: "/media/prod-1.png" },

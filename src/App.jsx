@@ -188,17 +188,16 @@ function ConversationDemo({ mode, playKey, query }) {
 }
 
 function ConversationPreview({ mode, playKey, query }) {
-return (
-<AnimatePresence mode="wait">
-     <HeroConversationDemo
-       key={`${mode}-${playKey}`}   // 👈 forces fresh mount → animations replay
-       script={makeScript(mode, query)}
-       startKey={playKey}
-       ratio={4 / 3}
-     />
-   </AnimatePresence>
-);
+  return (
+    <HeroConversationDemo
+      key={`${mode}-${playKey}`}
+      script={makeScript(mode, query)}
+      startKey={playKey}
+      ratio={4 / 3}
+    />
+  );
 }
+
 
 
 function BrandsRow() {

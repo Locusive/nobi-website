@@ -843,7 +843,8 @@ function Logos() {
   const brands = [
     { src: "/media/logos/lucchese.svg", alt: "Lucchese", widthHint: "max-w-[140px] md:max-w-[160px]" },
     { src: "/media/logos/untuckit.svg", alt: "UNTUCKit", widthHint: "max-w-[140px] md:max-w-[160px]" },
-    { src: "/media/logos/faherty.svg", alt: "Faherty", widthHint: "max-w-[180px]" },
+    { src: "/media/logos/faherty.svg", alt: "Faherty", widthHint: "max-w-[220px] md:max-w-[240px]",
+      heightHint: "h-9 sm:h-10 md:h-11" },
     { src: "/media/logos/toolup.svg", alt: "TOOLUP", widthHint: "max-w-[180px]" },
     { src: "/media/logos/stbernard.svg", alt: "St. Bernard", widthHint: "max-w-[180px]" },
   ];

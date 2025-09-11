@@ -10,6 +10,11 @@ import stbernard from "/media/logos/stbernard.svg";
 
 // …
 
+// Demo sentence that should be typed into the search bar for both modes
+const DEMO_QUERY =
+  "Looking for a linen shirt under $100 for a wedding — it's on the beach and I'll be wearing a navy jacket";
+
+
 /* ===================== Hero Conversation Demo ===================== */
 
 function ChatBubble({ from = "user", children }) {
@@ -412,33 +417,47 @@ function Logo({ className = "h-7 md:h-9 lg:h-10" }) {
   );
 }
 
-function useTypingDemo({ mode, setQuery, setPlaceholder, enabled = true, onDone }) {
+function useTypingDemo({
+  mode,
+  setQuery,
+  setPlaceholder,
+  enabled = true,
+  onDone,
+  textForMode,        // <-- new: string or (mode) => string
+}) {
   React.useEffect(() => {
     if (!enabled) return;
 
-    let cancelled = false;
-    const toType = mode === "ai" ? "Linen shirt for a wedding" : "linen shirt wedding";
-    const initialPlaceholder = mode === "ai" ? "Describe what you want..." : "Search products...";
+    // What to type (same text for both modes here)
+    const toType =
+      typeof textForMode === "function" ? textForMode(mode) : textForMode || "";
+
+    // Show the normal placeholders before typing begins
+    const initialPlaceholder =
+      mode === "ai" ? "Describe what you want..." : "Search products...";
 
     setPlaceholder(initialPlaceholder);
-    setQuery("");
+    setQuery(""); // start empty so the value (black text) replaces the placeholder
 
-    const startDelay = 1200;
-    const baseSpeed = 75;
-    const jitter = 35;
+    // ⏱ tweak these two to change speed
+    const startDelay = 600;
+    const baseSpeed = 24;  // milliseconds per char
+    const jitter = 20;     // random variation
 
+    let cancelled = false;
     const timers = [];
+
     const startTimer = setTimeout(() => {
       let i = 0;
       const step = () => {
         if (cancelled) return;
-        setQuery(toType.slice(0, i + 1));
+        setQuery(toType.slice(0, i + 1)); // value renders in black
         i++;
         if (i < toType.length) {
           const t = setTimeout(step, baseSpeed + Math.random() * jitter);
           timers.push(t);
         } else {
-          // small pause to simulate clicking the CTA, then “submit”
+          // short pause to feel like a click/submit
           const t = setTimeout(() => onDone?.(toType), 450);
           timers.push(t);
         }
@@ -451,7 +470,7 @@ function useTypingDemo({ mode, setQuery, setPlaceholder, enabled = true, onDone 
       clearTimeout(startTimer);
       timers.forEach(clearTimeout);
     };
-  }, [mode, enabled, setQuery, setPlaceholder, onDone]);
+  }, [mode, enabled, setQuery, setPlaceholder, onDone, textForMode]);
 }
 
 function DualModeSearchBar({
@@ -480,17 +499,17 @@ useEffect(() => {
 }, [mode]);
 
   useTypingDemo({
-    mode,
-    setQuery,
-    setPlaceholder,
-    enabled: demoEnabled,
-    onDone: (typed) => {
-      // auto “submit” after demo finishes so the preview can start
-      onDemoSubmit?.({ mode, query: typed });
-      setSubmitted({ mode, query: typed });
-      setTimeout(() => setSubmitted(null), 1600);
-    },
-  });
+  mode,
+  setQuery,
+  setPlaceholder,
+  enabled: demoEnabled,
+  textForMode: () => DEMO_QUERY,          // <-- force the same sentence for AI & Default
+  onDone: (typed) => {
+    onDemoSubmit?.({ mode, query: typed }); // <-- kick off the preview when typing ends
+    setSubmitted({ mode, query: typed });
+    setTimeout(() => setSubmitted(null), 1600);
+  },
+});
 
   const setMode = (m) => {
     if (controlledMode === undefined) setInternalMode(m);
@@ -735,82 +754,34 @@ function VideoModal({ open, onClose, youtube, src, poster = "" }) {
 
 function Hero({ onOpenForm, onOpenVideo }) {
   const [searchMode, setSearchMode] = useState("ai"); // "ai" | "site"
-  const [playKey, setPlayKey] = useState(0);          // bump to restart preview
+  const [playKey, setPlayKey] = useState(0);
+  const [lastQuery, setLastQuery] = useState("");     // <-- new
 
-  const kickOffPreview = ({ mode /*, query*/ }) => {
-    // make sure the preview uses the mode that just ran
+  const kickOffPreview = ({ mode, query }) => {
     setSearchMode(mode);
-    // bump key so HeroConversationDemo restarts its 0→1→2 sequence
-    setPlayKey((k) => k + 1);
+    setLastQuery(query || DEMO_QUERY); // fallback to the demo text
+    setPlayKey((k) => k + 1);          // remount the preview so it restarts
   };
 
   return (
-    <section id="home" className="relative overflow-hidden">
-      <div className="mx-auto max-w-6xl px-6 pt-16 sm:pt-24">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
-          {/* LEFT: headline, subcopy, CTAs, bullets */}
-          <div className="order-2 lg:order-1">
-            <h1 className="text-5xl sm:text-6xl font-semibold tracking-tight text-balance">
-              Turn product search
-              <br />
-              into a <span className="text-fuchsia-600">conversation</span>
-            </h1>
+    // ...
+    <div className="mb-4 p-4 rounded-2xl border border-fuchsia-200 bg-gradient-to-r from-fuchsia-50 to-pink-50 shadow-md">
+      <DualModeSearchBar
+        mode={searchMode}
+        onModeChange={setSearchMode}
+        defaultMode="ai"
+        size="compact"
+        onDemoSubmit={kickOffPreview}   // auto after typing demo
+        onSubmit={kickOffPreview}       // real user click/Enter
+      />
+    </div>
 
-            <p className="mt-6 text-lg text-black/70 dark:text-white/70 max-w-2xl">
-              Nobi gets your customers the right products faster with conversational AI.
-            </p>
-
-            <div className="mt-8 flex flex-col sm:flex-row gap-3">
-              <Button size="lg" onClick={onOpenForm}>
-                Try it on your store
-                <ArrowRight className="h-4 w-4" />
-              </Button>
-              <Button size="lg" variant="ghost" onClick={onOpenVideo}>
-                <PlayCircle className="h-5 w-5" />
-                How it works in 60 seconds
-              </Button>
-            </div>
-
-            <div className="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-3 text-sm text-black/70 dark:text-white/70">
-              <div className="flex items-center gap-2">
-                <CheckCircle2 className="h-4 w-4 text-fuchsia-600" />
-                15-minute install
-              </div>
-              <div className="flex items-center gap-2">
-                <CheckCircle2 className="h-4 w-4 text-fuchsia-600" />
-                Shopify & headless
-              </div>
-              <div className="flex items-center gap-2">
-                <CheckCircle2 className="h-4 w-4 text-fuchsia-600" />
-                Insights reporting
-              </div>
-            </div>
-          </div>
-
-          {/* RIGHT: search bar (types first) + conversation preview */}
-          <div className="order-1 lg:order-2 relative">
-            {/* Search bar wrapper to match pink pill look */}
-            <div className="mb-4 p-4 rounded-2xl border border-fuchsia-200 bg-gradient-to-r from-fuchsia-50 to-pink-50 shadow-sm">
-              <DualModeSearchBar
-                mode={searchMode}
-                onModeChange={setSearchMode}
-                defaultMode="ai"
-                size="compact"
-                onDemoSubmit={kickOffPreview}  // auto after typing demo finishes
-                onSubmit={kickOffPreview}      // user click/Enter
-              />
-            </div>
-
-            {/* Conversation card frame */}
-            <div className="rounded-3xl border border-black/10 dark:border-white/10 bg-white/60 dark:bg-white/5 shadow-inner">
-              <ConversationDemo mode={searchMode} playKey={playKey} />
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+    {/* Make sure the preview card renders and gets the query */}
+    <ConversationDemo mode={searchMode} playKey={playKey} query={lastQuery} />
+    // ...
   );
 }
+
 
 function BrandMark({ src, label, className = "" }) {
   // Renders the SVG as a mask so the shape fills the box exactly

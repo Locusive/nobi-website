@@ -529,29 +529,45 @@ function DualModeSearchBar({
   const height = size === "compact" ? "h-11" : "h-14";
 
   // Animated toggle thumb (measured to match the active button)
-  const toggleRef = React.useRef(null);
-  const siteBtnRef = React.useRef(null);
-  const aiBtnRef = React.useRef(null);
-  const [thumb, setThumb] = React.useState({ left: 0, width: 0 });
-  const measureThumb = React.useCallback(() => {
-    const btn = mode === "ai" ? aiBtnRef.current : siteBtnRef.current;
-    if (!btn) return;
-    setThumb({ left: btn.offsetLeft, width: btn.offsetWidth });
-  }, [mode]);
+const toggleRef = React.useRef(null);
+const siteBtnRef = React.useRef(null);
+const aiBtnRef = React.useRef(null);
+const [thumb, setThumb] = React.useState({ left: 0, width: 0 });
 
-  React.useEffect(() => {
-    measureThumb();
-    const ro = new ResizeObserver(measureThumb);
-    if (toggleRef.current) ro.observe(toggleRef.current);
-    const onR = () => measureThumb();
-    window.addEventListener("resize", onR);
-    const raf = requestAnimationFrame(measureThumb);
-    return () => {
-      try { ro.disconnect(); } catch {}
-      window.removeEventListener("resize", onR);
-      cancelAnimationFrame(raf);
-    };
-  }, [measureThumb]);
+const measureThumb = React.useCallback(() => {
+  const btn = (mode === "ai" ? aiBtnRef.current : siteBtnRef.current);
+  if (!btn) return;
+  setThumb({ left: btn.offsetLeft, width: btn.offsetWidth });
+}, [mode]);
+
+React.useEffect(() => {
+  // Run once to place the thumb
+  measureThumb();
+
+  // Guard for SSR / old browsers
+  const hasWindow = typeof window !== "undefined";
+  const hasRO = hasWindow && "ResizeObserver" in window;
+
+  // ResizeObserver (optional)
+  let ro;
+  if (hasRO && toggleRef.current) {
+    ro = new ResizeObserver(() => measureThumb());
+    try { ro.observe(toggleRef.current); } catch {}
+  }
+
+  // Window resize (optional)
+  const onResize = () => measureThumb();
+  if (hasWindow) window.addEventListener("resize", onResize);
+
+  // Next frame (optional)
+  const raf = hasWindow ? requestAnimationFrame(measureThumb) : null;
+
+  return () => {
+    if (ro) { try { ro.disconnect(); } catch {} }
+    if (hasWindow) window.removeEventListener("resize", onResize);
+    if (raf && hasWindow) cancelAnimationFrame(raf);
+  };
+}, [measureThumb]);
 
   function submit() {
     if (!query.trim()) return;

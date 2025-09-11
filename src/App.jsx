@@ -189,12 +189,14 @@ function ConversationDemo({ mode, playKey, query }) {
 
 function ConversationPreview({ mode, playKey, query }) {
   return (
-    <HeroConversationDemo
-      key={`${mode}-${playKey}`}
-      script={makeScript(mode, query)}
-      startKey={playKey}
-      ratio={4 / 3}
-    />
+    <AnimatePresence mode="wait">
+      <HeroConversationDemo
+        key={`${mode}-${playKey}`}
+        script={makeScript(mode, query)}
+        startKey={playKey}
+        ratio={4 / 3}
+      />
+    </AnimatePresence>
   );
 }
 

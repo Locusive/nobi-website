@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 
 // at the top of your file (e.g., App.jsx or the component where logos render)
 import lucchese from "/media/logos/lucchese.svg";
@@ -136,9 +136,11 @@ function HeroConversationDemo({ script, startKey, ratio = 4 / 3 }) {
               )}
               {showProducts && (
                 <motion.div
+                  key={`prods-${startKey}-${mode}`}
                   ref={productsRef}
                   initial={{ opacity: 0, y: 8 }}
                   animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: 6 }}
                   transition={{ duration: 0.55 }}
                   className="grid grid-cols-3 gap-2.5 sm:gap-3 pt-1"
                 >
@@ -187,12 +189,14 @@ function ConversationDemo({ mode, playKey, query }) {
 
 function ConversationPreview({ mode, playKey, query }) {
 return (
-<HeroConversationDemo
-key={`${mode}-${playKey}`}     // ← ensures fresh mount → animations replay
-script={makeScript(mode, query)}
-startKey={playKey}
-ratio={4 / 3}     // try 4/3 or 16/10 for a taller feel
-/>
+<AnimatePresence mode="wait" initial={false}>
+     <HeroConversationDemo
+       key={`${mode}-${playKey}`}   // 👈 forces fresh mount → animations replay
+       script={makeScript(mode, query)}
+       startKey={playKey}
+       ratio={4 / 3}
+     />
+   </AnimatePresence>
 );
 }
 

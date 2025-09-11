@@ -70,7 +70,7 @@ function HeroProductCard({ title = "Oxford Shirt", price = "$168", img }) {
   );
 }
 
-function HeroConversationDemo({ script, startKey }) {
+function HeroConversationDemo({ script, startKey, ratio = 16 / 9 }) {
   const {
     userText = "Linen shirt under $100 for a wedding — it's on the beach and I'll be wearing a navy jacket.",
     aiText   = "Got it! Here are beach-appropriate linen options in white, cream and eggshell, which go well with a navy jacket.",

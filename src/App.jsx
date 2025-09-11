@@ -141,6 +141,7 @@ function HeroConversationDemo({ script, startKey }) {
   );
 }
 
+// --- one script builder used by the preview ---
 function makeScript(mode, q = "linen shirt for a wedding") {
   if (mode === "ai") {
     return {
@@ -154,7 +155,6 @@ function makeScript(mode, q = "linen shirt for a wedding") {
       ],
     };
   }
-  // Default mode
   return {
     userText: `“${q}”`,
     aiText: "Showing top results (best match, in stock).",
@@ -164,6 +164,11 @@ function makeScript(mode, q = "linen shirt for a wedding") {
       { title: "Classic Button-down", price: "$148", img: "/media/prod-3.png" },
     ],
   };
+}
+
+// Adapter so the hero can pass mode + a restart key
+function ConversationDemo({ mode, playKey }) {
+  return <HeroConversationDemo script={makeScript(mode)} startKey={playKey} />;
 }
 
 function ConversationPreview({ mode, playKey, query }) {
@@ -723,65 +728,78 @@ function VideoModal({ open, onClose, youtube, src, poster = "" }) {
 
 
 function Hero({ onOpenForm, onOpenVideo }) {
-  const [searchMode, setSearchMode] = useState("ai");   // "ai" | "site"
-  const [playKey, setPlayKey] = useState(0);           // bump to start/restart preview
-  const [lastQuery, setLastQuery] = useState("linen shirt for a wedding"); // default seed
+  const [searchMode, setSearchMode] = useState("ai"); // "ai" | "site"
+  const [playKey, setPlayKey] = useState(0);          // bump to restart preview
 
-  const kickOffPreview = ({ mode, query }) => {
+  const kickOffPreview = ({ mode /*, query*/ }) => {
+    // make sure the preview uses the mode that just ran
     setSearchMode(mode);
-    if (query) setLastQuery(query);   // capture what was typed
-    setPlayKey((k) => k + 1);         // <-- triggers the conversation preview
+    // bump key so HeroConversationDemo restarts its 0→1→2 sequence
+    setPlayKey((k) => k + 1);
   };
 
   return (
-    <section id="home" className="relative overflow-hidden mb-3">
+    <section id="home" className="relative overflow-hidden">
       <div className="mx-auto max-w-6xl px-6 pt-16 sm:pt-24">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
-          {/* LEFT column (restored) */}
-          <div className="space-y-5">
-            <p className="inline-flex items-center gap-2 text-sm font-semibold text-fuchsia-600">
-              <Sparkles className="h-4 w-4" /> Conversational commerce
-            </p>
-            <h1 className="text-4xl sm:text-5xl font-semibold tracking-tight leading-tight">
-              Let shoppers just ask.
+          {/* LEFT: headline, subcopy, CTAs, bullets */}
+          <div className="order-2 lg:order-1">
+            <h1 className="text-5xl sm:text-6xl font-semibold tracking-tight text-balance">
+              Turn product search
+              <br />
+              into a <span className="text-fuchsia-600">conversation</span>
             </h1>
-            <p className="text-black/70 dark:text-white/70 max-w-xl">
-              Keep your default keyword search for everyone else. For the rest, “Ask AI” guides them
-              to the right products faster — and learns what they actually want.
+
+            <p className="mt-6 text-lg text-black/70 dark:text-white/70 max-w-2xl">
+              Nobi gets your customers the right products faster with conversational AI.
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-3">
-              <Button onClick={onOpenForm} className="sm:w-auto w-full">
-                Install Nobi
+            <div className="mt-8 flex flex-col sm:flex-row gap-3">
+              <Button size="lg" onClick={onOpenForm}>
+                Try it on your store
+                <ArrowRight className="h-4 w-4" />
               </Button>
-              <Button onClick={onOpenVideo} variant="ghost" className="sm:w-auto w-full">
-                <PlayCircle className="h-4 w-4" /> Watch how it works
+              <Button size="lg" variant="ghost" onClick={onOpenVideo}>
+                <PlayCircle className="h-5 w-5" />
+                How it works in 60 seconds
               </Button>
             </div>
 
-            <div className="text-sm text-black/60 dark:text-white/60">
-              No rebuilds • A/B ready • Shopify & headless
+            <div className="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-3 text-sm text-black/70 dark:text-white/70">
+              <div className="flex items-center gap-2">
+                <CheckCircle2 className="h-4 w-4 text-fuchsia-600" />
+                15-minute install
+              </div>
+              <div className="flex items-center gap-2">
+                <CheckCircle2 className="h-4 w-4 text-fuchsia-600" />
+                Shopify & headless
+              </div>
+              <div className="flex items-center gap-2">
+                <CheckCircle2 className="h-4 w-4 text-fuchsia-600" />
+                A/B testing & reporting
+              </div>
             </div>
           </div>
 
-          {/* RIGHT column: search bar (types first) + preview that starts afterwards */}
-         <div className="relative">
-  <div className="mb-4 p-4 rounded-2xl border border-fuchsia-200 bg-gradient-to-r from-fuchsia-50 to-pink-50 shadow-md">
-    <DualModeSearchBar
-      mode={searchMode}
-      onModeChange={setSearchMode}
-      defaultMode="ai"
-      size="compact"
-      onDemoSubmit={kickOffPreview}   // called after the typing demo finishes
-      onSubmit={kickOffPreview}       // called on real click/Enter
-    />
-  </div>
+          {/* RIGHT: search bar (types first) + conversation preview */}
+          <div className="order-1 lg:order-2 relative">
+            {/* Search bar wrapper to match pink pill look */}
+            <div className="mb-4 p-4 rounded-2xl border border-fuchsia-200 bg-gradient-to-r from-fuchsia-50 to-pink-50 shadow-sm">
+              <DualModeSearchBar
+                mode={searchMode}
+                onModeChange={setSearchMode}
+                defaultMode="ai"
+                size="compact"
+                onDemoSubmit={kickOffPreview}  // auto after typing demo finishes
+                onSubmit={kickOffPreview}      // user click/Enter
+              />
+            </div>
 
-  {/* Render preview only after first submit (playKey > 0) */}
-  {playKey > 0 && (
-    <ConversationPreview mode={searchMode} playKey={playKey} query={lastQuery} />
-  )}
-</div>
+            {/* Conversation card frame */}
+            <div className="rounded-3xl border border-black/10 dark:border-white/10 bg-white/60 dark:bg-white/5 shadow-inner">
+              <ConversationDemo mode={searchMode} playKey={playKey} />
+            </div>
+          </div>
         </div>
       </div>
     </section>

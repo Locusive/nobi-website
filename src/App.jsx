@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
-import { motion, AnimatePresence, MotionConfig } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
+import { MotionConfig } from "framer-motion"
 
 // at the top of your file (e.g., App.jsx or the component where logos render)
 import lucchese from "/media/logos/lucchese.svg";
@@ -786,16 +787,24 @@ function VideoModal({ open, onClose, youtube, src, poster = "" }) {
 
 
 function Hero({ onOpenForm, onOpenVideo }) {
-  const [searchMode, setSearchMode] = React.useState("ai");  // "ai" | "site"
+  const [searchMode, setSearchMode] = React.useState("ai");
   const [playKey, setPlayKey] = React.useState(-1);
   const [lastQuery, setLastQuery] = React.useState(DEMO_QUERY);
 
-  // fires after typing demo OR manual submit
   const kickOffPreview = ({ mode, query }) => {
     setSearchMode(mode);
     setLastQuery(query || DEMO_QUERY);
     setPlayKey((k) => k + 1);
   };
+
+  // NEW: force-start if demo never fires
+  React.useEffect(() => {
+    const t = setTimeout(() => {
+      setLastQuery((q) => q || DEMO_QUERY);
+      setPlayKey((k) => (k < 0 ? 0 : k));
+    }, 2000);
+    return () => clearTimeout(t);
+  }, []);
 
   return (
     <section id="home" className="relative overflow-hidden">
@@ -1668,12 +1677,21 @@ return (
       <Footer />
 {/* Video modal */}
       <RequestDemoModal open={isFormOpen} onClose={() => setIsFormOpen(false)} />
-<VideoModal
-  open={isVideoOpen}
-  onClose={() => setIsVideoOpen(false)}
-  youtube="https://www.youtube.com/watch?v=RKqGC3CVZd0"
-/>
-    </div>
+<VideoModal open={isVideoOpen} onClose={() => setIsVideoOpen(false)} youtube="https://www.youtube.com/watch?v=RKqGC3CVZd0" />
+      </div>
+    const TestPulse = () => (
+  <motion.div
+    aria-label="framer-ok"
+    initial={{ scale: 0.8, opacity: 0.6 }}
+    animate={{ scale: 1.1, opacity: 1 }}
+    transition={{ repeat: Infinity, repeatType: "mirror", duration: 0.8 }}
+    className="fixed bottom-3 right-3 h-3 w-3 rounded-full bg-fuchsia-500 z-[9999] pointer-events-none"
+  />
+);
+
+// inside App() JSX, at the very bottom:
+<TestPulse />
+
     </MotionConfig>
   );
 }

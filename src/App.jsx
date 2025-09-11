@@ -41,7 +41,7 @@ function DualModeSearchBar({
   mode: controlledMode,
   onModeChange,
   onSubmit,
-  onDemoSubmit, // fires after the typing demo completes
+  onDemoSubmit, // fired after the typing demo finishes
 }) {
   const [internalMode, setInternalMode] = React.useState(defaultMode);
   const mode = controlledMode ?? internalMode;
@@ -51,28 +51,29 @@ function DualModeSearchBar({
     mode === "ai" ? "Describe what you want..." : "Search products..."
   );
 
-  // replay typing demo whenever mode changes (until user interacts)
+  // re-run the typing demo whenever the mode toggles
   const [demoEnabled, setDemoEnabled] = React.useState(true);
   React.useEffect(() => {
     setDemoEnabled(true);
     setQuery("");
   }, [mode]);
 
-  // type DEMO_QUERY, then kick off the preview
+  // Type the canned sentence, then notify the hero to start the card
   useTypingDemo({
     mode,
     setQuery,
     setPlaceholder,
     enabled: demoEnabled,
     textForMode: () => DEMO_QUERY,
-    onDone: (typed) => onDemoSubmit?.({ mode, query: typed }),
+    onDone: (typed) => {
+      onDemoSubmit?.({ mode, query: typed });
+    },
   });
 
   const setMode = (m) => {
     if (controlledMode === undefined) setInternalMode(m);
     onModeChange?.(m);
-    setDemoEnabled(true);
-    setQuery("");
+    setDemoEnabled(true); // restart demo when switching tabs
   };
 
   // cancel demo on any user interaction
@@ -82,19 +83,13 @@ function DualModeSearchBar({
   };
 
   const ctaLabel = mode === "ai" ? "Ask AI" : "Search";
-  const height = size === "regular" ? "h-14" : "h-11";
+  const height = size === "compact" ? "h-11" : "h-14";
 
-  function submit() {
-    if (!query.trim()) return;
-    onSubmit?.({ mode, query });
-  }
-
-  // animated toggle thumb
+  // Animated toggle thumb (measured to match the active button)
   const toggleRef = React.useRef(null);
   const siteBtnRef = React.useRef(null);
   const aiBtnRef = React.useRef(null);
   const [thumb, setThumb] = React.useState({ left: 0, width: 0 });
-
   const measureThumb = React.useCallback(() => {
     const btn = mode === "ai" ? aiBtnRef.current : siteBtnRef.current;
     if (!btn) return;
@@ -115,21 +110,35 @@ function DualModeSearchBar({
     };
   }, [measureThumb]);
 
+  function submit() {
+    if (!query.trim()) return;
+    onSubmit?.({ mode, query });
+  }
+
   return (
     <div className="w-full max-w-3xl">
-      <div className={`flex items-center gap-2 rounded-2xl border border-black/10 dark:border-white/15 bg-white/70 dark:bg-white/5 backdrop-blur px-2 ${height} shadow-sm`}>
+      <div
+        className={`flex items-center gap-2 rounded-2xl border border-black/10 dark:border-white/15 bg-white/70 dark:bg-white/5 backdrop-blur px-2 ${height} shadow-sm`}
+      >
         {/* Toggle */}
-        <div ref={toggleRef} className="relative isolate inline-flex rounded-xl bg-black/5 dark:bg-white/10 overflow-hidden shrink-0">
+        <div
+          ref={toggleRef}
+          className="relative isolate inline-flex rounded-xl bg-black/5 dark:bg-white/10 overflow-hidden shrink-0"
+        >
           <button
             ref={siteBtnRef}
-            className={`relative z-[1] rounded-lg px-3 py-1.5 text-xs sm:px-4 sm:py-2 sm:text-sm font-medium transition-colors duration-300 ${mode === "site" ? "text-black dark:text-white" : "text-black/60 dark:text-white/60"}`}
+            className={`relative z-[1] rounded-lg px-3 py-1.5 text-xs sm:px-4 sm:py-2 sm:text-sm font-medium transition-colors duration-300 ${
+              mode === "site" ? "text-black dark:text-white" : "text-black/60 dark:text-white/60"
+            }`}
             onClick={() => setMode("site")}
           >
             Default
           </button>
           <button
             ref={aiBtnRef}
-            className={`relative z-[1] rounded-lg px-3 py-1.5 text-xs sm:px-4 sm:py-2 sm:text-sm font-medium transition-colors duration-300 ${mode === "ai" ? "text-black dark:text-white" : "text-black/60 dark:text-white/60"}`}
+            className={`relative z-[1] rounded-lg px-3 py-1.5 text-xs sm:px-4 sm:py-2 sm:text-sm font-medium transition-colors duration-300 ${
+              mode === "ai" ? "text-black dark:text-white" : "text-black/60 dark:text-white/60"
+            }`}
             onClick={() => setMode("ai")}
           >
             AI
@@ -137,7 +146,11 @@ function DualModeSearchBar({
           <motion.span
             layout
             transition={{ type: "spring", stiffness: 350, damping: 30 }}
-            className={`absolute inset-y-1 rounded-full shadow-sm ${mode === "ai" ? "bg-gradient-to-r from-fuchsia-500/20 to-pink-500/20" : "bg-black/10 dark:bg-white/20"}`}
+            className={`absolute inset-y-1 rounded-full shadow-sm ${
+              mode === "ai"
+                ? "bg-gradient-to-r from-fuchsia-500/20 to-pink-500/20"
+                : "bg-black/10 dark:bg-white/20"
+            }`}
             style={{ left: thumb.left, width: thumb.width }}
           />
         </div>

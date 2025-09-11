@@ -35,154 +35,6 @@ function ChatBubble({ from = "user", children }) {
   );
 }
 
-function DualModeSearchBar({
-  defaultMode = "ai",
-  size = "regular",
-  mode: controlledMode,
-  onModeChange,
-  onSubmit,
-  onDemoSubmit, // fired after the typing demo finishes
-}) {
-  const [internalMode, setInternalMode] = React.useState(defaultMode);
-  const mode = controlledMode ?? internalMode;
-
-  const [query, setQuery] = React.useState("");
-  const [placeholder, setPlaceholder] = React.useState(
-    mode === "ai" ? "Describe what you want..." : "Search products..."
-  );
-
-  // re-run the typing demo whenever the mode toggles
-  const [demoEnabled, setDemoEnabled] = React.useState(true);
-  React.useEffect(() => {
-    setDemoEnabled(true);
-    setQuery("");
-  }, [mode]);
-
-  // Type the canned sentence, then notify the hero to start the card
-  useTypingDemo({
-    mode,
-    setQuery,
-    setPlaceholder,
-    enabled: demoEnabled,
-    textForMode: () => DEMO_QUERY,
-    onDone: (typed) => {
-      onDemoSubmit?.({ mode, query: typed });
-    },
-  });
-
-  const setMode = (m) => {
-    if (controlledMode === undefined) setInternalMode(m);
-    onModeChange?.(m);
-    setDemoEnabled(true); // restart demo when switching tabs
-  };
-
-  // cancel demo on any user interaction
-  const stopDemoAnd = (next) => (e) => {
-    if (demoEnabled) setDemoEnabled(false);
-    next?.(e);
-  };
-
-  const ctaLabel = mode === "ai" ? "Ask AI" : "Search";
-  const height = size === "compact" ? "h-11" : "h-14";
-
-  // Animated toggle thumb (measured to match the active button)
-  const toggleRef = React.useRef(null);
-  const siteBtnRef = React.useRef(null);
-  const aiBtnRef = React.useRef(null);
-  const [thumb, setThumb] = React.useState({ left: 0, width: 0 });
-  const measureThumb = React.useCallback(() => {
-    const btn = mode === "ai" ? aiBtnRef.current : siteBtnRef.current;
-    if (!btn) return;
-    setThumb({ left: btn.offsetLeft, width: btn.offsetWidth });
-  }, [mode]);
-
-  React.useEffect(() => {
-    measureThumb();
-    const ro = new ResizeObserver(measureThumb);
-    if (toggleRef.current) ro.observe(toggleRef.current);
-    const onR = () => measureThumb();
-    window.addEventListener("resize", onR);
-    const raf = requestAnimationFrame(measureThumb);
-    return () => {
-      try { ro.disconnect(); } catch {}
-      window.removeEventListener("resize", onR);
-      cancelAnimationFrame(raf);
-    };
-  }, [measureThumb]);
-
-  function submit() {
-    if (!query.trim()) return;
-    onSubmit?.({ mode, query });
-  }
-
-  return (
-    <div className="w-full max-w-3xl">
-      <div
-        className={`flex items-center gap-2 rounded-2xl border border-black/10 dark:border-white/15 bg-white/70 dark:bg-white/5 backdrop-blur px-2 ${height} shadow-sm`}
-      >
-        {/* Toggle */}
-        <div
-          ref={toggleRef}
-          className="relative isolate inline-flex rounded-xl bg-black/5 dark:bg-white/10 overflow-hidden shrink-0"
-        >
-          <button
-            ref={siteBtnRef}
-            className={`relative z-[1] rounded-lg px-3 py-1.5 text-xs sm:px-4 sm:py-2 sm:text-sm font-medium transition-colors duration-300 ${
-              mode === "site" ? "text-black dark:text-white" : "text-black/60 dark:text-white/60"
-            }`}
-            onClick={() => setMode("site")}
-          >
-            Default
-          </button>
-          <button
-            ref={aiBtnRef}
-            className={`relative z-[1] rounded-lg px-3 py-1.5 text-xs sm:px-4 sm:py-2 sm:text-sm font-medium transition-colors duration-300 ${
-              mode === "ai" ? "text-black dark:text-white" : "text-black/60 dark:text-white/60"
-            }`}
-            onClick={() => setMode("ai")}
-          >
-            AI
-          </button>
-          <motion.span
-            layout
-            transition={{ type: "spring", stiffness: 350, damping: 30 }}
-            className={`absolute inset-y-1 rounded-full shadow-sm ${
-              mode === "ai"
-                ? "bg-gradient-to-r from-fuchsia-500/20 to-pink-500/20"
-                : "bg-black/10 dark:bg-white/20"
-            }`}
-            style={{ left: thumb.left, width: thumb.width }}
-          />
-        </div>
-
-        {/* Input */}
-        <div className="flex-1 min-w-0 flex items-center gap-2">
-          <input
-            value={query}
-            onChange={stopDemoAnd((e) => setQuery(e.target.value))}
-            onKeyDown={stopDemoAnd((e) => e.key === "Enter" && submit())}
-            onFocus={stopDemoAnd()}
-            placeholder={placeholder}
-            className="min-w-0 w-full bg-transparent outline-none text-[15px] placeholder:text-black/40 dark:placeholder:text-white/40"
-            aria-label={mode === "ai" ? "Ask AI" : "Search"}
-          />
-        </div>
-
-        {/* CTA */}
-        <Button
-          onClick={stopDemoAnd(submit)}
-          variant={mode === "ai" ? "ai" : "primary"}
-          size="compact"
-          className="whitespace-nowrap px-3 h-9 sm:h-8"
-        >
-          {mode === "ai" ? <Sparkles className="h-4 w-4" /> : <SearchIcon className="h-4 w-4" />}
-          <span className="hidden sm:inline">{ctaLabel}</span>
-        </Button>
-      </div>
-    </div>
-  );
-}
-
 function HeroProductCard({ title = "Oxford Shirt", price = "$168", img }) {
   const hasImage = Boolean(img);
 
@@ -618,6 +470,154 @@ function useTypingDemo({
     };
   // ❗ do NOT include `onDone` here; we use doneRef instead
   }, [mode, enabled, setQuery, setPlaceholder, textForMode]);
+}
+
+function DualModeSearchBar({
+  defaultMode = "ai",
+  size = "regular",
+  mode: controlledMode,
+  onModeChange,
+  onSubmit,
+  onDemoSubmit, // fired after the typing demo finishes
+}) {
+  const [internalMode, setInternalMode] = React.useState(defaultMode);
+  const mode = controlledMode ?? internalMode;
+
+  const [query, setQuery] = React.useState("");
+  const [placeholder, setPlaceholder] = React.useState(
+    mode === "ai" ? "Describe what you want..." : "Search products..."
+  );
+
+  // re-run the typing demo whenever the mode toggles
+  const [demoEnabled, setDemoEnabled] = React.useState(true);
+  React.useEffect(() => {
+    setDemoEnabled(true);
+    setQuery("");
+  }, [mode]);
+
+  // Type the canned sentence, then notify the hero to start the card
+  useTypingDemo({
+    mode,
+    setQuery,
+    setPlaceholder,
+    enabled: demoEnabled,
+    textForMode: () => DEMO_QUERY,
+    onDone: (typed) => {
+      onDemoSubmit?.({ mode, query: typed });
+    },
+  });
+
+  const setMode = (m) => {
+    if (controlledMode === undefined) setInternalMode(m);
+    onModeChange?.(m);
+    setDemoEnabled(true); // restart demo when switching tabs
+  };
+
+  // cancel demo on any user interaction
+  const stopDemoAnd = (next) => (e) => {
+    if (demoEnabled) setDemoEnabled(false);
+    next?.(e);
+  };
+
+  const ctaLabel = mode === "ai" ? "Ask AI" : "Search";
+  const height = size === "compact" ? "h-11" : "h-14";
+
+  // Animated toggle thumb (measured to match the active button)
+  const toggleRef = React.useRef(null);
+  const siteBtnRef = React.useRef(null);
+  const aiBtnRef = React.useRef(null);
+  const [thumb, setThumb] = React.useState({ left: 0, width: 0 });
+  const measureThumb = React.useCallback(() => {
+    const btn = mode === "ai" ? aiBtnRef.current : siteBtnRef.current;
+    if (!btn) return;
+    setThumb({ left: btn.offsetLeft, width: btn.offsetWidth });
+  }, [mode]);
+
+  React.useEffect(() => {
+    measureThumb();
+    const ro = new ResizeObserver(measureThumb);
+    if (toggleRef.current) ro.observe(toggleRef.current);
+    const onR = () => measureThumb();
+    window.addEventListener("resize", onR);
+    const raf = requestAnimationFrame(measureThumb);
+    return () => {
+      try { ro.disconnect(); } catch {}
+      window.removeEventListener("resize", onR);
+      cancelAnimationFrame(raf);
+    };
+  }, [measureThumb]);
+
+  function submit() {
+    if (!query.trim()) return;
+    onSubmit?.({ mode, query });
+  }
+
+  return (
+    <div className="w-full max-w-3xl">
+      <div
+        className={`flex items-center gap-2 rounded-2xl border border-black/10 dark:border-white/15 bg-white/70 dark:bg-white/5 backdrop-blur px-2 ${height} shadow-sm`}
+      >
+        {/* Toggle */}
+        <div
+          ref={toggleRef}
+          className="relative isolate inline-flex rounded-xl bg-black/5 dark:bg-white/10 overflow-hidden shrink-0"
+        >
+          <button
+            ref={siteBtnRef}
+            className={`relative z-[1] rounded-lg px-3 py-1.5 text-xs sm:px-4 sm:py-2 sm:text-sm font-medium transition-colors duration-300 ${
+              mode === "site" ? "text-black dark:text-white" : "text-black/60 dark:text-white/60"
+            }`}
+            onClick={() => setMode("site")}
+          >
+            Default
+          </button>
+          <button
+            ref={aiBtnRef}
+            className={`relative z-[1] rounded-lg px-3 py-1.5 text-xs sm:px-4 sm:py-2 sm:text-sm font-medium transition-colors duration-300 ${
+              mode === "ai" ? "text-black dark:text-white" : "text-black/60 dark:text-white/60"
+            }`}
+            onClick={() => setMode("ai")}
+          >
+            AI
+          </button>
+          <motion.span
+            layout
+            transition={{ type: "spring", stiffness: 350, damping: 30 }}
+            className={`absolute inset-y-1 rounded-full shadow-sm ${
+              mode === "ai"
+                ? "bg-gradient-to-r from-fuchsia-500/20 to-pink-500/20"
+                : "bg-black/10 dark:bg-white/20"
+            }`}
+            style={{ left: thumb.left, width: thumb.width }}
+          />
+        </div>
+
+        {/* Input */}
+        <div className="flex-1 min-w-0 flex items-center gap-2">
+          <input
+            value={query}
+            onChange={stopDemoAnd((e) => setQuery(e.target.value))}
+            onKeyDown={stopDemoAnd((e) => e.key === "Enter" && submit())}
+            onFocus={stopDemoAnd()}
+            placeholder={placeholder}
+            className="min-w-0 w-full bg-transparent outline-none text-[15px] placeholder:text-black/40 dark:placeholder:text-white/40"
+            aria-label={mode === "ai" ? "Ask AI" : "Search"}
+          />
+        </div>
+
+        {/* CTA */}
+        <Button
+          onClick={stopDemoAnd(submit)}
+          variant={mode === "ai" ? "ai" : "primary"}
+          size="compact"
+          className="whitespace-nowrap px-3 h-9 sm:h-8"
+        >
+          {mode === "ai" ? <Sparkles className="h-4 w-4" /> : <SearchIcon className="h-4 w-4" />}
+          <span className="hidden sm:inline">{ctaLabel}</span>
+        </Button>
+      </div>
+    </div>
+  );
 }
 
 function HeroSkeletonLine({ w = "60%" }) {

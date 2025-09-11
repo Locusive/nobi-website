@@ -503,9 +503,9 @@ useEffect(() => {
   setQuery,
   setPlaceholder,
   enabled: demoEnabled,
-  textForMode: () => DEMO_QUERY,          // <-- force the same sentence for AI & Default
+  textForMode: () => DEMO_QUERY,   // the long sentence
   onDone: (typed) => {
-    onDemoSubmit?.({ mode, query: typed }); // <-- kick off the preview when typing ends
+    onDemoSubmit?.({ mode, query: typed });
     setSubmitted({ mode, query: typed });
     setTimeout(() => setSubmitted(null), 1600);
   },
@@ -753,34 +753,95 @@ function VideoModal({ open, onClose, youtube, src, poster = "" }) {
 
 
 function Hero({ onOpenForm, onOpenVideo }) {
-  const [searchMode, setSearchMode] = useState("ai"); // "ai" | "site"
-  const [playKey, setPlayKey] = useState(0);
-  const [lastQuery, setLastQuery] = useState("");     // <-- new
+  // The sentence we want typed into the search bar before the preview runs
+  const DEMO_QUERY =
+    "Looking for a linen shirt under $100 for a wedding — it's on the beach and I'll be wearing a navy jacket";
 
+  const [searchMode, setSearchMode] = React.useState("ai"); // "ai" | "site"
+  const [playKey, setPlayKey] = React.useState(0);          // bump to restart preview
+  const [lastQuery, setLastQuery] = React.useState(DEMO_QUERY);
+
+  // Called both when the typing demo finishes and when the user manually submits
   const kickOffPreview = ({ mode, query }) => {
     setSearchMode(mode);
-    setLastQuery(query || DEMO_QUERY); // fallback to the demo text
-    setPlayKey((k) => k + 1);          // remount the preview so it restarts
+    setLastQuery(query || DEMO_QUERY);
+    setPlayKey((k) => k + 1);
   };
 
   return (
-    // ...
-    <div className="mb-4 p-4 rounded-2xl border border-fuchsia-200 bg-gradient-to-r from-fuchsia-50 to-pink-50 shadow-md">
-      <DualModeSearchBar
-        mode={searchMode}
-        onModeChange={setSearchMode}
-        defaultMode="ai"
-        size="compact"
-        onDemoSubmit={kickOffPreview}   // auto after typing demo
-        onSubmit={kickOffPreview}       // real user click/Enter
-      />
-    </div>
+    <section id="home" className="relative overflow-hidden mb-3">
+      <div className="mx-auto max-w-6xl px-6 pt-16 sm:pt-24">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+          {/* LEFT: headline, value prop, CTAs */}
+          <div className="space-y-6">
+            <h1 className="text-5xl sm:text-6xl font-semibold tracking-tight text-balance">
+              Turn product search into a{" "}
+              <span className="bg-gradient-to-r from-indigo-500 via-violet-500 to-fuchsia-500 bg-clip-text text-transparent">
+                conversation
+              </span>
+            </h1>
 
-    {/* Make sure the preview card renders and gets the query */}
-    <ConversationDemo mode={searchMode} playKey={playKey} query={lastQuery} />
-    // ...
+            <p className="text-lg text-black/70 dark:text-white/70 max-w-2xl">
+              Nobi gets your customers the right products faster with conversational AI.
+            </p>
+
+            <div className="flex flex-col sm:flex-row gap-3">
+              <Button size="lg" onClick={onOpenForm} className="w-full sm:w-auto">
+                Try it on your store
+              </Button>
+              <Button
+                size="lg"
+                variant="ghost"
+                onClick={onOpenVideo}
+                className="w-full sm:w-auto"
+              >
+                <PlayCircle className="h-5 w-5" />
+                How it works in 60 seconds
+              </Button>
+            </div>
+
+            <div className="flex flex-wrap items-center gap-5 text-sm text-black/60 dark:text-white/60">
+              <span className="inline-flex items-center gap-2">
+                <CheckCircle2 className="h-4 w-4 text-fuchsia-600" />
+                15-minute install
+              </span>
+              <span className="inline-flex items-center gap-2">
+                <CheckCircle2 className="h-4 w-4 text-fuchsia-600" />
+                Shopify & headless
+              </span>
+              <span className="inline-flex items-center gap-2">
+                <CheckCircle2 className="h-4 w-4 text-fuchsia-600" />
+                A/B testing & reporting
+              </span>
+            </div>
+          </div>
+
+          {/* RIGHT: search bar (types first) + preview that starts afterwards */}
+          <div className="relative">
+            <div className="mb-4 p-4 rounded-2xl border border-fuchsia-200 bg-gradient-to-r from-fuchsia-50 to-pink-50 shadow-md">
+              <DualModeSearchBar
+                mode={searchMode}
+                onModeChange={setSearchMode}
+                defaultMode="ai"
+                size="compact"
+                onDemoSubmit={kickOffPreview}   // auto after typing demo
+                onSubmit={kickOffPreview}       // real clicks/Enter
+              />
+            </div>
+
+            {/* Preview card */}
+            <ConversationDemo
+              mode={searchMode}
+              playKey={playKey}
+              query={lastQuery}
+            />
+          </div>
+        </div>
+      </div>
+    </section>
   );
 }
+
 
 
 function BrandMark({ src, label, className = "" }) {

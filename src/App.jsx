@@ -501,7 +501,7 @@ function DualModeSearchBar({
     setQuery,
     setPlaceholder,
     enabled: demoEnabled,
-    textForMode: () => DEMO_QUERY,
+    textForMode: DEMO_QUERY,
     onDone: (typed) => {
       onDemoSubmit?.({ mode, query: typed });
     },

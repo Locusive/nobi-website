@@ -846,10 +846,8 @@ function Hero({ onOpenForm, onOpenVideo }) {
 
           <div className="flex flex-wrap justify-center gap-3">
             <Button size="lg" onClick={onOpenForm}>
-  Try it on your store
-  <span className="ml-3 -mr-1 inline-flex h-8 w-8 items-center justify-center rounded-xl bg-black text-white ring-4 ring-amber-400/90 shadow-sm dark:bg-black dark:text-white">
-    <ArrowRight className="h-4 w-4" />
-  </span>
+  <span>Try it on your store</span>
+  <ArrowRight className="h-5 w-5 -mr-1" aria-hidden="true" />
 </Button>
             <Button size="lg" variant="ghost" onClick={onOpenVideo}>
               <PlayCircle className="h-5 w-5" />

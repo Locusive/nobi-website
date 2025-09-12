@@ -613,7 +613,7 @@ function DualModeSearchBar({
   }
 
   return (
-    <div className="w-full max-w-3xl">
+    <div className="w-full">
       <div
         className={`flex items-center gap-2 rounded-2xl border border-black/10 dark:border-white/15 bg-white/70 dark:bg-white/5 backdrop-blur px-2 ${height} shadow-sm`}
       >

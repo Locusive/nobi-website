@@ -42,8 +42,8 @@ function HeroProductCard({ title = "Oxford Shirt", price = "$168", img }) {
   if (hasImage) {
     // Image variant (uses AssetImage)
     return (
-      <div className="rounded-xl overflow-hidden border border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/5">
-        <div className="aspect-[3/4] bg-black/5 dark:bg-white/10">
+     <div className="rounded-xl overflow-hidden border border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/5">
+       <div className="aspect-square sm:aspect-[5/6] bg-black/5 dark:bg-white/10">
           <AssetImage
             src={img}
             alt={title}
@@ -51,11 +51,11 @@ function HeroProductCard({ title = "Oxford Shirt", price = "$168", img }) {
             labelForPlaceholder="Product image"
           />
         </div>
-        <div className="p-3">
-          <div className="text-sm font-medium text-black/90 dark:text-white/90 line-clamp-1">
+       <div className="p-2">
+      <div className="text-[13px] sm:text-sm font-medium text-black/90 dark:text-white/90 line-clamp-1">
             {title}
           </div>
-          <div className="text-sm text-black/60 dark:text-white/60">{price}</div>
+          <div className="text-xs text-black/60 dark:text-white/60">{price}</div>
         </div>
       </div>
     );
@@ -63,8 +63,8 @@ function HeroProductCard({ title = "Oxford Shirt", price = "$168", img }) {
 
   // Simple (no image provided)
   return (
-    <div className="rounded-xl border border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/5 p-3">
-      <div className="aspect-[3/4] w-full rounded-lg bg-black/5 dark:bg-white/10" />
+    <div className="rounded-xl border border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/5 p-2">
+     <div className="aspect-square sm:aspect-[5/6] w-full rounded-lg bg-black/5 dark:bg-white/10" />
       <div className="mt-2 text-sm font-medium text-black/80 dark:text-white/90">{title}</div>
       <div className="text-xs text-black/50 dark:text-white/60">{price}</div>
     </div>
@@ -143,7 +143,7 @@ function HeroConversationDemo({ script, startKey, ratio = 4 / 3 }) {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: 6 }}
                   transition={{ duration: 0.55 }}
-                  className="grid grid-cols-3 gap-2.5 sm:gap-3 pt-1"
+                  className="grid grid-cols-3 gap-2 sm:gap-2.5 pt-1"
                 >
                   {products.map((p) => (
                     <HeroProductCard key={p.title} title={p.title} price={p.price} img={p.img} />
@@ -165,20 +165,26 @@ function makeScript(mode, q = "linen shirt for a wedding") {
       userText: `Linen shirt under $100 for a beach wedding that goes with a navy jacket.`,
       aiText:
         "Got it! Here are beach-appropriate linen options in white, cream and eggshell, which would go great with a navy jacket.",
-      products: [
-        { title: "Legend Oxford", price: "$68", img: "/media/prod-1.png" },
-        { title: "Coastal Linen", price: "$78", img: "/media/prod-2.png" },
-        { title: "Classic Button-down", price: "$98", img: "/media/prod-3.png" },
-      ],
+     products: [
+     { title: "Legend Oxford",        price: "$68", img: "/media/prod-1.png" },
+     { title: "Coastal Linen",        price: "$78", img: "/media/prod-2.png" },
+     { title: "Classic Button-down",  price: "$98", img: "/media/prod-3.png" },
+     { title: "Lightweight Poplin",   price: "$72", img: "/media/prod-1.png" },
+     { title: "Relaxed Linen",        price: "$89", img: "/media/prod-2.png" },
+     { title: "Stretch Oxford",       price: "$94", img: "/media/prod-3.png" },
+   ],
     };
   }
   return {
     userText: "",
     aiText: "",
     products: [
-      { title: "Washed Linen Shirt",  price: "$129", img: "/media/prod-1.png" },
-      { title: "Summer Oxford",       price: "$138", img: "/media/prod-2.png" },
-      { title: "Classic Button-down", price: "$148", img: "/media/prod-3.png" }
+      { title: "Washed Linen Shirt",   price: "$129", img: "/media/prod-1.png" },
+   { title: "Summer Oxford",        price: "$138", img: "/media/prod-2.png" },
+   { title: "Classic Button-down",  price: "$148", img: "/media/prod-3.png" },
+   { title: "Linen Utility Shirt",  price: "$119", img: "/media/prod-1.png" },
+   { title: "Airy Camp Collar",     price: "$139", img: "/media/prod-2.png" },
+   { title: "Everyday Oxford",      price: "$128", img: "/media/prod-3.png" },
     ],
   };
 }

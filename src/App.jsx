@@ -73,7 +73,7 @@ function HeroProductCard({ title = "Oxford Shirt", price = "$168", img }) {
 
 function HeroConversationDemo({ script, startKey, ratio = 4 / 3 }) {
   const {
-    userText = 'Red dress for a beach wedding. I'm 5'5" and want something under $200.',
+    userText = `Red dress for a beach wedding. I'm 5'5" and want something under $200.`,
     aiText   = "Got it! Here are some red dresses that are warm-weather appropriate and comfortable on sand / in a slight breeze (rather than a formal ballroom) in your size (M).",
     products = [
       { title: "Legend Oxford", price: "$68", img: "/media/prod-1.png" },

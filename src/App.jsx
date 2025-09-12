@@ -513,6 +513,7 @@ function DualModeSearchBar({
   const [placeholder, setPlaceholder] = React.useState(
     mode === "ai" ? "Describe what you want..." : "Search products..."
   );
+const userInteractedRef = React.useRef(false);
   const [demoEnabled, setDemoEnabled] = React.useState(true);
 
   // animated toggle thumb
@@ -544,12 +545,19 @@ function DualModeSearchBar({
     }
   }, [measureThumb]);
 
-  // restart demo when the mode changes
-  React.useEffect(() => {
-    setDemoEnabled(true);
-    setQuery("");
-    setPlaceholder(mode === "ai" ? "Describe what you want..." : "Search products...");
-  }, [mode]);
+ // on mode change: don't wipe the query; only adjust placeholder and (optionally) enable demo
+ React.useEffect(() => {
+   setPlaceholder(mode === "ai" ? "Describe what you want..." : "Search products...");
+   // Only (re)enable auto-typing when switching *into* AI, the field is empty,
+   // and the user hasn't interacted yet.
+   if (mode === "ai" && !userInteractedRef.current && !query) {
+     setDemoEnabled(true);
+   } else {
+     setDemoEnabled(false);
+   }
+ // eslint-disable-next-line react-hooks/exhaustive-deps
+ }, [mode]);  // (we intentionally don't re-run because of query changes)
+
 
   const demoText = React.useMemo(
   () => (mode === "ai" ? DEMO_QUERY : "Linen shirt"),
@@ -573,9 +581,11 @@ function DualModeSearchBar({
 
   // cancel demo on any user interaction
   const stopDemoAnd = (next) => (e) => {
-    if (demoEnabled) setDemoEnabled(false);
-    next?.(e);
-  };
+   if (demoEnabled) setDemoEnabled(false);
+   userInteractedRef.current = true;
+   next?.(e);
+ };
+
 
   const ctaLabel = mode === "ai" ? "Ask AI" : "Search";
   const height = size === "compact" ? "h-11" : "h-14";

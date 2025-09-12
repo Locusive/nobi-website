@@ -469,6 +469,7 @@ function useTypingDemo({
       let i = 0;
       const step = () => {
         if (cancelled) return;
+        console.log("typing", i, toType[i]);
         setQuery(toType.slice(0, i + 1));
         i++;
         if (i < toType.length) {

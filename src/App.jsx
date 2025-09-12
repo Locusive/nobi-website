@@ -789,15 +789,6 @@ function Hero({ onOpenForm, onOpenVideo }) {
     setPlayKey((k) => k + 1);
   };
 
-  // NEW: force-start if demo never fires
-  React.useEffect(() => {
-    const t = setTimeout(() => {
-      setLastQuery((q) => q || DEMO_QUERY);
-      setPlayKey((k) => (k < 0 ? 0 : k));
-    }, 2000);
-    return () => clearTimeout(t);
-  }, []);
-
   return (
     <section id="home" className="relative overflow-hidden">
       <div className="mx-auto max-w-7xl px-6 pt-16 sm:pt-24 pb-6">

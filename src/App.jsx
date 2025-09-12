@@ -569,7 +569,7 @@ const userInteractedRef = React.useRef(false);
     mode,
     setQuery,
     setPlaceholder,
-    enabled: demoEnabled && mode === "ai",
+    enabled: demoEnabled,
     textForMode: (m) => (m === "ai" ? DEMO_QUERY : "Linen shirt"),
     onDone: (typed) => onDemoSubmit?.({ mode, query: typed }),
   });

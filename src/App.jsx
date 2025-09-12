@@ -76,9 +76,9 @@ function HeroConversationDemo({ script, startKey, ratio = 4 / 3 }) {
     userText = `Red dress for a beach wedding. I'm 5'5" and want something under $200.`,
     aiText   = "Got it! Here are some red dresses that are warm-weather appropriate and comfortable on sand / in a slight breeze (rather than a formal ballroom). These are all available in your size (M) and under $200.",
     products = [
-      { title: "Legend Oxford", price: "$68", img: "/media/prod-1.png" },
-      { title: "Coastal Linen", price: "$78", img: "/media/prod-2.png" },
-      { title: "Classic Button-down", price: "$98", img: "/media/prod-3.png" },
+      { title: "St. Bernard x Stark Maxi", price: "$98", img: "/media/prod-1.png" },
+      { title: "Maygel Coronel Cover-Up", price: "$178", img: "/media/prod-2.png" },
+      { title: "Hunter Puff-Sleeve Mini", price: "$124", img: "/media/prod-3.png" },
     ],
   } = script || {};
 
@@ -166,12 +166,12 @@ function makeScript(mode, q = "red dress for a wedding") {
       aiText:
         "Got it! Here are some red dresses that are warm-weather appropriate and comfortable on sand / in a slight breeze (rather than a formal ballroom). These are all available in your size (M) and under $200.",
      products: [
-     { title: "Legend Oxford",        price: "$68", img: "/media/prod-1.png" },
-     { title: "Coastal Linen",        price: "$78", img: "/media/prod-2.png" },
-     { title: "Classic Button-down",  price: "$98", img: "/media/prod-3.png" },
-     { title: "Lightweight Poplin",   price: "$72", img: "/media/prod-1.png" },
-     { title: "Relaxed Linen",        price: "$89", img: "/media/prod-2.png" },
-     { title: "Stretch Oxford",       price: "$94", img: "/media/prod-3.png" },
+     { title: "St. Bernard x Stark Maxi",        price: "$98", img: "/media/prod-1.png" },
+      { title: "Maygel Coronel Cover-Up",        price: "$178", img: "/media/prod-2.png" },
+      { title: "Lulus Bow Backless Maxi",        price: "$55", img: "/media/prod-3.png" },
+      { title: "Hunter Puff-Sleeve Mini",        price: "$124", img: "/media/prod-4.png" },
+     { title: "Banjanan Cotton Maxi",   price: "$172", img: "/media/prod-5.png" },
+     { title: "Majestic Coconut Maxi",        price: "$189", img: "/media/prod-6.png" },
    ],
     };
   }

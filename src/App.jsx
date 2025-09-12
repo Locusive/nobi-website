@@ -1195,7 +1195,7 @@ function HowItWorks() {
 
 function Pricing() {
   const tiers = [
-    { name: "Starter", price: "$0", blurb: "Kick the tires", points: ["Up to 500 queries/mo", "Default + AI search bar", "Email support"], cta: "Get started" },
+    { name: "Starter", price: "$0", blurb: "Kick the tires", points: ["Up to 500 queries", "Dual Mode search bar", "Email support"], cta: "Get started" },
     { name: "Growth", price: "$499", blurb: "Best for DTC brands", points: ["5k queries/mo", "Collections assistant", "Analytics Dashboard"], cta: "Start trial" },
     { name: "Enterprise", price: "Custom", blurb: "Scale & SSO", points: ["Unlimited queries", "Priority SLAs", "Custom models"], cta: "Talk to sales" },
   ];

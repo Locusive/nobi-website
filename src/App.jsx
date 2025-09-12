@@ -1038,10 +1038,10 @@ function Features() {
 
 function Results() {
   const rows = [
-    { metric: "Product Viewed", defaultVal: "60.9%", nobiVal: "64.1%", impact: "+6.0%" },
-    { metric: "Add to Cart", defaultVal: "8.5%", nobiVal: "11.5%", impact: "+35.3%" },
-    { metric: "Checkout Completed", defaultVal: "2.4%", nobiVal: "3.1%", impact: "+29.2%" },
-    { metric: "Average Order Value", defaultVal: "$231", nobiVal: "$360", impact: "+55.8%" },
+    { metric: "Product Viewed",       defaultVal: "60.9%", nobiVal: "64.1%", impact: "+6.0%" },
+    { metric: "Add to Cart",          defaultVal: "8.5%",  nobiVal: "11.5%", impact: "+35.3%" },
+    { metric: "Checkout Completed",   defaultVal: "2.4%",  nobiVal: "3.1%",  impact: "+29.2%" },
+    { metric: "Average Order Value",  defaultVal: "$231",  nobiVal: "$360",  impact: "+55.8%" },
   ];
 
   return (
@@ -1055,56 +1055,35 @@ function Results() {
           Nobi has outperformed the default shopping experience in every A/B test we've ever run.
         </p>
 
-       {/* REPLACE this whole block */}
-<div className="mt-8 overflow-x-auto">
-  <table className="w-full table-fixed text-left border-collapse">
-    <colgroup>
-      {/* metric column grows; value columns stay tight */}
-      <col className="w-auto" />
-      <col className="w-[108px]" />
-      <col className="w-[108px]" />
-      <col className="w-[108px]" />
-    </colgroup>
-
-    <thead>
-      <tr className="text-sm font-semibold text-black/70 dark:text-white/70">
-        <th className="py-2 px-2"></th>
-        <th className="py-2 px-2 text-center">Default</th>
-        <th className="py-2 px-2 text-center">Nobi</th>
-        <th className="py-2 px-2 text-center bg-gradient-to-r from-indigo-500 via-violet-500 to-fuchsia-500 bg-clip-text text-transparent">
-          Impact
-        </th>
-      </tr>
-    </thead>
-
-    <tbody>
-      {rows.map((r, i) => (
-        <tr
-          key={r.metric}
-          className={
-            i !== rows.length - 1
-              ? "border-b border-dashed border-black/20 dark:border-white/15"
-              : ""
-          }
-        >
-          <td className="py-3 px-2 font-medium text-black/80 dark:text-white/90">
-            {r.metric}
-          </td>
-          <td className="py-3 px-2 text-center text-2xl font-semibold tabular-nums whitespace-nowrap">
-            {r.defaultVal}
-          </td>
-          <td className="py-3 px-2 text-center text-2xl font-semibold tabular-nums whitespace-nowrap">
-            {r.nobiVal}
-          </td>
-          <td className="py-3 px-2 text-center text-2xl font-bold tabular-nums bg-gradient-to-r from-indigo-500 via-violet-500 to-fuchsia-500 bg-clip-text text-transparent whitespace-nowrap">
-            {r.impact}
-          </td>
-        </tr>
-      ))}
-    </tbody>
-  </table>
-</div>
-
+        <div className="mt-8 overflow-x-auto">
+          <table className="w-full text-left border-collapse">
+            <thead>
+              <tr className="text-sm font-semibold text-black/70 dark:text-white/70">
+                <th className="py-3 px-4"></th>
+                <th className="py-3 px-4 text-center">Default</th>
+                <th className="py-3 px-4 text-center">Nobi</th>
+                <th className="py-3 px-4 text-center bg-gradient-to-r from-indigo-500 via-violet-500 to-fuchsia-500 bg-clip-text text-transparent">
+                  Impact
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {rows.map((r, i) => (
+                <tr
+                  key={r.metric}
+                  className={i !== rows.length - 1 ? "border-b border-dashed border-black/20 dark:border-white/15" : ""}
+                >
+                  <td className="py-4 px-4 font-medium text-black/80 dark:text-white/90">{r.metric}</td>
+                  <td className="py-4 px-4 text-center text-2xl font-semibold tabular-nums">{r.defaultVal}</td>
+                  <td className="py-4 px-4 text-center text-2xl font-semibold tabular-nums">{r.nobiVal}</td>
+                  <td className="py-4 px-4 text-center text-2xl font-bold tabular-nums bg-gradient-to-r from-indigo-500 via-violet-500 to-fuchsia-500 bg-clip-text text-transparent">
+                    {r.impact}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
 
         <p className="mt-3 text-xs text-black/50 dark:text-white/50">
           Impact = relative lift vs. Default. A/B frameworks available for on-site validation.
@@ -1113,7 +1092,6 @@ function Results() {
     </section>
   );
 }
-
 
 function Testimonial() {
   const leftRef = useRef(null);

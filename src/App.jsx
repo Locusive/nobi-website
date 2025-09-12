@@ -906,14 +906,13 @@ function BrandMark({ src, label, className = "" }) {
 }
 
 function Logos() {
-  // Keep the data simple; we’ll tweak Faherty slightly
   const brands = [
-    { src: "/media/logos/lucchese.svg", alt: "Lucchese" },
-    { src: "/media/logos/untuckit.svg", alt: "UNTUCKit" },
-    // Nudge up a touch and scale slightly so the wordmark aligns with others
-    { src: "/media/logos/faherty.svg", alt: "Faherty", adjust: "-translate-y-[2px] scale-[1.08]" },
-    { src: "/media/logos/toolup.svg", alt: "TOOLUP" },
-    { src: "/media/logos/stbernard.svg", alt: "St. Bernard" },
+    { src: "/media/logos/lucchese.svg",  alt: "Lucchese",     widthHint: "max-w-[140px] md:max-w-[160px]" },
+    { src: "/media/logos/untuckit.svg",  alt: "UNTUCKit",     widthHint: "max-w-[140px] md:max-w-[160px]" },
+    // ↓ Add a tiny upward offset just for FAHERTY
+    { src: "/media/logos/faherty.svg",   alt: "Faherty",      widthHint: "max-w-[220px] md:max-w-[240px]", heightHint: "h-9 sm:h-10 md:h-11", offsetHint: "-top-[3px]" },
+    { src: "/media/logos/toolup.svg",    alt: "TOOLUP",       widthHint: "max-w-[180px]" },
+    { src: "/media/logos/stbernard.svg", alt: "St. Bernard",  widthHint: "max-w-[180px]" },
   ];
 
   return (
@@ -923,17 +922,21 @@ function Logos() {
           Trusted by modern commerce
         </p>
 
-        {/* Each logo gets the same height box; images fill max height and are centered */}
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-x-10 gap-y-8 items-center justify-items-center">
           {brands.map((b) => (
-            <div key={b.alt} className="flex items-center justify-center w-full h-10 sm:h-11 md:h-12">
+            <div key={b.alt} className="flex items-center justify-center w-full">
               <img
                 src={b.src}
                 alt={b.alt}
                 className={[
-                  "block max-h-full w-auto object-contain grayscale opacity-70 hover:opacity-100 transition",
-                  b.adjust || ""
+                  "relative",                                   // allow top offset
+                  "h-7 sm:h-8 md:h-9 w-auto object-contain",    // base sizing
+                  "grayscale opacity-70 hover:opacity-100 transition",
+                  b.widthHint,
+                  b.heightHint || "",
+                  b.offsetHint || ""                             // ← the nudge (only on FAHERTY)
                 ].join(" ")}
+                style={{ imageRendering: "auto" }}
               />
             </div>
           ))}

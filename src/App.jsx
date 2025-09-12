@@ -906,14 +906,12 @@ function BrandMark({ src, label, className = "" }) {
 }
 
 function Logos() {
-  // Give Lucchese and UNTUCKit a smaller max-width so they don’t dominate
   const brands = [
-    { src: "/media/logos/lucchese.svg", alt: "Lucchese", widthHint: "max-w-[140px] md:max-w-[160px]" },
-    { src: "/media/logos/untuckit.svg", alt: "UNTUCKit", widthHint: "max-w-[140px] md:max-w-[160px]" },
-    { src: "/media/logos/faherty.svg", alt: "Faherty", widthHint: "max-w-[220px] md:max-w-[240px]",
-      heightHint: "h-9 sm:h-10 md:h-11" },
-    { src: "/media/logos/toolup.svg", alt: "TOOLUP", widthHint: "max-w-[180px]" },
-    { src: "/media/logos/stbernard.svg", alt: "St. Bernard", widthHint: "max-w-[180px]" },
+    { src: "/media/logos/lucchese.svg", alt: "Lucchese" },
+    { src: "/media/logos/untuckit.svg", alt: "UNTUCKit" },
+    { src: "/media/logos/faherty.svg", alt: "Faherty" },
+    { src: "/media/logos/toolup.svg", alt: "TOOLUP" },
+    { src: "/media/logos/stbernard.svg", alt: "St. Bernard" },
   ];
 
   return (
@@ -923,22 +921,18 @@ function Logos() {
           Trusted by modern commerce
         </p>
 
-        {/* Even spacing, consistent height; grayscale until hover */}
+        {/* Fixed-height cells so SVG whitespace can't shift alignment */}
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-x-10 gap-y-8 items-center justify-items-center">
           {brands.map((b) => (
-            <div key={b.alt} className="flex items-center justify-center w-full">
+            <div key={b.alt} className="flex h-10 sm:h-12 items-center justify-center w-full">
               <img
-  src={b.src}
-  alt={b.alt}
-  className={[
-    // default height
-    "h-7 sm:h-8 md:h-9 w-auto object-contain grayscale opacity-70 hover:opacity-100 transition",
-    // per-logo overrides
-    b.widthHint,
-    b.heightHint || ""
-  ].join(" ")}
-  style={{ imageRendering: "auto" }}
-/>
+                src={b.src}
+                alt={b.alt}
+                loading="lazy"
+                decoding="async"
+                className="block max-h-full w-auto object-contain grayscale opacity-70 hover:opacity-100 transition"
+                style={{ imageRendering: "auto" }}
+              />
             </div>
           ))}
         </div>

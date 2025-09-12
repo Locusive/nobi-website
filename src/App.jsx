@@ -42,8 +42,8 @@ function HeroProductCard({ title = "Oxford Shirt", price = "$168", img }) {
   if (hasImage) {
     // Image variant (uses AssetImage)
     return (
-     <div className="rounded-xl overflow-hidden border border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/5">
-       <div className="aspect-square sm:aspect-[5/6] bg-black/5 dark:bg-white/10">
+      <div className="rounded-xl overflow-hidden border border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/5">
+        <div className="aspect-[3/2] bg-black/5 dark:bg-white/10">
           <AssetImage
             src={img}
             alt={title}
@@ -51,11 +51,11 @@ function HeroProductCard({ title = "Oxford Shirt", price = "$168", img }) {
             labelForPlaceholder="Product image"
           />
         </div>
-       <div className="p-2">
-      <div className="text-[13px] sm:text-sm font-medium text-black/90 dark:text-white/90 line-clamp-1">
+       <div className="p-2.5">
+          <div className="text-[13px] font-medium text-black/90 dark:text-white/90 line-clamp-1">
             {title}
           </div>
-          <div className="text-xs text-black/60 dark:text-white/60">{price}</div>
+          <div className="text-[13px] text-black/60 dark:text-white/60">{price}</div>
         </div>
       </div>
     );
@@ -63,10 +63,10 @@ function HeroProductCard({ title = "Oxford Shirt", price = "$168", img }) {
 
   // Simple (no image provided)
   return (
-    <div className="rounded-xl border border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/5 p-2">
-     <div className="aspect-square sm:aspect-[5/6] w-full rounded-lg bg-black/5 dark:bg-white/10" />
-      <div className="mt-2 text-sm font-medium text-black/80 dark:text-white/90">{title}</div>
-      <div className="text-xs text-black/50 dark:text-white/60">{price}</div>
+    <div className="rounded-xl border border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/5 p-2.5">
+      <div className="aspect-[3/2] w-full rounded-lg bg-black/5 dark:bg-white/10" />
+      <div className="mt-2 text-[13px] font-medium text-black/80 dark:text-white/90">{title}</div>
+      <div className="mt-2 text-[13px] font-medium text-black/80 dark:text-white/90">{title}</div>
     </div>
   );
 }
@@ -839,7 +839,8 @@ function Hero({ onOpenForm, onOpenVideo }) {
 
         {/* Preview card (bigger width) */}
         <div className="mt-4 max-w-5xl mx-auto">
-          <ConversationPreview mode={searchMode} playKey={playKey} query={lastQuery} />
+          <ConversationPreview mode={searchMode} playKey={playKey} query={lastQuery} ratio={3 / 2} 
+            />
         </div>
       </div>
     </section>

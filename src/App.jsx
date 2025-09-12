@@ -561,8 +561,8 @@ function DualModeSearchBar({
     mode,
     setQuery,
     setPlaceholder,
-    enabled: demoEnabled, // change to: demoEnabled && mode === "ai" if you only want AI mode to auto-type
-    textForMode: demoText,
+    enabled: demoEnabled && mode === "ai"
+    textForMode: (m) => (m === "ai" ? DEMO_QUERY : "Linen shirt"),
     onDone: (typed) => onDemoSubmit?.({ mode, query: typed }),
   });
 

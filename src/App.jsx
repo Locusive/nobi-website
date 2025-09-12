@@ -1337,7 +1337,7 @@ function InsightsHeatCell({ v = 0 }) {
   );
 }
 
-function Insights() {
+function Insights({ onOpenForm }) {
   const intents = [
     { label: "Buying a Gift", value: 124 },
     { label: "Shopping for an upcoming trip", value: 96 },
@@ -1487,7 +1487,14 @@ function Insights() {
 
         {/* CTA row */}
         <div className="mt-8 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
-          <Button size="lg" className="w-full sm:w-auto">See how insights are generated</Button>
+          <Button
+   size="lg"
+   className="w-full sm:w-auto"
+   onClick={onOpenForm}
+ >
+   <span>See how insights are generated</span>
+   <ArrowRight className="h-5 w-5 -mr-1" aria-hidden="true" />
+ </Button>
         </div>
       </div>
     </section>
@@ -1695,7 +1702,10 @@ export default function App() {
           </nav>
 
           <div className="hidden md:flex items-center gap-3">
-            <Button variant="ghost"><ShoppingCart className="h-4 w-4" /> Install Nobi</Button>
+            <Button variant="ghost" onClick={() => setIsFormOpen(true)}>
+   <ShoppingCart className="h-4 w-4" />
+   Install Nobi
+ </Button>
           </div>
         </div>
       </header>
@@ -1704,8 +1714,7 @@ export default function App() {
       <Logos />
       <Features />
       <Results />
-      <Insights />
-      <Testimonial />
+<Insights onOpenForm={() => setIsFormOpen(true)} />      <Testimonial />
       <HowItWorks />
       <Pricing />
       <FAQ />

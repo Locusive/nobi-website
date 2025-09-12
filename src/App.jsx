@@ -489,7 +489,7 @@ function useTypingDemo({
       timers.forEach(clearTimeout);
     };
   // ❗ do NOT include `onDone` here; we use doneRef instead
-  }, [mode, enabled, setQuery, setPlaceholder, textForMode]);
+  }, [mode, enabled]);
 }
 
 function DualModeSearchBar({
@@ -545,13 +545,18 @@ function DualModeSearchBar({
     setPlaceholder(mode === "ai" ? "Describe what you want..." : "Search products...");
   }, [mode]);
 
+  const demoText = React.useMemo(
+  () => (mode === "ai" ? DEMO_QUERY : "Linen shirt"),
+  [mode]
+);
+  
   // ⬇️ THIS actually types in the input
   useTypingDemo({
     mode,
     setQuery,
     setPlaceholder,
     enabled: demoEnabled, // change to: demoEnabled && mode === "ai" if you only want AI mode to auto-type
-    textForMode: (m) => (m === "ai" ? DEMO_QUERY : "Linen shirt"),
+    textForMode: demoText,
     onDone: (typed) => onDemoSubmit?.({ mode, query: typed }),
   });
 

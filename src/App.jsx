@@ -201,7 +201,7 @@ function ConversationPreview({ mode, playKey, query }) {
         key={`${mode}-${playKey}`}
         script={makeScript(mode, query)}
         startKey={playKey}
-        ratio={4 / 3}
+        ratio={2.2}
       />
     </AnimatePresence>
   );

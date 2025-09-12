@@ -906,10 +906,12 @@ function BrandMark({ src, label, className = "" }) {
 }
 
 function Logos() {
+  // Keep the data simple; we’ll tweak Faherty slightly
   const brands = [
     { src: "/media/logos/lucchese.svg", alt: "Lucchese" },
     { src: "/media/logos/untuckit.svg", alt: "UNTUCKit" },
-    { src: "/media/logos/faherty.svg", alt: "Faherty" },
+    // Nudge up a touch and scale slightly so the wordmark aligns with others
+    { src: "/media/logos/faherty.svg", alt: "Faherty", adjust: "-translate-y-[2px] scale-[1.08]" },
     { src: "/media/logos/toolup.svg", alt: "TOOLUP" },
     { src: "/media/logos/stbernard.svg", alt: "St. Bernard" },
   ];
@@ -921,17 +923,17 @@ function Logos() {
           Trusted by modern commerce
         </p>
 
-        {/* Fixed-height cells so SVG whitespace can't shift alignment */}
+        {/* Each logo gets the same height box; images fill max height and are centered */}
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-x-10 gap-y-8 items-center justify-items-center">
           {brands.map((b) => (
-            <div key={b.alt} className="flex h-10 sm:h-12 items-center justify-center w-full">
+            <div key={b.alt} className="flex items-center justify-center w-full h-10 sm:h-11 md:h-12">
               <img
                 src={b.src}
                 alt={b.alt}
-                loading="lazy"
-                decoding="async"
-                className="block max-h-full w-auto object-contain grayscale opacity-70 hover:opacity-100 transition"
-                style={{ imageRendering: "auto" }}
+                className={[
+                  "block max-h-full w-auto object-contain grayscale opacity-70 hover:opacity-100 transition",
+                  b.adjust || ""
+                ].join(" ")}
               />
             </div>
           ))}

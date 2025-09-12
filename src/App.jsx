@@ -985,7 +985,7 @@ function Features() {
         <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight mt-2 text-balance">
           One seamless experience, anywhere in your store.
         </h2>
-        <p className="mt-3 text-black/70 dark:text-white/70 max-w-3xl">
+        <p className="mt-3 text-black/70 dark:text-white/70">
           Test conversational AI on your PLPs, search, PDPs and anywhere else you think is right for your brand.
         </p>
 
@@ -1051,7 +1051,7 @@ function Results() {
         <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight mt-2">
           Conversational shopping works.
         </h2>
-        <p className="mt-3 text-black/70 dark:text-white/70 max-w-2xl">
+        <p className="mt-3 text-black/70 dark:text-white/70">
           Nobi has outperformed the default shopping experience in every A/B test we've ever run.
         </p>
 
@@ -1371,7 +1371,7 @@ function Insights({ onOpenForm }) {
             <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight mt-2">
               Insights your team can act on.
             </h2>
-            <p className="mt-3 text-black/70 dark:text-white/70 max-w-2xl">
+            <p className="mt-3 text-black/70 dark:text-white/70">
               Nobi turns real conversations into structured signals. Your merchandising, creative, and growth teams have never moved faster.
             </p>
           </div>

@@ -518,6 +518,10 @@ function DualModeSearchBar({
   const [demoEnabled, setDemoEnabled] = React.useState(true);
   const [demoSeed, setDemoSeed] = React.useState(0); // 👈 force rerun flag
 
+  React.useEffect(() => {
+  setDemoSeed((s) => s + 1);
+}, []);
+
   // animated toggle thumb
   const toggleRef = React.useRef(null);
   const siteBtnRef = React.useRef(null);
@@ -789,16 +793,33 @@ function Hero({ onOpenForm, onOpenVideo }) {
   const [playKey, setPlayKey] = React.useState(-1);
   const [lastQuery, setLastQuery] = React.useState(DEMO_QUERY);
 
+  // prevent double-fires (typing demo + fallback)
+  const hasKickedRef = React.useRef(false);
+
   const kickOffPreview = ({ mode, query }) => {
+    if (hasKickedRef.current) return;
+    hasKickedRef.current = true;
     setSearchMode(mode);
     setLastQuery(query || DEMO_QUERY);
     setPlayKey((k) => k + 1);
   };
 
+  // Fallback: if the typing demo doesn’t call onDemoSubmit, start the card anyway
+  React.useEffect(() => {
+    const t = setTimeout(() => {
+      if (!hasKickedRef.current) {
+        hasKickedRef.current = true;
+        setSearchMode("ai");
+        setLastQuery(DEMO_QUERY);
+        setPlayKey(0); // first run
+      }
+    }, 1600); // soft delay so the bar can start typing first
+    return () => clearTimeout(t);
+  }, []);
+
   return (
     <section id="home" className="relative overflow-hidden">
       <div className="mx-auto max-w-7xl px-6 pt-16 sm:pt-24 pb-6">
-        {/* Headline + subhead */}
         <div className="max-w-4xl mx-auto text-center space-y-6">
           <h1 className="text-5xl sm:text-6xl font-semibold tracking-tight text-balance">
             Turn product search into a{" "}
@@ -811,7 +832,6 @@ function Hero({ onOpenForm, onOpenVideo }) {
             Nobi gets your customers the right products faster with conversational AI.
           </p>
 
-          {/* CTAs */}
           <div className="flex flex-wrap justify-center gap-3">
             <Button size="lg" onClick={onOpenForm}>Try it on your store</Button>
             <Button size="lg" variant="ghost" onClick={onOpenVideo}>
@@ -819,8 +839,6 @@ function Hero({ onOpenForm, onOpenVideo }) {
               How it works in 60 seconds
             </Button>
           </div>
-
-        
         </div>
 
         {/* Search bar */}
@@ -830,23 +848,21 @@ function Hero({ onOpenForm, onOpenVideo }) {
               mode={searchMode}
               onModeChange={setSearchMode}
               defaultMode="ai"
-              size="regular"                 // bigger than "compact"
+              size="regular"
               onDemoSubmit={kickOffPreview}
               onSubmit={kickOffPreview}
             />
           </div>
         </div>
 
-        {/* Preview card (bigger width) */}
+        {/* Preview card */}
         <div className="mt-4 max-w-5xl mx-auto">
-          <ConversationPreview mode={searchMode} playKey={playKey} query={lastQuery} ratio={3 / 2} 
-            />
+          <ConversationPreview mode={searchMode} playKey={playKey} query={lastQuery} />
         </div>
       </div>
     </section>
   );
 }
-
 
 function BrandMark({ src, label, className = "" }) {
   // Renders the SVG as a mask so the shape fills the box exactly

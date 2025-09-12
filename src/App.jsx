@@ -561,7 +561,7 @@ function DualModeSearchBar({
     mode,
     setQuery,
     setPlaceholder,
-    enabled: demoEnabled && mode === "ai"
+    enabled: demoEnabled && mode === "ai",
     textForMode: (m) => (m === "ai" ? DEMO_QUERY : "Linen shirt"),
     onDone: (typed) => onDemoSubmit?.({ mode, query: typed }),
   });

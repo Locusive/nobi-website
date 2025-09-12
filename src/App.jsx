@@ -13,7 +13,7 @@ import stbernard from "/media/logos/stbernard.svg";
 
 // Demo sentence that should be typed into the search bar for both modes
 const DEMO_QUERY =
-  "Linen shirt under $100 for a beach wedding that goes with a navy jacket.";
+  "Red dress for a beach wedding. I'm 5'5" and want something under $200.";
 
 
 /* ===================== Hero Conversation Demo ===================== */
@@ -73,8 +73,8 @@ function HeroProductCard({ title = "Oxford Shirt", price = "$168", img }) {
 
 function HeroConversationDemo({ script, startKey, ratio = 4 / 3 }) {
   const {
-    userText = "Linen shirt under $100 for a beach wedding that goes with a navy jacket.",
-    aiText   = "Got it! Here are beach-appropriate linen options in white, cream and eggshell, which go well with a navy jacket.",
+    userText = "Red dress for a beach wedding. I'm 5'5" and want something under $200.",
+    aiText   = "Got it! Here are some red dresses that are warm-weather appropriate and comfortable on sand / in a slight breeze (rather than a formal ballroom) in your size (M).",
     products = [
       { title: "Legend Oxford", price: "$68", img: "/media/prod-1.png" },
       { title: "Coastal Linen", price: "$78", img: "/media/prod-2.png" },
@@ -159,12 +159,12 @@ function HeroConversationDemo({ script, startKey, ratio = 4 / 3 }) {
 }
 
 // --- one script builder used by the preview ---
-function makeScript(mode, q = "linen shirt for a wedding") {
+function makeScript(mode, q = "red dress for a wedding") {
   if (mode === "ai") {
     return {
-      userText: `Linen shirt under $100 for a beach wedding that goes with a navy jacket.`,
+      userText: `Red dress for a beach wedding. I'm 5'5" and want something under $200.`,
       aiText:
-        "Got it! Here are beach-appropriate linen options in white, cream and eggshell, which would go great with a navy jacket.",
+        "Got it! Here are some red dresses that are warm-weather appropriate and comfortable on sand / in a slight breeze (rather than a formal ballroom) in your size (M).",
      products: [
      { title: "Legend Oxford",        price: "$68", img: "/media/prod-1.png" },
      { title: "Coastal Linen",        price: "$78", img: "/media/prod-2.png" },
@@ -560,7 +560,7 @@ function DualModeSearchBar({
   React.useEffect(() => {
     if (!demoEnabled) return;
 
-    const toType = mode === "ai" ? DEMO_QUERY : "Linen shirt";
+    const toType = mode === "ai" ? DEMO_QUERY : "Red dress";
 
     // reset UI before typing
     setPlaceholder(mode === "ai" ? "Describe what you want..." : "Search products...");

@@ -508,7 +508,7 @@ function DualModeSearchBar({
   );
   const [demoEnabled, setDemoEnabled] = React.useState(true);
 
-  // ---- toggle thumb measurement (for the “Default / AI” pills) ----
+  // animated toggle thumb
   const toggleRef = React.useRef(null);
   const siteBtnRef = React.useRef(null);
   const aiBtnRef = React.useRef(null);
@@ -537,19 +537,19 @@ function DualModeSearchBar({
     }
   }, [measureThumb]);
 
-  // ---- restart the typing demo whenever the mode toggles ----
+  // restart demo when the mode changes
   React.useEffect(() => {
     setDemoEnabled(true);
     setQuery("");
     setPlaceholder(mode === "ai" ? "Describe what you want..." : "Search products...");
   }, [mode]);
 
-  // ---- type the canned sentence, then notify the hero to start the card ----
+  // ⬇️ THIS actually types in the input
   useTypingDemo({
     mode,
     setQuery,
     setPlaceholder,
-    enabled: demoEnabled,
+    enabled: demoEnabled, // change to: demoEnabled && mode === "ai" if you only want AI mode to auto-type
     textForMode: (m) => (m === "ai" ? DEMO_QUERY : "Linen shirt"),
     onDone: (typed) => onDemoSubmit?.({ mode, query: typed }),
   });
@@ -641,7 +641,6 @@ function DualModeSearchBar({
     </div>
   );
 }
-
 
 function HeroSkeletonLine({ w = "60%" }) {
   return (

@@ -47,7 +47,7 @@ function HeroProductCard({ title = "Oxford Shirt", price = "$168", img }) {
           <AssetImage
             src={img}
             alt={title}
-            className="w-full h-full object-cover"
+            className="w-full h-full object-cover object-top"
             labelForPlaceholder="Product image"
           />
         </div>

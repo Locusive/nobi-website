@@ -448,7 +448,8 @@ function useTypingDemo({
   setPlaceholder,
   enabled = true,
   onDone,
-  textForMode, // string or (mode) => string
+  textForMode,     // string or (mode) => string
+  seed = 0,        // 👈 tiny key that forces a re-run
 }) {
   // keep the latest onDone without retriggering the typing effect
   const doneRef = React.useRef(onDone);
@@ -458,15 +459,15 @@ function useTypingDemo({
     if (!enabled) return;
 
     const toType =
-      typeof textForMode === "function" ? textForMode(mode) : textForMode || "";
+      typeof textForMode === "function" ? textForMode(mode) : (textForMode || "");
 
     // show normal placeholders first, then type actual value in black
     setPlaceholder(mode === "ai" ? "Describe what you want..." : "Search products...");
     setQuery("");
 
-    const startDelay = 600; // ms before first char
-    const baseSpeed = 24;   // ms per char
-    const jitter = 20;      // random variation
+    const startDelay = 450; // ms before first char
+    const baseSpeed  = 22;  // ms per char
+    const jitter     = 20;  // random variation
 
     let cancelled = false;
     const timers = [];
@@ -475,14 +476,13 @@ function useTypingDemo({
       let i = 0;
       const step = () => {
         if (cancelled) return;
-        console.log("typing", i, toType[i]);
         setQuery(toType.slice(0, i + 1));
         i++;
         if (i < toType.length) {
           const t = setTimeout(step, baseSpeed + Math.random() * jitter);
           timers.push(t);
         } else {
-          const t = setTimeout(() => doneRef.current?.(toType), 450);
+          const t = setTimeout(() => doneRef.current?.(toType), 300);
           timers.push(t);
         }
       };
@@ -494,8 +494,8 @@ function useTypingDemo({
       clearTimeout(startTimer);
       timers.forEach(clearTimeout);
     };
-  // ❗ do NOT include `onDone` here; we use doneRef instead
-  }, [mode, enabled]);
+  // 👇 include `seed` so changing it restarts the effect even if dependencies look the same
+  }, [mode, enabled, seed, setQuery, setPlaceholder, textForMode]);
 }
 
 function DualModeSearchBar({
@@ -513,8 +513,10 @@ function DualModeSearchBar({
   const [placeholder, setPlaceholder] = React.useState(
     mode === "ai" ? "Describe what you want..." : "Search products..."
   );
-const userInteractedRef = React.useRef(false);
+
+  // typing demo control
   const [demoEnabled, setDemoEnabled] = React.useState(true);
+  const [demoSeed, setDemoSeed] = React.useState(0); // 👈 force rerun flag
 
   // animated toggle thumb
   const toggleRef = React.useRef(null);
@@ -545,33 +547,23 @@ const userInteractedRef = React.useRef(false);
     }
   }, [measureThumb]);
 
- // on mode change: don't wipe the query; only adjust placeholder and (optionally) enable demo
- React.useEffect(() => {
-   setPlaceholder(mode === "ai" ? "Describe what you want..." : "Search products...");
-   // Only (re)enable auto-typing when switching *into* AI, the field is empty,
-   // and the user hasn't interacted yet.
-   if (mode === "ai" && !userInteractedRef.current && !query) {
-     setDemoEnabled(true);
-   } else {
-     setDemoEnabled(false);
-   }
- // eslint-disable-next-line react-hooks/exhaustive-deps
- }, [mode]);  // (we intentionally don't re-run because of query changes)
+  // When the mode changes: re-enable demo & reset input, then bump seed to guarantee a re-run
+  React.useEffect(() => {
+    setDemoEnabled(true);
+    setQuery("");
+    setPlaceholder(mode === "ai" ? "Describe what you want..." : "Search products...");
+    setDemoSeed(s => s + 1);  // 👈 restart typing demo
+  }, [mode]);
 
-
-  const demoText = React.useMemo(
-  () => (mode === "ai" ? DEMO_QUERY : "Linen shirt"),
-  [mode]
-);
-  
-  // ⬇️ THIS actually types in the input
+  // actually types in the input for both modes
   useTypingDemo({
     mode,
     setQuery,
     setPlaceholder,
-    enabled: demoEnabled,
+    enabled: demoEnabled, // ✅ not restricted to AI
     textForMode: (m) => (m === "ai" ? DEMO_QUERY : "Linen shirt"),
     onDone: (typed) => onDemoSubmit?.({ mode, query: typed }),
+    seed: demoSeed, // ✅ ensures the hook restarts on toggle
   });
 
   const setMode = (m) => {
@@ -579,13 +571,11 @@ const userInteractedRef = React.useRef(false);
     onModeChange?.(m);
   };
 
-  // cancel demo on any user interaction
+  // cancel demo on any user interaction in the input/CTA
   const stopDemoAnd = (next) => (e) => {
-   if (demoEnabled) setDemoEnabled(false);
-   userInteractedRef.current = true;
-   next?.(e);
- };
-
+    if (demoEnabled) setDemoEnabled(false);
+    next?.(e);
+  };
 
   const ctaLabel = mode === "ai" ? "Ask AI" : "Search";
   const height = size === "compact" ? "h-11" : "h-14";

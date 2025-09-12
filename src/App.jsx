@@ -514,13 +514,12 @@ function DualModeSearchBar({
     mode === "ai" ? "Describe what you want..." : "Search products..."
   );
 
+  // Keep onDemoSubmit stable inside effects
+  const doneRef = React.useRef(onDemoSubmit);
+  React.useEffect(() => { doneRef.current = onDemoSubmit; }, [onDemoSubmit]);
+
   // typing demo control
   const [demoEnabled, setDemoEnabled] = React.useState(true);
-  const [demoSeed, setDemoSeed] = React.useState(0); // 👈 force rerun flag
-
-  React.useEffect(() => {
-  setDemoSeed((s) => s + 1);
-}, []);
 
   // animated toggle thumb
   const toggleRef = React.useRef(null);
@@ -551,52 +550,47 @@ function DualModeSearchBar({
     }
   }, [measureThumb]);
 
-  // When the mode changes: re-enable demo & reset input, then bump seed to guarantee a re-run
+  // Re-enable demo on toggle; the typing effect below handles reset/start
   React.useEffect(() => {
     setDemoEnabled(true);
-    setQuery("");
-    setPlaceholder(mode === "ai" ? "Describe what you want..." : "Search products...");
-    setDemoSeed(s => s + 1);  // 👈 restart typing demo
   }, [mode]);
 
- // Type the demo query directly (no external hook)
-React.useEffect(() => {
-  if (!demoEnabled) return;
+  // Type the demo query (no dependency on onDemoSubmit)
+  React.useEffect(() => {
+    if (!demoEnabled) return;
 
-  const toType = mode === "ai" ? DEMO_QUERY : "Linen shirt";
+    const toType = mode === "ai" ? DEMO_QUERY : "Linen shirt";
 
-  // reset UI before typing
-  setPlaceholder(mode === "ai" ? "Describe what you want..." : "Search products...");
-  setQuery("");
+    // reset UI before typing
+    setPlaceholder(mode === "ai" ? "Describe what you want..." : "Search products...");
+    setQuery("");
 
-  const startDelay = 450;     // ms before first char
-  const baseSpeed  = 22;      // ms per char
-  const jitter     = 20;      // random variation
+    const startDelay = 450;
+    const baseSpeed  = 22;
+    const jitter     = 20;
 
-  let i = 0;
-  let cancelled = false;
-  const timeouts = [];
+    let i = 0;
+    let cancelled = false;
+    const timers = [];
 
-  const start = setTimeout(function tick() {
-    if (cancelled) return;
-    setQuery(toType.slice(0, i + 1));
-    i += 1;
-    if (i < toType.length) {
-      const t = setTimeout(tick, baseSpeed + Math.random() * jitter);
-      timeouts.push(t);
-    } else {
-      const t = setTimeout(() => onDemoSubmit?.({ mode, query: toType }), 300);
-      timeouts.push(t);
-    }
-  }, startDelay);
+    const tick = () => {
+      if (cancelled) return;
+      setQuery(toType.slice(0, i + 1));
+      i += 1;
+      if (i < toType.length) {
+        timers.push(setTimeout(tick, baseSpeed + Math.random() * jitter));
+      } else {
+        timers.push(setTimeout(() => doneRef.current?.({ mode, query: toType }), 300));
+      }
+    };
 
-  return () => {
-    cancelled = true;
-    clearTimeout(start);
-    timeouts.forEach(clearTimeout);
-  };
-  // rerun when mode changes or demo re-enables
-}, [mode, demoEnabled, setQuery, setPlaceholder, onDemoSubmit]);
+    timers.push(setTimeout(tick, startDelay));
+
+    return () => {
+      cancelled = true;
+      timers.forEach(clearTimeout);
+    };
+  }, [mode, demoEnabled]); // ← no onDemoSubmit here
 
   const setMode = (m) => {
     if (controlledMode === undefined) setInternalMode(m);
@@ -821,7 +815,6 @@ function Hero({ onOpenForm, onOpenVideo }) {
   const [playKey, setPlayKey] = React.useState(-1);
   const [lastQuery, setLastQuery] = React.useState(DEMO_QUERY);
 
-  // prevent double-fires (typing demo + fallback)
   const hasKickedRef = React.useRef(false);
 
   const kickOffPreview = ({ mode, query }) => {
@@ -832,18 +825,8 @@ function Hero({ onOpenForm, onOpenVideo }) {
     setPlayKey((k) => k + 1);
   };
 
-  // Fallback: if the typing demo doesn’t call onDemoSubmit, start the card anyway
-  React.useEffect(() => {
-    const t = setTimeout(() => {
-      if (!hasKickedRef.current) {
-        hasKickedRef.current = true;
-        setSearchMode("ai");
-        setLastQuery(DEMO_QUERY);
-        setPlayKey(0); // first run
-      }
-    }, 1600); // soft delay so the bar can start typing first
-    return () => clearTimeout(t);
-  }, []);
+  // 🚫 Remove the 1600ms fallback auto-start to avoid the hero animating
+  //     before the typing demo finishes.
 
   return (
     <section id="home" className="relative overflow-hidden">

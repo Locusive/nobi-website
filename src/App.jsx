@@ -167,8 +167,8 @@ function makeScript(mode, q = "red dress for a wedding") {
         "Got it! Here are some red dresses that are warm-weather appropriate and comfortable on sand / in a slight breeze (rather than a formal ballroom). These are all available in your size (M) and under $200.",
      products: [
      { title: "St. Bernard x Stark Maxi",        price: "$98", img: "/media/prod-1.png" },
-      { title: "Maygel Coronel Cover-Up",        price: "$178", img: "/media/prod-2.png" },
-      { title: "Lulus Bow Backless Maxi",        price: "$55", img: "/media/prod-3.png" },
+      { title: "Lulus Bow Backless Maxi",        price: "$55", img: "/media/prod-2.png" },
+        { title: "Maygel Coronel Cover-Up",        price: "$178", img: "/media/prod-3.png" },
       { title: "Hunter Puff-Sleeve Mini",        price: "$124", img: "/media/prod-4.png" },
      { title: "Banjanan Cotton Maxi",   price: "$172", img: "/media/prod-5.png" },
      { title: "Majestic Coconut Maxi",        price: "$189", img: "/media/prod-6.png" },

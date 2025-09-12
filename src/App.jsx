@@ -43,14 +43,14 @@ function HeroProductCard({ title = "Oxford Shirt", price = "$168", img }) {
     // Image variant (uses AssetImage)
     return (
       <div className="rounded-xl overflow-hidden border border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/5">
-        <div className="aspect-[3/2] bg-black/5 dark:bg-white/10">
-          <AssetImage
-            src={img}
-            alt={title}
-            className="w-full h-full object-cover object-top"
-            labelForPlaceholder="Product image"
-          />
-        </div>
+        <div className="aspect-[6/5] bg-black/5 dark:bg-white/10">
+  <AssetImage
+    src={img}
+    alt={title}
+    className="w-full h-full object-cover object-top"
+    labelForPlaceholder="Product image"
+  />
+</div>
        <div className="p-2.5">
           <div className="text-[13px] font-medium text-black/90 dark:text-white/90 line-clamp-1">
             {title}
@@ -64,7 +64,7 @@ function HeroProductCard({ title = "Oxford Shirt", price = "$168", img }) {
   // Simple (no image provided)
   return (
     <div className="rounded-xl border border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/5 p-2.5">
-      <div className="aspect-[3/2] w-full rounded-lg bg-black/5 dark:bg-white/10" />
+<div className="aspect-[6/5] w-full rounded-lg bg-black/5 dark:bg-white/10" />
       <div className="mt-2 text-[13px] font-medium text-black/80 dark:text-white/90">{title}</div>
       <div className="mt-2 text-[13px] font-medium text-black/80 dark:text-white/90">{title}</div>
     </div>

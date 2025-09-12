@@ -257,6 +257,7 @@ function BrandsRow() {
    Sparkles,
    Search as SearchIcon,
    ArrowRight,
+   Heart,
    CheckCircle2,
    ShoppingCart,
    Filter,
@@ -844,7 +845,12 @@ function Hero({ onOpenForm, onOpenVideo }) {
           </p>
 
           <div className="flex flex-wrap justify-center gap-3">
-            <Button size="lg" onClick={onOpenForm}>Try it on your store</Button>
+            <Button size="lg" onClick={onOpenForm}>
+  Try it on your store
+  <span className="ml-3 -mr-1 inline-flex h-8 w-8 items-center justify-center rounded-xl bg-black text-white ring-4 ring-amber-400/90 shadow-sm dark:bg-black dark:text-white">
+    <ArrowRight className="h-4 w-4" />
+  </span>
+</Button>
             <Button size="lg" variant="ghost" onClick={onOpenVideo}>
               <PlayCircle className="h-5 w-5" />
               How it works in 60 seconds
@@ -1400,7 +1406,10 @@ function Insights() {
 
             {/* Attribute affinity by product (heatmap) */}
             <div className="rounded-3xl border border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/5 p-6 shadow-sm">
-              <div className="font-semibold">Attribute affinity by product</div>
+<div className="font-semibold flex items-center gap-2">
+  <Heart className="h-4 w-4 text-fuchsia-600" aria-hidden="true" />
+  Attribute affinity by product
+</div>
               <p className="mt-1 text-xs text-black/60 dark:text-white/60">
                 Likelihood a shopper will request an attribute when browsing a product type.
               </p>

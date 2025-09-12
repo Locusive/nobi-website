@@ -1086,7 +1086,7 @@ function Results() {
         </div>
 
         <p className="mt-3 text-xs text-black/50 dark:text-white/50">
-          Impact = relative lift vs. Default. A/B frameworks available for on-site validation.
+          Impact = relative lift vs. Default. Above are the total results we've seen across all of our clients comparing Nobi to the default. 
         </p>
       </div>
     </section>

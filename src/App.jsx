@@ -559,16 +559,44 @@ function DualModeSearchBar({
     setDemoSeed(s => s + 1);  // 👈 restart typing demo
   }, [mode]);
 
-  // actually types in the input for both modes
-  useTypingDemo({
-    mode,
-    setQuery,
-    setPlaceholder,
-    enabled: demoEnabled, // ✅ not restricted to AI
-    textForMode: (m) => (m === "ai" ? DEMO_QUERY : "Linen shirt"),
-    onDone: (typed) => onDemoSubmit?.({ mode, query: typed }),
-    seed: demoSeed, // ✅ ensures the hook restarts on toggle
-  });
+ // Type the demo query directly (no external hook)
+React.useEffect(() => {
+  if (!demoEnabled) return;
+
+  const toType = mode === "ai" ? DEMO_QUERY : "Linen shirt";
+
+  // reset UI before typing
+  setPlaceholder(mode === "ai" ? "Describe what you want..." : "Search products...");
+  setQuery("");
+
+  const startDelay = 450;     // ms before first char
+  const baseSpeed  = 22;      // ms per char
+  const jitter     = 20;      // random variation
+
+  let i = 0;
+  let cancelled = false;
+  const timeouts = [];
+
+  const start = setTimeout(function tick() {
+    if (cancelled) return;
+    setQuery(toType.slice(0, i + 1));
+    i += 1;
+    if (i < toType.length) {
+      const t = setTimeout(tick, baseSpeed + Math.random() * jitter);
+      timeouts.push(t);
+    } else {
+      const t = setTimeout(() => onDemoSubmit?.({ mode, query: toType }), 300);
+      timeouts.push(t);
+    }
+  }, startDelay);
+
+  return () => {
+    cancelled = true;
+    clearTimeout(start);
+    timeouts.forEach(clearTimeout);
+  };
+  // rerun when mode changes or demo re-enables
+}, [mode, demoEnabled, setQuery, setPlaceholder, onDemoSubmit]);
 
   const setMode = (m) => {
     if (controlledMode === undefined) setInternalMode(m);

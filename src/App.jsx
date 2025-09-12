@@ -1709,6 +1709,16 @@ export default function App() {
  </Button>
           </div>
         </div>
+         <!-- Favicon + app icons -->
+<link rel="icon" href="/favicon.png" type="image/svg+xml" />
+<link rel="icon" href="/favicon.ico" sizes="any" />
+<link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180" />
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#000000" />
+<meta name="theme-color" content="#000000" />
+
+<!-- (Optional) Web App Manifest for add-to-home -->
+<link rel="manifest" href="/site.webmanifest" />
+
       </header>
 
       <Hero onOpenForm={() => setIsFormOpen(true)} onOpenVideo={() => setIsVideoOpen(true)} />

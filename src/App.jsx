@@ -1171,7 +1171,7 @@ function Testimonial() {
 function HowItWorks() {
   const steps = [
     { h: "Install the code", p: "Paste two snippets of code in your store. Nobi reads your catalog and adopts your branding." },
-    { h: "Ramp up traffic", p: "Pick entry points (i.e. PLPs, search) and set what percent of traffic you want to see Nobi." },
+    { h: "Customize and launch", p: "Pick entry points (i.e. PLPs, search) and customize how you want Nobi to look." },
     { h: "Measure the lift", p: "Track conversion, AOV and qualitative insights in a simple dashboard." },
   ];
   return (

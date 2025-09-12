@@ -74,7 +74,7 @@ function HeroProductCard({ title = "Oxford Shirt", price = "$168", img }) {
 function HeroConversationDemo({ script, startKey, ratio = 4 / 3 }) {
   const {
     userText = `Red dress for a beach wedding. I'm 5'5" and want something under $200.`,
-    aiText   = "Got it! Here are some red dresses that are warm-weather appropriate and comfortable on sand / in a slight breeze (rather than a formal ballroom) in your size (M).",
+    aiText   = "Got it! Here are some red dresses that are warm-weather appropriate and comfortable on sand / in a slight breeze (rather than a formal ballroom). These are all available in your size (M) and under $200.",
     products = [
       { title: "Legend Oxford", price: "$68", img: "/media/prod-1.png" },
       { title: "Coastal Linen", price: "$78", img: "/media/prod-2.png" },
@@ -164,7 +164,7 @@ function makeScript(mode, q = "red dress for a wedding") {
     return {
       userText = `Red dress for a beach wedding. I'm 5'5" and want something under $200.`,
       aiText:
-        "Got it! Here are some red dresses that are warm-weather appropriate and comfortable on sand / in a slight breeze (rather than a formal ballroom) in your size (M).",
+        "Got it! Here are some red dresses that are warm-weather appropriate and comfortable on sand / in a slight breeze (rather than a formal ballroom). These are all available in your size (M) and under $200.",
      products: [
      { title: "Legend Oxford",        price: "$68", img: "/media/prod-1.png" },
      { title: "Coastal Linen",        price: "$78", img: "/media/prod-2.png" },

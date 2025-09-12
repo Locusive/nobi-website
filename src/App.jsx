@@ -1372,7 +1372,7 @@ function Insights({ onOpenForm }) {
               Insights your team can act on.
             </h2>
             <p className="mt-3 text-black/70 dark:text-white/70">
-              Nobi turns real conversations into structured signals. Your merchandising, creative, and growth teams have never moved faster.
+              Nobi turns real conversations into structured signals. Your merchandising, creative, and CX teams have never moved faster.
             </p>
           </div>
         </div>

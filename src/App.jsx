@@ -1228,7 +1228,7 @@ function FAQ() {
     { q: "Does Nobi replace my current search?", a: "No. Nobi layers on top so you can keep your existing keyword engine and optionally enable AI." },
     { q: "How long does install take?", a: "Typically ~15 minutes for Shopify themes and then it depends on how much you want to customize. Headless installs depend on your stack." },
     { q: "Can we A/B test it?", a: "Yes. Nobi easily hooks into your A/B testing solution or we can build something custom for you." },
-   { q: "Where does Nobi have the most success?", a: "Nobi is really good at understanding natural language and showing relevant products quickly. So we recommend enabling Nobi in your search bar for shoppers who want to put in a long-tail query. We also recommend putting Nobi on any Collection pages where shoppers have to filter out lots of irrelevant products." },
+   { q: "Where do customers have the most success?", a: "Nobi is really good at understanding natural language and showing relevant products quickly. So we recommend enabling Nobi in your search bar for shoppers who want to put in a long-tail query. We also recommend putting Nobi on any Collection pages where shoppers have to filter out lots of irrelevant products." },
   ];
 
   return (

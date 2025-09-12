@@ -179,12 +179,12 @@ function makeScript(mode, q = "red dress for a wedding") {
     userText: "",
     aiText: "",
     products: [
-      { title: "Washed Linen Shirt",   price: "$129", img: "/media/prod-1.png" },
-   { title: "Summer Oxford",        price: "$138", img: "/media/prod-2.png" },
-   { title: "Classic Button-down",  price: "$148", img: "/media/prod-3.png" },
-   { title: "Linen Utility Shirt",  price: "$119", img: "/media/prod-1.png" },
-   { title: "Airy Camp Collar",     price: "$139", img: "/media/prod-2.png" },
-   { title: "Everyday Oxford",      price: "$128", img: "/media/prod-3.png" },
+   { title: "Washed Linen Shirt",   price: "$499", img: "/media/prod-default-1.png" },
+   { title: "Summer Oxford",        price: "$138", img: "/media/prod-default-2.png" },
+   { title: "Classic Button-down",  price: "$148", img: "/media/prod-default-3.png" },
+   { title: "Linen Utility Shirt",  price: "$119", img: "/media/prod-default-4.png" },
+   { title: "Airy Camp Collar",     price: "$139", img: "/media/prod-default-5.png" },
+   { title: "Everyday Oxford",      price: "$128", img: "/media/prod-default-6.png" },
     ],
   };
 }

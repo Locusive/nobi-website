@@ -162,7 +162,7 @@ function HeroConversationDemo({ script, startKey, ratio = 4 / 3 }) {
 function makeScript(mode, q = "red dress for a wedding") {
   if (mode === "ai") {
     return {
-      userText = `Red dress for a beach wedding. I'm 5'5" and want something under $200.`,
+      userText: `Red dress for a beach wedding. I'm 5'5" and want something under $200.`,
       aiText:
         "Got it! Here are some red dresses that are warm-weather appropriate and comfortable on sand / in a slight breeze (rather than a formal ballroom). These are all available in your size (M) and under $200.",
      products: [

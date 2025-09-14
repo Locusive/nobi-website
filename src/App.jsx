@@ -779,15 +779,7 @@ function VideoModal({ open, onClose, youtube, src, poster = "" }) {
         </div>
 
         {/* Header / title row */}
-        <div className="p-6">
-  <motion.div
-    initial={{ opacity: 0, y: 20 }}
-    animate={{ opacity: 1, y: 0 }}
-    transition={{ duration: 0.6 }}
-    style={{ width: 120, height: 40 }}
-    className="rounded-xl bg-fuchsia-500/30 border border-fuchsia-300"
-  />
-</div>
+        
 
         <div className="absolute top-2 left-2 right-2 flex items-center justify-between pointer-events-none">
           <h2 id="howitworks-title" className="sr-only">

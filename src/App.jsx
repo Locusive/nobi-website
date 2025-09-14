@@ -841,24 +841,6 @@ function Hero({ onOpenForm, onOpenVideo }) {
   Nobi gets your customers the right products faster with <strong>conversational AI</strong>.
 </p>
 
-{/* Metrics row */}
-<div className="mt-6 w-full">
-  <div className="mx-auto flex max-w-3xl flex-wrap items-center justify-center gap-2 sm:gap-3">
-    <span className="rounded-full border border-black/10 dark:border-white/15 bg-white/70 dark:bg-white/5 px-3 py-1.5 text-sm">
-      Add to Cart +35%
-    </span>
-    <span className="rounded-full border border-black/10 dark:border-white/15 bg-white/70 dark:bg-white/5 px-3 py-1.5 text-sm">
-      Checkout +29%
-    </span>
-    <span className="rounded-full border border-black/10 dark:border-white/15 bg-white/70 dark:bg-white/5 px-3 py-1.5 text-sm">
-      AOV +56%
-    </span>
-    <span className="rounded-full border border-black/10 dark:border-white/15 bg-white/70 dark:bg-white/5 px-3 py-1.5 text-sm">
-      A/B validated
-    </span>
-  </div>
-</div>
-
           <div className="flex flex-wrap justify-center gap-3">
             <Button size="lg" onClick={onOpenForm}>
   <span>Try it on your store</span>

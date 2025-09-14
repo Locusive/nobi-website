@@ -1455,7 +1455,7 @@ function Insights({ onOpenForm }) {
             <div className="rounded-3xl border border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/5 p-6 shadow-sm">
               <div className="font-semibold flex items-center gap-2">
                 <Quote className="h-4 w-4 text-fuchsia-600" />
-                Voice of customer
+                Example Prompts
               </div>
               <div className="mt-3 space-y-3 text-sm text-black/80 dark:text-white/90">
                 <blockquote className="rounded-xl p-3 bg-black/5 dark:bg-white/10">

@@ -841,7 +841,7 @@ function Hero({ onOpenForm, onOpenVideo }) {
           </h1>
 
           <p className="text-lg text-black/70 dark:text-white/70">
-            Nobi gets your customers the right products faster, and converts 30% better than your default.
+            Nobi gets your customers the right products faster, and drive 50%+ revenue improvements.
           </p>
 
           <div className="flex flex-wrap justify-center gap-3">

@@ -833,17 +833,30 @@ function Hero({ onOpenForm, onOpenVideo }) {
     <section id="home" className="relative overflow-hidden">
       <div className="mx-auto max-w-7xl px-6 pt-16 sm:pt-24 pb-6">
         <div className="max-w-4xl mx-auto text-center space-y-6">
-          <h1 className="text-5xl sm:text-6xl font-semibold tracking-tight text-balance">
-            Convert{" "}
-            <span className="bg-gradient-to-r from-indigo-500 via-violet-500 to-fuchsia-500 bg-clip-text text-transparent">
-              30% more
-            </span>
-             from the same traffic.
-          </h1>
+         <h1 className="text-5xl sm:text-6xl font-semibold tracking-tight text-balance">
+  Convert <span className="bg-gradient-to-r from-indigo-500 via-violet-500 to-fuchsia-500 bg-clip-text text-transparent">30% more</span> from the same traffic
+</h1>
 
-          <p className="text-lg text-black/70 dark:text-white/70">
-            Nobi gets your customers the right products faster with conversational AI.
-          </p>
+<p className="mt-4 text-lg text-black/70 dark:text-white/70">
+  A/B-validated, guided product search that gets shoppers to the right item faster.
+  Recent tests: Add to Cart <strong>+35%</strong>, Checkout <strong>+29%</strong>, AOV <strong>+56%</strong>.
+</p>
+
+{/* Mini proof chips */}
+<div className="mt-4 flex flex-wrap gap-2 text-sm">
+  <span className="inline-flex items-center rounded-full border border-black/10 dark:border-white/15 px-3 py-1 bg-white/70 dark:bg-white/5">
+    Add to Cart +35%
+  </span>
+  <span className="inline-flex items-center rounded-full border border-black/10 dark:border-white/15 px-3 py-1 bg-white/70 dark:bg-white/5">
+    Checkout +29%
+  </span>
+  <span className="inline-flex items-center rounded-full border border-black/10 dark:border-white/15 px-3 py-1 bg-white/70 dark:bg-white/5">
+    AOV +56%
+  </span>
+  <span className="inline-flex items-center rounded-full border border-black/10 dark:border-white/15 px-3 py-1 bg-white/70 dark:bg-white/5">
+    A/B validated
+  </span>
+</div>
 
           <div className="flex flex-wrap justify-center gap-3">
             <Button size="lg" onClick={onOpenForm}>

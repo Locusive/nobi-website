@@ -838,24 +838,25 @@ function Hero({ onOpenForm, onOpenVideo }) {
 </h1>
 
 <p className="mt-4 text-lg text-black/70 dark:text-white/70">
-  A/B-validated, guided product search that gets shoppers to the right item faster.
-  Recent tests: Add to Cart <strong>+35%</strong>, Checkout <strong>+29%</strong>, AOV <strong>+56%</strong>.
+  Nobi gets your customers the right products faster with <strong>conversational AI</strong>.
 </p>
 
-{/* Mini proof chips */}
-<div className="mt-4 flex flex-wrap gap-2 text-sm">
-  <span className="inline-flex items-center rounded-full border border-black/10 dark:border-white/15 px-3 py-1 bg-white/70 dark:bg-white/5">
-    Add to Cart +35%
-  </span>
-  <span className="inline-flex items-center rounded-full border border-black/10 dark:border-white/15 px-3 py-1 bg-white/70 dark:bg-white/5">
-    Checkout +29%
-  </span>
-  <span className="inline-flex items-center rounded-full border border-black/10 dark:border-white/15 px-3 py-1 bg-white/70 dark:bg-white/5">
-    AOV +56%
-  </span>
-  <span className="inline-flex items-center rounded-full border border-black/10 dark:border-white/15 px-3 py-1 bg-white/70 dark:bg-white/5">
-    A/B validated
-  </span>
+{/* Metrics row */}
+<div className="mt-6 w-full">
+  <div className="mx-auto flex max-w-3xl flex-wrap items-center justify-center gap-2 sm:gap-3">
+    <span className="rounded-full border border-black/10 dark:border-white/15 bg-white/70 dark:bg-white/5 px-3 py-1.5 text-sm">
+      Add to Cart +35%
+    </span>
+    <span className="rounded-full border border-black/10 dark:border-white/15 bg-white/70 dark:bg-white/5 px-3 py-1.5 text-sm">
+      Checkout +29%
+    </span>
+    <span className="rounded-full border border-black/10 dark:border-white/15 bg-white/70 dark:bg-white/5 px-3 py-1.5 text-sm">
+      AOV +56%
+    </span>
+    <span className="rounded-full border border-black/10 dark:border-white/15 bg-white/70 dark:bg-white/5 px-3 py-1.5 text-sm">
+      A/B validated
+    </span>
+  </div>
 </div>
 
           <div className="flex flex-wrap justify-center gap-3">

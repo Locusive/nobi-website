@@ -834,14 +834,15 @@ function Hero({ onOpenForm, onOpenVideo }) {
       <div className="mx-auto max-w-7xl px-6 pt-16 sm:pt-24 pb-6">
         <div className="max-w-4xl mx-auto text-center space-y-6">
           <h1 className="text-5xl sm:text-6xl font-semibold tracking-tight text-balance">
-            Turn product search into a{" "}
+            Convert{" "}
             <span className="bg-gradient-to-r from-indigo-500 via-violet-500 to-fuchsia-500 bg-clip-text text-transparent">
-              conversation
+              30% more
             </span>
+             from the same traffic.
           </h1>
 
           <p className="text-lg text-black/70 dark:text-white/70">
-            Nobi gets your customers the right products faster, and drive 50%+ revenue improvements.
+            Nobi gets your customers the right products faster with conversational AI.
           </p>
 
           <div className="flex flex-wrap justify-center gap-3">

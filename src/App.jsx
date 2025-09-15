@@ -972,10 +972,10 @@ function Features() {
       <div className="mx-auto max-w-6xl px-6">
         <p className="text-sm font-semibold text-fuchsia-600">Features</p>
         <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight mt-2 text-balance">
-          Give customers more power with conversational shopping.
+          Empower customers with conversational shopping in seconds.
         </h2>
         <p className="mt-3 text-black/70 dark:text-white/70">
-          Test conversational AI on your PLPs, search, PDPs and anywhere else you think is right for your brand.
+          Test Nobi on your PLPs, search, and anywhere else you think is right for your brand.
         </p>
 
         <div className="mt-8 grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
@@ -1038,7 +1038,7 @@ function Results() {
       <div className="mx-auto max-w-6xl px-6">
         <p className="text-sm font-semibold text-fuchsia-600">Results</p>
         <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight mt-2">
-          Conversational shopping works.
+          Convert more traffic at a higher average order value.
         </h2>
         <p className="mt-3 text-black/70 dark:text-white/70">
           Nobi has outperformed the default shopping experience in every A/B test we've ever run.

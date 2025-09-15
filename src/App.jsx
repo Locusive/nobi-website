@@ -1359,7 +1359,7 @@ function Insights({ onOpenForm }) {
           <div>
             <p className="text-sm font-semibold text-fuchsia-600">Insights</p>
             <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight mt-2">
-              Insights your team can act on.
+              Hear your customers... in their own words.
             </h2>
             <p className="mt-3 text-black/70 dark:text-white/70">
               Nobi turns real conversations into structured signals. Your merchandising, creative, and CX teams have never moved faster.

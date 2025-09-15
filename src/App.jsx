@@ -1118,7 +1118,7 @@ function Testimonial() {
           >
             <Quote className="h-6 w-6 text-fuchsia-600 mb-4" />
             <p className="text-2xl leading-snug font-medium text-black/90 dark:text-white">
-              “If you want to learn and be inspired, you should implement a tool like Nobi. We've seen great incremental results, where conversion rates have been significantly higher through Nobi than on our binary search. But the biggest reason a brand should implement this is that you have the opportunity to apply more information towards optimizing
+              “If you want to learn and be inspired, you should implement a tool like Nobi. We've seen great incremental results... but the biggest reason a brand should implement this is that you have the opportunity to apply more information towards optimizing
               campaigns and your broader brand and e-comm goals.”
             </p>
             <div className="mt-6 flex items-center gap-4">

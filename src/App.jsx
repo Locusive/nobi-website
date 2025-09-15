@@ -972,7 +972,7 @@ function Features() {
       <div className="mx-auto max-w-6xl px-6">
         <p className="text-sm font-semibold text-fuchsia-600">Features</p>
         <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight mt-2 text-balance">
-          Integrate conversational shopping anywhere in your store.
+          Empower your customers with conversational shopping entry points anywhere in your store.
         </h2>
         <p className="mt-3 text-black/70 dark:text-white/70">
           Test conversational AI on your PLPs, search, PDPs and anywhere else you think is right for your brand.

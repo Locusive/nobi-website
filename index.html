@@ -67,5 +67,35 @@
     <div id="root"></div>
     <!-- NOTE: no leading slash here -->
     <script type="module" src="src/main.jsx"></script>
+    <script>
+// 1) Defer video loading until user taps the cover
+for (const cover of document.querySelectorAll('.video-cover')) {
+cover.addEventListener('click', () => {
+const v = cover.querySelector('video[data-defer]');
+if (!v) return;
+v.removeAttribute('data-defer');
+v.setAttribute('playsinline','');
+v.setAttribute('controls','');
+v.load();
+v.play().catch(()=>{});
+}, { once: true });
+}
+
+
+// 2) Lock body scroll when a drawer menu is open
+const drawer = document.querySelector('.drawer');
+const lock = (on) => document.body.style.overflow = on ? 'hidden' : '';
+if (drawer) {
+const mo = new MutationObserver(() => lock(drawer.getAttribute('aria-hidden') === 'false'));
+mo.observe(drawer, { attributes: true, attributeFilter: ['aria-hidden'] });
+}
+
+
+// 3) Safer 100vh fallback for browsers lacking svh (optional)
+(function(){
+const setVh = ()=> document.documentElement.style.setProperty('--vh', `${window.innerHeight*0.01}px`);
+setVh(); window.addEventListener('resize', setVh);
+})();
+</script>
   </body>
 </html>

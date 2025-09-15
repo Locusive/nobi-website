@@ -1679,12 +1679,16 @@ export default function App() {
             <a href="#faq" className="hover:opacity-80">FAQ</a>
           </nav>
 
-          <div className="hidden md:flex items-center gap-3">
-            <Button variant="ghost" onClick={() => setIsFormOpen(true)}>
-   <ShoppingCart className="h-4 w-4" />
-   Install Nobi
- </Button>
-          </div>
+          // AFTER
+<div className="hidden md:flex items-center gap-3">
+  <Button
+    variant="outline"
+    className="bg-white text-black border-black hover:bg-black/5"
+    onClick={() => setIsFormOpen(true)}   // opens the same form
+  >
+    Get a Demo
+  </Button>
+</div>
         </div>
       </header>
 

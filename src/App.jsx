@@ -1168,7 +1168,7 @@ function HowItWorks() {
   return (
     <section id="how" className="scroll-mt-20 py-20 border-t border-black/5 dark:border-white/5">
       <div className="mx-auto max-w-6xl px-6">
-        <h2 className="text-3xl font-semibold mb-8">How it works</h2>
+        <h2 className="text-3xl font-semibold mb-8">Low code setup in 15 minutes</h2>
         <ol className="grid grid-cols-1 md:grid-cols-3 gap-6 list-decimal list-inside">
           {steps.map((s) => (
             <li key={s.h} className="rounded-3xl border border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/5 p-6">
@@ -1214,10 +1214,10 @@ function Pricing() {
 
 function FAQ() {
   const qas = [
-    { q: "Does Nobi replace my current search?", a: "No. Nobi layers on top so you can keep your existing keyword engine and optionally enable AI." },
     { q: "How long does install take?", a: "Typically ~15 minutes for Shopify themes and then it depends on how much you want to customize. Headless installs depend on your stack." },
     { q: "Can we A/B test it?", a: "Yes. Nobi easily hooks into your A/B testing solution or we can build something custom for you." },
-   { q: "Where do customers have the most success?", a: "Nobi is really good at understanding natural language and showing relevant products quickly. So we recommend enabling it in your search bar, on collection pages, and anywhere else where shoppers may prefer to just describe what they're looking for." },
+   { q: "What can I do with Nobi?", a: "Nobi is really good at understanding natural language and showing relevant products quickly. So we recommend enabling it in your search bar, on collection pages, and anywhere else where shoppers may prefer to just describe what they're looking for." },
+   { q: "Does Nobi replace my current search?", a: "Up to you. Nobi can become your default search bar experience or layers on top so you can keep your existing keyword engine and optionally enable AI." },
   ];
 
   return (

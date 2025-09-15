@@ -1679,7 +1679,6 @@ export default function App() {
             <a href="#faq" className="hover:opacity-80">FAQ</a>
           </nav>
 
-          // AFTER
 <div className="hidden md:flex items-center gap-3">
   <Button
     variant="outline"

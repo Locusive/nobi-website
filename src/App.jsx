@@ -954,7 +954,7 @@ function Features() {
     {
       title: "Capture Bouncers",
       desc:
-        "Prevent customers from leaving your search result pages by offering them the ability to try again with Nobi.",
+        "Over 80% of your search traffic bounces from a search results page. Capture these high-intent shoppers with an AI search option.",
       icon: <MousePointerClick className="h-4 w-4" />,
       media: { src: "/media/feature-capture.mp4", alt: "Capture bouncers demo" },
     },

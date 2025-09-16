@@ -807,7 +807,6 @@ function Hero({ onOpenForm, onOpenVideo }) {
   const [searchMode, setSearchMode] = React.useState("ai");
   const [playKey, setPlayKey] = React.useState(-1);
   const [lastQuery, setLastQuery] = React.useState(DEMO_QUERY);
-
   const hasKickedRef = React.useRef(false);
 
   const kickOffPreview = ({ mode, query }) => {
@@ -818,36 +817,38 @@ function Hero({ onOpenForm, onOpenVideo }) {
     setPlayKey((k) => k + 1);
   };
 
-  // 🚫 Remove the 1600ms fallback auto-start to avoid the hero animating
-  //     before the typing demo finishes.
-
   return (
     <section id="home" className="relative overflow-hidden">
       <div className="mx-auto max-w-7xl px-6 pt-16 sm:pt-24 pb-6">
         <div className="max-w-4xl mx-auto text-center space-y-6">
-         <h1 className="text-5xl sm:text-6xl font-semibold tracking-tight text-balance">
-  Turn product search into a <span className="bg-gradient-to-r from-indigo-500 via-violet-500 to-fuchsia-500 bg-clip-text text-transparent">conversation</span>
-</h1>
+          <h1 className="text-5xl sm:text-6xl font-semibold tracking-tight text-balance">
+            Turn product search into a{" "}
+            <span className="bg-gradient-to-r from-indigo-500 via-violet-500 to-fuchsia-500 bg-clip-text text-transparent">
+              conversation
+            </span>
+          </h1>
 
-<p className="mt-4 text-lg text-black/70 dark:text-white/70">
-  Get your customers the right products faster at a <strong>30% higher</strong> conversion rate.
-</p>
+          <p className="mt-4 text-lg text-black/70 dark:text-white/70">
+            Get your customers the right products faster at a <strong>30% higher</strong> conversion rate.
+          </p>
 
+          {/* Same-row CTAs (works on mobile too) */}
           <div className="grid grid-cols-[1fr_auto] items-center gap-3 max-w-xl mx-auto">
-  <Button size="lg" onClick={onOpenForm} className="w-full">
-    <span>Try it on your store</span>
-    <ArrowRight className="h-5 w-5 -mr-1" aria-hidden="true" />
-  </Button>
-  <Button
-    size="lg"
-    variant="ghost"
-    onClick={onOpenVideo}
-    className="whitespace-nowrap px-3"
-  >
-    <PlayCircle className="h-5 w-5" />
-    How it works in 60 seconds
-  </Button>
-</div>
+            <Button size="lg" onClick={onOpenForm} className="w-full">
+              <span>Try it on your store</span>
+              <ArrowRight className="h-5 w-5 -mr-1" aria-hidden="true" />
+            </Button>
+            <Button
+              size="lg"
+              variant="ghost"
+              onClick={onOpenVideo}
+              className="whitespace-nowrap px-3"
+            >
+              <PlayCircle className="h-5 w-5" />
+              How it works in 60 seconds
+            </Button>
+          </div>
+        </div>
 
         {/* Search bar */}
         <div className="mt-8 max-w-4xl mx-auto">

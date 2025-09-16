@@ -835,7 +835,7 @@ function Hero({ onOpenForm, onOpenVideo }) {
           {/* Same-row CTAs (works on mobile too) */}
           <div className="grid grid-cols-[1fr_auto] items-center gap-3 max-w-xl mx-auto">
             <Button size="lg" onClick={onOpenForm} className="w-full">
-              <span>Try it on your store</span>
+              <span>Try on your store</span>
               <ArrowRight className="h-5 w-5 -mr-1" aria-hidden="true" />
             </Button>
            <Button

@@ -596,7 +596,6 @@ function DualModeSearchBar({
   }, [mode, demoEnabled]); // ← no onDemoSubmit here
 
   const setMode = (m) => {
-    if (isLocked) return;
      if (controlledMode === undefined) setInternalMode(m);
     onModeChange?.(m);
   };
@@ -627,8 +626,6 @@ function DualModeSearchBar({
         >
           <button
             ref={siteBtnRef}
-             disabled={isLocked}       
-  aria-disabled={isLocked || undefined}
             className={`relative z-[1] rounded-lg px-3 py-1.5 text-xs sm:px-4 sm:py-2 sm:text-sm font-medium transition-colors duration-300 ${
               mode === "site" ? "text-black dark:text-white" : "text-black/60 dark:text-white/60"
             }`}
@@ -638,11 +635,9 @@ function DualModeSearchBar({
           </button>
           <button
   ref={aiBtnRef}
-  disabled={isLocked}                              
-  aria-disabled={isLocked || undefined}
   className={`relative z-[1] rounded-lg px-3 py-1.5 text-xs sm:px-4 sm:py-2 sm:text-sm font-medium transition-colors duration-300 ${
     (mode === "ai" ? "text-black dark:text-white" : "text-black/60 dark:text-white/60")
-  } ${isLocked ? "cursor-default opacity-60" : ""}`}   
+  }`}   
   onClick={() => setMode("ai")}
 >
   AI

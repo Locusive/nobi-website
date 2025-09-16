@@ -1709,7 +1709,7 @@ export default function App() {
   </nav>
 
   {/* Desktop nav + CTA (pushed right) */}
-  <nav className="hidden md:flex items-center gap-6 text-sm ml-auto">
+  <nav className="hidden md:flex items-center gap-6 text-sm font-semibold ml-auto">
     <a href="#features" className="hover:opacity-80">Features</a>
     <a href="#how" className="hover:opacity-80">How it works</a>
     <a href="#pricing" className="hover:opacity-80">Pricing</a>

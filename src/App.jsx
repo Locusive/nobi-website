@@ -143,7 +143,7 @@ function HeroConversationDemo({ script, startKey, ratio = 4 / 3 }) {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: 6 }}
                   transition={{ duration: 0.55 }}
-                  className="grid grid-cols-3 gap-2 sm:gap-2.5 pt-1"
+className="grid grid-cols-2 sm:grid-cols-3 gap-2 sm:gap-2.5 pt-1"
                 >
                   {products.map((p) => (
                     <HeroProductCard key={p.title} title={p.title} price={p.price} img={p.img} />
@@ -833,17 +833,21 @@ function Hero({ onOpenForm, onOpenVideo }) {
   Get your customers the right products faster at a <strong>30% higher</strong> conversion rate.
 </p>
 
-          <div className="flex flex-wrap justify-center gap-3">
-            <Button size="lg" onClick={onOpenForm}>
-  <span>Try it on your store</span>
-  <ArrowRight className="h-5 w-5 -mr-1" aria-hidden="true" />
-</Button>
-            <Button size="lg" variant="ghost" onClick={onOpenVideo}>
-              <PlayCircle className="h-5 w-5" />
-              How it works in 60 seconds
-            </Button>
-          </div>
-        </div>
+          <div className="grid grid-cols-[1fr_auto] items-center gap-3 max-w-xl mx-auto">
+  <Button size="lg" onClick={onOpenForm} className="w-full">
+    <span>Try it on your store</span>
+    <ArrowRight className="h-5 w-5 -mr-1" aria-hidden="true" />
+  </Button>
+  <Button
+    size="lg"
+    variant="ghost"
+    onClick={onOpenVideo}
+    className="whitespace-nowrap px-3"
+  >
+    <PlayCircle className="h-5 w-5" />
+    How it works in 60 seconds
+  </Button>
+</div>
 
         {/* Search bar */}
         <div className="mt-8 max-w-4xl mx-auto">
@@ -1218,7 +1222,7 @@ function FAQ() {
   ];
 
   return (
-    <section id="faq" className="py-20 border-t border-black/5 dark:border-white/5">
+    <section id="faq" className="scroll-mt-20 py-20 border-t border-black/5 dark:border-white/5">
       <div className="mx-auto max-w-6xl px-6">
         <h2 className="text-3xl font-semibold mb-8">You're not the first to ask</h2>
 
@@ -1689,6 +1693,17 @@ export default function App() {
   </Button>
 </div>
         </div>
+{/* Mobile nav links (scrollable) */}
+<nav className="md:hidden border-t border-black/10 dark:border-white/10">
+  <div className="mx-auto max-w-7xl px-6 overflow-x-auto [-webkit-overflow-scrolling:touch]">
+    <div className="flex items-center gap-4 py-2 text-sm whitespace-nowrap">
+      <a href="#features" className="py-2">Features</a>
+      <a href="#how" className="py-2">How it works</a>
+      <a href="#pricing" className="py-2">Pricing</a>
+      <a href="#faq" className="py-2">FAQ</a>
+    </div>
+  </div>
+</nav>
       </header>
 
       <Hero onOpenForm={() => setIsFormOpen(true)} onOpenVideo={() => setIsVideoOpen(true)} />

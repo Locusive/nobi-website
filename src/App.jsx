@@ -506,7 +506,9 @@ function DualModeSearchBar({
   onModeChange,
   onSubmit,
   onDemoSubmit, // fired after the typing demo finishes
+  locked = false, // 👈 NEW
 }) {
+     const isLocked = !!locked;
   const [internalMode, setInternalMode] = React.useState(defaultMode);
   const mode = controlledMode ?? internalMode;
 
@@ -594,7 +596,8 @@ function DualModeSearchBar({
   }, [mode, demoEnabled]); // ← no onDemoSubmit here
 
   const setMode = (m) => {
-    if (controlledMode === undefined) setInternalMode(m);
+    if (isLocked) return;
+     if (controlledMode === undefined) setInternalMode(m);
     onModeChange?.(m);
   };
 
@@ -624,6 +627,8 @@ function DualModeSearchBar({
         >
           <button
             ref={siteBtnRef}
+             disabled={isLocked}       
+  aria-disabled={isLocked || undefined}
             className={`relative z-[1] rounded-lg px-3 py-1.5 text-xs sm:px-4 sm:py-2 sm:text-sm font-medium transition-colors duration-300 ${
               mode === "site" ? "text-black dark:text-white" : "text-black/60 dark:text-white/60"
             }`}
@@ -632,14 +637,16 @@ function DualModeSearchBar({
             Default
           </button>
           <button
-            ref={aiBtnRef}
-            className={`relative z-[1] rounded-lg px-3 py-1.5 text-xs sm:px-4 sm:py-2 sm:text-sm font-medium transition-colors duration-300 ${
-              mode === "ai" ? "text-black dark:text-white" : "text-black/60 dark:text-white/60"
-            }`}
-            onClick={() => setMode("ai")}
-          >
-            AI
-          </button>
+  ref={aiBtnRef}
+  disabled={isLocked}                              
+  aria-disabled={isLocked || undefined}
+  className={`relative z-[1] rounded-lg px-3 py-1.5 text-xs sm:px-4 sm:py-2 sm:text-sm font-medium transition-colors duration-300 ${
+    (mode === "ai" ? "text-black dark:text-white" : "text-black/60 dark:text-white/60")
+  } ${isLocked ? "cursor-default opacity-60" : ""}`}   
+  onClick={() => setMode("ai")}
+>
+  AI
+</button>
           <motion.span
             layout
             transition={{ type: "spring", stiffness: 350, damping: 30 }}
@@ -655,15 +662,19 @@ function DualModeSearchBar({
         {/* Input */}
         <div className="flex-1 min-w-0 flex items-center gap-2">
           <input
-            value={query}
-            onChange={stopDemoAnd((e) => setQuery(e.target.value))}
-            onKeyDown={stopDemoAnd((e) => e.key === "Enter" && submit())}
-            onMouseDown={stopDemoAnd()}
-            onTouchStart={stopDemoAnd()}
-            placeholder={placeholder}
-            className="min-w-0 w-full bg-transparent outline-none text-[15px] placeholder:text-black/40 dark:placeholder:text-white/40"
-            aria-label={mode === "ai" ? "Ask AI" : "Search"}
-          />
+  value={query}
+  readOnly={true}                                     // 👈 NEW: no edits allowed
+  tabIndex={isLocked ? -1 : 0}                        // 👈 NEW: not focusable when locked
+  onChange={isLocked ? undefined : stopDemoAnd((e) => setQuery(e.target.value))}
+  onKeyDown={isLocked ? (e) => e.preventDefault() : stopDemoAnd((e) => e.key === "Enter" && submit())}
+  onMouseDown={isLocked ? (e) => e.preventDefault() : stopDemoAnd()}
+  onTouchStart={isLocked ? (e) => e.preventDefault() : stopDemoAnd()}
+  placeholder={placeholder}
+  className={`min-w-0 w-full bg-transparent outline-none text-[15px] placeholder:text-black/40 dark:placeholder:text-white/40 ${
+    isLocked ? "pointer-events-none select-none cursor-default" : ""
+  }`}                                                 // 👈 NEW: ignore taps/clicks
+  aria-readonly="true"
+/>
         </div>
 
         {/* CTA */}
@@ -855,13 +866,14 @@ function Hero({ onOpenForm, onOpenVideo }) {
         <div className="mt-8 max-w-4xl mx-auto">
           <div className="p-4 rounded-2xl border border-fuchsia-200 bg-gradient-to-r from-fuchsia-50 to-pink-50 shadow-md">
             <DualModeSearchBar
-              mode={searchMode}
-              onModeChange={setSearchMode}
-              defaultMode="ai"
-              size="regular"
-              onDemoSubmit={kickOffPreview}
-              onSubmit={kickOffPreview}
-            />
+  locked                                 // 👈 NEW: display-only
+  mode={searchMode}
+  onModeChange={setSearchMode}
+  defaultMode="ai"
+  size="regular"
+  onDemoSubmit={kickOffPreview}
+  onSubmit={kickOffPreview}
+/>
           </div>
         </div>
 

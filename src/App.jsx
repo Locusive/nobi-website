@@ -838,15 +838,16 @@ function Hero({ onOpenForm, onOpenVideo }) {
               <span>Try it on your store</span>
               <ArrowRight className="h-5 w-5 -mr-1" aria-hidden="true" />
             </Button>
-            <Button
-              size="lg"
-              variant="ghost"
-              onClick={onOpenVideo}
-              className="whitespace-nowrap px-3"
-            >
-              <PlayCircle className="h-5 w-5" />
-              How it works in 60 seconds
-            </Button>
+           <Button
+  size="lg"
+  variant="ghost"
+  onClick={onOpenVideo}
+  className="whitespace-nowrap px-3"
+>
+  <PlayCircle className="h-5 w-5" />
+  <span className="sm:hidden">How it works</span>
+  <span className="hidden sm:inline">How it works in 60 seconds</span>
+</Button>
           </div>
         </div>
 
@@ -1672,39 +1673,36 @@ export default function App() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-white to-slate-50 dark:from-[#0a0a0a] dark:to-black text-black dark:text-white">
       <header className="sticky top-0 z-40 border-b backdrop-blur bg-white/70 dark:bg-black/40">
-        <div className="mx-auto max-w-7xl px-6 h-16 flex items-center justify-between">
-          <a href="#home" className="flex items-center gap-3">
-            <Logo className="h-8 md:h-9 lg:h-10" />
-          </a>
+        <div className="mx-auto max-w-7xl px-6 h-16 flex items-center gap-4">
+  <a href="#home" className="flex items-center gap-3 shrink-0">
+    <Logo className="h-8 md:h-9 lg:h-10" />
+  </a>
 
-          <nav className="hidden md:flex items-center gap-6 text-sm">
-            <a href="#features" className="hover:opacity-80">Features</a>
-            <a href="#how" className="hover:opacity-80">How it works</a>
-            <a href="#pricing" className="hover:opacity-80">Pricing</a>
-            <a href="#faq" className="hover:opacity-80">FAQ</a>
-          </nav>
+  {/* Mobile nav inline with logo */}
+  <nav className="flex md:hidden items-center gap-4 text-sm overflow-x-auto whitespace-nowrap [-webkit-overflow-scrolling:touch] flex-1">
+    <a href="#features" className="py-2">Features</a>
+    <a href="#how" className="py-2">How it works</a>
+    <a href="#pricing" className="py-2">Pricing</a>
+    <a href="#faq" className="py-2">FAQ</a>
+  </nav>
 
-<div className="hidden md:flex items-center gap-3">
-  <Button
-    variant="outline"
-    className="bg-white text-black border-black hover:bg-black/5"
-    onClick={() => setIsFormOpen(true)}   // opens the same form
-  >
-    Get a Demo
-  </Button>
-</div>
-        </div>
-{/* Mobile nav links (scrollable) */}
-<nav className="md:hidden border-t border-black/10 dark:border-white/10">
-  <div className="mx-auto max-w-7xl px-6 overflow-x-auto [-webkit-overflow-scrolling:touch]">
-    <div className="flex items-center gap-4 py-2 text-sm whitespace-nowrap">
-      <a href="#features" className="py-2">Features</a>
-      <a href="#how" className="py-2">How it works</a>
-      <a href="#pricing" className="py-2">Pricing</a>
-      <a href="#faq" className="py-2">FAQ</a>
-    </div>
+  {/* Desktop nav + CTA (pushed right) */}
+  <nav className="hidden md:flex items-center gap-6 text-sm ml-auto">
+    <a href="#features" className="hover:opacity-80">Features</a>
+    <a href="#how" className="hover:opacity-80">How it works</a>
+    <a href="#pricing" className="hover:opacity-80">Pricing</a>
+    <a href="#faq" className="hover:opacity-80">FAQ</a>
+  </nav>
+  <div className="hidden md:flex items-center gap-3">
+    <Button
+      variant="outline"
+      className="bg-white text-black border-black hover:bg-black/5"
+      onClick={() => setIsFormOpen(true)}
+    >
+      Get a Demo
+    </Button>
   </div>
-</nav>
+</div>
       </header>
 
       <Hero onOpenForm={() => setIsFormOpen(true)} onOpenVideo={() => setIsVideoOpen(true)} />

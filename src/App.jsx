@@ -1056,7 +1056,7 @@ function Results() {
       <div className="mx-auto max-w-6xl px-6">
         <p className="text-sm font-semibold text-fuchsia-600">Results</p>
         <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight mt-2">
-          Convert more traffic at a higher average order value.
+          Convert more traffic and drive more revenue.
         </h2>
         <p className="mt-3 text-black/70 dark:text-white/70">
           Nobi has outperformed the default shopping experience in every A/B test we've ever run.

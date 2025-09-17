@@ -2,12 +2,9 @@ import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 
-// at the top of your file (e.g., App.jsx or the component where logos render)
-import lucchese from "/media/logos/lucchese.svg";
-import untuckit from "/media/logos/untuckit.svg";
-import faherty from "/media/logos/faherty.svg";
-import toolup from "/media/logos/toolup.svg";
-import stbernard from "/media/logos/stbernard.svg";
+// ===== feature flags (hide sections/links without deleting code) =====
+const SHOW_LOGOS = false;
+const SHOW_PRICING = false;
 
 // …
 
@@ -1248,8 +1245,8 @@ function Footer() {
         </div>
         <div className="flex items-center gap-4 text-sm">
           <a href="#features" className="hover:opacity-80">Features</a>
-         <a href="#how" className="hover:opacity-80">How it Works</a>
-          <a href="#pricing" className="hover:opacity-80">Pricing</a>
+          <a href="#how" className="hover:opacity-80">How it Works</a>
+          {SHOW_PRICING && <a href="#pricing" className="hover:opacity-80">Pricing</a>}
           <a href="#faq" className="hover:opacity-80">FAQ</a>
         </div>
       </div>
@@ -1663,7 +1660,7 @@ export default function App() {
   <nav className="flex md:hidden items-center gap-4 text-sm overflow-x-auto whitespace-nowrap [-webkit-overflow-scrolling:touch] flex-1">
     <a href="#features" className="py-2">Features</a>
     <a href="#how" className="py-2">How it works</a>
-    <a href="#pricing" className="py-2">Pricing</a>
+  {SHOW_PRICING && <a href="#pricing" className="py-2">Pricing</a>}
     <a href="#faq" className="py-2">FAQ</a>
   </nav>
 
@@ -1671,7 +1668,7 @@ export default function App() {
 <nav className="hidden md:flex items-center gap-6 text-sm font-semibold absolute left-1/2 -translate-x-1/2">
     <a href="#features" className="hover:opacity-80">Features</a>
     <a href="#how" className="hover:opacity-80">How it works</a>
-    <a href="#pricing" className="hover:opacity-80">Pricing</a>
+  {SHOW_PRICING && <a href="#pricing" className="hover:opacity-80">Pricing</a>}
     <a href="#faq" className="hover:opacity-80">FAQ</a>
   </nav>
   <div className="hidden md:flex items-center gap-3 ml-auto">
@@ -1686,15 +1683,20 @@ export default function App() {
 </div>
       </header>
 
-      <Hero onOpenForm={() => setIsFormOpen(true)} onOpenVideo={() => setIsVideoOpen(true)} />
-      <Logos />
-      <Features />
-      <Results />
-<Insights onOpenForm={() => setIsFormOpen(true)} />      <Testimonial />
-      <HowItWorks />
-      <Pricing />
-      <FAQ />
-      <Footer />
+     <Hero onOpenForm={() => setIsFormOpen(true)} onOpenVideo={() => setIsVideoOpen(true)} />
+
+{SHOW_LOGOS && <Logos />}
+
+<Features />
+<Results />
+<Insights onOpenForm={() => setIsFormOpen(true)} />
+<Testimonial />
+<HowItWorks />
+
+{SHOW_PRICING && <Pricing />}
+
+<FAQ />
+<Footer />
 
       {/* Modals */}
       <RequestDemoModal open={isFormOpen} onClose={() => setIsFormOpen(false)} />

@@ -1,147 +1,135 @@
-<!-- index.html -->
 <!doctype html>
 <html lang="en">
   <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#0b0b0f" media="(prefers-color-scheme: dark)">
-<link rel="preconnect" href="https://assistant-script.nobi.ai" crossorigin>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Nobi</title>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#0b0b0f" media="(prefers-color-scheme: dark)">
+    <link rel="preconnect" href="https://assistant-script.nobi.ai" crossorigin>
+
+    <title>Nobi — Conversational commerce</title>
+
     <!-- Favicons -->
-<link rel="icon" href="/favicon.ico" sizes="any">
-<link rel="icon" href="/favicon.svg" type="image/svg+xml">
-<link rel="apple-touch-icon" href="/apple-touch-icon-180.png">
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/apple-touch-icon-180.png">
 
-<!-- (Optional for PWA-ish installs) -->
-<link rel="manifest" href="/site.webmanifest">
-<meta name="theme-color" content="#000000">
-  <!-- Canonical -->
-<link rel="canonical" href="https://yourdomain.com/" />
+    <!-- (Optional for PWA-ish installs) -->
+    <link rel="manifest" href="/site.webmanifest">
+    
+    <!-- Canonical (TODO: set correct domain, e.g., https://trynobi.com/ now; https://nobi.ai/ later) -->
+    <link rel="canonical" href="https://nobi.ai/" />
 
-<!-- Basic SEO -->
-<title>Nobi — Conversational commerce</title>
-<meta name="description" content="Nobi helps your customers find the right products faster with conversational AI." />
+    <!-- Basic SEO -->
+    <meta name="description" content="Nobi helps your customers find the right products faster with conversational AI." />
 
-<!-- Open Graph / Facebook -->
-<meta property="og:type" content="website" />
-<meta property="og:url" content="https://yourdomain.com/" />
-<meta property="og:title" content="Nobi — Conversational commerce" />
-<meta property="og:description" content="Turn product search into a conversation." />
-<meta property="og:image" content="https://yourdomain.com/og-image.png" />
-<meta property="og:image:width" content="1200" />
-<meta property="og:image:height" content="630" />
+    <!-- Open Graph / Facebook 
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://nobi.ai/" />
+    <meta property="og:title" content="Nobi — Conversational commerce" />
+    <meta property="og:description" content="Turn product search into a conversation." />
+    <meta property="og:image" content="https://nobi.ai/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
 
-<!-- Twitter -->
-<meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="Nobi — Conversational commerce" />
-<meta name="twitter:description" content="Turn product search into a conversation." />
-<meta name="twitter:image" content="https://yourdomain.com/og-image.png" />
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  "name": "Nobi",
-  "url": "https://yourdomain.com/",
-  "logo": "https://yourdomain.com/og-image.png",
-  "sameAs": []
-}
-</script>
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Nobi — Conversational commerce" />
+    <meta name="twitter:description" content="Turn product search into a conversation." />
+    <meta name="twitter:image" content="https://nobi.ai/og-image.png" />
 
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "WebSite",
-  "url": "https://yourdomain.com/",
-  "potentialAction": {
-    "@type": "SearchAction",
-    "target": "https://yourdomain.com/?q={search_term_string}",
-    "query-input": "required name=search_term_string"
-  }
-}
-</script>
+    <!-- Schema.org -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Nobi",
+      "url": "https://nobi.ai/",
+      "logo": "https://nobi.ai/og-image.png",
+      "sameAs": []
+    }
+    </script>
 
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "url": "https://nobi.ai/",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://nobi.ai/?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    }
+    </script>
+
+    <!-- Consent Mode defaults (optional; wire this to your banner later) -->
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('consent', 'default', {
+        ad_storage: 'denied',
+        analytics_storage: 'denied',
+        functionality_storage: 'granted',
+        security_storage: 'granted',
+        ad_user_data: 'denied',
+        ad_personalization: 'denied'
+      });
+    </script>
+
+    <!-- Google Tag Manager -->
+    <script>
+      (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+      'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+      })(window,document,'script','dataLayer','GTM-M289KWKR'); 
+    </script>
+    <!-- End Google Tag Manager -->
   </head>
+
   <body>
+    <!-- Google Tag Manager (noscript) — keep as first child in <body> -->
+    <noscript>
+      <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-M289KWKR"
+              height="0" width="0" style="display:none;visibility:hidden"></iframe>
+    </noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
     <div id="root"></div>
-    <!-- NOTE: no leading slash here -->
     <script type="module" src="src/main.jsx"></script>
+
+    <!-- Page helpers -->
     <script>
-// 1) Defer video loading until user taps the cover
-for (const cover of document.querySelectorAll('.video-cover')) {
-cover.addEventListener('click', () => {
-const v = cover.querySelector('video[data-defer]');
-if (!v) return;
-v.removeAttribute('data-defer');
-v.setAttribute('playsinline','');
-v.setAttribute('controls','');
-v.load();
-v.play().catch(()=>{});
-}, { once: true });
-}
+      // 1) Defer video loading until user taps the cover
+      for (const cover of document.querySelectorAll('.video-cover')) {
+        cover.addEventListener('click', () => {
+          const v = cover.querySelector('video[data-defer]');
+          if (!v) return;
+          v.removeAttribute('data-defer');
+          v.setAttribute('playsinline','');
+          v.setAttribute('controls','');
+          v.load();
+          v.play().catch(()=>{});
+        }, { once: true });
+      }
 
+      // 2) Lock body scroll when a drawer menu is open
+      const drawer = document.querySelector('.drawer');
+      const lock = (on) => document.body.style.overflow = on ? 'hidden' : '';
+      if (drawer) {
+        const mo = new MutationObserver(() => lock(drawer.getAttribute('aria-hidden') === 'false'));
+        mo.observe(drawer, { attributes: true, attributeFilter: ['aria-hidden'] });
+      }
 
-// 2) Lock body scroll when a drawer menu is open
-const drawer = document.querySelector('.drawer');
-const lock = (on) => document.body.style.overflow = on ? 'hidden' : '';
-if (drawer) {
-const mo = new MutationObserver(() => lock(drawer.getAttribute('aria-hidden') === 'false'));
-mo.observe(drawer, { attributes: true, attributeFilter: ['aria-hidden'] });
-}
-
-
-// 3) Safer 100vh fallback for browsers lacking svh (optional)
-(function(){
-const setVh = ()=> document.documentElement.style.setProperty('--vh', `${window.innerHeight*0.01}px`);
-setVh(); window.addEventListener('resize', setVh);
-})();
-</script>
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-MLC6HB157E"></script>
-<!-- GA4 loader (must be BEFORE the config) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-MLC6HB157E"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){ dataLayer.push(arguments); }
-  gtag('js', new Date());
-  gtag('config', 'G-MLC6HB157E', { anonymize_ip: true });
-</script>
-    <script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){ dataLayer.push(arguments); }
-  gtag('js', new Date());
-  gtag('config', 'G-MLC6HB157E', { anonymize_ip: true });
-</script>
-    <!-- RB2B -->
-<script>
-!function () {
-  var reb2b = window.reb2b = window.reb2b || [];
-  if (reb2b.invoked) return;
-  reb2b.invoked = true;
-  reb2b.methods = ["identify", "collect"];
-  reb2b.factory = function (method) {
-    return function () {
-      var args = Array.prototype.slice.call(arguments);
-      args.unshift(method);
-      reb2b.push(args);
-      return reb2b;
-    };
-  };
-  for (var i = 0; i < reb2b.methods.length; i++) {
-    var key = reb2b.methods[i];
-    reb2b[key] = reb2b.factory(key);
-  }
-  reb2b.load = function (key) {
-    var script = document.createElement("script");
-    script.type = "text/javascript";
-    script.async = true;
-    script.src = "https://s3-us-west-2.amazonaws.com/b2bjsstore/b/" + key + "/5NRP9HGL08O1.js.gz";
-    var first = document.getElementsByTagName("script")[0];
-    first.parentNode.insertBefore(script, first);
-  };
-  reb2b.SNIPPET_VERSION = "1.0.1";
-  reb2b.load("5NRP9HGL08O1");
-}();
-</script>
+      // 3) Safer 100vh fallback for browsers lacking svh (optional)
+      (function(){
+        const setVh = ()=> document.documentElement.style.setProperty('--vh', `${window.innerHeight*0.01}px`);
+        setVh(); window.addEventListener('resize', setVh);
+      })();
+    </script>
   </body>
 </html>

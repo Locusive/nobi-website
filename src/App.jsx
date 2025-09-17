@@ -1695,7 +1695,7 @@ export default function App() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-white to-slate-50 dark:from-[#0a0a0a] dark:to-black text-black dark:text-white">
       <header className="sticky top-0 z-40 border-b backdrop-blur bg-white/70 dark:bg-black/40">
-        <div className="mx-auto max-w-7xl px-6 h-16 flex items-center gap-4">
+<div className="mx-auto max-w-7xl px-6 h-16 flex items-center gap-4 relative">
   <a href="#home" className="flex items-center gap-3 shrink-0">
     <Logo className="h-8 md:h-9 lg:h-10" />
   </a>
@@ -1709,21 +1709,21 @@ export default function App() {
   </nav>
 
   {/* Desktop nav + CTA (pushed right) */}
-  <nav className="hidden md:flex items-center gap-6 text-sm font-semibold ml-auto">
+<nav className="hidden md:flex items-center gap-6 text-sm font-semibold absolute left-1/2 -translate-x-1/2">
     <a href="#features" className="hover:opacity-80">Features</a>
     <a href="#how" className="hover:opacity-80">How it works</a>
     <a href="#pricing" className="hover:opacity-80">Pricing</a>
     <a href="#faq" className="hover:opacity-80">FAQ</a>
   </nav>
-  <div className="hidden md:flex items-center gap-3">
-    <Button
-      variant="outline"
-      className="bg-white text-black border-black hover:bg-black/5"
-      onClick={() => setIsFormOpen(true)}
-    >
-      Get a Demo
-    </Button>
-  </div>
+  <div className="hidden md:flex items-center gap-3 ml-auto">
+  <Button
+    variant="outline"
+    className="bg-white text-black border-black hover:bg-black/5"
+    onClick={() => setIsFormOpen(true)}
+  >
+    Get a Demo
+  </Button>
+</div>
 </div>
       </header>
 

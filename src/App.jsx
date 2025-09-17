@@ -835,7 +835,7 @@ function Hero({ onOpenForm, onOpenVideo }) {
           </h1>
 
           <p className="mt-4 text-lg text-black/70 dark:text-white/70">
-            Get your customers the right products faster at a <strong>30% higher</strong> conversion rate.
+            Get your customers the right products at a <strong>30% higher</strong> conversion rate.
           </p>
 
           {/* Same-row CTAs (works on mobile too) */}

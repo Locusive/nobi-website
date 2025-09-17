@@ -103,5 +103,13 @@
         setVh(); window.addEventListener('resize', setVh);
       })();
     </script>
+    <script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  // Give it ~500ms after GTM loads, then grant analytics so GA4 can fire in preview
+  setTimeout(() => {
+    gtag('consent','update',{ analytics_storage:'granted' });
+  }, 500);
+</script>
   </body>
 </html>

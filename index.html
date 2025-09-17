@@ -98,7 +98,15 @@ setVh(); window.addEventListener('resize', setVh);
 })();
 </script>
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-MLC6HB157E"></script>
+<!-- GA4 loader (must be BEFORE the config) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-MLC6HB157E"></script>
 <script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){ dataLayer.push(arguments); }
+  gtag('js', new Date());
+  gtag('config', 'G-MLC6HB157E', { anonymize_ip: true });
+</script>
+    <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){ dataLayer.push(arguments); }
   gtag('js', new Date());

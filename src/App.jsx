@@ -907,47 +907,6 @@ function BrandMark({ src, label, className = "" }) {
   );
 }
 
-function Logos() {
-  const brands = [
-    { src: "/media/logos/lucchese.svg",  alt: "Lucchese",     widthHint: "max-w-[140px] md:max-w-[160px]" },
-    { src: "/media/logos/untuckit.svg",  alt: "UNTUCKit",     widthHint: "max-w-[140px] md:max-w-[160px]" },
-    // ↓ Add a tiny upward offset just for FAHERTY
-    { src: "/media/logos/faherty.svg",   alt: "Faherty",      widthHint: "max-w-[220px] md:max-w-[240px]", heightHint: "h-9 sm:h-10 md:h-11", offsetHint: "-top-[3px]" },
-    { src: "/media/logos/toolup.svg",    alt: "TOOLUP",       widthHint: "max-w-[180px]" },
-    { src: "/media/logos/stbernard.svg", alt: "St. Bernard",  widthHint: "max-w-[180px]" },
-  ];
-
-  return (
-    <section id="logos" className="py-16 border-t border-black/5 dark:border-white/5">
-      <div className="mx-auto max-w-6xl px-6">
-        <p className="text-sm font-semibold text-fuchsia-600 mb-6 text-center">
-          Trusted by modern commerce
-        </p>
-
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-x-10 gap-y-8 items-center justify-items-center">
-          {brands.map((b) => (
-            <div key={b.alt} className="flex items-center justify-center w-full">
-              <img
-                src={b.src}
-                alt={b.alt}
-                className={[
-                  "relative",                                   // allow top offset
-                  "h-7 sm:h-8 md:h-9 w-auto object-contain",    // base sizing
-                  "grayscale opacity-70 hover:opacity-100 transition",
-                  b.widthHint,
-                  b.heightHint || "",
-                  b.offsetHint || ""                             // ← the nudge (only on FAHERTY)
-                ].join(" ")}
-                style={{ imageRendering: "auto" }}
-              />
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
 function Features() {
   const items = [
     {

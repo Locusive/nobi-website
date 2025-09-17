@@ -835,7 +835,7 @@ function Hero({ onOpenForm, onOpenVideo }) {
           </h1>
 
           <p className="mt-4 text-lg text-black/70 dark:text-white/70">
-            Guide shoppers to the right products faster and see a <strong>30% lift</strong> in conversion.
+            Nobi helps brands achieve <strong>30% better</strong> product discovery with conversational AI.
           </p>
 
           {/* Same-row CTAs (works on mobile too) */}

@@ -909,7 +909,7 @@ function Features() {
     {
       title: "AI Mode your Search",
       desc:
-        "Let users who want the ChatGPT experience from your search 'Ask AI'. Keep your default keyword search for everyone else.",
+        "Give shoppers the same search experience they get with ChatGPT and Gemini... all from within your product catalog.",
       icon: <Sparkles className="h-4 w-4" />,
       media: { src: "/media/feature-ai-mode.mp4", alt: "" },
     },

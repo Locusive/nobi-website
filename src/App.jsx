@@ -634,7 +634,7 @@ function DualModeSearchBar({
   ref={aiBtnRef}
   className={`relative z-[1] rounded-lg px-3 py-1.5 text-xs sm:px-4 sm:py-2 sm:text-sm font-medium transition-colors duration-300 ${
     (mode === "ai" ? "text-black dark:text-white" : "text-black/60 dark:text-white/60")
-  }`}   
+  }`}
   onClick={() => setMode("ai")}
 >
   AI
@@ -782,7 +782,7 @@ function VideoModal({ open, onClose, youtube, src, poster = "" }) {
         </div>
 
         {/* Header / title row */}
-        
+
 
         <div className="absolute top-2 left-2 right-2 flex items-center justify-between pointer-events-none">
           <h2 id="howitworks-title" className="sr-only">
@@ -842,15 +842,15 @@ function Hero({ onOpenForm, onOpenVideo }) {
               <ArrowRight className="h-5 w-5 -mr-1" aria-hidden="true" />
             </Button>
            <Button
-  size="lg"
-  variant="ghost"
-  onClick={onOpenVideo}
-  className="whitespace-nowrap px-3"
->
-  <PlayCircle className="h-5 w-5" />
-  <span className="sm:hidden">How it works</span>
-  <span className="hidden sm:inline">How it works in 60 seconds</span>
-</Button>
+              size="lg"
+              variant="ghost"
+              onClick={onOpenVideo}
+              className="whitespace-nowrap px-3"
+            >
+              <PlayCircle className="h-5 w-5" />
+              <span className="sm:hidden">How it works</span>
+              <span className="hidden sm:inline">How it works in 60 seconds</span>
+            </Button>
           </div>
         </div>
 
@@ -858,20 +858,24 @@ function Hero({ onOpenForm, onOpenVideo }) {
         <div className="mt-8 max-w-4xl mx-auto">
           <div className="p-4 rounded-2xl border border-fuchsia-200 bg-gradient-to-r from-fuchsia-50 to-pink-50 shadow-md">
             <DualModeSearchBar
-  locked                                 // 👈 NEW: display-only
-  mode={searchMode}
-  onModeChange={setSearchMode}
-  defaultMode="ai"
-  size="regular"
-  onDemoSubmit={kickOffPreview}
-  onSubmit={kickOffPreview}
-/>
+              locked                                 // 👈 NEW: display-only
+              mode={searchMode}
+              onModeChange={setSearchMode}
+              defaultMode="ai"
+              size="regular"
+              onDemoSubmit={kickOffPreview}
+              onSubmit={kickOffPreview}
+            />
           </div>
         </div>
 
         {/* Preview card */}
         <div className="mt-4 max-w-5xl mx-auto">
           <ConversationPreview mode={searchMode} playKey={playKey} query={lastQuery} />
+        </div>
+
+        <div className="mt-6 max-w-5xl mx-auto flex justify-center">
+          <nobi-button button-label="Chat With Nobi"></nobi-button>
         </div>
       </div>
     </section>
@@ -1059,7 +1063,7 @@ function Results() {
   </table>
 </div>
         <p className="mt-3 text-xs text-black/50 dark:text-white/50">
-          Impact = relative lift vs. Default. Above are the total results we've seen across all of our clients comparing Nobi to the default. 
+          Impact = relative lift vs. Default. Above are the total results we've seen across all of our clients comparing Nobi to the default.
         </p>
       </div>
     </section>

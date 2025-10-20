@@ -5,7 +5,10 @@
 2) `npm install`
 3) `npm run dev`
 
-## Deploy to Vercel
+## Deploy to Cloudflare Pages
+- Simply push your changes to the main branch and Cloudflare Pages will build and deploy automatically.
+
+## Deploy to Vercel (deprecated)
 - Push this folder to a GitHub repo.
 - Import the repo in Vercel.
 - Framework Preset: **Vite**

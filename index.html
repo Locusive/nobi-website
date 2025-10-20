@@ -17,6 +17,12 @@
     <meta name="theme-color" content="#0b0b0f" media="(prefers-color-scheme: dark)">
     <link rel="preconnect" href="https://assistant-script.nobi.ai" crossorigin>
 
+    <style>
+      :root {
+        --nobi-button-background: #000000;
+      }
+    </style>
+
     <title>Nobi — Conversational commerce</title>
 
     <!-- Favicons -->
@@ -77,6 +83,9 @@
 
     <div id="root"></div>
     <script type="module" src="src/main.jsx"></script>
+
+    <!-- Nobi Assistant -->
+    <script src="https://assistant-script.nobi.ai/nobi.bundle.js" onload="window.Nobi.initialize({ merchantId: '460cbe82-9195-424f-a616-b1cb3e3caca0' });"></script>
 
     <!-- Page helpers -->
     <script>

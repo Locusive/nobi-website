@@ -1486,7 +1486,7 @@ function RequestDemoModal({ open, onClose }) {
     website: "",
     platform: "Shopify",
     message: "",
-    honey: "", // honeypot
+    botcheck: "", // honeypot
   });
   const [submitting, setSubmitting] = React.useState(false);
   const [done, setDone] = React.useState(false);
@@ -1513,13 +1513,30 @@ function RequestDemoModal({ open, onClose }) {
     setSubmitting(true);
     setError("");
     try {
-      const r = await fetch("/api/request-demo", {
+      // Web3Forms endpoint
+      const accessKey = "c7a3fd79-0e4f-47ce-aa30-c141616d21e3";
+
+      const formData = new FormData();
+      formData.append("access_key", accessKey);
+      formData.append("name", form.name);
+      formData.append("email", form.email);
+      formData.append("company", form.company);
+      formData.append("website", form.website);
+      formData.append("platform", form.platform);
+      formData.append("message", form.message);
+      formData.append("botcheck", form.botcheck);
+
+      // Optional: Add your email to receive notifications
+      // formData.append("from_name", "Nobi Website");
+      // formData.append("subject", "New Demo Request from " + (form.company || form.name));
+
+      const r = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
+        body: formData,
       });
-      const j = await r.json().catch(() => ({}));
-      if (!r.ok || !j.ok) throw new Error(j.error || "Something went wrong.");
+
+      const j = await r.json();
+      if (!r.ok || !j.success) throw new Error(j.message || "Something went wrong.");
       setDone(true);
     } catch (err) {
       setError(err.message || "Failed to submit.");
@@ -1546,7 +1563,7 @@ function RequestDemoModal({ open, onClose }) {
         {!done ? (
           <form onSubmit={submit} className="mt-4 space-y-4">
             {/* honeypot */}
-            <input type="text" name="honey" value={form.honey} onChange={update} className="hidden" tabIndex={-1} autoComplete="off" />
+            <input type="text" name="botcheck" value={form.botcheck} onChange={update} className="hidden" tabIndex={-1} autoComplete="off" />
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <div>

@@ -993,14 +993,14 @@ function Insights({ onOpenForm }) {
 
   // Simple Card shell for consistent padding/borders
   const Card = ({ title, icon, children, className = "" }) => (
-    <section className={`h-full rounded-3xl border border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/5 p-6 shadow-sm ${className}`}>
-      <div className="font-semibold flex items-center gap-2">
-        <span className="text-fuchsia-600">{icon}</span>
-        {title}
-      </div>
-      <div className="mt-4">{children}</div>
-    </section>
-  );
+  <section className={`h-full rounded-3xl border border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/5 p-5 shadow-sm ${className}`}>
+    <div className="font-semibold flex items-center gap-2">
+      <span className="text-fuchsia-600">{icon}</span>
+      {title}
+    </div>
+    <div className="mt-3">{children}</div>   {/* was mt-4 */}
+  </section>
+);
 
   return (
     <section id="insights" className="scroll-mt-20 py-20 border-t border-black/5 dark:border-white/5">
@@ -1018,19 +1018,17 @@ function Insights({ onOpenForm }) {
         </div>
 
         {/* Tetris grid */}
-        <div
-          className="
-            mt-8 grid grid-flow-dense gap-4
-            grid-cols-1
-            md:grid-cols-6
-            lg:grid-cols-12
-            [grid-auto-rows:minmax(140px,auto)]
-          "
-        >
-          {/* Intents — tall card */}
-          <div className="md:col-span-6 lg:col-span-4 md:row-span-3">
+       <div
+  className="
+    mt-8 grid grid-flow-dense gap-4
+    grid-cols-1 md:grid-cols-6 lg:grid-cols-12
+    [grid-auto-rows:minmax(100px,auto)]
+  "
+>
+          {/* Intents — shorter */}
+          <div className="md:col-span-6 lg:col-span-4 md:row-span-2">
             <Card title="Top student intents" icon={<GraduationCap className="h-4 w-4" />}>
-              <div className="space-y-3">
+              <div className="space-y-2">
                 {INSIGHTS.intents.map((d) => (
                   <div key={d.label}>
                     <div className="flex items-center justify-between text-sm">
@@ -1045,9 +1043,9 @@ function Insights({ onOpenForm }) {
           </div>
 
           {/* Barriers — tall card */}
-          <div className="md:col-span-6 lg:col-span-4 md:row-span-3">
+          <div className="md:col-span-6 lg:col-span-4 md:row-span-2">
             <Card title="Common objections & barriers" icon={<AlertTriangle className="h-4 w-4" />}>
-              <div className="space-y-3">
+              <div className="space-y-2">
                 {INSIGHTS.barriers.map((d) => (
                   <div key={d.label}>
                     <div className="flex items-center justify-between text-sm">
@@ -1061,10 +1059,10 @@ function Insights({ onOpenForm }) {
             </Card>
           </div>
 
-          {/* Prompts — medium card */}
-          <div className="md:col-span-6 lg:col-span-4 md:row-span-2">
+          {/* Prompts — stays compact */}
+<div className="md:col-span-6 lg:col-span-4 md:row-span-1">
             <Card title="Example prompts" icon={<Quote className="h-4 w-4" />}>
-              <div className="space-y-3 text-sm text-black/80 dark:text-white/90">
+              <div className="space-y-2 text-sm text-black/80 dark:text-white/90">
                 {INSIGHTS.prompts.map((p, i) => (
                   <blockquote key={i} className="rounded-xl p-3 bg-black/5 dark:bg-white/10">“{p}”</blockquote>
                 ))}
@@ -1072,10 +1070,10 @@ function Insights({ onOpenForm }) {
             </Card>
           </div>
 
-          {/* Funnel — wide card */}
-          <div className="md:col-span-6 lg:col-span-8 md:row-span-3">
+          {/* Funnel — a bit shorter */}
+<div className="md:col-span-6 lg:col-span-8 md:row-span-2">
             <Card title="Assistant → Apply funnel" icon={<ClipboardList className="h-4 w-4" />}>
-              <ol className="space-y-3">
+              <ol className="space-y-2">
                 {INSIGHTS.funnel.map((f, i) => (
                   <li key={f.stage} className="flex items-center gap-3">
                     <div className="w-6 h-6 rounded-full bg-violet-600 text-white text-xs grid place-items-center">{i + 1}</div>
@@ -1089,16 +1087,16 @@ function Insights({ onOpenForm }) {
                   </li>
                 ))}
               </ol>
-              <p className="mt-3 text-xs text-black/60 dark:text-white/60">
+              <p className="mt-2 text-xs text-black/60 dark:text-white/60">
                 * Largest drop-offs: Tuition/Aid details → Start application
               </p>
             </Card>
           </div>
 
           {/* Geo + Segments — tall narrow card */}
-          <div className="md:col-span-6 lg:col-span-4 md:row-span-3">
+<div className="md:col-span-6 lg:col-span-4 md:row-span-2">
             <Card title="Where prospects are from" icon={<MapPin className="h-4 w-4" />}>
-              <ul className="space-y-3">
+              <ul className="space-y-2">
                 {INSIGHTS.geo.map((g) => (
                   <li key={g.region} className="flex items-center justify-between text-sm">
                     <span className="truncate">{g.region}</span>
@@ -1110,7 +1108,7 @@ function Insights({ onOpenForm }) {
                 ))}
               </ul>
 
-              <div className="mt-5 font-semibold">Segments</div>
+              <div className="mt-4 font-semibold">Segments</div>
               <div className="mt-2 grid grid-cols-2 gap-3">
                 {INSIGHTS.segments.map((s) => (
                   <div

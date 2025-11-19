@@ -68,92 +68,7 @@ function HeroProductCard({ title = "Oxford Shirt", price = "$168", img }) {
   );
 }
 
-function HeroConversationDemo({ script, startKey, ratio = 4 / 3 }) {
-  const {
-    userText = `Red dress for a beach wedding. I'm 5'5" and want something under $200.`,
-    aiText   = "Got it! Here are some red dresses that are warm-weather appropriate and comfortable on sand / in a slight breeze (rather than a formal ballroom). These are all available in your size (M) and under $200.",
-    products = [
-      { title: "St. Bernard x Stark Maxi", price: "$98", img: "/media/prod-1.png" },
-      { title: "Maygel Coronel Cover-Up", price: "$178", img: "/media/prod-2.png" },
-      { title: "Hunter Puff-Sleeve Mini", price: "$124", img: "/media/prod-3.png" },
-    ],
-  } = script || {};
 
-  const [step, setStep] = React.useState(-1); // -1 idle, 0 user, 1 ai, 2 products
-  const scrollerRef = React.useRef(null);
-  const productsRef = React.useRef(null);
-
-  // Start sequence ONLY when startKey becomes >= 0
-  React.useEffect(() => {
-    if (startKey < 0) return; // gate on initial mount
-    const hasUser = Boolean(userText?.trim());
-    const hasAi   = Boolean(aiText?.trim());
-    // If no bubbles at all, jump straight to products
-    if (!hasUser && !hasAi) {
-      setStep(2);
-      return;
-    }
-    // Otherwise, step through what exists
-    setStep(hasUser ? 0 : 1);
-    scrollerRef.current?.scrollTo({ top: 0, behavior: "auto" });
-    const t1 = hasAi ? setTimeout(() => setStep(1), 1200) : null;
-    const t2 = setTimeout(() => setStep(2), hasAi ? 3000 : 1200);
-    return () => { if (t1) clearTimeout(t1); clearTimeout(t2); };
-  }, [startKey, userText, aiText, products]);
-
-  // Smooth scroll to products
-  React.useEffect(() => {
-    if (step === 2 && scrollerRef.current && productsRef.current) {
-      const id = setTimeout(() => {
-        const top = productsRef.current.offsetTop - 12;
-        scrollerRef.current.scrollTo({ top, behavior: "smooth" });
-      }, 140);
-      return () => clearTimeout(id);
-    }
-  }, [step]);
-
-  const showUser1 = step >= 0 && Boolean(userText?.trim());
-  const showAi1   = step >= 1 && Boolean(aiText?.trim());
-  const showProducts = step >= 2;
-
-  return (
-    <div className="w-full rounded-2xl border border-black/10 dark:border-white/10 bg-white/60 dark:bg-white/5 overflow-hidden shadow-inner">
-      <AspectBox ratio={ratio}>
-        <div className="absolute inset-0 p-4 sm:p-5 md:p-6 flex flex-col gap-3 sm:gap-4">
-          <div ref={scrollerRef} className="flex-1 overflow-y-auto">
-            <div className="flex h-full flex-col gap-2.5 sm:gap-3">
-              {showUser1 && userText && (
-                <motion.div initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.55 }}>
-                  <ChatBubble from="user">{userText}</ChatBubble>
-                </motion.div>
-              )}
-              {showAi1 && aiText && (
-                <motion.div initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.55 }}>
-                  <ChatBubble from="ai">{aiText}</ChatBubble>
-                </motion.div>
-              )}
-              {showProducts && (
-                <motion.div
-                  key={`prods-${startKey}`}
-                  ref={productsRef}
-                  initial={{ opacity: 0, y: 8 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: 6 }}
-                  transition={{ duration: 0.55 }}
-className="grid grid-cols-2 sm:grid-cols-3 gap-2 sm:gap-2.5 pt-1"
-                >
-                  {products.map((p) => (
-                    <HeroProductCard key={p.title} title={p.title} price={p.price} img={p.img} />
-                  ))}
-                </motion.div>
-              )}
-            </div>
-          </div>
-        </div>
-      </AspectBox>
-    </div>
-  );
-}
 
 // --- one script builder used by the preview ---
 function makeScript(mode, q = "red dress for a wedding") {
@@ -186,23 +101,6 @@ function makeScript(mode, q = "red dress for a wedding") {
   };
 }
 
-// Adapter so the hero can pass mode + a restart key
-function ConversationDemo({ mode, playKey, query }) {
-  return <HeroConversationDemo script={makeScript(mode, query)} startKey={playKey} />;
-}
-
-function ConversationPreview({ mode, playKey, query }) {
-  return (
-    <AnimatePresence initial={false} mode="wait">
-      <HeroConversationDemo
-        key={`${mode}-${playKey}`}
-        script={makeScript(mode, query)}
-        startKey={playKey}
-        ratio={2.2}
-      />
-    </AnimatePresence>
-  );
-}
 
 function BrandsRow() {
   const brands = [
@@ -496,193 +394,6 @@ function useTypingDemo({
   }, [mode, enabled, seed, setQuery, setPlaceholder, textForMode]);
 }
 
-function DualModeSearchBar({
-  defaultMode = "ai",
-  size = "regular",
-  mode: controlledMode,
-  onModeChange,
-  onSubmit,
-  onDemoSubmit, // fired after the typing demo finishes
-  locked = false, // 👈 NEW
-}) {
-     const isLocked = !!locked;
-  const [internalMode, setInternalMode] = React.useState(defaultMode);
-  const mode = controlledMode ?? internalMode;
-
-  const [query, setQuery] = React.useState("");
-  const [placeholder, setPlaceholder] = React.useState(
-    mode === "ai" ? "Describe what you want..." : "Search products..."
-  );
-
-  // Keep onDemoSubmit stable inside effects
-  const doneRef = React.useRef(onDemoSubmit);
-  React.useEffect(() => { doneRef.current = onDemoSubmit; }, [onDemoSubmit]);
-
-  // typing demo control
-  const [demoEnabled, setDemoEnabled] = React.useState(true);
-
-  // animated toggle thumb
-  const toggleRef = React.useRef(null);
-  const siteBtnRef = React.useRef(null);
-  const aiBtnRef = React.useRef(null);
-  const [thumb, setThumb] = React.useState({ left: 0, width: 0 });
-
-  const measureThumb = React.useCallback(() => {
-    const btn = mode === "ai" ? aiBtnRef.current : siteBtnRef.current;
-    if (!btn) return;
-    setThumb({ left: btn.offsetLeft, width: btn.offsetWidth });
-  }, [mode]);
-
-  React.useEffect(() => {
-    measureThumb();
-    if (typeof window !== "undefined") {
-      const onResize = () => measureThumb();
-      window.addEventListener("resize", onResize);
-      let ro;
-      if ("ResizeObserver" in window && toggleRef.current) {
-        ro = new ResizeObserver(() => measureThumb());
-        try { ro.observe(toggleRef.current); } catch {}
-      }
-      return () => {
-        window.removeEventListener("resize", onResize);
-        ro?.disconnect?.();
-      };
-    }
-  }, [measureThumb]);
-
-  // Re-enable demo on toggle; the typing effect below handles reset/start
-  React.useEffect(() => {
-    setDemoEnabled(true);
-  }, [mode]);
-
-  // Type the demo query (no dependency on onDemoSubmit)
-  React.useEffect(() => {
-    if (!demoEnabled) return;
-
-    const toType = mode === "ai" ? DEMO_QUERY : "Red dress";
-
-    // reset UI before typing
-    setPlaceholder(mode === "ai" ? "Describe what you want..." : "Search products...");
-    setQuery("");
-
-    const startDelay = 450;
-    const baseSpeed  = 22;
-    const jitter     = 20;
-
-    let i = 0;
-    let cancelled = false;
-    const timers = [];
-
-    const tick = () => {
-      if (cancelled) return;
-      setQuery(toType.slice(0, i + 1));
-      i += 1;
-      if (i < toType.length) {
-        timers.push(setTimeout(tick, baseSpeed + Math.random() * jitter));
-      } else {
-        timers.push(setTimeout(() => doneRef.current?.({ mode, query: toType }), 300));
-      }
-    };
-
-    timers.push(setTimeout(tick, startDelay));
-
-    return () => {
-      cancelled = true;
-      timers.forEach(clearTimeout);
-    };
-  }, [mode, demoEnabled]); // ← no onDemoSubmit here
-
-  const setMode = (m) => {
-     if (controlledMode === undefined) setInternalMode(m);
-    onModeChange?.(m);
-  };
-
-  // cancel demo on any user interaction in the input/CTA
-  const stopDemoAnd = (next) => (e) => {
-    if (demoEnabled) setDemoEnabled(false);
-    next?.(e);
-  };
-
-  const ctaLabel = mode === "ai" ? "Ask AI" : "Search";
-  const height = size === "compact" ? "h-11" : "h-14";
-
-  function submit() {
-    if (!query.trim()) return;
-    onSubmit?.({ mode, query });
-  }
-
-  return (
-    <div className="w-full">
-      <div
-        className={`flex items-center gap-2 rounded-2xl border border-black/10 dark:border-white/15 bg-white/70 dark:bg-white/5 backdrop-blur px-2 ${height} shadow-sm`}
-      >
-        {/* Toggle */}
-        <div
-          ref={toggleRef}
-          className="relative isolate inline-flex rounded-xl bg-black/5 dark:bg-white/10 overflow-hidden shrink-0"
-        >
-          <button
-            ref={siteBtnRef}
-            className={`relative z-[1] rounded-lg px-3 py-1.5 text-xs sm:px-4 sm:py-2 sm:text-sm font-medium transition-colors duration-300 ${
-              mode === "site" ? "text-black dark:text-white" : "text-black/60 dark:text-white/60"
-            }`}
-            onClick={() => setMode("site")}
-          >
-            Default
-          </button>
-          <button
-  ref={aiBtnRef}
-  className={`relative z-[1] rounded-lg px-3 py-1.5 text-xs sm:px-4 sm:py-2 sm:text-sm font-medium transition-colors duration-300 ${
-    (mode === "ai" ? "text-black dark:text-white" : "text-black/60 dark:text-white/60")
-  }`}
-  onClick={() => setMode("ai")}
->
-  AI
-</button>
-          <motion.span
-            layout
-            transition={{ type: "spring", stiffness: 350, damping: 30 }}
-            className={`absolute inset-y-1 rounded-full shadow-sm ${
-              mode === "ai"
-                ? "bg-gradient-to-r from-fuchsia-500/20 to-pink-500/20"
-                : "bg-black/10 dark:bg-white/20"
-            }`}
-            style={{ left: thumb.left, width: thumb.width }}
-          />
-        </div>
-
-        {/* Input */}
-        <div className="flex-1 min-w-0 flex items-center gap-2">
-          <input
-  value={query}
-  readOnly={true}                                     // 👈 NEW: no edits allowed
-  tabIndex={isLocked ? -1 : 0}                        // 👈 NEW: not focusable when locked
-  onChange={isLocked ? undefined : stopDemoAnd((e) => setQuery(e.target.value))}
-  onKeyDown={isLocked ? (e) => e.preventDefault() : stopDemoAnd((e) => e.key === "Enter" && submit())}
-  onMouseDown={isLocked ? (e) => e.preventDefault() : stopDemoAnd()}
-  onTouchStart={isLocked ? (e) => e.preventDefault() : stopDemoAnd()}
-  placeholder={placeholder}
-  className={`min-w-0 w-full bg-transparent outline-none text-[15px] placeholder:text-black/40 dark:placeholder:text-white/40 ${
-    isLocked ? "pointer-events-none select-none cursor-default" : ""
-  }`}                                                 // 👈 NEW: ignore taps/clicks
-  aria-readonly="true"
-/>
-        </div>
-
-        {/* CTA */}
-        <Button
-          onClick={stopDemoAnd(submit)}
-          variant={mode === "ai" ? "ai" : "primary"}
-          size="compact"
-          className="whitespace-nowrap px-3 h-9 sm:h-8"
-        >
-          {mode === "ai" ? <Sparkles className="h-4 w-4" /> : <SearchIcon className="h-4 w-4" />}
-          <span className="hidden sm:inline">{ctaLabel}</span>
-        </Button>
-      </div>
-    </div>
-  );
-}
 
 function HeroSkeletonLine({ w = "60%" }) {
   return (
@@ -844,29 +555,8 @@ function Hero({ onOpenForm, onOpenVideo }) {
           </div>
         </div>
 
-        {/* Search bar */}
-        <div className="mt-8 max-w-4xl mx-auto">
-          <div className="p-4 rounded-2xl border border-fuchsia-200 bg-gradient-to-r from-fuchsia-50 to-pink-50 shadow-md">
-            <DualModeSearchBar
-              locked                                 // 👈 NEW: display-only
-              mode={searchMode}
-              onModeChange={setSearchMode}
-              defaultMode="ai"
-              size="regular"
-              onDemoSubmit={kickOffPreview}
-              onSubmit={kickOffPreview}
-            />
-          </div>
-        </div>
-
-        {/* Preview card */}
-        <div className="mt-4 max-w-5xl mx-auto">
-          <ConversationPreview mode={searchMode} playKey={playKey} query={lastQuery} />
-        </div>
-
-        <div className="mt-6 max-w-5xl mx-auto flex justify-center">
-          <nobi-button button-label="Chat With Nobi"></nobi-button>
-        </div>
+       
+       
       </div>
     </section>
   );
@@ -1301,6 +991,32 @@ function InsightsHeatCell({ v = 0 }) {
     >
       {Math.round(v * 100)}%
     </div>
+  );
+}
+
+function Hero({ onOpenForm }) {
+  return (
+    <section id="home" className="relative overflow-hidden">
+      <div className="mx-auto max-w-7xl px-6 pt-16 sm:pt-24 pb-6">
+        <div className="max-w-4xl mx-auto text-center space-y-6">
+          <h1 className="text-5xl sm:text-6xl font-semibold tracking-tight text-balance">
+            Turn prospective students into  
+            <span className="bg-gradient-to-r from-indigo-500 via-violet-500 to-fuchsia-500 bg-clip-text text-transparent">
+              excited applicants
+            </span>
+          </h1>
+          <p className="mt-4 text-lg text-black/70 dark:text-white/70">
+            Nobi helps universities attract the <strong>right applicants</strong> with conversational AI.
+          </p>
+          <div className="mt-8">
+            <Button size="lg" onClick={onOpenForm} className="w-full">
+              <span>Try on your .edu site</span>
+              <ArrowRight className="h-5 w-5 -mr-1" aria-hidden="true" />
+            </Button>
+          </div>
+        </div>
+      </div>
+    </section>
   );
 }
 

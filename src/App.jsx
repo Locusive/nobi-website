@@ -1121,10 +1121,7 @@ function Insights({ onOpenForm }) {
     </section>
   );
 }
-    </div>
-  );
-}
-
+   
 
 function RequestDemoModal({ open, onClose }) {
   const [form, setForm] = React.useState({

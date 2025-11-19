@@ -794,7 +794,7 @@ function Testimonial() {
 function HowItWorks() {
   const steps = [
     { h: "Install the code", p: "Paste two snippets of code in your site. Nobi reads your data and adopts your branding." },
-    { h: "Train and launch", p: "Build workflows (i.e. how Nobi should answer FAQs) and customize how you want Nobi to look." },
+    { h: "Train and launch", p: "Train Nobi on how to answer FAQs and customize how you want the tool to look." },
     { h: "Measure the lift", p: "Track conversion and qualitative insights in a simple dashboard." },
   ];
   return (
@@ -994,10 +994,10 @@ function Insights({ onOpenForm }) {
           <div>
             <p className="text-sm font-semibold text-fuchsia-600">Insights</p>
             <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight mt-2">
-              Hear your customers... in their own words.
+              Hear your applicants... in their own words.
             </h2>
             <p className="mt-3 text-black/70 dark:text-white/70">
-              Nobi turns real conversations into structured signals. Your merchandising, creative, and CX teams have never moved faster.
+              Nobi turns real conversations into structured signals that your Admissions, Marketing, Academics and other departments have never had.
             </p>
           </div>
         </div>

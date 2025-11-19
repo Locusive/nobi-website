@@ -827,7 +827,7 @@ function Hero({ onOpenForm, onOpenVideo }) {
           <h1 className="text-5xl sm:text-6xl font-semibold tracking-tight text-balance">
             Turn prospective students into{" "}
             <span className="bg-gradient-to-r from-indigo-500 via-violet-500 to-fuchsia-500 bg-clip-text text-transparent">
-              quality applications
+              excited applicants
             </span>
           </h1>
 
@@ -838,18 +838,8 @@ function Hero({ onOpenForm, onOpenVideo }) {
           {/* Same-row CTAs (works on mobile too) */}
           <div className="grid grid-cols-[1fr_auto] items-center gap-3 max-w-xl mx-auto">
             <Button size="lg" onClick={onOpenForm} className="w-full">
-              <span>Try on your store</span>
+              <span>Try on your .edu site</span>
               <ArrowRight className="h-5 w-5 -mr-1" aria-hidden="true" />
-            </Button>
-           <Button
-              size="lg"
-              variant="ghost"
-              onClick={onOpenVideo}
-              className="whitespace-nowrap px-3"
-            >
-              <PlayCircle className="h-5 w-5" />
-              <span className="sm:hidden">How it works</span>
-              <span className="hidden sm:inline">How it works in 60 seconds</span>
             </Button>
           </div>
         </div>

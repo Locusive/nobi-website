@@ -555,7 +555,7 @@ function Features() {
     {
       title: "'AI Mode' your site",
       desc:
-        "Deliver the same powerful experience as ChatGPT and other AI platforms that prospective applicants use every day—right within your site.",
+        "Deliver the same powerful search & discovery experience as ChatGPT and other AI platforms—right within your site.",
       icon: <Sparkles className="h-4 w-4" />,
       media: { src: "/media/feature-ai-mode.mp4", alt: "" },
     },
@@ -569,7 +569,7 @@ function Features() {
     {
       title: "Simplify mountains of information",
       desc:
-        "Empower applicants with the information they need so they don't bounce from your site frustrated that they couldn't find what they needed.",
+        "Empower applicants with the information and resources they need so that they don't bounce from your site.",
       icon: <MousePointerClick className="h-4 w-4" />,
       media: { src: "/media/feature-capture.mp4", alt: "Capture bouncers demo" },
     },

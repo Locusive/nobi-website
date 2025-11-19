@@ -512,15 +512,15 @@ function Hero({ onOpenForm, onOpenVideo }) {
           </p>
 
           {/* Same-row CTAs (works on mobile too) */}
-         <div className="grid grid-cols-[1fr_auto] items-center gap-3 max-w-xl mx-auto">
+         <div className="grid grid-cols-[1fr_auto] items-center gap-3 max-w-xl mx-auto justify-center">
   <Button
-    size="lg"
-    onClick={onOpenForm}
-    className="inline-block w-fit whitespace-nowrap px-6 py-3"
-  >
-    <span>Try on your .edu site</span>
-    <ArrowRight className="h-5 w-5 -mr-1" aria-hidden="true" />
-  </Button>
+  size="lg"
+  onClick={onOpenForm}
+  className="inline-block w-fit whitespace-nowrap px-6 py-3 mx-auto"
+>
+  <span>Try on your .edu site</span>
+  <ArrowRight className="h-5 w-5 -mr-1" aria-hidden="true" />
+</Button>
 </div>
 
         </div>        

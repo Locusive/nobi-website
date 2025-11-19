@@ -825,14 +825,14 @@ function Hero({ onOpenForm, onOpenVideo }) {
       <div className="mx-auto max-w-7xl px-6 pt-16 sm:pt-24 pb-6">
         <div className="max-w-4xl mx-auto text-center space-y-6">
           <h1 className="text-5xl sm:text-6xl font-semibold tracking-tight text-balance">
-            Turn product search into a{" "}
+            Turn prospective students into{" "}
             <span className="bg-gradient-to-r from-indigo-500 via-violet-500 to-fuchsia-500 bg-clip-text text-transparent">
-              conversation
+              quality applications
             </span>
           </h1>
 
           <p className="mt-4 text-lg text-black/70 dark:text-white/70">
-            Nobi helps brands achieve <strong>30% better</strong> product discovery with conversational AI.
+            Nobi helps universities attract the <strong>right applicants</strong> with conversational AI.
           </p>
 
           {/* Same-row CTAs (works on mobile too) */}

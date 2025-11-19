@@ -587,10 +587,10 @@ function Features() {
       <div className="mx-auto max-w-6xl px-6">
         <p className="text-sm font-semibold text-fuchsia-600">Features</p>
         <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight mt-2 text-balance">
-          Empower customers with conversational shopping in seconds.
+          Empower applicants with the information they need in seconds.
         </h2>
         <p className="mt-3 text-black/70 dark:text-white/70">
-          Test Nobi on your PLPs, search, and anywhere else you think is right for your brand.
+          Let Nobi answer questions on academic programs, admissions, life on campus, and anything else buried on your site.
         </p>
 
         <div className="mt-8 grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">

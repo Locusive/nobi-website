@@ -661,7 +661,7 @@ function Results() {
           Convert more traffic and drive more revenue.
         </h2>
         <p className="mt-3 text-black/70 dark:text-white/70">
-          Nobi has outperformed the default shopping experience in every A/B test we've ever run.
+          Nobi has outperformed the default web conversion experience in every A/B test we've ever run.
         </p>
 
        <div className="mt-8">
@@ -793,14 +793,14 @@ function Testimonial() {
 
 function HowItWorks() {
   const steps = [
-    { h: "Install the code", p: "Paste two snippets of code in your store. Nobi reads your catalog and adopts your branding." },
-    { h: "Customize and launch", p: "Pick entry points (i.e. PLPs, search) and customize how you want Nobi to look." },
-    { h: "Measure the lift", p: "Track conversion, AOV and qualitative insights in a simple dashboard." },
+    { h: "Install the code", p: "Paste two snippets of code in your site. Nobi reads your data and adopts your branding." },
+    { h: "Train and launch", p: "Build workflows (i.e. how Nobi should answer FAQs) and customize how you want Nobi to look." },
+    { h: "Measure the lift", p: "Track conversion and qualitative insights in a simple dashboard." },
   ];
   return (
     <section id="how" className="scroll-mt-20 py-20 border-t border-black/5 dark:border-white/5">
       <div className="mx-auto max-w-6xl px-6">
-        <h2 className="text-3xl font-semibold mb-8">Low code setup in 15 minutes</h2>
+        <h2 className="text-3xl font-semibold mb-8">Low code setup in minutes</h2>
         <ol className="grid grid-cols-1 md:grid-cols-3 gap-6 list-decimal list-inside">
           {steps.map((s) => (
             <li key={s.h} className="rounded-3xl border border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/5 p-6">
@@ -846,10 +846,10 @@ function Pricing() {
 
 function FAQ() {
   const qas = [
-    { q: "How long does install take?", a: "Typically ~15 minutes for Shopify themes and then it depends on how much you want to customize. Headless installs depend on your stack." },
+    { q: "How long does install take?", a: "Typically less than an hour for a working prototype and then it depends on how much you want to customize. Our team can do the install for you if you prefer." },
     { q: "Can we A/B test it?", a: "Yes. Nobi easily hooks into your A/B testing solution or we can build something custom for you." },
-   { q: "What can I do with Nobi?", a: "Nobi is really good at understanding natural language and showing relevant products quickly. So we recommend enabling it in your search bar, on collection pages, and anywhere else where shoppers may prefer to just describe what they're looking for." },
-   { q: "Does Nobi replace my current search?", a: "Up to you. Nobi can become your default search bar experience or layers on top so you can keep your existing keyword engine and optionally enable AI." },
+   { q: "What can I do with Nobi?", a: "Nobi is really good at understanding natural language and showing relevant results quickly. So we recommend defining what common questions you get from applicants and how you'd ideally like Nobi to respond." },
+   { q: "Does Nobi replace my current search?", a: "Up to you. Nobi can become your default search bar experience or a separate, AI-only bar at the bottom of the page." },
   ];
 
   return (
@@ -892,7 +892,7 @@ function Footer() {
       <div className="mx-auto max-w-6xl px-6 flex flex-col sm:flex-row items-center justify-between gap-6">
         <Logo />
         <div className="text-sm text-black/60 dark:text-white/60">
-          © {new Date().getFullYear()} Nobi — Conversational commerce
+          © {new Date().getFullYear()} Nobi — Conversational search
         </div>
        <div className="flex items-center gap-4 text-sm">
   <a href="#features" className="hover:opacity-80">Features</a>

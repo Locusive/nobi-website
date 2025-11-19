@@ -553,23 +553,23 @@ function BrandMark({ src, label, className = "" }) {
 function Features() {
   const items = [
     {
-      title: "AI Mode your Search",
+      title: "'AI Mode' your site",
       desc:
-        "Deliver the same powerful search experience as ChatGPT and other AI platforms—right within your store.",
+        "Deliver the same powerful experience as ChatGPT and other AI platforms that prospective applicants use every day—right within your site.",
       icon: <Sparkles className="h-4 w-4" />,
       media: { src: "/media/feature-ai-mode.mp4", alt: "" },
     },
     {
-      title: "Simplify Collections Pages",
+      title: "Funnel quality applicants to the right place",
       desc:
-        "Empower customers to drill down from 100s of SKUs to the perfect fit in seconds, simply by asking.",
+        "Re-route applicants directly to Admissions Counselors, financial aid forms, or anywhere else based on the criteria you set.",
       icon: <Filter className="h-4 w-4" />,
       media: { src: "/media/feature-collections.mp4", alt: "Collections assistant demo" },
     },
     {
-      title: "Capture Bouncers",
+      title: "Simplify mountains of information",
       desc:
-        "Over 80% of your search traffic bounces from a search results page. Capture these high-intent shoppers with an AI search option.",
+        "Empower applicants with the information they need so they don't bounce from your site frustrated that they couldn't find what they needed.",
       icon: <MousePointerClick className="h-4 w-4" />,
       media: { src: "/media/feature-capture.mp4", alt: "Capture bouncers demo" },
     },
@@ -590,7 +590,7 @@ function Features() {
           Empower applicants with the information they need in seconds.
         </h2>
         <p className="mt-3 text-black/70 dark:text-white/70">
-          Let Nobi answer questions on academic programs, admissions, life on campus, and anything else buried on your site.
+          Nobi answers questions on academic programs, admissions, life on campus, and anything else you may have on your site.
         </p>
 
         <div className="mt-8 grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">

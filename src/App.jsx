@@ -113,24 +113,25 @@ function BrandsRow() {
 }
 
 
- +import {
-+  Sparkles,
-+  Search as SearchIcon,
-+  ArrowRight,
-+  Heart,
-+  CheckCircle2,
-+  ShoppingCart,
-+  Filter,
-+  MousePointerClick,
-+  BarChart3,
-+  Quote,
-+  PlayCircle,
-+  ChevronDown,
-+  GraduationCap,
-+  AlertTriangle,
-+  ClipboardList,
-+  MapPin,
-+} from "lucide-react";
+import {
+  Sparkles,
+  Search as SearchIcon,
+  ArrowRight,
+  Heart,
+  CheckCircle2,
+  ShoppingCart,
+  Filter,
+  MousePointerClick,
+  BarChart3,
+  Quote,
+  PlayCircle,
+  ChevronDown,
+  GraduationCap,
+  AlertTriangle,
+  ClipboardList,
+  MapPin,
+} from "lucide-react";
+
 
 // -------------------- NOTE --------------------
 // This file mirrors the Canvas version, adapted for Vite.
@@ -912,8 +913,9 @@ function Footer() {
 }
 
 // Simple horizontal bar
-function Bar({ value, maxValue }) {
-  const pct = Math.max(0, Math.min(100, Math.round((value / maxValue) * 100)));
+function Bar({ value, max, maxValue }) {
+  const m = typeof max !== "undefined" ? max : maxValue || 100;
+  const pct = Math.max(0, Math.min(100, Math.round((value / m) * 100)));
   return (
     <div className="h-2 w-full rounded-full bg-black/5 dark:bg-white/10">
       <div

@@ -942,7 +942,9 @@ function HeatCell({ v = 0 }) {
 }
 
 /* ========= Insights (University edition) ========= */
+/* ========= Insights (University – Tetris layout) ========= */
 function Insights({ onOpenForm }) {
+  // Dummy data (tuned for the tighter layout)
   const INSIGHTS = {
     intents: [
       { label: "Find a Major/Program", value: 182 },
@@ -960,14 +962,14 @@ function Insights({ onOpenForm }) {
     ],
     funnel: [
       { stage: "Explored programs", value: 100 },
-      { stage: "Viewed requirements", value: 76 },
+      { stage: "Viewed requirements", value: 78 },
       { stage: "Tuition/aid details", value: 58 },
-      { stage: "Started application", value: 33 },
-      { stage: "Requested info/visit", value: 25 },
+      { stage: "Started application", value: 36 },
+      { stage: "Requested info/visit", value: 27 },
     ],
     prompts: [
-      "Is the BSN direct-entry or do I apply after prerequisites?",
-      "What’s the application deadline for Fall transfer students?",
+      "Is the BSN direct-entry or after prerequisites?",
+      "What’s the deadline for Fall transfers?",
       "Average class size for Computer Science?",
       "Total cost after typical merit aid for a 3.6 GPA?",
     ],
@@ -989,6 +991,17 @@ function Insights({ onOpenForm }) {
   const maxI = Math.max(...INSIGHTS.intents.map((x) => x.value));
   const maxB = Math.max(...INSIGHTS.barriers.map((x) => x.value));
 
+  // Simple Card shell for consistent padding/borders
+  const Card = ({ title, icon, children, className = "" }) => (
+    <section className={`h-full rounded-3xl border border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/5 p-6 shadow-sm ${className}`}>
+      <div className="font-semibold flex items-center gap-2">
+        <span className="text-fuchsia-600">{icon}</span>
+        {title}
+      </div>
+      <div className="mt-4">{children}</div>
+    </section>
+  );
+
   return (
     <section id="insights" className="scroll-mt-20 py-20 border-t border-black/5 dark:border-white/5">
       <div className="mx-auto max-w-6xl px-6">
@@ -1004,124 +1017,126 @@ function Insights({ onOpenForm }) {
           </div>
         </div>
 
-        {/* Top row */}
-        <div className="mt-8 grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
-          {/* Intents */}
-          <section className="rounded-3xl border border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/5 p-6 shadow-sm">
-            <div className="font-semibold flex items-center gap-2">
-              <GraduationCap className="h-4 w-4 text-fuchsia-600" />
-              Top student intents
-            </div>
-            <div className="mt-4 space-y-3">
-              {INSIGHTS.intents.map((d) => (
-                <div key={d.label}>
-                  <div className="flex items-center justify-between text-sm">
-                    <span className="text-black/80 dark:text-white/90">{d.label}</span>
-                    <span className="tabular-nums text-black/60 dark:text-white/60">{d.value}</span>
-                  </div>
-                  <Bar value={d.value} max={maxI} />
-                </div>
-              ))}
-            </div>
-          </section>
-
-          {/* Barriers */}
-          <section className="rounded-3xl border border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/5 p-6 shadow-sm">
-            <div className="font-semibold flex items-center gap-2">
-              <AlertTriangle className="h-4 w-4 text-fuchsia-600" />
-              Common objections & barriers
-            </div>
-            <div className="mt-4 space-y-3">
-              {INSIGHTS.barriers.map((d) => (
-                <div key={d.label}>
-                  <div className="flex items-center justify-between text-sm">
-                    <span className="text-black/80 dark:text-white/90">{d.label}</span>
-                    <span className="tabular-nums text-black/60 dark:text-white/60">{d.value}</span>
-                  </div>
-                  <Bar value={d.value} max={maxB} />
-                </div>
-              ))}
-            </div>
-          </section>
-
-          {/* Example prompts */}
-          <section className="rounded-3xl border border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/5 p-6 shadow-sm">
-            <div className="font-semibold flex items-center gap-2">
-              <Quote className="h-4 w-4 text-fuchsia-600" />
-              Example prompts
-            </div>
-            <div className="mt-3 space-y-3 text-sm text-black/80 dark:text-white/90">
-              {INSIGHTS.prompts.map((p, i) => (
-                <blockquote key={i} className="rounded-xl p-3 bg-black/5 dark:bg-white/10">“{p}”</blockquote>
-              ))}
-            </div>
-          </section>
-        </div>
-
-        {/* Funnel + Geo/Segments */}
-        <div className="mt-8 grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
-          {/* Funnel */}
-          <section className="lg:col-span-2 rounded-3xl border border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/5 p-6 shadow-sm">
-            <div className="font-semibold flex items-center gap-2">
-              <ClipboardList className="h-4 w-4 text-fuchsia-600" />
-              Assistant → Apply funnel
-            </div>
-            <ol className="mt-4 space-y-3">
-              {INSIGHTS.funnel.map((f, i) => (
-                <li key={f.stage} className="flex items-center gap-3">
-                  <div className="w-6 h-6 rounded-full bg-violet-600 text-white text-xs grid place-items-center">{i + 1}</div>
-                  <div className="w-full">
-                    <div className="flex items-center justify-between text-sm mb-1">
-                      <span>{f.stage}</span>
-                      <span className="text-black/60 dark:text-white/60">{f.value}%</span>
+        {/* Tetris grid */}
+        <div
+          className="
+            mt-8 grid grid-flow-dense gap-4
+            grid-cols-1
+            md:grid-cols-6
+            lg:grid-cols-12
+            [grid-auto-rows:minmax(140px,auto)]
+          "
+        >
+          {/* Intents — tall card */}
+          <div className="md:col-span-6 lg:col-span-4 md:row-span-3">
+            <Card title="Top student intents" icon={<GraduationCap className="h-4 w-4" />}>
+              <div className="space-y-3">
+                {INSIGHTS.intents.map((d) => (
+                  <div key={d.label}>
+                    <div className="flex items-center justify-between text-sm">
+                      <span className="text-black/80 dark:text-white/90">{d.label}</span>
+                      <span className="tabular-nums text-black/60 dark:text-white/60">{d.value}</span>
                     </div>
-                    <Bar value={f.value} max={100} />
+                    <Bar value={d.value} max={maxI} />
                   </div>
-                </li>
-              ))}
-            </ol>
-            <p className="mt-3 text-xs text-black/60 dark:text-white/60">
-              * Largest drop-offs: Tuition/Aid details → Start application
-            </p>
-          </section>
+                ))}
+              </div>
+            </Card>
+          </div>
 
-          {/* Geo + Segments */}
-          <section className="rounded-3xl border border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/5 p-6 shadow-sm">
-            <div className="font-semibold flex items-center gap-2">
-              <MapPin className="h-4 w-4 text-fuchsia-600" />
-              Where prospects are from
-            </div>
-            <ul className="mt-4 space-y-3">
-              {INSIGHTS.geo.map((g) => (
-                <li key={g.region} className="flex items-center justify-between text-sm">
-                  <span>{g.region}</span>
-                  <div className="flex items-center gap-2 w-1/2">
-                    <Bar value={g.value} max={40} />
-                    <span className="text-black/60 dark:text-white/60 w-10 text-right">{g.value}%</span>
+          {/* Barriers — tall card */}
+          <div className="md:col-span-6 lg:col-span-4 md:row-span-3">
+            <Card title="Common objections & barriers" icon={<AlertTriangle className="h-4 w-4" />}>
+              <div className="space-y-3">
+                {INSIGHTS.barriers.map((d) => (
+                  <div key={d.label}>
+                    <div className="flex items-center justify-between text-sm">
+                      <span className="text-black/80 dark:text-white/90">{d.label}</span>
+                      <span className="tabular-nums text-black/60 dark:text-white/60">{d.value}</span>
+                    </div>
+                    <Bar value={d.value} max={maxB} />
                   </div>
-                </li>
-              ))}
-            </ul>
+                ))}
+              </div>
+            </Card>
+          </div>
 
-            <div className="mt-6 font-semibold">Segments</div>
-            <div className="mt-2 grid grid-cols-2 gap-3">
-              {INSIGHTS.segments.map((s) => (
-                <div
-                  key={s.label}
-                  className="rounded-2xl p-4 border border-black/10 dark:border-white/10 bg-gradient-to-br from-violet-50 to-fuchsia-50 dark:from-zinc-900 dark:to-zinc-900/60"
-                >
-                  <div className="text-sm text-black/60 dark:text-white/70">{s.label}</div>
-                  <div className="text-2xl font-semibold mt-1">{s.value}%</div>
-                </div>
-              ))}
-            </div>
-          </section>
+          {/* Prompts — medium card */}
+          <div className="md:col-span-6 lg:col-span-4 md:row-span-2">
+            <Card title="Example prompts" icon={<Quote className="h-4 w-4" />}>
+              <div className="space-y-3 text-sm text-black/80 dark:text-white/90">
+                {INSIGHTS.prompts.map((p, i) => (
+                  <blockquote key={i} className="rounded-xl p-3 bg-black/5 dark:bg-white/10">“{p}”</blockquote>
+                ))}
+              </div>
+            </Card>
+          </div>
+
+          {/* Funnel — wide card */}
+          <div className="md:col-span-6 lg:col-span-8 md:row-span-3">
+            <Card title="Assistant → Apply funnel" icon={<ClipboardList className="h-4 w-4" />}>
+              <ol className="space-y-3">
+                {INSIGHTS.funnel.map((f, i) => (
+                  <li key={f.stage} className="flex items-center gap-3">
+                    <div className="w-6 h-6 rounded-full bg-violet-600 text-white text-xs grid place-items-center">{i + 1}</div>
+                    <div className="w-full">
+                      <div className="flex items-center justify-between text-sm mb-1">
+                        <span>{f.stage}</span>
+                        <span className="text-black/60 dark:text-white/60">{f.value}%</span>
+                      </div>
+                      <Bar value={f.value} max={100} />
+                    </div>
+                  </li>
+                ))}
+              </ol>
+              <p className="mt-3 text-xs text-black/60 dark:text-white/60">
+                * Largest drop-offs: Tuition/Aid details → Start application
+              </p>
+            </Card>
+          </div>
+
+          {/* Geo + Segments — tall narrow card */}
+          <div className="md:col-span-6 lg:col-span-4 md:row-span-3">
+            <Card title="Where prospects are from" icon={<MapPin className="h-4 w-4" />}>
+              <ul className="space-y-3">
+                {INSIGHTS.geo.map((g) => (
+                  <li key={g.region} className="flex items-center justify-between text-sm">
+                    <span className="truncate">{g.region}</span>
+                    <div className="flex items-center gap-2 w-1/2">
+                      <Bar value={g.value} max={40} />
+                      <span className="text-black/60 dark:text-white/60 w-10 text-right">{g.value}%</span>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+
+              <div className="mt-5 font-semibold">Segments</div>
+              <div className="mt-2 grid grid-cols-2 gap-3">
+                {INSIGHTS.segments.map((s) => (
+                  <div
+                    key={s.label}
+                    className="rounded-2xl p-4 border border-black/10 dark:border-white/10 bg-gradient-to-br from-violet-50 to-fuchsia-50 dark:from-zinc-900 dark:to-zinc-900/60"
+                  >
+                    <div className="text-sm text-black/60 dark:text-white/70 truncate">{s.label}</div>
+                    <div className="text-2xl font-semibold mt-1">{s.value}%</div>
+                  </div>
+                ))}
+              </div>
+            </Card>
+          </div>
         </div>
+
+        {/* Small meta footer inside Insights */}
+        <footer className="mt-10 text-xs text-zinc-500">
+          <p className="flex items-center gap-2">
+            <CalendarClock className="w-4 h-4" />
+            Rolling 30-day window • Synthetic demo data • Replace via API
+          </p>
+        </footer>
       </div>
     </section>
   );
-}
-   
+}   
 
 function RequestDemoModal({ open, onClose }) {
   const [form, setForm] = React.useState({

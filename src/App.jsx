@@ -33,41 +33,6 @@ function ChatBubble({ from = "user", children }) {
   );
 }
 
-function HeroProductCard({ title = "Oxford Shirt", price = "$168", img }) {
-  const hasImage = Boolean(img);
-
-  if (hasImage) {
-    // Image variant (uses AssetImage)
-    return (
-      <div className="rounded-xl overflow-hidden border border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/5">
-        <div className="aspect-[6/5] bg-black/5 dark:bg-white/10">
-  <AssetImage
-    src={img}
-    alt={title}
-    className="w-full h-full object-cover object-top"
-    labelForPlaceholder="Product image"
-  />
-</div>
-       <div className="p-2.5">
-          <div className="text-[13px] font-medium text-black/90 dark:text-white/90 line-clamp-1">
-            {title}
-          </div>
-          <div className="text-[13px] text-black/60 dark:text-white/60">{price}</div>
-        </div>
-      </div>
-    );
-  }
-
-  // Simple (no image provided)
-  return (
-    <div className="rounded-xl border border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/5 p-2.5">
-<div className="aspect-[6/5] w-full rounded-lg bg-black/5 dark:bg-white/10" />
-      <div className="mt-2 text-[13px] font-medium text-black/80 dark:text-white/90">{title}</div>
-      <div className="mt-2 text-[13px] font-medium text-black/80 dark:text-white/90">{title}</div>
-    </div>
-  );
-}
-
 
 
 // --- one script builder used by the preview ---
@@ -553,10 +518,7 @@ function Hero({ onOpenForm, onOpenVideo }) {
               <ArrowRight className="h-5 w-5 -mr-1" aria-hidden="true" />
             </Button>
           </div>
-        </div>
-
-       
-       
+        </div>        
       </div>
     </section>
   );
@@ -994,31 +956,6 @@ function InsightsHeatCell({ v = 0 }) {
   );
 }
 
-function Hero({ onOpenForm }) {
-  return (
-    <section id="home" className="relative overflow-hidden">
-      <div className="mx-auto max-w-7xl px-6 pt-16 sm:pt-24 pb-6">
-        <div className="max-w-4xl mx-auto text-center space-y-6">
-          <h1 className="text-5xl sm:text-6xl font-semibold tracking-tight text-balance">
-            Turn prospective students into  
-            <span className="bg-gradient-to-r from-indigo-500 via-violet-500 to-fuchsia-500 bg-clip-text text-transparent">
-              excited applicants
-            </span>
-          </h1>
-          <p className="mt-4 text-lg text-black/70 dark:text-white/70">
-            Nobi helps universities attract the <strong>right applicants</strong> with conversational AI.
-          </p>
-          <div className="mt-8">
-            <Button size="lg" onClick={onOpenForm} className="w-full">
-              <span>Try on your .edu site</span>
-              <ArrowRight className="h-5 w-5 -mr-1" aria-hidden="true" />
-            </Button>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
 
 function Insights({ onOpenForm }) {
   const intents = [

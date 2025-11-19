@@ -941,7 +941,6 @@ function HeatCell({ v = 0 }) {
   );
 }
 
-/* ========= Insights (University edition) ========= */
 /* ========= Insights (University – Tetris layout) ========= */
 function Insights({ onOpenForm }) {
   // Dummy data (tuned for the tighter layout)
@@ -1022,11 +1021,11 @@ function Insights({ onOpenForm }) {
   className="
     mt-8 grid grid-flow-dense gap-4
     grid-cols-1 md:grid-cols-6 lg:grid-cols-12
-    [grid-auto-rows:minmax(100px,auto)]
+    [grid-auto-rows:minmax(84px,auto)]
   "
 >
           {/* Intents — shorter */}
-          <div className="md:col-span-6 lg:col-span-4 md:row-span-2">
+          <div className="md:col-span-6 lg:col-span-4 md:row-span-1">
             <Card title="Top student intents" icon={<GraduationCap className="h-4 w-4" />}>
               <div className="space-y-2">
                 {INSIGHTS.intents.map((d) => (
@@ -1043,7 +1042,7 @@ function Insights({ onOpenForm }) {
           </div>
 
           {/* Barriers — tall card */}
-          <div className="md:col-span-6 lg:col-span-4 md:row-span-2">
+          <div className="md:col-span-6 lg:col-span-4 md:row-span-1">
             <Card title="Common objections & barriers" icon={<AlertTriangle className="h-4 w-4" />}>
               <div className="space-y-2">
                 {INSIGHTS.barriers.map((d) => (
@@ -1071,7 +1070,7 @@ function Insights({ onOpenForm }) {
           </div>
 
           {/* Funnel — a bit shorter */}
-<div className="md:col-span-6 lg:col-span-8 md:row-span-2">
+<div className="md:col-span-6 lg:col-span-8 md:row-span-1">
             <Card title="Assistant → Apply funnel" icon={<ClipboardList className="h-4 w-4" />}>
               <ol className="space-y-2">
                 {INSIGHTS.funnel.map((f, i) => (
@@ -1094,7 +1093,7 @@ function Insights({ onOpenForm }) {
           </div>
 
           {/* Geo + Segments — tall narrow card */}
-<div className="md:col-span-6 lg:col-span-4 md:row-span-2">
+<div className="md:col-span-6 lg:col-span-4 md:row-span-1">
             <Card title="Where prospects are from" icon={<MapPin className="h-4 w-4" />}>
               <ul className="space-y-2">
                 {INSIGHTS.geo.map((g) => (

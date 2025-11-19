@@ -113,20 +113,24 @@ function BrandsRow() {
 }
 
 
- import {
-   Sparkles,
-   Search as SearchIcon,
-   ArrowRight,
-   Heart,
-   CheckCircle2,
-   ShoppingCart,
-   Filter,
-   MousePointerClick,
-   BarChart3,
-   Quote,
-  PlayCircle,
- ChevronDown,
- } from "lucide-react";
+ +import {
++  Sparkles,
++  Search as SearchIcon,
++  ArrowRight,
++  Heart,
++  CheckCircle2,
++  ShoppingCart,
++  Filter,
++  MousePointerClick,
++  BarChart3,
++  Quote,
++  PlayCircle,
++  ChevronDown,
++  GraduationCap,
++  AlertTriangle,
++  ClipboardList,
++  MapPin,
++} from "lucide-react";
 
 // -------------------- NOTE --------------------
 // This file mirrors the Canvas version, adapted for Vite.
@@ -934,219 +938,186 @@ function HeatCell({ v = 0 }) {
   );
 }
 
-/* ========= Insights section ========= */
-function InsightsBar({ value, maxValue }) {
-  const pct = Math.max(0, Math.min(100, Math.round((value / maxValue) * 100)));
+/* ========= Insights (University edition) ========= */
+function Insights({ onOpenForm }) {
+  const INSIGHTS = {
+    intents: [
+      { label: "Find a Major/Program", value: 182 },
+      { label: "Tuition & Financial Aid", value: 149 },
+      { label: "Application Help & Deadlines", value: 121 },
+      { label: "Campus Life & Housing", value: 97 },
+      { label: "Transfer Credit & Prereqs", value: 64 },
+    ],
+    barriers: [
+      { label: "Tuition/aid clarity", value: 88 },
+      { label: "Deadline confusion", value: 72 },
+      { label: "Prereqs / test policy", value: 51 },
+      { label: "Housing availability", value: 37 },
+      { label: "Online vs on-campus options", value: 29 },
+    ],
+    funnel: [
+      { stage: "Explored programs", value: 100 },
+      { stage: "Viewed requirements", value: 76 },
+      { stage: "Tuition/aid details", value: 58 },
+      { stage: "Started application", value: 33 },
+      { stage: "Requested info/visit", value: 25 },
+    ],
+    prompts: [
+      "Is the BSN direct-entry or do I apply after prerequisites?",
+      "What’s the application deadline for Fall transfer students?",
+      "Average class size for Computer Science?",
+      "Total cost after typical merit aid for a 3.6 GPA?",
+    ],
+    geo: [
+      { region: "Mid-Atlantic", value: 29 },
+      { region: "Southeast", value: 24 },
+      { region: "Midwest", value: 18 },
+      { region: "West", value: 15 },
+      { region: "Northeast", value: 14 },
+    ],
+    segments: [
+      { label: "First-gen", value: 22 },
+      { label: "Transfer", value: 19 },
+      { label: "International", value: 16 },
+      { label: "Adult/returning", value: 13 },
+    ],
+  };
+
+  const maxI = Math.max(...INSIGHTS.intents.map((x) => x.value));
+  const maxB = Math.max(...INSIGHTS.barriers.map((x) => x.value));
+
   return (
-    <div className="h-2 w-full rounded-full bg-black/5 dark:bg-white/10">
-      <div
-        className="h-2 rounded-full bg-gradient-to-r from-indigo-500 via-violet-500 to-fuchsia-500"
-        style={{ width: `${pct}%` }}
-      />
-    </div>
-  );
-}
-
-function InsightsHeatCell({ v = 0 }) {
-  const bg = `rgba(139, 92, 246, ${0.15 + v * 0.45})`;
-  const border = `rgba(0,0,0,0.06)`;
-  return (
-    <div
-      className="h-9 sm:h-10 md:h-11 flex items-center justify-center rounded-lg text-xs sm:text-sm font-medium"
-      style={{ backgroundColor: bg, border: `1px solid ${border}` }}
-      aria-label={`affinity ${Math.round(v * 100)}%`}
-    >
-      {Math.round(v * 100)}%
-    </div>
-  );
-}
-
-
-import React from "react";
-import { motion } from "framer-motion";
-import { Brain, GraduationCap, Banknote, CalendarClock, Globe2, Users, MapPin, ArrowUpRight, Search, BookOpen, ClipboardList, Building2, CheckCircle2, AlertTriangle } from "lucide-react";
-
-const data = {
-  topIntents: [
-    { label: "Find a Major/Program", value: 182 },
-    { label: "Tuition & Financial Aid", value: 149 },
-    { label: "Application Help & Deadlines", value: 121 },
-    { label: "Campus Life & Housing", value: 97 },
-    { label: "Transfer Credit & Prereqs", value: 64 },
-  ],
-  barriers: [
-    { label: "Tuition/aid clarity", value: 88 },
-    { label: "Deadline confusion", value: 72 },
-    { label: "Prereqs / test policy", value: 51 },
-    { label: "Housing availability", value: 37 },
-    { label: "Online vs on‑campus options", value: 29 },
-  ],
-  samplePrompts: [
-    "Do you have a 100% online MBA and how long does it take?",
-    "What’s the application deadline for Fall transfer students?",
-    "Is the BSN direct‑entry or do I apply after prerequisites?",
-    "Average class size for Computer Science?",
-    "Total cost after typical merit aid for a 3.6 GPA?",
-    "Can I study abroad if I’m in Mechanical Engineering?",
-  ],
-  funnel: [
-    { stage: "Explored programs", value: 100 },
-    { stage: "Viewed requirements", value: 76 },
-    { stage: "Tuition/aid details", value: 58 },
-    { stage: "Started application", value: 33 },
-    { stage: "Requested info/visit", value: 25 },
-  ],
-  geo: [
-    { region: "Mid‑Atlantic", value: 29 },
-    { region: "Southeast", value: 24 },
-    { region: "Midwest", value: 18 },
-    { region: "West", value: 15 },
-    { region: "Northeast", value: 14 },
-  ],
-  segments: [
-    { label: "First‑gen", value: 22 },
-    { label: "Transfer", value: 19 },
-    { label: "International", value: 16 },
-    { label: "Adult/returning", value: 13 },
-  ],
-};
-
-function Bar({ value, max = 200 }: { value: number; max?: number }) {
-  const pct = Math.min(100, Math.round((value / max) * 100));
-  return (
-    <div className="w-full h-2 rounded-full bg-zinc-200 dark:bg-zinc-800">
-      <div
-        className="h-2 rounded-full bg-gradient-to-r from-fuchsia-500 to-violet-500"
-        style={{ width: `${pct}%` }}
-      />
-    </div>
-  );
-}
-
-export default function UniversityInsightsMock() {
-  return (
-    <div className="min-h-screen w-full bg-white dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100 p-6 md:p-10">
-      <header className="mb-8 flex items-center justify-between">
-        <div className="flex items-center gap-3">
-          <motion.div initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ type: "spring", stiffness: 120 }}
-            className="p-2 rounded-2xl bg-gradient-to-br from-violet-600 to-fuchsia-500 text-white shadow-lg">
-            <Brain className="w-6 h-6" />
-          </motion.div>
+    <section id="insights" className="scroll-mt-20 py-20 border-t border-black/5 dark:border-white/5">
+      <div className="mx-auto max-w-6xl px-6">
+        <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
           <div>
-            <h1 className="text-2xl md:text-3xl font-semibold tracking-tight">Nobi – Prospective Student Insights</h1>
-            <p className="text-sm md:text-base text-zinc-500 dark:text-zinc-400">Live conversational analytics from the .edu assistant</p>
+            <p className="text-sm font-semibold text-fuchsia-600">Insights</p>
+            <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight mt-2">
+              What students ask for — in their own words.
+            </h2>
+            <p className="mt-3 text-black/70 dark:text-white/70">
+              Nobi turns live conversations into structured signals your Admissions and MarCom teams can act on immediately.
+            </p>
           </div>
         </div>
-        <div className="hidden md:flex items-center gap-2 text-sm text-zinc-500">
-          <Search className="w-4 h-4" /> Last sync: <span className="font-medium text-zinc-700 dark:text-zinc-200">5 min ago</span>
-        </div>
-      </header>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <section className="col-span-1 lg:col-span-1 rounded-2xl border border-zinc-200 dark:border-zinc-800 p-5 shadow-sm bg-white/70 dark:bg-zinc-950/60 backdrop-blur">
-          <div className="flex items-center justify-between mb-4">
-            <h2 className="text-lg font-semibold flex items-center gap-2"><GraduationCap className="w-5 h-5 text-violet-600"/>Top student intents</h2>
-            <span className="text-xs text-zinc-500">Last 30 days</span>
-          </div>
-          <div className="space-y-4">
-            {data.topIntents.map((i) => (
-              <div key={i.label}>
-                <div className="flex items-center justify-between mb-2 text-sm">
-                  <span>{i.label}</span>
-                  <span className="text-zinc-500">{i.value}</span>
-                </div>
-                <Bar value={i.value} max={200} />
-              </div>
-            ))}
-          </div>
-        </section>
-
-        <section className="col-span-1 lg:col-span-1 rounded-2xl border border-zinc-200 dark:border-zinc-800 p-5 shadow-sm bg-white/70 dark:bg-zinc-950/60">
-          <div className="flex items-center justify-between mb-4">
-            <h2 className="text-lg font-semibold flex items-center gap-2"><AlertTriangle className="w-5 h-5 text-violet-600"/>Common objections & barriers</h2>
-            <span className="text-xs text-zinc-500">Drop‑off signals</span>
-          </div>
-          <div className="space-y-4">
-            {data.barriers.map((b) => (
-              <div key={b.label}>
-                <div className="flex items-center justify-between mb-2 text-sm">
-                  <span>{b.label}</span>
-                  <span className="text-zinc-500">{b.value}</span>
-                </div>
-                <Bar value={b.value} max={100} />
-              </div>
-            ))}
-          </div>
-        </section>
-
-        <section className="col-span-1 lg:col-span-1 rounded-2xl border border-zinc-200 dark:border-zinc-800 p-5 shadow-sm bg-white/70 dark:bg-zinc-950/60">
-          <div className="flex items-center justify-between mb-4">
-            <h2 className="text-lg font-semibold flex items-center gap-2"><ClipboardList className="w-5 h-5 text-violet-600"/>Assistant→Apply funnel</h2>
-            <span className="text-xs text-zinc-500">Cohort: prospects</span>
-          </div>
-          <ol className="space-y-3">
-            {data.funnel.map((f, idx) => (
-              <li key={f.stage} className="flex items-center gap-3">
-                <div className="w-6 h-6 rounded-full bg-violet-600 text-white text-xs grid place-items-center">{idx+1}</div>
-                <div className="w-full">
-                  <div className="flex items-center justify-between text-sm mb-1">
-                    <span>{f.stage}</span>
-                    <span className="text-zinc-500">{f.value}%</span>
+        {/* Top row */}
+        <div className="mt-8 grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
+          {/* Intents */}
+          <section className="rounded-3xl border border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/5 p-6 shadow-sm">
+            <div className="font-semibold flex items-center gap-2">
+              <GraduationCap className="h-4 w-4 text-fuchsia-600" />
+              Top student intents
+            </div>
+            <div className="mt-4 space-y-3">
+              {INSIGHTS.intents.map((d) => (
+                <div key={d.label}>
+                  <div className="flex items-center justify-between text-sm">
+                    <span className="text-black/80 dark:text-white/90">{d.label}</span>
+                    <span className="tabular-nums text-black/60 dark:text-white/60">{d.value}</span>
                   </div>
-                  <Bar value={f.value} max={100} />
+                  <Bar value={d.value} max={maxI} />
                 </div>
-              </li>
-            ))}
-          </ol>
-          <p className="mt-4 text-xs text-zinc-500">* Largest drop‑offs: Tuition/Aid details → Start application</p>
-        </section>
-      </div>
+              ))}
+            </div>
+          </section>
 
-      <div className="grid grid-cols-1 xl:grid-cols-2 gap-6 mt-6">
-        <section className="xl:col-span-1 rounded-2xl border border-zinc-200 dark:border-zinc-800 p-5 shadow-sm bg-white/70 dark:bg-zinc-950/60">
-          <div className="flex items-center justify-between mb-4">
-            <h2 className="text-lg font-semibold flex items-center gap-2"><Building2 className="w-5 h-5 text-violet-600"/>Example prompts</h2>
-            <span className="text-xs text-zinc-500">From live student conversations</span>
-          </div>
-          <div className="space-y-3">
-            {data.samplePrompts.map((p, i) => (
-              <div key={i} className="rounded-xl border border-zinc-200 dark:border-zinc-800 p-3 bg-white/90 dark:bg-zinc-900/60">
-                “{p}”
-              </div>
-            ))}
-          </div>
-        </section>
-
-        <section className="xl:col-span-1 rounded-2xl border border-zinc-200 dark:border-zinc-800 p-5 shadow-sm bg-white/70 dark:bg-zinc-950/60">
-          <h2 className="text-lg font-semibold flex items-center gap-2 mb-4"><Users className="w-5 h-5 text-violet-600"/>Prospect segments</h2>
-          <div className="grid grid-cols-2 gap-3">
-            {data.segments.map((s) => (
-              <div key={s.label} className="rounded-2xl p-4 border border-zinc-200 dark:border-zinc-800 bg-gradient-to-br from-violet-50 to-fuchsia-50 dark:from-zinc-900 dark:to-zinc-900/60">
-                <div className="text-sm text-zinc-600 dark:text-zinc-400">{s.label}</div>
-                <div className="text-2xl font-semibold mt-1">{s.value}%</div>
-              </div>
-            ))}
-          </div>
-          <p className="text-xs text-zinc-500 mt-3">Share segments with Admissions & MarCom to tailor messaging.</p>
-        </section>
-      </div>
-
-      <div className="grid grid-cols-1 lg:grid-cols-1 gap-6 mt-6">
-        <section className="rounded-2xl border border-zinc-200 dark:border-zinc-800 p-5 shadow-sm bg-white/70 dark:bg-zinc-950/60">
-          <h2 className="text-lg font-semibold flex items-center gap-2 mb-4"><MapPin className="w-5 h-5 text-violet-600"/>Where prospects are from</h2>
-          <ul className="space-y-3">
-            {data.geo.map((g) => (
-              <li key={g.region} className="flex items-center justify-between text-sm">
-                <span>{g.region}</span>
-                <div className="flex items-center gap-2 w-1/2">
-                  <Bar value={g.value} max={40} />
-                  <span className="text-zinc-500 w-10 text-right">{g.value}%</span>
+          {/* Barriers */}
+          <section className="rounded-3xl border border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/5 p-6 shadow-sm">
+            <div className="font-semibold flex items-center gap-2">
+              <AlertTriangle className="h-4 w-4 text-fuchsia-600" />
+              Common objections & barriers
+            </div>
+            <div className="mt-4 space-y-3">
+              {INSIGHTS.barriers.map((d) => (
+                <div key={d.label}>
+                  <div className="flex items-center justify-between text-sm">
+                    <span className="text-black/80 dark:text-white/90">{d.label}</span>
+                    <span className="tabular-nums text-black/60 dark:text-white/60">{d.value}</span>
+                  </div>
+                  <Bar value={d.value} max={maxB} />
                 </div>
-              </li>
-            ))}
-          </ul>
-        </section>
+              ))}
+            </div>
+          </section>
+
+          {/* Example prompts */}
+          <section className="rounded-3xl border border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/5 p-6 shadow-sm">
+            <div className="font-semibold flex items-center gap-2">
+              <Quote className="h-4 w-4 text-fuchsia-600" />
+              Example prompts
+            </div>
+            <div className="mt-3 space-y-3 text-sm text-black/80 dark:text-white/90">
+              {INSIGHTS.prompts.map((p, i) => (
+                <blockquote key={i} className="rounded-xl p-3 bg-black/5 dark:bg-white/10">“{p}”</blockquote>
+              ))}
+            </div>
+          </section>
+        </div>
+
+        {/* Funnel + Geo/Segments */}
+        <div className="mt-8 grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
+          {/* Funnel */}
+          <section className="lg:col-span-2 rounded-3xl border border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/5 p-6 shadow-sm">
+            <div className="font-semibold flex items-center gap-2">
+              <ClipboardList className="h-4 w-4 text-fuchsia-600" />
+              Assistant → Apply funnel
+            </div>
+            <ol className="mt-4 space-y-3">
+              {INSIGHTS.funnel.map((f, i) => (
+                <li key={f.stage} className="flex items-center gap-3">
+                  <div className="w-6 h-6 rounded-full bg-violet-600 text-white text-xs grid place-items-center">{i + 1}</div>
+                  <div className="w-full">
+                    <div className="flex items-center justify-between text-sm mb-1">
+                      <span>{f.stage}</span>
+                      <span className="text-black/60 dark:text-white/60">{f.value}%</span>
+                    </div>
+                    <Bar value={f.value} max={100} />
+                  </div>
+                </li>
+              ))}
+            </ol>
+            <p className="mt-3 text-xs text-black/60 dark:text-white/60">
+              * Largest drop-offs: Tuition/Aid details → Start application
+            </p>
+          </section>
+
+          {/* Geo + Segments */}
+          <section className="rounded-3xl border border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/5 p-6 shadow-sm">
+            <div className="font-semibold flex items-center gap-2">
+              <MapPin className="h-4 w-4 text-fuchsia-600" />
+              Where prospects are from
+            </div>
+            <ul className="mt-4 space-y-3">
+              {INSIGHTS.geo.map((g) => (
+                <li key={g.region} className="flex items-center justify-between text-sm">
+                  <span>{g.region}</span>
+                  <div className="flex items-center gap-2 w-1/2">
+                    <Bar value={g.value} max={40} />
+                    <span className="text-black/60 dark:text-white/60 w-10 text-right">{g.value}%</span>
+                  </div>
+                </li>
+              ))}
+            </ul>
+
+            <div className="mt-6 font-semibold">Segments</div>
+            <div className="mt-2 grid grid-cols-2 gap-3">
+              {INSIGHTS.segments.map((s) => (
+                <div
+                  key={s.label}
+                  className="rounded-2xl p-4 border border-black/10 dark:border-white/10 bg-gradient-to-br from-violet-50 to-fuchsia-50 dark:from-zinc-900 dark:to-zinc-900/60"
+                >
+                  <div className="text-sm text-black/60 dark:text-white/70">{s.label}</div>
+                  <div className="text-2xl font-semibold mt-1">{s.value}%</div>
+                </div>
+              ))}
+            </div>
+          </section>
+        </div>
       </div>
+    </section>
+  );
+}
 
       <footer className="mt-10 text-xs text-zinc-500 flex items-center gap-2">
         <CalendarClock className="w-4 h-4"/> Rolling 30‑day window • Synthetic demo data • Replace via API

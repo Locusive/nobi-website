@@ -1121,9 +1121,12 @@ function Insights({ onOpenForm }) {
   );
 }
 
-      <footer className="mt-10 text-xs text-zinc-500 flex items-center gap-2">
-        <CalendarClock className="w-4 h-4"/> Rolling 30‑day window • Synthetic demo data • Replace via API
-      </footer>
+      <footer className="mt-10 text-xs text-zinc-500">
+  <p className="flex items-center gap-2">
+    <CalendarClock className="w-4 h-4" />
+    Rolling 30-day window • Synthetic demo data • Replace via API
+  </p>
+</footer>
     </div>
   );
 }

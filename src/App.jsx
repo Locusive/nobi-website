@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 
 
 // ===== feature flags (hide sections/links without deleting code) =====
-const SHOW_LOGOS = false;
+const SHOW_LOGOS = true;
 const SHOW_PRICING = false;
 
 // …

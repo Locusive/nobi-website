@@ -1,6 +1,22 @@
 import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
+class SectionErrorBoundary extends React.Component {
+  constructor(props){ super(props); this.state = { hasError: false }; }
+  static getDerivedStateFromError(){ return { hasError: true }; }
+  componentDidCatch(err, info){ console.error("Section crashed:", err, info); }
+  render(){
+    if (this.state.hasError) {
+      return (
+        <section className="rounded-2xl border border-red-300 bg-red-50/60 p-4 text-sm text-red-700">
+          Something went wrong rendering this section. Check the console for details.
+        </section>
+      );
+    }
+    return this.props.children;
+  }
+}
+
 
 // ===== feature flags (hide sections/links without deleting code) =====
 const SHOW_LOGOS = false;
@@ -562,92 +578,94 @@ function BrandMark({ src, label, className = "" }) {
 }
 
 function Features() {
+  // ✅ Known-good defaults — replace src values later with your files
   const items = [
     {
       title: "'AI Mode' your site",
-      desc:
-        "Deliver the same powerful search & discovery experience as ChatGPT and other AI platforms—right within your site.",
+      desc: "Deliver the same powerful search & discovery experience as ChatGPT and other AI platforms—right within your site.",
       icon: <Sparkles className="h-4 w-4" />,
-      media: { src: "/media/feature-ai-mode.mp4", alt: "" },
+      media: { src: "/media/feature-ai-mode.mp4", alt: "AI mode demo" },
     },
     {
       title: "Funnel quality applicants to the right place",
-      desc:
-        "Re-route applicants directly to Admissions Counselors, financial aid forms, or anywhere else based on the criteria you set.",
+      desc: "Re-route applicants directly to Admissions Counselors, financial aid forms, or anywhere else based on the criteria you set.",
       icon: <Filter className="h-4 w-4" />,
-      media: { src: "/media/feature-collections.mp4", alt: "Collections assistant demo" },
+      media: { src: "/media/feature-collections.mp4", alt: "Routing demo" },
     },
     {
       title: "Simplify mountains of information",
-      desc:
-        "Empower applicants with the information and resources they need so that they don't bounce from your site.",
+      desc: "Empower applicants with the information and resources they need so that they don't bounce from your site.",
       icon: <MousePointerClick className="h-4 w-4" />,
-      media: { src: "/media/feature-capture.mp4", alt: "Capture bouncers demo" },
+      media: { src: "/media/feature-capture.mp4", alt: "Answers demo" },
     },
   ];
 
   const [active, setActive] = useState(0);
   const [restartKey, setRestartKey] = useState(0);
 
-  // Cache-bust so we always refresh the video source
-  const rawSrc = items[active]?.media?.src || "";
+  // Defensive guards so bad data can't crash the page
+  const safeActive = Number.isInteger(active) && active >= 0 && active < items.length ? active : 0;
+  const m = items[safeActive]?.media || {};
+  const rawSrc = typeof m.src === "string" ? m.src : "";
   const bustSrc = rawSrc && `${rawSrc}${rawSrc.includes("?") ? "&" : "?"}r=${restartKey}`;
 
   return (
-    <section id="features" className="scroll-mt-20 py-20 border-t border-black/5 dark:border-white/5">
-      <div className="mx-auto max-w-6xl px-6">
-        <p className="text-sm font-semibold text-fuchsia-600">Features</p>
-        <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight mt-2 text-balance">
-          Empower applicants with the information they need in seconds.
-        </h2>
-        <p className="mt-3 text-black/70 dark:text-white/70">
-          Nobi answers questions on academic programs, admissions, life on campus, and anything else you may have on your site.
-        </p>
+    <SectionErrorBoundary>
+      <section id="features" className="scroll-mt-20 py-20 border-t border-black/5 dark:border-white/5">
+        <div className="mx-auto max-w-6xl px-6">
+          <p className="text-sm font-semibold text-fuchsia-600">Features</p>
+          <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight mt-2 text-balance">
+            Empower applicants with the information they need in seconds.
+          </h2>
+          <p className="mt-3 text-black/70 dark:text-white/70">
+            Nobi answers questions on academic programs, admissions, life on campus, and anything else you may have on your site.
+          </p>
 
-        <div className="mt-8 grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
-          {/* Preview first on mobile */}
-          <div
-            className="order-1 lg:order-2 rounded-3xl border border-black/10 dark:border-white/10 bg-white/60 dark:bg-white/5 shadow-inner overflow-hidden aspect-[4/3] sm:aspect-video lg:aspect-auto lg:h-full"
-            role="tabpanel"
-            id="feature-preview"
-            aria-labelledby={`feature-tab-${active}`}
-          >
-            <MediaBox
-              key={restartKey}
-              restartKey={restartKey}
-              src={bustSrc}
-              alt={items[active]?.media?.alt || ""}
-            />
-          </div>
+          <div className="mt-8 grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+            {/* Preview first on mobile */}
+            <div
+              className="order-1 lg:order-2 rounded-3xl border border-black/10 dark:border-white/10 bg-white/60 dark:bg-white/5 shadow-inner overflow-hidden aspect-[4/3] sm:aspect-video lg:aspect-auto lg:h-full"
+              role="tabpanel"
+              id="feature-preview"
+              aria-labelledby={`feature-tab-${safeActive}`}
+            >
+              <MediaBox
+                key={restartKey}
+                restartKey={restartKey}
+                src={bustSrc}
+                alt={m.alt || ""}
+              />
+            </div>
 
-          {/* Bullets second on mobile */}
-          <div className="order-2 lg:order-1 space-y-4" role="tablist" aria-controls="feature-preview">
-            {items.map((f, i) => (
-              <button
-                key={f.title}
-                id={`feature-tab-${i}`}
-                role="tab"
-                aria-selected={i === active}
-                onClick={() => { setActive(i); setRestartKey(k => k + 1); }}
-                className={`w-full text-left rounded-2xl border p-5 transition shadow-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-black/10 dark:focus-visible:ring-white/20 ${
-                  i === active
-                    ? "border-fuchsia-200 bg-fuchsia-50/70 dark:bg-white/5"
-                    : "border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/5"
-                }`}
-              >
-                <div className="flex items-start gap-3">
-                  <span className="mt-1 text-fuchsia-600">{f.icon}</span>
-                  <div>
-                    <div className="font-semibold">{f.title}</div>
-                    <p className="mt-1 text-sm text-black/70 dark:text-white/70">{f.desc}</p>
+            {/* Bullets second on mobile */}
+            <div className="order-2 lg:order-1 space-y-4" role="tablist" aria-controls="feature-preview">
+              {items.map((f, i) => (
+                <button
+                  key={f.title}
+                  id={`feature-tab-${i}`}
+                  role="tab"
+                  aria-selected={i === safeActive}
+                  onClick={() => { setActive(i); setRestartKey(k => k + 1); }}
+                  className={`w-full text-left rounded-2xl border p-5 transition shadow-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-black/10 dark:focus-visible:ring-white/20 ${
+                    i === safeActive
+                      ? "border-fuchsia-200 bg-fuchsia-50/70 dark:bg-white/5"
+                      : "border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/5"
+                  }`}
+                >
+                  <div className="flex items-start gap-3">
+                    <span className="mt-1 text-fuchsia-600">{f.icon}</span>
+                    <div>
+                      <div className="font-semibold">{f.title}</div>
+                      <p className="mt-1 text-sm text-black/70 dark:text-white/70">{f.desc}</p>
+                    </div>
                   </div>
-                </div>
-              </button>
-            ))}
+                </button>
+              ))}
+            </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </SectionErrorBoundary>
   );
 }
 

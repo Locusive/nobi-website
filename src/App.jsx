@@ -206,11 +206,11 @@ function ConversationPreview({ mode, playKey, query }) {
 
 function BrandsRow() {
   const brands = [
-    { alt: "Lucchese", src: "/media/logos/lucchese.svg" },
-    { alt: "Faherty", src: "/media/logos/faherty.svg" },
-    { alt: "TOOLUP", src: "/media/logos/toolup.svg" },
-    { alt: "UNTUCKit", src: "/media/logos/untuckit.svg" },
-    { alt: "Kilte", src: "/media/logos/kilte.svg" },
+    { alt: "Lucchese", src: lucchese },
+    { alt: "Faherty", src: faherty },
+    { alt: "TOOLUP", src: toolup },
+    { alt: "UNTUCKit", src: untuckit },
+    { alt: "Kilte", src: kilte },
   ];
 
   return (

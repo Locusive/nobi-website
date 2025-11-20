@@ -975,7 +975,6 @@ function Insights({ onOpenForm }) {
       { region: "Mid-Atlantic", value: 29 },
       { region: "Southeast", value: 24 },
       { region: "Midwest", value: 18 },
-      { region: "West", value: 15 },
       { region: "Northeast", value: 14 },
     ],
     segments: [

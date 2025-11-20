@@ -1005,7 +1005,7 @@ function Insights({ onOpenForm }) {
               What students ask for — in their own words.
             </h2>
             <p className="mt-3 text-black/70 dark:text-white/70">
-              Nobi turns live conversations into structured signals your Admissions and MarCom teams can act on immediately.
+              Nobi turns live conversations into structured signals your Admissions, Marketing and Enrollment Management teams can act on immediately.
             </p>
           </div>
         </div>

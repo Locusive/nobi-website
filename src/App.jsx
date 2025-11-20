@@ -1354,7 +1354,6 @@ export default function App() {
 {SHOW_LOGOS && <Logos />}
 
 <Features />
-<Results />
 <Insights onOpenForm={() => setIsFormOpen(true)} />
 <Testimonial />
 <HowItWorks />

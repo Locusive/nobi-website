@@ -969,7 +969,6 @@ function Insights({ onOpenForm }) {
     prompts: [
       "Is the BSN direct-entry or after prerequisites?",
       "What’s the deadline for Fall transfers?",
-      "Average class size for Computer Science?",
       "Total cost after typical merit aid for a 3.6 GPA?",
     ],
     geo: [
@@ -1011,7 +1010,7 @@ function Insights({ onOpenForm }) {
               What students ask for — in their own words.
             </h2>
             <p className="mt-3 text-black/70 dark:text-white/70">
-              Nobi turns live conversations into structured signals your Admissions and MarCom teams can act on immediately.
+              Nobi turns live conversations into structured signals your Admissions, Marketing, and Academics teams can act on immediately.
             </p>
           </div>
         </div>

@@ -941,9 +941,9 @@ function HeatCell({ v = 0 }) {
   );
 }
 
-/* ========= Insights (University – Tetris layout, fixed row heights) ========= */
+/* ========= Insights (University – stable grid + funnel) ========= */
 function Insights({ onOpenForm }) {
-  // Compact dummy data (tuned to fit the spans below)
+  // Dummy data
   const INSIGHTS = {
     intents: [
       { label: "Find a Major/Program", value: 182 },
@@ -959,18 +959,18 @@ function Insights({ onOpenForm }) {
       { label: "Housing availability", value: 37 },
       { label: "Online vs on-campus options", value: 29 },
     ],
-    prompts: [
-      "Is the BSN direct-entry or after prerequisites?",
-      "What’s the deadline for Fall transfers?",
-      "Average class size for Computer Science?",
-      "Total cost after typical merit aid for a 3.6 GPA?",
-    ],
     funnel: [
       { stage: "Explored programs", value: 100 },
       { stage: "Viewed requirements", value: 78 },
       { stage: "Tuition/aid details", value: 58 },
       { stage: "Started application", value: 36 },
       { stage: "Requested info/visit", value: 27 },
+    ],
+    prompts: [
+      "Is the BSN direct-entry or after prerequisites?",
+      "What’s the deadline for Fall transfers?",
+      "Average class size for Computer Science?",
+      "Total cost after typical merit aid for a 3.6 GPA?",
     ],
     geo: [
       { region: "Mid-Atlantic", value: 29 },
@@ -990,60 +990,67 @@ function Insights({ onOpenForm }) {
   const maxI = Math.max(...INSIGHTS.intents.map((x) => x.value));
   const maxB = Math.max(...INSIGHTS.barriers.map((x) => x.value));
 
-  // Shared bits
+  // Shared card shell
   const Card = ({ title, icon, children, className = "" }) => (
-    <section className={`h-full rounded-3xl border border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/5 p-5 shadow-sm ${className}`}>
+    <section className={`rounded-3xl border border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/5 p-5 shadow-sm ${className}`}>
       <div className="font-semibold flex items-center gap-2">
         <span className="text-fuchsia-600">{icon}</span>
-        <span className="truncate">{title}</span>
+        {title}
       </div>
       <div className="mt-3">{children}</div>
     </section>
   );
 
-  const Bar = ({ value, max = 100 }) => {
-    const pct = Math.max(0, Math.min(100, Math.round((value / max) * 100)));
+  // Centered funnel (stacked, tapered, compact)
+  function Funnel({ steps }) {
+    const max = Math.max(...steps.map((s) => s.value)) || 1;
     return (
-      <div className="h-2 w-full rounded-full bg-black/5 dark:bg-white/10">
-        <div
-          className="h-2 rounded-full bg-gradient-to-r from-indigo-500 via-violet-500 to-fuchsia-500"
-          style={{ width: `${pct}%` }}
-        />
-      </div>
-    );
-  };
-
-  const Funnel = ({ data }) => {
-    // widest at the top, taper by %; we cap min width so small steps still render
-    const maxW = 520;     // px
-    const minW = 160;     // px
-    const h = 28;         // bar height
-    const gap = 10;       // vertical gap
-
-    return (
-      <div className="w-full flex flex-col items-center" style={{ gap }}>
-        {data.map((d, i) => {
-          const w = Math.max(minW, Math.round((d.value / 100) * maxW));
-          return (
-            <div
-              key={d.stage}
-              className="relative rounded-xl bg-gradient-to-r from-indigo-500/15 via-violet-500/15 to-fuchsia-500/15 border border-black/10 dark:border-white/10 text-xs"
-              style={{ width: w, height: h }}
-              aria-label={`${d.stage} ${d.value}%`}
-            >
-              <div className="absolute inset-1 rounded-lg bg-white/60 dark:bg-white/5 backdrop-blur-[1px]" />
-              <div className="absolute inset-0 grid place-items-center font-medium text-black/70 dark:text-white/80">
-                {d.value}%
+      <div className="grid lg:grid-cols-2 gap-4">
+        {/* Left: labels */}
+        <ol className="space-y-2">
+          {steps.map((s, i) => (
+            <li key={s.stage} className="flex items-center gap-3">
+              <div className="w-6 h-6 rounded-full bg-violet-600 text-white text-xs grid place-items-center">{i + 1}</div>
+              <div>
+                <div className="text-sm font-medium">{s.stage}</div>
+                <div className="text-xs text-black/60 dark:text-white/60">{s.value}%</div>
               </div>
-            </div>
-          );
-        })}
+            </li>
+          ))}
+        </ol>
+
+        {/* Right: funnel */}
+        <div className="flex flex-col items-center justify-center">
+          {steps.map((s, idx) => {
+            const pct = Math.max(6, Math.round((s.value / max) * 100)); // keep a floor so smallest is still visible
+            return (
+              <div
+                key={s.stage}
+                className="relative my-1.5 w-full max-w-[520px]"
+                aria-label={`${s.stage} ${s.value}%`}
+              >
+                <div
+                  className="mx-auto h-8 sm:h-9 rounded-full border border-black/10 dark:border-white/10 bg-gradient-to-r from-indigo-500/20 via-violet-500/20 to-fuchsia-500/20 shadow-sm"
+                  style={{
+                    width: `${pct}%`,
+                    // taper the ends slightly as steps go down
+                    borderRadius: 9999,
+                  }}
+                >
+                  <div className="h-full w-full rounded-full bg-white/60 dark:bg-white/10 backdrop-blur-[2px] grid place-items-center text-[11px] sm:text-xs text-black/70 dark:text-white/70">
+                    {s.value}%
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
       </div>
     );
-  };
+  }
 
   return (
-    <section id="insights" className="scroll-mt-20 py-16 border-t border-black/5 dark:border-white/5">
+    <section id="insights" className="scroll-mt-20 py-20 border-t border-black/5 dark:border-white/5">
       <div className="mx-auto max-w-6xl px-6">
         <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
           <div>
@@ -1057,119 +1064,106 @@ function Insights({ onOpenForm }) {
           </div>
         </div>
 
-        {/* Tetris grid with fixed row height */}
-        <div
-          className="
-            mt-8 grid grid-flow-dense gap-4
-            grid-cols-1 md:grid-cols-12
-            [grid-auto-rows:var(--row)]
-          "
-          style={{ '--row': '120px' }} // 👈 tweak this number if you want taller/shorter rows
-        >
-          {/* Intents (4x2) */}
-          <div className="md:col-span-4 md:row-span-[2]">
-            <Card title="Top student intents" icon={<GraduationCap className="h-4 w-4" />}>
-              <div className="space-y-2">
-                {INSIGHTS.intents.map((d) => (
-                  <div key={d.label}>
-                    <div className="flex items-center justify-between text-sm leading-tight">
-                      <span className="truncate text-black/80 dark:text-white/90">{d.label}</span>
-                      <span className="tabular-nums text-black/60 dark:text-white/60">{d.value}</span>
-                    </div>
-                    <Bar value={d.value} max={maxI} />
+        {/* Stable, non-overlapping grid */}
+        <div className="mt-8 grid grid-cols-1 lg:grid-cols-12 gap-6">
+          {/* Row 1 */}
+          <Card
+            title="Top student intents"
+            icon={<GraduationCap className="h-4 w-4" />}
+            className="lg:col-span-4"
+          >
+            <div className="space-y-2">
+              {INSIGHTS.intents.map((d) => (
+                <div key={d.label}>
+                  <div className="flex items-center justify-between text-sm">
+                    <span className="text-black/80 dark:text-white/90">{d.label}</span>
+                    <span className="tabular-nums text-black/60 dark:text-white/60">{d.value}</span>
                   </div>
-                ))}
-              </div>
-            </Card>
-          </div>
-
-          {/* Barriers (4x2) */}
-          <div className="md:col-span-4 md:row-span-[2]">
-            <Card title="Common objections & barriers" icon={<AlertTriangle className="h-4 w-4" />}>
-              <div className="space-y-2">
-                {INSIGHTS.barriers.map((d) => (
-                  <div key={d.label}>
-                    <div className="flex items-center justify-between text-sm leading-tight">
-                      <span className="truncate text-black/80 dark:text-white/90">{d.label}</span>
-                      <span className="tabular-nums text-black/60 dark:text-white/60">{d.value}</span>
-                    </div>
-                    <Bar value={d.value} max={maxB} />
-                  </div>
-                ))}
-              </div>
-            </Card>
-          </div>
-
-          {/* Prompts (4x2) */}
-          <div className="md:col-span-4 md:row-span-[2]">
-            <Card title="Example prompts" icon={<Quote className="h-4 w-4" />}>
-              <div className="space-y-2 text-sm text-black/80 dark:text-white/90">
-                {INSIGHTS.prompts.map((p, i) => (
-                  <blockquote key={i} className="rounded-xl p-3 bg-black/5 dark:bg-white/10 leading-snug">“{p}”</blockquote>
-                ))}
-              </div>
-            </Card>
-          </div>
-
-          {/* Funnel (8x3) */}
-          <div className="md:col-span-8 md:row-span-[3]">
-            <Card title="Assistant → Apply funnel" icon={<ClipboardList className="h-4 w-4" />}>
-              <div className="grid grid-cols-12 gap-4">
-                {/* Labels (left) */}
-                <ol className="col-span-5 space-y-2">
-                  {INSIGHTS.funnel.map((f, i) => (
-                    <li key={f.stage} className="flex items-center gap-2">
-                      <div className="w-5 h-5 rounded-full bg-violet-600 text-white text-[11px] grid place-items-center shrink-0">{i + 1}</div>
-                      <div className="min-w-0">
-                        <div className="text-sm leading-tight">{f.stage}</div>
-                        <div className="text-[11px] text-black/60 dark:text-white/60">{f.value}%</div>
-                      </div>
-                    </li>
-                  ))}
-                </ol>
-                {/* Funnel (right) */}
-                <div className="col-span-7">
-                  <Funnel data={INSIGHTS.funnel} />
+                  <Bar value={d.value} max={maxI} />
                 </div>
-              </div>
-              <p className="mt-2 text-xs text-black/60 dark:text-white/60">
-                * Largest drop-offs: Tuition/Aid details → Start application
-              </p>
-            </Card>
-          </div>
+              ))}
+            </div>
+          </Card>
 
-          {/* Geo + Segments (4x3) */}
-          <div className="md:col-span-4 md:row-span-[3]">
-            <Card title="Where prospects are from" icon={<MapPin className="h-4 w-4" />}>
-              <ul className="space-y-2">
-                {INSIGHTS.geo.map((g) => (
-                  <li key={g.region} className="flex items-center justify-between text-sm">
-                    <span className="truncate">{g.region}</span>
-                    <div className="flex items-center gap-2 w-1/2">
-                      <Bar value={g.value} max={40} />
-                      <span className="text-black/60 dark:text-white/60 w-10 text-right">{g.value}%</span>
-                    </div>
-                  </li>
-                ))}
-              </ul>
-
-              <div className="mt-3 font-semibold">Segments</div>
-              <div className="mt-2 grid grid-cols-2 gap-3">
-                {INSIGHTS.segments.map((s) => (
-                  <div
-                    key={s.label}
-                    className="rounded-2xl p-4 border border-black/10 dark:border-white/10 bg-gradient-to-br from-violet-50 to-fuchsia-50 dark:from-zinc-900 dark:to-zinc-900/60"
-                  >
-                    <div className="text-sm text-black/60 dark:text-white/70 truncate">{s.label}</div>
-                    <div className="text-2xl font-semibold mt-1">{s.value}%</div>
+          <Card
+            title="Common objections & barriers"
+            icon={<AlertTriangle className="h-4 w-4" />}
+            className="lg:col-span-4"
+          >
+            <div className="space-y-2">
+              {INSIGHTS.barriers.map((d) => (
+                <div key={d.label}>
+                  <div className="flex items-center justify-between text-sm">
+                    <span className="text-black/80 dark:text-white/90">{d.label}</span>
+                    <span className="tabular-nums text-black/60 dark:text-white/60">{d.value}</span>
                   </div>
-                ))}
-              </div>
-            </Card>
-          </div>
+                  <Bar value={d.value} max={maxB} />
+                </div>
+              ))}
+            </div>
+          </Card>
+
+          <Card
+            title="Example prompts"
+            icon={<Quote className="h-4 w-4" />}
+            className="lg:col-span-4"
+          >
+            <div className="space-y-2 text-sm text-black/80 dark:text-white/90">
+              {INSIGHTS.prompts.map((p, i) => (
+                <blockquote key={i} className="rounded-xl p-3 bg-black/5 dark:bg-white/10">
+                  “{p}”
+                </blockquote>
+              ))}
+            </div>
+          </Card>
+
+          {/* Row 2 */}
+          <Card
+            title="Assistant → Apply funnel"
+            icon={<ClipboardList className="h-4 w-4" />}
+            className="lg:col-span-8"
+          >
+            <Funnel steps={INSIGHTS.funnel} />
+            <p className="mt-3 text-xs text-black/60 dark:text-white/60">
+              * Largest drop-offs: Tuition/Aid details → Start application
+            </p>
+          </Card>
+
+          <Card
+            title="Where prospects are from"
+            icon={<MapPin className="h-4 w-4" />}
+            className="lg:col-span-4"
+          >
+            <ul className="space-y-2">
+              {INSIGHTS.geo.map((g) => (
+                <li key={g.region} className="flex items-center justify-between text-sm">
+                  <span className="truncate">{g.region}</span>
+                  <div className="flex items-center gap-2 w-1/2">
+                    <Bar value={g.value} max={40} />
+                    <span className="text-black/60 dark:text-white/60 w-10 text-right">
+                      {g.value}%
+                    </span>
+                  </div>
+                </li>
+              ))}
+            </ul>
+
+            <div className="mt-4 font-semibold">Segments</div>
+            <div className="mt-2 grid grid-cols-2 gap-3">
+              {INSIGHTS.segments.map((s) => (
+                <div
+                  key={s.label}
+                  className="rounded-2xl p-4 border border-black/10 dark:border-white/10 bg-gradient-to-br from-violet-50 to-fuchsia-50 dark:from-zinc-900 dark:to-zinc-900/60"
+                >
+                  <div className="text-sm text-black/60 dark:text-white/70 truncate">{s.label}</div>
+                  <div className="text-2xl font-semibold mt-1">{s.value}%</div>
+                </div>
+              ))}
+            </div>
+          </Card>
         </div>
 
-        {/* Small meta footer inside Insights */}
+        {/* Meta */}
         <footer className="mt-8 text-xs text-zinc-500">
           <p className="flex items-center gap-2">
             <CalendarClock className="w-4 h-4" />

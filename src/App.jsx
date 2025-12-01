@@ -1708,7 +1708,7 @@ export default function App() {
 
      <Hero onOpenForm={() => setIsFormOpen(true)} onOpenVideo={() => setIsVideoOpen(true)} />
 
-{SHOW_LOGOS && <Logos />}
+{SHOW_LOGOS && <BrandsRow />}
 
 <Features />
 <Results />

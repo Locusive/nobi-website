@@ -206,11 +206,11 @@ function ConversationPreview({ mode, playKey, query }) {
 
 function BrandsRow() {
   const brands = [
-    { alt: "Lucchese", src: lucchese },
-    { alt: "Faherty", src: faherty },
-    { alt: "TOOLUP", src: toolup },
-    { alt: "UNTUCKit", src: untuckit },
-    { alt: "Kilte", src: kilte },
+    { alt: "Lucchese", src: "/media/logos/lucchese.svg" },
+    { alt: "Faherty",  src: "/media/logos/faherty.svg"  },
+    { alt: "TOOLUP",   src: "/media/logos/toolup.svg"   },
+    { alt: "UNTUCKit", src: "/media/logos/untuckit.svg" },
+    { alt: "Kilte",    src: "/media/logos/kilte.svg"    },
   ];
 
   return (
@@ -220,19 +220,16 @@ function BrandsRow() {
           Trusted by modern commerce
         </p>
 
-        {/* Even spacing, consistent height, grayscale */}
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-x-10 gap-y-8 items-center justify-items-center">
           {brands.map((b) => (
             <img
               key={b.alt}
               src={b.src}
               alt={b.alt}
-              height={28}
               className="block h-7 w-auto object-contain select-none grayscale opacity-60 hover:opacity-100"
               loading="lazy"
               decoding="async"
               onError={(e) => {
-                // helpful fallback so a missing asset doesn't disappear silently
                 e.currentTarget.replaceWith(
                   Object.assign(document.createElement("span"), {
                     textContent: b.alt,
@@ -248,7 +245,6 @@ function BrandsRow() {
     </section>
   );
 }
-
 
  import {
    Sparkles,

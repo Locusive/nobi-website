@@ -259,6 +259,7 @@ function BrandsRow() {
    Quote,
   PlayCircle,
  ChevronDown,
+ ExternalLink,
  } from "lucide-react";
 
 // -------------------- NOTE --------------------
@@ -1681,6 +1682,10 @@ export default function App() {
     <a href="#how" className="py-2">How it works</a>
   {SHOW_PRICING && <a href="#pricing" className="py-2">Pricing</a>}
     <a href="#faq" className="py-2">FAQ</a>
+    <a href="https://docs.nobi.ai" target="_blank" rel="noopener noreferrer" className="py-2 flex items-center gap-1">
+      Docs
+      <ExternalLink className="w-3 h-3" />
+    </a>
   </nav>
 
   {/* Desktop nav + CTA (pushed right) */}
@@ -1689,6 +1694,10 @@ export default function App() {
     <a href="#how" className="hover:opacity-80">How it works</a>
   {SHOW_PRICING && <a href="#pricing" className="hover:opacity-80">Pricing</a>}
     <a href="#faq" className="hover:opacity-80">FAQ</a>
+    <a href="https://docs.nobi.ai" target="_blank" rel="noopener noreferrer" className="hover:opacity-80 flex items-center gap-1">
+      Docs
+      <ExternalLink className="w-4 h-4" />
+    </a>
   </nav>
   <div className="hidden md:flex items-center gap-3 ml-auto">
   <Button

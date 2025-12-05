@@ -705,19 +705,18 @@ function Testimonial() {
           >
             <Quote className="h-6 w-6 text-fuchsia-600 mb-4" />
             <p className="text-2xl leading-snug font-medium text-black/90 dark:text-white">
-              “If you want to learn and be inspired, you should implement a tool like Nobi. We've seen great incremental results... but the biggest reason a brand should implement this is that you have the opportunity to apply more information towards optimizing
-              campaigns and your broader brand and e-comm goals.”
+              “Conversational search is the future. Every .edu website in the world will need to enable prospective students get answers to their questions that will guide them towards the right path, as universities endeavor to drive enrollments up. Tools like Nobi are leading the way towards that future.”
             </p>
             <div className="mt-6 flex items-center gap-4">
               <img
-                src="/media/avatar-placeholder.png"
+                src="/media/avatar-placeholder-2.png"
                 alt="Customer avatar"
                 className="h-10 w-10 rounded-full object-cover bg-black/10 dark:bg-white/10"
               />
               <div>
-                <div className="font-semibold">Lourdes Servin</div>
+                <div className="font-semibold">Jim Ellis</div>
                 <div className="text-sm text-black/60 dark:text-white/60">
-                  Senior Dr. Digital & E-Commerce, Lucchese Bootmaker
+                  Former Dean of Marshall School of Business, USC
                 </div>
               </div>
             </div>

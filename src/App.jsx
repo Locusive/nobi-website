@@ -819,7 +819,7 @@ function Hero({ onOpenForm, onOpenVideo }) {
 
   return (
     <section id="home" className="relative overflow-hidden">
-      <div className="mx-auto max-w-7xl px-6 pt-16 sm:pt-24 pb-6">
+      <div className="mx-auto max-w-7xl px-6 pt-16 sm:pt-12 pb-6">
         <div className="max-w-4xl mx-auto text-center space-y-6">
           <h1 className="text-5xl sm:text-6xl font-semibold tracking-tight text-balance">
             Turn product search into a{" "}

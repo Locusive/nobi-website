@@ -394,7 +394,8 @@ function Button({ variant = "primary", size = "md", className = "", children, ..
     compact: "h-8 px-3 text-sm",
   };
   const variants = {
-    primary: "bg-black text-white dark:bg-white dark:text-black hover:opacity-90 shadow-sm",
+    primary:
+      "bg-[#7c3aed] text-white hover:bg-[#6d28d9] dark:bg-[#7c3aed] dark:hover:bg-[#6d28d9] shadow-sm",
     ghost:
       "bg-transparent text-black/80 dark:text-white/90 hover:bg-black/5 dark:hover:bg-white/10",
     outline:

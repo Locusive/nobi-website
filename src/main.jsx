@@ -4,11 +4,17 @@ import { createRoot } from "react-dom/client";
 import App from "./App.jsx";
 import Terms from "./pages/Terms.jsx";
 import Privacy from "./pages/Privacy.jsx";
+import NotFound from "./pages/NotFound.jsx";
 
 import "./index.css";
 
 // --- tiny built-in router (no react-router-dom needed) ---
 const getPath = () => window.location.pathname;
+
+function normalizePathname(pathname) {
+  if (!pathname || pathname === "/") return "/";
+  return pathname.toLowerCase().replace(/\/+$/, "") || "/";
+}
 
 // Subscribe to browser navigation changes
 function subscribe(callback) {
@@ -31,17 +37,14 @@ function usePathname() {
 }
 
 function RouterView() {
-  const path = usePathname();
-  switch (path) {
-    case "/":
-      return <App />;
-    case "/terms":
-      return <Terms />;
-    case "/privacy":
-      return <Privacy />;
-    default:
-      return <App />; // fallback
-  }
+  const rawPath = usePathname();
+  const path = normalizePathname(rawPath);
+
+  if (path === "/") return <App />;
+  if (path === "/terms") return <Terms />;
+  if (path === "/privacy") return <Privacy />;
+
+  return <NotFound requestedPath={rawPath} onNavigateHome={() => navigate("/")} />;
 }
 
 createRoot(document.getElementById("root")).render(

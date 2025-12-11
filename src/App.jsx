@@ -395,7 +395,7 @@ function Button({ variant = "primary", size = "md", className = "", children, ..
   };
   const variants = {
     primary:
-      "bg-[#7c3aed] text-white hover:bg-[#6d28d9] dark:bg-[#7c3aed] dark:hover:bg-[#6d28d9] shadow-sm",
+      "bg-black text-white dark:bg-white dark:text-black hover:opacity-90 shadow-sm",
     ghost:
       "bg-transparent text-black/80 dark:text-white/90 hover:bg-black/5 dark:hover:bg-white/10",
     outline:
@@ -823,20 +823,20 @@ function Hero({ onOpenForm, onOpenVideo }) {
       <div className="mx-auto max-w-7xl px-6 pt-16 sm:pt-12 pb-6">
         <div className="max-w-4xl mx-auto text-center space-y-6">
           <h1 className="text-5xl sm:text-6xl font-semibold tracking-tight text-balance">
-            Turn product search into a{" "}
-            <span className="bg-gradient-to-r from-indigo-500 via-violet-500 to-fuchsia-500 bg-clip-text text-transparent">
-              conversation
-            </span>
+            Nobi is a site assistant that turns queries into {" "}
+              <span className="bg-gradient-to-r from-indigo-500 via-violet-500 to-fuchsia-500 bg-clip-text text-transparent">
+                  conversions
+              </span>
           </h1>
 
           <p className="mt-4 text-lg text-black/70 dark:text-white/70">
-            Nobi helps brands achieve <strong>30% better</strong> product discovery with conversational AI.
+              Our assistant handles searches, Q&A, and help requests for <strong>provably higher conversions</strong><sup>*</sup>
           </p>
 
           {/* Same-row CTAs (works on mobile too) */}
           <div className="grid grid-cols-[1fr_auto] items-center gap-3 max-w-xl mx-auto">
             <Button size="lg" onClick={onOpenForm} className="w-full">
-              <span>Try on your store</span>
+              <span>Set up a demo</span>
               <ArrowRight className="h-5 w-5 -mr-1" aria-hidden="true" />
             </Button>
            <Button
@@ -853,7 +853,7 @@ function Hero({ onOpenForm, onOpenVideo }) {
         </div>
 
         {/* Search bar */}
-        <div className="mt-8 max-w-4xl mx-auto">
+        <div className="mt-20 max-w-4xl mx-auto">
           <div className="p-4 rounded-2xl border border-fuchsia-200 bg-gradient-to-r from-fuchsia-50 to-pink-50 shadow-md">
             <DualModeSearchBar
               locked                                 // 👈 NEW: display-only
@@ -875,6 +875,9 @@ function Hero({ onOpenForm, onOpenVideo }) {
         <div className="mt-6 max-w-5xl mx-auto flex justify-center">
           <nobi-button button-label="Chat With Nobi"></nobi-button>
         </div>
+        <p className="mt-1 text-xs text-center text-black/60 dark:text-white/60">
+          * Based on on-site A/B tests where Nobi increased conversion rates by up to 30%.
+        </p>
       </div>
     </section>
   );

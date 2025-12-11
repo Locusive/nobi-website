@@ -54,6 +54,10 @@ html { scroll-behavior: smooth; }
   background-color: rgba(255, 255, 255, 0.45);
 }
 
+.scroll-preview {
+  pointer-events: none;
+}
+
 @media (max-width: 767px) {
   .hero-demo-scroll {
     padding-right: 0.6rem;

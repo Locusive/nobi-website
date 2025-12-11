@@ -23,6 +23,7 @@ import ScrollPreview from "./components/ScrollPreview";
 // ===== feature flags (hide sections/links without deleting code) =====
 const SHOW_LOGOS = true;
 const SHOW_PRICING = false;
+const SHOW_USE_CASES = false;
 
 // …
 
@@ -124,7 +125,7 @@ const PLACEMENTS = [
 ];
 
 const PREVIEW_SECTIONS = [
-  { id: "use-cases", label: "Use cases", summary: "Pick the surface where Nobi can help" },
+  ...(SHOW_USE_CASES ? [{ id: "use-cases", label: "Use cases", summary: "Pick the surface where Nobi can help" }] : []),
   { id: "features", label: "Feature deep dive", summary: "See what the assistant can do" },
   { id: "how", label: "Setup", summary: "Install in minutes and measure lift" },
 ];
@@ -1141,9 +1142,103 @@ const PILL_OPTIONS = [
   { id: "api", label: "Launch AI on demand", icon: Sparkles },
 ];
 
+const PILL_DETAILS = {
+  search: {
+    title: "AI Search Bar",
+    summary: "Drop in a dual-mode search that lets shoppers pick AI or native results instantly.",
+    benefits: [
+      "Benefit placeholder one.",
+      "Benefit placeholder two.",
+      "Benefit placeholder three.",
+    ],
+    customers: [
+      { alt: "UNTUCKit", src: "/media/logos/untuckit.svg" },
+      { alt: "Lucchese", src: "/media/logos/lucchese.svg" },
+    ],
+    visual: (
+      <div className="placement-visual placement-visual--search">
+        <div className="placement-search-bar">
+          <div className="placement-search-toggle">
+            <span className="placement-search-toggle-pill placement-search-toggle-pill--active">AI</span>
+            <span className="placement-search-toggle-pill">Site</span>
+          </div>
+          <div className="placement-search-input">Search “red dresses under $200”</div>
+          <div className="placement-search-hint text-slate-500 text-xs">Semantic answers + product cards instantly.</div>
+        </div>
+      </div>
+    ),
+    snippet:
+      '<nobi-search-bar default-mode="ai" size="regular" cta-variant="auto" show-mode-toggle="true" show-hint-row="true"></nobi-search-bar>',
+  },
+  engage: {
+    title: "Suggestion Pills",
+    summary: "Guide exploration with AI prompts that sit next to your filters and collections.",
+    benefits: [
+      "Benefit placeholder one.",
+      "Benefit placeholder two.",
+      "Benefit placeholder three.",
+    ],
+    customers: [
+      { alt: "Faherty", src: "/media/logos/faherty.svg" },
+      { alt: "TOOLUP", src: "/media/logos/toolup.svg" },
+    ],
+    visual: (
+      <div className="placement-visual placement-visual--collections">
+        <div className="placement-suggestion-shell">
+          <div className="placement-suggestion-pill">Beach wedding looks</div>
+          <div className="placement-suggestion-pill">Under $200</div>
+          <div className="placement-suggestion-pill">Red + size M</div>
+        </div>
+      </div>
+    ),
+    snippet: "<nobi-suggestion-pills pill-count=\"3\"></nobi-suggestion-pills>",
+  },
+  answers: {
+    title: "Button",
+    summary: "Launch Nobi from a button so shoppers can ask for help anywhere on the page.",
+    benefits: [
+      "Benefit placeholder one.",
+      "Benefit placeholder two.",
+      "Benefit placeholder three.",
+    ],
+    customers: [
+      { alt: "Lucchese", src: "/media/logos/lucchese.svg" },
+    ],
+    visual: (
+      <div className="placement-visual placement-visual--api">
+        <div className="placement-program-shell">
+          <button className="placement-program-btn" type="button">Ask Nobi</button>
+        </div>
+      </div>
+    ),
+    snippet: "<nobi-button></nobi-button>",
+  },
+  api: {
+    title: "Programmatic Trigger",
+    summary: "Open Nobi with one JS call—great for menus, help hubs, and post‑purchase flows.",
+    benefits: [
+      "Benefit placeholder one.",
+      "Benefit placeholder two.",
+      "Benefit placeholder three.",
+    ],
+    customers: [
+      { alt: "Kilte", src: "/media/logos/kilte.svg" },
+    ],
+    visual: (
+      <div className="placement-visual placement-visual--api">
+        <div className="placement-program-shell">
+          <button className="placement-program-btn" type="button">Open Nobi assistant</button>
+        </div>
+      </div>
+    ),
+    snippet: 'Nobi.openChat();',
+  },
+};
+
 function PillPicker() {
   const [active, setActive] = React.useState(PILL_OPTIONS[0].id);
   const activeItem = PILL_OPTIONS.find((p) => p.id === active) || PILL_OPTIONS[0];
+  const detail = PILL_DETAILS[active] || PILL_DETAILS.search;
 
   return (
     <div className="space-y-6">
@@ -1180,12 +1275,57 @@ function PillPicker() {
 
       <div className="placement-card">
         <div className="placement-card-grid">
-          <div className="text-left space-y-2">
-            <h3 className="text-2xl font-semibold">{activeItem.label}</h3>
-            <p className="text-black/70 dark:text-white/70">Panel content will update when we wire this up.</p>
+          <div className="space-y-3">
+            <p className="text-xs uppercase tracking-[0.35em] text-fuchsia-600">Overview</p>
+            <h3 className="text-2xl font-semibold">{detail.title}</h3>
+            <p className="text-base text-black/70 dark:text-white/70 leading-relaxed">
+              {detail.summary}
+            </p>
+            <div className="space-y-2">
+              {detail.benefits.map((b) => (
+                <div key={b} className="flex items-start gap-2 text-sm text-black/75 dark:text-white/75">
+                  <CheckCircle2 className="h-4 w-4 text-fuchsia-500 mt-[2px]" />
+                  <span>{b}</span>
+                </div>
+              ))}
+            </div>
+            <CustomerLogos logos={detail.customers} />
+            <div className="space-y-1">
+              <p className="text-xs uppercase tracking-[0.35em] text-black/50 dark:text-white/60">One line of code</p>
+              <pre className="rounded-2xl bg-slate-900 px-4 py-3 text-xs font-mono text-slate-100 whitespace-pre-wrap break-words">
+                {detail.snippet}
+              </pre>
+            </div>
           </div>
+          <DetailVisual detail={detail} />
         </div>
       </div>
+    </div>
+  );
+}
+
+function DetailVisual({ detail }) {
+  return (
+    <div className="w-full">
+      {detail.visual}
+    </div>
+  );
+}
+
+function CustomerLogos({ logos = [] }) {
+  if (!logos.length) return null;
+  return (
+    <div className="flex flex-wrap items-center gap-3 pt-2">
+      {logos.map((logo) => (
+        <img
+          key={logo.alt}
+          src={logo.src}
+          alt={logo.alt}
+          className="h-6 w-auto object-contain opacity-70 hover:opacity-100 transition"
+          loading="lazy"
+          decoding="async"
+        />
+      ))}
     </div>
   );
 }
@@ -2023,7 +2163,7 @@ export default function App() {
       </header>
 
      <Hero onOpenForm={() => setIsFormOpen(true)} onOpenVideo={() => setIsVideoOpen(true)} />
-     <UseCaseShowcase />
+     {SHOW_USE_CASES && <UseCaseShowcase />}
 
 {SHOW_LOGOS && <BrandsRow />}
 

@@ -218,6 +218,19 @@ html { scroll-behavior: smooth; }
   box-shadow: 0 10px 30px -18px rgba(139, 92, 246, 0.8);
 }
 
+.customer-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  background: #f8fafc;
+  color: #0f172a;
+  padding: 0.35rem 0.7rem;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
 @media (max-width: 1024px) {
   .placement-card-grid {
     padding: 28px;

@@ -23,7 +23,7 @@ import ScrollPreview from "./components/ScrollPreview";
 // ===== feature flags (hide sections/links without deleting code) =====
 const SHOW_LOGOS = true;
 const SHOW_PRICING = false;
-const SHOW_USE_CASES = false;
+const SHOW_USE_CASES = true;
 
 // …
 
@@ -125,7 +125,7 @@ const PLACEMENTS = [
 ];
 
 const PREVIEW_SECTIONS = [
-  ...(SHOW_USE_CASES ? [{ id: "use-cases", label: "Use cases", summary: "Pick the surface where Nobi can help" }] : []),
+  { id: "use-cases", label: "Use cases", summary: "Pick the surface where Nobi can help" },
   { id: "features", label: "Feature deep dive", summary: "See what the assistant can do" },
   { id: "how", label: "Setup", summary: "Install in minutes and measure lift" },
 ];

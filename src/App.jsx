@@ -1,5 +1,23 @@
 import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import {
+  Sparkles,
+  Search as SearchIcon,
+  LayoutGrid,
+  MessageCircleQuestion,
+  MousePointerClick,
+  ArrowRight,
+  Heart,
+  CheckCircle2,
+  ShoppingCart,
+  Filter,
+  BarChart3,
+  Quote,
+  PlayCircle,
+  ChevronDown,
+  ExternalLink,
+} from "lucide-react";
+import ScrollPreview from "./components/ScrollPreview";
 
 
 // ===== feature flags (hide sections/links without deleting code) =====
@@ -11,6 +29,55 @@ const SHOW_PRICING = false;
 // Demo sentence that should be typed into the search bar for both modes
 const DEMO_QUERY =
   `Red dress for a beach wedding. I'm 5'5" and want something under $200.`;
+
+const HERO_PILLS = [
+  {
+    id: "search",
+    label: "Search",
+    icon: SearchIcon,
+    detail:
+      "Swap your native search bar for a conversational assistant that understands natural language and recommends the right SKUs instantly.",
+    outcome: "Serve semantic answers and AI prompts as soon as shoppers open the bar.",
+    snippet:
+      '<script src="https://cdn.nobi.ai/widgets.js" data-app-id="store_123"></script>\n<nobi-search-bar placement="header"></nobi-search-bar>',
+  },
+  {
+    id: "collections",
+    label: "Collections",
+    icon: LayoutGrid,
+    detail:
+      "Layer Nobi inside your collection or PLP filters so shoppers can toggle between curated looks, reasons, and AI suggestions.",
+    outcome: "Guide visitors through 100s of SKUs with conversational prompts instead of endless filters.",
+    snippet:
+      '<script src="https://cdn.nobi.ai/widgets.js" data-app-id="store_123"></script>\n<nobi-collections-panel target="#collection-grid"></nobi-collections-panel>',
+  },
+  {
+    id: "product",
+    label: "Product Q&A",
+    icon: MessageCircleQuestion,
+    detail:
+      "Pop a mini assistant on every PDP that references the current SKU, variant, and relevant content (fit, shipping, etc.).",
+    outcome: "Answer sizing, materials, and availability questions without opening a support ticket.",
+    snippet:
+      '<script src="https://cdn.nobi.ai/widgets.js" data-app-id="store_123"></script>\n<nobi-pdp-assistant product-id="{{ sku }}"></nobi-pdp-assistant>',
+  },
+  {
+    id: "recapture",
+    label: "Recapture bouncers",
+    icon: MousePointerClick,
+    detail:
+      "Trigger a modal assistant on exit intent or inactivity, summarizing suggested products and promo codes instantly.",
+    outcome: "Intercept high-intent traffic before it leaves and redirect shoppers back to relevant collections.",
+    snippet:
+      '<script src="https://cdn.nobi.ai/widgets.js" data-app-id="store_123"></script>\n<nobi-exit-assistant threshold="inactivity"></nobi-exit-assistant>',
+  },
+];
+
+const PREVIEW_SECTIONS = [
+  { id: "use-cases", label: "Use cases", summary: "Pick the surface where Nobi can help" },
+  { id: "features", label: "Feature deep dive", summary: "See what the assistant can do" },
+  { id: "how", label: "Setup", summary: "Install in minutes and measure lift" },
+];
 
 
 /* ===================== Hero Conversation Demo ===================== */
@@ -200,8 +267,46 @@ function ConversationPreview({ mode, playKey, query }) {
         startKey={playKey}
         ratio={2.2}
         ratioVar="--hero-preview-ratio"
-        />
+      />
     </AnimatePresence>
+  );
+}
+
+function HeroPlacementPills({ interactive = false, activeId, onSelect }) {
+  return (
+    <div
+      className={[
+        "inline-flex flex-wrap justify-center gap-2 sm:gap-3 rounded-2xl border border-black/10 dark:border-white/10 bg-white dark:bg-zinc-900 px-4 py-3 shadow-lg",
+        interactive ? "" : "pointer-events-none",
+      ]
+        .filter(Boolean)
+        .join(" ")}
+    >
+      {HERO_PILLS.map((pill) => {
+        const Icon = pill.icon;
+        const isActive = activeId === pill.id;
+        return (
+          <button
+            type="button"
+            key={pill.id}
+            onClick={() => interactive && onSelect?.(pill.id)}
+            className={[
+              "group inline-flex items-center gap-2 rounded-full border bg-white/80 dark:bg-white/10 px-4 py-2 text-sm font-medium text-black dark:text-white transition",
+              "border-black/10 dark:border-white/10 hover:border-fuchsia-200 hover:bg-fuchsia-50/60 dark:hover:bg-white/20",
+              isActive ? "border-fuchsia-200 bg-fuchsia-50/70 dark:bg-white/20" : "",
+              interactive ? "cursor-pointer" : "cursor-default",
+            ]
+              .filter(Boolean)
+              .join(" ")}
+          >
+            <span className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-fuchsia-100 text-fuchsia-600 dark:bg-fuchsia-500/20 dark:text-fuchsia-300">
+              <Icon className="h-3.5 w-3.5" />
+            </span>
+            {pill.label}
+          </button>
+        );
+      })}
+    </div>
   );
 }
 
@@ -246,23 +351,6 @@ function BrandsRow() {
     </section>
   );
 }
-
- import {
-   Sparkles,
-   Search as SearchIcon,
-   ArrowRight,
-   Heart,
-   CheckCircle2,
-   ShoppingCart,
-   Filter,
-   MousePointerClick,
-   BarChart3,
-   Quote,
-  PlayCircle,
- ChevronDown,
- ExternalLink,
- } from "lucide-react";
-
 // -------------------- NOTE --------------------
 // This file mirrors the Canvas version, adapted for Vite.
 // Assets live in /public/media in this starter. If missing, fallbacks render.
@@ -814,7 +902,7 @@ function Hero({ onOpenForm, onOpenVideo }) {
 
   return (
     <section id="home" className="relative overflow-hidden">
-      <div className="mx-auto max-w-7xl px-6 pt-10 sm:pt-12 lg:pt-16 pb-6">
+      <div className="mx-auto max-w-7xl px-6 pt-10 sm:pt-12 lg:pt-16 pb-24">
         <div className="max-w-4xl mx-auto text-center space-y-6">
           <h1 className="text-5xl sm:text-6xl font-semibold tracking-tight text-balance">
             Nobi is a site assistant that turns queries into {" "}
@@ -864,6 +952,50 @@ function Hero({ onOpenForm, onOpenVideo }) {
         {/* Preview card */}
         <div className="mt-4 max-w-5xl mx-auto">
           <ConversationPreview mode={searchMode} playKey={playKey} query={lastQuery} />
+        </div>
+        <ScrollPreview sections={PREVIEW_SECTIONS} label="Next up" />
+      </div>
+    </section>
+  );
+}
+
+function UseCaseShowcase() {
+  const [activeId, setActiveId] = React.useState(HERO_PILLS[0].id);
+  const active = HERO_PILLS.find((pill) => pill.id === activeId) || HERO_PILLS[0];
+
+  return (
+    <section id="use-cases" className="scroll-mt-20 py-16 border-t border-black/5 dark:border-white/5">
+      <div className="mx-auto max-w-6xl px-6 space-y-10">
+        <div className="space-y-4 text-center">
+          <p className="text-sm font-semibold uppercase tracking-[0.4em] text-fuchsia-600">Use cases</p>
+          <h2 className="text-3xl sm:text-4xl font-semibold">Pick the surfaces where Nobi can help</h2>
+          <p className="text-black/70 dark:text-white/70">
+            Each pill represents a placement that lets visitors search, discover, or ask for help. Tap one to see the behavior and install snippet.
+          </p>
+        </div>
+        <div className="space-y-6">
+          <div className="flex flex-wrap justify-center gap-3">
+            <HeroPlacementPills interactive activeId={activeId} onSelect={setActiveId} />
+          </div>
+          <div className="rounded-3xl border border-black/10 dark:border-white/10 bg-white/80 dark:bg-white/5 p-6 sm:p-8 shadow-xl">
+            <div className="flex flex-wrap items-center gap-3">
+              <span className="inline-flex h-10 w-10 items-center justify-center rounded-2xl bg-fuchsia-100 text-fuchsia-600 dark:bg-fuchsia-500/20 dark:text-fuchsia-300">
+                <active.icon className="h-5 w-5" />
+              </span>
+              <div>
+                <p className="text-xs uppercase tracking-[0.3em] text-black/60 dark:text-white/60">Focus</p>
+                <p className="text-xl font-semibold">{active.label}</p>
+              </div>
+            </div>
+            <p className="mt-4 text-black/80 dark:text-white/80">{active.detail}</p>
+            <p className="mt-4 text-sm font-semibold uppercase tracking-[0.4em] text-black/50 dark:text-white/60">{active.outcome}</p>
+            <div className="mt-4">
+              <p className="text-xs uppercase tracking-[0.4em] text-black/60 dark:text-white/60">Install in 2 lines</p>
+              <pre className="mt-2 overflow-x-auto rounded-2xl bg-slate-900 px-4 py-3 text-xs font-mono text-slate-100">
+                {active.snippet}
+              </pre>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -1703,6 +1835,7 @@ export default function App() {
       </header>
 
      <Hero onOpenForm={() => setIsFormOpen(true)} onOpenVideo={() => setIsVideoOpen(true)} />
+     <UseCaseShowcase />
 
 {SHOW_LOGOS && <BrandsRow />}
 

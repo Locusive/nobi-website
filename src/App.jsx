@@ -823,20 +823,20 @@ function Hero({ onOpenForm, onOpenVideo }) {
       <div className="mx-auto max-w-7xl px-6 pt-16 sm:pt-12 pb-6">
         <div className="max-w-4xl mx-auto text-center space-y-6">
           <h1 className="text-5xl sm:text-6xl font-semibold tracking-tight text-balance">
-            Turn product search into a{" "}
+            Conversations that turn into site {" "}
             <span className="bg-gradient-to-r from-indigo-500 via-violet-500 to-fuchsia-500 bg-clip-text text-transparent">
-              conversation
+              conversions
             </span>
           </h1>
 
           <p className="mt-4 text-lg text-black/70 dark:text-white/70">
-            Nobi helps brands achieve <strong>30% better</strong> product discovery with conversational AI.
+              One site assistant for search, answers, and automated actions.
           </p>
 
           {/* Same-row CTAs (works on mobile too) */}
           <div className="grid grid-cols-[1fr_auto] items-center gap-3 max-w-xl mx-auto">
             <Button size="lg" onClick={onOpenForm} className="w-full">
-              <span>Try on your store</span>
+              <span>Set up a demo</span>
               <ArrowRight className="h-5 w-5 -mr-1" aria-hidden="true" />
             </Button>
            <Button
@@ -853,7 +853,7 @@ function Hero({ onOpenForm, onOpenVideo }) {
         </div>
 
         {/* Search bar */}
-        <div className="mt-8 max-w-4xl mx-auto">
+        <div className="mt-20 max-w-4xl mx-auto">
           <div className="p-4 rounded-2xl border border-fuchsia-200 bg-gradient-to-r from-fuchsia-50 to-pink-50 shadow-md">
             <DualModeSearchBar
               locked                                 // 👈 NEW: display-only

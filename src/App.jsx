@@ -10,7 +10,7 @@ const SHOW_PRICING = false;
 
 // Demo sentence that should be typed into the search bar for both modes
 const DEMO_QUERY =
-   `Red dress for a beach wedding. I'm 5'5" and want something under $200.`;
+  `Red dress for a beach wedding. I'm 5'5" and want something under $200.`;
 
 
 /* ===================== Hero Conversation Demo ===================== */
@@ -68,7 +68,7 @@ function HeroProductCard({ title = "Oxford Shirt", price = "$168", img }) {
   );
 }
 
-function HeroConversationDemo({ script, startKey, ratio = 4 / 3 }) {
+function HeroConversationDemo({ script, startKey, ratio = 4 / 3, ratioVar }) {
   const {
     userText = `Red dress for a beach wedding. I'm 5'5" and want something under $200.`,
     aiText   = "Got it! Here are some red dresses that are warm-weather appropriate and comfortable on sand / in a slight breeze (rather than a formal ballroom). These are all available in your size (M) and under $200.",
@@ -96,8 +96,8 @@ function HeroConversationDemo({ script, startKey, ratio = 4 / 3 }) {
     // Otherwise, step through what exists
     setStep(hasUser ? 0 : 1);
     scrollerRef.current?.scrollTo({ top: 0, behavior: "auto" });
-    const t1 = hasAi ? setTimeout(() => setStep(1), 1200) : null;
-    const t2 = setTimeout(() => setStep(2), hasAi ? 3000 : 1200);
+    const t1 = hasAi ? setTimeout(() => setStep(1), 900) : null;
+    const t2 = setTimeout(() => setStep(2), hasAi ? 1800 : 900);
     return () => { if (t1) clearTimeout(t1); clearTimeout(t2); };
   }, [startKey, userText, aiText, products]);
 
@@ -117,10 +117,10 @@ function HeroConversationDemo({ script, startKey, ratio = 4 / 3 }) {
   const showProducts = step >= 2;
 
   return (
-    <div className="w-full rounded-2xl border border-black/10 dark:border-white/10 bg-white/60 dark:bg-white/5 overflow-hidden shadow-inner">
-      <AspectBox ratio={ratio}>
-        <div className="absolute inset-0 p-4 sm:p-5 md:p-6 flex flex-col gap-3 sm:gap-4">
-          <div ref={scrollerRef} className="flex-1 overflow-y-auto">
+    <div className="hero-preview-panel w-full rounded-2xl border border-black/10 dark:border-white/10 bg-white/60 dark:bg-white/5 overflow-hidden shadow-inner">
+      <AspectBox ratio={ratio} ratioVar={ratioVar}>
+        <div className="absolute inset-0 px-4 md:px-5 py-4 flex flex-col gap-2.5 sm:gap-3">
+          <div ref={scrollerRef} className="flex-1 overflow-y-auto hero-demo-scroll">
             <div className="flex h-full flex-col gap-2.5 sm:gap-3">
               {showUser1 && userText && (
                 <motion.div initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.55 }}>
@@ -140,7 +140,7 @@ function HeroConversationDemo({ script, startKey, ratio = 4 / 3 }) {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: 6 }}
                   transition={{ duration: 0.55 }}
-className="grid grid-cols-2 sm:grid-cols-3 gap-2 sm:gap-2.5 pt-1"
+                  className="grid grid-cols-2 sm:grid-cols-3 gap-2 sm:gap-2.5 pt-1"
                 >
                   {products.map((p) => (
                     <HeroProductCard key={p.title} title={p.title} price={p.price} img={p.img} />
@@ -199,7 +199,8 @@ function ConversationPreview({ mode, playKey, query }) {
         script={makeScript(mode, query)}
         startKey={playKey}
         ratio={2.2}
-      />
+        ratioVar="--hero-preview-ratio"
+        />
     </AnimatePresence>
   );
 }
@@ -295,9 +296,13 @@ function PlaceholderSVG({ label = "Image", className = "w-full h-full" }) {
 }
 
 // --- Responsive aspect-ratio wrapper and media helpers ---
-function AspectBox({ ratio = 16 / 9, className = "", children }) {
+function AspectBox({ ratio = 16 / 9, className = "", ratioVar, children }) {
+  const style = ratioVar
+    ? { paddingTop: `calc(100% / var(${ratioVar}, ${ratio}))` }
+    : { paddingTop: `${100 / ratio}%` };
+
   return (
-    <div className={`relative w-full ${className}`} style={{ paddingTop: `${100 / ratio}%` }}>
+    <div className={`relative w-full ${className}`} style={style}>
       <div className="absolute inset-0">{children}</div>
     </div>
   );
@@ -691,17 +696,6 @@ function HeroSkeletonLine({ w = "60%" }) {
   );
 }
 
-/** Small “…” typing indicator */
-function HeroTypingDots() {
-  return (
-    <div className="inline-flex gap-[3px] items-center">
-      <span className="w-1.5 h-1.5 rounded-full bg-black/50 dark:bg-white/60 animate-bounce [animation-delay:-120ms]" />
-      <span className="w-1.5 h-1.5 rounded-full bg-black/50 dark:bg-white/60 animate-bounce [animation-delay:-60ms]" />
-      <span className="w-1.5 h-1.5 rounded-full bg-black/50 dark:bg-white/60 animate-bounce" />
-    </div>
-  );
-}
-
 function VideoModal({ open, onClose, youtube, src, poster = "" }) {
   // Accept either a full YouTube URL or just the ID
   function getYouTubeId(input = "") {
@@ -830,7 +824,7 @@ function Hero({ onOpenForm, onOpenVideo }) {
           </h1>
 
           <p className="mt-4 text-lg text-black/70 dark:text-white/70">
-              Our assistant handles searches, Q&A, and help requests for <strong>provably higher conversions</strong><sup>*</sup>
+              Our assistant handles searches, Q&A, and help requests for <strong>provably more conversions</strong>
           </p>
 
           {/* Same-row CTAs (works on mobile too) */}
@@ -853,7 +847,7 @@ function Hero({ onOpenForm, onOpenVideo }) {
         </div>
 
         {/* Search bar */}
-        <div className="mt-20 max-w-4xl mx-auto">
+        <div className="mt-16 max-w-4xl mx-auto">
           <div className="p-4 rounded-2xl border border-fuchsia-200 bg-gradient-to-r from-fuchsia-50 to-pink-50 shadow-md">
             <DualModeSearchBar
               locked                                 // 👈 NEW: display-only
@@ -871,13 +865,6 @@ function Hero({ onOpenForm, onOpenVideo }) {
         <div className="mt-4 max-w-5xl mx-auto">
           <ConversationPreview mode={searchMode} playKey={playKey} query={lastQuery} />
         </div>
-
-        <div className="mt-6 max-w-5xl mx-auto flex justify-center">
-          <nobi-button button-label="Chat With Nobi"></nobi-button>
-        </div>
-        <p className="mt-1 text-xs text-center text-black/60 dark:text-white/60">
-          * Based on on-site A/B tests where Nobi increased conversion rates by up to 30%.
-        </p>
       </div>
     </section>
   );

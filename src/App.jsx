@@ -823,14 +823,14 @@ function Hero({ onOpenForm, onOpenVideo }) {
       <div className="mx-auto max-w-7xl px-6 pt-16 sm:pt-12 pb-6">
         <div className="max-w-4xl mx-auto text-center space-y-6">
           <h1 className="text-5xl sm:text-6xl font-semibold tracking-tight text-balance">
-            Conversations that turn into site {" "}
+            One {" "}
             <span className="bg-gradient-to-r from-indigo-500 via-violet-500 to-fuchsia-500 bg-clip-text text-transparent">
-              conversions
-            </span>
+              assistant
+            </span> for site search, discovery, and Q&A
           </h1>
 
           <p className="mt-4 text-lg text-black/70 dark:text-white/70">
-              One site assistant for search, answers, and automated actions.
+              Nobi’s site assistant handles search, discovery, and help requests, driving provably higher conversion rates<small><sup>*</sup></small>
           </p>
 
           {/* Same-row CTAs (works on mobile too) */}
@@ -875,6 +875,9 @@ function Hero({ onOpenForm, onOpenVideo }) {
         <div className="mt-6 max-w-5xl mx-auto flex justify-center">
           <nobi-button button-label="Chat With Nobi"></nobi-button>
         </div>
+        <p className="mt-1 text-xs text-center text-black/60 dark:text-white/60">
+          * Based on on-site A/B tests where Nobi increased conversion rates by up to 30%.
+        </p>
       </div>
     </section>
   );

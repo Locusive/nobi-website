@@ -1115,24 +1115,6 @@ function PlacementVisual({ placement }) {
 }
 
 function UseCaseShowcase() {
-  React.useEffect(() => {
-    // Inject Nobi loader once
-    if (typeof window === "undefined") return;
-    if (document.getElementById("nobi-loader")) return;
-    const script = document.createElement("script");
-    script.id = "nobi-loader";
-    script.src = "https://assistant-script.nobi.ai/nobi.bundle.js";
-    script.async = true;
-    script.onload = () => {
-      try {
-        window.Nobi?.initialize({ merchantId: "460cbe82-9195-424f-a616-b1cb3e3caca0" });
-      } catch (e) {
-        console.warn("Nobi init failed", e);
-      }
-    };
-    document.head.appendChild(script);
-  }, []);
-
   const [activeId, setActiveId] = React.useState(PLACEMENTS[0].id);
   const active = PLACEMENTS.find((pill) => pill.id === activeId) || PLACEMENTS[0];
 
@@ -1157,7 +1139,6 @@ function SearchBarPreview() {
     if (typeof window === "undefined") return false;
     return window.innerWidth <= 650;
   });
-  const [ready, setReady] = React.useState(false);
 
   React.useEffect(() => {
     const updateIsMobile = () => {
@@ -1167,13 +1148,6 @@ function SearchBarPreview() {
     window.addEventListener("resize", updateIsMobile);
     return () => window.removeEventListener("resize", updateIsMobile);
   }, []);
-
-  React.useEffect(() => {
-    const timer = setTimeout(() => setReady(true), 500);
-    return () => clearTimeout(timer);
-  }, []);
-
-  if (!ready) return <div className="placement-visual placement-visual--search" />;
 
   return (
     <div className="placement-visual placement-visual--search" style={{ pointerEvents: "auto" }}>

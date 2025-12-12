@@ -23,7 +23,6 @@ import ScrollPreview from "./components/ScrollPreview";
 // ===== feature flags (hide sections/links without deleting code) =====
 const SHOW_LOGOS = true;
 const SHOW_PRICING = false;
-const SHOW_USE_CASES = true;
 
 // …
 
@@ -125,7 +124,7 @@ const PLACEMENTS = [
 ];
 
 const PREVIEW_SECTIONS = [
-  { id: "use-cases", label: "Use cases", summary: "Pick the surface where Nobi can help" },
+  { id: "use-cases", label: "How Nobi Helps", summary: "Pick the surface where Nobi can help" },
   { id: "features", label: "Feature deep dive", summary: "See what the assistant can do" },
   { id: "how", label: "Setup", summary: "Install in minutes and measure lift" },
 ];
@@ -1116,24 +1115,6 @@ function PlacementVisual({ placement }) {
 }
 
 function UseCaseShowcase() {
-  React.useEffect(() => {
-    // Inject Nobi loader once
-    if (typeof window === "undefined") return;
-    if (document.getElementById("nobi-loader")) return;
-    const script = document.createElement("script");
-    script.id = "nobi-loader";
-    script.src = "https://assistant-script.nobi.ai/nobi.bundle.js";
-    script.async = true;
-    script.onload = () => {
-      try {
-        window.Nobi?.initialize({ merchantId: "460cbe82-9195-424f-a616-b1cb3e3caca0" });
-      } catch (e) {
-        console.warn("Nobi init failed", e);
-      }
-    };
-    document.head.appendChild(script);
-  }, []);
-
   const [activeId, setActiveId] = React.useState(PLACEMENTS[0].id);
   const active = PLACEMENTS.find((pill) => pill.id === activeId) || PLACEMENTS[0];
 
@@ -1153,6 +1134,38 @@ function UseCaseShowcase() {
   );
 }
 
+function SearchBarPreview() {
+  const [isMobile, setIsMobile] = React.useState(() => {
+    if (typeof window === "undefined") return false;
+    return window.innerWidth <= 650;
+  });
+
+  React.useEffect(() => {
+    const updateIsMobile = () => {
+      setIsMobile(window.innerWidth <= 650);
+    };
+
+    window.addEventListener("resize", updateIsMobile);
+    return () => window.removeEventListener("resize", updateIsMobile);
+  }, []);
+
+  return (
+    <div className="placement-visual placement-visual--search" style={{ pointerEvents: "auto" }}>
+      {isMobile ? (
+        <nobi-search-bar
+          key="mobile-search"
+          default-mode="ai"
+          show-icon="true"
+          start-collapsed="true"
+          show-mode-toggle="false"
+        ></nobi-search-bar>
+      ) : (
+        <nobi-search-bar key="desktop-search" default-mode="ai"></nobi-search-bar>
+      )}
+    </div>
+  );
+}
+
 const PILL_OPTIONS = [
   { id: "search", label: "Improve search & discovery", icon: SearchIcon },
   { id: "engage", label: "Engage more visitors", icon: LayoutGrid },
@@ -1168,11 +1181,7 @@ const PILL_DETAILS = {
       { alt: "UNTUCKit", src: "/media/logos/untuckit.svg" },
       { alt: "Lucchese", src: "/media/logos/lucchese.svg" },
     ],
-    visual: (
-      <div className="placement-visual placement-visual--search">
-        <nobi-search-bar default-mode="ai" size="regular" cta-variant="auto"></nobi-search-bar>
-      </div>
-    ),
+    visual: <SearchBarPreview />,
     snippet:
       "<nobi-search-bar></nobi-search-bar>",
   },
@@ -1229,11 +1238,11 @@ function PillPicker() {
   return (
     <div className="space-y-6">
       <div className="flex flex-wrap justify-center gap-3">
-        <div className="w-full sm:w-auto inline-flex flex-col items-center gap-3 rounded-2xl border border-black/10 dark:border-white/10 bg-white dark:bg-zinc-900 px-4 py-4 shadow-sm">
+        <div className="w-full sm:w-auto inline-flex flex-col items-start sm:items-center gap-3 rounded-2xl border border-black/10 dark:border-white/10 bg-white dark:bg-zinc-900 px-4 py-4 shadow-sm">
           <span className="text-sm font-semibold text-black/55 dark:text-white/55 pb-1">
-            What’s your goal?
+            What's your goal?
           </span>
-          <div className="flex flex-wrap justify-center gap-2 sm:gap-3 pt-1">
+          <div className="flex flex-wrap justify-start sm:justify-center gap-2 sm:gap-3 pt-1">
             {PILL_OPTIONS.map((pill) => {
               const Icon = pill.icon;
               const isActive = active === pill.id;
@@ -1266,7 +1275,7 @@ function PillPicker() {
             <p className="text-base text-black/70 dark:text-white/70 leading-relaxed">
               {detail.summary}
             </p>
-            <div className="pt-3">
+            <div className="pt-3 hidden sm:block">
               <CustomerLogos logos={detail.customers} />
             </div>
           </div>
@@ -1274,11 +1283,14 @@ function PillPicker() {
             <DetailVisual detail={detail} />
             <div className="space-y-2">
               <p className="text-xs uppercase tracking-[0.35em] text-black/50 dark:text-white/60">The One-liner</p>
-              <pre className="rounded-2xl bg-slate-900 px-4 py-3 text-xs font-mono text-slate-100 whitespace-pre-wrap break-words">
+              <pre className="rounded-2xl bg-slate-900 px-4 py-3 text-xs font-mono text-slate-100 whitespace-pre-wrap break-words overflow-hidden">
                 {detail.snippet}
               </pre>
             </div>
           </div>
+        </div>
+        <div className="block sm:hidden px-[20px] pb-[20px]">
+          <CustomerLogos logos={detail.customers} />
         </div>
       </div>
     </div>
@@ -2113,20 +2125,9 @@ export default function App() {
     <Logo className="h-8 md:h-9 lg:h-10" />
   </a>
 
-  {/* Mobile nav inline with logo */}
-  <nav className="flex md:hidden items-center gap-4 text-sm overflow-x-auto whitespace-nowrap [-webkit-overflow-scrolling:touch] flex-1">
-    <a href="#features" className="py-2">Features</a>
-    <a href="#how" className="py-2">How it works</a>
-  {SHOW_PRICING && <a href="#pricing" className="py-2">Pricing</a>}
-    <a href="#faq" className="py-2">FAQ</a>
-    <a href="https://docs.nobi.ai" target="_blank" rel="noopener noreferrer" className="py-2 flex items-center gap-1">
-      Docs
-      <ExternalLink className="w-3 h-3" />
-    </a>
-  </nav>
-
   {/* Desktop nav + CTA (pushed right) */}
 <nav className="hidden md:flex items-center gap-6 text-sm font-semibold absolute left-1/2 -translate-x-1/2">
+    <a href="#use-cases" className="hover:opacity-80">How Nobi Helps</a>
     <a href="#features" className="hover:opacity-80">Features</a>
     <a href="#how" className="hover:opacity-80">How it works</a>
   {SHOW_PRICING && <a href="#pricing" className="hover:opacity-80">Pricing</a>}
@@ -2136,7 +2137,7 @@ export default function App() {
       <ExternalLink className="w-4 h-4" />
     </a>
   </nav>
-  <div className="hidden md:flex items-center gap-3 ml-auto">
+  <div className="flex items-center gap-3 ml-auto">
   <Button
     variant="outline"
     className="bg-white text-black border-black hover:bg-black/5"
@@ -2149,7 +2150,7 @@ export default function App() {
       </header>
 
      <Hero onOpenForm={() => setIsFormOpen(true)} onOpenVideo={() => setIsVideoOpen(true)} />
-     {SHOW_USE_CASES && <UseCaseShowcase />}
+     <UseCaseShowcase />
 
 {SHOW_LOGOS && <BrandsRow />}
 

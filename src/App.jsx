@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import Marquee from "react-fast-marquee";
 import {
   Sparkles,
   Search as SearchIcon,
@@ -1125,7 +1126,7 @@ function UseCaseShowcase() {
           <p className="text-xs font-semibold uppercase tracking-[0.5em] text-fuchsia-600">How Nobi Helps</p>
           <h2 className="text-3xl sm:text-4xl font-semibold">When to use Nobi</h2>
           <p className="text-black/70 dark:text-white/70">
-            Pick the widget you need, see how it behaves on your site, and copy the two-line install to ship it in minutes.
+            Pick the widget you need, see how it behaves on your site, install it in 10 seconds.
           </p>
         </div>
         <PillPicker />
@@ -1173,6 +1174,15 @@ const PILL_OPTIONS = [
   { id: "api", label: "Launch AI on demand", icon: Sparkles },
 ];
 
+const CUSTOMER_LOGOS = [
+  { alt: "UNTUCKit", src: "/media/logos/untuckit.svg" },
+  { alt: "Lucchese", src: "/media/logos/lucchese.svg" },
+  { alt: "Faherty", src: "/media/logos/faherty.svg" },
+  { alt: "TOOLUP", src: "/media/logos/toolup.svg" },
+  { alt: "Kilte", src: "/media/logos/kilte.svg" },
+  { alt: "Alps and Meters", src: "/media/logos/alps_meters.png" },
+];
+
 const PILL_DETAILS = {
   search: {
     title: "AI Search Bar",
@@ -1188,10 +1198,7 @@ const PILL_DETAILS = {
   engage: {
     title: "Suggestion Pills",
     summary: "Use on collections/PLPs to spark exploration with AI prompts that reflect page context, keeping shoppers clicking instead of bouncing.", // citeturn0search0
-    customers: [
-      { alt: "Faherty", src: "/media/logos/faherty.svg" },
-      { alt: "TOOLUP", src: "/media/logos/toolup.svg" },
-    ],
+    customers: [],
     visual: (
       <div className="placement-visual placement-visual--collections">
         <nobi-suggestion-pills pill-count="3"></nobi-suggestion-pills>
@@ -1202,9 +1209,7 @@ const PILL_DETAILS = {
   answers: {
     title: "Button",
     summary: "Use in the hero, nav, or help sections to give shoppers a clear CTA to open the assistant, best when you want a single, obvious entry point.",
-    customers: [
-      { alt: "Lucchese", src: "/media/logos/lucchese.svg" },
-    ],
+    customers: [],
     visual: (
       <div className="placement-visual placement-visual--api">
         <nobi-button></nobi-button>
@@ -1215,9 +1220,7 @@ const PILL_DETAILS = {
   api: {
     title: "Programmatic Trigger",
     summary: "Use when you need to launch Nobi from your own UI (menus, forms, post‑purchase flows) or want to prefill intent like category or cart context.",
-    customers: [
-      { alt: "Kilte", src: "/media/logos/kilte.svg" },
-    ],
+    customers: [],
     visual: (
       <div className="placement-visual placement-visual--api">
         <div className="placement-program-shell">
@@ -1275,9 +1278,28 @@ function PillPicker() {
             <p className="text-base text-black/70 dark:text-white/70 leading-relaxed">
               {detail.summary}
             </p>
-            <div className="pt-3 hidden sm:block">
-              <CustomerLogos logos={detail.customers} />
-            </div>
+            {active === "search" && (
+              <div className="pt-3 hidden sm:block">
+                <span className="text-xs uppercase tracking-[0.3em] text-black/50 dark:text-white/60 block mb-3">
+                  Used by
+                </span>
+                <div className="marquee-container">
+                  <div className="overflow-hidden py-4">
+                    <Marquee speed={40} gradient={false} pauseOnHover>
+                      {CUSTOMER_LOGOS.map((logo) => (
+                        <img
+                          key={logo.alt}
+                          src={logo.src}
+                          alt={logo.alt}
+                          className="h-5 w-auto object-contain grayscale opacity-60 hover:opacity-100 transition mx-4"
+                          loading="lazy"
+                        />
+                      ))}
+                    </Marquee>
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
           <div className="space-y-3">
             <DetailVisual detail={detail} />
@@ -1289,9 +1311,28 @@ function PillPicker() {
             </div>
           </div>
         </div>
-        <div className="block sm:hidden px-[20px] pb-[20px]">
-          <CustomerLogos logos={detail.customers} />
-        </div>
+        {active === "search" && (
+          <div className="block sm:hidden px-[20px] pb-[20px]">
+            <span className="text-xs uppercase tracking-[0.3em] text-black/50 dark:text-white/60 block mb-3">
+              Used by
+            </span>
+            <div className="marquee-container">
+              <div className="border border-black/10 dark:border-white/10 rounded-lg overflow-hidden py-4">
+                <Marquee speed={40} gradient={false} pauseOnHover>
+                  {CUSTOMER_LOGOS.map((logo) => (
+                    <img
+                      key={logo.alt}
+                      src={logo.src}
+                      alt={logo.alt}
+                      className="h-5 w-auto object-contain grayscale opacity-60 hover:opacity-100 transition mx-4"
+                      loading="lazy"
+                    />
+                  ))}
+                </Marquee>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

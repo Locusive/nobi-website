@@ -72,10 +72,14 @@ html { scroll-behavior: smooth; }
   padding: 38px;
 }
 
+.placement-card-grid--wide {
+  grid-template-columns: 0.35fr 0.65fr;
+}
+
 .placement-visual {
-  min-height: 260px;
+  min-height: 180px;
   border-radius: 18px;
-  padding: 1.25rem;
+  padding: 1rem;
   background: linear-gradient(180deg, #f8fafc 0%, #fff 100%);
   border: 1px solid rgba(15, 23, 42, 0.05);
   display: flex;
@@ -242,4 +246,13 @@ html { scroll-behavior: smooth; }
     padding-right: 0.6rem;
     margin-right: -0.6rem;
   }
+
+  .placement-card-grid,
+  .placement-card-grid--wide {
+    grid-template-columns: 1fr;
+  }
+}
+
+.nobi-suggestion-pills-container {
+    max-width: 600px;
 }

@@ -113,7 +113,7 @@ const PLACEMENTS = [
     label: "Launch an AI assistant on demand",
     icon: Sparkles,
     heading: "Trigger the agent wherever you want",
-    why: "Use the JS API to open Nobi from any button or menu item—returns, sizing help, concierge.",
+    why: "Use the JS API to open Nobi from any button or menu item, returns, sizing help, concierge.",
     outcome: "Assistant appears exactly where visitors need help, without page reloads.",
     snippet:
       '<button onclick="Nobi.openChat()">Open site assistant</button>',
@@ -1116,6 +1116,24 @@ function PlacementVisual({ placement }) {
 }
 
 function UseCaseShowcase() {
+  React.useEffect(() => {
+    // Inject Nobi loader once
+    if (typeof window === "undefined") return;
+    if (document.getElementById("nobi-loader")) return;
+    const script = document.createElement("script");
+    script.id = "nobi-loader";
+    script.src = "https://assistant-script.nobi.ai/nobi.bundle.js";
+    script.async = true;
+    script.onload = () => {
+      try {
+        window.Nobi?.initialize({ merchantId: "460cbe82-9195-424f-a616-b1cb3e3caca0" });
+      } catch (e) {
+        console.warn("Nobi init failed", e);
+      }
+    };
+    document.head.appendChild(script);
+  }, []);
+
   const [activeId, setActiveId] = React.useState(PLACEMENTS[0].id);
   const active = PLACEMENTS.find((pill) => pill.id === activeId) || PLACEMENTS[0];
 
@@ -1124,7 +1142,7 @@ function UseCaseShowcase() {
       <div className="mx-auto max-w-6xl px-6 space-y-8">
         <div className="space-y-3 text-center max-w-3xl mx-auto">
           <p className="text-xs font-semibold uppercase tracking-[0.5em] text-fuchsia-600">How Nobi Helps</p>
-          <h2 className="text-3xl sm:text-4xl font-semibold">Nobi elements to improve engagement</h2>
+          <h2 className="text-3xl sm:text-4xl font-semibold">When to use Nobi</h2>
           <p className="text-black/70 dark:text-white/70">
             Pick the widget you need, see how it behaves on your site, and copy the two-line install to ship it in minutes.
           </p>
@@ -1145,99 +1163,67 @@ const PILL_OPTIONS = [
 const PILL_DETAILS = {
   search: {
     title: "AI Search Bar",
-    summary: "Drop in a dual-mode search that lets shoppers pick AI or native results instantly.",
-    benefits: [
-      "Benefit placeholder one.",
-      "Benefit placeholder two.",
-      "Benefit placeholder three.",
-    ],
+    summary: "Use it to replace your existing search bar for better search results (Nobi's semantic search results provably outperform most legacy search engines) along with conversational AI capabilities.",
     customers: [
       { alt: "UNTUCKit", src: "/media/logos/untuckit.svg" },
       { alt: "Lucchese", src: "/media/logos/lucchese.svg" },
     ],
     visual: (
       <div className="placement-visual placement-visual--search">
-        <div className="placement-search-bar">
-          <div className="placement-search-toggle">
-            <span className="placement-search-toggle-pill placement-search-toggle-pill--active">AI</span>
-            <span className="placement-search-toggle-pill">Site</span>
-          </div>
-          <div className="placement-search-input">Search “red dresses under $200”</div>
-          <div className="placement-search-hint text-slate-500 text-xs">Semantic answers + product cards instantly.</div>
-        </div>
+        <nobi-search-bar default-mode="ai" size="regular" cta-variant="auto"></nobi-search-bar>
       </div>
     ),
     snippet:
-      '<nobi-search-bar default-mode="ai" size="regular" cta-variant="auto" show-mode-toggle="true" show-hint-row="true"></nobi-search-bar>',
+      "<nobi-search-bar></nobi-search-bar>",
   },
   engage: {
     title: "Suggestion Pills",
-    summary: "Guide exploration with AI prompts that sit next to your filters and collections.",
-    benefits: [
-      "Benefit placeholder one.",
-      "Benefit placeholder two.",
-      "Benefit placeholder three.",
-    ],
+    summary: "Use on collections/PLPs to spark exploration with AI prompts that reflect page context, keeping shoppers clicking instead of bouncing.", // citeturn0search0
     customers: [
       { alt: "Faherty", src: "/media/logos/faherty.svg" },
       { alt: "TOOLUP", src: "/media/logos/toolup.svg" },
     ],
     visual: (
       <div className="placement-visual placement-visual--collections">
-        <div className="placement-suggestion-shell">
-          <div className="placement-suggestion-pill">Beach wedding looks</div>
-          <div className="placement-suggestion-pill">Under $200</div>
-          <div className="placement-suggestion-pill">Red + size M</div>
-        </div>
+        <nobi-suggestion-pills pill-count="3"></nobi-suggestion-pills>
       </div>
     ),
-    snippet: "<nobi-suggestion-pills pill-count=\"3\"></nobi-suggestion-pills>",
+    snippet: "<nobi-suggestion-pills></nobi-suggestion-pills>",
   },
   answers: {
     title: "Button",
-    summary: "Launch Nobi from a button so shoppers can ask for help anywhere on the page.",
-    benefits: [
-      "Benefit placeholder one.",
-      "Benefit placeholder two.",
-      "Benefit placeholder three.",
-    ],
+    summary: "Use in the hero, nav, or help sections to give shoppers a clear CTA to open the assistant, best when you want a single, obvious entry point.",
     customers: [
       { alt: "Lucchese", src: "/media/logos/lucchese.svg" },
     ],
     visual: (
       <div className="placement-visual placement-visual--api">
-        <div className="placement-program-shell">
-          <button className="placement-program-btn" type="button">Ask Nobi</button>
-        </div>
+        <nobi-button></nobi-button>
       </div>
     ),
     snippet: "<nobi-button></nobi-button>",
   },
   api: {
     title: "Programmatic Trigger",
-    summary: "Open Nobi with one JS call—great for menus, help hubs, and post‑purchase flows.",
-    benefits: [
-      "Benefit placeholder one.",
-      "Benefit placeholder two.",
-      "Benefit placeholder three.",
-    ],
+    summary: "Use when you need to launch Nobi from your own UI (menus, forms, post‑purchase flows) or want to prefill intent like category or cart context.",
     customers: [
       { alt: "Kilte", src: "/media/logos/kilte.svg" },
     ],
     visual: (
       <div className="placement-visual placement-visual--api">
         <div className="placement-program-shell">
-          <button className="placement-program-btn" type="button">Open Nobi assistant</button>
+          <button className="placement-program-btn" type="button" onClick={() => window.Nobi?.openChat?.()}>
+            Open Nobi assistant
+          </button>
         </div>
       </div>
     ),
-    snippet: 'Nobi.openChat();',
+    snippet: "Nobi.openChat();",
   },
 };
 
 function PillPicker() {
   const [active, setActive] = React.useState(PILL_OPTIONS[0].id);
-  const activeItem = PILL_OPTIONS.find((p) => p.id === active) || PILL_OPTIONS[0];
   const detail = PILL_DETAILS[active] || PILL_DETAILS.search;
 
   return (
@@ -1274,30 +1260,25 @@ function PillPicker() {
       </div>
 
       <div className="placement-card">
-        <div className="placement-card-grid">
-          <div className="space-y-3">
-            <p className="text-xs uppercase tracking-[0.35em] text-fuchsia-600">Overview</p>
+        <div className="placement-card-grid placement-card-grid--wide">
+          <div className="space-y-4">
             <h3 className="text-2xl font-semibold">{detail.title}</h3>
             <p className="text-base text-black/70 dark:text-white/70 leading-relaxed">
               {detail.summary}
             </p>
-            <div className="space-y-2">
-              {detail.benefits.map((b) => (
-                <div key={b} className="flex items-start gap-2 text-sm text-black/75 dark:text-white/75">
-                  <CheckCircle2 className="h-4 w-4 text-fuchsia-500 mt-[2px]" />
-                  <span>{b}</span>
-                </div>
-              ))}
+            <div className="pt-3">
+              <CustomerLogos logos={detail.customers} />
             </div>
-            <CustomerLogos logos={detail.customers} />
-            <div className="space-y-1">
-              <p className="text-xs uppercase tracking-[0.35em] text-black/50 dark:text-white/60">One line of code</p>
+          </div>
+          <div className="space-y-3">
+            <DetailVisual detail={detail} />
+            <div className="space-y-2">
+              <p className="text-xs uppercase tracking-[0.35em] text-black/50 dark:text-white/60">The One-liner</p>
               <pre className="rounded-2xl bg-slate-900 px-4 py-3 text-xs font-mono text-slate-100 whitespace-pre-wrap break-words">
                 {detail.snippet}
               </pre>
             </div>
           </div>
-          <DetailVisual detail={detail} />
         </div>
       </div>
     </div>
@@ -1315,17 +1296,22 @@ function DetailVisual({ detail }) {
 function CustomerLogos({ logos = [] }) {
   if (!logos.length) return null;
   return (
-    <div className="flex flex-wrap items-center gap-3 pt-2">
-      {logos.map((logo) => (
-        <img
-          key={logo.alt}
-          src={logo.src}
-          alt={logo.alt}
-          className="h-6 w-auto object-contain opacity-70 hover:opacity-100 transition"
-          loading="lazy"
-          decoding="async"
-        />
-      ))}
+    <div className="space-y-2 pt-2">
+      <span className="text-xs uppercase tracking-[0.3em] text-black/50 dark:text-white/60 block">
+        Used by
+      </span>
+      <div className="flex flex-wrap items-center gap-3">
+        {logos.map((logo) => (
+          <img
+            key={logo.alt}
+            src={logo.src}
+            alt={logo.alt}
+            className="h-5 w-auto object-contain select-none grayscale opacity-60 hover:opacity-100 transition"
+            loading="lazy"
+            decoding="async"
+          />
+        ))}
+      </div>
     </div>
   );
 }
@@ -1361,7 +1347,7 @@ function Features() {
     {
       title: "AI Mode your Search",
       desc:
-        "Deliver the same powerful search experience as ChatGPT and other AI platforms—right within your store.",
+        "Deliver the same powerful search experience as ChatGPT and other AI platforms, right within your store.",
       icon: <Sparkles className="h-4 w-4" />,
       media: { src: "/media/feature-ai-mode.mp4", alt: "" },
     },
@@ -1693,7 +1679,7 @@ function Footer() {
       <div className="mx-auto max-w-6xl px-6 flex flex-col sm:flex-row items-center justify-between gap-6">
         <Logo />
         <div className="text-sm text-black/60 dark:text-white/60">
-          © {new Date().getFullYear()} Nobi — Conversational commerce
+          © {new Date().getFullYear()} Nobi: a site assistant to help you grow
         </div>
        <div className="flex items-center gap-4 text-sm">
   <a href="#features" className="hover:opacity-80">Features</a>

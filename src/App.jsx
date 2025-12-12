@@ -362,47 +362,6 @@ function HeroPlacementPills({ interactive = false, activeId, onSelect }) {
   );
 }
 
-function BrandsRow() {
-  const brands = [
-    { alt: "Lucchese", src: "/media/logos/lucchese.svg" },
-    { alt: "Faherty",  src: "/media/logos/faherty.svg"  },
-    { alt: "TOOLUP",   src: "/media/logos/toolup.svg"   },
-    { alt: "UNTUCKit", src: "/media/logos/untuckit.svg" },
-    { alt: "Kilte",    src: "/media/logos/kilte.svg"    },
-  ];
-
-  return (
-    <section id="logos" className="py-12 border-t border-black/5 dark:border-white/5">
-      <div className="mx-auto max-w-6xl px-6">
-        <p className="text-center text-sm font-semibold text-fuchsia-600 mb-6">
-          Trusted by modern commerce
-        </p>
-
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-x-10 gap-y-8 items-center justify-items-center">
-          {brands.map((b) => (
-            <img
-              key={b.alt}
-              src={b.src}
-              alt={b.alt}
-              className="block h-7 w-auto object-contain select-none grayscale opacity-60 hover:opacity-100"
-              loading="lazy"
-              decoding="async"
-              onError={(e) => {
-                e.currentTarget.replaceWith(
-                  Object.assign(document.createElement("span"), {
-                    textContent: b.alt,
-                    className:
-                      "text-sm text-black/40 dark:text-white/40 tracking-wide",
-                  })
-                );
-              }}
-            />
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
 // -------------------- NOTE --------------------
 // This file mirrors the Canvas version, adapted for Vite.
 // Assets live in /public/media in this starter. If missing, fallbacks render.
@@ -2192,8 +2151,6 @@ export default function App() {
 
      <Hero onOpenForm={() => setIsFormOpen(true)} onOpenVideo={() => setIsVideoOpen(true)} />
      <UseCaseShowcase />
-
-{SHOW_LOGOS && <BrandsRow />}
 
 <Features />
 <Results />

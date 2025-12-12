@@ -23,7 +23,6 @@ import ScrollPreview from "./components/ScrollPreview";
 // ===== feature flags (hide sections/links without deleting code) =====
 const SHOW_LOGOS = true;
 const SHOW_PRICING = false;
-const SHOW_USE_CASES = true;
 
 // …
 
@@ -1153,6 +1152,37 @@ function UseCaseShowcase() {
   );
 }
 
+function SearchBarPreview() {
+  const [isMobile, setIsMobile] = React.useState(() => {
+    if (typeof window === "undefined") return false;
+    return window.innerWidth <= 650;
+  });
+
+  React.useEffect(() => {
+    const updateIsMobile = () => {
+      setIsMobile(window.innerWidth <= 650);
+    };
+
+    window.addEventListener("resize", updateIsMobile);
+    return () => window.removeEventListener("resize", updateIsMobile);
+  }, []);
+
+  return (
+    <div className="placement-visual placement-visual--search" style={{ pointerEvents: "auto" }}>
+      {isMobile ? (
+        <nobi-search-bar
+          default-mode="ai"
+          show-icon="true"
+          start-collapsed="true"
+          show-mode-toggle="false"
+        ></nobi-search-bar>
+      ) : (
+        <nobi-search-bar default-mode="ai"></nobi-search-bar>
+      )}
+    </div>
+  );
+}
+
 const PILL_OPTIONS = [
   { id: "search", label: "Improve search & discovery", icon: SearchIcon },
   { id: "engage", label: "Engage more visitors", icon: LayoutGrid },
@@ -1168,11 +1198,7 @@ const PILL_DETAILS = {
       { alt: "UNTUCKit", src: "/media/logos/untuckit.svg" },
       { alt: "Lucchese", src: "/media/logos/lucchese.svg" },
     ],
-    visual: (
-      <div className="placement-visual placement-visual--search">
-        <nobi-search-bar default-mode="ai" size="regular" cta-variant="auto"></nobi-search-bar>
-      </div>
-    ),
+    visual: <SearchBarPreview />,
     snippet:
       "<nobi-search-bar></nobi-search-bar>",
   },
@@ -1274,7 +1300,7 @@ function PillPicker() {
             <DetailVisual detail={detail} />
             <div className="space-y-2">
               <p className="text-xs uppercase tracking-[0.35em] text-black/50 dark:text-white/60">The One-liner</p>
-              <pre className="rounded-2xl bg-slate-900 px-4 py-3 text-xs font-mono text-slate-100 whitespace-pre-wrap break-words">
+              <pre className="rounded-2xl bg-slate-900 px-4 py-3 text-xs font-mono text-slate-100 whitespace-pre-wrap break-words overflow-hidden">
                 {detail.snippet}
               </pre>
             </div>
@@ -2149,7 +2175,7 @@ export default function App() {
       </header>
 
      <Hero onOpenForm={() => setIsFormOpen(true)} onOpenVideo={() => setIsVideoOpen(true)} />
-     {SHOW_USE_CASES && <UseCaseShowcase />}
+     <UseCaseShowcase />
 
 {SHOW_LOGOS && <BrandsRow />}
 

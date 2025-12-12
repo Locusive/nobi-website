@@ -125,7 +125,7 @@ const PLACEMENTS = [
 ];
 
 const PREVIEW_SECTIONS = [
-  { id: "use-cases", label: "How Nobi helps your visitors", summary: "Pick the surface where Nobi can help" },
+  { id: "use-cases", label: "Nobi for your site", summary: "Pick the surface where Nobi can help" },
   { id: "features", label: "Feature deep dive", summary: "See what the assistant can do" },
   { id: "how", label: "Setup", summary: "Install in minutes and measure lift" },
 ];

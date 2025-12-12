@@ -1,6 +1,7 @@
 import React from "react";
+import PageLayout from "../components/PageLayout";
 
-function NotFound({ requestedPath = "", onNavigateHome }) {
+function NotFound({ requestedPath = "", onNavigateHome, onDemoClick }) {
   React.useEffect(() => {
     const previousTitle = document.title;
     document.title = "Page not found | Nobi";
@@ -20,7 +21,8 @@ function NotFound({ requestedPath = "", onNavigateHome }) {
   };
 
   return (
-    <main className="min-h-screen bg-gradient-to-b from-white to-slate-50 dark:from-[#0a0a0a] dark:to-black text-black dark:text-white">
+    <PageLayout onDemoClick={onDemoClick}>
+      <main className="bg-gradient-to-b from-white to-slate-50 dark:from-[#0a0a0a] dark:to-black text-black dark:text-white min-h-screen flex items-center">
       <div className="mx-auto max-w-2xl px-6 py-28 text-center">
         <p className="text-sm font-semibold text-fuchsia-600">404</p>
         <h1 className="mt-3 text-4xl font-semibold tracking-tight">Can't find {displayPath}</h1>
@@ -43,7 +45,8 @@ function NotFound({ requestedPath = "", onNavigateHome }) {
           </a>
         </div>
       </div>
-    </main>
+      </main>
+    </PageLayout>
   );
 }
 

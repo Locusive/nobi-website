@@ -40,11 +40,16 @@ function RouterView() {
   const rawPath = usePathname();
   const path = normalizePathname(rawPath);
 
-  if (path === "/") return <App />;
-  if (path === "/terms") return <Terms />;
-  if (path === "/privacy") return <Privacy />;
+  const handleDemoClick = () => {
+    // Demo click handler can be implemented here
+    // For now, it's a placeholder for future functionality
+  };
 
-  return <NotFound requestedPath={rawPath} onNavigateHome={() => navigate("/")} />;
+  if (path === "/") return <App />;
+  if (path === "/terms") return <Terms onDemoClick={handleDemoClick} />;
+  if (path === "/privacy") return <Privacy onDemoClick={handleDemoClick} />;
+
+  return <NotFound requestedPath={rawPath} onNavigateHome={() => navigate("/")} onDemoClick={handleDemoClick} />;
 }
 
 createRoot(document.getElementById("root")).render(

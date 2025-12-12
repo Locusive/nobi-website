@@ -1,7 +1,9 @@
 import React from "react";
+import PageLayout from "../components/PageLayout";
 
-const Privacy = () => (
-  <main className="prose prose-lg mx-auto px-4 py-8">
+const Privacy = ({ onDemoClick }) => (
+  <PageLayout onDemoClick={onDemoClick}>
+    <main className="prose prose-lg mx-auto px-4 py-8">
     {/* Page Heading and Intro */}
     <h1 className="text-3xl font-bold mb-4">Privacy Policy</h1>
     <p className="text-sm text-gray-500 mb-8">
@@ -117,7 +119,8 @@ const Privacy = () => (
         privacy@nobi.ai
       </a>.
     </p>
-  </main>
+    </main>
+  </PageLayout>
 );
 
 export default Privacy;

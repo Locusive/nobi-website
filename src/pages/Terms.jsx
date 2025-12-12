@@ -1,15 +1,17 @@
 // src/pages/Terms.jsx
 import React from "react";
+import PageLayout from "../components/PageLayout";
 
 const LEGAL_NAME = "Locusive, Inc. d/b/a Nobi";
 const SHORT_NAME = "Nobi";
 const EFFECTIVE = "October 1, 2025";
 const CONTACT = "legal@nobi.ai";
 
-export default function Terms() {
+export default function Terms({ onDemoClick }) {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-white to-slate-50 dark:from-[#0a0a0a] dark:to-black text-black dark:text-white">
-      <main className="mx-auto max-w-3xl px-6 py-16">
+    <PageLayout onDemoClick={onDemoClick}>
+      <div className="bg-gradient-to-b from-white to-slate-50 dark:from-[#0a0a0a] dark:to-black text-black dark:text-white py-16">
+        <div className="mx-auto max-w-3xl px-6">
         <header className="mb-10">
           <p className="text-sm font-semibold text-fuchsia-600">Legal</p>
           <h1 className="mt-2 text-4xl font-semibold tracking-tight">Terms of Service</h1>
@@ -188,7 +190,8 @@ export default function Terms() {
             Contact: <a className="underline" href={`mailto:${CONTACT}`}>{CONTACT}</a>
           </p>
         </section>
-      </main>
-    </div>
+        </div>
+      </div>
+    </PageLayout>
   );
 }

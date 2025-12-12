@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-/* nice-to-haves you’re already using */
+/* nice-to-haves you're already using */
 html { scroll-behavior: smooth; }
 @supports (text-wrap: balance) { .text-balance { text-wrap: balance; } }
 
@@ -75,7 +75,7 @@ html { scroll-behavior: smooth; }
 }
 
 .placement-card-grid--wide {
-  grid-template-columns: 0.35fr 0.65fr;
+  grid-template-columns: 0.55fr 1fr;
 }
 
 .placement-visual {
@@ -280,4 +280,19 @@ html { scroll-behavior: smooth; }
 
 .nobi-suggestion-pills-container {
     max-width: 600px;
+}
+
+.placement-card-grid--wide > div:first-child {
+  min-width: 0;
+}
+
+.placement-card-grid--wide > div:last-child {
+  min-width: 0;
+}
+
+/* Marquee container constraint */
+.marquee-container {
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden;
 }

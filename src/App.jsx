@@ -1005,7 +1005,7 @@ function Hero({ onOpenForm, onOpenVideo }) {
         <div className="mt-4 max-w-5xl mx-auto">
           <ConversationPreview mode={searchMode} playKey={playKey} query={lastQuery} />
         </div>
-        <ScrollPreview sections={PREVIEW_SECTIONS} label="Next up" />
+        <ScrollPreview sections={PREVIEW_SECTIONS} label="Next up" pillOptions={PILL_OPTIONS} />
       </div>
     </section>
   );

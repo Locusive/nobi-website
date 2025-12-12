@@ -89,6 +89,8 @@ html { scroll-behavior: smooth; }
   gap: 0.85rem;
   width: 100%;
   pointer-events: auto;
+  align-items: center;
+  justify-content: center;
 }
 
 .placement-visual--search {
@@ -220,8 +222,7 @@ html { scroll-behavior: smooth; }
 }
 
 .placement-program-shell {
-  background: #0f172a;
-  color: #e5e7eb;
+  background: transparent;
   border-radius: 14px;
   padding: 0.9rem 1rem;
   display: flex;

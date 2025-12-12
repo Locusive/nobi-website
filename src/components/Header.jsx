@@ -8,7 +8,7 @@ export default function Header({ onDemoClick }) {
       <div className="mx-auto max-w-7xl px-6 h-16 flex items-center gap-4 relative">
         {/* Logo */}
         <a href="/" className="flex items-center gap-3 shrink-0">
-          <Logo className="h-8 md:h-9 lg:h-10" />
+          <Logo className="h-10 md:h-12 lg:h-14" />
         </a>
 
         {/* Navigation */}

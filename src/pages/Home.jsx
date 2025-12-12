@@ -18,7 +18,9 @@ import {
   ChevronDown,
   ExternalLink,
 } from "lucide-react";
-import ScrollPreview from "./components/ScrollPreview";
+import ScrollPreview from "../components/ScrollPreview";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
 
 
 // ===== feature flags (hide sections/links without deleting code) =====
@@ -1685,27 +1687,6 @@ function FAQ() {
   );
 }
 
-function Footer() {
-  return (
-    <footer className="border-t border-black/10 dark:border-white/10 py-12">
-      <div className="mx-auto max-w-6xl px-6 flex flex-col sm:flex-row items-center justify-between gap-6">
-        <Logo />
-        <div className="text-sm text-black/60 dark:text-white/60">
-          © {new Date().getFullYear()} Nobi: a site assistant to help you grow
-        </div>
-       <div className="flex items-center gap-4 text-sm">
-  <a href="#features" className="hover:opacity-80">Features</a>
-  <a href="#how" className="hover:opacity-80">How it Works</a>
-  {SHOW_PRICING && <a href="#pricing" className="hover:opacity-80">Pricing</a>}
-  <a href="#faq" className="hover:opacity-80">FAQ</a>
-  <a href="/terms" className="hover:opacity-80">Terms</a>
-  <a href="/privacy" className="hover:opacity-80">Privacy</a>
-</div>
-      </div>
-    </footer>
-  );
-}
-
 // Simple horizontal bar
 function Bar({ value, maxValue }) {
   const pct = Math.max(0, Math.min(100, Math.round((value / maxValue) * 100)));
@@ -2119,35 +2100,7 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-white to-slate-50 dark:from-[#0a0a0a] dark:to-black text-black dark:text-white">
-      <header className="sticky top-0 z-40 border-b backdrop-blur bg-white/70 dark:bg-black/40">
-<div className="mx-auto max-w-7xl px-6 h-16 flex items-center gap-4 relative">
-  <a href="#home" className="flex items-center gap-3 shrink-0">
-    <Logo className="h-8 md:h-9 lg:h-10" />
-  </a>
-
-  {/* Desktop nav + CTA (pushed right) */}
-<nav className="hidden md:flex items-center gap-6 text-sm font-semibold absolute left-1/2 -translate-x-1/2">
-    <a href="#use-cases" className="hover:opacity-80">How Nobi Helps</a>
-    <a href="#features" className="hover:opacity-80">Features</a>
-    <a href="#how" className="hover:opacity-80">How it works</a>
-  {SHOW_PRICING && <a href="#pricing" className="hover:opacity-80">Pricing</a>}
-    <a href="#faq" className="hover:opacity-80">FAQ</a>
-    <a href="https://docs.nobi.ai" target="_blank" rel="noopener noreferrer" className="hover:opacity-80 flex items-center gap-1">
-      Docs
-      <ExternalLink className="w-4 h-4" />
-    </a>
-  </nav>
-  <div className="flex items-center gap-3 ml-auto">
-  <Button
-    variant="outline"
-    className="bg-white text-black border-black hover:bg-black/5"
-    onClick={() => setIsFormOpen(true)}
-  >
-    Get a Demo
-  </Button>
-</div>
-</div>
-      </header>
+      <Header onDemoClick={() => setIsFormOpen(true)} />
 
      <Hero onOpenForm={() => setIsFormOpen(true)} onOpenVideo={() => setIsVideoOpen(true)} />
      <UseCaseShowcase />

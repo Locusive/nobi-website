@@ -1,7 +1,7 @@
 import React, { StrictMode, useSyncExternalStore } from "react";
 import { createRoot } from "react-dom/client";
 
-import App from "./App.jsx";
+import Home from "./pages/Home.jsx";
 import Terms from "./pages/Terms.jsx";
 import Privacy from "./pages/Privacy.jsx";
 import NotFound from "./pages/NotFound.jsx";
@@ -45,7 +45,7 @@ function RouterView() {
     // For now, it's a placeholder for future functionality
   };
 
-  if (path === "/") return <App />;
+  if (path === "/") return <Home />;
   if (path === "/terms") return <Terms onDemoClick={handleDemoClick} />;
   if (path === "/privacy") return <Privacy onDemoClick={handleDemoClick} />;
 

@@ -41,11 +41,11 @@ export default function Nav({ onDemoClick }) {
         </a>
       </nav>
 
-      {/* Right side: Demo button + Mobile menu button */}
+      {/* Right side: Demo button (desktop only) + Mobile menu button */}
       <div className="flex items-center gap-3 ml-auto">
         <Button
           variant="outline"
-          className="bg-white text-black border-black hover:bg-black/5"
+          className="hidden md:flex bg-white text-black border-black hover:bg-black/5"
           onClick={onDemoClick}
         >
           Get a Demo
@@ -67,7 +67,7 @@ export default function Nav({ onDemoClick }) {
 
       {/* Mobile menu (drawer) */}
       {mobileMenuOpen && (
-        <div className="md:hidden border-t border-black/10 dark:border-white/10 absolute top-16 left-0 right-0 bg-white/70 dark:bg-black/40 backdrop-blur">
+        <div className="md:hidden border-t border-black/10 dark:border-white/10 absolute top-16 left-0 right-0 bg-white dark:bg-black">
           <nav className="mx-auto max-w-7xl px-6 py-4 flex flex-col gap-4">
             {navLinks.map((link) => (
               <a
@@ -89,6 +89,18 @@ export default function Nav({ onDemoClick }) {
               Docs
               <ExternalLink className="w-4 h-4" />
             </a>
+            <div className="pt-2 border-t border-black/10 dark:border-white/10">
+              <Button
+                variant="outline"
+                className="bg-white text-black border-black hover:bg-black/5"
+                onClick={() => {
+                  onDemoClick();
+                  closeMobileMenu();
+                }}
+              >
+                Get a Demo
+              </Button>
+            </div>
           </nav>
         </div>
       )}

@@ -1,4 +1,4 @@
-import React, { StrictMode } from "react";
+import React, { StrictMode, useState } from "react";
 import { createRoot } from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
@@ -6,22 +6,24 @@ import Home from "./pages/Home.jsx";
 import Terms from "./pages/Terms.jsx";
 import Privacy from "./pages/Privacy.jsx";
 import NotFound from "./pages/NotFound.jsx";
+import { RequestDemoModal } from "./components/DemoModals.jsx";
+import { DemoFormProvider } from "./context/DemoFormContext.jsx";
 
 import "./index.css";
 
-const handleDemoClick = () => {
-  // Demo click handler can be implemented here
-  // For now, it's a placeholder for future functionality
-};
-
 function App() {
+  const [isFormOpen, setIsFormOpen] = useState(false);
+
   return (
-    <Routes>
-      <Route path="/" element={<Home onDemoClick={handleDemoClick} />} />
-      <Route path="/terms" element={<Terms onDemoClick={handleDemoClick} />} />
-      <Route path="/privacy" element={<Privacy onDemoClick={handleDemoClick} />} />
-      <Route path="*" element={<NotFound onDemoClick={handleDemoClick} />} />
-    </Routes>
+    <DemoFormProvider isOpen={isFormOpen} onOpen={() => setIsFormOpen(true)}>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/terms" element={<Terms />} />
+        <Route path="/privacy" element={<Privacy />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+      <RequestDemoModal open={isFormOpen} onClose={() => setIsFormOpen(false)} />
+    </DemoFormProvider>
   );
 }
 

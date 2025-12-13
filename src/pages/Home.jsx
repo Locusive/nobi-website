@@ -21,6 +21,7 @@ import {
 import ScrollPreview from "../components/ScrollPreview";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import { useDemoForm } from "../context/DemoFormContext";
 
 
 // ===== feature flags (hide sections/links without deleting code) =====
@@ -2095,29 +2096,28 @@ function RequestDemoModal({ open, onClose }) {
 }
 
 export default function App() {
-  const [isFormOpen, setIsFormOpen] = useState(false);
   const [isVideoOpen, setIsVideoOpen] = useState(false);
+  const { onOpen: onOpenForm } = useDemoForm();
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-white to-slate-50 dark:from-[#0a0a0a] dark:to-black text-black dark:text-white">
-      <Header onDemoClick={() => setIsFormOpen(true)} />
+      <Header />
 
-     <Hero onOpenForm={() => setIsFormOpen(true)} onOpenVideo={() => setIsVideoOpen(true)} />
+      <Hero onOpenForm={onOpenForm} onOpenVideo={() => setIsVideoOpen(true)} />
      <UseCaseShowcase />
 
 <Features />
 <Results />
-<Insights onOpenForm={() => setIsFormOpen(true)} />
+<Insights onOpenForm={onOpenForm} />
 <Testimonial />
 <HowItWorks />
 
 {SHOW_PRICING && <Pricing />}
 
-<FAQ />
-<Footer />
+      <FAQ />
+      <Footer />
 
-      {/* Modals */}
-      <RequestDemoModal open={isFormOpen} onClose={() => setIsFormOpen(false)} />
+      {/* Video Modal */}
       <VideoModal
         open={isVideoOpen}
         onClose={() => setIsVideoOpen(false)}

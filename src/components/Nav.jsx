@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import { Menu, X, ExternalLink } from "lucide-react";
 import Button from "./Button";
+import { useDemoForm } from "../context/DemoFormContext";
 
 const SHOW_PRICING = false;
 
-export default function Nav({ onDemoClick }) {
+export default function Nav() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { onOpen } = useDemoForm();
 
   const navLinks = [
     { label: "How Nobi Helps", href: "#use-cases" },
@@ -46,7 +48,7 @@ export default function Nav({ onDemoClick }) {
         <Button
           variant="outline"
           className="hidden md:flex bg-white text-black border-black hover:bg-black/5"
-          onClick={onDemoClick}
+          onClick={onOpen}
         >
           Get a Demo
         </Button>
@@ -94,7 +96,7 @@ export default function Nav({ onDemoClick }) {
                 variant="outline"
                 className="bg-white text-black border-black hover:bg-black/5"
                 onClick={() => {
-                  onDemoClick();
+                  onOpen();
                   closeMobileMenu();
                 }}
               >

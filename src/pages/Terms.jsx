@@ -7,9 +7,9 @@ const SHORT_NAME = "Nobi";
 const EFFECTIVE = "October 1, 2025";
 const CONTACT = "legal@nobi.ai";
 
-export default function Terms({ onDemoClick }) {
+export default function Terms() {
   return (
-    <PageLayout onDemoClick={onDemoClick}>
+    <PageLayout>
       <div className="bg-gradient-to-b from-white to-slate-50 dark:from-[#0a0a0a] dark:to-black text-black dark:text-white py-16">
         <div className="mx-auto max-w-3xl px-6">
         <header className="mb-10">

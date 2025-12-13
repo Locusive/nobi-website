@@ -2,7 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import PageLayout from "../components/PageLayout";
 
-function NotFound({ onDemoClick }) {
+function NotFound() {
   const navigate = useNavigate();
 
   React.useEffect(() => {
@@ -18,7 +18,7 @@ function NotFound({ onDemoClick }) {
   };
 
   return (
-    <PageLayout onDemoClick={onDemoClick}>
+    <PageLayout>
       <main className="bg-gradient-to-b from-white to-slate-50 dark:from-[#0a0a0a] dark:to-black text-black dark:text-white min-h-screen flex items-center">
       <div className="mx-auto max-w-2xl px-6 py-28 text-center">
         <p className="text-sm font-semibold text-fuchsia-600">404</p>

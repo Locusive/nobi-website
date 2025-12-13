@@ -1,7 +1,10 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import PageLayout from "../components/PageLayout";
 
-function NotFound({ requestedPath = "", onNavigateHome, onDemoClick }) {
+function NotFound({ onDemoClick }) {
+  const navigate = useNavigate();
+
   React.useEffect(() => {
     const previousTitle = document.title;
     document.title = "Page not found | Nobi";
@@ -10,14 +13,8 @@ function NotFound({ requestedPath = "", onNavigateHome, onDemoClick }) {
     };
   }, []);
 
-  const displayPath = requestedPath && requestedPath !== "/" ? requestedPath : "this page";
-
   const handleNavigateHome = () => {
-    if (typeof onNavigateHome === "function") {
-      onNavigateHome();
-    } else {
-      window.location.href = "/";
-    }
+    navigate("/");
   };
 
   return (

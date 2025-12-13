@@ -172,7 +172,7 @@ export function RequestDemoModal({ open, onClose }) {
       <button className="absolute inset-0 bg-black/60 backdrop-blur-sm" aria-label="Close form" onClick={onClose} />
       <div className="relative w-full max-w-xl rounded-2xl bg-white dark:bg-zinc-900 p-6 shadow-2xl">
         <div className="flex items-center justify-between">
-          <h2 className="text-xl font-semibold">Try it on your store</h2>
+          <h2 className="text-xl font-semibold">Try it on your site</h2>
           <button
             onClick={onClose}
             className="inline-flex items-center rounded-full bg-black/5 dark:bg-white/10 px-2 py-1 hover:opacity-80"
@@ -187,68 +187,64 @@ export function RequestDemoModal({ open, onClose }) {
             {/* honeypot */}
             <input type="text" name="botcheck" value={form.botcheck} onChange={update} className="hidden" tabIndex={-1} autoComplete="off" />
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              <div>
-                <label className="text-sm block mb-1">Name</label>
-                <input
-                  name="name"
-                  value={form.name}
-                  onChange={update}
-                  required
-                  className="w-full rounded-xl border border-black/10 dark:border-white/10 bg-transparent px-3 py-2 outline-none"
-                />
-              </div>
-              <div>
-                <label className="text-sm block mb-1">Email</label>
-                <input
-                  name="email"
-                  type="email"
-                  value={form.email}
-                  onChange={update}
-                  required
-                  className="w-full rounded-xl border border-black/10 dark:border-white/10 bg-transparent px-3 py-2 outline-none"
-                />
-              </div>
+            <div>
+              <label className="text-sm block mb-1">Name</label>
+              <input
+                name="name"
+                value={form.name}
+                onChange={update}
+                required
+                className="w-full rounded-xl border border-black/10 dark:border-white/10 bg-transparent px-3 py-2 outline-none"
+              />
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              <div>
-                <label className="text-sm block mb-1">Company</label>
-                <input
-                  name="company"
-                  value={form.company}
-                  onChange={update}
-                  className="w-full rounded-xl border border-black/10 dark:border-white/10 bg-transparent px-3 py-2 outline-none"
-                />
-              </div>
-              <div>
-                <label className="text-sm block mb-1">Website</label>
-                <input
-                  name="website"
-                  value={form.website}
-                  onChange={update}
-                  placeholder="www.yoursite.com"
-                  className="w-full rounded-xl border border-black/10 dark:border-white/10 bg-transparent px-3 py-2 outline-none"
-                />
-              </div>
+            <div>
+              <label className="text-sm block mb-1">Email</label>
+              <input
+                name="email"
+                type="email"
+                value={form.email}
+                onChange={update}
+                required
+                className="w-full rounded-xl border border-black/10 dark:border-white/10 bg-transparent px-3 py-2 outline-none"
+              />
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              <div>
-                <label className="text-sm block mb-1">Platform (optional, for ecom businesses)</label>
-                <select
-                  name="platform"
-                  value={form.platform}
-                  onChange={update}
-                  className="w-full rounded-xl border border-black/10 dark:border-white/10 bg-transparent px-3 py-2 outline-none"
-                >
-                  <option>Shopify</option>
-                  <option>Headless</option>
-                  <option>Magento</option>
-                  <option>BigCommerce</option>
-                  <option>Other</option>
-                </select>
-              </div>
+            <div>
+              <label className="text-sm block mb-1">Company</label>
+              <input
+                name="company"
+                value={form.company}
+                onChange={update}
+                className="w-full rounded-xl border border-black/10 dark:border-white/10 bg-transparent px-3 py-2 outline-none"
+              />
+            </div>
+
+            <div>
+              <label className="text-sm block mb-1">Website</label>
+              <input
+                name="website"
+                value={form.website}
+                onChange={update}
+                placeholder="www.yoursite.com"
+                className="w-full rounded-xl border border-black/10 dark:border-white/10 bg-transparent px-3 py-2 outline-none"
+              />
+            </div>
+
+            <div>
+              <label className="text-sm block mb-1">Platform (optional, for ecom businesses)</label>
+              <select
+                name="platform"
+                value={form.platform}
+                onChange={update}
+                className="w-full rounded-xl border border-black/10 dark:border-white/10 bg-transparent px-3 py-2 outline-none"
+              >
+                <option>Shopify</option>
+                <option>Headless</option>
+                <option>Magento</option>
+                <option>BigCommerce</option>
+                <option>Other</option>
+              </select>
             </div>
 
             <div>

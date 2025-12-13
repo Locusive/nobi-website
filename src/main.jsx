@@ -1,5 +1,6 @@
-import React, { StrictMode, useSyncExternalStore } from "react";
+import React, { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import Home from "./pages/Home.jsx";
 import Terms from "./pages/Terms.jsx";
@@ -8,52 +9,26 @@ import NotFound from "./pages/NotFound.jsx";
 
 import "./index.css";
 
-// --- tiny built-in router (no react-router-dom needed) ---
-const getPath = () => window.location.pathname;
+const handleDemoClick = () => {
+  // Demo click handler can be implemented here
+  // For now, it's a placeholder for future functionality
+};
 
-function normalizePathname(pathname) {
-  if (!pathname || pathname === "/") return "/";
-  return pathname.toLowerCase().replace(/\/+$/, "") || "/";
-}
-
-// Subscribe to browser navigation changes
-function subscribe(callback) {
-  window.addEventListener("popstate", callback);
-  return () => window.removeEventListener("popstate", callback);
-}
-
-// Optional helper for client-side nav (use on buttons/links if you want)
-export function navigate(to) {
-  if (to !== window.location.pathname) {
-    window.history.pushState({}, "", to);
-    // Trigger a popstate-like update for our store
-    const popStateEvent = new PopStateEvent("popstate");
-    dispatchEvent(popStateEvent);
-  }
-}
-
-function usePathname() {
-  return useSyncExternalStore(subscribe, getPath, getPath);
-}
-
-function RouterView() {
-  const rawPath = usePathname();
-  const path = normalizePathname(rawPath);
-
-  const handleDemoClick = () => {
-    // Demo click handler can be implemented here
-    // For now, it's a placeholder for future functionality
-  };
-
-  if (path === "/") return <Home />;
-  if (path === "/terms") return <Terms onDemoClick={handleDemoClick} />;
-  if (path === "/privacy") return <Privacy onDemoClick={handleDemoClick} />;
-
-  return <NotFound requestedPath={rawPath} onNavigateHome={() => navigate("/")} onDemoClick={handleDemoClick} />;
+function App() {
+  return (
+    <Routes>
+      <Route path="/" element={<Home onDemoClick={handleDemoClick} />} />
+      <Route path="/terms" element={<Terms onDemoClick={handleDemoClick} />} />
+      <Route path="/privacy" element={<Privacy onDemoClick={handleDemoClick} />} />
+      <Route path="*" element={<NotFound onDemoClick={handleDemoClick} />} />
+    </Routes>
+  );
 }
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <RouterView />
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
   </StrictMode>
 );

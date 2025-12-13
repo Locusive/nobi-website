@@ -8,7 +8,7 @@ const isDevelopment = process.env.NODE_ENV === 'development';
 if (isProduction) {
   mixpanel.init(MIXPANEL_TOKEN, {
     debug: false,
-    track_pageview: false,
+    track_pageview: true,
     persistence: 'localStorage',
     autocapture: false,
     ignore_dnt: true

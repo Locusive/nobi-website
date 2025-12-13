@@ -56,7 +56,7 @@ export default function Nav() {
           className="hidden md:flex bg-white text-black border-black hover:bg-black/5"
           onClick={handleDemoClick}
         >
-          Get a Demo
+          Try Nobi on your site
         </Button>
 
         {/* Hamburger menu (visible on mobile) */}
@@ -106,7 +106,7 @@ export default function Nav() {
                   closeMobileMenu();
                 }}
               >
-                Get a Demo
+                Try Nobi on your site
               </Button>
             </div>
           </nav>

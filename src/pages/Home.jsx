@@ -802,6 +802,82 @@ function HeroSkeletonLine({ w = "60%" }) {
 // --- HERO PREVIEW HELPERS (names are unique to avoid clashes) ---
 
 
+// Where we help carousel for mobile
+const WHERE_WE_HELP_ITEMS = [
+  {
+    id: "search",
+    icon: SearchIcon,
+    text: "Visitors can't find what they want",
+  },
+  {
+    id: "questions",
+    icon: MessageCircleQuestion,
+    text: "They get stuck with questions",
+  },
+  {
+    id: "proof",
+    icon: BarChart3,
+    text: "They bounce and disappear",
+  },
+];
+
+function WhereWeHelpCarousel() {
+  const scrollContainerRef = React.useRef(null);
+
+  return (
+    <div className="mt-8 space-y-3">
+      <p className="text-xs font-semibold uppercase tracking-[0.28em] text-black/45 dark:text-white/45">
+        Where we help
+      </p>
+
+      {/* Desktop: all items in one row */}
+      <div className="hidden sm:flex flex-nowrap justify-center gap-2.5">
+        {WHERE_WE_HELP_ITEMS.map(({ id, icon: Icon, text }) => (
+          <div
+            key={id}
+            className="inline-flex items-center gap-2 rounded-full border border-black/10 dark:border-white/10 bg-white/95 dark:bg-white/5 px-3 py-1.5 text-[11px] text-black/75 dark:text-white/75 whitespace-nowrap"
+          >
+            <span className="inline-flex h-4 w-4 items-center justify-center rounded-full bg-black/5 dark:bg-white/10">
+              <Icon className="h-2.5 w-2.5" />
+            </span>
+            <span>{text}</span>
+          </div>
+        ))}
+      </div>
+
+      {/* Mobile: scrollable carousel (no scrollbar) */}
+      <div className="sm:hidden flex flex-col gap-3">
+        <div
+          ref={scrollContainerRef}
+          className="flex gap-2 pb-2 overflow-x-auto snap-x snap-mandatory"
+          style={{
+            scrollbarWidth: 'none',
+            msOverflowStyle: 'none',
+          }}
+        >
+          {WHERE_WE_HELP_ITEMS.map(({ id, icon: Icon, text }) => (
+            <div
+              key={id}
+              className="flex-shrink-0 inline-flex items-center gap-2 rounded-full border border-black/10 dark:border-white/10 bg-white/95 dark:bg-white/5 px-3 py-1.5 text-[10px] text-black/75 dark:text-white/75 whitespace-nowrap snap-center"
+            >
+              <span className="inline-flex h-4 w-4 items-center justify-center rounded-full bg-black/5 dark:bg-white/10">
+                <Icon className="h-2.5 w-2.5" />
+              </span>
+              <span>{text}</span>
+            </div>
+          ))}
+        </div>
+        {/* CSS to hide scrollbar */}
+        <style>{`
+          div[style*="scrollbarWidth"] ::-webkit-scrollbar {
+            display: none;
+          }
+        `}</style>
+      </div>
+    </div>
+  );
+}
+
 function Hero({ onOpenForm, onOpenVideo }) {
   const [searchMode, setSearchMode] = React.useState("ai");
   const [playKey, setPlayKey] = React.useState(-1);
@@ -828,14 +904,13 @@ function Hero({ onOpenForm, onOpenVideo }) {
           </h1>
 
           <p className="mt-4 text-lg text-black/70 dark:text-white/70">
-              Our assistant handles searches, Q&A, and help requests for <strong>provably more conversions</strong>
+              Most visitors leave when they can’t find the right product or get answers. Nobi lives across search, product, and key pages to guide them to conversions, all with tracking and A/B tests.
           </p>
 
           {/* Same-row CTAs (works on mobile too) */}
-          <div className="grid grid-cols-[1fr_auto] items-center gap-3 max-w-xl mx-auto">
+          <div className="grid grid-cols-[1fr_auto] items-center gap-1 max-w-xl mx-auto">
             <Button size="lg" onClick={onOpenForm} className="w-full">
-              <span>Set up a demo</span>
-              <ArrowRight className="h-5 w-5 -mr-1" aria-hidden="true" />
+              <span>Try Nobi on your site</span>
             </Button>
            <Button
               size="lg"
@@ -848,6 +923,9 @@ function Hero({ onOpenForm, onOpenVideo }) {
               <span className="hidden sm:inline">How it works in 60 seconds</span>
             </Button>
           </div>
+
+          {/* Where we help carousel */}
+          <WhereWeHelpCarousel />
         </div>
 
         {/* Search bar */}

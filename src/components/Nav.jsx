@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Menu, X, ExternalLink } from "lucide-react";
 import Button from "./Button";
 import { useDemoForm } from "../context/DemoFormContext";
+import { trackDemoFormOpened } from "../utils/eventTracker";
 
 const SHOW_PRICING = false;
 
@@ -18,6 +19,11 @@ export default function Nav() {
   ];
 
   const closeMobileMenu = () => setMobileMenuOpen(false);
+
+  const handleDemoClick = () => {
+    trackDemoFormOpened();
+    onOpen();
+  };
 
   return (
     <>
@@ -48,7 +54,7 @@ export default function Nav() {
         <Button
           variant="outline"
           className="hidden md:flex bg-white text-black border-black hover:bg-black/5"
-          onClick={onOpen}
+          onClick={handleDemoClick}
         >
           Get a Demo
         </Button>
@@ -96,7 +102,7 @@ export default function Nav() {
                 variant="outline"
                 className="bg-white text-black border-black hover:bg-black/5"
                 onClick={() => {
-                  onOpen();
+                  handleDemoClick();
                   closeMobileMenu();
                 }}
               >

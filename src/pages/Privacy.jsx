@@ -1,8 +1,8 @@
 import React from "react";
 import PageLayout from "../components/PageLayout";
 
-const Privacy = ({ onDemoClick }) => (
-  <PageLayout onDemoClick={onDemoClick}>
+const Privacy = () => (
+  <PageLayout>
     <main className="prose prose-lg mx-auto px-4 py-8">
     {/* Page Heading and Intro */}
     <h1 className="text-3xl font-bold mb-4">Privacy Policy</h1>

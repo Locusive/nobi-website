@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { ChevronDown } from "lucide-react";
+import { trackScrollPreviewClicked } from "../utils/eventTracker";
 
 export default function ScrollPreview({
   sections = [],
@@ -61,6 +62,7 @@ export default function ScrollPreview({
 
   const scrollToSection = () => {
     if (!preview) return;
+    trackScrollPreviewClicked(preview.label);
     const section = document.getElementById(preview.id);
     if (section) {
       section.scrollIntoView({ behavior: "smooth", block: "start" });

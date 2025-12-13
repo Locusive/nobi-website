@@ -2,7 +2,7 @@ import React from "react";
 import Logo from "./Logo";
 import Nav from "./Nav";
 
-export default function Header({ onDemoClick }) {
+export default function Header() {
   return (
     <header className="sticky top-0 z-40 border-b backdrop-blur bg-white/70 dark:bg-black/40">
       <div className="mx-auto max-w-7xl px-6 h-16 flex items-center gap-4 relative">
@@ -12,7 +12,7 @@ export default function Header({ onDemoClick }) {
         </a>
 
         {/* Navigation */}
-        <Nav onDemoClick={onDemoClick} />
+        <Nav />
       </div>
     </header>
   );

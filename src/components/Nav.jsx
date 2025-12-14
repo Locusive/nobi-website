@@ -11,11 +11,9 @@ export default function Nav() {
   const { onOpen } = useDemoForm();
 
   const navLinks = [
-    { label: "How Nobi Helps", href: "#use-cases" },
-    { label: "Features", href: "#features" },
-    { label: "How it works", href: "#how" },
-    ...(SHOW_PRICING ? [{ label: "Pricing", href: "#pricing" }] : []),
-    { label: "FAQ", href: "#faq" },
+    { label: "Home", href: "/" },
+    { label: "FAQs", href: "/faqs" },
+    { label: "Docs", href: "https://docs.nobi.ai", external: true },
   ];
 
   const closeMobileMenu = () => setMobileMenuOpen(false);
@@ -29,24 +27,19 @@ export default function Nav() {
     <>
       {/* Desktop nav (hidden on mobile) */}
       <nav className="hidden md:flex items-center gap-6 text-sm font-semibold absolute left-1/2 -translate-x-1/2">
-        {navLinks.map((link) => (
-          <a
-            key={link.href}
-            href={link.href}
-            className="hover:opacity-80"
-          >
-            {link.label}
-          </a>
-        ))}
-        <a
-          href="https://docs.nobi.ai"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="hover:opacity-80 flex items-center gap-1"
-        >
-          Docs
-          <ExternalLink className="w-4 h-4" />
-        </a>
+        {navLinks.map((link) => {
+          const common = { key: link.href, className: "hover:opacity-80 flex items-center gap-1" };
+          return link.external ? (
+            <a {...common} href={link.href} target="_blank" rel="noopener noreferrer">
+              {link.label}
+              <ExternalLink className="w-4 h-4" />
+            </a>
+          ) : (
+            <a {...common} href={link.href}>
+              {link.label}
+            </a>
+          );
+        })}
       </nav>
 
       {/* Right side: Demo button (desktop only) + Mobile menu button */}
@@ -81,22 +74,15 @@ export default function Nav() {
               <a
                 key={link.href}
                 href={link.href}
-                className="text-sm font-semibold hover:opacity-80 py-2"
+                className="text-sm font-semibold hover:opacity-80 py-2 flex items-center gap-1"
                 onClick={closeMobileMenu}
+                target={link.external ? "_blank" : undefined}
+                rel={link.external ? "noopener noreferrer" : undefined}
               >
                 {link.label}
+                {link.external && <ExternalLink className="w-4 h-4" />}
               </a>
             ))}
-            <a
-              href="https://docs.nobi.ai"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-sm font-semibold hover:opacity-80 py-2 flex items-center gap-1"
-              onClick={closeMobileMenu}
-            >
-              Docs
-              <ExternalLink className="w-4 h-4" />
-            </a>
             <div className="pt-2 border-t border-black/10 dark:border-white/10">
               <Button
                 variant="outline"

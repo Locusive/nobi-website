@@ -5,6 +5,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home.jsx";
 import Terms from "./pages/Terms.jsx";
 import Privacy from "./pages/Privacy.jsx";
+import FAQs from "./pages/FAQs.jsx";
 import NotFound from "./pages/NotFound.jsx";
 import { RequestDemoModal } from "./components/DemoModals.jsx";
 import { DemoFormProvider } from "./context/DemoFormContext.jsx";
@@ -20,6 +21,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/terms" element={<Terms />} />
         <Route path="/privacy" element={<Privacy />} />
+        <Route path="/faqs" element={<FAQs />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
       <RequestDemoModal open={isFormOpen} onClose={() => setIsFormOpen(false)} />

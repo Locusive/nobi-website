@@ -1,5 +1,6 @@
 import React from "react";
 import Logo from "./Logo";
+import { ExternalLink } from "lucide-react";
 
 const SHOW_PRICING = false; // Feature flag from App.jsx
 
@@ -12,19 +13,14 @@ export default function Footer() {
           © {new Date().getFullYear()} Nobi: a site assistant to help you grow
         </div>
         <div className="flex items-center gap-4 text-sm">
-          <a href="#features" className="hover:opacity-80">
-            Features
+          <a href="/" className="hover:opacity-80">
+            Home
           </a>
-          <a href="#how" className="hover:opacity-80">
-            How it Works
+          <a href="/faqs" className="hover:opacity-80">
+            FAQs
           </a>
-          {SHOW_PRICING && (
-            <a href="#pricing" className="hover:opacity-80">
-              Pricing
-            </a>
-          )}
-          <a href="#faq" className="hover:opacity-80">
-            FAQ
+          <a href="https://docs.nobi.ai" target="_blank" rel="noopener noreferrer" className="hover:opacity-80 flex items-center gap-1">
+            Docs <ExternalLink className="w-4 h-4" />
           </a>
           <a href="/terms" className="hover:opacity-80">
             Terms

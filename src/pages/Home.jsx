@@ -1,28 +1,26 @@
-import React, { useState, useEffect, useRef } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import React, {useEffect, useRef, useState} from "react";
+import {AnimatePresence, motion} from "framer-motion";
 import Marquee from "react-fast-marquee";
 import {
-  Sparkles,
-  Search as SearchIcon,
-  LayoutGrid,
-  MessageCircleQuestion,
-  MousePointerClick,
-  ArrowRight,
-  Heart,
-  CheckCircle2,
-  ShoppingCart,
-  Filter,
-  BarChart3,
-  Quote,
-  PlayCircle,
-  ChevronDown,
-  ExternalLink,
+    ArrowRight,
+    BarChart3,
+    CheckCircle2,
+    Filter,
+    Heart,
+    LayoutGrid,
+    MessageCircleQuestion,
+    MousePointerClick,
+    PlayCircle,
+    Quote,
+    Search as SearchIcon,
+    Sparkles,
 } from "lucide-react";
 import ScrollPreview from "../components/ScrollPreview";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import { VideoModal } from "../components/VideoModal";
-import { useDemoForm } from "../context/DemoFormContext";
+import FAQ, { FAQ_ITEMS } from "../components/FAQ";
+import {VideoModal} from "../components/VideoModal";
+import {useDemoForm} from "../context/DemoFormContext";
 
 
 // ===== feature flags (hide sections/links without deleting code) =====
@@ -817,7 +815,7 @@ const WHERE_WE_HELP_ITEMS = [
   {
     id: "proof",
     icon: BarChart3,
-    text: "They bounce and disappear",
+    text: "High-intent visitors bounce",
   },
 ];
 
@@ -1626,48 +1624,6 @@ function Pricing() {
   );
 }
 
-function FAQ() {
-  const qas = [
-    { q: "How long does install take?", a: "Typically ~15 minutes for Shopify themes and then it depends on how much you want to customize. Headless installs depend on your stack." },
-    { q: "Can we A/B test it?", a: "Yes. Nobi easily hooks into your A/B testing solution or we can build something custom for you." },
-   { q: "What can I do with Nobi?", a: "Nobi is really good at understanding natural language and showing relevant products quickly. So we recommend enabling it in your search bar, on collection pages, and anywhere else where shoppers may prefer to just describe what they're looking for." },
-   { q: "Does Nobi replace my current search?", a: "Up to you. Nobi can become your default search bar experience or layers on top so you can keep your existing keyword engine and optionally enable AI." },
-  ];
-
-  return (
-    <section id="faq" className="scroll-mt-20 py-20 border-t border-black/5 dark:border-white/5">
-      <div className="mx-auto max-w-6xl px-6">
-        <h2 className="text-3xl font-semibold mb-8">You're not the first to ask</h2>
-
-        <div className="space-y-4">
-          {qas.map((f) => (
-            <details
-              key={f.q}
-              className="group rounded-2xl border border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/5 shadow-sm"
-            >
-              {/* summary row */}
-              <summary
-                className="list-none cursor-pointer flex items-center justify-between gap-4 px-5 py-4 font-medium"
-              >
-                <span>{f.q}</span>
-                <ChevronDown
-                  className="h-5 w-5 text-black/40 dark:text-white/60 transition-transform duration-300 group-open:rotate-180"
-                  aria-hidden="true"
-                />
-              </summary>
-
-              {/* answer */}
-              <div className="px-5 pb-5 -mt-1">
-                <p className="text-sm text-black/70 dark:text-white/70">{f.a}</p>
-              </div>
-            </details>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
 // Simple horizontal bar
 function Bar({ value, maxValue }) {
   const pct = Math.max(0, Math.min(100, Math.round((value / maxValue) * 100)));
@@ -2094,7 +2050,11 @@ export default function App() {
 
 {SHOW_PRICING && <Pricing />}
 
-      <FAQ />
+      <FAQ
+        limit={FAQ_ITEMS.length}
+        showBorderTop
+        padding="py-20"
+      />
       <Footer />
 
       {/* Video Modal */}

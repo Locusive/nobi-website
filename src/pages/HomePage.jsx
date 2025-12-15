@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from "react";
+import React, {useEffect, useRef, useState, useMemo} from "react";
 import {AnimatePresence, motion} from "framer-motion";
 import Marquee from "react-fast-marquee";
 import {
@@ -2035,8 +2035,24 @@ function RequestDemoModal({ open, onClose }) {
 }
 
 function LatestPosts() {
-  const recent = posts.slice(0, 3);
+  const featured = posts.filter((p) => p.meta.featured);
+  const nonFeatured = posts.filter((p) => !p.meta.featured);
+  const ordered = [...featured, ...nonFeatured].slice(0, 3);
+  const recent = ordered;
   if (!recent.length) return null;
+
+  const articleLd = useMemo(() => {
+    const origin = typeof window !== "undefined" ? window.location.origin : "https://nobi.ai";
+    return recent.map((post, index) => ({
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": post.meta.title,
+      "datePublished": post.meta.date,
+      "image": post.meta.heroImage || undefined,
+      "url": `${origin}/blog/${post.slug}`,
+      "position": index + 1,
+    }));
+  }, [recent]);
   return (
     <section className="scroll-mt-20 py-20 border-t border-black/5 dark:border-white/5">
       <div className="mx-auto max-w-6xl px-6">
@@ -2079,6 +2095,10 @@ function LatestPosts() {
             View all →
           </a>
         </div>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(articleLd.length === 1 ? articleLd[0] : articleLd) }}
+        />
       </div>
     </section>
   );

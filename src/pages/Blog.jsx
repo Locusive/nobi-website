@@ -1,10 +1,23 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useMemo } from "react";
 import PageLayout from "../components/PageLayout";
 import { posts } from "../content/utils/mdxPostLoader";
 
 export default function Blog() {
   useEffect(() => {
     document.title = "Blog | Nobi: a conversational site assistant to help you grow";
+  }, []);
+
+  const blogLd = useMemo(() => {
+    const origin = typeof window !== "undefined" ? window.location.origin : "https://nobi.ai";
+    return posts.map((post, index) => ({
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": post.meta.title,
+      "datePublished": post.meta.date,
+      "image": post.meta.heroImage || undefined,
+      "url": `${origin}/blog/${post.slug}`,
+      "position": index + 1,
+    }));
   }, []);
 
   return (
@@ -53,6 +66,11 @@ export default function Blog() {
             </a>
           ))}
         </div>
+
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(blogLd.length === 1 ? blogLd[0] : blogLd) }}
+        />
       </div>
     </PageLayout>
   );

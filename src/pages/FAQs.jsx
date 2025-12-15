@@ -1,8 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
 import PageLayout from "../components/PageLayout";
 import FAQ, { FAQ_ITEMS } from "../components/FAQ";
 
 export default function FAQs() {
+  useEffect(() => {
+    document.title = "FAQs | Nobi: a conversational site assistant to help you grow";
+  }, []);
+
   return (
     <PageLayout>
       <div className="bg-gradient-to-b from-white to-slate-50 dark:from-[#0a0a0a] dark:to-black text-black dark:text-white">

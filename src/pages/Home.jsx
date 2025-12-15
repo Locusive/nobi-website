@@ -2034,6 +2034,9 @@ function RequestDemoModal({ open, onClose }) {
 export default function App() {
   const [isVideoOpen, setIsVideoOpen] = useState(false);
   const { onOpen: onOpenForm } = useDemoForm();
+  useEffect(() => {
+    document.title = "Nobi: a conversational site assistant to help you grow";
+  }, []);
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-white to-slate-50 dark:from-[#0a0a0a] dark:to-black text-black dark:text-white">

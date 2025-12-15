@@ -10,7 +10,7 @@ export default function Footer() {
       <div className="mx-auto max-w-6xl px-6 flex flex-col sm:flex-row items-center justify-between gap-6">
         <Logo />
         <div className="text-sm text-black/60 dark:text-white/60">
-          © {new Date().getFullYear()} Nobi: a site assistant to help you grow
+          © {new Date().getFullYear()} Nobi: a conversational site assistant to help you grow
         </div>
         <div className="flex items-center gap-4 text-sm">
           <a href="/" className="hover:opacity-80">

@@ -2054,6 +2054,8 @@ export default function App() {
         limit={FAQ_ITEMS.length}
         showBorderTop
         padding="py-20"
+        columns={2}
+        headingAlign="center"
       />
       <Footer />
 

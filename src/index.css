@@ -78,6 +78,20 @@ html { scroll-behavior: smooth; }
   grid-template-columns: 0.55fr 1fr;
 }
 
+.faq-answer a {
+  text-decoration: underline;
+  color: inherit;
+  transition: color 0.15s ease;
+}
+
+.faq-answer a:hover {
+  color: #7c3aed; /* violet-600-ish */
+}
+
+.dark .faq-answer a:hover {
+  color: #a78bfa; /* violet-300-ish */
+}
+
 .placement-visual {
   min-height: 180px;
   border-radius: 18px;

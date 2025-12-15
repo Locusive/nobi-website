@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { MDXProvider } from "@mdx-js/react";
 import ArticleLayout from "../components/ArticleLayout";
-import { getPostBySlug } from "../content/posts";
+import { getPostBySlug } from "../content/utils/mdxPostLoader";
 
 const components = {
   // Add any custom MDX component mappings here

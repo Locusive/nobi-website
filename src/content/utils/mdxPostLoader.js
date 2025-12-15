@@ -1,6 +1,6 @@
-// Centralized posts registry built from MDX files in this folder.
+// Centralized posts registry built from MDX files in ../posts.
 // Each MDX file should export `meta` and a default component.
-const modules = import.meta.glob('./*.mdx', { eager: true });
+const modules = import.meta.glob('../posts/*.mdx', { eager: true });
 
 export const posts = Object.entries(modules)
   .map(([path, mod]) => {

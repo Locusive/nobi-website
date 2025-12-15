@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import PageLayout from "../components/PageLayout";
-import { posts } from "../content/posts";
+import { posts } from "../content/utils/mdxPostLoader";
 
 export default function Blog() {
   useEffect(() => {

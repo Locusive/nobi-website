@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from "react";
+import React, {useEffect, useRef, useState, useMemo} from "react";
 import {AnimatePresence, motion} from "framer-motion";
 import Marquee from "react-fast-marquee";
 import {
@@ -22,6 +22,7 @@ import FAQ, { FAQ_ITEMS } from "../components/FAQ";
 import { posts } from "../content/utils/mdxPostLoader";
 import {VideoModal} from "../components/VideoModal";
 import {useDemoForm} from "../context/DemoFormContext";
+import DemoCTAButton from "../components/DemoCTAButton";
 
 
 // ===== feature flags (hide sections/links without deleting code) =====
@@ -816,7 +817,7 @@ const WHERE_WE_HELP_ITEMS = [
   {
     id: "proof",
     icon: BarChart3,
-    text: "High-intent visitors bounce",
+    text: "They bounce when they would have converted",
   },
 ];
 
@@ -824,7 +825,7 @@ function WhereWeHelpCarousel() {
   const scrollContainerRef = React.useRef(null);
 
   return (
-    <div className="mt-8 space-y-3">
+    <div className="mt-14 space-y-3 text-center">
       <p className="text-xs font-semibold uppercase tracking-[0.28em] text-black/45 dark:text-white/45">
         Where we help
       </p>
@@ -908,9 +909,7 @@ function Hero({ onOpenForm, onOpenVideo }) {
 
           {/* Same-row CTAs (works on mobile too) */}
           <div className="grid grid-cols-[1fr_auto] items-center gap-1 max-w-xl mx-auto">
-            <Button size="lg" onClick={onOpenForm} className="w-full">
-              <span>Try Nobi on your site</span>
-            </Button>
+            <DemoCTAButton />
            <Button
               size="lg"
               variant="ghost"
@@ -923,12 +922,14 @@ function Hero({ onOpenForm, onOpenVideo }) {
             </Button>
           </div>
 
-          {/* Where we help carousel */}
+          </div>
+
+        <div className="mt-16">
           <WhereWeHelpCarousel />
         </div>
 
         {/* Search bar */}
-        <div className="mt-16 max-w-4xl mx-auto">
+        <div className="mt-6 max-w-4xl mx-auto">
           <div className="p-4 rounded-2xl border border-fuchsia-200 bg-gradient-to-r from-fuchsia-50 to-pink-50 shadow-md">
             <DualModeSearchBar
               locked                                 // 👈 NEW: display-only
@@ -1829,14 +1830,10 @@ function Insights({ onOpenForm }) {
 
         {/* CTA row */}
         <div className="mt-8 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
-          <Button
-   size="lg"
-   className="w-full sm:w-auto"
-   onClick={onOpenForm}
- >
+          <DemoCTAButton className="sm:w-auto">
    <span>See how insights are generated</span>
    <ArrowRight className="h-5 w-5 -mr-1" aria-hidden="true" />
- </Button>
+ </DemoCTAButton>
         </div>
       </div>
     </section>
@@ -2033,9 +2030,24 @@ function RequestDemoModal({ open, onClose }) {
 }
 
 function LatestPosts() {
-  // const recent = posts.slice(0, 3);
-    const recent = [];
+  const featured = posts.filter((p) => p.meta.featured);
+  const nonFeatured = posts.filter((p) => !p.meta.featured);
+  const ordered = [...featured, ...nonFeatured].slice(0, 3);
+  const recent = ordered;
   if (!recent.length) return null;
+
+  const articleLd = useMemo(() => {
+    const origin = typeof window !== "undefined" ? window.location.origin : "https://nobi.ai";
+    return recent.map((post, index) => ({
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": post.meta.title,
+      "datePublished": post.meta.date,
+      "image": post.meta.heroImage || undefined,
+      "url": `${origin}/blog/${post.slug}`,
+      "position": index + 1,
+    }));
+  }, [recent]);
   return (
     <section className="scroll-mt-20 py-20 border-t border-black/5 dark:border-white/5">
       <div className="mx-auto max-w-6xl px-6">
@@ -2078,6 +2090,10 @@ function LatestPosts() {
             View all →
           </a>
         </div>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(articleLd.length === 1 ? articleLd[0] : articleLd) }}
+        />
       </div>
     </section>
   );

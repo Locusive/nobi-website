@@ -4,9 +4,7 @@ import { MDXProvider } from "@mdx-js/react";
 import ArticleLayout from "../components/ArticleLayout";
 import { getPostBySlug } from "../content/utils/mdxPostLoader";
 
-const components = {
-  // Add any custom MDX component mappings here
-};
+const components = {};
 
 export default function BlogPost() {
   const { slug } = useParams();

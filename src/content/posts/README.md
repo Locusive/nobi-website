@@ -7,6 +7,7 @@ Each article lives in this folder as an `.mdx` file. We use an exported `meta` o
 - `slug`: URL slug (`/blog/<slug>`). Use a clean slug without dates or spaces; file names can include dates for your own sorting.
 - `date`: ISO date (`YYYY-MM-DD`).
 - `excerpt`: 1–2 sentence summary.
+- `featured`: `true` to prioritize on the homepage (shown before others; homepage shows up to 3 posts total).
 
 ## Optional `meta` fields
 - `tags`: Array of strings.

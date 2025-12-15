@@ -14,6 +14,7 @@ export const posts = Object.entries(modules)
         tags: mod.meta?.tags || [],
         author: mod.meta?.author || 'Nobi Team',
         heroImage: mod.meta?.heroImage || null, // can be imported asset or URL string
+        featured: Boolean(mod.meta?.featured),
         draft: Boolean(mod.meta?.draft),
       },
       Component: mod.default,

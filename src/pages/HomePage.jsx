@@ -22,6 +22,7 @@ import FAQ, { FAQ_ITEMS } from "../components/FAQ";
 import { posts } from "../content/utils/mdxPostLoader";
 import {VideoModal} from "../components/VideoModal";
 import {useDemoForm} from "../context/DemoFormContext";
+import DemoCTAButton from "../components/DemoCTAButton";
 
 
 // ===== feature flags (hide sections/links without deleting code) =====
@@ -908,13 +909,7 @@ function Hero({ onOpenForm, onOpenVideo }) {
 
           {/* Same-row CTAs (works on mobile too) */}
           <div className="grid grid-cols-[1fr_auto] items-center gap-1 max-w-xl mx-auto">
-            <Button
-              size="lg"
-              className="w-full"
-              onClick={onOpenForm}
-            >
-              <span>Try Nobi on your site</span>
-            </Button>
+            <DemoCTAButton />
            <Button
               size="lg"
               variant="ghost"
@@ -1835,14 +1830,10 @@ function Insights({ onOpenForm }) {
 
         {/* CTA row */}
         <div className="mt-8 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
-          <Button
-   size="lg"
-   className="w-full sm:w-auto"
-   onClick={onOpenForm}
- >
+          <DemoCTAButton className="sm:w-auto">
    <span>See how insights are generated</span>
    <ArrowRight className="h-5 w-5 -mr-1" aria-hidden="true" />
- </Button>
+ </DemoCTAButton>
         </div>
       </div>
     </section>

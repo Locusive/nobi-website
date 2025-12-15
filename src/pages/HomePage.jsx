@@ -908,7 +908,11 @@ function Hero({ onOpenForm, onOpenVideo }) {
 
           {/* Same-row CTAs (works on mobile too) */}
           <div className="grid grid-cols-[1fr_auto] items-center gap-1 max-w-xl mx-auto">
-            <Button size="lg" onClick={onOpenForm} className="w-full">
+            <Button
+              size="lg"
+              className="w-full"
+              onClick={onOpenForm}
+            >
               <span>Try Nobi on your site</span>
             </Button>
            <Button

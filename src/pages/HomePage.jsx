@@ -19,6 +19,7 @@ import ScrollPreview from "../components/ScrollPreview";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import FAQ, { FAQ_ITEMS } from "../components/FAQ";
+import { posts } from "../content/utils/mdxPostLoader";
 import {VideoModal} from "../components/VideoModal";
 import {useDemoForm} from "../context/DemoFormContext";
 
@@ -2031,7 +2032,58 @@ function RequestDemoModal({ open, onClose }) {
   );
 }
 
-export default function App() {
+function LatestPosts() {
+  // const recent = posts.slice(0, 3);
+    const recent = [];
+  if (!recent.length) return null;
+  return (
+    <section className="scroll-mt-20 py-20 border-t border-black/5 dark:border-white/5">
+      <div className="mx-auto max-w-6xl px-6">
+        <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
+          <div>
+            <p className="text-sm font-semibold text-fuchsia-600">Blog</p>
+            <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight mt-2">Latest from Nobi</h2>
+            <p className="mt-2 text-black/70 dark:text-white/70 max-w-2xl">Playbooks and experiments for conversational shopping.</p>
+          </div>
+        </div>
+        <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {recent.map((post) => (
+            <a
+              key={post.slug}
+              href={`/blog/${post.slug}`}
+              className="group rounded-2xl border border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/5 hover:-translate-y-1 hover:shadow-lg transition-all overflow-hidden"
+            >
+              {post.meta.heroImage && (
+                <div className="aspect-[16/9] w-full overflow-hidden">
+                  <img
+                    src={post.meta.heroImage}
+                    alt=""
+                    className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-[1.02]"
+                    loading="lazy"
+                  />
+                </div>
+              )}
+              <div className="p-5">
+                <h3 className="mt-2 text-xl font-semibold group-hover:text-purple-600 transition-colors">{post.meta.title}</h3>
+                <p className="mt-2 text-sm text-black/70 dark:text-white/70 line-clamp-3">{post.meta.excerpt}</p>
+                <div className="mt-3 text-xs text-black/50 dark:text-white/60">
+                  {new Date(post.meta.date).toLocaleDateString(undefined, { month: "short", day: "numeric", year: "numeric" })}
+                </div>
+              </div>
+            </a>
+          ))}
+        </div>
+        <div className="mt-8 flex justify-center">
+          <a href="/blog" className="text-sm font-semibold text-black hover:text-purple-600 underline">
+            View all →
+          </a>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+export default function HomePage() {
   const [isVideoOpen, setIsVideoOpen] = useState(false);
   const { onOpen: onOpenForm } = useDemoForm();
   useEffect(() => {
@@ -2040,42 +2092,39 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-white to-slate-50 dark:from-[#0a0a0a] dark:to-black text-black dark:text-white">
-      <Header />
+        <Header />
+        <Hero onOpenForm={onOpenForm} onOpenVideo={() => setIsVideoOpen(true)} />
+        <UseCaseShowcase />
+        <Features />
+        <Results />
+        <Insights onOpenForm={onOpenForm} />
+        <Testimonial />
+        <HowItWorks />
+        <LatestPosts />
+        {SHOW_PRICING && <Pricing />}
+        <FAQ
+            limit={4}
+            showBorderTop
+            padding="py-20"
+            columns={2}
+            headingAlign="center"
+        />
+        <div className="mx-auto max-w-6xl px-6 -mt-6 mb-14 flex justify-center">
+            <a
+                href="/faqs"
+                className="text-sm font-semibold text-black hover:text-purple-600 transition-colors underline"
+            >
+                See all FAQs →
+            </a>
+        </div>
+        <Footer />
 
-      <Hero onOpenForm={onOpenForm} onOpenVideo={() => setIsVideoOpen(true)} />
-     <UseCaseShowcase />
-
-<Features />
-<Results />
-<Insights onOpenForm={onOpenForm} />
-<Testimonial />
-<HowItWorks />
-
-{SHOW_PRICING && <Pricing />}
-
-      <FAQ
-        limit={4}
-        showBorderTop
-        padding="py-20"
-        columns={2}
-        headingAlign="center"
-      />
-      <div className="mx-auto max-w-6xl px-6 -mt-6 mb-14 flex justify-center">
-        <a
-          href="/faqs"
-          className="text-sm font-semibold text-black hover:text-purple-600 transition-colors underline"
-        >
-          See all FAQs →
-        </a>
-      </div>
-      <Footer />
-
-      {/* Video Modal */}
-      <VideoModal
-        open={isVideoOpen}
-        onClose={() => setIsVideoOpen(false)}
-        youtube="https://www.youtube.com/watch?v=RKqGC3CVZd0"
-      />
+        {/* Video Modal */}
+        <VideoModal
+            open={isVideoOpen}
+            onClose={() => setIsVideoOpen(false)}
+            youtube="https://www.youtube.com/watch?v=RKqGC3CVZd0"
+        />
     </div>
   );
 }

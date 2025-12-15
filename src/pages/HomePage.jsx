@@ -2033,7 +2033,8 @@ function RequestDemoModal({ open, onClose }) {
 }
 
 function LatestPosts() {
-  const recent = posts.slice(0, 3);
+  // const recent = posts.slice(0, 3);
+    const recent = [];
   if (!recent.length) return null;
   return (
     <section className="scroll-mt-20 py-20 border-t border-black/5 dark:border-white/5">
@@ -2082,7 +2083,7 @@ function LatestPosts() {
   );
 }
 
-export default function App() {
+export default function HomePage() {
   const [isVideoOpen, setIsVideoOpen] = useState(false);
   const { onOpen: onOpenForm } = useDemoForm();
   useEffect(() => {
@@ -2091,44 +2092,39 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-white to-slate-50 dark:from-[#0a0a0a] dark:to-black text-black dark:text-white">
-      <Header />
+        <Header />
+        <Hero onOpenForm={onOpenForm} onOpenVideo={() => setIsVideoOpen(true)} />
+        <UseCaseShowcase />
+        <Features />
+        <Results />
+        <Insights onOpenForm={onOpenForm} />
+        <Testimonial />
+        <HowItWorks />
+        <LatestPosts />
+        {SHOW_PRICING && <Pricing />}
+        <FAQ
+            limit={4}
+            showBorderTop
+            padding="py-20"
+            columns={2}
+            headingAlign="center"
+        />
+        <div className="mx-auto max-w-6xl px-6 -mt-6 mb-14 flex justify-center">
+            <a
+                href="/faqs"
+                className="text-sm font-semibold text-black hover:text-purple-600 transition-colors underline"
+            >
+                See all FAQs →
+            </a>
+        </div>
+        <Footer />
 
-      <Hero onOpenForm={onOpenForm} onOpenVideo={() => setIsVideoOpen(true)} />
-     <UseCaseShowcase />
-
-<Features />
-<Results />
-<Insights onOpenForm={onOpenForm} />
-<Testimonial />
-<HowItWorks />
-
-<LatestPosts />
-
-{SHOW_PRICING && <Pricing />}
-
-      <FAQ
-        limit={4}
-        showBorderTop
-        padding="py-20"
-        columns={2}
-        headingAlign="center"
-      />
-      <div className="mx-auto max-w-6xl px-6 -mt-6 mb-14 flex justify-center">
-        <a
-          href="/faqs"
-          className="text-sm font-semibold text-black hover:text-purple-600 transition-colors underline"
-        >
-          See all FAQs →
-        </a>
-      </div>
-      <Footer />
-
-      {/* Video Modal */}
-      <VideoModal
-        open={isVideoOpen}
-        onClose={() => setIsVideoOpen(false)}
-        youtube="https://www.youtube.com/watch?v=RKqGC3CVZd0"
-      />
+        {/* Video Modal */}
+        <VideoModal
+            open={isVideoOpen}
+            onClose={() => setIsVideoOpen(false)}
+            youtube="https://www.youtube.com/watch?v=RKqGC3CVZd0"
+        />
     </div>
   );
 }

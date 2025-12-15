@@ -2,7 +2,7 @@ import React, { StrictMode, useState } from "react";
 import { createRoot } from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import Home from "./pages/Home.jsx";
+import HomePage from "./pages/HomePage.jsx";
 import Terms from "./pages/Terms.jsx";
 import Privacy from "./pages/Privacy.jsx";
 import FAQs from "./pages/FAQs.jsx";
@@ -10,8 +10,8 @@ import Blog from "./pages/Blog.jsx";
 import BlogPost from "./pages/BlogPost.jsx";
 import NotFound from "./pages/NotFound.jsx";
 import { RequestDemoModal } from "./components/DemoModals.jsx";
-import { DemoFormProvider } from "./context/DemoFormContext.jsx";
 
+import { DemoFormProvider } from "./context/DemoFormContext.jsx";
 import "./index.css";
 
 function App() {
@@ -20,7 +20,7 @@ function App() {
   return (
     <DemoFormProvider isOpen={isFormOpen} onOpen={() => setIsFormOpen(true)}>
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<HomePage />} />
         <Route path="/blog" element={<Blog />} />
         <Route path="/blog/:slug" element={<BlogPost />} />
         <Route path="/terms" element={<Terms />} />

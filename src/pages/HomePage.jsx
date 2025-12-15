@@ -18,7 +18,8 @@ import {
 import ScrollPreview from "../components/ScrollPreview";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import FAQ, { FAQ_ITEMS } from "../components/FAQ";
+import FAQ from "../components/FAQ";
+import { FAQ_ITEMS } from "../constants/faqItems";
 import { posts } from "../content/utils/mdxPostLoader";
 import {VideoModal} from "../components/VideoModal";
 import {useDemoForm} from "../context/DemoFormContext";

@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import PageLayout from "../components/PageLayout";
-import FAQ, { FAQ_ITEMS } from "../components/FAQ";
+import FAQ from "../components/FAQ";
+import { FAQ_ITEMS } from "../constants/faqItems";
 
 export default function FAQs() {
   useEffect(() => {

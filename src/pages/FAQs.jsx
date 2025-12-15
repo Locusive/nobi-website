@@ -17,9 +17,6 @@ export default function FAQs() {
 
         <FAQ
           id="faqs-list"
-          headingAlign="center"
-          title="You're not the first to ask"
-          description="If you don't see your question here, reach out and we'll get you an answer fast."
           padding="pb-14 sm:pb-16"
           sectionClassName="mx-auto max-w-6xl px-6"
           columns={2}

@@ -117,14 +117,20 @@ export default function FAQ({
       className={`scroll-mt-20 ${padding} ${borderClass} ${sectionClassName}`}
     >
       <div className="mx-auto max-w-6xl px-6">
-        <div className={`${headingAlignClass} mb-10`}>
-          <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight">{title}</h2>
-          {description && (
-            <p className="mt-3 text-base sm:text-lg text-black/70 dark:text-white/70">
-              {description}
-            </p>
-          )}
-        </div>
+        {(title || description) && (
+          <div className={`${headingAlignClass} mb-10`}>
+            {title && (
+              <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight">
+                {title}
+              </h2>
+            )}
+            {description && (
+              <p className="mt-3 text-base sm:text-lg text-black/70 dark:text-white/70">
+                {description}
+              </p>
+            )}
+          </div>
+        )}
 
         <div className={listClass}>
           {items.map((f) => (

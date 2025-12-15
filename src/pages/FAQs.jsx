@@ -17,6 +17,8 @@ export default function FAQs() {
 
         <FAQ
           id="faqs-list"
+          title=""
+          description=""
           padding="pb-14 sm:pb-16"
           sectionClassName="mx-auto max-w-6xl px-6"
           columns={2}

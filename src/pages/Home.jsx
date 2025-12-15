@@ -2051,12 +2051,20 @@ export default function App() {
 {SHOW_PRICING && <Pricing />}
 
       <FAQ
-        limit={FAQ_ITEMS.length}
+        limit={4}
         showBorderTop
         padding="py-20"
         columns={2}
         headingAlign="center"
       />
+      <div className="mx-auto max-w-6xl px-6 -mt-6 mb-14 flex justify-center">
+        <a
+          href="/faqs"
+          className="text-sm font-semibold text-black hover:text-purple-600 transition-colors underline"
+        >
+          See all FAQs →
+        </a>
+      </div>
       <Footer />
 
       {/* Video Modal */}

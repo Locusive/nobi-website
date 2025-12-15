@@ -91,6 +91,7 @@ export const FAQ_ITEMS = [
     {
         q: "Do you build your own models? Do you use ChatGPT?",
         a: "We don't build our own LLMs, instead, our system dynamically selects models from a selection of top LLM providers, with a focus on speed + accuracy. However, we do apply our own ranking and and personalization models on top of the LLM results to ensure the best possible answers for your shoppers.",
+        category: "Product",
     }
 ];
 

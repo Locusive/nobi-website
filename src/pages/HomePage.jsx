@@ -816,7 +816,7 @@ const WHERE_WE_HELP_ITEMS = [
   {
     id: "proof",
     icon: BarChart3,
-    text: "High-intent visitors bounce",
+    text: "They bounce when they would have converted",
   },
 ];
 
@@ -824,7 +824,7 @@ function WhereWeHelpCarousel() {
   const scrollContainerRef = React.useRef(null);
 
   return (
-    <div className="mt-8 space-y-3">
+    <div className="mt-14 space-y-3 text-center">
       <p className="text-xs font-semibold uppercase tracking-[0.28em] text-black/45 dark:text-white/45">
         Where we help
       </p>
@@ -923,12 +923,14 @@ function Hero({ onOpenForm, onOpenVideo }) {
             </Button>
           </div>
 
-          {/* Where we help carousel */}
+          </div>
+
+        <div className="mt-16">
           <WhereWeHelpCarousel />
         </div>
 
         {/* Search bar */}
-        <div className="mt-16 max-w-4xl mx-auto">
+        <div className="mt-6 max-w-4xl mx-auto">
           <div className="p-4 rounded-2xl border border-fuchsia-200 bg-gradient-to-r from-fuchsia-50 to-pink-50 shadow-md">
             <DualModeSearchBar
               locked                                 // 👈 NEW: display-only
@@ -2033,8 +2035,7 @@ function RequestDemoModal({ open, onClose }) {
 }
 
 function LatestPosts() {
-  // const recent = posts.slice(0, 3);
-    const recent = [];
+  const recent = posts.slice(0, 3);
   if (!recent.length) return null;
   return (
     <section className="scroll-mt-20 py-20 border-t border-black/5 dark:border-white/5">

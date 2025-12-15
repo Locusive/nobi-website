@@ -6,6 +6,8 @@ import Home from "./pages/Home.jsx";
 import Terms from "./pages/Terms.jsx";
 import Privacy from "./pages/Privacy.jsx";
 import FAQs from "./pages/FAQs.jsx";
+import Blog from "./pages/Blog.jsx";
+import BlogPost from "./pages/BlogPost.jsx";
 import NotFound from "./pages/NotFound.jsx";
 import { RequestDemoModal } from "./components/DemoModals.jsx";
 import { DemoFormProvider } from "./context/DemoFormContext.jsx";
@@ -19,6 +21,8 @@ function App() {
     <DemoFormProvider isOpen={isFormOpen} onOpen={() => setIsFormOpen(true)}>
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/blog" element={<Blog />} />
+        <Route path="/blog/:slug" element={<BlogPost />} />
         <Route path="/terms" element={<Terms />} />
         <Route path="/privacy" element={<Privacy />} />
         <Route path="/faqs" element={<FAQs />} />

@@ -158,7 +158,7 @@ export default function BetterSearch() {
             <div className="grid gap-5 md:grid-cols-2">
               {[
                 {
-                  title: "Upgrade your site's searchbar",
+                  title: "Show more relevant search results",
                   body: "Swap in the Dual Mode bar or AI toggle so shoppers choose native or semantic without leaving the page.",
                   type: "search",
                 },
@@ -198,7 +198,7 @@ export default function BetterSearch() {
         {/* Benefits with alternating visuals */}
         <section className="bg-gradient-to-b from-[#17122f] via-[#1c1540] to-[#17122f] py-20 text-white">
           <div className="mx-auto max-w-6xl xl:max-w-7xl px-6 space-y-10 sm:space-y-14">
-            <div className="text-center space-y-3 max-w-3xl mx-auto">
+            <div className="text-left md:text-center space-y-3 max-w-3xl mx-auto">
               <p className="text-sm uppercase tracking-[0.2em] text-purple-300 font-semibold">
                 Built for ecommerce search teams
               </p>
@@ -233,7 +233,7 @@ export default function BetterSearch() {
                   key={item.title}
                   className={`grid md:grid-cols-2 gap-8 sm:gap-10 items-center ${reverse ? "md:[&>*:first-child]:order-last" : ""} pb-14 sm:pb-24`}
                 >
-                  <div className="space-y-4 text-center md:text-left">
+                  <div className="space-y-4 text-left md:text-left">
                     <h3 className="text-2xl sm:text-3xl font-semibold text-white leading-tight">
                       {item.title}
                     </h3>

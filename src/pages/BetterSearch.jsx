@@ -173,9 +173,9 @@ export default function BetterSearch() {
                   type: "collections",
                 },
                 {
-                  title: "Open Nobi from any CTA",
-                  body: "Use the JS API to launch the assistant from emails, banners, or promo buttons across campaigns.",
-                  type: "api",
+                  title: "Filter large collections conversationally",
+                  body: "Let shoppers say “show trail runners, waterproof, under $150” and apply filters instantly without dropdown fatigue.",
+                  type: "collections-assist",
                 },
               ].map((card) => (
                 <div
@@ -428,6 +428,33 @@ function VisualMock({ type }) {
           runing shoe
         </div>
         <div className="text-lg font-semibold text-slate-900">⛔ No results found</div>
+      </div>
+    );
+  }
+
+  if (type === "collections-assist") {
+    return (
+      <div className={base + " p-3 flex flex-col gap-3"}>
+        <div className="rounded-full border border-slate-200 bg-white px-3 py-2 text-[12px] text-slate-600 shadow-inner flex items-center gap-2">
+          <span className="inline-flex h-4 w-4 items-center justify-center text-slate-500">✨</span>
+          “Show red dresses under $200”
+        </div>
+        <div className="grid grid-cols-2 gap-2">
+          {[
+            { src: "/media/prod-1.png", name: "Red Floral Midi", price: "$178" },
+            { src: "/media/prod-2.png", name: "Sleeveless A-line", price: "$148" },
+            { src: "/media/prod-3.png", name: "Silk Slip Dress", price: "$192" },
+            { src: "/media/prod-4.png", name: "Wrap Dress", price: "$168" },
+          ].map((item) => (
+            <div key={item.src} className="rounded-lg border border-slate-200 bg-white p-2 space-y-2 shadow-[0_6px_18px_-12px_rgba(15,23,42,0.25)]">
+              <div className="h-20 rounded-md overflow-hidden bg-slate-100">
+                <img src={item.src} alt={item.name} className="w-full h-full object-cover" loading="lazy" />
+              </div>
+              <div className="text-[12px] font-semibold text-slate-900 truncate">{item.name}</div>
+              <div className="text-[11px] text-slate-600">{item.price}</div>
+            </div>
+          ))}
+        </div>
       </div>
     );
   }

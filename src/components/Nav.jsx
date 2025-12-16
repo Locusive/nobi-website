@@ -47,7 +47,7 @@ export default function Nav() {
       <div className="flex items-center gap-3 ml-auto">
         <Button
           variant="outline"
-          className="hidden md:flex bg-white text-black border-black hover:bg-black/5"
+          className="hidden md:flex bg-white text-black border-black rounded-xl hover:bg-fuchsia-50 hover:border-fuchsia-200"
           onClick={handleDemoClick}
         >
           Try Nobi on your site

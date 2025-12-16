@@ -1131,6 +1131,8 @@ const PILL_DETAILS = {
   search: {
     title: "AI Search Bar",
     summary: "Use it to replace your existing search bar for better search results (Nobi's semantic search results provably outperform most legacy search engines) along with conversational AI capabilities.",
+    ctaLabel: "Learn More →",
+    ctaHref: "/why-nobi/better-search",
     customers: [
       { alt: "UNTUCKit", src: "/media/logos/untuckit.svg" },
       { alt: "Lucchese", src: "/media/logos/lucchese.svg" },
@@ -1222,6 +1224,16 @@ function PillPicker() {
             <p className="text-base text-black/70 dark:text-white/70 leading-relaxed">
               {detail.summary}
             </p>
+            {detail.ctaLabel && detail.ctaHref && (
+              <div className="pt-1">
+                <a
+                  href={detail.ctaHref}
+                  className="inline-flex items-center gap-2 rounded-xl border border-black/10 bg-white px-4 py-2 text-sm font-semibold text-black hover:border-fuchsia-200 hover:bg-fuchsia-50 transition"
+                >
+                  {detail.ctaLabel}
+                </a>
+              </div>
+            )}
         {active === "search" && (
           <div className="pt-3 hidden sm:block">
             <div className="marquee-container">
@@ -1526,7 +1538,7 @@ function Testimonial() {
             </p>
             <div className="mt-6 flex items-center gap-4">
               <img
-                src="/media/avatar-placeholder.png"
+                src="/media/lourdes.png"
                 alt="Customer avatar"
                 className="h-10 w-10 rounded-full object-cover bg-black/10 dark:bg-white/10"
               />
@@ -1812,14 +1824,6 @@ function Insights({ onOpenForm }) {
               </div>
             </div>
           </div>
-        </div>
-
-        {/* CTA row */}
-        <div className="mt-8 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
-          <DemoCTAButton className="sm:w-auto">
-   <span>See how insights are generated</span>
-   <ArrowRight className="h-5 w-5 -mr-1" aria-hidden="true" />
- </DemoCTAButton>
         </div>
       </div>
     </section>

@@ -347,8 +347,8 @@ export default function BetterSearch() {
                     <div>
                       <p className="text-sm font-semibold text-slate-900">Lourdes — “Make it Smart” lead, Lucchese</p>
                       <p className="text-xs text-slate-600">
-                        “We needed search to feel truly smart. Nobi’s semantic + RAG results surfaced the right products,
-                        even on misspelled and long-tail queries.”
+                          “If you want to learn and be inspired, you should implement a tool like Nobi. We've seen great incremental results... but the biggest reason a brand should implement this is that you have the opportunity to apply more information towards optimizing
+                          campaigns and your broader brand and e-comm goals.”
                       </p>
                     </div>
                   </div>

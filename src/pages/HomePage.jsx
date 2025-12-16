@@ -1526,7 +1526,7 @@ function Testimonial() {
             </p>
             <div className="mt-6 flex items-center gap-4">
               <img
-                src="/media/avatar-placeholder.png"
+                src="/media/lourdes.png"
                 alt="Customer avatar"
                 className="h-10 w-10 rounded-full object-cover bg-black/10 dark:bg-white/10"
               />
@@ -1812,14 +1812,6 @@ function Insights({ onOpenForm }) {
               </div>
             </div>
           </div>
-        </div>
-
-        {/* CTA row */}
-        <div className="mt-8 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
-          <DemoCTAButton className="sm:w-auto">
-   <span>See how insights are generated</span>
-   <ArrowRight className="h-5 w-5 -mr-1" aria-hidden="true" />
- </DemoCTAButton>
         </div>
       </div>
     </section>

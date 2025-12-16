@@ -97,14 +97,34 @@ export default function BetterSearch() {
           <div className="mx-auto max-w-6xl xl:max-w-7xl px-6">
             <div className="grid gap-4 sm:gap-5 md:grid-cols-2 lg:grid-cols-4">
               {[
-                { stat: "Up to 30%", label: "Lift in conversion rate (A/B proven)" },
-                { stat: "35.3%", label: "Lift in add-to-cart rate" },
-                { stat: "55.8%", label: "Lift in average order value" },
-                { stat: "6%", label: "Lift in product views" },
+                {
+                  stat: "Up to 30%",
+                  label: "Lift in conversion rate (A/B proven)",
+                  palette: "blue",
+                },
+                {
+                  stat: "35.3%",
+                  label: "Lift in add-to-cart rate",
+                  palette: "purple",
+                },
+                {
+                  stat: "55.8%",
+                  label: "Lift in average order value",
+                  palette: "blue",
+                },
+                {
+                  stat: "6%",
+                  label: "Lift in product views",
+                  palette: "purple",
+                },
               ].map((item, idx) => (
                 <div
                   key={item.stat}
-                  className="relative overflow-hidden rounded-xl border border-[#4c3ab8] bg-gradient-to-br from-[#4a47a8] via-[#6b52d9] to-[#9d5af0] text-white shadow-[0_18px_42px_-24px_rgba(64,41,153,0.45)]"
+                  className={`relative overflow-hidden rounded-xl border text-white shadow-[0_18px_42px_-24px_rgba(64,41,153,0.45)] ${
+                    item.palette === "blue"
+                      ? "border-[#3f6bff] bg-gradient-to-br from-[#3fb7ff] via-[#4f7dff] to-[#6b52d9]"
+                      : "border-[#4c3ab8] bg-gradient-to-br from-[#4a47a8] via-[#6b52d9] to-[#7f4ff0]"
+                  }`}
                   style={{ animationDelay: `${idx * 60}ms` }}
                 >
                   <div className="absolute inset-0 bg-[radial-gradient(circle_at_22%_18%,rgba(255,255,255,0.16),transparent_40%),radial-gradient(circle_at_80%_0%,rgba(255,255,255,0.12),transparent_36%)]" aria-hidden />
@@ -120,12 +140,410 @@ export default function BetterSearch() {
           </div>
         </section>
 
+        {/* Placements / surfaces */}
+        <section className="bg-gradient-to-b from-white via-slate-50 to-white py-16">
+          <div className="mx-auto max-w-6xl xl:max-w-7xl px-6 space-y-5 sm:space-y-8">
+            <div className="text-center space-y-2">
+              <p className="text-sm uppercase tracking-[0.2em] text-purple-600 font-semibold">
+                Put Nobi wherever shoppers need answers
+              </p>
+              <h2 className="text-3xl sm:text-4xl font-semibold text-slate-900">
+                Drop-in placements and APIs for every touchpoint
+              </h2>
+              <p className="text-base text-slate-600">
+                Bring semantic search into your header, PDPs, collections, and campaigns—fast to launch, easy to measure.
+              </p>
+            </div>
+
+            <div className="grid gap-5 md:grid-cols-2">
+              {[
+                {
+                  title: "Upgrade your site's searchbar",
+                  body: "Swap in the Dual Mode bar or AI toggle so shoppers choose native or semantic without leaving the page.",
+                  type: "search",
+                },
+                {
+                  title: "Answer product questions instantly",
+                  body: "Nobi's assistant not only searches your catalog, it also uses it to answer product-specific questions on PDPs.",
+                  type: "pdp",
+                },
+                {
+                  title: "Guide stalled browsers",
+                  body: "Fix zero-results and suggest next clicks with intent-based prompts right in collections and search pages.",
+                  type: "collections",
+                },
+                {
+                  title: "Open Nobi from any CTA",
+                  body: "Use the JS API to launch the assistant from emails, banners, or promo buttons across campaigns.",
+                  type: "api",
+                },
+              ].map((card) => (
+                <div
+                  key={card.title}
+                  className="flex flex-col sm:flex-row gap-4 sm:gap-6 items-center bg-white rounded-2xl border border-slate-200 shadow-[0_18px_46px_-32px_rgba(15,23,42,0.35)] p-5 sm:p-6"
+                >
+                  <div className="w-full sm:w-1/2">
+                    <VisualMock type={card.type} />
+                  </div>
+                  <div className="w-full sm:w-1/2 space-y-3 text-center sm:text-left">
+                    <h3 className="text-xl font-semibold text-slate-900">{card.title}</h3>
+                    <p className="text-sm sm:text-base text-slate-600 leading-relaxed">{card.body}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Benefits with alternating visuals */}
+        <section className="bg-gradient-to-b from-[#17122f] via-[#1c1540] to-[#17122f] py-20 text-white">
+          <div className="mx-auto max-w-6xl xl:max-w-7xl px-6 space-y-10 sm:space-y-14">
+            <div className="text-center space-y-3 max-w-3xl mx-auto">
+              <p className="text-sm uppercase tracking-[0.2em] text-purple-300 font-semibold">
+                Built for ecommerce search teams
+              </p>
+              <h2 className="text-3xl sm:text-4xl font-semibold text-white">
+                How Nobi removes friction across the funnel
+              </h2>
+              <p className="text-base text-slate-300">
+                Intent understanding, conversational filtering, and drop-in deployment so shoppers find the right product on the first try.
+              </p>
+            </div>
+
+            {[
+              {
+                title: "Understands what shoppers mean, not just the keywords they type",
+                body: "Semantic + RAG ranking closes the language gap—“breathable gym shirt” maps to ventilated performance tops on the first try, cutting zero-result pages.",
+                imageType: "intent",
+              },
+              {
+                title: "Conversational filters instead of endless dropdowns",
+                body: "Shoppers narrow results by just saying “trail running, waterproof, under $150,” and Nobi applies the filters instantly—no dropdown fatigue, fewer bounces.",
+                imageType: "filters",
+              },
+              {
+                title: "Drop-in everywhere in minutes",
+                body: "Toggle on AI in the header, add an Ask AI bar to collections, or launch via JS API—ships with your existing search and requires only a couple of tags.",
+                imageType: "install",
+              },
+            ].map((item, idx) => {
+              const reverse = idx % 2 === 1;
+              return (
+                <div
+                  key={item.title}
+                  className={`grid md:grid-cols-2 gap-8 sm:gap-10 items-center ${reverse ? "md:[&>*:first-child]:order-last" : ""} pb-14 sm:pb-24`}
+                >
+                  <div className="space-y-4 text-center md:text-left">
+                    <h3 className="text-2xl sm:text-3xl font-semibold text-white leading-tight">
+                      {item.title}
+                    </h3>
+                    <p className="text-base text-slate-300 leading-relaxed">{item.body}</p>
+                  </div>
+                  <BenefitVisual type={item.imageType} />
+                </div>
+              );
+            })}
+          </div>
+        </section>
+
+        {/* Lucchese case study */}
+        <section className="bg-gradient-to-b from-slate-50 via-white to-white py-20">
+          <div className="mx-auto max-w-6xl xl:max-w-7xl px-6 grid lg:grid-cols-[1.1fr_0.9fr] gap-10 lg:gap-14 items-center">
+            <div className="space-y-6">
+              <div className="inline-flex items-center gap-2 rounded-full bg-purple-100 text-purple-700 text-xs font-semibold uppercase tracking-[0.2em] px-3 py-1">
+                Case study
+              </div>
+              <h2 className="text-3xl sm:text-4xl font-semibold leading-tight text-slate-900">
+                How Lucchese enhanced engagement and hit 33x ROI with Nobi AI search
+              </h2>
+              <p className="text-base text-slate-600 leading-relaxed">
+                Lucchese set a 2025 mandate to “Make it Smart.” Traffic and speed were up, but conversions were down. Keyword search forced constant copy edits and still missed what shoppers meant. Nobi replaced guesswork with semantic + RAG search, lifting conversion and revenue within weeks.
+              </p>
+
+              <div className="grid sm:grid-cols-3 gap-3">
+                {[
+                  { label: "Conversion lift", value: "21%" },
+                  { label: "Incremental revenue (90 days)", value: "$148k" },
+                  { label: "ROI", value: "33x" },
+                ].map((stat) => (
+                  <div
+                    key={stat.label}
+                    className="rounded-xl border border-slate-200 bg-white px-4 py-4 shadow-[0_12px_32px_-26px_rgba(15,23,42,0.35)]"
+                  >
+                    <div className="text-xs uppercase tracking-[0.18em] text-slate-500">{stat.label}</div>
+                    <div className="text-2xl font-semibold text-slate-900 mt-1">{stat.value}</div>
+                  </div>
+                ))}
+              </div>
+
+              <div className="space-y-4">
+                <h3 className="text-lg font-semibold text-slate-900">What Nobi changed</h3>
+                <ul className="space-y-2 text-base text-slate-600 list-disc list-inside">
+                  <li>Always-show-results: even “Terlingua” surfaced relevant boots instead of zero results.</li>
+                  <li>Better rankings with RAG: “Olive” brought Dante Olive Chocolate to row two, no “load more.”</li>
+                  <li>Semantic rescue: “card holder” mapped to wallets and cases, saving the sale.</li>
+                </ul>
+              </div>
+
+              <div className="space-y-3">
+                <h4 className="text-sm font-semibold uppercase tracking-[0.18em] text-slate-500">Key takeaways</h4>
+                <ul className="space-y-2 text-sm text-slate-600 list-disc list-inside">
+                  <li>Defaulting to relevant alternatives beats zero-results pages.</li>
+                  <li>RAG-driven ranking surfaces the “right” SKU faster, reducing drop-off.</li>
+                  <li>Conversational search plus quick add-to-cart accelerates throughput to purchase.</li>
+                </ul>
+              </div>
+            </div>
+
+            <div className="space-y-6">
+              <div className="relative rounded-3xl bg-white border border-slate-200 shadow-[0_22px_60px_-30px_rgba(15,23,42,0.4)] overflow-hidden">
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(99,102,241,0.12),transparent_40%),radial-gradient(circle_at_80%_10%,rgba(236,72,153,0.12),transparent_42%)]" />
+                <div className="relative p-6 sm:p-8 flex flex-col gap-6">
+                  <div className="flex items-center gap-3">
+                    <img
+                      src="/media/logos/lucchese.svg"
+                      alt="Lucchese"
+                      className="h-7 w-auto object-contain"
+                    />
+                    <span className="text-sm text-slate-500">Founded 1883 · “Make it Smart” initiative</span>
+                  </div>
+
+                  <div className="grid md:grid-cols-2 gap-6">
+                    {[
+                      {
+                        title: "Before: keyword search shows 0 results",
+                        src: "https://storage.googleapis.com/nobi-public/docs_and_marketing_websites/features/better-search/terlingua-no-results.png",
+                      },
+                      {
+                        title: "After Nobi AI: relevant boots surfaced from “terlingua”",
+                        src: "https://storage.googleapis.com/nobi-public/docs_and_marketing_websites/features/better-search/terlingua-nobi.png",
+                      },
+                    ].map((shot) => (
+                      <figure
+                        key={shot.src}
+                        className="relative rounded-2xl border border-slate-200 overflow-hidden bg-slate-50 shadow-[0_12px_34px_-28px_rgba(15,23,42,0.35)]"
+                      >
+                        <div className="relative aspect-[4/3] bg-white">
+                          <img
+                            src={shot.src}
+                            alt={shot.title}
+                            className="absolute inset-0 w-full h-full object-contain"
+                            loading="lazy"
+                          />
+                        </div>
+                        <figcaption className="px-4 py-3 text-sm font-semibold text-slate-800 text-center">
+                          {shot.title}
+                        </figcaption>
+                      </figure>
+                    ))}
+                  </div>
+
+                  <div className="flex items-center gap-3">
+                    <img
+                      src="/media/lourdes.png"
+                      alt="Lourdes headshot"
+                      className="h-12 w-12 rounded-full object-cover border border-slate-200"
+                    />
+                    <div>
+                      <p className="text-sm font-semibold text-slate-900">Lourdes — “Make it Smart” lead, Lucchese</p>
+                      <p className="text-xs text-slate-600">
+                        “We needed search to feel truly smart. Nobi’s semantic + RAG results surfaced the right products,
+                        even on misspelled and long-tail queries.”
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
         <VideoModal
           open={isVideoOpen}
           onClose={() => setIsVideoOpen(false)}
           youtube="https://www.youtube.com/watch?v=RKqGC3CVZd0"
         />
+
+        {/* Closing CTA */}
+        <section className="bg-gradient-to-b from-white via-slate-50 to-white py-16">
+          <div className="mx-auto max-w-5xl px-6 text-center space-y-5">
+            <div className="space-y-3">
+              <h2 className="text-3xl sm:text-4xl font-semibold text-slate-900">
+                Ready to see more search-driven conversions?
+              </h2>
+              <p className="text-base text-slate-600">
+                Launch Nobi alongside your current search and measure the lift—no credit card required.
+              </p>
+            </div>
+            <div className="flex justify-center">
+              <DemoCTAButton className="h-12 rounded-full bg-black text-white hover:opacity-90 shadow-sm px-6 w-full sm:w-auto" />
+            </div>
+          </div>
+        </section>
       </div>
     </PageLayout>
+  );
+}
+
+function VisualMock({ type }) {
+  const base =
+    "w-full h-40 sm:h-44 rounded-xl border border-slate-200 bg-gradient-to-br from-slate-50 via-white to-slate-100 shadow-[0_10px_30px_-24px_rgba(15,23,42,0.35)] overflow-hidden";
+
+  if (type === "search") {
+    return (
+      <div className={base + " p-1"}>
+        <img
+          src="https://storage.googleapis.com/nobi-public/docs_and_marketing_websites/features/better-search/mobile-search.png"
+          alt="Nobi search experience"
+          className="w-full h-full object-contain"
+          loading="lazy"
+        />
+      </div>
+    );
+  }
+
+  if (type === "pdp") {
+    return (
+      <div className={base + " p-4 flex flex-col gap-2"}>
+        <div className="rounded-lg border border-slate-200 bg-white p-3 space-y-2">
+          <div className="flex justify-end">
+            <div className="rounded-lg border border-slate-300 bg-white text-[11px] text-slate-700 px-3 py-2 max-w-[85%]">
+              “Is it true to size?”
+            </div>
+          </div>
+          <div className="flex justify-start">
+            <div className="rounded-lg border border-slate-200 bg-slate-50 text-slate-800 text-xs px-3 py-2 max-w-[85%]">
+              Yes—customers note it fits true. If you are between sizes, size up for a relaxed fit.
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (type === "collections") {
+    return (
+      <div className={base + " p-4 flex flex-col gap-3 items-center justify-center text-center"}>
+        <div className="w-full max-w-xs rounded-full border border-slate-200 bg-white px-4 py-2 text-sm text-slate-500 shadow-inner">
+          runing shoe
+        </div>
+        <div className="text-lg font-semibold text-slate-900">⛔ No results found</div>
+      </div>
+    );
+  }
+
+  return (
+    <div className={base + " p-4 flex flex-col gap-3"}>
+      <div className="rounded-lg border border-slate-200 bg-white p-3 text-xs text-slate-700 space-y-2">
+        <div className="font-semibold text-slate-800">Open Nobi via JS API</div>
+        <div className="rounded bg-slate-900 text-white font-mono text-[11px] px-3 py-2">
+          {`<button onClick="Nobi.open()">Ask Nobi</button>`}
+        </div>
+        <div className="flex gap-2 flex-wrap">
+          <span className="rounded-full bg-slate-100 px-2.5 py-1 text-[11px] text-slate-600">
+            Email CTA
+          </span>
+          <span className="rounded-full bg-slate-100 px-2.5 py-1 text-[11px] text-slate-600">
+            Promo banner
+          </span>
+          <span className="rounded-full bg-slate-100 px-2.5 py-1 text-[11px] text-slate-600">
+            In-app menu
+          </span>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function BenefitVisual({ type }) {
+  const shell =
+    "relative w-full h-52 sm:h-56 rounded-2xl border border-slate-200 bg-gradient-to-br from-slate-50 via-white to-slate-100 shadow-[0_18px_40px_-30px_rgba(15,23,42,0.35)] overflow-hidden p-4";
+
+  if (type === "intent") {
+    return (
+      <div className={shell}>
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_25%_25%,rgba(99,102,241,0.12),transparent_45%),radial-gradient(circle_at_80%_20%,rgba(59,130,246,0.14),transparent_40%)]" />
+        <div className="relative space-y-3 text-sm text-slate-800">
+          <div className="flex items-center gap-2 rounded-full bg-slate-900 text-white px-3 py-1 w-fit text-[12px]">
+            <span className="h-2 w-2 rounded-full bg-emerald-400" />
+            AI mode
+          </div>
+          <div className="rounded-lg border border-slate-200 bg-white px-4 py-3">
+            <div className="text-xs text-slate-500 mb-1">Shopper query</div>
+            <div className="font-semibold text-slate-900">
+              “Breathable gym shirt that works for HIIT”
+            </div>
+          </div>
+          <div className="grid grid-cols-3 gap-2">
+            {["Ventilated tee", "Mesh panel top", "Lightweight tank"].map((label) => (
+              <div key={label} className="rounded-lg border border-slate-200 bg-white p-2">
+                <div className="h-20 rounded-md bg-gradient-to-br from-indigo-100 to-blue-100 mb-2" />
+                <div className="text-[11px] font-semibold text-slate-800">{label}</div>
+                <div className="text-[11px] text-slate-500">Relevant · In stock</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (type === "filters") {
+    return (
+      <div className={shell}>
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_80%,rgba(236,72,153,0.1),transparent_45%),radial-gradient(circle_at_75%_15%,rgba(99,102,241,0.12),transparent_40%)]" />
+        <div className="relative space-y-3 text-sm text-slate-800">
+          <div className="rounded-lg border border-slate-200 bg-white p-3">
+            <div className="text-xs text-slate-500 mb-1">Conversation</div>
+            <p className="font-semibold text-slate-900">
+              “Trail running shoes, waterproof, under $150.”
+            </p>
+          </div>
+          <div className="flex flex-wrap gap-2 text-[11px]">
+            {["Trail", "Waterproof", "Under $150", "Neutral"].map((pill) => (
+              <span
+                key={pill}
+                className="rounded-full bg-slate-900 text-white px-3 py-1 shadow-sm"
+              >
+                {pill}
+              </span>
+            ))}
+          </div>
+          <div className="rounded-lg border border-slate-200 bg-white p-3 grid grid-cols-2 gap-2">
+            {[1, 2, 3, 4].map((i) => (
+              <div key={i} className="rounded-md border border-slate-200 p-2">
+                <div className="h-14 rounded bg-gradient-to-br from-slate-100 to-white mb-2" />
+                <div className="h-3 rounded bg-slate-200 w-2/3 mb-1" />
+                <div className="h-3 rounded bg-slate-100 w-1/2" />
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className={shell}>
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_15%_25%,rgba(59,130,246,0.12),transparent_40%),radial-gradient(circle_at_80%_70%,rgba(124,58,237,0.12),transparent_40%)]" />
+      <div className="relative space-y-3 text-sm text-slate-800">
+        <div className="rounded-lg border border-slate-200 bg-white p-3 space-y-2">
+          <div className="text-xs font-semibold text-slate-800">Install in minutes</div>
+          <div className="rounded bg-slate-900 text-white font-mono text-[11px] px-3 py-2 overflow-x-auto">
+            {`<script src="https://assistant-script.nobi.ai/nobi.bundle.js"></script>\n<nobi-search-bar default-mode="site" show-mode-toggle="true"></nobi-search-bar>`}
+          </div>
+        </div>
+        <div className="flex gap-2 flex-wrap">
+          {["Header", "Collections", "Nav item", "CTA button"].map((tag) => (
+            <span
+              key={tag}
+              className="rounded-full bg-slate-100 px-3 py-1 text-[11px] text-slate-600 border border-slate-200"
+            >
+              {tag}
+            </span>
+          ))}
+        </div>
+      </div>
+    </div>
   );
 }

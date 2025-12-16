@@ -1,19 +1,16 @@
 import React from "react";
 import { ChevronDown } from "lucide-react";
-import { FAQ_ITEMS } from "../constants/faqItems";
+import FAQ_ITEMS_CONST from "../constants/faqs";
+
+export const FAQ_ITEMS = FAQ_ITEMS_CONST;
 
 /**
  * Shared FAQ accordion.
- * @param {number} [limit] - Optional number of FAQs to display.
- * @param {string} [id="faq"] - Optional section id.
- * @param {string} [title] - Optional heading override.
- * @param {string} [description] - Optional lead paragraph below the heading.
- * @param {"left"|"center"} [headingAlign="left"] - Heading alignment.
- * @param {boolean} [showBorderTop=true] - Toggle border at the top of the section.
- * @param {string} [sectionClassName] - Extra classes on the section.
- * @param {string} [padding="py-20"] - Override vertical padding utility.
- * @param {number} [columns=1] - Column count for the FAQ list (>=2 switches to grid layout).
- * @param {boolean} [groupByCategory=false] - When true, render FAQs grouped by their category label.
+ * Props:
+ * - limit: number | undefined — slice the list
+ * - id: string — section id
+ * - title/description: optional heading copy
+ * - headingAlign: "left" | "center"
  */
 export default function FAQ({
   limit,
@@ -23,13 +20,12 @@ export default function FAQ({
   headingAlign = "left",
   showBorderTop = false,
   sectionClassName = "",
-  padding = "",
+  padding = "py-20",
   columns = 1,
-  groupByCategory = false,
 }) {
   const items = typeof limit === "number" ? FAQ_ITEMS.slice(0, limit) : FAQ_ITEMS;
   const headingAlignClass = headingAlign === "center" ? "text-center" : "";
-  const borderClass = showBorderTop ? "border-t border-black/5 dark:border-white/5" : "";
+  const borderClass = showBorderTop ? "border-t border-black/5 dark:border-white/10" : "";
   const listClass =
     columns >= 2
       ? "grid grid-cols-1 md:grid-cols-2 gap-4"
@@ -37,55 +33,8 @@ export default function FAQ({
 
   const withTargetBlank = (html = "") =>
     html
-      // add target/rel when absent
       .replace(/<a\s+(?![^>]*target=)([^>]*?)>/gi, "<a $1 target=\"_blank\" rel=\"noopener noreferrer\">")
-      // ensure rel exists if a target already present
       .replace(/<a([^>]*target=[\"']?_blank[\"']?)(?![^>]*rel=)([^>]*)>/gi, "<a$1 rel=\"noopener noreferrer\"$2>");
-
-  const renderList = (list) => (
-    <div className={listClass}>
-      {list.map((f) => (
-        <details
-          key={f.q}
-          className="group rounded-2xl border border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/5 shadow-sm"
-        >
-          <summary className="list-none cursor-pointer flex items-center justify-between gap-4 px-5 py-4 font-medium">
-            <span>{f.q}</span>
-            <ChevronDown
-              className="h-5 w-5 text-black/40 dark:text-white/60 transition-transform duration-300 group-open:rotate-180"
-              aria-hidden="true"
-            />
-          </summary>
-
-          <div className="px-5 pb-5 -mt-1 text-sm text-black/70 dark:text-white/70">
-            {typeof f.a === "string" ? (
-              <p
-                className="leading-relaxed faq-answer"
-                dangerouslySetInnerHTML={{ __html: withTargetBlank(f.a) }}
-              />
-            ) : (
-              f.a
-            )}
-          </div>
-        </details>
-      ))}
-    </div>
-  );
-
-  const grouped = React.useMemo(() => {
-    if (!groupByCategory) return null;
-    const order = [];
-    const map = {};
-    items.forEach((item) => {
-      const cat = item.category || "General";
-      if (!map[cat]) {
-        map[cat] = [];
-        order.push(cat);
-      }
-      map[cat].push(item);
-    });
-    return { order, map };
-  }, [groupByCategory, items]);
 
   return (
     <section
@@ -108,18 +57,33 @@ export default function FAQ({
           </div>
         )}
 
-        {groupByCategory && grouped ? (
-          <div className="space-y-8">
-            {grouped.order.map((cat) => (
-              <div key={cat} className="space-y-4">
-                <h3 className="text-xl font-semibold">{cat}</h3>
-                {renderList(grouped.map[cat])}
+        <div className={listClass}>
+          {items.map((f) => (
+            <details
+              key={f.q}
+              className="group rounded-2xl border border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/5 shadow-sm"
+            >
+              <summary className="list-none cursor-pointer flex items-center justify-between gap-4 px-5 py-4 font-medium">
+                <span>{f.q}</span>
+                <ChevronDown
+                  className="h-5 w-5 text-black/40 dark:text-white/60 transition-transform duration-300 group-open:rotate-180"
+                  aria-hidden="true"
+                />
+              </summary>
+
+              <div className="px-5 pb-5 -mt-1 text-sm text-black/70 dark:text-white/70">
+                {typeof f.a === "string" ? (
+                  <p
+                    className="leading-relaxed faq-answer"
+                    dangerouslySetInnerHTML={{ __html: withTargetBlank(f.a) }}
+                  />
+                ) : (
+                  f.a
+                )}
               </div>
-            ))}
-          </div>
-        ) : (
-          renderList(items)
-        )}
+            </details>
+          ))}
+        </div>
       </div>
     </section>
   );

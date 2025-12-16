@@ -1,6 +1,7 @@
 import React, {useEffect, useRef, useState, useMemo} from "react";
 import {AnimatePresence, motion} from "framer-motion";
 import Marquee from "react-fast-marquee";
+import LogoMarquee from "../components/LogoMarquee";
 import {
     ArrowRight,
     BarChart3,
@@ -1221,32 +1222,24 @@ function PillPicker() {
             <p className="text-base text-black/70 dark:text-white/70 leading-relaxed">
               {detail.summary}
             </p>
-            {active === "search" && (
-              <div className="pt-3 hidden sm:block">
-                <span className="text-xs uppercase tracking-[0.3em] text-black/50 dark:text-white/60 block mb-3">
-                  Used by
-                </span>
-                <div className="marquee-container">
-                  <div className="overflow-hidden py-4">
-                    <Marquee speed={40} gradient={false} pauseOnHover>
-                      {CUSTOMER_LOGOS.map((logo) => (
-                        <img
-                          key={logo.alt}
-                          src={logo.src}
-                          alt={logo.alt}
-                          className="h-5 w-auto object-contain grayscale opacity-60 hover:opacity-100 transition mx-4"
-                          loading="lazy"
-                        />
-                      ))}
-                    </Marquee>
-                  </div>
-                </div>
-              </div>
-            )}
+        {active === "search" && (
+          <div className="pt-3 hidden sm:block">
+            <div className="marquee-container">
+              <LogoMarquee
+                logos={CUSTOMER_LOGOS}
+                label="Used by"
+                border
+                rounded
+                paddingY="py-4"
+                className="bg-white"
+              />
+            </div>
           </div>
-          <div className="space-y-3">
-            <DetailVisual detail={detail} />
-            <div className="space-y-2">
+        )}
+      </div>
+      <div className="space-y-3">
+        <DetailVisual detail={detail} />
+        <div className="space-y-2">
               <p className="text-xs uppercase tracking-[0.35em] text-black/50 dark:text-white/60">The One-liner</p>
               <pre className="rounded-2xl bg-slate-900 px-4 py-3 text-xs font-mono text-slate-100 whitespace-pre-wrap break-words overflow-hidden">
                 {detail.snippet}
@@ -1256,23 +1249,15 @@ function PillPicker() {
         </div>
         {active === "search" && (
           <div className="block sm:hidden px-[20px] pb-[20px]">
-            <span className="text-xs uppercase tracking-[0.3em] text-black/50 dark:text-white/60 block mb-3">
-              Used by
-            </span>
             <div className="marquee-container">
-              <div className="border border-black/10 dark:border-white/10 rounded-lg overflow-hidden py-4">
-                <Marquee speed={40} gradient={false} pauseOnHover>
-                  {CUSTOMER_LOGOS.map((logo) => (
-                    <img
-                      key={logo.alt}
-                      src={logo.src}
-                      alt={logo.alt}
-                      className="h-5 w-auto object-contain grayscale opacity-60 hover:opacity-100 transition mx-4"
-                      loading="lazy"
-                    />
-                  ))}
-                </Marquee>
-              </div>
+              <LogoMarquee
+                logos={CUSTOMER_LOGOS}
+                label="Used by"
+                border
+                rounded
+                paddingY="py-4"
+                className="bg-white"
+              />
             </div>
           </div>
         )}

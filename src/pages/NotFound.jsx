@@ -1,9 +1,11 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import PageLayout from "../components/PageLayout";
 
 function NotFound() {
   const navigate = useNavigate();
+  const location = useLocation();
+  const displayPath = location.pathname;
 
   React.useEffect(() => {
     const previousTitle = document.title;

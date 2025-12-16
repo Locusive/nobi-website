@@ -16,6 +16,9 @@ export default function Footer() {
           <a href="/" className="hover:opacity-80">
             Home
           </a>
+          <a href="/why-nobi/better-search" className="hover:opacity-80">
+            Why Nobi
+          </a>
           <a href="/faqs" className="hover:opacity-80">
             FAQs
           </a>

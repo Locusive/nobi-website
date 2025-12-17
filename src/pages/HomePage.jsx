@@ -19,7 +19,7 @@ import {
 import ScrollPreview from "../components/ScrollPreview";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import FAQ from "../components/FAQ";
+import FAQList from "../components/FAQList.jsx";
 import { FAQ_ITEMS } from "../constants/faqItems";
 import { posts } from "../content/utils/mdxPostLoader";
 import {VideoModal} from "../components/VideoModal";
@@ -2108,7 +2108,7 @@ export default function HomePage() {
         <HowItWorks />
         <LatestPosts />
         {SHOW_PRICING && <Pricing />}
-        <FAQ
+        <FAQList
             limit={4}
             showBorderTop
             padding="py-20"

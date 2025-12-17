@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import PageLayout from "../components/PageLayout";
-import FAQ from "../components/FAQ";
-import { FAQ_ITEMS } from "../constants/faqItems";
+import FAQList from "../components/FAQList.jsx";
+import FAQ_ITEMS from "../constants/faqs";
 
 export default function FAQs() {
   useEffect(() => {
@@ -20,7 +20,7 @@ export default function FAQs() {
           </p>
         </div>
 
-        <FAQ
+        <FAQList
           id="faqs-list"
           title=""
           description=""

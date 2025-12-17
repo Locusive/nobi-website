@@ -3,11 +3,13 @@ const FAQ_ITEMS = [
     q: "What can I do with Nobi?",
     a: "So we recommend enabling it in your search bar, on collection pages, and anywhere else where shoppers may prefer to just describe what they're looking for.",
     category: "Product",
+    topics: ["search"],
   },
   {
     q: "Does Nobi replace my current search?",
     a: "Up to you. Nobi can become your default search bar experience, or you can use other elements like our suggestion pills or button to prompt shoppers to use Nobi outside of search.",
     category: "Product",
+    topics: ["search"],
   },
   {
     q: "How does Nobi handle accessibility?",
@@ -27,27 +29,29 @@ const FAQ_ITEMS = [
   {
     q: "Can Nobi handle multiple languages?",
     a: "Yes! Nobi supports multiple languages and can be configured to understand and respond in the languages your shoppers use.",
-    category: "Product",
+    category: "Product"
   },
   {
     q: "Is there a limit to the number of products Nobi can handle?",
     a: "Nobi can handle product catalogs of varying sizes, from small boutiques to large enterprises with hundreds of thousands of products. For very large catalogs, we recommend reaching out to our team to discuss the best setup for your needs.",
-    category: "Product",
+    category: "Product"
   },
   {
     q: "Do you have merchandising capabilities?",
     a: "Yes! Nobi includes merchandising features that allow you to boost or filter specific products, and also provides merchandising rules for more general control over search results.",
     category: "Product",
+    topics: ["search"],
   },
   {
     q: "What kind of reporting do you have?",
     a: "Nobi provides performance metrics on search usage, conversion rates, and other key indicators to help you understand how Nobi is impacting your store's performance. In addition, we provide deep insights, analytics, trends, topic analytics, and search feature breakdowns in our dashboard.",
-    category: "Product",
+    category: "Product"
   },
   {
     q: "Can shoppers add products to their cart through Nobi?",
     a: "Yes! Nobi has a 'quick add' feature that allows shoppers to add products directly to their cart from the Nobi interface.",
     category: "Product",
+    topics: ["search"],
   },
   {
     q: "Does Nobi collect PII?",
@@ -57,7 +61,13 @@ const FAQ_ITEMS = [
   {
     q: "Can we A/B test it?",
     a: "Yes. Nobi easily hooks into your A/B testing solution, and we also offer A/B testing as a service to help you optimize your setup.",
+    category: "Product"
+  },
+  {
+    q: "Does Nobi remove zero-result searches?",
+    a: "Yes! Nobi uses semantic search, which allows us to always return results, even if there are no exact matches.",
     category: "Product",
+    topics: ["search"],
   },
   {
     q: "How hard is it to integrate my product catalog?",
@@ -84,6 +94,12 @@ const FAQ_ITEMS = [
     a: "Our customers get full access to our founders and we even have Slack Connect channels for real-time support.",
     category: "Support",
   },
+  {
+    q: "How is Nobi's search better than traditional search?",
+    a: "Nobi's searches tend to be more relevant (because we use a hybrid of semantic and keyword search), your customers don't have to click lots of filters (since Nobi can understand their requests in natural language), and Nobi offers lots of UX optimizations, including the ability for your customers to add items to their carts in one click.",
+    category: "Product",
+    topics: ["search"],
+  }
 ];
 
 export default FAQ_ITEMS;

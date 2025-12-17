@@ -6,6 +6,8 @@ import { VideoModal } from "../components/VideoModal";
 import { Play, ArrowRight } from "lucide-react";
 import { useDemoForm } from "../context/DemoFormContext";
 import Marquee from "react-fast-marquee";
+import FAQList from "../components/FAQList.jsx";
+import FAQ_ITEMS from "../constants/faqs";
 
 const CUSTOMER_LOGOS = [
   { alt: "UNTUCKit", src: "/media/logos/untuckit.svg" },
@@ -215,6 +217,10 @@ export default function BetterSearch() {
                 title: "Understands what shoppers mean, not just the keywords they type",
                 body: "Semantic + RAG ranking closes the language gap—“breathable gym shirt” maps to ventilated performance tops on the first try, cutting zero-result pages.",
                 imageType: "intent",
+                cta: {
+                  label: "Why semantic search is better",
+                  href: "http://localhost:5173/blog/semantic-search-vs-keyword-search",
+                },
               },
               {
                 title: "Conversational filters instead of endless dropdowns",
@@ -238,11 +244,32 @@ export default function BetterSearch() {
                       {item.title}
                     </h3>
                     <p className="text-base text-slate-300 leading-relaxed">{item.body}</p>
+                    {item.cta && (
+                      <div className="pt-2">
+                        <a
+                          href={item.cta.href}
+                          className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 px-4 py-2 text-sm font-semibold text-white hover:bg-white/15"
+                        >
+                          {item.cta.label}
+                        </a>
+                      </div>
+                    )}
                   </div>
                   <BenefitVisual type={item.imageType} />
                 </div>
               );
             })}
+
+            <div className="flex justify-center">
+              <a
+                href="https://docs.nobi.ai/components/search-bar/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 rounded-full bg-white text-[#17122f] px-5 py-3 text-sm font-semibold shadow-[0_10px_32px_-24px_rgba(255,255,255,0.6)] hover:bg-white/90 border border-white/20"
+              >
+                Explore the search docs
+              </a>
+            </div>
           </div>
         </section>
 
@@ -355,6 +382,21 @@ export default function BetterSearch() {
                 </div>
               </div>
             </div>
+          </div>
+        </section>
+
+        {/* Search-focused FAQs */}
+        <section className="bg-gradient-to-b from-white via-slate-50 to-white py-16 border-t border-slate-200/70">
+          <div className="mx-auto max-w-6xl xl:max-w-7xl px-6">
+            <FAQList
+              id="search-faqs"
+              title="FAQs about Nobi search"
+              headingAlign="center"
+              sectionClassName="px-0"
+              padding="py-0"
+              columns={2}
+              items={FAQ_ITEMS.filter((item) => item.topics?.includes("search"))}
+            />
           </div>
         </section>
 

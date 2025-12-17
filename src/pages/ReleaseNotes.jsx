@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo } from "react";
 import PageLayout from "../components/PageLayout";
-import { releaseNotes } from "../content/releases";
+import { releaseNotes } from "../content/utils/releaseLoader";
 
 export default function ReleaseNotes() {
   useEffect(() => {
@@ -36,7 +36,7 @@ export default function ReleaseNotes() {
           {releaseNotes.length === 0 && (
             <div className="rounded-2xl border border-dashed border-black/15 dark:border-white/15 bg-white/60 dark:bg-white/5 p-6 sm:p-7">
               <p className="text-base sm:text-lg text-black/70 dark:text-white/70">
-                No release notes yet. Add an entry in <code>src/content/releases.js</code> to publish the first one.
+                No release notes yet. Add a JSON file in <code>src/content/releases</code> with <code>slug</code>, <code>title</code>, <code>date</code>, and <code>highlights</code>.
               </p>
             </div>
           )}

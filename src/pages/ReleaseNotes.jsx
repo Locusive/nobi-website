@@ -57,7 +57,7 @@ export default function ReleaseNotes() {
                 <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
                   <div className="space-y-2">
                     <div className="text-sm text-black/60 dark:text-white/60">{formattedDate}</div>
-                    <h2 className="text-2xl sm:text-3xl font-semibold tracking-tight">{note.title}</h2>
+                    <h2 className="text-lg sm:text-xl font-semibold tracking-tight">{note.title}</h2>
                   </div>
 
                   <a

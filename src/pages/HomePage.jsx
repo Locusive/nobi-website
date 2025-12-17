@@ -2043,7 +2043,7 @@ function LatestPosts() {
       <div className="mx-auto max-w-6xl px-6">
         <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
           <div>
-            <p className="text-sm font-semibold text-fuchsia-600">Blog</p>
+            <p className="text-sm font-semibold text-fuchsia-600">Thoughts</p>
             <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight mt-2">Latest from Nobi</h2>
             <p className="mt-2 text-black/70 dark:text-white/70 max-w-2xl">Playbooks and experiments for conversational shopping.</p>
           </div>
@@ -2076,7 +2076,7 @@ function LatestPosts() {
           ))}
         </div>
         <div className="mt-8 flex justify-center">
-          <a href="/blog" className="text-sm font-semibold text-black hover:text-purple-600 underline">
+          <a href="/blog" className="text-sm font-semibold text-black hover:text-purple-600">
             View all →
           </a>
         </div>

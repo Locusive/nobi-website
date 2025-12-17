@@ -42,7 +42,7 @@ export default function ReleaseNotes() {
           )}
 
           {releaseNotes.map((note) => {
-            const formattedDate = new Date(note.date).toLocaleDateString(undefined, {
+            const formattedDate = new Date(`${note.date}T00:00:00`).toLocaleDateString(undefined, {
               year: "numeric",
               month: "short",
               day: "numeric",

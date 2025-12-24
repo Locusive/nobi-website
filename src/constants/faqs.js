@@ -99,6 +99,11 @@ const FAQ_ITEMS = [
     a: "Nobi's searches tend to be more relevant (because we use a hybrid of semantic and keyword search), your customers don't have to click lots of filters (since Nobi can understand their requests in natural language), and Nobi offers lots of UX optimizations, including the ability for your customers to add items to their carts in one click.",
     category: "Product",
     topics: ["search"],
+  },
+  {
+    q: "Do you use ChatGPT? Did you build your own model?",
+    a: "Nobi uses a dynamic combination of existing LLMs, including ChatGPT, along with various other models. For some features, like product recommendations, we will combine our own models with these LLMs to deliver the best results.",
+    category: "Product",
   }
 ];
 

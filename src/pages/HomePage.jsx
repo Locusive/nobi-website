@@ -14,6 +14,7 @@ import {
     PlayCircle,
     Quote,
     Search as SearchIcon,
+    ShoppingCart,
     Sparkles,
 } from "lucide-react";
 import ScrollPreview from "../components/ScrollPreview";
@@ -417,7 +418,7 @@ function isVideoSource(src = "") {
   return /\.(mp4|webm|ogg)(\?.*)?$/i.test(src);
 }
 
-function MediaBox({ src, alt = "", restartKey }) {
+function MediaBox({ src, alt = "", restartKey, objectPosition }) {
   const [failed, setFailed] = useState(false);
   const vidRef = useRef(null);
 
@@ -460,7 +461,8 @@ function MediaBox({ src, alt = "", restartKey }) {
         loop                         // make feature videos loop
         muted
         playsInline
-        className="w-full h-full object-cover object-top"
+        className="w-full h-full object-cover"
+        style={{ objectPosition: objectPosition || "top" }}
         onError={() => setFailed(true)}
         aria-hidden="true"
         tabIndex={-1}
@@ -804,82 +806,6 @@ function HeroSkeletonLine({ w = "60%" }) {
 // --- HERO PREVIEW HELPERS (names are unique to avoid clashes) ---
 
 
-// Where we help carousel for mobile
-const WHERE_WE_HELP_ITEMS = [
-  {
-    id: "search",
-    icon: SearchIcon,
-    text: "Visitors can't find what they want",
-  },
-  {
-    id: "questions",
-    icon: MessageCircleQuestion,
-    text: "They get stuck with questions",
-  },
-  {
-    id: "proof",
-    icon: BarChart3,
-    text: "They bounce when they would have converted",
-  },
-];
-
-function WhereWeHelpCarousel() {
-  const scrollContainerRef = React.useRef(null);
-
-  return (
-    <div className="mt-14 space-y-3 text-center">
-      <p className="text-xs font-semibold uppercase tracking-[0.28em] text-black/45 dark:text-white/45">
-        Where we help
-      </p>
-
-      {/* Desktop: all items in one row */}
-      <div className="hidden sm:flex flex-nowrap justify-center gap-2.5">
-        {WHERE_WE_HELP_ITEMS.map(({ id, icon: Icon, text }) => (
-          <div
-            key={id}
-            className="inline-flex items-center gap-2 rounded-full border border-black/10 dark:border-white/10 bg-white/95 dark:bg-white/5 px-3 py-1.5 text-[11px] text-black/75 dark:text-white/75 whitespace-nowrap"
-          >
-            <span className="inline-flex h-4 w-4 items-center justify-center rounded-full bg-black/5 dark:bg-white/10">
-              <Icon className="h-2.5 w-2.5" />
-            </span>
-            <span>{text}</span>
-          </div>
-        ))}
-      </div>
-
-      {/* Mobile: scrollable carousel (no scrollbar) */}
-      <div className="sm:hidden flex flex-col gap-3">
-        <div
-          ref={scrollContainerRef}
-          className="flex gap-2 pb-2 overflow-x-auto snap-x snap-mandatory"
-          style={{
-            scrollbarWidth: 'none',
-            msOverflowStyle: 'none',
-          }}
-        >
-          {WHERE_WE_HELP_ITEMS.map(({ id, icon: Icon, text }) => (
-            <div
-              key={id}
-              className="flex-shrink-0 inline-flex items-center gap-2 rounded-full border border-black/10 dark:border-white/10 bg-white/95 dark:bg-white/5 px-3 py-1.5 text-[10px] text-black/75 dark:text-white/75 whitespace-nowrap snap-center"
-            >
-              <span className="inline-flex h-4 w-4 items-center justify-center rounded-full bg-black/5 dark:bg-white/10">
-                <Icon className="h-2.5 w-2.5" />
-              </span>
-              <span>{text}</span>
-            </div>
-          ))}
-        </div>
-        {/* CSS to hide scrollbar */}
-        <style>{`
-          div[style*="scrollbarWidth"] ::-webkit-scrollbar {
-            display: none;
-          }
-        `}</style>
-      </div>
-    </div>
-  );
-}
-
 function Hero({ onOpenForm, onOpenVideo }) {
   const [searchMode, setSearchMode] = React.useState("ai");
   const [playKey, setPlayKey] = React.useState(-1);
@@ -899,14 +825,14 @@ function Hero({ onOpenForm, onOpenVideo }) {
       <div className="mx-auto max-w-7xl px-6 pt-10 sm:pt-12 lg:pt-16 pb-24">
         <div className="max-w-4xl mx-auto text-center space-y-6">
           <h1 className="text-5xl sm:text-6xl font-semibold tracking-tight text-balance">
-            Nobi is a site assistant that turns queries into {" "}
-              <span className="bg-gradient-to-r from-indigo-500 via-violet-500 to-fuchsia-500 bg-clip-text text-transparent">
-                  conversions
-              </span>
+            Turn clicks and keywords into{" "}
+            <span className="bg-gradient-to-r from-indigo-500 via-violet-500 to-fuchsia-500 bg-clip-text text-transparent">
+              conversations
+            </span>
           </h1>
 
           <p className="mt-4 text-lg text-black/70 dark:text-white/70">
-              Most visitors leave when they can’t find the right product or get answers. Nobi lives across search, product, and key pages to guide them to conversions, all with tracking and A/B tests.
+            Nobi drives 50% revenue improvements for brands through conversational AI
           </p>
 
           {/* Same-row CTAs (works on mobile too) */}
@@ -926,10 +852,6 @@ function Hero({ onOpenForm, onOpenVideo }) {
 
           </div>
 
-        <div className="mt-16">
-          <WhereWeHelpCarousel />
-        </div>
-
         {/* Search bar */}
         <div className="mt-6 max-w-4xl mx-auto">
           <div className="p-4 rounded-2xl border border-fuchsia-200 bg-gradient-to-r from-fuchsia-50 to-pink-50 shadow-md">
@@ -948,6 +870,23 @@ function Hero({ onOpenForm, onOpenVideo }) {
         {/* Preview card */}
         <div className="mt-4 max-w-5xl mx-auto">
           <ConversationPreview mode={searchMode} playKey={playKey} query={lastQuery} />
+        </div>
+        <div className="mt-10 max-w-5xl mx-auto text-center">
+          <p className="text-sm font-semibold text-fuchsia-600">
+            Trusted by Modern Commerce
+          </p>
+          <div className="mt-6 flex flex-wrap items-center justify-center gap-x-14 gap-y-8">
+            {CUSTOMER_LOGOS.map((logo) => (
+              <img
+                key={logo.alt}
+                src={logo.src}
+                alt={logo.alt}
+                className="h-8 w-28 object-contain select-none grayscale opacity-70 transition hover:grayscale-0 hover:opacity-100"
+                loading="lazy"
+                decoding="async"
+              />
+            ))}
+          </div>
         </div>
         <ScrollPreview sections={PREVIEW_SECTIONS} label="Next up" pillOptions={PILL_OPTIONS} />
       </div>
@@ -1057,26 +996,6 @@ function PlacementVisual({ placement }) {
   }
 
   return null;
-}
-
-function UseCaseShowcase() {
-  const [activeId, setActiveId] = React.useState(PLACEMENTS[0].id);
-  const active = PLACEMENTS.find((pill) => pill.id === activeId) || PLACEMENTS[0];
-
-  return (
-    <section id="use-cases" className="scroll-mt-20 py-20 border-t border-black/5 dark:border-white/5">
-      <div className="mx-auto max-w-6xl px-6 space-y-8">
-        <div className="space-y-3 text-center max-w-3xl mx-auto">
-          <p className="text-xs font-semibold uppercase tracking-[0.5em] text-fuchsia-600">How Nobi Helps</p>
-          <h2 className="text-3xl sm:text-4xl font-semibold">When to use Nobi</h2>
-          <p className="text-black/70 dark:text-white/70">
-            Pick the widget you need, see how it behaves on your site, install it in 10 seconds.
-          </p>
-        </div>
-        <PillPicker />
-      </div>
-    </section>
-  );
 }
 
 function SearchBarPreview() {
@@ -1234,20 +1153,6 @@ function PillPicker() {
                 </a>
               </div>
             )}
-        {active === "search" && (
-          <div className="pt-3 hidden sm:block">
-            <div className="marquee-container">
-              <LogoMarquee
-                logos={CUSTOMER_LOGOS}
-                label="Used by"
-                border
-                rounded
-                paddingY="py-4"
-                className="bg-white"
-              />
-            </div>
-          </div>
-        )}
       </div>
       <div className="space-y-3">
         <DetailVisual detail={detail} />
@@ -1259,20 +1164,6 @@ function PillPicker() {
             </div>
           </div>
         </div>
-        {active === "search" && (
-          <div className="block sm:hidden px-[20px] pb-[20px]">
-            <div className="marquee-container">
-              <LogoMarquee
-                logos={CUSTOMER_LOGOS}
-                label="Used by"
-                border
-                rounded
-                paddingY="py-4"
-                className="bg-white"
-              />
-            </div>
-          </div>
-        )}
       </div>
     </div>
   );
@@ -1338,25 +1229,31 @@ function BrandMark({ src, label, className = "" }) {
 function Features() {
   const items = [
     {
-      title: "AI Mode your Search",
+      title: "Improve search and discovery",
       desc:
-        "Deliver the same powerful search experience as ChatGPT and other AI platforms, right within your store.",
-      icon: <Sparkles className="h-4 w-4" />,
+        "Nobi's search bar takes 30 minutes to install and typically drives a 30% improvement in conversion rate within days.",
+      ctaLabel: "Learn More →",
+      ctaHref: "/why-nobi/better-search",
+      icon: <SearchIcon className="h-4 w-4" />,
       media: { src: "/media/feature-ai-mode.mp4", alt: "" },
     },
     {
-      title: "Simplify Collections Pages",
+      title: "Engage more visitors",
       desc:
-        "Empower customers to drill down from 100s of SKUs to the perfect fit in seconds, simply by asking.",
-      icon: <Filter className="h-4 w-4" />,
-      media: { src: "/media/feature-collections.mp4", alt: "Collections assistant demo" },
+        "Spark exploration with AI prompts that get customers what they need instead of bouncing from your site.",
+      ctaLabel: "Learn More →",
+      ctaHref: "/why-nobi/better-search",
+      icon: <Sparkles className="h-4 w-4" />,
+      media: { src: "/media/feature-qa.mp4", alt: "Collections assistant demo" },
     },
     {
-      title: "Capture Bouncers",
+      title: "Increase cart size",
       desc:
-        "Over 80% of your search traffic bounces from a search results page. Capture these high-intent shoppers with an AI search option.",
-      icon: <MousePointerClick className="h-4 w-4" />,
-      media: { src: "/media/feature-capture.mp4", alt: "Capture bouncers demo" },
+        "Recommend other products customers may want based on why they are shopping with you in the first place.",
+      ctaLabel: "Learn More →",
+      ctaHref: "/why-nobi/better-search",
+      icon: <ShoppingCart className="h-4 w-4" />,
+      media: { src: "/media/cross-sell.mp4", alt: "Capture bouncers demo", objectPosition: "right center" },
     },
   ];
 
@@ -1372,10 +1269,10 @@ function Features() {
       <div className="mx-auto max-w-6xl px-6">
         <p className="text-sm font-semibold text-fuchsia-600">Features</p>
         <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight mt-2 text-balance">
-          Empower customers with conversational shopping in seconds.
+          When to use Nobi
         </h2>
         <p className="mt-3 text-black/70 dark:text-white/70">
-          Test Nobi on your PLPs, search, and anywhere else you think is right for your brand.
+          Nobi helps shoppers find what they need, answers their questions, and recommends products they are likely to buy through conversational AI.
         </p>
 
         <div className="mt-8 grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
@@ -1391,6 +1288,7 @@ function Features() {
               restartKey={restartKey}
               src={bustSrc}
               alt={items[active]?.media?.alt || ""}
+              objectPosition={items[active]?.media?.objectPosition}
             />
           </div>
 
@@ -1414,6 +1312,16 @@ function Features() {
                   <div>
                     <div className="font-semibold">{f.title}</div>
                     <p className="mt-1 text-sm text-black/70 dark:text-white/70">{f.desc}</p>
+                    {i === active && f.ctaLabel && f.ctaHref && (
+                      <div className="mt-3">
+                        <a
+                          href={f.ctaHref}
+                          className="inline-flex items-center gap-2 rounded-xl border border-black/10 bg-white px-4 py-2 text-xs font-semibold text-black hover:border-fuchsia-200 hover:bg-fuchsia-50 transition"
+                        >
+                          {f.ctaLabel}
+                        </a>
+                      </div>
+                    )}
                   </div>
                 </div>
               </button>
@@ -2100,7 +2008,6 @@ export default function HomePage() {
     <div className="min-h-screen bg-gradient-to-b from-white to-slate-50 dark:from-[#0a0a0a] dark:to-black text-black dark:text-white">
         <Header />
         <Hero onOpenForm={onOpenForm} onOpenVideo={() => setIsVideoOpen(true)} />
-        <UseCaseShowcase />
         <Features />
         <Results />
         <Insights onOpenForm={onOpenForm} />

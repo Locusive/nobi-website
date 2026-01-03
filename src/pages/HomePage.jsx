@@ -832,7 +832,7 @@ function Hero({ onOpenForm, onOpenVideo }) {
           </h1>
 
           <p className="mt-4 text-lg text-black/70 dark:text-white/70">
-            Nobi drives 50% revenue improvements for brands through conversational AI
+            Nobi drives 50%+ increases in revenue for brands through conversational AI
           </p>
 
           {/* Same-row CTAs (works on mobile too) */}
@@ -873,7 +873,7 @@ function Hero({ onOpenForm, onOpenVideo }) {
         </div>
         <div className="mt-10 max-w-5xl mx-auto text-center">
           <p className="text-sm font-semibold text-fuchsia-600">
-            Trusted by Modern Commerce
+            Trusted by modern commerce
           </p>
           <div className="mt-6 flex flex-wrap items-center justify-center gap-x-14 gap-y-8">
             {CUSTOMER_LOGOS.map((logo) => (
@@ -1231,7 +1231,7 @@ function Features() {
     {
       title: "Improve search and discovery",
       desc:
-        "Nobi's search bar takes 30 minutes to install and typically drives a 30% improvement in conversion rate within days.",
+        "Nobi's search bar takes 30 minutes to install and typically drives a 30% improvement in conversion rates within days.",
       ctaLabel: "Learn More →",
       ctaHref: "/why-nobi/better-search",
       icon: <SearchIcon className="h-4 w-4" />,

@@ -832,7 +832,7 @@ function Hero({ onOpenForm, onOpenVideo }) {
           </h1>
 
           <p className="mt-4 text-lg text-black/70 dark:text-white/70">
-            Nobi drives 50%+ increases in revenue for brands through conversational AI
+            Nobi drives 50%+ revenue improvements in your store through conversational AI
           </p>
 
           {/* Same-row CTAs (works on mobile too) */}

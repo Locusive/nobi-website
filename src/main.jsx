@@ -1,6 +1,6 @@
-import React, { StrictMode, useState } from "react";
+import React, { StrictMode, useEffect, useState } from "react";
 import { createRoot } from "react-dom/client";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 
 import HomePage from "./pages/HomePage.jsx";
 import Terms from "./pages/Terms.jsx";
@@ -17,7 +17,19 @@ import { DemoFormProvider } from "./context/DemoFormContext.jsx";
 import "./index.css";
 
 function App() {
-  const [isFormOpen, setIsFormOpen] = useState(false);
+  const location = useLocation();
+
+  const [isFormOpen, setIsFormOpen] = useState(() => {
+    const params = new URLSearchParams(location.search);
+    return isContactParamTrue(params);
+  });
+
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    if (isContactParamTrue(params)) {
+      setIsFormOpen(true);
+    }
+  }, [location.search]);
 
   return (
     <DemoFormProvider isOpen={isFormOpen} onOpen={() => setIsFormOpen(true)}>
@@ -35,6 +47,12 @@ function App() {
       <RequestDemoModal open={isFormOpen} onClose={() => setIsFormOpen(false)} />
     </DemoFormProvider>
   );
+}
+
+function isContactParamTrue(params) {
+  const value = params.get("contact-us");
+  if (!value) return false;
+  return ["1", "true", "yes", "open"].includes(value.toLowerCase());
 }
 
 createRoot(document.getElementById("root")).render(

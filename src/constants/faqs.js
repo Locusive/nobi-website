@@ -38,7 +38,7 @@ const FAQ_ITEMS = [
   },
   {
     q: "Do you have merchandising capabilities?",
-    a: "Yes! Nobi includes merchandising features that allow you to boost or filter specific products, and also provides merchandising rules for more general control over search results.",
+    a: "Yes! Nobi includes merchandising features that allow you to boost, bury, slot or filter specific products.",
     category: "Product",
     topics: ["search"],
   },

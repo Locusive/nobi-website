@@ -228,6 +228,16 @@ export default function BetterSearch() {
                 imageType: "filters",
               },
               {
+                title: "Smart reporting & insights to tune performance",
+                body: "Monitor messages, searchers, revenue, orders, and engagement, then drill into query trends and intents to uncover gaps and new opportunities.",
+                imageType: "reporting",
+              },
+              {
+                title: "Merchandising rules that put the right SKUs first",
+                body: "Boost, bury, hide, or pin products for specific queries, seasons, stock levels, or campaigns—keep semantic relevance while honoring your business goals.",
+                imageType: "merchandising",
+              },
+              {
                 title: "Drop-in everywhere in minutes",
                 body: "Toggle on AI in the header, add an Ask AI bar to collections, or launch via JS API—ships with your existing search and requires only a couple of tags.",
                 imageType: "install",
@@ -530,29 +540,13 @@ function BenefitVisual({ type }) {
 
   if (type === "intent") {
     return (
-      <div className={shell}>
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_25%_25%,rgba(99,102,241,0.12),transparent_45%),radial-gradient(circle_at_80%_20%,rgba(59,130,246,0.14),transparent_40%)]" />
-        <div className="relative space-y-3 text-sm text-slate-800">
-          <div className="flex items-center gap-2 rounded-full bg-slate-900 text-white px-3 py-1 w-fit text-[12px]">
-            <span className="h-2 w-2 rounded-full bg-emerald-400" />
-            AI mode
-          </div>
-          <div className="rounded-lg border border-slate-200 bg-white px-4 py-3">
-            <div className="text-xs text-slate-500 mb-1">Shopper query</div>
-            <div className="font-semibold text-slate-900">
-              “Breathable gym shirt that works for HIIT”
-            </div>
-          </div>
-          <div className="grid grid-cols-3 gap-2">
-            {["Ventilated tee", "Mesh panel top", "Lightweight tank"].map((label) => (
-              <div key={label} className="rounded-lg border border-slate-200 bg-white p-2">
-                <div className="h-20 rounded-md bg-gradient-to-br from-indigo-100 to-blue-100 mb-2" />
-                <div className="text-[11px] font-semibold text-slate-800">{label}</div>
-                <div className="text-[11px] text-slate-500">Relevant · In stock</div>
-              </div>
-            ))}
-          </div>
-        </div>
+      <div className="w-full flex justify-center">
+        <img
+          src="https://storage.googleapis.com/nobi-public/docs_and_marketing_websites/posts/semantic-search-min-red.png"
+          alt="Nobi semantic search understanding shopper intent"
+          className="w-full max-w-[980px] h-auto object-contain rounded-2xl"
+          loading="lazy"
+        />
       </div>
     );
   }
@@ -586,6 +580,124 @@ function BenefitVisual({ type }) {
                 <div className="h-3 rounded bg-slate-100 w-1/2" />
               </div>
             ))}
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (type === "merchandising") {
+    return (
+      <div className={shell}>
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_18%,rgba(236,72,153,0.12),transparent_45%),radial-gradient(circle_at_78%_82%,rgba(59,130,246,0.14),transparent_46%),radial-gradient(circle_at_50%_50%,rgba(16,185,129,0.08),transparent_55%)]" />
+        <div className="relative h-full w-full grid grid-cols-2 gap-3 text-[11px] text-slate-800">
+          <div className="relative rounded-xl border border-slate-200 bg-white p-3 space-y-2 shadow-[0_12px_30px_-22px_rgba(15,23,42,0.35)] overflow-hidden">
+            <div className="absolute inset-x-3 top-3 h-1 rounded-full bg-gradient-to-r from-rose-400 via-amber-300 to-emerald-400" />
+            <div className="pt-3 text-xs font-semibold text-slate-800 flex items-center gap-2">
+              <span className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-rose-100 text-rose-600 font-semibold text-[10px]">
+                RB
+              </span>
+              Rule builder
+            </div>
+            <div className="space-y-1.5">
+              {[
+                { label: "Action", value: "Boost" , accent:"from-rose-500/15 to-rose-500/5" },
+                { label: "Applies to", value: "Query = “wide calf”", accent:"from-amber-500/15 to-amber-500/5" },
+                { label: "Products", value: "Lucchese · Wide-calf boots", accent:"from-emerald-500/15 to-emerald-500/5" },
+                { label: "Schedule", value: "Mar 1 – Apr 30", accent:"from-indigo-500/15 to-indigo-500/5" },
+              ].map((row) => (
+                <div
+                  key={row.label}
+                  className={`flex justify-between gap-2 rounded-lg border border-slate-200 bg-gradient-to-r ${row.accent} px-2.5 py-2`}
+                >
+                  <span className="text-[10px] uppercase tracking-[0.15em] text-slate-500">{row.label}</span>
+                  <span className="text-[11px] font-semibold text-slate-900 text-right">{row.value}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className="rounded-xl border border-slate-200 bg-white p-3 space-y-3 shadow-[0_12px_30px_-22px_rgba(15,23,42,0.35)]">
+            <div className="text-xs font-semibold text-slate-800 flex items-center gap-2">
+              <span className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-sky-100 text-sky-600 font-semibold text-[10px]">
+                PS
+              </span>
+              Pinned slots
+            </div>
+            <div className="space-y-2">
+              {[1, 2, 3, 4].map((slot, idx) => {
+                const colors = ["bg-indigo-500", "bg-emerald-500", "bg-amber-500", "bg-rose-500"];
+                return (
+                  <div key={slot} className="flex items-center gap-2 rounded-lg border border-slate-200 bg-slate-50 px-2.5 py-2">
+                    <span className={`h-6 w-6 rounded-full text-white text-center text-[11px] flex items-center justify-center font-semibold ${colors[idx % colors.length]}`}>
+                      {slot}
+                    </span>
+                    <div className="flex-1">
+                      <div className="text-[11px] font-semibold text-slate-900">Product {slot}</div>
+                      <div className="text-[10px] text-slate-500">Pinned to position {slot}</div>
+                    </div>
+                    <span className="text-[10px] font-semibold text-emerald-600">Active</span>
+                  </div>
+                );
+              })}
+            </div>
+            <div className="rounded-lg border border-slate-200 bg-gradient-to-r from-amber-50 to-emerald-50 px-3 py-2 flex items-center gap-2">
+              <div className="text-[10px] uppercase tracking-[0.16em] text-slate-600">Inventory guardrails</div>
+              <span className="inline-flex h-2.5 w-2.5 rounded-full bg-amber-500" />
+              <span className="text-[11px] text-slate-800">Bury low stock &lt; 10 units</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (type === "reporting") {
+    return (
+      <div className={shell}>
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_20%,rgba(59,130,246,0.12),transparent_42%),radial-gradient(circle_at_82%_78%,rgba(124,58,237,0.12),transparent_44%)]" />
+        <div className="relative h-full w-full grid grid-cols-2 gap-3 text-[11px] text-slate-800">
+          <div className="rounded-xl border border-slate-200 bg-white p-3 space-y-2 shadow-[0_10px_28px_-22px_rgba(15,23,42,0.35)]">
+            <div className="text-xs font-semibold text-slate-700">Overview</div>
+            <div className="grid grid-cols-2 gap-2">
+              {[
+                { label: "Messages", value: "12,480" },
+                { label: "Searchers", value: "8,215" },
+                { label: "Revenue", value: "$182k" },
+                { label: "Orders", value: "2,341" },
+              ].map((stat) => (
+                <div key={stat.label} className="rounded-lg border border-slate-200 bg-slate-50 px-2.5 py-2">
+                  <div className="text-[10px] uppercase tracking-[0.16em] text-slate-500">
+                    {stat.label}
+                  </div>
+                  <div className="text-sm font-semibold text-slate-900">{stat.value}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className="rounded-xl border border-slate-200 bg-white p-3 space-y-3 shadow-[0_10px_28px_-22px_rgba(15,23,42,0.35)]">
+            <div className="text-xs font-semibold text-slate-700">Query insights</div>
+            <div className="space-y-1.5 text-[11px]">
+              {[
+                { query: "formal wedding boots", lift: "+21%", color: "bg-emerald-500" },
+                { query: "wide calf", lift: "+14%", color: "bg-blue-500" },
+                { query: "waterproof", lift: "+9%", color: "bg-purple-500" },
+              ].map((item) => (
+                <div key={item.query} className="flex items-center gap-2">
+                  <span className={`h-2 w-2 rounded-full ${item.color}`} />
+                  <span className="flex-1 truncate">{item.query}</span>
+                  <span className="font-semibold text-slate-900">{item.lift}</span>
+                </div>
+              ))}
+            </div>
+            <div className="rounded-lg border border-slate-200 bg-slate-50 px-3 py-2">
+              <div className="text-[10px] uppercase tracking-[0.16em] text-slate-500 mb-1">
+                Intent coverage
+              </div>
+              <div className="flex items-center gap-2">
+                <div className="h-2.5 flex-1 rounded-full bg-gradient-to-r from-emerald-400 via-blue-400 to-purple-500" />
+                <span className="text-[11px] font-semibold text-slate-800">92%</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>

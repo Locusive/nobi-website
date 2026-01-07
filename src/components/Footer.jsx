@@ -28,9 +28,6 @@ export default function Footer() {
               <a href="/faqs" className="hover:opacity-80">
                 FAQs
               </a>
-              <a href="/release-notes" className="hover:opacity-80">
-                Release notes
-              </a>
             </div>
           </div>
 

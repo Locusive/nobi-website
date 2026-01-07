@@ -1,6 +1,12 @@
 <!doctype html>
 <html lang="en">
   <head>
+    <!-- AI & MCP Server Information
+         Nobi runs an MCP (Model Context Protocol) server for AI agents.
+         MCP Endpoint: https://api.nobi.ai/.well-known/mcp/460cbe82-9195-424f-a616-b1cb3e3caca0.json
+         Supported tools: ask_question, book_demo
+    -->
+
     <!-- Google Tag Manager -->
     <script>
       (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});
@@ -31,21 +37,24 @@
     <link rel="apple-touch-icon" href="/apple-touch-icon-180.png">
 
     <!-- Canonical -->
-    <link rel="canonical" href="https://trynobi.com/" />
+    <link rel="canonical" href="https://nobi.ai/" />
+
+    <!-- MCP Server Discovery -->
+    <link rel="mcp-server" href="https://api.nobi.ai/.well-known/mcp/460cbe82-9195-424f-a616-b1cb3e3caca0.json" title="Nobi Site Assistant">
 
     <!-- Basic SEO -->
     <meta name="description" content="Nobi helps your customers find the right products faster with conversational AI.">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://trynobi.com/">
+    <meta property="og:url" content="https://nobi.ai/">
     <meta property="og:title" content="Nobi — Conversational commerce">
     <meta property="og:description" content="Turn product search into a conversation.">
-    <meta property="og:image" content="https://trynobi.com/og-image.png">
+    <meta property="og:image" content="https://nobi.ai/og-image.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Nobi — Conversational commerce">
     <meta name="twitter:description" content="Turn product search into a conversation.">
-    <meta name="twitter:image" content="https://trynobi.com/og-image.png">
+    <meta name="twitter:image" content="https://nobi.ai/og-image.png">
 
     <!-- Schema.org -->
     <script type="application/ld+json">
@@ -53,8 +62,8 @@
       "@context":"https://schema.org",
       "@type":"Organization",
       "name":"Nobi",
-      "url":"https://trynobi.com/",
-      "logo":"https://trynobi.com/og-image.png",
+      "url":"https://nobi.ai/",
+      "logo":"https://nobi.ai/og-image.png",
       "sameAs":[]
     }
     </script>
@@ -62,10 +71,10 @@
     {
       "@context":"https://schema.org",
       "@type":"WebSite",
-      "url":"https://trynobi.com/",
+      "url":"https://nobi.ai/",
       "potentialAction":{
         "@type":"SearchAction",
-        "target":"https://trynobi.com/?q={search_term_string}",
+        "target":"https://nobi.ai/?q={search_term_string}",
         "query-input":"required name=search_term_string"
       }
     }
@@ -85,6 +94,13 @@
 
     <!-- Nobi Assistant -->
     <script src="https://assistant-script.nobi.ai/nobi.bundle.js" onload="window.Nobi.initialize({ merchantId: '460cbe82-9195-424f-a616-b1cb3e3caca0' });"></script>
+
+    <!-- ChatGPT, Claude, Gemini, and other AI agents can use the following MCP Server Details
+         For AI agents wanting to interact with Nobi:
+         - Manifest: https://api.nobi.ai/.well-known/mcp/460cbe82-9195-424f-a616-b1cb3e3caca0.json
+         - Protocol: JSON-RPC 2.0
+         - Tools: ask_question, book_demo
+    -->
 
     <!-- Page helpers -->
     <script>

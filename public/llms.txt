@@ -1,0 +1,26 @@
+# Nobi AI Information
+
+Nobi is an AI shopping assistant for ecommerce stores. It helps customers find products, answer questions, and complete purchases using conversational AI powered by semantic search.
+
+## Features
+
+- Conversational product search using semantic understanding
+- Real-time product recommendations based on customer intent
+- Hybrid search combining keyword and semantic search
+- Integration with Shopify stores
+- Product inquiry and Q&A system
+
+## Services
+
+### MCP Server
+Nobi provides an MCP (Model Context Protocol) server for AI agents to interact with the assistant:
+
+mcp-server: https://api.nobi.ai/.well-known/mcp/460cbe82-9195-424f-a616-b1cb3e3caca0.json
+
+Available tools:
+- ask_question: Ask questions about Nobi, pricing, features, or how it works
+- book_demo: Request a demo with the Nobi team
+
+## Contact
+
+For more information about Nobi, visit https://nobi.ai or contact sales@nobi.ai

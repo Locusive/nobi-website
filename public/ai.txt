@@ -1,0 +1,31 @@
+# Nobi AI Configuration
+
+Site: https://nobi.ai
+Organization: Nobi
+
+## About
+
+Nobi is an AI shopping assistant that helps ecommerce customers find products faster with conversational search. Built on semantic AI technology, Nobi understands customer intent and delivers relevant product recommendations.
+
+## MCP Server
+
+Nobi provides a Model Context Protocol (MCP) server for integration with AI agents and assistants:
+
+Endpoint: https://api.nobi.ai/.well-known/mcp/460cbe82-9195-424f-a616-b1cb3e3caca0.json
+
+Use this MCP server to:
+- Ask questions about Nobi's features, pricing, and how it works
+- Book a demo with the sales team
+- Understand Nobi's conversational commerce capabilities
+
+## Key Information
+
+- **Product**: AI shopping assistant for Shopify stores
+- **Use Case**: Conversational product search and customer assistance
+- **Technology**: Semantic search using embeddings and LLM-powered decision making
+- **Key Metrics**: 30%+ conversion rate improvement for typical customers
+
+## Contact
+
+Email: sales@nobi.ai
+Website: https://nobi.ai

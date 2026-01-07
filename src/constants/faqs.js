@@ -55,7 +55,7 @@ const FAQ_ITEMS = [
   },
   {
     q: "Does Nobi collect PII?",
-    a: "No. Nobi does not collect any personally identifiable information.",
+    a: "No. Nobi does not collect any personally identifiable information unless you explicitly instruct it to do so.",
     category: "Product",
   },
   {
@@ -103,6 +103,11 @@ const FAQ_ITEMS = [
   {
     q: "Do you use ChatGPT? Did you build your own model?",
     a: "Nobi uses a dynamic combination of existing LLMs, including ChatGPT, along with various other models. For some features, like product recommendations, we will combine our own models with these LLMs to deliver the best results.",
+    category: "Product",
+  },
+  {
+    q: "Can you also pull in reviews and other external data? If so, how do you do it? Do you scrape the web?",
+    a: "We can definitely pull in external data like reviews, but we don't scrape the web. Instead, we rely on APIs or data feeds that you provide to us to ensure that we're using accurate and up-to-date information.",
     category: "Product",
   }
 ];

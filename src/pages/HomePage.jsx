@@ -132,8 +132,10 @@ const PLACEMENTS = [
 ];
 
 const PREVIEW_SECTIONS = [
-  { id: "use-cases", label: "Nobi for your site", summary: "Pick the surface where Nobi can help" },
+  { id: "ask-nobi", label: "Ask Nobi", summary: "Have a question? Ask Nobi directly" },
   { id: "features", label: "Feature deep dive", summary: "See what the assistant can do" },
+  { id: "results", label: "Results", summary: "See how Nobi drives conversions" },
+  { id: "insights", label: "Insights", summary: "Hear your customers in their own words" },
   { id: "how", label: "Setup", summary: "Install in minutes and measure lift" },
 ];
 
@@ -1502,6 +1504,33 @@ function HowItWorks() {
   );
 }
 
+function AskNobi() {
+  return (
+    <section id="ask-nobi" className="scroll-mt-20 py-24 sm:py-32 border-t border-black/5 dark:border-white/5 bg-slate-50/50 dark:bg-white/[0.02]">
+      <div className="mx-auto max-w-3xl px-6 text-center">
+        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-tight text-balance">
+          Have a question about Nobi?
+        </h2>
+        <p className="mt-4 text-lg text-black/60 dark:text-white/60">
+          Ask anything and get an instant answer.
+        </p>
+
+        <div className="mt-10">
+          <nobi-search-bar
+            default-mode="ai"
+            size="large"
+            cta-variant="auto"
+            show-mode-toggle="false"
+            show-hint-row="false"
+            use-search-mode-at-launch="false"
+            placeholder="e.g. How does Nobi improve conversion rates?"
+          />
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function Pricing() {
   const tiers = [
     { name: "Starter", price: "$0", blurb: "Kick the tires", points: ["Up to 500 queries", "Dual Mode search bar", "Email support"], cta: "Get started" },
@@ -2008,6 +2037,7 @@ export default function HomePage() {
     <div className="min-h-screen bg-gradient-to-b from-white to-slate-50 dark:from-[#0a0a0a] dark:to-black text-black dark:text-white">
         <Header />
         <Hero onOpenForm={onOpenForm} onOpenVideo={() => setIsVideoOpen(true)} />
+        <AskNobi />
         <Features />
         <Results />
         <Insights onOpenForm={onOpenForm} />

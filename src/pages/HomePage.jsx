@@ -1527,6 +1527,12 @@ function AskNobi() {
             button-label="Ask Nobi"
           />
         </div>
+
+        <div className="mt-6 flex flex-wrap md:flex-nowrap justify-center gap-3">
+          <nobi-suggestion-pill text="How does Nobi boost conversions?" />
+          <nobi-suggestion-pill text="Can I try Nobi for free?" />
+          <nobi-suggestion-pill text="How fast can I set it up?" />
+        </div>
       </div>
     </section>
   );

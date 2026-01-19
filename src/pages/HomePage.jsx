@@ -1524,6 +1524,7 @@ function AskNobi() {
             show-hint-row="false"
             use-search-mode-at-launch="false"
             placeholder="e.g. How does Nobi improve conversion rates?"
+            button-label="Ask Nobi"
           />
         </div>
       </div>

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Menu, X, ExternalLink } from "lucide-react";
+import { Menu, X, ExternalLink, Sparkles } from "lucide-react";
 import Button from "./Button";
 import { useDemoForm } from "../context/DemoFormContext";
 import { trackDemoFormOpened } from "../utils/eventTracker";
@@ -9,6 +9,12 @@ const SHOW_PRICING = false;
 export default function Nav() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { onOpen } = useDemoForm();
+
+  const handleAskNobi = () => {
+    if (window.Nobi) {
+      window.Nobi.openChat();
+    }
+  };
 
   const navLinks = [
     { label: "Home", href: "/" },
@@ -29,18 +35,28 @@ export default function Nav() {
       {/* Desktop nav (hidden on mobile) */}
       <nav className="hidden md:flex items-center gap-6 text-sm font-semibold absolute left-1/2 -translate-x-1/2">
         {navLinks.map((link) => {
-          const common = { key: link.href, className: "hover:opacity-80 flex items-center gap-1" };
+          const className = "hover:opacity-80 flex items-center gap-1";
           return link.external ? (
-            <a {...common} href={link.href} target="_blank" rel="noopener noreferrer">
+            <a key={link.href} className={className} href={link.href} target="_blank" rel="noopener noreferrer">
               {link.label}
               <ExternalLink className="w-4 h-4" />
             </a>
           ) : (
-            <a {...common} href={link.href}>
+            <a key={link.href} className={className} href={link.href}>
               {link.label}
             </a>
           );
         })}
+        {/* Divider */}
+        <div className="w-px h-4 bg-black/20 dark:bg-white/20" />
+        {/* Ask Nobi */}
+        <button
+          className="flex items-center gap-1 bg-gradient-to-r from-indigo-500 via-violet-500 to-fuchsia-500 bg-clip-text text-transparent hover:opacity-80 transition-opacity"
+          onClick={handleAskNobi}
+        >
+          <Sparkles className="w-4 h-4 text-fuchsia-500" />
+          Ask Nobi
+        </button>
       </nav>
 
       {/* Right side: Demo button (desktop only) + Mobile menu button */}
@@ -84,7 +100,17 @@ export default function Nav() {
                 {link.external && <ExternalLink className="w-4 h-4" />}
               </a>
             ))}
-            <div className="pt-2 border-t border-black/10 dark:border-white/10">
+            <div className="pt-2 border-t border-black/10 dark:border-white/10 flex flex-col gap-3">
+              <button
+                className="flex items-center gap-1 py-2 text-sm font-semibold bg-gradient-to-r from-indigo-500 via-violet-500 to-fuchsia-500 bg-clip-text text-transparent"
+                onClick={() => {
+                  handleAskNobi();
+                  closeMobileMenu();
+                }}
+              >
+                <Sparkles className="w-4 h-4 text-fuchsia-500" />
+                Ask Nobi
+              </button>
               <Button
                 variant="outline"
                 className="bg-white text-black border-black hover:bg-black/5"

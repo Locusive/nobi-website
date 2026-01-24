@@ -109,6 +109,11 @@ const FAQ_ITEMS = [
     q: "Can you also pull in reviews and other external data? If so, how do you do it? Do you scrape the web?",
     a: "We can definitely pull in external data like reviews, but we don't scrape the web. Instead, we rely on APIs or data feeds that you provide to us to ensure that we're using accurate and up-to-date information.",
     category: "Product",
+  },
+  {
+    q: "Can I use Nobi on a headless storefront?",
+    a: "Yes! Nobi is designed to work seamlessly with any website. All you have to do is drop in our JavaScript snippet and import your product catalog.",
+    category: "Product",
   }
 ];
 

@@ -130,6 +130,7 @@ const PRODUCTS = [
 ];
 
 const PDP_QUESTION = "Does this run true to size?";
+const PDP_ANSWER = "This dress runs true to size. Most customers find it fits perfectly when ordering their usual size. The stretchy fabric provides a comfortable, flattering fit.";
 
 export default function HeroDemo({ className = "" }) {
   const [searchMode, setSearchMode] = useState("ai");
@@ -138,6 +139,8 @@ export default function HeroDemo({ className = "" }) {
   const [clicked, setClicked] = useState(false);
   const [showPDP, setShowPDP] = useState(false);
   const [pdpQuestion, setPdpQuestion] = useState("");
+  const [showAnswer, setShowAnswer] = useState(false);
+  const [showFAQ, setShowFAQ] = useState(false);
 
   const handleDemoComplete = () => {
     setTimeout(() => setShowProducts(true), 300);
@@ -153,7 +156,11 @@ export default function HeroDemo({ className = "" }) {
     if (!showPDP) return;
 
     setPdpQuestion("");
+    setShowAnswer(false);
+    setShowFAQ(false);
     let i = 0;
+    const timers = [];
+
     const startDelay = setTimeout(() => {
       const timer = setInterval(() => {
         if (i < PDP_QUESTION.length) {
@@ -161,12 +168,18 @@ export default function HeroDemo({ className = "" }) {
           i++;
         } else {
           clearInterval(timer);
+          // Show answer after question is done
+          timers.push(setTimeout(() => setShowAnswer(true), 600));
+          // Transition to FAQ section after answer is shown
+          timers.push(setTimeout(() => setShowFAQ(true), 3000));
         }
       }, 50);
-      return () => clearInterval(timer);
+      timers.push(timer);
     }, 500);
 
-    return () => clearTimeout(startDelay);
+    timers.push(startDelay);
+
+    return () => timers.forEach(t => clearTimeout(t));
   }, [showPDP]);
 
   return (
@@ -289,7 +302,7 @@ export default function HeroDemo({ className = "" }) {
                   </div>
                 </div>
 
-                {/* Product details + Ask AI bar */}
+                {/* Product details + Ask AI bar / FAQ section */}
                 <div className="flex-1">
                   {/* Product info */}
                   <div className="mb-4">
@@ -301,34 +314,116 @@ export default function HeroDemo({ className = "" }) {
                     </p>
                   </div>
 
-                  {/* Stylized Ask AI bar */}
-                  <div className="rounded-2xl border border-fuchsia-200 dark:border-fuchsia-800 bg-white/80 dark:bg-zinc-900/80 p-4 shadow-lg">
-                    <div className="flex items-center gap-3 mb-3">
-                      <div className="w-8 h-8 rounded-full bg-gradient-to-r from-fuchsia-500 to-pink-500 flex items-center justify-center">
-                        <Sparkles className="w-4 h-4 text-white" />
-                      </div>
-                      <span className="text-sm font-medium text-black/70 dark:text-white/70">Ask about this product</span>
-                    </div>
-                    <div className="flex items-center gap-3 rounded-xl border border-black/10 dark:border-white/15 bg-white/70 dark:bg-white/5 px-4 h-12">
-                      <div className="flex-1 text-sm text-black/80 dark:text-white/80">
-                        {pdpQuestion || <span className="text-black/40 dark:text-white/40">Ask a question...</span>}
-                        {pdpQuestion.length < PDP_QUESTION.length && pdpQuestion.length > 0 && (
-                          <span className="animate-pulse">|</span>
-                        )}
-                      </div>
-                      <Button variant="ai" size="compact" className="px-4 h-8">
-                        <Sparkles className="w-4 h-4" />
-                        Ask
-                      </Button>
-                    </div>
-                  </div>
+                  <AnimatePresence mode="wait">
+                    {!showFAQ ? (
+                      <motion.div
+                        key="ask-ai"
+                        initial={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 0.4 }}
+                      >
+                        {/* Stylized Ask AI bar */}
+                        <div className="rounded-2xl border border-fuchsia-200 dark:border-fuchsia-800 bg-white/80 dark:bg-zinc-900/80 p-4 shadow-lg">
+                          <div className="flex items-center gap-3 mb-3">
+                            <div className="w-8 h-8 rounded-full bg-gradient-to-r from-fuchsia-500 to-pink-500 flex items-center justify-center">
+                              <Sparkles className="w-4 h-4 text-white" />
+                            </div>
+                            <span className="text-sm font-medium text-black/70 dark:text-white/70">Ask about this product</span>
+                          </div>
+                          <div className="flex items-center gap-3 rounded-xl border border-black/10 dark:border-white/15 bg-white/70 dark:bg-white/5 px-4 h-12">
+                            <div className="flex-1 text-sm text-black/80 dark:text-white/80">
+                              {pdpQuestion || <span className="text-black/40 dark:text-white/40">Ask a question...</span>}
+                              {pdpQuestion.length < PDP_QUESTION.length && pdpQuestion.length > 0 && (
+                                <span className="animate-pulse">|</span>
+                              )}
+                            </div>
+                            <Button variant="ai" size="compact" className="px-4 h-8">
+                              <Sparkles className="w-4 h-4" />
+                              Ask
+                            </Button>
+                          </div>
 
-                  {/* Skeleton details below */}
-                  <div className="mt-4 space-y-2">
-                    <div className="h-3 bg-black/10 dark:bg-white/10 rounded w-full" />
-                    <div className="h-3 bg-black/5 dark:bg-white/5 rounded w-5/6" />
-                    <div className="h-3 bg-black/5 dark:bg-white/5 rounded w-4/6" />
-                  </div>
+                          {/* Answer */}
+                          <AnimatePresence>
+                            {showAnswer && (
+                              <motion.div
+                                initial={{ opacity: 0, y: 10 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ duration: 0.4 }}
+                                className="mt-4 p-4 rounded-xl bg-gradient-to-br from-fuchsia-50 to-pink-50 dark:from-fuchsia-900/20 dark:to-pink-900/20 border border-fuchsia-100 dark:border-fuchsia-800"
+                              >
+                                <p className="text-sm text-black/80 dark:text-white/80 leading-relaxed">
+                                  {PDP_ANSWER}
+                                </p>
+                              </motion.div>
+                            )}
+                          </AnimatePresence>
+                        </div>
+
+                        {/* Skeleton details below */}
+                        {!showAnswer && (
+                          <div className="mt-4 space-y-2">
+                            <div className="h-3 bg-black/10 dark:bg-white/10 rounded w-full" />
+                            <div className="h-3 bg-black/5 dark:bg-white/5 rounded w-5/6" />
+                            <div className="h-3 bg-black/5 dark:bg-white/5 rounded w-4/6" />
+                          </div>
+                        )}
+                      </motion.div>
+                    ) : (
+                      <motion.div
+                        key="faq-section"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ duration: 0.4 }}
+                      >
+                        {/* FAQ Section */}
+                        <div className="rounded-xl border border-fuchsia-200 dark:border-fuchsia-800 bg-white/80 dark:bg-zinc-900/80 p-4 shadow-lg">
+                          <div className="flex items-center gap-3 mb-3">
+                            <div className="w-6 h-6 rounded-full bg-gradient-to-r from-fuchsia-500 to-pink-500 flex items-center justify-center">
+                              <Sparkles className="w-3 h-3 text-white" />
+                            </div>
+                            <span className="text-base font-semibold text-black/80 dark:text-white/80">Conversational FAQs</span>
+                          </div>
+                          <div className="space-y-2">
+                            {/* The Q&A that transitioned */}
+                            <motion.div
+                              initial={{ opacity: 0, y: 10 }}
+                              animate={{ opacity: 1, y: 0 }}
+                              transition={{ duration: 0.5, delay: 0.2 }}
+                              className="p-2.5 rounded-lg bg-fuchsia-50/50 dark:bg-fuchsia-900/10 border border-fuchsia-100/50 dark:border-fuchsia-800/30"
+                            >
+                              <p className="font-semibold text-sm text-black/90 dark:text-white/90 mb-1.5 leading-tight">
+                                {PDP_QUESTION}
+                              </p>
+                              <p className="text-xs text-black/60 dark:text-white/60 leading-snug line-clamp-2">
+                                {PDP_ANSWER}
+                              </p>
+                            </motion.div>
+
+                            {/* Second FAQ - occasion based */}
+                            <motion.div
+                              initial={{ opacity: 0, y: 10 }}
+                              animate={{ opacity: 1, y: 0 }}
+                              transition={{ duration: 0.5, delay: 0.4 }}
+                              className="p-2.5 rounded-lg bg-white/50 dark:bg-white/5 border border-black/5 dark:border-white/10"
+                            >
+                              <p className="font-semibold text-sm text-black/70 dark:text-white/70 mb-1.5 leading-tight">
+                                When should I wear this dress?
+                              </p>
+                              <p className="text-xs text-black/50 dark:text-white/50 leading-snug line-clamp-2">
+                                Perfect for a fun weekend night out, dinner dates, rooftop bars, or any semi-casual evening event.
+                              </p>
+                            </motion.div>
+                          </div>
+
+                          {/* Nobi logo at bottom right */}
+                          <div className="flex justify-end mt-3">
+                            <img src="/media/nobi-logo.png" alt="Nobi" className="h-6" />
+                          </div>
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
                 </div>
               </motion.div>
             )}

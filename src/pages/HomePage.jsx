@@ -823,7 +823,7 @@ function Hero({ onOpenForm, onOpenVideo }) {
           </h1>
 
           <p className="mt-4 text-lg text-black/70 dark:text-white/70 max-w-2xl mx-auto">
-            Nobi's AI assistant answers customer questions on your site, then transforms those conversations into FAQ content that AI engines recommend
+            Nobi's AI assistant improves product discovery, answers customer questions on your site, and transforms conversations into FAQ content for AEO and SEO.
           </p>
 
           {/* Same-row CTAs (works on mobile too) */}

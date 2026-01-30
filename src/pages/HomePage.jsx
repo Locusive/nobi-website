@@ -2,7 +2,7 @@ import React, {useEffect, useRef, useState, useMemo} from "react";
 import {AnimatePresence, motion} from "framer-motion";
 import Marquee from "react-fast-marquee";
 import LogoMarquee from "../components/LogoMarquee";
-import AEOFlywheel from "../components/AEOFlywheel";
+import HeroDemo from "../components/HeroDemo";
 import {
     ArrowRight,
     BarChart3,
@@ -844,7 +844,7 @@ function Hero({ onOpenForm, onOpenVideo }) {
 
         {/* AEO Flywheel */}
         <div className="mt-10 max-w-3xl mx-auto">
-          <AEOFlywheel />
+          <HeroDemo />
         </div>
         <div className="mt-10 max-w-5xl mx-auto text-center">
           <p className="text-sm font-semibold text-fuchsia-600">

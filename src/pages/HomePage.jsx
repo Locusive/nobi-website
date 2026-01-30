@@ -2,6 +2,7 @@ import React, {useEffect, useRef, useState, useMemo} from "react";
 import {AnimatePresence, motion} from "framer-motion";
 import Marquee from "react-fast-marquee";
 import LogoMarquee from "../components/LogoMarquee";
+import AEOFlywheel from "../components/AEOFlywheel";
 import {
     ArrowRight,
     BarChart3,
@@ -809,32 +810,19 @@ function HeroSkeletonLine({ w = "60%" }) {
 
 
 function Hero({ onOpenForm, onOpenVideo }) {
-  const [searchMode, setSearchMode] = React.useState("ai");
-  const [playKey, setPlayKey] = React.useState(-1);
-  const [lastQuery, setLastQuery] = React.useState(DEMO_QUERY);
-  const hasKickedRef = React.useRef(false);
-
-  const kickOffPreview = ({ mode, query }) => {
-    if (hasKickedRef.current) return;
-    hasKickedRef.current = true;
-    setSearchMode(mode);
-    setLastQuery(query || DEMO_QUERY);
-    setPlayKey((k) => k + 1);
-  };
-
   return (
     <section id="home" className="relative overflow-hidden">
       <div className="mx-auto max-w-7xl px-6 pt-10 sm:pt-12 lg:pt-16 pb-24">
         <div className="max-w-4xl mx-auto text-center space-y-6">
           <h1 className="text-5xl sm:text-6xl font-semibold tracking-tight text-balance">
-            Turn clicks and keywords into{" "}
+            Get found when{" "}
             <span className="bg-gradient-to-r from-indigo-500 via-violet-500 to-fuchsia-500 bg-clip-text text-transparent">
-              conversations
+              AI answers questions
             </span>
           </h1>
 
-          <p className="mt-4 text-lg text-black/70 dark:text-white/70">
-            Nobi drives 50%+ revenue improvements in your store through conversational AI
+          <p className="mt-4 text-lg text-black/70 dark:text-white/70 max-w-2xl mx-auto">
+            Nobi tracks what prompts drive traffic to your site, then turns conversations into FAQ content that AI engines recommend
           </p>
 
           {/* Same-row CTAs (works on mobile too) */}
@@ -854,24 +842,9 @@ function Hero({ onOpenForm, onOpenVideo }) {
 
           </div>
 
-        {/* Search bar */}
-        <div className="mt-6 max-w-4xl mx-auto">
-          <div className="p-4 rounded-2xl border border-fuchsia-200 bg-gradient-to-r from-fuchsia-50 to-pink-50 shadow-md">
-            <DualModeSearchBar
-              locked                                 // 👈 NEW: display-only
-              mode={searchMode}
-              onModeChange={setSearchMode}
-              defaultMode="ai"
-              size="regular"
-              onDemoSubmit={kickOffPreview}
-              onSubmit={kickOffPreview}
-            />
-          </div>
-        </div>
-
-        {/* Preview card */}
-        <div className="mt-4 max-w-5xl mx-auto">
-          <ConversationPreview mode={searchMode} playKey={playKey} query={lastQuery} />
+        {/* AEO Flywheel */}
+        <div className="mt-10 max-w-3xl mx-auto">
+          <AEOFlywheel />
         </div>
         <div className="mt-10 max-w-5xl mx-auto text-center">
           <p className="text-sm font-semibold text-fuchsia-600">

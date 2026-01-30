@@ -815,20 +815,21 @@ function Hero({ onOpenForm, onOpenVideo }) {
       <div className="mx-auto max-w-7xl px-6 pt-10 sm:pt-12 lg:pt-16 pb-24">
         <div className="max-w-4xl mx-auto text-center space-y-6">
           <h1 className="text-5xl sm:text-6xl font-semibold tracking-tight text-balance">
-            Get found when{" "}
+            Turn browsers into buyers, and questions into{" "}
             <span className="bg-gradient-to-r from-indigo-500 via-violet-500 to-fuchsia-500 bg-clip-text text-transparent">
-              AI answers questions
+              AI-ready
             </span>
+            {" "}content
           </h1>
 
           <p className="mt-4 text-lg text-black/70 dark:text-white/70 max-w-2xl mx-auto">
-            Nobi tracks what prompts drive traffic to your site, then turns conversations into FAQ content that AI engines recommend
+            Nobi's AI assistant answers customer questions on your site, then transforms those conversations into FAQ content that AI engines recommend
           </p>
 
           {/* Same-row CTAs (works on mobile too) */}
           <div className="grid grid-cols-[1fr_auto] items-center gap-1 max-w-xl mx-auto">
             <DemoCTAButton />
-           <Button
+            <Button
               size="lg"
               variant="ghost"
               onClick={onOpenVideo}

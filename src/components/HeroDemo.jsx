@@ -171,7 +171,7 @@ export default function HeroDemo({ className = "" }) {
           // Show answer after question is done
           timers.push(setTimeout(() => setShowAnswer(true), 600));
           // Transition to FAQ section after answer is shown
-          timers.push(setTimeout(() => setShowFAQ(true), 3000));
+          timers.push(setTimeout(() => setShowFAQ(true), 1800));
         }
       }, 50);
       timers.push(timer);
@@ -186,7 +186,7 @@ export default function HeroDemo({ className = "" }) {
     <div className={`${className}`}>
       <div className="max-w-5xl mx-auto">
         {/* Abstract rectangular container */}
-        <div className="rounded-3xl shadow-2xl border border-black/5 dark:border-white/10 bg-gradient-to-br from-violet-50 via-white to-emerald-50 dark:from-violet-900/20 dark:via-zinc-900 dark:to-emerald-900/10 p-8">
+        <div className="rounded-3xl shadow-2xl border border-black/5 dark:border-white/10 bg-gradient-to-br from-violet-50 via-white to-emerald-50 dark:from-violet-900/20 dark:via-zinc-900 dark:to-emerald-900/10 p-4 sm:p-8">
 
           <AnimatePresence mode="wait">
             {!showPDP ? (
@@ -206,7 +206,7 @@ export default function HeroDemo({ className = "" }) {
                 />
 
                 {/* Product grid */}
-                <div className="mt-8 grid grid-cols-4 gap-4 relative">
+                <div className="mt-6 sm:mt-8 grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 relative">
                   {PRODUCTS.map((product, i) => (
                     <motion.div
                       key={i}
@@ -289,10 +289,10 @@ export default function HeroDemo({ className = "" }) {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.5 }}
-                className="flex gap-8"
+                className="flex flex-col md:flex-row gap-4 md:gap-8"
               >
-                {/* Product image - 35% width */}
-                <div className="w-[35%] flex-shrink-0">
+                {/* Product image - 35% width on desktop only */}
+                <div className="hidden md:block md:w-[35%] flex-shrink-0">
                   <div className="rounded-2xl overflow-hidden bg-white/60 dark:bg-white/5 border border-black/5 dark:border-white/10 shadow-lg">
                     <img
                       src={PRODUCTS[0].img}
@@ -304,15 +304,40 @@ export default function HeroDemo({ className = "" }) {
 
                 {/* Product details + Ask AI bar / FAQ section */}
                 <div className="flex-1">
-                  {/* Product info */}
-                  <div className="mb-4">
-                    <h2 className="text-2xl font-semibold text-black/90 dark:text-white/90 mb-1">
-                      {PRODUCTS[0].title}
-                    </h2>
-                    <p className="text-xl text-black/70 dark:text-white/70">
-                      {PRODUCTS[0].price}
-                    </p>
-                  </div>
+                  {/* Mobile/Tablet: Product image + info (only when not FAQ) */}
+                  {!showFAQ && (
+                    <div className="flex md:hidden gap-3 mb-3">
+                      <div className="w-16 sm:w-20 flex-shrink-0">
+                        <div className="rounded-lg overflow-hidden bg-white/60 dark:bg-white/5 border border-black/5 dark:border-white/10 shadow-lg">
+                          <img
+                            src={PRODUCTS[0].img}
+                            alt={PRODUCTS[0].title}
+                            className="w-full aspect-[3/4] object-cover"
+                          />
+                        </div>
+                      </div>
+                      <div>
+                        <h2 className="text-base sm:text-lg font-semibold text-black/90 dark:text-white/90 mb-1">
+                          {PRODUCTS[0].title}
+                        </h2>
+                        <p className="text-sm sm:text-base text-black/70 dark:text-white/70">
+                          {PRODUCTS[0].price}
+                        </p>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Desktop: Product info - hide when FAQ shows */}
+                  {!showFAQ && (
+                    <div className="hidden md:block mb-4">
+                      <h2 className="text-2xl font-semibold text-black/90 dark:text-white/90 mb-1">
+                        {PRODUCTS[0].title}
+                      </h2>
+                      <p className="text-xl text-black/70 dark:text-white/70">
+                        {PRODUCTS[0].price}
+                      </p>
+                    </div>
+                  )}
 
                   <AnimatePresence mode="wait">
                     {!showFAQ ? (
@@ -323,46 +348,44 @@ export default function HeroDemo({ className = "" }) {
                         transition={{ duration: 0.4 }}
                       >
                         {/* Stylized Ask AI bar */}
-                        <div className="rounded-2xl border border-fuchsia-200 dark:border-fuchsia-800 bg-white/80 dark:bg-zinc-900/80 p-4 shadow-lg">
-                          <div className="flex items-center gap-3 mb-3">
-                            <div className="w-8 h-8 rounded-full bg-gradient-to-r from-fuchsia-500 to-pink-500 flex items-center justify-center">
-                              <Sparkles className="w-4 h-4 text-white" />
+                        <div className="rounded-xl md:rounded-2xl border border-fuchsia-200 dark:border-fuchsia-800 bg-white/80 dark:bg-zinc-900/80 p-3 md:p-4 shadow-lg">
+                          <div className="flex items-center gap-2 md:gap-3 mb-2 md:mb-3">
+                            <div className="w-6 h-6 md:w-8 md:h-8 rounded-full bg-gradient-to-r from-fuchsia-500 to-pink-500 flex items-center justify-center flex-shrink-0">
+                              <Sparkles className="w-3 h-3 md:w-4 md:h-4 text-white" />
                             </div>
-                            <span className="text-sm font-medium text-black/70 dark:text-white/70">Ask about this product</span>
+                            <span className="text-xs md:text-sm font-medium text-black/70 dark:text-white/70">Ask about this product</span>
                           </div>
-                          <div className="flex items-center gap-3 rounded-xl border border-black/10 dark:border-white/15 bg-white/70 dark:bg-white/5 px-4 h-12">
-                            <div className="flex-1 text-sm text-black/80 dark:text-white/80">
+                          <div className="flex items-center gap-2 md:gap-3 rounded-lg md:rounded-xl border border-black/10 dark:border-white/15 bg-white/70 dark:bg-white/5 px-3 md:px-4 h-10 md:h-12">
+                            <div className="flex-1 min-w-0 text-xs md:text-sm text-black/80 dark:text-white/80 truncate">
                               {pdpQuestion || <span className="text-black/40 dark:text-white/40">Ask a question...</span>}
                               {pdpQuestion.length < PDP_QUESTION.length && pdpQuestion.length > 0 && (
                                 <span className="animate-pulse">|</span>
                               )}
                             </div>
-                            <Button variant="ai" size="compact" className="px-4 h-8">
-                              <Sparkles className="w-4 h-4" />
-                              Ask
+                            <Button variant="ai" size="compact" className="px-2 md:px-4 h-7 md:h-8 flex-shrink-0">
+                              <Sparkles className="w-3 h-3 md:w-4 md:h-4" />
+                              <span className="hidden md:inline">Ask</span>
                             </Button>
                           </div>
 
                           {/* Answer */}
-                          <AnimatePresence>
-                            {showAnswer && (
-                              <motion.div
-                                initial={{ opacity: 0, y: 10 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                transition={{ duration: 0.4 }}
-                                className="mt-4 p-4 rounded-xl bg-gradient-to-br from-fuchsia-50 to-pink-50 dark:from-fuchsia-900/20 dark:to-pink-900/20 border border-fuchsia-100 dark:border-fuchsia-800"
-                              >
-                                <p className="text-sm text-black/80 dark:text-white/80 leading-relaxed">
-                                  {PDP_ANSWER}
-                                </p>
-                              </motion.div>
-                            )}
-                          </AnimatePresence>
+                          {showAnswer && (
+                            <motion.div
+                              initial={{ opacity: 0, y: 10 }}
+                              animate={{ opacity: 1, y: 0 }}
+                              transition={{ duration: 0.4 }}
+                              className="mt-3 md:mt-4 p-3 md:p-4 rounded-lg md:rounded-xl bg-gradient-to-br from-fuchsia-50 to-pink-50 dark:from-fuchsia-900/20 dark:to-pink-900/20 border border-fuchsia-100 dark:border-fuchsia-800"
+                            >
+                              <p className="text-xs md:text-sm text-black/80 dark:text-white/80 leading-relaxed line-clamp-3 md:line-clamp-none">
+                                {PDP_ANSWER}
+                              </p>
+                            </motion.div>
+                          )}
                         </div>
 
                         {/* Skeleton details below */}
                         {!showAnswer && (
-                          <div className="mt-4 space-y-2">
+                          <div className="mt-3 md:mt-4 space-y-2 hidden md:block">
                             <div className="h-3 bg-black/10 dark:bg-white/10 rounded w-full" />
                             <div className="h-3 bg-black/5 dark:bg-white/5 rounded w-5/6" />
                             <div className="h-3 bg-black/5 dark:bg-white/5 rounded w-4/6" />
@@ -375,27 +398,39 @@ export default function HeroDemo({ className = "" }) {
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         transition={{ duration: 0.4 }}
+                        className="flex gap-3"
                       >
-                        {/* FAQ Section */}
-                        <div className="rounded-xl border border-fuchsia-200 dark:border-fuchsia-800 bg-white/80 dark:bg-zinc-900/80 p-4 shadow-lg">
-                          <div className="flex items-center gap-3 mb-3">
-                            <div className="w-6 h-6 rounded-full bg-gradient-to-r from-fuchsia-500 to-pink-500 flex items-center justify-center">
-                              <Sparkles className="w-3 h-3 text-white" />
-                            </div>
-                            <span className="text-base font-semibold text-black/80 dark:text-white/80">Conversational FAQs</span>
+                        {/* Mobile: Product image on left */}
+                        <div className="w-20 sm:w-24 flex-shrink-0 md:hidden">
+                          <div className="rounded-lg overflow-hidden bg-white/60 dark:bg-white/5 border border-black/5 dark:border-white/10 shadow-lg">
+                            <img
+                              src={PRODUCTS[0].img}
+                              alt={PRODUCTS[0].title}
+                              className="w-full aspect-[3/4] object-cover"
+                            />
                           </div>
-                          <div className="space-y-2">
+                        </div>
+
+                        {/* FAQ Section */}
+                        <div className="flex-1 rounded-lg md:rounded-xl border border-fuchsia-200 dark:border-fuchsia-800 bg-white/80 dark:bg-zinc-900/80 p-3 md:p-4 shadow-lg">
+                          <div className="flex items-center gap-2 md:gap-3 mb-2 md:mb-3">
+                            <div className="w-5 h-5 md:w-6 md:h-6 rounded-full bg-gradient-to-r from-fuchsia-500 to-pink-500 flex items-center justify-center flex-shrink-0">
+                              <Sparkles className="w-2.5 h-2.5 md:w-3 md:h-3 text-white" />
+                            </div>
+                            <span className="text-sm md:text-base font-semibold text-black/80 dark:text-white/80">Conversational FAQs</span>
+                          </div>
+                          <div className="space-y-1.5 md:space-y-2">
                             {/* The Q&A that transitioned */}
                             <motion.div
                               initial={{ opacity: 0, y: 10 }}
                               animate={{ opacity: 1, y: 0 }}
                               transition={{ duration: 0.5, delay: 0.2 }}
-                              className="p-2.5 rounded-lg bg-fuchsia-50/50 dark:bg-fuchsia-900/10 border border-fuchsia-100/50 dark:border-fuchsia-800/30"
+                              className="p-2 md:p-2.5 rounded-md md:rounded-lg bg-fuchsia-50/50 dark:bg-fuchsia-900/10 border border-fuchsia-100/50 dark:border-fuchsia-800/30"
                             >
-                              <p className="font-semibold text-sm text-black/90 dark:text-white/90 mb-1.5 leading-tight">
+                              <p className="font-semibold text-xs md:text-sm text-black/90 dark:text-white/90 mb-1 md:mb-1.5 leading-tight">
                                 {PDP_QUESTION}
                               </p>
-                              <p className="text-xs text-black/60 dark:text-white/60 leading-snug line-clamp-2">
+                              <p className="text-[10px] md:text-xs text-black/60 dark:text-white/60 leading-snug line-clamp-2">
                                 {PDP_ANSWER}
                               </p>
                             </motion.div>
@@ -405,20 +440,20 @@ export default function HeroDemo({ className = "" }) {
                               initial={{ opacity: 0, y: 10 }}
                               animate={{ opacity: 1, y: 0 }}
                               transition={{ duration: 0.5, delay: 0.4 }}
-                              className="p-2.5 rounded-lg bg-white/50 dark:bg-white/5 border border-black/5 dark:border-white/10"
+                              className="p-2 md:p-2.5 rounded-md md:rounded-lg bg-white/50 dark:bg-white/5 border border-black/5 dark:border-white/10"
                             >
-                              <p className="font-semibold text-sm text-black/70 dark:text-white/70 mb-1.5 leading-tight">
+                              <p className="font-semibold text-xs md:text-sm text-black/70 dark:text-white/70 mb-1 md:mb-1.5 leading-tight">
                                 When should I wear this dress?
                               </p>
-                              <p className="text-xs text-black/50 dark:text-white/50 leading-snug line-clamp-2">
+                              <p className="text-[10px] md:text-xs text-black/50 dark:text-white/50 leading-snug line-clamp-2">
                                 Perfect for a fun weekend night out, dinner dates, rooftop bars, or any semi-casual evening event.
                               </p>
                             </motion.div>
                           </div>
 
                           {/* Nobi logo at bottom right */}
-                          <div className="flex justify-end mt-3">
-                            <img src="/media/nobi-logo.png" alt="Nobi" className="h-6" />
+                          <div className="flex justify-end mt-2 md:mt-3">
+                            <img src="/media/nobi-logo.png" alt="Nobi" className="h-4 md:h-6" />
                           </div>
                         </div>
                       </motion.div>

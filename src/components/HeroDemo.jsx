@@ -173,7 +173,7 @@ export default function HeroDemo({ className = "" }) {
     <div className={`${className}`}>
       <div className="max-w-5xl mx-auto">
         {/* Abstract rectangular container */}
-        <div className="rounded-3xl shadow-2xl border border-black/5 dark:border-white/10 bg-gradient-to-br from-violet-50 via-white to-emerald-50 dark:from-violet-900/20 dark:via-zinc-900 dark:to-emerald-900/10 p-8 min-h-[500px]">
+        <div className="rounded-3xl shadow-2xl border border-black/5 dark:border-white/10 bg-gradient-to-br from-violet-50 via-white to-emerald-50 dark:from-violet-900/20 dark:via-zinc-900 dark:to-emerald-900/10 p-8">
 
           <AnimatePresence mode="wait">
             {!showPDP ? (
@@ -276,7 +276,7 @@ export default function HeroDemo({ className = "" }) {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.5 }}
-                className="flex gap-8 h-full"
+                className="flex gap-8"
               >
                 {/* Product image - 35% width */}
                 <div className="w-[35%] flex-shrink-0">
@@ -290,10 +290,10 @@ export default function HeroDemo({ className = "" }) {
                 </div>
 
                 {/* Product details + Ask AI bar */}
-                <div className="flex-1 flex flex-col">
+                <div className="flex-1">
                   {/* Product info */}
-                  <div className="mb-6">
-                    <h2 className="text-2xl font-semibold text-black/90 dark:text-white/90 mb-2">
+                  <div className="mb-4">
+                    <h2 className="text-2xl font-semibold text-black/90 dark:text-white/90 mb-1">
                       {PRODUCTS[0].title}
                     </h2>
                     <p className="text-xl text-black/70 dark:text-white/70">
@@ -302,34 +302,32 @@ export default function HeroDemo({ className = "" }) {
                   </div>
 
                   {/* Stylized Ask AI bar */}
-                  <div className="flex-1 flex flex-col">
-                    <div className="rounded-2xl border border-fuchsia-200 dark:border-fuchsia-800 bg-white/80 dark:bg-zinc-900/80 p-4 shadow-lg">
-                      <div className="flex items-center gap-3 mb-3">
-                        <div className="w-8 h-8 rounded-full bg-gradient-to-r from-fuchsia-500 to-pink-500 flex items-center justify-center">
-                          <Sparkles className="w-4 h-4 text-white" />
-                        </div>
-                        <span className="text-sm font-medium text-black/70 dark:text-white/70">Ask about this product</span>
+                  <div className="rounded-2xl border border-fuchsia-200 dark:border-fuchsia-800 bg-white/80 dark:bg-zinc-900/80 p-4 shadow-lg">
+                    <div className="flex items-center gap-3 mb-3">
+                      <div className="w-8 h-8 rounded-full bg-gradient-to-r from-fuchsia-500 to-pink-500 flex items-center justify-center">
+                        <Sparkles className="w-4 h-4 text-white" />
                       </div>
-                      <div className="flex items-center gap-3 rounded-xl border border-black/10 dark:border-white/15 bg-white/70 dark:bg-white/5 px-4 h-12">
-                        <div className="flex-1 text-sm text-black/80 dark:text-white/80">
-                          {pdpQuestion || <span className="text-black/40 dark:text-white/40">Ask a question...</span>}
-                          {pdpQuestion.length < PDP_QUESTION.length && pdpQuestion.length > 0 && (
-                            <span className="animate-pulse">|</span>
-                          )}
-                        </div>
-                        <Button variant="ai" size="compact" className="px-4 h-8">
-                          <Sparkles className="w-4 h-4" />
-                          Ask
-                        </Button>
-                      </div>
+                      <span className="text-sm font-medium text-black/70 dark:text-white/70">Ask about this product</span>
                     </div>
+                    <div className="flex items-center gap-3 rounded-xl border border-black/10 dark:border-white/15 bg-white/70 dark:bg-white/5 px-4 h-12">
+                      <div className="flex-1 text-sm text-black/80 dark:text-white/80">
+                        {pdpQuestion || <span className="text-black/40 dark:text-white/40">Ask a question...</span>}
+                        {pdpQuestion.length < PDP_QUESTION.length && pdpQuestion.length > 0 && (
+                          <span className="animate-pulse">|</span>
+                        )}
+                      </div>
+                      <Button variant="ai" size="compact" className="px-4 h-8">
+                        <Sparkles className="w-4 h-4" />
+                        Ask
+                      </Button>
+                    </div>
+                  </div>
 
-                    {/* Skeleton details below */}
-                    <div className="mt-6 space-y-3">
-                      <div className="h-3 bg-black/10 dark:bg-white/10 rounded w-full" />
-                      <div className="h-3 bg-black/5 dark:bg-white/5 rounded w-5/6" />
-                      <div className="h-3 bg-black/5 dark:bg-white/5 rounded w-4/6" />
-                    </div>
+                  {/* Skeleton details below */}
+                  <div className="mt-4 space-y-2">
+                    <div className="h-3 bg-black/10 dark:bg-white/10 rounded w-full" />
+                    <div className="h-3 bg-black/5 dark:bg-white/5 rounded w-5/6" />
+                    <div className="h-3 bg-black/5 dark:bg-white/5 rounded w-4/6" />
                   </div>
                 </div>
               </motion.div>

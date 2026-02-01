@@ -2,7 +2,6 @@ import React, {useEffect, useRef, useState, useMemo} from "react";
 import {AnimatePresence, motion} from "framer-motion";
 import Marquee from "react-fast-marquee";
 import LogoMarquee from "../components/LogoMarquee";
-import HeroDemo from "../components/HeroDemo";
 import {
     ArrowRight,
     BarChart3,
@@ -23,6 +22,7 @@ import Footer from "../components/Footer";
 import FAQList from "../components/FAQList.jsx";
 import { FAQ_ITEMS } from "../constants/faqItems";
 import { posts } from "../content/utils/mdxPostLoader";
+import HeroDemo from "../components/HeroDemo";
 import {VideoModal} from "../components/VideoModal";
 import {useDemoForm} from "../context/DemoFormContext";
 import DemoCTAButton from "../components/DemoCTAButton";
@@ -816,7 +816,7 @@ function Hero({ onOpenVideo }) {
           </h1>
 
           <p className="mt-4 text-lg text-black/70 dark:text-white/70 max-w-2xl mx-auto">
-            Nobi converts shoppers on your site with conversational AI and indexes that data so that ChatGPT is more likely to recommend you.
+          Nobi helps you get discovered by LLMs like ChatGPT by putting conversational shopping on your site.
           </p>
 
           {/* Same-row CTAs (works on mobile too) */}
@@ -1199,7 +1199,7 @@ function Features() {
     {
       title: "ChatGPT doesn’t rank keywords. It ranks intent.",
       desc:
-        "People don’t ask ChatGPT for “yoga pants.” They ask, “I need yoga pants for my wife who loves hot yoga.” Nobi captures that real intent from shopper conversations and shares it with LLMs—so you are more likely to be recommended for the same kinds of prompts.",
+        "Instead of “yoga pants”, people ask ChatGPT “need yoga pants for my wife who loves hot yoga.” Nobi allows them to do the same on your site.",
       ctaLabel: "Learn More →",
       ctaHref: "/why-nobi/better-search",
       icon: <SearchIcon className="h-4 w-4" />,
@@ -1208,7 +1208,7 @@ function Features() {
     {
       title: "Nobi turns user-generated content into recommendation signals",
       desc:
-        "Nobi answers customer questions about your products and indexes those conversations to the product page so LLMs are more likely to recommend you for similar prompts.",
+        "Nobi structures and indexes customer conversations on your site so LLMs are more likely to recommend you for similar prompts.",
       ctaLabel: "Learn More →",
       ctaHref: "/why-nobi/better-search",
       icon: <Sparkles className="h-4 w-4" />,
@@ -1217,7 +1217,7 @@ function Features() {
     {
       title: "The operational layer to win in AI search",
       desc:
-        "Nobi implements MCP and other operational protocols so that LLMs can find and recommend your products. We then track how you're performing on the prompts you want to show up for and give you recommendations on how to improve.",
+        "Nobi implements MCP and other operational layers you need for LLM visibility. Track, measure, and take action with our simple dashboard.",
       ctaLabel: "Learn More →",
       ctaHref: "/why-nobi/better-search",
       icon: <ShoppingCart className="h-4 w-4" />,
@@ -1240,7 +1240,7 @@ function Features() {
           When to use Nobi
         </h2>
         <p className="mt-3 text-black/70 dark:text-white/70">
-          Nobi helps shoppers find what they need, answers their questions, and recommends products through conversational AI. We structure all of that conversational data so that LLMs can find and recommend your products.
+        Nobi doesn’t just convert shoppers—it turns conversations into machine-readable signals that get your brand recommended by LLMs like ChatGPT.
         </p>
 
         <div className="mt-8 grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">

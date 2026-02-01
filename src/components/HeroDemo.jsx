@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Sparkles } from "lucide-react";
+import { ChevronLeft, ChevronRight, Sparkles } from "lucide-react";
 
 const DEMO_QUERY = "red dress for a weekend out";
 
@@ -132,28 +132,146 @@ const PRODUCTS = [
 const PDP_QUESTION = "Does this run true to size?";
 const PDP_ANSWER = "This dress runs true to size. Most customers find it fits perfectly when ordering their usual size. The stretchy fabric provides a comfortable, flattering fit.";
 
-export default function HeroDemo({ className = "" }) {
+function SearchDemo({ isActive }) {
   const [searchMode, setSearchMode] = useState("ai");
   const [showProducts, setShowProducts] = useState(false);
   const [showCursor, setShowCursor] = useState(false);
   const [clicked, setClicked] = useState(false);
-  const [showPDP, setShowPDP] = useState(false);
+  const [restartKey, setRestartKey] = useState(0);
+
+  const handleDemoComplete = () => {
+    setTimeout(() => setShowProducts(true), 300);
+    setTimeout(() => setShowCursor(true), 1200);
+    setTimeout(() => setClicked(true), 2000);
+  };
+
+  useEffect(() => {
+    if (!isActive) return;
+    setShowProducts(false);
+    setShowCursor(false);
+    setClicked(false);
+    setRestartKey((k) => k + 1);
+  }, [isActive]);
+
+  return (
+    <div>
+      <DualModeSearchBar
+        key={restartKey}
+        locked
+        mode={searchMode}
+        onModeChange={setSearchMode}
+        onDemoSubmit={handleDemoComplete}
+        defaultMode="ai"
+        size="regular"
+      />
+
+      {showProducts && (
+        <motion.div
+          initial={{ opacity: 0, y: 8 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4 }}
+          className="mt-4 rounded-2xl border border-black/10 dark:border-white/10 bg-white/80 dark:bg-white/5 px-4 py-3 text-sm text-black/80 dark:text-white/80"
+        >
+          <div className="flex items-start gap-2">
+            <img src="/favicon.svg" alt="Nobi" className="h-4 w-4 mt-0.5" />
+            <span>
+              Here are the most popular red dresses that shoppers have purchased over the past 6 months for a weekend out.
+            </span>
+          </div>
+        </motion.div>
+      )}
+
+      <div className="mt-6 sm:mt-8 relative">
+        {showProducts && (
+          <div className="mb-3 text-xs sm:text-sm font-semibold uppercase tracking-[0.25em] text-black/60 dark:text-white/60">
+            Red Dresses Popular for a Weekend Out
+          </div>
+        )}
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4">
+        {PRODUCTS.map((product, i) => (
+          <motion.div
+            key={i}
+            className={`rounded-xl bg-white/60 dark:bg-white/5 border overflow-hidden transition-all duration-300 ${
+              i === 0 && clicked
+                ? "border-fuchsia-400 ring-2 ring-fuchsia-400/50 scale-[1.02]"
+                : "border-black/5 dark:border-white/10"
+            }`}
+            initial={{ opacity: 1 }}
+            animate={{ opacity: 1 }}
+          >
+            <div className="aspect-[3/4] relative overflow-hidden">
+              {!showProducts ? (
+                <div className="absolute inset-0 bg-gradient-to-br from-black/5 to-black/10 dark:from-white/5 dark:to-white/10" />
+              ) : (
+                <motion.img
+                  src={product.img}
+                  alt={product.title}
+                  className="absolute inset-0 w-full h-full object-cover"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.4, delay: i * 0.1 }}
+                />
+              )}
+            </div>
+
+            <div className="p-3 space-y-2">
+              {!showProducts ? (
+                <>
+                  <div className="h-3 bg-black/10 dark:bg-white/10 rounded w-3/4" />
+                  <div className="h-3 bg-black/5 dark:bg-white/5 rounded w-1/2" />
+                </>
+              ) : (
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.4, delay: i * 0.1 }}
+                >
+                  <div className="text-sm font-medium text-black/80 dark:text-white/80 truncate">{product.title}</div>
+                  <div className="text-sm text-black/50 dark:text-white/50">{product.price}</div>
+                </motion.div>
+              )}
+            </div>
+          </motion.div>
+        ))}
+
+        </div>
+        <AnimatePresence>
+          {showCursor && (
+            <motion.div
+              className="absolute pointer-events-none z-10"
+              initial={{ top: "50%", left: "50%", opacity: 0 }}
+              animate={{
+                top: "30%",
+                left: "12%",
+                opacity: 1,
+                scale: clicked ? [1, 0.8, 1] : 1
+              }}
+              exit={{ opacity: 0 }}
+              transition={{
+                duration: 0.6,
+                ease: "easeOut",
+                scale: { duration: 0.2, delay: 0.8 }
+              }}
+            >
+              <svg width="28" height="28" viewBox="0 0 24 24" className="drop-shadow-lg">
+                <path d="M19.739 7.408c-.34 0-.662.069-.956.195a2.425 2.425 0 0 0-2.251-1.538c-.379 0-.739.088-1.058.244a2.424 2.424 0 0 0-2.148-1.314 2.4 2.4 0 0 0-.788.133V2.441A2.433 2.433 0 0 0 10.117 0a2.434 2.434 0 0 0-2.424 2.441v9.668l-1.747-1.998a2.425 2.425 0 0 0-1.753-.756H4.18c-.647 0-1.255.25-1.708.705-.801.802-.845 1.992-.122 3.266.938 1.648 1.957 3.201 2.857 4.571.658 1.002 1.278 1.948 1.731 2.729.393.681 1.439 2.882 1.451 2.904.133.287.422.47.738.47h10.367c.356 0 .672-.23.779-.568.194-.602 1.89-5.933 1.89-7.99V9.847a2.435 2.435 0 0 0-2.424-2.439z" fill="#000000"/>
+                <path fill="#ffffff" d="M18.956 9.847c0-.44.353-.801.783-.801.433 0 .785.36.785.801v5.594c0 1.369-1.052 5.046-1.632 6.919H9.644c-.339-.707-.975-2.018-1.288-2.556-.476-.821-1.109-1.784-1.78-2.806-.885-1.351-1.889-2.881-2.8-4.483-.239-.419-.458-.984-.146-1.296a.792.792 0 0 1 1.104-.005l3.163 3.616a.818.818 0 0 0 1.435-.539V2.441c0-.442.353-.801.786-.801.431.001.782.36.782.801v7.654a.82.82 0 0 0 1.638 0V7.434c0-.44.353-.799.788-.799a.79.79 0 0 1 .782.799v3.73a.82.82 0 0 0 1.638 0V8.506c0-.443.352-.802.785-.802s.785.359.785.802v3.726a.82.82 0 1 0 1.638 0V9.847z"/>
+              </svg>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
+    </div>
+  );
+}
+
+function PdpDemo({ isActive }) {
   const [pdpQuestion, setPdpQuestion] = useState("");
   const [showAnswer, setShowAnswer] = useState(false);
   const [showFAQ, setShowFAQ] = useState(false);
 
-  const handleDemoComplete = () => {
-    setTimeout(() => setShowProducts(true), 300);
-    // After products appear, show cursor and click
-    setTimeout(() => setShowCursor(true), 1200);
-    setTimeout(() => setClicked(true), 2000);
-    // After click, transition to PDP
-    setTimeout(() => setShowPDP(true), 2800);
-  };
-
-  // Typing animation for PDP question
   useEffect(() => {
-    if (!showPDP) return;
+    if (!isActive) return;
 
     setPdpQuestion("");
     setShowAnswer(false);
@@ -168,9 +286,7 @@ export default function HeroDemo({ className = "" }) {
           i++;
         } else {
           clearInterval(timer);
-          // Show answer after question is done
           timers.push(setTimeout(() => setShowAnswer(true), 600));
-          // Transition to FAQ section after answer is shown
           timers.push(setTimeout(() => setShowFAQ(true), 1800));
         }
       }, 50);
@@ -179,291 +295,277 @@ export default function HeroDemo({ className = "" }) {
 
     timers.push(startDelay);
 
-    return () => timers.forEach(t => clearTimeout(t));
-  }, [showPDP]);
+    return () => timers.forEach((t) => clearTimeout(t));
+  }, [isActive]);
+
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.5 }}
+      className="flex flex-col md:flex-row gap-4 md:gap-8"
+    >
+      <div className="hidden md:block md:w-[35%] flex-shrink-0">
+        <div className="rounded-2xl overflow-hidden bg-white/60 dark:bg-white/5 border border-black/5 dark:border-white/10 shadow-lg">
+          <img
+            src={PRODUCTS[0].img}
+            alt={PRODUCTS[0].title}
+            className="w-full aspect-[3/4] object-cover"
+          />
+        </div>
+      </div>
+
+      <div className="flex-1">
+        {!showFAQ && (
+          <div className="flex md:hidden gap-3 mb-3">
+            <div className="w-16 sm:w-20 flex-shrink-0">
+              <div className="rounded-lg overflow-hidden bg-white/60 dark:bg-white/5 border border-black/5 dark:border-white/10 shadow-lg">
+                <img
+                  src={PRODUCTS[0].img}
+                  alt={PRODUCTS[0].title}
+                  className="w-full aspect-[3/4] object-cover"
+                />
+              </div>
+            </div>
+            <div>
+              <h2 className="text-base sm:text-lg font-semibold text-black/90 dark:text-white/90 mb-1">
+                {PRODUCTS[0].title}
+              </h2>
+              <p className="text-sm sm:text-base text-black/70 dark:text-white/70">
+                {PRODUCTS[0].price}
+              </p>
+            </div>
+          </div>
+        )}
+
+        {!showFAQ && (
+          <div className="hidden md:block mb-4">
+            <h2 className="text-2xl font-semibold text-black/90 dark:text-white/90 mb-1">
+              {PRODUCTS[0].title}
+            </h2>
+            <p className="text-xl text-black/70 dark:text-white/70">
+              {PRODUCTS[0].price}
+            </p>
+          </div>
+        )}
+
+        <AnimatePresence mode="wait">
+          {!showFAQ ? (
+            <motion.div
+              key="ask-ai"
+              initial={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.4 }}
+            >
+              <div className="rounded-xl md:rounded-2xl border border-fuchsia-200 dark:border-fuchsia-800 bg-white/80 dark:bg-zinc-900/80 p-3 md:p-4 shadow-lg">
+                <div className="flex items-center gap-2 md:gap-3 mb-2 md:mb-3">
+                  <div className="w-6 h-6 md:w-8 md:h-8 rounded-full bg-gradient-to-r from-fuchsia-500 to-pink-500 flex items-center justify-center flex-shrink-0">
+                    <Sparkles className="w-3 h-3 md:w-4 md:h-4 text-white" />
+                  </div>
+                  <span className="text-xs md:text-sm font-medium text-black/70 dark:text-white/70">Ask about this product</span>
+                </div>
+                <div className="flex items-center gap-2 md:gap-3 rounded-lg md:rounded-xl border border-black/10 dark:border-white/15 bg-white/70 dark:bg-white/5 px-3 md:px-4 h-10 md:h-12">
+                  <div className="flex-1 min-w-0 text-xs md:text-sm text-black/80 dark:text-white/80 truncate">
+                    {pdpQuestion || <span className="text-black/40 dark:text-white/40">Ask a question...</span>}
+                    {pdpQuestion.length < PDP_QUESTION.length && pdpQuestion.length > 0 && (
+                      <span className="animate-pulse">|</span>
+                    )}
+                  </div>
+                  <Button variant="ai" size="compact" className="px-2 md:px-4 h-7 md:h-8 flex-shrink-0">
+                    <Sparkles className="w-3 h-3 md:w-4 md:h-4" />
+                    <span className="hidden md:inline">Ask</span>
+                  </Button>
+                </div>
+
+                {showAnswer && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.4 }}
+                    className="mt-3 md:mt-4 p-3 md:p-4 rounded-lg md:rounded-xl bg-gradient-to-br from-fuchsia-50 to-pink-50 dark:from-fuchsia-900/20 dark:to-pink-900/20 border border-fuchsia-100 dark:border-fuchsia-800"
+                  >
+                    <p className="text-xs md:text-sm text-black/80 dark:text-white/80 leading-relaxed line-clamp-3 md:line-clamp-none">
+                      {PDP_ANSWER}
+                    </p>
+                  </motion.div>
+                )}
+              </div>
+
+              {!showAnswer && (
+                <div className="mt-3 md:mt-4 space-y-2 hidden md:block">
+                  <div className="h-3 bg-black/10 dark:bg-white/10 rounded w-full" />
+                  <div className="h-3 bg-black/5 dark:bg-white/5 rounded w-5/6" />
+                  <div className="h-3 bg-black/5 dark:bg-white/5 rounded w-4/6" />
+                </div>
+              )}
+            </motion.div>
+          ) : (
+            <motion.div
+              key="faq-section"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.4 }}
+              className="flex gap-3"
+            >
+              <div className="w-20 sm:w-24 flex-shrink-0 md:hidden">
+                <div className="rounded-lg overflow-hidden bg-white/60 dark:bg-white/5 border border-black/5 dark:border-white/10 shadow-lg">
+                  <img
+                    src={PRODUCTS[0].img}
+                    alt={PRODUCTS[0].title}
+                    className="w-full aspect-[3/4] object-cover"
+                  />
+                </div>
+              </div>
+
+              <div className="flex-1 rounded-lg md:rounded-xl border border-fuchsia-200 dark:border-fuchsia-800 bg-white/80 dark:bg-zinc-900/80 p-3 md:p-4 shadow-lg">
+                <div className="flex items-center gap-2 md:gap-3 mb-2 md:mb-3">
+                  <div className="w-5 h-5 md:w-6 md:h-6 rounded-full bg-gradient-to-r from-fuchsia-500 to-pink-500 flex items-center justify-center flex-shrink-0">
+                    <Sparkles className="w-2.5 h-2.5 md:w-3 md:h-3 text-white" />
+                  </div>
+                  <span className="text-sm md:text-base font-semibold text-black/80 dark:text-white/80">
+                    Common questions shoppers ask about the Cherry Evening Gown
+                  </span>
+                </div>
+                <div className="space-y-1.5 md:space-y-2">
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: 0.2 }}
+                    className="p-2 md:p-2.5 rounded-md md:rounded-lg bg-fuchsia-50/50 dark:bg-fuchsia-900/10 border border-fuchsia-100/50 dark:border-fuchsia-800/30"
+                  >
+                    <p className="font-semibold text-xs md:text-sm text-black/90 dark:text-white/90 mb-1 md:mb-1.5 leading-tight">
+                      {PDP_QUESTION}
+                    </p>
+                    <p className="text-[10px] md:text-xs text-black/60 dark:text-white/60 leading-snug line-clamp-2">
+                      {PDP_ANSWER}
+                    </p>
+                  </motion.div>
+
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: 0.4 }}
+                    className="p-2 md:p-2.5 rounded-md md:rounded-lg bg-white/50 dark:bg-white/5 border border-black/5 dark:border-white/10"
+                  >
+                    <p className="font-semibold text-xs md:text-sm text-black/70 dark:text-white/70 mb-1 md:mb-1.5 leading-tight">
+                      What are the materials of this dress?
+                    </p>
+                    <p className="text-[10px] md:text-xs text-black/50 dark:text-white/50 leading-snug line-clamp-2">
+                      A soft satin blend with a touch of stretch, plus a breathable lining for comfort.
+                    </p>
+                  </motion.div>
+
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: 0.6 }}
+                    className="p-2 md:p-2.5 rounded-md md:rounded-lg bg-white/50 dark:bg-white/5 border border-black/5 dark:border-white/10"
+                  >
+                    <p className="font-semibold text-xs md:text-sm text-black/70 dark:text-white/70 mb-1 md:mb-1.5 leading-tight">
+                      Do I need to dry clean this?
+                    </p>
+                    <p className="text-[10px] md:text-xs text-black/50 dark:text-white/50 leading-snug line-clamp-2">
+                      We recommend dry cleaning to preserve the satin finish, but a gentle cold hand wash is okay if needed.
+                    </p>
+                  </motion.div>
+                </div>
+
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
+    </motion.div>
+  );
+}
+
+export default function HeroDemo({ className = "" }) {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const slides = [
+    { id: "search", label: "Search + discovery" },
+    { id: "pdp", label: "Product Q&A" },
+    { id: "measure", label: "Measure how you're performing" },
+  ];
+
+  const goPrev = () => setActiveIndex((i) => (i - 1 + slides.length) % slides.length);
+  const goNext = () => setActiveIndex((i) => (i + 1) % slides.length);
+  const autoAdvanceRef = useRef(null);
+
+  useEffect(() => {
+    if (autoAdvanceRef.current) clearTimeout(autoAdvanceRef.current);
+    if (activeIndex >= slides.length - 1) return;
+
+    const searchDurationMs = 4200;
+    const pdpDurationMs =
+      500 + PDP_QUESTION.length * 50 + 600 + 1800 + 600;
+    const measureDurationMs = 6000;
+    const pauseMs = 2000;
+    const durations = [searchDurationMs, pdpDurationMs, measureDurationMs].map(
+      (duration) => duration + pauseMs
+    );
+
+    autoAdvanceRef.current = setTimeout(() => {
+      goNext();
+    }, durations[activeIndex] || 5000);
+
+    return () => {
+      if (autoAdvanceRef.current) clearTimeout(autoAdvanceRef.current);
+    };
+  }, [activeIndex]);
 
   return (
     <div className={`${className}`}>
       <div className="max-w-5xl mx-auto">
-        {/* Abstract rectangular container */}
         <div className="rounded-3xl shadow-2xl border border-black/5 dark:border-white/10 bg-gradient-to-br from-violet-50 via-white to-emerald-50 dark:from-violet-900/20 dark:via-zinc-900 dark:to-emerald-900/10 p-4 sm:p-8">
-
-          <AnimatePresence mode="wait">
-            {!showPDP ? (
-              <motion.div
-                key="search-view"
-                initial={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.5 }}
+          <div className="flex items-center justify-between mb-4">
+            <div className="text-xs uppercase tracking-[0.35em] text-black/50 dark:text-white/60">
+              {slides[activeIndex].label}
+            </div>
+            <div className="flex items-center gap-2">
+              <button
+                type="button"
+                onClick={goPrev}
+                aria-label="Previous demo"
+                className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/5 text-black/70 dark:text-white/70 hover:bg-black/5 dark:hover:bg-white/10"
               >
-                <DualModeSearchBar
-                  locked
-                  mode={searchMode}
-                  onModeChange={setSearchMode}
-                  onDemoSubmit={handleDemoComplete}
-                  defaultMode="ai"
-                  size="regular"
-                />
-
-                {/* Product grid */}
-                <div className="mt-6 sm:mt-8 grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 relative">
-                  {PRODUCTS.map((product, i) => (
-                    <motion.div
-                      key={i}
-                      className={`rounded-xl bg-white/60 dark:bg-white/5 border overflow-hidden transition-all duration-300 ${
-                        i === 0 && clicked
-                          ? "border-fuchsia-400 ring-2 ring-fuchsia-400/50 scale-[1.02]"
-                          : "border-black/5 dark:border-white/10"
-                      }`}
-                      initial={{ opacity: 1 }}
-                      animate={{ opacity: 1 }}
-                    >
-                      {/* Image area */}
-                      <div className="aspect-[3/4] relative overflow-hidden">
-                        {!showProducts ? (
-                          <div className="absolute inset-0 bg-gradient-to-br from-black/5 to-black/10 dark:from-white/5 dark:to-white/10" />
-                        ) : (
-                          <motion.img
-                            src={product.img}
-                            alt={product.title}
-                            className="absolute inset-0 w-full h-full object-cover"
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            transition={{ duration: 0.4, delay: i * 0.1 }}
-                          />
-                        )}
-                      </div>
-
-                      {/* Text area */}
-                      <div className="p-3 space-y-2">
-                        {!showProducts ? (
-                          <>
-                            <div className="h-3 bg-black/10 dark:bg-white/10 rounded w-3/4" />
-                            <div className="h-3 bg-black/5 dark:bg-white/5 rounded w-1/2" />
-                          </>
-                        ) : (
-                          <motion.div
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            transition={{ duration: 0.4, delay: i * 0.1 }}
-                          >
-                            <div className="text-sm font-medium text-black/80 dark:text-white/80 truncate">{product.title}</div>
-                            <div className="text-sm text-black/50 dark:text-white/50">{product.price}</div>
-                          </motion.div>
-                        )}
-                      </div>
-                    </motion.div>
-                  ))}
-
-                  {/* Animated cursor */}
-                  <AnimatePresence>
-                    {showCursor && !showPDP && (
-                      <motion.div
-                        className="absolute pointer-events-none z-10"
-                        initial={{ top: "50%", left: "50%", opacity: 0 }}
-                        animate={{
-                          top: "30%",
-                          left: "12%",
-                          opacity: 1,
-                          scale: clicked ? [1, 0.8, 1] : 1
-                        }}
-                        exit={{ opacity: 0 }}
-                        transition={{
-                          duration: 0.6,
-                          ease: "easeOut",
-                          scale: { duration: 0.2, delay: 0.8 }
-                        }}
-                      >
-                        <svg width="28" height="28" viewBox="0 0 24 24" className="drop-shadow-lg">
-                          <path d="M19.739 7.408c-.34 0-.662.069-.956.195a2.425 2.425 0 0 0-2.251-1.538c-.379 0-.739.088-1.058.244a2.424 2.424 0 0 0-2.148-1.314 2.4 2.4 0 0 0-.788.133V2.441A2.433 2.433 0 0 0 10.117 0a2.434 2.434 0 0 0-2.424 2.441v9.668l-1.747-1.998a2.425 2.425 0 0 0-1.753-.756H4.18c-.647 0-1.255.25-1.708.705-.801.802-.845 1.992-.122 3.266.938 1.648 1.957 3.201 2.857 4.571.658 1.002 1.278 1.948 1.731 2.729.393.681 1.439 2.882 1.451 2.904.133.287.422.47.738.47h10.367c.356 0 .672-.23.779-.568.194-.602 1.89-5.933 1.89-7.99V9.847a2.435 2.435 0 0 0-2.424-2.439z" fill="#000000"/>
-                          <path fill="#ffffff" d="M18.956 9.847c0-.44.353-.801.783-.801.433 0 .785.36.785.801v5.594c0 1.369-1.052 5.046-1.632 6.919H9.644c-.339-.707-.975-2.018-1.288-2.556-.476-.821-1.109-1.784-1.78-2.806-.885-1.351-1.889-2.881-2.8-4.483-.239-.419-.458-.984-.146-1.296a.792.792 0 0 1 1.104-.005l3.163 3.616a.818.818 0 0 0 1.435-.539V2.441c0-.442.353-.801.786-.801.431.001.782.36.782.801v7.654a.82.82 0 0 0 1.638 0V7.434c0-.44.353-.799.788-.799a.79.79 0 0 1 .782.799v3.73a.82.82 0 0 0 1.638 0V8.506c0-.443.352-.802.785-.802s.785.359.785.802v3.726a.82.82 0 1 0 1.638 0V9.847z"/>
-                        </svg>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                </div>
-              </motion.div>
-            ) : (
-              <motion.div
-                key="pdp-view"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.5 }}
-                className="flex flex-col md:flex-row gap-4 md:gap-8"
+                <ChevronLeft className="h-4 w-4" />
+              </button>
+              <button
+                type="button"
+                onClick={goNext}
+                aria-label="Next demo"
+                className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/5 text-black/70 dark:text-white/70 hover:bg-black/5 dark:hover:bg-white/10"
               >
-                {/* Product image - 35% width on desktop only */}
-                <div className="hidden md:block md:w-[35%] flex-shrink-0">
-                  <div className="rounded-2xl overflow-hidden bg-white/60 dark:bg-white/5 border border-black/5 dark:border-white/10 shadow-lg">
-                    <img
-                      src={PRODUCTS[0].img}
-                      alt={PRODUCTS[0].title}
-                      className="w-full aspect-[3/4] object-cover"
-                    />
-                  </div>
+                <ChevronRight className="h-4 w-4" />
+              </button>
+            </div>
+          </div>
+
+          <div className="relative overflow-hidden">
+            <div
+              className="flex transition-transform duration-500 ease-out"
+              style={{ transform: `translateX(-${activeIndex * 100}%)` }}
+            >
+              <div className="w-full shrink-0">
+                <SearchDemo isActive={activeIndex === 0} />
+              </div>
+              <div className="w-full shrink-0">
+                <PdpDemo isActive={activeIndex === 1} />
+              </div>
+              <div className="w-full shrink-0">
+                <div className="rounded-2xl border border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/5 overflow-hidden shadow-lg">
+                  <video
+                    src="/media/MCP.mp4"
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    className="w-full h-full object-cover"
+                  />
                 </div>
-
-                {/* Product details + Ask AI bar / FAQ section */}
-                <div className="flex-1">
-                  {/* Mobile/Tablet: Product image + info (only when not FAQ) */}
-                  {!showFAQ && (
-                    <div className="flex md:hidden gap-3 mb-3">
-                      <div className="w-16 sm:w-20 flex-shrink-0">
-                        <div className="rounded-lg overflow-hidden bg-white/60 dark:bg-white/5 border border-black/5 dark:border-white/10 shadow-lg">
-                          <img
-                            src={PRODUCTS[0].img}
-                            alt={PRODUCTS[0].title}
-                            className="w-full aspect-[3/4] object-cover"
-                          />
-                        </div>
-                      </div>
-                      <div>
-                        <h2 className="text-base sm:text-lg font-semibold text-black/90 dark:text-white/90 mb-1">
-                          {PRODUCTS[0].title}
-                        </h2>
-                        <p className="text-sm sm:text-base text-black/70 dark:text-white/70">
-                          {PRODUCTS[0].price}
-                        </p>
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Desktop: Product info - hide when FAQ shows */}
-                  {!showFAQ && (
-                    <div className="hidden md:block mb-4">
-                      <h2 className="text-2xl font-semibold text-black/90 dark:text-white/90 mb-1">
-                        {PRODUCTS[0].title}
-                      </h2>
-                      <p className="text-xl text-black/70 dark:text-white/70">
-                        {PRODUCTS[0].price}
-                      </p>
-                    </div>
-                  )}
-
-                  <AnimatePresence mode="wait">
-                    {!showFAQ ? (
-                      <motion.div
-                        key="ask-ai"
-                        initial={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                        transition={{ duration: 0.4 }}
-                      >
-                        {/* Stylized Ask AI bar */}
-                        <div className="rounded-xl md:rounded-2xl border border-fuchsia-200 dark:border-fuchsia-800 bg-white/80 dark:bg-zinc-900/80 p-3 md:p-4 shadow-lg">
-                          <div className="flex items-center gap-2 md:gap-3 mb-2 md:mb-3">
-                            <div className="w-6 h-6 md:w-8 md:h-8 rounded-full bg-gradient-to-r from-fuchsia-500 to-pink-500 flex items-center justify-center flex-shrink-0">
-                              <Sparkles className="w-3 h-3 md:w-4 md:h-4 text-white" />
-                            </div>
-                            <span className="text-xs md:text-sm font-medium text-black/70 dark:text-white/70">Ask about this product</span>
-                          </div>
-                          <div className="flex items-center gap-2 md:gap-3 rounded-lg md:rounded-xl border border-black/10 dark:border-white/15 bg-white/70 dark:bg-white/5 px-3 md:px-4 h-10 md:h-12">
-                            <div className="flex-1 min-w-0 text-xs md:text-sm text-black/80 dark:text-white/80 truncate">
-                              {pdpQuestion || <span className="text-black/40 dark:text-white/40">Ask a question...</span>}
-                              {pdpQuestion.length < PDP_QUESTION.length && pdpQuestion.length > 0 && (
-                                <span className="animate-pulse">|</span>
-                              )}
-                            </div>
-                            <Button variant="ai" size="compact" className="px-2 md:px-4 h-7 md:h-8 flex-shrink-0">
-                              <Sparkles className="w-3 h-3 md:w-4 md:h-4" />
-                              <span className="hidden md:inline">Ask</span>
-                            </Button>
-                          </div>
-
-                          {/* Answer */}
-                          {showAnswer && (
-                            <motion.div
-                              initial={{ opacity: 0, y: 10 }}
-                              animate={{ opacity: 1, y: 0 }}
-                              transition={{ duration: 0.4 }}
-                              className="mt-3 md:mt-4 p-3 md:p-4 rounded-lg md:rounded-xl bg-gradient-to-br from-fuchsia-50 to-pink-50 dark:from-fuchsia-900/20 dark:to-pink-900/20 border border-fuchsia-100 dark:border-fuchsia-800"
-                            >
-                              <p className="text-xs md:text-sm text-black/80 dark:text-white/80 leading-relaxed line-clamp-3 md:line-clamp-none">
-                                {PDP_ANSWER}
-                              </p>
-                            </motion.div>
-                          )}
-                        </div>
-
-                        {/* Skeleton details below */}
-                        {!showAnswer && (
-                          <div className="mt-3 md:mt-4 space-y-2 hidden md:block">
-                            <div className="h-3 bg-black/10 dark:bg-white/10 rounded w-full" />
-                            <div className="h-3 bg-black/5 dark:bg-white/5 rounded w-5/6" />
-                            <div className="h-3 bg-black/5 dark:bg-white/5 rounded w-4/6" />
-                          </div>
-                        )}
-                      </motion.div>
-                    ) : (
-                      <motion.div
-                        key="faq-section"
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ duration: 0.4 }}
-                        className="flex gap-3"
-                      >
-                        {/* Mobile: Product image on left */}
-                        <div className="w-20 sm:w-24 flex-shrink-0 md:hidden">
-                          <div className="rounded-lg overflow-hidden bg-white/60 dark:bg-white/5 border border-black/5 dark:border-white/10 shadow-lg">
-                            <img
-                              src={PRODUCTS[0].img}
-                              alt={PRODUCTS[0].title}
-                              className="w-full aspect-[3/4] object-cover"
-                            />
-                          </div>
-                        </div>
-
-                        {/* FAQ Section */}
-                        <div className="flex-1 rounded-lg md:rounded-xl border border-fuchsia-200 dark:border-fuchsia-800 bg-white/80 dark:bg-zinc-900/80 p-3 md:p-4 shadow-lg">
-                          <div className="flex items-center gap-2 md:gap-3 mb-2 md:mb-3">
-                            <div className="w-5 h-5 md:w-6 md:h-6 rounded-full bg-gradient-to-r from-fuchsia-500 to-pink-500 flex items-center justify-center flex-shrink-0">
-                              <Sparkles className="w-2.5 h-2.5 md:w-3 md:h-3 text-white" />
-                            </div>
-                            <span className="text-sm md:text-base font-semibold text-black/80 dark:text-white/80">Conversational FAQs</span>
-                          </div>
-                          <div className="space-y-1.5 md:space-y-2">
-                            {/* The Q&A that transitioned */}
-                            <motion.div
-                              initial={{ opacity: 0, y: 10 }}
-                              animate={{ opacity: 1, y: 0 }}
-                              transition={{ duration: 0.5, delay: 0.2 }}
-                              className="p-2 md:p-2.5 rounded-md md:rounded-lg bg-fuchsia-50/50 dark:bg-fuchsia-900/10 border border-fuchsia-100/50 dark:border-fuchsia-800/30"
-                            >
-                              <p className="font-semibold text-xs md:text-sm text-black/90 dark:text-white/90 mb-1 md:mb-1.5 leading-tight">
-                                {PDP_QUESTION}
-                              </p>
-                              <p className="text-[10px] md:text-xs text-black/60 dark:text-white/60 leading-snug line-clamp-2">
-                                {PDP_ANSWER}
-                              </p>
-                            </motion.div>
-
-                            {/* Second FAQ - occasion based */}
-                            <motion.div
-                              initial={{ opacity: 0, y: 10 }}
-                              animate={{ opacity: 1, y: 0 }}
-                              transition={{ duration: 0.5, delay: 0.4 }}
-                              className="p-2 md:p-2.5 rounded-md md:rounded-lg bg-white/50 dark:bg-white/5 border border-black/5 dark:border-white/10"
-                            >
-                              <p className="font-semibold text-xs md:text-sm text-black/70 dark:text-white/70 mb-1 md:mb-1.5 leading-tight">
-                                When should I wear this dress?
-                              </p>
-                              <p className="text-[10px] md:text-xs text-black/50 dark:text-white/50 leading-snug line-clamp-2">
-                                Perfect for a fun weekend night out, dinner dates, rooftop bars, or any semi-casual evening event.
-                              </p>
-                            </motion.div>
-                          </div>
-
-                          {/* Nobi logo at bottom right */}
-                          <div className="flex justify-end mt-2 md:mt-3">
-                            <img src="/media/nobi-logo.png" alt="Nobi" className="h-4 md:h-6" />
-                          </div>
-                        </div>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                </div>
-              </motion.div>
-            )}
-          </AnimatePresence>
-
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

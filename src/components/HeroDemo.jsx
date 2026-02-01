@@ -303,7 +303,7 @@ function PdpDemo({ isActive }) {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
-      className="flex flex-col md:flex-row gap-4 md:gap-8"
+      className="flex flex-col md:flex-row gap-4 md:gap-8 h-full"
     >
       <div className="hidden md:block md:w-[35%] flex-shrink-0">
         <div className="rounded-2xl overflow-hidden bg-white/60 dark:bg-white/5 border border-black/5 dark:border-white/10 shadow-lg">
@@ -484,7 +484,7 @@ export default function HeroDemo({ className = "" }) {
   const slides = [
     { id: "search", label: "Search + discovery" },
     { id: "pdp", label: "Product Q&A" },
-    { id: "measure", label: "Measure how you're performing" },
+    { id: "measure", label: "Measure Performance" },
   ];
 
   const goPrev = () => setActiveIndex((i) => (i - 1 + slides.length) % slides.length);
@@ -543,7 +543,7 @@ export default function HeroDemo({ className = "" }) {
 
           <div className="relative overflow-hidden">
             <div
-              className="flex transition-transform duration-500 ease-out"
+              className="flex items-stretch transition-transform duration-500 ease-out"
               style={{ transform: `translateX(-${activeIndex * 100}%)` }}
             >
               <div className="w-full shrink-0">
@@ -552,8 +552,8 @@ export default function HeroDemo({ className = "" }) {
               <div className="w-full shrink-0">
                 <PdpDemo isActive={activeIndex === 1} />
               </div>
-              <div className="w-full shrink-0">
-                <div className="rounded-2xl border border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/5 overflow-hidden shadow-lg">
+              <div className="w-full shrink-0 flex">
+                <div className="flex-1 rounded-2xl border border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/5 overflow-hidden shadow-lg">
                   <video
                     src="/media/MCP.mp4"
                     autoPlay

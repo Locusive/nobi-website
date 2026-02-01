@@ -819,7 +819,7 @@ function Hero({ onOpenForm }) {
 
           {/* Same-row CTAs (works on mobile too) */}
           <div className="grid grid-cols-[1fr_auto] items-center gap-1 max-w-xl mx-auto">
-            <DemoCTAButton className="justify-self-center w-full max-w-[50%]" />
+            <DemoCTAButton className="justify-self-center w-full max-w-[60%]" />
           </div>
 
           </div>

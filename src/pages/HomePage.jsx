@@ -29,6 +29,7 @@ import DemoCTAButton from "../components/DemoCTAButton";
 
 
 // ===== feature flags (hide sections/links without deleting code) =====
+// Build trigger for Cloudflare Pages preview.
 const SHOW_LOGOS = true;
 const SHOW_PRICING = false;
 

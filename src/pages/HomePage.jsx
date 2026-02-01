@@ -1417,7 +1417,7 @@ function Testimonial() {
 
           {/* Photo card — height follows the quote, no inner padding, image covers */}
           <div
-            className="self-start rounded-3xl border border-black/10 dark:border-white/10 overflow-hidden bg-white/70 dark:bg-white/5"
+            className="relative self-start rounded-3xl border border-black/10 dark:border-white/10 overflow-hidden bg-white/70 dark:bg-white/5"
             style={{
               // Match the quote's height on desktop; give a safe minimum before we measure
               height: leftHeight || 320,
@@ -1428,6 +1428,15 @@ function Testimonial() {
               alt="Customer lifestyle"
               className="h-full w-full object-cover"
             />
+            <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
+            <div className="absolute bottom-5 left-5 right-5 text-white text-center">
+              <div className="text-3xl sm:text-4xl font-semibold leading-tight">
+                $1m in revenue
+              </div>
+              <div className="text-lg sm:text-xl font-medium text-white/90">
+                from Nobi in 2025
+              </div>
+            </div>
           </div>
         </div>
       </div>

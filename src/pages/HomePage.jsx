@@ -23,6 +23,7 @@ import Footer from "../components/Footer";
 import FAQList from "../components/FAQList.jsx";
 import { FAQ_ITEMS } from "../constants/faqItems";
 import { posts } from "../content/utils/mdxPostLoader";
+import {VideoModal} from "../components/VideoModal";
 import {useDemoForm} from "../context/DemoFormContext";
 import DemoCTAButton from "../components/DemoCTAButton";
 
@@ -800,7 +801,7 @@ function HeroSkeletonLine({ w = "60%" }) {
 // --- HERO PREVIEW HELPERS (names are unique to avoid clashes) ---
 
 
-function Hero({ onOpenForm }) {
+function Hero({ onOpenVideo }) {
   return (
     <section id="home" className="relative overflow-hidden">
       <div className="mx-auto max-w-7xl px-6 pt-10 sm:pt-12 lg:pt-16 pb-24">
@@ -819,7 +820,17 @@ function Hero({ onOpenForm }) {
 
           {/* Same-row CTAs (works on mobile too) */}
           <div className="grid grid-cols-[1fr_auto] items-center gap-1 max-w-xl mx-auto">
-            <DemoCTAButton className="justify-self-center w-full max-w-[60%]" />
+            <DemoCTAButton />
+            <Button
+              size="lg"
+              variant="ghost"
+              onClick={onOpenVideo}
+              className="whitespace-nowrap px-3"
+            >
+              <PlayCircle className="h-5 w-5" />
+              <span className="sm:hidden">How it works</span>
+              <span className="hidden sm:inline">How it works in 60 seconds</span>
+            </Button>
           </div>
 
           </div>
@@ -2096,6 +2107,7 @@ function LatestPosts() {
 }
 
 export default function HomePage() {
+  const [isVideoOpen, setIsVideoOpen] = useState(false);
   const { onOpen: onOpenForm } = useDemoForm();
   useEffect(() => {
     document.title = "Nobi: a conversational site assistant to help you grow";
@@ -2104,7 +2116,7 @@ export default function HomePage() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-white to-slate-50 dark:from-[#0a0a0a] dark:to-black text-black dark:text-white">
         <Header />
-        <Hero onOpenForm={onOpenForm} />
+        <Hero onOpenVideo={() => setIsVideoOpen(true)} />
         <Features />
         <Results />
         <Insights onOpenForm={onOpenForm} />
@@ -2129,6 +2141,13 @@ export default function HomePage() {
         </div>
         <Footer />
         <FloatingAskNobi />
+
+        {/* Video Modal */}
+        <VideoModal
+            open={isVideoOpen}
+            onClose={() => setIsVideoOpen(false)}
+            youtube="https://youtu.be/pF9CmqH2Mnc"
+        />
 
     </div>
   );

@@ -22,7 +22,6 @@ import Footer from "../components/Footer";
 import FAQList from "../components/FAQList.jsx";
 import { FAQ_ITEMS } from "../constants/faqItems";
 import { posts } from "../content/utils/mdxPostLoader";
-import HeroDemo from "../components/HeroDemo";
 import {VideoModal} from "../components/VideoModal";
 import {useDemoForm} from "../context/DemoFormContext";
 import DemoCTAButton from "../components/DemoCTAButton";
@@ -808,15 +807,15 @@ function Hero({ onOpenVideo }) {
       <div className="mx-auto max-w-7xl px-6 pt-10 sm:pt-12 lg:pt-16 pb-24">
         <div className="max-w-4xl mx-auto text-center space-y-6">
           <h1 className="text-5xl sm:text-6xl font-semibold tracking-tight text-balance">
-            Bring{" "}
+            Built for shoppers. Structured for{" "}
             <span className="bg-gradient-to-r from-indigo-500 via-violet-500 to-fuchsia-500 bg-clip-text text-transparent">
-              ChatGPT
+              LLMs
             </span>
-            {" "}to your site
+            {" "}
           </h1>
 
           <p className="mt-4 text-lg text-black/70 dark:text-white/70 max-w-2xl mx-auto">
-          Nobi helps you get discovered by LLMs like ChatGPT by putting conversational shopping on your site.
+          Nobi brings conversational shopping to your site so LLMs like ChatGPT can discover and recommend your products.
           </p>
 
           {/* Same-row CTAs (works on mobile too) */}
@@ -836,10 +835,6 @@ function Hero({ onOpenVideo }) {
 
           </div>
 
-        {/* AEO Flywheel */}
-        <div className="mt-10 max-w-3xl mx-auto">
-          <HeroDemo />
-        </div>
         <div className="mt-10 max-w-5xl mx-auto text-center">
           <p className="text-sm font-semibold text-fuchsia-600">
             Trusted by modern commerce
@@ -1206,9 +1201,9 @@ function Features() {
       media: { src: "/media/feature-ai-mode.mp4", alt: "" },
     },
     {
-      title: "Nobi turns user-generated content into recommendation signals",
+      title: "Turn user-generated content into recommendation signals",
       desc:
-        "Nobi structures and indexes customer conversations on your site so LLMs are more likely to recommend you for similar prompts.",
+        "Nobi structures customer conversations on your site so LLMs like ChatGPT are more likely to recommend you for similar prompts.",
       ctaLabel: "Learn More →",
       ctaHref: "/why-nobi/better-search",
       icon: <Sparkles className="h-4 w-4" />,
@@ -1237,7 +1232,7 @@ function Features() {
       <div className="mx-auto max-w-6xl px-6">
         <p className="text-sm font-semibold text-fuchsia-600">Features</p>
         <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight mt-2 text-balance">
-          When to use Nobi
+          Designed for GEO
         </h2>
         <p className="mt-3 text-black/70 dark:text-white/70">
         Nobi doesn’t just convert shoppers—it turns conversations into machine-readable signals that get your brand recommended by LLMs like ChatGPT.
@@ -1443,7 +1438,7 @@ function Testimonial() {
             <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
             <div className="absolute bottom-5 left-5 right-5 text-white text-center">
               <div className="text-3xl sm:text-4xl font-semibold leading-tight">
-                $1m in revenue
+                $1m+ in revenue
               </div>
               <div className="text-lg sm:text-xl font-medium text-white/90">
                 from Nobi in 2025
@@ -1710,7 +1705,11 @@ function Insights({ onOpenForm }) {
     { label: "Athletic wear recommendations", score: 52, delta: "+5" },
   ];
 
-  const aiTraffic = [12, 16, 21, 29, 34, 40, 46, 52, 48, 44, 41, 39, 45, 50, 54];
+  const worstPrompts = [
+    { label: "Affordable trail shoes under $100", score: 18, delta: "-4" },
+    { label: "Lightweight running jackets for rain", score: 22, delta: "-3" },
+    { label: "Best minimalist sneakers 2024", score: 27, delta: "-2" },
+  ];
 
   return (
     <section id="insights" className="scroll-mt-20 py-20 border-t border-black/5 dark:border-white/5">
@@ -1768,7 +1767,7 @@ function Insights({ onOpenForm }) {
               </div>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="rounded-2xl border border-black/10 dark:border-white/10 bg-white/80 dark:bg-white/5 p-4">
                 <div className="text-xs uppercase tracking-[0.3em] text-black/50 dark:text-white/60">Top prompts</div>
                 <div className="mt-3 space-y-3 text-sm">
@@ -1782,28 +1781,14 @@ function Insights({ onOpenForm }) {
               </div>
 
               <div className="rounded-2xl border border-black/10 dark:border-white/10 bg-white/80 dark:bg-white/5 p-4">
-                <div className="text-xs uppercase tracking-[0.3em] text-black/50 dark:text-white/60">AI traffic</div>
-                <div className="mt-3">
-                  <Sparkline series={aiTraffic} label="AI traffic sparkline" />
-                  <div className="mt-2 text-xs text-black/50 dark:text-white/50">Last 30 days</div>
-                </div>
-              </div>
-
-              <div className="rounded-2xl border border-black/10 dark:border-white/10 bg-white/80 dark:bg-white/5 p-4">
-                <div className="text-xs uppercase tracking-[0.3em] text-black/50 dark:text-white/60">Site health</div>
-                <div className="mt-3 space-y-2 text-sm text-black/70 dark:text-white/70">
-                  <div className="flex items-center justify-between">
-                    <span>robots.txt</span>
-                    <span className="text-emerald-600">Healthy</span>
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <span>llms.txt</span>
-                    <span className="text-emerald-600">Healthy</span>
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <span>llms-full.txt</span>
-                    <span className="text-emerald-600">Healthy</span>
-                  </div>
+                <div className="text-xs uppercase tracking-[0.3em] text-black/50 dark:text-white/60">Worst performing prompts</div>
+                <div className="mt-3 space-y-3 text-sm">
+                  {worstPrompts.map((prompt) => (
+                    <div key={prompt.label} className="flex items-center justify-between gap-3">
+                      <span className="text-black/80 dark:text-white/90">{prompt.label}</span>
+                      <span className="text-xs text-rose-500">{prompt.delta}</span>
+                    </div>
+                  ))}
                 </div>
               </div>
             </div>
@@ -1839,6 +1824,26 @@ function Insights({ onOpenForm }) {
                     </div>
                   </div>
                 ))}
+              </div>
+            </div>
+
+            <div className="rounded-3xl border border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/5 p-6 shadow-sm min-h-[168px]">
+              <div className="text-xs uppercase tracking-[0.3em] text-black/50 dark:text-white/60">
+                Site health
+              </div>
+              <div className="mt-4 space-y-2 text-sm text-black/70 dark:text-white/70">
+                <div className="flex items-center justify-between">
+                  <span>robots.txt</span>
+                  <span className="text-emerald-600">Healthy</span>
+                </div>
+                <div className="flex items-center justify-between">
+                  <span>llms.txt</span>
+                  <span className="text-emerald-600">Healthy</span>
+                </div>
+                <div className="flex items-center justify-between">
+                  <span>llms-full.txt</span>
+                  <span className="text-emerald-600">Healthy</span>
+                </div>
               </div>
             </div>
           </div>

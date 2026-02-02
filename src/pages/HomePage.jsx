@@ -810,7 +810,7 @@ function Hero({ onOpenVideo }) {
           <h1 className="text-5xl sm:text-6xl font-semibold tracking-tight text-balance">
             Built for shoppers. Structured for{" "}
             <span className="bg-gradient-to-r from-indigo-500 via-violet-500 to-fuchsia-500 bg-clip-text text-transparent">
-              LLMs
+              LLMs.
             </span>
             {" "}
           </h1>
@@ -830,7 +830,7 @@ function Hero({ onOpenVideo }) {
             >
               <PlayCircle className="h-5 w-5" />
               <span className="sm:hidden">How it works</span>
-              <span className="hidden sm:inline">How it works in 60 seconds</span>
+              <span className="hidden sm:inline">How it works in 30 seconds</span>
             </Button>
           </div>
 
@@ -1208,7 +1208,7 @@ function Features() {
     {
       title: "Turn user-generated content into recommendation signals",
       desc:
-        "Nobi structures customer conversations on your site so LLMs like ChatGPT are more likely to recommend you for similar prompts.",
+        "Nobi shows LLMs what products people are buying for what reasons so that they're more likely to recommend you for similar prompts.",
       ctaLabel: "Learn More →",
       ctaHref: "/why-nobi/better-search",
       icon: <Sparkles className="h-4 w-4" />,

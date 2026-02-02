@@ -514,9 +514,9 @@ export default function HeroDemo({ className = "" }) {
 
   return (
     <div className={`${className}`}>
-      <div className="max-w-5xl mx-auto">
-        <div className="rounded-3xl shadow-2xl border border-black/5 dark:border-white/10 bg-gradient-to-br from-violet-50 via-white to-emerald-50 dark:from-violet-900/20 dark:via-zinc-900 dark:to-emerald-900/10 p-4 sm:p-8">
-          <div className="flex items-center justify-between mb-4">
+      <div className="mx-auto w-full max-w-4xl">
+        <div className="rounded-3xl shadow-2xl border border-black/5 dark:border-white/10 bg-gradient-to-br from-violet-50 via-white to-emerald-50 dark:from-violet-900/20 dark:via-zinc-900 dark:to-emerald-900/10 p-3 sm:p-8">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-4">
             <div className="text-xs uppercase tracking-[0.35em] text-black/50 dark:text-white/60">
               {slides[activeIndex].label}
             </div>
@@ -525,7 +525,7 @@ export default function HeroDemo({ className = "" }) {
                 type="button"
                 onClick={goPrev}
                 aria-label="Previous demo"
-                className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/5 text-black/70 dark:text-white/70 hover:bg-black/5 dark:hover:bg-white/10"
+                className="inline-flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-full border border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/5 text-black/70 dark:text-white/70 hover:bg-black/5 dark:hover:bg-white/10"
               >
                 <ChevronLeft className="h-4 w-4" />
               </button>
@@ -533,7 +533,7 @@ export default function HeroDemo({ className = "" }) {
                 type="button"
                 onClick={goNext}
                 aria-label="Next demo"
-                className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/5 text-black/70 dark:text-white/70 hover:bg-black/5 dark:hover:bg-white/10"
+                className="inline-flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-full border border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/5 text-black/70 dark:text-white/70 hover:bg-black/5 dark:hover:bg-white/10"
               >
                 <ChevronRight className="h-4 w-4" />
               </button>

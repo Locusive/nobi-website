@@ -22,6 +22,7 @@ import Footer from "../components/Footer";
 import FAQList from "../components/FAQList.jsx";
 import { FAQ_ITEMS } from "../constants/faqItems";
 import { posts } from "../content/utils/mdxPostLoader";
+import HeroDemo from "../components/HeroDemo";
 import {VideoModal} from "../components/VideoModal";
 import {useDemoForm} from "../context/DemoFormContext";
 import DemoCTAButton from "../components/DemoCTAButton";
@@ -835,6 +836,10 @@ function Hero({ onOpenVideo }) {
 
           </div>
 
+        {/* Hero animation */}
+        <div className="mt-10 max-w-3xl mx-auto">
+          <HeroDemo />
+        </div>
         <div className="mt-10 max-w-5xl mx-auto text-center">
           <p className="text-sm font-semibold text-fuchsia-600">
             Trusted by modern commerce

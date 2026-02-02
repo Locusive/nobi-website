@@ -484,7 +484,6 @@ export default function HeroDemo({ className = "" }) {
   const slides = [
     { id: "search", label: "Search + discovery" },
     { id: "pdp", label: "Product Q&A" },
-    { id: "measure", label: "Measure Performance" },
   ];
 
   const goPrev = () => setActiveIndex((i) => (i - 1 + slides.length) % slides.length);
@@ -551,18 +550,6 @@ export default function HeroDemo({ className = "" }) {
               </div>
               <div className="w-full shrink-0">
                 <PdpDemo isActive={activeIndex === 1} />
-              </div>
-              <div className="w-full shrink-0 flex">
-                <div className="flex-1 rounded-2xl border border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/5 overflow-hidden shadow-lg">
-                  <video
-                    src="/media/MCP.mp4"
-                    autoPlay
-                    loop
-                    muted
-                    playsInline
-                    className="w-full h-full object-cover"
-                  />
-                </div>
               </div>
             </div>
           </div>

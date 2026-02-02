@@ -1371,6 +1371,8 @@ function Results() {
 function Testimonial() {
   const leftRef = useRef(null);
   const [leftHeight, setLeftHeight] = useState(0);
+  const [photoFailed, setPhotoFailed] = useState(false);
+  const [avatarFailed, setAvatarFailed] = useState(false);
 
   useEffect(() => {
   if (!leftRef.current) return;
@@ -1408,11 +1410,16 @@ function Testimonial() {
               campaigns and your broader brand and e-comm goals.”
             </p>
             <div className="mt-6 flex items-center gap-4">
-              <img
-                src="/media/lourdes.png"
-                alt="Customer avatar"
-                className="h-10 w-10 rounded-full object-cover bg-black/10 dark:bg-white/10"
-              />
+              {!avatarFailed ? (
+                <img
+                  src="/media/lourdes.png"
+                  alt="Customer avatar"
+                  className="h-10 w-10 rounded-full object-cover bg-black/10 dark:bg-white/10"
+                  onError={() => setAvatarFailed(true)}
+                />
+              ) : (
+                <div className="h-10 w-10 rounded-full bg-gradient-to-br from-fuchsia-400 to-indigo-500" />
+              )}
               <div>
                 <div className="font-semibold">Lourdes Servin</div>
                 <div className="text-sm text-black/60 dark:text-white/60">
@@ -1430,11 +1437,16 @@ function Testimonial() {
               height: leftHeight || 320,
             }}
           >
-            <img
-              src="/media/lucchese-testimonial-image.png" // <-- put your photo here
-              alt="Customer lifestyle"
-              className="h-full w-full object-cover"
-            />
+            {!photoFailed ? (
+              <img
+                src="/media/lucchese-testimonial-image.png" // <-- put your photo here
+                alt="Customer lifestyle"
+                className="h-full w-full object-cover"
+                onError={() => setPhotoFailed(true)}
+              />
+            ) : (
+              <div className="h-full w-full bg-gradient-to-br from-zinc-200 via-white to-zinc-100 dark:from-zinc-800 dark:via-zinc-900 dark:to-zinc-800" />
+            )}
             <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
             <div className="absolute bottom-5 left-5 right-5 text-white text-center">
               <div className="text-3xl sm:text-4xl font-semibold leading-tight">

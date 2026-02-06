@@ -808,16 +808,16 @@ function Hero({ onOpenVideo }) {
       <div className="mx-auto max-w-7xl px-6 pt-10 sm:pt-12 lg:pt-16 pb-24">
         <div className="max-w-4xl mx-auto text-center space-y-6">
           <h1 className="text-5xl sm:text-6xl font-semibold tracking-tight text-balance">
-            Built for shoppers. Structured for{" "}
+            The{" "}
             <span className="bg-gradient-to-r from-indigo-500 via-violet-500 to-fuchsia-500 bg-clip-text text-transparent">
-              LLMs.
+              shopping assistant
             </span>
             {" "}
+            your site needs.
           </h1>
 
           <p className="mt-4 text-lg text-black/70 dark:text-white/70 max-w-2xl mx-auto">
-          Nobi brings conversational shopping to your site so LLMs like ChatGPT can discover and recommend your products.
-          </p>
+          Nobi brings a ChatGPT-like shopping assistant to your site, helping customers find the right products and buy with confidence.</p>
 
           {/* Same-row CTAs (works on mobile too) */}
           <div className="grid grid-cols-[1fr_auto] items-center gap-1 max-w-xl mx-auto">
@@ -830,7 +830,7 @@ function Hero({ onOpenVideo }) {
             >
               <PlayCircle className="h-5 w-5" />
               <span className="sm:hidden">How it works</span>
-              <span className="hidden sm:inline">How it works in 30 seconds</span>
+              <span className="hidden sm:inline">How it works in 60 seconds</span>
             </Button>
           </div>
 
@@ -1197,31 +1197,31 @@ function BrandMark({ src, label, className = "" }) {
 function Features() {
   const items = [
     {
-      title: "ChatGPT doesn’t rank keywords. It ranks intent.",
+      title: "Improve search results fast",
       desc:
-        "Instead of “yoga pants”, people ask ChatGPT “need yoga pants for my wife who loves hot yoga.” Nobi allows them to do the same on your site.",
+        "Nobi's search bar provably outperforms legacy search engines by 30% and takes only 30 minutes to install.",
       ctaLabel: "Learn More →",
       ctaHref: "/why-nobi/better-search",
       icon: <SearchIcon className="h-4 w-4" />,
       media: { src: "/media/feature-ai-mode.mp4", alt: "" },
     },
     {
-      title: "Turn user-generated content into recommendation signals",
+      title: "Engage more visitors",
       desc:
-        "Nobi shows LLMs what products people are buying for what reasons so that they're more likely to recommend you for similar prompts.",
+        "Spark exploration with AI prompts that answers shoppers' questions and keeps them clicking instead of bouncing.",
       ctaLabel: "Learn More →",
       ctaHref: "/why-nobi/better-search",
       icon: <Sparkles className="h-4 w-4" />,
       media: { src: "/media/feature-qa.mp4", alt: "Collections assistant demo" },
     },
     {
-      title: "The operational layer to win in AI search",
+      title: "Increase cart size",
       desc:
-        "Nobi implements MCP and other operational layers you need for LLM visibility. Track, measure, and take action with our simple dashboard.",
+        "Recommend products that are likely to be added to the cart based on why they are buying from you in the first place.",
       ctaLabel: "Learn More →",
       ctaHref: "/why-nobi/better-search",
       icon: <ShoppingCart className="h-4 w-4" />,
-      media: { src: "/media/MCP.mp4", alt: "MCP performance demo", objectPosition: "center" },
+      media: { src: "/media/cross-sell.mp4", alt: "MCP performance demo", objectPosition: "center" },
     },
   ];
 
@@ -1237,10 +1237,10 @@ function Features() {
       <div className="mx-auto max-w-6xl px-6">
         <p className="text-sm font-semibold text-fuchsia-600">Features</p>
         <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight mt-2 text-balance">
-          Designed for GEO
+          Help shoppers find and buy.
         </h2>
         <p className="mt-3 text-black/70 dark:text-white/70">
-        Nobi doesn’t just convert shoppers—it turns conversations into machine-readable signals that get your brand recommended by LLMs like ChatGPT.
+        Nobi helps shoppers find what they need, answers their questions, and recommends products they are likely to buy through conversational AI.
         </p>
 
         <div className="mt-8 grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
@@ -1568,6 +1568,18 @@ function HeatCell({ v = 0 }) {
 }
 
 /* ========= Insights section ========= */
+function InsightsBar({ value, maxValue }) {
+  const pct = Math.max(0, Math.min(100, Math.round((value / maxValue) * 100)));
+  return (
+    <div className="h-2 w-full rounded-full bg-black/5 dark:bg-white/10">
+      <div
+        className="h-2 rounded-full bg-gradient-to-r from-indigo-500 via-violet-500 to-fuchsia-500"
+        style={{ width: `${pct}%` }}
+      />
+    </div>
+  );
+}
+
 function getSparklinePoints(series, width, height, padding = 6) {
   if (!series.length) return "";
   const min = Math.min(...series);
@@ -1680,53 +1692,29 @@ function MultiLineChart({ seriesList = [] }) {
 }
 
 function Insights({ onOpenForm }) {
-  const seriesList = [
-    {
-      label: "Best lightweight rain jacket for hiking",
-      color: "#6366F1",
-      values: [42, 45, 47, 51, 54, 57, 61, 64, 66, 68, 70, 72, 74, 75, 76],
-    },
-    {
-      label: "Gift for a new dad under $100",
-      color: "#8B5CF6",
-      values: [30, 33, 36, 40, 43, 46, 49, 53, 56, 59, 61, 63, 64, 66, 67],
-    },
-    {
-      label: "Sustainable linen shirts",
-      color: "#EC4899",
-      values: [38, 41, 45, 49, 52, 55, 58, 62, 66, 69, 73, 76, 79, 81, 83],
-    },
+  const intents = [
+    { label: "Buying a Gift", value: 124 },
+    { label: "Shopping for an upcoming trip", value: 96 },
+    { label: "Requesting sizing/fit", value: 88 },
+    { label: "Shopping by product type", value: 54 },
   ];
 
-  const summaryStats = [
-    { label: "Visibility", value: "72", delta: "+4.2" },
-    { label: "Presence", value: "87", delta: "+2.3" },
-    { label: "Mentions", value: "102", delta: "+9" },
-    { label: "Citations", value: "847", delta: "+12" },
-    { label: "Rank", value: "#1", delta: "of 57" },
+  const objections = [
+    { label: "Unsure about sizing/fit", value: 63 },
+    { label: "Shipping cost/timing", value: 49 },
+    { label: "Material care/durability", value: 31 },
+    { label: "Out of stock / color", value: 24 },
   ];
 
-  const rankings = [
-    { name: "Your brand", score: 72, change: "+4" },
-    { name: "Adidas", score: 64, change: "-2" },
-    { name: "Puma", score: 52, change: "+1" },
-    { name: "Under Armour", score: 48, change: "-3" },
-    { name: "New Balance", score: 41, change: "+2" },
-    { name: "Reebok", score: 38, change: "-1" },
-    { name: "ASICS", score: 35, change: "+3" },
-  ];
+  const products = ["Button downs", "Polos", "Dresses"];
+  const attrs = ["Linen", "Gauze", "Terry"];
+  const affinity = {
+    "Button downs": { Linen: 0.78, "Gauze": 0.32, "Terry": 0.55 },
+    Polos: { Linen: 0.22, "Gauze": 0.81, "Terry": 0.08 },
+    "Dresses": { Linen: 0.93, "Gauze": 0.05, "Terry": 0.06 },
+  };
 
-  const topPrompts = [
-    { label: "Best running shoes for marathon", score: 67, delta: "+6" },
-    { label: "Top sportswear brands 2024", score: 59, delta: "+3" },
-    { label: "Athletic wear recommendations", score: 52, delta: "+5" },
-  ];
-
-  const worstPrompts = [
-    { label: "Affordable trail shoes under $100", score: 18, delta: "-4" },
-    { label: "Lightweight running jackets for rain", score: 22, delta: "-3" },
-    { label: "Best minimalist sneakers 2024", score: 27, delta: "-2" },
-  ];
+  const max = (arr) => Math.max(...arr.map((d) => d.value));
 
   return (
     <section id="insights" className="scroll-mt-20 py-20 border-t border-black/5 dark:border-white/5">
@@ -1735,77 +1723,72 @@ function Insights({ onOpenForm }) {
           <div>
             <p className="text-sm font-semibold text-fuchsia-600">Insights</p>
             <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight mt-2">
-              Track your performance vs. your competitors.
+              Hear your customers in their own words.
             </h2>
             <p className="mt-3 text-black/70 dark:text-white/70">
-              Nobi monitors how your brand is performing on ChatGPT for the prompts you care most about.
+              Nobi turns real conversations into structured signals. Your merchandising, creative, and CX teams have never moved faster.
             </p>
           </div>
         </div>
 
         {/* Grid */}
-        <div className="mt-8 grid grid-cols-1 lg:grid-cols-[2.2fr_1fr] gap-8 items-start">
+        <div className="mt-8 grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
           {/* Left column */}
           <div className="space-y-6">
+            {/* Intents */}
             <div className="rounded-3xl border border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/5 p-6 shadow-sm">
-              <div className="flex items-center justify-between gap-4">
-                <div>
-                  <div className="font-semibold flex items-center gap-2">
-                    <Sparkles className="h-4 w-4 text-fuchsia-600" />
-                    Visibility over time (ChatGPT prompts)
-                  </div>
-                  <p className="mt-1 text-xs text-black/60 dark:text-white/60">
-                    Track how your brand appears across high-intent prompts and measure lift over time.
-                  </p>
-                </div>
-                <div className="inline-flex items-center gap-2 rounded-full border border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/5 px-3 py-1 text-xs">
-                  <span className="text-black/50 dark:text-white/50">7D</span>
-                  <span className="text-black/50 dark:text-white/50">14D</span>
-                  <span className="rounded-full bg-black/5 dark:bg-white/10 px-2 py-0.5 text-black/80 dark:text-white/80">30D</span>
-                </div>
+              <div className="font-semibold flex items-center gap-2">
+                <Sparkles className="h-4 w-4 text-fuchsia-600" />
+                Top customer intents
               </div>
-
-              <div className="mt-5 grid grid-cols-2 md:grid-cols-5 gap-3">
-                {summaryStats.map((stat) => (
-                  <div key={stat.label} className="rounded-2xl border border-black/10 dark:border-white/10 bg-white/80 dark:bg-white/5 px-3 py-2">
-                    <div className="text-[10px] uppercase tracking-[0.3em] text-black/50 dark:text-white/60">
-                      {stat.label}
+              <div className="mt-4 space-y-3">
+                {intents.map((d) => (
+                  <div key={d.label}>
+                    <div className="flex items-center justify-between text-sm">
+                      <span className="text-black/80 dark:text-white/90">{d.label}</span>
+                      <span className="tabular-nums text-black/60 dark:text-white/60">{d.value}</span>
                     </div>
-                    <div className="mt-1 flex items-end gap-2">
-                      <div className="text-xl font-semibold">{stat.value}</div>
-                      <div className="text-xs text-emerald-600">{stat.delta}</div>
-                    </div>
+                    <InsightsBar value={d.value} maxValue={max(intents)} />
                   </div>
                 ))}
               </div>
-
-              <div className="mt-6">
-                <MultiLineChart seriesList={seriesList} />
-              </div>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="rounded-2xl border border-black/10 dark:border-white/10 bg-white/80 dark:bg-white/5 p-4">
-                <div className="text-xs uppercase tracking-[0.3em] text-black/50 dark:text-white/60">Top prompts</div>
-                <div className="mt-3 space-y-3 text-sm">
-                  {topPrompts.map((prompt) => (
-                    <div key={prompt.label} className="flex items-center justify-between gap-3">
-                      <span className="text-black/80 dark:text-white/90">{prompt.label}</span>
-                      <span className="text-xs text-emerald-600">{prompt.delta}</span>
-                    </div>
-                  ))}
-                </div>
+            {/* Attribute affinity by product (heatmap) */}
+            <div className="rounded-3xl border border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/5 p-6 shadow-sm">
+              <div className="font-semibold flex items-center gap-2">
+                <Heart className="h-4 w-4 text-fuchsia-600" aria-hidden="true" />
+                Attribute affinity by product
               </div>
+              <p className="mt-1 text-xs text-black/60 dark:text-white/60">
+                Likelihood a shopper will request an attribute when browsing a product type.
+              </p>
 
-              <div className="rounded-2xl border border-black/10 dark:border-white/10 bg-white/80 dark:bg-white/5 p-4">
-                <div className="text-xs uppercase tracking-[0.3em] text-black/50 dark:text-white/60">Worst performing prompts</div>
-                <div className="mt-3 space-y-3 text-sm">
-                  {worstPrompts.map((prompt) => (
-                    <div key={prompt.label} className="flex items-center justify-between gap-3">
-                      <span className="text-black/80 dark:text-white/90">{prompt.label}</span>
-                      <span className="text-xs text-rose-500">{prompt.delta}</span>
-                    </div>
-                  ))}
+              <div className="mt-4 overflow-x-auto [-webkit-overflow-scrolling:touch]">
+                <div className="w-full">
+                  <div
+                    className="grid gap-2 sm:gap-3"
+                    style={{
+                      gridTemplateColumns: `clamp(112px, 20vw, 140px) repeat(${attrs.length}, minmax(clamp(58px, 8vw, 84px), 1fr))`,
+                    }}
+                  >
+                    <div />
+                    {attrs.map((a) => (
+                      <div key={a} className="px-2 py-1 text-xs sm:text-sm text-center text-black/70 dark:text-white/70">
+                        {a}
+                      </div>
+                    ))}
+                    {products.map((p) => (
+                      <React.Fragment key={p}>
+                        <div className="px-2 py-2 text-sm font-medium text-black/80 dark:text-white/90 flex items-center">
+                          {p}
+                        </div>
+                        {attrs.map((a) => (
+                          <HeatCell key={`${p}-${a}`} v={affinity[p][a] || 0} />
+                        ))}
+                      </React.Fragment>
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>
@@ -1813,54 +1796,44 @@ function Insights({ onOpenForm }) {
 
           {/* Right column */}
           <div className="space-y-6">
+            {/* Objections */}
             <div className="rounded-3xl border border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/5 p-6 shadow-sm">
               <div className="font-semibold flex items-center gap-2">
                 <BarChart3 className="h-4 w-4 text-fuchsia-600" />
-                Rankings
+                Common objections & barriers
               </div>
-              <div className="mt-4 space-y-3 text-sm">
-                {rankings.map((brand, index) => (
-                  <div
-                    key={brand.name}
-                    className={[
-                      "flex items-center justify-between rounded-2xl px-3 py-2",
-                      index === 0
-                        ? "bg-fuchsia-50/70 dark:bg-white/10 border border-fuchsia-200/70"
-                        : "bg-white/80 dark:bg-white/5 border border-black/10 dark:border-white/10",
-                    ].join(" ")}
-                  >
-                    <div className="flex items-center gap-3">
-                      <span className="text-xs text-black/50 dark:text-white/50">{index + 1}</span>
-                      <span className="font-medium text-black/80 dark:text-white/90">{brand.name}</span>
+              <div className="mt-4 space-y-3">
+                {objections.map((d) => (
+                  <div key={d.label}>
+                    <div className="flex items-center justify-between text-sm">
+                      <span className="text-black/80 dark:text-white/90">{d.label}</span>
+                      <span className="tabular-nums text-black/60 dark:text-white/60">{d.value}</span>
                     </div>
-                    <div className="flex items-center gap-3">
-                      <span className="font-semibold tabular-nums">{brand.score}</span>
-                      <span className={brand.change.startsWith("+") ? "text-emerald-600" : "text-rose-500"}>
-                        {brand.change}
-                      </span>
-                    </div>
+                    <InsightsBar value={d.value} maxValue={max(objections)} />
                   </div>
                 ))}
               </div>
             </div>
 
-            <div className="rounded-3xl border border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/5 p-6 shadow-sm min-h-[168px]">
-              <div className="text-xs uppercase tracking-[0.3em] text-black/50 dark:text-white/60">
-                Site health
+            {/* Voice of customer */}
+            <div className="rounded-3xl border border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/5 p-6 shadow-sm">
+              <div className="font-semibold flex items-center gap-2">
+                <Quote className="h-4 w-4 text-fuchsia-600" />
+                Example Prompts
               </div>
-              <div className="mt-4 space-y-2 text-sm text-black/70 dark:text-white/70">
-                <div className="flex items-center justify-between">
-                  <span>robots.txt</span>
-                  <span className="text-emerald-600">Healthy</span>
-                </div>
-                <div className="flex items-center justify-between">
-                  <span>llms.txt</span>
-                  <span className="text-emerald-600">Healthy</span>
-                </div>
-                <div className="flex items-center justify-between">
-                  <span>llms-full.txt</span>
-                  <span className="text-emerald-600">Healthy</span>
-                </div>
+              <div className="mt-3 space-y-3 text-sm text-black/80 dark:text-white/90">
+                <blockquote className="rounded-xl p-3 bg-black/5 dark:bg-white/10">
+                  “Shirts and pants for a boy going off to college (probably a large).”
+                </blockquote>
+                <blockquote className="rounded-xl p-3 bg-black/5 dark:bg-white/10">
+                  “Outfits for a trip to Puerto Vallarta for a girlfriend's 30th.”
+                </blockquote>
+                <blockquote className="rounded-xl p-3 bg-black/5 dark:bg-white/10">
+                  “Will the Legend shirt shrink in the wash?”
+                </blockquote>
+                <blockquote className="rounded-xl p-3 bg-black/5 dark:bg-white/10">
+                  “Men's sale items in sizes small and medium and pants size 32.”
+                </blockquote>
               </div>
             </div>
           </div>
@@ -2169,7 +2142,7 @@ export default function HomePage() {
         <VideoModal
             open={isVideoOpen}
             onClose={() => setIsVideoOpen(false)}
-            youtube="https://youtu.be/pF9CmqH2Mnc"
+            youtube="https://www.youtube.com/watch?v=RKqGC3CVZd0"
         />
 
     </div>

@@ -1,64 +1,64 @@
 <!doctype html>
 <html lang="en">
-<head>
-  <!-- AI & MCP Server Information
-       Nobi runs an MCP (Model Context Protocol) server for AI agents.
-       MCP Endpoint: https://api.nobi.ai/.well-known/mcp/460cbe82-9195-424f-a616-b1cb3e3caca0.json
-       Supported tools: ask_question, book_demo
-  -->
+  <head>
+    <!-- AI & MCP Server Information
+         Nobi runs an MCP (Model Context Protocol) server for AI agents.
+         MCP Endpoint: https://api.nobi.ai/.well-known/mcp/460cbe82-9195-424f-a616-b1cb3e3caca0.json
+         Supported tools: ask_question, book_demo
+    -->
 
-  <!-- Google Tag Manager -->
-  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-          new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-      'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-  })(window,document,'script','dataLayer','GTM-PMGNQGLR');</script>
-  <!-- End Google Tag Manager -->
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+            new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-PMGNQGLR');</script>
+    <!-- End Google Tag Manager -->
 
-  <!-- Contentsquare UX Analytics -->
-  <script src="https://t.contentsquare.net/uxa/3418189eebfe1.js"></script>
+    <!-- Contentsquare UX Analytics -->
+    <script src="https://t.contentsquare.net/uxa/3418189eebfe1.js"></script>
 
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
-  <meta name="theme-color" content="#0b0b0f" media="(prefers-color-scheme: dark)">
-  <link rel="preconnect" href="https://assistant-script.nobi.ai" crossorigin>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#0b0b0f" media="(prefers-color-scheme: dark)">
+    <link rel="preconnect" href="https://assistant-script.nobi.ai" crossorigin>
 
-  <style>
+    <style>
       :root {
           --nobi-button-background: #000000;
       }
-  </style>
+    </style>
 
-  <title>Nobi: Site & search assistant to help you convert more visitors</title>
+    <title>Nobi: Site & search assistant to help you convert more visitors</title>
 
-  <!-- Favicons -->
-  <link rel="icon" href="/favicon.ico" sizes="any">
-  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-  <link rel="apple-touch-icon" href="/apple-touch-icon-180.png">
+    <!-- Favicons -->
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/apple-touch-icon-180.png">
 
-  <!-- Canonical -->
-  <link rel="canonical" href="https://nobi.ai/" />
+    <!-- Canonical -->
+    <link rel="canonical" href="https://nobi.ai/" />
 
-  <!-- MCP Server Discovery -->
-  <link rel="mcp-server" href="https://api.nobi.ai/.well-known/mcp/460cbe82-9195-424f-a616-b1cb3e3caca0.json" title="Nobi Site Assistant">
+    <!-- MCP Server Discovery -->
+    <link rel="mcp-server" href="https://api.nobi.ai/.well-known/mcp/460cbe82-9195-424f-a616-b1cb3e3caca0.json" title="Nobi Site Assistant">
 
-  <!-- Basic SEO -->
-  <meta name="description" content="Nobi helps your customers find the right products faster with conversational AI.">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://nobi.ai/">
-  <meta property="og:title" content="Nobi — Conversational commerce">
-  <meta property="og:description" content="Turn product search into a conversation.">
-  <meta property="og:image" content="https://nobi.ai/og-image.png">
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Nobi — Conversational commerce">
-  <meta name="twitter:description" content="Turn product search into a conversation.">
-  <meta name="twitter:image" content="https://nobi.ai/og-image.png">
+    <!-- Basic SEO -->
+    <meta name="description" content="Nobi helps your customers find the right products faster with conversational AI.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://nobi.ai/">
+    <meta property="og:title" content="Nobi — Conversational commerce">
+    <meta property="og:description" content="Turn product search into a conversation.">
+    <meta property="og:image" content="https://nobi.ai/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Nobi — Conversational commerce">
+    <meta name="twitter:description" content="Turn product search into a conversation.">
+    <meta name="twitter:image" content="https://nobi.ai/og-image.png">
 
-  <!-- Schema.org -->
-  <script type="application/ld+json">
+    <!-- Schema.org -->
+    <script type="application/ld+json">
     {
       "@context":"https://schema.org",
       "@type":"Organization",
@@ -79,22 +79,22 @@
         "query-input":"required name=search_term_string"
       }
     }
-  </script>
-</head>
+    </script>
+  </head>
 
-<body>
-<!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PMGNQGLR"
-                  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->
+  <body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PMGNQGLR"
+                      height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
 
-<div id="root"></div>
-<script type="module" src="src/main.jsx"></script>
+    <div id="root"></div>
+    <script type="module" src="src/main.jsx"></script>
 
-<!-- Nobi Assistant -->
-<script>
-    // Browser tools for Nobi - must be defined before Nobi loads
-    window.NobiTools = [
+    <!-- Nobi Assistant -->
+    <script>
+      // Browser tools for Nobi - must be defined before Nobi loads
+      window.NobiTools = [
         {
             name: "requestDemo",
             description: "Submit a demo request when someone wants to learn more about Nobi, book a demo, schedule a call, or get in touch with the team. Requires name and email.",

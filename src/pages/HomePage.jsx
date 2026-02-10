@@ -2,7 +2,6 @@ import React, {useEffect, useRef, useState, useMemo} from "react";
 import {AnimatePresence, motion} from "framer-motion";
 import Marquee from "react-fast-marquee";
 import LogoMarquee from "../components/LogoMarquee";
-import HeroDemo from "../components/HeroDemo";
 import {
     ArrowRight,
     BarChart3,
@@ -18,18 +17,19 @@ import {
     ShoppingCart,
     Sparkles,
 } from "lucide-react";
-import ScrollPreview from "../components/ScrollPreview";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import FAQList from "../components/FAQList.jsx";
 import { FAQ_ITEMS } from "../constants/faqItems";
 import { posts } from "../content/utils/mdxPostLoader";
+import HeroDemo from "../components/HeroDemo";
 import {VideoModal} from "../components/VideoModal";
 import {useDemoForm} from "../context/DemoFormContext";
 import DemoCTAButton from "../components/DemoCTAButton";
 
 
 // ===== feature flags (hide sections/links without deleting code) =====
+// Build trigger for Cloudflare Pages preview.
 const SHOW_LOGOS = true;
 const SHOW_PRICING = false;
 
@@ -132,13 +132,6 @@ const PLACEMENTS = [
   },
 ];
 
-const PREVIEW_SECTIONS = [
-  { id: "ask-nobi", label: "Ask Nobi", summary: "Have a question? Ask Nobi directly" },
-  { id: "features", label: "Feature deep dive", summary: "See what the assistant can do" },
-  { id: "results", label: "Results", summary: "See how Nobi drives conversions" },
-  { id: "insights", label: "Insights", summary: "Hear your customers in their own words" },
-  { id: "how", label: "Setup", summary: "Install in minutes and measure lift" },
-];
 
 
 /* ===================== Hero Conversation Demo ===================== */
@@ -809,22 +802,22 @@ function HeroSkeletonLine({ w = "60%" }) {
 // --- HERO PREVIEW HELPERS (names are unique to avoid clashes) ---
 
 
-function Hero({ onOpenForm, onOpenVideo }) {
+function Hero({ onOpenVideo }) {
   return (
     <section id="home" className="relative overflow-hidden">
       <div className="mx-auto max-w-7xl px-6 pt-10 sm:pt-12 lg:pt-16 pb-24">
         <div className="max-w-4xl mx-auto text-center space-y-6">
           <h1 className="text-5xl sm:text-6xl font-semibold tracking-tight text-balance">
-            Turn browsers into buyers, and questions into{" "}
+            The{" "}
             <span className="bg-gradient-to-r from-indigo-500 via-violet-500 to-fuchsia-500 bg-clip-text text-transparent">
-              AI-ready
+              shopping assistant
             </span>
-            {" "}content
+            {" "}
+            your site needs.
           </h1>
 
           <p className="mt-4 text-lg text-black/70 dark:text-white/70 max-w-2xl mx-auto">
-            Nobi's AI assistant drives more sales through better product discovery, answers to questions, and shopper-generated FAQs for AEO and SEO.
-          </p>
+          Nobi brings a ChatGPT-like shopping assistant to your site, helping customers find the right products and buy with confidence.</p>
 
           {/* Same-row CTAs (works on mobile too) */}
           <div className="grid grid-cols-[1fr_auto] items-center gap-1 max-w-xl mx-auto">
@@ -843,7 +836,7 @@ function Hero({ onOpenForm, onOpenVideo }) {
 
           </div>
 
-        {/* AEO Flywheel */}
+        {/* Hero animation */}
         <div className="mt-10 max-w-3xl mx-auto">
           <HeroDemo />
         </div>
@@ -864,7 +857,6 @@ function Hero({ onOpenForm, onOpenVideo }) {
             ))}
           </div>
         </div>
-        <ScrollPreview sections={PREVIEW_SECTIONS} label="Next up" pillOptions={PILL_OPTIONS} />
       </div>
     </section>
   );
@@ -1205,9 +1197,9 @@ function BrandMark({ src, label, className = "" }) {
 function Features() {
   const items = [
     {
-      title: "Improve search and discovery",
+      title: "Improve search results fast",
       desc:
-        "Nobi's search bar takes 30 minutes to install and typically drives a 30% improvement in conversion rates within days.",
+        "Nobi's search bar provably outperforms legacy search engines by 30% and takes only 30 minutes to install.",
       ctaLabel: "Learn More →",
       ctaHref: "/why-nobi/better-search",
       icon: <SearchIcon className="h-4 w-4" />,
@@ -1216,7 +1208,7 @@ function Features() {
     {
       title: "Engage more visitors",
       desc:
-        "Spark exploration with AI prompts that get customers what they need instead of bouncing from your site.",
+        "Spark exploration with AI prompts that answers shoppers' questions and keeps them clicking instead of bouncing.",
       ctaLabel: "Learn More →",
       ctaHref: "/why-nobi/better-search",
       icon: <Sparkles className="h-4 w-4" />,
@@ -1225,11 +1217,11 @@ function Features() {
     {
       title: "Increase cart size",
       desc:
-        "Recommend other products customers may want based on why they are shopping with you in the first place.",
+        "Recommend products that are likely to be added to the cart based on why they are buying from you in the first place.",
       ctaLabel: "Learn More →",
       ctaHref: "/why-nobi/better-search",
       icon: <ShoppingCart className="h-4 w-4" />,
-      media: { src: "/media/cross-sell.mp4", alt: "Capture bouncers demo", objectPosition: "right center" },
+      media: { src: "/media/cross-sell.mp4", alt: "MCP performance demo", objectPosition: "center" },
     },
   ];
 
@@ -1245,10 +1237,10 @@ function Features() {
       <div className="mx-auto max-w-6xl px-6">
         <p className="text-sm font-semibold text-fuchsia-600">Features</p>
         <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight mt-2 text-balance">
-          When to use Nobi
+          Help shoppers find and buy.
         </h2>
         <p className="mt-3 text-black/70 dark:text-white/70">
-          Nobi helps shoppers find what they need, answers their questions, and recommends products they are likely to buy through conversational AI.
+        Nobi helps shoppers find what they need, answers their questions, and recommends products they are likely to buy through conversational AI.
         </p>
 
         <div className="mt-8 grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
@@ -1384,6 +1376,8 @@ function Results() {
 function Testimonial() {
   const leftRef = useRef(null);
   const [leftHeight, setLeftHeight] = useState(0);
+  const [photoFailed, setPhotoFailed] = useState(false);
+  const [avatarFailed, setAvatarFailed] = useState(false);
 
   useEffect(() => {
   if (!leftRef.current) return;
@@ -1421,11 +1415,16 @@ function Testimonial() {
               campaigns and your broader brand and e-comm goals.”
             </p>
             <div className="mt-6 flex items-center gap-4">
-              <img
-                src="/media/lourdes.png"
-                alt="Customer avatar"
-                className="h-10 w-10 rounded-full object-cover bg-black/10 dark:bg-white/10"
-              />
+              {!avatarFailed ? (
+                <img
+                  src="/media/lourdes.png"
+                  alt="Customer avatar"
+                  className="h-10 w-10 rounded-full object-cover bg-black/10 dark:bg-white/10"
+                  onError={() => setAvatarFailed(true)}
+                />
+              ) : (
+                <div className="h-10 w-10 rounded-full bg-gradient-to-br from-fuchsia-400 to-indigo-500" />
+              )}
               <div>
                 <div className="font-semibold">Lourdes Servin</div>
                 <div className="text-sm text-black/60 dark:text-white/60">
@@ -1437,17 +1436,31 @@ function Testimonial() {
 
           {/* Photo card — height follows the quote, no inner padding, image covers */}
           <div
-            className="self-start rounded-3xl border border-black/10 dark:border-white/10 overflow-hidden bg-white/70 dark:bg-white/5"
+            className="relative self-start rounded-3xl border border-black/10 dark:border-white/10 overflow-hidden bg-white/70 dark:bg-white/5"
             style={{
               // Match the quote's height on desktop; give a safe minimum before we measure
               height: leftHeight || 320,
             }}
           >
-            <img
-              src="/media/lucchese-testimonial-image.png" // <-- put your photo here
-              alt="Customer lifestyle"
-              className="h-full w-full object-cover"
-            />
+            {!photoFailed ? (
+              <img
+                src="/media/lucchese-testimonial-image.png" // <-- put your photo here
+                alt="Customer lifestyle"
+                className="h-full w-full object-cover"
+                onError={() => setPhotoFailed(true)}
+              />
+            ) : (
+              <div className="h-full w-full bg-gradient-to-br from-zinc-200 via-white to-zinc-100 dark:from-zinc-800 dark:via-zinc-900 dark:to-zinc-800" />
+            )}
+            <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
+            <div className="absolute bottom-5 left-5 right-5 text-white text-center">
+              <div className="text-3xl sm:text-4xl font-semibold leading-tight">
+                $1m+ in revenue
+              </div>
+              <div className="text-lg sm:text-xl font-medium text-white/90">
+                from Nobi in 2025
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -1478,37 +1491,22 @@ function HowItWorks() {
   );
 }
 
-function AskNobi() {
+function FloatingAskNobi() {
   return (
-    <section id="ask-nobi" className="scroll-mt-20 py-24 sm:py-32 border-t border-black/5 dark:border-white/5 bg-slate-50/50 dark:bg-white/[0.02]">
-      <div className="mx-auto max-w-3xl px-6 text-center">
-        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-tight text-balance">
-          Have a question about Nobi?
-        </h2>
-        <p className="mt-4 text-lg text-black/60 dark:text-white/60">
-          Ask anything and get an instant answer.
-        </p>
-
-        <div className="mt-10">
-          <nobi-search-bar
-            default-mode="ai"
-            size="large"
-            cta-variant="auto"
-            show-mode-toggle="false"
-            show-hint-row="false"
-            use-search-mode-at-launch="false"
-            placeholder="e.g. How does Nobi improve conversion rates?"
-            button-label="Ask Nobi"
-          />
-        </div>
-
-        <div className="mt-6 flex flex-wrap md:flex-nowrap justify-center gap-3">
-          <nobi-suggestion-pill text="How does Nobi boost conversions?" />
-          <nobi-suggestion-pill text="Can I try Nobi for free?" />
-          <nobi-suggestion-pill text="How fast can I set it up?" />
-        </div>
+    <div className="fixed bottom-5 left-0 right-0 z-50 px-4">
+      <div className="mx-auto w-[80%] max-w-2xl xl:max-w-lg">
+        <nobi-search-bar
+          default-mode="ai"
+          size="large"
+          cta-variant="auto"
+          show-mode-toggle="false"
+          show-hint-row="false"
+          use-search-mode-at-launch="false"
+          placeholder="Ask Nobi a question..."
+          button-label="Ask Nobi"
+        />
       </div>
-    </section>
+    </div>
   );
 }
 
@@ -1582,16 +1580,113 @@ function InsightsBar({ value, maxValue }) {
   );
 }
 
-function InsightsHeatCell({ v = 0 }) {
-  const bg = `rgba(139, 92, 246, ${0.15 + v * 0.45})`;
-  const border = `rgba(0,0,0,0.06)`;
+function getSparklinePoints(series, width, height, padding = 6) {
+  if (!series.length) return "";
+  const min = Math.min(...series);
+  const max = Math.max(...series);
+  const span = Math.max(1, max - min);
+  const step = (width - padding * 2) / (series.length - 1 || 1);
+  return series
+    .map((v, i) => {
+      const x = padding + i * step;
+      const y = height - padding - ((v - min) / span) * (height - padding * 2);
+      return `${x},${y}`;
+    })
+    .join(" ");
+}
+
+function Sparkline({ series, label }) {
+  const width = 160;
+  const height = 48;
+  const points = getSparklinePoints(series, width, height);
   return (
-    <div
-      className="h-9 sm:h-10 md:h-11 flex items-center justify-center rounded-lg text-xs sm:text-sm font-medium"
-      style={{ backgroundColor: bg, border: `1px solid ${border}` }}
-      aria-label={`affinity ${Math.round(v * 100)}%`}
+    <svg
+      viewBox={`0 0 ${width} ${height}`}
+      role="img"
+      aria-label={label}
+      className="w-full h-12 overflow-visible"
     >
-      {Math.round(v * 100)}%
+      <defs>
+        <linearGradient id="sparkline" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stopColor="#6366F1" />
+          <stop offset="50%" stopColor="#8B5CF6" />
+          <stop offset="100%" stopColor="#EC4899" />
+        </linearGradient>
+      </defs>
+      <polyline
+        points={points}
+        fill="none"
+        stroke="url(#sparkline)"
+        strokeWidth="3"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+function getLinePath(series, width, height, min, max, padding = 10) {
+  if (!series.length) return "";
+  const span = Math.max(1, max - min);
+  const step = (width - padding * 2) / (series.length - 1 || 1);
+  return series
+    .map((v, i) => {
+      const x = padding + i * step;
+      const y = height - padding - ((v - min) / span) * (height - padding * 2);
+      return `${i === 0 ? "M" : "L"}${x},${y}`;
+    })
+    .join(" ");
+}
+
+function MultiLineChart({ seriesList = [] }) {
+  const width = 560;
+  const height = 190;
+  const allValues = seriesList.flatMap((s) => s.values);
+  const min = Math.min(...allValues);
+  const max = Math.max(...allValues);
+  return (
+    <div>
+      <svg viewBox={`0 0 ${width} ${height}`} className="w-full h-52">
+        <defs>
+          <linearGradient id="lineFill" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor="#EC4899" stopOpacity="0.18" />
+            <stop offset="100%" stopColor="#EC4899" stopOpacity="0" />
+          </linearGradient>
+        </defs>
+        <rect x="0" y="0" width={width} height={height} fill="none" />
+        <g stroke="#E5E7EB" strokeWidth="1">
+          {[0.2, 0.4, 0.6, 0.8].map((p) => (
+            <line key={p} x1="0" x2={width} y1={height * p} y2={height * p} />
+          ))}
+        </g>
+        {seriesList.map((series, index) => {
+          const path = getLinePath(series.values, width, height, min, max);
+          return (
+            <path
+              key={series.label}
+              d={path}
+              fill="none"
+              stroke={series.color}
+              strokeWidth={index === 0 ? 3 : 2.5}
+              strokeLinecap="round"
+            />
+          );
+        })}
+        {seriesList[0] && (
+          <path
+            d={`${getLinePath(seriesList[0].values, width, height, min, max)} L ${width - 10},${height - 10} L 10,${height - 10} Z`}
+            fill="url(#lineFill)"
+          />
+        )}
+      </svg>
+      <div className="mt-3 flex flex-wrap gap-3 text-xs text-black/60 dark:text-white/60">
+        {seriesList.map((series) => (
+          <div key={series.label} className="inline-flex items-center gap-2">
+            <span className="h-2.5 w-2.5 rounded-full" style={{ backgroundColor: series.color }} />
+            <span>{series.label}</span>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
@@ -1628,7 +1723,7 @@ function Insights({ onOpenForm }) {
           <div>
             <p className="text-sm font-semibold text-fuchsia-600">Insights</p>
             <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight mt-2">
-              Hear your customers... in their own words.
+              Hear your customers in their own words.
             </h2>
             <p className="mt-3 text-black/70 dark:text-white/70">
               Nobi turns real conversations into structured signals. Your merchandising, creative, and CX teams have never moved faster.
@@ -1661,10 +1756,10 @@ function Insights({ onOpenForm }) {
 
             {/* Attribute affinity by product (heatmap) */}
             <div className="rounded-3xl border border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/5 p-6 shadow-sm">
-<div className="font-semibold flex items-center gap-2">
-  <Heart className="h-4 w-4 text-fuchsia-600" aria-hidden="true" />
-  Attribute affinity by product
-</div>
+              <div className="font-semibold flex items-center gap-2">
+                <Heart className="h-4 w-4 text-fuchsia-600" aria-hidden="true" />
+                Attribute affinity by product
+              </div>
               <p className="mt-1 text-xs text-black/60 dark:text-white/60">
                 Likelihood a shopper will request an attribute when browsing a product type.
               </p>
@@ -1689,7 +1784,7 @@ function Insights({ onOpenForm }) {
                           {p}
                         </div>
                         {attrs.map((a) => (
-                          <InsightsHeatCell key={`${p}-${a}`} v={affinity[p][a] || 0} />
+                          <HeatCell key={`${p}-${a}`} v={affinity[p][a] || 0} />
                         ))}
                       </React.Fragment>
                     ))}
@@ -1736,7 +1831,7 @@ function Insights({ onOpenForm }) {
                 <blockquote className="rounded-xl p-3 bg-black/5 dark:bg-white/10">
                   “Will the Legend shirt shrink in the wash?”
                 </blockquote>
-                 <blockquote className="rounded-xl p-3 bg-black/5 dark:bg-white/10">
+                <blockquote className="rounded-xl p-3 bg-black/5 dark:bg-white/10">
                   “Men's sale items in sizes small and medium and pants size 32.”
                 </blockquote>
               </div>
@@ -2017,8 +2112,7 @@ export default function HomePage() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-white to-slate-50 dark:from-[#0a0a0a] dark:to-black text-black dark:text-white">
         <Header />
-        <Hero onOpenForm={onOpenForm} onOpenVideo={() => setIsVideoOpen(true)} />
-        <AskNobi />
+        <Hero onOpenVideo={() => setIsVideoOpen(true)} />
         <Features />
         <Results />
         <Insights onOpenForm={onOpenForm} />
@@ -2042,6 +2136,7 @@ export default function HomePage() {
             </a>
         </div>
         <Footer />
+        <FloatingAskNobi />
 
         {/* Video Modal */}
         <VideoModal
@@ -2049,6 +2144,7 @@ export default function HomePage() {
             onClose={() => setIsVideoOpen(false)}
             youtube="https://www.youtube.com/watch?v=RKqGC3CVZd0"
         />
+
     </div>
   );
 }

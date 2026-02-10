@@ -250,7 +250,7 @@ function SearchDemo({ isActive }) {
               transition={{
                 duration: 0.6,
                 ease: "easeOut",
-                scale: { duration: 0.2, delay: 0.8 }
+                scale: { duration: 0.2 }
               }}
             >
               <svg width="28" height="28" viewBox="0 0 24 24" className="drop-shadow-lg">
@@ -493,8 +493,8 @@ export default function HeroDemo({ className = "" }) {
 
   const searchDurationMs = 4200;
   const pdpDurationMs = 500 + PDP_QUESTION.length * 50 + 600 + 1800 + 600;
-  const pauseMs = 2000;
-  const autoAdvanceDurations = [searchDurationMs + pauseMs, pdpDurationMs + pauseMs];
+  const pauseMs = 1200;
+  const autoAdvanceDurations = [searchDurationMs + pauseMs, 10000];
 
   useEffect(() => {
     const el = slideRefs.current[activeIndex];
@@ -508,7 +508,6 @@ export default function HeroDemo({ className = "" }) {
 
   useEffect(() => {
     if (autoAdvanceRef.current) clearTimeout(autoAdvanceRef.current);
-    if (activeIndex >= slides.length - 1) return;
 
     autoAdvanceRef.current = setTimeout(() => {
       goNext();

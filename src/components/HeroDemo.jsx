@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronLeft, ChevronRight, Sparkles } from "lucide-react";
+import { Sparkles } from "lucide-react";
 
 const DEMO_QUERY = "red dress for a weekend out";
 
@@ -181,7 +181,7 @@ function SearchDemo({ isActive }) {
         </motion.div>
       )}
 
-      <div className="mt-6 sm:mt-8 relative">
+      <div className="mt-3 sm:mt-4 relative p-3 -m-3">
         {showProducts && (
           <div className="mb-3 text-xs sm:text-sm font-semibold uppercase tracking-[0.25em] text-black/60 dark:text-white/60">
             Red Dresses Popular for a Weekend Out
@@ -250,7 +250,7 @@ function SearchDemo({ isActive }) {
               transition={{
                 duration: 0.6,
                 ease: "easeOut",
-                scale: { duration: 0.2, delay: 0.8 }
+                scale: { duration: 0.2 }
               }}
             >
               <svg width="28" height="28" viewBox="0 0 24 24" className="drop-shadow-lg">
@@ -486,26 +486,32 @@ export default function HeroDemo({ className = "" }) {
     { id: "pdp", label: "Product Q&A" },
   ];
 
-  const goPrev = () => setActiveIndex((i) => (i - 1 + slides.length) % slides.length);
   const goNext = () => setActiveIndex((i) => (i + 1) % slides.length);
   const autoAdvanceRef = useRef(null);
+  const slideRefs = useRef([]);
+  const [slideHeight, setSlideHeight] = useState(undefined);
+
+  const searchDurationMs = 4200;
+  const pdpDurationMs = 500 + PDP_QUESTION.length * 50 + 600 + 1800 + 600;
+  const pauseMs = 1200;
+  const autoAdvanceDurations = [searchDurationMs + pauseMs, 10000];
+
+  useEffect(() => {
+    const el = slideRefs.current[activeIndex];
+    if (!el) return;
+    const update = () => setSlideHeight(el.offsetHeight);
+    update();
+    const ro = new ResizeObserver(update);
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, [activeIndex]);
 
   useEffect(() => {
     if (autoAdvanceRef.current) clearTimeout(autoAdvanceRef.current);
-    if (activeIndex >= slides.length - 1) return;
-
-    const searchDurationMs = 4200;
-    const pdpDurationMs =
-      500 + PDP_QUESTION.length * 50 + 600 + 1800 + 600;
-    const measureDurationMs = 6000;
-    const pauseMs = 2000;
-    const durations = [searchDurationMs, pdpDurationMs, measureDurationMs].map(
-      (duration) => duration + pauseMs
-    );
 
     autoAdvanceRef.current = setTimeout(() => {
       goNext();
-    }, durations[activeIndex] || 5000);
+    }, autoAdvanceDurations[activeIndex] || 5000);
 
     return () => {
       if (autoAdvanceRef.current) clearTimeout(autoAdvanceRef.current);
@@ -515,40 +521,39 @@ export default function HeroDemo({ className = "" }) {
   return (
     <div className={`${className}`}>
       <div className="mx-auto w-full max-w-4xl">
-        <div className="rounded-3xl shadow-2xl border border-black/5 dark:border-white/10 bg-gradient-to-br from-violet-50 via-white to-emerald-50 dark:from-violet-900/20 dark:via-zinc-900 dark:to-emerald-900/10 p-3 sm:p-8">
-          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-4">
-            <div className="text-xs uppercase tracking-[0.35em] text-black/50 dark:text-white/60">
-              {slides[activeIndex].label}
-            </div>
-            <div className="flex items-center gap-2">
-              <button
-                type="button"
-                onClick={goPrev}
-                aria-label="Previous demo"
-                className="inline-flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-full border border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/5 text-black/70 dark:text-white/70 hover:bg-black/5 dark:hover:bg-white/10"
-              >
-                <ChevronLeft className="h-4 w-4" />
-              </button>
-              <button
-                type="button"
-                onClick={goNext}
-                aria-label="Next demo"
-                className="inline-flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-full border border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/5 text-black/70 dark:text-white/70 hover:bg-black/5 dark:hover:bg-white/10"
-              >
-                <ChevronRight className="h-4 w-4" />
-              </button>
-            </div>
+        <div className="rounded-3xl shadow-2xl border border-black/5 dark:border-white/10 bg-gradient-to-b from-slate-50 via-white to-slate-50/50 dark:from-zinc-800/40 dark:via-zinc-900 dark:to-zinc-800/20 p-3 sm:p-8">
+          <div className="inline-flex rounded-xl bg-black/[0.04] dark:bg-white/[0.06] p-1 mb-5">
+            {slides.map((slide, i) => {
+              const isActive = i === activeIndex;
+              return (
+                <button
+                  key={slide.id}
+                  type="button"
+                  onClick={() => setActiveIndex(i)}
+                  className={`relative text-xs uppercase tracking-[0.2em] px-4 sm:px-5 py-2.5 rounded-lg transition-all ${
+                    isActive
+                      ? "bg-white dark:bg-white/15 text-black/70 dark:text-white/80 shadow-sm"
+                      : "text-black/30 dark:text-white/30 hover:text-black/50 dark:hover:text-white/50"
+                  }`}
+                >
+                  {slide.label}
+                </button>
+              );
+            })}
           </div>
 
-          <div className="relative overflow-hidden">
+          <div
+            className="relative overflow-hidden"
+            style={{ height: slideHeight != null ? `${slideHeight}px` : 'auto' }}
+          >
             <div
-              className="flex items-stretch transition-transform duration-500 ease-out"
+              className="flex items-start transition-transform duration-500 ease-out"
               style={{ transform: `translateX(-${activeIndex * 100}%)` }}
             >
-              <div className="w-full shrink-0">
+              <div ref={el => slideRefs.current[0] = el} className="w-full shrink-0 px-1 pb-3">
                 <SearchDemo isActive={activeIndex === 0} />
               </div>
-              <div className="w-full shrink-0">
+              <div ref={el => slideRefs.current[1] = el} className="w-full shrink-0 px-1 overflow-hidden">
                 <PdpDemo isActive={activeIndex === 1} />
               </div>
             </div>

@@ -86,12 +86,12 @@ const FAQ_ITEMS = [
   },
   {
     q: "How does pricing work?",
-    a: "Nobi's pricing is based on the number of messages your shoppers send to Nobi each month, with a monthly minimum and discounts for higher volume usage and annual commitments.",
+    a: "Nobi offers tiered plans based on the number of messages your shoppers send each month. Pick the tier that fits your volume, and if you go over, choose to either pause until the next cycle or pay per additional message.",
     category: "Pricing",
   },
   {
     q: "What kind of support do you offer?",
-    a: "Our customers get full access to our founders and we even have Slack Connect channels for real-time support.",
+    a: "We provide email support, live chat support for enterprise customers, and a comprehensive knowledge base to help you with any questions or issues you may have. For enterprise customers, we also offer dedicated account management and priority support.",
     category: "Support",
   },
   {

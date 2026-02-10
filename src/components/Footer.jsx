@@ -2,8 +2,6 @@ import React from "react";
 import Logo from "./Logo";
 import { ExternalLink } from "lucide-react";
 
-const SHOW_PRICING = false; // Feature flag from App.jsx
-
 export default function Footer() {
   return (
     <footer className="border-t border-black/10 dark:border-white/10 py-12">
@@ -24,6 +22,9 @@ export default function Footer() {
               </a>
               <a href="/why-nobi/better-search" className="hover:opacity-80">
                 Why Nobi
+              </a>
+              <a href="/pricing" className="hover:opacity-80">
+                Pricing
               </a>
               <a href="/faqs" className="hover:opacity-80">
                 FAQs

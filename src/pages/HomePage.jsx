@@ -1,12 +1,8 @@
-import React, {useEffect, useRef, useState, useMemo} from "react";
+import React, {useEffect, useMemo, useRef, useState} from "react";
 import {AnimatePresence, motion} from "framer-motion";
-import Marquee from "react-fast-marquee";
-import LogoMarquee from "../components/LogoMarquee";
 import {
-    ArrowRight,
     BarChart3,
     CheckCircle2,
-    Filter,
     Heart,
     LayoutGrid,
     MessageCircleQuestion,
@@ -20,8 +16,7 @@ import {
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import FAQList from "../components/FAQList.jsx";
-import { FAQ_ITEMS } from "../constants/faqItems";
-import { posts } from "../content/utils/mdxPostLoader";
+import {posts} from "../content/utils/mdxPostLoader";
 import HeroDemo from "../components/HeroDemo";
 import {VideoModal} from "../components/VideoModal";
 import {useDemoForm} from "../context/DemoFormContext";
@@ -1493,8 +1488,8 @@ function HowItWorks() {
 
 function FloatingAskNobi() {
   return (
-    <div className="fixed bottom-5 left-0 right-0 z-50 px-4">
-      <div className="mx-auto w-[80%] max-w-2xl xl:max-w-lg">
+    <div className="fixed bottom-6 left-0 right-0 z-50 px-6">
+      <div className="mx-auto max-w-2xl rounded-[18px] shadow-[0_2px_8px_rgba(0,0,0,0.05),0_12px_40px_-8px_rgba(0,0,0,0.12),0_0_80px_-16px_rgba(168,85,247,0.15)]">
         <nobi-search-bar
           default-mode="ai"
           size="large"

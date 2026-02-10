@@ -9,6 +9,7 @@ import FAQs from "./pages/FAQs.jsx";
 import Blog from "./pages/Blog.jsx";
 import BlogPost from "./pages/BlogPost.jsx";
 import BetterSearch from "./pages/BetterSearch.jsx";
+import Pricing from "./pages/Pricing.jsx";
 import NotFound from "./pages/NotFound.jsx";
 import { RequestDemoModal } from "./components/DemoModals.jsx";
 
@@ -39,6 +40,7 @@ function App() {
         <Route path="/why-nobi/better-search" element={<BetterSearch />} />
         <Route path="/terms" element={<Terms />} />
         <Route path="/privacy" element={<Privacy />} />
+        <Route path="/pricing" element={<Pricing />} />
         <Route path="/faqs" element={<FAQs />} />
         <Route path="*" element={<NotFound />} />
       </Routes>

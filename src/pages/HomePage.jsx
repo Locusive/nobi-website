@@ -1488,8 +1488,8 @@ function HowItWorks() {
 
 function FloatingAskNobi() {
   return (
-    <div className="fixed bottom-5 left-0 right-0 z-50 px-4">
-      <div className="mx-auto w-[80%] max-w-2xl xl:max-w-lg">
+    <div className="fixed bottom-6 left-0 right-0 z-50 px-6">
+      <div className="mx-auto max-w-2xl rounded-[18px] shadow-[0_2px_8px_rgba(0,0,0,0.04),0_8px_32px_-4px_rgba(0,0,0,0.08),0_24px_56px_-12px_rgba(0,0,0,0.06)]">
         <nobi-search-bar
           default-mode="ai"
           size="large"

@@ -114,7 +114,7 @@ export default function Pricing() {
             aria-hidden
           />
 
-          <div className="relative mx-auto max-w-6xl px-6 pt-16 pb-6 sm:pt-20 sm:pb-10 text-center">
+          <div className="relative mx-auto max-w-6xl px-6 pt-16 pb-2 sm:pt-20 sm:pb-4 text-center">
             <p className="text-sm font-semibold tracking-[0.2em] text-purple-600 uppercase mb-4">
               Pricing
             </p>
@@ -129,7 +129,7 @@ export default function Pricing() {
         </section>
 
         {/* Plan cards */}
-        <section className="relative py-10 sm:py-14">
+        <section className="relative py-6 sm:py-8">
           <div className="mx-auto max-w-4xl px-6">
             {/* Free trial banner */}
             <div className="mb-8 rounded-xl border border-purple-200 bg-gradient-to-r from-purple-50 to-indigo-50 px-5 py-4 text-center shadow-sm">
@@ -197,7 +197,7 @@ export default function Pricing() {
                   onClick={openDemoForm}
                   className="inline-flex items-center gap-2 rounded-full bg-white text-[#17122f] px-6 py-3 text-sm font-semibold shadow-[0_10px_32px_-24px_rgba(255,255,255,0.6)] hover:bg-white/90 transition"
                 >
-                  Contact Us
+                  Set Up A Free Trial
                   <ArrowRight className="w-4 h-4" />
                 </button>
               </div>
@@ -351,7 +351,7 @@ function PlanCard({ plan, onSelect }) {
               : "bg-white text-black border border-black hover:bg-black/5"
           }`}
         >
-          Start Free Trial
+          Set Up A Free Trial
         </button>
       </div>
     </div>

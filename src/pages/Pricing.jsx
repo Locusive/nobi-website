@@ -102,7 +102,7 @@ export default function Pricing() {
 
   return (
     <PageLayout>
-      <div className="bg-gradient-to-b from-white via-white to-slate-50 text-black min-h-screen">
+      <div className="bg-gradient-to-b from-white via-white to-slate-50 text-black min-h-screen overflow-x-hidden">
         {/* Hero */}
         <section className="relative">
           <div

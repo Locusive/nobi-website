@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import PageLayout from "../components/PageLayout";
-import DemoCTAButton from "../components/DemoCTAButton";
 import FAQList from "../components/FAQList.jsx";
 import { Check, Search, Smile, BarChart3, MessageSquare, ArrowRight } from "lucide-react";
 import Marquee from "react-fast-marquee";
@@ -31,6 +30,8 @@ const PLANS = [
     description: "For growing brands with higher traffic and engagement.",
   },
 ];
+
+const SIGNUP_URL = "https://dashboard.nobi.ai";
 
 const SHARED_FEATURES = [
   "Search mode, suggestion pills, buttons, and all other components",
@@ -69,7 +70,7 @@ const VALUE_PROPS = [
 const PRICING_FAQS = [
   {
     q: "Can we try it before committing?",
-    a: "Absolutely! We offer a free trial period of 30 days or up to 100K messages.",
+    a: "Yes! Every paid plan comes with a free 30-day trial. You can also preview Nobi from your dashboard with your own products before going live on your site.",
   },
   {
     q: "How does pricing work?",
@@ -122,8 +123,8 @@ export default function Pricing() {
               Simple plans that scale with use
             </h1>
             <p className="mt-4 text-lg text-slate-600 max-w-2xl mx-auto leading-relaxed">
-              Start with a 30-day free trial. Pick the plan that matches your
-              monthly message volume, and only pay for what you need.
+              Every plan includes a free 30-day trial. Connect your store,
+              try Nobi with your own products, and only pay for what you need.
             </p>
           </div>
         </section>
@@ -131,21 +132,17 @@ export default function Pricing() {
         {/* Plan cards */}
         <section className="relative py-6 sm:py-8">
           <div className="mx-auto max-w-4xl px-6">
-            {/* Free trial banner */}
-            <div className="mb-8 rounded-xl border border-purple-200 bg-gradient-to-r from-purple-50 to-indigo-50 px-5 py-4 text-center shadow-sm">
-              <p className="text-sm font-semibold text-purple-800">
-                <span className="mr-1.5">🎁</span>
-                Free 30-day trial &mdash; 100,000 messages included. Cancel
-                anytime.
-              </p>
-            </div>
+            {/* Free trial note */}
+            <p className="mb-8 text-center text-sm text-slate-500">
+              Every plan includes a free 30-day trial. Preview Nobi with your own
+              products from the dashboard before going live on your site.
+            </p>
 
             <div className="grid gap-6 md:grid-cols-2">
               {PLANS.map((plan) => (
                 <PlanCard
                   key={plan.name}
                   plan={plan}
-                  onSelect={openDemoForm}
                 />
               ))}
             </div>
@@ -197,7 +194,7 @@ export default function Pricing() {
                   onClick={openDemoForm}
                   className="inline-flex items-center gap-2 rounded-full bg-white text-[#17122f] px-6 py-3 text-sm font-semibold shadow-[0_10px_32px_-24px_rgba(255,255,255,0.6)] hover:bg-white/90 transition"
                 >
-                  Set Up A Free Trial
+                  Contact Sales
                   <ArrowRight className="w-4 h-4" />
                 </button>
               </div>
@@ -292,7 +289,12 @@ export default function Pricing() {
               </p>
             </div>
             <div className="flex justify-center">
-              <DemoCTAButton className="h-12 rounded-full bg-black text-white hover:opacity-90 shadow-sm px-6 w-full sm:w-auto" />
+              <a
+                href={SIGNUP_URL}
+                className="h-12 rounded-full bg-black text-white hover:opacity-90 shadow-sm px-6 text-sm font-semibold transition active:scale-[.98] inline-flex items-center justify-center"
+              >
+                Sign Up Free
+              </a>
             </div>
           </div>
         </section>
@@ -304,7 +306,7 @@ export default function Pricing() {
 /**
  * Individual plan card for the pricing grid.
  */
-function PlanCard({ plan, onSelect }) {
+function PlanCard({ plan }) {
   return (
     <div
       className={`relative rounded-2xl border bg-white p-6 sm:p-8 shadow-[0_18px_46px_-32px_rgba(15,23,42,0.35)] transition hover:-translate-y-1 ${
@@ -343,16 +345,16 @@ function PlanCard({ plan, onSelect }) {
           messages/month
         </div>
 
-        <button
-          onClick={onSelect}
-          className={`w-full rounded-xl py-3 text-sm font-semibold transition active:scale-[.98] ${
+        <a
+          href={SIGNUP_URL}
+          className={`block w-full rounded-xl py-3 text-sm font-semibold text-center transition active:scale-[.98] ${
             plan.highlighted
               ? "bg-black text-white hover:opacity-90 shadow-sm"
               : "bg-white text-black border border-black hover:bg-black/5"
           }`}
         >
-          Set Up A Free Trial
-        </button>
+          Start Free Trial
+        </a>
       </div>
     </div>
   );

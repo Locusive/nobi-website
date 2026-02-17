@@ -7,7 +7,7 @@ const Privacy = () => (
     {/* Page Heading and Intro */}
     <h1 className="text-3xl font-bold mb-4">Privacy Policy</h1>
     <p className="text-sm text-gray-500 mb-8">
-      Effective October&nbsp;1,&nbsp;2025. This Privacy Policy explains how Nobi
+      Effective February&nbsp;17,&nbsp;2026. This Privacy Policy explains how Nobi
       collects, uses, and shares information.  If you have questions, email{" "}
       <a href="mailto:privacy@nobi.ai" className="text-blue-600 underline">
         privacy@nobi.ai
@@ -30,8 +30,11 @@ const Privacy = () => (
       <ul className="list-disc list-inside space-y-2">
         <li>
           <strong>Account & Contact Data</strong> — name, email, role, company
-          and similar details when you request a demo, start a trial or contact
-          us.
+          and similar details when you create an account, request a demo, start
+          a trial or contact us. When you sign up through our self-service
+          onboarding, we collect your Google account information (name and email)
+          via Google authentication, your website URL, and business details you
+          provide during setup.
         </li>
         <li>
           <strong>Commerce & Usage Data</strong> — queries, clicks, viewed
@@ -46,6 +49,14 @@ const Privacy = () => (
         <li>
           <strong>Customer Content</strong> — catalogue data or end‑user inputs
           that our brand customers send to Nobi to power the Service.
+        </li>
+        <li>
+          <strong>Onboarding Data</strong> — when you create a self-service
+          account, we automatically detect your website platform, scan publicly
+          available pages (such as FAQ, shipping, and returns pages) to
+          populate your knowledge base, and import your product catalogue. This
+          data is used solely to provide the Service and is subject to the same
+          protections as other Customer Content.
         </li>
       </ul>
     </section>

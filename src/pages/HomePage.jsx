@@ -26,7 +26,7 @@ import DemoCTAButton from "../components/DemoCTAButton";
 // ===== feature flags (hide sections/links without deleting code) =====
 // Build trigger for Cloudflare Pages preview.
 const SHOW_LOGOS = true;
-const SHOW_PRICING = false;
+const SHOW_PRICING = true;
 
 // …
 
@@ -815,8 +815,13 @@ function Hero({ onOpenVideo }) {
           </p>
 
           {/* Same-row CTAs (works on mobile too) */}
-          <div className="grid grid-cols-[1fr_auto] items-center gap-1 max-w-xl mx-auto">
-            <DemoCTAButton />
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 max-w-xl mx-auto">
+            <a
+              href="https://dashboard.nobi.ai"
+              className="inline-flex items-center justify-center gap-2 rounded-2xl font-medium transition active:scale-[.98] bg-black text-white hover:opacity-90 shadow-sm h-12 px-6 text-base w-full sm:w-auto"
+            >
+              Sign Up Free
+            </a>
             <Button
               size="lg"
               variant="ghost"
@@ -1506,30 +1511,44 @@ function FloatingAskNobi() {
 }
 
 function Pricing() {
+  const { onOpen } = useDemoForm();
   const tiers = [
-    { name: "Starter", price: "$0", blurb: "Kick the tires", points: ["Up to 500 queries", "Dual Mode search bar", "Email support"], cta: "Get started" },
-    { name: "Growth", price: "$499", blurb: "Best for DTC brands", points: ["5k queries/mo", "Collections assistant", "Analytics Dashboard"], cta: "Start trial" },
-    { name: "Enterprise", price: "Custom", blurb: "Scale & SSO", points: ["Unlimited queries", "Priority SLAs", "Custom models"], cta: "Talk to sales" },
+    { name: "Starter", price: "$300", blurb: "For brands getting started", points: ["3,000 messages/month", "All components included", "30-day free trial"], cta: "Start Free Trial", href: "https://dashboard.nobi.ai" },
+    { name: "Growth", price: "$900", blurb: "For growing brands", points: ["10,000 messages/month", "All components included", "30-day free trial"], cta: "Start Free Trial", href: "https://dashboard.nobi.ai", highlighted: true },
+    { name: "Enterprise", price: "Custom", blurb: "For high-volume brands", points: ["Unlimited messages", "Custom integrations", "Dedicated support"], cta: "Contact Sales", onClick: onOpen },
   ];
   return (
     <section id="pricing" className="scroll-mt-20 py-20 border-t border-black/5 dark:border-white/5">
       <div className="mx-auto max-w-6xl px-6">
-        <h2 className="text-3xl font-semibold mb-8">Simple plans that scale with you</h2>
+        <h2 className="text-3xl font-semibold mb-2">Simple plans that scale with you</h2>
+        <p className="text-black/60 dark:text-white/60 mb-8">Start free, upgrade when you're ready.</p>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch">
           {tiers.map((t) => (
-            <div key={t.name} className="flex flex-col rounded-3xl border border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/5 p-6">
+            <div key={t.name} className={`flex flex-col rounded-3xl border bg-white/70 dark:bg-white/5 p-6 ${t.highlighted ? "border-purple-300 ring-2 ring-purple-200" : "border-black/10 dark:border-white/10"}`}>
               <div className="text-sm font-semibold tracking-wide text-indigo-600">{t.name}</div>
               <div className="mt-2 text-3xl font-semibold">
-                {t.price}<span className="text-base font-normal opacity-70">/mo</span>
+                {t.price}{t.price !== "Custom" && <span className="text-base font-normal opacity-70">/mo</span>}
               </div>
               <div className="text-sm opacity-80 mt-1">{t.blurb}</div>
               <div className="mt-4 flex-1 text-sm space-y-2">
                 {t.points.map((p) => (<div key={p} className="flex items-center gap-2"><CheckCircle2 className="h-4 w-4" /> {p}</div>))}
               </div>
-              <Button className="mt-6 w-full">{t.cta}</Button>
+              {t.href ? (
+                <a
+                  href={t.href}
+                  className="mt-6 inline-flex items-center justify-center gap-2 rounded-2xl font-medium transition active:scale-[.98] bg-black text-white dark:bg-white dark:text-black hover:opacity-90 shadow-sm h-10 px-5 text-base w-full"
+                >
+                  {t.cta}
+                </a>
+              ) : (
+                <Button className="mt-6 w-full" variant="outline" onClick={t.onClick}>{t.cta}</Button>
+              )}
             </div>
           ))}
         </div>
+        <p className="mt-6 text-center text-sm text-black/50 dark:text-white/50">
+          <a href="/pricing" className="underline hover:text-purple-600">See full pricing</a> &middot; Overage at $0.10/message
+        </p>
       </div>
     </section>
   );

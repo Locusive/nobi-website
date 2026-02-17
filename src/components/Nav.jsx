@@ -58,15 +58,20 @@ export default function Nav() {
         </button>
       </nav>
 
-      {/* Right side: Demo button (desktop only) + Mobile menu button */}
-      <div className="flex items-center gap-3 ml-auto">
-        <Button
-          variant="outline"
-          className="hidden md:flex bg-white text-black border-black rounded-xl hover:bg-fuchsia-50 hover:border-fuchsia-200"
+      {/* Right side: Demo link + Sign Up button (desktop only) + Mobile menu button */}
+      <div className="flex items-center gap-8 ml-auto">
+        <button
+          className="hidden md:block text-sm font-semibold hover:opacity-80 transition-opacity"
           onClick={handleDemoClick}
         >
-          Try Nobi on your site
-        </Button>
+          Request a Demo
+        </button>
+        <a
+          href="https://dashboard.nobi.ai"
+          className="hidden md:inline-flex items-center justify-center gap-2 rounded-xl font-medium transition active:scale-[.98] bg-black text-white dark:bg-white dark:text-black hover:opacity-90 shadow-sm h-10 px-5 text-sm"
+        >
+          Sign Up Free
+        </a>
 
         {/* Hamburger menu (visible on mobile) */}
         <button
@@ -110,6 +115,13 @@ export default function Nav() {
                 <Sparkles className="w-4 h-4 text-fuchsia-500" />
                 Ask Nobi
               </button>
+              <a
+                href="https://dashboard.nobi.ai"
+                onClick={closeMobileMenu}
+                className="inline-flex items-center justify-center gap-2 rounded-2xl font-medium transition active:scale-[.98] bg-black text-white hover:opacity-90 shadow-sm h-10 px-5 text-base w-full"
+              >
+                Sign Up Free
+              </a>
               <Button
                 variant="outline"
                 className="bg-white text-black border-black hover:bg-black/5"
@@ -118,7 +130,7 @@ export default function Nav() {
                   closeMobileMenu();
                 }}
               >
-                Try Nobi on your site
+                Request a Demo
               </Button>
             </div>
           </nav>

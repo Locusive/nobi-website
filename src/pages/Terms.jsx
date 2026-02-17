@@ -4,7 +4,7 @@ import PageLayout from "../components/PageLayout";
 
 const LEGAL_NAME = "Locusive, Inc. d/b/a Nobi";
 const SHORT_NAME = "Nobi";
-const EFFECTIVE = "October 1, 2025";
+const EFFECTIVE = "February 17, 2026";
 const CONTACT = "legal@nobi.ai";
 
 export default function Terms() {
@@ -60,7 +60,8 @@ export default function Terms() {
 
           <h2 id="eligibility">2) Eligibility & Accounts</h2>
           <p>
-            You must be at least 18 years old to use the Service. You are responsible for maintaining
+            You must be at least 18 years old to use the Service. You may create an account through
+            our self-service sign-up process using Google authentication. You are responsible for maintaining
             the confidentiality of your account credentials and for all activities under your account.
             You agree to promptly notify us of any unauthorized use.
           </p>
@@ -95,8 +96,11 @@ export default function Terms() {
           <p>
             If you purchase a subscription, you agree to pay the fees described at checkout or in an
             Order. Unless stated otherwise, fees are non-refundable and do not include taxes, which
-            you are responsible for paying. We may offer free trials; at the end of a trial, continued
-            use may convert to a paid subscription unless cancelled on time.
+            you are responsible for paying. Paid plans may include a 30-day free trial period. At the
+            end of a trial, your subscription will automatically convert to a paid subscription unless
+            cancelled before the trial ends. {SHORT_NAME} may also offer limited preview access to the
+            Service for evaluation purposes; such access may be subject to usage limits and may be
+            modified or discontinued at any time.
           </p>
 
           <h2 id="confidentiality">6) Confidentiality</h2>

@@ -81,7 +81,7 @@ const FAQ_ITEMS = [
   },
   {
     q: "Can we try it before committing?",
-    a: "Absolutely! We offer a free trial period of 30 days or up to 100K messages.",
+    a: "Yes! Every paid plan comes with a free 30-day trial. You can also preview Nobi from your dashboard with your own products before going live on your site.",
     category: "Pricing",
   },
   {

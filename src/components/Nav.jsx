@@ -32,7 +32,7 @@ export default function Nav() {
   return (
     <>
       {/* Desktop nav (hidden on mobile) */}
-      <nav className="hidden md:flex items-center gap-6 text-sm font-semibold absolute left-1/2 -translate-x-1/2">
+      <nav className="hidden md:flex items-center gap-6 text-sm font-semibold flex-1 justify-center">
         {navLinks.map((link) => {
           const className = "hover:opacity-80 flex items-center gap-1";
           return link.external ? (
@@ -64,10 +64,16 @@ export default function Nav() {
           className="hidden md:block text-sm font-semibold hover:opacity-80 transition-opacity"
           onClick={handleDemoClick}
         >
-          Request a Demo
+          Get a Demo
         </button>
         <a
-          href="https://dashboard.nobi.ai"
+          href="https://dashboard.nobi.ai/login"
+          className="hidden md:block text-sm font-semibold hover:opacity-80 transition-opacity"
+        >
+          Log in
+        </a>
+        <a
+          href="https://dashboard.nobi.ai/signup"
           className="hidden md:inline-flex items-center justify-center gap-2 rounded-xl font-medium transition active:scale-[.98] bg-black text-white dark:bg-white dark:text-black hover:opacity-90 shadow-sm h-10 px-5 text-sm"
         >
           Sign Up Free
@@ -116,7 +122,14 @@ export default function Nav() {
                 Ask Nobi
               </button>
               <a
-                href="https://dashboard.nobi.ai"
+                href="https://dashboard.nobi.ai/login"
+                onClick={closeMobileMenu}
+                className="text-sm font-semibold hover:opacity-80 py-2"
+              >
+                Log in
+              </a>
+              <a
+                href="https://dashboard.nobi.ai/signup"
                 onClick={closeMobileMenu}
                 className="inline-flex items-center justify-center gap-2 rounded-2xl font-medium transition active:scale-[.98] bg-black text-white hover:opacity-90 shadow-sm h-10 px-5 text-base w-full"
               >
@@ -130,7 +143,7 @@ export default function Nav() {
                   closeMobileMenu();
                 }}
               >
-                Request a Demo
+                Get a Demo
               </Button>
             </div>
           </nav>

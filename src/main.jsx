@@ -10,6 +10,8 @@ import Blog from "./pages/Blog.jsx";
 import BlogPost from "./pages/BlogPost.jsx";
 import BetterSearch from "./pages/BetterSearch.jsx";
 import Pricing from "./pages/Pricing.jsx";
+import SearchEngineLanding from "./pages/landing/SearchEngineLanding.jsx";
+import AIAssistantLanding from "./pages/landing/AIAssistantLanding.jsx";
 import NotFound from "./pages/NotFound.jsx";
 import { RequestDemoModal } from "./components/DemoModals.jsx";
 
@@ -42,6 +44,8 @@ function App() {
         <Route path="/privacy" element={<Privacy />} />
         <Route path="/pricing" element={<Pricing />} />
         <Route path="/faqs" element={<FAQs />} />
+        <Route path="/s/search" element={<SearchEngineLanding />} />
+        <Route path="/s/ai-assistant" element={<AIAssistantLanding />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
       <RequestDemoModal open={isFormOpen} onClose={() => setIsFormOpen(false)} />

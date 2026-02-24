@@ -1,26 +1,46 @@
-# Nobi AI Information
+# Nobi AI
 
-Nobi is an AI shopping assistant for ecommerce stores. It helps customers find products, answer questions, and complete purchases using conversational AI powered by semantic search.
+> Nobi is an AI sales associate for business websites. It turns any site into a place where visitors can ask questions, get real answers, and take action — powered by the business's own data.
 
-## Features
+## What Nobi Does
 
-- Conversational product search using semantic understanding
-- Real-time product recommendations based on customer intent
-- Hybrid search combining keyword and semantic search
-- Integration with Shopify stores
-- Product inquiry and Q&A system
+Nobi sits on a business's website and acts as a conversational sales associate. It understands what visitors mean (not just what they type), answers their questions in real time, and guides them toward the right products, services, or next steps.
 
-## Services
+### Core Capabilities
 
-### MCP Server
-Nobi provides an MCP (Model Context Protocol) server for AI agents to interact with the assistant:
+- **Semantic search**: Understands natural-language queries like "running shoes for wide feet under $120" and surfaces the right results instantly.
+- **Conversational Q&A**: Answers product, sizing, shipping, and service questions without visitors needing to dig through pages or wait for support.
+- **Product recommendations**: Suggests products based on the visitor's stated needs and intent.
+- **Proactive engagement**: Suggestion pills, exit-intent prompts, and inline triggers keep visitors exploring instead of bouncing.
+- **Flexible placement**: Search bar, PDP assistant, collection pages, modals, or triggered from any button via JS API.
+
+### Verticals
+
+Nobi started in ecommerce (Shopify and other platforms) and is expanding into automotive and other verticals. The platform generalizes to any business that wants an AI agent on its website.
+
+## Results
+
+Nobi has outperformed the default shopping experience in every A/B test run to date:
+
+- 30% conversion lift (A/B proven)
+- 35% more add-to-carts
+- 56% higher average order value
+
+## Customers
+
+Trusted by brands including Untuckit, Lucchese, Faherty, TOOLUP, Kilte, and Alps & Meters.
+
+## MCP Server
+
+Nobi provides an MCP (Model Context Protocol) server so AI agents can interact with Nobi's own business agent:
 
 mcp-server: https://api.nobi.ai/.well-known/mcp/460cbe82-9195-424f-a616-b1cb3e3caca0.json
 
 Available tools:
-- ask_question: Ask questions about Nobi, pricing, features, or how it works
-- book_demo: Request a demo with the Nobi team
+- ask_question: Ask questions about Nobi — pricing, features, how it works, or anything else.
+- book_demo: Request a demo with the Nobi team.
 
 ## Contact
 
-For more information about Nobi, visit https://nobi.ai or contact sales@nobi.ai
+- Website: https://nobi.ai
+- Email: sales@nobi.ai

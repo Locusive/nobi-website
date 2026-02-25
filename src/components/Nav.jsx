@@ -3,6 +3,7 @@ import { Menu, X, ExternalLink, Sparkles } from "lucide-react";
 import Button from "./Button";
 import { useDemoForm } from "../context/DemoFormContext";
 import { trackDemoFormOpened } from "../utils/eventTracker";
+import { getSignupUrl } from "../utils/signupUrl";
 
 export default function Nav() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -73,7 +74,7 @@ export default function Nav() {
           Log in
         </a>
         <a
-          href="https://dashboard.nobi.ai/signup"
+          href={getSignupUrl()}
           className="hidden md:inline-flex items-center justify-center gap-2 rounded-xl font-medium transition active:scale-[.98] bg-black text-white dark:bg-white dark:text-black hover:opacity-90 shadow-sm h-10 px-5 text-sm"
         >
           Sign Up Free
@@ -129,7 +130,7 @@ export default function Nav() {
                 Log in
               </a>
               <a
-                href="https://dashboard.nobi.ai/signup"
+                href={getSignupUrl()}
                 onClick={closeMobileMenu}
                 className="inline-flex items-center justify-center gap-2 rounded-2xl font-medium transition active:scale-[.98] bg-black text-white hover:opacity-90 shadow-sm h-10 px-5 text-base w-full"
               >

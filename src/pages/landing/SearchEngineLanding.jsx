@@ -9,8 +9,7 @@ import {
   ChevronRight,
 } from "lucide-react";
 import Marquee from "react-fast-marquee";
-
-const CTA_URL = "https://dashboard.nobi.ai/signup";
+import { getSignupUrl } from "../../utils/signupUrl";
 
 const CUSTOMER_LOGOS = [
   { alt: "UNTUCKit", src: "/media/logos/untuckit.svg" },
@@ -44,7 +43,7 @@ function CTAButton({ children = "Start Free Trial", className = "", size = "lg" 
   };
   return (
     <a
-      href={CTA_URL}
+      href={getSignupUrl()}
       className={`inline-flex items-center justify-center gap-2 rounded-2xl font-semibold transition active:scale-[.98] bg-black text-white hover:opacity-90 shadow-sm ${sizes[size]} ${className}`}
     >
       {children}

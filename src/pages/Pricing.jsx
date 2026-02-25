@@ -3,6 +3,7 @@ import PageLayout from "../components/PageLayout";
 import FAQList from "../components/FAQList.jsx";
 import { Check, Search, Smile, BarChart3, MessageSquare, ArrowRight } from "lucide-react";
 import Marquee from "react-fast-marquee";
+import { getSignupUrl } from "../utils/signupUrl";
 import { useDemoForm } from "../context/DemoFormContext";
 
 const CUSTOMER_LOGOS = [
@@ -31,7 +32,8 @@ const PLANS = [
   },
 ];
 
-const SIGNUP_URL = "https://dashboard.nobi.ai";
+// Signup URL is dynamically generated to forward UTM params
+// from the current page to the dashboard.
 
 const SHARED_FEATURES = [
   "Search mode, suggestion pills, buttons, and all other components",
@@ -290,7 +292,7 @@ export default function Pricing() {
             </div>
             <div className="flex justify-center">
               <a
-                href={SIGNUP_URL}
+                href={getSignupUrl()}
                 className="h-12 rounded-full bg-black text-white hover:opacity-90 shadow-sm px-6 text-sm font-semibold transition active:scale-[.98] inline-flex items-center justify-center"
               >
                 Sign Up Free
@@ -346,7 +348,7 @@ function PlanCard({ plan }) {
         </div>
 
         <a
-          href={SIGNUP_URL}
+          href={getSignupUrl()}
           className={`block w-full rounded-xl py-3 text-sm font-semibold text-center transition active:scale-[.98] ${
             plan.highlighted
               ? "bg-black text-white hover:opacity-90 shadow-sm"

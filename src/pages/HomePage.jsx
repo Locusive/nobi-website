@@ -21,6 +21,7 @@ import HeroDemo from "../components/HeroDemo";
 import {VideoModal} from "../components/VideoModal";
 import {useDemoForm} from "../context/DemoFormContext";
 import DemoCTAButton from "../components/DemoCTAButton";
+import {getSignupUrl} from "../utils/signupUrl";
 
 
 // ===== feature flags (hide sections/links without deleting code) =====
@@ -817,7 +818,7 @@ function Hero({ onOpenVideo }) {
           {/* Same-row CTAs (works on mobile too) */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3 max-w-xl mx-auto">
             <a
-              href="https://dashboard.nobi.ai"
+              href={getSignupUrl()}
               className="inline-flex items-center justify-center gap-2 rounded-2xl font-medium transition active:scale-[.98] bg-black text-white hover:opacity-90 shadow-sm h-12 px-6 text-base w-full sm:w-auto"
             >
               Sign Up Free
@@ -1513,8 +1514,8 @@ function FloatingAskNobi() {
 function Pricing() {
   const { onOpen } = useDemoForm();
   const tiers = [
-    { name: "Starter", price: "$300", blurb: "For brands getting started", points: ["3,000 messages/month", "All components included", "30-day free trial"], cta: "Start Free Trial", href: "https://dashboard.nobi.ai" },
-    { name: "Growth", price: "$900", blurb: "For growing brands", points: ["10,000 messages/month", "All components included", "30-day free trial"], cta: "Start Free Trial", href: "https://dashboard.nobi.ai", highlighted: true },
+    { name: "Starter", price: "$300", blurb: "For brands getting started", points: ["3,000 messages/month", "All components included", "30-day free trial"], cta: "Start Free Trial", href: getSignupUrl() },
+    { name: "Growth", price: "$900", blurb: "For growing brands", points: ["10,000 messages/month", "All components included", "30-day free trial"], cta: "Start Free Trial", href: getSignupUrl(), highlighted: true },
     { name: "Enterprise", price: "Custom", blurb: "For high-volume brands", points: ["Unlimited messages", "Custom integrations", "Dedicated support"], cta: "Contact Sales", onClick: onOpen },
   ];
   return (

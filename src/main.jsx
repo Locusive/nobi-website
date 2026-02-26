@@ -48,8 +48,28 @@ function App() {
         <Route path="/s/ai-assistant" element={<AIAssistantLanding />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
+      <FloatingAskNobi />
       <RequestDemoModal open={isFormOpen} onClose={() => setIsFormOpen(false)} />
     </DemoFormProvider>
+  );
+}
+
+function FloatingAskNobi() {
+  return (
+    <div className="fixed bottom-6 left-0 right-0 z-50 px-6">
+      <div className="mx-auto max-w-2xl rounded-[18px] shadow-[0_2px_8px_rgba(0,0,0,0.05),0_12px_40px_-8px_rgba(0,0,0,0.12),0_0_80px_-16px_rgba(168,85,247,0.15)]">
+        <nobi-search-bar
+          default-mode="ai"
+          size="large"
+          cta-variant="auto"
+          show-mode-toggle="false"
+          show-hint-row="false"
+          use-search-mode-at-launch="false"
+          placeholder="Ask Nobi a question..."
+          button-label="Ask Nobi"
+        />
+      </div>
+    </div>
   );
 }
 

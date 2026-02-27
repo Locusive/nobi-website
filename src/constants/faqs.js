@@ -85,9 +85,8 @@ const FAQ_ITEMS = [
     category: "Pricing",
   },
   {
-    q: "How does pricing work?",
-    a: "Nobi offers tiered plans based on the number of messages your shoppers send each month. Pick the tier that fits your volume, and if you go over, choose to either pause until the next cycle or pay per additional message.",
-    category: "Pricing",
+      q: "I have X sessions per month and Y percent of my customers use search. How much would Nobi cost for me?",
+      a: "Our standard pricing tiers apply to customers with up to 10,000 messages per month. For customers with higher usage, we offer custom enterprise plans, usually with generous volume-based discounts. Please contact our sales team for a personalized quote based on your specific needs.",
   },
   {
     q: "What kind of support do you offer?",

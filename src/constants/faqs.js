@@ -86,7 +86,7 @@ const FAQ_ITEMS = [
   },
   {
       q: "I have X sessions per month and Y percent of my customers use search. How much would Nobi cost for me?",
-      a: "Our standard pricing tiers apply to customers with up to 10,000 messages per month. For customers with higher usage, we offer custom enterprise plans, usually with generous volume-based discounts. Please contact our sales team for a personalized quote based on your specific needs.",
+      a: "Our standard pricing tiers apply to customers with up to 10,000 messages per month. For customers with higher usage, we offer custom enterprise plans, usually with generous volume-based discounts. We can also provide significant discounts for search-mode only setups if you’re only looking to replace the search engine for your product catalog.",
   },
   {
     q: "What kind of support do you offer?",

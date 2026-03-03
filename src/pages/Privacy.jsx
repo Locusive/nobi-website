@@ -114,6 +114,15 @@ const Privacy = () => (
           the integration work.
         </li>
         <li>
+          <strong>Merchant‑Enabled Remarketing</strong> — when a merchant enables
+          remarketing in their Nobi dashboard, we fire search query events to
+          third‑party advertising pixels (such as Facebook/Meta Pixel or
+          Google Tag Manager) that the merchant has already installed on their
+          site. Nobi does not send data directly to these platforms; it triggers
+          events on the merchant’s existing pixel installations. This feature
+          is opt‑in and only active when explicitly enabled by the merchant.
+        </li>
+        <li>
           <strong>Business & Safety</strong> — to comply with law and protect
           rights, safety and the Service.
         </li>

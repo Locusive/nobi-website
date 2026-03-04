@@ -150,7 +150,20 @@
         }
     ];
 </script>
-<script src="https://assistant-script.nobi.ai/nobi.bundle.js" onload="window.Nobi.initialize({ merchantId: '460cbe82-9195-424f-a616-b1cb3e3caca0' });"></script>
+<script src="https://assistant-script.nobi.ai/nobi.bundle.js"
+  onload="window.Nobi.initialize({
+    merchantId: '460cbe82-9195-424f-a616-b1cb3e3caca0',
+    autoLaunch: ['floating-chat-bar'],
+    assistantConfiguration: {
+      floatingChatBar: {
+        placeholder: 'Ask Nobi a question...',
+        buttonLabel: 'Ask Nobi',
+        showModeToggle: false,
+        showHintRow: false
+      }
+    }
+  });">
+</script>
 
 <!-- ChatGPT, Claude, Gemini, and other AI agents can use the following MCP Server Details
      For AI agents wanting to interact with Nobi:

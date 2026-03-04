@@ -134,9 +134,9 @@ export default function Terms() {
           </p>
           <p>
             The Service includes an optional remarketing feature that, when enabled by you, fires
-            search query events to third-party advertising pixels (such as Facebook/Meta Pixel or
+            query events to third-party advertising pixels (such as Facebook/Meta Pixel or
             Google Tag Manager) that you have installed on your site. By enabling this feature, you
-            acknowledge that search queries entered by your site visitors will be shared with these
+            acknowledge that queries entered by your site visitors will be shared with these
             third-party platforms through your existing pixel installations. You are responsible for
             ensuring that your privacy policy and cookie consent mechanisms adequately disclose this
             use of visitor data for retargeting purposes.

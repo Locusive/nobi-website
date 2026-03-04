@@ -60,7 +60,7 @@ function FloatingAskNobi() {
       <div className="mx-auto max-w-2xl rounded-[18px] shadow-[0_2px_8px_rgba(0,0,0,0.05),0_12px_40px_-8px_rgba(0,0,0,0.12),0_0_80px_-16px_rgba(168,85,247,0.15)]">
         <nobi-search-bar
           default-mode="ai"
-          size="large"
+          size="regular"
           cta-variant="auto"
           show-mode-toggle="false"
           show-hint-row="false"

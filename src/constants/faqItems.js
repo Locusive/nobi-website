@@ -74,4 +74,9 @@ export const FAQ_ITEMS = [
         a: "Nobi takes data security seriously and complies with industry standards and regulations to protect your data and your customers' data.",
         category: "Security",
     },
+    {
+        q: "Does Nobi work with my platform?",
+        a: "Nobi is designed to work on any site. For product search, you can point Nobi to your product feed, or if you’re on Shopify, Nobi will pick up your feed automatically. For general Q&A or sales associate capabilities without a product catalog, Nobi will work with whatever information you have available to ensure your site’s visitors get accurate information. You can also add custom actions and overrides to ensure Nobi works with your visitor’s requests.",
+        category: "Product",
+    }
 ];

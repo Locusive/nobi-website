@@ -1,0 +1,66 @@
+<svg viewBox="0 0 1200 500" xmlns="http://www.w3.org/2000/svg" font-family="system-ui, -apple-system, sans-serif">
+  <rect width="1200" height="500" fill="#ffffff"/>
+
+  <text x="600" y="40" text-anchor="middle" font-size="20" font-weight="700" fill="#1e293b">How AI Processes a Search Query</text>
+
+  <!-- Vertical pipeline -->
+  <!-- Step 1: Raw Query -->
+  <rect x="340" y="65" width="520" height="70" rx="12" fill="#f0fdfa" stroke="#99f6e4" stroke-width="2"/>
+  <circle cx="380" cy="100" r="18" fill="#0d9488"/>
+  <text x="380" y="106" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff">1</text>
+  <text x="420" y="92" font-size="15" font-weight="700" fill="#1e293b">Raw Query Input</text>
+  <text x="420" y="112" font-size="13" fill="#64748b">"red dress for a summer wedding under $150"</text>
+
+  <!-- Arrow -->
+  <line x1="600" y1="135" x2="600" y2="155" stroke="#0d9488" stroke-width="2"/>
+  <polygon points="594,152 606,152 600,162" fill="#0d9488"/>
+
+  <!-- Step 2: NLP -->
+  <rect x="340" y="162" width="520" height="85" rx="12" fill="#f0fdfa" stroke="#5eead4" stroke-width="2"/>
+  <circle cx="380" cy="200" r="18" fill="#0d9488"/>
+  <text x="380" y="206" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff">2</text>
+  <text x="420" y="190" font-size="15" font-weight="700" fill="#1e293b">Natural Language Processing</text>
+  <text x="420" y="210" font-size="12" fill="#64748b">Entity extraction: Color=red, Category=dress, Occasion=wedding</text>
+  <text x="420" y="228" font-size="12" fill="#64748b">Constraint parsing: Season=summer, Price &lt; $150</text>
+
+  <!-- Arrow -->
+  <line x1="600" y1="247" x2="600" y2="267" stroke="#0d9488" stroke-width="2"/>
+  <polygon points="594,264 606,264 600,274" fill="#0d9488"/>
+
+  <!-- Step 3: Embeddings -->
+  <rect x="340" y="274" width="520" height="85" rx="12" fill="#f0fdfa" stroke="#2dd4bf" stroke-width="2"/>
+  <circle cx="380" cy="312" r="18" fill="#0d9488"/>
+  <text x="380" y="318" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff">3</text>
+  <text x="420" y="302" font-size="15" font-weight="700" fill="#1e293b">Vector Embedding</text>
+  <text x="420" y="322" font-size="12" fill="#64748b">Query mapped to semantic vector: [0.82, 0.15, 0.67, 0.91, ...]</text>
+  <text x="420" y="340" font-size="12" fill="#64748b">Compared against pre-embedded product catalog vectors</text>
+
+  <!-- Arrow -->
+  <line x1="600" y1="359" x2="600" y2="379" stroke="#0d9488" stroke-width="2"/>
+  <polygon points="594,376 606,376 600,386" fill="#0d9488"/>
+
+  <!-- Step 4: Results -->
+  <rect x="340" y="386" width="520" height="85" rx="12" fill="#f0fdfa" stroke="#14b8a6" stroke-width="2"/>
+  <circle cx="380" cy="424" r="18" fill="#0d9488"/>
+  <text x="380" y="430" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff">4</text>
+  <text x="420" y="414" font-size="15" font-weight="700" fill="#1e293b">Ranked Results</text>
+  <text x="420" y="434" font-size="12" fill="#64748b">Products ranked by semantic similarity + business rules</text>
+  <text x="420" y="452" font-size="12" fill="#64748b">Filters applied (price, availability). Served in &lt;200ms.</text>
+
+  <!-- Side annotations -->
+  <rect x="40" y="80" width="270" height="50" rx="8" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="175" y="100" text-anchor="middle" font-size="12" font-weight="600" fill="#475569">Shopper types naturally</text>
+  <text x="175" y="118" text-anchor="middle" font-size="11" fill="#94a3b8">No filters or dropdowns needed</text>
+
+  <rect x="40" y="280" width="270" height="50" rx="8" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="175" y="300" text-anchor="middle" font-size="12" font-weight="600" fill="#475569">768+ dimensional space</text>
+  <text x="175" y="318" text-anchor="middle" font-size="11" fill="#94a3b8">Captures nuance keywords miss</text>
+
+  <rect x="890" y="175" width="270" height="50" rx="8" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="1025" y="195" text-anchor="middle" font-size="12" font-weight="600" fill="#475569">Intent, not just tokens</text>
+  <text x="1025" y="213" text-anchor="middle" font-size="11" fill="#94a3b8">Understands context and meaning</text>
+
+  <rect x="890" y="400" width="270" height="50" rx="8" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="1025" y="420" text-anchor="middle" font-size="12" font-weight="600" fill="#475569">Zero-result rate: &lt;2%</text>
+  <text x="1025" y="438" text-anchor="middle" font-size="11" fill="#94a3b8">vs. 10-25% for keyword search</text>
+</svg>

@@ -1,0 +1,79 @@
+<svg viewBox="0 0 1200 500" xmlns="http://www.w3.org/2000/svg" font-family="system-ui, -apple-system, sans-serif">
+  <rect width="1200" height="500" fill="#f8fafc"/>
+
+  <text x="600" y="40" text-anchor="middle" font-size="20" font-weight="700" fill="#1e293b">AI Shopping Assistant vs. Traditional Site Search</text>
+  <text x="600" y="62" text-anchor="middle" font-size="14" fill="#64748b">A side-by-side comparison across 8 dimensions</text>
+
+  <!-- Left header -->
+  <rect x="430" y="80" width="340" height="36" rx="8" fill="#dbeafe"/>
+  <text x="600" y="104" text-anchor="middle" font-size="14" font-weight="700" fill="#1e40af">AI Shopping Assistant</text>
+
+  <!-- Right header -->
+  <rect x="790" y="80" width="340" height="36" rx="8" fill="#f1f5f9"/>
+  <text x="960" y="104" text-anchor="middle" font-size="14" font-weight="700" fill="#64748b">Traditional Keyword Search</text>
+
+  <!-- Row labels + comparisons -->
+  <!-- Row 1 -->
+  <rect x="40" y="126" width="1120" height="40" rx="0" fill="#ffffff"/>
+  <text x="60" y="151" font-size="13" font-weight="600" fill="#1e293b">Query Understanding</text>
+  <text x="600" y="151" text-anchor="middle" font-size="13" fill="#1e40af">Semantic intent + context</text>
+  <circle cx="445" cy="146" r="8" fill="#3b82f6"/>
+  <text x="960" y="151" text-anchor="middle" font-size="13" fill="#64748b">Exact word matching</text>
+  <circle cx="805" cy="146" r="8" fill="#cbd5e1"/>
+
+  <!-- Row 2 -->
+  <rect x="40" y="170" width="1120" height="40" rx="0" fill="#f8fafc"/>
+  <text x="60" y="195" font-size="13" font-weight="600" fill="#1e293b">Natural Language</text>
+  <text x="600" y="195" text-anchor="middle" font-size="13" fill="#1e40af">Native support</text>
+  <circle cx="445" cy="190" r="8" fill="#3b82f6"/>
+  <text x="960" y="195" text-anchor="middle" font-size="13" fill="#64748b">Fails on conversational queries</text>
+  <circle cx="805" cy="190" r="8" fill="#cbd5e1"/>
+
+  <!-- Row 3 -->
+  <rect x="40" y="214" width="1120" height="40" rx="0" fill="#ffffff"/>
+  <text x="60" y="239" font-size="13" font-weight="600" fill="#1e293b">Synonym Handling</text>
+  <text x="600" y="239" text-anchor="middle" font-size="13" fill="#1e40af">Automatic from language model</text>
+  <circle cx="445" cy="234" r="8" fill="#3b82f6"/>
+  <text x="960" y="239" text-anchor="middle" font-size="13" fill="#64748b">Manual configuration required</text>
+  <circle cx="805" cy="234" r="8" fill="#cbd5e1"/>
+
+  <!-- Row 4 -->
+  <rect x="40" y="258" width="1120" height="40" rx="0" fill="#f8fafc"/>
+  <text x="60" y="283" font-size="13" font-weight="600" fill="#1e293b">Zero-Result Rate</text>
+  <text x="600" y="283" text-anchor="middle" font-size="13" fill="#1e40af">Under 2%</text>
+  <circle cx="445" cy="278" r="8" fill="#3b82f6"/>
+  <text x="960" y="283" text-anchor="middle" font-size="13" fill="#64748b">10-25% of queries</text>
+  <circle cx="805" cy="278" r="8" fill="#cbd5e1"/>
+
+  <!-- Row 5 -->
+  <rect x="40" y="302" width="1120" height="40" rx="0" fill="#ffffff"/>
+  <text x="60" y="327" font-size="13" font-weight="600" fill="#1e293b">Typo Tolerance</text>
+  <text x="600" y="327" text-anchor="middle" font-size="13" fill="#1e40af">Context-based understanding</text>
+  <circle cx="445" cy="322" r="8" fill="#3b82f6"/>
+  <text x="960" y="327" text-anchor="middle" font-size="13" fill="#64748b">Basic fuzzy match (often wrong)</text>
+  <circle cx="805" cy="322" r="8" fill="#cbd5e1"/>
+
+  <!-- Row 6 -->
+  <rect x="40" y="346" width="1120" height="40" rx="0" fill="#f8fafc"/>
+  <text x="60" y="371" font-size="13" font-weight="600" fill="#1e293b">Setup Time</text>
+  <text x="600" y="371" text-anchor="middle" font-size="13" fill="#1e40af">Hours (connect feed + go)</text>
+  <circle cx="445" cy="366" r="8" fill="#3b82f6"/>
+  <text x="960" y="371" text-anchor="middle" font-size="13" fill="#64748b">Weeks (synonyms, rules, tuning)</text>
+  <circle cx="805" cy="366" r="8" fill="#cbd5e1"/>
+
+  <!-- Row 7 -->
+  <rect x="40" y="390" width="1120" height="40" rx="0" fill="#ffffff"/>
+  <text x="60" y="415" font-size="13" font-weight="600" fill="#1e293b">Maintenance</text>
+  <text x="600" y="415" text-anchor="middle" font-size="13" fill="#1e40af">Self-improving with data</text>
+  <circle cx="445" cy="410" r="8" fill="#3b82f6"/>
+  <text x="960" y="415" text-anchor="middle" font-size="13" fill="#64748b">Constant manual tuning</text>
+  <circle cx="805" cy="410" r="8" fill="#cbd5e1"/>
+
+  <!-- Row 8 -->
+  <rect x="40" y="434" width="1120" height="40" rx="0" fill="#f8fafc"/>
+  <text x="60" y="459" font-size="13" font-weight="600" fill="#1e293b">Conversion Impact</text>
+  <text x="600" y="459" text-anchor="middle" font-size="13" fill="#1e40af">+15-30% search revenue</text>
+  <circle cx="445" cy="454" r="8" fill="#3b82f6"/>
+  <text x="960" y="459" text-anchor="middle" font-size="13" fill="#64748b">Baseline</text>
+  <circle cx="805" cy="454" r="8" fill="#cbd5e1"/>
+</svg>

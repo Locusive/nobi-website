@@ -1,0 +1,87 @@
+<svg viewBox="0 0 1200 500" xmlns="http://www.w3.org/2000/svg" fill="none">
+  <rect width="1200" height="500" fill="#ffffff"/>
+
+  <text x="600" y="42" text-anchor="middle" font-family="system-ui, sans-serif" font-size="22" font-weight="700" fill="#1e293b">The Cost Waterfall of Bad Site Search</text>
+  <text x="600" y="65" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" fill="#64748b">From industry-wide losses to your store's bottom line</text>
+
+  <!-- Waterfall chart -->
+  <defs>
+    <linearGradient id="redGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ef4444"/>
+      <stop offset="100%" stop-color="#991b1b"/>
+    </linearGradient>
+    <linearGradient id="redGrad2" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#f87171"/>
+      <stop offset="100%" stop-color="#dc2626"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Bar 1: Industry total -->
+  <rect x="80" y="95" width="180" height="340" rx="8" fill="url(#redGrad)"/>
+  <text x="170" y="130" text-anchor="middle" font-family="system-ui, sans-serif" font-size="28" font-weight="800" fill="#ffffff">$300B</text>
+  <text x="170" y="158" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" fill="#fecaca">Lost annually</text>
+  <text x="170" y="178" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" fill="#fecaca">from bad search</text>
+  <text x="170" y="198" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#fca5a5">(Opensend Research)</text>
+  <text x="170" y="420" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" font-weight="600" fill="#fecaca">Industry Total</text>
+
+  <!-- Arrow -->
+  <path d="M280 265 L330 265" stroke="#dc2626" stroke-width="2" fill="none" marker-end="url(#arrowRed)"/>
+  <defs><marker id="arrowRed" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto"><polygon points="0 0, 10 3.5, 0 7" fill="#dc2626"/></marker></defs>
+
+  <!-- Bar 2: Average store -->
+  <rect x="340" y="175" width="180" height="260" rx="8" fill="url(#redGrad2)"/>
+  <text x="430" y="215" text-anchor="middle" font-family="system-ui, sans-serif" font-size="22" font-weight="800" fill="#ffffff">12-15%</text>
+  <text x="430" y="243" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#fecaca">of revenue lost</text>
+  <text x="430" y="263" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#fecaca">to search issues</text>
+  <text x="430" y="300" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#fca5a5">For a $5M store:</text>
+  <text x="430" y="320" text-anchor="middle" font-family="system-ui, sans-serif" font-size="18" font-weight="700" fill="#ffffff">$600K-750K</text>
+  <text x="430" y="420" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" font-weight="600" fill="#fecaca">Your Revenue</text>
+
+  <!-- Arrow -->
+  <path d="M540 305 L590 305" stroke="#dc2626" stroke-width="2" fill="none" marker-end="url(#arrowRed)"/>
+
+  <!-- Breakdown columns -->
+  <rect x="600" y="100" width="270" height="335" rx="12" fill="#fef2f2" stroke="#fca5a5" stroke-width="1.5"/>
+  <text x="735" y="130" text-anchor="middle" font-family="system-ui, sans-serif" font-size="16" font-weight="700" fill="#991b1b">Direct Costs</text>
+
+  <!-- Direct cost items -->
+  <rect x="620" y="145" width="230" height="52" rx="8" fill="#ffffff" stroke="#fecaca" stroke-width="1"/>
+  <text x="635" y="166" font-family="system-ui, sans-serif" font-size="12" font-weight="600" fill="#1e293b">Zero-result abandonment</text>
+  <text x="635" y="186" font-family="system-ui, sans-serif" font-size="16" font-weight="700" fill="#dc2626">$180K-225K</text>
+
+  <rect x="620" y="207" width="230" height="52" rx="8" fill="#ffffff" stroke="#fecaca" stroke-width="1"/>
+  <text x="635" y="228" font-family="system-ui, sans-serif" font-size="12" font-weight="600" fill="#1e293b">Wrong product cart drops</text>
+  <text x="635" y="248" font-family="system-ui, sans-serif" font-size="16" font-weight="700" fill="#dc2626">$120K-150K</text>
+
+  <rect x="620" y="269" width="230" height="52" rx="8" fill="#ffffff" stroke="#fecaca" stroke-width="1"/>
+  <text x="635" y="290" font-family="system-ui, sans-serif" font-size="12" font-weight="600" fill="#1e293b">Failed search bounces</text>
+  <text x="635" y="310" font-family="system-ui, sans-serif" font-size="16" font-weight="700" fill="#dc2626">$150K-190K</text>
+
+  <rect x="620" y="331" width="230" height="52" rx="8" fill="#ffffff" stroke="#fecaca" stroke-width="1"/>
+  <text x="635" y="352" font-family="system-ui, sans-serif" font-size="12" font-weight="600" fill="#1e293b">Reduced AOV from poor recs</text>
+  <text x="635" y="372" font-family="system-ui, sans-serif" font-size="16" font-weight="700" fill="#dc2626">$150K-185K</text>
+
+  <!-- Indirect costs -->
+  <rect x="900" y="100" width="270" height="335" rx="12" fill="#fff7ed" stroke="#fdba74" stroke-width="1.5"/>
+  <text x="1035" y="130" text-anchor="middle" font-family="system-ui, sans-serif" font-size="16" font-weight="700" fill="#9a3412">Indirect Costs</text>
+
+  <rect x="920" y="145" width="230" height="52" rx="8" fill="#ffffff" stroke="#fed7aa" stroke-width="1"/>
+  <text x="935" y="166" font-family="system-ui, sans-serif" font-size="12" font-weight="600" fill="#1e293b">Lost customer LTV</text>
+  <text x="935" y="186" font-family="system-ui, sans-serif" font-size="16" font-weight="700" fill="#c2410c">$200K+/yr</text>
+
+  <rect x="920" y="207" width="230" height="52" rx="8" fill="#ffffff" stroke="#fed7aa" stroke-width="1"/>
+  <text x="935" y="228" font-family="system-ui, sans-serif" font-size="12" font-weight="600" fill="#1e293b">Brand perception damage</text>
+  <text x="935" y="248" font-family="system-ui, sans-serif" font-size="16" font-weight="700" fill="#c2410c">Hard to quantify</text>
+
+  <rect x="920" y="269" width="230" height="52" rx="8" fill="#ffffff" stroke="#fed7aa" stroke-width="1"/>
+  <text x="935" y="290" font-family="system-ui, sans-serif" font-size="12" font-weight="600" fill="#1e293b">Increased support costs</text>
+  <text x="935" y="310" font-family="system-ui, sans-serif" font-size="16" font-weight="700" fill="#c2410c">$50K-80K/yr</text>
+
+  <rect x="920" y="331" width="230" height="52" rx="8" fill="#ffffff" stroke="#fed7aa" stroke-width="1"/>
+  <text x="935" y="352" font-family="system-ui, sans-serif" font-size="12" font-weight="600" fill="#1e293b">Wasted ad spend (traffic lost)</text>
+  <text x="935" y="372" font-family="system-ui, sans-serif" font-size="16" font-weight="700" fill="#c2410c">$100K-150K</text>
+
+  <!-- Bottom callout -->
+  <rect x="80" y="450" width="1090" height="40" rx="8" fill="#991b1b"/>
+  <text x="600" y="476" text-anchor="middle" font-family="system-ui, sans-serif" font-size="15" font-weight="700" fill="#ffffff">Total potential loss for a $5M store: $950K - $1.5M+ annually in direct and indirect costs</text>
+</svg>

@@ -1,0 +1,63 @@
+<svg viewBox="0 0 1200 500" xmlns="http://www.w3.org/2000/svg" fill="none">
+  <rect width="1200" height="500" fill="#ffffff"/>
+
+  <text x="600" y="42" text-anchor="middle" font-family="system-ui, sans-serif" font-size="22" font-weight="700" fill="#1e293b">What Shoppers Expect vs What They Get</text>
+  <text x="600" y="65" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" fill="#64748b">The gap between search expectations and reality</text>
+
+  <!-- Chart area -->
+  <!-- Categories on left -->
+  <!-- Horizontal grouped bar chart -->
+
+  <!-- Category 1: Instant Results -->
+  <text x="200" y="115" text-anchor="end" font-family="system-ui, sans-serif" font-size="13" font-weight="600" fill="#1e293b">Instant Results</text>
+  <rect x="220" y="98" width="760" height="18" rx="4" fill="#0d9488" opacity="0.85"/>
+  <text x="990" y="112" font-family="system-ui, sans-serif" font-size="12" font-weight="600" fill="#0d9488">95% expect</text>
+  <rect x="220" y="120" width="304" height="18" rx="4" fill="#e5e7eb"/>
+  <text x="534" y="134" font-family="system-ui, sans-serif" font-size="12" font-weight="600" fill="#94a3b8">38% deliver</text>
+
+  <!-- Category 2: Natural Language -->
+  <text x="200" y="175" text-anchor="end" font-family="system-ui, sans-serif" font-size="13" font-weight="600" fill="#1e293b">Natural Language</text>
+  <rect x="220" y="158" width="680" height="18" rx="4" fill="#0d9488" opacity="0.85"/>
+  <text x="910" y="172" font-family="system-ui, sans-serif" font-size="12" font-weight="600" fill="#0d9488">85% expect</text>
+  <rect x="220" y="180" width="96" height="18" rx="4" fill="#e5e7eb"/>
+  <text x="326" y="194" font-family="system-ui, sans-serif" font-size="12" font-weight="600" fill="#94a3b8">12% deliver</text>
+
+  <!-- Category 3: Typo Tolerance -->
+  <text x="200" y="235" text-anchor="end" font-family="system-ui, sans-serif" font-size="13" font-weight="600" fill="#1e293b">Typo Tolerance</text>
+  <rect x="220" y="218" width="720" height="18" rx="4" fill="#0d9488" opacity="0.85"/>
+  <text x="950" y="232" font-family="system-ui, sans-serif" font-size="12" font-weight="600" fill="#0d9488">90% expect</text>
+  <rect x="220" y="240" width="200" height="18" rx="4" fill="#e5e7eb"/>
+  <text x="430" y="254" font-family="system-ui, sans-serif" font-size="12" font-weight="600" fill="#94a3b8">25% deliver</text>
+
+  <!-- Category 4: Visual Results -->
+  <text x="200" y="295" text-anchor="end" font-family="system-ui, sans-serif" font-size="13" font-weight="600" fill="#1e293b">Visual Results</text>
+  <rect x="220" y="278" width="640" height="18" rx="4" fill="#0d9488" opacity="0.85"/>
+  <text x="870" y="292" font-family="system-ui, sans-serif" font-size="12" font-weight="600" fill="#0d9488">80% expect</text>
+  <rect x="220" y="300" width="360" height="18" rx="4" fill="#e5e7eb"/>
+  <text x="590" y="314" font-family="system-ui, sans-serif" font-size="12" font-weight="600" fill="#94a3b8">45% deliver</text>
+
+  <!-- Category 5: Product Answers -->
+  <text x="200" y="355" text-anchor="end" font-family="system-ui, sans-serif" font-size="13" font-weight="600" fill="#1e293b">Product Answers</text>
+  <rect x="220" y="338" width="560" height="18" rx="4" fill="#0d9488" opacity="0.85"/>
+  <text x="790" y="352" font-family="system-ui, sans-serif" font-size="12" font-weight="600" fill="#0d9488">70% expect</text>
+  <rect x="220" y="360" width="64" height="18" rx="4" fill="#e5e7eb"/>
+  <text x="294" y="374" font-family="system-ui, sans-serif" font-size="12" font-weight="600" fill="#94a3b8">8% deliver</text>
+
+  <!-- Category 6: Personalization -->
+  <text x="200" y="415" text-anchor="end" font-family="system-ui, sans-serif" font-size="13" font-weight="600" fill="#1e293b">Personalization</text>
+  <rect x="220" y="398" width="520" height="18" rx="4" fill="#0d9488" opacity="0.85"/>
+  <text x="750" y="412" font-family="system-ui, sans-serif" font-size="12" font-weight="600" fill="#0d9488">65% expect</text>
+  <rect x="220" y="420" width="120" height="18" rx="4" fill="#e5e7eb"/>
+  <text x="350" y="434" font-family="system-ui, sans-serif" font-size="12" font-weight="600" fill="#94a3b8">15% deliver</text>
+
+  <!-- Legend -->
+  <rect x="340" y="468" width="14" height="14" rx="3" fill="#0d9488" opacity="0.85"/>
+  <text x="360" y="480" font-family="system-ui, sans-serif" font-size="12" fill="#475569">Shopper expectation</text>
+  <rect x="520" y="468" width="14" height="14" rx="3" fill="#e5e7eb"/>
+  <text x="540" y="480" font-family="system-ui, sans-serif" font-size="12" fill="#475569">Stores that deliver</text>
+
+  <!-- Gap callout -->
+  <rect x="820" y="440" width="340" height="45" rx="10" fill="#f0fdfa" stroke="#5eead4" stroke-width="1.5"/>
+  <text x="990" y="460" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" font-weight="700" fill="#0d9488">Average gap: 55 percentage points</text>
+  <text x="990" y="478" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#0f766e">Biggest gap: Natural language (73 pts)</text>
+</svg>

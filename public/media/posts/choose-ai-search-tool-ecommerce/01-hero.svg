@@ -1,0 +1,77 @@
+<svg viewBox="0 0 1200 500" xmlns="http://www.w3.org/2000/svg" font-family="system-ui, -apple-system, sans-serif">
+  <rect width="1200" height="500" fill="#f8fafc"/>
+
+  <!-- Title -->
+  <text x="600" y="45" text-anchor="middle" font-size="22" font-weight="700" fill="#1e293b">AI Search Evaluation Scorecard</text>
+  <text x="600" y="70" text-anchor="middle" font-size="14" fill="#64748b">Rate each criterion 1-5 to find the right fit for your store</text>
+
+  <!-- Scorecard grid: 2 columns x 4 rows -->
+  <!-- Row 1 -->
+  <rect x="50" y="90" width="530" height="90" rx="10" fill="#ffffff" stroke="#bbf7d0" stroke-width="1.5"/>
+  <circle cx="100" cy="135" r="28" fill="#dcfce7" stroke="#22c55e" stroke-width="2"/>
+  <text x="100" y="141" text-anchor="middle" font-size="18" font-weight="700" fill="#16a34a">1</text>
+  <text x="145" y="122" font-size="15" font-weight="700" fill="#1e293b">Catalog Integration</text>
+  <text x="145" y="142" font-size="12" fill="#64748b">How easily does it sync with your</text>
+  <text x="145" y="158" font-size="12" fill="#64748b">product data and platform?</text>
+  <!-- Score dots -->
+  <circle cx="460" cy="135" r="8" fill="#22c55e"/><circle cx="482" cy="135" r="8" fill="#22c55e"/><circle cx="504" cy="135" r="8" fill="#22c55e"/><circle cx="526" cy="135" r="8" fill="#22c55e"/><circle cx="548" cy="135" r="8" fill="#e2e8f0"/>
+
+  <rect x="620" y="90" width="530" height="90" rx="10" fill="#ffffff" stroke="#bbf7d0" stroke-width="1.5"/>
+  <circle cx="670" cy="135" r="28" fill="#dcfce7" stroke="#22c55e" stroke-width="2"/>
+  <text x="670" y="141" text-anchor="middle" font-size="18" font-weight="700" fill="#16a34a">2</text>
+  <text x="715" y="122" font-size="15" font-weight="700" fill="#1e293b">NLP / Search Quality</text>
+  <text x="715" y="142" font-size="12" fill="#64748b">Does it understand natural language</text>
+  <text x="715" y="158" font-size="12" fill="#64748b">queries and shopper intent?</text>
+  <circle cx="1030" cy="135" r="8" fill="#22c55e"/><circle cx="1052" cy="135" r="8" fill="#22c55e"/><circle cx="1074" cy="135" r="8" fill="#22c55e"/><circle cx="1096" cy="135" r="8" fill="#e2e8f0"/><circle cx="1118" cy="135" r="8" fill="#e2e8f0"/>
+
+  <!-- Row 2 -->
+  <rect x="50" y="195" width="530" height="90" rx="10" fill="#ffffff" stroke="#bbf7d0" stroke-width="1.5"/>
+  <circle cx="100" cy="240" r="28" fill="#dcfce7" stroke="#22c55e" stroke-width="2"/>
+  <text x="100" y="246" text-anchor="middle" font-size="18" font-weight="700" fill="#16a34a">3</text>
+  <text x="145" y="227" font-size="15" font-weight="700" fill="#1e293b">Setup Complexity</text>
+  <text x="145" y="247" font-size="12" fill="#64748b">Can your team implement it without</text>
+  <text x="145" y="263" font-size="12" fill="#64748b">dedicated developer resources?</text>
+  <circle cx="460" cy="240" r="8" fill="#22c55e"/><circle cx="482" cy="240" r="8" fill="#22c55e"/><circle cx="504" cy="240" r="8" fill="#e2e8f0"/><circle cx="526" cy="240" r="8" fill="#e2e8f0"/><circle cx="548" cy="240" r="8" fill="#e2e8f0"/>
+
+  <rect x="620" y="195" width="530" height="90" rx="10" fill="#ffffff" stroke="#bbf7d0" stroke-width="1.5"/>
+  <circle cx="670" cy="240" r="28" fill="#dcfce7" stroke="#22c55e" stroke-width="2"/>
+  <text x="670" y="246" text-anchor="middle" font-size="18" font-weight="700" fill="#16a34a">4</text>
+  <text x="715" y="227" font-size="15" font-weight="700" fill="#1e293b">Pricing Model</text>
+  <text x="715" y="247" font-size="12" fill="#64748b">Is pricing predictable? Does it scale</text>
+  <text x="715" y="263" font-size="12" fill="#64748b">with your budget as you grow?</text>
+  <circle cx="1030" cy="240" r="8" fill="#22c55e"/><circle cx="1052" cy="240" r="8" fill="#22c55e"/><circle cx="1074" cy="240" r="8" fill="#22c55e"/><circle cx="1096" cy="240" r="8" fill="#22c55e"/><circle cx="1118" cy="240" r="8" fill="#22c55e"/>
+
+  <!-- Row 3 -->
+  <rect x="50" y="300" width="530" height="90" rx="10" fill="#ffffff" stroke="#bbf7d0" stroke-width="1.5"/>
+  <circle cx="100" cy="345" r="28" fill="#dcfce7" stroke="#22c55e" stroke-width="2"/>
+  <text x="100" y="351" text-anchor="middle" font-size="18" font-weight="700" fill="#16a34a">5</text>
+  <text x="145" y="332" font-size="15" font-weight="700" fill="#1e293b">Analytics & Insights</text>
+  <text x="145" y="352" font-size="12" fill="#64748b">What search data and conversion</text>
+  <text x="145" y="368" font-size="12" fill="#64748b">metrics can you track?</text>
+  <circle cx="460" cy="345" r="8" fill="#22c55e"/><circle cx="482" cy="345" r="8" fill="#22c55e"/><circle cx="504" cy="345" r="8" fill="#22c55e"/><circle cx="526" cy="345" r="8" fill="#e2e8f0"/><circle cx="548" cy="345" r="8" fill="#e2e8f0"/>
+
+  <rect x="620" y="300" width="530" height="90" rx="10" fill="#ffffff" stroke="#bbf7d0" stroke-width="1.5"/>
+  <circle cx="670" cy="345" r="28" fill="#dcfce7" stroke="#22c55e" stroke-width="2"/>
+  <text x="670" y="351" text-anchor="middle" font-size="18" font-weight="700" fill="#16a34a">6</text>
+  <text x="715" y="332" font-size="15" font-weight="700" fill="#1e293b">Platform Support</text>
+  <text x="715" y="352" font-size="12" fill="#64748b">Shopify, WooCommerce, BigCommerce,</text>
+  <text x="715" y="368" font-size="12" fill="#64748b">headless — does it work with yours?</text>
+  <circle cx="1030" cy="345" r="8" fill="#22c55e"/><circle cx="1052" cy="345" r="8" fill="#22c55e"/><circle cx="1074" cy="345" r="8" fill="#22c55e"/><circle cx="1096" cy="345" r="8" fill="#22c55e"/><circle cx="1118" cy="345" r="8" fill="#e2e8f0"/>
+
+  <!-- Row 4 -->
+  <rect x="50" y="405" width="530" height="90" rx="10" fill="#ffffff" stroke="#bbf7d0" stroke-width="1.5"/>
+  <circle cx="100" cy="450" r="28" fill="#dcfce7" stroke="#22c55e" stroke-width="2"/>
+  <text x="100" y="456" text-anchor="middle" font-size="18" font-weight="700" fill="#16a34a">7</text>
+  <text x="145" y="437" font-size="15" font-weight="700" fill="#1e293b">Scalability</text>
+  <text x="145" y="457" font-size="12" fill="#64748b">Will it handle traffic spikes and</text>
+  <text x="145" y="473" font-size="12" fill="#64748b">catalog growth without breaking?</text>
+  <circle cx="460" cy="450" r="8" fill="#22c55e"/><circle cx="482" cy="450" r="8" fill="#22c55e"/><circle cx="504" cy="450" r="8" fill="#22c55e"/><circle cx="526" cy="450" r="8" fill="#e2e8f0"/><circle cx="548" cy="450" r="8" fill="#e2e8f0"/>
+
+  <rect x="620" y="405" width="530" height="90" rx="10" fill="#ffffff" stroke="#bbf7d0" stroke-width="1.5"/>
+  <circle cx="670" cy="450" r="28" fill="#dcfce7" stroke="#22c55e" stroke-width="2"/>
+  <text x="670" y="456" text-anchor="middle" font-size="18" font-weight="700" fill="#16a34a">8</text>
+  <text x="715" y="437" font-size="15" font-weight="700" fill="#1e293b">Support & Onboarding</text>
+  <text x="715" y="457" font-size="12" fill="#64748b">Do you get hands-on help, or are</text>
+  <text x="715" y="473" font-size="12" fill="#64748b">you left reading docs alone?</text>
+  <circle cx="1030" cy="450" r="8" fill="#22c55e"/><circle cx="1052" cy="450" r="8" fill="#22c55e"/><circle cx="1074" cy="450" r="8" fill="#22c55e"/><circle cx="1096" cy="450" r="8" fill="#22c55e"/><circle cx="1118" cy="450" r="8" fill="#e2e8f0"/>
+</svg>

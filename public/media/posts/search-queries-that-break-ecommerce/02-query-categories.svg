@@ -1,0 +1,79 @@
+<svg viewBox="0 0 1200 500" xmlns="http://www.w3.org/2000/svg" fill="none">
+  <rect width="1200" height="500" fill="#f8fafc"/>
+  <text x="600" y="45" text-anchor="middle" font-family="system-ui, sans-serif" font-size="22" font-weight="700" fill="#0f172a">5 Query Types That Break Keyword Search</text>
+  <!-- Card 1: Natural Language -->
+  <rect x="40" y="70" width="210" height="400" rx="14" fill="#ffffff" stroke="#fca5a5" stroke-width="2"/>
+  <rect x="40" y="70" width="210" height="50" rx="14" fill="#dc2626"/>
+  <rect x="40" y="106" width="210" height="14" fill="#dc2626"/>
+  <text x="145" y="102" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" font-weight="700" fill="#ffffff">Natural Language</text>
+  <text x="60" y="150" font-family="system-ui, sans-serif" font-size="12" font-weight="600" fill="#374151">Examples:</text>
+  <text x="60" y="175" font-family="system-ui, sans-serif" font-size="11" fill="#6b7280">"dress for beach wedding"</text>
+  <text x="60" y="200" font-family="system-ui, sans-serif" font-size="11" fill="#6b7280">"something warm for skiing"</text>
+  <text x="60" y="225" font-family="system-ui, sans-serif" font-size="11" fill="#6b7280">"comfy shoes for standing</text>
+  <text x="60" y="240" font-family="system-ui, sans-serif" font-size="11" fill="#6b7280"> all day"</text>
+  <line x1="60" y1="260" x2="230" y2="260" stroke="#fee2e2" stroke-width="1.5"/>
+  <text x="60" y="285" font-family="system-ui, sans-serif" font-size="11" font-weight="600" fill="#dc2626">Keyword result:</text>
+  <text x="60" y="305" font-family="system-ui, sans-serif" font-size="11" fill="#9ca3af">0 results or irrelevant</text>
+  <text x="60" y="335" font-family="system-ui, sans-serif" font-size="11" font-weight="600" fill="#16a34a">AI result:</text>
+  <text x="60" y="355" font-family="system-ui, sans-serif" font-size="11" fill="#6b7280">Context-aware matches</text>
+  <!-- Card 2: Use-Case Based -->
+  <rect x="275" y="70" width="210" height="400" rx="14" fill="#ffffff" stroke="#fb923c" stroke-width="2"/>
+  <rect x="275" y="70" width="210" height="50" rx="14" fill="#ea580c"/>
+  <rect x="275" y="106" width="210" height="14" fill="#ea580c"/>
+  <text x="380" y="102" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" font-weight="700" fill="#ffffff">Use-Case Based</text>
+  <text x="295" y="150" font-family="system-ui, sans-serif" font-size="12" font-weight="600" fill="#374151">Examples:</text>
+  <text x="295" y="175" font-family="system-ui, sans-serif" font-size="11" fill="#6b7280">"gift for dad who golfs"</text>
+  <text x="295" y="200" font-family="system-ui, sans-serif" font-size="11" fill="#6b7280">"outfit for job interview"</text>
+  <text x="295" y="225" font-family="system-ui, sans-serif" font-size="11" fill="#6b7280">"laptop for video editing</text>
+  <text x="295" y="240" font-family="system-ui, sans-serif" font-size="11" fill="#6b7280"> under $1000"</text>
+  <line x1="295" y1="260" x2="465" y2="260" stroke="#ffedd5" stroke-width="1.5"/>
+  <text x="295" y="285" font-family="system-ui, sans-serif" font-size="11" font-weight="600" fill="#dc2626">Keyword result:</text>
+  <text x="295" y="305" font-family="system-ui, sans-serif" font-size="11" fill="#9ca3af">Matches "golf" or "dad"</text>
+  <text x="295" y="335" font-family="system-ui, sans-serif" font-size="11" font-weight="600" fill="#16a34a">AI result:</text>
+  <text x="295" y="355" font-family="system-ui, sans-serif" font-size="11" fill="#6b7280">Gift-appropriate golf gear</text>
+  <!-- Card 3: Negative Intent -->
+  <rect x="510" y="70" width="210" height="400" rx="14" fill="#ffffff" stroke="#a78bfa" stroke-width="2"/>
+  <rect x="510" y="70" width="210" height="50" rx="14" fill="#7c3aed"/>
+  <rect x="510" y="106" width="210" height="14" fill="#7c3aed"/>
+  <text x="615" y="102" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" font-weight="700" fill="#ffffff">Negative Intent</text>
+  <text x="530" y="150" font-family="system-ui, sans-serif" font-size="12" font-weight="600" fill="#374151">Examples:</text>
+  <text x="530" y="175" font-family="system-ui, sans-serif" font-size="11" fill="#6b7280">"sneakers that aren't Nike"</text>
+  <text x="530" y="200" font-family="system-ui, sans-serif" font-size="11" fill="#6b7280">"phone case without glitter"</text>
+  <text x="530" y="225" font-family="system-ui, sans-serif" font-size="11" fill="#6b7280">"jacket not leather"</text>
+  <line x1="530" y1="260" x2="700" y2="260" stroke="#ede9fe" stroke-width="1.5"/>
+  <text x="530" y="285" font-family="system-ui, sans-serif" font-size="11" font-weight="600" fill="#dc2626">Keyword result:</text>
+  <text x="530" y="305" font-family="system-ui, sans-serif" font-size="11" fill="#9ca3af">Shows Nike products</text>
+  <text x="530" y="335" font-family="system-ui, sans-serif" font-size="11" font-weight="600" fill="#16a34a">AI result:</text>
+  <text x="530" y="355" font-family="system-ui, sans-serif" font-size="11" fill="#6b7280">Excludes Nike correctly</text>
+  <!-- Card 4: Comparative -->
+  <rect x="745" y="70" width="210" height="400" rx="14" fill="#ffffff" stroke="#38bdf8" stroke-width="2"/>
+  <rect x="745" y="70" width="210" height="50" rx="14" fill="#0284c7"/>
+  <rect x="745" y="106" width="210" height="14" fill="#0284c7"/>
+  <text x="850" y="102" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" font-weight="700" fill="#ffffff">Comparative</text>
+  <text x="765" y="150" font-family="system-ui, sans-serif" font-size="12" font-weight="600" fill="#374151">Examples:</text>
+  <text x="765" y="175" font-family="system-ui, sans-serif" font-size="11" fill="#6b7280">"cheapest laptop that's</text>
+  <text x="765" y="190" font-family="system-ui, sans-serif" font-size="11" fill="#6b7280"> still good"</text>
+  <text x="765" y="215" font-family="system-ui, sans-serif" font-size="11" fill="#6b7280">"best bang for buck TV"</text>
+  <text x="765" y="240" font-family="system-ui, sans-serif" font-size="11" fill="#6b7280">"similar to AirPods but</text>
+  <text x="765" y="255" font-family="system-ui, sans-serif" font-size="11" fill="#6b7280"> cheaper"</text>
+  <line x1="765" y1="270" x2="935" y2="270" stroke="#e0f2fe" stroke-width="1.5"/>
+  <text x="765" y="295" font-family="system-ui, sans-serif" font-size="11" font-weight="600" fill="#dc2626">Keyword result:</text>
+  <text x="765" y="315" font-family="system-ui, sans-serif" font-size="11" fill="#9ca3af">Sorts by price only</text>
+  <text x="765" y="345" font-family="system-ui, sans-serif" font-size="11" font-weight="600" fill="#16a34a">AI result:</text>
+  <text x="765" y="365" font-family="system-ui, sans-serif" font-size="11" fill="#6b7280">Value-ranked by quality</text>
+  <!-- Card 5: Question-Based -->
+  <rect x="980" y="70" width="210" height="400" rx="14" fill="#ffffff" stroke="#4ade80" stroke-width="2"/>
+  <rect x="980" y="70" width="210" height="50" rx="14" fill="#15803d"/>
+  <rect x="980" y="106" width="210" height="14" fill="#15803d"/>
+  <text x="1085" y="102" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" font-weight="700" fill="#ffffff">Question-Based</text>
+  <text x="1000" y="150" font-family="system-ui, sans-serif" font-size="12" font-weight="600" fill="#374151">Examples:</text>
+  <text x="1000" y="175" font-family="system-ui, sans-serif" font-size="11" fill="#6b7280">"is this waterproof?"</text>
+  <text x="1000" y="200" font-family="system-ui, sans-serif" font-size="11" fill="#6b7280">"does it come in blue?"</text>
+  <text x="1000" y="225" font-family="system-ui, sans-serif" font-size="11" fill="#6b7280">"will this fit a 10-year</text>
+  <text x="1000" y="240" font-family="system-ui, sans-serif" font-size="11" fill="#6b7280"> old?"</text>
+  <line x1="1000" y1="260" x2="1170" y2="260" stroke="#dcfce7" stroke-width="1.5"/>
+  <text x="1000" y="285" font-family="system-ui, sans-serif" font-size="11" font-weight="600" fill="#dc2626">Keyword result:</text>
+  <text x="1000" y="305" font-family="system-ui, sans-serif" font-size="11" fill="#9ca3af">Can't parse questions</text>
+  <text x="1000" y="335" font-family="system-ui, sans-serif" font-size="11" font-weight="600" fill="#16a34a">AI result:</text>
+  <text x="1000" y="355" font-family="system-ui, sans-serif" font-size="11" fill="#6b7280">Answers from product data</text>
+</svg>

@@ -1,0 +1,54 @@
+<svg viewBox="0 0 1200 500" xmlns="http://www.w3.org/2000/svg" font-family="system-ui, -apple-system, sans-serif">
+  <rect width="1200" height="500" fill="#0f172a"/>
+
+  <!-- Report cover style -->
+  <rect x="50" y="30" width="1100" height="440" rx="16" fill="#ffffff" stroke="#fbbf24" stroke-width="3"/>
+
+  <!-- Gold accent bar -->
+  <rect x="50" y="30" width="1100" height="8" rx="4" fill="#fbbf24"/>
+
+  <!-- Report label -->
+  <rect x="80" y="55" width="180" height="30" rx="4" fill="#fef3c7"/>
+  <text x="170" y="76" text-anchor="middle" font-size="12" font-weight="700" fill="#92400e">2026 INDUSTRY REPORT</text>
+
+  <!-- Title -->
+  <text x="600" y="120" text-anchor="middle" font-size="28" font-weight="800" fill="#0f172a">The State of Ecommerce Site Search</text>
+  <text x="600" y="150" text-anchor="middle" font-size="16" fill="#64748b">Key findings from across the ecommerce landscape</text>
+
+  <!-- Divider -->
+  <line x1="250" y1="175" x2="950" y2="175" stroke="#e2e8f0" stroke-width="1.5"/>
+
+  <!-- 4 Key Stats in large type -->
+  <!-- Stat 1 -->
+  <rect x="80" y="200" width="240" height="140" rx="12" fill="#fffbeb" stroke="#fde68a" stroke-width="1.5"/>
+  <text x="200" y="260" text-anchor="middle" font-size="48" font-weight="800" fill="#0f172a">$300B</text>
+  <text x="200" y="290" text-anchor="middle" font-size="14" font-weight="600" fill="#92400e">Lost to bad search</text>
+  <text x="200" y="310" text-anchor="middle" font-size="12" fill="#64748b">annually in ecommerce</text>
+
+  <!-- Stat 2 -->
+  <rect x="350" y="200" width="240" height="140" rx="12" fill="#fffbeb" stroke="#fde68a" stroke-width="1.5"/>
+  <text x="470" y="260" text-anchor="middle" font-size="48" font-weight="800" fill="#0f172a">72%</text>
+  <text x="470" y="290" text-anchor="middle" font-size="14" font-weight="600" fill="#92400e">of sites fail search UX</text>
+  <text x="470" y="310" text-anchor="middle" font-size="12" fill="#64748b">Baymard Institute benchmark</text>
+
+  <!-- Stat 3 -->
+  <rect x="620" y="200" width="240" height="140" rx="12" fill="#fffbeb" stroke="#fde68a" stroke-width="1.5"/>
+  <text x="740" y="260" text-anchor="middle" font-size="48" font-weight="800" fill="#0f172a">2-3x</text>
+  <text x="740" y="290" text-anchor="middle" font-size="14" font-weight="600" fill="#92400e">Higher conversion</text>
+  <text x="740" y="310" text-anchor="middle" font-size="12" fill="#64748b">for search users vs browsers</text>
+
+  <!-- Stat 4 -->
+  <rect x="890" y="200" width="240" height="140" rx="12" fill="#fffbeb" stroke="#fde68a" stroke-width="1.5"/>
+  <text x="1010" y="260" text-anchor="middle" font-size="48" font-weight="800" fill="#0f172a">80%</text>
+  <text x="1010" y="290" text-anchor="middle" font-size="14" font-weight="600" fill="#92400e">Leave after failed search</text>
+  <text x="1010" y="310" text-anchor="middle" font-size="12" fill="#64748b">and never come back</text>
+
+  <!-- Bottom section -->
+  <line x1="250" y1="370" x2="950" y2="370" stroke="#e2e8f0" stroke-width="1.5"/>
+
+  <text x="600" y="405" text-anchor="middle" font-size="15" font-weight="600" fill="#1e293b">Key Trends: Conversational AI | Visual Search | Zero-Result Elimination</text>
+  <text x="600" y="435" text-anchor="middle" font-size="13" fill="#64748b">Based on industry benchmarks, platform data, and emerging adoption patterns</text>
+
+  <!-- nobi.ai label -->
+  <text x="1080" y="458" text-anchor="end" font-size="11" fill="#94a3b8">nobi.ai</text>
+</svg>

@@ -1,0 +1,167 @@
+export const meta = {
+  title: "How AI Site Search Works (And Why Keyword Search Can't Keep Up)",
+  slug: "how-ai-site-search-works",
+  date: "2026-03-12",
+  publishedAt: "2026-03-12",
+  description: "A technical but accessible breakdown of how AI search uses NLP, vector embeddings, and semantic matching to outperform keyword search.",
+  excerpt: "A technical but accessible breakdown of how AI search uses NLP, vector embeddings, and semantic matching to outperform traditional keyword search on ecommerce stores.",
+  tags: ["AI search", "keyword search", "NLP", "ecommerce technology"],
+  author: "Nobi Team",
+  heroImage: "/media/posts/how-ai-site-search-works/01-hero.svg",
+  featured: false,
+  draft: false,
+  faqItems: [
+    {
+      question: "What is semantic search in ecommerce?",
+      answer: "Semantic search is a search method that understands the meaning behind a query rather than matching exact words. In ecommerce, it means a shopper can search for 'something to keep drinks cold on a road trip' and get insulated tumblers and cooler bags — even though none of those keywords appear in the query."
+    },
+    {
+      question: "What are vector embeddings and how do they work in search?",
+      answer: "Vector embeddings are numerical representations of text that capture meaning. Each product and query is converted into a list of numbers (a vector) where similar concepts end up close together in mathematical space. This lets the search engine find products that are conceptually relevant, not just textually matching."
+    },
+    {
+      question: "Does AI search require manual synonym configuration?",
+      answer: "No. Traditional keyword search requires you to manually map synonyms (sneakers = trainers = running shoes). AI search understands these relationships natively through its language model training, so it handles synonyms, slang, and regional terminology automatically."
+    },
+    {
+      question: "How fast is AI-powered site search?",
+      answer: "Modern AI search engines return results in under 200 milliseconds — fast enough that shoppers don't notice any difference from keyword search. The heavy computation (embedding products) happens during indexing, not at query time."
+    },
+    {
+      question: "Can AI search handle typos and misspellings?",
+      answer: "Yes. Because AI search understands context and meaning, it can typically infer the correct intent even from misspelled queries. A search for 'runnign shoees' is understood as 'running shoes' without needing a separate typo-correction layer."
+    },
+    {
+      question: "Is AI search only useful for large catalogs?",
+      answer: "No. AI search is valuable for any catalog where there's a gap between how shoppers describe products and how products are labeled. A 200-SKU store benefits just as much if its customers use different language than its merchandising team."
+    }
+  ],
+};
+
+# How AI Site Search Works (And Why Keyword Search Can't Keep Up)
+
+If you run an ecommerce store, you've probably watched a shopper search for something you definitely sell — and get zero results. Or worse, completely wrong results.
+
+This happens because most site search engines are still built on keyword matching. A technology from the 1990s running on stores in 2026. And it's costing you real money.
+
+Let's break down how AI-powered search actually works, why it's fundamentally different from keyword matching, and why the gap between the two is only getting wider.
+
+## How Keyword Search Works (And Where It Breaks)
+
+Keyword search is conceptually simple. A shopper types a query. The search engine splits that query into individual words — tokens. Then it scans your product catalog for entries that contain those exact tokens.
+
+The ranking algorithm (typically some variant of [TF-IDF or BM25](https://en.wikipedia.org/wiki/Tf%E2%80%93idf)) scores each product based on how frequently the query terms appear and how unique those terms are across the catalog.
+
+This works fine when the shopper uses the exact same words that appear in your product data. "Blue Nike shoes" matches products tagged with "Blue," "Nike," and "shoes." Simple.
+
+But most real queries aren't that clean. Consider these common searches that break keyword matching:
+
+- **"something warm for a ski trip"** — No product is tagged "something warm." The engine matches "ski" and returns ski poles.
+- **"gift for mom who loves gardening"** — The engine matches "gardening" and ignores the gift context entirely.
+- **"casual shoes that won't hurt my feet"** — "Won't hurt my feet" has no keyword equivalent in product data.
+- **"outfit for a job interview"** — This is a use-case query. Keyword search has no concept of "interview-appropriate."
+
+Each of these queries makes perfect sense to a human. To a keyword engine, they're mostly gibberish.
+
+## Semantic Search: Understanding Meaning Instead of Words
+
+Semantic search works on a completely different principle. Instead of matching text strings, it matches meaning.
+
+<img src="/media/posts/how-ai-site-search-works/01-hero.svg" alt="Side-by-side comparison showing keyword search returning wrong products while semantic AI search returns relevant results for the same query" />
+
+The key insight is this: language is messy, but meaning is structured. "Sneakers," "trainers," "running shoes," and "athletic footwear" all point to roughly the same concept. A semantic search engine knows this without being told, because it's learned the relationships between words and concepts from massive amounts of text data.
+
+This is the difference between knowing what words look like and knowing what words mean.
+
+## Vector Embeddings: The Engine Behind AI Search
+
+Here's where it gets technical — but stay with me, because this is actually elegant.
+
+Every product in your catalog and every query a shopper types gets converted into a **vector embedding** — a list of numbers (typically 768 or more dimensions) that represents its meaning in mathematical space.
+
+Think of it like coordinates on a map, but instead of two dimensions (latitude, longitude), you have hundreds of dimensions. Each dimension captures some aspect of meaning — formality, category, material, price tier, use case, season, and hundreds of other subtle features that the model learned from training data.
+
+The magic: **things that mean similar things end up near each other in this space.**
+
+"Cozy throw blanket" and "soft fleece lap blanket" end up close together in vector space even though they share almost no words. "Throw pillow" — despite sharing the word "throw" — ends up far away because it means something fundamentally different.
+
+When a shopper searches, here's what happens:
+
+1. The query is converted to a vector
+2. That vector is compared to every product vector in your catalog
+3. Products whose vectors are closest to the query vector are returned as results
+4. The closer the vectors, the higher the relevance score
+
+This comparison happens in milliseconds using specialized nearest-neighbor algorithms. The heavy computation — converting all your products to vectors — happens once during indexing, not at query time.
+
+## How NLP Processes a Query
+
+<img src="/media/posts/how-ai-site-search-works/02-query-processing.svg" alt="Vertical pipeline showing how AI processes a search query from raw text through NLP, vector embedding, to ranked results" />
+
+Natural Language Processing (NLP) is the layer that extracts structured information from unstructured text. When a shopper types "red dress for a summer wedding under $150," the NLP pipeline:
+
+**Identifies entities:** Color = red, Category = dress, Occasion = wedding, Season = summer
+
+**Extracts constraints:** Price < $150
+
+**Infers implicit attributes:** Formality = semi-formal to formal (weddings), Fabric = lightweight (summer), Style = guest-appropriate (not bridal)
+
+**Resolves ambiguity:** "Red" in a dress context includes burgundy, crimson, wine, scarlet, and cherry — not fire-engine red
+
+This structured understanding is then encoded into the query vector, which gets compared against your product vectors. The result: a shopper types one natural sentence and gets products that match their actual needs across multiple dimensions simultaneously.
+
+No manual filter selection. No query refinement. No guessing.
+
+## Why the Gap Between AI and Keyword Search Is Growing
+
+Three trends are making keyword search increasingly inadequate:
+
+**Shoppers expect conversational interfaces.** Thanks to ChatGPT and voice assistants, people are used to asking questions in natural language and getting intelligent responses. Typing "formal" into a search box and scrolling through 400 results feels archaic. Research from [Baymard Institute shows that 72% of ecommerce sites fail site search expectations](https://baymard.com/blog/ecommerce-search-query-types) — and shopper expectations are rising fast.
+
+**Product catalogs are getting more complex.** More SKUs, more variants, more attributes. The combinatorial explosion of possible queries against possible products makes manual synonym mapping and rule-based tuning increasingly impractical. You can't hand-configure your way to good search when you have 50,000 products and shoppers use thousands of unique query patterns.
+
+**Mobile search demands better first-result accuracy.** On mobile, shoppers type shorter, sloppier queries and have less patience. They're not going to refine their search three times. If the first results aren't relevant, they bounce. [Algolia research shows 80% of shoppers leave after an unsuccessful search](https://www.algolia.com/). On mobile, that number is likely higher.
+
+## Queries That Break Keyword Search But Work With AI
+
+Here are real-world query patterns that demonstrate the gap:
+
+| Query | Keyword Search Does | AI Search Does |
+|---|---|---|
+| "laptop for video editing" | Returns all laptops | Returns laptops with dedicated GPUs and high RAM |
+| "birthday gift for 10 year old boy" | Matches "birthday" — returns party supplies | Returns toys, games, and age-appropriate tech |
+| "non-toxic sippy cup" | Returns any sippy cup with "non-toxic" in description | Understands safety concern and returns BPA-free, certified products |
+| "shoes like my last pair but in black" | Fails completely | With session context, can reference previous purchases |
+| "professional but comfortable" | Returns nothing useful | Understands the tension and finds smart-casual products |
+
+The pattern is clear: any query that involves intent, context, trade-offs, or human reasoning breaks keyword search. And these aren't rare edge cases — they represent a growing share of how people actually search.
+
+## What This Means for Your Store
+
+If you're still running keyword search, you're essentially asking shoppers to learn your catalog's vocabulary. Most won't bother. The [15% of visitors who use site search account for 45% of ecommerce revenue](https://opensend.com/), and every bad result pushes them toward a competitor who makes product discovery effortless.
+
+AI search isn't experimental technology. It's production-ready, fast, and increasingly accessible to stores of all sizes. The question isn't whether you'll upgrade — it's how much revenue you'll lose while waiting.
+
+For a direct comparison across every dimension, read our [AI vs. traditional site search breakdown](/blog/ai-vs-traditional-site-search). If you're already seeing high zero-result rates, check out our guide on [how to fix zero-result searches](/blog/fix-zero-result-searches).
+
+**[See how Nobi works →](/)**
+
+## Frequently Asked Questions
+
+### What is semantic search in ecommerce?
+Semantic search is a search method that understands the meaning behind a query rather than matching exact words. In ecommerce, it means a shopper can search for "something to keep drinks cold on a road trip" and get insulated tumblers and cooler bags — even though none of those keywords appear in the query.
+
+### What are vector embeddings and how do they work in search?
+Vector embeddings are numerical representations of text that capture meaning. Each product and query is converted into a list of numbers (a vector) where similar concepts end up close together in mathematical space. This lets the search engine find products that are conceptually relevant, not just textually matching.
+
+### Does AI search require manual synonym configuration?
+No. Traditional keyword search requires you to manually map synonyms (sneakers = trainers = running shoes). AI search understands these relationships natively through its language model training, so it handles synonyms, slang, and regional terminology automatically.
+
+### How fast is AI-powered site search?
+Modern AI search engines return results in under 200 milliseconds — fast enough that shoppers don't notice any difference from keyword search. The heavy computation (embedding products) happens during indexing, not at query time.
+
+### Can AI search handle typos and misspellings?
+Yes. Because AI search understands context and meaning, it can typically infer the correct intent even from misspelled queries. A search for "runnign shoees" is understood as "running shoes" without needing a separate typo-correction layer.
+
+### Is AI search only useful for large catalogs?
+No. AI search is valuable for any catalog where there's a gap between how shoppers describe products and how products are labeled. A 200-SKU store benefits just as much if its customers use different language than its merchandising team.

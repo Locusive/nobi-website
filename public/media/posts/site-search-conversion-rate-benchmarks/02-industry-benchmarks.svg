@@ -1,0 +1,54 @@
+<svg viewBox="0 0 1200 500" xmlns="http://www.w3.org/2000/svg" fill="none">
+  <rect width="1200" height="500" fill="#f8fafc"/>
+  <text x="600" y="40" text-anchor="middle" font-family="system-ui, sans-serif" font-size="20" font-weight="700" fill="#0f172a">Search Conversion Rate by Industry</text>
+  <text x="600" y="62" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#64748b">Average CVR for shoppers who use site search</text>
+  <!-- Y axis labels -->
+  <text x="190" y="110" text-anchor="end" font-family="system-ui, sans-serif" font-size="13" font-weight="500" fill="#334155">Health &amp; Beauty</text>
+  <text x="190" y="158" text-anchor="end" font-family="system-ui, sans-serif" font-size="13" font-weight="500" fill="#334155">Pet Supplies</text>
+  <text x="190" y="206" text-anchor="end" font-family="system-ui, sans-serif" font-size="13" font-weight="500" fill="#334155">Fashion &amp; Apparel</text>
+  <text x="190" y="254" text-anchor="end" font-family="system-ui, sans-serif" font-size="13" font-weight="500" fill="#334155">Home &amp; Garden</text>
+  <text x="190" y="302" text-anchor="end" font-family="system-ui, sans-serif" font-size="13" font-weight="500" fill="#334155">Electronics</text>
+  <text x="190" y="350" text-anchor="end" font-family="system-ui, sans-serif" font-size="13" font-weight="500" fill="#334155">Sporting Goods</text>
+  <text x="190" y="398" text-anchor="end" font-family="system-ui, sans-serif" font-size="13" font-weight="500" fill="#334155">Luxury &amp; Jewelry</text>
+  <text x="190" y="446" text-anchor="end" font-family="system-ui, sans-serif" font-size="13" font-weight="500" fill="#334155">B2B / Industrial</text>
+  <!-- Grid lines -->
+  <line x1="210" y1="80" x2="210" y2="460" stroke="#e2e8f0" stroke-width="1"/>
+  <line x1="410" y1="80" x2="410" y2="460" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="4 4"/>
+  <line x1="610" y1="80" x2="610" y2="460" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="4 4"/>
+  <line x1="810" y1="80" x2="810" y2="460" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="4 4"/>
+  <line x1="1010" y1="80" x2="1010" y2="460" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="4 4"/>
+  <!-- X axis labels -->
+  <text x="210" y="478" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#94a3b8">0%</text>
+  <text x="410" y="478" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#94a3b8">2.5%</text>
+  <text x="610" y="478" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#94a3b8">5%</text>
+  <text x="810" y="478" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#94a3b8">7.5%</text>
+  <text x="1010" y="478" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#94a3b8">10%</text>
+  <!-- Bars: Health & Beauty 6.8% -->
+  <rect x="210" y="96" width="544" height="28" rx="4" fill="#2dd4bf"/>
+  <text x="764" y="115" font-family="system-ui, sans-serif" font-size="13" font-weight="700" fill="#0d9488">6.8%</text>
+  <!-- Pet Supplies 6.2% -->
+  <rect x="210" y="144" width="496" height="28" rx="4" fill="#5eead4"/>
+  <text x="716" y="163" font-family="system-ui, sans-serif" font-size="13" font-weight="700" fill="#0d9488">6.2%</text>
+  <!-- Fashion 4.8% -->
+  <rect x="210" y="192" width="384" height="28" rx="4" fill="#99f6e4"/>
+  <text x="604" y="211" font-family="system-ui, sans-serif" font-size="13" font-weight="700" fill="#0d9488">4.8%</text>
+  <!-- Home & Garden 4.3% -->
+  <rect x="210" y="240" width="344" height="28" rx="4" fill="#99f6e4"/>
+  <text x="564" y="259" font-family="system-ui, sans-serif" font-size="13" font-weight="700" fill="#0d9488">4.3%</text>
+  <!-- Electronics 3.9% -->
+  <rect x="210" y="288" width="312" height="28" rx="4" fill="#a7f3d0"/>
+  <text x="532" y="307" font-family="system-ui, sans-serif" font-size="13" font-weight="700" fill="#0d9488">3.9%</text>
+  <!-- Sporting Goods 3.5% -->
+  <rect x="210" y="336" width="280" height="28" rx="4" fill="#a7f3d0"/>
+  <text x="500" y="355" font-family="system-ui, sans-serif" font-size="13" font-weight="700" fill="#0d9488">3.5%</text>
+  <!-- Luxury 2.8% -->
+  <rect x="210" y="384" width="224" height="28" rx="4" fill="#d1fae5"/>
+  <text x="444" y="403" font-family="system-ui, sans-serif" font-size="13" font-weight="700" fill="#0d9488">2.8%</text>
+  <!-- B2B 2.1% -->
+  <rect x="210" y="432" width="168" height="28" rx="4" fill="#d1fae5"/>
+  <text x="388" y="451" font-family="system-ui, sans-serif" font-size="13" font-weight="700" fill="#0d9488">2.1%</text>
+  <!-- Average line -->
+  <line x1="554" y1="80" x2="554" y2="460" stroke="#0d9488" stroke-width="2" stroke-dasharray="6 4"/>
+  <rect x="530" y="75" width="90" height="22" rx="4" fill="#0d9488"/>
+  <text x="575" y="90" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" font-weight="600" fill="#ffffff">AVG: 4.3%</text>
+</svg>

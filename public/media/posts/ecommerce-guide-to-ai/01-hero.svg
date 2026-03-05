@@ -1,0 +1,68 @@
+<svg viewBox="0 0 1200 500" xmlns="http://www.w3.org/2000/svg" fill="none">
+  <rect width="1200" height="500" fill="#ffffff"/>
+  <!-- Title -->
+  <text x="600" y="48" text-anchor="middle" font-family="system-ui, sans-serif" font-size="24" font-weight="800" fill="#0f172a">The Ecommerce Guide to AI</text>
+  <text x="600" y="74" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" fill="#64748b">What works. What's hype. Where to start.</text>
+  <!-- Central hub circle -->
+  <circle cx="600" cy="280" r="70" fill="#f8fafc" stroke="#6366f1" stroke-width="3"/>
+  <text x="600" y="270" text-anchor="middle" font-family="system-ui, sans-serif" font-size="16" font-weight="800" fill="#4338ca">AI FOR</text>
+  <text x="600" y="292" text-anchor="middle" font-family="system-ui, sans-serif" font-size="16" font-weight="800" fill="#4338ca">ECOMMERCE</text>
+  <!-- Topic nodes connected to center -->
+  <!-- Top: Search & Discovery -->
+  <line x1="600" y1="210" x2="600" y2="140" stroke="#6366f1" stroke-width="2"/>
+  <circle cx="600" cy="130" r="40" fill="#eef2ff" stroke="#6366f1" stroke-width="2"/>
+  <text x="600" y="126" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#4338ca">Search &amp;</text>
+  <text x="600" y="140" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#4338ca">Discovery</text>
+  <!-- Top-right: Recommendations -->
+  <line x1="660" y1="230" x2="780" y2="150" stroke="#8b5cf6" stroke-width="2"/>
+  <circle cx="800" cy="140" r="40" fill="#f5f3ff" stroke="#8b5cf6" stroke-width="2"/>
+  <text x="800" y="136" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#7c3aed">Product</text>
+  <text x="800" y="150" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#7c3aed">Recs</text>
+  <!-- Right: Pricing -->
+  <line x1="670" y1="280" x2="820" y2="280" stroke="#ec4899" stroke-width="2"/>
+  <circle cx="850" cy="280" r="40" fill="#fdf2f8" stroke="#ec4899" stroke-width="2"/>
+  <text x="850" y="276" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#be185d">Dynamic</text>
+  <text x="850" y="290" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#be185d">Pricing</text>
+  <!-- Bottom-right: Customer Service -->
+  <line x1="650" y1="330" x2="770" y2="400" stroke="#f97316" stroke-width="2"/>
+  <circle cx="790" cy="410" r="40" fill="#fff7ed" stroke="#f97316" stroke-width="2"/>
+  <text x="790" y="406" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#c2410c">Customer</text>
+  <text x="790" y="420" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#c2410c">Service</text>
+  <!-- Bottom: Content -->
+  <line x1="600" y1="350" x2="600" y2="410" stroke="#eab308" stroke-width="2"/>
+  <circle cx="600" cy="430" r="40" fill="#fefce8" stroke="#eab308" stroke-width="2"/>
+  <text x="600" y="426" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#a16207">Content &amp;</text>
+  <text x="600" y="440" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#a16207">Copy</text>
+  <!-- Bottom-left: Analytics -->
+  <line x1="545" y1="330" x2="430" y2="400" stroke="#22c55e" stroke-width="2"/>
+  <circle cx="410" cy="410" r="40" fill="#f0fdf4" stroke="#22c55e" stroke-width="2"/>
+  <text x="410" y="406" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#15803d">Analytics</text>
+  <text x="410" y="420" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#15803d">&amp; Data</text>
+  <!-- Left: Inventory -->
+  <line x1="530" y1="280" x2="380" y2="280" stroke="#0ea5e9" stroke-width="2"/>
+  <circle cx="350" cy="280" r="40" fill="#f0f9ff" stroke="#0ea5e9" stroke-width="2"/>
+  <text x="350" y="276" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#0369a1">Inventory</text>
+  <text x="350" y="290" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#0369a1">Mgmt</text>
+  <!-- Top-left: Marketing -->
+  <line x1="545" y1="230" x2="420" y2="150" stroke="#14b8a6" stroke-width="2"/>
+  <circle cx="400" cy="140" r="40" fill="#f0fdfa" stroke="#14b8a6" stroke-width="2"/>
+  <text x="400" y="136" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#0f766e">Marketing</text>
+  <text x="400" y="150" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#0f766e">&amp; Ads</text>
+  <!-- Labels: Works / Hype / Start Here -->
+  <rect x="50" y="95" width="120" height="32" rx="6" fill="#dcfce7" stroke="#86efac" stroke-width="1.5"/>
+  <text x="110" y="116" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#15803d">WHAT WORKS</text>
+  <rect x="50" y="140" width="120" height="32" rx="6" fill="#fee2e2" stroke="#fca5a5" stroke-width="1.5"/>
+  <text x="110" y="161" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#dc2626">WHAT'S HYPE</text>
+  <rect x="50" y="185" width="120" height="32" rx="6" fill="#dbeafe" stroke="#93c5fd" stroke-width="1.5"/>
+  <text x="110" y="206" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#2563eb">WHERE TO START</text>
+  <!-- Right side: quick stats -->
+  <rect x="1000" y="100" width="170" height="70" rx="10" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.5"/>
+  <text x="1085" y="130" text-anchor="middle" font-family="system-ui, sans-serif" font-size="22" font-weight="800" fill="#4338ca">$300B</text>
+  <text x="1085" y="152" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#64748b">Lost to bad search</text>
+  <rect x="1000" y="185" width="170" height="70" rx="10" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.5"/>
+  <text x="1085" y="215" text-anchor="middle" font-family="system-ui, sans-serif" font-size="22" font-weight="800" fill="#4338ca">2-3x</text>
+  <text x="1085" y="237" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#64748b">Search user CVR lift</text>
+  <rect x="1000" y="270" width="170" height="70" rx="10" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.5"/>
+  <text x="1085" y="300" text-anchor="middle" font-family="system-ui, sans-serif" font-size="22" font-weight="800" fill="#4338ca">72%</text>
+  <text x="1085" y="322" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#64748b">Sites fail at search</text>
+</svg>

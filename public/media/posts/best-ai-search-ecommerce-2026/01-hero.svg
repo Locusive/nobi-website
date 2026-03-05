@@ -1,0 +1,82 @@
+<svg viewBox="0 0 1200 500" xmlns="http://www.w3.org/2000/svg" font-family="system-ui, -apple-system, sans-serif">
+  <rect width="1200" height="500" fill="#f8fafc"/>
+
+  <!-- Title -->
+  <text x="600" y="50" text-anchor="middle" font-size="22" font-weight="700" fill="#1e293b">AI Search Solutions for Ecommerce — 2026 Landscape</text>
+
+  <!-- Row 1 -->
+  <!-- Constructor -->
+  <rect x="40" y="80" width="350" height="180" rx="12" fill="#ffffff" stroke="#bfdbfe" stroke-width="2"/>
+  <rect x="40" y="80" width="350" height="40" rx="12" fill="#2563eb"/>
+  <rect x="40" y="108" width="350" height="12" fill="#2563eb"/>
+  <text x="215" y="107" text-anchor="middle" font-size="16" font-weight="700" fill="#ffffff">Constructor</text>
+  <text x="60" y="150" font-size="13" font-weight="600" fill="#1e293b">Revenue-optimized AI search</text>
+  <text x="60" y="172" font-size="12" fill="#64748b">Best for: Enterprise retailers ($50M+ GMV)</text>
+  <text x="60" y="194" font-size="12" fill="#64748b">Pricing: $50K+/year</text>
+  <rect x="60" y="210" width="90" height="26" rx="13" fill="#dbeafe"/>
+  <text x="105" y="228" text-anchor="middle" font-size="11" font-weight="600" fill="#2563eb">Enterprise</text>
+  <rect x="160" y="210" width="80" height="26" rx="13" fill="#dbeafe"/>
+  <text x="200" y="228" text-anchor="middle" font-size="11" font-weight="600" fill="#2563eb">ML/AI</text>
+
+  <!-- Algolia -->
+  <rect x="420" y="80" width="350" height="180" rx="12" fill="#ffffff" stroke="#c4b5fd" stroke-width="2"/>
+  <rect x="420" y="80" width="350" height="40" rx="12" fill="#7c3aed"/>
+  <rect x="420" y="108" width="350" height="12" fill="#7c3aed"/>
+  <text x="595" y="107" text-anchor="middle" font-size="16" font-weight="700" fill="#ffffff">Algolia</text>
+  <text x="440" y="150" font-size="13" font-weight="600" fill="#1e293b">Developer-first search API</text>
+  <text x="440" y="172" font-size="12" fill="#64748b">Best for: Teams with dev resources</text>
+  <text x="440" y="194" font-size="12" fill="#64748b">Pricing: Usage-based (can spike)</text>
+  <rect x="440" y="210" width="70" height="26" rx="13" fill="#ede9fe"/>
+  <text x="475" y="228" text-anchor="middle" font-size="11" font-weight="600" fill="#7c3aed">API</text>
+  <rect x="520" y="210" width="100" height="26" rx="13" fill="#ede9fe"/>
+  <text x="570" y="228" text-anchor="middle" font-size="11" font-weight="600" fill="#7c3aed">Developer</text>
+
+  <!-- Bloomreach -->
+  <rect x="800" y="80" width="350" height="180" rx="12" fill="#ffffff" stroke="#86efac" stroke-width="2"/>
+  <rect x="800" y="80" width="350" height="40" rx="12" fill="#16a34a"/>
+  <rect x="800" y="108" width="350" height="12" fill="#16a34a"/>
+  <text x="975" y="107" text-anchor="middle" font-size="16" font-weight="700" fill="#ffffff">Bloomreach</text>
+  <text x="820" y="150" font-size="13" font-weight="600" fill="#1e293b">Full-stack commerce experience</text>
+  <text x="820" y="172" font-size="12" fill="#64748b">Best for: Enterprise omnichannel</text>
+  <text x="820" y="194" font-size="12" fill="#64748b">Pricing: Enterprise contracts</text>
+  <rect x="820" y="210" width="110" height="26" rx="13" fill="#dcfce7"/>
+  <text x="875" y="228" text-anchor="middle" font-size="11" font-weight="600" fill="#16a34a">Full-Stack</text>
+  <rect x="940" y="210" width="80" height="26" rx="13" fill="#dcfce7"/>
+  <text x="980" y="228" text-anchor="middle" font-size="11" font-weight="600" fill="#16a34a">CDP</text>
+
+  <!-- Row 2 -->
+  <!-- Searchspring -->
+  <rect x="40" y="290" width="350" height="180" rx="12" fill="#ffffff" stroke="#fdba74" stroke-width="2"/>
+  <rect x="40" y="290" width="350" height="40" rx="12" fill="#ea580c"/>
+  <rect x="40" y="318" width="350" height="12" fill="#ea580c"/>
+  <text x="215" y="317" text-anchor="middle" font-size="16" font-weight="700" fill="#ffffff">Searchspring</text>
+  <text x="60" y="360" font-size="13" font-weight="600" fill="#1e293b">Mid-market search + merch</text>
+  <text x="60" y="382" font-size="12" fill="#64748b">Best for: Growing Shopify/BigCommerce</text>
+  <text x="60" y="404" font-size="12" fill="#64748b">Pricing: Mid-range plans</text>
+  <rect x="60" y="420" width="100" height="26" rx="13" fill="#ffedd5"/>
+  <text x="110" y="438" text-anchor="middle" font-size="11" font-weight="600" fill="#ea580c">Mid-Market</text>
+
+  <!-- Klevu -->
+  <rect x="420" y="290" width="350" height="180" rx="12" fill="#ffffff" stroke="#5eead4" stroke-width="2"/>
+  <rect x="420" y="290" width="350" height="40" rx="12" fill="#0d9488"/>
+  <rect x="420" y="318" width="350" height="12" fill="#0d9488"/>
+  <text x="595" y="317" text-anchor="middle" font-size="16" font-weight="700" fill="#ffffff">Klevu</text>
+  <text x="440" y="360" font-size="13" font-weight="600" fill="#1e293b">AI search for merchandisers</text>
+  <text x="440" y="382" font-size="12" fill="#64748b">Best for: Merchandising-led teams</text>
+  <text x="440" y="404" font-size="12" fill="#64748b">Pricing: Tiered plans</text>
+  <rect x="440" y="420" width="120" height="26" rx="13" fill="#ccfbf1"/>
+  <text x="500" y="438" text-anchor="middle" font-size="11" font-weight="600" fill="#0d9488">Merchandising</text>
+
+  <!-- Nobi -->
+  <rect x="800" y="290" width="350" height="180" rx="12" fill="#ffffff" stroke="#93c5fd" stroke-width="2.5"/>
+  <rect x="800" y="290" width="350" height="40" rx="12" fill="#1d4ed8"/>
+  <rect x="800" y="318" width="350" height="12" fill="#1d4ed8"/>
+  <text x="975" y="317" text-anchor="middle" font-size="16" font-weight="700" fill="#ffffff">Nobi</text>
+  <text x="820" y="360" font-size="13" font-weight="600" fill="#1e293b">Conversational AI shopping assistant</text>
+  <text x="820" y="382" font-size="12" fill="#64748b">Best for: Ecommerce teams, DTC brands</text>
+  <text x="820" y="404" font-size="12" fill="#64748b">Pricing: Accessible, transparent</text>
+  <rect x="820" y="420" width="120" height="26" rx="13" fill="#dbeafe"/>
+  <text x="880" y="438" text-anchor="middle" font-size="11" font-weight="600" fill="#1d4ed8">Conversational</text>
+  <rect x="950" y="420" width="60" height="26" rx="13" fill="#dbeafe"/>
+  <text x="980" y="438" text-anchor="middle" font-size="11" font-weight="600" fill="#1d4ed8">NLP</text>
+</svg>

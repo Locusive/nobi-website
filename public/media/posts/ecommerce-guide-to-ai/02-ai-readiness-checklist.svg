@@ -1,0 +1,70 @@
+<svg viewBox="0 0 1200 500" xmlns="http://www.w3.org/2000/svg" fill="none">
+  <rect width="1200" height="500" fill="#f8fafc"/>
+  <text x="600" y="40" text-anchor="middle" font-family="system-ui, sans-serif" font-size="22" font-weight="700" fill="#0f172a">AI Readiness Assessment</text>
+  <text x="600" y="62" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#64748b">Score yourself: 1 point each. 8+ = ready to go. 5-7 = start small. Under 5 = build foundations first.</text>
+  <!-- Left column: Foundation -->
+  <rect x="40" y="85" width="360" height="380" rx="14" fill="#ffffff" stroke="#c7d2fe" stroke-width="2"/>
+  <rect x="40" y="85" width="360" height="44" rx="14" fill="#4338ca"/>
+  <rect x="40" y="115" width="360" height="14" fill="#4338ca"/>
+  <text x="220" y="113" text-anchor="middle" font-family="system-ui, sans-serif" font-size="15" font-weight="700" fill="#ffffff">Foundation (0-4 points)</text>
+  <!-- Checklist items -->
+  <rect x="65" y="145" width="22" height="22" rx="4" fill="#f8fafc" stroke="#c7d2fe" stroke-width="2"/>
+  <text x="97" y="160" font-family="system-ui, sans-serif" font-size="13" fill="#334155">Product catalog is structured (titles,</text>
+  <text x="97" y="176" font-family="system-ui, sans-serif" font-size="13" fill="#334155">descriptions, attributes, images)</text>
+  <rect x="65" y="195" width="22" height="22" rx="4" fill="#f8fafc" stroke="#c7d2fe" stroke-width="2"/>
+  <text x="97" y="210" font-family="system-ui, sans-serif" font-size="13" fill="#334155">Analytics tracking is in place</text>
+  <text x="97" y="226" font-family="system-ui, sans-serif" font-size="13" fill="#334155">(GA4, search events, conversions)</text>
+  <rect x="65" y="245" width="22" height="22" rx="4" fill="#f8fafc" stroke="#c7d2fe" stroke-width="2"/>
+  <text x="97" y="260" font-family="system-ui, sans-serif" font-size="13" fill="#334155">You know your site search CVR</text>
+  <text x="97" y="276" font-family="system-ui, sans-serif" font-size="13" fill="#334155">and zero-result rate</text>
+  <rect x="65" y="295" width="22" height="22" rx="4" fill="#f8fafc" stroke="#c7d2fe" stroke-width="2"/>
+  <text x="97" y="310" font-family="system-ui, sans-serif" font-size="13" fill="#334155">Your site gets 10k+ monthly</text>
+  <text x="97" y="326" font-family="system-ui, sans-serif" font-size="13" fill="#334155">sessions (enough data for ROI)</text>
+  <!-- Score indicator -->
+  <rect x="65" y="355" width="310" height="40" rx="8" fill="#eef2ff"/>
+  <rect x="65" y="355" width="155" height="40" rx="8" fill="#c7d2fe"/>
+  <text x="220" y="381" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" font-weight="600" fill="#4338ca">Foundation Score: ___ / 4</text>
+  <!-- Middle column: Readiness -->
+  <rect x="420" y="85" width="360" height="380" rx="14" fill="#ffffff" stroke="#99f6e4" stroke-width="2"/>
+  <rect x="420" y="85" width="360" height="44" rx="14" fill="#0d9488"/>
+  <rect x="420" y="115" width="360" height="14" fill="#0d9488"/>
+  <text x="600" y="113" text-anchor="middle" font-family="system-ui, sans-serif" font-size="15" font-weight="700" fill="#ffffff">Readiness (0-4 points)</text>
+  <rect x="445" y="145" width="22" height="22" rx="4" fill="#f8fafc" stroke="#99f6e4" stroke-width="2"/>
+  <text x="477" y="160" font-family="system-ui, sans-serif" font-size="13" fill="#334155">Someone owns site search or</text>
+  <text x="477" y="176" font-family="system-ui, sans-serif" font-size="13" fill="#334155">conversion optimization</text>
+  <rect x="445" y="195" width="22" height="22" rx="4" fill="#f8fafc" stroke="#99f6e4" stroke-width="2"/>
+  <text x="477" y="210" font-family="system-ui, sans-serif" font-size="13" fill="#334155">You can install a JS snippet on</text>
+  <text x="477" y="226" font-family="system-ui, sans-serif" font-size="13" fill="#334155">your storefront</text>
+  <rect x="445" y="245" width="22" height="22" rx="4" fill="#f8fafc" stroke="#99f6e4" stroke-width="2"/>
+  <text x="477" y="260" font-family="system-ui, sans-serif" font-size="13" fill="#334155">Budget exists for search / CRO</text>
+  <text x="477" y="276" font-family="system-ui, sans-serif" font-size="13" fill="#334155">tooling ($200-2000/mo range)</text>
+  <rect x="445" y="295" width="22" height="22" rx="4" fill="#f8fafc" stroke="#99f6e4" stroke-width="2"/>
+  <text x="477" y="310" font-family="system-ui, sans-serif" font-size="13" fill="#334155">Leadership supports testing</text>
+  <text x="477" y="326" font-family="system-ui, sans-serif" font-size="13" fill="#334155">new conversion tools</text>
+  <rect x="445" y="355" width="310" height="40" rx="8" fill="#f0fdfa"/>
+  <rect x="445" y="355" width="155" height="40" rx="8" fill="#99f6e4"/>
+  <text x="600" y="381" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" font-weight="600" fill="#0d9488">Readiness Score: ___ / 4</text>
+  <!-- Right column: Impact -->
+  <rect x="800" y="85" width="360" height="380" rx="14" fill="#ffffff" stroke="#fdba74" stroke-width="2"/>
+  <rect x="800" y="85" width="360" height="44" rx="14" fill="#ea580c"/>
+  <rect x="800" y="115" width="360" height="14" fill="#ea580c"/>
+  <text x="980" y="113" text-anchor="middle" font-family="system-ui, sans-serif" font-size="15" font-weight="700" fill="#ffffff">Impact Potential (0-4 points)</text>
+  <rect x="825" y="145" width="22" height="22" rx="4" fill="#f8fafc" stroke="#fdba74" stroke-width="2"/>
+  <text x="857" y="160" font-family="system-ui, sans-serif" font-size="13" fill="#334155">Your zero-result rate is above 10%</text>
+  <text x="857" y="176" font-family="system-ui, sans-serif" font-size="13" fill="#334155">(big upside from fixing search)</text>
+  <rect x="825" y="195" width="22" height="22" rx="4" fill="#f8fafc" stroke="#fdba74" stroke-width="2"/>
+  <text x="857" y="210" font-family="system-ui, sans-serif" font-size="13" fill="#334155">Search CVR is below your industry</text>
+  <text x="857" y="226" font-family="system-ui, sans-serif" font-size="13" fill="#334155">benchmark</text>
+  <rect x="825" y="245" width="22" height="22" rx="4" fill="#f8fafc" stroke="#fdba74" stroke-width="2"/>
+  <text x="857" y="260" font-family="system-ui, sans-serif" font-size="13" fill="#334155">You sell complex or considered</text>
+  <text x="857" y="276" font-family="system-ui, sans-serif" font-size="13" fill="#334155">purchase products</text>
+  <rect x="825" y="295" width="22" height="22" rx="4" fill="#f8fafc" stroke="#fdba74" stroke-width="2"/>
+  <text x="857" y="310" font-family="system-ui, sans-serif" font-size="13" fill="#334155">Shoppers frequently ask questions</text>
+  <text x="857" y="326" font-family="system-ui, sans-serif" font-size="13" fill="#334155">before buying (via chat, email, etc.)</text>
+  <rect x="825" y="355" width="310" height="40" rx="8" fill="#fff7ed"/>
+  <rect x="825" y="355" width="155" height="40" rx="8" fill="#fdba74"/>
+  <text x="980" y="381" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" font-weight="600" fill="#ea580c">Impact Score: ___ / 4</text>
+  <!-- Total -->
+  <rect x="420" y="470" width="360" height="28" rx="8" fill="#0f172a"/>
+  <text x="600" y="489" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" font-weight="700" fill="#ffffff">TOTAL SCORE: ___ / 12</text>
+</svg>

@@ -1,0 +1,58 @@
+<svg viewBox="0 0 1200 500" xmlns="http://www.w3.org/2000/svg" font-family="system-ui, -apple-system, sans-serif">
+  <rect width="1200" height="500" fill="#ffffff"/>
+
+  <text x="600" y="40" text-anchor="middle" font-size="20" font-weight="700" fill="#1e293b">Where Your Search Funnel Leaks Revenue</text>
+
+  <!-- Funnel -->
+  <!-- Level 1: All Visitors -->
+  <polygon points="200,75 1000,75 960,145 240,145" fill="#fef3c7" stroke="#fbbf24" stroke-width="2"/>
+  <text x="600" y="100" text-anchor="middle" font-size="16" font-weight="700" fill="#92400e">All Site Visitors</text>
+  <text x="600" y="122" text-anchor="middle" font-size="14" fill="#a16207">100%</text>
+
+  <!-- Drop off indicator 1 -->
+  <rect x="1010" y="90" width="160" height="40" rx="8" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="1090" y="107" text-anchor="middle" font-size="11" fill="#64748b">85% browse only</text>
+  <text x="1090" y="122" text-anchor="middle" font-size="11" fill="#94a3b8">(lower intent)</text>
+  <path d="M1000 110 L1010 110" stroke="#e2e8f0" stroke-width="1"/>
+
+  <!-- Level 2: Search Users -->
+  <polygon points="260,155 940,155 900,225 300,225" fill="#fed7aa" stroke="#f97316" stroke-width="2"/>
+  <text x="600" y="180" text-anchor="middle" font-size="16" font-weight="700" fill="#9a3412">Search Users</text>
+  <text x="600" y="202" text-anchor="middle" font-size="14" fill="#c2410c">15% of visitors | 45% of revenue</text>
+
+  <!-- Drop off indicator 2 -->
+  <rect x="30" y="165" width="200" height="50" rx="8" fill="#fef2f2" stroke="#fecaca" stroke-width="1"/>
+  <text x="130" y="185" text-anchor="middle" font-size="12" font-weight="600" fill="#dc2626">10-25% hit zero results</text>
+  <text x="130" y="203" text-anchor="middle" font-size="11" fill="#ef4444">80% of those leave</text>
+  <path d="M230 195 L260 195" stroke="#fecaca" stroke-width="1"/>
+
+  <!-- Level 3: Get Results -->
+  <polygon points="320,235 880,235 840,305 360,305" fill="#fdba74" stroke="#ea580c" stroke-width="2"/>
+  <text x="600" y="260" text-anchor="middle" font-size="16" font-weight="700" fill="#9a3412">See Search Results</text>
+  <text x="600" y="282" text-anchor="middle" font-size="14" fill="#c2410c">~12% of visitors</text>
+
+  <!-- Drop off indicator 3 -->
+  <rect x="1010" y="245" width="160" height="50" rx="8" fill="#fef2f2" stroke="#fecaca" stroke-width="1"/>
+  <text x="1090" y="265" text-anchor="middle" font-size="12" font-weight="600" fill="#dc2626">Irrelevant results</text>
+  <text x="1090" y="283" text-anchor="middle" font-size="11" fill="#ef4444">40-60% bounce</text>
+  <path d="M880 270 L1010 270" stroke="#fecaca" stroke-width="1"/>
+
+  <!-- Level 4: Relevant Results -->
+  <polygon points="380,315 820,315 780,385 420,385" fill="#fb923c" stroke="#dc2626" stroke-width="2"/>
+  <text x="600" y="340" text-anchor="middle" font-size="16" font-weight="700" fill="#7c2d12">Find Relevant Products</text>
+  <text x="600" y="362" text-anchor="middle" font-size="14" fill="#9a3412">~6% of visitors</text>
+
+  <!-- Drop off indicator 4 -->
+  <rect x="30" y="325" width="200" height="50" rx="8" fill="#fef2f2" stroke="#fecaca" stroke-width="1"/>
+  <text x="130" y="345" text-anchor="middle" font-size="12" font-weight="600" fill="#dc2626">Poor mobile UX</text>
+  <text x="130" y="363" text-anchor="middle" font-size="11" fill="#ef4444">Extra friction to convert</text>
+  <path d="M230 350 L380 350" stroke="#fecaca" stroke-width="1"/>
+
+  <!-- Level 5: Purchase -->
+  <polygon points="440,395 760,395 730,455 470,455" fill="#ef4444" stroke="#b91c1c" stroke-width="2"/>
+  <text x="600" y="418" text-anchor="middle" font-size="16" font-weight="700" fill="#ffffff">Purchase</text>
+  <text x="600" y="440" text-anchor="middle" font-size="14" fill="#fef2f2">~3% of search users convert</text>
+
+  <!-- Bottom note -->
+  <text x="600" y="486" text-anchor="middle" font-size="13" fill="#64748b">Every stage with poor search = revenue leak. AI search tightens the entire funnel.</text>
+</svg>

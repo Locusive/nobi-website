@@ -1,0 +1,83 @@
+<svg viewBox="0 0 1200 500" xmlns="http://www.w3.org/2000/svg" font-family="system-ui, -apple-system, sans-serif">
+  <rect width="1200" height="500" fill="#f8fafc"/>
+
+  <text x="600" y="40" text-anchor="middle" font-size="20" font-weight="700" fill="#1e293b">6 Common Search Failures That Cost You Sales</text>
+
+  <!-- Card 1 -->
+  <rect x="40" y="70" width="360" height="180" rx="14" fill="#ffffff" stroke="#e2e8f0" stroke-width="1.5"/>
+  <circle cx="80" cy="105" r="22" fill="#fef2f2" stroke="#fecaca" stroke-width="1"/>
+  <text x="80" y="112" text-anchor="middle" font-size="18">&#128269;</text>
+  <text x="115" y="100" font-size="15" font-weight="700" fill="#1e293b">Irrelevant Results</text>
+  <text x="115" y="118" font-size="12" fill="#dc2626">Revenue impact: HIGH</text>
+  <text x="60" y="145" font-size="13" fill="#64748b">Shoppers get results that don't</text>
+  <text x="60" y="163" font-size="13" fill="#64748b">match intent. "Laptop bag" returns</text>
+  <text x="60" y="181" font-size="13" fill="#64748b">laptop accessories. 40-60% bounce.</text>
+  <rect x="60" y="200" width="320" height="8" rx="4" fill="#fef2f2"/>
+  <rect x="60" y="200" width="280" height="8" rx="4" fill="#ef4444"/>
+  <text x="350" y="230" text-anchor="end" font-size="11" fill="#dc2626">87% severity</text>
+
+  <!-- Card 2 -->
+  <rect x="420" y="70" width="360" height="180" rx="14" fill="#ffffff" stroke="#e2e8f0" stroke-width="1.5"/>
+  <circle cx="460" cy="105" r="22" fill="#fef2f2" stroke="#fecaca" stroke-width="1"/>
+  <text x="460" y="112" text-anchor="middle" font-size="18">&#128683;</text>
+  <text x="495" y="100" font-size="15" font-weight="700" fill="#1e293b">Zero-Result Pages</text>
+  <text x="495" y="118" font-size="12" fill="#dc2626">Revenue impact: CRITICAL</text>
+  <text x="440" y="145" font-size="13" fill="#64748b">Query returns nothing. 80% leave</text>
+  <text x="440" y="163" font-size="13" fill="#64748b">immediately. 82% won't return.</text>
+  <text x="440" y="181" font-size="13" fill="#64748b">Dead end for high-intent shoppers.</text>
+  <rect x="440" y="200" width="320" height="8" rx="4" fill="#fef2f2"/>
+  <rect x="440" y="200" width="310" height="8" rx="4" fill="#dc2626"/>
+  <text x="730" y="230" text-anchor="end" font-size="11" fill="#dc2626">95% severity</text>
+
+  <!-- Card 3 -->
+  <rect x="800" y="70" width="360" height="180" rx="14" fill="#ffffff" stroke="#e2e8f0" stroke-width="1.5"/>
+  <circle cx="840" cy="105" r="22" fill="#fff7ed" stroke="#fdba74" stroke-width="1"/>
+  <text x="840" y="112" text-anchor="middle" font-size="18">&#128260;</text>
+  <text x="875" y="100" font-size="15" font-weight="700" fill="#1e293b">No Synonym Coverage</text>
+  <text x="875" y="118" font-size="12" fill="#ea580c">Revenue impact: HIGH</text>
+  <text x="820" y="145" font-size="13" fill="#64748b">"Sneakers" doesn't match "trainers"</text>
+  <text x="820" y="163" font-size="13" fill="#64748b">or "running shoes." Each unmapped</text>
+  <text x="820" y="181" font-size="13" fill="#64748b">synonym is a missed sale.</text>
+  <rect x="820" y="200" width="320" height="8" rx="4" fill="#fff7ed"/>
+  <rect x="820" y="200" width="256" height="8" rx="4" fill="#f97316"/>
+  <text x="1110" y="230" text-anchor="end" font-size="11" fill="#ea580c">80% severity</text>
+
+  <!-- Card 4 -->
+  <rect x="40" y="275" width="360" height="180" rx="14" fill="#ffffff" stroke="#e2e8f0" stroke-width="1.5"/>
+  <circle cx="80" cy="310" r="22" fill="#fff7ed" stroke="#fdba74" stroke-width="1"/>
+  <text x="80" y="317" text-anchor="middle" font-size="18">&#128241;</text>
+  <text x="115" y="305" font-size="15" font-weight="700" fill="#1e293b">Poor Mobile Search UX</text>
+  <text x="115" y="323" font-size="12" fill="#ea580c">Revenue impact: HIGH</text>
+  <text x="60" y="350" font-size="13" fill="#64748b">Tiny search bars, no autocomplete,</text>
+  <text x="60" y="368" font-size="13" fill="#64748b">results that require scrolling past</text>
+  <text x="60" y="386" font-size="13" fill="#64748b">irrelevant items. 60%+ traffic is mobile.</text>
+  <rect x="60" y="405" width="320" height="8" rx="4" fill="#fff7ed"/>
+  <rect x="60" y="405" width="240" height="8" rx="4" fill="#f97316"/>
+  <text x="350" y="435" text-anchor="end" font-size="11" fill="#ea580c">75% severity</text>
+
+  <!-- Card 5 -->
+  <rect x="420" y="275" width="360" height="180" rx="14" fill="#ffffff" stroke="#e2e8f0" stroke-width="1.5"/>
+  <circle cx="460" cy="310" r="22" fill="#fefce8" stroke="#fde047" stroke-width="1"/>
+  <text x="460" y="317" text-anchor="middle" font-size="18">&#128100;</text>
+  <text x="495" y="305" font-size="15" font-weight="700" fill="#1e293b">No Personalization</text>
+  <text x="495" y="323" font-size="12" fill="#a16207">Revenue impact: MODERATE</text>
+  <text x="440" y="350" font-size="13" fill="#64748b">Every shopper sees the same results</text>
+  <text x="440" y="368" font-size="13" fill="#64748b">regardless of browsing history, past</text>
+  <text x="440" y="386" font-size="13" fill="#64748b">purchases, or preferences.</text>
+  <rect x="440" y="405" width="320" height="8" rx="4" fill="#fefce8"/>
+  <rect x="440" y="405" width="192" height="8" rx="4" fill="#eab308"/>
+  <text x="730" y="435" text-anchor="end" font-size="11" fill="#a16207">60% severity</text>
+
+  <!-- Card 6 -->
+  <rect x="800" y="275" width="360" height="180" rx="14" fill="#ffffff" stroke="#e2e8f0" stroke-width="1.5"/>
+  <circle cx="840" cy="310" r="22" fill="#fefce8" stroke="#fde047" stroke-width="1"/>
+  <text x="840" y="317" text-anchor="middle" font-size="18">&#128200;</text>
+  <text x="875" y="305" font-size="15" font-weight="700" fill="#1e293b">No Search Analytics</text>
+  <text x="875" y="323" font-size="12" fill="#a16207">Revenue impact: MODERATE</text>
+  <text x="820" y="350" font-size="13" fill="#64748b">You can't see what shoppers search</text>
+  <text x="820" y="368" font-size="13" fill="#64748b">for, what converts, or where they</text>
+  <text x="820" y="386" font-size="13" fill="#64748b">drop off. Flying blind on intent data.</text>
+  <rect x="820" y="405" width="320" height="8" rx="4" fill="#fefce8"/>
+  <rect x="820" y="405" width="176" height="8" rx="4" fill="#eab308"/>
+  <text x="1110" y="435" text-anchor="end" font-size="11" fill="#a16207">55% severity</text>
+</svg>

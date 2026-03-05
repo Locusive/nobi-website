@@ -1,0 +1,89 @@
+<svg viewBox="0 0 1200 500" xmlns="http://www.w3.org/2000/svg" fill="none">
+  <rect width="1200" height="500" fill="#ffffff"/>
+
+  <text x="600" y="42" text-anchor="middle" font-family="system-ui, sans-serif" font-size="22" font-weight="700" fill="#1e293b">Conversion Rate Lift From Search Optimizations</text>
+  <text x="600" y="65" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" fill="#64748b">Before vs After implementing each optimization</text>
+
+  <!-- Y axis -->
+  <line x1="120" y1="90" x2="120" y2="430" stroke="#e5e7eb" stroke-width="1"/>
+  <text x="60" y="260" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#64748b" transform="rotate(-90 60 260)">Conversion Rate</text>
+
+  <!-- Y axis labels -->
+  <text x="110" y="430" text-anchor="end" font-family="system-ui, sans-serif" font-size="11" fill="#94a3b8">0%</text>
+  <line x1="115" y1="427" x2="1150" y2="427" stroke="#f1f5f9" stroke-width="1"/>
+  <text x="110" y="350" text-anchor="end" font-family="system-ui, sans-serif" font-size="11" fill="#94a3b8">2%</text>
+  <line x1="115" y1="347" x2="1150" y2="347" stroke="#f1f5f9" stroke-width="1"/>
+  <text x="110" y="270" text-anchor="end" font-family="system-ui, sans-serif" font-size="11" fill="#94a3b8">4%</text>
+  <line x1="115" y1="267" x2="1150" y2="267" stroke="#f1f5f9" stroke-width="1"/>
+  <text x="110" y="190" text-anchor="end" font-family="system-ui, sans-serif" font-size="11" fill="#94a3b8">6%</text>
+  <line x1="115" y1="187" x2="1150" y2="187" stroke="#f1f5f9" stroke-width="1"/>
+  <text x="110" y="110" text-anchor="end" font-family="system-ui, sans-serif" font-size="11" fill="#94a3b8">8%</text>
+  <line x1="115" y1="107" x2="1150" y2="107" stroke="#f1f5f9" stroke-width="1"/>
+
+  <!-- Bar groups - 7 optimizations -->
+  <!-- 1. Relevance Tuning: 2.1% → 3.8% -->
+  <rect x="150" y="343" width="40" height="84" rx="4" fill="#d1d5db"/>
+  <rect x="200" y="275" width="40" height="152" rx="4" fill="#16a34a"/>
+  <text x="195" y="455" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#475569">Relevance</text>
+  <text x="195" y="468" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#475569">Tuning</text>
+  <text x="170" y="338" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" font-weight="600" fill="#64748b">2.1%</text>
+  <text x="220" y="270" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" font-weight="600" fill="#16a34a">3.8%</text>
+
+  <!-- 2. Zero-Result Fixes: 2.1% → 3.4% -->
+  <rect x="290" y="343" width="40" height="84" rx="4" fill="#d1d5db"/>
+  <rect x="340" y="291" width="40" height="136" rx="4" fill="#16a34a"/>
+  <text x="335" y="455" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#475569">Zero-Result</text>
+  <text x="335" y="468" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#475569">Fixes</text>
+  <text x="310" y="338" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" font-weight="600" fill="#64748b">2.1%</text>
+  <text x="360" y="286" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" font-weight="600" fill="#16a34a">3.4%</text>
+
+  <!-- 3. Synonym Mgmt: 2.1% → 3.2% -->
+  <rect x="430" y="343" width="40" height="84" rx="4" fill="#d1d5db"/>
+  <rect x="480" y="299" width="40" height="128" rx="4" fill="#16a34a"/>
+  <text x="475" y="455" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#475569">Synonym</text>
+  <text x="475" y="468" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#475569">Mgmt</text>
+  <text x="450" y="338" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" font-weight="600" fill="#64748b">2.1%</text>
+  <text x="500" y="294" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" font-weight="600" fill="#16a34a">3.2%</text>
+
+  <!-- 4. Mobile UX: 1.5% → 2.8% -->
+  <rect x="570" y="367" width="40" height="60" rx="4" fill="#d1d5db"/>
+  <rect x="620" y="315" width="40" height="112" rx="4" fill="#16a34a"/>
+  <text x="615" y="455" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#475569">Mobile</text>
+  <text x="615" y="468" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#475569">Search UX</text>
+  <text x="590" y="362" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" font-weight="600" fill="#64748b">1.5%</text>
+  <text x="640" y="310" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" font-weight="600" fill="#16a34a">2.8%</text>
+
+  <!-- 5. Suggestions: 2.1% → 3.5% -->
+  <rect x="710" y="343" width="40" height="84" rx="4" fill="#d1d5db"/>
+  <rect x="760" y="287" width="40" height="140" rx="4" fill="#16a34a"/>
+  <text x="755" y="455" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#475569">Search</text>
+  <text x="755" y="468" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#475569">Suggestions</text>
+  <text x="730" y="338" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" font-weight="600" fill="#64748b">2.1%</text>
+  <text x="780" y="282" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" font-weight="600" fill="#16a34a">3.5%</text>
+
+  <!-- 6. Visual Results: 2.1% → 4.2% -->
+  <rect x="850" y="343" width="40" height="84" rx="4" fill="#d1d5db"/>
+  <rect x="900" y="259" width="40" height="168" rx="4" fill="#16a34a"/>
+  <text x="895" y="455" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#475569">Visual</text>
+  <text x="895" y="468" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#475569">Results</text>
+  <text x="870" y="338" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" font-weight="600" fill="#64748b">2.1%</text>
+  <text x="920" y="254" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" font-weight="600" fill="#16a34a">4.2%</text>
+
+  <!-- 7. AI Search: 2.1% → 6.4% -->
+  <rect x="990" y="343" width="40" height="84" rx="4" fill="#d1d5db"/>
+  <rect x="1040" y="171" width="40" height="256" rx="4" fill="#15803d"/>
+  <text x="1035" y="455" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#475569">AI-Powered</text>
+  <text x="1035" y="468" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#475569">Search</text>
+  <text x="1010" y="338" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" font-weight="600" fill="#64748b">2.1%</text>
+  <text x="1060" y="166" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" font-weight="600" fill="#15803d">6.4%</text>
+
+  <!-- Legend -->
+  <rect x="900" y="85" width="12" height="12" rx="2" fill="#d1d5db"/>
+  <text x="918" y="96" font-family="system-ui, sans-serif" font-size="12" fill="#64748b">Before</text>
+  <rect x="980" y="85" width="12" height="12" rx="2" fill="#16a34a"/>
+  <text x="998" y="96" font-family="system-ui, sans-serif" font-size="12" fill="#64748b">After</text>
+
+  <!-- Callout -->
+  <rect x="960" y="130" width="190" height="30" rx="6" fill="#f0fdf4" stroke="#86efac" stroke-width="1"/>
+  <text x="1055" y="150" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#15803d">+205% avg conversion lift</text>
+</svg>

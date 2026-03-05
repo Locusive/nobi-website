@@ -1,0 +1,68 @@
+<svg viewBox="0 0 1200 500" xmlns="http://www.w3.org/2000/svg" fill="none">
+  <rect width="1200" height="500" fill="#ffffff"/>
+  <text x="600" y="45" text-anchor="middle" font-family="system-ui, sans-serif" font-size="22" font-weight="700" fill="#0f172a">The Shopping Experience: Before vs. After AI</text>
+  <!-- Before column -->
+  <rect x="60" y="70" width="520" height="400" rx="16" fill="#f8fafc" stroke="#e2e8f0" stroke-width="2"/>
+  <text x="320" y="105" text-anchor="middle" font-family="system-ui, sans-serif" font-size="18" font-weight="700" fill="#64748b">BEFORE: Traditional Search</text>
+  <!-- Step 1 -->
+  <rect x="90" y="130" width="460" height="52" rx="8" fill="#ffffff" stroke="#e2e8f0" stroke-width="1.5"/>
+  <circle cx="120" cy="156" r="14" fill="#f1f5f9"/>
+  <text x="120" y="161" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#94a3b8">1</text>
+  <text x="145" y="153" font-family="system-ui, sans-serif" font-size="13" font-weight="600" fill="#334155">Type keywords into search bar</text>
+  <text x="145" y="170" font-family="system-ui, sans-serif" font-size="11" fill="#94a3b8">"blue running shoes"</text>
+  <!-- Step 2 -->
+  <rect x="90" y="192" width="460" height="52" rx="8" fill="#ffffff" stroke="#e2e8f0" stroke-width="1.5"/>
+  <circle cx="120" cy="218" r="14" fill="#f1f5f9"/>
+  <text x="120" y="223" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#94a3b8">2</text>
+  <text x="145" y="215" font-family="system-ui, sans-serif" font-size="13" font-weight="600" fill="#334155">Scroll through 200+ results</text>
+  <text x="145" y="232" font-family="system-ui, sans-serif" font-size="11" fill="#94a3b8">Mostly irrelevant, no context</text>
+  <!-- Step 3 -->
+  <rect x="90" y="254" width="460" height="52" rx="8" fill="#ffffff" stroke="#e2e8f0" stroke-width="1.5"/>
+  <circle cx="120" cy="280" r="14" fill="#f1f5f9"/>
+  <text x="120" y="285" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#94a3b8">3</text>
+  <text x="145" y="277" font-family="system-ui, sans-serif" font-size="13" font-weight="600" fill="#334155">Apply filters manually</text>
+  <text x="145" y="294" font-family="system-ui, sans-serif" font-size="11" fill="#94a3b8">Size, color, price range, brand...</text>
+  <!-- Step 4 -->
+  <rect x="90" y="316" width="460" height="52" rx="8" fill="#ffffff" stroke="#e2e8f0" stroke-width="1.5"/>
+  <circle cx="120" cy="342" r="14" fill="#f1f5f9"/>
+  <text x="120" y="347" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#94a3b8">4</text>
+  <text x="145" y="339" font-family="system-ui, sans-serif" font-size="13" font-weight="600" fill="#334155">Open tabs, compare manually</text>
+  <text x="145" y="356" font-family="system-ui, sans-serif" font-size="11" fill="#94a3b8">10+ clicks to find what you want</text>
+  <!-- Step 5 -->
+  <rect x="90" y="378" width="460" height="52" rx="8" fill="#fff1f2" stroke="#fecaca" stroke-width="1.5"/>
+  <circle cx="120" cy="404" r="14" fill="#fee2e2"/>
+  <text x="120" y="409" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#dc2626">5</text>
+  <text x="145" y="401" font-family="system-ui, sans-serif" font-size="13" font-weight="600" fill="#dc2626">Give up and leave</text>
+  <text x="145" y="418" font-family="system-ui, sans-serif" font-size="11" fill="#f87171">80% of shoppers after failed search</text>
+  <!-- After column -->
+  <rect x="620" y="70" width="520" height="400" rx="16" fill="#f0fdf4" stroke="#bbf7d0" stroke-width="2"/>
+  <text x="880" y="105" text-anchor="middle" font-family="system-ui, sans-serif" font-size="18" font-weight="700" fill="#16a34a">AFTER: AI Shopping Assistant</text>
+  <!-- Step 1 -->
+  <rect x="650" y="130" width="460" height="52" rx="8" fill="#ffffff" stroke="#bbf7d0" stroke-width="1.5"/>
+  <circle cx="680" cy="156" r="14" fill="#dcfce7"/>
+  <text x="680" y="161" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#16a34a">1</text>
+  <text x="705" y="153" font-family="system-ui, sans-serif" font-size="13" font-weight="600" fill="#334155">Describe what you need naturally</text>
+  <text x="705" y="170" font-family="system-ui, sans-serif" font-size="11" fill="#6b7280">"I need running shoes for flat feet"</text>
+  <!-- Step 2 -->
+  <rect x="650" y="192" width="460" height="52" rx="8" fill="#ffffff" stroke="#bbf7d0" stroke-width="1.5"/>
+  <circle cx="680" cy="218" r="14" fill="#dcfce7"/>
+  <text x="680" y="223" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#16a34a">2</text>
+  <text x="705" y="215" font-family="system-ui, sans-serif" font-size="13" font-weight="600" fill="#334155">Get curated, relevant results</text>
+  <text x="705" y="232" font-family="system-ui, sans-serif" font-size="11" fill="#6b7280">5-8 products matched to your intent</text>
+  <!-- Step 3 -->
+  <rect x="650" y="254" width="460" height="52" rx="8" fill="#ffffff" stroke="#bbf7d0" stroke-width="1.5"/>
+  <circle cx="680" cy="280" r="14" fill="#dcfce7"/>
+  <text x="680" y="285" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#16a34a">3</text>
+  <text x="705" y="277" font-family="system-ui, sans-serif" font-size="13" font-weight="600" fill="#334155">Ask follow-up questions</text>
+  <text x="705" y="294" font-family="system-ui, sans-serif" font-size="11" fill="#6b7280">"Which of these has the best arch support?"</text>
+  <!-- Step 4 -->
+  <rect x="650" y="316" width="460" height="52" rx="8" fill="#f0fdf4" stroke="#86efac" stroke-width="1.5"/>
+  <circle cx="680" cy="342" r="14" fill="#bbf7d0"/>
+  <text x="680" y="347" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#16a34a">4</text>
+  <text x="705" y="339" font-family="system-ui, sans-serif" font-size="13" font-weight="600" fill="#16a34a">Add to cart with confidence</text>
+  <text x="705" y="356" font-family="system-ui, sans-serif" font-size="11" fill="#6b7280">2-3 clicks from search to purchase</text>
+  <!-- Time comparison -->
+  <rect x="650" y="390" width="460" height="50" rx="8" fill="#dcfce7" stroke="#86efac" stroke-width="1.5"/>
+  <text x="880" y="415" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" font-weight="700" fill="#15803d">Average time to purchase: 3 min vs 15+ min</text>
+  <text x="880" y="433" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#16a34a">2-3x higher conversion rate</text>
+</svg>

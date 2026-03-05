@@ -1,0 +1,120 @@
+<svg viewBox="0 0 1200 500" xmlns="http://www.w3.org/2000/svg" font-family="system-ui, -apple-system, sans-serif">
+  <rect width="1200" height="500" fill="#ffffff"/>
+
+  <!-- Title -->
+  <text x="600" y="40" text-anchor="middle" font-size="20" font-weight="700" fill="#1e293b">Feature Comparison Matrix</text>
+
+  <!-- Header row -->
+  <rect x="30" y="55" width="1140" height="40" rx="6" fill="#1e40af"/>
+  <text x="170" y="81" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff">Feature</text>
+  <text x="370" y="81" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff">Constructor</text>
+  <text x="510" y="81" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff">Algolia</text>
+  <text x="650" y="81" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff">Bloomreach</text>
+  <text x="790" y="81" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff">Searchspring</text>
+  <text x="930" y="81" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff">Klevu</text>
+  <text x="1080" y="81" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff">Nobi</text>
+
+  <!-- Row backgrounds -->
+  <rect x="30" y="95" width="1140" height="38" fill="#f8fafc"/>
+  <rect x="30" y="133" width="1140" height="38" fill="#ffffff"/>
+  <rect x="30" y="171" width="1140" height="38" fill="#f8fafc"/>
+  <rect x="30" y="209" width="1140" height="38" fill="#ffffff"/>
+  <rect x="30" y="247" width="1140" height="38" fill="#f8fafc"/>
+  <rect x="30" y="285" width="1140" height="38" fill="#ffffff"/>
+  <rect x="30" y="323" width="1140" height="38" fill="#f8fafc"/>
+  <rect x="30" y="361" width="1140" height="38" fill="#ffffff"/>
+  <rect x="30" y="399" width="1140" height="38" fill="#f8fafc"/>
+  <rect x="30" y="437" width="1140" height="38" fill="#ffffff"/>
+
+  <!-- Feature labels -->
+  <text x="50" y="120" font-size="12" font-weight="600" fill="#1e293b">Semantic / NLP Search</text>
+  <text x="50" y="158" font-size="12" font-weight="600" fill="#1e293b">Conversational AI</text>
+  <text x="50" y="196" font-size="12" font-weight="600" fill="#1e293b">No-Code Setup</text>
+  <text x="50" y="234" font-size="12" font-weight="600" fill="#1e293b">Merchandising Tools</text>
+  <text x="50" y="272" font-size="12" font-weight="600" fill="#1e293b">Analytics Dashboard</text>
+  <text x="50" y="310" font-size="12" font-weight="600" fill="#1e293b">Personalization</text>
+  <text x="50" y="348" font-size="12" font-weight="600" fill="#1e293b">Shopify Integration</text>
+  <text x="50" y="386" font-size="12" font-weight="600" fill="#1e293b">Transparent Pricing</text>
+  <text x="50" y="424" font-size="12" font-weight="600" fill="#1e293b">Quick Implementation</text>
+  <text x="50" y="462" font-size="12" font-weight="600" fill="#1e293b">SMB Friendly</text>
+
+  <!-- Check/X marks — Constructor -->
+  <text x="370" y="120" text-anchor="middle" font-size="16" fill="#16a34a">&#10003;</text>
+  <text x="370" y="158" text-anchor="middle" font-size="14" fill="#dc2626">&#10007;</text>
+  <text x="370" y="196" text-anchor="middle" font-size="14" fill="#dc2626">&#10007;</text>
+  <text x="370" y="234" text-anchor="middle" font-size="16" fill="#16a34a">&#10003;</text>
+  <text x="370" y="272" text-anchor="middle" font-size="16" fill="#16a34a">&#10003;</text>
+  <text x="370" y="310" text-anchor="middle" font-size="16" fill="#16a34a">&#10003;</text>
+  <text x="370" y="348" text-anchor="middle" font-size="14" fill="#dc2626">&#10007;</text>
+  <text x="370" y="386" text-anchor="middle" font-size="14" fill="#dc2626">&#10007;</text>
+  <text x="370" y="424" text-anchor="middle" font-size="14" fill="#dc2626">&#10007;</text>
+  <text x="370" y="462" text-anchor="middle" font-size="14" fill="#dc2626">&#10007;</text>
+
+  <!-- Algolia -->
+  <text x="510" y="120" text-anchor="middle" font-size="16" fill="#16a34a">&#10003;</text>
+  <text x="510" y="158" text-anchor="middle" font-size="14" fill="#dc2626">&#10007;</text>
+  <text x="510" y="196" text-anchor="middle" font-size="14" fill="#dc2626">&#10007;</text>
+  <text x="510" y="234" text-anchor="middle" font-size="12" fill="#d97706">Partial</text>
+  <text x="510" y="272" text-anchor="middle" font-size="16" fill="#16a34a">&#10003;</text>
+  <text x="510" y="310" text-anchor="middle" font-size="16" fill="#16a34a">&#10003;</text>
+  <text x="510" y="348" text-anchor="middle" font-size="12" fill="#d97706">Plugin</text>
+  <text x="510" y="386" text-anchor="middle" font-size="14" fill="#dc2626">&#10007;</text>
+  <text x="510" y="424" text-anchor="middle" font-size="14" fill="#dc2626">&#10007;</text>
+  <text x="510" y="462" text-anchor="middle" font-size="12" fill="#d97706">Partial</text>
+
+  <!-- Bloomreach -->
+  <text x="650" y="120" text-anchor="middle" font-size="16" fill="#16a34a">&#10003;</text>
+  <text x="650" y="158" text-anchor="middle" font-size="12" fill="#d97706">Limited</text>
+  <text x="650" y="196" text-anchor="middle" font-size="14" fill="#dc2626">&#10007;</text>
+  <text x="650" y="234" text-anchor="middle" font-size="16" fill="#16a34a">&#10003;</text>
+  <text x="650" y="272" text-anchor="middle" font-size="16" fill="#16a34a">&#10003;</text>
+  <text x="650" y="310" text-anchor="middle" font-size="16" fill="#16a34a">&#10003;</text>
+  <text x="650" y="348" text-anchor="middle" font-size="12" fill="#d97706">Plugin</text>
+  <text x="650" y="386" text-anchor="middle" font-size="14" fill="#dc2626">&#10007;</text>
+  <text x="650" y="424" text-anchor="middle" font-size="14" fill="#dc2626">&#10007;</text>
+  <text x="650" y="462" text-anchor="middle" font-size="14" fill="#dc2626">&#10007;</text>
+
+  <!-- Searchspring -->
+  <text x="790" y="120" text-anchor="middle" font-size="12" fill="#d97706">Basic</text>
+  <text x="790" y="158" text-anchor="middle" font-size="14" fill="#dc2626">&#10007;</text>
+  <text x="790" y="196" text-anchor="middle" font-size="16" fill="#16a34a">&#10003;</text>
+  <text x="790" y="234" text-anchor="middle" font-size="16" fill="#16a34a">&#10003;</text>
+  <text x="790" y="272" text-anchor="middle" font-size="16" fill="#16a34a">&#10003;</text>
+  <text x="790" y="310" text-anchor="middle" font-size="12" fill="#d97706">Basic</text>
+  <text x="790" y="348" text-anchor="middle" font-size="16" fill="#16a34a">&#10003;</text>
+  <text x="790" y="386" text-anchor="middle" font-size="16" fill="#16a34a">&#10003;</text>
+  <text x="790" y="424" text-anchor="middle" font-size="16" fill="#16a34a">&#10003;</text>
+  <text x="790" y="462" text-anchor="middle" font-size="16" fill="#16a34a">&#10003;</text>
+
+  <!-- Klevu -->
+  <text x="930" y="120" text-anchor="middle" font-size="16" fill="#16a34a">&#10003;</text>
+  <text x="930" y="158" text-anchor="middle" font-size="14" fill="#dc2626">&#10007;</text>
+  <text x="930" y="196" text-anchor="middle" font-size="16" fill="#16a34a">&#10003;</text>
+  <text x="930" y="234" text-anchor="middle" font-size="16" fill="#16a34a">&#10003;</text>
+  <text x="930" y="272" text-anchor="middle" font-size="16" fill="#16a34a">&#10003;</text>
+  <text x="930" y="310" text-anchor="middle" font-size="16" fill="#16a34a">&#10003;</text>
+  <text x="930" y="348" text-anchor="middle" font-size="16" fill="#16a34a">&#10003;</text>
+  <text x="930" y="386" text-anchor="middle" font-size="12" fill="#d97706">Partial</text>
+  <text x="930" y="424" text-anchor="middle" font-size="16" fill="#16a34a">&#10003;</text>
+  <text x="930" y="462" text-anchor="middle" font-size="16" fill="#16a34a">&#10003;</text>
+
+  <!-- Nobi -->
+  <text x="1080" y="120" text-anchor="middle" font-size="16" fill="#16a34a">&#10003;</text>
+  <text x="1080" y="158" text-anchor="middle" font-size="16" fill="#16a34a">&#10003;</text>
+  <text x="1080" y="196" text-anchor="middle" font-size="16" fill="#16a34a">&#10003;</text>
+  <text x="1080" y="234" text-anchor="middle" font-size="12" fill="#d97706">Basic</text>
+  <text x="1080" y="272" text-anchor="middle" font-size="16" fill="#16a34a">&#10003;</text>
+  <text x="1080" y="310" text-anchor="middle" font-size="16" fill="#16a34a">&#10003;</text>
+  <text x="1080" y="348" text-anchor="middle" font-size="16" fill="#16a34a">&#10003;</text>
+  <text x="1080" y="386" text-anchor="middle" font-size="16" fill="#16a34a">&#10003;</text>
+  <text x="1080" y="424" text-anchor="middle" font-size="16" fill="#16a34a">&#10003;</text>
+  <text x="1080" y="462" text-anchor="middle" font-size="16" fill="#16a34a">&#10003;</text>
+
+  <!-- Grid lines -->
+  <line x1="300" y1="55" x2="300" y2="475" stroke="#e2e8f0" stroke-width="1"/>
+  <line x1="440" y1="55" x2="440" y2="475" stroke="#e2e8f0" stroke-width="1"/>
+  <line x1="580" y1="55" x2="580" y2="475" stroke="#e2e8f0" stroke-width="1"/>
+  <line x1="720" y1="55" x2="720" y2="475" stroke="#e2e8f0" stroke-width="1"/>
+  <line x1="860" y1="55" x2="860" y2="475" stroke="#e2e8f0" stroke-width="1"/>
+  <line x1="1010" y1="55" x2="1010" y2="475" stroke="#e2e8f0" stroke-width="1"/>
+</svg>

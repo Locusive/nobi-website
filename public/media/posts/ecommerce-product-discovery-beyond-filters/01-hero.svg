@@ -1,0 +1,94 @@
+<svg viewBox="0 0 1200 500" xmlns="http://www.w3.org/2000/svg" fill="none">
+  <rect width="1200" height="500" fill="#ffffff"/>
+
+  <!-- Left: Filter sidebar mockup -->
+  <rect x="40" y="30" width="520" height="440" rx="16" fill="#faf5ff" stroke="#e9d5ff" stroke-width="2"/>
+  <text x="300" y="68" text-anchor="middle" font-family="system-ui, sans-serif" font-size="18" font-weight="700" fill="#6b21a8">Traditional Filter Navigation</text>
+
+  <!-- Filter sidebar -->
+  <rect x="60" y="90" width="180" height="360" rx="8" fill="#ffffff" stroke="#e5e7eb" stroke-width="1"/>
+  <text x="80" y="115" font-family="system-ui, sans-serif" font-size="13" font-weight="700" fill="#1e293b">Category</text>
+  <rect x="80" y="125" width="12" height="12" rx="2" fill="#ffffff" stroke="#9ca3af" stroke-width="1"/><text x="100" y="136" font-family="system-ui, sans-serif" font-size="11" fill="#475569">Dresses (142)</text>
+  <rect x="80" y="145" width="12" height="12" rx="2" fill="#ffffff" stroke="#9ca3af" stroke-width="1"/><text x="100" y="156" font-family="system-ui, sans-serif" font-size="11" fill="#475569">Tops (89)</text>
+  <rect x="80" y="165" width="12" height="12" rx="2" fill="#ffffff" stroke="#9ca3af" stroke-width="1"/><text x="100" y="176" font-family="system-ui, sans-serif" font-size="11" fill="#475569">Bottoms (67)</text>
+
+  <text x="80" y="205" font-family="system-ui, sans-serif" font-size="13" font-weight="700" fill="#1e293b">Size</text>
+  <rect x="80" y="215" width="12" height="12" rx="2" fill="#ffffff" stroke="#9ca3af" stroke-width="1"/><text x="100" y="226" font-family="system-ui, sans-serif" font-size="11" fill="#475569">XS</text>
+  <rect x="130" y="215" width="12" height="12" rx="2" fill="#ffffff" stroke="#9ca3af" stroke-width="1"/><text x="150" y="226" font-family="system-ui, sans-serif" font-size="11" fill="#475569">S</text>
+  <rect x="170" y="215" width="12" height="12" rx="2" fill="#ffffff" stroke="#9ca3af" stroke-width="1"/><text x="190" y="226" font-family="system-ui, sans-serif" font-size="11" fill="#475569">M</text>
+
+  <text x="80" y="256" font-family="system-ui, sans-serif" font-size="13" font-weight="700" fill="#1e293b">Color</text>
+  <circle cx="86" cy="270" r="6" fill="#ef4444"/><circle cx="106" cy="270" r="6" fill="#3b82f6"/><circle cx="126" cy="270" r="6" fill="#22c55e"/><circle cx="146" cy="270" r="6" fill="#1e293b"/><circle cx="166" cy="270" r="6" fill="#f8fafc" stroke="#d1d5db" stroke-width="1"/>
+
+  <text x="80" y="300" font-family="system-ui, sans-serif" font-size="13" font-weight="700" fill="#1e293b">Price</text>
+  <rect x="80" y="310" width="140" height="4" rx="2" fill="#e5e7eb"/>
+  <circle cx="100" cy="312" r="6" fill="#7c3aed"/><circle cx="180" cy="312" r="6" fill="#7c3aed"/>
+  <text x="80" y="335" font-family="system-ui, sans-serif" font-size="10" fill="#6b7280">$25 - $150</text>
+
+  <text x="80" y="365" font-family="system-ui, sans-serif" font-size="13" font-weight="700" fill="#1e293b">Material</text>
+  <rect x="80" y="375" width="12" height="12" rx="2" fill="#ffffff" stroke="#9ca3af" stroke-width="1"/><text x="100" y="386" font-family="system-ui, sans-serif" font-size="11" fill="#475569">Cotton</text>
+  <rect x="80" y="395" width="12" height="12" rx="2" fill="#ffffff" stroke="#9ca3af" stroke-width="1"/><text x="100" y="406" font-family="system-ui, sans-serif" font-size="11" fill="#475569">Silk</text>
+  <rect x="80" y="415" width="12" height="12" rx="2" fill="#ffffff" stroke="#9ca3af" stroke-width="1"/><text x="100" y="426" font-family="system-ui, sans-serif" font-size="11" fill="#475569">Polyester</text>
+
+  <!-- Thought bubble -->
+  <rect x="260" y="150" width="280" height="100" rx="12" fill="#fef3c7" stroke="#fcd34d" stroke-width="1.5"/>
+  <text x="400" y="180" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#92400e">"I need something cute for a</text>
+  <text x="400" y="198" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#92400e">beach wedding in July... but I</text>
+  <text x="400" y="216" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#92400e">don't know which filters to pick"</text>
+  <text x="400" y="240" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" font-weight="600" fill="#dc2626">12 clicks, still browsing</text>
+
+  <!-- Frustrated icon -->
+  <circle cx="400" cy="350" r="35" fill="#fef2f2" stroke="#fca5a5" stroke-width="1.5"/>
+  <circle cx="387" cy="343" r="3" fill="#991b1b"/><circle cx="413" cy="343" r="3" fill="#991b1b"/>
+  <path d="M385 362 Q400 355 415 362" stroke="#991b1b" stroke-width="2" fill="none" stroke-linecap="round"/>
+  <text x="400" y="410" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#991b1b">Overwhelmed shopper</text>
+
+  <!-- Divider -->
+  <text x="600" y="260" text-anchor="middle" font-family="system-ui, sans-serif" font-size="28" fill="#d1d5db">VS</text>
+
+  <!-- Right: Conversational discovery -->
+  <rect x="640" y="30" width="520" height="440" rx="16" fill="#faf5ff" stroke="#c4b5fd" stroke-width="2"/>
+  <text x="900" y="68" text-anchor="middle" font-family="system-ui, sans-serif" font-size="18" font-weight="700" fill="#6b21a8">Conversational Discovery</text>
+
+  <!-- Chat interface -->
+  <rect x="680" y="90" width="440" height="340" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="1"/>
+
+  <!-- User message -->
+  <rect x="780" y="110" width="320" height="50" rx="10" fill="#7c3aed"/>
+  <text x="940" y="133" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#ffffff">I need something cute for a beach</text>
+  <text x="940" y="150" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#ffffff">wedding in July. Budget is $100-ish</text>
+
+  <!-- AI response -->
+  <rect x="700" y="175" width="350" height="70" rx="10" fill="#f5f3ff" stroke="#e9d5ff" stroke-width="1"/>
+  <text x="720" y="198" font-family="system-ui, sans-serif" font-size="13" fill="#475569">Great choice! Here are flowy summer</text>
+  <text x="720" y="216" font-family="system-ui, sans-serif" font-size="13" fill="#475569">dresses perfect for beach weddings,</text>
+  <text x="720" y="234" font-family="system-ui, sans-serif" font-size="13" fill="#475569">all under $120:</text>
+
+  <!-- Product suggestions -->
+  <rect x="700" y="260" width="130" height="90" rx="8" fill="#f8fafc" stroke="#e5e7eb" stroke-width="1"/>
+  <rect x="710" y="270" width="110" height="45" rx="4" fill="#ede9fe"/>
+  <text x="765" y="335" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" font-weight="600" fill="#1e293b">Coral Maxi Dress</text>
+  <text x="765" y="347" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#7c3aed">$89</text>
+
+  <rect x="840" y="260" width="130" height="90" rx="8" fill="#f8fafc" stroke="#e5e7eb" stroke-width="1"/>
+  <rect x="850" y="270" width="110" height="45" rx="4" fill="#ede9fe"/>
+  <text x="905" y="335" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" font-weight="600" fill="#1e293b">Floral Wrap Dress</text>
+  <text x="905" y="347" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#7c3aed">$95</text>
+
+  <rect x="980" y="260" width="130" height="90" rx="8" fill="#f8fafc" stroke="#e5e7eb" stroke-width="1"/>
+  <rect x="990" y="270" width="110" height="45" rx="4" fill="#ede9fe"/>
+  <text x="1045" y="335" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" font-weight="600" fill="#1e293b">Linen Midi Dress</text>
+  <text x="1045" y="347" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#7c3aed">$78</text>
+
+  <!-- Search input -->
+  <rect x="700" y="370" width="340" height="40" rx="20" fill="#f8fafc" stroke="#c4b5fd" stroke-width="1.5"/>
+  <text x="720" y="395" font-family="system-ui, sans-serif" font-size="12" fill="#9ca3af">Do you have that in green?</text>
+  <circle cx="1015" cy="390" r="14" fill="#7c3aed"/>
+  <path d="M1010 390 L1020 390 M1015 385 L1015 395" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/>
+
+  <!-- Happy icon -->
+  <circle cx="900" cy="445" r="20" fill="#f0fdf4" stroke="#86efac" stroke-width="1.5"/>
+  <circle cx="892" cy="441" r="2" fill="#166534"/><circle cx="908" cy="441" r="2" fill="#166534"/>
+  <path d="M892 450 Q900 456 908 450" stroke="#166534" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+  <text x="935" y="450" font-family="system-ui, sans-serif" font-size="12" font-weight="600" fill="#166534">1 question, perfect results</text>
+</svg>

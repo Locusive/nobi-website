@@ -1,0 +1,51 @@
+<svg viewBox="0 0 1200 500" xmlns="http://www.w3.org/2000/svg" font-family="system-ui, -apple-system, sans-serif">
+  <rect width="1200" height="500" fill="#ffffff"/>
+
+  <text x="600" y="40" text-anchor="middle" font-size="20" font-weight="700" fill="#1e293b">5 Fixes for Zero-Result Searches</text>
+  <text x="600" y="62" text-anchor="middle" font-size="14" fill="#64748b">Layered strategies from quick wins to complete solutions</text>
+
+  <!-- Layer 1 -->
+  <rect x="100" y="85" width="1000" height="72" rx="12" fill="#fef2f2" stroke="#fca5a5" stroke-width="2"/>
+  <circle cx="150" cy="121" r="20" fill="#ef4444"/>
+  <text x="150" y="127" text-anchor="middle" font-size="14" font-weight="700" fill="#ffffff">1</text>
+  <text x="190" y="112" font-size="16" font-weight="700" fill="#1e293b">Synonym Mapping</text>
+  <text x="190" y="133" font-size="13" fill="#64748b">Map common alternate terms to your catalog vocabulary. Quick but requires ongoing maintenance.</text>
+  <rect x="900" y="103" width="170" height="32" rx="16" fill="#fef2f2" stroke="#fca5a5" stroke-width="1"/>
+  <text x="985" y="124" text-anchor="middle" font-size="12" font-weight="600" fill="#dc2626">Quick Fix</text>
+
+  <!-- Layer 2 -->
+  <rect x="130" y="167" width="940" height="72" rx="12" fill="#fff7ed" stroke="#fdba74" stroke-width="2"/>
+  <circle cx="180" cy="203" r="20" fill="#f97316"/>
+  <text x="180" y="209" text-anchor="middle" font-size="14" font-weight="700" fill="#ffffff">2</text>
+  <text x="220" y="194" font-size="16" font-weight="700" fill="#1e293b">Fuzzy Matching</text>
+  <text x="220" y="215" font-size="13" fill="#64748b">Handle typos and misspellings with edit-distance algorithms. Catches simple input errors.</text>
+  <rect x="870" y="185" width="170" height="32" rx="16" fill="#fff7ed" stroke="#fdba74" stroke-width="1"/>
+  <text x="955" y="206" text-anchor="middle" font-size="12" font-weight="600" fill="#ea580c">Moderate Fix</text>
+
+  <!-- Layer 3 -->
+  <rect x="160" y="249" width="880" height="72" rx="12" fill="#fefce8" stroke="#fde047" stroke-width="2"/>
+  <circle cx="210" cy="285" r="20" fill="#eab308"/>
+  <text x="210" y="291" text-anchor="middle" font-size="14" font-weight="700" fill="#ffffff">3</text>
+  <text x="250" y="276" font-size="16" font-weight="700" fill="#1e293b">Suggested Alternatives</text>
+  <text x="250" y="297" font-size="13" fill="#64748b">When zero results occur, suggest related categories or popular products. Reduces dead ends.</text>
+  <rect x="840" y="267" width="170" height="32" rx="16" fill="#fefce8" stroke="#fde047" stroke-width="1"/>
+  <text x="925" y="288" text-anchor="middle" font-size="12" font-weight="600" fill="#a16207">Better UX</text>
+
+  <!-- Layer 4 -->
+  <rect x="190" y="331" width="820" height="72" rx="12" fill="#ecfdf5" stroke="#6ee7b7" stroke-width="2"/>
+  <circle cx="240" cy="367" r="20" fill="#10b981"/>
+  <text x="240" y="373" text-anchor="middle" font-size="14" font-weight="700" fill="#ffffff">4</text>
+  <text x="280" y="358" font-size="16" font-weight="700" fill="#1e293b">Curated Fallbacks</text>
+  <text x="280" y="379" font-size="13" fill="#64748b">Design zero-result pages with bestsellers, trending products, or category links. Keep shoppers engaged.</text>
+  <rect x="810" y="349" width="170" height="32" rx="16" fill="#ecfdf5" stroke="#6ee7b7" stroke-width="1"/>
+  <text x="895" y="370" text-anchor="middle" font-size="12" font-weight="600" fill="#059669">Smart Recovery</text>
+
+  <!-- Layer 5 -->
+  <rect x="220" y="413" width="760" height="72" rx="12" fill="#eff6ff" stroke="#93c5fd" stroke-width="2"/>
+  <circle cx="270" cy="449" r="20" fill="#3b82f6"/>
+  <text x="270" y="455" text-anchor="middle" font-size="14" font-weight="700" fill="#ffffff">5</text>
+  <text x="310" y="440" font-size="16" font-weight="700" fill="#1e293b">AI Semantic Search</text>
+  <text x="310" y="461" font-size="13" fill="#64748b">Replace keyword matching entirely. Understands intent, eliminates zero results at the source.</text>
+  <rect x="780" y="431" width="170" height="32" rx="16" fill="#eff6ff" stroke="#93c5fd" stroke-width="1"/>
+  <text x="865" y="452" text-anchor="middle" font-size="12" font-weight="600" fill="#2563eb">Complete Solution</text>
+</svg>

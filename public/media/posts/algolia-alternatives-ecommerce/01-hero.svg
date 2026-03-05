@@ -1,0 +1,63 @@
+<svg viewBox="0 0 1200 500" xmlns="http://www.w3.org/2000/svg" font-family="system-ui, -apple-system, sans-serif">
+  <rect width="1200" height="500" fill="#f8fafc"/>
+
+  <!-- Left: Code complexity -->
+  <rect x="40" y="40" width="520" height="420" rx="14" fill="#ffffff" stroke="#e2e8f0" stroke-width="1.5"/>
+  <text x="300" y="80" text-anchor="middle" font-size="18" font-weight="700" fill="#1e293b">The Algolia Way</text>
+  <text x="300" y="102" text-anchor="middle" font-size="13" fill="#94a3b8">Requires developer implementation</text>
+
+  <!-- Code block mockup -->
+  <rect x="70" y="120" width="460" height="310" rx="8" fill="#1e1b4b"/>
+  <text x="90" y="148" font-size="12" fill="#818cf8">import</text>
+  <text x="130" y="148" font-size="12" fill="#c4b5fd"> algoliasearch </text>
+  <text x="242" y="148" font-size="12" fill="#818cf8">from</text>
+  <text x="275" y="148" font-size="12" fill="#a5b4fc"> 'algoliasearch';</text>
+  <text x="90" y="170" font-size="12" fill="#818cf8">import</text>
+  <text x="130" y="170" font-size="12" fill="#c4b5fd"> instantsearch </text>
+  <text x="250" y="170" font-size="12" fill="#818cf8">from</text>
+  <text x="283" y="170" font-size="12" fill="#a5b4fc"> 'instantsearch.js';</text>
+  <text x="90" y="200" font-size="12" fill="#6b7280">// Initialize client</text>
+  <text x="90" y="222" font-size="12" fill="#818cf8">const</text>
+  <text x="130" y="222" font-size="12" fill="#c4b5fd"> client = algoliasearch(</text>
+  <text x="100" y="244" font-size="12" fill="#a5b4fc">  'YOUR_APP_ID',</text>
+  <text x="100" y="266" font-size="12" fill="#a5b4fc">  'YOUR_API_KEY'</text>
+  <text x="90" y="288" font-size="12" fill="#c4b5fd">);</text>
+  <text x="90" y="318" font-size="12" fill="#6b7280">// Configure search params</text>
+  <text x="90" y="340" font-size="12" fill="#818cf8">const</text>
+  <text x="130" y="340" font-size="12" fill="#c4b5fd"> search = instantsearch({</text>
+  <text x="100" y="362" font-size="12" fill="#c4b5fd">  indexName: 'products',</text>
+  <text x="100" y="384" font-size="12" fill="#c4b5fd">  searchClient: client,</text>
+  <text x="90" y="406" font-size="12" fill="#c4b5fd">});</text>
+
+  <!-- Right: No-code interface -->
+  <rect x="620" y="40" width="540" height="420" rx="14" fill="#ffffff" stroke="#e2e8f0" stroke-width="1.5"/>
+  <text x="890" y="80" text-anchor="middle" font-size="18" font-weight="700" fill="#1e293b">The No-Code Way</text>
+  <text x="890" y="102" text-anchor="middle" font-size="13" fill="#94a3b8">Set up without developers</text>
+
+  <!-- Visual UI mockup -->
+  <rect x="660" y="120" width="460" height="70" rx="8" fill="#eef2ff" stroke="#c7d2fe" stroke-width="1"/>
+  <circle cx="696" cy="155" r="18" fill="#6366f1"/>
+  <text x="696" y="160" text-anchor="middle" font-size="14" font-weight="700" fill="#ffffff">1</text>
+  <text x="730" y="150" font-size="14" font-weight="600" fill="#1e293b">Connect your store</text>
+  <text x="730" y="170" font-size="12" fill="#64748b">One-click Shopify / WooCommerce integration</text>
+
+  <rect x="660" y="205" width="460" height="70" rx="8" fill="#f0fdf4" stroke="#bbf7d0" stroke-width="1"/>
+  <circle cx="696" cy="240" r="18" fill="#22c55e"/>
+  <text x="696" y="245" text-anchor="middle" font-size="14" font-weight="700" fill="#ffffff">2</text>
+  <text x="730" y="235" font-size="14" font-weight="600" fill="#1e293b">Customize appearance</text>
+  <text x="730" y="255" font-size="12" fill="#64748b">Visual editor, match your brand in minutes</text>
+
+  <rect x="660" y="290" width="460" height="70" rx="8" fill="#fef3c7" stroke="#fde68a" stroke-width="1"/>
+  <circle cx="696" cy="325" r="18" fill="#f59e0b"/>
+  <text x="696" y="330" text-anchor="middle" font-size="14" font-weight="700" fill="#ffffff">3</text>
+  <text x="730" y="320" font-size="14" font-weight="600" fill="#1e293b">Go live</text>
+  <text x="730" y="340" font-size="12" fill="#64748b">AI learns your catalog automatically</text>
+
+  <!-- Time comparison -->
+  <rect x="660" y="385" width="200" height="50" rx="8" fill="#6366f1"/>
+  <text x="760" y="415" text-anchor="middle" font-size="14" font-weight="700" fill="#ffffff">~15 min setup</text>
+
+  <!-- VS divider -->
+  <circle cx="590" cy="250" r="24" fill="#6366f1"/>
+  <text x="590" y="256" text-anchor="middle" font-size="14" font-weight="700" fill="#ffffff">VS</text>
+</svg>

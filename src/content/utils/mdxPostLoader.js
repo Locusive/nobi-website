@@ -2,18 +2,19 @@
 // Each MDX file should export `meta` and a default component.
 const modules = import.meta.glob('../posts/*.mdx', { eager: true });
 
-export const posts = Object.entries(modules)
+const allPosts = Object.entries(modules)
   .map(([path, mod]) => {
     const slug = mod.meta?.slug || path.split('/').pop().replace(/\.mdx?$/, '');
     return {
       slug,
       meta: {
+        ...mod.meta,
         title: mod.meta?.title || slug,
         date: mod.meta?.date || new Date().toISOString(),
         excerpt: mod.meta?.excerpt || '',
         tags: mod.meta?.tags || [],
         author: mod.meta?.author || 'Nobi Team',
-        heroImage: mod.meta?.heroImage || null, // can be imported asset or URL string
+        heroImage: mod.meta?.heroImage || null,
         featured: Boolean(mod.meta?.featured),
         draft: Boolean(mod.meta?.draft),
       },
@@ -23,4 +24,15 @@ export const posts = Object.entries(modules)
   .filter((p) => !p.meta.draft)
   .sort((a, b) => new Date(b.meta.date) - new Date(a.meta.date));
 
-export const getPostBySlug = (slug) => posts.find((p) => p.slug === slug);
+// Published posts: excludes future-dated posts (used for blog listing)
+export const posts = allPosts.filter((p) => {
+  const publishDate = p.meta.publishedAt || p.meta.date;
+  if (publishDate) {
+    const today = new Date().toISOString().slice(0, 10);
+    if (publishDate > today) return false;
+  }
+  return true;
+});
+
+// Direct lookup: finds any non-draft post by slug (including scheduled)
+export const getPostBySlug = (slug) => allPosts.find((p) => p.slug === slug);

@@ -1,0 +1,94 @@
+<svg viewBox="0 0 1200 500" xmlns="http://www.w3.org/2000/svg" fill="none">
+  <rect width="1200" height="500" fill="#f8fafc"/>
+
+  <text x="600" y="45" text-anchor="middle" font-family="system-ui, sans-serif" font-size="22" font-weight="700" fill="#1e293b">5 Things Amazon Search Does That Most Stores Don't</text>
+  <line x1="250" y1="60" x2="950" y2="60" stroke="#fed7aa" stroke-width="3"/>
+
+  <!-- Item 1 -->
+  <rect x="40" y="85" width="210" height="380" rx="12" fill="#ffffff" stroke="#fdba74" stroke-width="2"/>
+  <circle cx="145" cy="130" r="28" fill="#fff7ed"/>
+  <text x="145" y="138" text-anchor="middle" font-family="system-ui, sans-serif" font-size="24" font-weight="700" fill="#ea580c">1</text>
+  <text x="145" y="180" text-anchor="middle" font-family="system-ui, sans-serif" font-size="15" font-weight="700" fill="#1e293b">Intent</text>
+  <text x="145" y="198" text-anchor="middle" font-family="system-ui, sans-serif" font-size="15" font-weight="700" fill="#1e293b">Recognition</text>
+  <line x1="80" y1="215" x2="210" y2="215" stroke="#fed7aa" stroke-width="1"/>
+  <text x="145" y="240" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#475569">Understands</text>
+  <text x="145" y="258" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#475569">"gift for dad"</text>
+  <text x="145" y="276" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#475569">means browsing,</text>
+  <text x="145" y="294" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#475569">not a specific</text>
+  <text x="145" y="312" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#475569">product lookup</text>
+  <rect x="65" y="340" width="160" height="30" rx="6" fill="#fff7ed"/>
+  <text x="145" y="360" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" font-weight="600" fill="#ea580c">Most stores: keyword match</text>
+  <rect x="65" y="380" width="160" height="30" rx="6" fill="#f0fdf4"/>
+  <text x="145" y="400" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" font-weight="600" fill="#16a34a">Amazon: context-aware</text>
+
+  <!-- Item 2 -->
+  <rect x="272" y="85" width="210" height="380" rx="12" fill="#ffffff" stroke="#fdba74" stroke-width="2"/>
+  <circle cx="377" cy="130" r="28" fill="#fff7ed"/>
+  <text x="377" y="138" text-anchor="middle" font-family="system-ui, sans-serif" font-size="24" font-weight="700" fill="#ea580c">2</text>
+  <text x="377" y="180" text-anchor="middle" font-family="system-ui, sans-serif" font-size="15" font-weight="700" fill="#1e293b">Synonym</text>
+  <text x="377" y="198" text-anchor="middle" font-family="system-ui, sans-serif" font-size="15" font-weight="700" fill="#1e293b">Intelligence</text>
+  <line x1="312" y1="215" x2="442" y2="215" stroke="#fed7aa" stroke-width="1"/>
+  <text x="377" y="240" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#475569">Knows "couch"</text>
+  <text x="377" y="258" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#475569">= "sofa" = "settee"</text>
+  <text x="377" y="276" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#475569">without manual</text>
+  <text x="377" y="294" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#475569">synonym lists</text>
+  <text x="377" y="312" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#475569"> </text>
+  <rect x="297" y="340" width="160" height="30" rx="6" fill="#fff7ed"/>
+  <text x="377" y="360" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" font-weight="600" fill="#ea580c">Most stores: exact match</text>
+  <rect x="297" y="380" width="160" height="30" rx="6" fill="#f0fdf4"/>
+  <text x="377" y="400" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" font-weight="600" fill="#16a34a">Amazon: semantic match</text>
+
+  <!-- Item 3 -->
+  <rect x="504" y="85" width="210" height="380" rx="12" fill="#ffffff" stroke="#fdba74" stroke-width="2"/>
+  <circle cx="609" cy="130" r="28" fill="#fff7ed"/>
+  <text x="609" y="138" text-anchor="middle" font-family="system-ui, sans-serif" font-size="24" font-weight="700" fill="#ea580c">3</text>
+  <text x="609" y="180" text-anchor="middle" font-family="system-ui, sans-serif" font-size="15" font-weight="700" fill="#1e293b">Typo</text>
+  <text x="609" y="198" text-anchor="middle" font-family="system-ui, sans-serif" font-size="15" font-weight="700" fill="#1e293b">Tolerance</text>
+  <line x1="544" y1="215" x2="674" y2="215" stroke="#fed7aa" stroke-width="1"/>
+  <text x="609" y="240" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#475569">"bllue snekers"</text>
+  <text x="609" y="258" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#475569">still returns</text>
+  <text x="609" y="276" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#475569">blue sneakers.</text>
+  <text x="609" y="294" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#475569">No "did you</text>
+  <text x="609" y="312" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#475569">mean?" needed</text>
+  <rect x="529" y="340" width="160" height="30" rx="6" fill="#fff7ed"/>
+  <text x="609" y="360" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" font-weight="600" fill="#ea580c">Most stores: 0 results</text>
+  <rect x="529" y="380" width="160" height="30" rx="6" fill="#f0fdf4"/>
+  <text x="609" y="400" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" font-weight="600" fill="#16a34a">Amazon: auto-correct</text>
+
+  <!-- Item 4 -->
+  <rect x="736" y="85" width="210" height="380" rx="12" fill="#ffffff" stroke="#fdba74" stroke-width="2"/>
+  <circle cx="841" cy="130" r="28" fill="#fff7ed"/>
+  <text x="841" y="138" text-anchor="middle" font-family="system-ui, sans-serif" font-size="24" font-weight="700" fill="#ea580c">4</text>
+  <text x="841" y="180" text-anchor="middle" font-family="system-ui, sans-serif" font-size="15" font-weight="700" fill="#1e293b">Behavioral</text>
+  <text x="841" y="198" text-anchor="middle" font-family="system-ui, sans-serif" font-size="15" font-weight="700" fill="#1e293b">Learning</text>
+  <line x1="776" y1="215" x2="906" y2="215" stroke="#fed7aa" stroke-width="1"/>
+  <text x="841" y="240" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#475569">Results improve</text>
+  <text x="841" y="258" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#475569">based on what</text>
+  <text x="841" y="276" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#475569">people actually</text>
+  <text x="841" y="294" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#475569">click and buy</text>
+  <text x="841" y="312" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#475569">after searching</text>
+  <rect x="761" y="340" width="160" height="30" rx="6" fill="#fff7ed"/>
+  <text x="841" y="360" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" font-weight="600" fill="#ea580c">Most stores: static rules</text>
+  <rect x="761" y="380" width="160" height="30" rx="6" fill="#f0fdf4"/>
+  <text x="841" y="400" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" font-weight="600" fill="#16a34a">Amazon: ML-optimized</text>
+
+  <!-- Item 5 -->
+  <rect x="968" y="85" width="210" height="380" rx="12" fill="#ffffff" stroke="#fdba74" stroke-width="2"/>
+  <circle cx="1073" cy="130" r="28" fill="#fff7ed"/>
+  <text x="1073" y="138" text-anchor="middle" font-family="system-ui, sans-serif" font-size="24" font-weight="700" fill="#ea580c">5</text>
+  <text x="1073" y="180" text-anchor="middle" font-family="system-ui, sans-serif" font-size="15" font-weight="700" fill="#1e293b">Zero-Result</text>
+  <text x="1073" y="198" text-anchor="middle" font-family="system-ui, sans-serif" font-size="15" font-weight="700" fill="#1e293b">Prevention</text>
+  <line x1="1008" y1="215" x2="1138" y2="215" stroke="#fed7aa" stroke-width="1"/>
+  <text x="1073" y="240" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#475569">Always shows</text>
+  <text x="1073" y="258" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#475569">something relevant.</text>
+  <text x="1073" y="276" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#475569">Falls back to</text>
+  <text x="1073" y="294" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#475569">related items</text>
+  <text x="1073" y="312" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#475569">gracefully</text>
+  <rect x="993" y="340" width="160" height="30" rx="6" fill="#fff7ed"/>
+  <text x="1073" y="360" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" font-weight="600" fill="#ea580c">Most stores: dead end</text>
+  <rect x="993" y="380" width="160" height="30" rx="6" fill="#f0fdf4"/>
+  <text x="1073" y="400" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" font-weight="600" fill="#16a34a">Amazon: always relevant</text>
+
+  <!-- Bottom bar -->
+  <rect x="40" y="475" width="1120" height="4" rx="2" fill="#ea580c" opacity="0.3"/>
+</svg>

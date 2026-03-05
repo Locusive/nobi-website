@@ -1,0 +1,66 @@
+<svg viewBox="0 0 1200 500" xmlns="http://www.w3.org/2000/svg" font-family="system-ui, -apple-system, sans-serif">
+  <rect width="1200" height="500" fill="#f8fafc"/>
+
+  <text x="600" y="45" text-anchor="middle" font-size="20" font-weight="700" fill="#1e293b">Keyword Search vs. Semantic AI Search</text>
+
+  <!-- Left column: Keyword -->
+  <rect x="40" y="70" width="540" height="400" rx="16" fill="#ffffff" stroke="#e2e8f0" stroke-width="1.5"/>
+  <rect x="40" y="70" width="540" height="50" rx="16" fill="#fef2f2"/>
+  <rect x="40" y="104" width="540" height="16" fill="#fef2f2"/>
+  <text x="310" y="102" text-anchor="middle" font-size="17" font-weight="700" fill="#dc2626">Keyword Matching</text>
+
+  <!-- Query -->
+  <rect x="80" y="140" width="460" height="44" rx="22" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="1"/>
+  <text x="310" y="167" text-anchor="middle" font-size="14" fill="#475569">"cozy throw blanket for the couch"</text>
+
+  <!-- Process -->
+  <text x="310" y="210" text-anchor="middle" font-size="13" fill="#94a3b8">Splits into tokens and matches exact words...</text>
+
+  <!-- Results -->
+  <rect x="80" y="230" width="460" height="60" rx="8" fill="#fef2f2" stroke="#fecaca" stroke-width="1"/>
+  <text x="100" y="255" font-size="13" font-weight="600" fill="#dc2626">Result 1:</text>
+  <text x="175" y="255" font-size="13" fill="#475569">Throw Pillow Set — Decorative</text>
+  <text x="100" y="275" font-size="11" fill="#94a3b8">Matched "throw" only. Wrong product entirely.</text>
+
+  <rect x="80" y="300" width="460" height="60" rx="8" fill="#fef2f2" stroke="#fecaca" stroke-width="1"/>
+  <text x="100" y="325" font-size="13" font-weight="600" fill="#dc2626">Result 2:</text>
+  <text x="175" y="325" font-size="13" fill="#475569">Couch Cover — Stretch Fit, Brown</text>
+  <text x="100" y="345" font-size="11" fill="#94a3b8">Matched "couch" only. Not a blanket.</text>
+
+  <rect x="80" y="370" width="460" height="60" rx="8" fill="#fff7ed" stroke="#fed7aa" stroke-width="1"/>
+  <text x="100" y="395" font-size="13" font-weight="600" fill="#ea580c">Result 3:</text>
+  <text x="175" y="395" font-size="13" fill="#475569">Blanket — Queen Size, Blue</text>
+  <text x="100" y="415" font-size="11" fill="#94a3b8">Matched "blanket" — but queen-size bed blanket, not a throw.</text>
+
+  <!-- Right column: Semantic -->
+  <rect x="620" y="70" width="540" height="400" rx="16" fill="#ffffff" stroke="#e2e8f0" stroke-width="1.5"/>
+  <rect x="620" y="70" width="540" height="50" rx="16" fill="#f0fdf4"/>
+  <rect x="620" y="104" width="540" height="16" fill="#f0fdf4"/>
+  <text x="890" y="102" text-anchor="middle" font-size="17" font-weight="700" fill="#16a34a">Semantic AI Search</text>
+
+  <!-- Query -->
+  <rect x="660" y="140" width="460" height="44" rx="22" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="1"/>
+  <text x="890" y="167" text-anchor="middle" font-size="14" fill="#475569">"cozy throw blanket for the couch"</text>
+
+  <!-- Process -->
+  <text x="890" y="210" text-anchor="middle" font-size="13" fill="#94a3b8">Understands: soft + small blanket + living room use...</text>
+
+  <!-- Results -->
+  <rect x="660" y="230" width="460" height="60" rx="8" fill="#f0fdf4" stroke="#bbf7d0" stroke-width="1"/>
+  <text x="680" y="255" font-size="13" font-weight="600" fill="#16a34a">Result 1:</text>
+  <text x="755" y="255" font-size="13" fill="#475569">Sherpa Fleece Throw — 50x60, Cream</text>
+  <text x="680" y="275" font-size="11" fill="#22c55e">Perfect match: soft, throw-sized, couch-appropriate</text>
+
+  <rect x="660" y="300" width="460" height="60" rx="8" fill="#f0fdf4" stroke="#bbf7d0" stroke-width="1"/>
+  <text x="680" y="325" font-size="13" font-weight="600" fill="#16a34a">Result 2:</text>
+  <text x="755" y="325" font-size="13" fill="#475569">Chunky Knit Blanket — Sofa Size, Gray</text>
+  <text x="680" y="345" font-size="11" fill="#22c55e">Excellent: cozy texture, right size, living room style</text>
+
+  <rect x="660" y="370" width="460" height="60" rx="8" fill="#f0fdf4" stroke="#bbf7d0" stroke-width="1"/>
+  <text x="680" y="395" font-size="13" font-weight="600" fill="#16a34a">Result 3:</text>
+  <text x="755" y="395" font-size="13" fill="#475569">Velvet Plush Throw — Reversible, Blush</text>
+  <text x="680" y="415" font-size="11" fill="#22c55e">Strong match: soft, decorative throw for living space</text>
+
+  <!-- Bottom -->
+  <text x="600" y="490" text-anchor="middle" font-size="13" fill="#94a3b8">Same query. Completely different shopping experience.</text>
+</svg>

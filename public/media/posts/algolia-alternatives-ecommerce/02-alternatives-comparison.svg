@@ -1,0 +1,122 @@
+<svg viewBox="0 0 1200 500" xmlns="http://www.w3.org/2000/svg" font-family="system-ui, -apple-system, sans-serif">
+  <rect width="1200" height="500" fill="#ffffff"/>
+
+  <!-- Title -->
+  <text x="600" y="40" text-anchor="middle" font-size="20" font-weight="700" fill="#1e293b">5 Algolia Alternatives — Setup Difficulty</text>
+
+  <!-- Card 1: Searchspring -->
+  <rect x="30" y="65" width="220" height="400" rx="12" fill="#ffffff" stroke="#e2e8f0" stroke-width="1.5"/>
+  <rect x="30" y="65" width="220" height="50" rx="12" fill="#ea580c"/>
+  <rect x="30" y="103" width="220" height="12" fill="#ea580c"/>
+  <text x="140" y="97" text-anchor="middle" font-size="15" font-weight="700" fill="#ffffff">Searchspring</text>
+  <text x="50" y="140" font-size="12" font-weight="600" fill="#1e293b">Best for:</text>
+  <text x="50" y="158" font-size="11" fill="#64748b">Mid-market Shopify stores</text>
+  <text x="50" y="185" font-size="12" font-weight="600" fill="#1e293b">Setup difficulty:</text>
+  <!-- Difficulty meter: 2/5 -->
+  <rect x="50" y="195" width="28" height="14" rx="3" fill="#22c55e"/>
+  <rect x="82" y="195" width="28" height="14" rx="3" fill="#22c55e"/>
+  <rect x="114" y="195" width="28" height="14" rx="3" fill="#e2e8f0"/>
+  <rect x="146" y="195" width="28" height="14" rx="3" fill="#e2e8f0"/>
+  <rect x="178" y="195" width="28" height="14" rx="3" fill="#e2e8f0"/>
+  <text x="50" y="230" font-size="11" fill="#16a34a" font-weight="600">Easy</text>
+  <text x="50" y="258" font-size="12" font-weight="600" fill="#1e293b">Pricing:</text>
+  <text x="50" y="276" font-size="11" fill="#64748b">Mid-range, quote-based</text>
+  <text x="50" y="310" font-size="12" font-weight="600" fill="#1e293b">Pros:</text>
+  <text x="50" y="328" font-size="11" fill="#64748b">Good merch tools</text>
+  <text x="50" y="346" font-size="11" fill="#64748b">Platform plugins</text>
+  <text x="50" y="374" font-size="12" font-weight="600" fill="#1e293b">Cons:</text>
+  <text x="50" y="392" font-size="11" fill="#64748b">Limited NLP</text>
+  <text x="50" y="410" font-size="11" fill="#64748b">Basic AI features</text>
+
+  <!-- Card 2: Klevu -->
+  <rect x="268" y="65" width="220" height="400" rx="12" fill="#ffffff" stroke="#e2e8f0" stroke-width="1.5"/>
+  <rect x="268" y="65" width="220" height="50" rx="12" fill="#0d9488"/>
+  <rect x="268" y="103" width="220" height="12" fill="#0d9488"/>
+  <text x="378" y="97" text-anchor="middle" font-size="15" font-weight="700" fill="#ffffff">Klevu</text>
+  <text x="288" y="140" font-size="12" font-weight="600" fill="#1e293b">Best for:</text>
+  <text x="288" y="158" font-size="11" fill="#64748b">Merchandising-led teams</text>
+  <text x="288" y="185" font-size="12" font-weight="600" fill="#1e293b">Setup difficulty:</text>
+  <rect x="288" y="195" width="28" height="14" rx="3" fill="#22c55e"/>
+  <rect x="320" y="195" width="28" height="14" rx="3" fill="#22c55e"/>
+  <rect x="352" y="195" width="28" height="14" rx="3" fill="#eab308"/>
+  <rect x="384" y="195" width="28" height="14" rx="3" fill="#e2e8f0"/>
+  <rect x="416" y="195" width="28" height="14" rx="3" fill="#e2e8f0"/>
+  <text x="288" y="230" font-size="11" fill="#d97706" font-weight="600">Moderate</text>
+  <text x="288" y="258" font-size="12" font-weight="600" fill="#1e293b">Pricing:</text>
+  <text x="288" y="276" font-size="11" fill="#64748b">Tiered plans</text>
+  <text x="288" y="310" font-size="12" font-weight="600" fill="#1e293b">Pros:</text>
+  <text x="288" y="328" font-size="11" fill="#64748b">Strong AI search</text>
+  <text x="288" y="346" font-size="11" fill="#64748b">Visual merch tools</text>
+  <text x="288" y="374" font-size="12" font-weight="600" fill="#1e293b">Cons:</text>
+  <text x="288" y="392" font-size="11" fill="#64748b">Some dev needed</text>
+  <text x="288" y="410" font-size="11" fill="#64748b">Learning curve</text>
+
+  <!-- Card 3: Doofinder -->
+  <rect x="506" y="65" width="220" height="400" rx="12" fill="#ffffff" stroke="#e2e8f0" stroke-width="1.5"/>
+  <rect x="506" y="65" width="220" height="50" rx="12" fill="#2563eb"/>
+  <rect x="506" y="103" width="220" height="12" fill="#2563eb"/>
+  <text x="616" y="97" text-anchor="middle" font-size="15" font-weight="700" fill="#ffffff">Doofinder</text>
+  <text x="526" y="140" font-size="12" font-weight="600" fill="#1e293b">Best for:</text>
+  <text x="526" y="158" font-size="11" fill="#64748b">Small stores, quick setup</text>
+  <text x="526" y="185" font-size="12" font-weight="600" fill="#1e293b">Setup difficulty:</text>
+  <rect x="526" y="195" width="28" height="14" rx="3" fill="#22c55e"/>
+  <rect x="558" y="195" width="28" height="14" rx="3" fill="#e2e8f0"/>
+  <rect x="590" y="195" width="28" height="14" rx="3" fill="#e2e8f0"/>
+  <rect x="622" y="195" width="28" height="14" rx="3" fill="#e2e8f0"/>
+  <rect x="654" y="195" width="28" height="14" rx="3" fill="#e2e8f0"/>
+  <text x="526" y="230" font-size="11" fill="#16a34a" font-weight="600">Very Easy</text>
+  <text x="526" y="258" font-size="12" font-weight="600" fill="#1e293b">Pricing:</text>
+  <text x="526" y="276" font-size="11" fill="#64748b">Affordable tiers</text>
+  <text x="526" y="310" font-size="12" font-weight="600" fill="#1e293b">Pros:</text>
+  <text x="526" y="328" font-size="11" fill="#64748b">Quick installation</text>
+  <text x="526" y="346" font-size="11" fill="#64748b">Budget-friendly</text>
+  <text x="526" y="374" font-size="12" font-weight="600" fill="#1e293b">Cons:</text>
+  <text x="526" y="392" font-size="11" fill="#64748b">Limited AI depth</text>
+  <text x="526" y="410" font-size="11" fill="#64748b">Basic analytics</text>
+
+  <!-- Card 4: Luigi's Box -->
+  <rect x="744" y="65" width="220" height="400" rx="12" fill="#ffffff" stroke="#e2e8f0" stroke-width="1.5"/>
+  <rect x="744" y="65" width="220" height="50" rx="12" fill="#9333ea"/>
+  <rect x="744" y="103" width="220" height="12" fill="#9333ea"/>
+  <text x="854" y="97" text-anchor="middle" font-size="15" font-weight="700" fill="#ffffff">Luigi's Box</text>
+  <text x="764" y="140" font-size="12" font-weight="600" fill="#1e293b">Best for:</text>
+  <text x="764" y="158" font-size="11" fill="#64748b">European ecommerce</text>
+  <text x="764" y="185" font-size="12" font-weight="600" fill="#1e293b">Setup difficulty:</text>
+  <rect x="764" y="195" width="28" height="14" rx="3" fill="#22c55e"/>
+  <rect x="796" y="195" width="28" height="14" rx="3" fill="#22c55e"/>
+  <rect x="828" y="195" width="28" height="14" rx="3" fill="#e2e8f0"/>
+  <rect x="860" y="195" width="28" height="14" rx="3" fill="#e2e8f0"/>
+  <rect x="892" y="195" width="28" height="14" rx="3" fill="#e2e8f0"/>
+  <text x="764" y="230" font-size="11" fill="#16a34a" font-weight="600">Easy</text>
+  <text x="764" y="258" font-size="12" font-weight="600" fill="#1e293b">Pricing:</text>
+  <text x="764" y="276" font-size="11" fill="#64748b">Revenue-based</text>
+  <text x="764" y="310" font-size="12" font-weight="600" fill="#1e293b">Pros:</text>
+  <text x="764" y="328" font-size="11" fill="#64748b">Multilingual</text>
+  <text x="764" y="346" font-size="11" fill="#64748b">Good analytics</text>
+  <text x="764" y="374" font-size="12" font-weight="600" fill="#1e293b">Cons:</text>
+  <text x="764" y="392" font-size="11" fill="#64748b">Smaller ecosystem</text>
+  <text x="764" y="410" font-size="11" fill="#64748b">Less known in US</text>
+
+  <!-- Card 5: Nobi -->
+  <rect x="982" y="65" width="220" height="400" rx="12" fill="#ffffff" stroke="#6366f1" stroke-width="2.5"/>
+  <rect x="982" y="65" width="220" height="50" rx="12" fill="#4f46e5"/>
+  <rect x="982" y="103" width="220" height="12" fill="#4f46e5"/>
+  <text x="1092" y="97" text-anchor="middle" font-size="15" font-weight="700" fill="#ffffff">Nobi</text>
+  <text x="1002" y="140" font-size="12" font-weight="600" fill="#1e293b">Best for:</text>
+  <text x="1002" y="158" font-size="11" fill="#64748b">Conversational AI search</text>
+  <text x="1002" y="185" font-size="12" font-weight="600" fill="#1e293b">Setup difficulty:</text>
+  <rect x="1002" y="195" width="28" height="14" rx="3" fill="#22c55e"/>
+  <rect x="1034" y="195" width="28" height="14" rx="3" fill="#e2e8f0"/>
+  <rect x="1066" y="195" width="28" height="14" rx="3" fill="#e2e8f0"/>
+  <rect x="1098" y="195" width="28" height="14" rx="3" fill="#e2e8f0"/>
+  <rect x="1130" y="195" width="28" height="14" rx="3" fill="#e2e8f0"/>
+  <text x="1002" y="230" font-size="11" fill="#16a34a" font-weight="600">Very Easy</text>
+  <text x="1002" y="258" font-size="12" font-weight="600" fill="#1e293b">Pricing:</text>
+  <text x="1002" y="276" font-size="11" fill="#64748b">Accessible, transparent</text>
+  <text x="1002" y="310" font-size="12" font-weight="600" fill="#1e293b">Pros:</text>
+  <text x="1002" y="328" font-size="11" fill="#64748b">Conversational AI</text>
+  <text x="1002" y="346" font-size="11" fill="#64748b">No-code, fast setup</text>
+  <text x="1002" y="374" font-size="12" font-weight="600" fill="#1e293b">Cons:</text>
+  <text x="1002" y="392" font-size="11" fill="#64748b">Newer platform</text>
+  <text x="1002" y="410" font-size="11" fill="#64748b">Growing feature set</text>
+</svg>

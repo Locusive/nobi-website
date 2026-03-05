@@ -36,7 +36,7 @@ const fadeUp = {
   }),
 };
 
-function CTAButton({ children = "Start Free Trial", className = "", size = "lg" }) {
+function CTAButton({ children = "Get Started Free", className = "", size = "lg" }) {
   const sizes = {
     md: "h-11 px-5 text-[15px]",
     lg: "h-12 px-7 text-base",
@@ -47,7 +47,6 @@ function CTAButton({ children = "Start Free Trial", className = "", size = "lg" 
       className={`inline-flex items-center justify-center gap-2 rounded-2xl font-semibold transition active:scale-[.98] bg-black text-white hover:opacity-90 shadow-sm ${sizes[size]} ${className}`}
     >
       {children}
-      <ArrowRight className="h-4 w-4" />
     </a>
   );
 }
@@ -64,7 +63,7 @@ function StickyBar() {
             className="h-7 w-auto"
           />
         </a>
-        <CTAButton size="md">Start Free Trial</CTAButton>
+        <CTAButton size="md">Get Started Free</CTAButton>
       </div>
     </header>
   );
@@ -147,7 +146,7 @@ export default function SearchEngineLanding() {
             custom={3}
             className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3"
           >
-            <CTAButton>Start Free Trial</CTAButton>
+            <CTAButton>Get Started Free</CTAButton>
             <span className="text-sm text-slate-500">No credit card required</span>
           </motion.div>
         </div>
@@ -418,7 +417,7 @@ export default function SearchEngineLanding() {
             30-day free trial, no credit card required.
           </p>
           <CTAButton className="text-lg h-14 px-8">
-            Start Free Trial
+            Get Started Free
           </CTAButton>
         </div>
       </section>

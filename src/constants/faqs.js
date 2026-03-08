@@ -44,7 +44,7 @@ const FAQ_ITEMS = [
   },
   {
     q: "What kind of reporting do you have?",
-    a: "Nobi provides performance metrics on search usage, conversion rates, and other key indicators to help you understand how Nobi is impacting your store's performance. In addition, we provide deep insights, analytics, trends, topic analytics, and search feature breakdowns in our dashboard.",
+    a: "Nobi provides performance metrics on search usage, conversion rates, and other key indicators to help you understand how Nobi is impacting your store's performance. In addition, we provide deep insights, analytics, trends, topic analytics, search feature breakdowns, and acquisition channel reporting that shows which traffic sources (organic search, paid ads, social, direct, etc.) drive the most searches, clicks, and revenue through Nobi.",
     category: "Product"
   },
   {

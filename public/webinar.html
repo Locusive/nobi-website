@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Claude Code Webinar Series | Nobi</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      color: #222;
+      background: #fff;
+      line-height: 1.7;
+      font-size: 17px;
+    }
+
+    a { color: #222; }
+
+    /* ── Nav ── */
+    nav {
+      padding: 20px 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 960px;
+      margin: 0 auto;
+    }
+    nav .logo img {
+      height: 32px;
+      width: auto;
+    }
+    nav a.register-link {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-size: 0.85rem;
+      text-decoration: none;
+      border-bottom: 1.5px solid #222;
+      padding-bottom: 1px;
+    }
+
+    /* ── Hero ── */
+    .hero {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 60px 32px 60px;
+    }
+    .hero-top {
+      display: flex;
+      align-items: flex-start;
+      gap: 48px;
+      margin-bottom: 36px;
+    }
+    .hero-text {
+      flex: 1;
+    }
+    .hero-visual {
+      flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      padding-top: 38px;
+    }
+    .hero-visual img {
+      height: 48px;
+      width: auto;
+    }
+    .hero-visual .plus {
+      font-size: 22px;
+      color: #ccc;
+      font-weight: 300;
+      margin: 0;
+      position: relative;
+      left: 12px;
+    }
+
+    .hero .eyebrow {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: #888;
+      margin-bottom: 20px;
+    }
+    .hero h1 {
+      font-size: 2.6rem;
+      font-weight: 400;
+      line-height: 1.2;
+      margin-bottom: 28px;
+      letter-spacing: -0.5px;
+    }
+    .hero h1 em {
+      font-style: italic;
+    }
+    .hero .intro {
+      color: #555;
+      margin-bottom: 28px;
+      font-size: 1.05rem;
+    }
+    .hero .details {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-size: 0.88rem;
+      color: #888;
+      margin-bottom: 8px;
+    }
+    .hero-cta {
+      margin-top: 28px;
+    }
+    .hero-cta a {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      display: inline-block;
+      background: #222;
+      color: #fff;
+      text-decoration: none;
+      padding: 13px 32px;
+      border-radius: 6px;
+      font-size: 0.92rem;
+      font-weight: 500;
+      transition: background 0.15s;
+    }
+    .hero-cta a:hover { background: #444; }
+
+    /* ── Divider ── */
+    hr {
+      border: none;
+      border-top: 1px solid #e0e0e0;
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    /* ── Sessions ── */
+    .sessions {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 60px 32px;
+    }
+    .sessions h2 {
+      font-weight: 400;
+      font-size: 1.6rem;
+      margin-bottom: 40px;
+    }
+    .session {
+      margin-bottom: 48px;
+      display: grid;
+      grid-template-columns: 56px 1fr;
+      gap: 0 24px;
+    }
+    .session-number {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: #aaa;
+      padding-top: 4px;
+    }
+    .session h3 {
+      font-weight: 600;
+      font-size: 1.15rem;
+      margin-bottom: 8px;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    }
+    .session .meta {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-size: 0.82rem;
+      color: #999;
+      margin-bottom: 10px;
+    }
+    .session p {
+      color: #555;
+      font-size: 0.98rem;
+      grid-column: 2;
+    }
+    .session .topics {
+      grid-column: 2;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-size: 0.85rem;
+      color: #777;
+      margin-top: 10px;
+    }
+
+    /* ── The pitch ── */
+    .pitch {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 60px 32px;
+    }
+    .pitch p {
+      color: #555;
+      font-size: 1.05rem;
+      margin-bottom: 16px;
+    }
+    .pitch p:last-of-type {
+      margin-bottom: 0;
+    }
+
+    /* ── Register ── */
+    .register {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 60px 32px 80px;
+    }
+    .register h2 {
+      font-weight: 400;
+      font-size: 1.6rem;
+      margin-bottom: 8px;
+    }
+    .register .sub {
+      color: #888;
+      font-size: 0.95rem;
+      margin-bottom: 32px;
+    }
+    .register form {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+    .register form .full {
+      grid-column: 1 / -1;
+    }
+    .register input, .register select {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      padding: 13px 14px;
+      border: 1.5px solid #ddd;
+      border-radius: 6px;
+      font-size: 0.92rem;
+      background: #fff;
+      color: #222;
+      width: 100%;
+      transition: border-color 0.15s;
+    }
+    .register input:focus, .register select:focus {
+      outline: none;
+      border-color: #222;
+    }
+    .register input::placeholder { color: #aaa; }
+    .register select { color: #aaa; }
+    .register select:has(option:checked:not([disabled])) { color: #222; }
+    .register button {
+      grid-column: 1 / -1;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      padding: 14px;
+      background: #222;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      font-size: 0.95rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    .register button:hover { background: #444; }
+    .register .fine-print {
+      grid-column: 1 / -1;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-size: 0.78rem;
+      color: #aaa;
+      text-align: center;
+    }
+
+    @media (max-width: 640px) {
+      .hero { padding: 48px 20px 40px; }
+      .hero h1 { font-size: 2rem; }
+      .hero-top { flex-direction: column; gap: 32px; }
+      .hero-visual { width: 100%; justify-content: center; }
+      .hero-visual img { height: 48px; }
+      .session { grid-template-columns: 1fr; }
+      .session-number { margin-bottom: 4px; }
+      .session p, .session .topics { grid-column: 1; }
+      .register form { grid-template-columns: 1fr; }
+      .sessions, .pitch, .register { padding-left: 20px; padding-right: 20px; }
+    }
+
+    footer {
+      text-align: center;
+      padding: 24px;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-size: 0.78rem;
+      color: #bbb;
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="logo">
+      <img src="/media/nobi-logo.png" srcset="/media/nobi-logo.png 1x, /media/nobi-logo@2x.png 2x" alt="Nobi">
+    </div>
+    <a href="#register" class="register-link">Register</a>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-top">
+      <div class="hero-text">
+        <div class="eyebrow">Free webinar series &middot; 4 weeks</div>
+        <h1>We'll show you how to use Claude Code to <em>actually</em> run your business</h1>
+      </div>
+      <div class="hero-visual">
+        <img src="/media/nobi-logo.png" alt="Nobi" style="height: 80px; margin-bottom: -14px;">
+        <span class="plus">+</span>
+        <img src="/media/claude-logo.svg" alt="Claude">
+      </div>
+    </div>
+    <p class="intro">
+      Not a lecture. Not a pitch deck. We're going to open a terminal and build things
+      in front of you — content pipelines, prospect research, data exports &amp; analysis, real software.
+      Four sessions, 30 minutes each.
+    </p>
+    <p class="details">Starts April 9th, 2026 &middot; Thursdays at 12 PM ET &middot; 30 min each</p>
+    <p class="details">Hosted by Tyler &amp; Shanif, co-founders of Nobi</p>
+    <div class="hero-cta">
+      <a href="#register">Register for the series</a>
+    </div>
+  </section>
+
+  <hr>
+
+  <section class="sessions">
+    <h2>The sessions</h2>
+
+    <div class="session">
+      <div class="session-number">Week 1</div>
+      <div>
+        <h3>Automate Your Content Pipeline</h3>
+        <div class="meta">Tyler &middot; April 9th</div>
+      </div>
+      <p>
+        We'll build an SEO content workflow from scratch — keyword research, competitor analysis,
+        drafting, optimization — all in one chain. Then we'll set up industry monitoring that
+        writes LinkedIn posts in your voice. The kind of stuff that used to eat half your morning.
+      </p>
+      <div class="topics">SEO &middot; Content generation &middot; LinkedIn &middot; Industry monitoring</div>
+    </div>
+
+    <div class="session">
+      <div class="session-number">Week 2</div>
+      <div>
+        <h3>Find Prospects and Write Emails That Get Replies</h3>
+        <div class="meta">Tyler &middot; April 16th</div>
+      </div>
+      <p>
+        We'll pull real prospect data — company context, recent news, role details — and
+        write cold emails that reference something specific about each person. Not mail merge.
+        Actual personalization, at scale. We'll also show how to engage in communities without
+        living on the internet all day.
+      </p>
+      <div class="topics">Prospect research &middot; Cold email &middot; Community engagement</div>
+    </div>
+
+    <div class="session">
+      <div class="session-number">Week 3</div>
+      <div>
+        <h3>Turn Your Data Into Decisions</h3>
+        <div class="meta">Tyler &middot; April 23rd</div>
+      </div>
+      <p>
+        We'll take messy, scattered data — spreadsheets, CRM exports, analytics dashboards —
+        and build automated analysis pipelines that surface the insights you actually care about.
+        Custom reports, trend detection, and forecasting, all generated on a schedule without
+        you lifting a finger.
+      </p>
+      <div class="topics">Data analysis &middot; Automated reporting &middot; Dashboards &middot; Forecasting</div>
+    </div>
+
+    <div class="session">
+      <div class="session-number">Week 4</div>
+      <div>
+        <h3>Stop Vibe Coding</h3>
+        <div class="meta">Shanif &middot; April 30th</div>
+      </div>
+      <p>
+        Most people think you can just go in and vibe code a whole app. You can't — or
+        rather, you can, but you'll end up with security flaws and errors that compound
+        until the whole thing falls over. Shanif will show the right way: break the work
+        into small, iterative pieces, prompt Claude correctly, and add tests as you go.
+        The way you'd actually ship software.
+      </p>
+      <div class="topics">Incremental development &middot; Prompting &middot; Testing &middot; Engineering workflow</div>
+    </div>
+  </section>
+
+  <hr>
+
+  <section class="pitch">
+    <p>
+      We're showing you all of this because we think it's genuinely useful and we want
+      you to see what's possible. If you walk away and build it all yourself — great.
+    </p>
+    <p>
+      But if you'd rather skip the setup and have someone who's already done this
+      handle it for you, that's what Nobi does. After the series, we're offering a
+      free 30-minute call where we'll look at your workflows and tell you exactly
+      where Claude Code can help.
+    </p>
+  </section>
+
+  <hr>
+
+  <section class="register" id="register">
+    <h2>Register</h2>
+    <p class="sub">Pick one session or sign up for all four. We'll send the recordings either way.</p>
+    <form onsubmit="event.preventDefault(); alert('Registration submitted! (Connect to your form backend)');">
+      <input type="text" placeholder="First name" required>
+      <input type="text" placeholder="Last name">
+      <input type="email" placeholder="Email" required class="full">
+      <input type="text" placeholder="Company (optional)" class="full">
+      <select class="full">
+        <option value="" disabled selected>Which sessions?</option>
+        <option value="all">All four</option>
+        <option value="1">Week 1 — Content &amp; SEO</option>
+        <option value="2">Week 2 — Prospecting &amp; Outreach</option>
+        <option value="3">Week 3 — Data Analysis &amp; Reporting</option>
+        <option value="4">Week 4 — Stop Vibe Coding</option>
+      </select>
+      <button type="submit">Register — it's free</button>
+      <div class="fine-print">No spam. Just reminders and the recording.</div>
+    </form>
+  </section>
+
+  <footer>&copy; 2026 Nobi</footer>
+
+</body>
+</html>

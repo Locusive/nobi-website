@@ -12,6 +12,7 @@ import BetterSearch from "./pages/BetterSearch.jsx";
 import Pricing from "./pages/Pricing.jsx";
 import SearchEngineLanding from "./pages/landing/SearchEngineLanding.jsx";
 import AIAssistantLanding from "./pages/landing/AIAssistantLanding.jsx";
+import Webinar from "./pages/Webinar.jsx";
 import NotFound from "./pages/NotFound.jsx";
 import { RequestDemoModal } from "./components/DemoModals.jsx";
 
@@ -46,6 +47,7 @@ function App() {
         <Route path="/faqs" element={<FAQs />} />
         <Route path="/s/search" element={<SearchEngineLanding />} />
         <Route path="/s/ai-assistant" element={<AIAssistantLanding />} />
+        <Route path="/webinar" element={<Webinar />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
 

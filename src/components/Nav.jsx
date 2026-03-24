@@ -18,8 +18,7 @@ export default function Nav() {
   const navLinks = [
     { label: "Home", href: "/" },
     { label: "Pricing", href: "/pricing" },
-    { label: "Why Nobi", href: "/why-nobi/better-search" },
-    { label: "FAQs", href: "/faqs" },
+{ label: "FAQs", href: "/faqs" },
     { label: "Docs", href: "https://docs.nobi.ai", external: true },
   ];
 

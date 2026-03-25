@@ -75,7 +75,7 @@ export default function WebinarIPullRank() {
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 1.25rem 2rem;
+            padding: 0.75rem 2rem;
             border-bottom: 1px solid var(--border-color);
           }
           .wip-nav-logos {
@@ -520,7 +520,7 @@ export default function WebinarIPullRank() {
         <nav className="wip-nav">
           <div className="wip-nav-logos">
             <a href="https://nobi.ai" className="wip-logo-nobi">
-              <img src="/media/nobi-logo.png" alt="Nobi" style={{ height: "32px", width: "auto" }} />
+              <img src="/media/nobi-logo.png" alt="Nobi" style={{ height: "44px", width: "auto" }} />
             </a>
             <span className="wip-divider">&times;</span>
             <a href="https://ipullrank.com" className="wip-logo-ipr">

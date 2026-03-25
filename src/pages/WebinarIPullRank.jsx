@@ -1,10 +1,51 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import PageLayout from "../components/PageLayout";
 
 export default function WebinarIPullRank() {
   useEffect(() => {
-    document.title = "Webinar: Christmas in July - Get Your Site Ready for AI-Powered Black Friday Shoppers | Nobi";
+    document.title = "Webinar: Christmas in June - Get Your Site Ready for AI-Powered Black Friday Shoppers | Nobi";
   }, []);
+
+  const [form, setForm] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    company: "",
+    botcheck: "",
+  });
+  const [submitting, setSubmitting] = useState(false);
+  const [done, setDone] = useState(false);
+  const [error, setError] = useState("");
+
+  const update = (e) => setForm((f) => ({ ...f, [e.target.name]: e.target.value }));
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+    setSubmitting(true);
+    setError("");
+    try {
+      const formData = new FormData();
+      formData.append("access_key", "c7a3fd79-0e4f-47ce-aa30-c141616d21e3");
+      formData.append("subject", "iPullRank Webinar Registration: " + (form.firstName + " " + form.lastName).trim());
+      formData.append("from_name", "Nobi x iPullRank Webinar");
+      formData.append("name", (form.firstName + " " + form.lastName).trim());
+      formData.append("email", form.email);
+      formData.append("company", form.company);
+      formData.append("botcheck", form.botcheck);
+
+      const r = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: formData,
+      });
+      const j = await r.json();
+      if (!r.ok || !j.success) throw new Error(j.message || "Something went wrong.");
+      setDone(true);
+    } catch (err) {
+      setError(err.message || "Failed to submit.");
+    } finally {
+      setSubmitting(false);
+    }
+  }
 
   return (
     <PageLayout>
@@ -185,7 +226,10 @@ export default function WebinarIPullRank() {
           .wip-page section {
             max-width: 920px;
             margin: 0 auto;
-            padding: 0 1.5rem;
+            padding: 3rem 1.5rem;
+          }
+          .wip-page section + section {
+            margin-top: 1rem;
           }
           .wip-section-heading {
             font-size: 0.75rem;
@@ -230,7 +274,7 @@ export default function WebinarIPullRank() {
             margin-top: 0.35rem;
           }
 
-          .wip-agenda { padding-top: 3rem; padding-bottom: 4rem; }
+          .wip-agenda { padding-top: 5rem; padding-bottom: 4rem; }
           .wip-timeline { display: grid; gap: 1rem; }
           .wip-timeline-item {
             display: grid;
@@ -275,7 +319,7 @@ export default function WebinarIPullRank() {
             margin-top: 0.5rem;
           }
 
-          .wip-speakers { padding-bottom: 4rem; }
+          .wip-speakers { padding-top: 3rem; padding-bottom: 5rem; }
           .wip-speakers-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -333,7 +377,7 @@ export default function WebinarIPullRank() {
             line-height: 1.55;
           }
 
-          .wip-brands { padding-bottom: 4rem; }
+          .wip-brands { padding-top: 3rem; padding-bottom: 5rem; }
           .wip-brands-row {
             display: flex;
             align-items: center;
@@ -358,7 +402,7 @@ export default function WebinarIPullRank() {
             display: block;
           }
 
-          .wip-audience { padding-bottom: 4rem; }
+          .wip-audience { padding-top: 3rem; padding-bottom: 5rem; }
           .wip-audience-tags {
             display: flex;
             flex-wrap: wrap;
@@ -402,6 +446,69 @@ export default function WebinarIPullRank() {
             font-size: 1rem;
           }
 
+          .wip-register {
+            max-width: 920px;
+            margin: 0 auto;
+            padding: 4rem 1.5rem 5rem;
+          }
+          .wip-register h2 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.5rem;
+          }
+          .wip-register .wip-register-sub {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            margin-bottom: 2rem;
+          }
+          .wip-register form {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.875rem;
+          }
+          .wip-register form .wip-full { grid-column: 1 / -1; }
+          .wip-register input {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            padding: 0.8rem 0.875rem;
+            border: 1.5px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 0.92rem;
+            background: #fff;
+            color: var(--text-primary);
+            width: 100%;
+            transition: border-color 0.15s;
+          }
+          .wip-register input:focus {
+            outline: none;
+            border-color: var(--ipr-accent);
+          }
+          .wip-register input::placeholder { color: #aaa; }
+          .wip-register button {
+            grid-column: 1 / -1;
+            padding: 1rem;
+            background: linear-gradient(120deg, var(--ipr-accent), var(--nobi-purple));
+            color: #fff;
+            border: none;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 4px 20px rgba(13,148,136,0.25);
+          }
+          .wip-register button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 30px rgba(13,148,136,0.35);
+          }
+          .wip-register .wip-fine-print {
+            grid-column: 1 / -1;
+            font-size: 0.78rem;
+            color: var(--text-secondary);
+            text-align: center;
+            margin-top: 0.25rem;
+          }
+
           @media (max-width: 600px) {
             .wip-hero { padding: 3rem 1rem 2.5rem; }
             .wip-meta-row { gap: 1rem; }
@@ -417,7 +524,7 @@ export default function WebinarIPullRank() {
             </a>
             <span className="wip-divider">&times;</span>
             <a href="https://ipullrank.com" className="wip-logo-ipr">
-              <img src="/media/ipullrank-logo.svg" alt="iPullRank" />
+              <img src="/media/ipullrank.svg" alt="iPullRank" />
             </a>
           </div>
         </nav>
@@ -427,7 +534,7 @@ export default function WebinarIPullRank() {
             <span className="wip-dot"></span>
             Live Webinar
           </div>
-          <h1>Christmas in July - <span className="wip-highlight">Get Your Site Ready for AI-Powered Black Friday Shoppers</span></h1>
+          <h1>Christmas in June - <span className="wip-highlight">Get Your Site Ready for AI-Powered Black Friday Shoppers</span></h1>
           <p className="wip-subtitle">Last year's Black Friday was the first where AI-driven shoppers showed up in force. This year, the wave will be bigger. Join iPullRank and Nobi to learn how to capture that traffic and convert it before your competitors do.</p>
           <div className="wip-meta-row">
             <div className="wip-meta-item">
@@ -508,7 +615,7 @@ export default function WebinarIPullRank() {
           <div className="wip-speakers-grid">
             <div className="wip-speaker-card">
               <div className="wip-speaker-avatar wip-ipr">
-                <img src="/media/mike-king.jpg" alt="Mike King" onError={(e) => { e.target.style.display = 'none'; e.target.parentElement.textContent = 'MK'; }} />
+                <img src="/media/mike king.jpeg" alt="Mike King" onError={(e) => { e.target.style.display = 'none'; e.target.parentElement.textContent = 'MK'; }} />
               </div>
               <h3>Mike King</h3>
               <div className="wip-role">Founder &amp; CEO</div>
@@ -517,11 +624,12 @@ export default function WebinarIPullRank() {
             </div>
             <div className="wip-speaker-card">
               <div className="wip-speaker-avatar wip-nobi">
-                <img src="/media/tyler.jpg" alt="Tyler" onError={(e) => { e.target.style.display = 'none'; e.target.parentElement.textContent = 'T'; }} />
+                <img src="/media/tyler headshot.jpeg" alt="Tyler" onError={(e) => { e.target.style.display = 'none'; e.target.parentElement.textContent = 'T'; }} />
               </div>
-              <h3>Tyler</h3>
+              <h3>Tyler Muse</h3>
               <div className="wip-role">Co-Founder</div>
               <div className="wip-company wip-nobi">Nobi</div>
+              <p className="wip-bio">13+ years building and scaling tech startups that have partnered with F500 firms like Microsoft, Facebook, and Ford. Now co-founder of Nobi, the leading AI Shopping Assistant for major retail brands across the globe.</p>
             </div>
           </div>
         </section>
@@ -534,8 +642,6 @@ export default function WebinarIPullRank() {
             <div className="wip-brand-pill"><img src="/media/logos/lucchese.svg" alt="Lucchese" /></div>
             <div className="wip-brand-pill"><img src="/media/logos/toolup.svg" alt="TOOLUP" /></div>
             <div className="wip-brand-pill"><img src="/media/logos/kilte.svg" alt="Kilte" /></div>
-            <div className="wip-brand-pill"><img src="/media/logos/alps_meters.png" alt="Alps and Meters" /></div>
-            <div className="wip-brand-pill"><img src="/media/logos/stbernard.svg" alt="St. Bernard" /></div>
           </div>
         </section>
 
@@ -547,8 +653,29 @@ export default function WebinarIPullRank() {
             <div className="wip-audience-tag">Digital Marketing Directors</div>
             <div className="wip-audience-tag">SEO &amp; Growth Leads</div>
             <div className="wip-audience-tag">CMOs &amp; VPs of Marketing</div>
-            <div className="wip-audience-tag">CX / Conversion Optimization Teams</div>
+
           </div>
+        </section>
+
+        <section className="wip-register" id="register">
+          <h2>Reserve Your Seat</h2>
+          <p className="wip-register-sub">30 minutes of real data, live demos, and an actionable playbook. No fluff.</p>
+          {!done ? (
+            <form onSubmit={handleSubmit}>
+              <input type="text" name="botcheck" value={form.botcheck} onChange={update} style={{ display: "none" }} tabIndex={-1} autoComplete="off" />
+              <input type="text" name="firstName" placeholder="First name" value={form.firstName} onChange={update} required />
+              <input type="text" name="lastName" placeholder="Last name" value={form.lastName} onChange={update} />
+              <input type="email" name="email" placeholder="Email" value={form.email} onChange={update} required className="wip-full" />
+              <input type="text" name="company" placeholder="Company (optional)" value={form.company} onChange={update} className="wip-full" />
+              {error && <div className="wip-full" style={{ color: "#c00", fontSize: "0.88rem" }}>{error}</div>}
+              <button type="submit" disabled={submitting}>{submitting ? "Submitting..." : "Register - it's free"}</button>
+              <div className="wip-fine-print">No spam. Just a reminder and the recording.</div>
+            </form>
+          ) : (
+            <div style={{ fontSize: "1rem", color: "#333", padding: "20px 0" }}>
+              <p>You're registered! We'll send you a reminder before the webinar.</p>
+            </div>
+          )}
         </section>
 
         <div className="wip-bottom-cta">

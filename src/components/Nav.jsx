@@ -58,26 +58,26 @@ export default function Nav() {
         </button>
       </nav>
 
-      {/* Right side: Demo link + Sign Up button (desktop only) + Mobile menu button */}
+      {/* Right side: Sign Up link + Log in + Demo button (desktop only) + Mobile menu button */}
       <div className="flex items-center gap-8 ml-auto">
-        <button
+        <a
+          href={getSignupUrl()}
           className="hidden md:block text-sm font-semibold hover:opacity-80 transition-opacity"
-          onClick={handleDemoClick}
         >
-          Get a Demo
-        </button>
+          Sign Up Free
+        </a>
         <a
           href="https://dashboard.nobi.ai/login"
           className="hidden md:block text-sm font-semibold hover:opacity-80 transition-opacity"
         >
           Log in
         </a>
-        <a
-          href={getSignupUrl()}
+        <button
           className="hidden md:inline-flex items-center justify-center gap-2 rounded-xl font-medium transition active:scale-[.98] bg-black text-white dark:bg-white dark:text-black hover:opacity-90 shadow-sm h-10 px-5 text-sm"
+          onClick={handleDemoClick}
         >
-          Sign Up Free
-        </a>
+          Get a Demo
+        </button>
 
         {/* Hamburger menu (visible on mobile) */}
         <button
@@ -128,16 +128,8 @@ export default function Nav() {
               >
                 Log in
               </a>
-              <a
-                href={getSignupUrl()}
-                onClick={closeMobileMenu}
-                className="inline-flex items-center justify-center gap-2 rounded-2xl font-medium transition active:scale-[.98] bg-black text-white hover:opacity-90 shadow-sm h-10 px-5 text-base w-full"
-              >
-                Sign Up Free
-              </a>
               <Button
-                variant="outline"
-                className="bg-white text-black border-black hover:bg-black/5"
+                className="w-full"
                 onClick={() => {
                   handleDemoClick();
                   closeMobileMenu();
@@ -145,6 +137,13 @@ export default function Nav() {
               >
                 Get a Demo
               </Button>
+              <a
+                href={getSignupUrl()}
+                onClick={closeMobileMenu}
+                className="inline-flex items-center justify-center gap-2 rounded-2xl font-medium transition active:scale-[.98] bg-white text-black border border-black hover:bg-black/5 shadow-sm h-10 px-5 text-base w-full"
+              >
+                Sign Up Free
+              </a>
             </div>
           </nav>
         </div>

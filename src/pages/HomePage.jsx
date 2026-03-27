@@ -798,7 +798,7 @@ function HeroSkeletonLine({ w = "60%" }) {
 // --- HERO PREVIEW HELPERS (names are unique to avoid clashes) ---
 
 
-function Hero({ onOpenVideo }) {
+function Hero({ onOpenVideo, onOpenDemo }) {
   return (
     <section id="home" className="relative overflow-hidden">
       <div className="mx-auto max-w-7xl px-6 pt-10 sm:pt-12 lg:pt-16 pb-24">
@@ -817,12 +817,12 @@ function Hero({ onOpenVideo }) {
 
           {/* Same-row CTAs (works on mobile too) */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3 max-w-xl mx-auto">
-            <a
-              href={getSignupUrl()}
+            <button
+              onClick={onOpenDemo}
               className="inline-flex items-center justify-center gap-2 rounded-2xl font-medium transition active:scale-[.98] bg-black text-white hover:opacity-90 shadow-sm h-12 px-6 text-base w-full sm:w-auto"
             >
-              Sign Up Free
-            </a>
+              Get a Demo
+            </button>
             <Button
               size="lg"
               variant="ghost"
@@ -2017,8 +2017,19 @@ function RequestDemoModal({ open, onClose }) {
             <p className="text-black/80 dark:text-white/90">
               Thanks! We’ve received your request and will reach out shortly.
             </p>
-            <div className="mt-4">
-              <Button onClick={onClose}>Close</Button>
+            <p className="text-black/60 dark:text-white/70 mt-2 text-sm">
+              Want to skip the wait? Book a time directly.
+            </p>
+            <div className="mt-4 flex gap-3">
+              <a
+                href="https://calendly.com/nobi"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center gap-2 rounded-2xl font-medium transition active:scale-[.98] bg-black text-white dark:bg-white dark:text-black hover:opacity-90 shadow-sm h-10 px-5 text-base no-underline"
+              >
+                Book a Call
+              </a>
+              <Button variant="ghost" onClick={onClose}>Close</Button>
             </div>
           </div>
         )}
@@ -2107,7 +2118,7 @@ export default function HomePage() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-white to-slate-50 dark:from-[#0a0a0a] dark:to-black text-black dark:text-white">
         <Header />
-        <Hero onOpenVideo={() => setIsVideoOpen(true)} />
+        <Hero onOpenVideo={() => setIsVideoOpen(true)} onOpenDemo={onOpenForm} />
         <Features />
         <Results />
         <Insights onOpenForm={onOpenForm} />

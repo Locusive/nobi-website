@@ -176,8 +176,19 @@ export function RequestDemoModal({ open, onClose }) {
             <p className="text-black/80 dark:text-white/90">
               Thanks! We've received your request and will reach out shortly.
             </p>
-            <div className="mt-4">
-              <Button onClick={onClose}>Close</Button>
+            <p className="text-black/60 dark:text-white/70 mt-2 text-sm">
+              Want to skip the wait? Book a time directly.
+            </p>
+            <div className="mt-4 flex gap-3">
+              <a
+                href="https://calendly.com/nobi"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center gap-2 rounded-2xl font-medium transition active:scale-[.98] bg-black text-white dark:bg-white dark:text-black hover:opacity-90 shadow-sm h-10 px-5 text-base no-underline"
+              >
+                Book a Call
+              </a>
+              <Button variant="ghost" onClick={onClose}>Close</Button>
             </div>
           </div>
         )}

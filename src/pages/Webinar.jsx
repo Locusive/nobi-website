@@ -296,7 +296,7 @@ export default function Webinar() {
           </div>
           <p className="intro">
             Not a lecture. Not a pitch deck. We're going to open a terminal and build things
-            in front of you — content pipelines, prospect research, data exports &amp; analysis, real software.
+            in front of you — marketing systems, outreach pipelines, data analysis, real software.
             Four sessions, 30 minutes each.
           </p>
           <p className="details">Starts April 9th, 2026 &middot; Thursdays at 12 PM ET &middot; 30 min each</p>
@@ -314,51 +314,49 @@ export default function Webinar() {
           <div className="webinar-session">
             <div className="webinar-session-number">Week 1</div>
             <div>
-              <h3>Automate Your Content Pipeline</h3>
+              <h3>Reach Your Ideal Customer Where They Already Are</h3>
               <div className="meta">Tyler &middot; April 9th</div>
             </div>
             <p>
-              We'll build an SEO content workflow from scratch — keyword research, competitor analysis,
-              drafting, optimization — all in one chain. Then we'll set up industry monitoring that
-              writes LinkedIn posts in your voice. The kind of stuff that used to eat half your morning.
+              We'll find where your customers actually hang out online, engage authentically
+              in their communities, and create targeted content that resonates — then turn the
+              whole thing into a repeatable marketing system. All built live.
             </p>
-            <div className="topics">SEO &middot; Content generation &middot; LinkedIn &middot; Industry monitoring</div>
+            <div className="topics">Community discovery &middot; Authentic engagement &middot; Targeted content &middot; Repeatable systems</div>
           </div>
 
           <div className="webinar-session">
             <div className="webinar-session-number">Week 2</div>
             <div>
-              <h3>Find Prospects and Write Emails That Get Replies</h3>
+              <h3>Send Outreach That Actually Gets Replies</h3>
               <div className="meta">Tyler &middot; April 16th</div>
             </div>
             <p>
-              We'll pull real prospect data — company context, recent news, role details — and
-              write cold emails that reference something specific about each person. Not mail merge.
-              Actual personalization, at scale. We'll also show how to engage in communities without
-              living on the internet all day.
+              We'll write personalized outreach at scale — not mail merge, real personalization
+              based on automatic prospect research. Then we'll set up follow-ups at the right time
+              and build a pipeline you can actually track and optimize.
             </p>
-            <div className="topics">Prospect research &middot; Cold email &middot; Community engagement</div>
+            <div className="topics">Personalized outreach &middot; Prospect research &middot; Follow-up sequences &middot; Pipeline tracking</div>
           </div>
 
           <div className="webinar-session">
             <div className="webinar-session-number">Week 3</div>
             <div>
-              <h3>Turn Your Data Into Decisions</h3>
+              <h3>Turn Raw Data Into Decisions</h3>
               <div className="meta">Tyler &middot; April 23rd</div>
             </div>
             <p>
-              We'll take messy, scattered data — spreadsheets, CRM exports, analytics dashboards —
-              and build automated analysis pipelines that surface the insights you actually care about.
-              Custom reports, trend detection, and forecasting, all generated on a schedule without
-              you lifting a finger.
+              We'll write SQL naturally, simulate user journeys, generate a deck with real
+              insights, and then actually implement the recommendations — including live site
+              updates. From messy data to action in 30 minutes.
             </p>
-            <div className="topics">Data analysis &middot; Automated reporting &middot; Dashboards &middot; Forecasting</div>
+            <div className="topics">Natural SQL &middot; User journey simulation &middot; Insight decks &middot; Live implementation</div>
           </div>
 
           <div className="webinar-session">
             <div className="webinar-session-number">Week 4</div>
             <div>
-              <h3>Stop Vibe Coding</h3>
+              <h3>Stop Vibe Coding: Build Software the Right Way</h3>
               <div className="meta">Shanif &middot; April 30th</div>
             </div>
             <p>
@@ -402,9 +400,9 @@ export default function Webinar() {
               <select className="full" name="sessions" value={form.sessions} onChange={update}>
                 <option value="" disabled>Which sessions?</option>
                 <option value="all">All four</option>
-                <option value="1">Week 1 — Content &amp; SEO</option>
-                <option value="2">Week 2 — Prospecting &amp; Outreach</option>
-                <option value="3">Week 3 — Data Analysis &amp; Reporting</option>
+                <option value="1">Week 1 — Reach Your Ideal Customer</option>
+                <option value="2">Week 2 — Send Outreach That Gets Replies</option>
+                <option value="3">Week 3 — Turn Data Into Decisions</option>
                 <option value="4">Week 4 — Stop Vibe Coding</option>
               </select>
               {error && <div className="full" style={{ color: "#c00", fontFamily: "-apple-system, sans-serif", fontSize: "0.88rem" }}>{error}</div>}

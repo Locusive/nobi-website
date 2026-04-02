@@ -85,6 +85,11 @@ const FAQ_ITEMS = [
     category: "Pricing",
   },
   {
+      q: "Can my site’s visitors filter or somehow update their searches?",
+      a: "Yes! All they have to do is ask. Unlike traditional search engines, which make visitors click through boxes, toggles, and filters, Nobi understand when your visitors want to filter a search based on natural language. After search results show up, they can simply say what they want instead and Nobi will execute a new search with the right filters applied (as long as any relevant attributes are present in your product feed in a structured format).",
+      category: "Product",
+  },
+  {
       q: "I have X sessions per month and Y percent of my customers use search. How much would Nobi cost for me?",
       a: "Our standard pricing tiers apply to customers with up to 10,000 messages per month. For customers with higher usage, we offer custom enterprise plans, usually with generous volume-based discounts. We can also provide significant discounts for search-mode only setups if you’re only looking to replace the search engine for your product catalog.",
   },

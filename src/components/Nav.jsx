@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Menu, X, ExternalLink, Sparkles } from "lucide-react";
-import Button from "./Button";
 import { useDemoForm } from "../context/DemoFormContext";
 import { trackDemoFormOpened } from "../utils/eventTracker";
 import { getSignupUrl } from "../utils/signupUrl";
@@ -60,24 +59,24 @@ export default function Nav() {
 
       {/* Right side: Sign Up link + Log in + Demo button (desktop only) + Mobile menu button */}
       <div className="flex items-center gap-8 ml-auto">
-        <a
-          href={getSignupUrl()}
+        <button
           className="hidden md:block text-sm font-semibold hover:opacity-80 transition-opacity"
+          onClick={handleDemoClick}
         >
-          Sign Up Free
-        </a>
+          Get a Demo
+        </button>
         <a
           href="https://dashboard.nobi.ai/login"
           className="hidden md:block text-sm font-semibold hover:opacity-80 transition-opacity"
         >
           Log in
         </a>
-        <button
+        <a
+          href={getSignupUrl()}
           className="hidden md:inline-flex items-center justify-center gap-2 rounded-xl font-medium transition active:scale-[.98] bg-black text-white dark:bg-white dark:text-black hover:opacity-90 shadow-sm h-10 px-5 text-sm"
-          onClick={handleDemoClick}
         >
-          Get a Demo
-        </button>
+          Sign Up Free
+        </a>
 
         {/* Hamburger menu (visible on mobile) */}
         <button
@@ -128,22 +127,22 @@ export default function Nav() {
               >
                 Log in
               </a>
-              <Button
-                className="w-full"
+              <a
+                href={getSignupUrl()}
+                onClick={closeMobileMenu}
+                className="inline-flex items-center justify-center gap-2 rounded-2xl font-medium transition active:scale-[.98] bg-black text-white dark:bg-white dark:text-black hover:opacity-90 shadow-sm h-10 px-5 text-base w-full"
+              >
+                Sign Up Free
+              </a>
+              <button
+                className="inline-flex items-center justify-center gap-2 rounded-2xl font-medium transition active:scale-[.98] bg-white text-black border border-black hover:bg-black/5 shadow-sm h-10 px-5 text-base w-full"
                 onClick={() => {
                   handleDemoClick();
                   closeMobileMenu();
                 }}
               >
                 Get a Demo
-              </Button>
-              <a
-                href={getSignupUrl()}
-                onClick={closeMobileMenu}
-                className="inline-flex items-center justify-center gap-2 rounded-2xl font-medium transition active:scale-[.98] bg-white text-black border border-black hover:bg-black/5 shadow-sm h-10 px-5 text-base w-full"
-              >
-                Sign Up Free
-              </a>
+              </button>
             </div>
           </nav>
         </div>

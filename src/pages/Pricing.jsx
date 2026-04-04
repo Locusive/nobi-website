@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import PageLayout from "../components/PageLayout";
 import FAQList from "../components/FAQList.jsx";
-import { Check, Search, Smile, BarChart3, MessageSquare, ArrowRight } from "lucide-react";
+import { Check, Search, Smile, BarChart3, MessageSquare, ArrowRight, Gift } from "lucide-react";
 import Marquee from "react-fast-marquee";
 import { getSignupUrl } from "../utils/signupUrl";
 import { useDemoForm } from "../context/DemoFormContext";
@@ -15,25 +15,27 @@ const CUSTOMER_LOGOS = [
   { alt: "Alps and Meters", src: "/media/logos/alps_meters.png" },
 ];
 
-const PLANS = [
-  {
-    name: "Starter",
-    price: 300,
-    messageCap: "3,000",
-    description: "For brands getting started with conversational commerce.",
-  },
-  {
-    name: "Growth",
-    price: 900,
-    messageCap: "10,000",
-    highlighted: true,
-    badge: "Best Value",
-    description: "For growing brands with higher traffic and engagement.",
-  },
+/** Nobi plan pricing constants. */
+const PLAN_PRICE = 25;
+const PLAN_SEARCH_CAP = "2,500";
+const PLAN_MESSAGE_CAP = "250";
+const OVERAGE_RATE_MESSAGE = "$0.10";
+const OVERAGE_RATE_SEARCH = "$0.01";
+const TRIAL_DAYS = 30;
+const MAX_PRODUCTS = "5,000";
+const MAX_KB_DOCS = "5,000";
+
+const PLAN_HIGHLIGHTS = [
+  `Includes ${PLAN_SEARCH_CAP} searches and ${PLAN_MESSAGE_CAP} conversational messages per month`,
+  `Up to ${MAX_PRODUCTS} products and ${MAX_KB_DOCS} knowledge base documents`,
 ];
 
-// Signup URL is dynamically generated to forward UTM params
-// from the current page to the dashboard.
+const ENTERPRISE_HIGHLIGHTS = [
+  "Dedicated support",
+  "Custom integrations and onboarding",
+  "Volume discounts on usage",
+  `Over ${MAX_PRODUCTS} products and knowledge base documents`,
+];
 
 const SHARED_FEATURES = [
   "Search mode, suggestion pills, buttons, and all other components",
@@ -72,27 +74,27 @@ const VALUE_PROPS = [
 const PRICING_FAQS = [
   {
     q: "Can we try it before committing?",
-    a: "Yes! Every paid plan comes with a free 30-day trial. You can also preview Nobi from your dashboard with your own products before going live on your site.",
+    a: `Yes! The Nobi plan comes with a free ${TRIAL_DAYS}-day trial. You can also preview Nobi from your dashboard with your own products before going live on your site.`,
   },
   {
     q: "How does pricing work?",
-    a: "Nobi offers tiered plans based on the number of messages your shoppers send each month. Pick the tier that fits your volume, and if you go over, choose to either pause until the next cycle or pay per additional message.",
+    a: `Nobi is $${PLAN_PRICE}/month and includes ${PLAN_SEARCH_CAP} searches and ${PLAN_MESSAGE_CAP} conversational messages. If you go over, you can choose to either pause until the next billing cycle or pay per-use overage rates.`,
   },
   {
-    q: "What happens if I go over my message limit?",
-    a: "You choose: either Nobi pauses until the next billing cycle, or you pay $0.10 per additional message. You can change this setting at any time from your dashboard.",
+    q: "What happens if I go over my limit?",
+    a: `You choose: either Nobi pauses until the next billing cycle, or you pay ${OVERAGE_RATE_MESSAGE} per additional message and ${OVERAGE_RATE_SEARCH} per additional search. You can change this setting at any time from your dashboard.`,
   },
   {
-    q: "Can I change plans later?",
-    a: "Yes! You can upgrade or downgrade at any time. Changes are prorated so you only pay for what you use.",
+    q: "What counts as a search vs. a message?",
+    a: "A search is when a visitor uses Nobi to find products or information on your site. A message is a back-and-forth conversational exchange. Both are tracked separately with their own limits.",
   },
   {
     q: "What kind of support do you offer?",
     a: "Our customers get full access to our founders and we even have Slack Connect channels for real-time support.",
   },
   {
-    q: "Do you offer annual pricing?",
-    a: "Yes, we offer discounts for annual commitments. Contact us to learn more about annual plans and custom pricing.",
+    q: "Do you offer annual or enterprise pricing?",
+    a: "Yes, we offer custom pricing for high-volume businesses, large catalogs, and annual commitments. Contact us to learn more.",
   },
 ];
 
@@ -122,11 +124,11 @@ export default function Pricing() {
               Pricing
             </p>
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-semibold tracking-tight text-slate-900 text-balance">
-              Simple plans that scale with use
+              Simple, usage-based pricing
             </h1>
             <p className="mt-4 text-lg text-slate-600 max-w-2xl mx-auto leading-relaxed">
-              Every plan includes a free 30-day trial. Connect your store,
-              try Nobi with your own products, and only pay for what you need.
+              A low monthly minimum with per-use rates for searches and messages.
+              Start with a free {TRIAL_DAYS}-day trial.
             </p>
           </div>
         </section>
@@ -134,19 +136,101 @@ export default function Pricing() {
         {/* Plan cards */}
         <section className="relative py-6 sm:py-8">
           <div className="mx-auto max-w-4xl px-6">
-            {/* Free trial note */}
-            <p className="mb-8 text-center text-sm text-slate-500">
-              Every plan includes a free 30-day trial. Preview Nobi with your own
-              products from the dashboard before going live on your site.
-            </p>
+            {/* Free trial banner */}
+            <div className="rounded-xl border border-purple-200 bg-white px-6 py-4 mb-8">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-full bg-purple-50 flex items-center justify-center flex-shrink-0">
+                  <Gift className="h-5 w-5 text-purple-600" />
+                </div>
+                <div>
+                  <p className="font-semibold text-slate-900">Free {TRIAL_DAYS}-day trial</p>
+                  <p className="text-sm text-slate-500">
+                    Full plan limits included. Cancel anytime.
+                  </p>
+                </div>
+              </div>
+            </div>
 
             <div className="grid gap-6 md:grid-cols-2">
-              {PLANS.map((plan) => (
-                <PlanCard
-                  key={plan.name}
-                  plan={plan}
-                />
-              ))}
+              {/* Standard Plan Card */}
+              <div className="relative rounded-2xl border border-purple-200 bg-gradient-to-br from-purple-50/50 to-white p-6 sm:p-8 shadow-[0_18px_46px_-32px_rgba(15,23,42,0.35)] transition hover:-translate-y-1 ring-2 ring-purple-100">
+                <div className="space-y-4">
+                  <div>
+                    <h3 className="text-xl font-semibold text-slate-900">Standard</h3>
+                    <p className="text-sm text-slate-500 mt-1">
+                      Everything you need to power search and conversations on your site.
+                    </p>
+                  </div>
+
+                  <div className="flex items-baseline gap-1">
+                    <span className="text-4xl font-bold tracking-tight text-slate-900">
+                      ${PLAN_PRICE}
+                    </span>
+                    <span className="text-base text-slate-500">monthly minimum</span>
+                  </div>
+
+                  <p className="text-sm text-slate-500">
+                    {OVERAGE_RATE_MESSAGE}/message and {OVERAGE_RATE_SEARCH}/search
+                  </p>
+
+                  <ul className="space-y-2">
+                    {PLAN_HIGHLIGHTS.map((highlight) => (
+                      <li
+                        key={highlight}
+                        className="flex items-start gap-2 text-sm text-slate-600"
+                      >
+                        <Check className="w-4 h-4 text-emerald-500 flex-shrink-0 mt-0.5" />
+                        {highlight}
+                      </li>
+                    ))}
+                  </ul>
+
+                  <a
+                    href={getSignupUrl()}
+                    className="block w-full rounded-xl py-3 text-sm font-semibold text-center transition active:scale-[.98] bg-black text-white hover:opacity-90 shadow-sm"
+                  >
+                    Start Free Trial
+                  </a>
+                </div>
+              </div>
+
+              {/* Enterprise Card */}
+              <div className="relative rounded-2xl border border-slate-200 bg-white p-6 sm:p-8 shadow-[0_18px_46px_-32px_rgba(15,23,42,0.35)] transition hover:-translate-y-1">
+                <div className="space-y-4">
+                  <div>
+                    <h3 className="text-xl font-semibold text-slate-900">Enterprise</h3>
+                    <p className="text-sm text-slate-500 mt-1">
+                      Tailored plans for high-volume businesses with large catalogs.
+                    </p>
+                  </div>
+
+                  <div className="flex items-baseline gap-1">
+                    <span className="text-4xl font-bold tracking-tight text-slate-900">
+                      Custom
+                    </span>
+                    <span className="text-base text-slate-500">pricing</span>
+                  </div>
+
+                  <ul className="space-y-2">
+                    {ENTERPRISE_HIGHLIGHTS.map((highlight) => (
+                      <li
+                        key={highlight}
+                        className="flex items-start gap-2 text-sm text-slate-600"
+                      >
+                        <Check className="w-4 h-4 text-emerald-500 flex-shrink-0 mt-0.5" />
+                        {highlight}
+                      </li>
+                    ))}
+                  </ul>
+
+                  <button
+                    onClick={openDemoForm}
+                    className="block w-full rounded-xl py-3 text-sm font-semibold text-center transition active:scale-[.98] bg-white text-black border border-black hover:bg-black/5"
+                  >
+                    Get in Touch
+                  </button>
+                </div>
+              </div>
             </div>
 
             {/* Shared features */}
@@ -164,41 +248,6 @@ export default function Pricing() {
                     {feature}
                   </div>
                 ))}
-              </div>
-            </div>
-
-            {/* Overage note */}
-            <p className="mt-6 text-center text-sm text-slate-500">
-              Go over your limit? Choose to pause or pay $0.10 per additional
-              message.
-            </p>
-          </div>
-        </section>
-
-        {/* Enterprise */}
-        <section className="py-12 sm:py-16">
-          <div className="mx-auto max-w-4xl px-6">
-            <div className="relative overflow-hidden rounded-2xl border border-slate-200 bg-gradient-to-br from-[#17122f] via-[#1c1540] to-[#221a4a] p-8 sm:p-10 text-center shadow-[0_22px_60px_-30px_rgba(15,23,42,0.5)]">
-              <div
-                className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(124,58,237,0.2),transparent_45%),radial-gradient(circle_at_80%_80%,rgba(59,130,246,0.15),transparent_40%)]"
-                aria-hidden
-              />
-              <div className="relative space-y-4">
-                <h2 className="text-2xl sm:text-3xl font-semibold text-white">
-                  Enterprise
-                </h2>
-                <p className="text-base text-slate-300 max-w-xl mx-auto leading-relaxed">
-                  Custom pricing for high-volume messaging, custom integrations,
-                  and dedicated support. We work with brands processing millions
-                  of messages per month.
-                </p>
-                <button
-                  onClick={openDemoForm}
-                  className="inline-flex items-center gap-2 rounded-full bg-white text-[#17122f] px-6 py-3 text-sm font-semibold shadow-[0_10px_32px_-24px_rgba(255,255,255,0.6)] hover:bg-white/90 transition"
-                >
-                  Contact Sales
-                  <ArrowRight className="w-4 h-4" />
-                </button>
               </div>
             </div>
           </div>
@@ -287,7 +336,7 @@ export default function Pricing() {
                 Ready to grow your conversions?
               </h2>
               <p className="text-base text-slate-600">
-                Start your free 30-day trial today. Cancel anytime.
+                Start your free {TRIAL_DAYS}-day trial today. Cancel anytime.
               </p>
             </div>
             <div className="flex justify-center">
@@ -302,62 +351,5 @@ export default function Pricing() {
         </section>
       </div>
     </PageLayout>
-  );
-}
-
-/**
- * Individual plan card for the pricing grid.
- */
-function PlanCard({ plan }) {
-  return (
-    <div
-      className={`relative rounded-2xl border bg-white p-6 sm:p-8 shadow-[0_18px_46px_-32px_rgba(15,23,42,0.35)] transition hover:-translate-y-1 ${
-        plan.highlighted
-          ? "border-purple-300 ring-2 ring-purple-200"
-          : "border-slate-200"
-      }`}
-    >
-      {plan.badge && (
-        <div className="absolute -top-3 left-1/2 -translate-x-1/2">
-          <span className="rounded-full bg-gradient-to-r from-purple-600 to-indigo-600 px-4 py-1 text-xs font-semibold text-white shadow-sm">
-            {plan.badge}
-          </span>
-        </div>
-      )}
-
-      <div className="space-y-4">
-        <div>
-          <h3 className="text-xl font-semibold text-slate-900">{plan.name}</h3>
-          <p className="text-sm text-slate-500 mt-1">{plan.description}</p>
-        </div>
-
-        <div className="flex items-baseline gap-1">
-          <span className="text-4xl font-bold tracking-tight text-slate-900">
-            ${plan.price}
-          </span>
-          <span className="text-base text-slate-500">/month</span>
-        </div>
-
-        <div className="flex items-center gap-2 text-sm text-slate-600">
-          <MessageSquare className="w-4 h-4 text-slate-400" />
-          Up to{" "}
-          <span className="font-semibold text-slate-900">
-            {plan.messageCap}
-          </span>{" "}
-          messages/month
-        </div>
-
-        <a
-          href={getSignupUrl()}
-          className={`block w-full rounded-xl py-3 text-sm font-semibold text-center transition active:scale-[.98] ${
-            plan.highlighted
-              ? "bg-black text-white hover:opacity-90 shadow-sm"
-              : "bg-white text-black border border-black hover:bg-black/5"
-          }`}
-        >
-          Start Free Trial
-        </a>
-      </div>
-    </div>
   );
 }

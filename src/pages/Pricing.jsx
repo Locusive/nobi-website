@@ -78,7 +78,7 @@ const PRICING_FAQS = [
   },
   {
     q: "How does pricing work?",
-    a: `Nobi is $${PLAN_PRICE}/mo base and includes ${PLAN_SEARCH_CAP} searches and ${PLAN_MESSAGE_CAP} conversational messages. If you go over, you can choose to either pause until the next billing cycle or pay ${OVERAGE_RATE_MESSAGE}/message and ${OVERAGE_RATE_SEARCH}/search.`,
+    a: `Nobi is $${PLAN_PRICE}/month base and includes ${PLAN_SEARCH_CAP} searches and ${PLAN_MESSAGE_CAP} conversational messages. If you go over, you can choose to either pause until the next billing cycle or pay ${OVERAGE_RATE_MESSAGE}/message and ${OVERAGE_RATE_SEARCH}/search.`,
   },
   {
     q: "What happens if I go over my limit?",
@@ -166,7 +166,7 @@ export default function Pricing() {
                     <span className="text-4xl font-bold tracking-tight text-slate-900">
                       ${PLAN_PRICE}
                     </span>
-                    <span className="text-base text-slate-500">/mo base</span>
+                    <span className="text-base text-slate-500">monthly base</span>
                   </div>
 
                   <p className="text-sm text-slate-500">

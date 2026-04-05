@@ -1528,7 +1528,7 @@ function Pricing() {
           ))}
         </div>
         <p className="mt-6 text-center text-sm text-black/50 dark:text-white/50">
-          <a href="/pricing" className="underline hover:text-purple-600">See full pricing</a> &middot; Overage at $0.10/message
+          <a href="/pricing" className="underline hover:text-purple-600">See full pricing</a> &middot; Overages: $0.10/message, $0.01/search
         </p>
       </div>
     </section>

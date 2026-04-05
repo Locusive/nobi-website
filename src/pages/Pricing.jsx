@@ -78,7 +78,7 @@ const PRICING_FAQS = [
   },
   {
     q: "How does pricing work?",
-    a: `Nobi is $${PLAN_PRICE}/month and includes ${PLAN_SEARCH_CAP} searches and ${PLAN_MESSAGE_CAP} conversational messages. If you go over, you can choose to either pause until the next billing cycle or pay per-use overage rates.`,
+    a: `Nobi is $${PLAN_PRICE}/mo base and includes ${PLAN_SEARCH_CAP} searches and ${PLAN_MESSAGE_CAP} conversational messages. If you go over, you can choose to either pause until the next billing cycle or pay ${OVERAGE_RATE_MESSAGE}/message and ${OVERAGE_RATE_SEARCH}/search.`,
   },
   {
     q: "What happens if I go over my limit?",
@@ -127,7 +127,7 @@ export default function Pricing() {
               Simple, usage-based pricing
             </h1>
             <p className="mt-4 text-lg text-slate-600 max-w-2xl mx-auto leading-relaxed">
-              A low monthly minimum with per-use rates for searches and messages.
+              A low monthly base with per-use rates for searches and messages.
               Start with a free {TRIAL_DAYS}-day trial.
             </p>
           </div>
@@ -166,11 +166,11 @@ export default function Pricing() {
                     <span className="text-4xl font-bold tracking-tight text-slate-900">
                       ${PLAN_PRICE}
                     </span>
-                    <span className="text-base text-slate-500">monthly minimum</span>
+                    <span className="text-base text-slate-500">/mo base</span>
                   </div>
 
                   <p className="text-sm text-slate-500">
-                    {OVERAGE_RATE_MESSAGE}/message and {OVERAGE_RATE_SEARCH}/search
+                    {OVERAGE_RATE_MESSAGE}/message and {OVERAGE_RATE_SEARCH}/search — {PLAN_SEARCH_CAP} searches and {PLAN_MESSAGE_CAP} messages included
                   </p>
 
                   <ul className="space-y-2">

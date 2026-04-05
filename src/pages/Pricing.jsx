@@ -169,7 +169,7 @@ export default function Pricing() {
                   </div>
 
                   <p className="text-sm text-slate-500">
-                    {OVERAGE_RATE_MESSAGE}/message and {OVERAGE_RATE_SEARCH}/search — {PLAN_SEARCH_CAP} searches and {PLAN_MESSAGE_CAP} messages included
+                    {PLAN_SEARCH_CAP} searches and {PLAN_MESSAGE_CAP} messages included. {OVERAGE_RATE_MESSAGE}/message and {OVERAGE_RATE_SEARCH}/search after that.
                   </p>
 
                   <ul className="space-y-2">

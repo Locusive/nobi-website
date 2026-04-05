@@ -26,7 +26,6 @@ const MAX_PRODUCTS = "5,000";
 const MAX_KB_DOCS = "5,000";
 
 const PLAN_HIGHLIGHTS = [
-  `Includes ${PLAN_SEARCH_CAP} searches and ${PLAN_MESSAGE_CAP} conversational messages per month`,
   `Up to ${MAX_PRODUCTS} products and ${MAX_KB_DOCS} knowledge base documents`,
 ];
 

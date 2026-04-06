@@ -3,6 +3,7 @@ import {AnimatePresence, motion} from "framer-motion";
 import {
     BarChart3,
     CheckCircle2,
+    ChevronDown,
     Heart,
     LayoutGrid,
     MessageCircleQuestion,
@@ -16,6 +17,7 @@ import {
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import FAQList from "../components/FAQList.jsx";
+import ScrollPreview from "../components/ScrollPreview";
 import {posts} from "../content/utils/mdxPostLoader";
 import HeroDemo from "../components/HeroDemo";
 import {VideoModal} from "../components/VideoModal";
@@ -128,6 +130,91 @@ const PLACEMENTS = [
   },
 ];
 
+// ===== Personalization variant content =====
+const CHIPS = [
+  { id: "default", label: "More conversions" },
+  { id: "search",  label: "Better search" },
+  { id: "answers", label: "Answer every question" },
+  { id: "leads",   label: "More leads" },
+];
+
+const PREVIEW_SECTIONS = [
+  { id: "results",  label: "Real results" },
+  { id: "features", label: "What Nobi does" },
+  { id: "how",      label: "How it works" },
+  { id: "pricing",  label: "Pricing" },
+];
+
+const VARIANT_CONTENT = {
+  default: {
+    headline: "Turn your website into your best sales associate",
+    subline:  "An AI assistant that answers questions, finds products, and captures leads. Works on ecommerce, services, real estate, and more.",
+    problemHeading: "Most visitors leave without finding what they need",
+    problemBody:    "Your search needs exact words. Your FAQ takes patience. Most visitors bounce before they get an answer.",
+    problemPoints: [
+      { Icon: SearchIcon,           label: "Dead-end searches",      desc: "Your search needs exact keywords. Visitors who describe what they want get nothing and give up." },
+      { Icon: MessageCircleQuestion, label: "Unanswered questions",   desc: "Visitors want to know if it fits their situation, what you charge, or if you ship to them. Your FAQ doesn't have it." },
+      { Icon: ShoppingCart,          label: "Lost sales",             desc: "High-intent visitors who couldn't find help buy somewhere else and never come back." },
+    ],
+    numbersHeading: "What our customers have seen",
+    stats: [
+      { number: "$1M+",  label: "in extra revenue",    desc: "What Lucchese made in incremental sales in year one. Nobi's AI search surfaced products their keyword search was missing entirely." },
+      { number: "2.5x",  label: "more likely to buy",   desc: "Nobi searchers convert at 2.5x the rate of visitors who don't use Nobi, measured across Lucchese and UNTUCKit in head-to-head A/B tests." },
+      { number: "39x",   label: "ROI",                 desc: "Lucchese's sustained return since launch. $865K in incremental revenue in the first six months, with the number continuing to grow." },
+    ],
+  },
+  search: {
+    headline: "Your shoppers can't find what they're looking for. Nobi fixes that.",
+    subline:  "AI search that understands what visitors mean, not just what they type. Lucchese generated $1M+ in incremental revenue in year one.",
+    problemHeading: "Shoppers describe what they want and get nothing back",
+    problemBody:    "Your search needs exact words from product descriptions. Natural language returns zero results, so they leave and buy somewhere else.",
+    problemPoints: [
+      { Icon: SearchIcon,    label: "Keyword-only search",   desc: "Your search engine matches exact words, not intent. Natural language queries return zero results." },
+      { Icon: LayoutGrid,    label: "Dead-end result pages", desc: "Visitors who can't find the right product in two tries don't try a third time. They leave." },
+      { Icon: ShoppingCart,  label: "Revenue left behind",   desc: "Every failed search is a product you carry but couldn't surface. That's direct, measurable lost revenue." },
+    ],
+    numbersHeading: "What better search has done for our customers",
+    stats: [
+      { number: "$1M+",  label: "in extra revenue",         desc: "Lucchese, year one. Nobi surfaced products their keyword search never would have found, turning dead-end searches into sales." },
+      { number: "21.7%", label: "more conversions",         desc: "Kilte vs. Shopify default search in a head-to-head A/B test." },
+      { number: "12.3%", label: "vs 10.1% for competitor",  desc: "Faherty's conversion rate on Nobi was higher than the dedicated AI search tool they were already paying for." },
+    ],
+  },
+  answers: {
+    headline: "Your visitors have questions your website isn't answering",
+    subline:  "Nobi pulls answers from your content, cites its sources, and checks facts before responding. No guessing, no hallucinations.",
+    problemHeading: "Visitors leave with the same question they arrived with",
+    problemBody:    "They dig through your site, find nothing clear, and go to a competitor who gives them a straight answer.",
+    problemPoints: [
+      { Icon: MessageCircleQuestion, label: "Questions go unanswered", desc: "Visitors search your FAQ, find nothing useful, and leave with the same doubt they arrived with." },
+      { Icon: LayoutGrid,            label: "Scattered information",   desc: "Your answers are spread across product pages, blog posts, and PDFs. Visitors can't piece it together themselves." },
+      { Icon: MousePointerClick,     label: "One chance lost",         desc: "A visitor who leaves with an unanswered question rarely comes back. Your competitor answers it instead." },
+    ],
+    numbersHeading: "What happens when every question gets a real answer",
+    stats: [
+      { number: "6x",    label: "more purchases",       desc: "Visitors who click a suggested question and get an answer are 6x more likely to buy than those who don't engage." },
+      { number: "2.5x",  label: "higher conversion",    desc: "Nobi-assisted visitors convert at 2.5x the rate of unassisted visitors, measured across Lucchese and UNTUCKit in A/B tests." },
+      { number: "Zero",  label: "hallucinations",        desc: "Before sending, Nobi runs a second AI pass that verifies every claim against your knowledge base. It won't say what it can't prove." },
+    ],
+  },
+  leads: {
+    headline: "Stop letting interested visitors leave without a trace",
+    subline:  "Nobi collects contact info naturally through conversation and routes it wherever you need it.",
+    problemHeading: "Most visitors leave and you have no way to reach them",
+    problemBody:    "They browse, get interested, and disappear. No contact info, no follow-up, no second chance.",
+    problemPoints: [
+      { Icon: MousePointerClick, label: "Silent exits",        desc: "High-intent visitors land, browse, and bounce. You have no idea they were there and no way to reach them." },
+      { Icon: Heart,             label: "No follow-up window", desc: "Pop-up forms interrupt at the wrong moment. Most visitors dismiss them without a second thought." },
+      { Icon: BarChart3,         label: "Invisible pipeline",  desc: "Without contact info, you can't attribute revenue to campaigns or optimize what's working." },
+    ],
+    numbersHeading: "What happens when your website actually captures leads",
+    stats: [
+      { number: "17.6%", label: "conversion rate",        desc: "UNTUCKit Nobi users vs. 15.0% on Shopify default. More engaged visitors convert to customers at a higher rate." },
+      { number: "+21.3%", label: "revenue per referral",  desc: "Faherty Brand saw a 21.3% improvement in revenue per referral after adding Nobi to their lead capture flow." },
+      { number: "100%",   label: "of leads attributed",   desc: "Every lead tagged with the conversation and campaign that drove it, routed directly to your CRM or form handler." },
+    ],
+  },
+};
 
 
 /* ===================== Hero Conversation Demo ===================== */
@@ -798,52 +885,115 @@ function HeroSkeletonLine({ w = "60%" }) {
 // --- HERO PREVIEW HELPERS (names are unique to avoid clashes) ---
 
 
-function Hero({ onOpenVideo, onOpenDemo }) {
+const GRADIENT = "bg-gradient-to-r from-indigo-500 via-violet-500 to-fuchsia-500 bg-clip-text text-transparent";
+
+function renderHeadline(variant) {
+  switch (variant) {
+    case "search":
+      return <>Your shoppers can't find what they're looking for. Nobi{" "}<span className={GRADIENT}>fixes that.</span></>;
+    case "answers":
+      return <>Your visitors have questions your website{" "}<span className={GRADIENT}>isn't answering</span></>;
+    case "leads":
+      return <>Stop letting interested visitors{" "}<span className={GRADIENT}>leave quietly</span></>;
+    default:
+      return <>Turn your website into your best{" "}<span className={GRADIENT}>sales associate</span></>;
+  }
+}
+
+function Hero({ onOpenVideo, onOpenDemo, variant, setVariant }) {
+  const content = VARIANT_CONTENT[variant] || VARIANT_CONTENT.default;
+
+  const handleChip = (id) => {
+    if (id === "default") {
+      setVariant("default");
+      try { localStorage.setItem("nobi_hero_variant", "default"); } catch (_) {}
+      return;
+    }
+    const next = id === variant ? "default" : id;
+    setVariant(next);
+    try { localStorage.setItem("nobi_hero_variant", next); } catch (_) {}
+  };
+
   return (
     <section id="home" className="relative overflow-hidden">
-      <div className="mx-auto max-w-7xl px-6 pt-10 sm:pt-12 lg:pt-16 pb-24">
+      <div className="mx-auto max-w-7xl px-6 pt-4 sm:pt-6 lg:pt-8 pb-24">
         <div className="max-w-4xl mx-auto text-center space-y-6">
-          <h1 className="text-5xl sm:text-6xl font-semibold tracking-tight text-balance">
-            People expect the{" "}
-            <span className="bg-gradient-to-r from-indigo-500 via-violet-500 to-fuchsia-500 bg-clip-text text-transparent">
-              ChatGPT experience
-            </span>
-            {" "}
-          </h1>
 
-          <p className="mt-4 text-lg text-black/70 dark:text-white/70 max-w-2xl mx-auto">
-          Nobi turns your site into a place where users can ask questions and get real answers, powered by your own data.
-          </p>
+          {/* Personalization chips */}
+          <div className="pb-6">
+            <p className="text-xs font-medium text-black/40 dark:text-white/40 uppercase tracking-widest mb-3">
+              What matters most to you?
+            </p>
+            <div className="flex flex-wrap items-center justify-center gap-2">
+              {CHIPS.map((chip) => (
+                <button
+                  key={chip.id}
+                  onClick={() => handleChip(chip.id)}
+                  className={`rounded-full border px-4 py-1.5 text-sm font-medium transition ${
+                    variant === chip.id
+                      ? "border-fuchsia-400 bg-fuchsia-50 text-fuchsia-700 dark:bg-fuchsia-900/30 dark:text-fuchsia-300 dark:border-fuchsia-700"
+                      : "border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/5 text-black/70 dark:text-white/70 hover:border-fuchsia-300 hover:bg-fuchsia-50 hover:text-fuchsia-700 dark:hover:border-fuchsia-700 dark:hover:bg-fuchsia-900/20"
+                  }`}
+                >
+                  {chip.label}
+                </button>
+              ))}
+            </div>
+          </div>
 
-          {/* Same-row CTAs (works on mobile too) */}
+          <AnimatePresence mode="wait">
+            <motion.h1
+              key={content.headline}
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -8 }}
+              transition={{ duration: 0.3 }}
+              className="text-5xl sm:text-6xl font-semibold tracking-tight text-balance"
+            >
+              {renderHeadline(variant)}
+            </motion.h1>
+          </AnimatePresence>
+
+          <AnimatePresence mode="wait">
+            <motion.p
+              key={content.subline}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              className="text-lg text-black/70 dark:text-white/70 max-w-2xl mx-auto"
+            >
+              {content.subline}
+            </motion.p>
+          </AnimatePresence>
+
+          {/* CTAs */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3 max-w-xl mx-auto">
             <button
               onClick={onOpenDemo}
               className="inline-flex items-center justify-center gap-2 rounded-2xl font-medium transition active:scale-[.98] bg-black text-white hover:opacity-90 shadow-sm h-12 px-6 text-base w-full sm:w-auto"
             >
-              Get a Demo
+              Get a demo
             </button>
-            <Button
-              size="lg"
-              variant="ghost"
-              onClick={onOpenVideo}
-              className="whitespace-nowrap px-3"
+            <a
+              href={getSignupUrl()}
+              className="inline-flex items-center justify-center gap-2 rounded-2xl font-medium transition active:scale-[.98] border border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/5 h-12 px-6 text-base w-full sm:w-auto hover:border-black/30 dark:hover:border-white/30"
             >
-              <PlayCircle className="h-5 w-5" />
-              <span className="sm:hidden">How it works</span>
-              <span className="hidden sm:inline">How it works in 60 seconds</span>
-            </Button>
+              Get started free
+            </a>
           </div>
 
-          </div>
+        </div>
 
         {/* Hero animation */}
         <div className="mt-10 max-w-3xl mx-auto">
-          <HeroDemo />
+          <HeroDemo variant={variant} />
         </div>
-        <div className="mt-10 max-w-5xl mx-auto text-center">
+
+        {/* Logo strip */}
+        <div className="mt-16 max-w-5xl mx-auto text-center">
           <p className="text-sm font-semibold text-fuchsia-600">
-            Trusted by modern commerce
+            Trusted by leading brands
           </p>
           <div className="mt-6 flex flex-wrap items-center justify-center gap-x-14 gap-y-8">
             {CUSTOMER_LOGOS.map((logo) => (
@@ -858,6 +1008,98 @@ function Hero({ onOpenVideo, onOpenDemo }) {
             ))}
           </div>
         </div>
+
+      </div>
+    </section>
+  );
+}
+
+// ===== Problem section =====
+function Problem({ variant }) {
+  const content = VARIANT_CONTENT[variant] || VARIANT_CONTENT.default;
+  return (
+    <section className="py-20 border-t border-black/5 dark:border-white/5">
+      <div className="mx-auto max-w-6xl px-6 text-center">
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={content.problemHeading}
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -8 }}
+            transition={{ duration: 0.3 }}
+          >
+            <p className="text-sm font-semibold text-fuchsia-600 uppercase tracking-widest mb-3">
+              Sound familiar?
+            </p>
+            <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight text-balance max-w-3xl mx-auto">
+              {content.problemHeading}
+            </h2>
+            <p className="mt-4 text-lg text-black/70 dark:text-white/70 max-w-2xl mx-auto">
+              {content.problemBody}
+            </p>
+            {content.problemPoints && (
+              <div className="mt-10 grid grid-cols-1 sm:grid-cols-3 gap-5 text-left">
+                {content.problemPoints.map((pt) => (
+                  <div
+                    key={pt.label}
+                    className="rounded-2xl border border-black/8 dark:border-white/8 bg-white/60 dark:bg-white/5 p-6 shadow-sm"
+                  >
+                    <div className="flex items-center gap-3 mb-3">
+                      <div className="p-2 rounded-xl bg-red-50 dark:bg-red-900/20 text-red-500 shrink-0">
+                        <pt.Icon className="h-4 w-4" />
+                      </div>
+                      <h3 className="font-semibold text-sm">{pt.label}</h3>
+                    </div>
+                    <p className="text-sm text-black/60 dark:text-white/60 leading-relaxed">{pt.desc}</p>
+                  </div>
+                ))}
+              </div>
+            )}
+          </motion.div>
+        </AnimatePresence>
+      </div>
+    </section>
+  );
+}
+
+// ===== Numbers section =====
+function Numbers({ variant }) {
+  const content = VARIANT_CONTENT[variant] || VARIANT_CONTENT.default;
+  return (
+    <section id="results" className="scroll-mt-20 py-20 border-t border-black/5 dark:border-white/5">
+      <div className="mx-auto max-w-6xl px-6">
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={content.numbersHeading}
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -8 }}
+            transition={{ duration: 0.3 }}
+          >
+            <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight">
+              {content.numbersHeading}
+            </h2>
+            <div className="mt-10 grid grid-cols-1 sm:grid-cols-3 gap-6">
+              {content.stats.map((stat) => (
+                <div
+                  key={stat.number + stat.label}
+                  className="rounded-3xl border border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/5 p-8 shadow-sm"
+                >
+                  <div className="text-4xl font-semibold bg-gradient-to-r from-indigo-500 via-violet-500 to-fuchsia-500 bg-clip-text text-transparent">
+                    {stat.number}
+                  </div>
+                  <div className="mt-1 text-base font-semibold text-black/80 dark:text-white/80">
+                    {stat.label}
+                  </div>
+                  <p className="mt-3 text-sm text-black/60 dark:text-white/60">{stat.desc}</p>
+                </div>
+              ))}
+            </div>
+            <p className="mt-4 text-xs text-black/50 dark:text-white/50">
+              Results measured in A/B tests with a one-day conversion window.
+            </p>
+          </motion.div>
+        </AnimatePresence>
       </div>
     </section>
   );
@@ -1195,182 +1437,69 @@ function BrandMark({ src, label, className = "" }) {
 }
 
 function Features() {
-  const items = [
+  const capabilities = [
     {
-      title: "Improve search results fast",
-      desc:
-        "Nobi's search bar provably outperforms legacy search engines by 30% and takes only 30 minutes to install.",
-      ctaLabel: "Learn More →",
-      ctaHref: "/why-nobi/better-search",
-      icon: <SearchIcon className="h-4 w-4" />,
-      media: { src: "/media/feature-ai-mode.mp4", alt: "" },
+      icon: <SearchIcon className="h-5 w-5" />,
+      title: "Find anything on your site",
+      stat: "+36% add-to-cart",
+      desc: "Visitors search in plain language and Nobi finds the right match even when the exact words don't appear in your content. No more dead-end searches.",
     },
     {
-      title: "Engage more visitors",
-      desc:
-        "Spark exploration with AI prompts that answers shoppers' questions and keeps them clicking instead of bouncing.",
-      ctaLabel: "Learn More →",
-      ctaHref: "/why-nobi/better-search",
-      icon: <Sparkles className="h-4 w-4" />,
-      media: { src: "/media/feature-qa.mp4", alt: "Collections assistant demo" },
+      icon: <CheckCircle2 className="h-5 w-5" />,
+      title: "Answer every question accurately",
+      stat: "6x more purchases",
+      desc: "Pulls from your knowledge base, cites its sources, and runs a fact-check before responding. Visitors get a straight answer they can trust.",
     },
     {
-      title: "Increase cart size",
-      desc:
-        "Recommend products that are likely to be added to the cart based on why they are buying from you in the first place.",
-      ctaLabel: "Learn More →",
-      ctaHref: "/why-nobi/better-search",
-      icon: <ShoppingCart className="h-4 w-4" />,
-      media: { src: "/media/cross-sell.mp4", alt: "MCP performance demo", objectPosition: "center" },
+      icon: <Heart className="h-5 w-5" />,
+      title: "Capture and qualify leads",
+      stat: "+21.3% revenue per referral",
+      desc: "Collects contact info naturally through conversation, attributes it to the right source, and sends it to your CRM or form handler.",
+    },
+    {
+      icon: <BarChart3 className="h-5 w-5" />,
+      title: "Know what's working",
+      stat: "A/B tested",
+      desc: "See what visitors are asking, where they get stuck, and which conversations led to conversions. A/B test configurations and measure results directly in Nobi's dashboard.",
     },
   ];
-
-  const [active, setActive] = useState(0);
-  const [restartKey, setRestartKey] = useState(0);
-
-  // Cache-bust so we always refresh the video source
-  const rawSrc = items[active]?.media?.src || "";
-  const bustSrc = rawSrc && `${rawSrc}${rawSrc.includes("?") ? "&" : "?"}r=${restartKey}`;
 
   return (
     <section id="features" className="scroll-mt-20 py-20 border-t border-black/5 dark:border-white/5">
       <div className="mx-auto max-w-6xl px-6">
-        <p className="text-sm font-semibold text-fuchsia-600">Features</p>
-        <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight mt-2 text-balance">
-          Help shoppers find and buy.
+        <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight text-balance">
+          One assistant for everything your visitors need
         </h2>
-        <p className="mt-3 text-black/70 dark:text-white/70">
-        Nobi helps shoppers find what they need, answers their questions, and recommends products they are likely to buy through conversational AI.
-        </p>
-
-        <div className="mt-8 grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
-          {/* Preview first on mobile */}
-          <div
-            className="order-1 lg:order-2 rounded-3xl border border-black/10 dark:border-white/10 bg-white/60 dark:bg-white/5 shadow-inner overflow-hidden aspect-[4/3] sm:aspect-video lg:aspect-auto lg:h-full"
-            role="tabpanel"
-            id="feature-preview"
-            aria-labelledby={`feature-tab-${active}`}
-          >
-            <MediaBox
-              key={restartKey}
-              restartKey={restartKey}
-              src={bustSrc}
-              alt={items[active]?.media?.alt || ""}
-              objectPosition={items[active]?.media?.objectPosition}
-            />
-          </div>
-
-          {/* Bullets second on mobile */}
-          <div className="order-2 lg:order-1 space-y-4" role="tablist" aria-controls="feature-preview">
-            {items.map((f, i) => (
-              <button
-                key={f.title}
-                id={`feature-tab-${i}`}
-                role="tab"
-                aria-selected={i === active}
-                onClick={() => { setActive(i); setRestartKey(k => k + 1); }}
-                className={`w-full text-left rounded-2xl border p-5 transition shadow-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-black/10 dark:focus-visible:ring-white/20 ${
-                  i === active
-                    ? "border-fuchsia-200 bg-fuchsia-50/70 dark:bg-white/5"
-                    : "border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/5"
-                }`}
-              >
-                <div className="flex items-start gap-3">
-                  <span className="mt-1 text-fuchsia-600">{f.icon}</span>
-                  <div>
-                    <div className="font-semibold">{f.title}</div>
-                    <p className="mt-1 text-sm text-black/70 dark:text-white/70">{f.desc}</p>
-                    {i === active && f.ctaLabel && f.ctaHref && (
-                      <div className="mt-3">
-                        <a
-                          href={f.ctaHref}
-                          className="inline-flex items-center gap-2 rounded-xl border border-black/10 bg-white px-4 py-2 text-xs font-semibold text-black hover:border-fuchsia-200 hover:bg-fuchsia-50 transition"
-                        >
-                          {f.ctaLabel}
-                        </a>
-                      </div>
-                    )}
+        <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 gap-6">
+          {capabilities.map((cap) => (
+            <div
+              key={cap.title}
+              className="rounded-3xl border border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/5 p-8 shadow-sm flex flex-col gap-4"
+            >
+              <div className="flex items-center justify-between gap-3">
+                <div className="flex items-center gap-3">
+                  <div className="p-2 rounded-xl bg-fuchsia-50 dark:bg-fuchsia-900/20 text-fuchsia-600 shrink-0">
+                    {cap.icon}
                   </div>
+                  <h3 className="font-semibold text-lg">{cap.title}</h3>
                 </div>
-              </button>
-            ))}
-          </div>
+                <span className="shrink-0 text-xs font-semibold text-fuchsia-700 dark:text-fuchsia-300 bg-fuchsia-50 dark:bg-fuchsia-900/30 border border-fuchsia-200 dark:border-fuchsia-800/50 rounded-full px-2.5 py-1">
+                  {cap.stat}
+                </span>
+              </div>
+              <p className="text-black/70 dark:text-white/70">{cap.desc}</p>
+            </div>
+          ))}
         </div>
       </div>
     </section>
   );
 }
 
+
+// Results is now handled by the Numbers component above; this stub keeps old anchor links working
 function Results() {
-  const rows = [
-    { metric: "Product Viewed",       defaultVal: "60.9%", nobiVal: "64.1%", impact: "+6.0%" },
-    { metric: "Add to Cart",          defaultVal: "8.5%",  nobiVal: "11.5%", impact: "+35.3%" },
-    { metric: "Checkout Completed",   defaultVal: "2.4%",  nobiVal: "3.1%",  impact: "+29.2%" },
-    { metric: "Average Order Value",  defaultVal: "$231",  nobiVal: "$360",  impact: "+55.8%" },
-  ];
-
-  return (
-    <section id="results" className="scroll-mt-20 py-20 border-t border-black/5 dark:border-white/5">
-      <div className="mx-auto max-w-6xl px-6">
-        <p className="text-sm font-semibold text-fuchsia-600">Results</p>
-        <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight mt-2">
-          Convert more traffic and drive more revenue.
-        </h2>
-        <p className="mt-3 text-black/70 dark:text-white/70">
-          Nobi has outperformed the default shopping experience in every A/B test we've ever run.
-        </p>
-
-       <div className="mt-8">
-  <table className="w-full text-left border-collapse table-fixed">
-    {/* Force sane column widths on mobile so nothing gets clipped */}
-    <colgroup>
-      <col style={{ width: "40%" }} />  {/* Metric */}
-      <col style={{ width: "20%" }} />  {/* Default */}
-      <col style={{ width: "20%" }} />  {/* Nobi */}
-      <col style={{ width: "20%" }} />  {/* Impact */}
-    </colgroup>
-
-    <thead>
-      <tr className="text-xs sm:text-sm font-semibold text-black/70 dark:text-white/70">
-        <th className="py-2 px-2 sm:px-4"></th>
-        <th className="py-2 px-2 sm:px-4 text-center">Default</th>
-        <th className="py-2 px-2 sm:px-4 text-center">Nobi</th>
-        <th className="py-2 px-2 sm:px-4 text-center bg-gradient-to-r from-indigo-500 via-violet-500 to-fuchsia-500 bg-clip-text text-transparent">
-          Impact
-        </th>
-      </tr>
-    </thead>
-
-    <tbody>
-      {rows.map((r, i) => (
-        <tr
-          key={r.metric}
-          className={i !== rows.length - 1 ? "border-b border-dashed border-black/20 dark:border-white/15" : ""}
-        >
-          <td className="py-3 px-2 sm:px-4 font-medium text-black/80 dark:text-white/90 leading-snug">
-            {r.metric}
-          </td>
-
-          <td className="py-3 px-2 sm:px-4 text-center text-xl sm:text-2xl font-semibold tabular-nums">
-            {r.defaultVal}
-          </td>
-          <td className="py-3 px-2 sm:px-4 text-center text-xl sm:text-2xl font-semibold tabular-nums">
-            {r.nobiVal}
-          </td>
-          <td className="py-3 px-2 sm:px-4 text-center text-xl sm:text-2xl font-bold tabular-nums whitespace-nowrap bg-gradient-to-r from-indigo-500 via-violet-500 to-fuchsia-500 bg-clip-text text-transparent">
-            {r.impact}
-          </td>
-        </tr>
-      ))}
-    </tbody>
-  </table>
-</div>
-        <p className="mt-3 text-xs text-black/50 dark:text-white/50">
-          Impact = relative lift vs. Default. Above are the total results we've seen across all of our clients comparing Nobi to the default.
-        </p>
-      </div>
-    </section>
-  );
+  return null;
 }
 
 function Testimonial() {
@@ -1411,8 +1540,7 @@ function Testimonial() {
           >
             <Quote className="h-6 w-6 text-fuchsia-600 mb-4" />
             <p className="text-2xl leading-snug font-medium text-black/90 dark:text-white">
-              “If you want to learn and be inspired, you should implement a tool like Nobi. We've seen great incremental results... but the biggest reason a brand should implement this is that you have the opportunity to apply more information towards optimizing
-              campaigns and your broader brand and e-comm goals.”
+              “If you want to learn and be inspired, you should look to implement a tool like Nobi. We've seen great incremental results, where conversion rates have been significantly higher through Nobi than on our binary search. But I think the biggest reason a brand should implement a tool like this is that you have the opportunity to apply more information towards optimizing broader campaigns and your broader e-comm goals.”
             </p>
             <div className="mt-6 flex items-center gap-4">
               {!avatarFailed ? (
@@ -1428,7 +1556,7 @@ function Testimonial() {
               <div>
                 <div className="font-semibold">Lourdes Servin</div>
                 <div className="text-sm text-black/60 dark:text-white/60">
-                  Senior Dr. Digital & E-Commerce, Lucchese Bootmaker
+                  Sr. Director, Digital and E-Commerce, Lucchese Bootmaker
                 </div>
               </div>
             </div>
@@ -1470,9 +1598,9 @@ function Testimonial() {
 
 function HowItWorks() {
   const steps = [
-    { h: "Install the code", p: "Paste two snippets of code in your store. Nobi reads your catalog and adopts your branding." },
-    { h: "Customize and launch", p: "Pick entry points (i.e. PLPs, search) and customize how you want Nobi to look." },
-    { h: "Measure the lift", p: "Track conversion, AOV and qualitative insights in a simple dashboard." },
+    { h: "Connect your site", p: "Paste one script tag or install the Shopify app. Nobi reads your catalog, pages, and PDFs automatically." },
+    { h: "Customize and launch", p: "Pick where Nobi appears, configure your brand voice, and go live. Knowledge base refreshes twice a day with no maintenance needed." },
+    { h: "Measure the results", p: "Track conversions, revenue, and what visitors are asking in a simple dashboard. A/B test configurations and see the lift directly." },
   ];
   return (
     <section id="how" className="scroll-mt-20 py-20 border-t border-black/5 dark:border-white/5">
@@ -1502,9 +1630,9 @@ function Pricing() {
       <div className="mx-auto max-w-6xl px-6">
         <h2 className="text-3xl font-semibold mb-2">Simple, usage-based pricing</h2>
         <p className="text-black/60 dark:text-white/60 mb-8">A low monthly base with per-use rates. Start with a free 30-day trial.</p>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-stretch max-w-3xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-stretch">
           {tiers.map((t) => (
-            <div key={t.name} className={`flex flex-col rounded-3xl border bg-white/70 dark:bg-white/5 p-6 ${t.highlighted ? "border-purple-300 ring-2 ring-purple-200" : "border-black/10 dark:border-white/10"}`}>
+            <div key={t.name} className={`flex flex-col rounded-3xl border bg-white/70 dark:bg-white/5 p-8 ${t.highlighted ? "border-purple-300 ring-2 ring-purple-200" : "border-black/10 dark:border-white/10"}`}>
               <div className="text-sm font-semibold tracking-wide text-indigo-600">{t.name}</div>
               <div className="mt-2 text-3xl font-semibold">
                 {t.price}{t.price !== "Custom" && <span className="text-base font-normal opacity-70"> monthly base</span>}
@@ -2107,48 +2235,80 @@ function LatestPosts() {
   );
 }
 
+function WorksWith() {
+  const items = [
+    "Shopify, WooCommerce, headless, or custom site",
+    "Reads web pages, PDFs, and uploaded documents",
+    "Connects to your existing forms and CRM",
+    "Remarketing pixels for Facebook and Google Ads included",
+    "Knowledge base refreshes automatically twice a day",
+  ];
+  return (
+    <section className="py-20 border-t border-black/5 dark:border-white/5">
+      <div className="mx-auto max-w-6xl px-6">
+        <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight">
+          Works with what you already have
+        </h2>
+        <ul className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-4">
+          {items.map((item) => (
+            <li key={item} className="flex items-start gap-3 text-black/80 dark:text-white/80">
+              <CheckCircle2 className="h-5 w-5 text-fuchsia-600 mt-0.5 shrink-0" />
+              <span>{item}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  );
+}
+
 export default function HomePage() {
   const [isVideoOpen, setIsVideoOpen] = useState(false);
   const { onOpen: onOpenForm } = useDemoForm();
+
+  const [variant, setVariant] = useState(() => {
+    try { return localStorage.getItem("nobi_hero_variant") || "default"; } catch (_) { return "default"; }
+  });
+
   useEffect(() => {
     document.title = "Nobi: a conversational site assistant to help you grow";
   }, []);
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-white to-slate-50 dark:from-[#0a0a0a] dark:to-black text-black dark:text-white">
-        <Header />
-        <Hero onOpenVideo={() => setIsVideoOpen(true)} onOpenDemo={onOpenForm} />
-        <Features />
-        <Results />
-        <Insights onOpenForm={onOpenForm} />
-        <Testimonial />
-        <HowItWorks />
-        <LatestPosts />
-        {SHOW_PRICING && <Pricing />}
-        <FAQList
-            limit={4}
-            showBorderTop
-            padding="py-20"
-            columns={2}
-            headingAlign="center"
-        />
-        <div className="mx-auto max-w-6xl px-6 -mt-6 mb-14 flex justify-center">
-            <a
-                href="/faqs"
-                className="text-sm font-semibold text-black hover:text-purple-600 transition-colors underline"
-            >
-                See all FAQs →
-            </a>
-        </div>
-        <Footer />
-
-        {/* Video Modal */}
-        <VideoModal
-            open={isVideoOpen}
-            onClose={() => setIsVideoOpen(false)}
-            youtube="https://www.youtube.com/watch?v=RKqGC3CVZd0"
-        />
-
+      <Header />
+      <Hero onOpenVideo={() => setIsVideoOpen(true)} onOpenDemo={onOpenForm} variant={variant} setVariant={setVariant} />
+      <Problem variant={variant} />
+      <Numbers variant={variant} />
+      <Features />
+      <Testimonial />
+      <HowItWorks />
+      <WorksWith />
+      <Insights onOpenForm={onOpenForm} />
+      <LatestPosts />
+      {SHOW_PRICING && <Pricing />}
+      <FAQList
+        limit={4}
+        showBorderTop
+        padding="py-20"
+        columns={2}
+        headingAlign="center"
+      />
+      <div className="mx-auto max-w-6xl px-6 -mt-6 mb-14 flex justify-center">
+        <a
+          href="/faqs"
+          className="text-sm font-semibold text-black hover:text-purple-600 transition-colors underline"
+        >
+          See all FAQs
+        </a>
+      </div>
+      <Footer />
+      <VideoModal
+        open={isVideoOpen}
+        onClose={() => setIsVideoOpen(false)}
+        youtube="https://www.youtube.com/watch?v=RKqGC3CVZd0"
+      />
+      <ScrollPreview sections={PREVIEW_SECTIONS} label="Next up" side="right" />
     </div>
   );
 }

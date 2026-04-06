@@ -2,7 +2,12 @@ import React, { useEffect, useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Sparkles } from "lucide-react";
 
-const DEMO_QUERY = "red dress for a weekend out";
+const DEMO_QUERIES = {
+  default: "red dress for a weekend out",
+  search:  "red dress for a weekend out",
+  answers: "what's your return policy?",
+  leads:   "I need help finding the right size",
+};
 
 function Button({ variant = "primary", size = "md", className = "", children, ...props }) {
   const base =
@@ -36,6 +41,7 @@ function DualModeSearchBar({
   onModeChange,
   onDemoSubmit,
   locked = true,
+  demoQuery,
 }) {
   const isLocked = !!locked;
   const [internalMode, setInternalMode] = useState(defaultMode);
@@ -54,7 +60,8 @@ function DualModeSearchBar({
   useEffect(() => {
     if (!demoEnabled) return;
 
-    const toType = mode === "ai" ? DEMO_QUERY : "Red dress";
+    const defaultQuery = DEMO_QUERIES[demoQuery] || DEMO_QUERIES.default;
+    const toType = mode === "ai" ? defaultQuery : "Red dress";
 
     setPlaceholder(mode === "ai" ? "Describe what you want..." : "Search products...");
     setQuery("");
@@ -132,7 +139,7 @@ const PRODUCTS = [
 const PDP_QUESTION = "Does this run true to size?";
 const PDP_ANSWER = "This dress runs true to size. Most customers find it fits perfectly when ordering their usual size. The stretchy fabric provides a comfortable, flattering fit.";
 
-function SearchDemo({ isActive }) {
+function SearchDemo({ isActive, variant = "default" }) {
   const [searchMode, setSearchMode] = useState("ai");
   const [showProducts, setShowProducts] = useState(false);
   const [showCursor, setShowCursor] = useState(false);
@@ -163,6 +170,7 @@ function SearchDemo({ isActive }) {
         onDemoSubmit={handleDemoComplete}
         defaultMode="ai"
         size="regular"
+        demoQuery={variant}
       />
 
       {showProducts && (
@@ -479,7 +487,7 @@ function PdpDemo({ isActive }) {
   );
 }
 
-export default function HeroDemo({ className = "" }) {
+export default function HeroDemo({ className = "", variant = "default" }) {
   const [activeIndex, setActiveIndex] = useState(0);
   const slides = [
     { id: "search", label: "Search + discovery" },
@@ -551,7 +559,7 @@ export default function HeroDemo({ className = "" }) {
               style={{ transform: `translateX(-${activeIndex * 100}%)` }}
             >
               <div ref={el => slideRefs.current[0] = el} className="w-full shrink-0 px-1 pb-3">
-                <SearchDemo isActive={activeIndex === 0} />
+                <SearchDemo isActive={activeIndex === 0} variant={variant} />
               </div>
               <div ref={el => slideRefs.current[1] = el} className="w-full shrink-0 px-1 overflow-hidden">
                 <PdpDemo isActive={activeIndex === 1} />

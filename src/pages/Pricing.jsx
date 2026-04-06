@@ -9,7 +9,6 @@ import { useDemoForm } from "../context/DemoFormContext";
 const CUSTOMER_LOGOS = [
   { alt: "UNTUCKit", src: "/media/logos/untuckit.svg" },
   { alt: "Lucchese", src: "/media/logos/lucchese.svg" },
-  { alt: "Faherty", src: "/media/logos/faherty.svg" },
   { alt: "TOOLUP", src: "/media/logos/toolup.svg" },
   { alt: "Kilte", src: "/media/logos/kilte.svg" },
   { alt: "Alps and Meters", src: "/media/logos/alps_meters.png" },

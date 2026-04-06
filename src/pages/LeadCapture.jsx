@@ -9,7 +9,6 @@ const GRADIENT = "bg-gradient-to-r from-indigo-500 via-violet-500 to-fuchsia-500
 const CUSTOMER_LOGOS = [
   { alt: "UNTUCKit", src: "/media/logos/untuckit.svg" },
   { alt: "Lucchese", src: "/media/logos/lucchese.svg" },
-  { alt: "Faherty", src: "/media/logos/faherty.svg" },
   { alt: "TOOLUP", src: "/media/logos/toolup.svg" },
   { alt: "Kilte", src: "/media/logos/kilte.svg" },
   { alt: "Alps and Meters", src: "/media/logos/alps_meters.png" },
@@ -115,9 +114,9 @@ export default function LeadCapture() {
                   palette: "blue",
                 },
                 {
-                  stat: "+21.3%",
-                  label: "revenue per referral",
-                  desc: "Faherty Brand measured a 21.3% increase in revenue per referral after adding Nobi to their site.",
+                  stat: "100%",
+                  label: "of leads include conversation context",
+                  desc: "Every lead captured by Nobi includes a summary of what the visitor was asking about, so follow-ups aren't cold.",
                   palette: "purple",
                 },
                 {

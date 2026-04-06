@@ -5,6 +5,20 @@ import { useDemoForm } from "../../context/DemoFormContext";
 
 const GRADIENT = "bg-gradient-to-r from-indigo-500 via-violet-500 to-fuchsia-500 bg-clip-text text-transparent";
 
+// Images from docs.nobi.ai
+const IMG_CHANNEL_REPORT = "https://imagedelivery.net/IEMzXmjRvW0g933AN5ejrA/assetsbulletsitefiles-31cc7ba9-c3dd-8066-9382-ebac6405dfcd-attachment8fea41c4-9871-405b-824f-fc16435fe6c8imagepng/public";
+const IMG_INSIGHTS = "https://imagedelivery.net/IEMzXmjRvW0g933AN5ejrA/assetsbulletsitefiles-2e1c7ba9-c3dd-8052-aeca-e9137d03eb5c-attachmentc7117cb2-969a-462c-8bc7-fc5a4ca5047finsights-minpng/public";
+const IMG_METRICS = "https://imagedelivery.net/IEMzXmjRvW0g933AN5ejrA/assetsbulletsitefiles-2e1c7ba9-c3dd-806a-84a9-d4740187b34c-attachment6d666b45-2b36-4c0b-b00e-3d2232bc3ef1metrics-minpng/public";
+
+function StatCallout({ value, label }) {
+  return (
+    <span className="inline-flex flex-col items-center bg-violet-50 border border-violet-200 rounded-xl px-3 py-1.5 mx-1 align-middle">
+      <span className="text-lg font-bold text-violet-700 leading-none">{value}</span>
+      <span className="text-[10px] text-violet-500 font-medium leading-none mt-0.5">{label}</span>
+    </span>
+  );
+}
+
 export default function UNTUCKitCustomer() {
   const { onOpen } = useDemoForm();
 
@@ -35,7 +49,7 @@ export default function UNTUCKitCustomer() {
                   into a long-term partnership
                 </h1>
                 <p className="text-lg text-slate-600 max-w-2xl leading-relaxed">
-                  UNTUCKit wanted to see what AI could actually do for their site. They ran a two-month A/B test, saw the results, and kept going. Deeper than almost any other customer.
+                  UNTUCKit wanted more shoppers engaging with search. They ran a two-month A/B test, saw the numbers, dropped the split, and went all in.
                 </p>
               </div>
 
@@ -57,7 +71,7 @@ export default function UNTUCKitCustomer() {
           </div>
         </section>
 
-        {/* Company + challenge */}
+        {/* About + Why they started */}
         <section className="bg-white border-t border-slate-100 py-16">
           <div className="mx-auto max-w-4xl px-6">
             <div className="grid md:grid-cols-2 gap-10 lg:gap-16">
@@ -70,19 +84,19 @@ export default function UNTUCKitCustomer() {
               <div className="space-y-4">
                 <p className="text-sm font-semibold uppercase tracking-[0.18em] text-slate-400">Why they started</p>
                 <p className="text-base text-slate-600 leading-relaxed">
-                  UNTUCKit knew that shoppers who search are far more likely to convert than those who don't. They wanted to test whether AI search could meaningfully improve what happened after a visitor typed something in, and whether the ROI would justify the cost.
+                  UNTUCKit knew that shoppers who search convert at a much higher rate than those who don't — so getting more visitors to engage with search was a real business lever. One of the first things Nobi did was add an "Ask AI" button to their nav bar, giving shoppers a new way to engage with the site. Then they ran a two-month A/B test to see what the results actually looked like.
                 </p>
               </div>
             </div>
           </div>
         </section>
 
-        {/* What Nobi outperformed on */}
+        {/* Three examples */}
         <section className="bg-gradient-to-b from-slate-50 to-white py-20">
           <div className="mx-auto max-w-4xl px-6 space-y-10">
             <div className="space-y-3">
-              <p className="text-sm font-semibold uppercase tracking-[0.18em] text-fuchsia-600">Where Nobi outperformed</p>
-              <h2 className="text-3xl font-semibold text-slate-900">Three areas that drove the lift</h2>
+              <p className="text-sm font-semibold uppercase tracking-[0.18em] text-fuchsia-600">What the test found</p>
+              <h2 className="text-3xl font-semibold text-slate-900">Three places Nobi pulled ahead</h2>
             </div>
 
             <div className="grid md:grid-cols-3 gap-6">
@@ -97,7 +111,7 @@ export default function UNTUCKitCustomer() {
                 },
                 {
                   title: "Semantic search",
-                  body: "A search for \"navy vest\" (a product UNTUCKit didn't carry in navy) had Shopify showing t-shirts. Nobi correctly confirmed no navy vests were available, but surfaced vests in other colors and other navy items. The shopper stayed on the site.",
+                  body: "A search for \"navy vest\" (a product UNTUCKit didn't carry in navy) had Shopify showing t-shirts. Nobi confirmed no navy vests were available but surfaced vests in other colors and other navy items. The shopper stayed on the site.",
                 },
               ].map((item) => (
                 <div key={item.title} className="rounded-2xl border border-slate-200 bg-white p-6 space-y-3 shadow-[0_8px_24px_-16px_rgba(15,23,42,0.12)]">
@@ -109,41 +123,100 @@ export default function UNTUCKitCustomer() {
           </div>
         </section>
 
-        {/* Partnership grew */}
+        {/* Results — stats woven into narrative */}
+        <section className="bg-white border-t border-slate-100 py-16">
+          <div className="mx-auto max-w-4xl px-6 space-y-6">
+            <div className="space-y-3">
+              <p className="text-sm font-semibold uppercase tracking-[0.18em] text-fuchsia-600">The result</p>
+              <h2 className="text-2xl font-semibold text-slate-900">The A/B test ran for two months. Then they stopped splitting.</h2>
+            </div>
+            <div className="space-y-4 text-base text-slate-600 leading-relaxed max-w-2xl">
+              <p>
+                Nobi's conversion rate came in at <strong>17.6%</strong> against Shopify's <strong>15.0%</strong> — a <strong>+17.1% lift</strong>. Revenue per searcher climbed from <strong>$32.30</strong> to <strong>$39.17</strong>, a <strong>+21.3% improvement</strong>. Average order value moved from <strong>$215</strong> to <strong>$222</strong>.
+              </p>
+              <p>
+                The numbers were clear enough that UNTUCKit didn't need to keep running the test. They moved Nobi from a split to 100% of their traffic and started looking at what else they could do with it.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* What happened next — dark section with images */}
         <section className="bg-gradient-to-b from-[#17122f] via-[#1c1540] to-[#17122f] py-20 text-white">
           <div className="mx-auto max-w-4xl px-6 space-y-10">
             <div className="space-y-3 max-w-2xl">
-              <p className="text-sm font-semibold uppercase tracking-[0.18em] text-purple-300">What happened after the pilot</p>
-              <h2 className="text-3xl font-semibold text-white">The pilot ended. The partnership didn't.</h2>
+              <p className="text-sm font-semibold uppercase tracking-[0.18em] text-purple-300">After the pilot</p>
+              <h2 className="text-3xl font-semibold text-white">They went all in — and started shaping the product</h2>
               <p className="text-base text-slate-300">
-                After seeing the A/B test results and getting comfortable with the pricing, UNTUCKit kept going and pushed deeper into what Nobi could do.
+                Once they committed fully, UNTUCKit pushed deeper into Nobi than almost any other customer. Some of what they asked for became features every Nobi customer uses today.
               </p>
             </div>
 
-            <div className="grid md:grid-cols-2 gap-5">
-              {[
-                {
-                  title: "They asked for a query channel report",
-                  body: "UNTUCKit wanted to understand which channels their search traffic was coming from. Nobi built it. That report is now available to every customer.",
-                },
-                {
-                  title: "They inspired Nobi's Hooks API",
-                  body: "UNTUCKit's team wanted to control how Nobi displayed product information, customizing the output to match their experience. That request turned into Nobi's Hooks capability, which any developer can now use.",
-                },
-                {
-                  title: "They run Nobi insights in weekly meetings",
-                  body: "UNTUCKit's team reviews Nobi's search insights every week as part of their regular business review, looking at query trends, zero-result searches, and what shoppers are asking for.",
-                },
-                {
-                  title: "They now have full search history",
-                  body: "Before Nobi, UNTUCKit's search data only went back 12 months. Nobi stores everything from day one, so they can track long-term trends, compare seasons, and build a real picture of how search behavior changes over time.",
-                },
-              ].map((item) => (
-                <div key={item.title} className="rounded-2xl border border-white/10 bg-white/5 p-6 space-y-2">
-                  <h3 className="text-base font-semibold text-white">{item.title}</h3>
-                  <p className="text-sm text-slate-300 leading-relaxed">{item.body}</p>
+            <div className="grid md:grid-cols-2 gap-6">
+              {/* Panel 1: Query channel report */}
+              <div className="rounded-2xl border border-white/10 bg-white/5 overflow-hidden">
+                <div className="aspect-[16/9] overflow-hidden bg-white/5">
+                  <img
+                    src={IMG_CHANNEL_REPORT}
+                    alt="Queries by Channel report in Nobi dashboard"
+                    className="w-full h-full object-cover object-top"
+                  />
                 </div>
-              ))}
+                <div className="p-6 space-y-2">
+                  <h3 className="text-base font-semibold text-white">They asked for a query channel report</h3>
+                  <p className="text-sm text-slate-300 leading-relaxed">UNTUCKit wanted to understand which channels their search traffic was coming from — organic, paid, email, social — and which queries drove revenue. Nobi built it. That report is now in every customer's dashboard.</p>
+                </div>
+              </div>
+
+              {/* Panel 2: Hooks API — code block, no image available */}
+              <div className="rounded-2xl border border-white/10 bg-white/5 overflow-hidden">
+                <div className="aspect-[16/9] overflow-hidden bg-[#0f0c1d] flex items-center justify-center p-6">
+                  <pre className="text-xs text-violet-300 leading-relaxed font-mono overflow-auto w-full"><code>{`window.NobiFeatureHooks = {
+  onProductDisplay: function(product) {
+    // customize how Nobi renders
+    // each product card
+    return {
+      badge: getBadge(product),
+      subtitle: getSubtitle(product),
+    };
+  }
+}`}</code></pre>
+                </div>
+                <div className="p-6 space-y-2">
+                  <h3 className="text-base font-semibold text-white">They inspired Nobi's Hooks API</h3>
+                  <p className="text-sm text-slate-300 leading-relaxed">UNTUCKit's team wanted to control how Nobi displayed products — customizing each card to match their experience. That request became Nobi's Hooks capability, which lets any developer inject custom logic into the assistant without touching Nobi's code directly.</p>
+                </div>
+              </div>
+
+              {/* Panel 3: Weekly insights */}
+              <div className="rounded-2xl border border-white/10 bg-white/5 overflow-hidden">
+                <div className="aspect-[16/9] overflow-hidden bg-white/5">
+                  <img
+                    src={IMG_INSIGHTS}
+                    alt="Nobi Insights dashboard"
+                    className="w-full h-full object-cover object-top"
+                  />
+                </div>
+                <div className="p-6 space-y-2">
+                  <h3 className="text-base font-semibold text-white">They run Nobi insights in weekly meetings</h3>
+                  <p className="text-sm text-slate-300 leading-relaxed">UNTUCKit's team reviews Nobi's search insights every week as part of their regular business review — looking at query trends, zero-result searches, and what shoppers are actually asking for. It became a standing part of how they think about their catalog.</p>
+                </div>
+              </div>
+
+              {/* Panel 4: Search history */}
+              <div className="rounded-2xl border border-white/10 bg-white/5 overflow-hidden">
+                <div className="aspect-[16/9] overflow-hidden bg-white/5">
+                  <img
+                    src={IMG_METRICS}
+                    alt="Nobi Performance Metrics dashboard"
+                    className="w-full h-full object-cover object-top"
+                  />
+                </div>
+                <div className="p-6 space-y-2">
+                  <h3 className="text-base font-semibold text-white">They now have full search history</h3>
+                  <p className="text-sm text-slate-300 leading-relaxed">Before Nobi, UNTUCKit's search data only went back 12 months. Nobi stores everything from day one, so they can track long-term trends, compare seasons, and build a real picture of how search behavior changes over time.</p>
+                </div>
+              </div>
             </div>
           </div>
         </section>

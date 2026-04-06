@@ -100,7 +100,7 @@ export default function KnowledgeBase() {
                 {
                   stat: "6x",
                   label: "more likely to purchase",
-                  desc: "Visitors who ask a question and get a real answer are 6x more likely to buy than those who don't engage.",
+                  desc: "Based on Nobi's internal data across customers: visitors who engage with the assistant and get a real answer are 6x more likely to purchase than visitors who don't interact.",
                   palette: "blue",
                 },
                 {

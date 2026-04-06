@@ -3,6 +3,7 @@ import {AnimatePresence, motion} from "framer-motion";
 import {
     BarChart3,
     CheckCircle2,
+    ChevronDown,
     Heart,
     LayoutGrid,
     MessageCircleQuestion,
@@ -130,6 +131,7 @@ const PLACEMENTS = [
 
 // ===== Personalization variant content =====
 const CHIPS = [
+  { id: "default", label: "All" },
   { id: "search",  label: "Better search" },
   { id: "answers", label: "Answer questions" },
   { id: "leads",   label: "Capture leads" },
@@ -138,7 +140,7 @@ const CHIPS = [
 const VARIANT_CONTENT = {
   default: {
     headline: "Turn your website into your best sales associate",
-    subline:  "Nobi is an AI assistant that answers questions, guides visitors to what they need, and consistently drives more conversions across ecommerce, services, real estate, and more.",
+    subline:  "An AI assistant that answers questions, finds products, and captures leads. Works on ecommerce sites, service businesses, real estate — anything.",
     problemHeading: "Your visitors aren't getting the help they need",
     problemBody:    "They arrive with a question or a vague sense of what they want. Your search bar needs exact words. Your FAQ page needs patience. Most of them leave without finding what they came for.",
     numbersHeading: "What our customers have seen",
@@ -859,6 +861,11 @@ function Hero({ onOpenVideo, onOpenDemo, variant, setVariant }) {
   const content = VARIANT_CONTENT[variant] || VARIANT_CONTENT.default;
 
   const handleChip = (id) => {
+    if (id === "default") {
+      setVariant("default");
+      try { localStorage.setItem("nobi_hero_variant", "default"); } catch (_) {}
+      return;
+    }
     const next = id === variant ? "default" : id;
     setVariant(next);
     try { localStorage.setItem("nobi_hero_variant", next); } catch (_) {}
@@ -878,7 +885,13 @@ function Hero({ onOpenVideo, onOpenDemo, variant, setVariant }) {
               transition={{ duration: 0.3 }}
               className="text-5xl sm:text-6xl font-semibold tracking-tight text-balance"
             >
-              {content.headline}
+              {variant === "default" ? (
+                <>Turn your website into your{" "}
+                  <span className="bg-gradient-to-r from-indigo-500 via-violet-500 to-fuchsia-500 bg-clip-text text-transparent">
+                    best sales associate
+                  </span>
+                </>
+              ) : content.headline}
             </motion.h1>
           </AnimatePresence>
 
@@ -894,23 +907,6 @@ function Hero({ onOpenVideo, onOpenDemo, variant, setVariant }) {
               {content.subline}
             </motion.p>
           </AnimatePresence>
-
-          {/* Personalization chips */}
-          <div className="flex flex-wrap items-center justify-center gap-2">
-            {CHIPS.map((chip) => (
-              <button
-                key={chip.id}
-                onClick={() => handleChip(chip.id)}
-                className={`rounded-full border px-4 py-1.5 text-sm font-medium transition ${
-                  variant === chip.id
-                    ? "border-fuchsia-400 bg-fuchsia-50 text-fuchsia-700 dark:bg-fuchsia-900/30 dark:text-fuchsia-300 dark:border-fuchsia-700"
-                    : "border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/5 text-black/70 dark:text-white/70 hover:border-fuchsia-300 dark:hover:border-fuchsia-700"
-                }`}
-              >
-                {chip.label}
-              </button>
-            ))}
-          </div>
 
           {/* CTAs */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3 max-w-xl mx-auto">
@@ -928,11 +924,33 @@ function Hero({ onOpenVideo, onOpenDemo, variant, setVariant }) {
             </a>
           </div>
 
+          {/* Personalization chips */}
+          <div className="pt-2">
+            <p className="text-xs font-medium text-black/40 dark:text-white/40 uppercase tracking-widest mb-3">
+              What matters most to you?
+            </p>
+            <div className="flex flex-wrap items-center justify-center gap-2">
+              {CHIPS.map((chip) => (
+                <button
+                  key={chip.id}
+                  onClick={() => handleChip(chip.id)}
+                  className={`rounded-full border px-4 py-1.5 text-sm font-medium transition ${
+                    variant === chip.id
+                      ? "border-fuchsia-400 bg-fuchsia-50 text-fuchsia-700 dark:bg-fuchsia-900/30 dark:text-fuchsia-300 dark:border-fuchsia-700"
+                      : "border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/5 text-black/70 dark:text-white/70 hover:border-fuchsia-300 hover:bg-fuchsia-50 hover:text-fuchsia-700 dark:hover:border-fuchsia-700 dark:hover:bg-fuchsia-900/20"
+                  }`}
+                >
+                  {chip.label}
+                </button>
+              ))}
+            </div>
+          </div>
+
         </div>
 
         {/* Hero animation */}
         <div className="mt-10 max-w-3xl mx-auto">
-          <HeroDemo />
+          <HeroDemo variant={variant} />
         </div>
 
         {/* Logo strip */}
@@ -953,6 +971,16 @@ function Hero({ onOpenVideo, onOpenDemo, variant, setVariant }) {
             ))}
           </div>
         </div>
+
+        {/* Scroll indicator */}
+        <div className="flex justify-center mt-10">
+          <motion.div
+            animate={{ y: [0, 6, 0] }}
+            transition={{ repeat: Infinity, duration: 1.6, ease: "easeInOut" }}
+          >
+            <ChevronDown className="h-6 w-6 text-black/25 dark:text-white/25" />
+          </motion.div>
+        </div>
       </div>
     </section>
   );
@@ -972,6 +1000,9 @@ function Problem({ variant }) {
             exit={{ opacity: 0, y: -8 }}
             transition={{ duration: 0.3 }}
           >
+            <p className="text-sm font-semibold text-fuchsia-600 uppercase tracking-widest mb-3">
+              Sound familiar?
+            </p>
             <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight text-balance">
               {content.problemHeading}
             </h2>
@@ -1364,21 +1395,25 @@ function Features() {
     {
       icon: <SearchIcon className="h-5 w-5" />,
       title: "Find anything on your site",
+      stat: "+36% add-to-cart",
       desc: "Visitors search in plain language and Nobi finds the right match even when the exact words don't appear in your content. No more dead-end searches.",
     },
     {
       icon: <CheckCircle2 className="h-5 w-5" />,
       title: "Answer every question accurately",
+      stat: "6x more purchases",
       desc: "Pulls from your knowledge base, cites its sources, and runs a fact-check before responding. Visitors get a straight answer they can trust.",
     },
     {
       icon: <Heart className="h-5 w-5" />,
       title: "Capture and qualify leads",
+      stat: "+21.3% revenue per referral",
       desc: "Collects contact info naturally through conversation, attributes it to the right source, and sends it to your CRM or form handler.",
     },
     {
       icon: <BarChart3 className="h-5 w-5" />,
       title: "Know what's working",
+      stat: "A/B tested",
       desc: "See what visitors are asking, where they get stuck, and which conversations led to conversions. A/B test configurations and measure results directly in Nobi's dashboard.",
     },
   ];
@@ -1387,7 +1422,7 @@ function Features() {
     <section id="features" className="scroll-mt-20 py-20 border-t border-black/5 dark:border-white/5">
       <div className="mx-auto max-w-6xl px-6">
         <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight text-balance">
-          One assistant. Everything your visitors need.
+          One assistant for everything your visitors need
         </h2>
         <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 gap-6">
           {capabilities.map((cap) => (
@@ -1395,11 +1430,16 @@ function Features() {
               key={cap.title}
               className="rounded-3xl border border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/5 p-8 shadow-sm flex flex-col gap-4"
             >
-              <div className="flex items-center gap-3">
-                <div className="p-2 rounded-xl bg-fuchsia-50 dark:bg-fuchsia-900/20 text-fuchsia-600 shrink-0">
-                  {cap.icon}
+              <div className="flex items-center justify-between gap-3">
+                <div className="flex items-center gap-3">
+                  <div className="p-2 rounded-xl bg-fuchsia-50 dark:bg-fuchsia-900/20 text-fuchsia-600 shrink-0">
+                    {cap.icon}
+                  </div>
+                  <h3 className="font-semibold text-lg">{cap.title}</h3>
                 </div>
-                <h3 className="font-semibold text-lg">{cap.title}</h3>
+                <span className="shrink-0 text-xs font-semibold text-fuchsia-700 dark:text-fuchsia-300 bg-fuchsia-50 dark:bg-fuchsia-900/30 border border-fuchsia-200 dark:border-fuchsia-800/50 rounded-full px-2.5 py-1">
+                  {cap.stat}
+                </span>
               </div>
               <p className="text-black/70 dark:text-white/70">{cap.desc}</p>
             </div>
@@ -1544,7 +1584,7 @@ function Pricing() {
       <div className="mx-auto max-w-6xl px-6">
         <h2 className="text-3xl font-semibold mb-2">Simple, usage-based pricing</h2>
         <p className="text-black/60 dark:text-white/60 mb-8">A low monthly base with per-use rates. Start with a free 30-day trial.</p>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-stretch max-w-3xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-stretch max-w-3xl">
           {tiers.map((t) => (
             <div key={t.name} className={`flex flex-col rounded-3xl border bg-white/70 dark:bg-white/5 p-6 ${t.highlighted ? "border-purple-300 ring-2 ring-purple-200" : "border-black/10 dark:border-white/10"}`}>
               <div className="text-sm font-semibold tracking-wide text-indigo-600">{t.name}</div>
@@ -2151,7 +2191,7 @@ function LatestPosts() {
 
 function WorksWith() {
   const items = [
-    "Shopify, headless, or custom site",
+    "Shopify, WooCommerce, headless, or custom site",
     "Reads web pages, PDFs, and uploaded documents",
     "Connects to your existing forms and CRM",
     "Remarketing pixels for Facebook and Google Ads included",

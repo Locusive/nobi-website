@@ -102,24 +102,12 @@ export default function KnowledgeBase() {
                 When visitors get real answers — sourced from your content, not guessed — they trust the site more and buy more often.
               </p>
             </div>
-            <div className="grid gap-4 sm:gap-5 md:grid-cols-3">
+            <div className="grid gap-4 sm:gap-5 md:grid-cols-1 max-w-xl mx-auto">
               {[
                 {
                   stat: "6x",
                   label: "more likely to purchase",
                   desc: "Based on Nobi's internal data across customers: visitors who engage with the assistant and get a real answer are 6x more likely to purchase than visitors who don't interact.",
-                  palette: "blue",
-                },
-                {
-                  stat: "Zero",
-                  label: "hallucinations",
-                  desc: "Nobi verifies every claim against your imported content before answering. It won't say what it can't prove from your pages.",
-                  palette: "purple",
-                },
-                {
-                  stat: "2x daily",
-                  label: "content refresh",
-                  desc: "Nobi re-indexes your imported pages twice a day. Price changes, policy updates, and new products stay current automatically.",
                   palette: "blue",
                 },
               ].map((item) => (

@@ -75,7 +75,7 @@ const PLACEMENTS = [
         <div className="placement-suggestion-pill">Red + size M</div>
       </div>
     ),
-    customer: "Faherty highlights AI prompts beside filters to keep shoppers clicking.",
+    customer: "Kilte uses AI prompts beside filters to keep shoppers clicking.",
   },
   {
     id: "pdp",
@@ -177,7 +177,7 @@ const VARIANT_CONTENT = {
     stats: [
       { number: "$1M+",  label: "in extra revenue",         desc: "Lucchese, year one. Nobi surfaced products their keyword search never would have found, turning dead-end searches into sales." },
       { number: "21.7%", label: "more conversions",         desc: "Kilte vs. Shopify default search in a head-to-head A/B test." },
-      { number: "12.3%", label: "vs 10.1% for competitor",  desc: "Faherty's conversion rate on Nobi was higher than the dedicated AI search tool they were already paying for." },
+
     ],
   },
   answers: {
@@ -210,7 +210,7 @@ const VARIANT_CONTENT = {
     numbersHeading: "What happens when your website actually captures leads",
     stats: [
       { number: "17.6%", label: "conversion rate",        desc: "UNTUCKit Nobi users vs. 15.0% on Shopify default. More engaged visitors convert to customers at a higher rate." },
-      { number: "+21.3%", label: "revenue per referral",  desc: "Faherty Brand saw a 21.3% improvement in revenue per referral after adding Nobi to their lead capture flow." },
+
       { number: "100%",   label: "of leads attributed",   desc: "Every lead tagged with the conversation and campaign that drove it, routed directly to your CRM or form handler." },
     ],
   },
@@ -1453,8 +1453,8 @@ function Features() {
     {
       icon: <Heart className="h-5 w-5" />,
       title: "Capture and qualify leads",
-      stat: "+21.3% revenue per referral",
-      desc: "Collects contact info naturally through conversation, attributes it to the right source, and sends it to your CRM or form handler.",
+      stat: "Higher-intent leads",
+      desc: "Collects contact info naturally through conversation. Every lead includes a summary of what the visitor was asking about, so follow-ups aren't cold.",
     },
     {
       icon: <BarChart3 className="h-5 w-5" />,

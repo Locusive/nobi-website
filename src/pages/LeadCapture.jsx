@@ -9,7 +9,6 @@ const GRADIENT = "bg-gradient-to-r from-indigo-500 via-violet-500 to-fuchsia-500
 const CUSTOMER_LOGOS = [
   { alt: "UNTUCKit", src: "/media/logos/untuckit.svg" },
   { alt: "Lucchese", src: "/media/logos/lucchese.svg" },
-  { alt: "Faherty", src: "/media/logos/faherty.svg" },
   { alt: "TOOLUP", src: "/media/logos/toolup.svg" },
   { alt: "Kilte", src: "/media/logos/kilte.svg" },
   { alt: "Alps and Meters", src: "/media/logos/alps_meters.png" },
@@ -38,11 +37,11 @@ export default function LeadCapture() {
                   Lead capture
                 </p>
                 <h1 className="text-4xl sm:text-5xl lg:text-6xl font-semibold leading-[1.05] text-slate-900 text-balance">
-                  Turn browsers into{" "}
-                  <span className={GRADIENT}>contacts</span>
+                  Don't let interested visitors{" "}
+                  <span className={GRADIENT}>leave empty-handed</span>
                 </h1>
                 <p className="text-lg text-slate-600 max-w-xl leading-relaxed">
-                  Nobi collects contact info inside the conversation, at the exact moment a visitor is engaged. No pop-up forms. No interruptions. Every lead goes straight to your CRM with full source attribution.
+                  When you set up Nobi to guide visitors through your product or service, some of them are ready to take the next step. Nobi captures their info inside the conversation they're already having, along with full context about what they were asking about. You get a lead. They get a real follow-up.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-3 pt-2">
                   <a
@@ -72,7 +71,7 @@ export default function LeadCapture() {
         <section className="border-t border-slate-200/70 bg-gradient-to-b from-slate-50 to-white pb-16 pt-12">
           <div className="mx-auto max-w-6xl xl:max-w-7xl px-6 space-y-4">
             <p className="text-center text-sm text-black/50 tracking-[0.04em]">
-              Used by ecommerce teams that care about converting visitors
+              Trusted by teams that rely on follow-up to close
             </p>
             <div className="marquee-container">
               <div className="bg-white rounded-xl border border-[#d6d6d6] shadow-[0_8px_22px_-18px_rgba(15,23,42,0.45)] overflow-hidden py-5 px-2">
@@ -94,26 +93,31 @@ export default function LeadCapture() {
 
         {/* Stats */}
         <section className="bg-gradient-to-b from-white via-slate-50 to-white py-16">
-          <div className="mx-auto max-w-6xl xl:max-w-7xl px-6">
-            <div className="grid gap-4 sm:gap-5 md:grid-cols-3">
+          <div className="mx-auto max-w-6xl xl:max-w-7xl px-6 space-y-8">
+            <div className="text-center space-y-3 max-w-2xl mx-auto">
+              <p className="text-sm uppercase tracking-[0.2em] text-fuchsia-600 font-semibold">
+                Results
+              </p>
+              <h2 className="text-3xl sm:text-4xl font-semibold text-slate-900">
+                Higher-intent leads, with context already attached
+              </h2>
+              <p className="text-base text-slate-600">
+                Visitors who engage with Nobi and ask to be followed up have already told you what they need. That changes what happens next.
+              </p>
+            </div>
+            <div className="grid gap-4 sm:gap-5 md:grid-cols-2 max-w-3xl mx-auto">
               {[
                 {
-                  stat: "17.6%",
-                  label: "conversion rate",
-                  desc: "UNTUCKit Nobi users vs. 15.0% on Shopify default in a direct A/B test.",
+                  stat: "6x",
+                  label: "more likely to convert",
+                  desc: "Based on Nobi's internal data: visitors who engage with the assistant are 6x more likely to become customers than those who don't interact.",
                   palette: "blue",
-                },
-                {
-                  stat: "+21.3%",
-                  label: "revenue per referral",
-                  desc: "Faherty Brand after switching to Nobi lead capture, measured against their prior tool.",
-                  palette: "purple",
                 },
                 {
                   stat: "100%",
-                  label: "of leads attributed",
-                  desc: "Every contact tagged with the conversation, campaign, and channel that drove it.",
-                  palette: "blue",
+                  label: "of leads include conversation context",
+                  desc: "Every lead captured by Nobi includes a summary of what the visitor was asking about, so follow-ups aren't cold.",
+                  palette: "purple",
                 },
               ].map((item) => (
                 <div
@@ -136,7 +140,7 @@ export default function LeadCapture() {
           </div>
         </section>
 
-        {/* Alternating benefits - dark section */}
+        {/* Two modes */}
         <section className="bg-gradient-to-b from-[#17122f] via-[#1c1540] to-[#17122f] py-20 text-white">
           <div className="mx-auto max-w-6xl xl:max-w-7xl px-6 space-y-10 sm:space-y-14">
             <div className="text-center space-y-3 max-w-3xl mx-auto">
@@ -144,28 +148,23 @@ export default function LeadCapture() {
                 How it works
               </p>
               <h2 className="text-3xl sm:text-4xl font-semibold text-white">
-                Lead capture that fits the conversation
+                Two ways to capture leads — pick what fits your site
               </h2>
               <p className="text-base text-slate-300">
-                Nobi asks at the right moment, routes every lead to your CRM, and tags each one with exactly where it came from.
+                Whether you want Nobi to collect info directly or route visitors to a form you already have, attribution is tracked either way.
               </p>
             </div>
 
             {[
               {
-                title: "Asks at the right moment, not at random",
-                body: "You configure when Nobi asks for contact info: after a set time on site, on exit intent, after a visitor views specific pages, or when they get stuck. The ask happens inside a conversation the visitor is already in, so it feels natural instead of intrusive.",
-                visual: "timing",
+                title: "Native: Nobi collects inline",
+                body: "After providing value in the conversation, Nobi naturally offers to connect the visitor with your team. It presents a short inline form — name, email, phone, or any custom fields you configure. The lead lands in your Nobi dashboard and your team gets an email notification with the full conversation summary.",
+                visual: "native",
               },
               {
-                title: "Every lead routes straight to your CRM",
-                body: "No Zapier, no manual exports. You configure the destination once. Nobi handles delivery, deduplication, and tagging automatically. Works with Klaviyo, HubSpot, Salesforce, or any webhook endpoint you already use.",
-                visual: "crm",
-              },
-              {
-                title: "Full attribution on every contact",
-                body: "Each lead is tagged with UTM source, the page where the conversation started, the query that triggered it, and a summary of what the visitor was trying to do. You know which campaigns and channels are driving real pipeline, not just form fills.",
-                visual: "attribution",
+                title: "External form: Nobi refers, then tracks",
+                body: "If you already have a contact form you want to keep using, Nobi directs visitors there and tracks which conversations led to a submission. You get attribution between the AI conversation and the form fill — without changing your existing setup. Works automatically for standard HTML forms, or manually with one line of JavaScript.",
+                visual: "external",
               },
             ].map((item, idx) => {
               const reverse = idx % 2 === 1;
@@ -180,67 +179,54 @@ export default function LeadCapture() {
                     </h3>
                     <p className="text-base text-slate-300 leading-relaxed">{item.body}</p>
                   </div>
-                  <BenefitVisual type={item.visual} />
+                  <ModeVisual type={item.visual} />
                 </div>
               );
             })}
           </div>
         </section>
 
-        {/* Faherty case study */}
+        {/* What comes with every lead */}
         <section className="bg-gradient-to-b from-slate-50 via-white to-white py-20">
-          <div className="mx-auto max-w-6xl xl:max-w-7xl px-6 grid lg:grid-cols-[1.1fr_0.9fr] gap-10 lg:gap-14 items-center">
-            <div className="space-y-6">
-              <div className="inline-flex items-center gap-2 rounded-full bg-violet-100 text-violet-700 text-xs font-semibold uppercase tracking-[0.2em] px-3 py-1">
-                Case study
-              </div>
-              <h2 className="text-3xl sm:text-4xl font-semibold leading-tight text-slate-900">
-                How Faherty Brand grew revenue per referral by 21.3%
+          <div className="mx-auto max-w-6xl xl:max-w-7xl px-6 space-y-10">
+            <div className="text-center space-y-3 max-w-2xl mx-auto">
+              <h2 className="text-3xl sm:text-4xl font-semibold text-slate-900">
+                What comes with every lead
               </h2>
-              <p className="text-base text-slate-600 leading-relaxed">
-                Faherty was running a timed pop-up for lead capture, but visitors dismissed it immediately. They hadn't engaged with anything yet. After switching to Nobi, lead collection moved into active conversations. Visitors gave their email because they wanted a follow-up, not because a form blocked their way.
+              <p className="text-base text-slate-600">
+                Every lead in your dashboard includes more than a name and email. You know what they were asking about before you call.
               </p>
-              <div className="grid sm:grid-cols-2 gap-3">
-                {[
-                  { label: "Revenue per referral", value: "+21.3%" },
-                  { label: "Lead attribution", value: "100%" },
-                ].map((stat) => (
-                  <div key={stat.label} className="rounded-xl border border-slate-200 bg-white px-4 py-4 shadow-[0_12px_32px_-26px_rgba(15,23,42,0.35)]">
-                    <div className="text-xs uppercase tracking-[0.18em] text-slate-500">{stat.label}</div>
-                    <div className="text-2xl font-semibold text-slate-900 mt-1">{stat.value}</div>
-                  </div>
-                ))}
-              </div>
-              <div className="space-y-3">
-                <h3 className="text-lg font-semibold text-slate-900">What changed</h3>
-                <ul className="space-y-2 text-base text-slate-600 list-disc list-inside">
-                  <li>Lead capture moved from a blocking pop-up into an active conversation.</li>
-                  <li>Every lead automatically tagged with UTM source, page, and conversation context.</li>
-                  <li>CRM sync replaced a manual export workflow with zero extra tooling.</li>
-                </ul>
-              </div>
             </div>
 
-            <div className="rounded-3xl bg-white border border-slate-200 shadow-[0_22px_60px_-30px_rgba(15,23,42,0.4)] overflow-hidden">
-              <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(99,102,241,0.08),transparent_40%)]" />
-              <div className="p-6 sm:p-8 space-y-5">
-                <div className="flex items-center gap-3">
-                  <img src="/media/logos/faherty.svg" alt="Faherty" className="h-6 w-auto object-contain" />
+            <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+              {[
+                {
+                  emoji: "📋",
+                  title: "Contact info",
+                  body: "Name, email, and phone. You configure which fields to collect and which are required.",
+                },
+                {
+                  emoji: "💬",
+                  title: "Conversation summary",
+                  body: "A summary of what the visitor asked Nobi, so you know exactly what they need before you reach out.",
+                },
+                {
+                  emoji: "🔔",
+                  title: "Email notification",
+                  body: "Your team gets notified by email as soon as a new lead comes in, with a link to view it in the dashboard.",
+                },
+                {
+                  emoji: "🗂️",
+                  title: "Manage in dashboard",
+                  body: "Search leads by name or email, view the full conversation, add follow-up notes, and manage from one place.",
+                },
+              ].map((card) => (
+                <div key={card.title} className="rounded-2xl border border-slate-200 bg-white p-6 shadow-[0_12px_32px_-24px_rgba(15,23,42,0.2)] space-y-3">
+                  <div className="text-3xl">{card.emoji}</div>
+                  <h3 className="text-base font-semibold text-slate-900">{card.title}</h3>
+                  <p className="text-sm text-slate-600 leading-relaxed">{card.body}</p>
                 </div>
-                <div className="space-y-3 text-sm text-slate-700 leading-relaxed">
-                  <div className="rounded-2xl bg-slate-50 border border-slate-200 p-4">
-                    <p className="font-semibold text-slate-900 text-base mb-2">The problem with forms</p>
-                    <p>A timed pop-up asked for email after 30 seconds. Most visitors dismissed it immediately. The form collected some leads but had no context about what they actually wanted.</p>
-                  </div>
-                  <div className="rounded-2xl bg-violet-50 border border-violet-200 p-4">
-                    <p className="font-semibold text-slate-900 text-base mb-2">What Nobi does instead</p>
-                    <p>Nobi waits until a visitor is actively looking for something. Then it offers to follow up by email. Visitors say yes because they actually want to hear back.</p>
-                  </div>
-                </div>
-                <div className="rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-500 italic">
-                  "We were getting emails from people who actually wanted to buy, with full context about what they were looking at."
-                </div>
-              </div>
+              ))}
             </div>
           </div>
         </section>
@@ -251,10 +237,10 @@ export default function LeadCapture() {
             <div className="space-y-8 text-center max-w-2xl mx-auto">
               <div className="space-y-4">
                 <h2 className="text-3xl sm:text-4xl font-semibold">
-                  Start capturing better leads today
+                  Start capturing leads from real conversations
                 </h2>
                 <p className="text-lg text-white/70 leading-relaxed">
-                  Set up in minutes. Works with any CRM you already use.
+                  Set up in minutes from the Nobi dashboard. No code changes required for native mode.
                 </p>
               </div>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -279,6 +265,7 @@ export default function LeadCapture() {
   );
 }
 
+// Hero visual: non-ecom conversation (home services)
 function ConversationMock() {
   return (
     <div className="relative rounded-3xl bg-white border border-slate-200 shadow-[0_28px_80px_-30px_rgba(15,23,42,0.45)] overflow-hidden">
@@ -296,125 +283,111 @@ function ConversationMock() {
       <div className="relative px-4 py-4 space-y-3 text-sm">
         <div className="flex justify-end">
           <div className="rounded-2xl rounded-tr-sm bg-slate-900 text-white px-4 py-2.5 max-w-[80%] text-[13px] leading-snug">
-            Looking for a gift for my girlfriend. She loves boho style, around $150.
+            I need someone to replace my HVAC before summer. What's involved?
           </div>
         </div>
         <div className="flex justify-start gap-2">
           <div className="h-7 w-7 rounded-full bg-gradient-to-br from-indigo-500 via-violet-500 to-fuchsia-500 flex items-center justify-center text-white text-[10px] font-bold shrink-0 mt-0.5">N</div>
           <div className="rounded-2xl rounded-tl-sm bg-slate-50 border border-slate-200 px-4 py-2.5 max-w-[80%] text-[13px] text-slate-800 leading-snug">
-            Great taste. Here are a few she would love:
-            <div className="mt-2 grid grid-cols-3 gap-1.5">
-              {["Breezy Midi $148", "Linen Set $138", "Wrap Dress $152"].map((p) => (
-                <div key={p} className="rounded-xl border border-slate-200 bg-white p-1.5 text-center shadow-sm">
-                  <div className="h-10 rounded-lg bg-gradient-to-br from-violet-100 to-fuchsia-100 mb-1.5" />
-                  <div className="text-[9px] font-semibold text-slate-800 leading-tight">{p}</div>
-                </div>
-              ))}
-            </div>
+            A full replacement typically takes one day. We'll assess your current system, recommend the right unit for your square footage, and handle permits and installation. Most homeowners are up and running in 6–8 hours.
+          </div>
+        </div>
+        <div className="flex justify-end">
+          <div className="rounded-2xl rounded-tr-sm bg-slate-900 text-white px-4 py-2.5 max-w-[80%] text-[13px] leading-snug">
+            How much does it usually cost?
           </div>
         </div>
         <div className="flex justify-start gap-2">
           <div className="h-7 w-7 rounded-full bg-gradient-to-br from-indigo-500 via-violet-500 to-fuchsia-500 flex items-center justify-center text-white text-[10px] font-bold shrink-0 mt-0.5">N</div>
           <div className="rounded-2xl rounded-tl-sm bg-slate-50 border border-slate-200 px-4 py-2.5 max-w-[80%] text-[13px] text-slate-800 leading-snug">
-            Want me to send these to your email?
+            It depends on your home size and current setup. Our team can give you an exact quote. Want me to have someone reach out?
           </div>
         </div>
-        <div className="rounded-xl border border-violet-200 bg-violet-50 px-3 py-2.5 space-y-2">
-          <div className="text-[10px] font-semibold text-violet-700 uppercase tracking-[0.12em]">Your email</div>
-          <div className="flex items-center gap-2">
-            <div className="flex-1 rounded-lg border border-slate-200 bg-white px-3 py-1.5 text-[12px] text-slate-400">sarah@example.com</div>
-            <div className="rounded-lg bg-gradient-to-r from-indigo-500 via-violet-500 to-fuchsia-500 px-3 py-1.5 text-white text-[11px] font-semibold shrink-0">Send</div>
+        {/* Lead capture form inline */}
+        <div className="rounded-xl border border-violet-200 bg-violet-50 px-4 py-3 space-y-2.5">
+          <div className="text-[11px] font-semibold text-violet-700 uppercase tracking-[0.12em]">Get a free quote</div>
+          <div className="space-y-2">
+            <div className="rounded-lg border border-slate-200 bg-white px-3 py-1.5 text-[12px] text-slate-400">Your name</div>
+            <div className="rounded-lg border border-slate-200 bg-white px-3 py-1.5 text-[12px] text-slate-400">Email address</div>
+            <div className="rounded-lg border border-slate-200 bg-white px-3 py-1.5 text-[12px] text-slate-400">Phone number</div>
           </div>
-        </div>
-        <div className="flex items-center gap-2 rounded-xl bg-emerald-50 border border-emerald-200 px-3 py-2">
-          <span className="h-4 w-4 rounded-full bg-emerald-500 text-white text-[9px] flex items-center justify-center font-bold shrink-0">✓</span>
-          <div className="text-[11px] text-emerald-800 font-medium">Lead synced to Klaviyo · utm_source=instagram</div>
+          <div className="rounded-lg bg-gradient-to-r from-indigo-500 via-violet-500 to-fuchsia-500 px-3 py-2 text-white text-[12px] font-semibold text-center">
+            Request a quote
+          </div>
         </div>
       </div>
     </div>
   );
 }
 
-function BenefitVisual({ type }) {
+function ModeVisual({ type }) {
   const shell = "relative w-full rounded-2xl border border-white/10 bg-white/5 overflow-hidden p-4 shadow-[0_18px_40px_-30px_rgba(0,0,0,0.5)]";
 
-  if (type === "timing") {
+  if (type === "native") {
     return (
       <div className={shell}>
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_80%,rgba(167,139,250,0.08),transparent_45%)]" />
-        <div className="relative space-y-2.5">
-          <div className="text-[11px] font-semibold uppercase tracking-[0.15em] text-slate-400 mb-3">Trigger rules</div>
-          {[
-            { label: "Exit intent", enabled: true },
-            { label: "45 seconds on page", enabled: true },
-            { label: "After product view", enabled: true },
-            { label: "Cart abandonment", enabled: false },
-          ].map((rule) => (
-            <div key={rule.label} className="flex items-center justify-between rounded-xl border border-white/10 bg-white/5 px-4 py-2.5">
-              <span className="text-[13px] text-slate-200">{rule.label}</span>
-              <div className={`flex items-center gap-1.5 text-[11px] font-semibold ${rule.enabled ? "text-emerald-400" : "text-slate-500"}`}>
-                <span className={`h-1.5 w-1.5 rounded-full ${rule.enabled ? "bg-emerald-500" : "bg-slate-600"}`} />
-                {rule.enabled ? "Active" : "Off"}
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_30%,rgba(167,139,250,0.08),transparent_45%)]" />
+        <div className="relative space-y-3">
+          <div className="text-[11px] font-semibold uppercase tracking-[0.15em] text-slate-400 mb-3">Native mode — inline collection</div>
+          <div className="rounded-xl border border-white/10 bg-white/5 p-3.5 space-y-2.5 text-[12px]">
+            <div className="flex gap-2 items-start">
+              <div className="h-6 w-6 rounded-full bg-gradient-to-br from-indigo-500 to-fuchsia-500 flex items-center justify-center text-white text-[9px] font-bold shrink-0 mt-0.5">N</div>
+              <div className="rounded-xl bg-white/10 px-3 py-2 text-slate-200 leading-snug">
+                Want someone from our team to follow up with a quote?
               </div>
             </div>
-          ))}
-          <div className="rounded-xl border border-violet-400/30 bg-violet-500/10 px-4 py-2.5 text-[12px] text-violet-300">
-            Never interrupts mid-checkout. Asks once per session.
-          </div>
-        </div>
-      </div>
-    );
-  }
-
-  if (type === "crm") {
-    return (
-      <div className={shell}>
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_15%_25%,rgba(59,130,246,0.08),transparent_40%)]" />
-        <div className="relative space-y-2.5">
-          <div className="text-[11px] font-semibold uppercase tracking-[0.15em] text-slate-400 mb-3">Connected CRMs</div>
-          {[
-            { name: "Klaviyo", icon: "K", color: "bg-green-600", detail: "List sync + tags" },
-            { name: "HubSpot", icon: "H", color: "bg-orange-500", detail: "Contact + deal creation" },
-            { name: "Salesforce", icon: "S", color: "bg-blue-600", detail: "Lead object + activity" },
-            { name: "Webhook", icon: "→", color: "bg-slate-600", detail: "Any endpoint" },
-          ].map((crm) => (
-            <div key={crm.name} className="flex items-center gap-3 rounded-xl border border-white/10 bg-white/5 px-3 py-2.5">
-              <div className={`h-7 w-7 rounded-lg ${crm.color} flex items-center justify-center text-white text-[11px] font-bold shrink-0`}>{crm.icon}</div>
-              <div className="flex-1 min-w-0">
-                <div className="text-[12px] font-semibold text-slate-200">{crm.name}</div>
-                <div className="text-[10px] text-slate-400 truncate">{crm.detail}</div>
-              </div>
-              <span className="text-[10px] font-medium text-emerald-400 shrink-0">Active</span>
+            <div className="rounded-lg border border-violet-400/30 bg-violet-500/10 p-3 space-y-2">
+              <div className="text-[10px] uppercase tracking-[0.12em] text-violet-300 font-semibold">Inline form</div>
+              {["Name", "Email", "Phone"].map((f) => (
+                <div key={f} className="rounded border border-white/10 bg-white/5 px-2.5 py-1.5 text-[11px] text-slate-400">{f}</div>
+              ))}
             </div>
-          ))}
-        </div>
-      </div>
-    );
-  }
-
-  if (type === "attribution") {
-    return (
-      <div className={shell}>
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_78%_82%,rgba(59,130,246,0.08),transparent_46%)]" />
-        <div className="relative space-y-2">
-          <div className="text-[11px] font-semibold uppercase tracking-[0.15em] text-slate-400 mb-3">Lead record</div>
-          <div className="rounded-xl border border-white/10 bg-white/5 p-3.5 space-y-2 text-[12px]">
-            {[
-              { label: "Contact", value: "sarah@example.com" },
-              { label: "Source", value: "utm_source=instagram" },
-              { label: "Captured on", value: "/collections/dresses" },
-              { label: "Intent", value: "Gift, boho style, ~$150" },
-              { label: "Products", value: "Breezy Midi, Linen Set" },
-            ].map((row) => (
-              <div key={row.label} className="flex items-start gap-3">
-                <span className="text-slate-500 w-20 shrink-0 leading-tight">{row.label}</span>
-                <span className="text-slate-200 font-medium leading-tight">{row.value}</span>
-              </div>
-            ))}
           </div>
           <div className="rounded-xl border border-emerald-400/20 bg-emerald-500/10 px-3 py-2 text-[11px] text-emerald-300 flex items-center gap-2">
             <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 shrink-0" />
-            Synced to Klaviyo 2 minutes ago
+            Lead saved to dashboard · Team notified by email
+          </div>
+          <div className="text-[11px] text-slate-400 px-1">Configure which fields to collect and which are required in the Lead Capture settings.</div>
+        </div>
+      </div>
+    );
+  }
+
+  if (type === "external") {
+    return (
+      <div className={shell}>
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_75%_25%,rgba(59,130,246,0.08),transparent_45%)]" />
+        <div className="relative space-y-3">
+          <div className="text-[11px] font-semibold uppercase tracking-[0.15em] text-slate-400 mb-3">External form mode — refer and track</div>
+          <div className="rounded-xl border border-white/10 bg-white/5 p-3.5 space-y-2.5 text-[12px]">
+            <div className="flex gap-2 items-start">
+              <div className="h-6 w-6 rounded-full bg-gradient-to-br from-indigo-500 to-fuchsia-500 flex items-center justify-center text-white text-[9px] font-bold shrink-0 mt-0.5">N</div>
+              <div className="rounded-xl bg-white/10 px-3 py-2 text-slate-200 leading-snug">
+                Our team would love to help. You can reach us through our contact form.
+              </div>
+            </div>
+            <div className="rounded-lg border border-blue-400/30 bg-blue-500/10 px-3 py-2.5 flex items-center gap-2">
+              <span className="text-[18px]">🔗</span>
+              <div>
+                <div className="text-[11px] font-semibold text-blue-300">yoursite.com/contact</div>
+                <div className="text-[10px] text-slate-400">Visitor directed to your existing form</div>
+              </div>
+            </div>
+          </div>
+          <div className="rounded-xl border border-white/10 bg-white/5 p-3 space-y-1.5 text-[12px]">
+            <div className="text-[10px] uppercase tracking-[0.12em] text-slate-500 mb-2">Attribution tracked automatically</div>
+            <div className="flex items-center gap-2 text-[11px] text-slate-300">
+              <span className="h-1.5 w-1.5 rounded-full bg-violet-400 shrink-0" />
+              Conversation that referred the lead
+            </div>
+            <div className="flex items-center gap-2 text-[11px] text-slate-300">
+              <span className="h-1.5 w-1.5 rounded-full bg-violet-400 shrink-0" />
+              Time between conversation and form submission
+            </div>
+            <div className="flex items-center gap-2 text-[11px] text-slate-300">
+              <span className="h-1.5 w-1.5 rounded-full bg-violet-400 shrink-0" />
+              Works on any standard HTML form — or one JS call
+            </div>
           </div>
         </div>
       </div>

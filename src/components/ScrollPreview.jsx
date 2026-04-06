@@ -8,6 +8,7 @@ export default function ScrollPreview({
   fadeEndRatio = 0.15,
   label = "Next up",
   pillOptions = [],
+  side = "left",
 }) {
   const [activeIndex, setActiveIndex] = useState(-1);
   const [opacity, setOpacity] = useState(0);
@@ -71,7 +72,11 @@ export default function ScrollPreview({
 
   return (
     <div
-      className="scroll-preview fixed left-0 right-0 bottom-4 z-30 flex justify-center px-4 pointer-events-none"
+      className={`scroll-preview fixed bottom-4 z-30 pointer-events-none ${
+        side === "left"  ? "left-4" :
+        side === "right" ? "right-4" :
+        "left-0 right-0 flex justify-center px-4"
+      }`}
       style={{
         opacity,
         transition: "opacity 0.25s ease, transform 0.25s ease",

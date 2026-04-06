@@ -149,8 +149,8 @@ const VARIANT_CONTENT = {
   default: {
     headline: "Turn your website into your best sales associate",
     subline:  "An AI assistant that answers questions, finds products, and captures leads. Works on ecommerce sites, service businesses, real estate — anything.",
-    problemHeading: "Most visitors leave because your site couldn't help them",
-    problemBody:    "They arrive with a question or a vague sense of what they want. Your search bar needs exact words. Your FAQ page needs patience. Most of them leave without finding what they came for.",
+    problemHeading: "Most visitors leave without finding what they need",
+    problemBody:    "Your search needs exact words. Your FAQ takes patience. Most visitors bounce before they get an answer.",
     problemPoints: [
       { Icon: SearchIcon,           label: "Dead-end searches",      desc: "Your search needs exact keywords. Visitors who describe what they want get nothing and give up." },
       { Icon: MessageCircleQuestion, label: "Unanswered questions",   desc: "Visitors want to know if it fits their situation, what you charge, or if you ship to them. Your FAQ doesn't have it." },
@@ -166,8 +166,8 @@ const VARIANT_CONTENT = {
   search: {
     headline: "Your shoppers can't find what they're looking for. Nobi fixes that.",
     subline:  "AI search that understands what visitors mean, not just what they type. Lucchese generated $1M+ in incremental revenue in year one.",
-    problemHeading: "Your shoppers can't find what they're looking for",
-    problemBody:    "They type something like \"something for a hiking trip\" and get no results because those words aren't in your product descriptions. They try again, still nothing. So they leave and buy it somewhere else.",
+    problemHeading: "Shoppers describe what they want and get nothing back",
+    problemBody:    "Your search needs exact words from product descriptions. Natural language returns zero results, so they leave and buy somewhere else.",
     problemPoints: [
       { Icon: SearchIcon,    label: "Keyword-only search",   desc: "Your search engine matches exact words, not intent. Natural language queries return zero results." },
       { Icon: LayoutGrid,    label: "Dead-end result pages", desc: "Visitors who can't find the right product in two tries don't try a third time. They leave." },
@@ -183,8 +183,8 @@ const VARIANT_CONTENT = {
   answers: {
     headline: "Your visitors have questions your website isn't answering",
     subline:  "Nobi pulls answers from your content, cites its sources, and checks facts before responding. No guessing, no hallucinations.",
-    problemHeading: "Visitors leave because no one answered their question",
-    problemBody:    "They want to know if your product fits their situation, what your return policy is, or whether you serve their area. They dig through your site, find nothing clear, and go to a competitor who can give them a straight answer.",
+    problemHeading: "Visitors leave with the same question they arrived with",
+    problemBody:    "They dig through your site, find nothing clear, and go to a competitor who gives them a straight answer.",
     problemPoints: [
       { Icon: MessageCircleQuestion, label: "Questions go unanswered", desc: "Visitors search your FAQ, find nothing useful, and leave with the same doubt they arrived with." },
       { Icon: LayoutGrid,            label: "Scattered information",   desc: "Your answers are spread across product pages, blog posts, and PDFs. Visitors can't piece it together themselves." },
@@ -194,14 +194,14 @@ const VARIANT_CONTENT = {
     stats: [
       { number: "6x",    label: "more purchases",       desc: "Visitors who click a suggested question and get an answer are 6x more likely to buy than those who don't engage." },
       { number: "2.5x",  label: "higher conversion",    desc: "Nobi-assisted visitors convert at 2.5x the rate of unassisted visitors, measured across Lucchese and UNTUCKit in A/B tests." },
-      { number: "100%",  label: "of answers verified",  desc: "Every response is cross-checked against your knowledge base before it's sent. No guessing, no hallucinations." },
+      { number: "Zero",  label: "hallucinations",        desc: "Before sending, Nobi runs a second AI pass that verifies every claim against your knowledge base. It won't say what it can't prove." },
     ],
   },
   leads: {
     headline: "Stop letting interested visitors leave without a trace",
     subline:  "Nobi collects contact info naturally through conversation and routes it wherever you need it.",
-    problemHeading: "Most visitors leave without telling you who they are",
-    problemBody:    "They browse, they get interested, they leave. No contact info, no follow-up, no second chance. You had no idea they were ever there.",
+    problemHeading: "Most visitors leave and you have no way to reach them",
+    problemBody:    "They browse, get interested, and disappear. No contact info, no follow-up, no second chance.",
     problemPoints: [
       { Icon: MousePointerClick, label: "Silent exits",        desc: "High-intent visitors land, browse, and bounce. You have no idea they were there and no way to reach them." },
       { Icon: Heart,             label: "No follow-up window", desc: "Pop-up forms interrupt at the wrong moment. Most visitors dismiss them without a second thought." },
@@ -919,6 +919,28 @@ function Hero({ onOpenVideo, onOpenDemo, variant, setVariant }) {
       <div className="mx-auto max-w-7xl px-6 pt-10 sm:pt-12 lg:pt-16 pb-24">
         <div className="max-w-4xl mx-auto text-center space-y-6">
 
+          {/* Personalization chips */}
+          <div>
+            <p className="text-xs font-medium text-black/40 dark:text-white/40 uppercase tracking-widest mb-3">
+              What matters most to you?
+            </p>
+            <div className="flex flex-wrap items-center justify-center gap-2">
+              {CHIPS.map((chip) => (
+                <button
+                  key={chip.id}
+                  onClick={() => handleChip(chip.id)}
+                  className={`rounded-full border px-4 py-1.5 text-sm font-medium transition ${
+                    variant === chip.id
+                      ? "border-fuchsia-400 bg-fuchsia-50 text-fuchsia-700 dark:bg-fuchsia-900/30 dark:text-fuchsia-300 dark:border-fuchsia-700"
+                      : "border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/5 text-black/70 dark:text-white/70 hover:border-fuchsia-300 hover:bg-fuchsia-50 hover:text-fuchsia-700 dark:hover:border-fuchsia-700 dark:hover:bg-fuchsia-900/20"
+                  }`}
+                >
+                  {chip.label}
+                </button>
+              ))}
+            </div>
+          </div>
+
           <AnimatePresence mode="wait">
             <motion.h1
               key={content.headline}
@@ -961,28 +983,6 @@ function Hero({ onOpenVideo, onOpenDemo, variant, setVariant }) {
             </a>
           </div>
 
-          {/* Personalization chips */}
-          <div className="pt-2">
-            <p className="text-xs font-medium text-black/40 dark:text-white/40 uppercase tracking-widest mb-3">
-              What matters most to you?
-            </p>
-            <div className="flex flex-wrap items-center justify-center gap-2">
-              {CHIPS.map((chip) => (
-                <button
-                  key={chip.id}
-                  onClick={() => handleChip(chip.id)}
-                  className={`rounded-full border px-4 py-1.5 text-sm font-medium transition ${
-                    variant === chip.id
-                      ? "border-fuchsia-400 bg-fuchsia-50 text-fuchsia-700 dark:bg-fuchsia-900/30 dark:text-fuchsia-300 dark:border-fuchsia-700"
-                      : "border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/5 text-black/70 dark:text-white/70 hover:border-fuchsia-300 hover:bg-fuchsia-50 hover:text-fuchsia-700 dark:hover:border-fuchsia-700 dark:hover:bg-fuchsia-900/20"
-                  }`}
-                >
-                  {chip.label}
-                </button>
-              ))}
-            </div>
-          </div>
-
         </div>
 
         {/* Hero animation */}
@@ -991,7 +991,7 @@ function Hero({ onOpenVideo, onOpenDemo, variant, setVariant }) {
         </div>
 
         {/* Logo strip */}
-        <div className="mt-10 max-w-5xl mx-auto text-center">
+        <div className="mt-16 max-w-5xl mx-auto text-center">
           <p className="text-sm font-semibold text-fuchsia-600">
             Trusted by leading brands
           </p>
@@ -1630,9 +1630,9 @@ function Pricing() {
       <div className="mx-auto max-w-6xl px-6">
         <h2 className="text-3xl font-semibold mb-2">Simple, usage-based pricing</h2>
         <p className="text-black/60 dark:text-white/60 mb-8">A low monthly base with per-use rates. Start with a free 30-day trial.</p>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-stretch max-w-3xl">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-stretch">
           {tiers.map((t) => (
-            <div key={t.name} className={`flex flex-col rounded-3xl border bg-white/70 dark:bg-white/5 p-6 ${t.highlighted ? "border-purple-300 ring-2 ring-purple-200" : "border-black/10 dark:border-white/10"}`}>
+            <div key={t.name} className={`flex flex-col rounded-3xl border bg-white/70 dark:bg-white/5 p-8 ${t.highlighted ? "border-purple-300 ring-2 ring-purple-200" : "border-black/10 dark:border-white/10"}`}>
               <div className="text-sm font-semibold tracking-wide text-indigo-600">{t.name}</div>
               <div className="mt-2 text-3xl font-semibold">
                 {t.price}{t.price !== "Custom" && <span className="text-base font-normal opacity-70"> monthly base</span>}

@@ -148,13 +148,13 @@ const PREVIEW_SECTIONS = [
 const VARIANT_CONTENT = {
   default: {
     headline: "Turn your website into your best sales associate",
-    subline:  "An AI assistant that answers questions, finds products, and captures leads. Works on ecommerce sites, service businesses, real estate — anything.",
+    subline:  "An AI assistant that answers questions, finds products, and captures leads. Works on ecommerce, services, real estate, and more.",
     problemHeading: "Most visitors leave without finding what they need",
     problemBody:    "Your search needs exact words. Your FAQ takes patience. Most visitors bounce before they get an answer.",
     problemPoints: [
       { Icon: SearchIcon,           label: "Dead-end searches",      desc: "Your search needs exact keywords. Visitors who describe what they want get nothing and give up." },
       { Icon: MessageCircleQuestion, label: "Unanswered questions",   desc: "Visitors want to know if it fits their situation, what you charge, or if you ship to them. Your FAQ doesn't have it." },
-      { Icon: ShoppingCart,          label: "Lost sales",             desc: "High-intent visitors who couldn't find help buy somewhere else — and never come back." },
+      { Icon: ShoppingCart,          label: "Lost sales",             desc: "High-intent visitors who couldn't find help buy somewhere else and never come back." },
     ],
     numbersHeading: "What our customers have seen",
     stats: [

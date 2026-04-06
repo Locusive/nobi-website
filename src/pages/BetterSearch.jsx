@@ -292,16 +292,6 @@ export default function BetterSearch() {
               );
             })}
 
-            <div className="flex justify-center">
-              <a
-                href="https://docs.nobi.ai/components/search-bar/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 rounded-full bg-white text-[#17122f] px-5 py-3 text-sm font-semibold shadow-[0_10px_32px_-24px_rgba(255,255,255,0.6)] hover:bg-white/90 border border-white/20"
-              >
-                Explore the search docs
-              </a>
-            </div>
           </div>
         </section>
 

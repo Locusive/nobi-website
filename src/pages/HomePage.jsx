@@ -2308,7 +2308,7 @@ export default function HomePage() {
         onClose={() => setIsVideoOpen(false)}
         youtube="https://www.youtube.com/watch?v=RKqGC3CVZd0"
       />
-      <ScrollPreview sections={PREVIEW_SECTIONS} label="Next up" />
+      <ScrollPreview sections={PREVIEW_SECTIONS} label="Next up" side="right" />
     </div>
   );
 }

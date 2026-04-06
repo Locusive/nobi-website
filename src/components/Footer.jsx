@@ -35,6 +35,9 @@ export default function Footer() {
           <div className="space-y-2">
             <div className="font-semibold text-black dark:text-white">Resources</div>
             <div className="flex flex-col gap-2">
+              <a href="/customers" className="hover:opacity-80">
+                Case studies
+              </a>
               <a href="/blog" className="hover:opacity-80">
                 Thoughts
               </a>

@@ -1,16 +1,16 @@
 import React, { useState } from "react";
-import { ChevronDown, Menu, X, ExternalLink, Sparkles } from "lucide-react";
+import { BookOpen, BarChart3, ChevronDown, Globe, Heart, Menu, Search as SearchIcon, SlidersHorizontal, X, ExternalLink, Sparkles, Zap } from "lucide-react";
 import { useDemoForm } from "../context/DemoFormContext";
 import { trackDemoFormOpened } from "../utils/eventTracker";
 import { getSignupUrl } from "../utils/signupUrl";
 
 const FEATURES = [
-  { label: "Search",          href: "/why-nobi/better-search", desc: "Semantic search that understands natural language" },
-  { label: "Lead capture",    href: "/lead-capture",           desc: "Collect contact info through conversation" },
-  { label: "Custom actions",  href: "/custom-actions",         desc: "Trigger any workflow from inside the chat" },
-  { label: "Knowledge base",  href: "/knowledge-base",         desc: "Answers from your docs, cited and fact-checked" },
-  { label: "Industries",      href: "/industries",             desc: "Works for ecommerce, services, real estate, and more" },
-  { label: "Merchandising",   href: "/merchandising",          desc: "Boost, bury, pin, and hide search results" },
+  { label: "Search",          href: "/why-nobi/better-search", desc: "Semantic search that understands natural language",      Icon: SearchIcon },
+  { label: "Lead capture",    href: "/lead-capture",           desc: "Collect contact info through conversation",              Icon: Heart },
+  { label: "Custom actions",  href: "/custom-actions",         desc: "Trigger any workflow from inside the chat",              Icon: Zap },
+  { label: "Knowledge base",  href: "/knowledge-base",         desc: "Answers from your docs, cited and fact-checked",         Icon: BookOpen },
+  { label: "Industries",      href: "/industries",             desc: "Works for ecommerce, services, real estate, and more",   Icon: Globe },
+  { label: "Merchandising",   href: "/merchandising",          desc: "Boost, bury, pin, and hide search results",              Icon: SlidersHorizontal },
 ];
 
 export default function Nav() {
@@ -43,18 +43,25 @@ export default function Nav() {
             Why Nobi
             <ChevronDown className="w-3.5 h-3.5 opacity-60 group-hover:opacity-100 transition-transform group-hover:rotate-180" />
           </button>
-          {/* Dropdown panel */}
-          <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-72 rounded-2xl border border-black/10 dark:border-white/10 bg-white dark:bg-zinc-900 shadow-xl shadow-black/10 py-2 opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-all duration-150 z-50">
-            {FEATURES.map((f) => (
-              <a
-                key={f.href}
-                href={f.href}
-                className="flex flex-col px-4 py-2.5 hover:bg-black/5 dark:hover:bg-white/5 rounded-xl mx-1 transition-colors"
-              >
-                <span className="font-semibold text-sm">{f.label}</span>
-                <span className="text-xs text-black/50 dark:text-white/50 mt-0.5">{f.desc}</span>
-              </a>
-            ))}
+          {/* Dropdown panel — pt-2 outer wrapper bridges the hover gap so mouse can reach the panel */}
+          <div className="absolute top-full left-1/2 -translate-x-1/2 pt-2 opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-all duration-150 z-50">
+            <div className="w-96 rounded-2xl border border-black/10 dark:border-white/10 bg-white dark:bg-zinc-900 shadow-xl shadow-black/10 py-2">
+              {FEATURES.map((f) => (
+                <a
+                  key={f.href}
+                  href={f.href}
+                  className="flex items-start gap-3 px-4 py-2.5 hover:bg-black/5 dark:hover:bg-white/5 rounded-xl mx-1 transition-colors"
+                >
+                  <div className="mt-0.5 p-1.5 rounded-lg bg-fuchsia-50 dark:bg-fuchsia-900/20 text-fuchsia-600 shrink-0">
+                    <f.Icon className="h-3.5 w-3.5" />
+                  </div>
+                  <div>
+                    <span className="block font-semibold text-sm">{f.label}</span>
+                    <span className="block text-xs text-black/50 dark:text-white/50 mt-0.5">{f.desc}</span>
+                  </div>
+                </a>
+              ))}
+            </div>
           </div>
         </div>
 

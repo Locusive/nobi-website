@@ -105,7 +105,7 @@ export default function LeadCapture() {
                 Visitors who engage with Nobi and ask to be followed up have already told you what they need. That changes what happens next.
               </p>
             </div>
-            <div className="grid gap-4 sm:gap-5 md:grid-cols-3">
+            <div className="grid gap-4 sm:gap-5 md:grid-cols-2 max-w-3xl mx-auto">
               {[
                 {
                   stat: "6x",
@@ -118,12 +118,6 @@ export default function LeadCapture() {
                   label: "of leads include conversation context",
                   desc: "Every lead captured by Nobi includes a summary of what the visitor was asking about, so follow-ups aren't cold.",
                   palette: "purple",
-                },
-                {
-                  stat: "100%",
-                  label: "of leads include conversation context",
-                  desc: "Every lead captured by Nobi includes a summary of what the visitor was asking about, so follow-ups aren't cold.",
-                  palette: "blue",
                 },
               ].map((item) => (
                 <div

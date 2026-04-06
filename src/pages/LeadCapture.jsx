@@ -37,11 +37,11 @@ export default function LeadCapture() {
                   Lead capture
                 </p>
                 <h1 className="text-4xl sm:text-5xl lg:text-6xl font-semibold leading-[1.05] text-slate-900 text-balance">
-                  Don't let interested visitors{" "}
-                  <span className={GRADIENT}>leave empty-handed</span>
+                  Capture leads{" "}
+                  <span className={GRADIENT}>inside the conversation</span>
                 </h1>
                 <p className="text-lg text-slate-600 max-w-xl leading-relaxed">
-                  When you set up Nobi to guide visitors through your product or service, some of them are ready to take the next step. Nobi captures their info inside the conversation they're already having, along with full context about what they were asking about. You get a lead. They get a real follow-up.
+                  When a visitor is ready to take the next step, Nobi captures their info inline — along with a summary of what they were asking about, so your follow-up isn't starting cold.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-3 pt-2">
                   <a
@@ -105,14 +105,8 @@ export default function LeadCapture() {
                 Visitors who engage with Nobi and ask to be followed up have already told you what they need. That changes what happens next.
               </p>
             </div>
-            <div className="grid gap-4 sm:gap-5 md:grid-cols-2 max-w-3xl mx-auto">
+            <div className="grid gap-4 sm:gap-5 md:grid-cols-1 max-w-xl mx-auto">
               {[
-                {
-                  stat: "6x",
-                  label: "more likely to convert",
-                  desc: "Based on Nobi's internal data: visitors who engage with the assistant are 6x more likely to become customers than those who don't interact.",
-                  palette: "blue",
-                },
                 {
                   stat: "100%",
                   label: "of leads include conversation context",
@@ -270,49 +264,45 @@ function ConversationMock() {
   return (
     <div className="relative rounded-3xl bg-white border border-slate-200 shadow-[0_28px_80px_-30px_rgba(15,23,42,0.45)] overflow-hidden">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_15%_20%,rgba(124,58,237,0.08),transparent_35%),radial-gradient(circle_at_85%_75%,rgba(236,72,153,0.08),transparent_40%)]" aria-hidden />
-      <div className="relative flex items-center gap-3 px-4 py-3 border-b border-slate-100 bg-white/80">
-        <div className="h-8 w-8 rounded-full bg-gradient-to-br from-indigo-500 via-violet-500 to-fuchsia-500 flex items-center justify-center text-white text-xs font-bold">N</div>
-        <div>
-          <div className="text-sm font-semibold text-slate-900">Nobi</div>
-          <div className="flex items-center gap-1.5">
-            <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
-            <span className="text-xs text-slate-500">Online</span>
-          </div>
-        </div>
-      </div>
-      <div className="relative px-4 py-4 space-y-3 text-sm">
+      <div className="relative px-4 pt-5 pb-4 space-y-3 text-sm">
+        {/* Visitor message */}
         <div className="flex justify-end">
-          <div className="rounded-2xl rounded-tr-sm bg-slate-900 text-white px-4 py-2.5 max-w-[80%] text-[13px] leading-snug">
+          <div className="rounded-2xl rounded-tr-sm bg-violet-100 text-violet-900 px-4 py-2.5 max-w-[80%] text-[13px] leading-snug">
             I need someone to replace my HVAC before summer. What's involved?
           </div>
         </div>
+        {/* Nobi reply */}
         <div className="flex justify-start gap-2">
           <div className="h-7 w-7 rounded-full bg-gradient-to-br from-indigo-500 via-violet-500 to-fuchsia-500 flex items-center justify-center text-white text-[10px] font-bold shrink-0 mt-0.5">N</div>
           <div className="rounded-2xl rounded-tl-sm bg-slate-50 border border-slate-200 px-4 py-2.5 max-w-[80%] text-[13px] text-slate-800 leading-snug">
-            A full replacement typically takes one day. We'll assess your current system, recommend the right unit for your square footage, and handle permits and installation. Most homeowners are up and running in 6–8 hours.
+            A full replacement typically takes one day. We'll assess your current system, recommend the right unit, and handle permits and installation. Most homeowners are up and running in 6–8 hours.
           </div>
         </div>
+        {/* Visitor message */}
         <div className="flex justify-end">
-          <div className="rounded-2xl rounded-tr-sm bg-slate-900 text-white px-4 py-2.5 max-w-[80%] text-[13px] leading-snug">
+          <div className="rounded-2xl rounded-tr-sm bg-violet-100 text-violet-900 px-4 py-2.5 max-w-[80%] text-[13px] leading-snug">
             How much does it usually cost?
           </div>
         </div>
+        {/* Nobi reply + inline form */}
         <div className="flex justify-start gap-2">
           <div className="h-7 w-7 rounded-full bg-gradient-to-br from-indigo-500 via-violet-500 to-fuchsia-500 flex items-center justify-center text-white text-[10px] font-bold shrink-0 mt-0.5">N</div>
-          <div className="rounded-2xl rounded-tl-sm bg-slate-50 border border-slate-200 px-4 py-2.5 max-w-[80%] text-[13px] text-slate-800 leading-snug">
-            It depends on your home size and current setup. Our team can give you an exact quote. Want me to have someone reach out?
-          </div>
-        </div>
-        {/* Lead capture form inline */}
-        <div className="rounded-xl border border-violet-200 bg-violet-50 px-4 py-3 space-y-2.5">
-          <div className="text-[11px] font-semibold text-violet-700 uppercase tracking-[0.12em]">Get a free quote</div>
-          <div className="space-y-2">
-            <div className="rounded-lg border border-slate-200 bg-white px-3 py-1.5 text-[12px] text-slate-400">Your name</div>
-            <div className="rounded-lg border border-slate-200 bg-white px-3 py-1.5 text-[12px] text-slate-400">Email address</div>
-            <div className="rounded-lg border border-slate-200 bg-white px-3 py-1.5 text-[12px] text-slate-400">Phone number</div>
-          </div>
-          <div className="rounded-lg bg-gradient-to-r from-indigo-500 via-violet-500 to-fuchsia-500 px-3 py-2 text-white text-[12px] font-semibold text-center">
-            Request a quote
+          <div className="flex-1 space-y-2.5 min-w-0">
+            <div className="rounded-2xl rounded-tl-sm bg-slate-50 border border-slate-200 px-4 py-2.5 text-[13px] text-slate-800 leading-snug">
+              It depends on your home size and setup. Want me to have someone reach out with an exact quote?
+            </div>
+            {/* Lead capture form — aligned with message bubble, not full-width */}
+            <div className="rounded-xl border border-violet-200 bg-violet-50 px-4 py-3 space-y-2.5">
+              <div className="text-[11px] font-semibold text-violet-700 uppercase tracking-[0.12em]">Get a free quote</div>
+              <div className="space-y-2">
+                <div className="rounded-lg border border-slate-200 bg-white px-3 py-1.5 text-[12px] text-slate-400">Your name</div>
+                <div className="rounded-lg border border-slate-200 bg-white px-3 py-1.5 text-[12px] text-slate-400">Email address</div>
+                <div className="rounded-lg border border-slate-200 bg-white px-3 py-1.5 text-[12px] text-slate-400">Phone number</div>
+              </div>
+              <div className="rounded-lg bg-gradient-to-r from-indigo-500 via-violet-500 to-fuchsia-500 px-3 py-2 text-white text-[12px] font-semibold text-center">
+                Request a quote
+              </div>
+            </div>
           </div>
         </div>
       </div>

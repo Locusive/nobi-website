@@ -91,45 +91,67 @@ export default function LeadCapture() {
           </div>
         </section>
 
-        {/* Stats */}
+        {/* Lead comparison */}
         <section className="bg-gradient-to-b from-white via-slate-50 to-white py-16">
-          <div className="mx-auto max-w-6xl xl:max-w-7xl px-6 space-y-8">
+          <div className="mx-auto max-w-4xl px-6 space-y-8">
             <div className="text-center space-y-3 max-w-2xl mx-auto">
-              <p className="text-sm uppercase tracking-[0.2em] text-fuchsia-600 font-semibold">
-                Results
-              </p>
               <h2 className="text-3xl sm:text-4xl font-semibold text-slate-900">
-                Higher-intent leads, with context already attached
+                Not all leads are equal
               </h2>
               <p className="text-base text-slate-600">
-                Visitors who engage with Nobi and ask to be followed up have already told you what they need. That changes what happens next.
+                A name and email from a contact form tells you nothing. A lead from Nobi tells you what they need.
               </p>
             </div>
-            <div className="grid gap-4 sm:gap-5 md:grid-cols-1 max-w-xl mx-auto">
-              {[
-                {
-                  stat: "100%",
-                  label: "of leads include conversation context",
-                  desc: "Every lead captured by Nobi includes a summary of what the visitor was asking about, so follow-ups aren't cold.",
-                  palette: "purple",
-                },
-              ].map((item) => (
-                <div
-                  key={item.stat}
-                  className={`relative overflow-hidden rounded-xl border text-white shadow-[0_18px_42px_-24px_rgba(64,41,153,0.45)] ${
-                    item.palette === "blue"
-                      ? "border-[#3f6bff] bg-gradient-to-br from-[#3fb7ff] via-[#4f7dff] to-[#6b52d9]"
-                      : "border-[#4c3ab8] bg-gradient-to-br from-[#4a47a8] via-[#6b52d9] to-[#7f4ff0]"
-                  }`}
-                >
-                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_22%_18%,rgba(255,255,255,0.16),transparent_40%),radial-gradient(circle_at_80%_0%,rgba(255,255,255,0.12),transparent_36%)]" aria-hidden />
-                  <div className="relative px-5 sm:px-6 py-6 sm:py-7 flex flex-col gap-2">
-                    <div className="text-3xl sm:text-4xl font-bold tracking-tight text-white drop-shadow-sm">{item.stat}</div>
-                    <div className="text-xs sm:text-sm font-medium text-white/85">{item.label}</div>
-                    <div className="text-xs text-white/70 leading-relaxed pt-1">{item.desc}</div>
-                  </div>
+
+            <div className="grid md:grid-cols-2 gap-4">
+              {/* Typical form lead */}
+              <div className="rounded-2xl border border-slate-200 bg-white p-6 space-y-4 shadow-[0_8px_24px_-16px_rgba(15,23,42,0.12)]">
+                <div className="flex items-center gap-2">
+                  <span className="h-2 w-2 rounded-full bg-slate-300" />
+                  <span className="text-sm font-semibold text-slate-500">Typical contact form</span>
                 </div>
-              ))}
+                <div className="space-y-2">
+                  {[
+                    { label: "Name", value: "Sarah M." },
+                    { label: "Email", value: "sarah@email.com" },
+                    { label: "Phone", value: "(555) 410-2291" },
+                    { label: "Message", value: "Interested in your services", muted: true },
+                  ].map((row) => (
+                    <div key={row.label} className="flex gap-3 text-sm">
+                      <span className="w-14 shrink-0 text-slate-400 text-xs pt-0.5">{row.label}</span>
+                      <span className={row.muted ? "text-slate-400 italic" : "text-slate-700"}>{row.value}</span>
+                    </div>
+                  ))}
+                </div>
+                <p className="text-xs text-slate-400 pt-1 leading-relaxed">
+                  No context. Cold outreach. You're guessing what they need.
+                </p>
+              </div>
+
+              {/* Nobi lead */}
+              <div className="rounded-2xl border border-violet-200 bg-gradient-to-br from-white to-violet-50/50 p-6 space-y-4 shadow-[0_8px_24px_-16px_rgba(109,40,217,0.2)]">
+                <div className="flex items-center gap-2">
+                  <span className="h-2 w-2 rounded-full bg-gradient-to-r from-indigo-500 to-fuchsia-500" />
+                  <span className="text-sm font-semibold text-violet-700">Lead from Nobi</span>
+                </div>
+                <div className="space-y-2">
+                  {[
+                    { label: "Name", value: "Sarah M." },
+                    { label: "Email", value: "sarah@email.com" },
+                    { label: "Phone", value: "(555) 410-2291" },
+                    { label: "Asked about", value: "HVAC replacement before summer, 2,400 sq ft home" },
+                    { label: "Context", value: "Wants quote, asked about cost and timeline" },
+                  ].map((row) => (
+                    <div key={row.label} className="flex gap-3 text-sm">
+                      <span className="w-14 shrink-0 text-slate-400 text-xs pt-0.5">{row.label}</span>
+                      <span className="text-slate-700">{row.value}</span>
+                    </div>
+                  ))}
+                </div>
+                <p className="text-xs text-violet-600 pt-1 leading-relaxed font-medium">
+                  Full context. Warm outreach. You know what to say before you call.
+                </p>
+              </div>
             </div>
           </div>
         </section>

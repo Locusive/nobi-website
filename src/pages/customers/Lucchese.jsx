@@ -5,6 +5,21 @@ import { useDemoForm } from "../../context/DemoFormContext";
 
 const GRADIENT = "bg-gradient-to-r from-indigo-500 via-violet-500 to-fuchsia-500 bg-clip-text text-transparent";
 
+function Quote({ text, name, title }) {
+  return (
+    <blockquote className="border-l-4 border-violet-300 pl-6 space-y-3">
+      <p className="text-lg text-slate-700 leading-relaxed italic">"{text}"</p>
+      <footer className="flex items-center gap-3">
+        <img src="/media/lourdes.png" alt={name} className="h-8 w-8 rounded-full object-cover border border-slate-200" />
+        <div>
+          <div className="text-sm font-semibold text-slate-900">{name}</div>
+          <div className="text-xs text-slate-500">{title}</div>
+        </div>
+      </footer>
+    </blockquote>
+  );
+}
+
 export default function LuccheseCustomer() {
   const { onOpen } = useDemoForm();
 
@@ -30,12 +45,12 @@ export default function LuccheseCustomer() {
               <div className="space-y-4">
                 <p className="text-sm font-semibold tracking-[0.2em] text-fuchsia-600 uppercase">Customer story</p>
                 <h1 className="text-4xl sm:text-5xl lg:text-6xl font-semibold leading-[1.05] text-slate-900 text-balance">
-                  How Lucchese hit{" "}
-                  <span className={GRADIENT}>33x ROI</span>{" "}
-                  with AI search
+                  How Lucchese{" "}
+                  <span className={GRADIENT}>"Made it Smart"</span>{" "}
+                  and got a 33x ROI
                 </h1>
                 <p className="text-lg text-slate-600 max-w-2xl leading-relaxed">
-                  Lucchese's traffic was up. Their load times were better. But conversions were down. They replaced keyword search with Nobi and generated $1M+ in incremental revenue in year one.
+                  Lucchese's leading indicators were moving in the right direction going into 2025. Traffic was up, load times were better. But conversions were down, and they suspected search was the problem.
                 </p>
               </div>
 
@@ -57,62 +72,45 @@ export default function LuccheseCustomer() {
           </div>
         </section>
 
-        {/* Company + challenge */}
+        {/* Narrative intro */}
         <section className="bg-white border-t border-slate-100 py-16">
           <div className="mx-auto max-w-4xl px-6">
-            <div className="grid md:grid-cols-2 gap-10 lg:gap-16">
-              <div className="space-y-4">
-                <p className="text-sm font-semibold uppercase tracking-[0.18em] text-slate-400">About Lucchese</p>
-                <p className="text-base text-slate-600 leading-relaxed">
-                  Founded in 1883 by Italian immigrant Salvatore "Sam" Lucchese, Lucchese Bootmaker is one of America's most storied western boot brands. Each pair is handcrafted in El Paso using century-old techniques, taking more than 200 steps to complete.
-                </p>
+            <div className="grid md:grid-cols-[2fr_1fr] gap-12 lg:gap-20">
+              <div className="space-y-6">
+                <p className="text-sm font-semibold uppercase tracking-[0.18em] text-slate-400">The story</p>
+                <div className="space-y-4 text-base text-slate-600 leading-relaxed">
+                  <p>
+                    Founded in 1883 by Italian immigrant Salvatore "Sam" Lucchese, Lucchese Bootmaker is one of America's most storied western boot brands. Each pair is handcrafted in El Paso using century-old techniques, taking more than 200 steps to complete.
+                  </p>
+                  <p>
+                    Entering 2025 with a "Make it Smart" mandate, Lucchese's goal was to elevate the shopping experience at every point on their site. The leading indicators looked good: more traffic, faster load times. But conversion rates were going the other way. They suspected search was the culprit. Keyword-based search required constant product copy maintenance and still missed what shoppers actually meant.
+                  </p>
+                  <p>
+                    They turned to Nobi to see whether AI search could improve result accuracy and move the needle on conversions.
+                  </p>
+                </div>
+                <Quote
+                  text="We want to do more for our customer while leveraging tech. We run a very lean team so we're always looking for partners that have the tech to fill in gaps, especially with things like search where we knew there was a lot of low-hanging fruit."
+                  name="Lourdes Servin"
+                  title="Sr. Director, Digital and E-Commerce, Lucchese Bootmaker"
+                />
               </div>
-              <div className="space-y-4">
-                <p className="text-sm font-semibold uppercase tracking-[0.18em] text-slate-400">The challenge</p>
-                <p className="text-base text-slate-600 leading-relaxed">
-                  Entering 2025 with a "Make it Smart" mandate, Lucchese's leading indicators were moving in the right direction: more traffic, faster load times. But conversion rates were down. They suspected search was the culprit: keyword-based search required constant product copy maintenance and still missed what shoppers actually meant.
-                </p>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Testimonial image + quote */}
-        <section className="bg-gradient-to-b from-[#17122f] to-[#1c1540] py-16">
-          <div className="mx-auto max-w-4xl px-6">
-            <div className="grid md:grid-cols-2 gap-10 items-center">
-              <div className="relative rounded-2xl overflow-hidden aspect-[4/3]">
+              <div className="relative rounded-2xl overflow-hidden aspect-[3/4]">
                 <img
                   src="/media/lucchese-testimonial-image.png"
                   alt="Lucchese boots"
                   className="absolute inset-0 w-full h-full object-cover"
                 />
               </div>
-              <div className="space-y-6">
-                <blockquote className="text-lg text-white leading-relaxed">
-                  "If you want to learn and be inspired, you should implement a tool like Nobi. We've seen great incremental results, but the biggest reason a brand should implement this is that you have the opportunity to apply more information towards optimizing campaigns and your broader brand and e-comm goals."
-                </blockquote>
-                <div className="flex items-center gap-3">
-                  <img
-                    src="/media/lourdes.png"
-                    alt="Lourdes"
-                    className="h-10 w-10 rounded-full object-cover border border-white/20"
-                  />
-                  <div>
-                    <div className="text-sm font-semibold text-white">Lourdes</div>
-                    <div className="text-xs text-white/60">Sr. Director, Digital and E-Commerce, Lucchese Bootmaker</div>
-                  </div>
-                </div>
-              </div>
             </div>
           </div>
         </section>
 
-        {/* What Nobi changed */}
-        <section className="bg-white py-20">
-          <div className="mx-auto max-w-4xl px-6 space-y-12">
+        {/* Three capability examples */}
+        <section className="bg-slate-50 border-t border-slate-100 py-20">
+          <div className="mx-auto max-w-4xl px-6 space-y-16">
             <div className="space-y-3">
-              <p className="text-sm font-semibold uppercase tracking-[0.18em] text-fuchsia-600">How it worked</p>
+              <p className="text-sm font-semibold uppercase tracking-[0.18em] text-fuchsia-600">What changed</p>
               <h2 className="text-3xl sm:text-4xl font-semibold text-slate-900">Three things that moved the needle</h2>
             </div>
 
@@ -120,7 +118,7 @@ export default function LuccheseCustomer() {
               {
                 number: "01",
                 title: "Always show results",
-                body: "Keyword search returns nothing when a query doesn't exactly match product copy. Nobi always surfaces the closest relevant products instead. When a Lucchese shopper searched \"Terlingua\" (a West Texas town), Shopify returned zero results. Nobi returned the Walter boot and others that matched the vibe. The shopper added to cart.",
+                body: "Keyword search returns nothing when a query doesn't exactly match product copy. Nobi always surfaces the closest relevant products instead. When a shopper searched \"Terlingua\" (a West Texas town), Shopify returned zero results. Nobi used its knowledge base to figure out what the shopper was going for and returned the Walter boot and others with a matching look and feel. The shopper added to cart.",
                 before: { label: "Shopify default", text: "SEARCH: TERLINGUA\n0 results" },
                 after: { label: "Nobi", text: "\"Terlingua\" → Walter boot\nShopper added to cart" },
               },
@@ -139,14 +137,14 @@ export default function LuccheseCustomer() {
                 after: { label: "Nobi", text: "\"card holder\" → wallets,\ncard cases, bifolds → purchased" },
               },
             ].map((item) => (
-              <div key={item.number} className="grid md:grid-cols-2 gap-8 items-start pb-10 border-b border-slate-100 last:border-0 last:pb-0">
+              <div key={item.number} className="grid md:grid-cols-2 gap-8 items-start pb-14 border-b border-slate-200 last:border-0 last:pb-0">
                 <div className="space-y-4">
                   <div className="text-4xl font-bold text-slate-200">{item.number}</div>
                   <h3 className="text-xl font-semibold text-slate-900">{item.title}</h3>
                   <p className="text-base text-slate-600 leading-relaxed">{item.body}</p>
                 </div>
                 <div className="grid grid-cols-2 gap-3">
-                  <div className="rounded-xl border border-slate-200 bg-slate-50 p-4 space-y-2">
+                  <div className="rounded-xl border border-slate-200 bg-white p-4 space-y-2">
                     <div className="flex items-center gap-1.5">
                       <span className="h-1.5 w-1.5 rounded-full bg-slate-300" />
                       <span className="text-[11px] font-semibold text-slate-400 uppercase tracking-wide">{item.before.label}</span>
@@ -166,13 +164,73 @@ export default function LuccheseCustomer() {
           </div>
         </section>
 
-        {/* Results summary */}
-        <section className="bg-gradient-to-b from-slate-50 to-white py-16">
-          <div className="mx-auto max-w-4xl px-6 space-y-6">
-            <h2 className="text-2xl font-semibold text-slate-900">The result</h2>
+        {/* Second quote */}
+        <section className="bg-gradient-to-b from-[#17122f] to-[#1c1540] py-16">
+          <div className="mx-auto max-w-4xl px-6">
+            <div className="max-w-2xl mx-auto space-y-6">
+              <blockquote className="text-lg text-white/90 leading-relaxed">
+                "It's been really great to understand how people are typing and interacting with an agent, and understand how people are looking for our popular categories. It's also a treat to work with a partner who is just as excited to learn and dive deep."
+              </blockquote>
+              <div className="flex items-center gap-3">
+                <img
+                  src="/media/lourdes.png"
+                  alt="Lourdes"
+                  className="h-10 w-10 rounded-full object-cover border border-white/20"
+                />
+                <div>
+                  <div className="text-sm font-semibold text-white">Lourdes Servin</div>
+                  <div className="text-xs text-white/60">Sr. Director, Digital and E-Commerce, Lucchese Bootmaker</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Results */}
+        <section className="bg-white py-16">
+          <div className="mx-auto max-w-4xl px-6 space-y-8">
+            <div className="space-y-3">
+              <p className="text-sm font-semibold uppercase tracking-[0.18em] text-fuchsia-600">The result</p>
+              <h2 className="text-2xl font-semibold text-slate-900">What happened</h2>
+            </div>
             <p className="text-base text-slate-600 leading-relaxed max-w-2xl">
               In the first two months after launch, Nobi drove a <strong>21% improvement in conversion rates</strong> compared to the standard Shopify experience in a direct A/B test. By year one, Lucchese had generated <strong>$1M+ in incremental revenue</strong>, a 74% improvement over the standard Shopify experience, at an <strong>ROI of 33x</strong>.
             </p>
+
+            <div className="rounded-2xl border border-slate-100 bg-slate-50 p-8 space-y-4">
+              <p className="text-sm font-semibold uppercase tracking-[0.18em] text-slate-400">Key takeaways</p>
+              <ul className="space-y-3 text-base text-slate-600 leading-relaxed">
+                <li className="flex gap-3">
+                  <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-violet-400" />
+                  Always showing results, even when a search query doesn't exactly match any product, can still drive sales. Shoppers who get relevant results stay on site.
+                </li>
+                <li className="flex gap-3">
+                  <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-violet-400" />
+                  Ranking by relevance (not keyword frequency) surfaces the right product at the right time, without requiring constant product copy maintenance.
+                </li>
+                <li className="flex gap-3">
+                  <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-violet-400" />
+                  Semantic search recovers sales that would otherwise walk out the door. Shoppers shouldn't have to use your language to find your products.
+                </li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        {/* Third quote + conclusion */}
+        <section className="bg-slate-50 border-t border-slate-100 py-16">
+          <div className="mx-auto max-w-4xl px-6 space-y-8">
+            <div className="space-y-3">
+              <p className="text-sm font-semibold uppercase tracking-[0.18em] text-slate-400">What's next</p>
+              <p className="text-base text-slate-600 leading-relaxed max-w-2xl">
+                Lucchese and Nobi continue to explore new ways to use AI throughout the shopping experience as Lucchese works toward its "Make it Smart" goal for 2025 and beyond.
+              </p>
+            </div>
+            <Quote
+              text="If you want to learn and be inspired, you should implement a tool like Nobi. We've seen great incremental results, but the biggest reason a brand should implement this is that you have the opportunity to apply more information towards optimizing campaigns and your broader brand and e-comm goals."
+              name="Lourdes Servin"
+              title="Sr. Director, Digital and E-Commerce, Lucchese Bootmaker"
+            />
           </div>
         </section>
 

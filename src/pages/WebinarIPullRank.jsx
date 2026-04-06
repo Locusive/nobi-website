@@ -586,7 +586,7 @@ export default function WebinarIPullRank() {
               <div className="wip-time-badge">10 - 25 min</div>
               <div>
                 <h3>Capturing AI-Driven Shopper Intent with Nobi</h3>
-                <p>What "AI search" means for e-commerce - how shoppers arriving from AI assistants carry richer context and intent, and how Nobi's AI search layer captures that to drive conversions. Live demo plus real data from brands like Faherty and UNTUCKit on VDP engagement and conversion lift.</p>
+                <p>What "AI search" means for e-commerce - how shoppers arriving from AI assistants carry richer context and intent, and how Nobi's AI search layer captures that to drive conversions. Live demo plus real data from brands like UNTUCKit and Lucchese on VDP engagement and conversion lift.</p>
                 <div className="wip-presenter">Presented by Tyler, Nobi</div>
               </div>
             </div>

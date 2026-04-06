@@ -40,7 +40,7 @@ export default function Nav() {
         {/* Features dropdown */}
         <div className="relative group">
           <button className="flex items-center gap-1 hover:opacity-80 transition-opacity py-1">
-            The assistant
+            Why Nobi
             <ChevronDown className="w-3.5 h-3.5 opacity-60 group-hover:opacity-100 transition-transform group-hover:rotate-180" />
           </button>
           {/* Dropdown panel */}
@@ -100,7 +100,7 @@ export default function Nav() {
               className="text-sm font-semibold hover:opacity-80 py-2 flex items-center justify-between w-full"
               onClick={() => setMobileFeaturesOpen(!mobileFeaturesOpen)}
             >
-              The assistant
+              Why Nobi
               <ChevronDown className={`w-4 h-4 opacity-60 transition-transform ${mobileFeaturesOpen ? "rotate-180" : ""}`} />
             </button>
             {mobileFeaturesOpen && (

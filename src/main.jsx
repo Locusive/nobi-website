@@ -9,6 +9,9 @@ import FAQs from "./pages/FAQs.jsx";
 import Blog from "./pages/Blog.jsx";
 import BlogPost from "./pages/BlogPost.jsx";
 import BetterSearch from "./pages/BetterSearch.jsx";
+import LeadCapture from "./pages/LeadCapture.jsx";
+import CustomActions from "./pages/CustomActions.jsx";
+import KnowledgeBase from "./pages/KnowledgeBase.jsx";
 import Pricing from "./pages/Pricing.jsx";
 import SearchEngineLanding from "./pages/landing/SearchEngineLanding.jsx";
 import AIAssistantLanding from "./pages/landing/AIAssistantLanding.jsx";
@@ -42,6 +45,9 @@ function App() {
         <Route path="/blog" element={<Blog />} />
         <Route path="/blog/:slug" element={<BlogPost />} />
         <Route path="/why-nobi/better-search" element={<BetterSearch />} />
+        <Route path="/lead-capture" element={<LeadCapture />} />
+        <Route path="/custom-actions" element={<CustomActions />} />
+        <Route path="/knowledge-base" element={<KnowledgeBase />} />
         <Route path="/terms" element={<Terms />} />
         <Route path="/privacy" element={<Privacy />} />
         <Route path="/pricing" element={<Pricing />} />

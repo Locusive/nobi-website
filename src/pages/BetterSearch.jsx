@@ -8,6 +8,7 @@ import { useDemoForm } from "../context/DemoFormContext";
 import Marquee from "react-fast-marquee";
 import FAQList from "../components/FAQList.jsx";
 import FAQ_ITEMS from "../constants/faqs";
+import { getSignupUrl } from "../utils/signupUrl";
 
 const CUSTOMER_LOGOS = [
   { alt: "UNTUCKit", src: "/media/logos/untuckit.svg" },
@@ -47,7 +48,20 @@ export default function BetterSearch() {
                   Natural-language, typo-tolerant semantic search that ranks SKUs by purchase intent—proven conversion lift in days, verified by A/B tests.
                 </p>
 
-                <DemoCTAButton className="h-12 rounded-full bg-black text-white hover:opacity-90 shadow-sm px-6 w-full sm:w-auto" />
+                <div className="flex flex-col sm:flex-row gap-3 pt-2">
+                  <a
+                    href={getSignupUrl()}
+                    className="inline-flex items-center justify-center gap-2 rounded-2xl font-medium transition bg-black text-white hover:opacity-90 shadow-sm h-12 px-6 text-base w-full sm:w-auto"
+                  >
+                    Sign up free
+                  </a>
+                  <button
+                    onClick={openDemoForm}
+                    className="inline-flex items-center justify-center gap-2 rounded-2xl font-medium transition border border-black/10 bg-white/70 h-12 px-6 text-base w-full sm:w-auto hover:border-black/30"
+                  >
+                    Get a demo
+                  </button>
+                </div>
               </div>
 
               <div className="relative">
@@ -96,28 +110,37 @@ export default function BetterSearch() {
 
         {/* Key metrics */}
         <section className="bg-gradient-to-b from-white via-slate-50 to-white py-16">
-          <div className="mx-auto max-w-6xl xl:max-w-7xl px-6">
-            <div className="grid gap-4 sm:gap-5 md:grid-cols-2 lg:grid-cols-4">
+          <div className="mx-auto max-w-6xl xl:max-w-7xl px-6 space-y-8">
+            <div className="text-center space-y-3 max-w-2xl mx-auto">
+              <p className="text-sm uppercase tracking-[0.2em] text-purple-600 font-semibold">
+                Measured results
+              </p>
+              <h2 className="text-3xl sm:text-4xl font-semibold text-slate-900">
+                What customers see after switching to Nobi
+              </h2>
+              <p className="text-base text-slate-600">
+                Every number below comes from A/B tests or direct before-and-after comparisons run by Nobi customers.
+              </p>
+            </div>
+            <div className="grid gap-4 sm:gap-5 md:grid-cols-3">
               {[
                 {
-                  stat: "Up to 30%",
-                  label: "Lift in conversion rate (A/B proven)",
+                  stat: "21%",
+                  label: "Conversion lift",
+                  desc: "Lucchese measured a 21% lift in conversion rate after switching to Nobi, verified in a direct A/B test.",
                   palette: "blue",
                 },
                 {
-                  stat: "35.3%",
-                  label: "Lift in add-to-cart rate",
+                  stat: "+35.3%",
+                  label: "Add-to-cart rate",
+                  desc: "Lift in add-to-cart rate measured across Nobi search customers with merchandising rules applied.",
                   palette: "purple",
                 },
                 {
-                  stat: "55.8%",
-                  label: "Lift in average order value",
+                  stat: "33x",
+                  label: "ROI in 90 days",
+                  desc: "Lucchese saw $148k in incremental revenue in the first 90 days on a low monthly Nobi subscription.",
                   palette: "blue",
-                },
-                {
-                  stat: "6%",
-                  label: "Lift in product views",
-                  palette: "purple",
                 },
               ].map((item, idx) => (
                 <div
@@ -130,11 +153,10 @@ export default function BetterSearch() {
                   style={{ animationDelay: `${idx * 60}ms` }}
                 >
                   <div className="absolute inset-0 bg-[radial-gradient(circle_at_22%_18%,rgba(255,255,255,0.16),transparent_40%),radial-gradient(circle_at_80%_0%,rgba(255,255,255,0.12),transparent_36%)]" aria-hidden />
-                  <div className="relative px-5 sm:px-6 py-6 sm:py-7 flex flex-col gap-2 text-center">
+                  <div className="relative px-5 sm:px-6 py-6 sm:py-7 flex flex-col gap-2">
                     <div className="text-3xl sm:text-4xl font-bold tracking-tight text-white drop-shadow-sm">{item.stat}</div>
-                    <div className="text-xs sm:text-sm font-medium leading-relaxed text-white/85">
-                      {item.label}
-                    </div>
+                    <div className="text-xs sm:text-sm font-medium text-white/85">{item.label}</div>
+                    <div className="text-xs text-white/70 leading-relaxed pt-1">{item.desc}</div>
                   </div>
                 </div>
               ))}
@@ -270,16 +292,6 @@ export default function BetterSearch() {
               );
             })}
 
-            <div className="flex justify-center">
-              <a
-                href="https://docs.nobi.ai/components/search-bar/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 rounded-full bg-white text-[#17122f] px-5 py-3 text-sm font-semibold shadow-[0_10px_32px_-24px_rgba(255,255,255,0.6)] hover:bg-white/90 border border-white/20"
-              >
-                Explore the search docs
-              </a>
-            </div>
           </div>
         </section>
 
@@ -427,8 +439,19 @@ export default function BetterSearch() {
                 Launch Nobi alongside your current search and measure the lift—no credit card required.
               </p>
             </div>
-            <div className="flex justify-center">
-              <DemoCTAButton className="h-12 rounded-full bg-black text-white hover:opacity-90 shadow-sm px-6 w-full sm:w-auto" />
+            <div className="flex flex-col sm:flex-row gap-3 justify-center">
+              <a
+                href={getSignupUrl()}
+                className="inline-flex items-center justify-center gap-2 rounded-2xl font-medium transition bg-black text-white hover:opacity-90 shadow-sm h-12 px-6 text-base"
+              >
+                Sign up free
+              </a>
+              <button
+                onClick={openDemoForm}
+                className="inline-flex items-center justify-center gap-2 rounded-2xl font-medium transition border border-black/10 bg-white/70 h-12 px-6 text-base hover:border-black/30"
+              >
+                Get a demo
+              </button>
             </div>
           </div>
         </section>

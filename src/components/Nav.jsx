@@ -59,7 +59,7 @@ export default function Nav() {
                   </div>
                 </a>
               ))}
-              <div className="mx-4 my-1.5 border-t border-black/8 dark:border-white/8" />
+              <div className="mx-auto my-1.5 border-t border-black/8 dark:border-white/8 w-1/2" />
               <a
                 href="/customers"
                 className="flex items-start gap-3 px-4 py-2.5 hover:bg-black/5 dark:hover:bg-white/5 rounded-xl mx-1 transition-colors"

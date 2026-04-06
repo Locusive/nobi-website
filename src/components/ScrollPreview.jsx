@@ -72,10 +72,10 @@ export default function ScrollPreview({
 
   return (
     <div
-      className={`scroll-preview fixed bottom-4 z-30 pointer-events-none ${
-        side === "left"  ? "left-4" :
-        side === "right" ? "right-4" :
-        "left-0 right-0 flex justify-center px-4"
+      className={`scroll-preview fixed bottom-8 z-30 pointer-events-none ${
+        side === "left"  ? "left-8" :
+        side === "right" ? "right-8" :
+        "left-0 right-0 flex justify-center px-8"
       }`}
       style={{
         opacity,

@@ -99,7 +99,7 @@ export default function LeadCapture() {
                 Not all leads are equal
               </h2>
               <p className="text-base text-slate-600">
-                A name and email from a contact form tells you nothing. A lead from Nobi tells you what they need.
+                A name and email from a contact form tells you nothing. A lead from Nobi tells you what they need — and 100% of them include a full conversation summary, so your follow-up isn't starting cold.
               </p>
             </div>
 

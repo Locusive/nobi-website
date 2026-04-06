@@ -144,8 +144,8 @@ const VARIANT_CONTENT = {
     numbersHeading: "What our customers have seen",
     stats: [
       { number: "$1M+",  label: "in extra revenue",    desc: "What Lucchese made in incremental sales in year one. Nobi's AI search surfaced products their keyword search was missing entirely." },
-      { number: "17-22%", label: "more conversions",   desc: "The consistent improvement across our customers vs. whatever they were using before, measured in head-to-head A/B tests." },
-      { number: "33x",   label: "ROI",                 desc: "What Lucchese saw in the first 3 months alone. $148K in incremental revenue from smarter search results." },
+      { number: "2.5x",  label: "more likely to buy",   desc: "Nobi searchers convert at 2.5x the rate of visitors who don't use Nobi, measured across Lucchese and UNTUCKit in head-to-head A/B tests." },
+      { number: "39x",   label: "ROI",                 desc: "Lucchese's sustained return since launch. $865K in incremental revenue in the first six months, with the number continuing to grow." },
     ],
   },
   search: {

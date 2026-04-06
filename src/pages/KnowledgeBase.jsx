@@ -41,7 +41,7 @@ export default function KnowledgeBase() {
                   <span className={GRADIENT}>not from thin air</span>
                 </h1>
                 <p className="text-lg text-slate-600 max-w-xl leading-relaxed">
-                  Import your existing help docs, policy pages, and product content. Nobi answers questions from that content, shows visitors exactly where each answer came from, and never claims something you haven't written. For anything you want to control precisely, write a guided answer that Nobi uses verbatim.
+                  Nobi pulls answers from your existing help docs, product pages, and policies — and shows visitors exactly where each answer came from. For questions you want to control precisely, write a guided answer and Nobi uses it word-for-word.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-3 pt-2">
                   <a
@@ -93,7 +93,15 @@ export default function KnowledgeBase() {
 
         {/* Stats */}
         <section className="bg-gradient-to-b from-white via-slate-50 to-white py-16">
-          <div className="mx-auto max-w-6xl xl:max-w-7xl px-6">
+          <div className="mx-auto max-w-6xl xl:max-w-7xl px-6 space-y-8">
+            <div className="text-center space-y-3 max-w-2xl mx-auto">
+              <h2 className="text-3xl sm:text-4xl font-semibold text-slate-900">
+                What accurate answers actually do
+              </h2>
+              <p className="text-base text-slate-600">
+                When visitors get real answers — sourced from your content, not guessed — they trust the site more and buy more often.
+              </p>
+            </div>
             <div className="grid gap-4 sm:gap-5 md:grid-cols-3">
               {[
                 {
@@ -139,14 +147,11 @@ export default function KnowledgeBase() {
         <section className="bg-gradient-to-b from-[#17122f] via-[#1c1540] to-[#17122f] py-20 text-white">
           <div className="mx-auto max-w-6xl xl:max-w-7xl px-6 space-y-10 sm:space-y-14">
             <div className="text-center space-y-3 max-w-3xl mx-auto">
-              <p className="text-sm uppercase tracking-[0.2em] text-purple-300 font-semibold">
-                Two layers of accuracy
-              </p>
               <h2 className="text-3xl sm:text-4xl font-semibold text-white">
-                Import your content. Write your overrides.
+                Grounded in your content, controlled by you
               </h2>
               <p className="text-base text-slate-300">
-                Nobi draws answers from your existing content, cites every claim, and lets you write specific answers for questions you want to control precisely.
+                Nobi answers from what you've already written — and you can lock in exact answers for anything where AI summaries aren't good enough.
               </p>
             </div>
 
@@ -274,27 +279,17 @@ export default function KnowledgeBase() {
   );
 }
 
-// Hero visual: Q&A with citation
+// Hero visual: Q&A with citation and guided override
 function AnswerMock() {
   return (
     <div className="relative rounded-3xl bg-white border border-slate-200 shadow-[0_28px_80px_-30px_rgba(15,23,42,0.45)] overflow-hidden">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_15%_20%,rgba(99,102,241,0.08),transparent_35%),radial-gradient(circle_at_85%_75%,rgba(167,139,250,0.08),transparent_40%)]" aria-hidden />
-      <div className="relative flex items-center gap-3 px-4 py-3 border-b border-slate-100 bg-white/80">
-        <div className="h-8 w-8 rounded-full bg-gradient-to-br from-indigo-500 via-violet-500 to-fuchsia-500 flex items-center justify-center text-white text-xs font-bold">N</div>
-        <div>
-          <div className="text-sm font-semibold text-slate-900">Nobi</div>
-          <div className="flex items-center gap-1.5">
-            <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
-            <span className="text-xs text-slate-500">Online</span>
-          </div>
-        </div>
-      </div>
 
-      <div className="relative px-4 py-4 space-y-4 text-sm">
+      <div className="relative px-4 pt-5 pb-4 space-y-4 text-sm">
         {/* Q&A 1: cited answer */}
         <div className="space-y-2.5">
           <div className="flex justify-end">
-            <div className="rounded-2xl rounded-tr-sm bg-slate-900 text-white px-4 py-2.5 max-w-[80%] text-[13px] leading-snug">
+            <div className="rounded-2xl rounded-tr-sm bg-violet-100 text-violet-900 px-4 py-2.5 max-w-[80%] text-[13px] leading-snug">
               What's your return window for sale items?
             </div>
           </div>
@@ -319,8 +314,8 @@ function AnswerMock() {
         {/* Q&A 2: guided override */}
         <div className="space-y-2.5">
           <div className="flex justify-end">
-            <div className="rounded-2xl rounded-tr-sm bg-slate-900 text-white px-4 py-2.5 max-w-[80%] text-[13px] leading-snug">
-              How do your boots compare to Lucchese's competitors?
+            <div className="rounded-2xl rounded-tr-sm bg-violet-100 text-violet-900 px-4 py-2.5 max-w-[80%] text-[13px] leading-snug">
+              How do your boots compare to competitors?
             </div>
           </div>
           <div className="flex justify-start gap-2">

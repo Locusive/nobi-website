@@ -17,6 +17,7 @@ import {
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import FAQList from "../components/FAQList.jsx";
+import ScrollPreview from "../components/ScrollPreview";
 import {posts} from "../content/utils/mdxPostLoader";
 import HeroDemo from "../components/HeroDemo";
 import {VideoModal} from "../components/VideoModal";
@@ -131,18 +132,30 @@ const PLACEMENTS = [
 
 // ===== Personalization variant content =====
 const CHIPS = [
-  { id: "default", label: "All" },
+  { id: "default", label: "More conversions" },
   { id: "search",  label: "Better search" },
-  { id: "answers", label: "Answer questions" },
-  { id: "leads",   label: "Capture leads" },
+  { id: "answers", label: "Better answers" },
+  { id: "leads",   label: "More leads" },
+];
+
+const PREVIEW_SECTIONS = [
+  { id: "results",  label: "Real results" },
+  { id: "features", label: "What Nobi does" },
+  { id: "how",      label: "How it works" },
+  { id: "pricing",  label: "Pricing" },
 ];
 
 const VARIANT_CONTENT = {
   default: {
     headline: "Turn your website into your best sales associate",
     subline:  "An AI assistant that answers questions, finds products, and captures leads. Works on ecommerce sites, service businesses, real estate — anything.",
-    problemHeading: "Your visitors aren't getting the help they need",
+    problemHeading: "Most visitors leave because your site couldn't help them",
     problemBody:    "They arrive with a question or a vague sense of what they want. Your search bar needs exact words. Your FAQ page needs patience. Most of them leave without finding what they came for.",
+    problemPoints: [
+      { Icon: SearchIcon,           label: "Dead-end searches",      desc: "Your search needs exact keywords. Visitors who describe what they want get nothing and give up." },
+      { Icon: MessageCircleQuestion, label: "Unanswered questions",   desc: "Visitors want to know if it fits their situation, what you charge, or if you ship to them. Your FAQ doesn't have it." },
+      { Icon: ShoppingCart,          label: "Lost sales",             desc: "High-intent visitors who couldn't find help buy somewhere else — and never come back." },
+    ],
     numbersHeading: "What our customers have seen",
     stats: [
       { number: "$1M+",  label: "in extra revenue",    desc: "What Lucchese made in incremental sales in year one. Nobi's AI search surfaced products their keyword search was missing entirely." },
@@ -155,6 +168,11 @@ const VARIANT_CONTENT = {
     subline:  "AI search that understands what visitors mean, not just what they type. Lucchese generated $1M+ in incremental revenue in year one.",
     problemHeading: "Your shoppers can't find what they're looking for",
     problemBody:    "They type something like \"something for a hiking trip\" and get no results because those words aren't in your product descriptions. They try again, still nothing. So they leave and buy it somewhere else.",
+    problemPoints: [
+      { Icon: SearchIcon,    label: "Keyword-only search",   desc: "Your search engine matches exact words, not intent. Natural language queries return zero results." },
+      { Icon: LayoutGrid,    label: "Dead-end result pages", desc: "Visitors who can't find the right product in two tries don't try a third time. They leave." },
+      { Icon: ShoppingCart,  label: "Revenue left behind",   desc: "Every failed search is a product you carry but couldn't surface. That's direct, measurable lost revenue." },
+    ],
     numbersHeading: "What better search has done for our customers",
     stats: [
       { number: "$1M+",  label: "in extra revenue",         desc: "Lucchese, year one. Nobi surfaced products their keyword search never would have found, turning dead-end searches into sales." },
@@ -167,11 +185,16 @@ const VARIANT_CONTENT = {
     subline:  "Nobi pulls answers from your content, cites its sources, and checks facts before responding. No guessing, no hallucinations.",
     problemHeading: "Visitors leave because no one answered their question",
     problemBody:    "They want to know if your product fits their situation, what your return policy is, or whether you serve their area. They dig through your site, find nothing clear, and go to a competitor who can give them a straight answer.",
+    problemPoints: [
+      { Icon: MessageCircleQuestion, label: "Questions go unanswered", desc: "Visitors search your FAQ, find nothing useful, and leave with the same doubt they arrived with." },
+      { Icon: LayoutGrid,            label: "Scattered information",   desc: "Your answers are spread across product pages, blog posts, and PDFs. Visitors can't piece it together themselves." },
+      { Icon: MousePointerClick,     label: "One chance lost",         desc: "A visitor who leaves with an unanswered question rarely comes back. Your competitor answers it instead." },
+    ],
     numbersHeading: "What happens when every question gets a real answer",
     stats: [
-      { number: "6x",          label: "more purchases",       desc: "Visitors who click a suggested question and get an answer are 6x more likely to buy than those who don't engage." },
-      { number: "Cited",       label: "every answer",         desc: "Nobi shows visitors exactly where each answer came from in your content, so they can trust it." },
-      { number: "Fact-checked", label: "before it sends",     desc: "A second AI pass verifies dates, prices, and names against your knowledge base before every response." },
+      { number: "6x",    label: "more purchases",       desc: "Visitors who click a suggested question and get an answer are 6x more likely to buy than those who don't engage." },
+      { number: "2.5x",  label: "higher conversion",    desc: "Nobi-assisted visitors convert at 2.5x the rate of unassisted visitors, measured across Lucchese and UNTUCKit in A/B tests." },
+      { number: "100%",  label: "of answers verified",  desc: "Every response is cross-checked against your knowledge base before it's sent. No guessing, no hallucinations." },
     ],
   },
   leads: {
@@ -179,11 +202,16 @@ const VARIANT_CONTENT = {
     subline:  "Nobi collects contact info naturally through conversation and routes it wherever you need it.",
     problemHeading: "Most visitors leave without telling you who they are",
     problemBody:    "They browse, they get interested, they leave. No contact info, no follow-up, no second chance. You had no idea they were ever there.",
+    problemPoints: [
+      { Icon: MousePointerClick, label: "Silent exits",        desc: "High-intent visitors land, browse, and bounce. You have no idea they were there and no way to reach them." },
+      { Icon: Heart,             label: "No follow-up window", desc: "Pop-up forms interrupt at the wrong moment. Most visitors dismiss them without a second thought." },
+      { Icon: BarChart3,         label: "Invisible pipeline",  desc: "Without contact info, you can't attribute revenue to campaigns or optimize what's working." },
+    ],
     numbersHeading: "What happens when your website actually captures leads",
     stats: [
-      { number: "17.6%", label: "conversion rate",       desc: "UNTUCKit Nobi users vs. 15.0% on Shopify default. More engaged visitors convert to customers at a higher rate." },
-      { number: "Natural", label: "lead collection",     desc: "No awkward pop-up forms. Nobi asks for contact info through conversation, at the right moment." },
-      { number: "Full",   label: "source attribution",   desc: "Every lead is tagged with the campaign and conversation that drove it, and sent directly to your CRM or form handler." },
+      { number: "17.6%", label: "conversion rate",        desc: "UNTUCKit Nobi users vs. 15.0% on Shopify default. More engaged visitors convert to customers at a higher rate." },
+      { number: "+21.3%", label: "revenue per referral",  desc: "Faherty Brand saw a 21.3% improvement in revenue per referral after adding Nobi to their lead capture flow." },
+      { number: "100%",   label: "of leads attributed",   desc: "Every lead tagged with the conversation and campaign that drove it, routed directly to your CRM or form handler." },
     ],
   },
 };
@@ -857,6 +885,21 @@ function HeroSkeletonLine({ w = "60%" }) {
 // --- HERO PREVIEW HELPERS (names are unique to avoid clashes) ---
 
 
+const GRADIENT = "bg-gradient-to-r from-indigo-500 via-violet-500 to-fuchsia-500 bg-clip-text text-transparent";
+
+function renderHeadline(variant) {
+  switch (variant) {
+    case "search":
+      return <>Your shoppers can't find what they're looking for. Nobi{" "}<span className={GRADIENT}>fixes that.</span></>;
+    case "answers":
+      return <>Your visitors have questions your website{" "}<span className={GRADIENT}>isn't answering</span></>;
+    case "leads":
+      return <>Stop letting interested visitors{" "}<span className={GRADIENT}>leave quietly</span></>;
+    default:
+      return <>Turn your website into your best{" "}<span className={GRADIENT}>sales associate</span></>;
+  }
+}
+
 function Hero({ onOpenVideo, onOpenDemo, variant, setVariant }) {
   const content = VARIANT_CONTENT[variant] || VARIANT_CONTENT.default;
 
@@ -885,13 +928,7 @@ function Hero({ onOpenVideo, onOpenDemo, variant, setVariant }) {
               transition={{ duration: 0.3 }}
               className="text-5xl sm:text-6xl font-semibold tracking-tight text-balance"
             >
-              {variant === "default" ? (
-                <>Turn your website into your{" "}
-                  <span className="bg-gradient-to-r from-indigo-500 via-violet-500 to-fuchsia-500 bg-clip-text text-transparent">
-                    best sales associate
-                  </span>
-                </>
-              ) : content.headline}
+              {renderHeadline(variant)}
             </motion.h1>
           </AnimatePresence>
 
@@ -972,15 +1009,6 @@ function Hero({ onOpenVideo, onOpenDemo, variant, setVariant }) {
           </div>
         </div>
 
-        {/* Scroll indicator */}
-        <div className="flex justify-center mt-10">
-          <motion.div
-            animate={{ y: [0, 6, 0] }}
-            transition={{ repeat: Infinity, duration: 1.6, ease: "easeInOut" }}
-          >
-            <ChevronDown className="h-6 w-6 text-black/25 dark:text-white/25" />
-          </motion.div>
-        </div>
       </div>
     </section>
   );
@@ -991,7 +1019,7 @@ function Problem({ variant }) {
   const content = VARIANT_CONTENT[variant] || VARIANT_CONTENT.default;
   return (
     <section className="py-20 border-t border-black/5 dark:border-white/5">
-      <div className="mx-auto max-w-6xl px-6">
+      <div className="mx-auto max-w-6xl px-6 text-center">
         <AnimatePresence mode="wait">
           <motion.div
             key={content.problemHeading}
@@ -1003,12 +1031,30 @@ function Problem({ variant }) {
             <p className="text-sm font-semibold text-fuchsia-600 uppercase tracking-widest mb-3">
               Sound familiar?
             </p>
-            <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight text-balance">
+            <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight text-balance max-w-3xl mx-auto">
               {content.problemHeading}
             </h2>
-            <p className="mt-4 text-lg text-black/70 dark:text-white/70 max-w-2xl">
+            <p className="mt-4 text-lg text-black/70 dark:text-white/70 max-w-2xl mx-auto">
               {content.problemBody}
             </p>
+            {content.problemPoints && (
+              <div className="mt-10 grid grid-cols-1 sm:grid-cols-3 gap-5 text-left">
+                {content.problemPoints.map((pt) => (
+                  <div
+                    key={pt.label}
+                    className="rounded-2xl border border-black/8 dark:border-white/8 bg-white/60 dark:bg-white/5 p-6 shadow-sm"
+                  >
+                    <div className="flex items-center gap-3 mb-3">
+                      <div className="p-2 rounded-xl bg-red-50 dark:bg-red-900/20 text-red-500 shrink-0">
+                        <pt.Icon className="h-4 w-4" />
+                      </div>
+                      <h3 className="font-semibold text-sm">{pt.label}</h3>
+                    </div>
+                    <p className="text-sm text-black/60 dark:text-white/60 leading-relaxed">{pt.desc}</p>
+                  </div>
+                ))}
+              </div>
+            )}
           </motion.div>
         </AnimatePresence>
       </div>
@@ -2262,6 +2308,7 @@ export default function HomePage() {
         onClose={() => setIsVideoOpen(false)}
         youtube="https://www.youtube.com/watch?v=RKqGC3CVZd0"
       />
+      <ScrollPreview sections={PREVIEW_SECTIONS} label="Next up" />
     </div>
   );
 }

@@ -12,6 +12,10 @@ import BetterSearch from "./pages/BetterSearch.jsx";
 import LeadCapture from "./pages/LeadCapture.jsx";
 import CustomActions from "./pages/CustomActions.jsx";
 import KnowledgeBase from "./pages/KnowledgeBase.jsx";
+import CustomersIndex from "./pages/customers/index.jsx";
+import LuccheseCustomer from "./pages/customers/Lucchese.jsx";
+import UNTUCKitCustomer from "./pages/customers/UNTUCKit.jsx";
+import KilteCustomer from "./pages/customers/Kilte.jsx";
 import Pricing from "./pages/Pricing.jsx";
 import SearchEngineLanding from "./pages/landing/SearchEngineLanding.jsx";
 import AIAssistantLanding from "./pages/landing/AIAssistantLanding.jsx";
@@ -48,6 +52,10 @@ function App() {
         <Route path="/lead-capture" element={<LeadCapture />} />
         <Route path="/custom-actions" element={<CustomActions />} />
         <Route path="/knowledge-base" element={<KnowledgeBase />} />
+        <Route path="/customers" element={<CustomersIndex />} />
+        <Route path="/customers/lucchese" element={<LuccheseCustomer />} />
+        <Route path="/customers/untuckit" element={<UNTUCKitCustomer />} />
+        <Route path="/customers/kilte" element={<KilteCustomer />} />
         <Route path="/terms" element={<Terms />} />
         <Route path="/privacy" element={<Privacy />} />
         <Route path="/pricing" element={<Pricing />} />

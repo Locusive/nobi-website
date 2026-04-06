@@ -11,6 +11,82 @@ const fadeUp = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.55, ease: "easeOut" } },
 };
 
+const SearchBar = ({ query }) => (
+  <div className="flex items-center gap-2 rounded-lg border border-slate-200 bg-slate-50 px-3 py-2">
+    <svg className="w-3.5 h-3.5 text-slate-400 shrink-0" fill="none" viewBox="0 0 16 16">
+      <circle cx="6" cy="6" r="4.5" stroke="currentColor" strokeWidth="1.5"/>
+      <path d="M10 10l3 3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+    </svg>
+    <span className="text-xs text-slate-500 font-mono">{query}</span>
+  </div>
+);
+
+// SVG clothing silhouettes — renders inside a colored gradient container
+function ShirtSVG({ variant = "buttondown", className = "" }) {
+  if (variant === "tshirt") return (
+    <svg viewBox="0 0 32 40" fill="currentColor" className={className} aria-hidden>
+      <path d="M10,4 C12,9 20,9 22,4 L29,8 L27,16 L23,14 L23,38 L9,38 L9,14 L5,16 L3,8Z" />
+    </svg>
+  );
+  if (variant === "vest") return (
+    <svg viewBox="0 0 28 40" fill="currentColor" className={className} aria-hidden>
+      <path d="M9,2 L14,14 L19,2 L24,6 L23,38 L5,38 L4,6Z" />
+    </svg>
+  );
+  if (variant === "chino") return (
+    <svg viewBox="0 0 28 40" fill="currentColor" className={className} aria-hidden>
+      <rect x="5" y="2" width="18" height="10" rx="1.5" />
+      <path d="M5,12 L9,38 L14,38 L14,24 L14,38 L19,38 L23,12Z" />
+    </svg>
+  );
+  // buttondown — pointed collar, button placeholders
+  return (
+    <svg viewBox="0 0 32 40" fill="currentColor" className={className} aria-hidden>
+      <path d="M11,3 L16,11 L21,3 L29,7 L27,15 L23,13 L23,38 L9,38 L9,13 L5,15 L3,7Z" />
+      <circle cx="16" cy="15" r="0.75" fill="rgba(0,0,0,0.3)" />
+      <circle cx="16" cy="19" r="0.75" fill="rgba(0,0,0,0.3)" />
+      <circle cx="16" cy="23" r="0.75" fill="rgba(0,0,0,0.3)" />
+    </svg>
+  );
+}
+
+// Mini product card for grid layouts (tall image + name + price below)
+function ProductCard({ name, price, gradient, variant = "buttondown", badge, badgeRed = false, faded = false }) {
+  return (
+    <div className={`rounded-xl overflow-hidden border ${faded ? "border-slate-100 opacity-60" : badge && !badgeRed ? "border-emerald-200 ring-2 ring-emerald-200" : "border-slate-200"}`}>
+      <div className={`aspect-[3/4] bg-gradient-to-br ${gradient} relative overflow-hidden flex items-center justify-center`}>
+        <ShirtSVG variant={variant} className="absolute inset-0 w-full h-full p-3 text-white opacity-20" />
+        {badge && (
+          <span className={`absolute top-1.5 right-1.5 text-[8px] font-bold px-1.5 py-0.5 rounded-full ${badgeRed ? "text-white bg-red-500" : "text-white bg-emerald-500"}`}>
+            {badge}
+          </span>
+        )}
+      </div>
+      <div className="bg-white px-1.5 py-1.5 space-y-0.5">
+        <div className="text-[10px] font-semibold text-slate-800 leading-tight truncate">{name}</div>
+        <div className="text-[9px] text-slate-400">{price}</div>
+      </div>
+    </div>
+  );
+}
+
+// List row with shirt thumbnail — for the rankings illustration
+function ResultRow({ pos, name, sub, gradient, variant = "buttondown", badge, isWrong = false, highlight = false }) {
+  return (
+    <div className={`flex items-center gap-3 px-3 py-2.5 rounded-xl ${highlight ? "bg-emerald-50 ring-2 ring-emerald-200" : isWrong ? "bg-red-50 ring-1 ring-red-100" : "bg-slate-50"}`}>
+      <span className={`text-xs font-mono w-4 shrink-0 font-bold ${highlight ? "text-emerald-600" : isWrong ? "text-red-500" : "text-slate-400"}`}>{pos}</span>
+      <div className={`w-8 h-10 rounded-lg bg-gradient-to-br ${gradient} shrink-0 relative overflow-hidden border ${isWrong ? "border-slate-300" : highlight ? "border-emerald-200" : "border-slate-200"}`}>
+        <ShirtSVG variant={variant} className={`absolute inset-0 w-full h-full p-0.5 opacity-40 ${isWrong ? "text-slate-500" : highlight ? "text-emerald-600" : "text-slate-500"}`} />
+      </div>
+      <div className="flex-1 min-w-0 space-y-0.5">
+        <div className={`text-xs font-semibold truncate ${highlight ? "text-emerald-900" : "text-slate-700"}`}>{name}</div>
+        <div className={`text-[11px] ${isWrong ? "text-red-500 font-medium" : highlight ? "text-emerald-600" : "text-slate-400"}`}>{sub}</div>
+      </div>
+      {badge && <span className="text-[10px] font-bold text-emerald-600 bg-emerald-100 px-2 py-1 rounded-full shrink-0">{badge}</span>}
+    </div>
+  );
+}
+
 function StatCallout({ value, label }) {
   return (
     <span className="inline-flex flex-col items-center bg-violet-50 border border-violet-200 rounded-xl px-3 py-1.5 mx-1 align-middle">
@@ -40,7 +116,7 @@ export default function UNTUCKitCustomer() {
               <div className="flex items-center gap-4">
                 <img src="/media/logos/untuckit.svg" alt="UNTUCKit" className="h-5 w-auto" />
                 <span className="text-sm text-slate-400">×</span>
-                <span className="text-sm font-semibold text-slate-500">Nobi</span>
+                <img src="/media/nobi-logo.png" alt="Nobi" className="h-4 w-auto opacity-60" />
               </div>
               <div className="space-y-4">
                 <p className="text-sm font-semibold tracking-[0.2em] text-fuchsia-600 uppercase">Customer story</p>
@@ -113,62 +189,45 @@ export default function UNTUCKitCustomer() {
                 </p>
               </div>
               <div className="grid sm:grid-cols-2 gap-5 select-none">
+                {/* Before */}
                 <div className="rounded-2xl border border-red-100 bg-white shadow-[0_18px_46px_-24px_rgba(15,23,42,0.18)] overflow-hidden">
                   <div className="bg-red-50 border-b border-red-100 px-5 py-3 flex items-center gap-2">
                     <span className="h-2.5 w-2.5 rounded-full bg-red-400 shrink-0" />
                     <span className="text-sm font-semibold text-red-700">Shopify keyword search</span>
                   </div>
                   <div className="p-4 space-y-3">
-                    <div className="flex items-center gap-2 rounded-lg border border-slate-200 bg-slate-50 px-3 py-2">
-                      <svg className="w-3.5 h-3.5 text-slate-400 shrink-0" fill="none" viewBox="0 0 16 16"><circle cx="6" cy="6" r="4.5" stroke="currentColor" strokeWidth="1.5"/><path d="M10 10l3 3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/></svg>
-                      <span className="text-xs text-slate-500 font-mono">smiths sirt</span>
-                    </div>
-                    <div className="py-5 text-center space-y-2 border border-dashed border-slate-200 rounded-xl bg-slate-50">
-                      <div className="text-3xl">∅</div>
-                      <div className="text-sm font-medium text-slate-600">No results for "smiths sirt"</div>
-                      <div className="text-xs text-slate-400">Showing bestsellers instead</div>
+                    <SearchBar query="smiths sirt" />
+                    <div className="py-4 text-center space-y-1.5 border border-dashed border-red-100 rounded-xl bg-red-50/50">
+                      <div className="text-2xl font-light text-red-300">∅</div>
+                      <div className="text-xs font-semibold text-red-600">No results for "smiths sirt"</div>
+                      <div className="text-[11px] text-slate-400">Showing top sellers instead</div>
                     </div>
                     <div className="grid grid-cols-3 gap-2">
-                      {["from-slate-100 to-slate-200", "from-slate-100 to-slate-200", "from-slate-100 to-slate-200"].map((c, i) => (
-                        <div key={i} className={`aspect-[3/4] rounded-xl bg-gradient-to-br ${c}`} />
-                      ))}
+                      <ProductCard name="Polo Oxford" price="$79" gradient="from-slate-200 to-slate-300" variant="buttondown" faded />
+                      <ProductCard name="Henley Shirt" price="$65" gradient="from-zinc-200 to-zinc-300" variant="tshirt" faded />
+                      <ProductCard name="Canvas Chino" price="$89" gradient="from-stone-200 to-stone-300" variant="chino" faded />
                     </div>
-                    <p className="text-xs text-center text-red-600 font-medium">Smithson Shirt not found. Sale lost.</p>
+                    <p className="text-xs text-center text-red-600 font-semibold">Smithson Shirt not found. Sale lost.</p>
                   </div>
                 </div>
+                {/* After */}
                 <div className="rounded-2xl border border-emerald-100 bg-white shadow-[0_18px_46px_-24px_rgba(15,23,42,0.18)] overflow-hidden">
                   <div className="bg-emerald-50 border-b border-emerald-100 px-5 py-3 flex items-center gap-2">
                     <span className="h-2.5 w-2.5 rounded-full bg-emerald-400 shrink-0" />
                     <span className="text-sm font-semibold text-emerald-700">Nobi semantic search</span>
                   </div>
                   <div className="p-4 space-y-3">
-                    <div className="flex items-center gap-2 rounded-lg border border-slate-200 bg-slate-50 px-3 py-2">
-                      <svg className="w-3.5 h-3.5 text-slate-400 shrink-0" fill="none" viewBox="0 0 16 16"><circle cx="6" cy="6" r="4.5" stroke="currentColor" strokeWidth="1.5"/><path d="M10 10l3 3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/></svg>
-                      <span className="text-xs text-slate-500 font-mono">smiths sirt</span>
-                    </div>
+                    <SearchBar query="smiths sirt" />
                     <div className="flex items-center gap-2 rounded-lg bg-violet-50 border border-violet-100 px-3 py-2">
                       <svg className="w-3.5 h-3.5 text-violet-400 shrink-0" fill="none" viewBox="0 0 16 16"><path d="M8 2l1.5 3 3.5.5-2.5 2.5.6 3.5L8 10l-3.1 1.5.6-3.5L3 5.5 6.5 5z" stroke="currentColor" strokeWidth="1.2" strokeLinejoin="round"/></svg>
                       <span className="text-xs text-violet-700">Did you mean: <span className="font-semibold">Smithson Shirt</span>?</span>
                     </div>
-                    <div className="flex items-center gap-3 px-3 py-2.5 rounded-xl bg-emerald-50 ring-2 ring-emerald-200">
-                      <span className="text-xs font-mono font-bold text-emerald-600 w-4 shrink-0">1</span>
-                      <div className="w-8 h-10 rounded-lg bg-gradient-to-br from-sky-300 to-sky-500 shrink-0" />
-                      <div className="flex-1 min-w-0 space-y-1">
-                        <div className="text-xs font-semibold text-emerald-900">Smithson Shirt</div>
-                        <div className="text-[11px] text-emerald-600">Classic Fit</div>
-                      </div>
-                      <span className="text-[10px] font-bold text-emerald-600 bg-emerald-100 px-2 py-1 rounded-full shrink-0">Purchased</span>
+                    <div className="grid grid-cols-3 gap-2">
+                      <ProductCard name="Smithson Shirt" price="$98" gradient="from-sky-300 to-sky-500" variant="buttondown" badge="Purchased" />
+                      <ProductCard name="Smithson Slim" price="$98" gradient="from-sky-400 to-indigo-500" variant="buttondown" faded />
+                      <ProductCard name="Hartford Classic" price="$86" gradient="from-slate-300 to-slate-500" variant="buttondown" faded />
                     </div>
-                    {[2, 3].map((pos) => (
-                      <div key={pos} className="flex items-center gap-3 px-3 py-2.5 rounded-xl bg-slate-50">
-                        <span className="text-xs font-mono text-slate-400 w-4 shrink-0">{pos}</span>
-                        <div className="w-8 h-10 rounded-lg bg-slate-200 shrink-0" />
-                        <div className="flex-1 min-w-0 space-y-1.5">
-                          <div className="h-2 bg-slate-200 rounded-full w-2/3" />
-                          <div className="h-1.5 bg-slate-100 rounded-full w-1/2" />
-                        </div>
-                      </div>
-                    ))}
+                    <p className="text-xs text-center text-emerald-600 font-semibold">Smithson Shirt surfaced. Sale saved.</p>
                   </div>
                 </div>
               </div>
@@ -187,78 +246,32 @@ export default function UNTUCKitCustomer() {
                 </p>
               </div>
               <div className="grid sm:grid-cols-2 gap-5 select-none">
+                {/* Before */}
                 <div className="rounded-2xl border border-red-100 bg-white shadow-[0_18px_46px_-24px_rgba(15,23,42,0.18)] overflow-hidden">
                   <div className="bg-red-50 border-b border-red-100 px-5 py-3 flex items-center gap-2">
                     <span className="h-2.5 w-2.5 rounded-full bg-red-400 shrink-0" />
                     <span className="text-sm font-semibold text-red-700">Shopify keyword search</span>
                   </div>
                   <div className="p-4 space-y-2">
-                    <div className="flex items-center gap-2 rounded-lg border border-slate-200 bg-slate-50 px-3 py-2 mb-3">
-                      <svg className="w-3.5 h-3.5 text-slate-400 shrink-0" fill="none" viewBox="0 0 16 16"><circle cx="6" cy="6" r="4.5" stroke="currentColor" strokeWidth="1.5"/><path d="M10 10l3 3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/></svg>
-                      <span className="text-xs text-slate-500 font-mono">white button down</span>
-                    </div>
-                    {/* Position 1: t-shirt (wrong type) */}
-                    <div className="flex items-center gap-3 px-3 py-2.5 rounded-xl bg-red-50 ring-1 ring-red-200">
-                      <span className="text-xs font-mono font-bold text-red-500 w-4 shrink-0">1</span>
-                      <div className="w-8 h-10 rounded-lg bg-gradient-to-br from-slate-100 to-slate-200 shrink-0 flex items-center justify-center">
-                        <div className="w-5 h-6 rounded-sm bg-white border border-slate-300" />
-                      </div>
-                      <div className="flex-1 min-w-0 space-y-1">
-                        <div className="text-xs font-semibold text-slate-700">Classic Crew T-Shirt</div>
-                        <div className="text-[11px] text-red-500 font-medium">Not a button-down</div>
-                      </div>
-                    </div>
-                    {[2, 3, 4].map((pos) => (
-                      <div key={pos} className="flex items-center gap-3 px-3 py-2.5 rounded-xl bg-slate-50">
-                        <span className="text-xs font-mono text-slate-400 w-4 shrink-0">{pos}</span>
-                        <div className="w-8 h-10 rounded-lg bg-slate-200 shrink-0" />
-                        <div className="flex-1 min-w-0 space-y-1.5">
-                          <div className="h-2 bg-slate-200 rounded-full w-3/4" />
-                          <div className="h-1.5 bg-slate-100 rounded-full w-1/2" />
-                        </div>
-                      </div>
-                    ))}
+                    <SearchBar query="white button down" />
+                    <ResultRow pos={1} name="Classic Crew T-Shirt" sub="Not a button-down" gradient="from-slate-100 to-slate-200" variant="tshirt" isWrong />
+                    <ResultRow pos={2} name="Weekend Henley" sub="Pullover, no collar" gradient="from-zinc-100 to-zinc-200" variant="tshirt" />
+                    <ResultRow pos={3} name="Slub Cotton Tee" sub="Crew neck" gradient="from-stone-100 to-stone-200" variant="tshirt" />
+                    <ResultRow pos={4} name="Essential Polo" sub="Button placket" gradient="from-slate-100 to-slate-200" variant="tshirt" />
                   </div>
                 </div>
+                {/* After */}
                 <div className="rounded-2xl border border-emerald-100 bg-white shadow-[0_18px_46px_-24px_rgba(15,23,42,0.18)] overflow-hidden">
                   <div className="bg-emerald-50 border-b border-emerald-100 px-5 py-3 flex items-center gap-2">
                     <span className="h-2.5 w-2.5 rounded-full bg-emerald-400 shrink-0" />
                     <span className="text-sm font-semibold text-emerald-700">Nobi semantic search</span>
                   </div>
                   <div className="p-4 space-y-2">
-                    <div className="flex items-center gap-2 rounded-lg border border-slate-200 bg-slate-50 px-3 py-2 mb-3">
-                      <svg className="w-3.5 h-3.5 text-slate-400 shrink-0" fill="none" viewBox="0 0 16 16"><circle cx="6" cy="6" r="4.5" stroke="currentColor" strokeWidth="1.5"/><path d="M10 10l3 3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/></svg>
-                      <span className="text-xs text-slate-500 font-mono">white button down</span>
-                    </div>
-                    {/* Position 1: Gironde (correct, purchased) */}
-                    <div className="flex items-center gap-3 px-3 py-2.5 rounded-xl bg-emerald-50 ring-2 ring-emerald-200">
-                      <span className="text-xs font-mono font-bold text-emerald-600 w-4 shrink-0">1</span>
-                      <div className="w-8 h-10 rounded-lg bg-gradient-to-br from-slate-50 to-slate-200 shrink-0 border border-slate-300 flex items-center justify-center">
-                        <div className="w-4 h-6 rounded-sm bg-white border border-slate-300 relative">
-                          <div className="absolute top-1 left-1/2 -translate-x-1/2 w-0.5 h-3 bg-slate-400 rounded-full" />
-                        </div>
-                      </div>
-                      <div className="flex-1 min-w-0 space-y-1">
-                        <div className="text-xs font-semibold text-emerald-900">Gironde Shirt</div>
-                        <div className="text-[11px] text-emerald-600">White, Button-Down</div>
-                      </div>
-                      <span className="text-[10px] font-bold text-emerald-600 bg-emerald-100 px-2 py-1 rounded-full shrink-0">Purchased</span>
-                    </div>
-                    {/* Positions 2-4: also button-downs */}
-                    {[
-                      { pos: 2, name: "Hartford Shirt", sub: "White, Classic Fit" },
-                      { pos: 3, name: "Burford Oxford", sub: "White, Slim Fit" },
-                      { pos: 4, name: "Carmel Shirt", sub: "Off-White, Relaxed" },
-                    ].map((item) => (
-                      <div key={item.pos} className="flex items-center gap-3 px-3 py-2.5 rounded-xl bg-slate-50">
-                        <span className="text-xs font-mono text-slate-400 w-4 shrink-0">{item.pos}</span>
-                        <div className="w-8 h-10 rounded-lg bg-gradient-to-br from-slate-50 to-slate-200 shrink-0 border border-slate-200" />
-                        <div className="flex-1 min-w-0 space-y-1">
-                          <div className="text-xs text-slate-600">{item.name}</div>
-                          <div className="text-[11px] text-slate-400">{item.sub}</div>
-                        </div>
-                      </div>
-                    ))}
+                    <SearchBar query="white button down" />
+                    <ResultRow pos={1} name="Gironde Shirt" sub="White, Button-Down" gradient="from-slate-50 to-slate-200" variant="buttondown" badge="Purchased" highlight />
+                    <ResultRow pos={2} name="Hartford Shirt" sub="White, Classic Fit" gradient="from-slate-100 to-slate-200" variant="buttondown" />
+                    <ResultRow pos={3} name="Burford Oxford" sub="White, Slim Fit" gradient="from-zinc-50 to-zinc-200" variant="buttondown" />
+                    <ResultRow pos={4} name="Carmel Shirt" sub="Off-White, Relaxed" gradient="from-stone-50 to-stone-200" variant="buttondown" />
                   </div>
                 </div>
               </div>
@@ -277,60 +290,42 @@ export default function UNTUCKitCustomer() {
                 </p>
               </div>
               <div className="grid sm:grid-cols-2 gap-5 select-none">
+                {/* Before */}
                 <div className="rounded-2xl border border-red-100 bg-white shadow-[0_18px_46px_-24px_rgba(15,23,42,0.18)] overflow-hidden">
                   <div className="bg-red-50 border-b border-red-100 px-5 py-3 flex items-center gap-2">
                     <span className="h-2.5 w-2.5 rounded-full bg-red-400 shrink-0" />
                     <span className="text-sm font-semibold text-red-700">Shopify keyword search</span>
                   </div>
                   <div className="p-4 space-y-3">
-                    <div className="flex items-center gap-2 rounded-lg border border-slate-200 bg-slate-50 px-3 py-2">
-                      <svg className="w-3.5 h-3.5 text-slate-400 shrink-0" fill="none" viewBox="0 0 16 16"><circle cx="6" cy="6" r="4.5" stroke="currentColor" strokeWidth="1.5"/><path d="M10 10l3 3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/></svg>
-                      <span className="text-xs text-slate-500 font-mono">navy vest</span>
-                    </div>
+                    <SearchBar query="navy vest" />
                     <div className="grid grid-cols-3 gap-2">
-                      {[
-                        { label: "Crew Tee", color: "from-slate-200 to-slate-300" },
-                        { label: "V-Neck Tee", color: "from-slate-200 to-slate-300" },
-                        { label: "Polo Shirt", color: "from-slate-200 to-slate-300" },
-                      ].map((item) => (
-                        <div key={item.label} className="space-y-1.5">
-                          <div className={`aspect-[3/4] rounded-xl bg-gradient-to-br ${item.color}`} />
-                          <div className="text-[10px] text-center text-slate-500">{item.label}</div>
-                        </div>
-                      ))}
+                      <ProductCard name="Crew Tee" price="$54" gradient="from-slate-200 to-slate-400" variant="tshirt" faded />
+                      <ProductCard name="V-Neck Tee" price="$54" gradient="from-zinc-300 to-zinc-500" variant="tshirt" faded />
+                      <ProductCard name="Polo Shirt" price="$79" gradient="from-slate-300 to-slate-500" variant="tshirt" faded />
                     </div>
-                    <div className="rounded-lg bg-red-50 border border-red-100 px-3 py-2 text-xs text-red-600 text-center font-medium">
+                    <div className="rounded-lg bg-red-50 border border-red-100 px-3 py-2 text-xs text-red-600 text-center font-semibold">
                       No vests shown at all
                     </div>
                   </div>
                 </div>
+                {/* After */}
                 <div className="rounded-2xl border border-emerald-100 bg-white shadow-[0_18px_46px_-24px_rgba(15,23,42,0.18)] overflow-hidden">
                   <div className="bg-emerald-50 border-b border-emerald-100 px-5 py-3 flex items-center gap-2">
                     <span className="h-2.5 w-2.5 rounded-full bg-emerald-400 shrink-0" />
                     <span className="text-sm font-semibold text-emerald-700">Nobi semantic search</span>
                   </div>
                   <div className="p-4 space-y-3">
-                    <div className="flex items-center gap-2 rounded-lg border border-slate-200 bg-slate-50 px-3 py-2">
-                      <svg className="w-3.5 h-3.5 text-slate-400 shrink-0" fill="none" viewBox="0 0 16 16"><circle cx="6" cy="6" r="4.5" stroke="currentColor" strokeWidth="1.5"/><path d="M10 10l3 3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/></svg>
-                      <span className="text-xs text-slate-500 font-mono">navy vest</span>
-                    </div>
+                    <SearchBar query="navy vest" />
                     <div className="flex items-start gap-2 rounded-lg bg-amber-50 border border-amber-100 px-3 py-2">
                       <svg className="w-3.5 h-3.5 text-amber-500 mt-0.5 shrink-0" fill="none" viewBox="0 0 16 16"><path d="M8 2l1.5 3 3.5.5-2.5 2.5.6 3.5L8 10l-3.1 1.5.6-3.5L3 5.5 6.5 5z" stroke="currentColor" strokeWidth="1.2" strokeLinejoin="round"/></svg>
                       <span className="text-xs text-amber-700 leading-snug">No navy vests available. Showing vests in other colors and navy tops.</span>
                     </div>
                     <div className="grid grid-cols-3 gap-2">
-                      {[
-                        { label: "Vest, Olive", color: "from-green-600 to-green-800" },
-                        { label: "Vest, Black", color: "from-zinc-600 to-zinc-900" },
-                        { label: "Navy Chino", color: "from-blue-700 to-blue-900" },
-                      ].map((item) => (
-                        <div key={item.label} className="space-y-1.5">
-                          <div className={`aspect-[3/4] rounded-xl bg-gradient-to-br ${item.color}`} />
-                          <div className="text-[10px] text-center text-slate-500 leading-tight">{item.label}</div>
-                        </div>
-                      ))}
+                      <ProductCard name="Vest, Olive" price="$110" gradient="from-green-600 to-green-800" variant="vest" />
+                      <ProductCard name="Vest, Black" price="$110" gradient="from-zinc-600 to-zinc-900" variant="vest" />
+                      <ProductCard name="Navy Chino" price="$98" gradient="from-blue-700 to-blue-900" variant="chino" />
                     </div>
-                    <div className="rounded-lg bg-emerald-50 border border-emerald-100 px-3 py-2 text-xs text-emerald-700 text-center font-medium">
+                    <div className="rounded-lg bg-emerald-50 border border-emerald-100 px-3 py-2 text-xs text-emerald-700 text-center font-semibold">
                       Shopper stayed on site
                     </div>
                   </div>
@@ -374,7 +369,7 @@ export default function UNTUCKitCustomer() {
 
               {/* Panel 1: Query channel report */}
               <div className="rounded-2xl border border-white/10 bg-white/5 overflow-hidden">
-                <div className="aspect-[16/9] bg-[#0f0c1d] p-5 flex flex-col justify-between">
+                <div className="aspect-[16/9] bg-[#1e1847] p-5 flex flex-col justify-between">
                   <div className="flex items-center justify-between mb-1">
                     <div className="text-xs font-semibold text-purple-300 uppercase tracking-wider">Queries by Channel</div>
                     <div className="text-[10px] text-white/30 font-mono">Last 30 days</div>
@@ -409,7 +404,7 @@ export default function UNTUCKitCustomer() {
 
               {/* Panel 2: Hooks API */}
               <div className="rounded-2xl border border-white/10 bg-white/5 overflow-hidden">
-                <div className="aspect-[16/9] bg-[#0f0c1d] flex overflow-hidden">
+                <div className="aspect-[16/9] bg-[#1e1847] flex overflow-hidden">
                   {/* Code editor */}
                   <div className="flex-1 p-4 border-r border-white/8 flex flex-col min-w-0">
                     <div className="flex items-center gap-1.5 mb-3">
@@ -455,7 +450,7 @@ export default function UNTUCKitCustomer() {
 
               {/* Panel 3: Weekly insights */}
               <div className="rounded-2xl border border-white/10 bg-white/5 overflow-hidden">
-                <div className="aspect-[16/9] bg-[#0f0c1d] p-5 flex flex-col gap-3">
+                <div className="aspect-[16/9] bg-[#1e1847] p-5 flex flex-col gap-3">
                   <div className="flex items-center justify-between">
                     <div className="text-xs font-semibold text-purple-300 uppercase tracking-wider">Weekly Insights</div>
                     <div className="text-[10px] text-white/30 font-mono">Apr 1 – 7</div>
@@ -490,7 +485,7 @@ export default function UNTUCKitCustomer() {
 
               {/* Panel 4: Search history timeline */}
               <div className="rounded-2xl border border-white/10 bg-white/5 overflow-hidden">
-                <div className="aspect-[16/9] bg-[#0f0c1d] p-5 flex flex-col gap-3">
+                <div className="aspect-[16/9] bg-[#1e1847] p-5 flex flex-col gap-3">
                   <div className="text-xs font-semibold text-purple-300 uppercase tracking-wider">Search History</div>
                   <div className="flex-1 relative">
                     {/* SVG line chart */}

@@ -1,16 +1,14 @@
 import React, { useState } from "react";
-import { BookOpen, BarChart3, ChevronDown, Globe, Heart, Menu, Search as SearchIcon, SlidersHorizontal, X, ExternalLink, Sparkles, Zap } from "lucide-react";
+import { BookOpen, ChevronDown, Menu, Search as SearchIcon, UserPlus, X, ExternalLink, Sparkles, Zap } from "lucide-react";
 import { useDemoForm } from "../context/DemoFormContext";
 import { trackDemoFormOpened } from "../utils/eventTracker";
 import { getSignupUrl } from "../utils/signupUrl";
 
 const FEATURES = [
-  { label: "Search",          href: "/why-nobi/better-search", desc: "Semantic search that understands natural language",      Icon: SearchIcon },
-  { label: "Lead capture",    href: "/lead-capture",           desc: "Collect contact info through conversation",              Icon: Heart },
-  { label: "Custom actions",  href: "/custom-actions",         desc: "Trigger any workflow from inside the chat",              Icon: Zap },
-  { label: "Knowledge base",  href: "/knowledge-base",         desc: "Answers from your docs, cited and fact-checked",         Icon: BookOpen },
-  { label: "Industries",      href: "/industries",             desc: "Works for ecommerce, services, real estate, and more",   Icon: Globe },
-  { label: "Merchandising",   href: "/merchandising",          desc: "Boost, bury, pin, and hide search results",              Icon: SlidersHorizontal },
+  { label: "Search",            href: "/why-nobi/better-search", desc: "Semantic search that understands natural language",  Icon: SearchIcon },
+  { label: "Lead capture",      href: "/lead-capture",           desc: "Collect contact info through conversation",          Icon: UserPlus },
+  { label: "Custom actions",    href: "/custom-actions",         desc: "Trigger any workflow from inside the chat",          Icon: Zap },
+  { label: "Accurate answers",  href: "/knowledge-base",         desc: "Answers from your docs, cited and verified",         Icon: BookOpen },
 ];
 
 export default function Nav() {

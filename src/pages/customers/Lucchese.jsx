@@ -114,29 +114,120 @@ export default function LuccheseCustomer() {
               <h2 className="text-3xl sm:text-4xl font-semibold text-slate-900">Three things that moved the needle</h2>
             </div>
 
-            {[
-              {
-                number: "01",
-                title: "Always show results",
-                body: "Keyword search returns nothing when a query doesn't exactly match product copy. Nobi always surfaces the closest relevant products instead. When a shopper searched \"Terlingua\" (a West Texas town), Shopify returned zero results. Nobi used its knowledge base to figure out what the shopper was going for and returned the Walter boot and others with a matching look and feel. The shopper added to cart.",
-              },
-              {
-                number: "02",
-                title: "Better rankings with RAG",
-                body: "Standard search ranks purely by keyword match frequency. Nobi uses Retrieval Augmented Generation to rank by actual relevance. For the query \"Olive,\" Shopify buried the Dante Olive Chocolate boot past 16 results, requiring shoppers to click \"Load More.\" Nobi surfaced it on row two. The shopper bought it.",
-              },
-              {
-                number: "03",
-                title: "Semantic search",
-                body: "Shoppers don't always use the same words you used to describe your products. A search for \"card holder\" on Shopify only returned tote bags that happened to have card slots, missing Lucchese's entire wallet and card case collection. Nobi understood what the shopper meant and surfaced wallets, card cases, and bifold options. The shopper bought a wallet in Ostrich Cognac.",
-              },
-            ].map((item) => (
-              <div key={item.number} className="max-w-2xl pb-14 border-b border-slate-200 last:border-0 last:pb-0 space-y-4">
-                <div className="text-4xl font-bold text-slate-200">{item.number}</div>
-                <h3 className="text-xl font-semibold text-slate-900">{item.title}</h3>
-                <p className="text-base text-slate-600 leading-relaxed">{item.body}</p>
+            {/* 01 — Always show results */}
+            <div className="grid md:grid-cols-[1fr_260px] gap-10 items-center pb-14 border-b border-slate-200">
+              <div className="space-y-4">
+                <div className="text-4xl font-bold text-slate-200">01</div>
+                <h3 className="text-xl font-semibold text-slate-900">Always show results</h3>
+                <p className="text-base text-slate-600 leading-relaxed">
+                  Keyword search returns nothing when a query doesn't exactly match product copy. Nobi always surfaces the closest relevant products instead. When a shopper searched "Terlingua" (a West Texas town), Shopify returned zero results. Nobi used its knowledge base to figure out what the shopper was going for and returned the Walter boot and others with a matching look and feel. The shopper added to cart.
+                </p>
               </div>
-            ))}
+              {/* Illustration: search with results */}
+              <div className="rounded-2xl bg-white border border-slate-200 shadow-[0_4px_20px_-8px_rgba(15,23,42,0.1)] overflow-hidden select-none">
+                <div className="bg-slate-50 px-3 py-2.5 border-b border-slate-100 flex items-center gap-2">
+                  <div className="flex gap-1">
+                    <div className="w-2 h-2 rounded-full bg-slate-200" />
+                    <div className="w-2 h-2 rounded-full bg-slate-200" />
+                    <div className="w-2 h-2 rounded-full bg-slate-200" />
+                  </div>
+                  <div className="flex-1 bg-white rounded-md px-2.5 py-1 flex items-center gap-1.5 border border-slate-200">
+                    <svg className="w-2.5 h-2.5 text-slate-400 shrink-0" fill="none" viewBox="0 0 16 16"><circle cx="6" cy="6" r="4.5" stroke="currentColor" strokeWidth="1.5"/><path d="M10 10l3 3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/></svg>
+                    <span className="text-[11px] text-slate-500 font-mono">Terlingua</span>
+                  </div>
+                </div>
+                <div className="p-2.5 space-y-1.5">
+                  {[
+                    { label: "Walter Boot", sub: "Western Collection", highlight: true, w: "72%" },
+                    { label: "Lone Star", sub: "Heritage Series", highlight: false, w: "55%" },
+                    { label: "El Paso Classic", sub: "Everyday Range", highlight: false, w: "62%" },
+                  ].map((item, i) => (
+                    <div key={i} className={`flex items-center gap-2.5 px-2.5 py-2 rounded-xl ${item.highlight ? "bg-violet-50 ring-1 ring-violet-200" : "bg-slate-50"}`}>
+                      <div className={`w-8 h-8 rounded-lg shrink-0 ${item.highlight ? "bg-gradient-to-br from-amber-300 to-amber-500" : "bg-gradient-to-br from-slate-200 to-slate-300"}`} />
+                      <div className="space-y-1 flex-1 min-w-0">
+                        <div className={`h-2 rounded-full ${item.highlight ? "bg-violet-200" : "bg-slate-200"}`} style={{ width: item.w }} />
+                        <div className="h-1.5 bg-slate-100 rounded-full w-2/5" />
+                      </div>
+                      {item.highlight && <span className="text-[9px] font-bold text-violet-600 bg-violet-100 px-1.5 py-0.5 rounded-full shrink-0">Added</span>}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* 02 — Better rankings */}
+            <div className="grid md:grid-cols-[1fr_260px] gap-10 items-center pb-14 border-b border-slate-200">
+              <div className="space-y-4">
+                <div className="text-4xl font-bold text-slate-200">02</div>
+                <h3 className="text-xl font-semibold text-slate-900">Better rankings with RAG</h3>
+                <p className="text-base text-slate-600 leading-relaxed">
+                  Standard search ranks purely by keyword match frequency. Nobi uses Retrieval Augmented Generation to rank by actual relevance. For the query "Olive," Shopify buried the Dante Olive Chocolate boot past 16 results, requiring shoppers to click "Load More." Nobi surfaced it on row two. The shopper bought it.
+                </p>
+              </div>
+              {/* Illustration: product grid with position 2 highlighted */}
+              <div className="rounded-2xl bg-white border border-slate-200 shadow-[0_4px_20px_-8px_rgba(15,23,42,0.1)] overflow-hidden select-none p-3 space-y-2.5">
+                <div className="flex items-center gap-1.5 pb-2 border-b border-slate-100">
+                  <svg className="w-2.5 h-2.5 text-slate-400 shrink-0" fill="none" viewBox="0 0 16 16"><circle cx="6" cy="6" r="4.5" stroke="currentColor" strokeWidth="1.5"/><path d="M10 10l3 3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/></svg>
+                  <span className="text-[11px] text-slate-500 font-mono">Olive</span>
+                </div>
+                <div className="grid grid-cols-4 gap-1.5">
+                  {Array.from({ length: 8 }, (_, i) => i + 1).map((pos) => (
+                    <div key={pos} className={`aspect-square rounded-xl flex flex-col items-center justify-center gap-0.5 ${pos === 2 ? "bg-violet-50 ring-2 ring-violet-300" : "bg-slate-50"}`}>
+                      {pos === 2 ? (
+                        <>
+                          <div className="w-5 h-6 rounded-md bg-gradient-to-br from-green-300 to-emerald-500" />
+                          <span className="text-[7px] font-bold text-violet-600 leading-none text-center">Dante<br/>Olive</span>
+                        </>
+                      ) : (
+                        <div className="w-5 h-6 rounded-md bg-slate-200" />
+                      )}
+                    </div>
+                  ))}
+                </div>
+                <div className="text-[10px] text-violet-600 font-semibold text-center bg-violet-50 rounded-lg py-1.5">
+                  Dante Olive Chocolate — position 2 → purchased
+                </div>
+              </div>
+            </div>
+
+            {/* 03 — Semantic search */}
+            <div className="grid md:grid-cols-[1fr_260px] gap-10 items-center">
+              <div className="space-y-4">
+                <div className="text-4xl font-bold text-slate-200">03</div>
+                <h3 className="text-xl font-semibold text-slate-900">Semantic search</h3>
+                <p className="text-base text-slate-600 leading-relaxed">
+                  Shoppers don't always use the same words you used to describe your products. A search for "card holder" on Shopify only returned tote bags that happened to have card slots, missing Lucchese's entire wallet and card case collection. Nobi understood what the shopper meant and surfaced wallets, card cases, and bifold options. The shopper bought a wallet in Ostrich Cognac.
+                </p>
+              </div>
+              {/* Illustration: semantic mapping */}
+              <div className="rounded-2xl bg-white border border-slate-200 shadow-[0_4px_20px_-8px_rgba(15,23,42,0.1)] overflow-hidden select-none p-3 space-y-3">
+                <div className="flex items-center gap-1.5 pb-2 border-b border-slate-100">
+                  <svg className="w-2.5 h-2.5 text-slate-400 shrink-0" fill="none" viewBox="0 0 16 16"><circle cx="6" cy="6" r="4.5" stroke="currentColor" strokeWidth="1.5"/><path d="M10 10l3 3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/></svg>
+                  <span className="text-[11px] text-slate-500 font-mono">card holder</span>
+                </div>
+                <div className="space-y-1.5">
+                  <div className="text-[9px] font-semibold text-slate-400 uppercase tracking-widest">Nobi surfaced</div>
+                  <div className="grid grid-cols-3 gap-2">
+                    {[
+                      { label: "Wallet", color: "from-amber-300 to-amber-500" },
+                      { label: "Card Case", color: "from-stone-300 to-stone-500" },
+                      { label: "Bifold", color: "from-slate-300 to-slate-500" },
+                    ].map((item) => (
+                      <div key={item.label} className="space-y-1">
+                        <div className={`aspect-square rounded-xl bg-gradient-to-br ${item.color} flex items-center justify-center`}>
+                          <div className="w-5 h-4 rounded bg-white/30 border border-white/40" />
+                        </div>
+                        <div className="text-[9px] text-center text-slate-500 font-medium">{item.label}</div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+                <div className="text-[10px] text-violet-600 bg-violet-50 rounded-lg px-2 py-1.5 text-center font-semibold">
+                  Ostrich Cognac wallet → purchased
+                </div>
+              </div>
+            </div>
+
           </div>
         </section>
 

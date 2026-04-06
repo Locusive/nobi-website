@@ -34,7 +34,7 @@ export default function KilteCustomer() {
                   <span className={GRADIENT}>21.7%</span>
                 </h1>
                 <p className="text-lg text-slate-600 max-w-2xl leading-relaxed">
-                  Kilte ran a head-to-head comparison between Nobi and Shopify's default search. Nobi converted 21.7% more visitors. They've been on Nobi ever since — and now use it across their entire site.
+                  Kilte ran a head-to-head comparison between Nobi and Shopify's default search. Nobi converted 21.7% more visitors. They've been on Nobi ever since and now use it across their entire site.
                 </p>
               </div>
 
@@ -57,13 +57,13 @@ export default function KilteCustomer() {
               <div className="space-y-4">
                 <p className="text-sm font-semibold uppercase tracking-[0.18em] text-slate-400">About Kilte</p>
                 <p className="text-base text-slate-600 leading-relaxed">
-                  Kilte is a fashion brand selling directly to consumers online. Like most ecommerce brands, their site depends on shoppers being able to find what they're looking for — which made search a critical part of the experience.
+                  Kilte is a fashion brand selling directly to consumers online. Like most ecommerce brands, their site depends on shoppers being able to find what they're looking for, which made search a critical part of the experience.
                 </p>
               </div>
               <div className="space-y-4">
                 <p className="text-sm font-semibold uppercase tracking-[0.18em] text-slate-400">The test</p>
                 <p className="text-base text-slate-600 leading-relaxed">
-                  Kilte ran a straightforward comparison: Shopify default search against Nobi, measured on conversion rate. Nobi won by 21.7%. They didn't need more convincing — they switched and haven't looked back.
+                  Kilte ran a straightforward comparison: Shopify default search against Nobi, measured on conversion rate. Nobi won by 21.7%. They didn't need more convincing. They switched and haven't looked back.
                 </p>
               </div>
             </div>
@@ -83,7 +83,7 @@ export default function KilteCustomer() {
                   },
                   {
                     title: "Help hub for returns",
-                    body: "Kilte launches Nobi from their help hub to handle return questions — giving shoppers fast answers without a support ticket.",
+                    body: "Kilte launches Nobi from their help hub to handle return questions, giving shoppers fast answers without a support ticket.",
                   },
                 ].map((item) => (
                   <div key={item.title} className="rounded-2xl border border-slate-200 bg-white p-6 space-y-3 shadow-[0_8px_24px_-16px_rgba(15,23,42,0.12)]">
@@ -101,7 +101,7 @@ export default function KilteCustomer() {
           <div className="mx-auto max-w-4xl px-6">
             <div className="space-y-8 text-center max-w-2xl mx-auto">
               <div className="space-y-4">
-                <h2 className="text-3xl sm:text-4xl font-semibold">See what Nobi can do for your store</h2>
+                <h2 className="text-3xl sm:text-4xl font-semibold">See what Nobi can do for your brand</h2>
                 <p className="text-lg text-white/70">Set up takes minutes. Results show up in weeks.</p>
               </div>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">

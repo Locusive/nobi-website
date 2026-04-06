@@ -12,26 +12,25 @@ const STORIES = [
     logo: "/media/logos/lucchese.svg",
     name: "Lucchese",
     headline: "33x ROI in 90 days",
-    body: "Lucchese replaced keyword search with Nobi and generated $148k in incremental revenue in the first 90 days — a 21% conversion lift verified in an A/B test.",
+    body: "Lucchese replaced keyword search with Nobi and generated $1M+ in incremental revenue in year one, with a 21% conversion lift verified in an A/B test.",
     stats: [
       { value: "21%", label: "Conversion lift" },
       { value: "33x", label: "ROI" },
-      { value: "$148k", label: "Revenue in 90 days" },
+      { value: "$1M+", label: "Revenue in year one" },
     ],
-    tag: "Search",
   },
   {
     slug: "/customers/untuckit",
     logo: "/media/logos/untuckit.svg",
+    logoClass: "h-4 w-auto",
     name: "UNTUCKit",
     headline: "+17.1% conversion rate",
-    body: "UNTUCKit ran a two-month pilot, saw the results, and kept building. Their feedback shaped Nobi's Hooks API — and their team now runs Nobi search insights in weekly business reviews.",
+    body: "UNTUCKit ran a two-month pilot, saw the results, and kept building. Their feedback shaped Nobi's Hooks API. Their team now runs Nobi search insights in weekly business reviews.",
     stats: [
       { value: "+17.1%", label: "Conversion rate" },
       { value: "+21.3%", label: "Revenue per searcher" },
       { value: "+3.3%", label: "Average order value" },
     ],
-    tag: "Search",
   },
   {
     slug: "/customers/kilte",
@@ -42,7 +41,6 @@ const STORIES = [
     stats: [
       { value: "+21.7%", label: "More conversions" },
     ],
-    tag: "Search + Help",
   },
 ];
 
@@ -65,7 +63,7 @@ export default function CustomersIndex() {
             <p className="text-sm font-semibold tracking-[0.2em] text-fuchsia-600 uppercase">Customer stories</p>
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-semibold leading-[1.05] text-slate-900 text-balance">
               Real results from{" "}
-              <span className={GRADIENT}>real stores</span>
+              <span className={GRADIENT}>real brands</span>
             </h1>
             <p className="text-lg text-slate-600 max-w-xl mx-auto leading-relaxed">
               A/B tested, measured, and verified by the brands that ran them.
@@ -85,8 +83,7 @@ export default function CustomersIndex() {
                 <div className="grid md:grid-cols-2 gap-8 items-center">
                   <div className="space-y-5">
                     <div className="flex items-center gap-4">
-                      <img src={story.logo} alt={story.name} className="h-6 w-auto grayscale group-hover:grayscale-0 transition" />
-                      <span className="text-xs font-semibold uppercase tracking-[0.15em] text-slate-400 border border-slate-200 rounded-full px-2.5 py-1">{story.tag}</span>
+                      <img src={story.logo} alt={story.name} className={story.logoClass ?? "h-6 w-auto"} />
                     </div>
                     <div className="space-y-2">
                       <div className="text-2xl font-bold text-slate-900">{story.headline}</div>
@@ -116,7 +113,7 @@ export default function CustomersIndex() {
           <div className="mx-auto max-w-6xl px-6">
             <div className="space-y-8 text-center max-w-2xl mx-auto">
               <div className="space-y-4">
-                <h2 className="text-3xl sm:text-4xl font-semibold">Add your store to this list</h2>
+                <h2 className="text-3xl sm:text-4xl font-semibold">Add your brand to this list</h2>
                 <p className="text-lg text-white/70">Set up takes minutes. Results show up in weeks.</p>
               </div>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">

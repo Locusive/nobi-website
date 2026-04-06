@@ -23,7 +23,7 @@ export default function UNTUCKitCustomer() {
           <div className="relative mx-auto max-w-4xl px-6 pb-16 pt-16 sm:pt-20 lg:pt-24">
             <div className="space-y-8">
               <div className="flex items-center gap-4">
-                <img src="/media/logos/untuckit.svg" alt="UNTUCKit" className="h-7 w-auto" />
+                <img src="/media/logos/untuckit.svg" alt="UNTUCKit" className="h-5 w-auto" />
                 <span className="text-sm text-slate-400">×</span>
                 <span className="text-sm font-semibold text-slate-500">Nobi</span>
               </div>
@@ -35,7 +35,7 @@ export default function UNTUCKitCustomer() {
                   into a long-term partnership
                 </h1>
                 <p className="text-lg text-slate-600 max-w-2xl leading-relaxed">
-                  UNTUCKit wanted to see what AI could actually do for their site. They ran a two-month A/B test, saw the results, and kept going — deeper than almost any other customer.
+                  UNTUCKit wanted to see what AI could actually do for their site. They ran a two-month A/B test, saw the results, and kept going. Deeper than almost any other customer.
                 </p>
               </div>
 
@@ -64,13 +64,13 @@ export default function UNTUCKitCustomer() {
               <div className="space-y-4">
                 <p className="text-sm font-semibold uppercase tracking-[0.18em] text-slate-400">About UNTUCKit</p>
                 <p className="text-base text-slate-600 leading-relaxed">
-                  UNTUCKit is a men's and women's clothing brand known for shirts designed to be worn untucked. Built around a simple idea — that casual dress clothes should actually fit and look good — they've grown into a major direct-to-consumer brand with a strong online store.
+                  UNTUCKit is a men's and women's clothing brand known for shirts designed to be worn untucked. Built around a simple idea (that casual dress clothes should actually fit and look good), they've grown into a major direct-to-consumer brand with a strong online presence.
                 </p>
               </div>
               <div className="space-y-4">
                 <p className="text-sm font-semibold uppercase tracking-[0.18em] text-slate-400">Why they started</p>
                 <p className="text-base text-slate-600 leading-relaxed">
-                  UNTUCKit knew that shoppers who search are far more likely to convert than those who don't. They wanted to test whether AI search could meaningfully improve what happened after a visitor typed something in — and whether the ROI would justify the cost.
+                  UNTUCKit knew that shoppers who search are far more likely to convert than those who don't. They wanted to test whether AI search could meaningfully improve what happened after a visitor typed something in, and whether the ROI would justify the cost.
                 </p>
               </div>
             </div>
@@ -89,7 +89,7 @@ export default function UNTUCKitCustomer() {
               {[
                 {
                   title: "Fixing misspellings",
-                  body: "A shopper typed \"smiths sirt.\" Shopify returned no results and suggested top sellers. Nobi figured out they meant the Smithson Shirt — it was the first result, and the shopper bought it.",
+                  body: "A shopper typed \"smiths sirt.\" Shopify returned no results and suggested top sellers. Nobi figured out they meant the Smithson Shirt. It was the first result, and the shopper bought it.",
                 },
                 {
                   title: "Better product rankings",
@@ -97,7 +97,7 @@ export default function UNTUCKitCustomer() {
                 },
                 {
                   title: "Semantic search",
-                  body: "A search for \"navy vest\" — a product UNTUCKit didn't carry in navy — had Shopify showing t-shirts. Nobi correctly confirmed no navy vests were available, but surfaced vests in other colors and other navy items. The shopper stayed on the site.",
+                  body: "A search for \"navy vest\" (a product UNTUCKit didn't carry in navy) had Shopify showing t-shirts. Nobi correctly confirmed no navy vests were available, but surfaced vests in other colors and other navy items. The shopper stayed on the site.",
                 },
               ].map((item) => (
                 <div key={item.title} className="rounded-2xl border border-slate-200 bg-white p-6 space-y-3 shadow-[0_8px_24px_-16px_rgba(15,23,42,0.12)]">
@@ -116,7 +116,7 @@ export default function UNTUCKitCustomer() {
               <p className="text-sm font-semibold uppercase tracking-[0.18em] text-purple-300">What happened after the pilot</p>
               <h2 className="text-3xl font-semibold text-white">The pilot ended. The partnership didn't.</h2>
               <p className="text-base text-slate-300">
-                After seeing the A/B test results and getting comfortable with the pricing, UNTUCKit kept going — and pushed deeper into what Nobi could do.
+                After seeing the A/B test results and getting comfortable with the pricing, UNTUCKit kept going and pushed deeper into what Nobi could do.
               </p>
             </div>
 
@@ -128,15 +128,15 @@ export default function UNTUCKitCustomer() {
                 },
                 {
                   title: "They inspired Nobi's Hooks API",
-                  body: "UNTUCKit's team wanted to control how Nobi displayed product information — customizing the output to match their store's experience. That request turned into Nobi's Hooks capability, which any developer can now use.",
+                  body: "UNTUCKit's team wanted to control how Nobi displayed product information, customizing the output to match their experience. That request turned into Nobi's Hooks capability, which any developer can now use.",
                 },
                 {
                   title: "They run Nobi insights in weekly meetings",
-                  body: "UNTUCKit's team reviews Nobi's search insights every week as part of their regular business review — looking at query trends, zero-result searches, and what shoppers are asking for.",
+                  body: "UNTUCKit's team reviews Nobi's search insights every week as part of their regular business review, looking at query trends, zero-result searches, and what shoppers are asking for.",
                 },
                 {
                   title: "They now have full search history",
-                  body: "Before Nobi, UNTUCKit's search data only went back 12 months. Nobi stores everything from day one — so they can track long-term trends, compare seasons, and build a real picture of how search behavior changes over time.",
+                  body: "Before Nobi, UNTUCKit's search data only went back 12 months. Nobi stores everything from day one, so they can track long-term trends, compare seasons, and build a real picture of how search behavior changes over time.",
                 },
               ].map((item) => (
                 <div key={item.title} className="rounded-2xl border border-white/10 bg-white/5 p-6 space-y-2">
@@ -153,7 +153,7 @@ export default function UNTUCKitCustomer() {
           <div className="mx-auto max-w-4xl px-6">
             <div className="space-y-8 text-center max-w-2xl mx-auto">
               <div className="space-y-4">
-                <h2 className="text-3xl sm:text-4xl font-semibold">See what Nobi can do for your store</h2>
+                <h2 className="text-3xl sm:text-4xl font-semibold">See what Nobi can do for your brand</h2>
                 <p className="text-lg text-white/70">Start with a two-month test. Keep going if it works.</p>
               </div>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">

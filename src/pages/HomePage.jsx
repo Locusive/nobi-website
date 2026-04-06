@@ -1494,21 +1494,20 @@ function HowItWorks() {
 function Pricing() {
   const { onOpen } = useDemoForm();
   const tiers = [
-    { name: "Starter", price: "$300", blurb: "For brands getting started", points: ["3,000 messages/month", "All components included", "30-day free trial"], cta: "Start Free Trial", href: getSignupUrl() },
-    { name: "Growth", price: "$900", blurb: "For growing brands", points: ["10,000 messages/month", "All components included", "30-day free trial"], cta: "Start Free Trial", href: getSignupUrl(), highlighted: true },
-    { name: "Enterprise", price: "Custom", blurb: "For high-volume brands", points: ["Unlimited messages", "Custom integrations", "Dedicated support"], cta: "Contact Sales", onClick: onOpen },
+    { name: "Standard", price: "$25", blurb: "Everything you need to get started", points: ["2,500 searches and 250 messages included", "Up to 5,000 products and KB documents", "30-day free trial"], cta: "Start Free Trial", href: getSignupUrl(), highlighted: true },
+    { name: "Enterprise", price: "Custom", blurb: "For high-volume brands with large catalogs", points: ["Volume discounts on usage", "Custom integrations and onboarding", "Dedicated support"], cta: "Contact Sales", onClick: onOpen },
   ];
   return (
     <section id="pricing" className="scroll-mt-20 py-20 border-t border-black/5 dark:border-white/5">
       <div className="mx-auto max-w-6xl px-6">
-        <h2 className="text-3xl font-semibold mb-2">Simple plans that scale with you</h2>
-        <p className="text-black/60 dark:text-white/60 mb-8">Start free, upgrade when you're ready.</p>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch">
+        <h2 className="text-3xl font-semibold mb-2">Simple, usage-based pricing</h2>
+        <p className="text-black/60 dark:text-white/60 mb-8">A low monthly base with per-use rates. Start with a free 30-day trial.</p>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-stretch max-w-3xl mx-auto">
           {tiers.map((t) => (
             <div key={t.name} className={`flex flex-col rounded-3xl border bg-white/70 dark:bg-white/5 p-6 ${t.highlighted ? "border-purple-300 ring-2 ring-purple-200" : "border-black/10 dark:border-white/10"}`}>
               <div className="text-sm font-semibold tracking-wide text-indigo-600">{t.name}</div>
               <div className="mt-2 text-3xl font-semibold">
-                {t.price}{t.price !== "Custom" && <span className="text-base font-normal opacity-70">/mo</span>}
+                {t.price}{t.price !== "Custom" && <span className="text-base font-normal opacity-70"> monthly base</span>}
               </div>
               <div className="text-sm opacity-80 mt-1">{t.blurb}</div>
               <div className="mt-4 flex-1 text-sm space-y-2">

@@ -119,46 +119,22 @@ export default function LuccheseCustomer() {
                 number: "01",
                 title: "Always show results",
                 body: "Keyword search returns nothing when a query doesn't exactly match product copy. Nobi always surfaces the closest relevant products instead. When a shopper searched \"Terlingua\" (a West Texas town), Shopify returned zero results. Nobi used its knowledge base to figure out what the shopper was going for and returned the Walter boot and others with a matching look and feel. The shopper added to cart.",
-                before: { label: "Shopify default", text: "SEARCH: TERLINGUA\n0 results" },
-                after: { label: "Nobi", text: "\"Terlingua\" → Walter boot\nShopper added to cart" },
               },
               {
                 number: "02",
                 title: "Better rankings with RAG",
                 body: "Standard search ranks purely by keyword match frequency. Nobi uses Retrieval Augmented Generation to rank by actual relevance. For the query \"Olive,\" Shopify buried the Dante Olive Chocolate boot past 16 results, requiring shoppers to click \"Load More.\" Nobi surfaced it on row two. The shopper bought it.",
-                before: { label: "Shopify default", text: "\"Olive\" → Dante Olive Chocolate\nnot in first 16 results" },
-                after: { label: "Nobi", text: "\"Olive\" → Dante Olive Chocolate\non row 2, shopper purchased" },
               },
               {
                 number: "03",
                 title: "Semantic search",
                 body: "Shoppers don't always use the same words you used to describe your products. A search for \"card holder\" on Shopify only returned tote bags that happened to have card slots, missing Lucchese's entire wallet and card case collection. Nobi understood what the shopper meant and surfaced wallets, card cases, and bifold options. The shopper bought a wallet in Ostrich Cognac.",
-                before: { label: "Shopify default", text: "\"card holder\" → 2 tote bags\n(keyword match only)" },
-                after: { label: "Nobi", text: "\"card holder\" → wallets,\ncard cases, bifolds → purchased" },
               },
             ].map((item) => (
-              <div key={item.number} className="grid md:grid-cols-2 gap-8 items-start pb-14 border-b border-slate-200 last:border-0 last:pb-0">
-                <div className="space-y-4">
-                  <div className="text-4xl font-bold text-slate-200">{item.number}</div>
-                  <h3 className="text-xl font-semibold text-slate-900">{item.title}</h3>
-                  <p className="text-base text-slate-600 leading-relaxed">{item.body}</p>
-                </div>
-                <div className="grid grid-cols-2 gap-3">
-                  <div className="rounded-xl border border-slate-200 bg-white p-4 space-y-2">
-                    <div className="flex items-center gap-1.5">
-                      <span className="h-1.5 w-1.5 rounded-full bg-slate-300" />
-                      <span className="text-[11px] font-semibold text-slate-400 uppercase tracking-wide">{item.before.label}</span>
-                    </div>
-                    <p className="text-xs text-slate-500 leading-relaxed whitespace-pre-line">{item.before.text}</p>
-                  </div>
-                  <div className="rounded-xl border border-violet-200 bg-violet-50 p-4 space-y-2">
-                    <div className="flex items-center gap-1.5">
-                      <span className="h-1.5 w-1.5 rounded-full bg-gradient-to-r from-indigo-500 to-fuchsia-500" />
-                      <span className="text-[11px] font-semibold text-violet-600 uppercase tracking-wide">{item.after.label}</span>
-                    </div>
-                    <p className="text-xs text-violet-800 leading-relaxed whitespace-pre-line">{item.after.text}</p>
-                  </div>
-                </div>
+              <div key={item.number} className="max-w-2xl pb-14 border-b border-slate-200 last:border-0 last:pb-0 space-y-4">
+                <div className="text-4xl font-bold text-slate-200">{item.number}</div>
+                <h3 className="text-xl font-semibold text-slate-900">{item.title}</h3>
+                <p className="text-base text-slate-600 leading-relaxed">{item.body}</p>
               </div>
             ))}
           </div>

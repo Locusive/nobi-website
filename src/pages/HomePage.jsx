@@ -134,7 +134,7 @@ const PLACEMENTS = [
 const CHIPS = [
   { id: "default", label: "More conversions" },
   { id: "search",  label: "Better search" },
-  { id: "answers", label: "Better answers" },
+  { id: "answers", label: "Answer every question" },
   { id: "leads",   label: "More leads" },
 ];
 
@@ -916,11 +916,11 @@ function Hero({ onOpenVideo, onOpenDemo, variant, setVariant }) {
 
   return (
     <section id="home" className="relative overflow-hidden">
-      <div className="mx-auto max-w-7xl px-6 pt-10 sm:pt-12 lg:pt-16 pb-24">
+      <div className="mx-auto max-w-7xl px-6 pt-4 sm:pt-6 lg:pt-8 pb-24">
         <div className="max-w-4xl mx-auto text-center space-y-6">
 
           {/* Personalization chips */}
-          <div>
+          <div className="pb-6">
             <p className="text-xs font-medium text-black/40 dark:text-white/40 uppercase tracking-widest mb-3">
               What matters most to you?
             </p>

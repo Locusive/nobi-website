@@ -41,7 +41,7 @@ export default function KnowledgeBase() {
                   <span className={GRADIENT}>not from thin air</span>
                 </h1>
                 <p className="text-lg text-slate-600 max-w-xl leading-relaxed">
-                  Nobi pulls answers from your existing help docs, product pages, and policies — and shows visitors exactly where each answer came from. For questions you want to control precisely, write a guided answer and Nobi uses it word-for-word.
+                  Nobi pulls answers from your existing help docs, product pages, and policies — and shows visitors exactly where each answer came from. Visitors who get a real answer are 6x more likely to purchase. For questions you want to control precisely, write a guided answer and Nobi uses it word-for-word.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-3 pt-2">
                   <a
@@ -87,58 +87,6 @@ export default function KnowledgeBase() {
                   ))}
                 </Marquee>
               </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Stats */}
-        <section className="bg-gradient-to-b from-white via-slate-50 to-white py-16">
-          <div className="mx-auto max-w-6xl xl:max-w-7xl px-6 space-y-8">
-            <div className="text-center space-y-3 max-w-2xl mx-auto">
-              <h2 className="text-3xl sm:text-4xl font-semibold text-slate-900">
-                What accurate answers actually do
-              </h2>
-              <p className="text-base text-slate-600">
-                When visitors get real answers — sourced from your content, not guessed — they trust the site more and buy more often.
-              </p>
-            </div>
-            <div className="grid gap-4 sm:gap-5 md:grid-cols-3">
-              {[
-                {
-                  stat: "6x",
-                  label: "more likely to purchase",
-                  desc: "Based on Nobi's internal data across customers: visitors who engage with the assistant and get a real answer are 6x more likely to purchase than visitors who don't interact.",
-                  palette: "blue",
-                },
-                {
-                  stat: "Zero",
-                  label: "hallucinations",
-                  desc: "Nobi verifies every claim against your imported content before answering. It won't say what it can't prove from your pages.",
-                  palette: "purple",
-                },
-                {
-                  stat: "2x daily",
-                  label: "content refresh",
-                  desc: "Nobi re-indexes your imported pages twice a day. Price changes, policy updates, and new products stay current automatically.",
-                  palette: "blue",
-                },
-              ].map((item) => (
-                <div
-                  key={item.stat}
-                  className={`relative overflow-hidden rounded-xl border text-white shadow-[0_18px_42px_-24px_rgba(64,41,153,0.45)] ${
-                    item.palette === "blue"
-                      ? "border-[#3f6bff] bg-gradient-to-br from-[#3fb7ff] via-[#4f7dff] to-[#6b52d9]"
-                      : "border-[#4c3ab8] bg-gradient-to-br from-[#4a47a8] via-[#6b52d9] to-[#7f4ff0]"
-                  }`}
-                >
-                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_22%_18%,rgba(255,255,255,0.16),transparent_40%),radial-gradient(circle_at_80%_0%,rgba(255,255,255,0.12),transparent_36%)]" aria-hidden />
-                  <div className="relative px-5 sm:px-6 py-6 sm:py-7 flex flex-col gap-2">
-                    <div className="text-3xl sm:text-4xl font-bold tracking-tight text-white drop-shadow-sm">{item.stat}</div>
-                    <div className="text-xs sm:text-sm font-medium text-white/85">{item.label}</div>
-                    <div className="text-xs text-white/70 leading-relaxed pt-1">{item.desc}</div>
-                  </div>
-                </div>
-              ))}
             </div>
           </div>
         </section>

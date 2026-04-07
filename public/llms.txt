@@ -1,6 +1,6 @@
 # Nobi AI
 
-> Nobi is an AI sales associate for business websites. It turns any site into a place where visitors can ask questions, get real answers, and take action — powered by the business's own data.
+> Nobi is an AI site assistant for ecommerce and other businesses. It turns any website into a place where visitors can ask questions, find the right products, and take action — powered by the business's own data.
 
 ## What Nobi Does
 
@@ -8,27 +8,35 @@ Nobi sits on a business's website and acts as a conversational sales associate. 
 
 ### Core Capabilities
 
-- **Semantic search**: Understands natural-language queries like "running shoes for wide feet under $120" and surfaces the right results instantly.
+- **Semantic search**: Understands natural-language queries like "brown boots for wide feet under $200" and surfaces the right results instantly — even when the product is tagged with a brand-specific name like "Cappuccino Boot."
 - **Conversational Q&A**: Answers product, sizing, shipping, and service questions without visitors needing to dig through pages or wait for support.
 - **Product recommendations**: Suggests products based on the visitor's stated needs and intent.
-- **Proactive engagement**: Suggestion pills, exit-intent prompts, and inline triggers keep visitors exploring instead of bouncing.
+- **Lead capture**: Identifies high-intent visitors and captures their contact before they bounce.
+- **Proactive engagement**: Suggestion pills, exit-intent prompts, and inline triggers keep visitors exploring instead of leaving.
 - **Flexible placement**: Search bar, PDP assistant, collection pages, modals, or triggered from any button via JS API.
 
 ### Verticals
 
 Nobi started in ecommerce (Shopify and other platforms) and is expanding into automotive and other verticals. The platform generalizes to any business that wants an AI agent on its website.
 
-## Results
+## Proven Results
 
 Nobi has outperformed the default shopping experience in every A/B test run to date:
 
-- 30% conversion lift (A/B proven)
-- 35% more add-to-carts
-- 56% higher average order value
+- **$1M+** incremental revenue for Lucchese in year one (33x ROI)
+- **+21.3%** revenue per searcher for UNTUCKit vs. their prior search tool
+- **+17.1%** conversion rate lift for UNTUCKit (17.6% vs 15.0%)
+- **+21.7%** conversion improvement for Kilte vs. Shopify default search
+- **2.5x** more likely to convert — Nobi searchers vs. non-Nobi visitors (combined Lucchese + UNTUCKit A/B data)
+- **17–22%** consistent conversion improvement across customers vs. prior search tool
 
 ## Customers
 
-Trusted by brands including Untuckit, Lucchese, Faherty, TOOLUP, Kilte, and Alps & Meters.
+Trusted by brands including UNTUCKit, Lucchese, Kilte, TOOLUP, Faherty, and Alps & Meters.
+
+## Pricing
+
+Starts at $25/month. Includes up to 2,500 AI search interactions and 250 assistant messages per month. 30-day free trial. No setup fees.
 
 ## MCP Server
 

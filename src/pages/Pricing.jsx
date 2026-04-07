@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { useSEO } from "../hooks/useSEO";
 import PageLayout from "../components/PageLayout";
 import FAQList from "../components/FAQList.jsx";
 import { Check, Search, Smile, BarChart3, MessageSquare, ArrowRight, Gift } from "lucide-react";
@@ -99,9 +100,25 @@ const PRICING_FAQS = [
 export default function Pricing() {
   const { onOpen: openDemoForm } = useDemoForm();
 
-  useEffect(() => {
-    document.title = "Pricing | Nobi: a conversational site assistant to help you grow";
-  }, []);
+  useSEO({
+    title: "Pricing | Nobi",
+    description: "Simple pricing starting at $25/month with a 30-day free trial. AI search, knowledge base, and lead capture for any ecommerce store.",
+    path: "/pricing",
+    schema: {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "Nobi",
+      "description": "AI site search and shopping assistant for ecommerce stores.",
+      "brand": { "@type": "Brand", "name": "Nobi" },
+      "offers": {
+        "@type": "Offer",
+        "price": "25",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock",
+        "url": "https://nobi.ai/pricing",
+      },
+    },
+  });
 
   return (
     <PageLayout>

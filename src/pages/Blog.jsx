@@ -1,11 +1,14 @@
 import React, { useEffect, useMemo } from "react";
+import { useSEO } from "../hooks/useSEO";
 import PageLayout from "../components/PageLayout";
 import { posts } from "../content/utils/mdxPostLoader";
 
 export default function Blog() {
-  useEffect(() => {
-    document.title = "Blog | Nobi: a conversational site assistant to help you grow";
-  }, []);
+  useSEO({
+    title: "Blog | Nobi",
+    description: "Insights on AI site search, ecommerce conversion, and product discovery for Shopify and other online retailers.",
+    path: "/blog",
+  });
 
   const blogLd = useMemo(() => {
     const origin = typeof window !== "undefined" ? window.location.origin : "https://nobi.ai";

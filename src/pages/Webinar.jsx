@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from "react";
+import { useSEO } from "../hooks/useSEO";
 import PageLayout from "../components/PageLayout";
 
 export default function Webinar() {
-  useEffect(() => {
-    document.title = "Claude Code Webinar Series | Nobi";
-  }, []);
+  useSEO({
+    title: "Claude Code Webinar Series | Nobi",
+    description: "Join Nobi's webinar series on AI tools for ecommerce. Learn how to use AI to grow your online store.",
+    path: "/webinar",
+  });
 
   const [form, setForm] = useState({
     firstName: "",

@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { useSEO } from "../../hooks/useSEO";
 import { motion } from "framer-motion";
 import PageLayout from "../../components/PageLayout";
 import { getSignupUrl } from "../../utils/signupUrl";
@@ -29,9 +30,11 @@ function Quote({ text, name, title }) {
 export default function LuccheseCustomer() {
   const { onOpen } = useDemoForm();
 
-  useEffect(() => {
-    document.title = "Lucchese + Nobi | Customer Story";
-  }, []);
+  useSEO({
+    title: "Lucchese Generated $1M+ With Nobi AI Search | Case Study",
+    description: "$1M+ incremental revenue, 33x ROI, +22.9% checkout completion. How Lucchese transformed site search with AI and kept expanding from there.",
+    path: "/customers/lucchese",
+  });
 
   return (
     <PageLayout>

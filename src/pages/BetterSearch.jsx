@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useSEO } from "../hooks/useSEO";
 import PageLayout from "../components/PageLayout";
 import Button from "../components/Button";
 import DemoCTAButton from "../components/DemoCTAButton";
@@ -22,9 +23,11 @@ export default function BetterSearch() {
   const [isVideoOpen, setIsVideoOpen] = useState(false);
   const { onOpen: openDemoForm } = useDemoForm();
 
-  useEffect(() => {
-    document.title = "Semantic Search that Converts | Nobi";
-  }, []);
+  useSEO({
+    title: "AI Site Search That Understands Natural Language | Nobi",
+    description: "Replace keyword search with AI that understands intent. Nobi surfaces the right products even when shoppers don't use your exact product names.",
+    path: "/why-nobi/better-search",
+  });
 
   return (
     <PageLayout>

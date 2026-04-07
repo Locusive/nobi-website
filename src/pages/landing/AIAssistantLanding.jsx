@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useSEO } from "../../hooks/useSEO";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   ArrowRight,
@@ -188,9 +189,11 @@ function ConversationDemo() {
 }
 
 export default function AIAssistantLanding() {
-  useEffect(() => {
-    document.title = "Bring the ChatGPT Experience to Your Site | Nobi";
-  }, []);
+  useSEO({
+    title: "AI Shopping Assistant for Ecommerce | Nobi",
+    description: "A conversational AI assistant that answers questions, recommends products, and guides shoppers to purchase. One line of code to install.",
+    path: "/s/ai-assistant",
+  });
 
   return (
     <div className="min-h-screen bg-white text-slate-900">

@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { useSEO } from "../hooks/useSEO";
 import PageLayout from "../components/PageLayout";
 import { getSignupUrl } from "../utils/signupUrl";
 import { useDemoForm } from "../context/DemoFormContext";
@@ -17,9 +18,11 @@ const CUSTOMER_LOGOS = [
 export default function LeadCapture() {
   const { onOpen } = useDemoForm();
 
-  useEffect(() => {
-    document.title = "Lead Capture | Nobi";
-  }, []);
+  useSEO({
+    title: "Lead Capture for Ecommerce Visitors | Nobi",
+    description: "Identify high-intent shoppers before they bounce and capture their contact. Nobi turns browsers into leads.",
+    path: "/lead-capture",
+  });
 
   return (
     <PageLayout>

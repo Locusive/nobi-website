@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { useSEO } from "../../hooks/useSEO";
 import { motion } from "framer-motion";
 import {
   ArrowRight,
@@ -20,10 +21,10 @@ const CUSTOMER_LOGOS = [
 ];
 
 const METRICS = [
-  { stat: "30%", label: "Conversion lift (A/B proven)", palette: "blue" },
-  { stat: "35%", label: "More add-to-carts", palette: "purple" },
-  { stat: "56%", label: "Higher average order value", palette: "blue" },
-  { stat: "0", label: "Dead-end searches", palette: "purple" },
+  { stat: "$1M+", label: "Revenue for Lucchese in year one", palette: "blue" },
+  { stat: "+21.3%", label: "Revenue per searcher for UNTUCKit", palette: "purple" },
+  { stat: "+21.7%", label: "Conversion rate for Kilte vs. Shopify", palette: "blue" },
+  { stat: "2.5x", label: "More likely to convert with Nobi", palette: "purple" },
 ];
 
 const fadeUp = {
@@ -94,9 +95,11 @@ function LogoStrip() {
 }
 
 export default function SearchEngineLanding() {
-  useEffect(() => {
-    document.title = "Better Site Search That Converts | Nobi";
-  }, []);
+  useSEO({
+    title: "AI Site Search for Ecommerce | Nobi",
+    description: "Semantic search that understands what shoppers mean. Stop losing sales to dead-end keyword searches. Set up in one line of code.",
+    path: "/s/search",
+  });
 
   return (
     <div className="min-h-screen bg-white text-slate-900">

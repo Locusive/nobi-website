@@ -527,10 +527,10 @@ function VisualMock({ type }) {
         </div>
         <div className="grid grid-cols-2 gap-2">
           {[
-            { src: "/media/prod-1.png", name: "Red Floral Midi", price: "$178" },
-            { src: "/media/prod-2.png", name: "Sleeveless A-line", price: "$148" },
-            { src: "/media/prod-3.png", name: "Silk Slip Dress", price: "$192" },
-            { src: "/media/prod-4.png", name: "Wrap Dress", price: "$168" },
+            { src: "/media/prod-1.webp", name: "Red Floral Midi", price: "$178" },
+            { src: "/media/prod-2.webp", name: "Sleeveless A-line", price: "$148" },
+            { src: "/media/prod-3.webp", name: "Silk Slip Dress", price: "$192" },
+            { src: "/media/prod-4.webp", name: "Wrap Dress", price: "$168" },
           ].map((item) => (
             <div key={item.src} className="rounded-lg border border-slate-200 bg-white p-2 space-y-2 shadow-[0_6px_18px_-12px_rgba(15,23,42,0.25)]">
               <div className="h-20 rounded-md overflow-hidden bg-slate-100">

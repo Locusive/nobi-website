@@ -278,9 +278,9 @@ function HeroConversationDemo({ script, startKey, ratio = 4 / 3, ratioVar }) {
     userText = `Red dress for a beach wedding. I'm 5'5" and want something under $200.`,
     aiText   = "Got it! Here are some red dresses that are warm-weather appropriate and comfortable on sand / in a slight breeze (rather than a formal ballroom). These are all available in your size (M) and under $200.",
     products = [
-      { title: "St. Bernard x Stark Maxi", price: "$98", img: "/media/prod-1.png" },
-      { title: "Maygel Coronel Cover-Up", price: "$178", img: "/media/prod-2.png" },
-      { title: "Hunter Puff-Sleeve Mini", price: "$124", img: "/media/prod-3.png" },
+      { title: "St. Bernard x Stark Maxi", price: "$98", img: "/media/prod-1.webp" },
+      { title: "Maygel Coronel Cover-Up", price: "$178", img: "/media/prod-2.webp" },
+      { title: "Hunter Puff-Sleeve Mini", price: "$124", img: "/media/prod-3.webp" },
     ],
   } = script || {};
 
@@ -368,12 +368,12 @@ function makeScript(mode, q = "red dress for a wedding") {
       aiText:
         "Got it! Here are some red dresses that are warm-weather appropriate and comfortable on sand / in a slight breeze (rather than a formal ballroom). These are all available in your size (M) and under $200.",
      products: [
-     { title: "St. Bernard x Stark Maxi",        price: "$98", img: "/media/prod-1.png" },
-      { title: "Lulus Bow Backless Maxi",        price: "$55", img: "/media/prod-2.png" },
-        { title: "Maygel Coronel Cover-Up",        price: "$178", img: "/media/prod-3.png" },
-      { title: "Hunter Puff-Sleeve Mini",        price: "$124", img: "/media/prod-4.png" },
-     { title: "Banjanan Cotton Maxi",   price: "$172", img: "/media/prod-5.png" },
-     { title: "Majestic Coconut Maxi",        price: "$189", img: "/media/prod-6.png" },
+     { title: "St. Bernard x Stark Maxi",        price: "$98", img: "/media/prod-1.webp" },
+      { title: "Lulus Bow Backless Maxi",        price: "$55", img: "/media/prod-2.webp" },
+        { title: "Maygel Coronel Cover-Up",        price: "$178", img: "/media/prod-3.webp" },
+      { title: "Hunter Puff-Sleeve Mini",        price: "$124", img: "/media/prod-4.webp" },
+     { title: "Banjanan Cotton Maxi",   price: "$172", img: "/media/prod-5.webp" },
+     { title: "Majestic Coconut Maxi",        price: "$189", img: "/media/prod-6.webp" },
    ],
     };
   }
@@ -381,12 +381,12 @@ function makeScript(mode, q = "red dress for a wedding") {
     userText: "",
     aiText: "",
     products: [
-   { title: "Efrain Mogollon Chau Rosa",   price: "$499", img: "/media/prod-default-1.png" },
-   { title: "Loeffler Red Dress Sandal",        price: "$138", img: "/media/prod-default-2.png" },
-   { title: "Anna Quan Penelope Dress",  price: "$148", img: "/media/prod-default-3.png" },
-   { title: "Nadia Red Dress Heel",  price: "$119", img: "/media/prod-default-4.png" },
-   { title: "Mayoral Girl's Red Dress",     price: "$89", img: "/media/prod-default-5.png" },
-   { title: "MVG Brie Dress",      price: "$228", img: "/media/prod-default-6.png" },
+   { title: "Efrain Mogollon Chau Rosa",   price: "$499", img: "/media/prod-default-1.webp" },
+   { title: "Loeffler Red Dress Sandal",        price: "$138", img: "/media/prod-default-2.webp" },
+   { title: "Anna Quan Penelope Dress",  price: "$148", img: "/media/prod-default-3.webp" },
+   { title: "Nadia Red Dress Heel",  price: "$119", img: "/media/prod-default-4.webp" },
+   { title: "Mayoral Girl's Red Dress",     price: "$89", img: "/media/prod-default-5.webp" },
+   { title: "MVG Brie Dress",      price: "$228", img: "/media/prod-default-6.webp" },
     ],
   };
 }

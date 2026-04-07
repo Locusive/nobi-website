@@ -22,6 +22,15 @@ export default function LeadCapture() {
     title: "Lead Capture for Website Visitors | Nobi",
     description: "Identify high-intent shoppers before they bounce and capture their contact. Nobi turns browsers into leads.",
     path: "/lead-capture",
+    schema: {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "Nobi Lead Capture",
+      "description": "Identify high-intent visitors before they bounce. Capture contact details and turn browsers into leads.",
+      "brand": { "@type": "Brand", "name": "Nobi" },
+      "url": "https://nobi.ai/lead-capture",
+      "offers": { "@type": "Offer", "price": "25", "priceCurrency": "USD", "availability": "https://schema.org/InStock" },
+    },
   });
 
   return (

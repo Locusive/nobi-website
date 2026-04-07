@@ -165,7 +165,7 @@ const VARIANT_CONTENT = {
     ],
   },
   search: {
-    headline: "Your shoppers can't find what they're looking for. Nobi fixes that.",
+    headline: "Visitors who can't find it won't buy it.",
     subline:  "AI search that understands what visitors mean, not just what they type. Lucchese generated $1M+ in incremental revenue in year one.",
     problemHeading: "Shoppers describe what they want and get nothing back",
     problemBody:    "Your search needs exact words from product descriptions. Natural language returns zero results, so they leave and buy somewhere else.",
@@ -891,7 +891,7 @@ const GRADIENT = "bg-gradient-to-r from-indigo-500 via-violet-500 to-fuchsia-500
 function renderHeadline(variant) {
   switch (variant) {
     case "search":
-      return <>Your shoppers can't find what they're looking for. Nobi{" "}<span className={GRADIENT}>fixes that.</span></>;
+      return <>Visitors who can't find it{" "}<span className={GRADIENT}>won't buy it.</span></>;
     case "answers":
       return <>Your visitors have questions your website{" "}<span className={GRADIENT}>isn't answering</span></>;
     case "leads":
@@ -2275,16 +2275,32 @@ export default function HomePage() {
     title: "Nobi: Your Website's AI Sales Associate",
     description: "Lucchese generated $1M+ in year one. Add Nobi to your website in minutes and start converting more visitors.",
     path: "/",
-    schema: {
-      "@context": "https://schema.org",
-      "@type": "SoftwareApplication",
-      "name": "Nobi",
-      "applicationCategory": "BusinessApplication",
-      "operatingSystem": "Web",
-      "description": "AI-powered site search and shopping assistant for ecommerce stores. Understands natural language queries and surfaces the right products instantly.",
-      "url": "https://nobi.ai",
-      "offers": { "@type": "Offer", "price": "25", "priceCurrency": "USD", "availability": "https://schema.org/InStock" },
-    },
+    schema: [
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "Nobi",
+        "url": "https://nobi.ai",
+        "logo": "https://nobi.ai/og-image.png",
+        "sameAs": ["https://www.linkedin.com/company/heynobi"],
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "Nobi",
+        "url": "https://nobi.ai",
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "Nobi",
+        "applicationCategory": "BusinessApplication",
+        "operatingSystem": "Web",
+        "description": "AI-powered website assistant. Understands natural language queries and helps visitors find what they need, answer questions, and take action.",
+        "url": "https://nobi.ai",
+        "offers": { "@type": "Offer", "price": "25", "priceCurrency": "USD", "availability": "https://schema.org/InStock" },
+      },
+    ],
   });
 
   return (

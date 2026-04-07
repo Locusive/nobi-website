@@ -27,6 +27,15 @@ export default function BetterSearch() {
     title: "AI Site Search That Understands Natural Language | Nobi",
     description: "Replace keyword search with AI that understands intent. Nobi surfaces the right products even when shoppers don't use your exact product names.",
     path: "/why-nobi/better-search",
+    schema: {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "Nobi AI Search",
+      "description": "AI-powered site search that understands natural language. Surfaces the right results even when visitors don't use exact product names.",
+      "brand": { "@type": "Brand", "name": "Nobi" },
+      "url": "https://nobi.ai/why-nobi/better-search",
+      "offers": { "@type": "Offer", "price": "25", "priceCurrency": "USD", "availability": "https://schema.org/InStock" },
+    },
   });
 
   return (

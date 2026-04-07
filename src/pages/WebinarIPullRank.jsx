@@ -5,7 +5,7 @@ import PageLayout from "../components/PageLayout";
 export default function WebinarIPullRank() {
   useSEO({
     title: "Black Friday AI Search Webinar with iPullRank | Nobi",
-    description: "How to prepare your ecommerce site for AI-powered holiday shoppers. Joint webinar with iPullRank on search and discoverability.",
+    description: "How to prepare your website for AI-powered holiday shoppers. Joint webinar with iPullRank on search and discoverability.",
     path: "/webinar/ipullrank",
   });
 

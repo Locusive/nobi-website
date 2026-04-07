@@ -190,7 +190,7 @@ function ConversationDemo() {
 
 export default function AIAssistantLanding() {
   useSEO({
-    title: "AI Shopping Assistant for Ecommerce | Nobi",
+    title: "AI Shopping Assistant for Your Website | Nobi",
     description: "A conversational AI assistant that answers questions, recommends products, and guides shoppers to purchase. One line of code to install.",
     path: "/s/ai-assistant",
   });

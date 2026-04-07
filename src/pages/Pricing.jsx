@@ -102,7 +102,7 @@ export default function Pricing() {
 
   useSEO({
     title: "Pricing | Nobi",
-    description: "Simple pricing starting at $25/month with a 30-day free trial. AI search, knowledge base, and lead capture for any ecommerce store.",
+    description: "Simple pricing starting at $25/month with a 30-day free trial. AI search, knowledge base, and lead capture for any website.",
     path: "/pricing",
     schema: {
       "@context": "https://schema.org",

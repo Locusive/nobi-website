@@ -32,7 +32,7 @@ export default function LuccheseCustomer() {
 
   useSEO({
     title: "Lucchese Generated $1M+ With Nobi AI Search | Case Study",
-    description: "$1M+ incremental revenue, 33x ROI, +22.9% checkout completion. How Lucchese transformed site search with AI and kept expanding from there.",
+    description: "$1M+ incremental revenue, 33x ROI, +22.9% checkout completion. How Lucchese transformed search with Nobi and kept expanding from there.",
     path: "/customers/lucchese",
   });
 

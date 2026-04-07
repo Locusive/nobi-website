@@ -19,7 +19,7 @@ export default function LeadCapture() {
   const { onOpen } = useDemoForm();
 
   useSEO({
-    title: "Lead Capture for Ecommerce Visitors | Nobi",
+    title: "Lead Capture for Website Visitors | Nobi",
     description: "Identify high-intent shoppers before they bounce and capture their contact. Nobi turns browsers into leads.",
     path: "/lead-capture",
   });

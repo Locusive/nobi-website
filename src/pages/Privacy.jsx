@@ -1,7 +1,14 @@
 import React from "react";
+import { useSEO } from "../hooks/useSEO";
 import PageLayout from "../components/PageLayout";
 
-const Privacy = () => (
+const Privacy = () => {
+  useSEO({
+    title: "Privacy Policy | Nobi",
+    description: "How Nobi collects, uses, and protects your data. Read our privacy policy for full details.",
+    path: "/privacy",
+  });
+  return (
   <PageLayout>
     <main className="prose prose-lg mx-auto px-4 py-8">
     {/* Page Heading and Intro */}
@@ -141,6 +148,7 @@ const Privacy = () => (
     </p>
     </main>
   </PageLayout>
-);
+  );
+};
 
 export default Privacy;

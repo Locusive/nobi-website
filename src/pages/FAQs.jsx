@@ -1,12 +1,15 @@
 import React, { useEffect } from "react";
+import { useSEO } from "../hooks/useSEO";
 import PageLayout from "../components/PageLayout";
 import FAQList from "../components/FAQList.jsx";
 import FAQ_ITEMS from "../constants/faqs";
 
 export default function FAQs() {
-  useEffect(() => {
-    document.title = "FAQs | Nobi: a conversational site assistant to help you grow";
-  }, []);
+  useSEO({
+    title: "Frequently Asked Questions | Nobi",
+    description: "Common questions about Nobi's AI search, setup time, A/B testing, platform compatibility, and pricing.",
+    path: "/faqs",
+  });
 
   return (
     <PageLayout>

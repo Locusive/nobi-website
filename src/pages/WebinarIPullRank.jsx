@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from "react";
+import { useSEO } from "../hooks/useSEO";
 import PageLayout from "../components/PageLayout";
 
 export default function WebinarIPullRank() {
-  useEffect(() => {
-    document.title = "Webinar: Christmas in June - Get Your Site Ready for AI-Powered Black Friday Shoppers | Nobi";
-  }, []);
+  useSEO({
+    title: "Black Friday AI Search Webinar with iPullRank | Nobi",
+    description: "How to prepare your ecommerce site for AI-powered holiday shoppers. Joint webinar with iPullRank on search and discoverability.",
+    path: "/webinar/ipullrank",
+  });
 
   const [form, setForm] = useState({
     firstName: "",

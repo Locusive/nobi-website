@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { useSEO } from "../../hooks/useSEO";
 import { motion } from "framer-motion";
 import PageLayout from "../../components/PageLayout";
 import { getSignupUrl } from "../../utils/signupUrl";
@@ -53,9 +54,11 @@ const ResultRow = ({ pos, name, sub, colorHex, highlight = false }) => (
 export default function KilteCustomer() {
   const { onOpen } = useDemoForm();
 
-  useEffect(() => {
-    document.title = "Kilte + Nobi | Customer Story";
-  }, []);
+  useSEO({
+    title: "Kilte + Nobi: 21.7% More Conversions | Case Study",
+    description: "Kilte uses evocative color names like Cappuccino and Ivory. Nobi maps them to what shoppers actually search for. Result: 21.7% more conversions.",
+    path: "/customers/kilte",
+  });
 
   return (
     <PageLayout>

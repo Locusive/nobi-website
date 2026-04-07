@@ -1,5 +1,6 @@
 // src/pages/Terms.jsx
 import React from "react";
+import { useSEO } from "../hooks/useSEO";
 import PageLayout from "../components/PageLayout";
 
 const LEGAL_NAME = "Locusive, Inc. d/b/a Nobi";
@@ -8,6 +9,11 @@ const EFFECTIVE = "February 17, 2026";
 const CONTACT = "legal@nobi.ai";
 
 export default function Terms() {
+  useSEO({
+    title: "Terms of Service | Nobi",
+    description: "Nobi's terms of service governing use of our AI site search and shopping assistant products.",
+    path: "/terms",
+  });
   return (
     <PageLayout>
       <div className="bg-gradient-to-b from-white to-slate-50 dark:from-[#0a0a0a] dark:to-black text-black dark:text-white py-16">

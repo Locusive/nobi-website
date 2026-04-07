@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { useSEO } from "../hooks/useSEO";
 import PageLayout from "../components/PageLayout";
 import { getSignupUrl } from "../utils/signupUrl";
 import { useDemoForm } from "../context/DemoFormContext";
@@ -17,9 +18,11 @@ const CUSTOMER_LOGOS = [
 export default function CustomActions() {
   const { onOpen } = useDemoForm();
 
-  useEffect(() => {
-    document.title = "Custom Actions | Nobi";
-  }, []);
+  useSEO({
+    title: "Custom Actions & Hooks for AI Search | Nobi",
+    description: "Inject custom badges, sorting, and business logic into Nobi without touching our code. Full control over how search results look and behave.",
+    path: "/custom-actions",
+  });
 
   return (
     <PageLayout>

@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { useSEO } from "../hooks/useSEO";
 import PageLayout from "../components/PageLayout";
 import { getSignupUrl } from "../utils/signupUrl";
 import { useDemoForm } from "../context/DemoFormContext";
@@ -17,9 +18,11 @@ const CUSTOMER_LOGOS = [
 export default function KnowledgeBase() {
   const { onOpen } = useDemoForm();
 
-  useEffect(() => {
-    document.title = "Accurate Answers | Nobi";
-  }, []);
+  useSEO({
+    title: "AI Knowledge Base for Product & Policy Questions | Nobi",
+    description: "Let shoppers get instant answers to sizing, shipping, and returns questions. Nobi's knowledge base turns your FAQs into a conversion tool.",
+    path: "/knowledge-base",
+  });
 
   return (
     <PageLayout>

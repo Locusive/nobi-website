@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { useSEO } from "../../hooks/useSEO";
 import { Link } from "react-router-dom";
 import PageLayout from "../../components/PageLayout";
 import { getSignupUrl } from "../../utils/signupUrl";
@@ -47,9 +48,11 @@ const STORIES = [
 export default function CustomersIndex() {
   const { onOpen } = useDemoForm();
 
-  useEffect(() => {
-    document.title = "Customer Stories | Nobi";
-  }, []);
+  useSEO({
+    title: "Customer Stories | Nobi",
+    description: "See how Lucchese, UNTUCKit, and Kilte use Nobi's AI search to generate measurable revenue lift. Real results from real brands.",
+    path: "/customers",
+  });
 
   return (
     <PageLayout>

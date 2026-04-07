@@ -1,4 +1,5 @@
 import React, {useEffect, useMemo, useRef, useState} from "react";
+import { useSEO } from "../hooks/useSEO";
 import {AnimatePresence, motion} from "framer-motion";
 import {
     BarChart3,
@@ -2270,9 +2271,21 @@ export default function HomePage() {
     try { return localStorage.getItem("nobi_hero_variant") || "search"; } catch (_) { return "search"; }
   });
 
-  useEffect(() => {
-    document.title = "Nobi: a conversational site assistant to help you grow";
-  }, []);
+  useSEO({
+    title: "Nobi — AI Site Search & Shopping Assistant for Ecommerce",
+    description: "Turn your site search into a revenue driver. Lucchese generated $1M+ in year one. Add Nobi to any ecommerce store in minutes.",
+    path: "/",
+    schema: {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "Nobi",
+      "applicationCategory": "BusinessApplication",
+      "operatingSystem": "Web",
+      "description": "AI-powered site search and shopping assistant for ecommerce stores. Understands natural language queries and surfaces the right products instantly.",
+      "url": "https://nobi.ai",
+      "offers": { "@type": "Offer", "price": "25", "priceCurrency": "USD", "availability": "https://schema.org/InStock" },
+    },
+  });
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-white to-slate-50 dark:from-[#0a0a0a] dark:to-black text-black dark:text-white">

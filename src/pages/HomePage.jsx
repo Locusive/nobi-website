@@ -132,8 +132,8 @@ const PLACEMENTS = [
 
 // ===== Personalization variant content =====
 const CHIPS = [
-  { id: "default", label: "More conversions" },
   { id: "search",  label: "Better search" },
+  { id: "default", label: "More conversions" },
   { id: "answers", label: "Answer every question" },
   { id: "leads",   label: "More leads" },
 ];
@@ -2267,7 +2267,7 @@ export default function HomePage() {
   const { onOpen: onOpenForm } = useDemoForm();
 
   const [variant, setVariant] = useState(() => {
-    try { return localStorage.getItem("nobi_hero_variant") || "default"; } catch (_) { return "default"; }
+    try { return localStorage.getItem("nobi_hero_variant") || "search"; } catch (_) { return "search"; }
   });
 
   useEffect(() => {

@@ -73,8 +73,8 @@ export default function KilteCustomer() {
               <div className="space-y-4">
                 <p className="text-sm font-semibold tracking-[0.2em] text-fuchsia-600 uppercase">Customer story</p>
                 <h1 className="text-4xl sm:text-5xl lg:text-6xl font-semibold leading-[1.05] text-slate-900 text-balance">
-                  How Kilte made their{" "}
-                  <span className={GRADIENT}>beautiful catalog searchable</span>
+                  How Kilte made their beautiful catalog{" "}
+                  <span className={GRADIENT}>searchable</span>
                 </h1>
                 <p className="text-lg text-slate-600 max-w-2xl leading-relaxed">
                   Kilte's product descriptions are evocative and on-brand. "Cappuccino," "Ivory," "Midnight." The problem: shoppers don't search that way. Nobi bridges the gap, and beat Shopify search by 21.7% in the process.

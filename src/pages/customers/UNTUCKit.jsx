@@ -119,9 +119,8 @@ export default function UNTUCKitCustomer() {
               <div className="space-y-4">
                 <p className="text-sm font-semibold tracking-[0.2em] text-fuchsia-600 uppercase">Customer story</p>
                 <h1 className="text-4xl sm:text-5xl lg:text-6xl font-semibold leading-[1.05] text-slate-900 text-balance">
-                  How UNTUCKit turned a{" "}
-                  <span className={GRADIENT}>two-month pilot</span>{" "}
-                  into a long-term partnership
+                  How UNTUCKit turned a two-month pilot into a{" "}
+                  <span className={GRADIENT}>long-term partnership</span>
                 </h1>
                 <p className="text-lg text-slate-600 max-w-2xl leading-relaxed">
                   UNTUCKit wanted more shoppers engaging with search. They ran a two-month A/B test, saw the numbers, dropped the split, and went all in.
@@ -131,9 +130,9 @@ export default function UNTUCKitCustomer() {
               {/* Stats row */}
               <div className="grid sm:grid-cols-3 gap-4 max-w-2xl">
                 {[
-                  { value: "+17.1%", label: "Conversion rate", note: "17.6% Nobi vs. 15.0% Shopify default" },
-                  { value: "+21.3%", label: "Revenue per searcher", note: "$39.17 vs. $32.30 on Shopify" },
-                  { value: "+3.3%", label: "Average order value", note: "$222 vs. $215 on Shopify" },
+                  { value: "+17.1%", label: "Conversion rate", note: "17.6% Nobi vs. 15.0% on their prior search tool" },
+                  { value: "+21.3%", label: "Revenue per searcher", note: "$39.17 vs. $32.30 on their prior tool" },
+                  { value: "+3.3%", label: "Average order value", note: "$222 vs. $215 on their prior tool" },
                 ].map((s) => (
                   <div key={s.value} className="rounded-2xl border border-slate-200 bg-white px-5 py-5 shadow-[0_8px_24px_-16px_rgba(15,23,42,0.15)]">
                     <div className="text-3xl font-bold text-slate-900">{s.value}</div>
@@ -183,7 +182,7 @@ export default function UNTUCKitCustomer() {
                 <div className="text-5xl font-bold text-slate-200 leading-none">01</div>
                 <h3 className="text-2xl font-semibold text-slate-900">Fixing misspellings</h3>
                 <p className="text-base text-slate-600 leading-relaxed">
-                  A shopper typed "smiths sirt." Shopify returned no results and suggested top sellers. Nobi figured out they meant the Smithson Shirt. It was the first result, and the shopper bought it.
+                  A shopper typed "smiths sirt." Their existing search returned no results and fell back to top sellers. Nobi figured out they meant the Smithson Shirt. It was the first result, and the shopper bought it.
                 </p>
               </div>
               <div className="grid sm:grid-cols-2 gap-5 select-none">
@@ -191,7 +190,7 @@ export default function UNTUCKitCustomer() {
                 <div className="rounded-2xl border border-red-100 bg-white shadow-[0_18px_46px_-24px_rgba(15,23,42,0.18)] overflow-hidden">
                   <div className="bg-red-50 border-b border-red-100 px-5 py-3 flex items-center gap-2">
                     <span className="h-2.5 w-2.5 rounded-full bg-red-400 shrink-0" />
-                    <span className="text-sm font-semibold text-red-700">Shopify keyword search</span>
+                    <span className="text-sm font-semibold text-red-700">Keyword search</span>
                   </div>
                   <div className="p-4 space-y-3">
                     <SearchBar query="smiths sirt" />
@@ -240,7 +239,7 @@ export default function UNTUCKitCustomer() {
                 <div className="text-5xl font-bold text-slate-200 leading-none">02</div>
                 <h3 className="text-2xl font-semibold text-slate-900">Better product rankings</h3>
                 <p className="text-base text-slate-600 leading-relaxed">
-                  A search for "white button down" on Shopify returned a t-shirt as the first result. Nobi returned only actual button-downs. The shopper bought the Gironde.
+                  A search for "white button down" returned a t-shirt as the first result. Nobi returned only actual button-downs. The shopper bought the Gironde.
                 </p>
               </div>
               <div className="grid sm:grid-cols-2 gap-5 select-none">
@@ -248,7 +247,7 @@ export default function UNTUCKitCustomer() {
                 <div className="rounded-2xl border border-red-100 bg-white shadow-[0_18px_46px_-24px_rgba(15,23,42,0.18)] overflow-hidden">
                   <div className="bg-red-50 border-b border-red-100 px-5 py-3 flex items-center gap-2">
                     <span className="h-2.5 w-2.5 rounded-full bg-red-400 shrink-0" />
-                    <span className="text-sm font-semibold text-red-700">Shopify keyword search</span>
+                    <span className="text-sm font-semibold text-red-700">Keyword search</span>
                   </div>
                   <div className="p-4 space-y-2">
                     <SearchBar query="white button down" />
@@ -284,7 +283,7 @@ export default function UNTUCKitCustomer() {
                 <div className="text-5xl font-bold text-slate-200 leading-none">03</div>
                 <h3 className="text-2xl font-semibold text-slate-900">Semantic search</h3>
                 <p className="text-base text-slate-600 leading-relaxed">
-                  A search for "navy vest" (a product UNTUCKit didn't carry in navy) had Shopify showing t-shirts. Nobi confirmed no navy vests were available but surfaced vests in other colors and other navy items. The shopper stayed on the site.
+                  A search for "navy vest" (a product UNTUCKit didn't carry in navy) returned t-shirts. Nobi confirmed no navy vests were available but surfaced vests in other colors and other navy items. The shopper stayed on the site.
                 </p>
               </div>
               <div className="grid sm:grid-cols-2 gap-5 select-none">
@@ -292,7 +291,7 @@ export default function UNTUCKitCustomer() {
                 <div className="rounded-2xl border border-red-100 bg-white shadow-[0_18px_46px_-24px_rgba(15,23,42,0.18)] overflow-hidden">
                   <div className="bg-red-50 border-b border-red-100 px-5 py-3 flex items-center gap-2">
                     <span className="h-2.5 w-2.5 rounded-full bg-red-400 shrink-0" />
-                    <span className="text-sm font-semibold text-red-700">Shopify keyword search</span>
+                    <span className="text-sm font-semibold text-red-700">Keyword search</span>
                   </div>
                   <div className="p-4 space-y-3">
                     <SearchBar query="navy vest" />
@@ -343,12 +342,33 @@ export default function UNTUCKitCustomer() {
             </div>
             <div className="space-y-4 text-base text-slate-600 leading-relaxed max-w-2xl">
               <p>
-                Nobi's conversion rate came in at <strong>17.6%</strong> against Shopify's <strong>15.0%</strong> — a <strong>+17.1% lift</strong>. Revenue per searcher climbed from <strong>$32.30</strong> to <strong>$39.17</strong>, a <strong>+21.3% improvement</strong>. Average order value moved from <strong>$215</strong> to <strong>$222</strong>.
+                Nobi's conversion rate came in at <strong>17.6%</strong> against their existing tool's <strong>15.0%</strong> — a <strong>+17.1% lift</strong>. Revenue per searcher climbed from <strong>$32.30</strong> to <strong>$39.17</strong>, a <strong>+21.3% improvement</strong>. Average order value moved from <strong>$215</strong> to <strong>$222</strong>.
               </p>
               <p>
                 The numbers were clear enough that UNTUCKit didn't need to keep running the test. They moved Nobi from a split to 100% of their traffic and started looking at what else they could do with it.
               </p>
             </div>
+
+            {/* Paid tool head-to-head */}
+            <div className="rounded-2xl border border-slate-100 bg-slate-50 overflow-hidden max-w-2xl">
+              <div className="px-6 pt-5 pb-3 border-b border-slate-100">
+                <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-400">Head to head — separate test</p>
+                <p className="text-sm text-slate-500 mt-1">In a direct head-to-head against their existing search tool, Nobi came out ahead.</p>
+              </div>
+              <div className="grid grid-cols-2 divide-x divide-slate-100">
+                <div className="px-6 py-5 space-y-1">
+                  <p className="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-3">Paid incumbent</p>
+                  <p className="text-3xl font-bold text-slate-500">16.5%</p>
+                  <p className="text-sm text-slate-400">conversion rate</p>
+                </div>
+                <div className="px-6 py-5 space-y-1 bg-emerald-50/60">
+                  <p className="text-xs font-semibold text-emerald-600 uppercase tracking-wider mb-3">Nobi</p>
+                  <p className="text-3xl font-bold text-slate-900">17.4%</p>
+                  <p className="text-sm text-slate-500">conversion rate</p>
+                </div>
+              </div>
+            </div>
+
           </div>
         </section>
 

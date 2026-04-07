@@ -2275,16 +2275,32 @@ export default function HomePage() {
     title: "Nobi: Your Website's AI Sales Associate",
     description: "Lucchese generated $1M+ in year one. Add Nobi to your website in minutes and start converting more visitors.",
     path: "/",
-    schema: {
-      "@context": "https://schema.org",
-      "@type": "SoftwareApplication",
-      "name": "Nobi",
-      "applicationCategory": "BusinessApplication",
-      "operatingSystem": "Web",
-      "description": "AI-powered site search and shopping assistant for ecommerce stores. Understands natural language queries and surfaces the right products instantly.",
-      "url": "https://nobi.ai",
-      "offers": { "@type": "Offer", "price": "25", "priceCurrency": "USD", "availability": "https://schema.org/InStock" },
-    },
+    schema: [
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "Nobi",
+        "url": "https://nobi.ai",
+        "logo": "https://nobi.ai/og-image.png",
+        "sameAs": ["https://www.linkedin.com/company/heynobi"],
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "Nobi",
+        "url": "https://nobi.ai",
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "Nobi",
+        "applicationCategory": "BusinessApplication",
+        "operatingSystem": "Web",
+        "description": "AI-powered website assistant. Understands natural language queries and helps visitors find what they need, answer questions, and take action.",
+        "url": "https://nobi.ai",
+        "offers": { "@type": "Offer", "price": "25", "priceCurrency": "USD", "availability": "https://schema.org/InStock" },
+      },
+    ],
   });
 
   return (

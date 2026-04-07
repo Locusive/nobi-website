@@ -22,6 +22,15 @@ export default function CustomActions() {
     title: "Custom Actions & Hooks for AI Search | Nobi",
     description: "Inject custom badges, sorting, and business logic into Nobi without touching our code. Full control over how search results look and behave.",
     path: "/custom-actions",
+    schema: {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "Nobi Custom Actions",
+      "description": "Inject custom badges, sorting rules, and business logic into Nobi without touching the core code. Full control over how results look and behave.",
+      "brand": { "@type": "Brand", "name": "Nobi" },
+      "url": "https://nobi.ai/custom-actions",
+      "offers": { "@type": "Offer", "price": "25", "priceCurrency": "USD", "availability": "https://schema.org/InStock" },
+    },
   });
 
   return (

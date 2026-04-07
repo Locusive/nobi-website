@@ -22,6 +22,15 @@ export default function KnowledgeBase() {
     title: "AI Knowledge Base for Product & Policy Questions | Nobi",
     description: "Let shoppers get instant answers to sizing, shipping, and returns questions. Nobi's knowledge base turns your FAQs into a conversion tool.",
     path: "/knowledge-base",
+    schema: {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "Nobi Knowledge Base",
+      "description": "AI-powered Q&A for product, shipping, and policy questions. Turns your existing FAQs into an instant-answer engine that keeps visitors moving toward checkout.",
+      "brand": { "@type": "Brand", "name": "Nobi" },
+      "url": "https://nobi.ai/knowledge-base",
+      "offers": { "@type": "Offer", "price": "25", "priceCurrency": "USD", "availability": "https://schema.org/InStock" },
+    },
   });
 
   return (

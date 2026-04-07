@@ -366,8 +366,8 @@ export default function UNTUCKitCustomer() {
             <div className="grid md:grid-cols-2 gap-6">
 
               {/* Panel 1: Query channel report */}
-              <div className="rounded-2xl border border-white/10 bg-white/5 overflow-hidden">
-                <div className="aspect-[16/9] bg-[#1e1847] p-5 flex flex-col justify-between">
+              <div className="rounded-2xl border border-white/15 bg-white/8 overflow-hidden">
+                <div className="aspect-[16/9] bg-[#312880] p-5 flex flex-col justify-between">
                   <div className="flex items-center justify-between mb-1">
                     <div className="text-xs font-semibold text-purple-300 uppercase tracking-wider">Queries by Channel</div>
                     <div className="text-[10px] text-white/30 font-mono">Last 30 days</div>
@@ -401,8 +401,8 @@ export default function UNTUCKitCustomer() {
               </div>
 
               {/* Panel 2: Hooks API */}
-              <div className="rounded-2xl border border-white/10 bg-white/5 overflow-hidden">
-                <div className="aspect-[16/9] bg-[#1e1847] flex overflow-hidden">
+              <div className="rounded-2xl border border-white/15 bg-white/8 overflow-hidden">
+                <div className="aspect-[16/9] bg-[#312880] flex overflow-hidden">
                   {/* Code editor */}
                   <div className="flex-1 p-4 border-r border-white/8 flex flex-col min-w-0">
                     <div className="flex items-center gap-1.5 mb-3">
@@ -447,8 +447,8 @@ export default function UNTUCKitCustomer() {
               </div>
 
               {/* Panel 3: Weekly insights */}
-              <div className="rounded-2xl border border-white/10 bg-white/5 overflow-hidden">
-                <div className="aspect-[16/9] bg-[#1e1847] p-5 flex flex-col gap-3">
+              <div className="rounded-2xl border border-white/15 bg-white/8 overflow-hidden">
+                <div className="aspect-[16/9] bg-[#312880] p-5 flex flex-col gap-3">
                   <div className="flex items-center justify-between">
                     <div className="text-xs font-semibold text-purple-300 uppercase tracking-wider">Weekly Insights</div>
                     <div className="text-[10px] text-white/30 font-mono">Apr 1 – 7</div>
@@ -482,8 +482,8 @@ export default function UNTUCKitCustomer() {
               </div>
 
               {/* Panel 4: Search history timeline */}
-              <div className="rounded-2xl border border-white/10 bg-white/5 overflow-hidden">
-                <div className="aspect-[16/9] bg-[#1e1847] p-5 flex flex-col gap-3">
+              <div className="rounded-2xl border border-white/15 bg-white/8 overflow-hidden">
+                <div className="aspect-[16/9] bg-[#312880] p-5 flex flex-col gap-3">
                   <div className="text-xs font-semibold text-purple-300 uppercase tracking-wider">Search History</div>
                   <div className="flex-1 relative">
                     {/* SVG line chart */}

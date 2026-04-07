@@ -170,9 +170,9 @@ function ConversationDemo() {
             transition={{ duration: 0.5 }}
             className="grid grid-cols-3 gap-2 pt-1"
           >
-            <ProductCard title="St. Bernard Maxi" price="$98" img="/media/prod-1.png" />
-            <ProductCard title="Lulus Backless Maxi" price="$55" img="/media/prod-2.png" />
-            <ProductCard title="Coronel Cover-Up" price="$178" img="/media/prod-3.png" />
+            <ProductCard title="St. Bernard Maxi" price="$98" img="/media/prod-1.webp" />
+            <ProductCard title="Lulus Backless Maxi" price="$55" img="/media/prod-2.webp" />
+            <ProductCard title="Coronel Cover-Up" price="$178" img="/media/prod-3.webp" />
           </motion.div>
         )}
       </div>

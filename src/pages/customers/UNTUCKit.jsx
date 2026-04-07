@@ -366,7 +366,6 @@ export default function UNTUCKitCustomer() {
                   <p className="text-xs font-semibold text-emerald-600 uppercase tracking-wider mb-3">Nobi</p>
                   <p className="text-3xl font-bold text-slate-900">17.4%</p>
                   <p className="text-sm text-slate-500">conversion rate</p>
-                  <div className="inline-flex items-center gap-1.5 mt-3 rounded-full bg-emerald-100 px-3 py-1 text-xs font-semibold text-emerald-700">+115 checkouts/month</div>
                 </div>
               </div>
             </div>

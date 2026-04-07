@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { BookOpen, ChevronDown, Menu, Search as SearchIcon, UserPlus, X, ExternalLink, Sparkles, Zap } from "lucide-react";
+import { BookOpen, ChevronDown, Menu, Search as SearchIcon, UserPlus, X, ExternalLink, Sparkles, Zap, BarChart2 } from "lucide-react";
 import { useDemoForm } from "../context/DemoFormContext";
 import { trackDemoFormOpened } from "../utils/eventTracker";
 import { getSignupUrl } from "../utils/signupUrl";
@@ -59,6 +59,19 @@ export default function Nav() {
                   </div>
                 </a>
               ))}
+              <div className="mx-auto my-1.5 border-t border-black/8 dark:border-white/8 w-1/2" />
+              <a
+                href="/customers"
+                className="flex items-start gap-3 px-4 py-2.5 hover:bg-black/5 dark:hover:bg-white/5 rounded-xl mx-1 transition-colors"
+              >
+                <div className="mt-0.5 p-1.5 rounded-lg bg-fuchsia-50 dark:bg-fuchsia-900/20 text-fuchsia-600 shrink-0">
+                  <BarChart2 className="h-3.5 w-3.5" />
+                </div>
+                <div>
+                  <span className="block font-semibold text-sm">Case studies</span>
+                  <span className="block text-xs text-black/50 dark:text-white/50 mt-0.5">Real results from Lucchese, UNTUCKit, and Kilte</span>
+                </div>
+              </a>
             </div>
           </div>
         </div>
@@ -115,6 +128,10 @@ export default function Nav() {
                     {f.label}
                   </a>
                 ))}
+                <div className="border-t border-black/8 my-0.5" />
+                <a href="/customers" onClick={closeMobileMenu} className="text-sm font-medium text-black/70 dark:text-white/70 hover:opacity-80 py-1.5">
+                  Case studies
+                </a>
               </div>
             )}
             <a href="/pricing" onClick={closeMobileMenu} className="text-sm font-semibold hover:opacity-80 py-2">Pricing</a>

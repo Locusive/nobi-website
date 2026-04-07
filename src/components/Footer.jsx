@@ -13,31 +13,31 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="grid grid-cols-2 sm:grid-cols-3 gap-6 text-sm">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 text-sm">
           <div className="space-y-2">
             <div className="font-semibold text-black dark:text-white">Product</div>
             <div className="flex flex-col gap-2">
-              <a href="/" className="hover:opacity-80">
-                Home
-              </a>
-              <a href="/why-nobi/better-search" className="hover:opacity-80">
-                Why Nobi
-              </a>
-              <a href="/pricing" className="hover:opacity-80">
-                Pricing
-              </a>
-              <a href="/faqs" className="hover:opacity-80">
-                FAQs
-              </a>
+              <a href="/" className="hover:opacity-80">Home</a>
+              <a href="/pricing" className="hover:opacity-80">Pricing</a>
+              <a href="/faqs" className="hover:opacity-80">FAQs</a>
+            </div>
+          </div>
+
+          <div className="space-y-2">
+            <div className="font-semibold text-black dark:text-white">Capabilities</div>
+            <div className="flex flex-col gap-2">
+              <a href="/why-nobi/better-search" className="hover:opacity-80">Search</a>
+              <a href="/lead-capture" className="hover:opacity-80">Lead capture</a>
+              <a href="/custom-actions" className="hover:opacity-80">Custom actions</a>
+              <a href="/knowledge-base" className="hover:opacity-80">Accurate answers</a>
             </div>
           </div>
 
           <div className="space-y-2">
             <div className="font-semibold text-black dark:text-white">Resources</div>
             <div className="flex flex-col gap-2">
-              <a href="/blog" className="hover:opacity-80">
-                Thoughts
-              </a>
+              <a href="/customers" className="hover:opacity-80">Case studies</a>
+              <a href="/blog" className="hover:opacity-80">Thoughts</a>
               <a href="https://docs.nobi.ai" target="_blank" rel="noopener noreferrer" className="hover:opacity-80 flex items-center gap-1">
                 Docs <ExternalLink className="w-4 h-4" />
               </a>
@@ -47,12 +47,8 @@ export default function Footer() {
           <div className="space-y-2">
             <div className="font-semibold text-black dark:text-white">Legal</div>
             <div className="flex flex-col gap-2">
-              <a href="/terms" className="hover:opacity-80">
-                Terms
-              </a>
-              <a href="/privacy" className="hover:opacity-80">
-                Privacy
-              </a>
+              <a href="/terms" className="hover:opacity-80">Terms</a>
+              <a href="/privacy" className="hover:opacity-80">Privacy</a>
             </div>
           </div>
         </div>

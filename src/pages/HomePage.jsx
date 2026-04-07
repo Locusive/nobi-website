@@ -2272,8 +2272,8 @@ export default function HomePage() {
   });
 
   useSEO({
-    title: "Nobi — AI Site Search & Shopping Assistant for Ecommerce",
-    description: "Turn your site search into a revenue driver. Lucchese generated $1M+ in year one. Add Nobi to any ecommerce store in minutes.",
+    title: "Nobi: Your Website's AI Sales Associate",
+    description: "Lucchese generated $1M+ in year one. Add Nobi to your website in minutes and start converting more visitors.",
     path: "/",
     schema: {
       "@context": "https://schema.org",

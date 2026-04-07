@@ -6,7 +6,7 @@ import { posts } from "../content/utils/mdxPostLoader";
 export default function Blog() {
   useSEO({
     title: "Blog | Nobi",
-    description: "Insights on AI site search, ecommerce conversion, and product discovery for Shopify and other online retailers.",
+    description: "Insights on AI, conversion, and helping visitors find what they're looking for — for any business that wants more from its website.",
     path: "/blog",
   });
 

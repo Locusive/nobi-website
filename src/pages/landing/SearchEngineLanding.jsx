@@ -96,7 +96,7 @@ function LogoStrip() {
 
 export default function SearchEngineLanding() {
   useSEO({
-    title: "AI Site Search for Ecommerce | Nobi",
+    title: "AI Search That Understands Your Visitors | Nobi",
     description: "Semantic search that understands what shoppers mean. Stop losing sales to dead-end keyword searches. Set up in one line of code.",
     path: "/s/search",
   });

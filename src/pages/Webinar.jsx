@@ -5,7 +5,7 @@ import PageLayout from "../components/PageLayout";
 export default function Webinar() {
   useSEO({
     title: "Claude Code Webinar Series | Nobi",
-    description: "Join Nobi's webinar series on AI tools for ecommerce. Learn how to use AI to grow your online store.",
+    description: "Join Nobi's webinar series on AI tools. Learn how to use AI to convert more visitors and grow your business.",
     path: "/webinar",
   });
 

@@ -11,7 +11,7 @@ const CONTACT = "legal@nobi.ai";
 export default function Terms() {
   useSEO({
     title: "Terms of Service | Nobi",
-    description: "Nobi's terms of service governing use of our AI site search and shopping assistant products.",
+    description: "Nobi's terms of service governing use of our AI assistant products.",
     path: "/terms",
   });
   return (

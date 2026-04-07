@@ -350,15 +350,15 @@ export default function UNTUCKitCustomer() {
               </p>
             </div>
 
-            {/* Findify head-to-head */}
+            {/* Paid tool head-to-head */}
             <div className="rounded-2xl border border-slate-100 bg-slate-50 overflow-hidden max-w-2xl">
               <div className="px-6 pt-5 pb-3 border-b border-slate-100">
                 <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-400">Head to head</p>
-                <p className="text-sm text-slate-500 mt-1">They were also running Findify, a paid search tool. Nobi was tested against that too.</p>
+                <p className="text-sm text-slate-500 mt-1">They were also running a paid third-party search tool at the time. Nobi was tested against that too.</p>
               </div>
               <div className="grid grid-cols-2 divide-x divide-slate-100">
                 <div className="px-6 py-5 space-y-1">
-                  <p className="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-3">Findify</p>
+                  <p className="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-3">Paid incumbent</p>
                   <p className="text-3xl font-bold text-slate-500">16.5%</p>
                   <p className="text-sm text-slate-400">conversion rate</p>
                 </div>

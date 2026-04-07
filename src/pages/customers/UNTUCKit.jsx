@@ -116,7 +116,7 @@ export default function UNTUCKitCustomer() {
               <div className="flex items-center gap-4">
                 <img src="/media/logos/untuckit.svg" alt="UNTUCKit" className="h-5 w-auto" />
                 <span className="text-sm text-slate-400">×</span>
-                <img src="/media/nobi-logo.png" alt="Nobi" className="h-4 w-auto opacity-60" />
+                <span className="text-sm font-semibold text-slate-500">Nobi</span>
               </div>
               <div className="space-y-4">
                 <p className="text-sm font-semibold tracking-[0.2em] text-fuchsia-600 uppercase">Customer story</p>

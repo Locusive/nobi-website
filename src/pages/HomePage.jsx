@@ -2267,7 +2267,7 @@ export default function HomePage() {
   const { onOpen: onOpenForm } = useDemoForm();
 
   const [variant, setVariant] = useState(() => {
-    try { return localStorage.getItem("nobi_hero_variant") || "default"; } catch (_) { return "default"; }
+    try { return localStorage.getItem("nobi_hero_variant") || "search"; } catch (_) { return "search"; }
   });
 
   useEffect(() => {

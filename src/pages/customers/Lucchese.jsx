@@ -392,7 +392,7 @@ export default function LuccheseCustomer() {
               <h2 className="text-2xl font-semibold text-slate-900">What happened</h2>
             </div>
             <p className="text-base text-slate-600 leading-relaxed max-w-2xl">
-              In the first two months after launch, Nobi drove a <strong>21% improvement in conversion rates</strong> compared to the standard Shopify experience in a direct A/B test. By year one, Lucchese had generated <strong>$1M+ in incremental revenue</strong>, a 74% improvement over the standard Shopify experience, at an <strong>ROI of 33x</strong>.
+              By year one, Lucchese had generated <strong>$1M+ in incremental revenue</strong> at a <strong>33x ROI</strong>. Across the purchase funnel, Nobi search drove <strong>+12% more add-to-carts</strong>, <strong>+22.9% better checkout completion</strong>, and a <strong>+10.6% lift in average order value</strong> — from $925 to $1,023.
             </p>
 
             <div className="rounded-2xl border border-slate-100 bg-slate-50 p-8 space-y-4">
@@ -421,7 +421,7 @@ export default function LuccheseCustomer() {
             <div className="space-y-3">
               <p className="text-sm font-semibold uppercase tracking-[0.18em] text-slate-400">What's next</p>
               <p className="text-base text-slate-600 leading-relaxed max-w-2xl">
-                Lucchese and Nobi continue to explore new ways to use AI throughout the shopping experience as Lucchese works toward its "Make it Smart" goal for 2025 and beyond.
+                After search, Lucchese kept going. The cart assistant launched in May 2025 and has since driven <strong>$108K in all-time revenue at an 8.5x ROI</strong>. The PDP assistant followed in August. Nobi has become a platform across Lucchese's shopping experience, not just a search layer.
               </p>
             </div>
             <Quote

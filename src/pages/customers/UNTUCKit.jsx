@@ -349,6 +349,28 @@ export default function UNTUCKitCustomer() {
                 The numbers were clear enough that UNTUCKit didn't need to keep running the test. They moved Nobi from a split to 100% of their traffic and started looking at what else they could do with it.
               </p>
             </div>
+
+            {/* Findify head-to-head */}
+            <div className="rounded-2xl border border-slate-100 bg-slate-50 overflow-hidden max-w-2xl">
+              <div className="px-6 pt-5 pb-3 border-b border-slate-100">
+                <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-400">Head to head</p>
+                <p className="text-sm text-slate-500 mt-1">They were also running Findify, a paid search tool. Nobi was tested against that too.</p>
+              </div>
+              <div className="grid grid-cols-2 divide-x divide-slate-100">
+                <div className="px-6 py-5 space-y-1">
+                  <p className="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-3">Findify</p>
+                  <p className="text-3xl font-bold text-slate-500">16.5%</p>
+                  <p className="text-sm text-slate-400">conversion rate</p>
+                </div>
+                <div className="px-6 py-5 space-y-1 bg-emerald-50/60">
+                  <p className="text-xs font-semibold text-emerald-600 uppercase tracking-wider mb-3">Nobi</p>
+                  <p className="text-3xl font-bold text-slate-900">17.4%</p>
+                  <p className="text-sm text-slate-500">conversion rate</p>
+                  <div className="inline-flex items-center gap-1.5 mt-3 rounded-full bg-emerald-100 px-3 py-1 text-xs font-semibold text-emerald-700">+115 checkouts/month</div>
+                </div>
+              </div>
+            </div>
+
           </div>
         </section>
 

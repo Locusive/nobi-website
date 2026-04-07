@@ -130,10 +130,10 @@ function DualModeSearchBar({
 }
 
 const PRODUCTS = [
-  { title: "Cherry Evening Gown", price: "$189", img: "/media/prod-1.png" },
-  { title: "Satin A-Line Dress", price: "$156", img: "/media/prod-2.png" },
-  { title: "Sequin Maxi Dress", price: "$224", img: "/media/prod-3.png" },
-  { title: "Off-Shoulder Formal", price: "$178", img: "/media/prod-4.png" },
+  { title: "Cherry Evening Gown", price: "$189", img: "/media/prod-1.webp" },
+  { title: "Satin A-Line Dress", price: "$156", img: "/media/prod-2.webp" },
+  { title: "Sequin Maxi Dress", price: "$224", img: "/media/prod-3.webp" },
+  { title: "Off-Shoulder Formal", price: "$178", img: "/media/prod-4.webp" },
 ];
 
 const PDP_QUESTION = "Does this run true to size?";

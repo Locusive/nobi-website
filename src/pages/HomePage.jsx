@@ -2272,7 +2272,7 @@ export default function HomePage() {
   });
 
   useSEO({
-    title: "Nobi: AI Site Search That Converts",
+    title: "Nobi: Your Website's AI Sales Associate",
     description: "Turn your site search into a revenue driver. Lucchese generated $1M+ in year one. Add Nobi to any ecommerce store in minutes.",
     path: "/",
     schema: {

@@ -1,6 +1,6 @@
 import React from "react";
-import nobiLogo from "../assets/nobi-logo.png";
-import nobiLogo2x from "../assets/nobi-logo@2x.png";
+import nobiLogo from "../assets/nobi-logo.webp";
+import nobiLogo2x from "../assets/nobi-logo@2x.webp";
 
 export default function Logo({ className = "h-8 md:h-9 lg:h-10" }) {
   return (

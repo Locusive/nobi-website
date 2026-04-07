@@ -19,7 +19,7 @@ const CUSTOMER_LOGOS = [
   { alt: "UNTUCKit", src: "/media/logos/untuckit.svg" },
   { alt: "Lucchese", src: "/media/logos/lucchese.svg" },
   { alt: "TOOLUP", src: "/media/logos/toolup.svg" },
-  { alt: "Kilte", src: "/media/logos/kilte.svg" },
+  { alt: "Kilte", src: "/media/logos/kilte.webp" },
   { alt: "Alps and Meters", src: "/media/logos/alps_meters.png" },
 ];
 
@@ -53,8 +53,8 @@ function StickyBar() {
       <div className="mx-auto max-w-6xl px-6 flex items-center justify-between h-14">
         <a href="/" className="flex items-center gap-2">
           <img
-            src="/media/nobi-logo.png"
-            srcSet="/media/nobi-logo.png 1x, /media/nobi-logo@2x.png 2x"
+            src="/media/nobi-logo.webp"
+            srcSet="/media/nobi-logo.webp 1x, /media/nobi-logo@2x.webp 2x"
             alt="Nobi"
             className="h-7 w-auto"
           />

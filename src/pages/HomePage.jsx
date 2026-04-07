@@ -607,10 +607,10 @@ function Logo({ className = "h-7 md:h-9 lg:h-10" }) {
     <div className={`flex items-center gap-2 ${className}`}>
       {!failed ? (
         <img
-          src="/media/nobi-logo.png"                     // your PNG route
-          srcSet="/media/nobi-logo.png 1x, /media/nobi-logo@2x.png 2x"
+          src="/media/nobi-logo.webp"
+          srcSet="/media/nobi-logo.webp 1x, /media/nobi-logo@2x.webp 2x"
           alt="Nobi"
-          className="h-full w-auto"                      // ← scale to wrapper height
+          className="h-full w-auto"
           onError={() => setFailed(true)}
         />
       ) : (
@@ -1253,7 +1253,7 @@ const CUSTOMER_LOGOS = [
   { alt: "UNTUCKit", src: "/media/logos/untuckit.svg" },
   { alt: "Lucchese", src: "/media/logos/lucchese.svg" },
 { alt: "TOOLUP", src: "/media/logos/toolup.svg" },
-  { alt: "Kilte", src: "/media/logos/kilte.svg" },
+  { alt: "Kilte", src: "/media/logos/kilte.webp" },
   { alt: "Alps and Meters", src: "/media/logos/alps_meters.png" },
 ];
 
@@ -1573,7 +1573,7 @@ function Testimonial() {
           >
             {!photoFailed ? (
               <img
-                src="/media/lucchese-testimonial-image.png" // <-- put your photo here
+                src="/media/lucchese-testimonial-image.webp"
                 alt="Customer lifestyle"
                 className="h-full w-full object-cover"
                 onError={() => setPhotoFailed(true)}
@@ -2306,31 +2306,33 @@ export default function HomePage() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-white to-slate-50 dark:from-[#0a0a0a] dark:to-black text-black dark:text-white">
       <Header />
-      <Hero onOpenVideo={() => setIsVideoOpen(true)} onOpenDemo={onOpenForm} variant={variant} setVariant={setVariant} />
-      <Problem variant={variant} />
-      <Numbers variant={variant} />
-      <Features />
-      <Testimonial />
-      <HowItWorks />
-      <WorksWith />
-      <Insights onOpenForm={onOpenForm} />
-      <LatestPosts />
-      {SHOW_PRICING && <Pricing />}
-      <FAQList
-        limit={4}
-        showBorderTop
-        padding="py-20"
-        columns={2}
-        headingAlign="center"
-      />
-      <div className="mx-auto max-w-6xl px-6 -mt-6 mb-14 flex justify-center">
-        <a
-          href="/faqs"
-          className="text-sm font-semibold text-black hover:text-purple-600 transition-colors underline"
-        >
-          See all FAQs
-        </a>
-      </div>
+      <main>
+        <Hero onOpenVideo={() => setIsVideoOpen(true)} onOpenDemo={onOpenForm} variant={variant} setVariant={setVariant} />
+        <Problem variant={variant} />
+        <Numbers variant={variant} />
+        <Features />
+        <Testimonial />
+        <HowItWorks />
+        <WorksWith />
+        <Insights onOpenForm={onOpenForm} />
+        <LatestPosts />
+        {SHOW_PRICING && <Pricing />}
+        <FAQList
+          limit={4}
+          showBorderTop
+          padding="py-20"
+          columns={2}
+          headingAlign="center"
+        />
+        <div className="mx-auto max-w-6xl px-6 -mt-6 mb-14 flex justify-center">
+          <a
+            href="/faqs"
+            className="text-sm font-semibold text-black hover:text-purple-600 transition-colors underline"
+          >
+            See all FAQs
+          </a>
+        </div>
+      </main>
       <Footer />
       <VideoModal
         open={isVideoOpen}

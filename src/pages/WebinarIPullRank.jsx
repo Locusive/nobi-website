@@ -523,7 +523,7 @@ export default function WebinarIPullRank() {
         <nav className="wip-nav">
           <div className="wip-nav-logos">
             <a href="https://nobi.ai" className="wip-logo-nobi">
-              <img src="/media/nobi-logo.png" alt="Nobi" style={{ height: "44px", width: "auto" }} />
+              <img src="/media/nobi-logo.webp" alt="Nobi" style={{ height: "44px", width: "auto" }} />
             </a>
             <span className="wip-divider">&times;</span>
             <a href="https://ipullrank.com" className="wip-logo-ipr">
@@ -644,7 +644,7 @@ export default function WebinarIPullRank() {
             <div className="wip-brand-pill"><img src="/media/logos/untuckit.svg" alt="UNTUCKit" /></div>
             <div className="wip-brand-pill"><img src="/media/logos/lucchese.svg" alt="Lucchese" /></div>
             <div className="wip-brand-pill"><img src="/media/logos/toolup.svg" alt="TOOLUP" /></div>
-            <div className="wip-brand-pill"><img src="/media/logos/kilte.svg" alt="Kilte" /></div>
+            <div className="wip-brand-pill"><img src="/media/logos/kilte.webp" alt="Kilte" /></div>
           </div>
         </section>
 

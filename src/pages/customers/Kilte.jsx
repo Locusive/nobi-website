@@ -71,7 +71,7 @@ export default function KilteCustomer() {
           <div className="relative mx-auto max-w-4xl px-6 pb-16 pt-16 sm:pt-20 lg:pt-24">
             <div className="space-y-8">
               <div className="flex items-center gap-4">
-                <img src="/media/logos/kilte.svg" alt="Kilte" className="h-7 w-auto" />
+                <img src="/media/logos/kilte.webp" alt="Kilte" className="h-7 w-auto" />
               </div>
               <div className="space-y-4">
                 <p className="text-sm font-semibold tracking-[0.2em] text-fuchsia-600 uppercase">Customer story</p>

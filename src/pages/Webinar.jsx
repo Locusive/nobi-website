@@ -292,7 +292,7 @@ export default function Webinar() {
               <h1>We'll show you how to use Claude Code to <em>actually</em> run your business</h1>
             </div>
             <div className="webinar-hero-visual">
-              <a href="https://nobi.ai"><img src="/media/nobi-logo.png" alt="Nobi" style={{ height: "80px", marginBottom: "-14px" }} /></a>
+              <a href="https://nobi.ai"><img src="/media/nobi-logo.webp" alt="Nobi" style={{ height: "80px", marginBottom: "-14px" }} /></a>
               <span className="plus">+</span>
               <img src="/media/claude-logo.svg" alt="Claude" />
             </div>

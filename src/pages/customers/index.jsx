@@ -35,7 +35,7 @@ const STORIES = [
   },
   {
     slug: "/customers/kilte",
-    logo: "/media/logos/kilte.svg",
+    logo: "/media/logos/kilte.webp",
     name: "Kilte",
     headline: "+21.7% more conversions",
     body: "Kilte ran a head-to-head comparison against Shopify default search. Nobi won by 21.7%. They switched and now use Nobi across search, filters, and their help hub.",

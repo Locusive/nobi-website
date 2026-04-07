@@ -11,7 +11,7 @@ const CUSTOMER_LOGOS = [
   { alt: "UNTUCKit", src: "/media/logos/untuckit.svg" },
   { alt: "Lucchese", src: "/media/logos/lucchese.svg" },
   { alt: "TOOLUP", src: "/media/logos/toolup.svg" },
-  { alt: "Kilte", src: "/media/logos/kilte.svg" },
+  { alt: "Kilte", src: "/media/logos/kilte.webp" },
   { alt: "Alps and Meters", src: "/media/logos/alps_meters.png" },
 ];
 

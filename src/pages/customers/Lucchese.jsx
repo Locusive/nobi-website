@@ -104,7 +104,7 @@ export default function LuccheseCustomer() {
               </div>
               <div className="relative rounded-2xl overflow-hidden aspect-[3/4]">
                 <img
-                  src="/media/lucchese-testimonial-image.png"
+                  src="/media/lucchese-testimonial-image.webp"
                   alt="Lucchese boots"
                   className="absolute inset-0 w-full h-full object-cover"
                 />

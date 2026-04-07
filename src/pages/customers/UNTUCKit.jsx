@@ -119,9 +119,8 @@ export default function UNTUCKitCustomer() {
               <div className="space-y-4">
                 <p className="text-sm font-semibold tracking-[0.2em] text-fuchsia-600 uppercase">Customer story</p>
                 <h1 className="text-4xl sm:text-5xl lg:text-6xl font-semibold leading-[1.05] text-slate-900 text-balance">
-                  How UNTUCKit turned a{" "}
-                  <span className={GRADIENT}>two-month pilot</span>{" "}
-                  into a long-term partnership
+                  How UNTUCKit turned a two-month pilot into a{" "}
+                  <span className={GRADIENT}>long-term partnership</span>
                 </h1>
                 <p className="text-lg text-slate-600 max-w-2xl leading-relaxed">
                   UNTUCKit wanted more shoppers engaging with search. They ran a two-month A/B test, saw the numbers, dropped the split, and went all in.

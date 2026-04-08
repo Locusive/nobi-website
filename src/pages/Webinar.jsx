@@ -302,7 +302,7 @@ export default function Webinar() {
             in front of you — marketing systems, outreach pipelines, data analysis, real software.
             Four sessions, 30 minutes each.
           </p>
-          <p className="details">Starts April 9th, 2026 &middot; Thursdays at 12 PM ET &middot; 30 min each</p>
+          <p className="details">Starts April 10th, 2026 &middot; Thursdays at 12 PM ET &middot; 30 min each</p>
           <p className="details">Hosted by Tyler &amp; Shanif, co-founders of Nobi</p>
           <div className="webinar-hero-cta">
             <a href="#register">Register for the series</a>
@@ -318,7 +318,7 @@ export default function Webinar() {
             <div className="webinar-session-number">Week 1</div>
             <div>
               <h3>Reach Your Ideal Customer Where They Already Are</h3>
-              <div className="meta">Tyler &middot; April 9th</div>
+              <div className="meta">Tyler &middot; April 10th</div>
             </div>
             <p>
               We'll find where your customers actually hang out online, engage authentically

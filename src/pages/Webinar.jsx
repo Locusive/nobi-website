@@ -302,7 +302,7 @@ export default function Webinar() {
             in front of you — marketing systems, outreach pipelines, data analysis, real software.
             Four sessions, 30 minutes each.
           </p>
-          <p className="details">Starts April 10th, 2026 &middot; Thursdays at 12 PM ET &middot; 30 min each</p>
+          <p className="details">New webinar every week in April &middot; 30 min each</p>
           <p className="details">Hosted by Tyler &amp; Shanif, co-founders of Nobi</p>
           <div className="webinar-hero-cta">
             <a href="#register">Register for the series</a>

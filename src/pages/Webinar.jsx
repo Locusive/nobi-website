@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useSEO } from "../hooks/useSEO";
 import PageLayout from "../components/PageLayout";
 
@@ -8,49 +8,6 @@ export default function Webinar() {
     description: "Join Nobi's webinar series on AI tools. Learn how to use AI to convert more visitors and grow your business.",
     path: "/webinar",
   });
-
-  const [form, setForm] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    company: "",
-    sessions: "",
-    botcheck: "",
-  });
-  const [submitting, setSubmitting] = useState(false);
-  const [done, setDone] = useState(false);
-  const [error, setError] = useState("");
-
-  const update = (e) => setForm((f) => ({ ...f, [e.target.name]: e.target.value }));
-
-  async function handleSubmit(e) {
-    e.preventDefault();
-    setSubmitting(true);
-    setError("");
-    try {
-      const formData = new FormData();
-      formData.append("access_key", "c7a3fd79-0e4f-47ce-aa30-c141616d21e3");
-      formData.append("subject", "Webinar Registration: " + (form.firstName + " " + form.lastName).trim());
-      formData.append("from_name", "Nobi Webinar");
-      formData.append("name", (form.firstName + " " + form.lastName).trim());
-      formData.append("email", form.email);
-      formData.append("company", form.company);
-      formData.append("sessions", form.sessions);
-      formData.append("botcheck", form.botcheck);
-
-      const r = await fetch("https://api.web3forms.com/submit", {
-        method: "POST",
-        body: formData,
-      });
-      const j = await r.json();
-      if (!r.ok || !j.success) throw new Error(j.message || "Something went wrong.");
-      setDone(true);
-    } catch (err) {
-      setError(err.message || "Failed to submit.");
-    } finally {
-      setSubmitting(false);
-    }
-  }
 
   return (
     <PageLayout>
@@ -392,31 +349,26 @@ export default function Webinar() {
 
         <section className="webinar-register" id="register">
           <h2>Register</h2>
-          <p className="sub">Pick one session or sign up for all four. We'll send the recordings either way.</p>
-          {!done ? (
-            <form onSubmit={handleSubmit}>
-              <input type="text" name="botcheck" value={form.botcheck} onChange={update} style={{ display: "none" }} tabIndex={-1} autoComplete="off" />
-              <input type="text" name="firstName" placeholder="First name" value={form.firstName} onChange={update} required />
-              <input type="text" name="lastName" placeholder="Last name" value={form.lastName} onChange={update} />
-              <input type="email" name="email" placeholder="Email" value={form.email} onChange={update} required className="full" />
-              <input type="text" name="company" placeholder="Company (optional)" value={form.company} onChange={update} className="full" />
-              <select className="full" name="sessions" value={form.sessions} onChange={update}>
-                <option value="" disabled>Which sessions?</option>
-                <option value="all">All four</option>
-                <option value="1">Week 1 — Reach Your Ideal Customer</option>
-                <option value="2">Week 2 — Send Outreach That Gets Replies</option>
-                <option value="3">Week 3 — Turn Data Into Decisions</option>
-                <option value="4">Week 4 — Stop Vibe Coding</option>
-              </select>
-              {error && <div className="full" style={{ color: "#c00", fontFamily: "-apple-system, sans-serif", fontSize: "0.88rem" }}>{error}</div>}
-              <button type="submit" disabled={submitting}>{submitting ? "Submitting…" : "Register — it's free"}</button>
-              <div className="fine-print">No spam. Just reminders and the recording.</div>
-            </form>
-          ) : (
-            <div style={{ fontFamily: "-apple-system, sans-serif", fontSize: "1rem", color: "#333", padding: "20px 0" }}>
-              <p>You're registered! We'll send you a reminder before each session.</p>
-            </div>
-          )}
+          <p className="sub">Pick a session to register via Zoom. Sign up for one or all four — we'll send the recordings either way.</p>
+          <div style={{ display: "flex", flexDirection: "column", gap: "14px" }}>
+            <a href="https://us06web.zoom.us/webinar/register/WN_fSW4DDOGSYGiipZi5HWsVQ" target="_blank" rel="noopener noreferrer" style={{ display: "block", padding: "16px 20px", border: "1.5px solid #ddd", borderRadius: "6px", textDecoration: "none", color: "#222", fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif", transition: "border-color 0.15s" }}>
+              <strong style={{ fontSize: "0.95rem" }}>Week 1 — Reach Your Ideal Customer</strong><br />
+              <span style={{ fontSize: "0.82rem", color: "#999" }}>Friday, April 10th &middot; 12 PM PT</span>
+            </a>
+            <a href="https://us06web.zoom.us/webinar/register/WN_Y1SIzq6BRh6FRFgzrjGGIw" target="_blank" rel="noopener noreferrer" style={{ display: "block", padding: "16px 20px", border: "1.5px solid #ddd", borderRadius: "6px", textDecoration: "none", color: "#222", fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif", transition: "border-color 0.15s" }}>
+              <strong style={{ fontSize: "0.95rem" }}>Week 2 — Outreach That Gets Replies</strong><br />
+              <span style={{ fontSize: "0.82rem", color: "#999" }}>Thursday, April 16th &middot; 12 PM PT</span>
+            </a>
+            <a href="https://us06web.zoom.us/webinar/register/WN_BB3Z9e-5S8q0CM36XnLoVg" target="_blank" rel="noopener noreferrer" style={{ display: "block", padding: "16px 20px", border: "1.5px solid #ddd", borderRadius: "6px", textDecoration: "none", color: "#222", fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif", transition: "border-color 0.15s" }}>
+              <strong style={{ fontSize: "0.95rem" }}>Week 3 — Data Into Decisions</strong><br />
+              <span style={{ fontSize: "0.82rem", color: "#999" }}>Thursday, April 23rd &middot; 12 PM PT</span>
+            </a>
+            <a href="https://us06web.zoom.us/webinar/register/WN_3glh79uMRT6T_FAMXFtQVA" target="_blank" rel="noopener noreferrer" style={{ display: "block", padding: "16px 20px", border: "1.5px solid #ddd", borderRadius: "6px", textDecoration: "none", color: "#222", fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif", transition: "border-color 0.15s" }}>
+              <strong style={{ fontSize: "0.95rem" }}>Week 4 — Stop Vibe Coding</strong><br />
+              <span style={{ fontSize: "0.82rem", color: "#999" }}>Thursday, April 30th &middot; 12 PM PT</span>
+            </a>
+          </div>
+          <p className="fine-print" style={{ marginTop: "16px" }}>No spam. Just reminders and the recording.</p>
         </section>
       </div>
     </PageLayout>

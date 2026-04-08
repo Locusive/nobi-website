@@ -420,79 +420,30 @@
 
   <section class="register" id="register">
     <h2>Register</h2>
-    <p class="sub">Pick one session or sign up for all four. We'll send the recordings either way.</p>
-    <form id="webinar-form">
-      <!-- Honeypot spam protection -->
-      <input type="text" name="botcheck" style="display:none !important" tabindex="-1" autocomplete="off">
-      <input type="text" name="firstName" placeholder="First name" required>
-      <input type="text" name="lastName" placeholder="Last name">
-      <input type="email" name="email" placeholder="Email" required class="full">
-      <input type="text" name="company" placeholder="Company (optional)" class="full">
-      <select name="sessions" class="full">
-        <option value="" disabled selected>Which sessions?</option>
-        <option value="all">All four</option>
-        <option value="1">Week 1 — Reach Your Ideal Customer</option>
-        <option value="2">Week 2 — Outreach That Gets Replies</option>
-        <option value="3">Week 3 — Data Into Decisions</option>
-        <option value="4">Week 4 — Stop Vibe Coding</option>
-      </select>
-      <div id="form-error" class="error-msg" style="display:none"></div>
-      <button type="submit" id="submit-btn">Register — it's free</button>
-      <div class="fine-print">No spam. Just reminders and the recording.</div>
-    </form>
-    <div id="success-state" class="success-msg" style="display:none">
-      <strong>You're registered!</strong><br>
-      We'll send you a reminder before each session and the recording afterward.
+    <p class="sub">Pick a session to register via Zoom. Sign up for one or all four — we'll send the recordings either way.</p>
+    <div style="display: flex; flex-direction: column; gap: 14px;">
+      <a href="https://us06web.zoom.us/webinar/register/WN_fSW4DDOGSYGiipZi5HWsVQ" target="_blank" style="display: block; padding: 16px 20px; border: 1.5px solid #ddd; border-radius: 6px; text-decoration: none; color: #222; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; transition: border-color 0.15s;">
+        <strong style="font-size: 0.95rem;">Week 1 — Reach Your Ideal Customer</strong><br>
+        <span style="font-size: 0.82rem; color: #999;">Friday, April 10th &middot; 12 PM PT</span>
+      </a>
+      <a href="https://us06web.zoom.us/webinar/register/WN_Y1SIzq6BRh6FRFgzrjGGIw" target="_blank" style="display: block; padding: 16px 20px; border: 1.5px solid #ddd; border-radius: 6px; text-decoration: none; color: #222; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; transition: border-color 0.15s;">
+        <strong style="font-size: 0.95rem;">Week 2 — Outreach That Gets Replies</strong><br>
+        <span style="font-size: 0.82rem; color: #999;">Thursday, April 16th &middot; 12 PM PT</span>
+      </a>
+      <a href="https://us06web.zoom.us/webinar/register/WN_BB3Z9e-5S8q0CM36XnLoVg" target="_blank" style="display: block; padding: 16px 20px; border: 1.5px solid #ddd; border-radius: 6px; text-decoration: none; color: #222; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; transition: border-color 0.15s;">
+        <strong style="font-size: 0.95rem;">Week 3 — Data Into Decisions</strong><br>
+        <span style="font-size: 0.82rem; color: #999;">Thursday, April 23rd &middot; 12 PM PT</span>
+      </a>
+      <a href="https://us06web.zoom.us/webinar/register/WN_3glh79uMRT6T_FAMXFtQVA" target="_blank" style="display: block; padding: 16px 20px; border: 1.5px solid #ddd; border-radius: 6px; text-decoration: none; color: #222; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; transition: border-color 0.15s;">
+        <strong style="font-size: 0.95rem;">Week 4 — Stop Vibe Coding</strong><br>
+        <span style="font-size: 0.82rem; color: #999;">Thursday, April 30th &middot; 12 PM PT</span>
+      </a>
     </div>
+    <p class="fine-print" style="margin-top: 16px;">No spam. Just reminders and the recording.</p>
   </section>
 
   <footer>&copy; 2026 Nobi</footer>
 
-  <script>
-    document.getElementById('webinar-form').addEventListener('submit', async function(e) {
-      e.preventDefault();
-
-      var btn = document.getElementById('submit-btn');
-      var errorEl = document.getElementById('form-error');
-      var form = e.target;
-
-      btn.disabled = true;
-      btn.textContent = 'Submitting...';
-      errorEl.style.display = 'none';
-
-      try {
-        var formData = new FormData();
-        formData.append('access_key', 'c7a3fd79-0e4f-47ce-aa30-c141616d21e3');
-        formData.append('subject', 'Webinar Registration: ' + (form.firstName.value + ' ' + form.lastName.value).trim());
-        formData.append('from_name', 'Nobi Webinar');
-        formData.append('name', (form.firstName.value + ' ' + form.lastName.value).trim());
-        formData.append('email', form.email.value);
-        formData.append('company', form.company.value);
-        formData.append('sessions', form.sessions.value);
-        formData.append('botcheck', form.botcheck.value);
-
-        var response = await fetch('https://api.web3forms.com/submit', {
-          method: 'POST',
-          body: formData
-        });
-
-        var result = await response.json();
-
-        if (!response.ok || !result.success) {
-          throw new Error(result.message || 'Something went wrong.');
-        }
-
-        form.style.display = 'none';
-        document.getElementById('success-state').style.display = 'block';
-
-      } catch (err) {
-        errorEl.textContent = err.message || 'Failed to submit. Please try again.';
-        errorEl.style.display = 'block';
-        btn.disabled = false;
-        btn.textContent = 'Register — it\'s free';
-      }
-    });
-  </script>
 
 </body>
 </html>

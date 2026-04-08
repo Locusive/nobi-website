@@ -1,0 +1,48 @@
+# Variables used to generate BoFu keyword combinations.
+# Each template is expanded using itertools.product over all variable sets.
+# "same value" combos are automatically skipped (e.g. "Algolia vs Algolia").
+
+templates:
+  - "{competitor} alternative"
+  - "{competitor} vs nobi"
+  - "nobi vs {competitor}"
+  - "best {category} for {vertical}"
+  - "{category} comparison"
+  - "best {category}"
+  - "top {category}"
+  - "{category} reviews"
+
+variables:
+  competitor:
+    - algolia
+    - elasticsearch
+    - searchspring
+    - constructor.io
+    - bloomreach
+    - coveo
+    - klevu
+    - yext
+    - doofinder
+    - searchie
+    - chatgpt
+
+  category:
+    - ai shopping assistant
+    - ai site search
+    - ecommerce site search
+    - product discovery platform
+    - ecommerce search software
+    - ai product finder
+    - conversational commerce platform
+    - site search platform
+    - ecommerce chatbot
+
+  vertical:
+    - ecommerce
+    - shopify
+    - woocommerce
+    - magento
+    - bigcommerce
+    - online retailers
+    - fashion brands
+    - automotive dealers

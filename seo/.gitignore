@@ -1,0 +1,5 @@
+# Don't commit the actual .env
+.env
+
+# Keep the DB in version control (it's the keyword seed store)
+# data/seo_pipeline.db  ← intentionally NOT ignored

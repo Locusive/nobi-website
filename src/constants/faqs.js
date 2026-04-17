@@ -85,9 +85,10 @@ const FAQ_ITEMS = [
     category: "Pricing",
   },
   {
-      q: "Can my site’s visitors filter or somehow update their searches?",
-      a: "Yes! All they have to do is ask. Unlike traditional search engines, which make visitors click through boxes, toggles, and filters, Nobi understand when your visitors want to filter a search based on natural language. After search results show up, they can simply say what they want instead and Nobi will execute a new search with the right filters applied (as long as any relevant attributes are present in your product feed in a structured format).",
+      q: "Can my site’s visitors filter or update their searches?",
+      a: "Yes, two ways. Visitors can chat — \"show me the waterproof ones under $150\" — and Nobi auto-applies the right filters. Or they can use the filter dropdowns Nobi shows above the product grid. Nobi builds that row automatically from your catalog's variants, metafields, and tags, so there's no faceting schema to maintain. Dropdown values adapt to whatever the shopper is browsing, and you control which attributes appear from the Filters tab in your dashboard.",
       category: "Product",
+      topics: ["search"],
   },
   {
       q: "I have X sessions per month and Y percent of my customers use search. How much would Nobi cost for me?",
@@ -100,7 +101,7 @@ const FAQ_ITEMS = [
   },
   {
     q: "How is Nobi's search better than traditional search?",
-    a: "Nobi's searches tend to be more relevant (because we use a hybrid of semantic and keyword search), your customers don't have to click lots of filters (since Nobi can understand their requests in natural language), and Nobi offers lots of UX optimizations, including the ability for your customers to add items to their carts in one click.",
+    a: "Nobi's searches tend to be more relevant (because we use a hybrid of semantic and keyword search), shoppers can narrow results however they prefer — chat or dropdowns — and Nobi offers lots of UX optimizations, including the ability for your customers to add items to their carts in one click.",
     category: "Product",
     topics: ["search"],
   },

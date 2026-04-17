@@ -208,8 +208,8 @@ export default function BetterSearch() {
                   type: "collections",
                 },
                 {
-                  title: "Filter large collections conversationally",
-                  body: "Let shoppers say “show trail runners, waterproof, under $150” and apply filters instantly without dropdown fatigue.",
+                  title: "Filters that work both ways, out of the box",
+                  body: "Shoppers can chat (“show trail runners under $150”) or use the dropdowns Nobi auto-builds from your catalog. No facet schema required up front—refine which attributes show from the dashboard whenever you want.",
                   type: "collections-assist",
                 },
               ].map((card) => (
@@ -241,7 +241,7 @@ export default function BetterSearch() {
                 How Nobi removes friction across the funnel
               </h2>
               <p className="text-base text-slate-300">
-                Intent understanding, conversational filtering, and drop-in deployment so shoppers find the right product on the first try.
+                Intent understanding, adaptive filters that work out of the box, and drop-in deployment so shoppers find the right product on the first try.
               </p>
             </div>
 
@@ -256,8 +256,8 @@ export default function BetterSearch() {
                 },
               },
               {
-                title: "Conversational filters instead of endless dropdowns",
-                body: "Shoppers narrow results by just saying “trail running, waterproof, under $150,” and Nobi applies the filters instantly—no dropdown fatigue, fewer bounces.",
+                title: "Filters that work both ways, out of the box",
+                body: "Shoppers can chat (“trail running, waterproof, under $150”) or tweak dropdowns—Nobi applies the filters either way. The dropdown row is auto-generated from your catalog's variants, metafields, and tags, and the values adapt to the current result set: searching “sweaters” surfaces fabrics and fit, searching “watches” surfaces strap material and case size. No facet schema to build up front, and you can fine-tune which attributes appear from the dashboard whenever you want.",
                 imageType: "filters",
               },
               {
@@ -520,24 +520,43 @@ function VisualMock({ type }) {
 
   if (type === "collections-assist") {
     return (
-      <div className={base + " p-3 flex flex-col gap-3"}>
-        <div className="rounded-full border border-slate-200 bg-white px-3 py-2 text-[12px] text-slate-600 shadow-inner flex items-center gap-2">
+      <div className={base + " p-3 flex flex-col gap-2"}>
+        <div className="rounded-full border border-slate-200 bg-white px-3 py-1.5 text-[11px] text-slate-600 shadow-inner flex items-center gap-2">
           <span className="inline-flex h-4 w-4 items-center justify-center text-slate-500">✨</span>
-          “Show red dresses under $200”
+          “Red dresses under $200”
+        </div>
+        <div className="flex flex-wrap gap-1">
+          {[
+            { label: "Color: Red", selected: true },
+            { label: "Under $200", selected: true },
+            { label: "Size", selected: false },
+            { label: "Material", selected: false },
+            { label: "Length", selected: false },
+          ].map((pill) => (
+            <span
+              key={pill.label}
+              className={`inline-flex items-center gap-1 rounded-full border px-2 py-0.5 text-[10px] ${
+                pill.selected
+                  ? "bg-slate-900 text-white border-slate-900"
+                  : "bg-white text-slate-600 border-slate-200"
+              }`}
+            >
+              {pill.label}
+              <span className="opacity-70">{pill.selected ? "✓" : "▾"}</span>
+            </span>
+          ))}
         </div>
         <div className="grid grid-cols-2 gap-2">
           {[
             { src: "/media/prod-1.webp", name: "Red Floral Midi", price: "$178" },
-            { src: "/media/prod-2.webp", name: "Sleeveless A-line", price: "$148" },
-            { src: "/media/prod-3.webp", name: "Silk Slip Dress", price: "$192" },
             { src: "/media/prod-4.webp", name: "Wrap Dress", price: "$168" },
           ].map((item) => (
-            <div key={item.src} className="rounded-lg border border-slate-200 bg-white p-2 space-y-2 shadow-[0_6px_18px_-12px_rgba(15,23,42,0.25)]">
-              <div className="h-20 rounded-md overflow-hidden bg-slate-100">
+            <div key={item.src} className="rounded-lg border border-slate-200 bg-white p-2 space-y-1 shadow-[0_6px_18px_-12px_rgba(15,23,42,0.25)]">
+              <div className="h-12 rounded-md overflow-hidden bg-slate-100">
                 <img src={item.src} alt={item.name} className="w-full h-full object-cover" loading="lazy" />
               </div>
-              <div className="text-[12px] font-semibold text-slate-900 truncate">{item.name}</div>
-              <div className="text-[11px] text-slate-600">{item.price}</div>
+              <div className="text-[11px] font-semibold text-slate-900 truncate">{item.name}</div>
+              <div className="text-[10px] text-slate-600">{item.price}</div>
             </div>
           ))}
         </div>
@@ -591,29 +610,44 @@ function BenefitVisual({ type }) {
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_80%,rgba(236,72,153,0.1),transparent_45%),radial-gradient(circle_at_75%_15%,rgba(99,102,241,0.12),transparent_40%)]" />
         <div className="relative space-y-3 text-sm text-slate-800">
           <div className="rounded-lg border border-slate-200 bg-white p-3">
-            <div className="text-xs text-slate-500 mb-1">Conversation</div>
-            <p className="font-semibold text-slate-900">
-              “Trail running shoes, waterproof, under $150.”
-            </p>
-          </div>
-          <div className="flex flex-wrap gap-2 text-[11px]">
-            {["Trail", "Waterproof", "Under $150", "Neutral"].map((pill) => (
-              <span
-                key={pill}
-                className="rounded-full bg-slate-900 text-white px-3 py-1 shadow-sm"
-              >
-                {pill}
+            <div className="flex items-center justify-between mb-2">
+              <div className="text-[10px] uppercase tracking-[0.16em] text-slate-500">Filter row</div>
+              <div className="text-[10px] text-slate-500">Auto-generated from your catalog</div>
+            </div>
+            <div className="flex flex-wrap gap-1.5">
+              {[
+                { label: "Activity: Trail", selected: true },
+                { label: "Waterproof: Yes", selected: true },
+                { label: "Under $150", selected: true },
+                { label: "Size", selected: false },
+                { label: "Brand", selected: false },
+                { label: "Color", selected: false },
+              ].map((pill) => (
+                <span
+                  key={pill.label}
+                  className={`inline-flex items-center gap-1 rounded-full border px-2.5 py-1 text-[11px] ${
+                    pill.selected
+                      ? "bg-slate-900 text-white border-slate-900"
+                      : "bg-white text-slate-700 border-slate-200"
+                  }`}
+                >
+                  {pill.label}
+                  <span className="opacity-70">{pill.selected ? "✓" : "▾"}</span>
+                </span>
+              ))}
+              <span className="inline-flex items-center rounded-full border border-slate-200 bg-white px-2.5 py-1 text-[11px] text-slate-500">
+                Clear all
               </span>
-            ))}
+            </div>
           </div>
-          <div className="rounded-lg border border-slate-200 bg-white p-3 grid grid-cols-2 gap-2">
-            {[1, 2, 3, 4].map((i) => (
-              <div key={i} className="rounded-md border border-slate-200 p-2">
-                <div className="h-14 rounded bg-gradient-to-br from-slate-100 to-white mb-2" />
-                <div className="h-3 rounded bg-slate-200 w-2/3 mb-1" />
-                <div className="h-3 rounded bg-slate-100 w-1/2" />
-              </div>
-            ))}
+          <div className="rounded-lg border border-slate-200 bg-white p-3 space-y-1">
+            <div className="text-[10px] uppercase tracking-[0.16em] text-slate-500">Or just ask</div>
+            <p className="text-[13px] font-semibold text-slate-900">
+              “Trail running, waterproof, under $150.”
+            </p>
+            <div className="text-[11px] text-slate-500">
+              Nobi auto-selects the matching dropdown values.
+            </div>
           </div>
         </div>
       </div>

@@ -274,8 +274,8 @@ export default function SearchEngineLanding() {
             },
             {
               icon: SlidersHorizontal,
-              title: "Conversational filtering replaces dropdown fatigue",
-              body: "Shoppers type \"trail runners, waterproof, under $150\" and Nobi applies the filters instantly. No clicking through 12 dropdowns to narrow down a collection.",
+              title: "Filters that work both ways, out of the box",
+              body: "Nobi auto-generates filter dropdowns from your catalog's variants, metafields, and tags — no facet schema to build. Shoppers can tweak the dropdowns or just chat (\"trail runners, waterproof, under $150\"), and Nobi applies the filters either way. Values adapt to the current result set, and you can fine-tune which attributes appear from the dashboard.",
             },
           ].map((block, idx) => {
             const Icon = block.icon;

@@ -7,6 +7,17 @@ import remarkGfm from 'remark-gfm'
 import rehypeSlug from 'rehype-slug'
 
 export default defineConfig({
+  // macOS FSEvents can miss file-save events silently (especially for
+  // files swapped in by `gh pr checkout`). Force chokidar to poll so
+  // every save is reliably detected. The CPU cost is trivial for a
+  // project this size and it fixes the "I saved an MDX and it didn't
+  // reload" class of bugs.
+  server: {
+    watch: {
+      usePolling: true,
+      interval: 300,
+    },
+  },
   plugins: [
     react(),
     {

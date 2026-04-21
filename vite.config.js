@@ -24,10 +24,26 @@ export default defineConfig({
     {
       name: 'mdx-posts-full-reload',
       handleHotUpdate({ file, server }) {
+        // Diagnostic: log every handleHotUpdate call so we can tell
+        // whether Vite's watcher is seeing the save at all.
+        console.log('[mdx-posts-full-reload] handleHotUpdate fired:', file)
         if (file.includes('/src/content/posts/')) {
+          console.log('[mdx-posts-full-reload] MATCH — sending full-reload')
           server.ws.send({ type: 'full-reload' })
           return []
         }
+      },
+      // Some @mdx-js/rollup versions don't emit HMR events, in which
+      // case handleHotUpdate never fires for .mdx files. Watch the
+      // directory explicitly so `configureServer` can fall back to
+      // a chokidar event.
+      configureServer(server) {
+        server.watcher.on('all', (event, path) => {
+          if (path.includes('/src/content/posts/')) {
+            console.log(`[mdx-posts-full-reload] watcher '${event}':`, path)
+            server.ws.send({ type: 'full-reload' })
+          }
+        })
       },
     },
   ],

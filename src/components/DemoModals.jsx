@@ -41,6 +41,8 @@ export function RequestDemoModal({ open, onClose }) {
 
       const formData = new FormData();
       formData.append("access_key", accessKey);
+      formData.append("subject", "Nobi Demo Request: " + (form.company || form.name || "(no name)"));
+      formData.append("from_name", "Nobi Website");
       formData.append("name", form.name);
       formData.append("email", form.email);
       formData.append("company", form.company);
@@ -48,10 +50,6 @@ export function RequestDemoModal({ open, onClose }) {
       formData.append("platform", form.platform);
       formData.append("message", form.message);
       formData.append("botcheck", form.botcheck);
-
-      // Optional: Add your email to receive notifications
-      // formData.append("from_name", "Nobi Website");
-      // formData.append("subject", "New Demo Request from " + (form.company || form.name));
 
       const r = await fetch("https://api.web3forms.com/submit", {
         method: "POST",

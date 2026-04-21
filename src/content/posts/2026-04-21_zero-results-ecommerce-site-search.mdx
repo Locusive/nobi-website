@@ -1,0 +1,177 @@
+export const meta = {
+ title: "How to Handle Zero Results in Your Ecommerce Site Search",
+ slug: "handle-zero-results-ecommerce-site-search",
+ date: "2026-04-21",
+ publishedAt: "2026-04-21",
+ description: "A practical playbook for reducing zero-result searches in ecommerce: what causes them, how to measure them, and which fixes (synonyms, semantics, AI) work.",
+ excerpt: "A practical playbook for reducing zero-result searches in ecommerce: what causes them, how to measure them, and which fixes (synonyms, semantics, AI) work.",
+ tags: ["how-to", "site search", "ecommerce", "ecommerce search"],
+ author: "Nobi Team",
+ heroImage: "https://storage.googleapis.com/nobi-public/docs_and_marketing_websites/posts/handle-zero-results-ecommerce-site-search/hero.png",
+ featured: false,
+ draft: true,
+ faqItems: [
+ {
+ question: "What counts as a zero-result search, and why should a head of ecommerce care?",
+ answer: "A zero-result search is any query typed into your search box that returns no product tiles. These are high-intent sessions, so wasting them is expensive. Industry benchmarks put zero-result rates at 10 to 15 percent of ecommerce queries, and those sessions convert at a fraction of the site-wide rate. Track zero-result queries as their own bucket, separate from low-result or no-click queries, and segment by query length since short queries often signal merchandising gaps while longer ones reveal unmet catalog demand."
+ },
+ {
+ question: "What actually causes zero-result queries in an ecommerce catalog?",
+ answer: "Most zero-result queries fall into four buckets: vocabulary mismatch, typos and plurals, out-of-stock or discontinued items, and genuine catalog gaps. Vocabulary mismatch is the largest and most fixable, such as editorial color names like Cappuccino returning nothing for brown, or copy that says utility trousers while shoppers search work pants. Typos like sneakr or bootes break older search engines, and out-of-stock filters silently strip products that shoppers wanted to buy. Genuine catalog gaps, like 400 monthly searches for wide-calf boots you do not carry, are a valuable merchandising signal."
+ },
+ {
+ question: "How do you find and prioritize the zero-result queries worth fixing?",
+ answer: "Pull a weekly zero-result report sorted by search volume, then bucket the top 50 to 100 queries by root cause. Fix vocabulary and typo issues first since they are the highest volume and easiest to resolve with synonyms or spelling tolerance, and flag catalog gaps for merchandising and buying. Ignore the long tail of one-off queries that are not worth the operational cost. Instrument the report to capture query text, weekly volume, referrer, and downstream session outcome so you can see whether shoppers refined, bounced, or eventually bought."
+ },
+ {
+ question: "What techniques actually reduce zero-result rates?",
+ answer: "The article does not go into depth on specific techniques for reducing zero-result rates beyond what is covered in the causes and prioritization sections. Based on the content provided, the main levers are adding synonyms and spelling tolerance for vocabulary and typo issues, normalizing brand color names to shopper vocabulary (as Nobi does for Kilte so brown boots surfaces the Cappuccino Boot), showing out-of-stock items with an email-me-when-back option instead of hiding them, and flagging catalog gaps for merchandising decisions."
+ },
+ {
+ question: "When do rule-based fixes work, and when do you need AI-native search?",
+ answer: "The article does not directly compare rule-based fixes to AI-native search. It does note that vocabulary mismatch is the largest and most fixable category, and that Nobi's color-normalization layer maps brand color names to shopper vocabulary so queries like brown boots surface products named Cappuccino even when the word brown never appears in the product record. Typos and plurals are described as unforgiving in older search engines, which implies modern search handles them better."
+ },
+ {
+ question: "Which tools help handle zero results, and when is each the right pick?",
+ answer: "The article only specifically mentions Nobi, whose color-normalization layer is used by fashion brand Kilte to map brand color names to shopper vocabulary so that brown boots surfaces the Cappuccino Boot even when brown never appears in the product record. The article notes this gap affects any brand using evocative naming in fashion, home goods, or beauty. Beyond Nobi, the article does not cover other specific tools or when each is the right pick."
+ },
+ {
+ question: "How do you measure whether your zero-results fixes are actually working?",
+ answer: "The article does not lay out a full measurement framework, but it points to tracking zero-result queries as their own bucket separate from low-result and no-click queries, and watching whether a one-point drop in zero-result rate moves site-wide conversion. The weekly zero-result report should capture query text, weekly volume, referrer (paid, organic, or internal link), and downstream session outcome, including whether the shopper refined the query, bounced, or eventually bought. Making this a standing weekly ritual rather than a quarterly audit is what separates teams that compound improvement from those that do not."
+ }
+ ],
+};
+
+<script type="application/ld+json" data-nobi-schema>
+{`{
+  "@context": "https://schema.org",
+  "@type": "HowToArticle",
+  "headline": "How to Handle Zero Results in Your Ecommerce Site Search",
+  "description": "A practical playbook for reducing zero-result searches in ecommerce: what causes them, how to measure them, and which fixes (synonyms, semantics, AI) work.",
+  "datePublished": "2026-04-21",
+  "dateModified": "2026-04-21",
+  "author": {
+    "@type": "Organization",
+    "name": "Nobi"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Nobi",
+    "url": "https://nobi.ai"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://nobi.ai/blog/handle-zero-results-ecommerce-site-search"
+  },
+  "about": [
+    {
+      "@type": "Thing",
+      "name": "site search"
+    },
+    {
+      "@type": "Thing",
+      "name": "ecommerce"
+    }
+  ]
+}`}
+</script>
+# How to Handle Zero Results in Your Ecommerce Site Search
+
+**TL;DR:** Zero-result searches are one of the highest-intent drop-off points on an ecommerce site. A shopper typed exactly what they wanted, and got nothing back. The teams that fix this fastest layer three things: a weekly sweep of zero-result query logs, synonym and color vocabulary normalization, and semantic search that reads intent instead of matching strings. Rule-based tools can patch the obvious queries. AI-native search is what bends the curve on the long tail.
+
+| Product | Primary job | Best for | Pricing (starting) | Standout strength | Key weakness |
+| --- | --- | --- | --- | --- | --- |
+| Nobi | AI-native site search with semantic vocabulary handling | Mid-market DTC brands with editorial catalog language | $25/mo (2,500 searches, 250 messages) | Semantic mapping of brand names to shopper language without manual synonym lists | Smaller integration ecosystem than Algolia; not ideal under ~$1M GMV |
+| Algolia | Developer-first search infrastructure with synonym and rule APIs | Teams with engineering capacity who want full control | ~$0.50 per 1K searches (Build) / from ~$500/mo Premium | Granular APIs for synonyms, rules, and ranking at scale | Zero-result fixes still require manual synonym/rule maintenance |
+| Searchspring | Mid-market ecommerce search and merchandising | Brands that want a structured merchandising workflow | Custom contract (mid-market range) | Mature merchandising UI for curated collections and pinned results | Rule-based, so zero-results long tail still needs human tuning |
+| Klevu | AI search tuned for Shopify catalogs | Shopify brands wanting self-learning search | From ~$139/mo (Smart Search) | Out-of-the-box self-learning query understanding on Shopify | Personalization priced as a separate module; UI feels dated |
+| Constructor | Enterprise AI product discovery | Large catalogs running continuous discovery experiments | Revenue-share / custom | Reinforcement-learning ranking optimized against commerce KPIs | Revenue-share pricing can create unpredictable bills |
+| Findify | Shopify search and merchandising | Shopify brands that want a managed search app | From ~$499/mo | Turnkey Shopify install with merchandising controls | Still requires manual merchandising; UNTUCKit A/B test showed lower CVR than Nobi (16.5% vs 17.4%) |
+
+## What counts as a zero-result search, and why should a head of ecommerce care?
+
+A zero-result search is any query a shopper types into your search box that returns no product tiles on the results page. These sessions are among the highest-intent moments on your site. The shopper told you exactly what they wanted, which is also what makes wasting the session so expensive. Industry benchmarks put zero-result rates at 10–15% of ecommerce queries, and those sessions convert at a fraction of the site-wide rate.
+
+Measure the metric precisely. Track queries with zero product tiles as their own bucket, kept separate from low-result queries (under five products) and no-click queries. Conflating them hides the real problem.
+
+Segment by query length. Short queries of one or two words are usually navigational ("sale", "sneakers") and often reflect a merchandising gap. Longer queries ("waterproof hiking boots women size 8") are where shoppers reveal unmet catalog demand or stock holes.
+
+This is a revenue line, not a UX nice-to-have. A one-point drop in zero-result rate frequently moves site-wide conversion enough to justify a dedicated quarterly owner.
+
+## What actually causes zero-result queries in an ecommerce catalog?
+
+Most zero-result queries fall into four buckets: vocabulary mismatch, typos and plurals, out-of-stock or discontinued items, and genuine catalog gaps. Vocabulary mismatch is the largest and most fixable category. A fashion brand that names its colors "Cappuccino" or "Écru" will routinely return nothing for "brown" or "cream" searches, even when the products sit right there in the catalog waiting to be bought.
+
+The vocabulary problem shows up everywhere once you look. Editorial color names are the classic case, but it extends to internal SKU jargon leaking into PDP copy, product lines named after designers or cities that shoppers have never heard of, and category terms that live in your merchandising team's vocabulary instead of your customers'. If your copy says "utility trousers" and shoppers search "work pants," you get a zero. [Nobi's color-normalization layer](https://nobi.ai/why-nobi/better-search), used by fashion brand Kilte, maps brand color names to shopper vocabulary so that "brown boots" surfaces the Cappuccino Boot even when the word "brown" never appears in the product record. Any brand using evocative naming, fashion, home goods, beauty, runs into the same gap.
+
+Typos and plurals are the second bucket, and they are unforgiving in older search engines. "Sneakr," "bootes," "mens" without the apostrophe: each one is a shopper who wanted to buy from you and got an empty page instead.
+
+Out-of-stock is the sneakiest cause. The product exists, but inventory filters strip it from results, producing a silent zero-result with no clue to the shopper that you ever sold the thing. Showing the product with an "email me when back" option almost always beats hiding it.
+
+Genuine catalog gaps are the last bucket, and they are the most valuable signal you have. If 400 people a month search "wide-calf boots" and you don't carry them, that is a merchandising decision waiting to happen.
+
+## How do you find and prioritize the zero-result queries worth fixing?
+
+Pull a weekly zero-result report sorted by search volume, then bucket the top 50 to 100 queries by root cause. Fix vocabulary and typo issues first. They're the highest volume and the easiest to resolve with synonyms or spelling tolerance. Flag catalog gaps for merchandising and buying. Ignore the long tail of one-off queries that aren't worth the operational cost. What separates teams that compound improvement from those that don't isn't the tool. It's making this a standing weekly ritual instead of a quarterly audit nobody reads.
+
+Start by instrumenting a report that captures more than the query string. You want the query text, the weekly volume, the referrer (paid traffic versus organic versus internal link), and the downstream session outcome. Did the shopper refine the query, bounce, or eventually buy something else? A zero-result query that ends in a purchase tells a different story than one that ends in an exit.
+
+Sort by volume multiplied by estimated lost revenue, not alphabetically and not by recency. A query searched 400 times with a $90 AOV deserves attention before a quirky one-off, even if the one-off is funnier in the meeting.
+
+Then classify each top query into one of the four buckets from the prior section: vocabulary mismatch, typo or plural, out-of-stock, or genuine catalog gap. The first two are a same-week fix in your search tool. The second two aren't search problems. They're inputs for merchandising and buying, which is why the report should land in their inbox too, not just the person who owns site search.
+
+UNTUCKit treats this as a standing agenda item. Search trends, zero-result queries, and shopper intent get reviewed in a weekly meeting, which is how those signals start shaping catalog decisions instead of sitting in a dashboard nobody opens. Nobi surfaces this in its search insights so the ritual has something concrete to run on.
+
+## What techniques actually reduce zero-result rates?
+
+Four techniques, in rough order of impact: semantic understanding of intent, synonym and dictionary management, typo tolerance, and a structured fallback page. Semantic search moves the needle on the long tail. Synonyms and typo tolerance cover the head. The fallback page keeps the shopper moving when nothing matches.
+
+Semantic, embedding-based matching is the one that actually scales. No synonym list can anticipate every way a shopper describes a product, especially if your catalog uses editorial or evocative names. A DTC fashion brand called Kilte ran into this with color names like Cappuccino, Ivory, Midnight, and Écru, which shoppers typed as brown, white, black, and off-white. Nobi's semantic color-normalization layer maps those brand terms to shopper vocabulary, so "brown boots" returns the Cappuccino Boot even though the word brown never appears in the product record. In an A/B test against Shopify's default search, Kilte saw a 21.7% conversion rate lift.
+
+Synonym dictionaries still earn their keep for the head of the distribution: sneakers vs. trainers, couch vs. sofa, hoodie vs. sweatshirt. They are cheap to maintain for 50 to 100 known-cause queries and produce immediate results. They do not scale to the long tail, which is why they work best alongside semantic matching rather than instead of it.
+
+Typo tolerance and phonetic matching handle misspellings and plurals. Tune thresholds to your catalog, tight product names need stricter matching than broad ones. Algolia acknowledges on its own documentation that typosquatting is a hard problem for its engine, so expect ongoing tuning no matter the vendor.
+
+For true zero-result queries, show a structured fallback: related categories, top sellers in the shopper's likely intent bucket, and redirect rules for navigational queries like "size guide" or "returns." Rule-driven platforms like Searchspring lean heavily on merchandising campaigns here, which works if you have the ops capacity to maintain them.
+
+## When do rule-based fixes work, and when do you need AI-native search?
+
+Rule-based tools work well when your zero-result queries cluster into a short, predictable list. A few dozen synonyms and a handful of redirects can cover most of it, especially if your catalog uses literal product language and you have a merchandiser with time to maintain the dictionary. AI-native search earns its keep once the long tail of zero-result queries exceeds what a human can realistically keep up with, or when your catalog uses editorial language that shoppers don't type. A small catalog with names like "black cotton crewneck" probably doesn't need semantic search. A mid-market DTC brand with color names like "Midnight Sage" and collection names like "The Wanderer Edit" almost always does.
+
+The sorting question is query volume times vocabulary gap. High query volume plus editorial catalog language plus multilingual shoppers means rules alone will leave money on the table, because each new phrasing requires another manual entry. Low volume plus descriptive SKUs means a $20/month Shopify app with a synonyms table is probably enough.
+
+A hybrid setup is common and sensible: rules for navigational redirects (branded terms, SKU lookups, collection names), AI for the semantic matching on the messy long tail. That way the merchandiser keeps direct control of the queries that matter most, and the engine handles everything else.
+
+Honest picture of where Nobi fits: brands under roughly $1M GMV with simple catalogs are usually better off with a lighter Shopify app than with Nobi or Algolia. If you want a structured rule and merchandising workflow with a mature UI, Searchspring is a legitimate pick, it's built around that motion. Algolia and Boost Commerce both sit in the same neighborhood, with Algolia skewing developer-heavy and Boost oriented toward filter-driven merchandising. Nobi's case is strongest when the long tail is the problem and you don't want to staff a search merchandiser to chase it.
+
+## Which tools help handle zero results, and when is each the right pick?
+
+The useful shortlist for ecommerce is Algolia, Searchspring, Klevu, Constructor, Findify, and Nobi. They split on two axes: how much engineering lift they assume, and whether relevance is rule-based or AI-native. There is no single best pick. The right tool depends on catalog size, team shape, and whether your catalog language matches what shoppers actually type.
+
+**Algolia** is the right call if you have engineers and want deep API control over synonyms, rules, and ranking. Its published pricing scales with usage (Grow is $0.50 per additional 1K search requests, Grow Plus is $1.75 per additional 1K), so budget the query volume before you sign.
+
+**Searchspring** fits merchandising-heavy teams that want a structured rule workflow and a mature UI for running campaigns. It's rule-based at the core, which is a feature if your merchandisers think in rules and a constraint if your zero-result tail is too long to curate.
+
+**Klevu** is the Shopify-first pick when you want self-learning search with minimal dev work. Pricing isn't published, so get a quote early.
+
+**Constructor** suits enterprise catalogs with a test-and-learn culture. Expect a revenue-share pricing model, which aligns incentives but makes the line item volatile.
+
+**Findify** works if you want a managed Shopify app and your catalog language already matches shopper vocabulary. Plans start at $499/month.
+
+**[Nobi](https://nobi.ai/)** fits mid-market brands with editorial catalog language that want semantic matching without hand-building synonym lists. Pricing is $25/month base (2,500 searches, 250 conversational messages), then $0.01 per additional search and $0.10 per additional message, so a brand doing 50K searches a month lands near $500 with no revenue share. UNTUCKit ran Nobi head-to-head against Findify and saw 17.4% CVR vs. 16.5%, then moved Nobi to 100% of traffic.
+
+Nobi's honest trade-offs: a smaller third-party integration ecosystem than Algolia, and less brand recognition than incumbents like Bloomreach.
+
+## How do you measure whether your zero-results fixes are actually working?
+
+Track four metrics weekly: zero-result rate (the share of queries returning nothing), search-to-click rate, search CVR, and revenue per searcher. A real improvement shows up as a drop in zero-result rate paired with a lift in search CVR and revenue per searcher, not just one number moving in isolation. If zero-result rate falls 40% but search CVR stays flat, you're probably surfacing irrelevant results instead of real matches.
+
+Segment zero-result rate by query length. Short queries (one or two words) tend to be category-level and should almost never return nothing. Long-tail queries (four-plus words) are where semantic understanding earns its keep, and where you'll see the biggest swings when you layer in intent matching.
+
+Keep overall site CVR as a guardrail. A fix that inflates search recall by matching loosely across the catalog can tank relevance for shoppers who already knew what they wanted.
+
+Run changes as A/B tests when your volume supports it. [UNTUCKit](https://nobi.ai/customers) split traffic between Nobi and their prior search tool for two months and measured a 17.1% lift in search CVR (17.6% vs. 15.0%), a 21.3% lift in revenue per searcher ($39.17 vs. $32.30), and a 3.3% AOV lift. Kilte saw a 21.7% CVR lift against Shopify's default search. Mid-teens lifts are realistic, but you only know you got one if you measured.
+
+---
+
+If your catalog uses editorial language your shoppers never type, Nobi's semantic search maps brand vocabulary to shopper intent out of the box. Book a demo and run it against your own zero-result queries.

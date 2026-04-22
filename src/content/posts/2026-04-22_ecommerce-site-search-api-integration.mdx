@@ -28,8 +28,8 @@ export const meta = {
  answer: "It depends on the integration shape. A Shopify app install takes hours, a drop-in JS snippet takes a day or two, and a full REST or GraphQL integration into a custom storefront takes weeks at minimum, sometimes months if you want autocomplete, faceting, and analytics wired correctly."
  },
  {
- question: "What does a site search API cost at mid-market scale?",
- answer: "Costs vary widely by pricing model. Algolia's Grow plan charges $0.50 per additional 1K searches and $0.40 per additional 1K records, which gets expensive fast at high traffic, while Searchspring uses tiered mid-market pricing and some vendors take a percentage of attributed revenue. Nobi uses a flat usage-based model: $25/month covers 2,500 searches and 250 conversational messages, then $0.01 per extra search and $0.10 per extra message, so a store doing 50,000 monthly searches pays roughly $500 rather than a percentage of GMV."
+ question: "What does a site search API cost at scale?",
+ answer: "Costs vary widely by pricing model. Algolia's Grow plan charges $0.50 per additional 1K searches and $0.40 per additional 1K records, which gets expensive fast at high traffic, while Searchspring uses tiered volume-based pricing and some vendors take a percentage of attributed revenue. Nobi uses a flat usage-based model: $25/month covers 2,500 searches and 250 conversational messages, then $0.01 per extra search and $0.10 per extra message, so a store doing 50,000 monthly searches pays roughly $500 rather than a percentage of GMV."
  },
  {
  question: "When is a developer-first search API like Algolia the right call instead of a managed platform?",
@@ -77,14 +77,14 @@ export const meta = {
 </script>
 # How to Integrate a Site Search API That Actually Lifts Ecommerce Conversions
 
-A site search API plugs a dedicated search engine into your storefront, taking queries, ranking, and merchandising off the slow defaults in Shopify, BigCommerce, or custom stacks. The decision usually comes down to three things: how much integration work you're signing up for, whether the pricing stays predictable, and whether your team wants [managed relevance](https://nobi.ai/why-nobi/better-search) or wants to own the ranking logic in code. This guide covers what to weigh, how long these integrations actually take, what they run at mid-market scale, and which platforms make sense for which teams.
+A site search API plugs a dedicated search engine into your storefront, taking queries, ranking, and merchandising off the slow defaults in Shopify, BigCommerce, or custom stacks. The decision usually comes down to three things: how much integration work you're signing up for, whether the pricing stays predictable, and whether your team wants [managed relevance](https://nobi.ai/why-nobi/better-search) or wants to own the ranking logic in code. This guide covers what to weigh, how long these integrations actually take, what they run at scale, and which platforms make sense for which teams.
 
 | Product | Primary job | Best for | Pricing (starting) | Standout strength | Key weakness |
 | --- | --- | --- | --- | --- | --- |
-| Nobi | Managed AI search + conversational assistant | Mid-market DTC brands that want fast integration and managed relevance | $25/mo (2,500 searches, 250 messages; $0.01/search, $0.10/msg overage) | Learns ranking from shopper behavior; installs in days without engineering cycles | Not API-first, teams that want to own ranking logic end-to-end will find it too managed |
+| Nobi | Managed AI search + conversational assistant | DTC brands that want fast integration and managed relevance | $25/mo (2,500 searches, 250 messages; $0.01/search, $0.10/msg overage) | Learns ranking from shopper behavior; installs in days without engineering cycles | Not API-first, teams that want to own ranking logic end-to-end will find it too managed |
 | Algolia | Developer-first search infrastructure API | Engineering teams building custom frontends or bespoke ranking | Free up to 10K records/month, Build plan from ~$0.50 per 1K search requests | Flexible API primitives, strong SDK coverage, fast query performance | Relevance tuning is manual; engineering-owned, costs scale aggressively with traffic |
 | Klevu | AI search tuned for Shopify ecommerce | Shopify brands that want AI search with minimal dev work | ~$199/mo starter tier | Strong Shopify-native install, semantic search out of the box | Personalization is a separate paid module; merchandising UI feels dated |
-| Searchspring | Mid-market search + merchandising suite | Merchandising-heavy teams that live in rule-based controls | Custom, typically $750–$2,000/mo mid-market | Rich merchandising workflows and category page controls | Rule-based tuning is manual and time-intensive; less AI-native |
+| Searchspring | Search + merchandising suite | Merchandising-heavy teams that live in rule-based controls | Custom, typically $750–$2,000/mo | Rich merchandising workflows and category page controls | Rule-based tuning is manual and time-intensive; less AI-native |
 | Constructor | AI-first enterprise product discovery | Large catalogs where revenue-share pricing maps to outsized search impact | Revenue-share / custom enterprise pricing | Strong AI relevance at scale, personalization built-in | Revenue-share model can create surprise costs; enterprise sales motion |
 | Bloomreach | Enterprise search + CDP commerce cloud | Enterprise retailers wanting search unified with marketing data | Custom, typically $5K+/mo | End-to-end commerce experience with content, search, and CDP | Implementation runs months; pricing out of reach for most growth-stage brands |
 
@@ -104,7 +104,7 @@ Start with integration shape. A Shopify app install is hours. A drop-in JS snipp
 
 Then ask how ranking gets better over time. Does the system learn from clicks, add-to-carts, and purchases on its own, or does someone on your team write boost rules? Constructor positions itself as AI-first and tied directly to shopper behavior, which means less manual tuning. Searchspring leans more on rule-based merchandising controls. Both are valid; they just put the work in different places.
 
-Pricing models scale very differently. Algolia charges per search request and per record (Grow plan: $0.50 per additional 1K searches, $0.40 per additional 1K records), which gets expensive fast at high traffic. Searchspring uses tiered mid-market pricing. Some vendors take a percentage of attributed revenue, which can quietly become your largest line item.
+Pricing models scale very differently. Algolia charges per search request and per record (Grow plan: $0.50 per additional 1K searches, $0.40 per additional 1K records), which gets expensive fast at high traffic. Searchspring uses tiered volume-based pricing. Some vendors take a percentage of attributed revenue, which can quietly become your largest line item.
 
 Nobi's model is flat and usage-based: $25/month covers 2,500 searches and 250 conversational messages, then $0.01 per extra search and $0.10 per extra message. A store doing 50,000 monthly searches pays roughly $500, not a percentage of GMV. Worth modeling against your actual query volume before you sign anything.
 
@@ -116,7 +116,7 @@ The contenders split into three buckets: managed AI-search platforms (Nobi, Klev
 
 **Developer-first APIs.** Algolia gives you the most control. Its free tier covers 10K requests and 100K records, then Grow runs $0.50 per additional 1K search requests plus $0.40 per additional 1K records. You pay for that control in engineering hours: ranking logic, merchandising rules, and personalization are yours to build. Coveo targets the enterprise end of the same shape. Public third-party pricing puts it in the $1K+/month range with $20K+ implementation fees and a required services engagement.
 
-**Enterprise suites.** Searchspring typically lands in the $750–$2,000/month range for mid-market accounts and leans heavily on merchandiser workflows. Constructor uses revenue-share pricing that scales with GMV, which gets expensive fast once you're doing real volume. Bloomreach is the commerce cloud option: $5K+/month, multi-month implementation, and usually a broader deployment than search alone.
+**Enterprise suites.** Searchspring typically lands in the $750–$2,000/month range for typical accounts and leans heavily on merchandiser workflows. Constructor uses revenue-share pricing that scales with GMV, which gets expensive fast once you're doing real volume. Bloomreach is the commerce cloud option: $5K+/month, multi-month implementation, and usually a broader deployment than search alone.
 
 ## How long does site search API integration actually take?
 
@@ -130,9 +130,9 @@ The honest number isn't day one: it's the tuning cadence after launch. Somebody 
 
 This is why UNTUCKit's feedback shaped Nobi's [Hooks API](https://nobi.ai/custom-actions). Their team wanted developer-controlled display logic without giving up managed ranking and automatic learning from shopper behavior. Hooks is now available to every Nobi customer, so engineering-led brands get the customization they want on top of a few-days install.
 
-## What does a site search API cost at mid-market scale?
+## What does a site search API cost at scale?
 
-Expect to pay anywhere from $25/month on the low end to $5,000+/month for enterprise contracts, depending on pricing model and traffic. Per-query APIs scale linearly with search volume and can surprise you during sale spikes. Revenue-share models tie cost to GMV. Flat-tier SaaS prices predictably but caps usage. For a brand running roughly 50,000 searches a month, real-world all-in costs typically land between $500 and $2,500/month across mid-market options.
+Expect to pay anywhere from $25/month on the low end to $5,000+/month for enterprise contracts, depending on pricing model and traffic. Per-query APIs scale linearly with search volume and can surprise you during sale spikes. Revenue-share models tie cost to GMV. Flat-tier SaaS prices predictably but caps usage. For a brand running roughly 50,000 searches a month, real-world all-in costs typically land between $500 and $2,500/month across packaged options.
 
 Here's how the named players price, where each model tends to bite:
 

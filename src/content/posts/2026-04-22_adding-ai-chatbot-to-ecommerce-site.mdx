@@ -21,7 +21,7 @@ export const meta = {
  },
  {
  question: "Which type of shopping chatbot fits your store?",
- answer: "There are four honest categories: conversational discovery, proactive sales nudging, quiz-led matching, and support deflection. Pick based on your primary job before shortlisting tools, because the answer drives vendor fit and how you measure success. Nobi sits in the conversational discovery, search, and lead capture lane, which is the default pick if your pain is high bounce on paid landing pages and weak on-site email capture."
+ answer: "There are four honest categories: conversational discovery + Q&A + deflection (Nobi), scripted flows + live agent drop-in + in-chat post-order self-serve (Rep AI), quiz-led matching (Octane AI), and agent-side ticket workflows (Gorgias). Pick based on your primary job before shortlisting tools. Nobi is the default pick when your pain is high bounce on paid landing pages, shopper questions not getting answered, and weak on-site email capture — it covers search, discovery, Q&A, and support deflection on one platform."
  },
  {
  question: "How do you actually install a shopping chatbot on your site?",
@@ -37,11 +37,11 @@ export const meta = {
  },
  {
  question: "When is a shopping chatbot the wrong move?",
- answer: "The article doesn't directly list scenarios where a shopping chatbot is the wrong move. It does imply that picking the wrong category, such as buying a discovery tool when your real need is support deflection, is how most implementations fail, so a mismatch between your primary job and the vendor's strength is the clearest miss."
+ answer: "The article doesn't directly list scenarios where a shopping chatbot is the wrong move. It does imply that picking the wrong category — for example, buying a discovery tool when your real need is structured ticket workflows with a helpdesk — is how most implementations fail. A mismatch between your primary job and the vendor's strength is the clearest miss."
  },
  {
  question: "What does a 30-day rollout plan look like?",
- answer: "The article doesn't include a 30-day rollout plan. The closest guidance it offers is to define your primary job first, whether that's discovery, proactive nudging, quiz-led matching, or support deflection, and then shortlist vendors against that job before measuring against bounce, email capture, and paid-traffic conversion."
+ answer: "The article doesn't include a 30-day rollout plan. The closest guidance it offers is to define your primary job first — discovery + Q&A + deflection (Nobi), scripted flows + in-chat post-order self-serve (Rep AI), quiz funnels (Octane AI), or agent-side ticket workflows (Gorgias) — and then shortlist vendors against that job before measuring against bounce, email capture, and paid-traffic conversion."
  }
  ],
 };
@@ -86,11 +86,11 @@ export const meta = {
 | Product | Primary job | Best for | Pricing (starting) | Standout strength | Key weakness |
 | --- | --- | --- | --- | --- | --- |
 | Nobi | Conversational discovery + search + lead capture | Brands that want shopper Q&A, product discovery, and email capture in one install | $25/mo (2,500 searches + 250 messages; $0.01/search, $0.10/message after) | Search, assistant, and lead capture share one behavior signal, no manual ranking rules | Web chat only; no SMS, WhatsApp, or voice surfaces |
-| Rep AI | Proactive sales chatbot | DTC stores focused on browser-to-buyer nudging on PDPs | Tiered plans (Shopify-listed) | Proactive engagement triggers tuned for conversion moments | Sales-chat only, no search, no deflection |
+| Rep AI | Flow Studio, proactive chat, live agent drop-in, Post-Order Tasks | Brands that need scripted flows per campaign, hybrid AI + live-agent conversations, or in-chat cancellations/returns/tracking | Starter $39–$95/mo (10K visitors); $12/1K visitors at low volume | Flow Studio, live agent hybrid mode, Post-Order Tasks Agent, drop-off reasons analytics | Not a search engine; pair with Nobi for discovery and Q&A |
 | Octane AI | Quiz + chatbot funnel | Beauty and CPG brands running a quiz as their hero discovery surface | Published Shopify app plans | Quiz funnels that double as email capture and product matching | Quiz-centric, less useful when open-ended chat is the main job |
-| Alby | AI shopping assistant (Shopify) | Shopify merchants wanting product Q&A on PDPs | Shopify-listed plans | Focused product Q&A surface | Acquired by Bluecore in Nov 2024, roadmap direction uncertain; no search |
-| Tidio | Live chat + chatbot | Small Shopify merchants who want live chat first and bot second | Free tier (50 Lyro conversations) | Combines human live chat with simple bot flows | Lighter semantic understanding; not built for deep product discovery |
-| Gorgias | Helpdesk with AI | Brands whose core need is ticket deflection and agent workflows | Ticket-based plans; AI features gated on higher tiers | Full ticketing, return, and refund workflows built for ecommerce | No product discovery or search; AI features gated on higher tiers |
+| Alby | AI shopping assistant (Shopify) | Brands already in the Bluecore ecosystem — overlaps with Nobi's PDP Q&A with no unique lane | Shopify-listed plans | Shopify-native PDP Q&A install | Acquired by Bluecore in Nov 2024, roadmap direction uncertain; Nobi covers the same lane |
+| Tidio | Live human chat with AI handoff | Small Shopify merchants who want live human chat with Lyro AI backup | Free tier (50 Lyro conversations) | Easy install, friendly live-chat UX with AI agent fallback | Lighter semantic understanding; limited product discovery |
+| Gorgias | Agent-side ticket workflows + routing + returns flows | Brands that need ticket routing, macros, returns/refunds, and post-purchase workflows alongside Nobi's deflection | Ticket-based plans; AI features gated on higher tiers | Strong ticketing, return, and refund workflows built for ecommerce | Not a deflection substitute — complements Nobi rather than replacing it |
 
 ## What is a shopping chatbot and how is it different from live chat?
 
@@ -106,19 +106,19 @@ Think about where it earns its keep at each funnel stage. At the top, a paid vis
 
 The benchmarks back it up. Faherty's Shop with AI surface converts at 6.3% CVR with a $315 AOV, well above typical sitewide apparel numbers. That's conversion lift on traffic the brand already paid to acquire, which is the only honest way to measure CAC payback.
 
-Vendors have noticed. Rep AI, for instance, is a Shopify-native chatbot that pitches proactive engagement as a way to recover would-be bounces. The category is real. The question for a marketing manager isn't whether to add a chatbot, it's which surface, and what it needs to plug into: Nobi's angle is [conversational discovery that ties the chat directly to search results](https://nobi.ai/why-nobi/better-search), so the assistant surfaces SKUs, not canned replies.
+Vendors have noticed. Rep AI, for instance, is a Shopify-native chatbot built around scripted Flow Studio flows, live agent drop-in, and post-order self-serve. The category is real. The question for a marketing manager isn't whether to add a chatbot, it's which surface, and what it needs to plug into: Nobi's angle is [conversational discovery that ties the chat directly to search results](https://nobi.ai/why-nobi/better-search), so the assistant surfaces SKUs, not canned replies.
 
 ## Which type of shopping chatbot fits your store?
 
-There are four honest categories on the market today, and picking the wrong one is how most implementations fail. Figure out your primary job before you shortlist tools: discovery, proactive sales nudging, quiz-led matching, or support deflection. The answer drives which vendor fits, and it changes how you measure success.
+There are a few honest categories on the market today, and picking the wrong one is how most implementations fail. Figure out your primary job before you shortlist tools: discovery and Q&A, scripted flows with live agent drop-in, quiz-led matching, or agent-side ticket workflows. The answer drives which vendor fits, and it changes how you measure success.
 
-**Conversational discovery, search, and lead capture in one surface.** This is where Nobi sits. A shopper lands from a paid ad, asks a product question in chat or types into search, gets a recommendation, and [drops an email before they bounce](https://nobi.ai/lead-capture). It's the default pick if your real pain is high bounce on paid landing pages and weak on-site email capture, and you'd rather buy one tool than stitch together search, chat, and a popup app.
+**Conversational discovery, search, Q&A, and deflection in one surface.** This is where Nobi sits. A shopper lands from a paid ad, asks a product or policy question in chat or types into search, gets a recommendation or answer, and [drops an email before they bounce](https://nobi.ai/lead-capture). It's the default pick if your real pain is high bounce on paid landing pages, weak on-site email capture, or support questions eating shopper attention, and you'd rather buy one tool than stitch together search, chat, Q&A, and a popup app.
 
-**Proactive sales nudging.** Rep AI is purpose-built here. It triggers on PDP behavior to push visitors toward a buy, and it's tightly tied to Shopify. If your search is already handled and the job to be done is squeezing more conversions out of product pages, Rep AI fits better than a discovery-first tool.
+**Scripted flows, live agent drop-in, and in-chat post-order self-serve.** Rep AI covers four lanes Nobi doesn't: Flow Studio (no-code scripted conversation flows tied to campaigns or audiences), live agent drop-in on AI conversations for hybrid AI+human handling, a Post-Order Tasks Agent that lets shoppers cancel orders / start returns / check tracking inside the chat, and a drop-off reasons analytics lens distinct from Nobi's search/CVR reporting. It's also the most mature proactive-chat tool in the category. Rep AI is a chat surface, not a search engine — pair it with Nobi if discovery and Q&A are also weak.
 
 **Quiz-led product finder.** Octane AI owns this category, especially for beauty and CPG brands where a quiz is the hero discovery experience. Plans start at $50/month and scale on credits. If you've already decided your funnel runs through a quiz, Octane is purpose-built and Nobi is not.
 
-**Helpdesk plus AI.** Gorgias leads here. If returns, refunds, and ticket deflection are your actual problem, a discovery bot won't move the needle, commit to a helpdesk.
+**Agent-side ticket workflows.** Gorgias leads here. If you need ticket routing, macros, structured returns/refunds flows, and post-purchase order modifications handled by agents, Gorgias is the right complement to Nobi. Nobi deflects the questions (pre- and post-purchase) that don't need a human — Gorgias handles the tickets that do.
 
 Honest caveat on Nobi: we don't merchandise category or collection pages, we don't run quiz funnels, and we're web-chat only, no SMS or WhatsApp. If any of those is your core requirement, pick a different tool from this list.
 
@@ -144,7 +144,7 @@ Expect to spend between $25 and a few hundred dollars a month for SMB plans, wit
 
 **Tidio's** Lyro AI agent has a free tier (50 conversations to start) and is sold either inside the Plus plan or as an add-on to other Tidio plans. Conversation-based limits apply.
 
-**Rep AI** is sold through the Shopify app store on tiered plans that scale with store traffic. It's a Shopify-only fit, which is fine if you're on Shopify and a non-starter if you aren't.
+**Rep AI** uses visitor-based pricing: Starter runs $39–$95/month at 10K monthly visitors, with Pro hitting $280–$740/month around 125K visitors, at a rate of roughly $12 per 1,000 visitors at low volume that drops at scale. It's a Shopify-only fit, which is fine if you're on Shopify and a non-starter if you aren't.
 
 **Octane AI** publishes three plans on Shopify: Basic at $50/month (400 credits), Plus at $200/month (2,200 credits), and Enterprise at $500+/month. Credits are consumed by quiz interactions and messages, so heavy quiz funnels burn through tiers quickly.
 
@@ -168,7 +168,7 @@ For a [Shopify Plus benchmark](https://nobi.ai/customers), Lucchese attributed $
 
 Not every ecommerce problem is a chatbot problem. If your real pain is ticket volume, post-purchase returns, or a messaging channel that isn't your website, a shopping discovery bot will underwhelm, and a different tool will earn its keep faster. Here's how to tell.
 
-**Your real issue is ticket deflection and returns.** If shoppers are writing in about "where is my order," refund status, or exchange sizes, that's a helpdesk problem. Gorgias is built for this: ticket-based pricing from $10/month to $900/month, with an AI Agent priced at $0.90 per resolved conversation. Nobi's assistant helps shoppers find and decide, but it doesn't process returns, refunds, or order modifications inside the chat. Pair Nobi with Gorgias, or start with Gorgias if support is the bleeding wound.
+**Your real issue is ticket routing, macros, and structured returns/refunds workflows.** Nobi deflects inbound questions before they become tickets — pre-purchase Q&A, post-purchase "where is my order" queries, policy questions. But Nobi doesn't process returns, refunds, or order modifications as structured ticket workflows, and it doesn't manage agent routing or macros. That's Gorgias: ticket-based pricing from $10/month to $900/month, with an AI Agent priced at $0.90 per resolved conversation. Pair Nobi with Gorgias — Nobi handles the deflection, Gorgias handles the tickets that still need agent tooling.
 
 **Your discovery model is quiz-first.** Beauty, skincare, supplements, and other "routine builder" categories convert best when the shopper answers five questions and gets a kit. Octane AI is purpose-built for that flow, with plans starting at $50/month and templates for product finders, routine builders, and personality quizzes. A general-purpose chatbot will lose to a dedicated quiz on that specific surface.
 

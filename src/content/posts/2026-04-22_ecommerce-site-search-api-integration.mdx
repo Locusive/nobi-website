@@ -3,13 +3,13 @@ export const meta = {
  slug: "ecommerce-site-search-api-integration",
  date: "2026-04-22",
  publishedAt: "2026-04-22",
- description: "How to evaluate, integrate, and measure a site search API for ecommerce, real pricing, integration timelines, and CVR benchmarks from mid-market brands.",
- excerpt: "How to evaluate, integrate, and measure a site search API for ecommerce, real pricing, integration timelines, and CVR benchmarks from mid-market brands.",
+ description: "How to evaluate, integrate, and measure a site search API for ecommerce, real pricing, integration timelines, and CVR benchmarks from growth-stage brands.",
+ excerpt: "How to evaluate, integrate, and measure a site search API for ecommerce, real pricing, integration timelines, and CVR benchmarks from growth-stage brands.",
  tags: ["integration", "site search", "ecommerce", "ecommerce search"],
  author: "Nobi Team",
  heroImage: "https://storage.googleapis.com/nobi-public/docs_and_marketing_websites/posts/ecommerce-site-search-api-integration/hero.png",
- featured: false,
- draft: true,
+ featured: true,
+ draft: false,
  faqItems: [
  {
  question: "What is a site search API and why does ecommerce need one?",
@@ -20,7 +20,7 @@ export const meta = {
  answer: "Focus on four criteria: integration effort (days vs months of engineering), relevance model (AI-learned vs manually tuned rules), pricing predictability (flat vs revenue-share vs per-query), and merchandising workflow for non-engineering users. The real difference between vendors is who owns ranking maintenance week after week, and whether your bill stays predictable as traffic scales. Most other feature checklists are noise."
  },
  {
- question: "Which site search APIs are worth considering for a mid-market ecommerce brand?",
+ question: "Which site search APIs are worth considering for an ecommerce brand?",
  answer: "The contenders split into three buckets: managed AI-search platforms like Nobi, Klevu, and Fast Simon; developer-first infrastructure APIs like Algolia and Coveo; and enterprise discovery suites like Bloomreach, Constructor, and Searchspring. Each solves a different problem, and the right pick depends on whether you want ranking handled for you, owned by your engineers, or bundled into a larger commerce cloud. Pricing and integration effort vary by an order of magnitude across these options."
  },
  {
@@ -47,7 +47,7 @@ export const meta = {
   "@context": "https://schema.org",
   "@type": "Article",
   "headline": "How to Integrate a Site Search API That Actually Lifts Ecommerce Conversions",
-  "description": "How to evaluate, integrate, and measure a site search API for ecommerce, real pricing, integration timelines, and CVR benchmarks from mid-market brands.",
+  "description": "How to evaluate, integrate, and measure a site search API for ecommerce, real pricing, integration timelines, and CVR benchmarks from growth-stage brands.",
   "datePublished": "2026-04-22",
   "dateModified": "2026-04-22",
   "author": {
@@ -86,7 +86,7 @@ A site search API plugs a dedicated search engine into your storefront, taking q
 | Klevu | AI search tuned for Shopify ecommerce | Shopify brands that want AI search with minimal dev work | ~$199/mo starter tier | Strong Shopify-native install, semantic search out of the box | Personalization is a separate paid module; merchandising UI feels dated |
 | Searchspring | Mid-market search + merchandising suite | Merchandising-heavy teams that live in rule-based controls | Custom, typically $750–$2,000/mo mid-market | Rich merchandising workflows and category page controls | Rule-based tuning is manual and time-intensive; less AI-native |
 | Constructor | AI-first enterprise product discovery | Large catalogs where revenue-share pricing maps to outsized search impact | Revenue-share / custom enterprise pricing | Strong AI relevance at scale, personalization built-in | Revenue-share model can create surprise costs; enterprise sales motion |
-| Bloomreach | Enterprise search + CDP commerce cloud | Enterprise retailers wanting search unified with marketing data | Custom, typically $5K+/mo | End-to-end commerce experience with content, search, and CDP | Implementation runs months; pricing out of reach for most mid-market brands |
+| Bloomreach | Enterprise search + CDP commerce cloud | Enterprise retailers wanting search unified with marketing data | Custom, typically $5K+/mo | End-to-end commerce experience with content, search, and CDP | Implementation runs months; pricing out of reach for most growth-stage brands |
 
 ## What is a site search API and why does ecommerce need one?
 
@@ -108,7 +108,7 @@ Pricing models scale very differently. Algolia charges per search request and pe
 
 Nobi's model is flat and usage-based: $25/month covers 2,500 searches and 250 conversational messages, then $0.01 per extra search and $0.10 per extra message. A store doing 50,000 monthly searches pays roughly $500, not a percentage of GMV. Worth modeling against your actual query volume before you sign anything.
 
-## Which site search APIs are worth considering for a mid-market ecommerce brand?
+## Which site search APIs are worth considering for an ecommerce brand?
 
 The contenders split into three buckets: managed AI-search platforms (Nobi, Klevu, Fast Simon), developer-first infrastructure APIs (Algolia, Coveo), and enterprise discovery suites (Bloomreach, Constructor, Searchspring). Each solves a different problem. The right pick depends on whether you want ranking handled for you, owned by your engineers, or bundled into a larger commerce cloud. Pricing and integration effort vary by an order of magnitude across the three.
 
@@ -139,7 +139,7 @@ Here's how the named players price, where each model tends to bite:
 - **[Nobi](https://nobi.ai/pricing)**: $25/month base includes 2,500 searches and 250 conversational messages. Additional searches are $0.01 each, additional messages $0.10. A brand doing 50,000 searches and 5,000 messages lands around $1,000/month, with no revenue-share or per-seat fees layered on top.
 - **Algolia**: free up to 10K search requests and 100K records. The Grow plan adds $0.50 per 1,000 requests beyond that, so 50K searches is roughly $25 in query cost. Query-heavy catalogs (autocomplete firing on every keystroke, facet refinements, recommendation calls) push that number up quickly. Grow Plus jumps to $1.75 per 1K, and Improve moves to custom volume pricing.
 - **Klevu**: doesn't publish full pricing publicly. Starter SaaS plans are commonly cited around $199/month, and Smart Category Merchandising is sold as a separate add-on, so personalization and category curation aren't always in the base fee.
-- **Searchspring**: custom quotes only. Mid-market brands typically land in the $750 to $2,000/month range.
+- **Searchspring**: custom quotes only. Growth-stage brands typically land in the $750 to $2,000/month range.
 - **Constructor**: revenue-share against attributed GMV. Predictable only if your GMV is.
 - **Bloomreach and Coveo**: $5,000+/month plus implementation and services contracts that often run $20K and up.
 
@@ -159,7 +159,7 @@ Nobi's honest limit: it's not built for teams that want to write ranking logic f
 
 ## What conversion results can I expect after integrating a better site search API?
 
-Mid-market brands that swap native or rule-based search for an AI-driven API typically see search conversion lifts in the 10–25% range, with revenue-per-searcher gains that often outpace the CVR delta. The numbers from real head-to-head A/B tests bear this out, and they're worth reading as a floor rather than a ceiling.
+Growth-stage brands that swap native or rule-based search for an AI-driven API typically see search conversion lifts in the 10–25% range, with revenue-per-searcher gains that often outpace the CVR delta. The numbers from real head-to-head A/B tests bear this out, and they're worth reading as a floor rather than a ceiling.
 
 UNTUCKit ran a two-month split test and measured a 17.1% CVR lift with Nobi (17.6% vs. 15.0%), a 21.3% lift in revenue per searcher ($39.17 vs. $32.30), and a 3.3% AOV bump ($222 vs. $215). They later ran Nobi against the paid incumbent they were already using, Findify, and Nobi still came out ahead at 17.4% vs. 16.5% CVR. Kilte, a DTC fashion brand, saw a 21.7% CVR lift over Shopify's default search, driven largely by semantic color normalization: shoppers typing "brown boots" actually find the Cappuccino Boot, even though "brown" appears nowhere in the product record. Faherty hit 12.3% search CVR against another AI search tool's 10.1%. Lucchese cleared $1M+ in incremental revenue in year one, a 39x ROI.
 

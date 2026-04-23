@@ -1,10 +1,10 @@
 export const meta = {
- title: "How to Implement a Shopping Chatbot for Ecommerce Success",
+ title: "How to Implement a Shopping Assistant for Ecommerce Success",
  slug: "adding-ai-chatbot-to-ecommerce-site",
  date: "2026-04-23",
  publishedAt: "2026-04-23",
- description: "A step-by-step guide for marketing managers: picking a shopping chatbot platform, rolling it out on Shopify, measuring revenue, and knowing when to skip.",
- excerpt: "A step-by-step guide for marketing managers: picking a shopping chatbot platform, rolling it out on Shopify, measuring revenue, and knowing when to skip.",
+ description: "A step-by-step guide for marketing managers: picking a shopping assistant platform, rolling it out on Shopify, measuring revenue, and knowing when to skip.",
+ excerpt: "A step-by-step guide for marketing managers: picking a shopping assistant platform, rolling it out on Shopify, measuring revenue, and knowing when to skip.",
  tags: ["how-to", "sales assistance", "ecommerce", "ecommerce search"],
  author: "Nobi Team",
  heroImage: "https://storage.googleapis.com/nobi-public/docs_and_marketing_websites/posts/adding-ai-chatbot-to-ecommerce-site/hero.png",
@@ -12,32 +12,32 @@ export const meta = {
  draft: false,
  faqItems: [
  {
- question: "What does a shopping chatbot actually do on an ecommerce site?",
- answer: "A shopping chatbot is an AI-powered conversational interface on an ecommerce site that helps visitors find products, answers pre-purchase questions, captures email or SMS leads, and deflects common support questions. Modern versions are grounded in your actual product catalog and shopper data, so a question like 'do you have this in a wide fit under $80?' returns real SKUs with real availability instead of hallucinated products. Surfaces vary by platform: the baseline is a chat widget on every page, and more capable platforms also power the search results page, the product detail page, and sometimes the cart. It is not a helpdesk like Gorgias or Zendesk, which manage tickets agent-side; a shopping chatbot talks to the shopper directly, before a ticket would ever get filed."
+ question: "What does a shopping assistant actually do on an ecommerce site?",
+ answer: "A shopping assistant is an AI-powered conversational interface on an ecommerce site that helps visitors find products, answers pre-purchase questions, captures email or SMS leads, and deflects common support questions. Modern versions are grounded in your actual product catalog and shopper data, so a question like 'do you have this in a wide fit under $80?' returns real SKUs with real availability instead of hallucinated products. Surfaces vary by platform: the baseline is a chat widget on every page, and more capable platforms also power the search results page, the product detail page, and sometimes the cart. It is not a helpdesk like Gorgias or Zendesk, which manage tickets agent-side; a shopping assistant talks to the shopper directly, before a ticket would ever get filed."
  },
  {
- question: "How much does a shopping chatbot cost, and what pricing models should you expect?",
+ question: "How much does a shopping assistant cost, and what pricing models should you expect?",
  answer: "Pricing comes in three shapes: flat subscription with included usage and per-unit overage, custom GMV-indexed quotes that scale with revenue, and helpdesk-bundled pricing that gates AI behind higher tiers. Nobi uses flat-plus-overage at $25/month for 2,500 searches and 250 conversational messages, with $0.01 per additional search and $0.10 per additional message. Rep AI and Octane AI lean toward GMV or store-size quotes, while Gorgias and Tidio bundle chat into ticketing platforms with per-ticket overages of $0.36 to $0.40 once limits are exceeded. Before signing anywhere, model your six-month bill at projected traffic, since GMV-indexed quotes and per-ticket overages can look cheap at tier one and balloon by month three."
  },
  {
- question: "Which shopping chatbot platforms should marketing managers shortlist?",
+ question: "Which shopping assistant platforms should marketing managers shortlist?",
  answer: "The shortlist depends on the primary job you are solving. Pick Nobi for site search plus conversational discovery plus lead capture in one tool, Rep AI for scripted proactive-chat flows marketing ops can design without engineering, and Octane AI for quiz-led product finders. Pick Tidio for a 24/7 live-chat widget with AI-assisted first touch, Gorgias for agent-side ticket workflow with AI deflection, and Alby for PDP Q&A inside the Bluecore ecosystem."
  },
  {
- question: "How do you plan a shopping chatbot rollout before you pick a tool?",
- answer: "The article does not cover how to plan a shopping chatbot rollout before picking a tool. The closest guidance it offers is to model your six-month bill at projected traffic before you sign with any vendor, since GMV-indexed quotes and per-ticket overages can balloon quickly."
+ question: "How do you plan a shopping assistant rollout before you pick a tool?",
+ answer: "The article does not cover how to plan a shopping assistant rollout before picking a tool. The closest guidance it offers is to model your six-month bill at projected traffic before you sign with any vendor, since GMV-indexed quotes and per-ticket overages can balloon quickly."
  },
  {
  question: "What does the implementation timeline look like from install to launch?",
  answer: "The article does not describe an implementation timeline from install to launch."
  },
  {
- question: "How do you measure whether your shopping chatbot is actually working?",
- answer: "The article does not lay out specific measurement metrics for a shopping chatbot."
+ question: "How do you measure whether your shopping assistant is actually working?",
+ answer: "The article does not lay out specific measurement metrics for a shopping assistant."
  },
  {
- question: "When is a shopping chatbot NOT the right move for your store?",
- answer: "The article does not directly cover when a shopping chatbot is not the right move. It does note that a shopping chatbot is not a substitute for a helpdesk like Gorgias or Zendesk, which manage tickets agent-side rather than talking to shoppers directly."
+ question: "What is the fastest way to get a shopping assistant live on Shopify?",
+ answer: "Most of the shortlist installs from the Shopify App Store and can be live the same day once you sync your catalog - Nobi, Rep AI, Octane AI, and Tidio all fit that pattern. Gorgias takes four to eight weeks because it is a helpdesk cutover rather than a widget install, and Alby routes through a Bluecore contract. The remaining difference is whether you can get started without talking to sales: Nobi is free to sign up, with the $25/month base only kicking in once you are live."
  }
  ],
 };
@@ -46,8 +46,8 @@ export const meta = {
 {`{
   "@context": "https://schema.org",
   "@type": "HowToArticle",
-  "headline": "How to Implement a Shopping Chatbot for Ecommerce Success",
-  "description": "A step-by-step guide for marketing managers: picking a shopping chatbot platform, rolling it out on Shopify, measuring revenue, and knowing when to skip.",
+  "headline": "How to Implement a Shopping Assistant for Ecommerce Success",
+  "description": "A step-by-step guide for marketing managers: picking a shopping assistant platform, rolling it out on Shopify, measuring revenue, and knowing when to skip.",
   "datePublished": "2026-04-23",
   "dateModified": "2026-04-23",
   "author": {
@@ -75,95 +75,103 @@ export const meta = {
   ]
 }`}
 </script>
-# How to Implement a Shopping Chatbot for Ecommerce Success
+# How to Implement a Shopping Assistant for Ecommerce Success
 
-**TL;DR:** Adding a shopping chatbot to an ecommerce site comes down to four steps:
+**TL;DR:** Adding a shopping assistant to an ecommerce site comes down to four steps:
 
 1. **Pick a platform built for the job you actually need** - search, conversational discovery, scripted campaign flows, or post-order support.
 2. **Install and ground it in your live product catalog** so it answers from real inventory, not hallucinated SKUs.
 3. **Instrument a holdout segment before launch** so you can attribute revenue uplift cleanly.
 4. **Measure incremental revenue against that holdout** - not chat volume, not deflection rate in isolation.
 
-Nobi starts at $25/month and includes 2,500 searches plus 250 conversational messages.
+*Disclosure: this article is published by Nobi, one of the six shopping assistants named below. Nobi is covered alongside Rep AI, Octane AI, Tidio, Gorgias, and Alby - treat every mention of Nobi as one candidate among six, and evaluate against the alternatives for your specific job.*
 
-## What does a shopping chatbot actually do on an ecommerce site?
+## What does a shopping assistant actually do on an ecommerce site?
 
-A shopping chatbot is an [AI-powered conversational interface](https://nobi.ai/blog/ai-shopping-assistant-ecommerce) that sits on an ecommerce site and helps visitors find products, answer pre-purchase questions, capture email or SMS leads, and deflect common support questions. The modern versions are grounded in your actual product catalog and shopper data, so when a visitor asks "do you have this in a wide fit under $80?" the bot recommends real SKUs with real availability instead of hallucinating a product that doesn't exist.
+A shopping assistant is an [AI-powered conversational interface](https://nobi.ai/blog/ai-shopping-assistant-ecommerce) that sits on an ecommerce site and helps visitors find products, answer pre-purchase questions, capture email or SMS leads, and deflect common support questions. The modern versions are grounded in your actual product catalog and shopper data, so when a visitor asks "do you have this in a wide fit under $80?" the bot recommends real SKUs with real availability instead of hallucinating a product that doesn't exist.
 
-Surfaces vary by platform. The baseline is a chat widget on every page. On more capable platforms, the same conversational layer also powers the search results page (a shopper types a query and gets a ranked list plus an answer), the product detail page (a Q&A assistant that answers fit, sizing, compatibility, and returns questions inline), and sometimes the cart.
+The concrete payoff looks like this: a shopper types "white running shoes size 10" into the search bar, gets a ranked list of in-stock SKUs plus a short AI answer summarising the options. If she follows up with "are these true to size?", the assistant pulls the answer from your product descriptions and returns policy without the shopper ever leaving the page. One session handles discovery, a fit question, and the decision - three steps that used to live in search, a PDP, and an email to support.
 
-Worth naming up front where a shopping chatbot isn't the right category - because the surfaces above get confused with helpdesk tools all the time. A shopping chatbot is not a helpdesk. Helpdesks like Gorgias or Zendesk manage tickets agent-side - they're the interface your support team uses to handle cases, macros, and returns. A shopping chatbot talks to the shopper directly, before a ticket would ever get filed.
+Worth naming up front where a shopping assistant isn't the right category - the label gets confused with helpdesk tools all the time. A shopping assistant is not a helpdesk. Helpdesks like [Gorgias](https://gorgias.com) or [Zendesk](https://zendesk.com) manage tickets agent-side - they're the interface your support team uses to handle cases, macros, and returns. A shopping assistant talks to the shopper directly, before a ticket would ever get filed.
 
-## How much does a shopping chatbot cost, and what pricing models should you expect?
+## How much does a shopping assistant cost, and what pricing models should you expect?
 
-Shopping chatbot pricing breaks into three shapes, and the one you pick matters less than whether you model your actual volume before signing. Flat subscription with included usage and per-unit overage is the most predictable. Custom GMV-indexed quotes scale your bill with revenue rather than chatbot-influenced sessions. Helpdesk-bundled pricing puts chat inside a broader ticketing platform, usually with AI features gated behind higher tiers.
+Shopping assistant pricing breaks into three categories, and the one you pick matters less than whether you model your actual volume before signing.
 
-Nobi sits in the flat-plus-overage camp. $25/month base, including 2,500 searches and 250 conversational messages. Beyond that, $0.01 per additional search and $0.10 per additional message. A brand running 50,000 searches and 5,000 messages a month lands around $995. No revenue share, no per-seat add-ons, no AI gating between tiers.
+1. Flat subscription with included usage and per-unit overage is the most predictable.
+2. Custom GMV-indexed quotes scale your bill with revenue rather than assistant-influenced sessions.
+3. Helpdesk-bundled pricing puts chat inside a broader ticketing platform, usually with AI features gated behind higher tiers.
 
-Rep AI and Octane AI both lean toward quotes indexed to store size or GMV. Octane AI publishes three tiers - Basic at $50/month for 400 credits, Plus at $200/month for 2,200 credits, and Enterprise/Unlimited starting at $500+/month - with custom Enterprise pricing for larger stores. Credit-based plus Shopify-store-sized quoting means the variable bill tracks revenue more than actual chatbot sessions. Rep AI doesn't publish a public price sheet; quotes vary by Shopify store size.
+**Flat subscription with per-unit overage** is the most predictable model. Nobi is an example here: $25/month base covers 2,500 searches and 250 conversational messages, with $0.01 per additional search and $0.10 per additional message beyond that. [Rep AI's](https://hellorep.ai) Pay As You Grow tier also fits this shape - $12 per 1,000 visitors with no revenue share.
 
-Gorgias and Tidio are helpdesk-bundled. Gorgias uses a ticket-based model from $10/month (Starter) up to $900/month (Advanced), plus a custom Enterprise option, with overage charges of $0.36-$0.40 per ticket once you exceed your monthly limit. Tidio offers a free trial including 50 Lyro conversations; paid AI sits in Lyro-specific tiers on top of the base chat product.
+**Store-size or GMV-indexed quotes** scale the bill with your revenue rather than with actual assistant sessions. [Rep AI's](https://hellorep.ai) Pro tiers run $280-$740/month at ~125K monthly sessions, with Enterprise custom above ~500K. [Octane AI](https://octaneai.com) publishes three tiers - Basic at $50/month for 400 credits, Plus at $200/month for 2,200 credits, Enterprise at $500+/month - with custom Enterprise pricing for larger stores. The variable bill here tracks revenue more than actual assistant usage, which can surprise at the six-month mark.
 
-Alby is the one outlier - Bluecore acquired Alby in November 2024 and its standalone pricing is no longer published; post-acquisition, Alby's PDP Q&A is effectively bundled into Bluecore's contract, so the pricing conversation happens at the Bluecore level rather than line-item per feature.
+**Helpdesk-bundled pricing** puts chat inside a broader ticketing platform. [Gorgias](https://gorgias.com) uses a ticket-based model from $10/month Starter up to $900/month Advanced, with overage charges of $0.36-$0.40 per ticket once you exceed your monthly limit, plus a custom Enterprise option. [Tidio](https://tidio.com) offers a free trial including 50 Lyro conversations; paid AI sits in Lyro-specific tiers on top of the base chat product.
+
+**Post-acquisition outlier:** [Alby](https://alby.com) doesn't fit any of the above cleanly. Bluecore acquired Alby in November 2024 and its standalone pricing is no longer published; Alby's PDP Q&A is effectively bundled into Bluecore's contract, so the pricing conversation happens at the Bluecore level rather than line-item per feature.
 
 Before you sign anywhere, model your six-month bill at projected traffic. GMV-indexed quotes and per-ticket overages can look cheap at tier one and balloon by month three.
 
-## Which shopping chatbot platforms should marketing managers shortlist?
+## Which shopping assistant platforms should marketing managers shortlist?
 
-The [shortlist](https://nobi.ai/blog/best-ai-shopping-assistants-for-ecommerce) depends on the primary job you're solving. Site search plus conversational discovery plus lead capture in one tool points you at Nobi. Scripted proactive-chat flows that marketing ops can design without engineering help point you at Rep AI. Quiz-led product finders point you at Octane AI. A 24/7 live-chat widget with AI-assisted first touch points you at Tidio. Agent-side ticket workflow with AI deflection points you at Gorgias. PDP Q&A inside the Bluecore ecosystem points you at Alby.
+The [shortlist](https://nobi.ai/blog/best-ai-shopping-assistants-for-ecommerce) depends on the primary job you're solving. Match the job to the tool in the table, then read the paragraph below for the one or two candidates you want to dig into.
 
-Nobi handles search, conversational shopping, and lead capture on one web-chat surface, with the shopping assistant grounded in the live product catalog so a query like "do you have this in a wide fit under $80?" returns real SKUs instead of fabricated recommendations. Lucchese, a luxury Western boot brand on Shopify Plus, drove $1M+ in incremental first-year revenue at a 39x ROI using Nobi across search plus a cart assistant and a PDP assistant - $3.46M cumulative attributed revenue since launch. Pricing starts at $25/month, which includes 2,500 searches and 250 conversational messages; overages run $0.01 per additional search and $0.10 per additional message. Good fit for teams whose primary friction is search relevance and who want chat grounded in the live catalog without running a second tool.
+| Primary job | Best tool |
+| --- | --- |
+| Site search + conversational shopping + lead capture in one platform | Nobi |
+| Scripted proactive-chat flows marketing ops can build without engineering | Rep AI |
+| Quiz-led product finder as the hero discovery surface | Octane AI |
+| 24/7 human chat with AI first-touch coverage after hours | Tidio |
+| Ticket routing, returns processing, macros (helpdesk) | Gorgias |
+| PDP Q&A inside an existing Bluecore stack | Alby |
 
-Rep AI is built around a no-code Flow Studio for scripted campaign chat - think Black Friday promo flows, product-launch walk-throughs, and abandoned-cart rescue sequences that marketing ops can design and ship without engineering. It also supports live-agent drop-in mid-thread (a human can jump into an AI session while the AI continues) and a Post-Order Tasks Agent for shopper self-serve on cancellations, returns, and tracking. One-click Shopify install.
+Nobi handles search, conversational shopping, and lead capture on one web-chat surface, with the shopping assistant grounded in the live product catalog so a query like "do you have this in a wide fit under $80?" returns real SKUs instead of fabricated recommendations. Lucchese, a luxury Western boot brand on Shopify Plus, <a href="/customers/lucchese">drove $1M+ in incremental first-year revenue</a> at a 39x ROI using Nobi across search plus a cart assistant and a PDP assistant - $3.46M cumulative attributed revenue since launch. Pricing starts at $25/month, which includes 2,500 searches and 250 conversational messages; overages run $0.01 per additional search and $0.10 per additional message. Good fit for teams whose primary friction is search relevance and who want chat grounded in the live catalog without running a second tool.
 
-Octane AI is a product-quiz platform for Shopify, strong in beauty and CPG, where the quiz itself is the hero discovery surface. Pricing starts at $50/month (Basic, 400 credits) and scales to Plus at $200/month and Enterprise at $500+/month. Pick it when a quiz funnel is the conversion mechanic.
+<div className="my-8 flex justify-center">
+  <a
+    href="https://dashboard.nobi.ai"
+    className="inline-flex items-center justify-center gap-2 rounded-2xl font-medium transition active:scale-[.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-black/10 dark:focus-visible:ring-white/20 bg-black text-white dark:bg-white dark:text-black hover:opacity-90 shadow-sm h-12 px-6 text-base no-underline"
+  >
+    <span>Get started with Nobi free</span>
+  </a>
+</div>
 
-Tidio pairs a live human chat widget with its Lyro AI agent for first-touch automation, with a free trial of 50 Lyro conversations. Built for merchants who want a combination of live chat + AI-assisted first touch without a full helpdesk migration. The AI agent can handle common questions and route to human agents when needed.
+[Rep AI](https://hellorep.ai) is built around a no-code Flow Studio for scripted campaign chat - think Black Friday promo flows, product-launch walk-throughs, and abandoned-cart rescue sequences that marketing ops can design and ship without engineering. It also supports live-agent drop-in mid-thread (a human can jump into an AI session while the AI continues) and a Post-Order Tasks Agent for shopper self-serve on cancellations, returns, and tracking. One-click Shopify install.
 
-Gorgias is a helpdesk: ticket management, macros, returns and refund processing, and AI deflection layered on top, with ticket-based pricing from $10/month (Starter) to $900/month (Advanced). Pick it when ticket routing, returns processing, and macro automation are the real bottleneck, and chatbot-on-storefront is a secondary need rather than the primary one.
+[Octane AI](https://octaneai.com) is a product-quiz platform for Shopify, strong in beauty and CPG, where the quiz itself is the hero discovery surface. Pricing starts at $50/month (Basic, 400 credits) and scales to Plus at $200/month and Enterprise at $500+/month. Pick it when a quiz funnel is the conversion mechanic.
 
-Alby is a PDP Q&A assistant inside the Bluecore ecosystem. It was acquired by Bluecore in November 2024 and its standalone roadmap and pricing are unclear post-acquisition, so treat it as a Bluecore-stack decision rather than a standalone evaluation.
+[Tidio](https://tidio.com) pairs a live human chat widget with its Lyro AI agent for first-touch automation, with a free trial of 50 Lyro conversations. Built for merchants who want a combination of live chat + AI-assisted first touch without a full helpdesk migration. The AI agent can handle common questions and route to human agents when needed.
 
-## How do you plan a shopping chatbot rollout before you pick a tool?
+[Gorgias](https://gorgias.com) is a helpdesk: ticket management, macros, returns and refund processing, and AI deflection layered on top, with ticket-based pricing from $10/month (Starter) to $900/month (Advanced). Pick it when ticket routing, returns processing, and macro automation are the real bottleneck, and assistant-on-storefront is a secondary need rather than the primary one.
 
-Plan the rollout in three stages: scoping, technical prep, and go-live. Skip any of them and the tool you pick will feel wrong inside a month.
+[Alby](https://alby.com) is a PDP Q&A assistant inside the Bluecore ecosystem. It was acquired by Bluecore in November 2024 and its standalone roadmap and pricing are unclear post-acquisition, so treat it as a Bluecore-stack decision rather than a standalone evaluation.
 
-Scoping means writing down the single primary job the chatbot has to do on your site. Product discovery, lead capture, post-purchase deflection, or a specific campaign flow are all valid jobs, but the best tool for each is different. A platform that's great at conversational product discovery will do a mediocre job of ticket deflection, and a support-first bot will not move your AOV. Pick one primary job, rank the second and third as stretch goals, and shortlist against the primary. Teams that try to solve all four jobs at once end up with a tool that's adequate at each and great at none.
+## How do you plan a shopping assistant rollout before you pick a tool?
 
-Technical prep is the part most teams skip. Verify catalog feed quality first: missing attributes, wrong inventory counts, and broken image URLs will show up in the chatbot's recommendations faster than they show up anywhere else on your site. Instrument analytics before the tool goes live so you can measure CVR and AOV on chatbot-interacted sessions against a holdout segment. Decide widget placement, trigger rules, and what the bot does when it can't answer before the vendor asks you in the implementation call.
+Scoping means understanding and focusing on the primary job the assistant has to do on your site. Product discovery, lead capture, post-purchase deflection, or a specific campaign flow are all valid jobs, but the best tool for each is different. A platform that's great at conversational product discovery will do a mediocre job of ticket deflection, and a support-first bot will not move your AOV. Pick one primary job, rank the second and third as stretch goals, and shortlist against the primary. Teams that try to solve all four jobs at once end up with a tool that's adequate at each and great at none.
 
-Go-live should be a soft launch to 10-25% of traffic for one to two weeks before rolling out wide. That window catches tone, recommendation-quality, and fallback issues while the blast radius is small. Model your projected six-month cost at expected traffic and message volume, not the brochure number. The budget leak at this stage is picking a tool whose pricing scales with GMV and then discovering months later that the variable bill tracks total revenue rather than actual chatbot-influenced sessions. Run the overage math before you sign.
+Technical prep is the part most teams skip. Verify catalog feed quality first: missing attributes, wrong inventory counts, and broken image URLs will show up in the assistant's recommendations faster than they show up anywhere else on your site. Decide widget placement, trigger rules, and what the bot does when it can't answer before the vendor asks you in the implementation call. Holdout-based analytics instrumentation belongs here too - more on that in the measurement section below.
+
+Go-live should be a soft launch to 10-25% of traffic for one to two weeks before rolling out wide. That window catches tone, recommendation-quality, and fallback issues while the blast radius is small. Model your projected six-month cost at expected traffic and message volume, not the brochure number. The budget leak at this stage is picking a tool whose pricing scales with GMV and then discovering months later that the variable bill tracks total revenue rather than actual assistant-influenced sessions. Run the overage math before you sign.
 
 ## What does the implementation timeline look like from install to launch?
 
-Modern LLM-grounded shopping chatbots install on Shopify in days, not months. A typical week-one timeline: catalog sync the same day you install, tone and fallback configuration over the next 2-3 days, analytics wiring so you can attribute revenue (another 2-3 days), and a soft launch to 10-25% of traffic by the end of week one. Helpdesk-bundled tools take longer because the rollout includes training the agent team on new ticket workflows, macros, and case routing, not just dropping in a chat widget. Plan on 1-2 weeks for a modern shopping chatbot and 4-8 weeks for anything bundled with a helpdesk migration.
+A typical week-one timeline for a non-helpdesk assistant: catalog sync the same day you install, tone and fallback configuration over days 2-3, analytics and holdout wiring by day 4-5, and a soft launch to 10-25% of traffic by the end of week one. Helpdesk-bundled rollouts run longer because they pull in ticket-system cutover, macro rebuilding, and agent training on top of the assistant itself - plan on 4-8 weeks for that path.
 
-Rep AI installs from the Shopify App Store and pulls catalog and order data through the native Shopify integration on day one. Tone and proactive-engagement triggers are configured in-app, so most brands are running a soft launch within a week. The longest part of a Rep AI rollout is usually deciding which proactive intervention rules to enable, not the technical install.
+The step brands skip most often is analytics wiring. Without a holdout group and revenue attribution in place before launch, you'll have a assistant in production and no way to prove what it's worth.
 
-Octane AI is faster still for its specific job. Quiz-led product discovery is the hero surface, and the AI quiz generator builds a first-draft quiz from your catalog in minutes. Brands using Octane AI as their primary discovery flow can have a quiz live in 2-3 days; the remaining time goes into Klaviyo handoff wiring and reviewing the recommendation logic against actual catalog inventory.
+## How do you measure whether your shopping assistant is actually working?
 
-Gorgias is the long-pole option because it isn't really a chat-widget rollout, it's a support-ops migration. Plans run from $10/month Starter to $900/month Advanced, and the 4-8 week timeline reflects ticket-system cutover, macro rebuilding, and agent training, not chatbot installation itself. If your team is replacing an existing helpdesk at the same time, budget the longer end.
+Measure incremental revenue from assistant sessions against a holdout, not chat volume. The three numbers that tie to marketing KPIs: conversion rate on sessions that interacted with the assistant versus a matched holdout that didn't, average order value on assistant-assisted checkouts, and email or SMS captures attributable to the chat surface. Set the holdout up on day one. If you wait, you'll spend a quarter arguing about whether the assistant caused the lift or whether those shoppers would have converted anyway.
 
-The step brands skip most often is analytics wiring. Without a holdout group and revenue attribution in place before launch, you'll have a chatbot in production and no way to prove what it's worth.
+Setting up the holdout is a one-time config: most platforms let you gate the assistant by a cookie flag or a percentage of traffic, so a random share of visitors sees the site without it. Keep the holdout at 10-20% for the first 4-6 weeks - long enough to accumulate enough converted sessions on each side for a real comparison at your volume. Don't touch the split mid-test; if you re-randomize, you lose the baseline. The comparison you care about at the end is CVR and AOV on the treated group minus the holdout, not the raw numbers on either side.
 
-## How do you measure whether your shopping chatbot is actually working?
+One Nobi-specific capability worth naming up front: Nobi has A/B testing built into the platform. A developer turns it on with a single line of config that sets the split percentage (say, 10% of traffic sees nothing, 90% sees Nobi), and Nobi keeps each visitor on the same side of the test across visits and fires the cart-and-checkout events you need to compare the groups. That saves your team the engineering work of gating the assistant behind your own cookie logic and lets you stand up a clean holdout-based measurement from day one. [Full configuration lives in the docs](https://docs.nobi.ai/developers-guide/ab-testing/).
 
-Measure incremental revenue from chatbot sessions against a holdout, not chat volume. The three numbers that tie to marketing KPIs: conversion rate on sessions that interacted with the chatbot versus a matched holdout that didn't, average order value on chatbot-assisted checkouts, and email or SMS captures attributable to the chat surface. Set the holdout up on day one. If you wait, you'll spend a quarter arguing about whether the chatbot caused the lift or whether those shoppers would have converted anyway.
+One gap to name alongside that strength: Nobi's analytics are built around search and CVR, not shopper drop-off reasons. If you need behavioral drop-off analytics as your primary lens, that's real and worth factoring in before you commit.
 
-[Published benchmarks](https://nobi.ai/blog/state-of-ecommerce-site-search-2026) give you something to anchor against. Faherty's Shop with AI assistant runs at a 6.3% CVR with a $315 AOV, which is a useful yardstick for a conversational discovery surface on a premium apparel catalog. Lucchese generated over $1M in incremental revenue in year one at a 39x ROI using Nobi across search, a cart assistant, and a PDP assistant, and has since accumulated $3.46M in attributed revenue. The cart and PDP assistant surfaces drove meaningful incremental checkouts on top of search, which matters when you're deciding whether to expand beyond the search box.
+## What's the fastest way to get started?
 
-Three vanity metrics to ignore in isolation: total messages handled, raw engagement rate, and deflection rate. Messages handled scales with traffic, not value. Engagement rate flatters tools that interrupt shoppers who were already going to convert. Deflection rate as a standalone number rewards any chatbot that answers anything, even when the answer sent the shopper away from a purchase. Pair deflection with downstream CVR on the same sessions or don't report it.
+Most of the tools on this shortlist install from the Shopify App Store and can be live the same day once you sync your catalog - Nobi, Rep AI, Octane AI, and Tidio all fit that pattern. Gorgias takes four to eight weeks because it's a helpdesk cutover rather than a widget install, and Alby routes through a Bluecore contract.
 
-One differentiator that matters here: Nobi's analytics are built around search and CVR, not shopper drop-off reasons. If you need behavioral drop-off analytics as your primary lens, that's a real gap worth naming before you commit.
-
-## When is a shopping chatbot NOT the right move for your store?
-
-A shopping chatbot is the wrong investment in a few specific cases, and it's worth naming them before you sign a contract.
-
-If your site gets under a few thousand monthly sessions, you don't have the sample size to move conversion rate in a way you can measure. Fix landing-page bounce first - chatbot lifts show up once traffic is stable, not before. If your conversion angle hinges on a branded voice or celebrity character in chat, most platforms including Nobi aren't purpose-built for that persona work and you'll need a bespoke build. And if your shoppers live on WhatsApp, SMS, or voice rather than your site, Nobi is web chat only, so you'll need a messaging-channel tool to reach them there.
-
-The vendor-specific cutouts matter too. If marketing ops wants to design scripted conversation trees per campaign - a Black Friday flow, a product-launch pitch, an abandoned-cart rescue - without engineering help, Rep AI's Flow Studio gives ops a visual builder with one-click Shopify integration for that job. If a product quiz is your hero discovery surface, Octane AI is the specialist: AI-powered quiz generation, 50+ integrations including Klaviyo and Recharge, Basic at $50/month. And if your real bottleneck is agent-side ticket workflow rather than shopper-facing chat, pair a chatbot with Gorgias, which centralizes tickets, automates repetitive cases, and runs macros inside a Shopify-native helpdesk.
-
----
-
-See what a shopping chatbot looks like when site search, conversational discovery, and lead capture all run in one platform at a flat $25/month. Start with Nobi.
+The remaining difference is whether you can get started without talking to sales: Nobi is free to sign up, with the $25/month base only kicking in once you're live. <a href="https://dashboard.nobi.ai">Try Nobi →</a>

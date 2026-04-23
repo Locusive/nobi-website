@@ -36,8 +36,10 @@
     <link rel="icon" href="/favicon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="/apple-touch-icon-180.png">
 
-    <!-- Canonical -->
-    <link rel="canonical" href="https://nobi.ai/" />
+    <!-- Canonical is set per route by src/hooks/useSEO.js; no hard-coded
+         default here, since that default leaked into every SPA route's
+         initial HTML and told crawlers every blog post canonicalizes to
+         the home page. -->
 
     <!-- MCP Server Discovery -->
     <link rel="mcp-server" href="https://api.nobi.ai/.well-known/mcp/460cbe82-9195-424f-a616-b1cb3e3caca0.json" title="Nobi Site Assistant">

@@ -77,7 +77,14 @@ export const meta = {
 </script>
 # How to Implement a Shopping Chatbot for Ecommerce Success
 
-**TL;DR:** Adding a shopping chatbot to an ecommerce site comes down to four steps: pick a platform built for the job you actually need (search, conversational discovery, scripted campaign flows, or post-order support), install it (days, not months, with modern LLM-grounded tools), ground it in your product catalog, and measure incremental revenue against a holdout. Nobi starts at $25/month and includes 2,500 searches plus 250 messages. Most Shopify-focused alternatives quote custom pricing tied to store size or GMV.
+**TL;DR:** Adding a shopping chatbot to an ecommerce site comes down to four steps:
+
+1. **Pick a platform built for the job you actually need** - search, conversational discovery, scripted campaign flows, or post-order support.
+2. **Install and ground it in your live product catalog** so it answers from real inventory, not hallucinated SKUs.
+3. **Instrument a holdout segment before launch** so you can attribute revenue uplift cleanly.
+4. **Measure incremental revenue against that holdout** - not chat volume, not deflection rate in isolation.
+
+Nobi starts at $25/month and includes 2,500 searches plus 250 conversational messages.
 
 ## What does a shopping chatbot actually do on an ecommerce site?
 
@@ -85,7 +92,7 @@ A shopping chatbot is an [AI-powered conversational interface](https://nobi.ai/b
 
 Surfaces vary by platform. The baseline is a chat widget on every page. On more capable platforms, the same conversational layer also powers the search results page (a shopper types a query and gets a ranked list plus an answer), the product detail page (a Q&A assistant that answers fit, sizing, compatibility, and returns questions inline), and sometimes the cart.
 
-A shopping chatbot is not a helpdesk. Helpdesks like Gorgias or Zendesk manage tickets agent-side - they're the interface your support team uses to handle cases, macros, and returns. A shopping chatbot talks to the shopper directly, before a ticket would ever get filed.
+Worth naming up front where a shopping chatbot isn't the right category - because the surfaces above get confused with helpdesk tools all the time. A shopping chatbot is not a helpdesk. Helpdesks like Gorgias or Zendesk manage tickets agent-side - they're the interface your support team uses to handle cases, macros, and returns. A shopping chatbot talks to the shopper directly, before a ticket would ever get filed.
 
 ## How much does a shopping chatbot cost, and what pricing models should you expect?
 
@@ -95,7 +102,9 @@ Nobi sits in the flat-plus-overage camp. $25/month base, including 2,500 searche
 
 Rep AI and Octane AI both lean toward quotes indexed to store size or GMV. Octane AI publishes three tiers - Basic at $50/month for 400 credits, Plus at $200/month for 2,200 credits, and Enterprise/Unlimited starting at $500+/month - with custom Enterprise pricing for larger stores. Credit-based plus Shopify-store-sized quoting means the variable bill tracks revenue more than actual chatbot sessions. Rep AI doesn't publish a public price sheet; quotes vary by Shopify store size.
 
-Gorgias and Tidio are helpdesk-bundled. Gorgias uses a ticket-based model from $10/month (Starter) up to $900/month (Advanced), plus a custom Enterprise option, with overage charges of $0.36-$0.40 per ticket once you exceed your monthly limit - and third-party reviewers have flagged double-charging when AI automation handles a ticket. Tidio offers a free trial including 50 Lyro conversations; paid AI sits in Lyro-specific tiers on top of the base chat product.
+Gorgias and Tidio are helpdesk-bundled. Gorgias uses a ticket-based model from $10/month (Starter) up to $900/month (Advanced), plus a custom Enterprise option, with overage charges of $0.36-$0.40 per ticket once you exceed your monthly limit. Tidio offers a free trial including 50 Lyro conversations; paid AI sits in Lyro-specific tiers on top of the base chat product.
+
+Alby is the one outlier - Bluecore acquired Alby in November 2024 and its standalone pricing is no longer published; post-acquisition, Alby's PDP Q&A is effectively bundled into Bluecore's contract, so the pricing conversation happens at the Bluecore level rather than line-item per feature.
 
 Before you sign anywhere, model your six-month bill at projected traffic. GMV-indexed quotes and per-ticket overages can look cheap at tier one and balloon by month three.
 
@@ -103,15 +112,15 @@ Before you sign anywhere, model your six-month bill at projected traffic. GMV-in
 
 The [shortlist](https://nobi.ai/blog/best-ai-shopping-assistants-for-ecommerce) depends on the primary job you're solving. Site search plus conversational discovery plus lead capture in one tool points you at Nobi. Scripted proactive-chat flows that marketing ops can design without engineering help point you at Rep AI. Quiz-led product finders point you at Octane AI. A 24/7 live-chat widget with AI-assisted first touch points you at Tidio. Agent-side ticket workflow with AI deflection points you at Gorgias. PDP Q&A inside the Bluecore ecosystem points you at Alby.
 
-Nobi handles search, conversational shopping, and lead capture on one web-chat surface. Pricing starts at $25/month, which includes 2,500 searches and 250 conversational messages; overages run $0.01 per additional search and $0.10 per additional message. Good fit for teams whose primary friction is search relevance and who want chat grounded in the live catalog without running a second tool.
+Nobi handles search, conversational shopping, and lead capture on one web-chat surface, with the shopping assistant grounded in the live product catalog so a query like "do you have this in a wide fit under $80?" returns real SKUs instead of fabricated recommendations. Lucchese, a luxury Western boot brand on Shopify Plus, drove $1M+ in incremental first-year revenue at a 39x ROI using Nobi across search plus a cart assistant and a PDP assistant - $3.46M cumulative attributed revenue since launch. Pricing starts at $25/month, which includes 2,500 searches and 250 conversational messages; overages run $0.01 per additional search and $0.10 per additional message. Good fit for teams whose primary friction is search relevance and who want chat grounded in the live catalog without running a second tool.
 
 Rep AI is built around a no-code Flow Studio for scripted campaign chat - think Black Friday promo flows, product-launch walk-throughs, and abandoned-cart rescue sequences that marketing ops can design and ship without engineering. It also supports live-agent drop-in mid-thread (a human can jump into an AI session while the AI continues) and a Post-Order Tasks Agent for shopper self-serve on cancellations, returns, and tracking. One-click Shopify install.
 
 Octane AI is a product-quiz platform for Shopify, strong in beauty and CPG, where the quiz itself is the hero discovery surface. Pricing starts at $50/month (Basic, 400 credits) and scales to Plus at $200/month and Enterprise at $500+/month. Pick it when a quiz funnel is the conversion mechanic.
 
-Tidio pairs a live human chat widget with its Lyro AI agent for first-touch automation, with a free trial of 50 Lyro conversations. Built for Shopify SMBs who want AI handling easy questions and humans taking the rest.
+Tidio pairs a live human chat widget with its Lyro AI agent for first-touch automation, with a free trial of 50 Lyro conversations. Built for merchants who want a combination of live chat + AI-assisted first touch without a full helpdesk migration. The AI agent can handle common questions and route to human agents when needed.
 
-Gorgias is a helpdesk: ticket management, macros, returns and refund processing, and AI deflection layered on top, with ticket-based pricing from $10/month (Starter) to $900/month (Advanced). Pick it when agent-side workflow is the bottleneck.
+Gorgias is a helpdesk: ticket management, macros, returns and refund processing, and AI deflection layered on top, with ticket-based pricing from $10/month (Starter) to $900/month (Advanced). Pick it when ticket routing, returns processing, and macro automation are the real bottleneck, and chatbot-on-storefront is a secondary need rather than the primary one.
 
 Alby is a PDP Q&A assistant inside the Bluecore ecosystem. It was acquired by Bluecore in November 2024 and its standalone roadmap and pricing are unclear post-acquisition, so treat it as a Bluecore-stack decision rather than a standalone evaluation.
 

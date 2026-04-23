@@ -1,10 +1,11 @@
 import React from "react";
 import Header from "./Header";
 import Footer from "./Footer";
+import { formatPostDate } from "../content/utils/mdxPostLoader";
 
 export default function ArticleLayout({ meta, children }) {
   const { title, date, author, tags = [], heroImage } = meta || {};
-  const formattedDate = date ? new Date(date).toLocaleDateString(undefined, { year: "numeric", month: "long", day: "numeric" }) : "";
+  const formattedDate = formatPostDate(date);
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-white to-slate-50 dark:from-[#0a0a0a] dark:to-black text-black dark:text-white">

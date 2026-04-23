@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo } from "react";
 import { useSEO } from "../hooks/useSEO";
 import PageLayout from "../components/PageLayout";
-import { posts } from "../content/utils/mdxPostLoader";
+import { posts, formatPostDate } from "../content/utils/mdxPostLoader";
 
 export default function Blog() {
   useSEO({
@@ -54,7 +54,7 @@ export default function Blog() {
                 <h2 className="mt-2 text-xl font-semibold group-hover:text-purple-600 transition-colors">{post.meta.title}</h2>
                 <p className="mt-2 text-sm text-black/70 dark:text-white/70 line-clamp-3">{post.meta.excerpt}</p>
                 <div className="mt-3 text-xs text-black/50 dark:text-white/60">
-                  {new Date(post.meta.date).toLocaleDateString(undefined, { month: "short", day: "numeric", year: "numeric" })}
+                  {formatPostDate(post.meta.date, { month: "short", day: "numeric", year: "numeric" })}
                 </div>
                 {post.meta.tags?.length ? (
                   <div className="mt-3 flex flex-wrap gap-2">

@@ -19,7 +19,7 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import FAQList from "../components/FAQList.jsx";
 import ScrollPreview from "../components/ScrollPreview";
-import {posts} from "../content/utils/mdxPostLoader";
+import {posts, formatPostDate} from "../content/utils/mdxPostLoader";
 import HeroDemo from "../components/HeroDemo";
 import {VideoModal} from "../components/VideoModal";
 import {useDemoForm} from "../context/DemoFormContext";
@@ -2214,7 +2214,7 @@ function LatestPosts() {
                 <h3 className="mt-2 text-xl font-semibold group-hover:text-purple-600 transition-colors">{post.meta.title}</h3>
                 <p className="mt-2 text-sm text-black/70 dark:text-white/70 line-clamp-3">{post.meta.excerpt}</p>
                 <div className="mt-3 text-xs text-black/50 dark:text-white/60">
-                  {new Date(post.meta.date).toLocaleDateString(undefined, { month: "short", day: "numeric", year: "numeric" })}
+                  {formatPostDate(post.meta.date, { month: "short", day: "numeric", year: "numeric" })}
                 </div>
               </div>
             </a>

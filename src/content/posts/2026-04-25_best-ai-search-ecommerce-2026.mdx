@@ -7,21 +7,21 @@ export const meta = {
   excerpt: "Compare the top AI search solutions for ecommerce in 2026. Honest look at Constructor, Algolia, Bloomreach, Searchspring, Klevu, and Nobi - who they serve, what they cost, and where each one falls short.",
   tags: ["AI search", "tools", "ecommerce", "2026"],
   author: "Nobi Team",
-  heroImage: "/media/posts/best-ai-search-ecommerce-2026/01-hero.svg",
+  heroImage: "https://storage.googleapis.com/nobi-public/docs_and_marketing_websites/posts/best-ai-search-ecommerce-2026/hero.png",
   featured: true,
   draft: false,
   faqItems: [
     {
       question: "What is the best AI search tool for ecommerce in 2026?",
-      answer: "It depends on your team, budget, and catalog size. Constructor leads for enterprise revenue optimization. Algolia is ideal for developer-heavy teams. Nobi offers the most accessible conversational AI for ecommerce teams without dedicated engineers - UNTUCKit's A/B test showed a 17.1% conversion lift over their prior search tool and a head-to-head win against Findify."
+      answer: "It depends on what you need the tool to do. Constructor is strong when you need personalized session-signal ranking plus site-wide merchandising across category and collection pages under one contract. Algolia is ideal for teams that want a developer API they can build on. Nobi bundles AI site search with a conversational shopping assistant under a single contract with transparent per-unit pricing, scaling from small Shopify storefronts up through Shopify Plus brands - UNTUCKit's A/B test showed a 17.1% conversion lift over their prior search tool, with revenue per searcher up 21.3%, and Lucchese has attributed $1M+ in first-year incremental revenue running Nobi at scale."
     },
     {
       question: "What conversion lift can AI site search realistically deliver?",
       answer: "Controlled A/B tests at apparel brands show AI site search delivering 15–22% conversion-rate lifts over default platform search and competing AI tools. UNTUCKit ran a two-month split test where Nobi posted a 17.6% conversion rate vs. 15.0%, with revenue per searcher up 21.3%. Kilte saw a 21.7% lift over Shopify's default search. Lucchese attributed over $1M in incremental revenue in year one. If a vendor cites a lift number without a real control group, treat it as marketing copy."
     },
     {
-      question: "How much does enterprise AI search cost?",
-      answer: "Enterprise solutions like Constructor and Bloomreach typically run $60K–$250K+ per year with custom contracts and multi-month implementations. Mid-market tools like Searchspring ($799/mo+) and Klevu ($249/mo+) are more accessible. Algolia uses request-based pricing ($0.50 per 1K requests on Grow, $1.75 on Grow Plus), which often lands at $500–$5,000/mo for mid-sized deployments. Nobi starts at $25/month with transparent per-unit overages ($0.01/search, $0.10/message) - a store running 50,000 searches a month pays around $500, not a percentage of revenue."
+      question: "How much does AI search cost?",
+      answer: "Platform-scale solutions like Constructor and Bloomreach typically run $60K–$250K+ per year with custom contracts and multi-month implementations. Mid-market tools like Searchspring ($799/mo+) and Klevu ($449/mo+) - both now divisions of Athos Commerce after the recent consolidation - are more accessible. Algolia uses request-based pricing ($0.50 per 1K requests on Grow, $1.75 on Grow Plus), which often lands at $500–$5,000/mo for mid-sized deployments. Nobi starts at $25/month with transparent per-unit overages ($0.01/search, $0.10/message) - a store running 50,000 searches a month pays around $500, not a percentage of revenue."
     },
     {
       question: "Do I need developers to implement AI search?",
@@ -37,7 +37,7 @@ export const meta = {
     },
     {
       question: "What should you ask every AI search vendor before signing?",
-      answer: "Ask for a controlled A/B test with a real holdout group, not a flattering before-and-after case study. Ask what your bill looks like at 2x your current traffic in writing. Ask how long from contract signature to live in production - modern tools should ship in days to weeks, not a six-month services engagement. Ask what your team has to do when 500 new SKUs land in the catalog. Ask whether personalization is included or priced as a separate module. Ask how zero-result queries get handled: fallback page, conversational clarification, or a dead-end empty state."
+      answer: "Ask for a controlled A/B test with a real holdout group, not a flattering before-and-after case study. Ask what your bill looks like at 2x your current traffic in writing. Ask how long from contract signature to live in production - modern tools should ship in hours to days, not a six-month services engagement. Ask what your team has to do when 500 new SKUs land in the catalog. Ask whether personalization is included or priced as a separate module. Ask how zero-result queries get handled: fallback page, conversational clarification, or a dead-end empty state."
     }
   ],
 };
@@ -72,6 +72,7 @@ export const meta = {
     { "@type": "Product", "name": "Constructor" },
     { "@type": "Product", "name": "Algolia" },
     { "@type": "Product", "name": "Bloomreach" },
+    { "@type": "Product", "name": "Athos Commerce" },
     { "@type": "Product", "name": "Searchspring" },
     { "@type": "Product", "name": "Klevu" },
     { "@type": "Product", "name": "Fast Simon" },
@@ -84,82 +85,107 @@ export const meta = {
 
 # Best AI Search Solutions for Ecommerce in 2026
 
-**TL;DR:** Real AI site search reads shopper intent, ranks by real behavior, and personalizes out of the box - no hand-written synonym rules. The ecommerce shortlist worth considering in 2026: Nobi, Algolia, Klevu, Searchspring, Constructor, Bloomreach, Coveo, Fast Simon, and Findify. Which one fits depends on your platform, engineering bandwidth, and whether you want search, merchandising, and conversational AI under one contract or stitched together. Shopify-native brands typically land on Nobi, Klevu, or Fast Simon. Enterprise teams with their own engineering orgs weigh Algolia, Constructor, or Bloomreach.
+**TL;DR:** Picking an AI search tool comes down to platform fit, engineering bandwidth, and whether you want search, merchandising, and conversational AI under one contract or stitched together. The eight tools in this article each lead in a different lane:
 
-The ecommerce search market has matured fast. What used to be a simple text box is now a battleground of machine learning models, natural language processing, and conversational interfaces. The problem is, most comparison articles are written by vendors pretending to be journalists. So here is an honest look at nine AI search solutions, what they actually do well, and where each one falls short - including specific A/B test numbers and per-unit pricing instead of the usual hand-wavy "enterprise-grade" language.
-
-If your search bar still returns "no results found" when a shopper types "blue running shoes for flat feet," you are leaving money on the table. [Research from Baymard Institute](https://baymard.com/blog/ecommerce-search-query-types) shows that 72% of ecommerce sites fail basic search usability benchmarks. [According to Forrester](https://www.forrester.com/), search users convert at 2-3x the rate of browsers. And controlled A/B tests at apparel brands consistently show AI-native search delivering 15–22% conversion lifts over default platform search - UNTUCKit posted a 17.1% lift after switching to Nobi, and [Lucchese attributed over $1M in incremental year-one revenue](https://nobi.ai/customers) to the combined search + assistant deployment.
-
-The stakes are clear. The question is which tool fits your team.
+- [**Constructor**](https://constructor.io) - semantic search with personalized session-signal ranking and site-wide merchandising across category and collection pages. Pricing is opaque but can run into six figures annually. Pick when you have a data team to shape ranking and need merchandising beyond the search bar.
+- [**Algolia**](https://www.algolia.com) - developer-first search API with sub-50ms latency and NeuralSearch. From $0.50 per 1K requests. Pick when engineers build the search UX.
+- [**Bloomreach**](https://www.bloomreach.com) - bundles site search, a customer-data platform, and a CMS into one contract. $60K–$250K+/yr. Pick when you want to replace several existing tools with a single vendor.
+- [**Athos Commerce**](https://athoscommerce.com) (formerly Searchspring and Klevu) - search plus merchandising products consolidated under one parent. Post-merger pricing is unclear but Searchspring started around ~$799/mo (mid-market rule-based merchandising for Shopify / BigCommerce / Magento) and Klevu started around ~$449/mo (Shopify AI search with a merchandising dashboard). Pick one when your merchandising team leads discovery, but know you are picking between two products of the same parent company.
+- [**Fast Simon**](https://www.fastsimon.com) - Shopify-native visual merchandising plus search. ~$99/mo. Pick when collection curation is the bottleneck.
+- [**Coveo**](https://www.coveo.com) - AI search that runs on your ecommerce site, your customer support help center, and your internal employee knowledge base. $100K+/yr. Pick when you want one vendor handling relevance across commerce and support.
+- [**Findify**](https://www.findify.io) - mature Shopify Plus search + merchandising app with personalization claims included. From $499/mo. Pick when you want a packaged app with merchandising bundled in.
+- **Nobi** - AI site search plus a conversational shopping assistant in one platform. $25/mo base for 2,500 searches and 250 messages, then $0.10/message and $0.01/search. Pick when on-site discovery is the bottleneck or you want a single platform for search, chat, and reducing support tickets, all with proven CVR lift (UNTUCKit +17.1%).
 
 ![AI Search Solutions Comparison](/media/posts/best-ai-search-ecommerce-2026/01-hero.svg)
 
 | Product | Primary job | Best for | Pricing (starting) | Standout strength | Key weakness |
 | --- | --- | --- | --- | --- | --- |
-| Nobi | AI site search + conversational shopping assistant | Shopify / Shopify Plus brands wanting CVR lift in days, not months | $25/mo (2,500 searches + 250 messages) | Search, conversational AI, and lead capture in one platform with proven CVR lift (UNTUCKit +17.1%) | No site-wide merchandising beyond the search results page |
-| Algolia | Developer-first search infrastructure | Engineering-heavy teams building bespoke search UX | ~$0.50 per 1K requests (~$500+/mo at scale) | Strongest APIs, sub-50ms latency, granular relevance configuration | Requires engineering to implement and tune; relevance work is manual |
-| Klevu | AI search + discovery for Shopify ecosystems | Shopify Plus brands wanting AI search plus merchandising in one vendor | ~$249/mo | Mature semantic search and tight Shopify integration | Personalization is a separate paid module; pricing climbs quickly |
-| Searchspring (Athos) | Search + merchandising for ecommerce | Merchandising-led teams that want deep manual control over results | ~$799/mo | Mature merchandising UI and visual rule builder | Rule-based at its core; less AI-native than newer entrants |
-| Constructor | AI-first product discovery for enterprise | Large catalogs with high query volume and a data team | Revenue-share (typically mid-five-figures and up annually) | Behavioral ranking trained on session-level signals | Revenue-share pricing can surprise as GMV grows |
-| Bloomreach | Enterprise search + CDP + content | Enterprise brands consolidating search, personalization, and content | Enterprise contracts ~$60K–$250K+/yr | End-to-end commerce experience cloud with deep personalization | Multi-month implementation; over-featured if you only need search |
-| Coveo | Enterprise AI search across commerce and workplace | Enterprises unifying ecommerce search with support and internal search | Enterprise contracts ~$100K+/yr | Powerful ML relevance and cross-surface search | Long sales cycle and services-heavy implementation |
-| Fast Simon | Shopify-native search + merchandising | Shopify brands focused on visual merchandising and collection control | ~$99/mo | Strong Shopify integration and visual merchandising | Lighter on natural-language understanding and personalization |
-| Findify | Shopify search + merchandising | Shopify brands wanting plug-and-play AI ranking | ~$499/mo | Smart Collections and ranked product feeds | Lost head-to-head CVR test against Nobi at UNTUCKit (16.5% vs 17.4%) |
+| [Constructor](https://constructor.io) | semantic search + personalized ranking + site-wide merchandising | catalogs with a data team that need merchandising outside of the search results screen | Revenue-share (typically mid-five-figures and up annually) | Personalized session-signal ranking and site-wide merchandising at scale | Revenue-share pricing can surprise as GMV grows |
+| [Algolia](https://www.algolia.com) | Developer-first search infrastructure | Engineering-heavy teams building bespoke search UX | Starting at $0.50 per 1K requests | Strongest APIs, sub-50ms latency, granular relevance configuration | Requires engineering to implement and tune; relevance work is manual |
+| [Bloomreach](https://www.bloomreach.com) | search + CDP + content | brands consolidating search, personalization, and content | contracts ~$60K–$250K+/yr | End-to-end commerce experience cloud with deep personalization | Multi-month implementation; over-featured if you only need search |
+| [Athos Commerce](https://athoscommerce.com) (formerly Searchspring and Klevu) | Search + merchandising for Shopify / BigCommerce / Magento, split across two products of the same parent | Merchandising-led teams that want visual rule builders (Searchspring) or Shopify AI search with a merchandising dashboard (Klevu) | Post-merger pricing is unclear but Searchspring started around ~$799/mo and Klevu started around ~$449/mo | Mature merchandising UI (Searchspring) and tight Shopify AI search integration (Klevu) | Two products of one parent; Searchspring is rule-based and less AI-native; Klevu upsells personalization as an add-on |
+| [Fast Simon](https://www.fastsimon.com) | Shopify-native search + merchandising | Shopify brands focused on visual merchandising and collection control | ~$99/mo | Strong Shopify integration and visual merchandising | Lighter on natural-language understanding and personalization |
+| [Coveo](https://www.coveo.com) | AI search across commerce and workplace | Enterprises unifying ecommerce search with support and internal search | contracts ~$100K+/yr | Powerful ML relevance and cross-surface search | Long sales cycle and services-heavy implementation |
+| [Findify](https://www.findify.io) | Shopify search + merchandising | Shopify brands wanting plug-and-play AI ranking | ~$499/mo | Smart Collections and ranked product feeds | Merchandising workflows still require manual tuning; pricing climbs past $1,000/mo on higher tiers |
+| Nobi | AI site search + conversational shopping assistant | Shopify / Shopify Plus brands wanting CVR lift in days, not months | $25/mo base for 2,500 searches & 250 messages <br />Then $0.01/search and $0.10/message | Search, conversational AI, and lead capture in one platform with proven CVR lift (UNTUCKit +17.1%) | No site-wide merchandising outside of the search results screen |
 
-## 1. Constructor - Enterprise Revenue Optimization
+## What should a head of ecommerce look for in an AI search tool?
 
-**What it does:** Constructor uses machine learning to optimize search and product discovery for revenue, not just relevance. It learns from user behavior to rank products that are most likely to convert.
+The "[AI search](https://nobi.ai/blog/ai-shopping-assistant-ecommerce)" label covers a wide range of tools, and most are strong in one or two specific jobs. Head-of-ecommerce buyers should identify which gap is actually costing revenue - on-site discovery, merchandising control, enterprise-scale behavioral ranking, or a full commerce experience platform - then evaluate tools against that job specifically. Pricing model (flat vs. revenue-share vs. per-query), implementation time (hours vs. weeks or months), and whether the ranker learns from shopper behavior or requires manual rule-tuning matter more at scale than feature counts.
 
-**Best for:** Large enterprise retailers with $50M+ in annual GMV who want search to directly drive revenue growth.
+Constructor and Bloomreach are platform plays: search bundled with personalization, merchandising, and (for Bloomreach) CDP and content under a single contract, paid for with revenue-share pricing, multi-quarter implementations, and the data-team overhead to keep the whole stack tuned. Algolia is a developer API - powerful if you have the engineering team to run it, but might require lots of for relevance tuning if you don't. Coveo is the cross-surface play when ecommerce search, support, and internal knowledge all need to share one relevance engine. Athos Commerce (the parent of Searchspring and Klevu), Fast Simon, and Findify are packaged Shopify apps tilted toward merchandising and visual curation, with search as a secondary surface and no conversational layer. Nobi is a single AI site search and a conversational shopping assistant bundled under into one product, transparent per-unit pricing that scales with actual usage, and live in production in hours rather than months - used by Shopify Plus brands like Lucchese, which has attributed $1M+ in first-year incremental revenue and a 39x ROI to Nobi.
 
-**Pricing tier:** Enterprise. Revenue-share with no published list price - deals typically run mid-five-figures and up annually. The most common complaint in post-signing reviews is surprise bills as GMV grows.
+## How did we evaluate these tools?
+
+Nine tools, one framework: which job does each one actually do well, and how does that map to the conversion gaps a head of ecommerce can point to in the analytics. We looked at four things for every entry in this list.
+
+**Job fit.** Which lane the tool is genuinely strong in - behavioral ranking, developer API, Shopify-native packaging, visual merchandising, cross-surface relevance, or search-plus-assistant - not which lanes the marketing page claims. A tool that's excellent in one lane and mediocre in three is usually the better pick over a tool that's "adequate" across the whole surface.
+
+**Concrete pricing.** A starting number, a per-unit rate, or an explicit qualifier ("revenue-share, mid-five-figures and up") rather than a bare "contact sales." Revenue-share and per-query pricing compound fast at scale, so the pricing model mattered as much as the headline price.
+
+**Implementation time.** Hours or days versus the multi-quarter rollouts typical of search platforms. For a head of ecommerce whose quarterly goal is "fix conversion," a tool that ships quickly is qualitatively different from one that ships in six months.
+
+**Rule-tuning overhead.** Whether merchandisers have to hand-pin products to specific queries every week to keep relevance acceptable, or the tool ships with that work already solved. Manual rule-tuning is invisible labour that eats merch-team hours without the reader seeing it on the demo.
+
+Full disclosure: Nobi is our product, and it's included in this list alongside the eight competitors head-of-ecommerce buyers most often weigh against it. We've aimed to be honest about Nobi's own limits (web-chat-only, no site-wide merchandising beyond the search results page, newer platform with a growing feature set) and explicit about when another tool on this list is the better pick.
+
+## 1. Constructor
+
+[Constructor](https://constructor.io) combines semantic search (the same type of contextual understanding that Nobi uses) - with personalized session-signal boosting (products reordered in real time based on what the shopper has clicked, viewed, and bought in session) and a merchandising layer that spans category pages, collection pages, browse, and recommendations in addition to the search results. For a retailer with a data team that can shape training signals and merchandisers who need to curate the full site, not just the search bar, that breadth is the reason to buy. Constructor is good at driving conversions across those surfaces. The honest tradeoffs are scope and cost: revenue-share pricing has no published list price, deals typically run mid-five-figures (often six-figures based on online research) and up annually, and the most common complaint in post-signing reviews is that bills scale in surprising ways as GMV grows.
+
+**Best for:** retailers with $50M+ GMV and an internal data team, where merchandising has to move across category, collection, browse, and search surfaces together.
+
+**Pricing:** Revenue-share with no published list price - deals typically run mid-five-figures (often six-figures) and up annually.
 
 **Pros:**
-- Revenue-focused ranking that goes beyond keyword matching
-- Strong personalization and A/B testing infrastructure
-- Quizzes, browse, and recommendations all in one platform
+- Semantic search plus personalized session-signal ranking (real-time product reordering based on in-session behavior)
+- Merchandising across the full site - category, collection, browse, recommendations - not just the search results page
+- Strong A/B testing infrastructure and behavioral analytics
+- Quizzes, browse, and recommendations unified under one platform
 
 **Cons:**
 - Out of reach for most SMBs and mid-market brands
 - Implementation takes weeks to months
-- No Shopify-native integration
 - Requires internal data science or analytics resources to get full value
+- Revenue-share pricing can surprise as GMV grows
 
-Constructor is the right choice if you have the budget and the team. For everyone else, it is aspirational pricing attached to enterprise-grade tooling.
+**Verdict:** Pick Constructor when you're a retailer that needs behavioral personalization and merchandising across the full site, and you have the data team and budget to match; skip it if you want transparent per-unit pricing, a Shopify-native install, or just the search bar without a full merchandising platform attached.
 
-## 2. Algolia - Developer-First Search API
+## 2. Algolia
 
-**What it does:** Algolia provides a powerful, fast search API that developers can customize extensively. It has expanded into AI recommendations and NeuralSearch, but its core strength remains the API layer.
+[Algolia](https://www.algolia.com) is a developer-first search API with sub-50ms response times, a massive ecosystem of libraries and widgets, and, what they call, NeuralSearch for semantic capabilities. The core strength has always been the API layer: engineering teams get granular control over ranking, indexing, relevance configuration, and the frontend experience. For a head of ecommerce with a dedicated search engineering team that wants to own the UX end-to-end, Algolia is a strong choice. For others, the same strength flips into a liability - your search is only as good as the engineering hours you can spend on it.
 
 **Best for:** Teams with dedicated frontend and backend developers who want full control over the search experience.
 
-**Pricing tier:** Usage-based. $0.50 per 1K search requests on the Grow plan, $1.75 per 1K on Grow Plus, with NeuralSearch gated to higher tiers. Mid-sized deployments typically land in the $500–$5,000/month range before custom relevance engineering work.
+**Pricing:** Usage-based. $0.50 per 1K search requests on the Grow plan, $1.75 per 1K on Grow Plus, with NeuralSearch gated to higher tiers. Mid-sized deployments typically land in the $500–$5,000/month range before custom relevance engineering work.
 
 **Pros:**
 - Extremely fast search indexing and response times
 - Massive ecosystem of libraries, widgets, and integrations
 - NeuralSearch adds semantic capabilities on top of keyword matching
+- Granular control over ranking and indexing for engineering teams
 
 **Cons:**
 - Requires developers to implement and maintain
-- [Usage-based pricing](https://www.algolia.com/pricing/) can produce surprise bills during traffic spikes
+- Usage-based pricing can produce surprise bills during traffic spikes
 - Configuration complexity means your search is only as good as your engineering time
 - Not built for non-technical ecommerce teams
 
-Algolia is a powerful engine. But handing a Formula 1 car to someone without a racing team does not end well. If you do not have developers, look elsewhere.
+**Verdict:** Pick Algolia if you have a dedicated search engineering team and want full API control; pair it with a merchandising or assistant layer if non-technical teams need to drive relevance work.
 
-## 3. Bloomreach - Full-Stack Commerce Experience
+## 3. Bloomreach
 
-**What it does:** Bloomreach combines search, merchandising, content, and customer data into a full commerce experience platform. Its Discovery module handles search and product recommendations.
+[Bloomreach](https://www.bloomreach.com) combines search, merchandising, content, and customer data into a full commerce experience platform - the Discovery module handles search and product recommendations, and everything is wired to unified customer profiles that drive personalization. For an omnichannel retailer consolidating search, CMS, and CDP into one contract, that scope is the reason to buy. For a team that just wants better search, it is a platform-scale purchase attached to a platform-scale implementation timeline.
 
-**Best for:** Enterprise omnichannel retailers who want search, CMS, and CDP in one platform.
+**Best for:** omnichannel retailers who want search, CMS, and CDP in one platform.
 
-**Pricing tier:** Enterprise contracts in the $60K–$250K+/year range, priced on catalog size, customers served, and events. Multi-month implementation standard.
+**Pricing:** contracts in the $60K–$250K+/year range, priced on catalog size, customers served, and events. Multi-month implementation standard.
 
 **Pros:**
 - True full-stack: search, content, marketing, and data in one place
 - Strong semantic search with product-specific AI
 - Personalization driven by unified customer profiles
+- Unified customer profiles across the entire experience layer
 
 **Cons:**
 - Enterprise-only pricing and sales process
@@ -167,79 +193,41 @@ Algolia is a powerful engine. But handing a Formula 1 car to someone without a r
 - Overkill if you just need better search
 - Not ideal for lean ecommerce teams
 
-Bloomreach makes sense when you are ready to consolidate your entire commerce stack. If you just want search that understands your shoppers, it is a lot of platform for one problem.
+**Verdict:** Pick Bloomreach when you are ready to consolidate your entire commerce stack into one contract; skip it if search is a standalone problem and a multi-quarter rollout is off the table.
 
-## 4. Searchspring (now Athos) - Mid-Market Search and Merchandising
+## 4. Athos Commerce (formerly Searchspring and Klevu)
 
-**What it does:** Searchspring provides search, merchandising, and product recommendations for mid-market ecommerce stores. It has recently rebranded under the Athos umbrella after acquiring other commerce tools.
+[Athos Commerce](https://athoscommerce.com) is the parent company that now houses Searchspring, Klevu, and Intelligent Reach after the three consolidated under one brand. Searchspring and Klevu continue to be sold as separate products with their own pricing, contracts, and logins, but the parent company is now the same - worth knowing if you're comparing both in a shortlist, because you're really picking between two products of the same vendor rather than sampling a competitive market.
 
-**Best for:** Growing Shopify and BigCommerce stores that want solid search with visual merchandising controls.
+Searchspring is the mid-market play, pitched at Shopify, BigCommerce, and Magento stores that want search and visual merchandising under one roof. The differentiator is the merchandising UI - visual rule builders, collection control, and analytics designed for non-technical merchandisers to run day-to-day. The tradeoff is that the core ranking is rule-based and semantic understanding lags AI-native entrants, so long-tail natural-language queries are weaker.
 
-**Pricing tier:** Mid-range. Typically $799/month and up depending on traffic and modules, with annual-pay discounts and special rates for early-stage and MWBE brands. Quote-based but accessible to growing brands.
+Klevu is the Shopify-focused AI search product in the same portfolio. Klevu's own NLP engine handles search intent and a visual merchandising dashboard keeps it accessible to non-technical teams. It hits a real sweet spot between cost and Shopify-native ergonomics. The gap is conversational capability: search is still query-and-results, not guided dialogue, and that's where the market is moving.
+
+**Best for:** Shopify, BigCommerce, or Magento teams who want either visual rule-based merchandising (Searchspring) or AI-native semantic search with a merchandising dashboard (Klevu) - but know you are picking between two products of one parent company.
+
+**Pricing:** Searchspring typically $799/month and up depending on traffic and modules. Klevu tiered plans starting around $449/month, with Smart Category Merchandising and personalization priced as add-ons. Both quote-based at higher tiers.
 
 **Pros:**
 - Native integrations with Shopify, BigCommerce, and Magento
-- Visual merchandising tools that non-technical teams can use
-- Solid analytics and reporting
+- Visual merchandising tools that non-technical teams can use (both products)
+- Klevu's NLP engine is strong for long-tail product search
+- Mature rule builder (Searchspring) for merchandisers who want hand-pinning and manual control
 
 **Cons:**
-- AI and NLP capabilities are still basic compared to newer entrants
-- Semantic understanding is limited - still leans on keyword matching
-- The Athos rebrand has created some market confusion
+- Searchspring's ranking is rule-based, not AI-native - still leans on keyword matching with semantic enhancements
+- Klevu upsells personalization and Smart Category Merchandising as paid add-ons, so all-in costs climb past the entry tier
+- Neither product ships with a conversational shopping assistant - search is still query-and-results
+- Consolidation under Athos Commerce is recent; independent product roadmaps going forward remain to be seen
 
-Searchspring is a reliable mid-market option if you need merchandising more than you need AI. But if natural language understanding matters, it lags behind.
+**Verdict:** Pick one of the Athos Commerce products when your merchandising team leads discovery and rule-based or merch-dashboard control is the primary job; pair with a conversational assistant if chat-led discovery matters, and factor in that Searchspring vs. Klevu is a pick between two products of the same parent rather than a competitive shopping of the market.
 
-## 5. Klevu - AI Search for Merchandisers
+## 5. Fast Simon
 
-**What it does:** Klevu focuses on AI-powered search and product discovery with a particular strength in merchandising tools. It uses its own NLP engine to understand search intent.
-
-**Best for:** Merchandising-led ecommerce teams that want AI search without writing code.
-
-**Pricing tier:** Tiered plans starting around $249/month. More accessible than enterprise options, but Smart Category Merchandising is a paid add-on and personalization is typically priced as a separate module - real all-in costs climb quickly past the entry tier.
-
-**Pros:**
-- Strong NLP for product search
-- Visual merchandising dashboard that non-technical users love
-- Good Shopify and Magento integrations
-- Supports multiple languages
-
-**Cons:**
-- Some features still require developer involvement
-- Learning curve for the full feature set
-- Not conversational - search is still query-and-results
-
-Klevu hits a sweet spot for merchandising teams who want better search without an enterprise contract. The gap is in conversational capabilities, which the market is moving toward.
-
-## 6. Nobi - Conversational AI Shopping Assistant
-
-**What it does:** Nobi replaces the traditional search bar with a conversational AI shopping assistant. Instead of query-and-filter, shoppers describe what they want in natural language and get guided to the right products through dialogue.
-
-**Best for:** Ecommerce teams and DTC brands that want to improve product discovery without hiring developers.
-
-**Pricing tier:** Accessible and transparent. [Starts at $25/month](https://nobi.ai/pricing) for 2,500 searches and 250 conversational messages, with $0.01 per additional search and $0.10 per additional message. No revenue-share, no per-seat fees, no AI features gated behind higher tiers. A store running 50,000 searches and 5,000 messages per month lands around $975/month - math you can do yourself before signing anything.
-
-**Pros:**
-- Conversational interface that goes beyond search-and-filter
-- No-code setup - integrates with your Shopify catalog in minutes
-- Understands natural language queries without synonym management ([Kilte's "brown boots" to Cappuccino mapping](https://nobi.ai/why-nobi/better-search) is a good example - no rule-writing required)
-- Predictable per-unit pricing, no usage-based surprise bills
-- Proof-point CVR lifts: UNTUCKit +17.1%, Kilte +21.7%, Faherty 12.3% vs. competing AI search at 10.1%
-
-**Cons:**
-- Newer platform with a growing feature set
-- Less enterprise merchandising tooling than Constructor or Bloomreach
-- Not an API-first tool - less customizable for developer teams
-- Web chat only today; no native SMS, WhatsApp, or voice channels
-
-Nobi is the choice if you believe ecommerce search should feel like a conversation, not a keyword matching exercise. It is the most accessible entry point to AI-powered product discovery - [Lucchese](https://nobi.ai/customers), a luxury Western boot brand on Shopify Plus, attributed over $1M in incremental revenue in year one and a 39x ROI from the combined search and assistant deployment. If you want the depth of Constructor's ML models, Nobi is not there yet. But most stores do not need that depth - they need search that works.
-
-## 7. Fast Simon - Shopify-Native Visual Merchandising
-
-**What it does:** Fast Simon provides AI-assisted site search, product recommendations, and visual merchandising tools tuned for Shopify. It positions itself as a merchandiser's toolkit with search and recommendations bundled in.
+[Fast Simon](https://www.fastsimon.com) provides AI-assisted site search, product recommendations, and visual merchandising tools tuned for Shopify - the positioning is a merchandiser's toolkit with search and recommendations bundled in. For Shopify brands whose bottleneck is collection curation and visual merchandising rather than semantic relevance, the install-through-the-App-Store model makes Fast Simon the lightest-weight option on this list. The tradeoff is that natural-language understanding and personalization are lighter than AI-native engines, so long-tail semantic queries land softer than with Nobi or Klevu.
 
 **Best for:** Shopify brands whose bottleneck is collection curation and visual merchandising, not semantic relevance.
 
-**Pricing tier:** Accessible. Starts around $99/month via the Shopify App Store, scaling with catalog and traffic.
+**Pricing:** Accessible. Starts around $99/month via the Shopify App Store, scaling with catalog and traffic.
 
 **Pros:**
 - Strong Shopify integration and visual merchandising tools
@@ -251,35 +239,35 @@ Nobi is the choice if you believe ecommerce search should feel like a conversati
 - Personalization is a secondary strength, not a headline capability
 - Will not match Nobi or Klevu on long-tail semantic queries
 
-Fast Simon is a solid pick if your merchandising team leads with visual curation and your search needs are basic. If natural-language queries are the unlock, it is not the right engine.
+**Verdict:** Pick Fast Simon if your merchandising team leads with visual curation and your search needs are basic; skip it if natural-language queries are the unlock.
 
-## 8. Coveo - Enterprise AI Across Commerce and Workplace
+## 6. Coveo
 
-**What it does:** Coveo provides AI-powered relevance across commerce search, customer support, and internal knowledge. Its ecommerce module uses ML to unify search with service and self-help surfaces.
+[Coveo](https://www.coveo.com) provides AI-powered relevance across commerce search, customer support, and internal knowledge - its ecommerce module uses machine learning to unify search with service and self-help surfaces, and the same relevance engine runs across every surface. For a merchant that wants one ML relevance model spanning ecommerce, support portal, and internal knowledge base, Coveo is built for that shape of deployment. For a standalone ecommerce search problem, it's a lot of platform - and a lot of sales cycle - for one job.
 
 **Best for:** Enterprises that want one AI relevance engine spanning their ecommerce site, support portal, and internal knowledge base.
 
-**Pricing tier:** Enterprise. Third-party references put base plans around $600/month, but real all-in deployments commonly run $100K+ per year once annual licensing (~$50K+), implementation (~$20K+), and professional services ($200–$300/hour) are added.
+**Pricing:** Enterprise. Third-party references put base plans around $600/month, but real all-in deployments commonly run $100K+ per year once annual licensing (about $50K+), implementation (about $20K+), and professional services ($200–$300/hour) are added.
 
 **Pros:**
 - Powerful ML relevance that spans commerce + support + workplace search
 - Strong cross-surface personalization
-- Mature enterprise tooling and analytics
+- Mature tooling and analytics
 
 **Cons:**
 - Long sales cycle and services-heavy implementation
 - Overkill if you only need ecommerce search
 - Not built for Shopify-native workflows
 
-Coveo makes sense when you are unifying search across multiple surfaces at enterprise scale. For a standalone ecommerce search problem, it is a lot of platform for one job.
+**Verdict:** Pick Coveo when you are unifying search across multiple surfaces at scale; skip it for standalone ecommerce search problems.
 
-## 9. Findify - Shopify Search + Merchandising
+## 7. Findify
 
-**What it does:** Findify is a Shopify-focused search, merchandising, and product-feed engine. It offers Smart Collections, ranked product feeds, and personalization claims.
+[Findify](https://www.findify.io) is a Shopify-focused search, merchandising, and product-feed engine with Smart Collections, ranked product feeds, and personalization claims. For Shopify Plus brands that want a mature packaged app with personalization bundled rather than bolted on, Findify is a reasonable single-vendor pick. As with any AI ranking claim, it's worth running a controlled A/B test on your own traffic before committing past a quarter.
 
 **Best for:** Shopify Plus brands that want a mature packaged app with personalization claims out of the box.
 
-**Pricing tier:** Essential at $499/month, Professional at $799, Enterprise at $1,399.
+**Pricing:** Essential at $499/month, Professional at $799, Enterprise at $1,399.
 
 **Pros:**
 - Mature Shopify app with plug-and-play AI ranking
@@ -287,62 +275,90 @@ Coveo makes sense when you are unifying search across multiple surfaces at enter
 - Personalization features included rather than bolted on
 
 **Cons:**
-- Lost head-to-head CVR test against Nobi at UNTUCKit (16.5% vs. 17.4%) and was replaced in production
 - Merchandising workflows still require manual tuning
-- Pricing climbs past $1,000/month fast on Professional or Enterprise tiers
+- Pricing climbs past $1,000/month fast on Professional or tiers
+- Less AI-native than newer entrants built on semantic search and behavioral ranking from the ground up
 
-Findify is a reasonable packaged pick for Shopify Plus brands that want a single-vendor option with merchandising included. Worth running head-to-head against Nobi on your own traffic before signing anything longer than a quarter.
+**Verdict:** Pick Findify if you want a mature packaged Shopify app with personalization included.
 
-![Feature Comparison Matrix](/media/posts/best-ai-search-ecommerce-2026/02-comparison-matrix.svg)
+## 8. Nobi
+
+Nobi bundles AI site search, a conversational shopping assistant, and support deflection into one product that's easy to set up and can appear as a standard search bar, a button, dynamic pills, or many other elements. It doesn't require merchandisers to hand-pin products to queries or maintain weekly tuning rules (but they can if they want). For a head of ecommerce, that means one product for optimizing your shoppers' experiences and driving up conversion rates. [Lucchese](https://nobi.ai/customers), a luxury Western boot brand on Shopify Plus, has attributed $1M+ in incremental first-year revenue and $3.46M cumulative at a 39x ROI running Nobi across search plus a cart assistant and PDP assistant. UNTUCKit posted a 17.1% CVR lift in a controlled two-month A/B test against their prior search tool, with revenue per searcher up 21.3% and AOV up 3.3%. Implementation typically takes hours, not the multi-quarter rollouts search platforms require.
+
+**Best for:** Shopify / Shopify Plus brands whose biggest conversion gap is on-site discovery and who want search and a conversational assistant unified rather than stitched from two contracts.
+
+**Pricing:** [Starts at $25/month](https://nobi.ai/pricing) for 2,500 searches and 250 conversational messages, with $0.01 per additional search and $0.10 per additional message. No revenue-share, no per-seat fees, no AI features gated behind higher tiers. A store running 50,000 searches lands around $500/month (and Nobi offers volume-based discounts) - math you can do yourself before signing anything.
+
+**Pros:**
+- Search and chat share the same relevance ranking, so the assistant recommends the same products your search results rank highly - one system of record instead of two that disagree
+- No-code setup - integrates with your Shopify catalog in minutes
+- Understands natural-language queries without synonym management ([Kilte's "brown boots" to Cappuccino mapping](https://nobi.ai/why-nobi/better-search) is a good example - no rule-writing required)
+- Flat per-unit pricing - no usage-based surprise bills, no revenue-share scaling with GMV
+- Proof-point CVR lifts: UNTUCKit +17.1%, Kilte +21.7%, Lucchese $1M+ incremental year-one revenue
+
+**Cons:**
+- Newer platform with a growing feature set
+- Less merchandising tooling than Constructor or Bloomreach
+- Not an API-first tool - less customizable for developer teams
+- Web chat only today; no native SMS, WhatsApp, or voice channels
+
+**Verdict:** Pick Nobi if your biggest conversion gap is on-site discovery and you want search and a conversational assistant unified under one contract with transparent per-unit pricing - this works for small Shopify storefronts through Shopify Plus catalogs. Look elsewhere if your primary need is personalized session-signal ranking, site-wide merchandising across category and collection pages, or a developer-controlled API layer.
+
+<div className="my-8 flex justify-center">
+  <a
+    href="https://dashboard.nobi.ai"
+    className="inline-flex items-center justify-center gap-2 rounded-2xl font-medium transition active:scale-[.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-black/10 dark:focus-visible:ring-white/20 bg-black text-white dark:bg-white dark:text-black hover:opacity-90 shadow-sm h-12 px-6 text-base no-underline"
+  >
+    <span>Get started with Nobi free</span>
+  </a>
+</div>
 
 ## The Numbers: What Conversion Lift Is Realistic
 
 Most "AI search" comparison articles cite vendor-reported averages with no control group. Those numbers are marketing copy, not evidence. Below are CVR lifts from controlled A/B tests with a real holdout - the only way to know whether a tool actually moves the number or just produces prettier reports.
 
-UNTUCKit ran a two-month split test against the search tool they were already using. Nobi posted a 17.6% conversion rate vs. 15.0%, a 17.1% lift. Revenue per searcher rose 21.3% ($39.17 vs. $32.30) and AOV ticked up 3.3% ($222 vs. $215). After the test ended, they moved Nobi to 100% of traffic. Separately, UNTUCKit ran Nobi head-to-head against Findify, their paid incumbent - Nobi won again, 17.4% vs. 16.5% CVR, and replaced Findify in production.
+UNTUCKit ran a two-month split test against the search tool they were already using (one listed in this post). Nobi posted a 17.6% conversion rate vs. 15.0%, a 17.1% lift. Revenue per searcher rose 21.3% ($39.17 vs. $32.30) and AOV ticked up 3.3% ($222 vs. $215). After the test ended, they moved Nobi to 100% of traffic.
 
 Kilte saw a 21.7% CVR lift over Shopify's default search. Most of the gain came from semantic color normalization: brand color names like Cappuccino and Écru were invisible to shoppers typing "brown boots" or "off-white." Nobi mapped the brand vocabulary to the shopper vocabulary without anyone writing a synonym rule.
 
-Faherty measured 12.3% search CVR against a competing AI search tool's 10.1% in a head-to-head. Lucchese, the luxury Western boot brand, [attributed over $1M in incremental revenue](https://nobi.ai/customers) in year one and a 39x ROI from the combined search and assistant deployment.
+[Lucchese](https://nobi.ai/customers), the luxury Western boot brand, attributed over $1M in incremental revenue in year one and a 39x ROI from the combined search and assistant deployment.
 
 The honest filter when reading any vendor's case studies: if there is no control group, the lift number is marketing copy. Ask for the A/B methodology, the sample size, and the duration before you trust any number - including the ones above.
 
-## How to Choose
+## How should a head of ecommerce pick between these AI search tools?
 
-There is no single best AI search tool. There is only the best tool for your specific situation.
+Start by identifying which job is actually costing you the most revenue, then pick the tool built for that job. If on-site discovery is the bottleneck and you want search and chat unified under one contract, Nobi is the default - UNTUCKit's 17.1% CVR lift and Lucchese's $1M+ in year-one incremental revenue are the shape of the payoff when discovery and conversational shopping live in the same layer.
 
-**Choose Nobi** if you want AI search and a conversational assistant live in days with transparent per-unit pricing, and your team can deploy it without developers. Proof points at UNTUCKit, Kilte, Faherty, and Lucchese span Shopify Plus apparel through luxury Western boots.
+[Algolia](https://www.algolia.com) is the stronger pick when you have a dedicated search engineering team and want full API control over ranking, indexing, and the frontend - a Formula 1 engine for teams that can drive it.
 
-**Choose Algolia** if you have a dedicated search engineering team and want full API control over ranking, indexing, and the frontend. A Formula 1 engine for teams that can drive it.
+[Constructor](https://constructor.io) fits when you're a retailer that needs personalized session-signal ranking and merchandising across the full site - category pages, collection pages, browse, recommendations, and search - and you have a data team to shape the behavioral training. Nobi and Constructor both run semantic search; the decision between them hinges on whether you need merchandising beyond the search results page and can absorb revenue-share pricing that scales with GMV.
 
-**Choose Constructor** if you are an enterprise retailer with a large catalog, a data team to shape behavioral training, and you are comfortable with revenue-share pricing that scales with GMV.
+[Bloomreach](https://www.bloomreach.com) is the answer when you're consolidating search, personalization, content, and CDP into one contract, not just buying a search tool.
 
-**Choose Bloomreach** if you are consolidating search, personalization, content, and CDP into one enterprise contract, not just buying a search tool.
+[Coveo](https://www.coveo.com) makes sense when you're unifying ecommerce search with support and internal knowledge search across the business at scale.
 
-**Choose Coveo** if you are unifying ecommerce search with support and internal knowledge search across the business at enterprise scale.
+[Athos Commerce](https://athoscommerce.com) (formerly Searchspring and Klevu) is the right pick when your merchandising team leads discovery - Searchspring for visual rule builders and manual control over category and collection pages, Klevu for Shopify AI search with a merchandising dashboard. Know that picking between the two means picking between two products of the same parent company rather than shopping a competitive market.
 
-**Choose Searchspring** if your merchandising team needs manual control over category and collection pages site-wide, not just the search results page, and merchandising matters more than AI sophistication.
+[Fast Simon](https://www.fastsimon.com) is the other search-only Shopify pick when you don't want a conversational assistant bundled in - strong on Shopify and focused narrowly on search and merchandising.
 
-**Choose Klevu or Fast Simon** if you want a search-only Shopify vendor and do not want a conversational assistant bundled in. Both are strong on Shopify and focus narrowly on search and merchandising.
+[Findify](https://www.findify.io) is a reasonable mature Shopify Plus app with personalization claims included, worth A/B testing against Nobi before committing past a quarter.
 
-**Choose Findify** if you want a mature packaged Shopify app with personalization claims included. Worth A/B testing against Nobi before committing past a quarter.
-
-The worst decision is no decision. Every month you run a search bar that does not understand your shoppers, you lose the [15% of visitors who search and generate 45% of revenue](https://www.nosto.com/).
-
-## What to Ask Every AI Search Vendor Before Signing
+## What to ask every AI search vendor before signing
 
 Most evaluations go sideways because buyers ask about features instead of operating realities. A short list of pointed questions separates real AI search from rebranded keyword engines:
 
 - **Show me the A/B test.** Controlled split with a real holdout group, not a before-and-after case study that conveniently lacks one. Ask for methodology, sample size, and duration.
 - **What does my bill look like at 2x my current traffic?** In writing. This is where revenue-share and per-query pricing diverge from flat plans.
-- **How long from contract signature to live in production?** Modern tools should ship in days to a few weeks. A six-month services engagement is a different category of purchase.
+- **How long from contract signature to live in production?** Modern tools should ship in hours or days. A six-month services engagement is a different category of purchase.
 - **What do I have to do when 500 new SKUs land in the catalog?** AI-native tools adapt from behavior; keyword engines make your team write synonym rules every week.
-- **Is personalization included or priced as a separate module?** Common gotcha with Klevu and several enterprise vendors.
+- **Is personalization included or priced as a separate module?** Common gotcha with Klevu and several vendors.
 - **How do you handle zero-result queries?** Fallback page, conversational clarification, or dead-end? The answer predicts real-world UX more than any demo does.
 - **What does the hand-off look like between search and a conversational assistant for higher-consideration questions?** If search and chat use different ranking models, you end up with two merchandising systems that contradict each other.
 - **Where does the tool stop?** Honest vendors name their limits. For Nobi: curates the search results page, not site-wide collection merchandising - brands that need full-site merchandising should pair it with a dedicated tool.
 
-**[See how Nobi works →](/)**
+---
+
+If one flat per-unit-priced plan that handles AI site search, a conversational shopping assistant, and lead capture in the same place sounds like what you need, <a href="https://dashboard.nobi.ai">try Nobi free for 30 days</a>.
 
 ## Related Reading
 

@@ -900,7 +900,7 @@ export default function HeroDemo({
             </div>
           )}
 
-          <div className="relative min-h-[420px] sm:min-h-[440px]">
+          <div className="relative">
             <AnimatePresence mode="popLayout">
               <motion.div
                 key={HERO_SLIDES[activeIndex].id}

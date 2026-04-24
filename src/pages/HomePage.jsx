@@ -41,7 +41,7 @@ const DEMO_QUERY =
 // ===== Personalization variant content =====
 const CHIPS = [
   { id: "search",  label: "Better search" },
-  { id: "product", label: "Clear product doubts" },
+  { id: "product", label: "Help shoppers decide" },
   { id: "support", label: "Automate support answers" },
   { id: "leads",   label: "Capture more leads" },
 ];

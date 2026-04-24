@@ -313,12 +313,12 @@ function PdpDemo({ isActive }) {
       transition={{ duration: 0.5 }}
       className="flex flex-col md:flex-row gap-4 md:gap-8 h-full"
     >
-      <div className="hidden md:block md:w-[35%] flex-shrink-0">
+      <div className="hidden md:block md:w-[26%] flex-shrink-0">
         <div className="rounded-2xl overflow-hidden bg-white/60 dark:bg-white/5 border border-black/5 dark:border-white/10 shadow-lg">
           <img
             src={PRODUCTS[0].img}
             alt={PRODUCTS[0].title}
-            className="w-full aspect-[3/4] object-cover"
+            className="w-full aspect-[1/1] object-cover object-top"
           />
         </div>
       </div>
@@ -462,20 +462,6 @@ function PdpDemo({ isActive }) {
                       A soft satin blend with a touch of stretch, plus a breathable lining for comfort.
                     </p>
                   </motion.div>
-
-                  <motion.div
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, delay: 0.6 }}
-                    className="p-2 md:p-2.5 rounded-md md:rounded-lg bg-white/50 dark:bg-white/5 border border-black/5 dark:border-white/10"
-                  >
-                    <p className="font-semibold text-xs md:text-sm text-black/70 dark:text-white/70 mb-1 md:mb-1.5 leading-tight">
-                      Do I need to dry clean this?
-                    </p>
-                    <p className="text-[10px] md:text-xs text-black/50 dark:text-white/50 leading-snug line-clamp-2">
-                      We recommend dry cleaning to preserve the satin finish, but a gentle cold hand wash is okay if needed.
-                    </p>
-                  </motion.div>
                 </div>
 
               </div>
@@ -488,16 +474,14 @@ function PdpDemo({ isActive }) {
 }
 
 const LEADS_USER_QUESTION = "Do you offer installations in Chicago?";
-const LEADS_ANSWER = "Yes — we have 3 certified installers serving the Chicago metro. Typical turnaround is 5–7 business days.";
-const LEADS_FOLLOWUP = "Want me to have a specialist reach out with a quote?";
+const LEADS_ANSWER = "Yes — 3 certified installers in Chicago, 5–7 day turnaround. Drop your name and email and I'll have one reach out with a quote.";
 const LEADS_NAME = "Jamie Patel";
 const LEADS_EMAIL = "jamie@example.com";
-const LEADS_CONFIRMATION = "Got it — Sarah from our sales team will reach out within 24 hours.";
+const LEADS_CONFIRMATION = "Sent! Sarah on our team will reach out within 24 hours.";
 
 function LeadsDemo({ isActive }) {
   const [userText, setUserText] = useState("");
   const [showAnswer, setShowAnswer] = useState(false);
-  const [showFollowup, setShowFollowup] = useState(false);
   const [showForm, setShowForm] = useState(false);
   const [nameText, setNameText] = useState("");
   const [emailText, setEmailText] = useState("");
@@ -509,7 +493,6 @@ function LeadsDemo({ isActive }) {
 
     setUserText("");
     setShowAnswer(false);
-    setShowFollowup(false);
     setShowForm(false);
     setNameText("");
     setEmailText("");
@@ -525,15 +508,14 @@ function LeadsDemo({ isActive }) {
       return startAt + text.length * speed;
     };
 
-    const userDone = typeInto(setUserText, LEADS_USER_QUESTION, 400, 35);
-    schedule(() => setShowAnswer(true), userDone + 500);
-    schedule(() => setShowFollowup(true), userDone + 1800);
-    const formStart = userDone + 2600;
+    const userDone = typeInto(setUserText, LEADS_USER_QUESTION, 300, 25);
+    schedule(() => setShowAnswer(true), userDone + 350);
+    const formStart = userDone + 900;
     schedule(() => setShowForm(true), formStart);
-    const nameDone = typeInto(setNameText, LEADS_NAME, formStart + 500, 45);
-    const emailDone = typeInto(setEmailText, LEADS_EMAIL, nameDone + 300, 40);
-    schedule(() => setPulseSubmit(true), emailDone + 300);
-    schedule(() => setSubmitted(true), emailDone + 900);
+    const nameDone = typeInto(setNameText, LEADS_NAME, formStart + 300, 28);
+    const emailDone = typeInto(setEmailText, LEADS_EMAIL, nameDone + 200, 28);
+    schedule(() => setPulseSubmit(true), emailDone + 200);
+    schedule(() => setSubmitted(true), emailDone + 600);
 
     return () => timers.forEach((t) => clearTimeout(t));
   }, [isActive]);
@@ -620,22 +602,6 @@ function LeadsDemo({ isActive }) {
               </motion.div>
             )}
 
-            {showFollowup && (
-              <motion.div
-                initial={{ opacity: 0, y: 6 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.3 }}
-                className="flex items-start gap-2"
-              >
-                <div className="w-6 h-6 rounded-full bg-gradient-to-r from-fuchsia-500 to-pink-500 flex items-center justify-center flex-shrink-0 mt-0.5">
-                  <Sparkles className="w-3 h-3 text-white" />
-                </div>
-                <div className="max-w-[85%] rounded-2xl rounded-bl-sm bg-gradient-to-br from-fuchsia-50 to-pink-50 dark:from-fuchsia-900/20 dark:to-pink-900/20 border border-fuchsia-100 dark:border-fuchsia-800 px-3.5 py-2 text-sm text-black/80 dark:text-white/90">
-                  {LEADS_FOLLOWUP}
-                </div>
-              </motion.div>
-            )}
-
             {showForm && !submitted && (
               <motion.div
                 initial={{ opacity: 0, y: 6 }}
@@ -696,7 +662,165 @@ function LeadsDemo({ isActive }) {
             >
               <span className="h-2 w-2 rounded-full bg-emerald-500" />
               <span className="text-xs font-medium text-emerald-800 dark:text-emerald-300">
-                Lead forwarded to CRM — {LEADS_NAME}, tagged with chat transcript
+                {LEADS_NAME} → your CRM, with the full chat
+              </span>
+            </motion.div>
+          )}
+        </div>
+      </div>
+    </motion.div>
+  );
+}
+
+const SUPPORT_QUESTION = "How do I cancel my account?";
+const SUPPORT_ANSWER = "You can cancel anytime from Settings → Account → Cancel subscription. Your access stays active until the end of the current billing period.";
+const SUPPORT_SOURCE_LABEL = "Help Center / Cancellations";
+
+function SupportQADemo({ isActive }) {
+  const [userText, setUserText] = useState("");
+  const [showAnswer, setShowAnswer] = useState(false);
+  const [showSource, setShowSource] = useState(false);
+  const [showDeflection, setShowDeflection] = useState(false);
+
+  useEffect(() => {
+    if (!isActive) return;
+
+    setUserText("");
+    setShowAnswer(false);
+    setShowSource(false);
+    setShowDeflection(false);
+
+    const timers = [];
+    const schedule = (fn, ms) => timers.push(setTimeout(fn, ms));
+    const typeInto = (setter, text, startAt, speed) => {
+      for (let i = 1; i <= text.length; i++) {
+        schedule(() => setter(text.slice(0, i)), startAt + i * speed);
+      }
+      return startAt + text.length * speed;
+    };
+
+    const userDone = typeInto(setUserText, SUPPORT_QUESTION, 300, 28);
+    schedule(() => setShowAnswer(true), userDone + 350);
+    schedule(() => setShowSource(true), userDone + 1000);
+    schedule(() => setShowDeflection(true), userDone + 1800);
+
+    return () => timers.forEach((t) => clearTimeout(t));
+  }, [isActive]);
+
+  const userTyping = userText.length > 0 && userText.length < SUPPORT_QUESTION.length;
+
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.4 }}
+      className="flex flex-col md:flex-row gap-4 md:gap-6"
+    >
+      <div className="md:w-[38%] md:flex-shrink-0">
+        <div className="rounded-2xl border border-black/10 dark:border-white/10 bg-gradient-to-br from-slate-50 to-white dark:from-zinc-900 dark:to-zinc-900/60 p-5 shadow-sm h-full">
+          <div className="text-[10px] uppercase tracking-[0.2em] text-black/40 dark:text-white/40 mb-2">
+            Help Center
+          </div>
+          <div className="text-base font-semibold text-black/80 dark:text-white/80 mb-4">
+            How can we help?
+          </div>
+          <div className="grid grid-cols-2 gap-2">
+            {["Account", "Billing", "Shipping", "Returns"].map((topic) => (
+              <div
+                key={topic}
+                className="rounded-lg border border-black/5 dark:border-white/10 bg-white/60 dark:bg-white/5 px-3 py-2 text-xs font-medium text-black/60 dark:text-white/60"
+              >
+                {topic}
+              </div>
+            ))}
+          </div>
+          <div className="mt-4 pt-3 border-t border-black/5 dark:border-white/5 text-[11px] text-black/40 dark:text-white/40">
+            Still stuck?{" "}
+            <span className="text-fuchsia-600 dark:text-fuchsia-400">Contact support</span>
+          </div>
+        </div>
+      </div>
+
+      <div className="flex-1 min-w-0">
+        <div className="rounded-2xl border border-fuchsia-200 dark:border-fuchsia-800 bg-white/90 dark:bg-zinc-900/80 shadow-lg overflow-hidden">
+          <div className="flex items-center gap-2 px-4 py-3 bg-gradient-to-r from-fuchsia-50 to-pink-50 dark:from-fuchsia-900/30 dark:to-pink-900/20 border-b border-fuchsia-100 dark:border-fuchsia-800">
+            <div className="w-6 h-6 rounded-full bg-gradient-to-r from-fuchsia-500 to-pink-500 flex items-center justify-center">
+              <Sparkles className="w-3.5 h-3.5 text-white" />
+            </div>
+            <span className="text-sm font-medium text-black/80 dark:text-white/80">Ask Nobi</span>
+          </div>
+
+          <div className="p-4 space-y-3 min-h-[220px]">
+            {userText && (
+              <motion.div
+                initial={{ opacity: 0, y: 6 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.25 }}
+                className="flex justify-end"
+              >
+                <div className="max-w-[85%] rounded-2xl rounded-br-sm bg-slate-100 dark:bg-white/10 px-3.5 py-2 text-sm text-black/80 dark:text-white/90">
+                  {userText}
+                  {userTyping && <span className="ml-0.5 animate-pulse">|</span>}
+                </div>
+              </motion.div>
+            )}
+
+            {showAnswer && (
+              <motion.div
+                initial={{ opacity: 0, y: 6 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.3 }}
+                className="flex items-start gap-2"
+              >
+                <div className="w-6 h-6 rounded-full bg-gradient-to-r from-fuchsia-500 to-pink-500 flex items-center justify-center flex-shrink-0 mt-0.5">
+                  <Sparkles className="w-3 h-3 text-white" />
+                </div>
+                <div className="max-w-[85%] space-y-2">
+                  <div className="rounded-2xl rounded-bl-sm bg-gradient-to-br from-fuchsia-50 to-pink-50 dark:from-fuchsia-900/20 dark:to-pink-900/20 border border-fuchsia-100 dark:border-fuchsia-800 px-3.5 py-2 text-sm text-black/80 dark:text-white/90 leading-relaxed">
+                    {SUPPORT_ANSWER}
+                  </div>
+                  {showSource && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 4 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.3 }}
+                      className="inline-flex items-center gap-1.5 rounded-lg bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 px-2 py-1"
+                    >
+                      <svg
+                        className="h-3 w-3 text-slate-500 dark:text-slate-400"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      >
+                        <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
+                        <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
+                      </svg>
+                      <span className="text-[11px] font-medium text-slate-600 dark:text-slate-300">
+                        Source:{" "}
+                        <span className="text-fuchsia-600 dark:text-fuchsia-400">
+                          {SUPPORT_SOURCE_LABEL}
+                        </span>
+                      </span>
+                    </motion.div>
+                  )}
+                </div>
+              </motion.div>
+            )}
+          </div>
+
+          {showDeflection && (
+            <motion.div
+              initial={{ opacity: 0, scale: 0.92 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.35, ease: "easeOut" }}
+              className="mx-4 mb-4 flex items-center gap-2 rounded-lg bg-emerald-50 dark:bg-emerald-900/20 border border-emerald-200 dark:border-emerald-800 px-3 py-2"
+            >
+              <span className="h-2 w-2 rounded-full bg-emerald-500" />
+              <span className="text-xs font-medium text-emerald-800 dark:text-emerald-300">
+                Answered in chat — one less support ticket
               </span>
             </motion.div>
           )}
@@ -707,17 +831,19 @@ function LeadsDemo({ isActive }) {
 }
 
 const HERO_SLIDES = [
-  { id: "search", label: "Search + discovery", Component: SearchDemo },
-  { id: "pdp",    label: "Product Q&A",        Component: PdpDemo },
-  { id: "leads",  label: "Lead capture",       Component: LeadsDemo },
+  { id: "search",  label: "Search + discovery", Component: SearchDemo },
+  { id: "pdp",     label: "Product Q&A",        Component: PdpDemo },
+  { id: "support", label: "Support deflection", Component: SupportQADemo },
+  { id: "leads",   label: "Lead capture",       Component: LeadsDemo },
 ];
 
-const VARIANT_TO_INDEX = { search: 0, answers: 1, leads: 2 };
+const VARIANT_TO_INDEX = { search: 0, product: 1, support: 2, leads: 3 };
 
 const SLIDE_DURATIONS_MS = [
   4200 + 1200,
   500 + PDP_QUESTION.length * 50 + 600 + 1800 + 600 + 1200,
-  9500,
+  3200,
+  4500,
 ];
 
 export default function HeroDemo({

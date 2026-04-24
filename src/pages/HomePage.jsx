@@ -107,20 +107,19 @@ const VARIANT_CONTENT = {
     ],
   },
   leads: {
-    headline: "Stop letting interested visitors leave without a trace",
-    subline:  "Nobi collects contact info naturally through conversation and routes it wherever you need it.",
-    problemHeading: "Most visitors leave and you have no way to reach them",
-    problemBody:    "They browse, get interested, and disappear. No contact info, no follow-up, no second chance.",
+    headline: "Turn website conversations into qualified leads",
+    subline:  "Nobi answers visitor questions, builds intent, and collects their contact info inside the conversation. Every lead lands in your CRM with the full chat attached so sales knows exactly what to say.",
+    problemHeading: "Your website answers questions but never captures the interest",
+    problemBody:    "Visitors arrive with real questions. They get an answer — or don't — and leave without ever identifying themselves. Your sales team never hears about them.",
     problemPoints: [
-      { Icon: MousePointerClick, label: "Silent exits",        desc: "High-intent visitors land, browse, and bounce. You have no idea they were there and no way to reach them." },
-      { Icon: Heart,             label: "No follow-up window", desc: "Pop-up forms interrupt at the wrong moment. Most visitors dismiss them without a second thought." },
-      { Icon: BarChart3,         label: "Invisible pipeline",  desc: "Without contact info, you can't attribute revenue to campaigns or optimize what's working." },
+      { Icon: MousePointerClick, label: "Silent exits",         desc: "Visitors land, read, and leave. Even high-intent ones disappear without a trace, no contact info, no chance for sales to follow up." },
+      { Icon: Heart,             label: "Pop-ups get ignored",  desc: "Generic email-capture pop-ups interrupt at the wrong moment. Visitors dismiss them on reflex, so you get neither the answer nor the lead." },
+      { Icon: BarChart3,         label: "Sales flies blind",    desc: "Without the conversation attached to the contact, your team can't tell which leads are ready, what they asked about, or where they came from." },
     ],
-    numbersHeading: "What happens when your website actually captures leads",
+    numbersHeading: "What your sales team gets when the website captures leads",
     stats: [
-      { number: "17.6%", label: "conversion rate",        desc: "UNTUCKit Nobi users vs. 15.0% on Shopify default. More engaged visitors convert to customers at a higher rate." },
-
-      { number: "100%",   label: "of leads attributed",   desc: "Every lead tagged with the conversation and campaign that drove it, routed directly to your CRM or form handler." },
+      { number: "0",    label: "forms to build",      desc: "Nobi captures leads inside the conversation itself. No new pop-ups, landing pages, or form integrations to maintain." },
+      { number: "100%", label: "of leads attributed", desc: "Every lead arrives with the conversation, campaign source, and referring page attached. Route it to your CRM, Slack, or sales inbox in real time." },
     ],
   },
 };
@@ -764,7 +763,7 @@ function renderHeadline(variant) {
     case "answers":
       return <>Your visitors have questions your website{" "}<span className={GRADIENT}>isn't answering</span></>;
     case "leads":
-      return <>Stop letting interested visitors{" "}<span className={GRADIENT}>leave quietly</span></>;
+      return <>Turn website conversations into{" "}<span className={GRADIENT}>qualified leads</span></>;
     default:
       return <>Turn your website into your best{" "}<span className={GRADIENT}>sales associate</span></>;
   }

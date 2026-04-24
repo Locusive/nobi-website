@@ -487,84 +487,306 @@ function PdpDemo({ isActive }) {
   );
 }
 
-export default function HeroDemo({ className = "", variant = "default" }) {
-  const [activeIndex, setActiveIndex] = useState(0);
-  const slides = [
-    { id: "search", label: "Search + discovery" },
-    { id: "pdp", label: "Product Q&A" },
-  ];
+const LEADS_USER_QUESTION = "Do you offer installations in Chicago?";
+const LEADS_ANSWER = "Yes — we have 3 certified installers serving the Chicago metro. Typical turnaround is 5–7 business days.";
+const LEADS_FOLLOWUP = "Want me to have a specialist reach out with a quote?";
+const LEADS_NAME = "Jamie Patel";
+const LEADS_EMAIL = "jamie@example.com";
+const LEADS_CONFIRMATION = "Got it — Sarah from our sales team will reach out within 24 hours.";
 
-  const goNext = () => setActiveIndex((i) => (i + 1) % slides.length);
+function LeadsDemo({ isActive }) {
+  const [userText, setUserText] = useState("");
+  const [showAnswer, setShowAnswer] = useState(false);
+  const [showFollowup, setShowFollowup] = useState(false);
+  const [showForm, setShowForm] = useState(false);
+  const [nameText, setNameText] = useState("");
+  const [emailText, setEmailText] = useState("");
+  const [pulseSubmit, setPulseSubmit] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
+
+  useEffect(() => {
+    if (!isActive) return;
+
+    setUserText("");
+    setShowAnswer(false);
+    setShowFollowup(false);
+    setShowForm(false);
+    setNameText("");
+    setEmailText("");
+    setPulseSubmit(false);
+    setSubmitted(false);
+
+    const timers = [];
+    const schedule = (fn, ms) => timers.push(setTimeout(fn, ms));
+    const typeInto = (setter, text, startAt, speed) => {
+      for (let i = 1; i <= text.length; i++) {
+        schedule(() => setter(text.slice(0, i)), startAt + i * speed);
+      }
+      return startAt + text.length * speed;
+    };
+
+    const userDone = typeInto(setUserText, LEADS_USER_QUESTION, 400, 35);
+    schedule(() => setShowAnswer(true), userDone + 500);
+    schedule(() => setShowFollowup(true), userDone + 1800);
+    const formStart = userDone + 2600;
+    schedule(() => setShowForm(true), formStart);
+    const nameDone = typeInto(setNameText, LEADS_NAME, formStart + 500, 45);
+    const emailDone = typeInto(setEmailText, LEADS_EMAIL, nameDone + 300, 40);
+    schedule(() => setPulseSubmit(true), emailDone + 300);
+    schedule(() => setSubmitted(true), emailDone + 900);
+
+    return () => timers.forEach((t) => clearTimeout(t));
+  }, [isActive]);
+
+  const userTyping = userText.length > 0 && userText.length < LEADS_USER_QUESTION.length;
+  const nameTyping = nameText.length > 0 && nameText.length < LEADS_NAME.length;
+  const emailTyping = emailText.length > 0 && emailText.length < LEADS_EMAIL.length;
+
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.4 }}
+      className="flex flex-col md:flex-row gap-4 md:gap-6"
+    >
+      <div className="md:w-[38%] md:flex-shrink-0">
+        <div className="rounded-2xl border border-black/10 dark:border-white/10 bg-gradient-to-br from-slate-50 to-white dark:from-zinc-900 dark:to-zinc-900/60 p-5 shadow-sm h-full">
+          <div className="flex items-center gap-2 mb-3">
+            <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-indigo-500 to-fuchsia-500 flex items-center justify-center">
+              <span className="text-white text-xs font-bold">P</span>
+            </div>
+            <div className="text-sm font-semibold text-black/80 dark:text-white/80">
+              Pacific Home Solutions
+            </div>
+          </div>
+          <p className="text-xs text-black/50 dark:text-white/50 leading-relaxed mb-4">
+            Certified installation & repair services across the Midwest.
+          </p>
+          <div className="space-y-1.5">
+            {["HVAC installation", "Solar panels", "Water filtration", "Smart home setup"].map((svc) => (
+              <div
+                key={svc}
+                className="flex items-center gap-2 text-xs text-black/60 dark:text-white/60"
+              >
+                <span className="h-1 w-1 rounded-full bg-black/30 dark:bg-white/30" />
+                {svc}
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <div className="flex-1 min-w-0">
+        <div className="rounded-2xl border border-fuchsia-200 dark:border-fuchsia-800 bg-white/90 dark:bg-zinc-900/80 shadow-lg overflow-hidden">
+          <div className="flex items-center gap-2 px-4 py-3 bg-gradient-to-r from-fuchsia-50 to-pink-50 dark:from-fuchsia-900/30 dark:to-pink-900/20 border-b border-fuchsia-100 dark:border-fuchsia-800">
+            <div className="w-6 h-6 rounded-full bg-gradient-to-r from-fuchsia-500 to-pink-500 flex items-center justify-center">
+              <Sparkles className="w-3.5 h-3.5 text-white" />
+            </div>
+            <span className="text-sm font-medium text-black/80 dark:text-white/80">Ask Nobi</span>
+            <div className="ml-auto flex items-center gap-1.5">
+              <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
+              <span className="text-[10px] uppercase tracking-wider text-emerald-700 dark:text-emerald-400">Online</span>
+            </div>
+          </div>
+
+          <div className="p-4 space-y-3 min-h-[240px]">
+            {userText && (
+              <motion.div
+                initial={{ opacity: 0, y: 6 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.25 }}
+                className="flex justify-end"
+              >
+                <div className="max-w-[85%] rounded-2xl rounded-br-sm bg-slate-100 dark:bg-white/10 px-3.5 py-2 text-sm text-black/80 dark:text-white/90">
+                  {userText}
+                  {userTyping && <span className="ml-0.5 animate-pulse">|</span>}
+                </div>
+              </motion.div>
+            )}
+
+            {showAnswer && (
+              <motion.div
+                initial={{ opacity: 0, y: 6 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.3 }}
+                className="flex items-start gap-2"
+              >
+                <div className="w-6 h-6 rounded-full bg-gradient-to-r from-fuchsia-500 to-pink-500 flex items-center justify-center flex-shrink-0 mt-0.5">
+                  <Sparkles className="w-3 h-3 text-white" />
+                </div>
+                <div className="max-w-[85%] rounded-2xl rounded-bl-sm bg-gradient-to-br from-fuchsia-50 to-pink-50 dark:from-fuchsia-900/20 dark:to-pink-900/20 border border-fuchsia-100 dark:border-fuchsia-800 px-3.5 py-2 text-sm text-black/80 dark:text-white/90 leading-relaxed">
+                  {LEADS_ANSWER}
+                </div>
+              </motion.div>
+            )}
+
+            {showFollowup && (
+              <motion.div
+                initial={{ opacity: 0, y: 6 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.3 }}
+                className="flex items-start gap-2"
+              >
+                <div className="w-6 h-6 rounded-full bg-gradient-to-r from-fuchsia-500 to-pink-500 flex items-center justify-center flex-shrink-0 mt-0.5">
+                  <Sparkles className="w-3 h-3 text-white" />
+                </div>
+                <div className="max-w-[85%] rounded-2xl rounded-bl-sm bg-gradient-to-br from-fuchsia-50 to-pink-50 dark:from-fuchsia-900/20 dark:to-pink-900/20 border border-fuchsia-100 dark:border-fuchsia-800 px-3.5 py-2 text-sm text-black/80 dark:text-white/90">
+                  {LEADS_FOLLOWUP}
+                </div>
+              </motion.div>
+            )}
+
+            {showForm && !submitted && (
+              <motion.div
+                initial={{ opacity: 0, y: 6 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.3 }}
+                className="ml-8 rounded-xl border border-black/10 dark:border-white/10 bg-white dark:bg-zinc-900 p-3 space-y-2 shadow-sm"
+              >
+                <div className="flex items-center gap-3 rounded-lg border border-black/10 dark:border-white/10 bg-slate-50 dark:bg-white/5 px-3 py-1.5">
+                  <span className="text-[11px] uppercase tracking-wider text-black/40 dark:text-white/40 w-12">Name</span>
+                  <span className="text-sm text-black/90 dark:text-white/90 min-h-[20px]">
+                    {nameText}
+                    {nameTyping && <span className="ml-0.5 animate-pulse">|</span>}
+                  </span>
+                </div>
+                <div className="flex items-center gap-3 rounded-lg border border-black/10 dark:border-white/10 bg-slate-50 dark:bg-white/5 px-3 py-1.5">
+                  <span className="text-[11px] uppercase tracking-wider text-black/40 dark:text-white/40 w-12">Email</span>
+                  <span className="text-sm text-black/90 dark:text-white/90 min-h-[20px]">
+                    {emailText}
+                    {emailTyping && <span className="ml-0.5 animate-pulse">|</span>}
+                  </span>
+                </div>
+                <Button
+                  variant="ai"
+                  size="compact"
+                  className={`w-full h-9 transition-all ${
+                    pulseSubmit ? "ring-2 ring-fuchsia-300 shadow-lg scale-[1.02]" : ""
+                  }`}
+                >
+                  <Sparkles className="w-3.5 h-3.5" />
+                  <span>Send to sales team</span>
+                </Button>
+              </motion.div>
+            )}
+
+            {submitted && (
+              <motion.div
+                initial={{ opacity: 0, y: 6 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.3 }}
+                className="flex items-start gap-2"
+              >
+                <div className="w-6 h-6 rounded-full bg-gradient-to-r from-fuchsia-500 to-pink-500 flex items-center justify-center flex-shrink-0 mt-0.5">
+                  <Sparkles className="w-3 h-3 text-white" />
+                </div>
+                <div className="max-w-[85%] rounded-2xl rounded-bl-sm bg-gradient-to-br from-fuchsia-50 to-pink-50 dark:from-fuchsia-900/20 dark:to-pink-900/20 border border-fuchsia-100 dark:border-fuchsia-800 px-3.5 py-2 text-sm text-black/80 dark:text-white/90">
+                  {LEADS_CONFIRMATION}
+                </div>
+              </motion.div>
+            )}
+          </div>
+
+          {submitted && (
+            <motion.div
+              initial={{ opacity: 0, scale: 0.92 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.35, ease: "easeOut" }}
+              className="mx-4 mb-4 flex items-center gap-2 rounded-lg bg-emerald-50 dark:bg-emerald-900/20 border border-emerald-200 dark:border-emerald-800 px-3 py-2"
+            >
+              <span className="h-2 w-2 rounded-full bg-emerald-500" />
+              <span className="text-xs font-medium text-emerald-800 dark:text-emerald-300">
+                Lead forwarded to CRM — {LEADS_NAME}, tagged with chat transcript
+              </span>
+            </motion.div>
+          )}
+        </div>
+      </div>
+    </motion.div>
+  );
+}
+
+const HERO_SLIDES = [
+  { id: "search", label: "Search + discovery", Component: SearchDemo },
+  { id: "pdp",    label: "Product Q&A",        Component: PdpDemo },
+  { id: "leads",  label: "Lead capture",       Component: LeadsDemo },
+];
+
+const VARIANT_TO_INDEX = { search: 0, answers: 1, leads: 2 };
+
+const SLIDE_DURATIONS_MS = [
+  4200 + 1200,
+  500 + PDP_QUESTION.length * 50 + 600 + 1800 + 600 + 1200,
+  9500,
+];
+
+export default function HeroDemo({
+  className = "",
+  variant = "search",
+  showTabs = false,
+  autoAdvance = false,
+}) {
+  const initialIndex = VARIANT_TO_INDEX[variant] ?? 0;
+  const [activeIndex, setActiveIndex] = useState(initialIndex);
+
+  useEffect(() => {
+    const next = VARIANT_TO_INDEX[variant] ?? 0;
+    setActiveIndex(next);
+  }, [variant]);
+
   const autoAdvanceRef = useRef(null);
-  const slideRefs = useRef([]);
-  const [slideHeight, setSlideHeight] = useState(undefined);
-
-  const searchDurationMs = 4200;
-  const pdpDurationMs = 500 + PDP_QUESTION.length * 50 + 600 + 1800 + 600;
-  const pauseMs = 1200;
-  const autoAdvanceDurations = [searchDurationMs + pauseMs, 10000];
-
   useEffect(() => {
-    const el = slideRefs.current[activeIndex];
-    if (!el) return;
-    const update = () => setSlideHeight(el.offsetHeight);
-    update();
-    const ro = new ResizeObserver(update);
-    ro.observe(el);
-    return () => ro.disconnect();
-  }, [activeIndex]);
-
-  useEffect(() => {
+    if (!autoAdvance) return;
     if (autoAdvanceRef.current) clearTimeout(autoAdvanceRef.current);
-
     autoAdvanceRef.current = setTimeout(() => {
-      goNext();
-    }, autoAdvanceDurations[activeIndex] || 5000);
-
+      setActiveIndex((i) => (i + 1) % HERO_SLIDES.length);
+    }, SLIDE_DURATIONS_MS[activeIndex] ?? 6000);
     return () => {
       if (autoAdvanceRef.current) clearTimeout(autoAdvanceRef.current);
     };
-  }, [activeIndex]);
+  }, [activeIndex, autoAdvance]);
+
+  const ActiveComponent = HERO_SLIDES[activeIndex].Component;
 
   return (
-    <div className={`${className}`}>
+    <div className={className}>
       <div className="mx-auto w-full max-w-4xl">
         <div className="rounded-3xl shadow-2xl border border-black/5 dark:border-white/10 bg-gradient-to-b from-slate-50 via-white to-slate-50/50 dark:from-zinc-800/40 dark:via-zinc-900 dark:to-zinc-800/20 p-3 sm:p-8">
-          <div className="inline-flex rounded-xl bg-black/[0.04] dark:bg-white/[0.06] p-1 mb-5">
-            {slides.map((slide, i) => {
-              const isActive = i === activeIndex;
-              return (
-                <button
-                  key={slide.id}
-                  type="button"
-                  onClick={() => setActiveIndex(i)}
-                  className={`relative text-xs uppercase tracking-[0.2em] px-4 sm:px-5 py-2.5 rounded-lg transition-all ${
-                    isActive
-                      ? "bg-white dark:bg-white/15 text-black/70 dark:text-white/80 shadow-sm"
-                      : "text-black/30 dark:text-white/30 hover:text-black/50 dark:hover:text-white/50"
-                  }`}
-                >
-                  {slide.label}
-                </button>
-              );
-            })}
-          </div>
-
-          <div
-            className="relative overflow-hidden"
-            style={{ height: slideHeight != null ? `${slideHeight}px` : 'auto' }}
-          >
-            <div
-              className="flex items-start transition-transform duration-500 ease-out"
-              style={{ transform: `translateX(-${activeIndex * 100}%)` }}
-            >
-              <div ref={el => slideRefs.current[0] = el} className="w-full shrink-0 px-1 pb-3">
-                <SearchDemo isActive={activeIndex === 0} variant={variant} />
-              </div>
-              <div ref={el => slideRefs.current[1] = el} className="w-full shrink-0 px-1 overflow-hidden">
-                <PdpDemo isActive={activeIndex === 1} />
-              </div>
+          {showTabs && (
+            <div className="inline-flex rounded-xl bg-black/[0.04] dark:bg-white/[0.06] p-1 mb-5">
+              {HERO_SLIDES.map((slide, i) => {
+                const isActive = i === activeIndex;
+                return (
+                  <button
+                    key={slide.id}
+                    type="button"
+                    onClick={() => setActiveIndex(i)}
+                    className={`relative text-xs uppercase tracking-[0.2em] px-4 sm:px-5 py-2.5 rounded-lg transition-all ${
+                      isActive
+                        ? "bg-white dark:bg-white/15 text-black/70 dark:text-white/80 shadow-sm"
+                        : "text-black/30 dark:text-white/30 hover:text-black/50 dark:hover:text-white/50"
+                    }`}
+                  >
+                    {slide.label}
+                  </button>
+                );
+              })}
             </div>
+          )}
+
+          <div className="relative min-h-[420px] sm:min-h-[440px]">
+            <AnimatePresence mode="popLayout">
+              <motion.div
+                key={HERO_SLIDES[activeIndex].id}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -6 }}
+                transition={{ duration: 0.32, ease: "easeOut" }}
+                className="px-1"
+              >
+                <ActiveComponent isActive={true} variant={variant} />
+              </motion.div>
+            </AnimatePresence>
           </div>
         </div>
       </div>

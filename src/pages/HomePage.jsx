@@ -41,7 +41,8 @@ const DEMO_QUERY =
 // ===== Personalization variant content =====
 const CHIPS = [
   { id: "search",  label: "Better search" },
-  { id: "answers", label: "Answer every question" },
+  { id: "product", label: "Help shoppers decide" },
+  { id: "support", label: "Automate support answers" },
   { id: "leads",   label: "Capture more leads" },
 ];
 
@@ -89,38 +90,53 @@ const VARIANT_CONTENT = {
 
     ],
   },
-  answers: {
-    headline: "Your visitors have questions your website isn't answering",
-    subline:  "Nobi pulls answers from your content, cites its sources, and checks facts before responding. No guessing, no hallucinations.",
-    problemHeading: "Visitors leave with the same question they arrived with",
-    problemBody:    "They dig through your site, find nothing clear, and go to a competitor who gives them a straight answer.",
+  product: {
+    headline: "Shoppers won't buy what they still have doubts about",
+    subline:  "Nobi answers fit, material, shipping, and compatibility questions right on the product page, so visitors stop bouncing to competitors to figure it out.",
+    problemHeading: "One unresolved doubt and the add-to-cart is gone",
+    problemBody:    "Shoppers reach the product page with a specific question. If they can't confirm the answer in under a minute, most leave to compare elsewhere and don't come back.",
     problemPoints: [
-      { Icon: MessageCircleQuestion, label: "Questions go unanswered", desc: "Visitors search your FAQ, find nothing useful, and leave with the same doubt they arrived with." },
-      { Icon: LayoutGrid,            label: "Scattered information",   desc: "Your answers are spread across product pages, blog posts, and PDFs. Visitors can't piece it together themselves." },
-      { Icon: MousePointerClick,     label: "One chance lost",         desc: "A visitor who leaves with an unanswered question rarely comes back. Your competitor answers it instead." },
+      { Icon: MessageCircleQuestion, label: "Unanswered product doubts", desc: "Questions about fit, material, or shipping that aren't obvious from the PDP push shoppers to go check a competitor instead." },
+      { Icon: LayoutGrid,            label: "Info buried in the page",   desc: "The answer is on your site somewhere — in specs, reviews, or FAQs — but scanning for it is slower than bouncing to look elsewhere." },
+      { Icon: MousePointerClick,     label: "Lost to competitors",       desc: "A competitor whose PDP feels easier to decide on wins the sale, even when your product is better." },
     ],
-    numbersHeading: "What happens when every question gets a real answer",
+    numbersHeading: "What happens when every product question gets a confident answer",
     stats: [
-      { number: "6x",    label: "more purchases",       desc: "Visitors who click a suggested question and get an answer are 6x more likely to buy than those who don't engage." },
-      { number: "2.5x",  label: "higher conversion",    desc: "Nobi-assisted visitors convert at 2.5x the rate of unassisted visitors, measured across Lucchese and UNTUCKit in A/B tests." },
-      { number: "Zero",  label: "hallucinations",        desc: "Before sending, Nobi runs a second AI pass that verifies every claim against your knowledge base. It won't say what it can't prove." },
+      { number: "6x",    label: "more purchases",    desc: "Shoppers who click a suggested product question and get an answer are 6x more likely to buy than those who don't engage." },
+      { number: "2.5x",  label: "higher conversion", desc: "Nobi-assisted shoppers convert at 2.5x the rate of unassisted visitors, measured across Lucchese and UNTUCKit in A/B tests." },
+      { number: "Zero",  label: "hallucinations",    desc: "Before sending, Nobi runs a second AI pass that verifies every claim against your product data. It won't say what it can't prove." },
+    ],
+  },
+  support: {
+    headline: "Your knowledge base should be answering tickets, not collecting dust",
+    subline:  "Nobi answers policy, billing, and account questions instantly — with a citation to the doc it pulled from — so repeat support tickets stop landing in your queue.",
+    problemHeading: "Support spends the day answering the same five questions",
+    problemBody:    "The answer is in your help center, but visitors can't find it fast enough. So they file a ticket, email support, or leave frustrated. Your team spends the week on deflectable questions instead of the ones that actually need a human.",
+    problemPoints: [
+      { Icon: MessageCircleQuestion, label: "Repeat tickets",           desc: "Returns, billing, cancellations, shipping — the same questions fill your queue, even though the answer is already published." },
+      { Icon: LayoutGrid,            label: "Buried documentation",    desc: "Your help center has the answer, but it's three clicks deep and most visitors give up before they find it." },
+      { Icon: MousePointerClick,     label: "Wasted support hours",    desc: "Agents spend the day on deflectable questions instead of the tickets that actually need a human." },
+    ],
+    numbersHeading: "What your team gets when the website answers its own questions",
+    stats: [
+      { number: "Zero",  label: "new tickets",       desc: "Questions answered in chat never become support tickets. Your team stops repeating themselves and focuses on the cases that actually need a human." },
+      { number: "Every", label: "answer is cited",   desc: "Nobi links to the exact help article or policy page it pulled the answer from. Visitors trust the response, and agents can verify it in one click." },
     ],
   },
   leads: {
-    headline: "Stop letting interested visitors leave without a trace",
-    subline:  "Nobi collects contact info naturally through conversation and routes it wherever you need it.",
-    problemHeading: "Most visitors leave and you have no way to reach them",
-    problemBody:    "They browse, get interested, and disappear. No contact info, no follow-up, no second chance.",
+    headline: "Turn website conversations into qualified leads",
+    subline:  "Nobi answers visitor questions, makes prospects comfortable enough to share who they are, and sends every lead to your CRM with the full chat so sales knows exactly what to say.",
+    problemHeading: "Your best prospects leave without telling you who they are",
+    problemBody:    "Visitors arrive with real intent, get their questions answered, and leave — without your sales team ever knowing they were there.",
     problemPoints: [
-      { Icon: MousePointerClick, label: "Silent exits",        desc: "High-intent visitors land, browse, and bounce. You have no idea they were there and no way to reach them." },
-      { Icon: Heart,             label: "No follow-up window", desc: "Pop-up forms interrupt at the wrong moment. Most visitors dismiss them without a second thought." },
-      { Icon: BarChart3,         label: "Invisible pipeline",  desc: "Without contact info, you can't attribute revenue to campaigns or optimize what's working." },
+      { Icon: MousePointerClick, label: "Silent exits",         desc: "Visitors land, read, and leave. Even high-intent ones disappear without a trace, no contact info, no chance for sales to follow up." },
+      { Icon: Heart,             label: "Pop-ups get ignored",  desc: "Generic email-capture pop-ups interrupt at the wrong moment. Visitors dismiss them on reflex, so you get neither the answer nor the lead." },
+      { Icon: BarChart3,         label: "Sales flies blind",    desc: "Without the conversation attached to the contact, your team can't tell which leads are ready, what they asked about, or where they came from." },
     ],
-    numbersHeading: "What happens when your website actually captures leads",
+    numbersHeading: "What your sales team gets when the website captures leads",
     stats: [
-      { number: "17.6%", label: "conversion rate",        desc: "UNTUCKit Nobi users vs. 15.0% on Shopify default. More engaged visitors convert to customers at a higher rate." },
-
-      { number: "100%",   label: "of leads attributed",   desc: "Every lead tagged with the conversation and campaign that drove it, routed directly to your CRM or form handler." },
+      { number: "0",    label: "forms to build",      desc: "Nobi captures leads inside the conversation itself. No new pop-ups, landing pages, or form integrations to maintain." },
+      { number: "100%", label: "of leads attributed", desc: "Every lead arrives with the conversation, campaign source, and referring page attached. Route it to your CRM, Slack, or sales inbox in real time." },
     ],
   },
 };
@@ -761,10 +777,12 @@ function renderHeadline(variant) {
   switch (variant) {
     case "search":
       return <>Visitors who can't find it{" "}<span className={GRADIENT}>won't buy it.</span></>;
-    case "answers":
-      return <>Your visitors have questions your website{" "}<span className={GRADIENT}>isn't answering</span></>;
+    case "product":
+      return <>Shoppers won't buy what they still{" "}<span className={GRADIENT}>have doubts about</span></>;
+    case "support":
+      return <>Your knowledge base should be{" "}<span className={GRADIENT}>answering the tickets</span></>;
     case "leads":
-      return <>Stop letting interested visitors{" "}<span className={GRADIENT}>leave quietly</span></>;
+      return <>Turn website conversations into{" "}<span className={GRADIENT}>qualified leads</span></>;
     default:
       return <>Turn your website into your best{" "}<span className={GRADIENT}>sales associate</span></>;
   }

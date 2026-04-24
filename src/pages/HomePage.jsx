@@ -38,106 +38,14 @@ const SHOW_PRICING = true;
 const DEMO_QUERY =
   `Red dress for a beach wedding. I'm 5'5" and want something under $200.`;
 
-const PLACEMENTS = [
-  {
-    id: "search",
-    label: "My search and discovery is lacking",
-    icon: SearchIcon,
-    heading: "Improve search results fast",
-    why: "Add the AI + native toggle search bar so shoppers get semantic answers without leaving your header.",
-    outcome: "Search results that understand natural language and surface the right SKUs instantly.",
-    snippet:
-      '<script src="https://assistant-script.nobi.ai/nobi.bundle.js" onload="window.Nobi.initialize({ merchantId: \'460cbe82-9195-424f-a616-b1cb3e3caca0\' });"></script>\n<nobi-search-bar default-mode="ai" size="regular" cta-variant="auto" show-mode-toggle="true" show-hint-row="true"></nobi-search-bar>',
-    liveMarkup: (
-      <div className="placement-search-bar">
-        <div className="placement-search-toggle">
-          <span className="placement-search-toggle-pill placement-search-toggle-pill--active">AI</span>
-          <span className="placement-search-toggle-pill">Site</span>
-        </div>
-        <div className="placement-search-input">Search for “red dresses under $200”</div>
-        <div className="placement-search-hint">Hints + quick filters appear as soon as you type.</div>
-      </div>
-    ),
-    customer: "Untuckit uses this to lift search conversion.",
-  },
-  {
-    id: "engagement",
-    label: "My engagement is low",
-    icon: LayoutGrid,
-    heading: "Keep collection shoppers exploring",
-    why: "Place Nobi suggestion pills on PLPs/collections to nudge deeper browsing.",
-    outcome: "Longer sessions and more viewed products per visit.",
-    snippet:
-      '<nobi-suggestion-pills pill-count="3"></nobi-suggestion-pills>',
-    liveMarkup: (
-      <div className="placement-suggestion-shell">
-        <div className="placement-suggestion-pill">Beach wedding looks</div>
-        <div className="placement-suggestion-pill">Under $200</div>
-        <div className="placement-suggestion-pill">Red + size M</div>
-      </div>
-    ),
-    customer: "Kilte uses AI prompts beside filters to keep shoppers clicking.",
-  },
-  {
-    id: "pdp",
-    label: "My visitors have lots of product doubts",
-    icon: MessageCircleQuestion,
-    heading: "Answer product Q&A on-page",
-    why: "Drop the PDP assistant so fit, materials, and shipping questions get answered without support tickets.",
-    outcome: "Confident add‑to‑carts and fewer pre‑purchase tickets.",
-    snippet:
-      '<nobi-pdp-assistant product-id="{{ product.id }}"></nobi-pdp-assistant>',
-    liveMarkup: (
-      <div className="placement-badge-shell">
-        <div className="placement-badge-avatar">?</div>
-        <div>
-          <p className="text-base font-semibold text-slate-900">Ask Nobi</p>
-          <p className="text-xs text-slate-500">“Is this true to size?” “How fast is shipping?”</p>
-        </div>
-      </div>
-    ),
-    customer: "Lucchese surfaces sizing answers on every boot PDP.",
-  },
-  {
-    id: "recover",
-    label: "Recover searchers who don't convert",
-    icon: MousePointerClick,
-    heading: "Recapture bouncers from search/PLP",
-    why: "Trigger a modal or inline prompt when searchers stall, summarizing top picks and offers.",
-    outcome: "Redirects high‑intent visitors before they leave.",
-    snippet:
-      '<nobi-exit-assistant threshold="inactivity"></nobi-exit-assistant>',
-    liveMarkup: (
-      <div className="placement-modal-shell">
-        <p className="text-sm font-semibold text-slate-900">Don’t leave yet</p>
-        <p className="text-xs text-slate-600">Here are 3 red dresses in your size + free shipping code.</p>
-      </div>
-    ),
-    customer: "Toolup recovers stalled searchers with AI exit prompts.",
-  },
-  {
-    id: "api",
-    label: "Launch an AI assistant on demand",
-    icon: Sparkles,
-    heading: "Trigger the agent wherever you want",
-    why: "Use the JS API to open Nobi from any button or menu item, returns, sizing help, concierge.",
-    outcome: "Assistant appears exactly where visitors need help, without page reloads.",
-    snippet:
-      '<button onclick="Nobi.openChat()">Open site assistant</button>',
-    liveMarkup: (
-      <button className="placement-program-btn" type="button">Open Nobi assistant</button>
-    ),
-    customer: "Kilte launches Nobi from its help hub to handle returns.",
-  },
-];
-
 // ===== Personalization variant content =====
 const CHIPS = [
   { id: "search",  label: "Better search" },
-  { id: "default", label: "More conversions" },
   { id: "answers", label: "Answer every question" },
-  { id: "leads",   label: "More leads" },
+  { id: "leads",   label: "Capture more leads" },
 ];
+
+const VALID_VARIANTS = CHIPS.map((c) => c.id);
 
 const PREVIEW_SECTIONS = [
   { id: "results",  label: "Real results" },
@@ -407,45 +315,6 @@ function ConversationPreview({ mode, playKey, query }) {
         ratioVar="--hero-preview-ratio"
       />
     </AnimatePresence>
-  );
-}
-
-function HeroPlacementPills({ interactive = false, activeId, onSelect }) {
-  const pills = PLACEMENTS;
-  return (
-    <div
-      className={[
-        "inline-flex flex-wrap justify-center gap-2 sm:gap-3 rounded-2xl border border-black/10 dark:border-white/10 bg-white dark:bg-zinc-900 px-4 py-3 shadow-lg",
-        interactive ? "" : "pointer-events-none",
-      ]
-        .filter(Boolean)
-        .join(" ")}
-    >
-      {pills.map((pill) => {
-        const Icon = pill.icon;
-        const isActive = activeId === pill.id;
-        return (
-          <button
-            type="button"
-            key={pill.id}
-            onClick={() => interactive && onSelect?.(pill.id)}
-            className={[
-              "group inline-flex items-center gap-2 rounded-full border bg-white/80 dark:bg-white/10 px-4 py-2 text-sm font-medium text-black dark:text-white transition",
-              "border-black/10 dark:border-white/10 hover:border-fuchsia-200 hover:bg-fuchsia-50/60 dark:hover:bg-white/20",
-              isActive ? "border-fuchsia-200 bg-fuchsia-50/70 dark:bg-white/20" : "",
-              interactive ? "cursor-pointer" : "cursor-default",
-            ]
-              .filter(Boolean)
-              .join(" ")}
-          >
-            <span className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-fuchsia-100 text-fuchsia-600 dark:bg-fuchsia-500/20 dark:text-fuchsia-300">
-              <Icon className="h-3.5 w-3.5" />
-            </span>
-            {pill.label}
-          </button>
-        );
-      })}
-    </div>
   );
 }
 
@@ -905,16 +774,16 @@ function Hero({ onOpenVideo, onOpenDemo, variant, setVariant }) {
   const content = VARIANT_CONTENT[variant] || VARIANT_CONTENT.default;
 
   const handleChip = (id) => {
-    const next = id === "default" ? "default" : (id === variant ? "default" : id);
-    setVariant(next);
-    try { localStorage.setItem("nobi_hero_variant", next); } catch (_) {}
+    const previous = variant;
+    setVariant(id);
+    try { localStorage.setItem("nobi_hero_variant", id); } catch (_) {}
     try {
       window.dataLayer = window.dataLayer || [];
       window.dataLayer.push({
         event: "hero_chip_click",
         chip_id: id,
-        hero_variant: next,
-        previous_variant: variant,
+        hero_variant: id,
+        previous_variant: previous,
       });
     } catch (_) {}
   };
@@ -2270,7 +2139,10 @@ export default function HomePage() {
   const { onOpen: onOpenForm } = useDemoForm();
 
   const [variant, setVariant] = useState(() => {
-    try { return localStorage.getItem("nobi_hero_variant") || "search"; } catch (_) { return "search"; }
+    try {
+      const stored = localStorage.getItem("nobi_hero_variant");
+      return VALID_VARIANTS.includes(stored) ? stored : "search";
+    } catch (_) { return "search"; }
   });
 
   useSEO({

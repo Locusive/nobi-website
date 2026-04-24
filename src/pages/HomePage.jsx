@@ -905,14 +905,18 @@ function Hero({ onOpenVideo, onOpenDemo, variant, setVariant }) {
   const content = VARIANT_CONTENT[variant] || VARIANT_CONTENT.default;
 
   const handleChip = (id) => {
-    if (id === "default") {
-      setVariant("default");
-      try { localStorage.setItem("nobi_hero_variant", "default"); } catch (_) {}
-      return;
-    }
-    const next = id === variant ? "default" : id;
+    const next = id === "default" ? "default" : (id === variant ? "default" : id);
     setVariant(next);
     try { localStorage.setItem("nobi_hero_variant", next); } catch (_) {}
+    try {
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({
+        event: "hero_chip_click",
+        chip_id: id,
+        hero_variant: next,
+        previous_variant: variant,
+      });
+    } catch (_) {}
   };
 
   return (

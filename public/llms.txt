@@ -12,7 +12,7 @@ Nobi sits on a business's website and acts as a conversational sales associate. 
 - **Conversational Q&A**: Answers product, sizing, shipping, and service questions without visitors needing to dig through pages or wait for support.
 - **Product recommendations**: Suggests products based on the visitor's stated needs and intent.
 - **Lead capture**: Identifies high-intent visitors and captures their contact before they bounce.
-- **Proactive engagement**: Suggestion pills, exit-intent prompts, and inline triggers keep visitors exploring instead of leaving.
+- **Proactive engagement**: Suggestion pills and inline triggers keep visitors exploring instead of leaving.
 - **Flexible placement**: Search bar, PDP assistant, collection pages, modals, or triggered from any button via JS API.
 
 ### Verticals

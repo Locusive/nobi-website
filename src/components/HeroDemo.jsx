@@ -900,7 +900,11 @@ export default function HeroDemo({
             </div>
           )}
 
-          <div className="relative">
+          <motion.div
+            layout
+            transition={{ layout: { duration: 0.4, ease: [0.22, 1, 0.36, 1] } }}
+            className="relative"
+          >
             <AnimatePresence mode="popLayout">
               <motion.div
                 key={HERO_SLIDES[activeIndex].id}
@@ -913,7 +917,7 @@ export default function HeroDemo({
                 <ActiveComponent isActive={true} variant={variant} />
               </motion.div>
             </AnimatePresence>
-          </div>
+          </motion.div>
         </div>
       </div>
     </div>

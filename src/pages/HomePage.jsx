@@ -125,9 +125,9 @@ const VARIANT_CONTENT = {
   },
   leads: {
     headline: "Turn website conversations into qualified leads",
-    subline:  "Nobi answers visitor questions, builds intent, and collects their contact info inside the conversation. Every lead lands in your CRM with the full chat attached so sales knows exactly what to say.",
-    problemHeading: "Your website answers questions but never captures the interest",
-    problemBody:    "Visitors arrive with real questions. They get an answer — or don't — and leave without ever identifying themselves. Your sales team never hears about them.",
+    subline:  "Nobi answers visitor questions, makes prospects comfortable enough to share who they are, and sends every lead to your CRM with the full chat so sales knows exactly what to say.",
+    problemHeading: "Your website starts the job but never finishes it",
+    problemBody:    "Visitors arrive with real intent, get their questions answered, and leave — without your sales team ever knowing they were there.",
     problemPoints: [
       { Icon: MousePointerClick, label: "Silent exits",         desc: "Visitors land, read, and leave. Even high-intent ones disappear without a trace, no contact info, no chance for sales to follow up." },
       { Icon: Heart,             label: "Pop-ups get ignored",  desc: "Generic email-capture pop-ups interrupt at the wrong moment. Visitors dismiss them on reflex, so you get neither the answer nor the lead." },

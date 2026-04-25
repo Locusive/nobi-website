@@ -21,7 +21,7 @@ export const meta = {
  },
  {
  question: "1. Nobi",
- answer: "Nobi attacks zero results in two layers. A semantic intent layer resolves queries against what the catalog means rather than literal tokens, so 'brown boots' surfaces the Cappuccino Boot at Kilte even though 'brown' never appears in the product record. When a query still cannot be matched, the conversational assistant picks up inside the same surface and offers alternatives in real time, so the shopper never hits a dead-end page. Kilte saw a 21.7% CVR lift versus Shopify default search."
+ answer: "Nobi prevents the zero-result page by design. Its semantic search engine resolves queries against what the catalog means rather than literal tokens, so 'brown boots' surfaces the Cappuccino Boot at Kilte even though 'brown' never appears in the product record - and even ambiguous, misspelled, or off-pattern queries return relevant matches instead of an empty page. A conversational assistant is also available on the same surface for shoppers who want to ask a question rather than run a query. Kilte saw a 21.7% CVR lift versus Shopify default search."
  },
  {
  question: "2. Algolia",
@@ -41,7 +41,7 @@ export const meta = {
  },
  {
  question: "Which tool's zero-result handling fits your team?",
- answer: "The article content provided does not include a final recommendation section matching queries to teams. Based on what is covered, the fit depends on whether a team wants semantic intent plus a conversational fallback (Nobi), developer-driven neural search (Algolia), an AI discovery engine with paid merchandising add-ons (Klevu), behavior-based ranking (Constructor), or rule-based merchandising campaigns (Searchspring)."
+ answer: "The fit depends on what you want at the zero-result page. Pick Nobi if you want the page eliminated by design (semantic search always returns relevant results), with a conversational assistant available when shoppers want to ask rather than search. Pick Algolia if your engineering team wants to compose the fallback chain themselves. Pick Klevu if redirecting empty queries to a category page or recommendation slot from a merchandising UI is the right shape on Shopify. Pick Constructor if zero-result fallbacks need to be personalized per shopper at $50M+ GMV. Pick Searchspring if you want explicit rule-by-rule control over what each empty query returns."
  }
  ],
 };
@@ -102,19 +102,19 @@ export const meta = {
   "articleSection": "best of article"
 }`}
 </script>
-**TL;DR:** Five tools take five different routes to the same problem:
+**TL;DR:** Of the five tools compared, only Nobi prevents the zero-result page by design. The other four reduce, redirect, or fill it - but the empty page still happens.
 
-- **Nobi** - semantic intent matching plus a conversational assistant that catches the misses, included from $25/mo base. Pick when you want zero-results intercepted twice: once in ranking, once in chat.
-- [**Algolia**](https://algolia.com) - Query Suggestions, Recommend, and NeuralSearch composed by your engineering team, $500-$5,000/mo on mid-sized deployments. Pick when developers want to design the fallback chain themselves.
-- [**Klevu**](https://klevu.com) - semantic 'did you mean' plus configurable category-page fallbacks in the merchandising UI, from $249/mo on the Shopify App Store. Pick when long-tail semantic mismatch is your main zero-result driver on Shopify.
-- [**Constructor**](https://constructor.io) - NLP query rewrite plus personalized session-signal recommendations on the no-results slot. Pricing is not public; it's a revenue-share model with mid-market deals typically landing $50K-$80K/year and scaling up with GMV. Pick when zero-result fallbacks need to be personalized per shopper at $50M+ GMV.
-- [**Searchspring**](https://searchspring.com) - explicit 'No Results' merchandising rules with redirect options, custom mid-market plans typically $1,500-$3,500/mo. Pick when your team wants rule-by-rule control over what each zero-result query returns.
+- **Nobi** - Semantic search always returns relevant results, so search mode never produces a zero-result page; even ambiguous or off-pattern queries surface something. A conversational assistant is available for follow-up shopping questions when ranking alone can't answer what the shopper actually wants. From $25/mo base.
+- [**Algolia**](https://algolia.com) - Default keyword search returns an empty page when nothing matches. NeuralSearch (gated to higher tiers) layers a vector-match retry, and Query Suggestions / Recommend can populate the empty page - but engineering composes the fallback chain. $500-$5,000/mo on mid-sized deployments.
+- [**Klevu**](https://klevu.com) - A 'did you mean' layer absorbs typos; for queries that genuinely return nothing, merchandisers can redirect the shopper to a category page or recommendation slot from the merchandising UI. From $249/mo on the Shopify App Store.
+- [**Constructor**](https://constructor.io) - NLP query rewrite tries to resolve intent before declaring zero, then fills the empty page with session-personalized recommendations rather than a static block. Revenue-share pricing, no public list price; mid-market deals typically start $50K-$80K/year and scale up with GMV.
+- [**Searchspring**](https://searchspring.com) - Explicit 'No Results' merchandiser rules - every long-tail empty query needs its own rule, but each rule gives the merchandiser full control over what the page returns. $1,500-$3,500/mo for mid-market plans.
 
-Pick by how the fallback should actually behave on your catalog, not by who quotes the lowest zero-result rate in a sales deck.
+Pick by what you want at the zero-result page: prevent it (Nobi), engineer the fallback chain (Algolia), redirect from it (Klevu), personalize the recommendations that fill it (Constructor), or hand-tune one rule per query (Searchspring).
 
 | Product | Default behavior on zero results | Fallback mechanism | Configurable without engineering? | Plan/tier required | Known limitation |
 | --- | --- | --- | --- | --- | --- |
-| Nobi | Semantic intent match attempted before declaring zero | Conversational assistant offers alternatives in chat in real time | Yes, in admin | All plans from $25/mo base | Curates the search results page, not site-wide category or collection pages |
+| Nobi | Semantic search always returns relevant results; no zero-result page produced | None needed — search ranking always returns matches, and a conversational assistant is available for follow-up help | Yes, in admin | All plans from $25/mo base | Curates the search results page, not site-wide category or collection pages |
 | [Algolia](https://algolia.com) | Returns empty if no keyword or vector match | Query Suggestions, Recommend widget, NeuralSearch retry - composed by engineering | Partially - chained fallback logic typically requires developers | NeuralSearch gated to higher tiers | Fallback quality is bounded by engineering hours invested |
 | [Klevu](https://klevu.com) | Semantic match plus 'did you mean' before zero | Auto-redirect to a category page or recommendation slot | Yes, in merchandising UI | Smart Search and above | Fallback quality hinges on how well the catalog is enriched; personalization upsold separately |
 | [Constructor](https://constructor.io) | NLP query rewrite attempted before declaring zero | Personalized session-signal recommendation slot inserted on the page | Yes, via merchandising UI | All plans | Revenue-share pricing; needs data team to tune the signals driving the fallback |
@@ -138,23 +138,23 @@ Where a vendor doesn't publish pricing publicly (Klevu, Searchspring), we say so
 
 ## 1. Nobi
 
-Nobi attacks the zero-result problem in two layers. First, a [semantic intent layer](https://nobi.ai/blog/how-ai-site-search-works) resolves queries against what the catalog means rather than the literal tokens - "brown boots" surfaces the Cappuccino Boot at Kilte even though the word "brown" never appears in the product record. When a query still can't be matched, the conversational assistant picks up inside the same surface and offers alternatives in real time, so the shopper never lands on a dead-end page. For a head of ecommerce, that means two chances to convert a query before it turns into a lost session, without writing a new rule for every long-tail variant.
+Nobi prevents the zero-result page from happening in the first place. Its [semantic search engine](https://nobi.ai/blog/how-ai-site-search-works) ranks results against what the catalog means rather than what literal tokens match - "brown boots" surfaces the Cappuccino Boot at Kilte even though the word "brown" never appears in the product record, and even ambiguous, misspelled, or off-pattern queries return relevant matches rather than an empty page. A conversational assistant is also available on the same surface as a complementary channel: when a shopper wants to ask a question rather than search a query (sizing, availability, fit, "what would go with this"), they can type it in and get a real answer grounded in the catalog. For a head of ecommerce, that means the dead-end page is removed by design instead of routed around.
 
-**Best for:** Ecommerce teams who want zero-result queries intercepted twice - once by semantic ranking up front, once by a conversational fallback when ranking still misses - without hand-tuning a growing rule library.
+**Best for:** Ecommerce teams who want zero-result pages eliminated at the search-ranking layer - and a conversational surface available when shoppers want to ask rather than search - without hand-tuning a growing rule library.
 
 **Pricing:** $25/month base (includes 2,500 searches and 250 conversational messages). $0.01 per additional search, $0.10 per additional message. A brand running 50,000 searches and 5,000 messages a month lands around $995.
 
 **Pros:**
-- Semantic intent layer catches brand-voice and natural-language mismatches before a query goes to zero - Kilte saw a +21.7% conversion rate lift against Shopify default search after switching it on
-- Conversational assistant catches what ranking still misses and offers alternatives inside chat, turning the dead-end page into a recovery moment
-- Zero-result queries surface in weekly insights - UNTUCKit reviews them in their standing weekly meeting and feeds the patterns back into the catalog
-- New long-tail queries are handled by the same semantic layer, so adding fallback paths doesn't mean hand-pinning products to queries every week
+- Semantic search always returns relevant results, so the zero-result page is prevented at the ranking layer instead of routed around - Kilte saw a +21.7% conversion rate lift against Shopify default search after switching it on
+- Conversational assistant available on the same surface when a shopper wants to ask a question rather than run a query
+- Zero-result queries (and the ambiguous low-relevance queries the semantic layer catches before they hit zero) surface in weekly insights - UNTUCKit reviews them in their standing weekly meeting and feeds the patterns back into the catalog
+- New long-tail queries are handled by the same semantic layer, so adding coverage doesn't mean hand-pinning products to queries every week
 
 **Cons:**
-- Curates the search results page, not category or collection pages - brands that also need zero-result interception across browse and PLPs will need another tool for those surfaces
+- Curates the search results page, not category or collection pages - brands that also want intent-aware interception across browse and PLPs will need another tool for those surfaces
 - Not API-first; engineering teams who want to design a custom multi-tier retry chain themselves will prefer a dev-centric option like Algolia
 
-**Verdict:** Pick Nobi when you want zero-result mismatches caught semantically up front and the inevitable misses converted by a chat fallback - skip it if you also need site-wide merchandising across category and collection pages.
+**Verdict:** Pick Nobi when you want the zero-result page eliminated at the ranking layer rather than handled after the fact - skip it if you also need site-wide merchandising across category and collection pages.
 
 ## 2. Algolia
 
@@ -241,7 +241,7 @@ Nobi attacks the zero-result problem in two layers. First, a [semantic intent la
 
 The right pick depends less on each tool's marketing claim and more on what is actually driving zero-results in your store. Start with the [specific pattern in your search logs](https://nobi.ai/blog/search-queries-that-break-ecommerce) - editorial naming, long-tail questions, personalized fallbacks, rule-by-rule control, or the queries that still miss after intent resolution - and map to the vendor built for that job.
 
-If your catalog uses brand-voice or editorial naming and shoppers type the everyday word, [Klevu](https://klevu.com) or Nobi is the pick. Klevu's semantic layer maps natural-language queries to enriched catalog data before declaring zero, and it's strong on Shopify. Nobi adds a color-normalization layer that resolves "brown boots" to Kilte's Cappuccino Boot even when "brown" never appears in the product record, plus a conversational fallback on the queries that still miss. UNTUCKit reviews Nobi's zero-result and intent data in a standing weekly catalog meeting.
+If your catalog uses brand-voice or editorial naming and shoppers type the everyday word, Nobi or [Klevu](https://klevu.com) is the pick. Nobi's semantic search resolves "brown boots" to Kilte's Cappuccino Boot even when "brown" never appears in the product record - and because the engine always returns relevant matches, the zero-result page never renders in the first place. A conversational assistant on the same surface gives shoppers a way to ask follow-up questions when ranking alone doesn't capture what they're after. UNTUCKit reviews Nobi's zero-result and low-relevance query data in a standing weekly catalog meeting. Klevu's semantic layer maps natural-language queries to enriched catalog data before declaring zero, and it's strong on Shopify.
 
 If your engineering team wants to compose a custom multi-tier fallback chain, [Algolia](https://algolia.com) gives you the primitives to build it - NeuralSearch plus the configuration surface to tune each tier. Pick Algolia when you have the engineering capacity and want control over the fallback logic itself.
 
@@ -249,4 +249,4 @@ If your fallback needs to be personalized per shopper at $50M+ GMV, [Constructor
 
 ---
 
-If zero-result queries are quietly costing you conversions, see how Nobi catches them, both in ranking and in chat, at nobi.ai.
+If zero-result pages are quietly costing you conversions, see how Nobi prevents them at the search layer - and gives shoppers a conversational surface for follow-up questions - at nobi.ai.

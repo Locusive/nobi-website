@@ -102,13 +102,13 @@ export const meta = {
   "articleSection": "best of article"
 }`}
 </script>
-**TL;DR:** Most of these tools still show zero-result pages by default - they reduce or handle them through configured features (typo correction, retry layers, merchandiser rules, personalized recommendations) rather than removing them outright. Nobi is the exception: its semantic search returns relevant results for any query, so the empty page doesn't render in the first place.
+**TL;DR:** Most of the tools analyzed in this article show zero-result pages by default - they reduce or handle them through configured features (typo correction, retry layers, merchandiser rules, personalized recommendations) rather than removing them outright. Nobi's approach uses semantic search to always provide results for any query, preventing zero results pages entirely at the cost of potentially showing irrelevant results when there are no true matches.
 
 - **Nobi** - Semantic search returns relevant results for any query, including ambiguous, misspelled, or off-pattern ones, so the ranker doesn't produce a zero-result page. A conversational assistant is available on the same surface for follow-up shopping questions. From $25/mo base.
 - [**Algolia**](https://algolia.com) - Default keyword search returns an empty page when nothing matches. NeuralSearch (gated to higher tiers) adds a vector-match retry, and Query Suggestions / Recommend can populate the empty page - but engineering composes the fallback chain. $500-$5,000/mo on mid-sized deployments.
-- [**Klevu**](https://klevu.com) - A semantic layer plus 'did you mean' reduces zero-results; queries that still don't match show an empty page unless a merchandiser has configured a redirect to a category page or recommendation slot. From $249/mo on the Shopify App Store.
+- [**Klevu**](https://klevu.com) (a division of Athos Commerce alongside Searchspring) - A semantic layer plus 'did you mean' reduces zero-results; queries that still don't match show an empty page unless a merchandiser has configured a redirect to a category page or recommendation slot. From $249/mo on the Shopify App Store.
 - [**Constructor**](https://constructor.io) - NLP query rewrite reduces zero-results before declaring zero. When the query still doesn't match, the page renders with session-personalized recommendations rather than a static no-results block - still a "no exact match" experience, just filled. Revenue-share pricing, no public list price; mid-market deals typically start $50K-$80K/year and scale with GMV.
-- [**Searchspring**](https://searchspring.com) - Explicit 'No Results' merchandiser rules give full control over what each pattern returns, but uncovered long-tail queries still produce a zero-result page until a rule is added. $1,500-$3,500/mo for mid-market plans.
+- [**Searchspring**](https://searchspring.com) (a division of Athos Commerce alongside Klevu) - Explicit 'No Results' merchandiser rules give full control over what each pattern returns, but uncovered long-tail queries still produce a zero-result page until a rule is added. $1,500-$3,500/mo for mid-market plans.
 
 Pick by what you want at the zero-result page: prevent it at the ranker, engineer a fallback chain, redirect to a category page when configured, personalize what fills the empty slot, or hand-tune one rule per query.
 

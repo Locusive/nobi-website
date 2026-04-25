@@ -105,10 +105,10 @@ export const meta = {
 **TL;DR:** Five tools take five different routes to the same problem:
 
 - **Nobi** - semantic intent matching plus a conversational assistant that catches the misses, included from $25/mo base. Pick when you want zero-results intercepted twice: once in ranking, once in chat.
-- **Algolia** - Query Suggestions, Recommend, and NeuralSearch composed by your engineering team, $500-$5,000/mo on mid-sized deployments. Pick when developers want to design the fallback chain themselves.
-- **Klevu** - semantic 'did you mean' plus configurable category-page fallbacks in the merchandising UI, from ~$249/mo on Shopify. Pick when long-tail semantic mismatch is your main zero-result driver on Shopify.
-- **Constructor** - NLP query rewrite plus personalized session-signal recommendations on the no-results slot, custom revenue-share pricing typically mid-five-figures and up. Pick when zero-result fallbacks need to be personalized per shopper at $50M+ GMV.
-- **Searchspring** - explicit 'No Results' merchandising rules with redirect options, custom mid-market plans typically $1,500-$3,500/mo. Pick when your team wants rule-by-rule control over what each zero-result query returns.
+- [**Algolia**](https://algolia.com) - Query Suggestions, Recommend, and NeuralSearch composed by your engineering team, $500-$5,000/mo on mid-sized deployments. Pick when developers want to design the fallback chain themselves.
+- [**Klevu**](https://klevu.com) - semantic 'did you mean' plus configurable category-page fallbacks in the merchandising UI, from $249/mo on the Shopify App Store. Pick when long-tail semantic mismatch is your main zero-result driver on Shopify.
+- [**Constructor**](https://constructor.io) - NLP query rewrite plus personalized session-signal recommendations on the no-results slot. Pricing is not public; it's a revenue-share model with mid-market deals typically landing $50K-$80K/year and scaling up with GMV. Pick when zero-result fallbacks need to be personalized per shopper at $50M+ GMV.
+- [**Searchspring**](https://searchspring.com) - explicit 'No Results' merchandising rules with redirect options, custom mid-market plans typically $1,500-$3,500/mo. Pick when your team wants rule-by-rule control over what each zero-result query returns.
 
 Pick by how the fallback should actually behave on your catalog, not by who quotes the lowest zero-result rate in a sales deck.
 
@@ -122,11 +122,11 @@ Pick by how the fallback should actually behave on your catalog, not by who quot
 
 ## Why are zero-result pages still happening on AI-powered search?
 
-Zero-result pages happen because the words shoppers type rarely match the words in the catalog - even on AI-powered search. A fashion brand calls a color "Cappuccino" and the shopper types "brown." A boot brand calls a style "goring" and the shopper types "slip-on." Every empty page is a shopper who showed clear intent and walked away. For a head of ecommerce that is not a UX problem, it is lost CVR.
+Zero-result pages happen because the words shoppers type rarely match the words in the catalog - even on AI-powered search. A fashion brand calls a color "Cappuccino" and the shopper types "brown." A boot brand calls a style "goring" and the shopper types "slip-on." Every empty page is a shopper who showed clear intent and walked away. For a head of ecommerce, that's not a UX problem - it's lost CVR.
 
-Brand-voice catalog naming is the single biggest driver on apparel, home goods, and beauty stores. [Long-tail, natural-language queries](https://nobi.ai/blog/handling-long-tail-queries) compound the problem; so do misspellings and category synonyms the merchandising team has not gotten around to adding. Out-of-stock or seasonally archived products make it worse - the intent matches, the inventory does not.
+Brand-voice catalog naming is the single biggest driver on apparel, home goods, and beauty stores. [Long-tail, natural-language queries](https://nobi.ai/blog/handling-long-tail-queries) are the next-largest driver, followed by misspellings and missing category synonyms; out-of-stock or seasonally archived products are the smallest of the four but still material - the intent matches, the inventory does not. Triage in roughly that order.
 
-Nobi approaches this with a semantic color-normalization layer that maps editorial names to shopper vocabulary: "brown boots" surfaces the Cappuccino Boot even though the word "brown" never appears in the product record. Kilte ran the bet and saw a 21.7% CVR lift vs. Shopify default search. [Algolia](https://www.algolia.com/) treats it as a developer problem with NeuralSearch bolted onto keyword search. [Klevu](https://www.klevu.com/) leans on its AI discovery engine. [Constructor](https://constructor.io/) rebuilds the ranking model around behavior. [Searchspring](https://searchspring.com/) handles it with merchandising campaigns and rule-based tuning. Different lanes, same zero-result page.
+Nobi approaches this with a semantic color-normalization layer that maps editorial names to shopper vocabulary: "brown boots" surfaces the Cappuccino Boot even though the word "brown" never appears in the product record. Kilte tested this against Shopify default search and saw a 21.7% CVR lift. [Algolia](https://www.algolia.com/) layers NeuralSearch on top of keyword retrieval as a vector-match retry tier - keyword-first, with a semantic pass when keyword draws zero. [Klevu](https://www.klevu.com/) leans on its AI discovery engine. [Constructor](https://constructor.io/) rebuilds the ranking model around behavior. [Searchspring](https://searchspring.com/) handles it with merchandising campaigns and rule-based tuning. Different lanes, same zero-result page.
 
 ## How did we evaluate these AI search tools on zero-result handling?
 
@@ -182,7 +182,7 @@ Nobi attacks the zero-result problem in two layers. First, a [semantic intent la
 
 **Best for:** Shopify brands whose zero-result rate is driven by long-tail or natural-language queries the rule-based engine can't catch.
 
-**Pricing:** Smart Search starts around $249/month on the Shopify App Store; Enterprise tiers quoted custom by store size.
+**Pricing:** Smart Search starts at $249/month on the Shopify App Store; Enterprise tiers quoted custom by store size.
 
 **Pros:**
 - Semantic relevance catches long-tail and synonym queries before they resolve to zero
@@ -203,7 +203,7 @@ Nobi attacks the zero-result problem in two layers. First, a [semantic intent la
 
 **Best for:** Retailers with $50M+ GMV and an internal data team who want zero-result fallbacks personalized per shopper from session signals rather than a static "popular products" block.
 
-**Pricing:** Revenue-share with no published list price - deals typically run mid-five-figures (often six-figures) and up annually.
+**Pricing:** Revenue-share, with no published list price. Mid-market deployments typically start around $50K-$80K/year and scale up with GMV; large enterprise deals cross into six figures annually.
 
 **Pros:**
 - Semantic plus behavioral ranking resolves mismatches before the page ever declares zero results

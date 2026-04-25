@@ -2,21 +2,17 @@ import React from "react";
 import Header from "./Header";
 import Footer from "./Footer";
 import { formatPostDate } from "../content/utils/mdxPostLoader";
+import authors from "../content/authors.json";
 
 export default function ArticleLayout({ meta, children }) {
-  const {
-    title,
-    date,
-    author,
-    authorTitle,
-    authorBio,
-    authorPhoto,
-    authorLinkedIn,
-    tags = [],
-    heroImage,
-  } = meta || {};
+  const { title, date, author, tags = [], heroImage } = meta || {};
   const formattedDate = formatPostDate(date);
-  const hasRichByline = author && (authorPhoto || authorBio || authorLinkedIn || authorTitle);
+
+  // Single source of truth: look up rich byline (bio, photo, LinkedIn,
+  // title) in authors.json by the article's author name. To update a
+  // bio across every article, edit src/content/authors.json once.
+  const profile = author ? authors[author] : null;
+  const hasRichByline = !!(profile && (profile.photo || profile.bio || profile.linkedin || profile.title));
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-white to-slate-50 dark:from-[#0a0a0a] dark:to-black text-black dark:text-white">
@@ -54,24 +50,24 @@ export default function ArticleLayout({ meta, children }) {
 
         {hasRichByline && (
           <div className="not-prose mb-10 flex items-start gap-4 rounded-2xl border border-black/5 dark:border-white/10 bg-black/[.02] dark:bg-white/[.03] p-4">
-            {authorPhoto && (
+            {profile.photo && (
               <img
-                src={authorPhoto}
-                alt={author || ""}
+                src={profile.photo}
+                alt={profile.name || ""}
                 className="h-14 w-14 rounded-full object-cover border border-black/10 dark:border-white/10 flex-shrink-0"
                 loading="lazy"
               />
             )}
             <div className="text-sm text-black/80 dark:text-white/80">
               <div className="font-semibold text-black dark:text-white">
-                {authorLinkedIn ? (
-                  <a href={authorLinkedIn} target="_blank" rel="noopener" className="no-underline hover:underline">
-                    {author}
+                {profile.linkedin ? (
+                  <a href={profile.linkedin} target="_blank" rel="noopener" className="no-underline hover:underline">
+                    {profile.name}
                   </a>
-                ) : author}
-                {authorTitle && <span className="font-normal text-black/60 dark:text-white/60"> — {authorTitle}</span>}
+                ) : profile.name}
+                {profile.title && <span className="font-normal text-black/60 dark:text-white/60"> — {profile.title}</span>}
               </div>
-              {authorBio && <p className="mt-1 text-black/70 dark:text-white/70 leading-snug">{authorBio}</p>}
+              {profile.bio && <p className="mt-1 text-black/70 dark:text-white/70 leading-snug">{profile.bio}</p>}
             </div>
           </div>
         )}

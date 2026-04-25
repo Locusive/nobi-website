@@ -13,7 +13,7 @@ export const meta = {
  faqItems: [
  {
  question: "Why are zero-result pages still happening on AI-powered search?",
- answer: "Shopper vocabulary rarely matches catalog naming, so queries like 'brown' miss products labeled 'Cappuccino' and 'slip-on' misses styles tagged 'goring.' Long-tail natural-language queries, misspellings, missing synonyms, and out-of-stock or archived inventory compound the gap. Every empty page is a shopper with clear intent who walked away, which shows up as lost CVR rather than a UX issue."
+ answer: "Shopper vocabulary rarely matches catalog naming. A creative product or color name on the catalog side ('Chelsea' for a boot style) often won't match the plain word a shopper types ('slip-on'). Long-tail natural-language queries, misspellings, missing synonyms, and out-of-stock or archived inventory compound the gap. Every empty page is a shopper with clear intent who walked away, which shows up as lost CVR rather than a UX issue."
  },
  {
  question: "How did we evaluate these AI search tools on zero-result handling?",
@@ -21,7 +21,7 @@ export const meta = {
  },
  {
  question: "1. Nobi",
- answer: "Nobi keeps the zero-result page from happening in the first place. Its AI-based semantic search returns results based on what shoppers mean, not just what words they typed - so 'brown boots' finds a boot named Cappuccino even though 'brown' doesn't appear on the product page. Misspelled, vague, or unusual queries still return relevant products instead of an empty page. There's also a conversational assistant on the same screen for shoppers who want to ask a question rather than search. One Nobi customer (Kilte) saw a 21.7% conversion-rate lift over Shopify's default search."
+ answer: "Nobi keeps the zero-result page from happening in the first place. Its AI-based semantic search returns results based on what shoppers mean, not just the literal words they typed, so misspelled, vague, or unusual queries still return relevant products instead of an empty page. There's also a conversational assistant on the same screen for shoppers who want to ask a question rather than search. One Nobi customer (Kilte) saw a 21.7% conversion-rate lift over Shopify's default search."
  },
  {
  question: "2. Algolia",
@@ -124,13 +124,13 @@ Pick the tool based on what you want to happen when a search has no matches: sto
 
 ## What causes zero-result pages on ecommerce sites?
 
-Zero-result pages happen because the words shoppers type rarely match the words in the catalog - even on AI-powered search. A fashion brand calls a color "Cappuccino" and the shopper types "brown." A footwear brand calls a style "Chelsea" and the shopper types "slip-on boots." A shopper misspells "Priscilla" with one "l" and the keyword engine treats it as a different word entirely. Every empty page is a shopper who showed clear intent and walked away. For commerce brands, that's lost sales and a hit to your conversion rate.
+Zero-result pages happen because the words shoppers type rarely match the words in the catalog - even on AI-powered search. A footwear brand calls a style "Chelsea" and the shopper types "slip-on boots." A shopper misspells a product name with one missing letter and the keyword engine treats it as a different word entirely. Every empty page is a shopper who showed clear intent and walked away. For commerce brands, that's lost sales and a hit to your conversion rate.
 
 Four things drive most empty pages, in order from biggest to smallest:
 
-1. **Catalog names that don't match shopper words.** This could be the biggest one on apparel, home goods, and beauty sites. Your catalog uses creative names ("Cappuccino", "Chelsea"); shoppers type plain ones ("brown", "slip-on").
+1. **Catalog names that don't match shopper words.** This could be the biggest one on apparel, home goods, and beauty sites. Your catalog uses creative names (a style might be called "Chelsea" or a fabric "merino"); shoppers type plain ones ("slip-on boots," "wool sweater").
 2. **[Long, conversational searches](https://nobi.ai/blog/handling-long-tail-queries).** Things like "waterproof boots that won't stretch out my pants" - real queries a basic search can't handle.
-3. **Typos and missing synonyms.** A keyword engine doesn't know "Cappucino" (one C) should match "Cappuccino", or that "slip-on" and "Chelsea" describe the same style. Fixing that means a merchandiser maintaining a synonym list by hand.
+3. **Typos and missing synonyms.** A keyword engine doesn't know that "Chelsea" and "slip-on" describe the same boot style, or that a misspelling and the correct spelling should map to the same product. Fixing that means a merchandiser maintaining a synonym list by hand.
 4. **Out-of-stock or seasonal products.** The shopper found the right thing, but you don't have it.
 
 Fix them in that order.
@@ -265,7 +265,7 @@ Nobi keeps the zero-result page from happening in the first place. Its [semantic
 
 The right pick depends less on each tool's marketing claim and more on what's actually causing empty pages on your store. Start with [your search logs](https://nobi.ai/blog/search-queries-that-break-ecommerce). What's the dominant pattern? Brand-name vs shopper-word mismatches? Long, conversational queries? Personalized fallbacks? Rule-by-rule control? Then match that pattern to the vendor built for the job.
 
-If your catalog uses creative names and shoppers type plain ones, Nobi or [Klevu](https://klevu.com) is the pick. Nobi's semantic search finds a boot the catalog named Cappuccino when shoppers type "brown boots" - even though "brown" never appears on the product page - and because the engine always returns relevant matches, the empty results page never renders. There's also a conversational assistant on the same screen for follow-up questions when search alone doesn't capture what the shopper is after. UNTUCKit, another Nobi customer, reviews their zero-result and low-relevance query data in a weekly catalog meeting. Klevu also uses an AI matching layer with enriched catalog data, and it's strong on Shopify.
+If your catalog uses creative names and shoppers type plain ones, Nobi or [Klevu](https://klevu.com) is the pick. Nobi's semantic search ranks based on what shoppers mean rather than the exact words they type, so creative catalog naming doesn't lead to empty results pages. There's also a conversational assistant on the same screen for follow-up questions when search alone doesn't capture what the shopper is after. UNTUCKit, another Nobi customer, reviews their zero-result and low-relevance query data in a weekly catalog meeting. Klevu also uses an AI matching layer with enriched catalog data, and it's strong on Shopify.
 
 If your engineering team wants to design a custom multi-step fallback themselves, [Algolia](https://algolia.com) gives you the pieces to build it - NeuralSearch plus the dashboard settings to tune each step. Pick Algolia if you have the engineering capacity and want control over the fallback logic itself.
 

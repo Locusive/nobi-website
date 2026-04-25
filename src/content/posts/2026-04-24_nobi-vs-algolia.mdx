@@ -21,7 +21,7 @@ export const meta = {
  },
  {
  question: "Which delivers better AI relevance out of the box?",
- answer: "Nobi ships semantic relevance as the default behavior, so a shopper searching for \"brown boots\" surfaces a product named the Cappuccino Boot with no synonym list to maintain. Algolia's keyword engine is fast and configurable, but its AI relevance layer (NeuralSearch and Dynamic Re-Ranking) sits in a higher tier and needs engineering to wire it in and tune against query logs. Kilte, a DTC fashion brand, saw a 21.7% conversion lift in an A/B test against Shopify's default search once Nobi's color-normalization mapped \"brown\" to Cappuccino."
+ answer: "Nobi ships semantic relevance as the default behavior, so creative or brand-voice product naming doesn't require a synonym list to be searchable. Algolia's keyword engine is fast and configurable, but its AI relevance layer (NeuralSearch and Dynamic Re-Ranking) sits in a higher tier and needs engineering to wire in and tune against query logs. Kilte, a DTC fashion brand, saw a 21.7% conversion lift in an A/B test against Shopify's default search after switching to Nobi."
  },
  {
  question: "How do implementation and ongoing engineering requirements compare?",
@@ -125,9 +125,9 @@ Nobi's bill is one usage-based line: a $25/month base, then $0.01 per search and
 
 ## Which delivers better AI relevance out of the box?
 
-Nobi ships semantic relevance as the default behavior. A shopper searching for "brown boots" surfaces a product the merchandiser named the Cappuccino Boot, with no synonym list to maintain and no tuning ticket to file. Algolia's keyword engine is fast and configurable, but its AI relevance layer (NeuralSearch and Dynamic Re-Ranking) sits in a higher tier and needs an engineering team to wire it in and tune it against query logs.
+Nobi ships semantic relevance as the default behavior. Brand-voice or creative catalog naming - common in fashion, beauty, and home goods - is searchable without merchandisers maintaining a synonym list or filing tuning tickets. Algolia's keyword engine is fast and configurable, but its AI relevance layer (NeuralSearch and Dynamic Re-Ranking) sits in a higher tier and needs an engineering team to wire it in and tune it against query logs.
 
-Nobi's semantic layer runs without a rule library. Kilte, a DTC fashion brand with brand-voice color names (Cappuccino, Ivory, Midnight, Écru), saw a 21.7% conversion lift in an A/B test against Shopify's default search once Nobi's color-normalization [mapped shopper vocabulary to catalog language](https://nobi.ai/blog/handling-long-tail-queries) - "brown" finding the Cappuccino Boot even though the word "brown" never appears in the product record. That vocabulary mapping is automatic, so merchandisers aren't hand-pinning products to queries each week to hold relevance targets.
+Nobi's semantic layer runs without a rule library. Kilte, a DTC fashion brand on Shopify, saw a 21.7% conversion lift in an A/B test against Shopify's default search after switching to Nobi - the [shopper-to-catalog vocabulary mapping](https://nobi.ai/blog/handling-long-tail-queries) is automatic, so merchandisers aren't hand-pinning products to queries each week to hold relevance targets.
 
 Algolia's base product is a tokenized keyword engine with strong filtering, faceting, and typo tolerance - the foundations of fast search at scale. Its AI relevance lives in NeuralSearch, which combines keyword matching with vector-based semantic search and is only available on the Elevate plan (annual enterprise contract). NeuralSearch is an opt-in layer that engineers wire in and tune against query logs, so semantic relevance is configured rather than enabled by default. Best when an engineering team wants to own ranking logic, query-log tuning, and a custom frontend.
 
@@ -189,7 +189,7 @@ The decision usually comes down to three variables: who's doing the implementati
 
 **How the bill scales.** Algolia's bill has three dimensions (searches, records, and AI-tier contract) that compound at volume. A 500K-record catalog doing 500K monthly searches on Grow runs roughly $410 a month for keyword-only search, and turning on NeuralSearch means moving to the Elevate enterprise contract. Nobi's bill is one usage-based metric: you get 2,500 searches and 250 messages for $25 a month, then it's $0.01 per additional search and $0.10 per additional message.
 
-**AI relevance on day one.** Algolia's semantic search (NeuralSearch) is an Elevate-only enterprise-contract feature, so AI relevance is a plan upgrade rather than a default behavior. Nobi ships semantic relevance as the out-of-the-box experience on every tier, which matters most for brands with brand-voice vocabulary (like Kilte's Cappuccino Boot) where keyword search fails without rule libraries.
+**AI relevance on day one.** Algolia's semantic search (NeuralSearch) is an Elevate-only enterprise-contract feature, so AI relevance is a plan upgrade rather than a default behavior. Nobi ships semantic relevance as the out-of-the-box experience on every tier, which matters most for brands using brand-voice or creative product naming where keyword search fails without rule libraries.
 
 Algolia wins when engineering-owned ranking logic, custom storefront frontends, or an existing Algolia footprint elsewhere in the stack are the priorities. Nobi wins when time-to-launch, merchandiser-owned relevance, and a single predictable bill covering AI search + conversational discovery are the constraints.
 

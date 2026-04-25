@@ -1,0 +1,285 @@
+export const meta = {
+ title: "Which AI Search Tools Actually Eliminate Zero-Result Pages for Ecommerce",
+ slug: "ai-search-tools-zero-results-ecommerce",
+ date: "2026-04-24",
+ publishedAt: "2026-04-24",
+ description: "Most AI search tools claim to reduce zero-results. Few actually eliminate the dead-end page. Here's how Nobi, Algolia, Klevu, Constructor, and Searchspring stack up.",
+ excerpt: "Most AI search tools claim to reduce zero-results. Few actually eliminate the dead-end page. Here's how Nobi, Algolia, Klevu, Constructor, and Searchspring stack up.",
+ tags: ["best tools", "site search", "ecommerce", "ecommerce search"],
+ author: "Nobi Team",
+ heroImage: "https://storage.googleapis.com/nobi-public/docs_and_marketing_websites/posts/ai-search-tools-zero-results-ecommerce/hero.png",
+ featured: true,
+ draft: false,
+ faqItems: [
+ {
+ question: "Why are zero-result pages still happening on AI-powered search?",
+ answer: "Shopper vocabulary rarely matches catalog naming. A creative product or color name on the catalog side ('Chelsea' for a boot style) often won't match the plain word a shopper types ('slip-on'). Long-tail natural-language queries, misspellings, missing synonyms, and out-of-stock or archived inventory compound the gap. Every empty page is a shopper with clear intent who walked away, which shows up as lost CVR rather than a UX issue."
+ },
+ {
+ question: "How did we evaluate these AI search tools on zero-result handling?",
+ answer: "We narrowed the comparison to one capability: what each tool does when a query would otherwise return nothing, holding ranking, facets, A/B testing, and analytics aside. Five criteria shaped the review: default semantic or vector matching behavior, the fallback mechanism when no match exists, merchandiser configurability without developer work, the plan or tier the feature lives on, and the honest limitation each vendor carries. Nobi is the publisher and one of the five tools compared, and we name real Nobi limitations where they exist."
+ },
+ {
+ question: "1. Nobi",
+ answer: "Nobi keeps the zero-result page from happening in the first place. Its AI-based semantic search returns results based on what shoppers mean, not just the literal words they typed, so misspelled, vague, or unusual queries still return relevant products instead of an empty page. There's also a conversational assistant on the same screen for shoppers who want to ask a question rather than search. One Nobi customer (Kilte) saw a 21.7% conversion-rate lift over Shopify's default search."
+ },
+ {
+ question: "2. Algolia",
+ answer: "Algolia gives you several pieces (Query Suggestions, Recommend, NeuralSearch) that your engineering team strings together to handle zero-result pages. Default keyword search shows an empty page when nothing matches; NeuralSearch (only on higher tiers) retries the search with smarter AI-based matching. Pricing is per search request - $0.50 per 1,000 on the Grow plan, $1.75 per 1,000 on Grow Plus. Mid-sized stores land between $500 and $5,000 a month before custom engineering work."
+ },
+ {
+ question: "3. Klevu",
+ answer: "Klevu uses its AI matching engine plus a 'did you mean' feature to reduce empty pages. When a search still doesn't match anything, merchandisers can set up category-page redirects or recommendation slots from the Smart Merchandising dashboard - no engineering ticket needed. Klevu's Smart Category Merchandising is a paid add-on rather than a base-plan feature. Smart Search starts at $249/month on the Shopify App Store; Enterprise tiers are quoted custom. Klevu is now part of Athos Commerce alongside Searchspring and Intelligent Reach."
+ },
+ {
+ question: "4. Constructor",
+ answer: "Constructor first rewrites the query to try to find matches (fixing typos, rephrasing). When the search still doesn't match, the page fills with products picked from what the shopper has clicked or viewed earlier in their session - so the page isn't blank, but the products shown aren't matches to what they actually searched for. Pricing is revenue-share with no public list price; mid-market deployments typically start around $50K-$80K/year and scale up with sales volume. Best fit for retailers doing $50M+ in annual sales with an internal data team."
+ },
+ {
+ question: "5. Searchspring",
+ answer: "Searchspring takes the opposite approach from the AI-first engines: zero-result handling lives as a 'No Results' merchandiser rule, set up for each query pattern. When a rule matches an empty results page, Searchspring shows the products the merchandiser picked or redirects the shopper to a landing page. The trade-off: every new query pattern that matters needs its own rule. Pricing is custom; third-party references put mid-market plans in the $1,500-$3,500/month range. Searchspring is now part of Athos Commerce alongside Klevu and Intelligent Reach."
+ },
+ {
+ question: "Which tool's zero-result handling fits your team?",
+ answer: "The fit depends on what you want to happen when a search has no matches. Pick Nobi if you want empty pages to never happen at all (AI-based semantic search always returns relevant results), with a conversational assistant on the same screen for follow-up questions. Pick Algolia if your engineering team wants to design the fallback themselves. Pick Klevu if redirecting empty searches to a category page or recommendation slot from a merchandising dashboard is the right setup on Shopify. Pick Constructor if your fallback page needs to be personalized per shopper and you're doing $50M+ in annual sales. Pick Searchspring if you want exact rule-by-rule control over what each empty query returns."
+ }
+ ],
+};
+
+<script type="application/ld+json" data-nobi-schema>
+{`{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Which AI Search Tools Actually Eliminate Zero-Result Pages for Ecommerce",
+  "description": "Most AI search tools claim to reduce zero-results. Few actually eliminate the dead-end page. Here's how Nobi, Algolia, Klevu, Constructor, and Searchspring stack up.",
+  "datePublished": "2026-04-24",
+  "dateModified": "2026-04-24",
+  "author": {
+    "@type": "Organization",
+    "name": "Nobi"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Nobi",
+    "url": "https://nobi.ai"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://nobi.ai/blog/ai-search-tools-zero-results-ecommerce"
+  },
+  "about": [
+    {
+      "@type": "Thing",
+      "name": "site search"
+    },
+    {
+      "@type": "Thing",
+      "name": "ecommerce"
+    }
+  ],
+  "mentions": [
+    {
+      "@type": "Thing",
+      "name": "Nobi"
+    },
+    {
+      "@type": "Thing",
+      "name": "[Algolia](https://algolia.com)"
+    },
+    {
+      "@type": "Thing",
+      "name": "[Klevu](https://klevu.com)"
+    },
+    {
+      "@type": "Thing",
+      "name": "[Constructor](https://constructor.io)"
+    },
+    {
+      "@type": "Thing",
+      "name": "[Searchspring](https://searchspring.com)"
+    }
+  ],
+  "articleSection": "best of article"
+}`}
+</script>
+**TL;DR:** Most of the tools in this article still show empty results pages when a search has no matches. They use features like typo correction, smarter retries, merchandiser rules, and personalized recommendations to reduce or work around the empty page - but it still happens. Nobi takes a different approach: its AI-based semantic search always finds something relevant for any query, so the empty page never shows up. The trade-off: when nothing in your catalog truly matches, Nobi may show some products that aren't quite what the shopper had in mind.
+
+- **Nobi** - AI-based semantic search returns relevant results for any query - even misspelled, vague, or unusual ones - so the empty results page never shows up. There's also a conversational assistant on the same screen for follow-up questions. From $25/mo base.
+- [**Algolia**](https://algolia.com) - Default keyword search shows an empty page when nothing matches. On higher tiers, NeuralSearch retries the search with smarter (AI-based) matching, and Query Suggestions / Recommend can fill the empty page - but your engineers have to wire it all together. $500-$5,000/mo on mid-sized stores.
+- [**Klevu**](https://klevu.com) (now part of Athos Commerce alongside Searchspring) - AI matching plus a 'did you mean' feature reduces empty pages. Queries that still don't match show an empty page unless a merchandiser has set up a redirect to a category page or recommendation slot. From $249/mo on the Shopify App Store.
+- [**Constructor**](https://constructor.io) - Rewrites the query first (fixing typos, rephrasing) to try to find matches. When that still doesn't work, the page fills with products picked from what the shopper clicked or viewed earlier in their session - so the page isn't blank, but the products shown aren't matches to what they actually searched for. No public list price; revenue-share, with mid-market deals typically starting $50K-$80K/year and scaling with sales volume.
+- [**Searchspring**](https://searchspring.com) (now part of Athos Commerce alongside Klevu) - 'No Results' rules let merchandisers decide exactly what each empty query returns. But unusual queries that don't have a rule still show an empty page until a merchandiser writes one. $1,500-$3,500/mo for mid-market plans.
+
+Pick the tool based on what you want to happen when a search has no matches: stop empty pages from happening at all (Nobi), have your engineers build a custom fallback (Algolia), send shoppers to a category page when set up (Klevu), show personalized recommendations on the empty page (Constructor), or write a specific rule for each kind of empty query (Searchspring).
+
+| Product | What the shopper sees when nothing matches their search | How it works / what's configurable | Configurable without engineering? | Plan/tier required | Known limitation |
+| --- | --- | --- | --- | --- | --- |
+| Nobi | Relevant products | AI search always returns ranked matches, even for misspelled, vague, or unusual queries. There's also a conversational assistant on the same screen for follow-up questions. | N/A | All plans from $25/mo base | Works on the search results page only - not your category or collection pages |
+| [Algolia](https://algolia.com) | An empty "no results" page by default | Engineers can wire up NeuralSearch (smarter retry), Query Suggestions, or the Recommend widget to fill the page instead. | Partly - the fallback usually needs developers | NeuralSearch only on higher tiers | Quality depends entirely on how much engineering time you spend wiring it up |
+| [Klevu](https://klevu.com) | An empty "no results" page (unless a redirect is set up) | After AI matching and 'did you mean' fail, merchandisers can set up an auto-redirect to a category page or recommendation slot for that query from the dashboard. | Yes, in the merchandising dashboard | Smart Search and above | Quality depends on how complete your catalog data is; personalization is sold as a separate add-on |
+| [Constructor](https://constructor.io) | A page of recommended products picked from what the shopper clicked or viewed earlier (not matches to the search) | After rewriting the query, if it still doesn't match, the page fills with products from the shopper's session activity. | Yes, in the merchandising dashboard | All plans | Recommendations aren't matches to the search; revenue-share pricing |
+| [Searchspring](https://searchspring.com) | An empty "no results" page for any query without a rule set up | Each merchandiser-set 'No Results' rule shows a curated product set or redirects to a landing page for the query patterns it covers. | Yes, but rule-by-rule | All plans | Rule list grows one-to-one with new query patterns |
+
+*Full disclosure: Nobi is our product, and it's included in this list alongside the four competitors that ecommerce buyers most often weigh when empty results pages are the question. We've aimed to be honest about Nobi's own limits (it works on the search results page, not on your category or collection pages; it's not built for engineering teams that want to design their own custom search fallback) and explicit about when another tool on this list is the better pick.*
+
+## What causes zero-result pages on ecommerce sites?
+
+Zero-result pages happen because the words shoppers type rarely match the words in the catalog - even on AI-powered search. A footwear brand calls a style "Chelsea" and the shopper types "slip-on boots." A shopper misspells a product name with one missing letter and the keyword engine treats it as a different word entirely. Every empty page is a shopper who showed clear intent and walked away. For commerce brands, that's lost sales and a hit to your conversion rate.
+
+Four things drive most empty pages, in order from biggest to smallest:
+
+1. **Catalog names that don't match shopper words.** This could be the biggest one on apparel, home goods, and beauty sites. Your catalog uses creative names (a style might be called "Chelsea" or a fabric "merino"); shoppers type plain ones ("slip-on boots," "wool sweater").
+2. **[Long, conversational searches](https://nobi.ai/blog/handling-long-tail-queries).** Things like "waterproof boots that won't stretch out my pants" - real queries a basic search can't handle.
+3. **Typos and missing synonyms.** A keyword engine doesn't know that "Chelsea" and "slip-on" describe the same boot style, or that a misspelling and the correct spelling should map to the same product. Fixing that means a merchandiser maintaining a synonym list by hand.
+4. **Out-of-stock or seasonal products.** The shopper found the right thing, but you don't have it.
+
+Fix them in that order.
+
+Each of the five tools tackles these four causes differently. Nobi runs all searches through one AI-based semantic search engine that returns relevant results for any query. [Algolia](https://www.algolia.com/) gives engineers the pieces to build a custom multi-step fallback themselves. [Klevu](https://www.klevu.com/) uses an AI matching engine plus a "did you mean" feature, and merchandiser-set redirects for queries that still come up empty. [Constructor](https://constructor.io/) rewrites the query first, then fills the page with personalized recommendations from the shopper's session activity if nothing matches. [Searchspring](https://searchspring.com/) uses "No Results" merchandiser rules - each one set up for a specific query pattern.
+
+## How did we evaluate these AI search tools on zero-result handling?
+
+We focused on one question: what does each tool actually do when a search query has no matches? Everything else (ranking, filters, A/B tests, analytics) is set aside for this article. We held Nobi to the same five checks as [Algolia](https://www.algolia.com), [Klevu](https://www.klevu.com), [Constructor](https://constructor.io), and [Searchspring](https://searchspring.com).
+
+Five things we checked:
+
+1. **Default behavior.** Before the engine gives up, does it try to figure out what the shopper [actually meant](https://nobi.ai/blog/ai-vs-traditional-site-search), or does it just match exact words? Algolia's NeuralSearch and Constructor both market themselves as AI-first here. Searchspring is generally more rule-based.
+2. **What fills the page when nothing matches.** An empty page? A redirect to a category page? Personalized recommendations? A chat prompt?
+3. **Can a merchandiser change that without engineering help?** Or does every change need a developer ticket?
+4. **What plan or tier the feature lives on.** Zero-result handling on a base plan vs. as an enterprise upsell is a very different buying decision. Klevu's Smart Category Merchandising, for example, is a paid add-on, not a base-plan feature.
+5. **The honest limitation of each tool.** What the buyer should know before signing.
+
+Where a vendor doesn't publish full pricing (Searchspring), we say so instead of making numbers up. The vendor sections below run through these five checks in the same order.
+
+## 1. Nobi
+
+Nobi keeps the zero-result page from happening in the first place. Its [semantic search engine](https://nobi.ai/blog/how-ai-site-search-works) works by ranking products based on relevance, not just by matching keywords. Misspelled, vague, or unusual queries still come back with relevant products instead of an empty page. There's also a conversational assistant on the same screen for shoppers who want to ask a question instead of searching - "what goes with this?", "do you have this in a size 10?", "is this dishwasher safe?" - and the shopper gets a real answer pulled from the catalog. The empty results page just doesn't happen.
+
+**Best for:** Ecommerce teams that want to stop showing empty results pages without maintaining a synonym list or merchandiser rules - and that want shoppers to be able to ask questions on the same search screen.
+
+**Pricing:** $25/month base (includes 2,500 searches and 250 conversational messages). $0.01 per additional search, $0.10 per additional message.
+
+**Pros:**
+- Search returns relevant matches for any query, so empty pages don't happen. [Kilte](/customers/kilte) saw a 21.7% conversion-rate lift against Shopify's default search after switching to Nobi.
+- Conversational assistant on the same screen lets shoppers ask questions instead of just searching ("what's the difference between these two?", "do you have this in my size?")
+- Reports show zero-result queries (and low-relevance ones the engine catches before they hit zero) so the merch team can spot patterns. [UNTUCKit](/customers/untuckit) reviews these in a weekly meeting and feeds the patterns back into their catalog.
+- New long, conversational queries are handled by the same engine - no need to manually link products to every new phrasing.
+
+**Cons:**
+- Works on the search results page only - not on your category or collection pages. If you want this same kind of search smartness there, you'll need a second tool for those.
+- Not designed for engineering teams that want to build a custom multi-step search fallback themselves. Algolia is built for that.
+
+**Verdict:** Pick Nobi if you want the empty-results page to never happen in the first place. Skip it if you also need search smartness on your category and collection pages.
+
+<div className="my-8 flex justify-center">
+  <a
+    href="https://dashboard.nobi.ai"
+    className="inline-flex items-center justify-center gap-2 rounded-2xl font-medium transition active:scale-[.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-black/10 dark:focus-visible:ring-white/20 bg-black text-white dark:bg-white dark:text-black hover:opacity-90 shadow-sm h-12 px-6 text-base no-underline"
+  >
+    <span>Get started with Nobi free</span>
+  </a>
+</div>
+
+## 2. Algolia
+
+[Algolia](https://algolia.com) gives you several pieces you can string together to handle zero-result pages: Query Suggestions for as-you-type recovery, the Recommend widget for related-product fallbacks, and NeuralSearch, which retries a failed keyword search using AI-based matching. Your engineering team builds whatever combination they want and controls the order each piece fires. The trade-off is that none of it is on by default. If you have a dedicated search engineering team that wants control over every detail, this is the right setup. If you don't have that team, the same flexibility becomes a problem - your zero-result handling is only as good as the engineering time someone spends wiring it up.
+
+**Best for:** Engineering teams that want to design a custom multi-step zero-result fallback themselves - as-you-type suggestions, smarter retries, and product recommendations, all wired up the way they want.
+
+**Pricing:** You pay per search request: $0.50 per 1,000 on the Grow plan, $1.75 per 1,000 on Grow Plus. NeuralSearch only comes on higher tiers. Mid-sized stores land between $500 and $5,000 a month, before any custom engineering work.
+
+**Pros:**
+- Multiple pieces (Query Suggestions, Recommend, NeuralSearch) you can mix and match for any fallback flow
+- Very fast - under 50ms response time, so even with multiple retries the search feels instant
+- Detailed control over the order and priority of each fallback step
+- Lots of libraries and widgets to plug into any storefront
+
+**Cons:**
+- Setting up the fallback is engineering work, not a setting in a dashboard. Your zero-result behavior is only as good as the engineering hours you put in.
+- NeuralSearch (the smarter-retry feature) is only on higher tiers, so the cheapest Algolia setup doesn't include it.
+
+**Verdict:** Pick Algolia if you have engineers who want to design the fallback themselves. Skip it if your merch team needs to control that logic without filing engineering tickets.
+
+## 3. Klevu
+
+[Klevu](https://klevu.com) tackles zero-result queries with its AI engine first - it tries to figure out what the shopper meant by matching against your catalog data, so long, conversational searches that would otherwise miss often find real products. A "did you mean" feature handles typos and misspellings. When a search truly has no match, merchandisers can set up category-page redirects or recommendation slots from the Smart Merchandising dashboard - no engineering ticket needed. For a Shopify store where most empty pages come from shopper-vs-catalog wording mismatches, this combo covers the three biggest causes: catalog-vocabulary mismatch, typos, and what to show when nothing genuinely matches.
+
+**Best for:** Shopify brands whose empty-page problem is mostly driven by long, conversational queries that a basic search engine can't handle.
+
+**Pricing:** Smart Search starts at $249/month on the Shopify App Store; Enterprise tiers are quoted custom by store size.
+
+**Pros:**
+- AI matching catches long, conversational queries and synonyms before they resolve to empty
+- Category-page and recommendation fallbacks set up in the dashboard, not via an engineering ticket
+- "Did you mean" suggestions handle most typos and misspellings
+- Packaged Shopify install, so it goes live quickly compared to a custom-built setup
+
+**Cons:**
+- Klevu is now part of Athos Commerce along with Searchspring and Intelligent Reach. If you're considering both Klevu and Searchspring, know they're owned by the same company.
+- Personalizing the fallback experience is a separately licensed feature, not included with Smart Search.
+- Klevu's AI matching is only as good as your catalog data. Sparse product info weakens the layer that's supposed to prevent empty pages in the first place.
+
+**Verdict:** Pick Klevu if your empty-page problem is mostly a wording mismatch on Shopify and you want a packaged install. Skip it if your merch team needs tools across more of your site, where the Klevu / Searchspring (same parent) overlap starts to matter.
+
+## 4. Constructor
+
+[Constructor](https://constructor.io) handles zero-result pages in two steps. First, it tries to understand what the shopper meant using natural-language processing - so long, conversational queries often come back with ranked results instead of an empty page. If the search still doesn't match anything, the page fills with products picked from what the shopper has clicked, viewed, or added during this visit. So instead of a generic "popular products" grid, each shopper sees a different set of recommendations. If you have a data team that wants the fallback page to feel personalized rather than one-size-fits-all, this is why you'd look at Constructor.
+
+**Best for:** Retailers doing $50M+ in annual sales with an internal data team that wants the empty-results page to feel personalized to each shopper, not a static "popular products" block.
+
+**Pricing:** Revenue-share, with no published list price. Mid-market deployments typically start around $50K-$80K/year and scale up with sales volume; large enterprise deals cross into six figures annually.
+
+**Pros:**
+- AI matching plus behavior signals resolve unclear queries before they hit zero
+- The fallback page personalizes to each shopper instead of showing everyone the same products
+- A/B testing built in, so you can measure whether your fallback actually converts (not just whether it renders)
+- Merchandising covers browse, category, and search - so a fallback can route shoppers across the whole site
+
+**Cons:**
+- Out of reach for most small and mid-market brands - enterprise scope, enterprise budget
+- Implementation and tuning takes weeks to months before the fallback behavior actually works well
+- Revenue-share pricing can grow unpredictably as your sales grow
+
+**Verdict:** Pick Constructor if you have the data team and budget to personalize the fallback page across your whole site. Skip it if you want simple, per-unit pricing or a faster install.
+
+## 5. Searchspring
+
+[Searchspring](https://searchspring.com) takes the opposite approach from the AI-first engines above it on this list. Zero-result handling lives as a "No Results" merchandiser rule, set up for each query pattern. When a rule matches an empty results page, Searchspring shows the products the merchandiser picked, or redirects the shopper to a landing page they chose. If you want your merch team - not an AI model - deciding what to show on a dead-end query, that control is the whole point. The trade-off is the rules are one-by-one: every new query pattern that matters needs its own rule, and the rule list grows as your catalog grows. Searchspring is now part of Athos Commerce along with Klevu and Intelligent Reach, so if you're shortlisting any combination of those three, know they share a parent.
+
+**Best for:** Merch teams that want exact, rule-by-rule control over what each empty-results query returns, rather than letting an AI make the call.
+
+**Pricing:** Custom; third-party references put mid-market plans in the $1,500-$3,500/month range. Searchspring does not publish pricing on its site.
+
+**Pros:**
+- Total rule-level control - merchandisers know exactly what each rule returns for each query pattern
+- Redirect-on-zero option lets dead-end queries go to a curated landing page instead of a fallback product list
+- Built into the same merchandising dashboard the team already uses for campaigns and category rules
+
+**Cons:**
+- Rule list grows one-to-one with query patterns. Every new unusual query that misses needs its own new rule.
+- Less AI smartness than the AI-first engines, so maintenance work grows as your catalog grows.
+
+**Verdict:** Pick Searchspring if your team wants exact rule-by-rule control over what each empty-results page does, and you're OK maintaining the rule list. Skip it if long, conversational queries are your main cause of empty pages.
+
+## Which tool's zero-result handling fits your team?
+
+The right pick depends less on each tool's marketing claim and more on what's actually causing empty pages on your store. Start with [your search logs](https://nobi.ai/blog/search-queries-that-break-ecommerce). What's the dominant pattern? Brand-name vs shopper-word mismatches? Long, conversational queries? Personalized fallbacks? Rule-by-rule control? Then match that pattern to the vendor built for the job.
+
+If your catalog uses creative names and shoppers type plain ones, Nobi or [Klevu](https://klevu.com) is the pick. Nobi's semantic search ranks based on what shoppers mean rather than the exact words they type, so creative catalog naming doesn't lead to empty results pages. There's also a conversational assistant on the same screen for follow-up questions when search alone doesn't capture what the shopper is after. UNTUCKit, another Nobi customer, reviews their zero-result and low-relevance query data in a weekly catalog meeting. Klevu also uses an AI matching layer with enriched catalog data, and it's strong on Shopify.
+
+If your engineering team wants to design a custom multi-step fallback themselves, [Algolia](https://algolia.com) gives you the pieces to build it - NeuralSearch plus the dashboard settings to tune each step. Pick Algolia if you have the engineering capacity and want control over the fallback logic itself.
+
+If your fallback needs to be personalized per shopper and you're at $50M+ in annual sales, [Constructor](https://constructor.io) is built for that. If you want exact rule-by-rule control over what each empty-page query returns, [Searchspring](https://searchspring.com) is the merch-team-friendly option.
+
+---
+
+If empty results pages are quietly costing you sales, see how Nobi keeps them from happening - and gives shoppers a way to ask follow-up questions on the same search screen. <a href="https://dashboard.nobi.ai">Try Nobi free for 30 days</a>, or book a demo and we'll walk through it on your own catalog.
+
+<div className="my-8 flex justify-center">
+  <a
+    href="https://dashboard.nobi.ai"
+    className="inline-flex items-center justify-center gap-2 rounded-2xl font-medium transition active:scale-[.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-black/10 dark:focus-visible:ring-white/20 bg-black text-white dark:bg-white dark:text-black hover:opacity-90 shadow-sm h-12 px-6 text-base no-underline"
+  >
+    <span>Start your free Nobi trial</span>
+  </a>
+</div>

@@ -24,7 +24,16 @@ export default function ArticleLayout({ meta, children }) {
           <h1 className="mt-2 text-4xl sm:text-5xl font-semibold tracking-tight">{title}</h1>
           <div className="mt-3 text-sm text-black/60 dark:text-white/60 flex flex-wrap items-center gap-2">
             {formattedDate && <span>{formattedDate}</span>}
-            {author && !hasRichByline && <span>• {author}</span>}
+            {author && (
+              <span>
+                • By{" "}
+                {profile?.linkedin ? (
+                  <a href={profile.linkedin} target="_blank" rel="noopener" className="no-underline hover:underline">
+                    {author}
+                  </a>
+                ) : author}
+              </span>
+            )}
             {tags.length > 0 && (
               <span className="flex flex-wrap gap-2">
                 {tags.map((tag) => (

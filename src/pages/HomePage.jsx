@@ -861,18 +861,18 @@ function Hero({ onOpenVideo, onOpenDemo, variant, setVariant }) {
 
           {/* CTAs */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3 max-w-xl mx-auto">
-            <button
-              onClick={onOpenDemo}
-              className="inline-flex items-center justify-center gap-2 rounded-2xl font-medium transition active:scale-[.98] bg-black text-white hover:opacity-90 shadow-sm h-12 px-6 text-base w-full sm:w-auto"
-            >
-              Get a demo
-            </button>
             <a
               href={getSignupUrl()}
-              className="inline-flex items-center justify-center gap-2 rounded-2xl font-medium transition active:scale-[.98] border border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/5 h-12 px-6 text-base w-full sm:w-auto hover:border-black/30 dark:hover:border-white/30"
+              className="inline-flex items-center justify-center gap-2 rounded-2xl font-medium transition active:scale-[.98] bg-black text-white hover:opacity-90 shadow-sm h-12 px-6 text-base w-full sm:w-auto"
             >
               Get started free
             </a>
+            <button
+              onClick={onOpenDemo}
+              className="inline-flex items-center justify-center gap-2 rounded-2xl font-medium transition active:scale-[.98] border border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/5 h-12 px-6 text-base w-full sm:w-auto hover:border-black/30 dark:hover:border-white/30"
+            >
+              Get a demo
+            </button>
           </div>
 
         </div>

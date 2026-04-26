@@ -1,14 +1,14 @@
 import React, { useState } from "react";
-import { BookOpen, ChevronDown, Menu, Search as SearchIcon, UserPlus, X, ExternalLink, Sparkles, Zap, BarChart2 } from "lucide-react";
+import { ChevronDown, LifeBuoy, Menu, Search as SearchIcon, UserPlus, X, ExternalLink, Sparkles, Zap, BarChart2 } from "lucide-react";
 import { useDemoForm } from "../context/DemoFormContext";
 import { trackDemoFormOpened } from "../utils/eventTracker";
 import { getSignupUrl } from "../utils/signupUrl";
 
 const FEATURES = [
-  { label: "Search",            href: "/why-nobi/better-search", desc: "Semantic search that understands natural language",  Icon: SearchIcon },
-  { label: "Lead capture",      href: "/lead-capture",           desc: "Collect contact info through conversation",          Icon: UserPlus },
-  { label: "Custom actions",    href: "/custom-actions",         desc: "Trigger any workflow from inside the chat",          Icon: Zap },
-  { label: "Accurate answers",  href: "/knowledge-base",         desc: "Answers from your docs, cited and verified",         Icon: BookOpen },
+  { label: "Better search",     href: "/why-nobi/better-search",      desc: "Semantic search that understands natural language",  Icon: SearchIcon },
+  { label: "Automated support", href: "/why-nobi/automated-support",  desc: "Answer repeat tickets before they hit your queue",   Icon: LifeBuoy },
+  { label: "Lead capture",      href: "/lead-capture",                desc: "Collect contact info through conversation",          Icon: UserPlus },
+  { label: "Custom actions",    href: "/custom-actions",              desc: "Trigger any workflow from inside the chat",          Icon: Zap },
 ];
 
 export default function Nav() {

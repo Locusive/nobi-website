@@ -1,4 +1,7 @@
 {
+  "redirects": [
+    { "source": "/knowledge-base", "destination": "/why-nobi/automated-support", "permanent": true }
+  ],
   "routes": [
     { "handle": "filesystem" },
     { "src": "/.*", "dest": "/index.html" }

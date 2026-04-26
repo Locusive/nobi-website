@@ -12,10 +12,10 @@ const BASE_URL   = "https://nobi.ai";
 // Static routes — priority and changefreq per page type
 const STATIC_PAGES = [
   { path: "/",                       priority: "1.0", changefreq: "weekly"  },
-  { path: "/why-nobi/better-search", priority: "0.8", changefreq: "monthly" },
-  { path: "/lead-capture",           priority: "0.8", changefreq: "monthly" },
-  { path: "/custom-actions",         priority: "0.8", changefreq: "monthly" },
-  { path: "/knowledge-base",         priority: "0.8", changefreq: "monthly" },
+  { path: "/why-nobi/better-search",     priority: "0.8", changefreq: "monthly" },
+  { path: "/why-nobi/automated-support", priority: "0.8", changefreq: "monthly" },
+  { path: "/lead-capture",               priority: "0.8", changefreq: "monthly" },
+  { path: "/custom-actions",             priority: "0.8", changefreq: "monthly" },
   { path: "/pricing",                priority: "0.8", changefreq: "monthly" },
   { path: "/faqs",                   priority: "0.8", changefreq: "monthly" },
   { path: "/customers",              priority: "0.8", changefreq: "monthly" },

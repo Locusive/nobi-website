@@ -14,7 +14,7 @@ const BlogPost           = lazy(() => import("./pages/BlogPost.jsx"));
 const BetterSearch       = lazy(() => import("./pages/BetterSearch.jsx"));
 const LeadCapture        = lazy(() => import("./pages/LeadCapture.jsx"));
 const CustomActions      = lazy(() => import("./pages/CustomActions.jsx"));
-const KnowledgeBase      = lazy(() => import("./pages/KnowledgeBase.jsx"));
+const AutomatedSupport   = lazy(() => import("./pages/AutomatedSupport.jsx"));
 const CustomersIndex     = lazy(() => import("./pages/customers/index.jsx"));
 const LuccheseCustomer   = lazy(() => import("./pages/customers/Lucchese.jsx"));
 const UNTUCKitCustomer   = lazy(() => import("./pages/customers/UNTUCKit.jsx"));
@@ -53,9 +53,9 @@ function App() {
           <Route path="/blog" element={<Blog />} />
           <Route path="/blog/:slug" element={<BlogPost />} />
           <Route path="/why-nobi/better-search" element={<BetterSearch />} />
+          <Route path="/why-nobi/automated-support" element={<AutomatedSupport />} />
           <Route path="/lead-capture" element={<LeadCapture />} />
           <Route path="/custom-actions" element={<CustomActions />} />
-          <Route path="/knowledge-base" element={<KnowledgeBase />} />
           <Route path="/customers" element={<CustomersIndex />} />
           <Route path="/customers/lucchese" element={<LuccheseCustomer />} />
           <Route path="/customers/untuckit" element={<UNTUCKitCustomer />} />

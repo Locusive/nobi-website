@@ -26,10 +26,10 @@ export default function Footer() {
           <div className="space-y-2">
             <div className="font-semibold text-black dark:text-white">Capabilities</div>
             <div className="flex flex-col gap-2">
-              <a href="/why-nobi/better-search" className="hover:opacity-80">Search</a>
+              <a href="/why-nobi/better-search" className="hover:opacity-80">Better search</a>
+              <a href="/why-nobi/automated-support" className="hover:opacity-80">Automated support</a>
               <a href="/lead-capture" className="hover:opacity-80">Lead capture</a>
               <a href="/custom-actions" className="hover:opacity-80">Custom actions</a>
-              <a href="/knowledge-base" className="hover:opacity-80">Accurate answers</a>
             </div>
           </div>
 

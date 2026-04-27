@@ -37,6 +37,15 @@ export const posts = allPosts.filter((p) => {
 // Direct lookup: finds any non-draft post by slug (including scheduled)
 export const getPostBySlug = (slug) => allPosts.find((p) => p.slug === slug);
 
+// HMR: tell Vite that this module accepts its own updates. Without this,
+// renaming or adding an MDX file under ../posts/ leaves the cached glob
+// stale — the dev server still serves the old slug map until you restart.
+// With it, Vite invalidates this module whenever the matched file set
+// changes and the new slug list takes effect on the next render.
+if (import.meta.hot) {
+  import.meta.hot.accept();
+}
+
 // Format a YYYY-MM-DD frontmatter date as a localized human-readable string.
 // Parses the bare "YYYY-MM-DD" form as a local date instead of UTC midnight,
 // which is what `new Date("YYYY-MM-DD")` does by default and which displays

@@ -148,6 +148,14 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
+
+## VITE EXCLUSIONS ##
+# Vite writes timestamped .mjs build artifacts next to vite.config.js
+# every time the dev server reloads the config. Transient cache files,
+# never meant to be committed.
+vite.config.js.timestamp-*.mjs
+vite.config.ts.timestamp-*.mjs
+dist/
 .pnp.cjs
 .pnp.loader.mjs
 .pnp/

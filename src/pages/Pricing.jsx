@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useSEO } from "../hooks/useSEO";
 import PageLayout from "../components/PageLayout";
 import FAQList from "../components/FAQList.jsx";
+import PricingCalculator from "../components/PricingCalculator.jsx";
 import { Check, Search, Smile, BarChart3, MessageSquare, ArrowRight, Gift } from "lucide-react";
 import Marquee from "react-fast-marquee";
 import { getSignupUrl } from "../utils/signupUrl";
@@ -248,25 +249,11 @@ export default function Pricing() {
               </div>
             </div>
 
-            {/* Shared features */}
-            <div className="mt-10 text-center">
-              <p className="text-sm font-semibold text-slate-500 uppercase tracking-[0.15em] mb-4">
-                Included in every plan
-              </p>
-              <div className="flex flex-wrap justify-center gap-x-6 gap-y-3">
-                {SHARED_FEATURES.map((feature) => (
-                  <div
-                    key={feature}
-                    className="flex items-center gap-2 text-sm text-slate-700"
-                  >
-                    <Check className="w-4 h-4 text-emerald-500 flex-shrink-0" />
-                    {feature}
-                  </div>
-                ))}
-              </div>
-            </div>
           </div>
         </section>
+
+        {/* Pricing calculator */}
+        <PricingCalculator />
 
         {/* Value propositions */}
         <section className="bg-gradient-to-b from-slate-50 via-white to-white py-16 border-t border-slate-200/70">
@@ -302,6 +289,18 @@ export default function Pricing() {
                   </div>
                 );
               })}
+            </div>
+
+            <div className="mt-12 flex flex-wrap justify-center gap-x-6 gap-y-3">
+              {SHARED_FEATURES.map((feature) => (
+                <div
+                  key={feature}
+                  className="flex items-center gap-2 text-sm text-slate-700"
+                >
+                  <Check className="w-4 h-4 text-emerald-500 flex-shrink-0" />
+                  {feature}
+                </div>
+              ))}
             </div>
           </div>
         </section>

@@ -103,7 +103,7 @@ function formatInt(n) {
 }
 
 function formatCurrency(n) {
-  return n.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  return Math.round(n).toLocaleString("en-US");
 }
 
 function formatRate(n) {
@@ -126,6 +126,7 @@ export default function PricingCalculator() {
   const [sessions, setSessions] = useState(DEFAULT_SESSIONS);
   const [searchRatePct, setSearchRatePct] = useState(DEFAULT_SEARCH_RATE_PCT);
   const [messageRatePct, setMessageRatePct] = useState(DEFAULT_MESSAGE_RATE_PCT);
+  const [hasSearch, setHasSearch] = useState(true);
 
   const initial = useMemo(
     () => deriveFromSessions(DEFAULT_SESSIONS, DEFAULT_SEARCH_RATE_PCT, DEFAULT_MESSAGE_RATE_PCT),
@@ -134,9 +135,9 @@ export default function PricingCalculator() {
   const [searches, setSearches] = useState(initial.searches);
   const [messages, setMessages] = useState(initial.messages);
 
-  const recomputeFromSessions = (s, sr, mr) => {
+  const recomputeFromSessions = (s, sr, mr, search = hasSearch) => {
     const derived = deriveFromSessions(s, sr, mr);
-    setSearches(derived.searches);
+    setSearches(search ? derived.searches : 0);
     setMessages(derived.messages);
   };
 
@@ -150,6 +151,17 @@ export default function PricingCalculator() {
     const clamped = Math.max(0, Math.min(100, next));
     setSearchRatePct(clamped);
     recomputeFromSessions(sessions, clamped, messageRatePct);
+  };
+
+  const handleToggleSearch = () => {
+    if (hasSearch) {
+      setHasSearch(false);
+      setSearches(0);
+    } else {
+      setHasSearch(true);
+      const derived = deriveFromSessions(sessions, searchRatePct, messageRatePct);
+      setSearches(derived.searches);
+    }
   };
 
   const handleMessageRateChange = (next) => {
@@ -209,16 +221,18 @@ export default function PricingCalculator() {
 
         <div className="rounded-2xl bg-white border border-slate-200 shadow-[0_18px_50px_-30px_rgba(15,23,42,0.18)] px-6 py-5">
           <div className="space-y-1">
-            <CalcRow
-              label="Searches"
-              value={searches}
-              onChange={(v) => setSearches(Math.max(0, v))}
-              sub={
-                <>
-                  ≈ <RateInput value={searchRatePct} onChange={handleSearchRateChange} max={20} />% of visitors
-                </>
-              }
-            />
+            {hasSearch ? (
+              <CalcRow
+                label="Searches"
+                value={searches}
+                onChange={(v) => setSearches(Math.max(0, v))}
+                sub={
+                  <>
+                    ≈ <RateInput value={searchRatePct} onChange={handleSearchRateChange} max={20} />% of visitors
+                  </>
+                }
+              />
+            ) : null}
             <CalcRow
               label="Messages"
               value={messages}
@@ -231,14 +245,23 @@ export default function PricingCalculator() {
             />
           </div>
 
-          <div className="mt-5 pt-5 border-t border-slate-100">
-            <div className="flex items-baseline gap-2">
+          <div className="mt-4 flex items-center justify-between gap-2">
+            <span className="text-xs text-slate-500">Use Nobi for search</span>
+            <PurpleToggle
+              checked={hasSearch}
+              onChange={handleToggleSearch}
+              label="Use Nobi for search"
+            />
+          </div>
+
+          <div className="mt-4 pt-5 border-t border-slate-100">
+            <div className="flex items-baseline justify-end gap-2">
               <span className="text-5xl font-semibold text-slate-900 tabular-nums tracking-tight">
                 ${formatCurrency(monthlyCost)}
               </span>
               <span className="text-base text-slate-500 font-medium">/ month</span>
             </div>
-            <div className="text-sm text-slate-600 mt-2 tabular-nums">
+            <div className="text-sm text-slate-600 mt-2 tabular-nums text-right">
               $25 base
               {overage > 0 ? (
                 <>
@@ -270,6 +293,27 @@ function CalcRow({ label, sub, value, onChange }) {
         className="calc-text-input text-sm font-medium text-slate-700 tabular-nums w-20 ml-auto hover:bg-slate-50 focus:bg-slate-50 rounded-md px-1 -mx-1 transition"
       />
     </div>
+  );
+}
+
+function PurpleToggle({ checked, onChange, label }) {
+  return (
+    <button
+      type="button"
+      role="switch"
+      aria-checked={checked}
+      aria-label={label}
+      onClick={() => onChange(!checked)}
+      className={`relative inline-flex h-4 w-7 shrink-0 items-center rounded-full transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-violet-300 focus-visible:ring-offset-1 ${
+        checked ? "bg-violet-600" : "bg-slate-300"
+      }`}
+    >
+      <span
+        className={`inline-block h-3 w-3 transform rounded-full bg-white shadow transition-transform duration-200 ${
+          checked ? "translate-x-3.5" : "translate-x-0.5"
+        }`}
+      />
+    </button>
   );
 }
 
@@ -513,7 +557,7 @@ function UrlEstimateForm({ onTrafficLookup }) {
       className="mt-4 rounded-2xl border border-slate-100 bg-white px-5 py-4"
     >
       <div className="text-xs text-slate-500 mb-2">
-        Don't know your numbers? Drop your URL and we'll fill them in for you.
+        Don't know your numbers? Drop your URL and we'll estimate them for you.
       </div>
       <div className="grid sm:grid-cols-[1fr_auto] gap-2">
         <input

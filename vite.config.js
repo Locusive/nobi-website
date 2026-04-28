@@ -11,6 +11,13 @@ export default defineConfig({
   // `gh pr checkout` swaps in a new MDX file). Polling makes the file
   // watcher reliable — the CPU cost is trivial for a project this size.
   server: {
+    port: 5173,
+    // Fail loudly when 5173 is already taken instead of silently
+    // bumping to 5174 — silent reassignment caused real confusion when
+    // an unrelated app on this machine was already squatting on 5173
+    // and the blog ended up at /5174, not where the URL expected. To
+    // start on a different port: `npm run dev -- --port 5180`.
+    strictPort: true,
     watch: {
       usePolling: true,
       interval: 300,

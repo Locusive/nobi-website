@@ -21,11 +21,11 @@ export const meta = {
  },
  {
  question: "1. Nobi",
- answer: "Nobi lives on the dealership website as AI-powered site search plus a shopping assistant that helps a shopper narrow down by year, make, model, and price and answers questions on a VDP before they bounce off the page. It installs by dropping two JavaScript snippets into the site theme, so a single rooftop can go live in days. Pricing is public: $25/month base including 2,500 searches and 250 conversational messages, with $0.01 per additional search and $0.10 per additional message. Nobi is strong when on-site bounce and unanswered VDP questions are the bottleneck, and weaker if your gap is BDC follow-up across phone and SMS."
+ answer: "Nobi lives on the dealership website as AI-powered site search plus a shopping assistant that helps a shopper narrow down by year, make, model, and price and answers questions on a VDP before they bounce off the page. It installs by adding a script tag to the site theme's head plus an HTML custom element where the search or assistant should appear, so a single rooftop can go live in days. Pricing is public: $25/month base including 2,500 searches and 250 conversational messages, with $0.01 per additional search and $0.10 per additional message. Nobi is strong when on-site bounce and unanswered VDP questions are the bottleneck, and weaker if your gap is BDC follow-up across phone and SMS."
  },
  {
  question: "2. Impel",
- answer: "Impel is the broadest of the five, positioned as an Automotive AI Operating System spanning lead engagement, service scheduling, and lifecycle marketing after its 2024 Outsell acquisition. It layers across the existing stack and integrates with OEM journey platforms like FordDirect. Impel handles inventory through the lead workflow rather than as a shopper-facing search surface, and it does not publish public pricing. Rollout is heavier than a website-only tool because it touches CRM, lead routing, and OEM integrations."
+ answer: "Impel is the broadest of the five, positioned as an Automotive AI Operating System spanning lead engagement, service scheduling, and lifecycle marketing after its 2024 Outsell acquisition. It layers across the existing stack and integrates with OEM journey platforms like FordDirect. Impel handles inventory through the lead workflow rather than as a shopper-facing search surface, and it does not publish public pricing. Rollout is heavier than a chat-layer-only tool because it touches CRM, lead routing, and OEM integrations."
  },
  {
  question: "3. DriveCentric",
@@ -37,11 +37,11 @@ export const meta = {
  },
  {
  question: "5. DealerAI",
- answer: "DealerAI is a website-only assistant with a multi-agent setup for inventory inquiries and appointment booking. Along with Nobi, it is one of the two tools in this list explicitly built to answer year/make/model VDP-level questions on-site. It does not touch the DMS and is a net-new on-site layer. DealerAI does not publish public pricing."
+ answer: "DealerAI is a multi-agent generative AI platform with separate agents for sales, service, parts, and finance. The base Chatbot tier covers website, Facebook, Instagram, and SMS; Voice / phone is a higher-tier upsell. Along with Nobi, it is one of the two tools in this list explicitly built to answer year/make/model VDP-level questions on-site. Pricing is published per site: Chatbot $599/month, Reach $1,499/month, All-In-One $2,299/month, with dealer-group and OEM tiers quote-only."
  },
  {
  question: "How should a dealership GM pick between these AI assistants?",
- answer: "Pick by where the leads actually leak. If on-site bounce and unanswered VDP questions are the bottleneck, a website-only assistant like Nobi or DealerAI is the right lane. If the gap is BDC follow-up across phone and SMS, Matador AI fits better, and if the CRM itself is the problem, DriveCentric replaces it. Impel is the broadest option when you want one vendor across lead engagement, service, and lifecycle marketing."
+ answer: "Pick by where the leads actually leak. If on-site bounce and unanswered VDP questions are the bottleneck, an on-site assistant like Nobi or DealerAI is the right lane. If the gap is BDC follow-up across phone and SMS, Matador AI fits better, and if the CRM itself is the problem, DriveCentric replaces it. Impel is the broadest option when you want one vendor across lead engagement, service, and lifecycle marketing."
  }
  ],
 };
@@ -114,7 +114,7 @@ export const meta = {
 - **Impel** - end-to-end automotive AI operating system covering lead engagement, service, and lifecycle marketing. No published pricing; per-rooftop or dealer-group quote. Pick when you want one vendor across the whole dealer journey.
 - **DriveCentric** - AI-first dealership CRM with autonomous agents and multi-channel follow-up baked into the lead record. No published pricing; per-rooftop quote. Pick when you're ready to replace your CRM, not just add a chat layer.
 - **Matador AI** - conversational AI across phone, text, email, social, and web chat with a TCPA compliance engine. No published pricing; per-rooftop quote. Pick when SMS and phone follow-up are where leads actually convert.
-- **DealerAI** - multi-agent website assistant for appointment scheduling and inventory inquiries. No published pricing; per-site quote. Pick when your bottleneck is purely the on-site chat experience and you don't want CRM scope creep.
+- **DealerAI** - multi-agent generative AI for dealerships, with separate sales / service / parts / finance agents. Base Chatbot tier ($599/mo per site) covers website, Facebook, Instagram, and SMS; Voice/phone is a higher tier. Pick when your bottleneck is the on-site chat experience and you don't want CRM scope creep.
 
 A common stack we see is one on-site assistant covering the website plus one BDC/CRM tool handling phone, SMS, and lead follow-up - different tools because the two surfaces have different failure modes (a shopper bouncing off a VDP and a lead going cold in the CRM aren't the same problem).
 
@@ -124,7 +124,7 @@ A common stack we see is one on-site assistant covering the website plus one BDC
 | [Impel](https://impel.ai) | Automotive AI operating system across lead, service, and lifecycle | Dealer groups consolidating onto one AI vendor | Not published; per-rooftop or dealer-group quote | Breadth across CLM, marketing, and service in one suite | Heavier integration footprint; enterprise-leaning rollout |
 | [DriveCentric](https://drivecentric.com) | AI-first dealership CRM with autonomous follow-up agents | Rooftops ready to replace their CRM, not just bolt on chat | Not published; per-rooftop quote | Conversational AI baked into the CRM record, not a separate tool | Replacing an existing CRM is a months-long lift |
 | [Matador AI](https://matador.ai) | Multi-channel conversational AI across phone, text, email, social, web | Dealerships where SMS and phone are the primary lead channels | Not published; per-rooftop quote | TCPA compliance engine and SMS broadcast tooling purpose-built for dealers | Plugs into your CRM rather than replacing it; less inventory-aware product Q&A |
-| [DealerAI](https://dealerai.com) | Multi-agent website assistant for appointments and inventory questions | Single rooftops who only want to fix the website chat experience | Not published; per-site quote | Purpose-built website agents for VDP and appointment-booking flows | Website only - no phone, SMS, or service-bay coverage in the base product |
+| [DealerAI](https://dealerai.com) | Multi-agent generative AI across website, Meta, and SMS for appointments + inventory | Single rooftops who want a multi-channel chat layer without a CRM swap | $599/mo Chatbot · $1,499/mo Reach · $2,299/mo All-In-One (per site) | Separate Sales / Service / Parts / Finance agents on a published price card | Voice / phone coverage requires the higher Reach or All-In-One tier |
 
 *Full disclosure: Nobi is our product, and it's included in this list alongside the four competitors dealership GMs and dealer-group buyers most often weigh against it. We've aimed to be honest about Nobi's own limits and explicit about when another tool on this list is the better pick.*
 
@@ -132,7 +132,7 @@ A common stack we see is one on-site assistant covering the website plus one BDC
 
 A dealership AI assistant is software that uses generative AI to answer shopper questions, surface the right vehicles, qualify leads, or follow up with customers on behalf of a dealership. The category is wide, and each tool is built around a different primary job - so the right pick depends on where your store actually loses deals today.
 
-[Nobi](https://nobi.ai) lives on the dealership website: AI-powered site search and a shopping assistant that helps a shopper narrow down by year, make, model, price, and answer questions on a VDP before they bounce off the page. Strong when on-site bounce and unanswered VDP questions are the bottleneck; weaker if your gap is BDC follow-up across phone and SMS. [DealerAI](https://dealerai.com) sits in the same on-site lane with a multi-agent setup for inventory inquiries and appointment booking, but is website-only with no phone or SMS leg.
+[Nobi](https://nobi.ai) lives on the dealership website: AI-powered site search and a shopping assistant that helps a shopper narrow down by year, make, model, price, and answer questions on a VDP before they bounce off the page. Strong when on-site bounce and unanswered VDP questions are the bottleneck; weaker if your gap is BDC follow-up across phone and SMS. [DealerAI](https://dealerai.com) sits in the same on-site lane with a multi-agent setup for inventory inquiries and appointment booking; the base tier covers website plus Facebook, Instagram, and SMS, with Voice/phone available on higher tiers.
 
 [Matador AI](https://matador.ai) and [DriveCentric](https://drivecentric.com) work the BDC and CRM side instead - Matador on multi-channel conversational follow-up to lift show rates, DriveCentric as an AI-first CRM with automated lead response, follow-up, and trade-in offers priced by rooftop. [Impel](https://impel.ai) is the broadest of the five: an Automotive AI Operating System spanning lead engagement, service scheduling, and lifecycle marketing after its 2024 Outsell acquisition.
 
@@ -140,19 +140,19 @@ A dealership AI assistant is software that uses generative AI to answer shopper 
 
 We compared these tools on five practical questions a GM cares about: where the assistant runs (website, phone, SMS, CRM), how well it handles year/make/model inventory queries, what it costs to get a single rooftop live, how it integrates with the DMS and CRM you already pay for, and how transparent the vendor is about pricing.
 
-**Channel coverage.** Nobi runs on the dealership website only - AI site search and an on-site shopping assistant. No phone, SMS, or WhatsApp leg. [DealerAI](https://dealerai.com) is also website-only by design, with multi-agent chat for inventory and appointment booking. [Matador AI](https://matador.ai) sits on the BDC follow-up side across conversational channels to lift show rates. [Impel](https://impel.ai) is the broadest of the five, spanning lead engagement, service scheduling, and lifecycle marketing as an Automotive AI Operating System. [DriveCentric](https://drivecentric.com) is a CRM-first tool with AI-powered lead response and follow-up baked into the CRM workflow.
+**Channel coverage.** Nobi runs on the dealership website only - AI site search and an on-site shopping assistant. No phone, SMS, or WhatsApp leg. [DealerAI](https://dealerai.com)'s base Chatbot tier covers website plus Facebook, Instagram, and SMS, with Voice/phone as a higher-tier upsell - multi-channel out of the gate, just not voice in the entry tier. [Matador AI](https://matador.ai) sits on the BDC follow-up side across conversational channels to lift show rates. [Impel](https://impel.ai) is the broadest of the five, spanning lead engagement, service scheduling, and lifecycle marketing as an Automotive AI Operating System. [DriveCentric](https://drivecentric.com) is a CRM-first tool with AI-powered lead response and follow-up baked into the CRM workflow.
 
 **Inventory awareness.** Nobi and DealerAI are the two assistants in this list explicitly built to answer year/make/model VDP-level questions on-site. Impel and DriveCentric handle inventory through the lead and CRM workflow rather than as a shopper-facing search surface; Matador works the conversation, not the catalog.
 
-**Pricing transparency.** Nobi publishes its numbers - $25/month base including 2,500 searches and 250 conversational messages, with $0.01 per additional search and $0.10 per additional message. DriveCentric prices by rooftop and units sold and quotes per dealer. Impel, Matador AI, and DealerAI don't publish public pricing.
+**Pricing transparency.** Nobi publishes its numbers - $25/month base including 2,500 searches and 250 conversational messages, with $0.01 per additional search and $0.10 per additional message. DealerAI publishes per-site tiers on its site - $599/month Chatbot, $1,499/month Reach, $2,299/month All-In-One, with dealer-group and OEM tiers quote-only. DriveCentric prices by rooftop and units sold and quotes per dealer. Impel and Matador AI don't publish public pricing.
 
 **DMS and CRM fit.** DriveCentric replaces the CRM; Impel layers across the existing stack and integrates with OEM journey platforms like FordDirect. Matador AI sits next to the BDC and the CRM. Nobi and DealerAI are net-new on-site layers that don't touch the DMS.
 
-**Time-to-live for one rooftop.** Nobi installs by dropping two JavaScript snippets into the site theme, so a single rooftop can go live in days. DealerAI is also a website install. Impel and DriveCentric carry heavier rollout timelines because they touch CRM, lead routing, and OEM integrations; Matador's path depends on BDC tooling already in place.
+**Time-to-live for one rooftop.** Nobi installs with a script tag in the theme's head plus an HTML custom element where the assistant should appear, so a single rooftop can go live in days. DealerAI is also a fast website-side install. Impel and DriveCentric carry heavier rollout timelines because they touch CRM, lead routing, and OEM integrations; Matador's path depends on BDC tooling already in place.
 
 ## 1. Nobi
 
-Nobi is an [AI shopping assistant](https://nobi.ai/blog/ai-shopping-assistant-ecommerce) and site-search layer that runs on the dealership website, aimed at the on-site moment most stores quietly lose: a shopper hits a VDP, has a question about trim, mileage, payment, or trade-in, and bounces because nothing on the page answers it. Drop two JavaScript snippets into the theme and Nobi indexes the pages you connect - inventory listings, finance and warranty pages, FAQ and help-center articles, PDFs - then fields year/make/model queries in plain English ("used Tahoe under 40k with third row") and answers VDP-level questions in a chat surface alongside the listing.
+Nobi is an [AI shopping assistant](https://nobi.ai/blog/ai-shopping-assistant-ecommerce) and site-search layer that runs on the dealership website, aimed at the on-site moment most stores quietly lose: a shopper hits a VDP, has a question about trim, mileage, payment, or trade-in, and bounces because nothing on the page answers it. Drop a single `<script>` tag into the site theme's `<head>` and place a `<nobi-search-bar>` (or `<nobi-assistant>`) custom element where the surface should render; Nobi indexes the pages you connect - inventory listings, finance and warranty pages, FAQ and help-center articles, PDFs - then fields year/make/model queries in plain English ("used Tahoe under 40k with third row") and answers VDP-level questions in a chat surface alongside the listing.
 
 **Best for:** Dealerships whose shoppers bounce from VDPs because the on-site search can't handle year/make/model queries and there's no fast way to answer a question on the page.
 
@@ -242,29 +242,30 @@ Nobi is an [AI shopping assistant](https://nobi.ai/blog/ai-shopping-assistant-ec
 
 ## 5. DealerAI
 
-[DealerAI](https://dealerai.com) is a multi-agent generative AI platform built for dealership websites, with separate agents handling sales, service, and finance questions in the right tone for each. The product centers on three on-site jobs: appointment scheduling, inventory inquiries, and answering shopper questions on a VDP before they bounce off the page. For a single-rooftop GM whose CRM and BDC stack already works and whose website chat is the weak link, DealerAI is a dealership-native tool aimed squarely at that one surface.
+[DealerAI](https://dealerai.com) is a multi-agent generative AI platform built for car dealerships - a "Multi-Agent Generative System" (MAGS) that splits work across separate Sales, Service, Parts, and Finance agents instead of routing every conversation through one chatbot. The product centers on three on-site jobs: appointment scheduling, inventory inquiries, and answering shopper questions on a VDP before they bounce off the page. The base Chatbot tier covers the dealership website plus Facebook, Instagram, and SMS; higher tiers add Voice/phone. For a rooftop whose CRM and BDC stack already works and whose website-and-Meta chat is the weak link, DealerAI is a dealership-native tool aimed squarely at that surface.
 
-**Best for:** Single rooftops who only want to upgrade their website chat experience and aren't looking for CRM, BDC, or service-side scope.
+**Best for:** Rooftops that want a multi-channel chat layer (website + Meta + SMS in the base tier) without a CRM swap, with a published per-site price they can budget against.
 
-**Pricing:** Not published. Per-site quote.
+**Pricing:** Public per-site tiers as of April 2026: Chatbot $599/month (website + Facebook + Instagram + SMS), Reach $1,499/month, All-In-One $2,299/month. Dealer-group and OEM tiers are quote-only.
 
 **Pros:**
-- Purpose-built for the dealership website, so inventory inquiry and appointment-booking flows feel native rather than retrofitted onto a generic chat tool
-- Multi-agent architecture lets different agents handle sales, service, and finance questions with the right tone for each
-- Light footprint - sits on the website without requiring a DMS or CRM swap, so the rest of the stack keeps running
+- Purpose-built for dealerships, so inventory inquiry and appointment-booking flows feel native rather than retrofitted onto a generic chat tool
+- Multi-agent architecture splits Sales / Service / Parts / Finance into separate agents so each gets the right tone and routing
+- Published per-site pricing on the website, so a GM can model cost without a sales call
+- Multi-channel from the entry tier (website + Facebook + Instagram + SMS), so the BDC isn't getting fragments across separate tools
 
 **Cons:**
-- Website-only in the base product - no phone, SMS, or service-bay coverage, so a multi-channel BDC will still need a separate tool
+- Voice / phone coverage is a higher-tier upsell, not in the $599/month base
 - Less depth on lifecycle CRM and lead routing than Impel or DriveCentric
-- No public pricing, so budgeting requires a sales call
+- Per-site billing means dealer groups scale linearly without a published group discount
 
-**Verdict:** Pick DealerAI when you've narrowed the problem to website chat specifically and want a dealership-native vendor for that one job; skip it if you also need phone, SMS, or service coverage in the same tool.
+**Verdict:** Pick DealerAI when you want a dealership-native multi-agent chat layer covering website plus Meta plus SMS without a CRM swap, and the published-pricing model matters; skip it if voice/phone coverage in the base tier is non-negotiable, or if your real problem is CRM workflow rather than the chat layer.
 
 ## How should a dealership GM pick between these AI assistants?
 
 Start by naming where the dealership is actually losing the deal, then pick the tool that owns that lane.
 
-If shoppers bounce off VDPs because they can't find the right vehicle or get a question answered on the page, the fix is on-site. Nobi is the pick when you want AI site search plus a shopping assistant grounded in the inventory, finance, and policy pages you connect, with published pricing from $25/month and a two-snippet install that goes live in days. The trade-off is real: web chat only, no SMS or phone leg. [DealerAI](https://dealerai.com) lives in the same on-site lane with a multi-agent setup for inventory inquiries and appointment booking; pick it when you want a dealership-native website chat vendor and don't need pricing on the page.
+If shoppers bounce off VDPs because they can't find the right vehicle or get a question answered on the page, the fix is on-site. Nobi is the pick when you want AI site search plus a shopping assistant grounded in the inventory, finance, and policy pages you connect, with published pricing from $25/month and a script-tag-plus-custom-element install that goes live in days. The trade-off is real: web chat only, no SMS or phone leg. [DealerAI](https://dealerai.com) lives in the same on-site lane with a multi-agent setup for inventory inquiries and appointment booking; the base Chatbot tier ($599/month per site) covers website plus Facebook, Instagram, and SMS, and Voice/phone is on a higher tier - pick DealerAI when you want a dealership-native multi-channel chat layer with pricing on the page.
 
 If the leak is inbound calls and texts the BDC isn't getting to fast enough, [Matador AI](https://matador.ai) is the better fit - multi-channel follow-up with TCPA compliance built in, plugged into the CRM you already run.
 

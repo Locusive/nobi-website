@@ -19,7 +19,9 @@ export default function BlogPost() {
     "headline": meta.title,
     "datePublished": meta.date,
     "dateModified": meta.publishedAt || meta.date,
-    "image": meta.heroImage ? `https://nobi.ai${meta.heroImage}` : undefined,
+    "image": meta.heroImage
+      ? (meta.heroImage.startsWith("http") ? meta.heroImage : `https://nobi.ai${meta.heroImage}`)
+      : undefined,
     "author": { "@type": "Person", "name": meta.author || "Nobi Team" },
     "publisher": { "@type": "Organization", "name": "Nobi", "url": "https://nobi.ai" },
     "mainEntityOfPage": { "@type": "WebPage", "@id": `https://nobi.ai/blog/${post.slug}` },

@@ -13,11 +13,11 @@ export const meta = {
  faqItems: [
  {
  question: "What does an AI shopping assistant actually do for a beauty or skincare brand?",
- answer: "An AI shopping assistant retrieves and synthesizes information from your connected data sources and product catalog, then points shoppers at the right SKUs. The work splits across two surfaces: a search and chat surface that pulls from your product pages, FAQ, and policy docs to answer questions a shopper has about what's in your catalog, and a guided-discovery surface that walks shoppers through a quiz when they don't know what to ask yet. Catalog-aware grounding matters in beauty because the assistant should never invent claims about ingredients or formulations - it should only repeat what your own product pages and connected docs already say."
+ answer: "An AI shopping assistant retrieves and synthesizes information from your connected data sources and product catalog, then points shoppers at the right SKUs. The work splits two ways: a search and chat that pulls from your product pages, FAQ, and policy docs to answer questions a shopper has about your catalog, and a guided-discovery quiz that walks shoppers through a diagnostic when they don't know what to ask yet. Catalog-aware grounding matters in beauty because the assistant should never invent claims about ingredients or formulations - it should only repeat what your own product pages and connected docs already say."
  },
  {
  question: "How did we evaluate these AI shopping assistants for beauty?",
- answer: "We picked tools by the job a beauty or skincare ecommerce team is actually trying to do: answering ingredient and skin-type questions on-site, guiding shoppers from one SKU to a routine, and following up on people who showed interest but didn't buy. For each tool we looked at how answers are grounded, where the surface lives (search bar, quiz funnel, chat widget, SMS), how pricing scales with volume, and what implementation costs in calendar time. Job fit for beauty came first, and pricing transparency came next - we weighted published-pricing tools higher for buyers who want to model the bill before a sales call."
+ answer: "We picked tools by the job a beauty or skincare ecommerce team is actually trying to do: answering ingredient and skin-type questions on-site, guiding shoppers from one SKU to a routine, and following up on people who showed interest but didn't buy. For each tool we looked at how answers are grounded, where the tool actually runs (search bar, quiz funnel, chat widget, SMS), how pricing scales with volume, and what implementation costs in calendar time. Job fit for beauty came first, and pricing transparency came next - we weighted published-pricing tools higher for buyers who want to model the bill before a sales call."
  },
  {
  question: "1. Nobi",
@@ -25,7 +25,7 @@ export const meta = {
  },
  {
  question: "2. Octane AI",
- answer: "Octane AI owns the quiz-led product finder lane on Shopify, starting at $50/month. Pick it when a routine builder or skin-type quiz is your primary discovery surface rather than open-ended search. It is the right hero choice when guided diagnostics, not catalog Q&A, is how shoppers first engage your brand."
+ answer: "Octane AI is the leading quiz-led product finder on Shopify, starting at $50/month. Pick it when a routine builder or skin-type quiz is the main way shoppers discover your products rather than open-ended search. It is the right pick when guided diagnostics, not catalog Q&A, is how shoppers first engage your brand."
  },
  {
  question: "3. Conversica",
@@ -109,7 +109,7 @@ Match the tool to where your beauty buyers actually have ingredient and routine 
 | Product | Primary job | Best for | Pricing (starting) | Standout strength | Key weakness |
 | --- | --- | --- | --- | --- | --- |
 | Nobi | AI assistant grounded in your catalog | Beauty teams whose customers ask ingredient, skin-type, and routine questions on-site | $25/month base (2,500 searches, 250 messages) | Cited answers with hover-to-verify source pills, refreshed twice a day | No quiz-led product finder flow; pair with Octane if a quiz is your main discovery moment |
-| [Octane AI](https://octaneai.com) | Quiz-led product finder for Shopify | Beauty and CPG teams whose discovery hinges on a diagnostic quiz | $50/month Basic (400 credits, where 1 credit = 1 quiz completion) | Pre-built skincare-routine and regimen quiz templates with Klaviyo handoff | No real-time chat or search-bar surface; the value sits inside the quiz flow itself |
+| [Octane AI](https://octaneai.com) | Quiz-led product finder for Shopify | Beauty and CPG teams whose discovery hinges on a diagnostic quiz | $50/month Basic (400 credits, where 1 credit = 1 quiz completion) | Pre-built skincare-routine and regimen quiz templates with Klaviyo handoff | No real-time chat or search bar; the value sits inside the quiz itself |
 | [Conversica](https://conversica.com) | AI conversational agents for persistent lead follow-up | Teams with high-intent inbound leads that need multi-touch nurture | Quote-only; per-conversation enterprise model, no public starter | Persistent multi-touch follow-up across email and SMS until the lead replies or opts out | Email is the primary channel; SMS is supported but not the default |
 | [Podium](https://podium.com) | Multi-channel SMS, web chat, reviews, and payments | Local-services and SMB retail businesses running SMS and reviews motions | Quote-only; per-location SMB pricing with modular add-ons (AI Employee, Bulk Messages, 10DLC fees) | SMS-first conversational layer with reviews and payments stitched in | Built for local-services SMB workflows, not ecommerce catalog discovery |
 
@@ -117,13 +117,13 @@ Match the tool to where your beauty buyers actually have ingredient and routine 
 
 ## What does an AI assistant actually do for a beauty or skincare team?
 
-An [AI shopping assistant](https://nobi.ai/blog/ai-shopping-assistant-ecommerce) retrieves and synthesizes information from your connected data sources and product catalog, then points shoppers at the right SKUs. The job splits into two surfaces: a search and chat surface that pulls from your product pages, FAQ, and policy docs to answer questions about what's in your catalog, and a guided-discovery surface that walks shoppers through a quiz when they don't yet know what to ask. Catalog-aware grounding matters in beauty because the assistant should never invent claims about ingredients, formulations, or skin reactions - it should only repeat what your own product pages and connected docs already say. The brand owns whether those source pages are regulatory-compliant; the AI only retrieves them.
+An [AI shopping assistant](https://nobi.ai/blog/ai-shopping-assistant-ecommerce) retrieves and synthesizes information from your connected data sources and product catalog, then points shoppers at the right SKUs. The job splits two ways: a search and chat that pulls from your product pages, FAQ, and policy docs to answer questions about your catalog, and a guided-discovery quiz that walks shoppers through a diagnostic when they don't yet know what to ask. Catalog-aware grounding matters in beauty because the assistant should never invent claims about ingredients, formulations, or skin reactions - it should only repeat what your own product pages and connected docs already say. The brand owns whether those source pages are regulatory-compliant; the AI only retrieves them.
 
 Nobi answers open-ended questions by retrieving from the pages you connect: product pages, FAQ routes, policy docs, PDFs of ingredient decks or routine guides. Strong when shoppers arrive with a specific question and need a cited answer; weaker if your main discovery moment is a quiz funnel. [Octane AI](https://octaneai.com) is the leading quiz-led product finder on Shopify, from $50/month. Strong when a routine builder or skin-type quiz is the main way shoppers engage; no real-time chat or search bar, so the value sits inside the quiz itself. [Conversica](https://conversica.com) runs persistent AI conversational agents that re-engage inbound leads by email and SMS until they reply or opt out. Strong when the bottleneck is multi-touch nurture after a lead has already raised a hand; weaker for real-time on-site responses. [Podium](https://podium.com) is a multi-channel SMB messaging platform combining SMS, web chat, reviews, and payments. Built for local-services SMB workflows, not ecommerce catalog discovery; strong when SMS and reviews drive your business, especially across multi-location retail.
 
 ## How did we evaluate these AI assistants for beauty?
 
-We picked tools by the job a beauty or skincare team is actually trying to do: answering ingredient and skin-type questions on-site, guiding customers from one SKU to a routine, and following up on people who showed interest but didn't buy. For each tool we looked at how answers are grounded (your catalog and policy pages versus generic LLM output that drifts), where the surface lives (search bar, quiz funnel, chat widget, SMS), how pricing scales with volume, and what implementation actually costs in calendar time.
+We picked tools by the job a beauty or skincare team is actually trying to do: answering ingredient and skin-type questions on-site, guiding customers from one SKU to a routine, and following up on people who showed interest but didn't buy. For each tool we looked at how answers are grounded (your catalog and policy pages versus generic LLM output that drifts), where the tool actually runs (search bar, quiz funnel, chat widget, SMS), how pricing scales with volume, and what implementation actually costs in calendar time.
 
 Start with what beauty shoppers actually do on the site. They look for what's in a product, compare across SKUs in the line, check policies, and look up what your routine guide recommends. A tool either retrieves those answers from your own product pages and connected docs, or it generates content from outside your catalog - and for beauty, only the first kind is safe to ship. Nobi runs retrieval and synthesis against the product pages, FAQ routes, and PDFs you connect, with citation pills on every answer so a shopper can verify the answer back to your source. Octane AI is the leading quiz-led product finder on Shopify, from $50/month - the right pick when a routine builder or skin-type quiz is the main way shoppers discover your products rather than search.
 
@@ -142,14 +142,14 @@ Nobi is an AI assistant that retrieves and synthesizes information from your con
 **Pros:**
 - Cited answers with inline numbered source pills - hovering shows the source document name, date, and the exact excerpt the answer came from, so a shopper can verify any claim back to the page your team published it on
 - Connected knowledge sources refresh twice a day, so an updated ingredient list, a new shade launch, or a return-policy change reaches customer answers within hours instead of waiting on a weekly sync
-- Contextual suggestion pills - LLM-generated and scoped to the page the visitor is on, so a product detail page surfaces different prompts than the homepage - appear as tappable buttons that give visitors a starting point when they don't know what to type
+- Contextual suggestion pills - LLM-generated and scoped to the page the visitor is on, so a product detail page shows different prompts than the homepage - appear as tappable buttons that give visitors a starting point when they don't know what to type
 - Implementation lands in hours, not months, and pricing publishes plainly rather than gating behind a sales call, so the team can model cost against expected search and message volume up front
 
 **Cons:**
 - No quiz-led product finder flow - if a diagnostic quiz is genuinely how shoppers discover your routines, Octane AI is a better fit and the two can coexist
-- Web chat surface only - no voice, SMS, or WhatsApp channel today, so customers who primarily engage over text will need a separate tool for those conversations
+- Web chat only - no voice, SMS, or WhatsApp channel today, so customers who primarily engage over text will need a separate tool for those conversations
 
-**Verdict:** Pick Nobi when customers are already typing questions into your site search and you want grounded, cited answers from your catalog; skip it (or pair it) if your discovery surface is a scripted quiz tree or your conversations live mostly on SMS.
+**Verdict:** Pick Nobi when customers are already typing questions into your site search and you want grounded, cited answers from your catalog; skip it (or pair it) if your discovery is a scripted quiz tree or your conversations live mostly on SMS.
 
 <div className="my-8 flex justify-center">
   <a
@@ -164,7 +164,7 @@ Nobi is an AI assistant that retrieves and synthesizes information from your con
 
 [Octane AI](https://octaneai.com) is a quiz-led product finder built primarily for Shopify. The quiz is where shoppers engage, not open-ended chat or site search. For a beauty or skincare team, that focus is the point: customers answer five to ten diagnostic questions about skin type, goals, or routine, and the platform maps answers to product attributes in the catalog to recommend a regimen. Octane positions itself as the leading product quiz platform for Shopify and ships pre-built templates for skincare routines, supplement regimens, and fit finders, plus a Klaviyo handoff that turns quiz answers into email-segment attributes.
 
-**Best for:** Beauty, skincare, and CPG teams whose primary discovery surface is a diagnostic or routine-builder quiz funnel.
+**Best for:** Beauty, skincare, and CPG teams whose main way shoppers discover products is a diagnostic or routine-builder quiz funnel.
 
 **Pricing:** Basic at $50/month (400 credits, where one credit covers one quiz completion), Plus at $200/month (2,200 credits), Enterprise & Unlimited at $500+/month. AI features (Smart Products, Smart Copy, Image Analyzer) consume fractional extra credits per interaction.
 
@@ -175,7 +175,7 @@ Nobi is an AI assistant that retrieves and synthesizes information from your con
 - Lower engineering overhead than building quiz logic in-house on a headless site
 
 **Cons:**
-- Quiz-centric - no real-time chat or search-bar surface, so the value sits inside the quiz flow itself rather than spreading across the site
+- Quiz-centric - no real-time chat or search bar, so the value sits inside the quiz itself rather than spreading across the site
 - Best fit is beauty and CPG; outside those verticals, scripted diagnostic questions don't always map cleanly to catalog attributes
 
 **Verdict:** Pick Octane AI if a quiz is genuinely the right discovery metaphor for your beauty catalog; skip it if your customers are typing open-ended ingredient and routine questions you'd rather answer directly.
@@ -202,23 +202,23 @@ Nobi is an AI assistant that retrieves and synthesizes information from your con
 
 ## 4. Podium
 
-[Podium](https://podium.com) is a multi-channel customer messaging platform built around SMS, web chat, reviews, and payments. It got its start with local-services and SMB retail businesses, and teams - especially those running brick-and-mortar locations or active VIP texting programs - use it to combine review collection, two-way SMS, and payment links in one surface. Podium is strongest where SMS is your primary channel and reviews are core to conversion, with the messaging-and-reviews motion stitched into a single interface across multi-location operations.
+[Podium](https://podium.com) is a multi-channel customer messaging platform built around SMS, web chat, reviews, and payments. It got its start with local-services and SMB retail businesses, and teams - especially those running brick-and-mortar locations or active VIP texting programs - use it to combine review collection, two-way SMS, and payment links in one tool. Podium is strongest where SMS is your primary channel and reviews are core to conversion, with the messaging-and-reviews motion stitched into a single interface across multi-location operations.
 
-**Best for:** Local-services SMBs and multi-location retail teams - including beauty teams with retail locations or active SMS and VIP texting programs - that want messaging, reviews, and payments stitched into one SMS-first surface.
+**Best for:** Local-services SMBs and multi-location retail teams - including beauty teams with retail locations or active SMS and VIP texting programs - that want messaging, reviews, and payments stitched into one SMS-first tool.
 
 **Pricing:** Quote-only - per-location SMB pricing with modular add-ons (AI Employee, Bulk Messages credits, 10DLC fees) layered on top. Podium doesn't publish public starter pricing.
 
 **Pros:**
-- Native SMS conversation surface plus reviews and payments in one tool, useful for businesses whose customers prefer texting over web chat
-- Strong reviews workflow that captures and surfaces customer feedback, which compounds in any category where social proof drives conversion
+- Native SMS conversations plus reviews and payments in one tool, useful for businesses whose customers prefer texting over web chat
+- Strong reviews workflow that captures customer feedback, which compounds in any category where social proof drives conversion
 - Web chat that can hand off to SMS so the conversation continues after the visitor leaves the site
 
 **Cons:**
-- Built around messaging, reviews, and payments for SMB retail; depth lives in those surfaces rather than catalog-specific tooling
+- Built around messaging, reviews, and payments for SMB retail; depth lives in those products rather than catalog-specific tooling
 - Per-location pricing scales fast across multi-location operations
 - Built for local-services SMB workflows, not ecommerce catalog discovery; ingredient and routine questions aren't what the product is tuned for
 
-**Verdict:** Pick Podium when SMS, reviews, and payments are the surfaces driving your business; skip it if your job is answering ingredient and routine questions on the site itself.
+**Verdict:** Pick Podium when SMS, reviews, and payments are the channels driving your business; skip it if your job is answering ingredient and routine questions on the site itself.
 
 ## How should a beauty or skincare team pick between these AI assistants?
 

@@ -13,7 +13,7 @@ export const meta = {
  faqItems: [
  {
  question: "What does an AI shopping assistant actually do for a beauty or skincare brand?",
- answer: "An AI shopping assistant answers the ingredient, skin-type, and routine questions beauty buyers ask before they convert, then points them at the right SKUs in your catalog. The work splits across two surfaces: a search and chat surface that fields open-ended questions like whether a product is safe for sensitive skin, and a guided-discovery surface that walks shoppers through a diagnostic when they don't know what to ask yet. Catalog-aware grounding matters more here than in most categories, because answers turn on specific INCI ingredients, allergens, and skin-type compatibility."
+ answer: "An AI shopping assistant retrieves and synthesizes information from your connected data sources and product catalog, then points shoppers at the right SKUs. The work splits across two surfaces: a search and chat surface that pulls from your product pages, FAQ, and policy docs to answer questions a shopper has about what's in your catalog, and a guided-discovery surface that walks shoppers through a quiz when they don't know what to ask yet. Catalog-aware grounding matters in beauty because the assistant should never invent claims about ingredients or formulations - it should only repeat what your own product pages and connected docs already say."
  },
  {
  question: "How did we evaluate these AI shopping assistants for beauty?",
@@ -21,7 +21,7 @@ export const meta = {
  },
  {
  question: "1. Nobi",
- answer: "Nobi is site search plus a conversational assistant grounded in the pages you connect, including product pages, FAQ routes, policy docs, and PDFs of ingredient decks or routine guides. It is strong when shoppers arrive with a specific ingredient or skin-type question and need a cited answer, with citation pills on every answer so a shopper can verify the claim against the source. Pricing is $25/month base (2,500 searches and 250 messages included), then $0.01 per additional search and $0.10 per additional message."
+ answer: "Nobi is site search plus a conversational assistant that retrieves and synthesizes information from the data sources and product catalog you connect, including product pages, FAQ routes, policy docs, and PDFs of ingredient decks or routine guides. Every answer carries an inline citation pill so a shopper can verify it back to the exact source document. Nobi does not generate new ingredient, allergen, or efficacy claims; it only repeats what's already on your connected pages. Pricing is $25/month base (2,500 searches and 250 messages included), then $0.01 per additional search and $0.10 per additional message."
  },
  {
  question: "2. Octane AI",
@@ -99,7 +99,7 @@ export const meta = {
 
 Beauty and skincare buyers ask routine, ingredient, and skin-type questions before they buy - here's how the leading tools handle that:
 
-- **Nobi** - an AI assistant grounded in your catalog that answers ingredient and routine questions with cited sources, $25/month base (2,500 searches and 250 messages included). Pick when customers are typing real product questions and you want answers tied to your own catalog and policy pages.
+- **Nobi** - an AI assistant that retrieves and synthesizes answers from your connected data sources and product catalog only, with an inline citation pill on every answer, $25/month base (2,500 searches and 250 messages included). Pick when shoppers are typing real product questions and you want answers bounded to what your own catalog and policy pages already say.
 - **[Octane AI](https://octaneai.com)** - quiz-led product finder for Shopify with skincare-routine and regimen templates, from $50/month. Pick when a diagnostic quiz is genuinely your hero discovery surface.
 - **[Conversica](https://conversica.com)** - persistent AI follow-up agents for inbound leads and abandoned carts, quote-only (per-conversation enterprise pricing, no public starter). Pick when the bottleneck is multi-touch lead engagement after a customer has already raised a hand.
 - **[Podium](https://podium.com)** - SMS-led customer messaging with web chat and reviews, quote-only (per-location SMB pricing with modular add-ons). Pick when texting and reviews are the channels your beauty buyers actually use.
@@ -117,7 +117,7 @@ Match the tool to where your beauty buyers actually have ingredient and routine 
 
 ## What does an AI assistant actually do for a beauty or skincare team?
 
-An [AI shopping assistant](https://nobi.ai/blog/ai-shopping-assistant-ecommerce) answers the ingredient, skin-type, and routine questions beauty buyers ask before they convert, then points them at the right SKUs in your catalog. The job splits into two surfaces: a search and chat surface that fields open-ended questions like "is this safe for sensitive skin" or "what should I pair with this serum", and a guided-discovery surface that walks customers through a diagnostic flow when they don't yet know what to ask. Catalog-aware grounding matters more here than in most categories, because answers turn on specific ingredients (INCI labels), allergens, and skin-type compatibility - and a generic web answer is wrong often enough to be a liability.
+An [AI shopping assistant](https://nobi.ai/blog/ai-shopping-assistant-ecommerce) retrieves and synthesizes information from your connected data sources and product catalog, then points shoppers at the right SKUs. The job splits into two surfaces: a search and chat surface that pulls from your product pages, FAQ, and policy docs to answer questions about what's in your catalog, and a guided-discovery surface that walks shoppers through a quiz when they don't yet know what to ask. Catalog-aware grounding matters in beauty because the assistant should never invent claims about ingredients, formulations, or skin reactions - it should only repeat what your own product pages and connected docs already say. The brand owns whether those source pages are regulatory-compliant; the AI only retrieves them.
 
 Nobi leans into the open-ended Q&A surface: an AI assistant grounded in the pages you connect (product pages, FAQ routes, policy docs, PDFs of ingredient decks or routine guides). Strong when buyers arrive with a specific question and need a cited answer; weaker if your hero discovery moment is a quiz funnel. [Octane AI](https://octaneai.com) owns the quiz-led product finder lane on Shopify, from $50/month. Strong when a routine builder or skin-type quiz is your primary discovery surface; no real-time chat or search-bar surface, so the value sits inside the quiz flow itself. [Conversica](https://conversica.com) runs persistent AI conversational agents that re-engage inbound leads by email and SMS until they reply or opt out. Strong when the bottleneck is multi-touch nurture after a lead has already raised a hand; weaker as an on-site real-time response surface. [Podium](https://podium.com) is a multi-channel SMB messaging platform combining SMS, web chat, reviews, and payments. Built for local-services SMB workflows, not ecommerce catalog discovery; strong when SMS and reviews drive your business, especially across multi-location retail.
 
@@ -125,7 +125,7 @@ Nobi leans into the open-ended Q&A surface: an AI assistant grounded in the page
 
 We picked tools by the job a beauty or skincare team is actually trying to do: answering ingredient and skin-type questions on-site, guiding customers from one SKU to a routine, and following up on people who showed interest but didn't buy. For each tool we looked at how answers are grounded (your catalog and policy pages versus generic LLM output that drifts), where the surface lives (search bar, quiz funnel, chat widget, SMS), how pricing scales with volume, and what implementation actually costs in calendar time.
 
-Start with what beauty buyers actually ask. The questions are narrow and ingredient-specific - is this fragrance-free, will the niacinamide clash with my retinol, what should I layer with this serum - and a tool either resolves them against your catalog or it doesn't. Nobi handles open-ended search and chat grounded in the product pages, FAQ routes, and PDFs you connect, with citation pills on every answer so a customer can verify the ingredient claim against the source. Octane AI runs the quiz-led product finder lane on Shopify, from $50/month - the right pick when a routine builder or skin-type quiz is your hero discovery surface rather than search.
+Start with what beauty shoppers actually do on the site. They look for what's in a product, compare across SKUs in the line, check policies, and look up what your routine guide recommends. A tool either retrieves those answers from your own product pages and connected docs, or it generates content from outside your catalog - and for beauty, only the first kind is safe to ship. Nobi runs retrieval and synthesis against the product pages, FAQ routes, and PDFs you connect, with citation pills on every answer so a shopper can verify the answer back to your source. Octane AI runs the quiz-led product finder lane on Shopify, from $50/month - the right pick when a routine builder or skin-type quiz is your hero discovery surface rather than search.
 
 Conversica runs persistent email and SMS follow-up on inbound leads who didn't convert, with per-conversation enterprise pricing; the lane is multi-touch nurture for higher-consideration purchases where the lead has already raised a hand and gone quiet. Podium handles SMS, reviews, web chat, and payments for SMB retail at per-location subscription pricing; the lane is multi-channel customer messaging for businesses where texting and reviews are core to conversion.
 
@@ -133,14 +133,14 @@ Pricing transparency was the second filter. Nobi publishes $25/month base (2,500
 
 ## 1. Nobi
 
-Nobi is an AI assistant that resolves questions like "is this safe with retinol" or "what should I layer for combination skin in winter" against your own product pages, ingredient PDFs, and policy content - then cites the source on every answer. For a beauty or skincare team, the grounding is what matters: ingredient claims, allergen flags, and routine compatibility have to come from your real catalog, not a model's guess. Implementation is a quick install on the website measured in hours, and the pricing publishes plainly so the team can model the bill before signing.
+Nobi is an AI assistant that retrieves and synthesizes information from your connected data sources and product catalog, then cites the source on every answer. It can pull what's on a product page, what's in your routine guide PDF, what your policy doc says about returns - all from content you've already published and reviewed. It does not generate new claims about ingredients, allergens, or skin reactions; it only repeats what your sources say. For a beauty or skincare team, that constraint is the whole point: every answer is something the brand has already approved on its own pages. Implementation is a quick install on the website measured in hours, and the pricing publishes plainly so the team can model the bill before signing.
 
-**Best for:** Beauty and skincare teams whose customers are typing real ingredient, skin-type, and routine questions on-site and want answers grounded in your own catalog instead of generic LLM output.
+**Best for:** Beauty and skincare teams that want shoppers' on-site questions answered from your own connected sources and product catalog only, never from a model's general training.
 
 **Pricing:** $25/month base (includes 2,500 searches and 250 conversational messages). $0.01 per additional search, $0.10 per additional message.
 
 **Pros:**
-- Cited answers with inline numbered source pills - hovering shows the source document name, date, and the exact excerpt the answer came from, which matters when a buyer asks an ingredient-safety question and wants to verify against your real product page
+- Cited answers with inline numbered source pills - hovering shows the source document name, date, and the exact excerpt the answer came from, so a shopper can verify any claim back to the page your team published it on
 - Connected knowledge sources refresh twice a day, so an updated ingredient list, a new shade launch, or a return-policy change reaches customer answers within hours instead of waiting on a weekly sync
 - Contextual suggestion pills - LLM-generated and scoped to the page the visitor is on, so a product detail page surfaces different prompts than the homepage - appear as tappable buttons that give visitors a starting point when they don't know what to type
 - Implementation lands in hours, not months, and pricing publishes plainly rather than gating behind a sales call, so the team can model cost against expected search and message volume up front
@@ -228,7 +228,7 @@ A common beauty stack pairs Nobi for on-site Q&A and search with Octane AI for t
 
 ## Frequently asked questions
 
-**Can an AI assistant safely answer ingredient and allergen questions?** Only if the answers are grounded in your own product data and cited back to the source. A model answering from its general training will hedge, drift, or quietly invent. Nobi grounds answers in the product pages, FAQ routes, and ingredient PDFs you connect, with inline citation pills that show the source document, date, and exact excerpt - so a buyer checking a fragrance-free or retinol-compatibility claim can verify it against your real catalog. The optional second-LLM fact-check pass is toggleable per team if you want an extra layer.
+**Where do answers about my products come from?** From the data sources and product catalog you connect - product pages, FAQ routes, policy docs, ingredient PDFs - and nothing else. Nobi retrieves and synthesizes; it does not generate new ingredient, allergen, or efficacy claims, and it does not pull from a model's general training. Every answer carries inline citation pills back to the exact source document, date, and excerpt. The brand owns whether those source pages are regulatory-compliant; Nobi only repeats what's published. The optional second-LLM fact-check pass re-reads each draft answer against the cited content if you want an extra verification layer.
 
 **Quiz funnel or conversational assistant - which fits a beauty catalog?** Both, often together. Pick a quiz when customers don't know what to ask and need a guided routine builder; pick a conversational assistant when they're typing real ingredient and skin-type questions. Octane AI owns the quiz lane; Nobi handles open-ended search and chat. Many beauty teams run both. If you're weighing the underlying technology shift, our piece on [AI shopping assistants vs traditional site search](https://nobi.ai/blog/ai-vs-traditional-site-search) walks through where each approach wins.
 
@@ -238,7 +238,7 @@ A common beauty stack pairs Nobi for on-site Q&A and search with Octane AI for t
 
 ---
 
-Want to see how Nobi handles ingredient questions, skin-type matching, and routine building for beauty buyers? Book a demo at nobi.ai.
+Want to see how Nobi retrieves answers from your beauty brand's connected sources and product catalog, with a citation back to the page on every answer? Book a demo at nobi.ai.
 
 <div className="my-8 flex justify-center">
  <a

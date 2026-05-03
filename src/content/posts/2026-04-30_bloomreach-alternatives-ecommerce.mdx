@@ -29,7 +29,7 @@ export const meta = {
  },
  {
  question: "3. Coveo",
- answer: "Coveo is the enterprise AI search platform built for organizations unifying content across 30+ sources. Rollouts are longer because the value is in that content-unification project, but the ML adapts with less hand-tuning once it's in place. Published commerce tiers run $600/month for Base and $1,320/month for Pro, with custom Enterprise pricing on top."
+ answer: "Coveo is the enterprise AI search platform built for organizations unifying content across 30+ sources. Rollouts are longer because the value is in that content-unification project, but the ML adapts with less hand-tuning once it's in place. Pricing is quoted directly through sales rather than via published tiers; real all-in deployments commonly land at $100K+ per year once licensing, implementation, and professional services are added."
  },
  {
  question: "4. Hawk Search",
@@ -123,7 +123,14 @@ The four alternatives in this guide each solve search without forcing a re-platf
 
 ## How did we evaluate these alternatives?
 
-We compared each tool on the four things a buyer actually has to defend in a vendor review: time from contract signed to live search on the site, pricing model and what the total annual cost looks like at realistic traffic, how much engineering and merchandising labor the tool needs to keep relevance good after launch, and whether it solves problems beyond keyword search - [semantic relevance on long-tail natural language queries](https://nobi.ai/blog/handling-long-tail-queries), conversational Q&A, recommendations. Nobi is one of the four tools on this list and is published by the team behind this article; we've named honest weaknesses for every product, including ours, so the comparison holds up.
+We compared each tool on the four things a buyer actually has to defend in a vendor review:
+
+- **Time to live**: how long it takes to go from contract signed to live search on the site.
+- **Total cost**: the pricing model and what the all-in annual bill looks like at realistic traffic.
+- **Ongoing labor**: the engineering and merchandising hours needed to keep relevance good after launch.
+- **Beyond keyword search**: whether the tool solves [semantic relevance on long-tail natural language queries](https://nobi.ai/blog/handling-long-tail-queries), conversational Q&A, and recommendations.
+
+Nobi is one of the four tools on this list and is published by the team behind this article. We've named honest weaknesses for every product, including ours, so the comparison holds up.
 
 ## 1. Nobi
 
@@ -156,11 +163,11 @@ Nobi is an AI site search and customer assistant built for teams that want both 
 
 ## 2. Algolia
 
-[Algolia](https://algolia.com) is the developer-first search API, and that framing is the whole story. Engineering teams get a fast, well-documented API with sub-50ms response times, a deep library of frontend widgets across every major stack, and NeuralSearch on higher tiers when keyword relevance alone isn't enough. The tradeoff is labor: search quality on Algolia tracks the engineering hours you spend tuning ranking, indexing, and the frontend, not the contract you signed. For a team that has a dedicated search engineer and wants full control over the experience, that's the feature. For a team without one, it's the bottleneck.
+[Algolia](https://algolia.com) is the developer-first search API. Engineering teams get a fast, well-documented API with sub-50ms response times, a deep library of frontend widgets across every major stack, and NeuralSearch on higher tiers when keyword relevance alone isn't enough. The tradeoff is labor: custom ranking, NeuralSearch tuning, and bespoke frontend work all need engineering hours - the contract gives you the platform, not the relevance work. For a team that has a dedicated search engineer and wants full control over the experience, that's the feature. For a team without one, it's the bottleneck.
 
 **Best for:** Engineering teams that want full API control over the search experience and have the developer hours to keep relevance tuned.
 
-**Pricing:** Usage-based. $0.50 per 1K search requests on Grow, $1.75 per 1K on Grow Plus, with NeuralSearch gated to higher tiers. Mid-sized deployments typically land at $500-$5,000/month before custom relevance engineering - the lower end is a small catalog with steady traffic; the upper end is high search volume plus custom ranking work.
+**Pricing:** Usage-based. $0.50 per 1K search requests above 10K on Grow, $1.75 per 1K on Grow Plus, with NeuralSearch gated to higher tiers. Mid-sized deployments typically land at $500-$5,000/month before custom relevance engineering - the lower end is a small catalog with steady traffic; the upper end is high search volume plus custom ranking work.
 
 **Pros:**
 - Sub-50ms search response times and fast indexing at scale
@@ -169,7 +176,7 @@ Nobi is an AI site search and customer assistant built for teams that want both 
 - Granular ranking and indexing control for teams that want to own the UX end to end
 
 **Cons:**
-- Requires developers to implement and maintain - search quality tracks the engineering hours you spend
+- Requires developers to implement and maintain - custom ranking and bespoke UX scale with engineering hours, not contract size
 - Usage-based pricing produces surprise bills during traffic spikes
 - Configuration complexity is real; non-technical teams cannot drive relevance work alone
 
@@ -177,7 +184,7 @@ Nobi is an AI site search and customer assistant built for teams that want both 
 
 ## 3. Coveo
 
-[Coveo](https://coveo.com) brings AI-powered relevance to commerce search, customer support portals, and internal knowledge in a single engine. Coveo's commerce module uses machine learning to personalize product displays based on session signals, catalog attributes, and behavioral history, and the same ranking engine powers every other surface you point it at. That cross-surface unification is the reason large organizations buy it, and it's also why the rollout looks more like an enterprise software project than a search install.
+[Coveo](https://coveo.com) brings AI-powered relevance to commerce search, customer support portals, and internal knowledge in a single engine. The commerce module uses machine learning to personalize product displays based on session signals, catalog attributes, and behavioral history, and the same ranking engine powers every other surface you point it at. That cross-surface unification is the reason large organizations buy it, and it's also why the rollout looks more like an enterprise software project than a search install.
 
 **Best for:** Enterprises unifying AI relevance across their commerce site, support portal, and internal knowledge base under one engine.
 

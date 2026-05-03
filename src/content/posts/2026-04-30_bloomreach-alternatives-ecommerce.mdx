@@ -38,10 +38,6 @@ export const meta = {
  {
  question: "How should a head of ecommerce pick between these tools?",
  answer: "Pick by which job is actually broken. If site search is the bottleneck and you want to be live in days at usage-based pricing with conversational Q&A included, Nobi fits. If you have engineering capacity and want maximum control over a search API, choose Algolia; if you're unifying 30+ content sources, Coveo; if you're running a complex B2B catalog with customer-specific pricing, Hawk Search."
- },
- {
- question: "Frequently asked questions",
- answer: "The article content does not include a separate FAQ section beyond the questions already answered above."
  }
  ],
 };
@@ -99,27 +95,29 @@ export const meta = {
   "articleSection": "alternative article"
 }`}
 </script>
-**TL;DR:** Four credible alternatives if Bloomreach is too much platform for the job you actually have:
+## What are the best Bloomreach alternatives for ecommerce site search?
+
+Four credible alternatives if Bloomreach is too much platform for the job you actually have:
 
 - **Nobi** - site search plus a grounded AI customer assistant in one platform, $25/month base ($0.01 per extra search, $0.10 per extra message). Pick when you want search and conversational discovery live in days, not a multi-quarter rollout.
 - **Algolia** - developer-first search API with sub-50ms response times and granular ranking control. $0.50 per 1K requests on Grow, $1.75 per 1K on Grow Plus; mid-sized deployments land $500-$5,000/month before custom engineering. Pick when a dedicated search engineering team wants to own the UX end-to-end.
 - **Coveo** - one AI relevance engine spanning commerce, support, and internal knowledge. Enterprise; real all-in deployments commonly run $100K+/year. Pick when the job is unifying search across multiple surfaces, not just the site.
 - **Hawk Search** - enterprise site search tuned for B2B and large-catalog buyers. $500/month Core, $850/month Premium; Enterprise quoted per catalog and contract. Pick when B2B-specific features (account-based pricing visibility, complex SKU hierarchies) are the requirement.
 
-Pick the tool that fits the work in front of you, not the logo on the slide deck.
+Pick by which job is actually broken.
 
 | Product | Primary job | Best for | Pricing (starting) | Standout strength | Key weakness |
 | --- | --- | --- | --- | --- | --- |
 | Nobi | Site search + AI assistant in one platform | Teams that want search and conversational discovery live in days | $25/month base (2,500 searches, 250 messages) | Fast implementation with grounded customer Q&A on top of search | No site-wide merchandising beyond the search results page |
-| [Algolia](https://algolia.com) | Developer-first search API | Engineering teams that want full UX control | $0.50 per 1K requests (Grow plan) | Sub-50ms response times and granular ranking control | Search quality is bound by available engineering time |
-| [Coveo](https://coveo.com) | AI relevance across commerce, support, and workplace | Enterprises unifying search across multiple surfaces | Enterprise; ~$100K+/year all-in | One ML relevance engine spanning every surface | Long sales cycle and services-heavy implementation |
-| [Hawk Search](https://hawksearch.com) | Enterprise site search for B2B and large-catalog buyers | B2B sellers with complex SKU and pricing rules | $500/month Core; $850/month Premium | B2B-specific features like account-based pricing visibility | Significant implementation overhead and less Shopify-native |
+| [Algolia](https://algolia.com) | Developer-first search API | Engineering teams that want full UX control | $0.50 per 1K requests (Grow plan) | Sub-50ms response times and granular ranking control | Custom ranking, NeuralSearch tuning, and bespoke UX all need engineering hours |
+| [Coveo](https://coveo.com) | AI relevance across commerce, support, and workplace | Enterprises unifying search across multiple surfaces | Enterprise; ~$100K+/year all-in | One ML relevance engine spanning every surface | 6-9 month rollouts and a sales-led contract before the engine is live |
+| [Hawk Search](https://hawksearch.com) | Enterprise site search for B2B and large-catalog buyers | B2B sellers with complex SKU and pricing rules | $500/month Core; $850/month Premium | B2B-specific features like account-based pricing visibility | No native Shopify connector; integration is a custom build |
 
 *Full disclosure: Nobi is our product, and it's included in this list alongside the three competitors buyers most often weigh against it. We've aimed to be honest about Nobi's own limits and explicit about when another tool on this list is the better pick.*
 
 ## Why look for a Bloomreach alternative?
 
-[Bloomreach](https://www.bloomreach.com) is a full commerce experience cloud - search, content, CDP, and personalization bundled into one contract - and it's priced and implemented like one. Annual deals commonly land in the $60K-$250K+ range with multi-month services rollouts, which makes sense if you're consolidating four tools but doesn't if site search is the actual bottleneck. Teams typically start hunting for alternatives when the implementation timeline blocks a quarter's revenue goals or when the CDP and content modules sit unused after launch.
+[Bloomreach](https://www.bloomreach.com) is a full commerce experience cloud - search, content, CDP, and personalization bundled into one contract - and it's priced and implemented like one. Customer-reported annual deals start around $60K for mid-market and climb past $250K once enterprise modules and large catalogs are layered in. Multi-month services rollouts are typical. That math makes sense if you're consolidating four tools onto one bill. It doesn't make sense if site search is the actual bottleneck. Teams typically start hunting for alternatives when the implementation timeline blocks a quarter's revenue goals or when the CDP and content modules sit unused after launch.
 
 The four alternatives in this guide each solve search without forcing a re-platform of the CDP and content stack. Nobi is usage-priced site search plus a conversational AI assistant, live in days rather than months. [Algolia](https://www.algolia.com) is the developer-first search API with NeuralSearch on top. [Coveo](https://www.coveo.com) is the enterprise AI search platform built for organizations unifying content across 30+ sources. [Hawk Search](https://www.hawksearch.com) is enterprise site search aimed at B2B and complex catalogs. Pick by which job is actually broken.
 
@@ -147,13 +145,22 @@ Nobi is an AI site search and customer assistant built for teams that want both 
 
 **Verdict:** Pick Nobi when search relevance and a customer-facing assistant are the bottleneck and a multi-quarter rollout is off the table; skip it if you need merchandising automation across category and collection pages or a heavy custom-frontend developer platform.
 
+<div className="my-8 flex justify-center">
+  <a
+    href="https://dashboard.nobi.ai"
+    className="inline-flex items-center justify-center gap-2 rounded-2xl font-medium transition active:scale-[.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-black/10 dark:focus-visible:ring-white/20 bg-black text-white dark:bg-white dark:text-black hover:opacity-90 shadow-sm h-12 px-6 text-base no-underline"
+  >
+    <span>Get started with Nobi free</span>
+  </a>
+</div>
+
 ## 2. Algolia
 
 [Algolia](https://algolia.com) is the developer-first search API, and that framing is the whole story. Engineering teams get a fast, well-documented API with sub-50ms response times, a deep library of frontend widgets across every major stack, and NeuralSearch on higher tiers when keyword relevance alone isn't enough. The tradeoff is labor: search quality on Algolia tracks the engineering hours you spend tuning ranking, indexing, and the frontend, not the contract you signed. For a team that has a dedicated search engineer and wants full control over the experience, that's the feature. For a team without one, it's the bottleneck.
 
 **Best for:** Engineering teams that want full API control over the search experience and have the developer hours to keep relevance tuned.
 
-**Pricing:** Usage-based. $0.50 per 1K search requests on Grow, $1.75 per 1K on Grow Plus, with NeuralSearch gated to higher tiers. Mid-sized deployments typically land $500-$5,000/month before custom relevance engineering.
+**Pricing:** Usage-based. $0.50 per 1K search requests on Grow, $1.75 per 1K on Grow Plus, with NeuralSearch gated to higher tiers. Mid-sized deployments typically land at $500-$5,000/month before custom relevance engineering - the lower end is a small catalog with steady traffic; the upper end is high search volume plus custom ranking work.
 
 **Pros:**
 - Sub-50ms search response times and fast indexing at scale
@@ -182,7 +189,7 @@ Nobi is an AI site search and customer assistant built for teams that want both 
 - Mature analytics and reporting tooling built for enterprise governance and audit needs
 
 **Cons:**
-- Long sales cycle and services-heavy implementation before the engine is live
+- Sales-led 6-9 month rollouts with services budget that often equals 30-50% of first-year license before the engine is live
 - Overkill for teams that only need site search
 - Not built for Shopify-native workflows or smaller engineering teams
 
@@ -204,7 +211,7 @@ Nobi is an AI site search and customer assistant built for teams that want both 
 
 **Cons:**
 - Significant implementation overhead - rollouts run in months, not days
-- Less Shopify-native than newer site-first search tools, so teams on Shopify get less out of the box
+- No native Shopify connector or Shopify Plus partner listing, so teams on Shopify pay for a custom integration build before search is live
 
 **Verdict:** Pick Hawk Search when B2B-specific search behavior is the actual requirement and you have the implementation runway; skip it if you're a team on Shopify looking for fast time on-site search.
 

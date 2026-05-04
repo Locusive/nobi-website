@@ -21,7 +21,7 @@ export const meta = {
  },
  {
  question: "1. Nobi",
- answer: "Nobi is AI site search built for apparel catalogs where shopper language doesn't line up with product titles, pairing semantic search with a conversational assistant and automatic shopper Q&A on one bill. Pricing is $25/month base with $0.01 per additional search and $0.10 per additional message, and a working install takes days. The trade-off worth naming: Nobi curates the search results page, not category or collection pages, and the third-party integration marketplace is smaller than Algolia's."
+ answer: "Nobi is AI site search built for apparel catalogs where shopper language doesn't line up with product titles, pairing semantic search with a conversational assistant and automatic shopper Q&A on one bill. Pricing is $25/month base with $0.01 per additional search and $0.10 per additional message, and a working install takes hours - paste the snippet, drop a placeholder, live the same day. The trade-off worth naming: Nobi curates the search results page, not category or collection pages, and the third-party integration marketplace is smaller than Algolia's."
  },
  {
  question: "2. Algolia",
@@ -33,11 +33,11 @@ export const meta = {
  },
  {
  question: "4. Coveo",
- answer: "Coveo is enterprise AI search built to unify many content sources across an organization. Third-party pricing reports start around $1k+/month with annual licensing in the $50k+ band. It's the right tool when scale and source breadth justify the spend, and the wrong tool when a focused apparel catalog doesn't."
+ answer: "Coveo is enterprise AI search built to unify many content sources across an organization. Third-party reports put the commerce module's base around $600/month, with real all-in deployments commonly $100K+ per year once licensing, implementation, and services are added. It's the right tool when scale and source breadth justify the spend, and the wrong tool when a focused apparel catalog doesn't."
  },
  {
  question: "How should an apparel brand pick between these tools?",
- answer: "Match the tool to who's tuning relevance and what budget is realistic. Nobi fits apparel teams that want semantic matching on shopper language without merchandiser pinning, at $25/month base, accepting that it curates the search results page only. Algolia fits engineering-led teams that want API control, Hawk Search fits B2B catalogs that want rule-based merchandiser control, and Coveo fits enterprises with many content sources and budget in the $50k+ band."
+ answer: "Match the tool to who's tuning relevance and what budget is realistic. Nobi fits apparel teams that want semantic matching on shopper language without merchandiser pinning, at $25/month base, accepting that it curates the search results page only. Algolia fits engineering-led teams that want API control, Hawk Search fits B2B catalogs that want rule-based merchandiser control, and Coveo fits enterprises with many content sources and budget in the $100K+/year band."
  }
  ],
 };
@@ -100,17 +100,17 @@ export const meta = {
 Apparel catalogs don't behave like other catalogs. Size, fit, color, seasonality: the variables stack up fast, and most hand-tuned search engines weren't built for it. Four AI search tools take a swing at the problem, each in their own way:
 
 - **Nobi** - AI site search with built-in semantic understanding of fit, size, color, and seasonality, plus a conversational assistant on the same platform. $25/month base (2,500 searches and 250 conversational messages included). Pick when you want apparel-aware relevance without paying a search engineer to tune it every week.
-- **Algolia** - developer-first search API with NeuralSearch on higher tiers. $0.50 per 1,000 search requests on the Grow plan, mid-sized deployments commonly $500 - $5,000/month. Pick when you have a dedicated frontend and backend team that wants to own the apparel ranking logic end-to-end.
-- **Hawk Search** - enterprise site search built around faceted product discovery, popular in B2B and mid-market apparel catalogs. $500/month Core, $850/month Premium; Enterprise quoted per catalog size and traffic. Pick when filter-and-facet browsing is the main way customers find products and you have implementation budget.
-- **Coveo** - enterprise AI relevance that spans commerce, support, and internal knowledge. Base plans around $600/month per third-party reports; real all-in deployments commonly $100K+ per year. Pick when one ML relevance model needs to run across an apparel site, a support portal, and an internal knowledge base.
+- **[Algolia](https://algolia.com)** - developer-first search API with NeuralSearch on higher tiers. $0.50 per 1,000 search requests on the Grow plan, mid-sized deployments commonly $500 - $5,000/month. Pick when you have a dedicated frontend and backend team that wants to own the apparel ranking logic end-to-end.
+- **[Hawk Search](https://hawksearch.com)** - enterprise site search built around faceted product discovery, popular with B2B uniform and workwear catalogs. $500/month Core, $850/month Premium; Enterprise quoted per catalog size and traffic. Pick when filter-and-facet browsing is the main way customers find products and you have implementation budget.
+- **[Coveo](https://coveo.com)** - enterprise AI relevance that spans commerce, support, and internal knowledge. Base plans around $600/month per third-party reports; real all-in deployments commonly $100K+ per year. Pick when one ML relevance model needs to run across an apparel site, a support portal, and an internal knowledge base.
 
-Pick by the apparel-specific job each tool does best, not by who has the loudest marketing.
+Pick by where your team is bottlenecked - relevance the merch team can't tune fast enough, engineering hours you don't have, deep faceted controls, or cross-property scale.
 
 | Product | Primary job | Best for | Pricing (starting) | Standout strength | Key weakness |
 | --- | --- | --- | --- | --- | --- |
-| Nobi | AI site search and conversational assistant for apparel catalogs | Fashion teams who need fit / size / color-aware relevance without weekly merchandiser tuning | $25/month base (2,500 searches, 250 conversational messages) | Out-of-the-box semantic understanding of apparel attributes plus an in-platform conversational assistant | No site-wide merchandising on category and collection pages |
+| Nobi | AI site search and conversational assistant for apparel catalogs | Fashion teams who need fit, size, and color-aware relevance without weekly merchandiser tuning | $25/month base (2,500 searches, 250 conversational messages) | Out-of-the-box semantic understanding of apparel attributes plus an in-platform conversational assistant | No site-wide merchandising on category and collection pages |
 | [Algolia](https://algolia.com) | Developer-first search API with optional NeuralSearch | Engineering teams that want full control over apparel ranking and the site UX | $0.50 per 1,000 search requests on Grow plan ($500 - $5,000/month typical) | Sub-50ms response time and granular ranking control | Relevance and ranking quality only as good as the engineering hours you spend tuning it |
-| [Hawk Search](https://hawksearch.com) | Faceted enterprise site search for catalogs with deep filtering needs | B2B and mid-market apparel catalogs where filter-driven discovery is the main path | $500/month Core, $850/month Premium; Enterprise quoted per catalog and traffic profile | Mature faceted navigation and category browsing for SKU-heavy catalogs | Significant implementation overhead and less Shopify-native than competitors |
+| [Hawk Search](https://hawksearch.com) | Faceted enterprise site search for catalogs with deep filtering needs | Deep-faceted catalog teams where filter-driven discovery is the main path | $500/month Core, $850/month Premium; Enterprise quoted per catalog and traffic profile | Mature faceted navigation and category browsing for SKU-heavy catalogs | Significant implementation overhead and less Shopify-native than competitors |
 | [Coveo](https://coveo.com) | Enterprise AI relevance across commerce, support, and workplace search | Enterprises unifying apparel search with support and internal knowledge on one ML engine | Around $600/month base per third-party reports; real all-in deployments commonly $100K+ per year | Cross-surface ML relevance and personalization at enterprise scale | Long sales cycle, services-heavy implementation, overkill for standalone search |
 
 *Full disclosure: Nobi is our product, and it's included in this list alongside the three competitors most teams weigh against it. We've aimed to be honest about Nobi's own limits and explicit about when another tool on this list is the better pick.*
@@ -125,7 +125,7 @@ Nobi pairs semantic site search with a [conversational assistant](https://nobi.a
 
 [Hawk Search](https://www.hawksearch.com) gives merchandisers granular control over rankings, faceted navigation, and synonyms. A better fit for B2B and enterprise catalogs where rule-based control is wanted, not a tax.
 
-[Coveo](https://www.coveo.com) is enterprise AI search built for organizations connecting many content sources. Third-party pricing reports start around $1k+/month with annual licensing in the $50k+ band - heavy for most apparel teams below enterprise scale.
+[Coveo](https://www.coveo.com) is enterprise AI search built for organizations connecting many content sources. Third-party reports put the commerce module's base around $600/month, with real all-in deployments commonly $100K+ per year once licensing, implementation, and services are added - heavy for most apparel teams below enterprise scale.
 
 ## How did we pick these tools?
 
@@ -142,7 +142,7 @@ Nobi is AI site search built for apparel catalogs where customer language doesn'
 **Pros:**
 - Semantic relevance on apparel attributes - fit, fabric, color, seasonality - without weekly merchandiser pinning
 - Site search and the conversational assistant share one catalog index and one platform, so a search query and an in-chat question return consistent products
-- Days-not-months install on Shopify, with apparel customers like UNTUCKit and Kilte showing CVR and revenue-per-searcher lifts in production
+- Hours-not-months install on Shopify, with apparel customers like UNTUCKit and Kilte showing CVR and revenue-per-searcher lifts in production
 - Transparent metered pricing from $25/month - no enterprise quote required to launch
 
 **Cons:**
@@ -186,7 +186,7 @@ Nobi is AI site search built for apparel catalogs where customer language doesn'
 
 [Hawk Search](https://hawksearch.com) is enterprise site search built for catalogs with hundreds of attributes per product, where faceted navigation - size, fit, color, fabric, category - is the dominant way customers find what they want. The product has a mature footprint with B2B sellers and native integrations into BigCommerce and Optimizely's B2B and B2C platforms, where most of its reference customers live. For an apparel catalog with deep SKU hierarchies, contract pricing on uniform or workwear lines, or category structures that need merchandiser-level control over how products rank inside a refinement, Hawk Search has spent years solving exactly that problem. The trade-off is calendar time. Implementation is sales-led and services-heavy, so the gap between contract and live search reads more like a quarter than a sprint.
 
-**Best for:** B2B and mid-market apparel catalogs where filter-driven product discovery is the primary path, not free-text search.
+**Best for:** B2B uniform and workwear catalogs where filter-driven product discovery is the primary path, not free-text search.
 
 **Pricing:** Core at $500/month and Premium at $850/month per the vendor; Enterprise quoted per catalog size and contract scope through a sales-led process.
 
@@ -201,7 +201,7 @@ Nobi is AI site search built for apparel catalogs where customer language doesn'
 - No native Shopify connector, so Shopify teams pay for a custom integration build before search is live
 - Enterprise pricing isn't published in full, so budget planning above the entry tiers requires getting a quote first
 
-**Verdict:** Pick Hawk Search when filter-driven discovery on a deep B2B or mid-market apparel catalog is the actual job and you have the implementation runway; skip it if you want a Shopify-native deployment in days.
+**Verdict:** Pick Hawk Search when filter-driven discovery on a deep B2B or large-catalog apparel team is the actual job and you have the implementation runway; skip it if you want a Shopify-native deployment in hours.
 
 ## 4. Coveo
 
@@ -225,13 +225,13 @@ Nobi is AI site search built for apparel catalogs where customer language doesn'
 
 ## How should an apparel team pick between these tools?
 
-Pick by the specific apparel job that's costing you conversions today. Customers searching "going-out top" or "wide-leg trouser" who bounce because the catalog speaks a different language need semantic relevance the merch team isn't hand-tuning every week. Engineering teams who want to own ranking logic end-to-end need a developer platform. B2B and uniform catalogs where filtering carries the discovery load need deep faceted controls. Enterprise teams unifying search across an apparel site, a support portal, and an internal knowledge base need one engine that runs on every property.
+Pick by where your team is bottlenecked. Customers searching "going-out top" or "wide-leg trouser" who bounce because the catalog speaks a different language need semantic relevance the merch team isn't hand-tuning every week. Engineering teams who want to own ranking logic end-to-end need a developer platform. B2B uniform and workwear catalogs where filtering carries the discovery load need deep faceted controls. Enterprise teams unifying search across an apparel site, a support portal, and an internal knowledge base need one engine that runs on every property.
 
-Nobi is the pick when semantic apparel relevance is the bottleneck and you don't want to staff a search engineer to keep ranking honest each season. [UNTUCKit](/customers/untuckit) saw a 17.1% conversion lift over their prior search tool in a two-month A/B test, and [Kilte](/customers/kilte) saw a 21.7% lift over Shopify's default search. Pricing is $25/month base with $0.01 per additional search and $0.10 per additional message, and a working install runs in days on Shopify. The trade-off worth naming: Nobi curates the search results page, not category or collection pages, so a team that needs site-wide merchandising will pair Nobi with a dedicated tool.
+Nobi is the pick when semantic apparel relevance is the bottleneck and you don't want to staff a search engineer to keep ranking honest each season. [UNTUCKit](/customers/untuckit) saw a 17.1% conversion lift over their prior search tool in a two-month A/B test, and [Kilte](/customers/kilte) saw a 21.7% lift over Shopify's default search. Pricing is $25/month base with $0.01 per additional search and $0.10 per additional message, and a working install runs in hours on Shopify. The trade-off worth naming: Nobi curates the search results page, not category or collection pages, so a team that needs site-wide merchandising will pair Nobi with a dedicated tool.
 
 Algolia is the pick when an in-house engineering team wants API-first control over how fit, size, and color attributes get weighted, and is willing to own the relevance work. Public per-1,000-request metering on Grow and Grow Plus tiers makes the unit economics legible up front, but the relevance quality scales with the engineering hours you can spend.
 
-Hawk Search is the pick when filter-driven discovery on a deep B2B or uniform / workwear catalog is the actual job. Faceted depth and merchandiser-level rule control are mature; implementation runs in months, not days, and there's no native Shopify connector.
+Hawk Search is the pick when filter-driven discovery on a deep B2B or uniform and workwear catalog is the actual job. Faceted depth and merchandiser-level rule control are mature; implementation runs in months, and there's no native Shopify connector.
 
 Coveo is the pick when one AI relevance engine has to run across an apparel site, a support portal, and an internal knowledge base at enterprise scale. Standalone apparel catalog search is a lot of platform and a long sales cycle for one job.
 
@@ -239,15 +239,15 @@ Coveo is the pick when one AI relevance engine has to run across an apparel site
 
 **Does AI search actually understand apparel queries like "wide-leg cropped trouser" or "lightweight summer dress"?** Yes, when the engine does [semantic matching rather than only keyword matching](https://nobi.ai/blog/ai-vs-traditional-site-search). Nobi reads attribute language - fit, fabric, color, seasonality - and returns relevant products without a merchandiser pinning every query. Algolia adds the same kind of semantic layer through NeuralSearch on its higher tiers. Hawk Search and Coveo both ship machine-learning relevance, though Hawk leans harder on faceted navigation as the primary path to product discovery.
 
-**What does AI search cost for a mid-sized apparel catalog?** Nobi is $25/month base, with $0.01 per additional search and $0.10 per additional message above the included quota. Algolia meters per 1,000 search requests on Grow and Grow Plus, with NeuralSearch gated to higher tiers. Hawk Search publishes Core at $500/month and Premium at $850/month, with Enterprise quoted; Coveo is sales-led, with third-party reports putting deployments above $50K annually once licensing and services are counted.
+**What does AI search cost for a mid-sized apparel catalog?** Nobi is $25/month base, with $0.01 per additional search and $0.10 per additional message above the included quota. Algolia meters per 1,000 search requests on Grow and Grow Plus, with NeuralSearch gated to higher tiers. Hawk Search publishes Core at $500/month and Premium at $850/month, with Enterprise quoted; Coveo is sales-led, with third-party reports putting real all-in deployments at $100K+ per year once licensing, implementation, and services are counted.
 
-**How long does it take to launch on a Shopify apparel site?** A quick install on the website for Nobi runs in days. Hawk Search and Coveo rollouts run in months.
+**How long does it take to launch on a Shopify apparel site?** Nobi installs on Shopify in hours - paste the snippet, drop a placeholder, live the same day. Hawk Search and Coveo rollouts run in months.
 
 **Does AI search replace a merchandiser?** No. It removes the weekly query-pinning chore so merchandisers spend their time on collection strategy and seasonal planning, not tuning ranking rules.
 
 ---
 
-Want apparel-aware search relevance and an automatic customer Q&A assistant running on the same platform? Check out Nobi's transparent $25/month pricing and book a demo at nobi.ai.
+If apparel-aware search relevance and an automatic customer Q&A assistant on one bill is what you need, [try Nobi free](https://dashboard.nobi.ai). Pricing is $25/month base, install runs in hours, and there's no enterprise quote to schedule before you can model the bill.
 
 <div className="my-8 flex justify-center">
  <a

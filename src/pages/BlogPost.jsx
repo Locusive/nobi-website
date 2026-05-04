@@ -82,10 +82,20 @@ export default function BlogPost() {
     ...(itemListSchema ? [itemListSchema] : []),
   ] : null;
 
+  // Pass the article's hero image through to useSEO so the runtime
+  // og:image matches what the build-time prerender wrote. Without
+  // this, useSEO defaults to the homepage og-image and overwrites
+  // the prerendered one after hydration. Resolves relative paths to
+  // absolute URLs the same way BlogPost.jsx's article schema does.
+  const ogImage = meta?.heroImage
+    ? (meta.heroImage.startsWith("http") ? meta.heroImage : `https://nobi.ai${meta.heroImage}`)
+    : undefined;
+
   useSEO({
     title: meta?.title ? `${meta.title} | Nobi` : undefined,
     description: meta?.description || meta?.excerpt || undefined,
     path: post ? `/blog/${post.slug}` : undefined,
+    image: ogImage,
     type: "article",
     schema,
   });

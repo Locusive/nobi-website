@@ -13,7 +13,7 @@ export const meta = {
  faqItems: [
  {
  question: "What is an AI shopping assistant for a fashion or apparel team?",
- answer: "An AI shopping assistant for a fashion or apparel retailer is software that helps shoppers find the right item and answers questions about fit, fabric, sizing, care, returns, and styling. It can show up as a search bar, chat widget, guided quiz, or a question prompt on the product page. The job is to compress the path from browsing to confident purchase in a category where most cart abandonment comes from doubt about whether something will fit or look right."
+ answer: "An AI shopping assistant for a fashion or apparel retailer is software that helps shoppers find the right item and answers questions about fit, fabric, sizing, care, returns, and styling. It can show up as a search bar, chat widget, guided quiz, or a question prompt on the product page. The job is to answer the questions that drive apparel returns and abandoned carts - fit and fabric uncertainty, return-window doubt, styling questions - before the shopper bounces."
  },
  {
  question: "How did we evaluate these tools for fashion and apparel?",
@@ -29,7 +29,7 @@ export const meta = {
  },
  {
  question: "3. Rep AI",
- answer: "Rep AI runs proactive chat that intervenes mid-session when a shopper looks stuck. It has separate Sales and Support modules and a flow builder for scripted campaigns. Pricing is not published at entry tier. Pick it when browsing abandonment is the bottleneck."
+ answer: "Rep AI runs proactive chat that intervenes mid-session when a shopper looks stuck. It has separate Sales and Support modules and a flow builder for scripted campaigns. Pricing starts at $12 per 1,000 visitors on the Pay As You Grow tier; Pro tiers run $280-$740/month at around 125,000 monthly sessions. Pick it when browsing abandonment is the bottleneck."
  },
  {
  question: "4. Alby",
@@ -108,10 +108,10 @@ export const meta = {
 Five tools handle the work fashion and apparel teams actually need an AI assistant for:
 
 - **Nobi** - site search, conversational discovery, and customer Q&A grounded in your product catalog and connected content sources, $25/month base. Pick when on-site discovery and answering fit, fabric, and care questions are the conversion bottleneck.
-- **Octane AI** - quiz-led fit finders and style diagnostics on Shopify, from $50/month. Pick when a guided quiz is your main path to product discovery.
-- **Rep AI** - proactive chat with no-code conversation flows for Shopify, from $12 per 1,000 visitors. Pick when marketing ops needs to ship campaign-specific flows without engineering tickets.
-- **Alby** - PDP-only Q&A inside the Bluecore stack, $1 per assisted conversion after the first 100. Pick when you already run on Bluecore and want inline product-page answers.
-- **Gorgias** - helpdesk with structured returns, refunds, and ticket workflow, from $10/month. Pick when agent-side support throughput is the bottleneck rather than pre-purchase discovery.
+- **[Octane AI](https://octaneai.com)** - quiz-led fit finders and style diagnostics on Shopify, from $50/month. Pick when a guided quiz is your main path to product discovery.
+- **[Rep AI](https://hellorep.ai)** - proactive chat with no-code conversation flows for Shopify, from $12 per 1,000 visitors. Pick when marketing ops needs to ship campaign-specific flows without engineering tickets.
+- **[Alby](https://alby.com)** - PDP-only Q&A inside the Bluecore stack, $1 per assisted conversion after the first 100. Pick when you already run on Bluecore and want inline product-page answers.
+- **[Gorgias](https://gorgias.com)** - helpdesk with structured returns, refunds, and ticket workflow, from $10/month. Pick when agent-side support throughput is the bottleneck rather than pre-purchase discovery.
 
 Pick by the job - discovery, quiz, proactive chat, PDP Q&A, or support workflow - not by demo polish.
 
@@ -127,7 +127,7 @@ Pick by the job - discovery, quiz, proactive chat, PDP Q&A, or support workflow 
 
 ## What does an AI assistant do for a fashion or apparel team?
 
-An [AI assistant for a fashion or apparel retailer](https://nobi.ai/blog/ai-shopping-assistant-ecommerce) is software that helps customers find the right item and answers questions about fit, fabric, sizing, care, returns, and styling - through a search bar, a chat widget, a guided quiz, or a question prompt on the product page. The job is to compress the path from browsing to confident purchase in a category where most cart abandonment comes from doubt about whether something will fit or look right.
+An [AI assistant for a fashion or apparel retailer](https://nobi.ai/blog/ai-shopping-assistant-ecommerce) is software that helps customers find the right item and answers questions about fit, fabric, sizing, care, returns, and styling - through a search bar, a chat widget, a guided quiz, or a question prompt on the product page. The job is to answer the questions that drive apparel returns and abandoned carts - fit and fabric uncertainty, return-window doubt, styling questions - before the customer bounces.
 
 ## How did we evaluate these tools for fashion and apparel?
 
@@ -217,7 +217,8 @@ Nobi pairs [site search](https://nobi.ai/blog/best-ai-search-ecommerce-2026), pr
 
 **Cons:**
 - PDP Q&A only, with no search capability, so it can't help customers earlier in the discovery funnel
-- Standalone roadmap is uncertain after the Bluecore acquisition; future direction depends on Bluecore's priorities
+- Pricing is per-assisted-conversion rather than a flat subscription, which makes monthly cost harder to model than published-tier alternatives - especially for high-conversion catalogs where the per-conversion line item compounds quickly
+- Requires a Bluecore deployment to land cleanly; teams not already on Bluecore are paying for the predictive-marketing platform underneath, not just the PDP Q&A layer
 
 **Verdict:** Pick Alby if Bluecore is already your predictive-marketing platform and PDP Q&A is the one gap; look elsewhere if you need a standalone assistant or anything beyond the product page.
 
@@ -259,7 +260,7 @@ Most apparel retailers end up running two tools - one for site discovery, one fo
 
 ---
 
-If customers keep bouncing because they cannot find the right fit, fabric, or return policy, take a look at how Nobi grounds search and customer Q&A in your real catalog at nobi.ai.
+If customers keep bouncing because they cannot find the right fit, fabric, or return policy, see how Nobi grounds search and customer Q&A in your real catalog - [try Nobi free](https://dashboard.nobi.ai), $25/month base once you're live.
 
 <div className="my-8 flex justify-center">
  <a

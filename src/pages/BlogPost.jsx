@@ -18,7 +18,11 @@ export default function BlogPost() {
     "@type": "Article",
     "headline": meta.title,
     "datePublished": meta.date,
-    "dateModified": meta.publishedAt || meta.date,
+    // Use lastUpdated if explicitly set on a re-edited article, else
+    // fall back to publishedAt, else the original date. This lets the
+    // editor surface freshness ("Last updated 2026-05-04") on articles
+    // that have had real content edits since publication.
+    "dateModified": meta.lastUpdated || meta.publishedAt || meta.date,
     "image": meta.heroImage
       ? (meta.heroImage.startsWith("http") ? meta.heroImage : `https://nobi.ai${meta.heroImage}`)
       : undefined,
@@ -28,17 +32,54 @@ export default function BlogPost() {
     "description": meta.description || meta.excerpt || "",
   } : null;
 
+  // Derive ItemList schema for listicle articles (best-of, alternatives,
+  // multi-vendor comparisons). The vendor entries live in faqItems as
+  // questions shaped like "1. Nobi", "2. Algolia" - that's how the
+  // assembler writes them. We pull each numbered vendor question out,
+  // strip the leading number, and build the ItemList. Without this,
+  // listicle articles aren't eligible for SERP rich-result treatment
+  // (the "list-style" carousel Google shows for "best X" queries).
+  const itemListSchema = (() => {
+    if (!post || !meta.faqItems) return null;
+    const vendorPattern = /^\d+\.\s+(.+)$/;
+    const vendors = meta.faqItems
+      .filter((item) => vendorPattern.test(item.question || ""))
+      .map((item, idx) => {
+        const m = (item.question || "").match(vendorPattern);
+        return m ? {
+          "@type": "ListItem",
+          "position": idx + 1,
+          "name": m[1].trim(),
+          "url": `https://nobi.ai/blog/${post.slug}#${m[1].trim().toLowerCase().replace(/\s+/g, "-")}`,
+        } : null;
+      })
+      .filter(Boolean);
+    if (vendors.length < 2) return null;
+    return {
+      "@context": "https://schema.org",
+      "@type": "ItemList",
+      "itemListElement": vendors,
+    };
+  })();
+
   const schema = articleSchema ? [
     articleSchema,
     ...(meta.faqItems ? [{
       "@context": "https://schema.org",
       "@type": "FAQPage",
-      "mainEntity": meta.faqItems.map((item) => ({
-        "@type": "Question",
-        "name": item.question,
-        "acceptedAnswer": { "@type": "Answer", "text": item.answer },
-      })),
+      "mainEntity": meta.faqItems
+        // Vendor entries (faqItems with questions like "1. Nobi") are
+        // the article's vendor sections, not real FAQs. Including them
+        // in FAQPage schema misleads Google's PAA targeting. Filter
+        // them out; they're already covered by ItemList schema.
+        .filter((item) => !/^\d+\.\s+/.test(item.question || ""))
+        .map((item) => ({
+          "@type": "Question",
+          "name": item.question,
+          "acceptedAnswer": { "@type": "Answer", "text": item.answer },
+        })),
     }] : []),
+    ...(itemListSchema ? [itemListSchema] : []),
   ] : null;
 
   useSEO({

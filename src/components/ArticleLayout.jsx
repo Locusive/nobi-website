@@ -5,8 +5,15 @@ import { formatPostDate } from "../content/utils/mdxPostLoader";
 import authors from "../content/authors.json";
 
 export default function ArticleLayout({ meta, children }) {
-  const { title, date, author, tags = [], heroImage } = meta || {};
+  const { title, date, lastUpdated, author, tags = [], heroImage } = meta || {};
   const formattedDate = formatPostDate(date);
+  // Show "Last updated" only when the article has been meaningfully
+  // re-edited after publication. We render it from a separate
+  // `lastUpdated` field rather than auto-deriving from publishedAt,
+  // because the previous behavior (dateModified = publishedAt) made
+  // every edit invisible to crawlers and to readers.
+  const formattedLastUpdated =
+    lastUpdated && lastUpdated !== date ? formatPostDate(lastUpdated) : null;
 
   // Single source of truth: look up rich byline (bio, photo, LinkedIn,
   // title) in authors.json by the article's author name. To update a
@@ -24,6 +31,9 @@ export default function ArticleLayout({ meta, children }) {
           <h1 className="mt-2 text-4xl sm:text-5xl font-semibold tracking-tight">{title}</h1>
           <div className="mt-3 text-sm text-black/60 dark:text-white/60 flex flex-wrap items-center gap-2">
             {formattedDate && <span>{formattedDate}</span>}
+            {formattedLastUpdated && (
+              <span>• Updated {formattedLastUpdated}</span>
+            )}
             {author && (
               <span>
                 • By{" "}

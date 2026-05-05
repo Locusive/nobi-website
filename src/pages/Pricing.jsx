@@ -263,7 +263,7 @@ export default function Pricing() {
                 Why Nobi
               </p>
               <h2 className="text-3xl sm:text-4xl font-semibold text-slate-900">
-                Every plan includes everything you need
+                Access everything you need
               </h2>
             </div>
 

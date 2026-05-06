@@ -107,15 +107,15 @@ export const meta = {
 
 Five tools, five different ways to move conversion rate.
 
-- **Nobi** - AI site search that also answers product questions inline, with documented +17.1% CVR (UNTUCKit) and +21.7% CVR (Kilte) A/B test lifts. $25/mo base. Pick when shoppers are bouncing because [the search bar misses long, conversational queries](https://nobi.ai/blog/increase-ecommerce-conversion-rate-search) and PDP questions go unanswered.
-- **Algolia** - sub-50ms keyword + NeuralSearch ranking that engineering teams tune query-by-query for the catalog. Usage-based on search requests and records indexed; ~$2,000+/mo at mid-market volumes before custom relevance work. Pick when you have a search engineer who will own ranking and want full API control over what drives CVR.
-- **Klevu** - AI matching plus 'did you mean' that catches conversational queries and typos before they become zero-result pages. Tiered pricing; not published publicly. Pick when wording mismatches between shopper and catalog are your main CVR leak.
-- **Constructor** - semantic search plus session-signal personalization that reorders results in real time across search, browse, category, and recommendations. Revenue-share model; costs scale with GMV. Pick when CVR work needs to span the full site, not just the search bar, and you have a data team.
-- **Fast Simon** - AI-assisted Shopify search bundled with visual merchandising and collection curation tools. Shopify App Store tiered pricing. Pick when your CVR bottleneck is collection curation and visual merchandising rather than semantic relevance.
+- **Nobi** - AI site search that also answers product questions inline, with documented +17.1% CVR ([UNTUCKit](/customers/untuckit)) and +21.7% CVR ([Kilte](/customers/kilte)) A/B test lifts. $25/mo base. Pick when shoppers are bouncing because [the search bar misses long, conversational queries](https://nobi.ai/blog/increase-ecommerce-conversion-rate-search) and PDP questions go unanswered.
+- **[Algolia](https://algolia.com)** - sub-50ms keyword + NeuralSearch ranking that engineering teams tune query-by-query for the catalog. Usage-based on search requests and records indexed; ~$2,000+/mo at mid-market volumes before custom relevance work. Pick when you have a search engineer who will own ranking and want full API control over what drives CVR.
+- **[Klevu](https://klevu.com)** - AI matching plus 'did you mean' that catches conversational queries and typos before they become zero-result pages. Tiered pricing; not published publicly. Pick when wording mismatches between shopper and catalog are your main CVR leak.
+- **[Constructor](https://constructor.io)** - semantic search plus session-signal personalization that reorders results in real time across search, browse, category, and recommendations. Revenue-share model; costs scale with GMV. Pick when CVR work needs to span the full site, not just the search bar, and you have a data team.
+- **[Fast Simon](https://fastsimon.com)** - AI-assisted Shopify search bundled with visual merchandising and collection curation tools. Shopify App Store tiered pricing. Pick when your CVR bottleneck is collection curation and visual merchandising rather than semantic relevance.
 
 Pick by the CVR mechanism that fits your bottleneck, not by demo polish.
 
-| Product | How it lifts CVR | Proven CVR result | Pricing (starting) | Best for CVR work | CVR limitation |
+| Product | How it lifts CVR | Published CVR evidence | Pricing (starting) | Best for CVR work | CVR limitation |
 | --- | --- | --- | --- | --- | --- |
 | Nobi | AI site search with shopper Q&A answered inline with cited sources | +17.1% CVR (UNTUCKit), +21.7% CVR (Kilte) in A/B tests vs prior search | $25/mo base; $0.01 per extra search, $0.10 per extra message | Search relevance + on-page Q&A as a combined CVR lever | Curates the search results page, not category/collection pages |
 | [Algolia](https://algolia.com) | Keyword ranking + NeuralSearch (gated to higher tiers) for queries that miss titles word-for-word | Vendor-published case studies; relevance lift depends on engineering tuning | Usage-based on search requests and records indexed; ~$2,000+/mo at mid-market volumes before custom relevance engineering | Engineering teams who will own ranking logic end-to-end | CVR scales with engineering hours - no built-in tuning automation |
@@ -133,7 +133,7 @@ Nobi leads on conversational query understanding plus inline shopper Q&A. [UNTUC
 
 ## How did we evaluate these tools for conversion rate impact?
 
-Every tool here was evaluated on its specific mechanism for lifting conversion rates, not its overall product profile. We focused on five questions: how each handles long-tail and conversational queries, what happens on zero-result pages, whether CVR lifts come out of the box or require ongoing engineering and merchandising work, what real customer data backs the claim, and whether pricing stays predictable as traffic grows. Nobi is one of the tools in this list - the article is published on Nobi's site - and we've called out where Algolia, Klevu, Constructor, or Fast Simon is the better pick for a CVR problem Nobi doesn't solve.
+Every tool here was evaluated on its specific mechanism for lifting conversion rates, not its overall product profile. We evaluated each tool on five criteria: how it handles long-tail and conversational queries, zero-result page behavior, whether lift comes out of the box or requires ongoing engineering and merchandising work, what customer data backs the claim, and whether pricing stays predictable as traffic grows. Nobi is one of the tools in this list - the article is published on Nobi's site - and we've called out where Algolia, Klevu, Constructor, or Fast Simon is the better pick for a CVR problem Nobi doesn't solve.
 
 ## 1. Nobi
 
@@ -144,7 +144,7 @@ Nobi is AI site search that also answers product questions inline. Shoppers who 
 **Pricing:** $25/month base (includes 2,500 searches and 250 conversational messages). $0.01 per additional search, $0.10 per additional message.
 
 **Pros:**
-- Documented A/B-test CVR lifts: +17.1% at UNTUCKit (with +21.3% revenue per searcher and +3.3% AOV in the same test) and +21.7% at Kilte against Shopify's default search.
+- Documented A/B-test CVR lifts at [UNTUCKit](/customers/untuckit) (+17.1%) and [Kilte](/customers/kilte) (+21.7%) - real split-test data against prior search baselines, not vendor-sourced estimates.
 - AI site search and shopper Q&A in one platform, so a visitor who can't find the product or has a question doesn't drop into two separate dead ends.
 - Inline numbered citation pills on every assistant answer link back to the source document, date, and excerpt, so shoppers verify against your official content without leaving the chat.
 - $25/month base with per-unit overage pricing - no revenue-share, no surprise bill when traffic spikes during a sale.
@@ -200,7 +200,7 @@ Nobi is AI site search that also answers product questions inline. Shoppers who 
 - Packaged Shopify install, so a CVR-targeted rollout takes hours-to-days instead of months
 
 **Cons:**
-- Klevu is now part of Athos Commerce alongside Searchspring and Intelligent Reach, so a Klevu + Searchspring shortlist is two products of the same parent company
+- Klevu is now a division of Athos Commerce, the holding company that also owns Searchspring and Intelligent Reach; each product still contracts, prices, and logs in separately
 - Personalizing the fallback experience is a separately licensed feature, not included with Smart Search
 - Klevu's AI matching is only as good as your catalog data; sparse product info weakens the layer that's supposed to drive CVR
 
@@ -218,7 +218,7 @@ Nobi is AI site search that also answers product questions inline. Shoppers who 
 - Session-signal personalization reorders results in real time, so the CVR lever moves on every individual session, not just on average ranking quality.
 - Merchandising covers the full site - category, collection, browse, recommendations - so CVR work isn't trapped in the search bar.
 - A/B testing infrastructure is built in, so you can measure which CVR change is actually working instead of guessing.
-- Quizzes, browse, and recommendations sit on one platform, so the CVR signal flows across surfaces instead of fragmenting.
+- Search, browse, category, and recommendations run on one platform, so in-session signals from any part of the site feed the shared ranking model instead of fragmenting.
 
 **Cons:**
 - Revenue-share pricing means a successful CVR campaign costs you more on the contract as GMV grows.
@@ -261,13 +261,4 @@ Fast Simon is the cheapest pick when your bottleneck is collection curation rath
 
 ---
 
-If your CVR is leaking through search-bar misses and unanswered product questions, [book a Nobi demo](https://nobi.ai) and see the same A/B test setup that moved UNTUCKit's CVR +17.1%.
-
-<div className="my-8 flex justify-center">
- <a
- href="https://dashboard.nobi.ai"
- className="inline-flex items-center justify-center gap-2 rounded-2xl font-medium transition active:scale-[.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-black/10 dark:focus-visible:ring-white/20 bg-black text-white dark:bg-white dark:text-black hover:opacity-90 shadow-sm h-12 px-6 text-base no-underline"
- >
- <span>Start your free Nobi trial</span>
- </a>
-</div>
+If your CVR is leaking through search-bar misses and unanswered product questions, [book a Nobi demo](https://dashboard.nobi.ai) and see the same A/B test setup that moved UNTUCKit's CVR +17.1%.

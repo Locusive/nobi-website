@@ -106,10 +106,10 @@ export const meta = {
 ## What are the best AI-powered ecommerce search tools for real-time personalization?
 
 - **Nobi** - out-of-the-box behavioral personalization on the search results page, no manual rules. $25/mo base (2,500 searches + 250 conversational messages). Pick when search-page personalization needs to work on day one without an engineering or data-science build.
-- **Constructor** - session-signal reordering across search, browse, category, and recommendations on one engine. Revenue-share, no published list price. Pick when personalization has to span the whole site and you have a data team.
-- **Bloomreach** - personalization driven by unified CDP profiles across search, content, and email. Enterprise-only pricing; six-figure annual contracts are common. Pick when you're consolidating search and customer data into one contract.
-- **Algolia** - personalization is API-level, gated to higher tiers, and tuned by your engineers. Usage-based on search requests and records indexed; mid-market deployments often run $2K+/month, enterprise tier opaque. Pick when a search engineering team owns ranking end-to-end.
-- **Klevu** - AI search on Shopify with personalization sold as a separately licensed module on top of Smart Search. Tiered pricing; the Personalization module is quoted separately on top of Smart Search. Pick when Shopify-native install matters and the personalization tier is in budget.
+- **[Constructor](https://constructor.io)** - session-signal reordering across search, browse, category, and recommendations on one engine. Revenue-share, no published list price. Pick when personalization has to span the whole site and you have a data team.
+- **[Bloomreach](https://bloomreach.com)** - personalization driven by unified CDP profiles across search, content, and email. Enterprise-only pricing; six-figure annual contracts are common. Pick when you're consolidating search and customer data into one contract.
+- **[Algolia](https://algolia.com)** - personalization is API-level, gated to higher tiers, and tuned by your engineers. Usage-based on search requests and records indexed; mid-market deployments often run $2K+/month, enterprise tier opaque. Pick when a search engineering team owns ranking end-to-end.
+- **[Klevu](https://klevu.com)** - AI search on Shopify with personalization sold as a separately licensed module on top of Smart Search. No published starter price, quoted through sales; Personalization module licensed separately on top of Smart Search. Pick when Shopify-native install matters and the personalization tier is in budget.
 
 Pick by how the tool actually delivers personalization for the surface you care about, not by the marketing line.
 
@@ -119,7 +119,7 @@ Pick by how the tool actually delivers personalization for the surface you care 
 | [Constructor](https://constructor.io) | Real-time session-signal reordering across search, browse, category, and recommendations | In-session behavior plus historical signals across surfaces | Included; tuning typically requires internal data team | Revenue-share; no published list price, quoted to sales | Implementation runs weeks to months; revenue-share bills can scale unpredictably with GMV |
 | [Bloomreach](https://bloomreach.com) | Personalized search, content, and recommendations driven by unified customer profiles | CDP profile data plus session events across the experience cloud | Included in Discovery + Engagement contracts; configured during enterprise rollout | Enterprise-only pricing; six-figure annual contracts are common | Multi-month enterprise implementation; over-featured for teams that just want personalized search |
 | [Algolia](https://algolia.com) | Personalization is an API capability your engineers configure; not on by default | Per-user event streams you instrument and send via the API | Personalization and NeuralSearch gated to higher tiers; tuning is engineering-led | Usage-based on search requests and records indexed; mid-market deployments often $2K+/month, enterprise tier opaque | Out-of-the-box personalization is minimal until your team builds it |
-| [Klevu](https://klevu.com) | Smart Search returns AI-matched results; personalized ranking is a separately licensed module | Browsing and purchase behavior once the personalization module is added | Personalization sold as an upsell on top of Smart Search; not included in the base plan | Tiered pricing; Personalization module quoted separately on top of Smart Search | Personalization is a paid add-on, not a default; Klevu, Searchspring, and Intelligent Reach all sit under Athos Commerce |
+| [Klevu](https://klevu.com) | Smart Search returns AI-matched results; personalized ranking is a separately licensed module | Browsing and purchase behavior once the personalization module is added | Personalization sold as an upsell on top of Smart Search; not included in the base plan | No published starter price, quoted through sales; Personalization module licensed separately on top of Smart Search | Personalization is a paid add-on, not a default; Klevu, Searchspring, and Intelligent Reach all sit under Athos Commerce |
 
 *Full disclosure: Nobi is our product, and it's included in this list alongside the four competitors head-of-ecommerce buyers most often weigh against it. We've aimed to be honest about Nobi's own limits and explicit about when another tool on this list is the better pick.*
 
@@ -133,7 +133,7 @@ Real-time personalization reorders the products a shopper sees based on what the
 
 Each tool was scored on five things specific to real-time personalization: what works the day you turn it on, which signals it draws on, what tier or configuration the personalization actually requires, whether pricing is published, and the honest limit on what it can personalize. The order below isn't a ranked ladder - it reflects fit for a head of ecommerce who needs personalized search live without a multi-quarter rollout.
 
-Default behavior is the first filter. Some tools personalize results the moment you flip them on; others give you a flat ranker and ask you to build the personalization layer yourself. Nobi includes real-time personalization on the $25/month base plan, no separate module to license. Constructor and Bloomreach also personalize out of the box. Algolia ships personalization as a paid add-on that engineering wires up against your event stream. Klevu gates it behind a separate Personalization module licensed on top of base search.
+Default behavior is the first filter. Some tools personalize results the moment you flip them on; others give you a flat ranker and ask you to build the personalization layer yourself. Nobi includes real-time personalization by default at the $25/month base tier - no upgrade required, no add-on to license. Constructor and Bloomreach also personalize out of the box. Algolia ships personalization as a paid add-on that engineering wires up against your event stream. Klevu gates it behind a separate Personalization module licensed on top of base search.
 
 Signals matter next. In-session clicks, views, and cart adds are the floor; the difference is whether the engine also blends prior-visit data from a CDP or stored shopper profile. Bloomreach leans heaviest here through its Engagement CDP. Constructor blends in-session and historical signals as a default. Nobi uses session behavior plus historical patterns; Algolia and Klevu draw on whatever event stream you connect.
 
@@ -234,16 +234,16 @@ Nobi handles real-time personalization out of the box on the search results page
 
 **Best for:** Shopify brands that want a packaged AI search install and have budget to add the Personalization module on top of Smart Search.
 
-**Pricing:** Tiered pricing across Smart Search; the Personalization module is quoted separately on top of Smart Search.
+**Pricing:** No published starter price, quoted through sales; the Personalization module is licensed separately on top of Smart Search.
 
 **Pros:**
 - AI matching catches [long, conversational queries](https://nobi.ai/blog/handling-long-tail-queries) before they go to zero results, which feeds the personalization layer cleaner traffic
-- Packaged Shopify install, so the AI search layer goes live in days rather than the weeks-to-months rollout enterprise platforms quote
+- Packaged Shopify install, so the AI search layer goes live in days rather than the full onboarding cycle a platform like Constructor or Bloomreach requires
 - Dashboard-driven configuration that merchandisers can run without an engineering ticket
 
 **Cons:**
 - Personalization is a separately licensed module, not part of Smart Search; the base price does not include the per-shopper reordering layer
-- Klevu is now a division of Athos Commerce alongside Searchspring and Intelligent Reach, so a shortlist that pairs Klevu with Searchspring is shopping inside the same parent company
+- Klevu is now a division of Athos Commerce alongside Searchspring and Intelligent Reach - shortlisting both Klevu and Searchspring means evaluating two products owned by the same parent
 
 **Verdict:** Pick Klevu when a packaged Shopify install matters and the Personalization module is in budget; skip it if real-time personalization needs to be on by default in the base plan or if the Athos overlap with Searchspring matters to your shortlist.
 
@@ -263,7 +263,7 @@ If a packaged Shopify install matters and the separate Personalization module is
 
 ---
 
-Skip the engineering build. Spin up Nobi for $25 a month and have personalized search running the same day you sign up.
+Skip the engineering build. Start Nobi for $25 a month and have personalized search running the same day you sign up.
 
 <div className="my-8 flex justify-center">
  <a

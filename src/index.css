@@ -6,6 +6,10 @@
 html { scroll-behavior: smooth; }
 @supports (text-wrap: balance) { .text-balance { text-wrap: balance; } }
 
+/* Defense in depth against horizontal scroll on mobile. `clip`
+   (vs `hidden`) preserves the sticky header's scroll context. */
+html, body { overflow-x: clip; }
+
 :root {
   --hero-preview-ratio: 2.2;
 }

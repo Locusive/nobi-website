@@ -100,16 +100,16 @@ export const meta = {
 Looking at [four Intercom alternatives](https://nobi.ai/blog/intercom-alternatives-for-customer-support), each one wins a different financial services support job:
 
 - **Nobi** - AI question-answering on the website with twice-daily knowledge refresh and inline citation pills, $25/mo base (2,500 searches and 250 conversational messages included; $0.01 per additional search, $0.10 per additional message). Pick when on-site customer question answering with verifiable retrieval grounded in approved content is the main job.
-- **Zendesk** - mature ticket workflow with autonomous AI Agents layered on top. Suite + Copilot bundle at $155/agent/mo (Professional) and $209 (Enterprise) annual, or a standalone Copilot add-on at $50/agent/mo for teams that already run Suite without the bundle. Pick when agent-side ticket workflow is the bottleneck.
-- **Ada** - autonomous AI customer service across web, app, email, SMS, and messaging. Quote-only; explicitly fits companies running 300,000+ annual customer service conversations. Pick when one AI layer has to cover many channels at high volume.
-- **Forethought** - AI layer that sits on top of an existing helpdesk (Zendesk, Salesforce, Kustomer). Quote-only with a platform fee plus deflection-volume and routed-ticket usage. Pick when keeping your current helpdesk is non-negotiable and you want AI added on top.
+- **[Zendesk](https://zendesk.com)** - mature ticket workflow with autonomous AI Agents layered on top. Suite + Copilot bundle at $155/agent/mo (Professional) and $209 (Enterprise) annual, or a standalone Copilot add-on at $50/agent/mo for teams that already run Suite without the bundle. Pick when agent-side ticket workflow is the bottleneck.
+- **[Ada](https://ada.cx)** - autonomous AI customer service across web, app, email, SMS, and messaging. Quote-only; explicitly fits companies running 300,000+ annual customer service conversations. Pick when one AI layer has to cover many channels at high volume.
+- **[Forethought](https://forethought.ai)** - AI layer that sits on top of an existing helpdesk (Zendesk, Salesforce, Kustomer). Quote-only with a platform fee plus deflection-volume and routed-ticket usage. Pick when keeping your current helpdesk is non-negotiable and you want AI added on top.
 
-Match the tool to the actual support job, not to the demo polish.
+The friction that usually drives the search: Fin's weekly source sync lag, the Expert-plan SSO floor at $132/seat/mo, and whether the team's bottleneck is on-site client questions or agent-side ticket routing.
 
 | Product | Primary job | Best for | Pricing (starting) | Standout strength | Key weakness |
 | --- | --- | --- | --- | --- | --- |
 | Nobi | AI customer question-answering on the website with cited retrieval | Teams whose primary need is on-site question answering grounded in current approved content | $25/mo base (2,500 searches and 250 messages); $0.01 per additional search, $0.10 per additional message | Twice-daily knowledge refresh, inline citation pills with source name/date/excerpt, optional second-LLM fact-check pass (on by default for financial services) | Not a ticket workflow platform; web chat only |
-| [Zendesk](https://zendesk.com) | Ticket workflow with autonomous AI Agents layered on top | Teams whose primary need is mature agent-side ticket workflow | $155/agent/mo (Professional) and $209 (Enterprise) annual on Suite + Copilot bundle; or $50/agent/mo standalone Copilot add-on | Industry-standard ticket workflow with macros, SLAs, routing rules, and one of the deepest support-tool app marketplaces | Enterprise implementation cycles measured in months; cost compounds at scale once Copilot stacks on Suite |
+| [Zendesk](https://zendesk.com) | Ticket workflow with autonomous AI Agents layered on top | Teams whose primary need is mature agent-side ticket workflow | $155/agent/mo (Professional) and $209 (Enterprise) annual on Suite + Copilot bundle; or $50/agent/mo standalone Copilot add-on | Industry-standard ticket workflow with macros, SLAs, routing rules, and a large third-party app marketplace | Enterprise implementation cycles measured in months; cost compounds at scale once Copilot stacks on Suite |
 | [Ada](https://ada.cx) | Autonomous AI customer service across web, app, email, SMS, and messaging | Teams handling support across many channels at high cross-channel volume | Quote-only; vendor explicitly fits companies running 300,000+ annual customer service conversations | One AI agent persona running across web, app, email, SMS, and messaging from a single configuration | Enterprise-leaning rollout measured in quarters; no public pricing so finance can't model the bill before a sales cycle |
 | [Forethought](https://forethought.ai) | AI layer on top of an existing helpdesk (Zendesk, Salesforce, Kustomer) | Teams whose helpdesk choice is locked in and who want AI added on top | Quote-only; platform fee plus deflection-volume usage plus ticket-volume routed to agents | Layers onto an existing helpdesk without replacing it, so change-management burden is much lower than a platform swap | Requires an existing helpdesk; agent-assist focus means less direct lift on visitor-side question answering |
 
@@ -125,7 +125,7 @@ We compared the four alternatives on the criteria a financial services head of c
 
 ## 1. Nobi
 
-Nobi is an [AI customer-support layer](https://nobi.ai/blog/best-ai-chatbot-for-customer-support) that lives on your firm's website and answers client questions in chat. It indexes the sources you connect - help center articles, policy pages, FAQ routes, internal docs, PDFs - and grounds every answer in those sources, with a numbered citation pill back to the document, date, and excerpt the answer came from. For a support lead at a financial services firm evaluating against Intercom Fin, the appeal is the combination of a cited answer trail clients can verify themselves and source content that refreshes twice a day, all on a published per-message price rather than a seat-based subscription. The trade-off: it's a website-side answering layer, not a full ticket platform with case routing or macros.
+Nobi is an [AI customer-support layer](https://nobi.ai/blog/best-ai-chatbot-for-customer-support) that lives on your firm's website and answers client questions in chat. It indexes the sources you connect - help center articles, policy pages, FAQ routes, internal docs, PDFs - and grounds every answer in those sources. For a support lead evaluating against Intercom Fin, three things stand out. Every answer carries a numbered citation pill back to the source document, so clients can verify any response against your published content without leaving the chat. Connected sources refresh twice a day instead of weekly. And pricing is per message rather than per seat, so cost scales with actual usage rather than headcount. The trade-off: it's a website-side answering layer, not a full ticket platform with case routing or macros.
 
 **Best for:** Financial services support teams whose main job is answering client questions on the firm's website with cited answers grounded in approved policies and current product content.
 
@@ -133,7 +133,7 @@ Nobi is an [AI customer-support layer](https://nobi.ai/blog/best-ai-chatbot-for-
 
 **Pros:**
 - Optional second-LLM fact-check pass, on by default for financial services: every draft answer is re-evaluated by a separate LLM call that receives the raw cited content and is asked to flag inaccuracies; only answers that clear the second pass are sent
-- Connected sources refresh twice a day, so a fee schedule, disclosure, or rate change shows up in client answers within hours instead of waiting on Intercom Fin's weekly external sync
+- Connected sources refresh twice a day rather than weekly - any update you publish to a connected source (policy pages, FAQ articles, product terms) reaches client answers the same day
 - Inline numbered citation pills on every answer: hovering shows the source document, date, and exact excerpt, and a sources sidebar lists every reference with direct links so clients can verify any answer against your published content without leaving the chat
 - Published usage-based pricing ($25/month base plus predictable per-search and per-message overage), in contrast to Intercom's seat-based subscription stacked with $0.99 per Fin resolution
 
@@ -154,14 +154,14 @@ Nobi is an [AI customer-support layer](https://nobi.ai/blog/best-ai-chatbot-for-
 
 ## 2. Zendesk
 
-[Zendesk](https://zendesk.com) is the customer support platform many financial services teams already run as their ticketing system, and it's the conventional choice when agent-side workflow is the bottleneck rather than visitor-facing answers on the firm's site. Recent AI Agents now resolve tickets autonomously inside the Zendesk inbox, so a support team whose primary job is ticket workflow can keep that workflow and add an AI layer on top of it. The trade-off is implementation depth: Suite is built for support organizations at scale, with multi-org routing, SLAs, and compliance controls that take months rather than days to roll out.
+[Zendesk](https://zendesk.com) handles ticket workflow at scale - routing, macros, SLAs, case management - and its AI Agents resolve tickets autonomously inside the same inbox your team already works from. For financial services teams whose primary bottleneck is agent-side workflow rather than on-site client question answering, that combination is the appeal: the ticket platform stays in place and AI layers on top of it. The trade-off is implementation depth: Suite is built for support organizations at scale, with multi-org routing, SLAs, and compliance controls that take months rather than days to roll out.
 
 **Best for:** Financial services support teams whose primary need is mature ticket workflow - routing, macros, SLAs, and reporting - with AI as an additional layer rather than the main event.
 
 **Pricing:** Suite + Copilot bundle at $155/agent/month (Professional) and $209 (Enterprise) on annual billing; or a standalone Copilot add-on at $50/agent/month for teams that want AI without the bundle.
 
 **Pros:**
-- Industry-standard ticket workflow with macros, SLAs, routing rules, and one of the deepest app marketplaces in support tooling
+- Industry-standard ticket workflow with macros, SLAs, routing rules, and a large third-party app marketplace
 - Mature reporting and case management built for support organizations at scale
 - AI Agents resolve tickets autonomously inside the Zendesk inbox, layered on the existing workflow rather than replacing it
 
@@ -174,7 +174,7 @@ Nobi is an [AI customer-support layer](https://nobi.ai/blog/best-ai-chatbot-for-
 
 ## 3. Ada
 
-[Ada](https://ada.cx) is an AI customer service platform that deploys autonomous agents across web, app, email, SMS, and messaging apps to resolve support requests end-to-end without an existing helpdesk underneath them. For a financial services support lead, the appeal is breadth of channel coverage: clients reach the team across many places - chat on the firm's site, replies to product emails, in-app questions about an account, SMS for urgent issues - and Ada puts one AI layer over all of them rather than asking you to stitch together a different tool per channel. The trade-off is enterprise weight: data integration, intent tuning, and rollout are a multi-quarter project, and pricing surfaces only after a sales conversation.
+[Ada](https://ada.cx) is an AI customer service platform that deploys autonomous agents across web, app, email, SMS, and messaging apps to resolve support requests end-to-end without an existing helpdesk underneath them. For a financial services support lead, the appeal is breadth of channel coverage: clients reach the team across many places - chat on the firm's site, replies to product emails, in-app questions about an account, SMS for urgent issues - and Ada puts one AI layer over all of them rather than asking you to stitch together a different tool per channel. The trade-off is enterprise weight: data integration, intent tuning, and rollout are a multi-quarter project, and pricing appears only after a sales conversation.
 
 **Best for:** Support teams that need one autonomous AI agent answering across web, app, email, SMS, and messaging at high cross-channel volume.
 
@@ -193,7 +193,7 @@ Nobi is an [AI customer-support layer](https://nobi.ai/blog/best-ai-chatbot-for-
 
 ## 4. Forethought
 
-[Forethought](https://forethought.ai) is an AI customer-support platform that layers on top of an existing helpdesk - Zendesk, Salesforce, or Kustomer - to auto-resolve tickets, route them, and assist agents inside the inbox the support team already lives in. For a financial services support lead whose helpdesk choice is locked in and whose bottleneck is ticket volume rather than client questions on the firm's website, Forethought is the lowest-change way to add an AI layer. The workflows, macros, and routing rules don't move, and the AI lift shows up inside the same agent view your team already uses. The trade-off is reach: because the product assumes a helpdesk underneath it, it isn't a standalone client-facing deployment, and the impact concentrates on agent-side resolution rather than answers given before a ticket is filed.
+[Forethought](https://forethought.ai) is an AI customer-support platform that layers on top of an existing helpdesk - Zendesk, Salesforce, or Kustomer - to auto-resolve tickets, route them, and assist agents inside the inbox the support team already lives in. If your helpdesk choice is locked in and the bottleneck is ticket volume rather than client questions on the firm's website, Forethought is the lowest-change way to add an AI layer. The workflows, macros, and routing rules don't move, and the AI lift shows up inside the same agent view your team already uses. The trade-off is reach: because the product assumes a helpdesk underneath it, it isn't a standalone client-facing deployment, and the impact concentrates on agent-side resolution rather than answers given before a ticket is filed.
 
 **Best for:** Financial services support teams whose helpdesk choice is set in stone (Zendesk, Salesforce, or Kustomer) and who want AI added on top without a migration.
 
@@ -219,7 +219,7 @@ Map the choice to the actual job that's bottlenecking your team. If most of your
 
 ### How often do connected knowledge sources refresh?
 
-Nobi refreshes connected sources twice a day, so a fee schedule or disclosure update reaches client answers within hours. Intercom Fin's external sources sync weekly. Zendesk, Ada, and Forethought set refresh cadence per integration rather than as a single platform default, so it depends on how each source is wired in.
+Nobi refreshes connected sources twice a day, so content changes reach client answers the same day they're published. Intercom Fin's external sources sync weekly. Zendesk, Ada, and Forethought set refresh cadence per integration rather than as a single platform default, so it depends on how each source is wired in.
 
 ### Which tools cite the source on every answer?
 
@@ -227,7 +227,7 @@ Nobi puts an inline numbered citation pill on every answer; hovering shows the s
 
 ### Which alternatives publish public pricing?
 
-Nobi ($25/month base, $0.01 per additional search, $0.10 per additional message), Zendesk (Suite + Copilot bundle at $155 to $209 per agent/month annual, or a standalone Copilot add-on at $50 per agent/month), and Intercom ($39 to $139 per seat/month with $0.99 per Fin resolution) publish numbers. Ada and Forethought are quote-only.
+Nobi (usage-based; starts at $25/month - full rates in the Nobi section above), Zendesk (Suite + Copilot bundle at $155 to $209 per agent/month annual, or a standalone Copilot add-on at $50 per agent/month), and Intercom ($29 to $132/seat/mo annual, or $39 to $139/seat/mo monthly, plus $0.99 per Fin resolution) publish numbers. Ada and Forethought are quote-only.
 
 ### Can you use one without an underlying helpdesk?
 
@@ -239,7 +239,7 @@ Ada and Zendesk cover web, app, email, SMS, and messaging. Intercom covers web, 
 
 ---
 
-Curious how Nobi answers customer questions with cited, frequently refreshed retrieval? Connect your knowledge sources and try it for $25/month.
+Curious how Nobi answers client questions with cited, frequently refreshed retrieval? Connect your knowledge sources. The base plan is $25/month (2,500 searches and 250 messages included); additional messages are $0.10 each.
 
 <div className="my-8 flex justify-center">
  <a

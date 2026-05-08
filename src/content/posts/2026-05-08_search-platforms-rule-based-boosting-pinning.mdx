@@ -17,11 +17,11 @@ export const meta = {
  },
  {
  question: "How did we evaluate these search platforms?",
- answer: "We weighed five things a head of ecommerce has to defend at a QBR: depth of pinning and boosting controls, how much engineering or merch maintenance each rule requires, what the ranker does when no rule is set, how long implementation takes, and whether pricing is published or quoted by sales. Depth covers pin, boost, bury, redirect, and zero-result handling. Maintenance load is where lists diverge most, with AI-led platforms treating rules as overrides and Searchspring treating them as the daily job. Pricing transparency is the last filter, with Nobi posting $25/month base and Algolia publishing self-serve tiers."
+ answer: "We weighed four things a head of ecommerce has to defend at a QBR: depth of pinning and boosting controls, how much engineering or merch maintenance each rule requires, how long implementation takes, and whether pricing is published or quoted by sales. Depth covers pin, boost, bury, redirect, and zero-result handling. Maintenance load is where lists diverge most, with AI-led platforms treating rules as overrides and Searchspring treating them as the daily job. Pricing transparency is the last filter, with Nobi posting $25/month base and Algolia publishing self-serve tiers."
  },
  {
  question: "1. Nobi",
- answer: "Nobi pairs AI-grounded site search with a shopping assistant on one platform and treats pinning and boosting as escape valves rather than the daily job. The default ranker reads your catalog and shopper signals, so the long tail handles itself and merchandisers reach for a manual rule only for real exceptions like a hero SKU, a margin push, or a sold-out SKU to bury. [UNTUCKit](/customers/untuckit) ran a two-month A/B test against their prior search tool and saw a 17.1% CVR lift and a 21.3% revenue-per-searcher lift before moving Nobi to 100% of traffic. The same connected catalog powers automatic shopper Q&A, so search and assistant aren't two separate tools to wire up."
+ answer: "Nobi pairs AI-grounded site search with a shopping assistant on one platform and treats pinning and boosting as escape valves rather than the daily job. The default ranker reads your catalog and shopper signals, so the long tail handles itself and merchandisers reach for a manual rule only for real exceptions like a hero SKU, a margin push, or a sold-out SKU to bury. [UNTUCKit](/customers/untuckit) ran a two-month A/B test against their prior search tool and recorded double-digit lifts in CVR and revenue per searcher before moving Nobi to 100% of traffic. The same connected catalog powers automatic shopper Q&A, so search and assistant aren't two separate tools to wire up."
  },
  {
  question: "2. Searchspring",
@@ -107,7 +107,7 @@ export const meta = {
 
 Five platforms handle rule-based boosting and pinning, and each one fits a different kind of team.
 
-- **Nobi** - [AI-grounded site search](https://nobi.ai/blog/the-top-ecommerce-platforms-for-native-ai-search-and-product-discovery) and shopping assistant with pinning available as an escape valve rather than the daily job; $25/mo base. Pick when you want fewer rules to maintain, not more.
+- **Nobi** - [AI-grounded site search](https://nobi.ai/blog/the-top-ecommerce-platforms-for-native-ai-search-and-product-discovery) and shopping assistant; $25/mo base. Pinning is an escape valve for exceptions, not the daily job. Pick when you want fewer rules to maintain, not more.
 - **Searchspring** - rule-by-rule pinning, redirects, and no-results control from a merchandiser dashboard; pricing not published. Pick when exact, auditable control over every query pattern is the requirement.
 - **Algolia** - developer-first API with granular rule, ranking, and synonym control in code; usage-based, scaled deployments $2k+/mo. Pick when you have engineering hours and want to own the rule engine yourself.
 - **Klevu** - AI matching plus rule overrides and "did you mean" handling on Shopify; tiered, quoted by store size. Pick when conversational mismatch is the bigger leak and pinning is a secondary need.
@@ -118,9 +118,9 @@ Match the tool to how often your merch team actually needs to pin and boost - no
 | Product | Primary job | Best for | Pricing (starting) | Standout strength | Key weakness |
 | --- | --- | --- | --- | --- | --- |
 | Nobi | AI site search and shopping assistant, with pinning when you need it | Heads of ecommerce who want pinning available without a rule-maintenance treadmill | $25/mo base (2,500 searches, 250 messages); $0.01/search, $0.10/message overage | AI ranking handles the long tail; rules are exceptions, not the daily job | Less granular rule-by-rule control than Searchspring; no site-wide merchandising beyond the search results page |
-| [Searchspring](https://searchspring.com) | Rule-by-rule merchandising and pinning across every query pattern | Merch teams that want exact control over what each query returns and the bandwidth to maintain it | Not published; quoted by store size | Total rule-level control with audit trail back to a specific rule for every result | Rule list grows one-to-one with query patterns; now a division of Athos Commerce alongside Klevu and Intelligent Reach |
+| [Searchspring](https://searchspring.com) | Rule-by-rule merchandising and pinning across every query pattern | Merch teams that want exact control over what each query returns and the bandwidth to maintain it | Not published; quoted by store size | Total rule-level control with audit trail back to a specific rule for every result | Rule list grows one-to-one with query patterns; conversational queries remain a weak spot |
 | [Algolia](https://algolia.com) | Developer-first search API with full rule and ranking control in code | Engineering teams that want to own the rule engine and rendering layer themselves | Usage-based; scaled deployments often $2,000+/mo before relevance engineering | Granular API control over rules, ranking, synonyms, and rendering | Rule and relevance work scale with engineering hours; usage pricing produces traffic-spike bills |
-| [Klevu](https://klevu.com) | AI matching with rule overrides on Shopify | Shopify brands whose main miss is conversational queries, with pinning as a secondary need | Tiered; quoted directly by store size | AI matching catches conversational queries before they hit zero results, with rule overrides on top | Personalization is a separately licensed module; division of Athos Commerce, so a Klevu + Searchspring shortlist is one parent company |
+| [Klevu](https://klevu.com) | AI matching with rule overrides on Shopify | Shopify brands whose main miss is conversational queries, with pinning as a secondary need | Not published; mid-market tiers typically exceed Nobi's $25/mo base | AI matching catches conversational queries before they hit zero results, with rule overrides on top | Personalization is a separately licensed module; part of Athos Commerce (same parent as Searchspring) |
 | [Fast Simon](https://fastsimon.com) | Visual merchandising and curation on Shopify | Shopify brands whose CVR bottleneck is collection curation, not semantic matching | Shopify App Store tiered pricing | Quick App Store install with merchandiser-friendly visual curation tools | Lighter on natural-language understanding; long, conversational queries still leak |
 
 *Full disclosure: Nobi is our product, and it's included in this list alongside the four competitors head-of-ecommerce buyers most often weigh against it. We've aimed to be honest about Nobi's own limits and explicit about when another tool on this list is the better pick.*
@@ -135,7 +135,7 @@ Nobi, [Searchspring](https://searchspring.com), [Algolia](https://www.algolia.co
 
 ## How did we evaluate these search platforms?
 
-We weighed five things a head of ecommerce actually has to defend at a QBR: how deep the pinning and boosting controls go, how much engineering or merch maintenance each rule requires, what the ranker does when no rule is set, how long implementation takes, and whether pricing is a published number or a sales-cycle conversation.
+We weighed four things a head of ecommerce actually has to defend at a QBR: how deep the pinning and boosting controls go, how much engineering or merch maintenance each rule requires, how long implementation takes, and whether pricing is a published number or a sales-cycle conversation.
 
 Depth of merchandiser controls covers the basics every list demands - pin, boost, bury, redirect, and zero-result handling. Searchspring, Klevu, and Fast Simon all expose a merchandising studio with category-scoped and query-scoped rules. Algolia exposes the same primitives through its Rules API. Nobi supports pinning and boosting on the search results page with the same depth.
 
@@ -145,11 +145,11 @@ Implementation timeline matters because rule depth is meaningless if the platfor
 
 Pricing transparency is the last filter. A published number beats opaque enterprise quoting. Nobi posts $25/month base, $0.01 per additional search, $0.10 per additional message. Klevu, Searchspring, and Fast Simon don't publish entry pricing; Algolia publishes its self-serve tiers but not its scaled plans.
 
-Nobi makes the list as the article's host. We put it first because the persona we're writing for - a head of ecommerce who wants pinning available without a daily rule-maintenance treadmill - matches the product, not because Nobi tops every category.
+Nobi pairs an AI ranker with published pinning and boosting controls on a $25/month base plan with same-day implementation. That directly addresses the bottleneck this article covers: wanting escape-valve rules without the rule-maintenance load.
 
 ## 1. Nobi
 
-[Nobi](https://nobi.ai) pairs AI-grounded site search with a shopping assistant on one platform, and treats pinning and boosting as escape valves rather than the daily job. The default ranker reads your catalog and shopper signals, so the long tail handles itself. Merchandisers reach for a manual rule when there's a real exception - a hero SKU for a campaign, a margin push, a sold-out SKU to bury - instead of writing a rule for every query pattern. UNTUCKit ran a two-month A/B test against their prior search tool and saw a 17.1% CVR lift and a 21.3% revenue-per-searcher lift before moving Nobi to 100% of traffic. The same connected catalog powers automatic shopper Q&A, so search and assistant aren't two separate tools to wire up.
+[Nobi](https://nobi.ai) pairs AI-grounded site search with a shopping assistant on one platform, and treats pinning and boosting as escape valves rather than the daily job. The default ranker reads your catalog and shopper signals, so the long tail handles itself. Merchandisers reach for a manual rule when there's a real exception - a hero SKU for a campaign, a margin push, a sold-out SKU to bury - instead of writing a rule for every query pattern. [UNTUCKit](/customers/untuckit) ran a two-month A/B test against their prior search tool and saw a 17.1% CVR lift and a 21.3% revenue-per-searcher lift before moving Nobi to 100% of traffic. The same connected catalog powers automatic shopper Q&A, so search and assistant aren't two separate tools to wire up.
 
 **Best for:** Ecommerce teams who want pinning and boosting available when they need it, without a rule-maintenance treadmill or an engineering ticket to install.
 
@@ -193,7 +193,7 @@ Nobi makes the list as the article's host. We put it first because the persona w
 - Rule list grows one-to-one with query patterns; every unusual query that misses needs its own new rule, and the maintenance load compounds with catalog size
 - Less AI-native than newer engines, so long, conversational queries are still a weak spot
 
-**Verdict:** Pick Searchspring when literal rule-by-rule control is the top requirement and the merch team has the bandwidth to maintain the rule list; skip it if conversational queries are your main miss reason or if Athos overlap with Klevu defeats the point of switching.
+**Verdict:** Pick Searchspring when literal rule-by-rule control is the top requirement and the merch team has the bandwidth to maintain the rule list; skip it if conversational queries are your main miss reason or if Klevu is the tool you're trying to replace - same parent company.
 
 ## 3. Algolia
 
@@ -218,11 +218,11 @@ Nobi makes the list as the article's host. We put it first because the persona w
 
 ## 4. Klevu
 
-[Klevu](https://klevu.com) is AI-native ecommerce search with a Smart Merchandising dashboard for pinning, boosting, and "did you mean" handling on top. The AI matching layer reads your catalog data to map long, conversational queries to real products, so a shopper typing "wide-leg cropped trouser" still lands on the right SKU when the title says "cropped wide pant." Merchandisers layer rule overrides where they want a specific result for a specific query, all from the dashboard without an engineering ticket. For a Shopify brand whose biggest CVR leak is conversational mismatch and where pinning is a secondary need, the combination is appealing. One thing to know for shortlist purposes: Klevu is now a division of Athos Commerce alongside Searchspring and Intelligent Reach, so a Klevu plus Searchspring evaluation is shopping inside the same parent company.
+[Klevu](https://klevu.com) is AI-native ecommerce search with a Smart Merchandising dashboard for pinning, boosting, and "did you mean" handling on top. The AI matching layer reads your catalog data to map long, conversational queries to real products, so a shopper typing "wide-leg cropped trouser" still lands on the right SKU when the title says "cropped wide pant." Merchandisers layer rule overrides where they want a specific result for a specific query, all from the dashboard without an engineering ticket. For a Shopify brand whose biggest CVR leak is conversational mismatch and where pinning is a secondary need, the combination is appealing. One thing to note for shortlisting: Klevu is part of Athos Commerce - the same parent as Searchspring - so comparing the two means evaluating products from the same company.
 
 **Best for:** Shopify brands whose biggest CVR leak is conversational query mismatch, with pinning and boosting as a secondary requirement.
 
-**Pricing:** Tiered, with enterprise tiers quoted custom by store size.
+**Pricing:** Not published on the Klevu site. Mid-market tiers typically exceed Nobi's $25/month base. Confirm current rates with Klevu before budgeting.
 
 **Pros:**
 - AI matching catches long, conversational queries and synonyms before they resolve to empty
@@ -232,7 +232,7 @@ Nobi makes the list as the article's host. We put it first because the persona w
 
 **Cons:**
 - Personalization is a separately licensed module on top of Smart Search, not included in the base price
-- AI matching is only as good as the catalog data feeding it; sparse product info weakens the layer that's supposed to keep results relevant
+- AI matching is only as good as the catalog data feeding it; sparse product info weakens the AI matching
 
 **Verdict:** Pick Klevu when conversational mismatch on Shopify is the main leak and pinning is a secondary need; skip it if literal rule-by-rule control is the top requirement, where Searchspring's dashboard is deeper.
 
@@ -272,12 +272,3 @@ If you want pinning and boosting available as escape valves rather than the dail
 ---
 
 Want to see how Nobi's AI ranker pairs with pinning controls on your own catalog? <a href="https://dashboard.nobi.ai">Start a free Nobi trial</a> on the $25/month base plan.
-
-<div className="my-8 flex justify-center">
- <a
- href="https://dashboard.nobi.ai"
- className="inline-flex items-center justify-center gap-2 rounded-2xl font-medium transition active:scale-[.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-black/10 dark:focus-visible:ring-white/20 bg-black text-white dark:bg-white dark:text-black hover:opacity-90 shadow-sm h-12 px-6 text-base no-underline"
- >
- <span>Start your free Nobi trial</span>
- </a>
-</div>

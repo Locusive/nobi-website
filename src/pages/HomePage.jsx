@@ -1514,14 +1514,14 @@ function HowItWorks() {
 function Pricing() {
   const { onOpen } = useDemoForm();
   const tiers = [
-    { name: "Standard", price: "$25", blurb: "Everything you need to get started", points: ["2,500 searches and 250 messages included", "Up to 5,000 products and KB documents", "30-day free trial"], cta: "Start Free Trial", href: getSignupUrl(), highlighted: true },
+    { name: "Standard", price: "$25", blurb: "Everything you need to get started", points: ["100 free messages/month to try in your dashboard", "2,500 searches and 250 messages included", "Up to 5,000 products and KB documents"], cta: "Start for Free", href: getSignupUrl(), highlighted: true },
     { name: "Enterprise", price: "Custom", blurb: "For high-volume brands with large catalogs", points: ["Volume discounts on usage", "Custom integrations and onboarding", "Dedicated support"], cta: "Contact Sales", onClick: onOpen },
   ];
   return (
     <section id="pricing" className="scroll-mt-20 py-20 border-t border-black/5 dark:border-white/5">
       <div className="mx-auto max-w-6xl px-6">
         <h2 className="text-3xl font-semibold mb-2">Simple, usage-based pricing</h2>
-        <p className="text-black/60 dark:text-white/60 mb-8">A low monthly base with per-use rates. Start with a free 30-day trial.</p>
+        <p className="text-black/60 dark:text-white/60 mb-8">A low monthly base with per-use rates. Try free in your dashboard — no credit card needed.</p>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-stretch">
           {tiers.map((t) => (
             <div key={t.name} className={`flex flex-col rounded-3xl border bg-white/70 dark:bg-white/5 p-8 ${t.highlighted ? "border-purple-300 ring-2 ring-purple-200" : "border-black/10 dark:border-white/10"}`}>

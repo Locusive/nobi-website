@@ -60,8 +60,8 @@ export const FAQ_ITEMS = [
         category: "Pricing",
     },
     {
-        q: "Is there a free trial?",
-        a: "Yes! We offer a free trial so you can experience Nobi firsthand. Sign up on our website to get started.",
+        q: "Can I try Nobi for free?",
+        a: "Yes — every account gets 100 free messages every month to try the full Nobi experience in your dashboard, no credit card needed. When you're ready to go live on your site, start a 30-day free trial.",
         category: "Pricing",
     },
     {

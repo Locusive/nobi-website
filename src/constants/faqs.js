@@ -80,8 +80,8 @@ const FAQ_ITEMS = [
     category: "Setup",
   },
   {
-    q: "Can we try it before committing?",
-    a: "Yes! Every paid plan comes with a free 30-day trial. You can also preview Nobi from your dashboard with your own products before going live on your site.",
+    q: "Can I try Nobi for free?",
+    a: "Yes — every account gets 100 free messages every month to try the full Nobi experience in your dashboard, no credit card needed. When you're ready to go live on your site, start a 30-day free trial.",
     category: "Pricing",
   },
   {

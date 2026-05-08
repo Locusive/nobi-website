@@ -27,6 +27,7 @@ const MAX_PRODUCTS = "5,000";
 const MAX_KB_DOCS = "5,000";
 
 const PLAN_HIGHLIGHTS = [
+  `100 free messages every month to try in your dashboard — no credit card needed`,
   `Up to ${MAX_PRODUCTS} products and ${MAX_KB_DOCS} knowledge base documents`,
 ];
 
@@ -73,8 +74,8 @@ const VALUE_PROPS = [
 
 const PRICING_FAQS = [
   {
-    q: "Can we try it before committing?",
-    a: `Yes! The Nobi plan comes with a free ${TRIAL_DAYS}-day trial. You can also preview Nobi from your dashboard with your own products before going live on your site.`,
+    q: "Can I try Nobi for free?",
+    a: `Yes — every account gets 100 free messages every month to try the full Nobi experience in your dashboard, no credit card needed. When you're ready to go live on your site, start a ${TRIAL_DAYS}-day free trial.`,
   },
   {
     q: "How does pricing work?",
@@ -103,7 +104,7 @@ export default function Pricing() {
 
   useSEO({
     title: "Pricing | Nobi",
-    description: "Simple pricing starting at $25/month with a 30-day free trial. AI search, knowledge base, and lead capture for any website.",
+    description: "Simple pricing starting at $25/month. Try free in your dashboard with 100 free messages every month — no credit card needed. AI search, knowledge base, and lead capture for any website.",
     path: "/pricing",
     schema: {
       "@context": "https://schema.org",
@@ -143,8 +144,8 @@ export default function Pricing() {
               Simple, usage-based pricing
             </h1>
             <p className="mt-4 text-lg text-slate-600 max-w-2xl mx-auto leading-relaxed">
-              A low monthly base with per-use rates for searches and messages.
-              Start with a free {TRIAL_DAYS}-day trial.
+              Try the full Nobi experience free in your dashboard — no credit card needed.
+              Ready to go live on your site? Start a {TRIAL_DAYS}-day free trial.
             </p>
           </div>
         </section>
@@ -152,17 +153,19 @@ export default function Pricing() {
         {/* Plan cards */}
         <section className="relative py-6 sm:py-8">
           <div className="mx-auto max-w-4xl px-6">
-            {/* Free trial banner */}
+            {/* Free preview + trial banner */}
             <div className="rounded-xl border border-purple-200 bg-white px-6 py-4 mb-8">
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-purple-50 flex items-center justify-center flex-shrink-0">
-                  <Gift className="h-5 w-5 text-purple-600" />
-                </div>
-                <div>
-                  <p className="font-semibold text-slate-900">Free {TRIAL_DAYS}-day trial</p>
-                  <p className="text-sm text-slate-500">
-                    Full plan limits included. Cancel anytime.
-                  </p>
+              <div className="flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-6">
+                <div className="flex items-center gap-3 flex-1">
+                  <div className="w-10 h-10 rounded-full bg-purple-50 flex items-center justify-center flex-shrink-0">
+                    <Gift className="h-5 w-5 text-purple-600" />
+                  </div>
+                  <div>
+                    <p className="font-semibold text-slate-900">Start free, no credit card needed</p>
+                    <p className="text-sm text-slate-500">
+                      100 free messages every month to try the full experience in your dashboard. Start a {TRIAL_DAYS}-day trial when you're ready to go live.
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
@@ -205,7 +208,7 @@ export default function Pricing() {
                     href={getSignupUrl()}
                     className="block w-full rounded-xl py-3 text-sm font-semibold text-center transition active:scale-[.98] bg-black text-white hover:opacity-90 shadow-sm"
                   >
-                    Start Free Trial
+                    Start for Free
                   </a>
                 </div>
               </div>
@@ -350,7 +353,7 @@ export default function Pricing() {
                 Ready to grow your conversions?
               </h2>
               <p className="text-base text-slate-600">
-                Start your free {TRIAL_DAYS}-day trial today. Cancel anytime.
+                Try free in your dashboard — no credit card needed. Start a {TRIAL_DAYS}-day trial when you're ready to go live.
               </p>
             </div>
             <div className="flex justify-center">
@@ -358,7 +361,7 @@ export default function Pricing() {
                 href={getSignupUrl()}
                 className="h-12 rounded-full bg-black text-white hover:opacity-90 shadow-sm px-6 text-sm font-semibold transition active:scale-[.98] inline-flex items-center justify-center"
               >
-                Sign Up Free
+                Start for Free
               </a>
             </div>
           </div>

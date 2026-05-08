@@ -493,7 +493,7 @@ export default function AIAssistantLanding() {
           </h2>
           <p className="text-base text-slate-300 mb-8 max-w-xl mx-auto">
             Your customers use AI every day. Bring that same experience to your site
-            with Nobi. 30-day free trial, no credit card required.
+            with Nobi. Try free in your dashboard — no credit card needed.
           </p>
           <CTAButton className="text-lg h-14 px-8">
             Get Started Free

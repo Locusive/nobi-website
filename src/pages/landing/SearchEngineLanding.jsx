@@ -416,7 +416,7 @@ export default function SearchEngineLanding() {
           </h2>
           <p className="text-base text-slate-300 mb-8 max-w-xl mx-auto">
             Launch Nobi alongside your current search and measure the conversion lift.
-            30-day free trial, no credit card required.
+            Try free in your dashboard — no credit card needed.
           </p>
           <CTAButton className="text-lg h-14 px-8">
             Get Started Free

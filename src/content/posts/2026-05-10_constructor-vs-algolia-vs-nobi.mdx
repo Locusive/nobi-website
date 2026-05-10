@@ -96,17 +96,17 @@ There's a third option worth knowing before you commit: Nobi. It takes a differe
 
 These three tools represent fundamentally different philosophies.
 
-**Constructor** treats search as a revenue lever. Its ML models learn which products convert and rerank results accordingly - search optimization is the product, not a feature.
+**Constructor** treats search as a revenue lever. Its models learn which products convert and rank them higher accordingly. Search is an optimization tool, not just a utility.
 
-**Algolia** treats search as an API. Give developers the building blocks to construct any experience they want, and they'll build what fits their store. The relevance you get is roughly proportional to the engineering work you put in.
+**Algolia** treats search as a developer API. It gives engineering teams the building blocks to construct whatever experience they want. The relevance you get out of it is roughly proportional to the engineering work you put in.
 
-**Nobi** is built on the belief that relevance is the primary conversion driver. Show a shopper the most relevant products for what they actually want - whether they phrased the query perfectly or described it loosely - and the purchase follows. AI-native semantic understanding and a shopping assistant are how Nobi gets there; better conversion outcomes are the goal.
+**Nobi** is built on the idea that relevance is the primary conversion driver. If a shopper sees the right product - whether they typed a clean keyword or described it in plain language - they buy. AI search and a shopping assistant are how Nobi gets there.
 
-None of these is the wrong philosophy. But each produces a very different product, and the right pick depends on which one matches your team's reality.
+Each produces a very different product, and the right pick depends on which one matches your team's reality.
 
-- **[Constructor](https://constructor.io)** - enterprise product discovery with session-signal personalization across search, browse, category, and recommendations. Revenue-share pricing, no published list. Pick when CVR work has to span the full site and you have a data team to match.
-- **[Algolia](https://algolia.com)** - developer-first search API with sub-50ms response times and granular control. Usage-based, around $2,000+/mo at mid-market scale before relevance engineering, with NeuralSearch gated to higher tiers. Pick when a search engineer is owning the rule engine.
-- **Nobi** - [AI-native site search](https://nobi.ai/blog/best-ai-search-ecommerce-2026) plus a shopping assistant with cited answers, $25/mo base ($0.01 per extra search, $0.10 per extra message). Pick when you want better relevance - and the conversion lift that follows - without a revenue-share contract or a dedicated search engineer.
+- **[Constructor](https://constructor.io)** - product discovery for large retailers. It personalizes search results, browse pages, category pages, and recommendations based on what each shopper clicks during their visit. Pricing is revenue-share, no published rate. The right pick when conversion work needs to touch the whole site and you have a data team to support it.
+- **[Algolia](https://algolia.com)** - a developer-first search API that gives engineering teams full control over ranking, rules, and how results appear. Usage-based pricing; mid-market teams typically pay around $2,000+/month before adding custom relevance work. The right pick when a search engineer will own the setup and keep it tuned.
+- **Nobi** - [AI-native site search](https://nobi.ai/blog/best-ai-search-ecommerce-2026) plus a shopping assistant with cited answers, $25/month base ($0.01 per extra search, $0.10 per extra message). The right pick when you want better search relevance and the conversion lift that follows, without a revenue-share contract or a dedicated engineer.
 
 | Product | Primary job | Best for | Pricing (starting) | Standout strength | Key weakness |
 | --- | --- | --- | --- | --- | --- |
@@ -120,51 +120,51 @@ None of these is the wrong philosophy. But each produces a very different produc
 
 The three use different pricing models - and the model matters as much as the headline number.
 
-Constructor is revenue-share with no published list price. The bill scales with GMV, which means a successful CVR lift directly increases what you pay Constructor next quarter. The most common post-signing complaint is that costs grow in ways the buyer didn't model going in.
+Constructor is revenue-share with no published list price. Your bill scales with GMV, which means when your conversion rate improves, you pay Constructor more next quarter. The most common post-signing complaint is that costs grow in ways buyers didn't model upfront.
 
-Algolia is usage-based on search requests and records indexed. Mid-market deployments typically land around $2,000+/month before any custom relevance engineering, and NeuralSearch is gated to higher tiers. The bill moves with traffic, so a strong campaign or a viral product page can produce a surprise overage in a month you can't predict.
+Algolia charges by search requests and records indexed. Mid-market teams typically pay around $2,000+/month before any custom relevance work, and semantic search is only available on pricier plans. Because the bill moves with traffic, a big promotion or a viral product page can produce an overage you didn't plan for.
 
-Nobi publishes a flat per-unit bill: $25/month base, including 2,500 searches and 250 conversational messages, then $0.01 per additional search and $0.10 per additional message. A head of ecommerce can plug their own volumes into that math and forecast the bill before signing anything.
+Nobi charges a flat per-unit rate: $25/month base, including 2,500 searches and 250 chat messages, then $0.01 per extra search and $0.10 per extra message. You can plug your actual volume into that math and know the bill before you sign.
 
 ## Which one delivers better AI relevance and personalization?
 
-Constructor leads on personalization. Real-time session signals reorder results based on what the shopper has clicked, viewed, and added during the visit, and that reordering runs across search, browse, category pages, and recommendations on one model. If a shopper clicks two black ankle boots in search, the next category page reflects that.
+Constructor leads on personalization. As a shopper clicks, views, and adds items during their visit, Constructor reorders results across search, browse, category pages, and recommendations in real time - all on one model. Click two black ankle boots in search and the next category page you land on already reflects that.
 
-Algolia is keyword-first by default. A query like "wide-leg cropped trouser" hits a product titled "cropped wide pant" only if your team has built the synonym group by hand or paid up for NeuralSearch. Custom ranking strategies, query rules, and merchandising configs are all programmable, but the work is yours to do. Strong when an engineering team wants to own the rule engine in code; weaker when you want relevance that works on day one.
+Algolia is keyword-first by default. A query like "wide-leg cropped trouser" only matches a product called "cropped wide pant" if your team has manually built the synonym, or if you're on a higher plan that includes semantic search. All the ranking strategies, search rules, and merchandising settings are configurable in code - but the work falls to your team. The right fit for an engineering team that wants full control; not the right fit if you need relevance to work on day one with no setup.
 
-Nobi ships AI-native semantic search out of the box - no synonym list to seed, no query rules to write. It also adds a shopping assistant that answers shopper questions with inline citation pills tied to source documents, refreshed twice a day. In a two-month A/B test, [UNTUCKit](/customers/untuckit) saw revenue per searcher rise from $32.30 to $39.17 (+21.3%) and moved Nobi to 100% of traffic. The honest gap: Nobi's personalization today is starter messages and placeholder text only. Constructor is genuinely deeper on individualized result ordering.
+Nobi ships AI-native semantic search out of the box - no synonyms to build, no rules to write. It also adds a shopping assistant that answers shopper questions with source citations, updated twice a day. In a two-month A/B test, [UNTUCKit](/customers/untuckit) saw revenue per searcher rise from $32.30 to $39.17 (+21.3%) and moved Nobi to 100% of traffic. The honest gap: Nobi doesn't yet rerank results based on each shopper's click history during a visit. Constructor is deeper there.
 
 ## How much engineering effort does each require?
 
-Constructor's rollouts typically run weeks to months. Getting full value from the personalization layer usually means involving internal data or analytics resources to validate models against your catalog and shopper signals. Strong when you have that team; weaker when the head of ecommerce wants something live this quarter.
+Constructor rollouts typically take weeks to months. Getting full value from the personalization requires involving data or analytics staff to tune the models against your catalog and shopper behavior. If you have that team, it's worth the wait. If the head of ecommerce needs something live this quarter without a project, this isn't the right pick.
 
-Algolia is built for engineering teams. Rules, ranking, synonyms, indexing, and frontend rendering all live in code, and the relevance you ship is roughly proportional to the engineering hours you put in. Strong when you have a search engineer who wants to own the rule engine; weaker when you don't.
+Algolia is built for engineering teams. Rules, ranking, synonyms, indexing, and how results appear all live in code. The relevance you get out of it is roughly proportional to the engineering hours you put in. The right fit when you have a search engineer who wants to own it; not the right fit when you don't.
 
-Nobi installs in hours. Paste in the Nobi snippet and drop a placeholder where the search bar should appear. AI-native relevance ranks results from your catalog using semantic matching by default, so there's no synonym list to seed and no rules to maintain for every query. A merchandiser handles overrides in a no-code dashboard. The honest trade-off: Nobi isn't an API-first developer platform. If you want to build your own ranking logic from the ground up or wire search into a highly bespoke frontend, Algolia is the better fit.
+Nobi installs in hours. Drop in a snippet and place the search widget where the bar should go. AI-native relevance works out of the box - there are no synonyms to seed and no rules to maintain for every query. Merchandisers handle overrides in a no-code dashboard. The honest trade-off: Nobi isn't a developer API. If you want to build your own ranking logic from scratch or wire search into a highly custom frontend, Algolia is the better fit.
 
 ## Where does each platform's coverage stop?
 
-Constructor covers the full site on one ranking model. Search, browse, category pages, collection pages, and recommendations all draw from the same engine, and in-session signals on any one page feed the others.
+Constructor runs the full site on one ranking model. Search, browse, category pages, collection pages, and recommendations all draw from the same engine. What a shopper does on one page feeds what they see on the next.
 
-Algolia is a search-API foundation. The API is broad enough to power category pages, recommendations, and personalization, but each of those is its own engineering build. Strong when you have the team and want full control; weaker when you want it to ship without an internal project.
+Algolia is a search API that can power category pages, recommendations, and personalization - but each of those is a separate engineering project. The right fit when you have the team and want full control; not the right fit when you want those features without building them.
 
-Nobi curates the search results page and adds a shopping assistant on every page - homepage, PDP, cart - with contextual suggestion pills scoped to where the visitor is. [Kilte](/customers/kilte) runs Nobi across three places on the storefront. The honest gap: Nobi does not merchandise category or collection pages. Brands whose primary CVR lever is category-page curation will need a separate tool for that.
+Nobi handles the search results page and adds a shopping assistant on every page - homepage, product pages, cart - with suggested prompts matched to where the shopper is. [Kilte](/customers/kilte) runs Nobi in three places across their storefront. The honest gap: Nobi doesn't merchandise category or collection pages. If category-page optimization is your main conversion lever, you'll need a separate tool for that.
 
 ## When is Constructor the right pick?
 
-Pick Constructor when CVR work has to move across the full site, GMV is in the $50M+ range, and there's a data team to keep the personalization layer tuned. The unified session-signal model across search, browse, category, and recommendations is what the contract is paying for. Skip it when you want transparent per-unit pricing, when search is a standalone problem, or when there's no internal data team to validate models on an ongoing basis.
+Pick Constructor when you need personalization to work across the whole site - search, browse, category pages, and recommendations - you're at $50M+ GMV, and you have a data team to keep it tuned. That's what the revenue-share contract is paying for. Skip it when you want predictable pricing, when search is your only problem, or when there's no internal team to keep the models running.
 
 ## When is Algolia the right pick?
 
-Pick Algolia when a search engineer is owning the ranking levers, you want full API control over rules and rendering, and you have the developer hours to keep relevance tuned. Skip it when no one will own that work, when surprise bills during traffic spikes would break the budget conversation, or when a shopping assistant needs to live in the same contract.
+Pick Algolia when a search engineer will own the ranking rules, you want full API control over how results work and appear, and you have the developer hours to keep it tuned. Skip it when no one will own that work, when unpredictable bills during traffic spikes are a problem, or when you want a shopping assistant included.
 
 ## When is Nobi the right pick?
 
-Pick Nobi when on-site discovery is the bottleneck, you want [AI-native search](https://nobi.ai/blog/nobi-vs-algolia) and a cited shopping assistant in one platform, and you need transparent per-unit pricing instead of a revenue-share contract or a usage-based bill that spikes with traffic.
+Pick Nobi when search relevance is the bottleneck, you want [AI-native search](https://nobi.ai/blog/nobi-vs-algolia) and a shopping assistant on one flat bill, and you don't have a dedicated search engineer to set it up and maintain it.
 
-The proof is on the CVR side. [UNTUCKit](/customers/untuckit) ran a two-month A/B test and saw conversion rate move from 15.0% to 17.6% (+17.1%), revenue per searcher rise from $32.30 to $39.17 (+21.3%), and AOV go from $215 to $222 (+3.3%) before moving Nobi to 100% of traffic. [Kilte](/customers/kilte) saw a 21.7% CVR lift versus default Shopify search. [Lucchese](/customers/lucchese) attributes $1M+ incremental revenue and 39x ROI to Nobi in year one.
+The results are there. [UNTUCKit](/customers/untuckit) ran a two-month A/B test: conversion rate went from 15.0% to 17.6% (+17.1%), revenue per searcher from $32.30 to $39.17 (+21.3%), AOV from $215 to $222 (+3.3%). They moved Nobi to 100% of traffic. [Kilte](/customers/kilte) saw a 21.7% conversion lift versus default Shopify search. [Lucchese](/customers/lucchese) attributes $1M+ in incremental revenue and 39x ROI to Nobi in year one.
 
-Skip Nobi when behavioral reranking across category and browse pages is the headline requirement - Constructor is genuinely deeper there. Skip it too when a search engineer wants raw API control over every ranking lever.
+Skip Nobi when personalization across category and browse pages is the headline need - Constructor is deeper there. Skip it too when your search engineer wants raw API control over every ranking decision.
 
 ## What's the honest verdict?
 

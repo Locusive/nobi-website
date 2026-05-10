@@ -1,0 +1,179 @@
+export const meta = {
+ title: "Constructor vs. Algolia vs. Nobi: Picking Site Search and Product Discovery",
+ slug: "constructor-vs-algolia-vs-nobi",
+ date: "2026-05-10",
+ publishedAt: "2026-05-10",
+ description: "Compare Constructor, Algolia, and Nobi on pricing, AI relevance, implementation effort, and fit. Concrete numbers, honest trade-offs, and when each one wins.",
+ excerpt: "Compare Constructor, Algolia, and Nobi on pricing, AI relevance, implementation effort, and fit. Concrete numbers, honest trade-offs, and when each one wins.",
+ tags: ["Constructor", "Algolia", "Nobi", "comparison", "site search", "ecommerce search"],
+ author: "Shanif Dhanani",
+ heroImage: "https://storage.googleapis.com/nobi-public/docs_and_marketing_websites/posts/constructor-vs-algolia-vs-nobi/hero.webp",
+ featured: true,
+ draft: false,
+ faqItems: [
+ {
+ question: "How does pricing compare across Constructor, Algolia, and Nobi?",
+ answer: "The three use different pricing models. Constructor is revenue-share with no published list price, so the bill scales with GMV and a CVR lift increases what you pay next quarter. Algolia is usage-based on search requests and records indexed, with mid-market deployments typically $2,000+/month and NeuralSearch gated to higher tiers. Nobi is flat per-unit at $25/month base, including 2,500 searches and 250 conversational messages, then $0.01 per extra search and $0.10 per extra message, so the bill is forecastable before you sign."
+ },
+ {
+ question: "Which one delivers better AI relevance and personalization out of the box?",
+ answer: "Constructor leads on personalization, with real-time session signals reordering search, browse, category, and recommendations on one model. Algolia is keyword-first by default, so semantic matches like 'wide-leg cropped trouser' to 'cropped wide pant' need hand-built synonyms or the higher-tier NeuralSearch layer. Nobi ships AI-native semantic search and a shopping assistant with cited answers out of the box, and UNTUCKit saw conversion go from 15.0% to 17.6% in a two-month A/B test, but Nobi's individualized reranking is still on the roadmap."
+ },
+ {
+ question: "How much engineering effort does each platform require to launch and maintain?",
+ answer: "Algolia is API-first and assumes an engineering team will own rules, ranking, synonyms, indexing, and frontend rendering in code. Constructor needs a real rollout project with internal data resources. Nobi is live in hours with a no-code dashboard for overrides, which is usually the deciding factor for a head of ecommerce without a dedicated search engineer."
+ },
+ {
+ question: "When is Constructor the better choice over Algolia or Nobi?",
+ answer: "Constructor is the better choice when individualized result ordering is the top priority and real-time session-based personalization across search, browse, category, and recommendations matters more than pricing predictability. The trade-off is revenue-share pricing that scales with GMV, so a successful CVR lift directly increases what you pay next quarter."
+ },
+ {
+ question: "When is Algolia the better choice over Constructor or Nobi?",
+ answer: "Algolia is the better choice when you have an engineering team that wants to own the rule engine in code and is willing to build synonyms, query rules, ranking strategies, and merchandising configs themselves. It fits teams comfortable with usage-based pricing and the engineering hours required, since the relevance you ship is roughly proportional to the work you put in."
+ },
+ {
+ question: "When is Nobi the better choice over Constructor or Algolia?",
+ answer: "Nobi is the better choice when you want the relevance-driven conversion lift that comes from AI-native semantic search - and the data to back it up: UNTUCKit saw revenue per searcher rise 21.3% in a two-month A/B test, Kilte saw a 21.7% CVR lift, Lucchese attributes $1M+ incremental revenue in year one. It ships in hours with flat per-unit pricing you can forecast before signing. The honest trade-off: behavioral reranking across category and browse pages isn't shipped yet, so Constructor is deeper on individualized ordering today."
+ }
+ ],
+};
+
+<script type="application/ld+json" data-nobi-schema>
+{`{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Constructor vs. Algolia vs. Nobi: Picking Site Search and Product Discovery",
+  "description": "Compare Constructor, Algolia, and Nobi on pricing, AI relevance, implementation effort, and fit. Concrete numbers, honest trade-offs, and when each one wins.",
+  "datePublished": "2026-05-10",
+  "dateModified": "2026-05-10",
+  "author": {
+    "@type": "Person",
+    "name": "Shanif Dhanani",
+    "url": "https://www.linkedin.com/in/shanifdhanani/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Nobi",
+    "url": "https://nobi.ai"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://nobi.ai/blog/constructor-vs-algolia-vs-nobi"
+  },
+  "about": [
+    {
+      "@type": "Thing",
+      "name": "site search"
+    },
+    {
+      "@type": "Thing",
+      "name": "ecommerce"
+    }
+  ],
+  "mentions": [
+    {
+      "@type": "Thing",
+      "name": "Nobi"
+    },
+    {
+      "@type": "Thing",
+      "name": "Constructor"
+    },
+    {
+      "@type": "Thing",
+      "name": "Algolia"
+    }
+  ],
+  "articleSection": "comparison article"
+}`}
+</script>
+
+## Which site search platform should you pick: Constructor, Algolia, or Nobi?
+
+Constructor and Algolia are both strong choices - the decision between them comes down to whether you need full-site personalization backed by a data team, or developer API control over every ranking decision. Before committing to either, there's a third option worth knowing: Nobi ships AI-native search and a shopping assistant in hours at a predictable per-usage price, and for teams that don't need Constructor's data-team requirements or Algolia's engineering ownership, it often turns out to be the better fit. The differences run deeper than features though - they start with how each tool thinks about the problem.
+
+These three tools represent fundamentally different philosophies.
+
+**Constructor** treats search as a revenue lever. Its models learn which products convert and rank them higher accordingly. Search is an optimization tool, not just a utility.
+
+**Algolia** treats search as a developer API. It gives engineering teams the building blocks to construct whatever experience they want. The relevance you get out of it is roughly proportional to the engineering work you put in.
+
+**Nobi** is built on the idea that relevance is the primary conversion driver. If a shopper sees the right product - whether they typed a clean keyword or described it in plain language - they buy. AI search and a shopping assistant are how Nobi gets there.
+
+Each produces a very different product, and the right pick depends on which one matches your team's reality.
+
+- **[Constructor](https://constructor.io)** - product discovery built primarily for large retailers. It personalizes search results, browse pages, category pages, and recommendations based on what each shopper clicks during their visit. Pricing is revenue-share with no published rate. Pick it when conversion work needs to touch the whole site and you have a data team to support it.
+- **[Algolia](https://algolia.com)** - a developer-first search API that gives engineering teams full control over ranking, rules, and how results appear. Pricing is usage-based; mid-market teams typically pay around $2,000+/month before adding custom relevance work. Pick it when a search engineer will own the setup and keep it tuned.
+- **Nobi** - [AI-native site search](https://nobi.ai/blog/best-ai-search-ecommerce-2026) plus a shopping assistant with cited answers. Pricing starts at $25/month ($0.01 per extra search, $0.10 per extra message). Pick it when you want better search relevance and the conversion lift that follows, without a revenue-share contract or a dedicated engineer.
+
+| Product | Primary job | Best for | Pricing (starting) | Standout strength | Key weakness |
+| --- | --- | --- | --- | --- | --- |
+| [Constructor](https://constructor.io) | Enterprise product discovery across search, browse, category, recommendations | $50M+ GMV retailers with a data team where merchandising spans the full site | Revenue-share, no published list; scales with GMV | Real-time session-signal personalization that reorders results across search, browse, category, and recommendations, not just the search page | Revenue-share contracts scale with GMV - a successful CVR campaign costs you more |
+| [Algolia](https://algolia.com) | Developer-first search API with granular ranking control | Engineering teams that want full API control and have the developer hours to keep relevance tuned | Usage-based; mid-market volumes typically land around $2,000+/mo before custom relevance engineering | Low-latency response at catalog scale plus NeuralSearch on higher tiers for semantic matching | Relevance work scales with engineering hours, not contract size; non-technical merch teams cannot drive ranking work alone |
+| Nobi | AI site search plus shopping assistant | Teams whose biggest CVR leak is on-site discovery and want transparent per-unit pricing | $25/mo base (2,500 searches + 250 messages); $0.01 per extra search, $0.10 per extra message | Search + conversational AI + cited shopper Q&A in one platform with twice-daily content refresh | Personalization today is starter-message and placeholder-text only, no behavioral reranking yet |
+
+*Full disclosure: Nobi is our product, included alongside two competitors heads of ecommerce most often weigh against it. We've aimed to be honest about Nobi's limits and explicit about when another tool is the better pick.*
+
+## How does pricing compare?
+
+The three use different pricing models - and the model matters as much as the headline number.
+
+Constructor is revenue-share with no published list price. Your bill scales with GMV, which means when your conversion rate improves, you pay Constructor more next quarter. The most common post-signing complaint is that costs grow in ways buyers didn't model upfront.
+
+Algolia charges by search requests and records indexed. Mid-market teams typically pay around $2,000+/month before any custom relevance work, and semantic search is only available on pricier plans. Because the bill moves with traffic, a big promotion or a viral product page can produce an overage you didn't plan for.
+
+Nobi charges a flat per-unit rate: $25/month base, including 2,500 searches and 250 chat messages, then $0.01 per extra search and $0.10 per extra message. You can plug your actual volume into that math and know the bill before you sign.
+
+## Which one delivers better AI relevance and personalization?
+
+Constructor leads on personalization. As a shopper clicks, views, and adds items during their visit, Constructor reorders results across search, browse, category pages, and recommendations in real time - all on one model. Click two black ankle boots in search and the next category page you land on already reflects that.
+
+Algolia is keyword-first by default. A query like "wide-leg cropped trouser" only matches a product called "cropped wide pant" if your team has manually built the synonym, or if you're on a higher plan that includes semantic search. All the ranking strategies, search rules, and merchandising settings are configurable in code - but the work falls to your team. The right fit for an engineering team that wants full control; not the right fit if you need relevance to work on day one with no setup.
+
+Nobi ships AI-native semantic search out of the box - no synonyms to build, no rules to write. It also adds a shopping assistant that answers shopper questions with source citations, updated twice a day. In a two-month A/B test, [UNTUCKit](/customers/untuckit) saw revenue per searcher rise from $32.30 to $39.17 (+21.3%) and moved Nobi to 100% of traffic. The honest gap: Nobi doesn't yet rerank results based on each shopper's click history during a visit. Constructor is deeper there.
+
+## How much engineering effort does each require?
+
+Constructor rollouts typically take weeks to months. Getting full value from the personalization requires involving data or analytics staff to tune the models against your catalog and shopper behavior. If you have that team, it's worth the wait. If the head of ecommerce needs something live this quarter without a project, this isn't the right pick.
+
+Algolia is built for engineering teams. Rules, ranking, synonyms, indexing, and how results appear all live in code. The relevance you get out of it is roughly proportional to the engineering hours you put in. The right fit when you have a search engineer who wants to own it; not the right fit when you don't.
+
+Nobi installs in hours. Drop in a snippet and place the search widget where the bar should go. AI-native relevance works out of the box - there are no synonyms to seed and no rules to maintain for every query. Merchandisers handle overrides in a no-code dashboard. The honest trade-off: Nobi isn't a developer API. If you want to build your own ranking logic from scratch or wire search into a highly custom frontend, Algolia is the better fit.
+
+## Where does each platform's coverage stop?
+
+Constructor runs the full site on one ranking model. Search, browse, category pages, collection pages, and recommendations all draw from the same engine. What a shopper does on one page feeds what they see on the next.
+
+Algolia is a search API that can power category pages, recommendations, and personalization - but each of those is a separate engineering project. The right fit when you have the team and want full control; not the right fit when you want those features without building them.
+
+Nobi handles the search results page and adds a shopping assistant on every page - homepage, product pages, cart - with suggested prompts matched to where the shopper is. [Kilte](/customers/kilte) runs Nobi in three places across their storefront. The honest gap: Nobi doesn't merchandise category or collection pages. If category-page optimization is your main conversion lever, you'll need a separate tool for that.
+
+## When is Constructor the right pick?
+
+Pick Constructor when you need personalization to work across the whole site - search, browse, category pages, and recommendations - you're at $50M+ GMV, and you have a data team to keep it tuned. That's what the revenue-share contract is paying for. Skip it when you want predictable pricing, when search is your only problem, or when there's no internal team to keep the models running.
+
+## When is Algolia the right pick?
+
+Pick Algolia when a search engineer will own the ranking rules, you want full API control over how results work and appear, and you have the developer hours to keep it tuned. Skip it when no one will own that work, when unpredictable bills during traffic spikes are a problem, or when you want a shopping assistant included.
+
+## When is Nobi the right pick?
+
+Pick Nobi when search relevance is the bottleneck, you want [AI-native search](https://nobi.ai/blog/nobi-vs-algolia) and a shopping assistant at a predictable per-usage price, and you don't have a dedicated search engineer to set it up and maintain it.
+
+The results are there. [UNTUCKit](/customers/untuckit) ran a two-month A/B test: conversion rate went from 15.0% to 17.6% (+17.1%), revenue per searcher from $32.30 to $39.17 (+21.3%), AOV from $215 to $222 (+3.3%). They moved Nobi to 100% of traffic. [Kilte](/customers/kilte) saw a 21.7% conversion lift versus default Shopify search. [Lucchese](/customers/lucchese) attributes $1M+ in incremental revenue and 39x ROI to Nobi in year one.
+
+Skip Nobi when personalization across category and browse pages is the headline need - Constructor is deeper there. Skip it too when your search engineer wants raw API control over every ranking decision.
+
+## What's the honest verdict?
+
+If you're a $500M retailer with a 10-person data team, Constructor will make you more money than Nobi can today. That's the truth.
+
+If you're building a headless commerce experience with engineers who want complete control, Algolia gives you more flexibility than Nobi does. That's also the truth.
+
+But if you're like most ecommerce teams - a few people wearing multiple hats, a Shopify store, no dedicated developers, and a budget that doesn't include six-figure annual software contracts - the question isn't "which is the most powerful tool?" It's "which tool will actually improve my search this month?"
+
+[According to Baymard Institute](https://baymard.com/blog/ecommerce-search-query-types), 72% of ecommerce sites fail basic search usability. If your store is in that 72%, the first step isn't buying the most expensive tool. It's buying the tool you'll actually implement.
+
+---
+
+Want to see how Nobi's AI search and shopping assistant work on your catalog? <a href="https://dashboard.nobi.ai">Start a free Nobi trial</a> on the $25/month base plan - no sales call required.

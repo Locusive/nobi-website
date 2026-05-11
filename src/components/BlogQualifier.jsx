@@ -36,14 +36,11 @@ export default function BlogQualifier({ context }) {
       });
     }
 
-    // Pre-seed visitor context for when setVisitorContext ships
-    if (window.Nobi?.setVisitorContext) {
-      window.Nobi.setVisitorContext({
-        intent: option.id,
-        source_article: window.location.pathname,
-        article_context: context || null,
-        clicked_at: new Date().toISOString(),
-      });
+    // Persist visitor intent to Nobi so the LLM knows on this and future visits
+    if (window.Nobi?.addVisitorContext) {
+      const articleContext = context ? ` comparing ${context}` : "";
+      const signal = `Visitor clicked "${option.label}" while reading a Nobi blog article${articleContext}. Article URL: ${window.location.pathname}.`;
+      window.Nobi.addVisitorContext(signal);
     }
 
     // Open Nobi with the selection as the USER's first message so Nobi responds naturally

@@ -26,6 +26,7 @@ Here is how we turn a complex human sentence into a curated product shelf.
 
 When a query lands in our system, we don't just pass it blindly to a database. It parses the sentence to extract **hard constraints**, specifically, the non-negotiable filters and attributes that a site visitor has specifically requested.
 
+
 This lets us identify specific variables that we can use to filter down the product catalog before we even start thinking about semantics:
 
 * **Price Ceilings:** We recognize "under $300" not as text, but as a logic filter (`price <= 300`).
@@ -45,6 +46,8 @@ Instead of matching text, we translate the shopper's request into a multi-dimens
 * **Aesthetic Matching:** It boosts items with floral patterns or lighter, season-appropriate variations of red.
 
 This allows your catalog to respond intelligently to queries like "outfit for a job interview" or "cozy clothes for a ski trip" without you having to manually tag every SKU with those exact phrases.
+
+<BlogEmailCapture hook="Losing long-tail searches like 'red dress for a summer wedding'?" subtext="Drop your email and we'll show you how Nobi's AI search understands natural language queries and surfaces the right products instead of zero results." />
 
 ## 3. The Curator Phase: LLM Re-Ranking
 

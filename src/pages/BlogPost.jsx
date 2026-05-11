@@ -3,7 +3,6 @@ import { useParams } from "react-router-dom";
 import { MDXProvider } from "@mdx-js/react";
 import { useSEO } from "../hooks/useSEO";
 import ArticleLayout from "../components/ArticleLayout";
-import BlogChatPrompt from "../components/BlogChatPrompt";
 import BlogEmailCapture from "../components/BlogEmailCapture";
 import { getPostBySlug } from "../content/utils/mdxPostLoader";
 
@@ -11,7 +10,6 @@ import { getPostBySlug } from "../content/utils/mdxPostLoader";
 // comparison tables (6+ columns) scroll inside their own box on
 // mobile rather than forcing the whole page to scroll sideways.
 const components = {
-  BlogChatPrompt,
   BlogEmailCapture,
   table: (props) => (
     <div className="my-6 overflow-x-auto">
@@ -126,7 +124,7 @@ export default function BlogPost() {
   return (
     <ArticleLayout meta={meta}>
       <MDXProvider components={components}>
-        <Component />
+        <Component components={components} />
       </MDXProvider>
     </ArticleLayout>
   );

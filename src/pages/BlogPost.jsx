@@ -126,7 +126,7 @@ export default function BlogPost() {
   return (
     <ArticleLayout meta={meta}>
       <MDXProvider components={components}>
-        <Component />
+        <Component components={components} />
       </MDXProvider>
     </ArticleLayout>
   );

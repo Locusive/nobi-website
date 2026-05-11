@@ -2,7 +2,7 @@ import React from "react";
 
 const WEB3FORMS_KEY = "c7a3fd79-0e4f-47ce-aa30-c141616d21e3";
 
-export default function BlogEmailCapture({ hook, articleTitle }) {
+export default function BlogEmailCapture({ hook, subtext, articleTitle }) {
   const [email, setEmail] = React.useState("");
   const [submitting, setSubmitting] = React.useState(false);
   const [done, setDone] = React.useState(false);
@@ -55,7 +55,7 @@ export default function BlogEmailCapture({ hook, articleTitle }) {
   return (
     <div className="my-6 rounded-xl border border-zinc-200 bg-zinc-50 dark:border-zinc-800 dark:bg-zinc-900/50 px-5 py-4">
       <div className="text-base font-semibold text-zinc-900 dark:text-zinc-100 leading-snug">{hook}</div>
-      <div className="text-sm text-zinc-500 dark:text-zinc-400 mt-1 mb-3">Drop your email and we'll show you how it works on your site.</div>
+      <div className="text-sm text-zinc-500 dark:text-zinc-400 mt-1 mb-3">{subtext || "Drop your email and we'll show you how Nobi works."}</div>
       <form onSubmit={submit} className="flex gap-2">
         <input
           type="email"

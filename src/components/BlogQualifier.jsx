@@ -6,17 +6,17 @@ function buildMessages(context) {
     {
       id: "evaluating",
       label: "Actively evaluating tools right now",
-      assistantMessage: `Looks like you're actively comparing ${ctx}. I can walk you through exactly how Nobi would perform on your site — what are you currently using, or what's your store URL?`,
+      message: `I'm actively evaluating ${ctx}. Can you walk me through how Nobi compares and what it would look like on my site?`,
     },
     {
       id: "researching",
       label: "Still in research mode",
-      assistantMessage: `Still researching ${ctx} — no rush. What questions do you have? I can help you figure out what to actually look for when comparing these tools.`,
+      message: `I'm still researching ${ctx}. What should I actually be looking for when comparing these tools?`,
     },
     {
       id: "switching",
       label: "Already using something, thinking of switching",
-      assistantMessage: `Thinking about switching away from one of ${ctx}? Tell me which tool you're on and what's frustrating you — I'll give you an honest read on how Nobi compares.`,
+      message: `I'm currently using one of ${ctx} and thinking about switching. Can you give me an honest read on how Nobi compares?`,
     },
   ];
 }
@@ -28,6 +28,15 @@ export default function BlogQualifier({ context }) {
   function handleClick(option) {
     setSelected(option.id);
 
+    // Fire GA4 event
+    if (typeof window.gtag === "function") {
+      window.gtag("event", "qualifier_click", {
+        intent: option.id,
+        article_path: window.location.pathname,
+      });
+    }
+
+    // Pre-seed visitor context for when setVisitorContext ships
     if (window.Nobi?.setVisitorContext) {
       window.Nobi.setVisitorContext({
         intent: option.id,
@@ -37,8 +46,9 @@ export default function BlogQualifier({ context }) {
       });
     }
 
+    // Open Nobi with the selection as the USER's first message so Nobi responds naturally
     if (window.Nobi?.openChat) {
-      window.Nobi.openChat({ assistantMessage: option.assistantMessage });
+      window.Nobi.openChat({ message: option.message });
     }
   }
 
@@ -48,7 +58,7 @@ export default function BlogQualifier({ context }) {
         Where are you in your search?
       </div>
       <div className="text-xs text-zinc-500 dark:text-zinc-400 mt-0.5 mb-3">
-        Pick one and Nobi will open with a response tailored to your situation.
+        Pick one and Nobi will respond based on where you are.
       </div>
       <div className="flex flex-col gap-2">
         {options.map((option) => (

@@ -1,42 +1,42 @@
 import React from "react";
 
-const OPTIONS = [
-  {
-    id: "evaluating",
-    label: "Actively evaluating tools right now",
-    assistantMessage:
-      "Looks like you're actively comparing tools. I can walk you through exactly how Nobi would perform on your site — what's your store URL or what are you currently using?",
-  },
-  {
-    id: "researching",
-    label: "Still in research mode",
-    assistantMessage:
-      "Still in research mode — no rush. What questions do you have? I can help you figure out what to actually look for when comparing these tools.",
-  },
-  {
-    id: "switching",
-    label: "Already using a competitor, thinking of switching",
-    assistantMessage:
-      "Thinking about switching? Tell me which tool you're on and what's frustrating you — I'll give you an honest read on how Nobi compares.",
-  },
-];
+function buildMessages(context) {
+  const ctx = context || "these tools";
+  return [
+    {
+      id: "evaluating",
+      label: "Actively evaluating tools right now",
+      assistantMessage: `Looks like you're actively comparing ${ctx}. I can walk you through exactly how Nobi would perform on your site — what are you currently using, or what's your store URL?`,
+    },
+    {
+      id: "researching",
+      label: "Still in research mode",
+      assistantMessage: `Still researching ${ctx} — no rush. What questions do you have? I can help you figure out what to actually look for when comparing these tools.`,
+    },
+    {
+      id: "switching",
+      label: "Already using something, thinking of switching",
+      assistantMessage: `Thinking about switching away from one of ${ctx}? Tell me which tool you're on and what's frustrating you — I'll give you an honest read on how Nobi compares.`,
+    },
+  ];
+}
 
-export default function BlogQualifier() {
+export default function BlogQualifier({ context }) {
   const [selected, setSelected] = React.useState(null);
+  const options = buildMessages(context);
 
   function handleClick(option) {
     setSelected(option.id);
 
-    // Set visitor context for Nobi to use in the conversation
     if (window.Nobi?.setVisitorContext) {
       window.Nobi.setVisitorContext({
         intent: option.id,
         source_article: window.location.pathname,
+        article_context: context || null,
         clicked_at: new Date().toISOString(),
       });
     }
 
-    // Open Nobi with a tailored greeting
     if (window.Nobi?.openChat) {
       window.Nobi.openChat({ assistantMessage: option.assistantMessage });
     }
@@ -48,7 +48,7 @@ export default function BlogQualifier() {
         Where are you in your search?
       </div>
       <div className="flex flex-col gap-2">
-        {OPTIONS.map((option) => (
+        {options.map((option) => (
           <button
             key={option.id}
             onClick={() => handleClick(option)}

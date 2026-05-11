@@ -1,22 +1,22 @@
 import React from "react";
 
 function buildMessages(context) {
-  const ctx = context || "these tools";
+  const ctx = context || "a few different tools";
   return [
     {
       id: "evaluating",
       label: "Actively evaluating tools right now",
-      message: `I'm actively evaluating ${ctx}. Can you walk me through how Nobi compares and what it would look like on my site?`,
+      message: `Hey, I've been reading up on ${ctx} and I'm trying to make a decision soon. How does Nobi stack up and what would it actually look like on my site?`,
     },
     {
       id: "researching",
       label: "Still in research mode",
-      message: `I'm still researching ${ctx}. What should I actually be looking for when comparing these tools?`,
+      message: `I'm in the middle of researching ${ctx} - not ready to decide yet but trying to understand my options. What should I actually be paying attention to when comparing these?`,
     },
     {
       id: "switching",
       label: "Already using something, thinking of switching",
-      message: `I'm currently using one of ${ctx} and thinking about switching. Can you give me an honest read on how Nobi compares?`,
+      message: `I'm currently on one of the tools in this comparison and starting to think about switching. Can you give me an honest take on how Nobi compares - what's actually different?`,
     },
   ];
 }

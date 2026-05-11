@@ -56,10 +56,7 @@ export default function BlogEmailCapture({ hook, articleTitle }) {
 
   return (
     <div className="my-6 rounded-xl border border-zinc-200 bg-zinc-50 dark:border-zinc-800 dark:bg-zinc-900/50 px-5 py-4">
-      <p className="text-base font-bold text-zinc-900 dark:text-zinc-100 leading-snug">{hook}</p>
-      <p className="text-sm text-zinc-500 dark:text-zinc-400 mt-0.5 mb-3">
-        Drop your email and we'll run a live demo on your actual site - not a canned walkthrough.
-      </p>
+      <p className="text-base font-bold text-zinc-900 dark:text-zinc-100 leading-snug mb-3">{hook}</p>
       <form onSubmit={submit} className="flex flex-col sm:flex-row gap-2">
         <input
           type="email"

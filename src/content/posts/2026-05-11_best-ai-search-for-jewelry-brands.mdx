@@ -99,17 +99,17 @@ export const meta = {
 
 Shoppers searching for jewelry care about specifics: metal, stone, carat, setting, ring size. Get those filters wrong and the sale walks. Four tools handle attribute search well, each in its own way:
 
-- **Nobi** - AI search plus a [shopping assistant](https://nobi.ai/blog/ai-shopping-assistant-ecommerce) that answers metal-allergen, sizing, and care questions inline with cited sources, $25/mo base ($0.01/extra search, $0.10/extra message). Pick when shoppers ask attribute and policy questions in the same session and you want both jobs in one tool.
+- **Nobi** - AI search and a [shopping assistant](https://nobi.ai/blog/ai-shopping-assistant-ecommerce) in one tool. Answers sizing, allergen, and policy questions inline with cited sources. $25/mo base ($0.01/extra search, $0.10/extra message). Pick when shoppers mix attribute filtering with policy questions in the same session.
 - **Algolia** - developer-first search API with deep faceting, sub-50ms response, and NeuralSearch on higher tiers. Usage-based pricing on search requests and records indexed; mid-market deployments often run $2,000+/month. Pick when an in-house engineering team owns ranking logic for stone/setting attributes.
 - **Klevu** - AI search for Shopify with synonym handling that catches "solitaire" vs "engagement ring" out of the box. Tiered pricing quoted by store size. Pick when conversational and synonym-heavy queries are the main miss reason.
-- **Fast Simon** - Shopify-focused search with visual merchandising tools tuned for collection curation. Shopify App Store tiered pricing that scales with catalog and traffic. Pick when visual collection layouts (anniversary edits, birthstone collections) are the bottleneck, not semantic relevance.
+- **Fast Simon** - Shopify-focused search with visual merchandising tools tuned for collection curation. Quote-only pricing that scales with catalog and traffic. Pick when visual collection layouts (anniversary edits, birthstone collections) are the bottleneck, not semantic relevance.
 
 | Product | Primary job | Best for | Pricing (starting) | Standout strength | Key weakness |
 | --- | --- | --- | --- | --- | --- |
 | Nobi | AI search + shopping assistant grounded in catalog and policies | Jewelry brands whose shoppers mix attribute search with sizing, allergen, and care questions in one session | $25/mo base (2,500 searches + 250 messages); $0.01/extra search, $0.10/extra message | Cited inline answers refresh twice daily, so a metal-allergen disclosure or sizing-chart edit reaches shopper answers within hours | No site-wide merchandising beyond the search results page; not an API-first developer platform |
 | [Algolia](https://algolia.com) | Developer-first search API with deep faceting | Engineering teams that want to own ranking logic on metal, stone, carat, and setting attributes | Usage-based on search requests and records indexed; mid-market deployments often $2,000+/month before custom relevance work | Sub-50ms response and NeuralSearch on higher tiers for queries like "vintage halo setting in rose gold" | Custom ranking and NeuralSearch tuning all scale with engineering hours, not contract size; usage-based pricing spikes around launches and gifting season |
-| [Klevu](https://klevu.com) | AI search for Shopify jewelry catalogs | Shopify jewelry brands whose biggest miss is conversational and synonym-heavy queries | Tiered, quoted by store size | AI matching catches "solitaire" / "engagement ring" / "diamond ring" without manual synonym lists | Personalization is licensed separately from Smart Search; now a division of Athos Commerce alongside Searchspring and Intelligent Reach |
-| [Fast Simon](https://fastsimon.com) | Shopify search plus visual merchandising for collection curation | Shopify jewelry brands whose bottleneck is visual collection curation (birthstone edits, anniversary capsules) | Shopify App Store tiered pricing, scaling with catalog and traffic | Visual merchandising tools and quick App Store install that non-technical merchandisers can run daily | Lighter on natural-language understanding than AI-native engines; personalization is a secondary strength |
+| [Klevu](https://klevu.com) | AI search for Shopify jewelry catalogs | Shopify jewelry brands whose biggest miss is conversational and synonym-heavy queries | Quote-only (Essential / Advanced / Expert tiers; priced by sessions and SKU volume) | AI matching catches "solitaire" / "engagement ring" / "diamond ring" without manual synonym lists | Behavioral personalization is a separately licensed module, not bundled with Smart Search; now a division of Athos Commerce alongside Searchspring and Intelligent Reach |
+| [Fast Simon](https://fastsimon.com) | Shopify search plus visual merchandising for collection curation | Shopify jewelry brands whose bottleneck is visual collection curation (birthstone edits, anniversary capsules) | Quote-only; scales with catalog and traffic | Visual merchandising tools that non-technical merchandisers can run daily for birthstone edits and capsule layouts | Lighter on natural-language understanding than AI-native engines; personalization is a secondary strength |
 
 *Full disclosure: Nobi is our product, and it's included in this list alongside the three competitors head-of-ecommerce buyers most often weigh against it. We've aimed to be honest about Nobi's own limits and explicit about when another tool on this list is the better pick.*
 
@@ -130,7 +130,7 @@ Nobi pairs AI site search with a shopping assistant in the same tool, which fits
 **Pricing:** $25/month base (2,500 searches and 250 conversational messages included). $0.01 per additional search, $0.10 per additional message - flat per-unit pricing that doesn't shift to revenue share during a Valentine's or Mother's Day spike.
 
 **Pros:**
-- Faceted attribute search and a conversational assistant in one tool, so a shopper filtering for "14k gold solitaire under $2,000" can ask "is this hypoallergenic?" without leaving the page.
+- Faceted attribute search and a conversational assistant in one tool, so a shopper filtering for "round diamond halo ring under $3,000" can ask "is this hypoallergenic?" without leaving the page.
 - Inline numbered citation pills on every answer link to the exact source document, date, and excerpt - a real signal of trust on a category where shoppers are already wary of online claims.
 - Connected catalog, sizing charts, allergen disclosures, and policy pages refresh twice a day, so a return-window update lands in shopper answers within hours instead of on a weekly external sync.
 - Transparent per-unit pricing with no revenue share or surprise gifting-season bill.
@@ -174,11 +174,11 @@ Nobi pairs AI site search with a shopping assistant in the same tool, which fits
 
 ## 3. Klevu
 
-[Klevu](https://klevu.com) is AI search for ecommerce, strongest on Shopify - which is where a lot of jewelry DTC catalogs already live. The AI matching reads your catalog and figures out what a shopper meant, so jewelry-vocabulary mismatches like "solitaire" vs "engagement ring" or "chain" vs "necklace" resolve to real products instead of empty pages. A "did you mean" feature handles the typos common in stone and designer names. When a query genuinely has no match, merchandisers can set up category-page redirects from the Smart Merchandising dashboard without an engineering ticket. The packaged Shopify install gets a jewelry store live in days, not months.
+[Klevu](https://klevu.com) is AI search built for Shopify, which is where most jewelry DTC catalogs run. The AI matching reads your catalog and figures out what a shopper meant, so jewelry-vocabulary mismatches like "solitaire" vs "engagement ring" or "chain" vs "necklace" resolve to real products instead of empty pages. A "did you mean" feature handles the typos common in stone and designer names. When a query genuinely has no match, merchandisers can set up category-page redirects from the Smart Merchandising dashboard without an engineering ticket. The packaged Shopify install gets a jewelry store live in days, not months.
 
 **Best for:** Shopify jewelry brands whose biggest miss reason is conversational, descriptive, or synonym-heavy queries that a basic search engine can't resolve.
 
-**Pricing:** Tiered and quoted by store size. Confirm the current tier on Klevu's pricing page.
+**Pricing:** Quote-only; three tiers (Essential, Advanced, Expert) priced by domain count, sessions, and SKU volume. No public price list - contact Athos Commerce for a quote.
 
 **Pros:**
 - AI matching catches long, descriptive jewelry queries like "art deco emerald-cut sapphire ring" and synonym pairs like "solitaire" / "engagement ring" before they resolve to empty results
@@ -188,18 +188,18 @@ Nobi pairs AI site search with a shopping assistant in the same tool, which fits
 
 **Cons:**
 - Klevu is now a division of Athos Commerce alongside Searchspring and Intelligent Reach, so the roadmap and support footprint sit inside a larger parent company rather than an independent search-focused team
-- Personalizing the fallback experience is a separately licensed feature, not included with Smart Search
+- Behavioral personalization - showing shoppers different results based on their browsing history - is a separately licensed module, not bundled with Smart Search
 - AI matching is only as good as your catalog data - sparse jewelry product info (missing setting, carat, or stone metadata) weakens the layer that's supposed to prevent empty pages
 
 **Verdict:** Pick Klevu if your empty-page problem on a Shopify jewelry store is mostly wording mismatch and you want a packaged install. Skip it if your team needs broader merchandising control across the site or wants pricing published per unit rather than quoted per store.
 
 ## 4. Fast Simon
 
-[Fast Simon](https://fastsimon.com) is AI-assisted Shopify search bundled with product recommendations and visual merchandising tools - and the visual merchandising piece is what earns it a place on a jewelry shortlist. Birthstone edits, anniversary capsules, and seasonal gift collections are visual-curation work as much as they are search work, and Fast Simon gives merchandisers a toolkit to lay those collections out without an engineering ticket. Pinning, boosting, and collection rules all live in the same dashboard, and the App Store install means a jewelry store is typically live within a day. The trade-off is that [natural-language understanding](https://nobi.ai/blog/ai-vs-traditional-site-search) is lighter than the AI-native engines above, so descriptive jewelry queries like "vintage rose gold halo setting" still leak.
+[Fast Simon](https://fastsimon.com) is Shopify search with product recommendations and visual merchandising tools in one package. The visual merchandising piece is what earns it a spot on a jewelry shortlist: birthstone edits, anniversary capsules, and seasonal gift collections are visual-curation work as much as search work, and Fast Simon gives merchandisers a toolkit to manage those layouts without an engineering ticket. Pinning, boosting, and collection rules all live in the same dashboard, and the App Store install means a jewelry store is typically live within a day. The trade-off is that [natural-language understanding](https://nobi.ai/blog/ai-vs-traditional-site-search) is lighter than the AI-native engines above, so descriptive jewelry queries like "cushion-cut pink sapphire in yellow gold" still leak.
 
 **Best for:** Shopify jewelry brands whose bottleneck is collection curation and visual merchandising - birthstone edits, anniversary capsules, gift guides - not semantic relevance.
 
-**Pricing:** Shopify App Store tiered pricing, scaling with catalog and traffic. Confirm the current entry tier on the Fast Simon listing.
+**Pricing:** Quote-only; plans scale with catalog and traffic for DTC brands through enterprise. No public price list - contact Fast Simon for a quote.
 
 **Pros:**
 - Strong Shopify integration and visual merchandising tools that fit jewelry's image-led discovery patterns
@@ -207,7 +207,7 @@ Nobi pairs AI site search with a shopping assistant in the same tool, which fits
 - Pinning, boosting, and collection curation all run from one dashboard a non-technical merchandiser can manage daily - useful for capsules and gift edits that change month over month
 
 **Cons:**
-- Lighter on natural-language understanding than AI-native engines, so descriptive queries like "vintage rose gold halo setting" land softer
+- Lighter on natural-language understanding than AI-native engines, so descriptive queries like "art deco emerald-cut yellow gold ring" land softer
 - Personalization is a secondary strength, not a headline capability
 
 **Verdict:** Pick Fast Simon if your merchandising team leads with visual curation of jewelry collections and your search needs are basic; skip it if descriptive natural-language queries are what's really costing you sales.
@@ -218,7 +218,7 @@ Pick Nobi when shoppers are mixing attribute filtering with questions about sizi
 
 Pick [Algolia](https://www.algolia.com) when you have dedicated search engineers who want to own ranking on metal, stone, carat, and setting attributes end to end. The API gives you sub-50ms response times and full control over how those attributes get weighted, with NeuralSearch available on higher tiers for descriptive queries. The trade-off is real engineering hours: synonym dictionaries, ranking rules, and NeuralSearch tuning are all yours to build and maintain, and usage-based pricing can produce surprise bills during gifting-season spikes.
 
-Pick [Klevu](https://www.klevu.com) when you're on Shopify and your biggest miss reason is descriptive or synonym-heavy queries that a basic engine can't resolve. AI matching handles "solitaire" vs "engagement ring" and "vintage halo cluster in rose gold" out of the box, the packaged install gets you live in days, and pricing is tiered and quoted by store size.
+Pick [Klevu](https://www.klevu.com) when you're on Shopify and your biggest miss reason is descriptive or synonym-heavy queries that a basic engine can't resolve. AI matching handles "solitaire" vs "engagement ring" and "art deco sapphire cluster ring" out of the box, and the packaged install gets you live in days. Pricing is quote-only through Athos Commerce.
 
 Pick [Fast Simon](https://www.fastsimon.com) when your merchandising team's real job is visual collection curation - birthstone edits, anniversary capsules, gift guides - and search relevance is a secondary concern. The merchandiser toolkit makes monthly capsule layouts a dashboard task rather than an engineering ticket.
 
@@ -234,7 +234,7 @@ One caveat that applies across all four: none of these alone cover site-wide mer
 
 ---
 
-Stuck on getting search to work and answer sizing, allergen, and policy questions in the same session? [Start with Nobi](https://nobi.ai). $25/month covers both jobs in one platform, with per-unit pricing that stays predictable through every gifting-season spike.
+If attribute filtering and shopper Q&A are both bottlenecks - sizing, allergens, and policy questions alongside search - [Nobi](https://nobi.ai) handles both in one tool. $25/month base, with per-unit pricing that stays predictable through every gifting-season spike.
 
 <div className="my-8 flex justify-center">
  <a

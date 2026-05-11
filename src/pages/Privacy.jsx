@@ -14,7 +14,7 @@ const Privacy = () => {
     {/* Page Heading and Intro */}
     <h1 className="text-3xl font-bold mb-4">Privacy Policy</h1>
     <p className="text-sm text-gray-500 mb-8">
-      Effective February&nbsp;17,&nbsp;2026. This Privacy Policy explains how Nobi
+      Effective May&nbsp;11,&nbsp;2026. This Privacy Policy explains how Nobi
       collects, uses, and shares information.  If you have questions, email{" "}
       <a href="mailto:privacy@nobi.ai" className="text-blue-600 underline">
         privacy@nobi.ai
@@ -45,8 +45,13 @@ const Privacy = () => {
         </li>
         <li>
           <strong>Commerce & Usage Data</strong> — queries, clicks, viewed
-          items, conversation logs, device/browser info, IP address, timestamps
-          and interactions with our widgets or APIs.
+          items, conversation logs, device/browser info, IP address, timestamps,
+          and interactions with our widgets or APIs. This includes intent signals
+          you voluntarily express through interactive components on our site
+          (for example, clicking a button on a blog post to indicate where you
+          are in your buying journey). These signals are stored on your visitor
+          profile for up to 12 months and used to personalize the Nobi
+          assistant experience on future visits.
         </li>
         <li>
           <strong>Technical Data</strong> — cookies, pixel tags, SDKs, error
@@ -64,6 +69,17 @@ const Privacy = () => {
           populate your knowledge base, and import your product catalogue. This
           data is used solely to provide the Service and is subject to the same
           protections as other Customer Content.
+        </li>
+        <li>
+          <strong>Merchant-Supplied Visitor Context</strong> — merchants may
+          use the <code>window.Nobi.addVisitorContext()</code> JavaScript API
+          to supply free-form context strings describing a site visitor's
+          situation or intent (for example, "visitor indicated they are actively
+          evaluating tools"). This data is treated as Customer Content, stored
+          on the visitor's profile, and used solely to personalize that
+          visitor's assistant experience. Merchants are responsible for ensuring
+          they have appropriate consent from their visitors before supplying
+          this context.
         </li>
       </ul>
     </section>

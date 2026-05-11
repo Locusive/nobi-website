@@ -55,10 +55,10 @@ export default function BlogEmailCapture({ hook, articleTitle }) {
   }
 
   return (
-    <div className="my-6 rounded-xl border border-zinc-200 bg-zinc-50 dark:border-zinc-800 dark:bg-zinc-900/50 px-6 py-5">
-      <p className="text-lg font-bold text-zinc-900 dark:text-zinc-100 leading-snug">{hook}</p>
-      <p className="text-sm text-zinc-500 dark:text-zinc-400 mt-1 mb-4">
-        Shanif responds personally, usually within a day.
+    <div className="my-6 rounded-xl border border-zinc-200 bg-zinc-50 dark:border-zinc-800 dark:bg-zinc-900/50 px-5 py-4">
+      <p className="text-base font-bold text-zinc-900 dark:text-zinc-100 leading-snug">{hook}</p>
+      <p className="text-sm text-zinc-500 dark:text-zinc-400 mt-0.5 mb-3">
+        Drop your email and we'll run a live demo on your actual site - not a canned walkthrough.
       </p>
       <form onSubmit={submit} className="flex flex-col sm:flex-row gap-2">
         <input
@@ -74,7 +74,7 @@ export default function BlogEmailCapture({ hook, articleTitle }) {
           disabled={submitting}
           className="shrink-0 rounded-lg bg-black dark:bg-white text-white dark:text-black text-sm font-semibold px-5 py-2 hover:opacity-80 transition-opacity disabled:opacity-50"
         >
-          {submitting ? "Sending…" : "Get in touch"}
+          {submitting ? "Sending…" : "Show me"}
         </button>
       </form>
       {error && <p className="mt-2 text-xs text-red-600 dark:text-red-400">{error}</p>}

@@ -45,18 +45,16 @@ export default function BlogEmailCapture({ hook, articleTitle }) {
 
   if (done) {
     return (
-      <div className="my-6 rounded-xl border border-zinc-200 bg-zinc-50 dark:border-zinc-800 dark:bg-zinc-900/50 px-6 py-5">
-        <p className="text-base font-semibold text-zinc-900 dark:text-zinc-100">You're on the list.</p>
-        <p className="text-sm text-zinc-500 dark:text-zinc-400 mt-1">
-          Shanif will follow up personally, usually within a day.
-        </p>
+      <div className="my-6 rounded-xl border border-zinc-200 bg-zinc-50 dark:border-zinc-800 dark:bg-zinc-900/50 px-5 py-4">
+        <div className="text-base font-semibold text-zinc-900 dark:text-zinc-100">You're on the list.</div>
+        <div className="text-sm text-zinc-500 dark:text-zinc-400 mt-1">We'll be in touch shortly.</div>
       </div>
     );
   }
 
   return (
     <div className="my-6 rounded-xl border border-zinc-200 bg-zinc-50 dark:border-zinc-800 dark:bg-zinc-900/50 px-5 py-4">
-      <p className="text-base font-bold text-zinc-900 dark:text-zinc-100 leading-snug mb-3">{hook}</p>
+      <div className="text-base font-bold text-zinc-900 dark:text-zinc-100 leading-snug mb-3">{hook}</div>
       <form onSubmit={submit} className="flex flex-col sm:flex-row gap-2">
         <input
           type="email"

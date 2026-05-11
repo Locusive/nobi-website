@@ -464,6 +464,13 @@ function UrlEstimateForm({ onTrafficLookup }) {
       onTrafficLookup?.(visits);
     }
 
+    if (window.Nobi?.addVisitorContext) {
+      const site = resolvedName || url.trim();
+      window.Nobi.addVisitorContext(
+        `Visitor entered their site URL on the Nobi pricing page${site ? ` (${site})` : ""} to get a pricing estimate.`
+      );
+    }
+
     timeoutRef.current = setTimeout(() => {
       sendOnce();
       setStep((s) => (s === "details" ? "done-quiet" : s));

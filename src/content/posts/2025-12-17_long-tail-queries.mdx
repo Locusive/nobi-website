@@ -27,7 +27,6 @@ Here is how we turn a complex human sentence into a curated product shelf.
 When a query lands in our system, we don't just pass it blindly to a database. It parses the sentence to extract **hard constraints**, specifically, the non-negotiable filters and attributes that a site visitor has specifically requested.
 
 
-<BlogChatPrompt prompt="How would Nobi interpret 'red dress for a summer wedding under $150' on my store?" />
 This lets us identify specific variables that we can use to filter down the product catalog before we even start thinking about semantics:
 
 * **Price Ceilings:** We recognize "under $300" not as text, but as a logic filter (`price <= 300`).

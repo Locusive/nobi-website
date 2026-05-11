@@ -4,7 +4,6 @@ import { MDXProvider } from "@mdx-js/react";
 import { useSEO } from "../hooks/useSEO";
 import ArticleLayout from "../components/ArticleLayout";
 import { getPostBySlug } from "../content/utils/mdxPostLoader";
-import BlogChatPrompt from "../components/BlogChatPrompt";
 import BlogEmailCapture from "../components/BlogEmailCapture";
 
 // Wrap MDX tables in a horizontally-scrollable container so wide
@@ -16,7 +15,6 @@ const components = {
       <table {...props} />
     </div>
   ),
-  BlogChatPrompt,
   BlogEmailCapture,
 };
 

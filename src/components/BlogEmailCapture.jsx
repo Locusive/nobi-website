@@ -54,8 +54,8 @@ export default function BlogEmailCapture({ hook, articleTitle }) {
 
   return (
     <div className="my-6 rounded-xl border border-zinc-200 bg-zinc-50 dark:border-zinc-800 dark:bg-zinc-900/50 px-5 py-4">
-      <div className="text-sm font-semibold text-zinc-900 dark:text-zinc-100 leading-snug">{hook}</div>
-      <div className="text-xs text-zinc-500 dark:text-zinc-400 mt-0.5 mb-2">Drop your email and we'll show you how it works on your site.</div>
+      <div className="text-base font-semibold text-zinc-900 dark:text-zinc-100 leading-snug">{hook}</div>
+      <div className="text-sm text-zinc-500 dark:text-zinc-400 mt-1 mb-3">Drop your email and we'll show you how it works on your site.</div>
       <form onSubmit={submit} className="flex gap-2">
         <input
           type="email"

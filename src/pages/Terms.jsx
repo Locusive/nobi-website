@@ -5,7 +5,7 @@ import PageLayout from "../components/PageLayout";
 
 const LEGAL_NAME = "Locusive, Inc. d/b/a Nobi";
 const SHORT_NAME = "Nobi";
-const EFFECTIVE = "February 17, 2026";
+const EFFECTIVE = "May 11, 2026";
 const CONTACT = "legal@nobi.ai";
 
 export default function Terms() {
@@ -96,6 +96,12 @@ export default function Terms() {
           <p>
             You represent and warrant that you have all necessary rights in Customer Content and that
             your use of the Service and Customer Content does not violate law or third-party rights.
+          </p>
+          <p>
+            If you use the <code>addVisitorContext()</code> programmatic API to supply context about
+            your site visitors, you represent and warrant that you have obtained any consent required
+            under applicable law to collect and share that visitor data with {SHORT_NAME}, and that your
+            own privacy policy adequately discloses this use of visitor data.
           </p>
 
           <h2 id="fees">5) Fees, Trials & Taxes</h2>

@@ -39,7 +39,7 @@ export default function BlogQualifier({ context }) {
     // Persist visitor intent to Nobi so the LLM knows on this and future visits
     if (window.Nobi?.addVisitorContext) {
       const articleContext = context ? ` comparing ${context}` : "";
-      const signal = `Visitor clicked "${option.label}" while reading a Nobi blog article${articleContext}. Article URL: ${window.location.pathname}.`;
+      const signal = `Visitor clicked "${option.label}" while reading a Nobi blog article${articleContext}.`;
       window.Nobi.addVisitorContext(signal);
     }
 

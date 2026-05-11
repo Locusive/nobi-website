@@ -53,26 +53,26 @@ export default function BlogEmailCapture({ hook, articleTitle }) {
   }
 
   return (
-    <div className="my-6 rounded-xl border border-zinc-200 bg-zinc-50 dark:border-zinc-800 dark:bg-zinc-900/50 px-5 py-4">
-      <div className="text-base font-bold text-zinc-900 dark:text-zinc-100 leading-snug mb-3">{hook}</div>
-      <form onSubmit={submit} className="flex flex-col sm:flex-row gap-2">
+    <div className="my-6 rounded-xl border border-zinc-200 bg-zinc-50 dark:border-zinc-800 dark:bg-zinc-900/50 px-5 py-4 flex flex-col sm:flex-row sm:items-center gap-4">
+      <div className="text-sm font-semibold text-zinc-900 dark:text-zinc-100 leading-snug sm:flex-1">{hook}</div>
+      <form onSubmit={submit} className="flex gap-2 shrink-0">
         <input
           type="email"
           required
           placeholder="you@company.com"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          className="flex-1 rounded-lg border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-800 px-3 py-2 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-black/20 dark:focus:ring-white/20"
+          className="w-48 rounded-lg border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-800 px-3 py-2 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-black/20 dark:focus:ring-white/20"
         />
         <button
           type="submit"
           disabled={submitting}
-          className="shrink-0 rounded-lg bg-black dark:bg-white text-white dark:text-black text-sm font-semibold px-5 py-2 hover:opacity-80 transition-opacity disabled:opacity-50"
+          className="shrink-0 rounded-lg bg-black dark:bg-white text-white dark:text-black text-sm font-semibold px-4 py-2 hover:opacity-80 transition-opacity disabled:opacity-50"
         >
-          {submitting ? "Sending…" : "Show me"}
+          {submitting ? "…" : "Show me"}
         </button>
       </form>
-      {error && <p className="mt-2 text-xs text-red-600 dark:text-red-400">{error}</p>}
+      {error && <div className="text-xs text-red-600 dark:text-red-400 w-full">{error}</div>}
     </div>
   );
 }

@@ -4,6 +4,7 @@ import { MDXProvider } from "@mdx-js/react";
 import { useSEO } from "../hooks/useSEO";
 import ArticleLayout from "../components/ArticleLayout";
 import BlogEmailCapture from "../components/BlogEmailCapture";
+import BlogQualifier from "../components/BlogQualifier";
 import { getPostBySlug } from "../content/utils/mdxPostLoader";
 
 // Wrap MDX tables in a horizontally-scrollable container so wide
@@ -11,6 +12,7 @@ import { getPostBySlug } from "../content/utils/mdxPostLoader";
 // mobile rather than forcing the whole page to scroll sideways.
 const components = {
   BlogEmailCapture,
+  BlogQualifier,
   table: (props) => (
     <div className="my-6 overflow-x-auto">
       <table {...props} />

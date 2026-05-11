@@ -16,7 +16,7 @@ function buildMessages(context) {
     {
       id: "switching",
       label: "Already using something, thinking of switching",
-      message: `I'm currently on one of the tools in this comparison and starting to think about switching. Can you give me an honest take on how Nobi compares - what's actually different?`,
+      message: `I'm currently using one of ${ctx} and starting to think about switching. Can you give me an honest take on how Nobi compares - what's actually different?`,
     },
   ];
 }

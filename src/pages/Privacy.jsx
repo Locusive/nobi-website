@@ -45,8 +45,13 @@ const Privacy = () => {
         </li>
         <li>
           <strong>Commerce & Usage Data</strong> — queries, clicks, viewed
-          items, conversation logs, device/browser info, IP address, timestamps
-          and interactions with our widgets or APIs.
+          items, conversation logs, device/browser info, IP address, timestamps,
+          and interactions with our widgets or APIs. This includes intent signals
+          you voluntarily express through interactive components on our site
+          (for example, clicking a button on a blog post to indicate where you
+          are in your buying journey). These signals are stored on your visitor
+          profile for up to 12 months and used to personalize the Nobi
+          assistant experience on future visits.
         </li>
         <li>
           <strong>Technical Data</strong> — cookies, pixel tags, SDKs, error

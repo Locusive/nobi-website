@@ -107,7 +107,7 @@ export const meta = {
 
 Looking at five options that actually fit a dealership GM shopping for AI search and shopper answers:
 
-- **Nobi** - AI site search with an AI answer layer, inline numbered citations, and an optional second AI review that checks each answer against its sources; $25/mo base ($0.01 per extra search, $0.10 per extra message). Pick when shoppers bounce because they can't find the right vehicle and you need an answer layer that won't quote a sold car.
+- **Nobi** - AI site search with a cited answer layer and an optional second AI review pass; $25/mo base. Pick when shoppers bounce because they can't find the right vehicle and you need an answer layer that won't quote a sold car.
 - **Dealer.com** - Cox Automotive's flagship dealership website platform with inventory-driven sites and search built in; per-rooftop quote. Pick when you're standardizing a multi-rooftop group already on VinSolutions and Dealertrack.
 - **DealerInspire** - Cars.com-owned site platform with a modern page-builder, conversational features, and integrated digital retailing; quote-only, premium tier. Pick when you're already invested in the Cars.com inventory and lead-management feed.
 - **DealerOn** - independent, SEO-forward dealer website platform with strong analytics; quote-only, mid-market focus. Pick when organic traffic and conversion analytics matter more than ecosystem bundling.
@@ -139,7 +139,7 @@ Vehicle-query relevance was the first cut. A shopper typing "2022 Silverado 1500
 
 Answer grounding was the third cut, and the one with the most variance. Some tools cite every answer back to a specific VDP or policy page the GM can audit; others run free-form LLM output with no source. After Chevy Watsonville, the second one is a CSI fire waiting to start.
 
-On pricing, [Nobi](https://nobi.ai) publishes $25/month base with 2,500 searches and 250 messages included, then $0.01 per extra search and $0.10 per extra message. [Dealer.com](https://www.dealer.com), [DealerInspire](https://www.dealerinspire.com), [DealerOn](https://www.dealeron.com), and [Yext](https://www.yext.com) all quote per-rooftop and don't post numbers publicly - fair, but you'll be on a sales call to get one. Install path mattered too: the website platforms ship AI search inside their stack, Yext overlays on top, and Nobi is a small website-side install you can ship in hours.
+On pricing, [Nobi](https://nobi.ai) publishes $25/month base with usage-based overages for searches and messages beyond the included allowance. [Dealer.com](https://www.dealer.com), [DealerInspire](https://www.dealerinspire.com), [DealerOn](https://www.dealeron.com), and [Yext](https://www.yext.com) all quote per-rooftop and don't post numbers publicly - fair, but you'll be on a sales call to get one. Install path mattered too: the website platforms ship AI search inside their stack, Yext overlays on top, and Nobi is a small website-side install you can ship in hours.
 
 ## 1. Nobi
 
@@ -150,10 +150,10 @@ On pricing, [Nobi](https://nobi.ai) publishes $25/month base with 2,500 searches
 **Pricing:** $25/month base (2,500 searches and 250 conversational messages included). $0.01 per additional search, $0.10 per additional message.
 
 **Pros:**
-- Inline citation pills on every answer with a hover preview of the source document, plus an optional second AI review that checks each draft answer against its cited sources before it sends - directly addresses the fear of an AI quoting a sold car or the wrong price
+- Every answer ships with inline citation pills; hover one to see the source document, date, and exact excerpt. An optional second AI review re-reads each draft answer against its sources before it sends. Together they're the direct answer to the fear of an AI quoting a sold car or the wrong price.
 - Connected sources refresh twice a day, so a price change, a policy update, or a sold VDP lands in shopper answers within hours instead of waiting on a weekly sync
-- Transparent published pricing - $25/mo base, $0.01 per extra search, $0.10 per extra message - with no revenue-share or surprise usage bills at month-end
-- Contextual suggestion pills appear as tappable prompts scoped to the page the shopper is on (SRP, VDP, finance page), giving phone-ups and internet-ups a starting point when they don't know what to type
+- Transparent published pricing at $25/mo base with no revenue-share or surprise usage bills at month-end
+- Contextual suggestion pills appear as tappable prompts scoped to the page the shopper is on (SRP, VDP, finance page), giving shoppers a starting point when they don't know what to type
 
 **Cons:**
 - Not automotive-native today: Nobi doesn't ship a turnkey VDP-feed connector or a packaged BDC workflow the way Cox-stack or Cars.com-stack products do, so expect implementation work to wire up the inventory feed
@@ -209,11 +209,11 @@ On pricing, [Nobi](https://nobi.ai) publishes $25/month base with 2,500 searches
 - Conversational AI features are still maturing compared to vendors building answer layers from scratch
 - No published pricing; premium tier above entry-level dealership website platforms, so budget planning needs a quote
 
-**Verdict:** Pick DealerInspire when you're already on the Cars.com inventory and lead feed and want the website on the same vendor; skip it if you need a strongest AI search and answer layer rather than a website platform with conversational features added on.
+**Verdict:** Pick DealerInspire when you're already on the Cars.com inventory and lead feed and want the website on the same vendor; skip it if you need the strongest AI search and answer layer rather than a website platform with conversational features added on.
 
 ## 4. DealerOn
 
-[DealerOn](https://dealeron.com) is an independent dealership website platform that's built its reputation on organic search performance and analytics, rather than on bundling itself into a larger CRM or DMS stack. Its Cobalt 2.0 responsive sites are designed around Google-friendly structure and page speed, and the reporting layer gives a GM enough visibility to act on traffic and conversion data without leaning on an engineering team.
+[DealerOn](https://dealeron.com) is an independent dealership website platform that's built its reputation on organic search performance and analytics, rather than on bundling itself into a larger CRM or DMS stack. Its Cobalt 2.0 sites (DealerOn's current responsive website template) are designed around Google-friendly structure and page speed, and the reporting layer gives a GM enough visibility to act on traffic and conversion data without leaning on an engineering team.
 
 **Best for:** Independent dealers and small franchise groups who prioritize organic search performance and want a website platform that isn't part of the Cox or Cars.com ecosystem.
 
@@ -253,7 +253,7 @@ On pricing, [Nobi](https://nobi.ai) publishes $25/month base with 2,500 searches
 
 ## How should a dealership GM pick between these tools?
 
-Start with what's actually broken. If shoppers leave because the site search can't parse "used silver Tahoe under 40k," the fix is an AI search layer like [Nobi](https://nobi.ai) that handles year, make, model, and price as separate facets and grounds every answer in your live inventory with a citation back to the VDP. If the bigger problem is that the dealership website itself feels dated, the question is which platform to move to - and the deciding factor is usually which ecosystem you already run.
+Start with what's actually broken. If shoppers leave because the site search can't parse "used silver Tahoe under 40k," the fix is an AI search layer like [Nobi](https://nobi.ai) that handles year, make, model, and price as separate facets and grounds every answer in your live inventory with a citation back to the VDP. If the bigger problem is that the dealership website itself feels dated, the question is which platform to move to - and the deciding factor is usually which ecosystem you already run. For those three platform options, AI search comes bundled with the site. Nobi and Yext are overlays - you can add either on top of whatever platform the rooftop already runs.
 
 If you're already on the Cox stack with VinSolutions and Dealertrack, [Dealer.com](https://www.dealer.com) is the easiest website pick. The trade-off is more Cox lock-in. If you're on the Cars.com side instead - sending inventory there and buying leads back - [DealerInspire](https://www.dealerinspire.com) is the mirror-image choice for the same reason. If you want a modern site without getting pulled deeper into either ecosystem, [DealerOn](https://www.dealeron.com) is the independent option, with a long-running focus on organic search.
 
@@ -266,7 +266,7 @@ Skip Nobi when you need an end-to-end BDC stack covering SMS, phone, and email o
 
 ---
 
-Site search and a cited, fact-checked assistant on your dealership site are the real problem here. [See how Nobi handles year/make/model queries with grounded answers](https://nobi.ai).
+If shoppers are bouncing because site search can't parse a year-make-model query - or a sold VDP keeps showing up in answers - Nobi's cited answer layer is built for exactly that gap. [See how Nobi handles year/make/model queries with grounded answers](https://nobi.ai).
 
 <div className="my-8 flex justify-center">
  <a

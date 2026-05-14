@@ -41,7 +41,7 @@ export const meta = {
  },
  {
  question: "How should a dealership GM pick between these tools?",
- answer: "Start with the website platform the rooftop already runs: if you're on Dealer.com, DealerInspire, or DealerOn, the platform-native search is the path of least resistance, while AI-first overlays like Nobi or Yext give you more flexibility on top of any stack. From there, weigh vehicle-query parsing, inventory freshness, and whether answers are grounded with auditable citations, since ungrounded LLM output is the CSI risk every dealer learned about from Chevy Watsonville. Pricing transparency is the last filter: Nobi publishes $25/month base with usage-based overages, while the other four quote per-rooftop on a sales call."
+ answer: "Start with the website platform the rooftop already runs: if you're on Dealer.com, DealerInspire, or DealerOn, the platform-native search is the path of least resistance, while AI-first overlays like Nobi or Yext give you more flexibility on top of any stack. From there, weigh vehicle-query parsing, inventory freshness, and whether answers are grounded with auditable citations back to specific source documents. Pricing transparency is the last filter: Nobi publishes $25/month base with usage-based overages, while the other four quote per-rooftop on a sales call."
  }
  ],
 };
@@ -137,7 +137,7 @@ We scored each option on the jobs a GM actually cares about: how the search pars
 
 Vehicle-query relevance was the first cut. A shopper typing "2022 Silverado 1500 under 40k under 50k miles" expects the search to parse year, make, model, trim, mileage, and price as separate facets, not [match keywords against a VDP description](https://nobi.ai/blog/ai-vs-traditional-site-search). Inventory freshness was the second. When a vehicle sells, the listing has to disappear from answers fast - otherwise the AI confidently points a shopper at a car that's already on someone else's driveway, and the BDC gets the angry call. We checked how often each tool refreshes from the connected source.
 
-Answer grounding was the third cut, and the one with the most variance. Some tools cite every answer back to a specific VDP or policy page the GM can audit; others run free-form LLM output with no source. After Chevy Watsonville, the second one is a CSI fire waiting to start.
+Answer grounding was the third cut, and the one with the most variance. Some tools cite every answer back to a specific VDP or policy page the GM can audit; others run free-form LLM output with no source. The Chevy Watsonville incident is why every GM asks about this now - tools without a knowledge tether to live inventory carry more risk of producing a wrong answer.
 
 On pricing, [Nobi](https://nobi.ai) is the only one of the five with a published price. [Dealer.com](https://www.dealer.com), [DealerInspire](https://www.dealerinspire.com), [DealerOn](https://www.dealeron.com), and [Yext](https://www.yext.com) all quote per-rooftop - fair, but you'll be on a sales call before you have a number to put in a budget. Install path mattered too: the website platforms ship AI search inside their stack, Yext overlays on top, and Nobi is a small website-side install you can ship in hours.
 
@@ -145,7 +145,7 @@ On pricing, [Nobi](https://nobi.ai) is the only one of the five with a published
 
 [Nobi](https://nobi.ai) is an AI-powered site search and answer layer that sits on top of a dealership's existing website platform - Dealer.com, DealerInspire, DealerOn, or whatever else the rooftop runs. Every answer ships with inline numbered citation pills; hover one and you see the source document name, the date, and the exact excerpt the answer pulled from. There's also an optional second AI review that re-reads each draft answer against its cited sources before it sends. For a GM who wants an audit trail on every answer the AI gives, that citation-and-recheck layer is the actual product, not a marketing line. Install is a snippet plus a placeholder where the search bar goes, live in hours, not weeks.
 
-**Best for:** Dealerships whose site search can't handle year/make/model queries and want an AI answer layer with cited, fact-checked responses grounded in their own inventory and policy pages.
+**Best for:** Dealerships whose site search can't handle year/make/model queries and want an AI answer layer that cites every response back to the specific inventory page or policy document it pulled from.
 
 **Pricing:** $25/month base (2,500 searches and 250 conversational messages included). $0.01 per additional search, $0.10 per additional message.
 
@@ -266,7 +266,7 @@ Skip Nobi when you need an end-to-end BDC stack covering SMS, phone, and email o
 
 ---
 
-If shoppers are bouncing because site search can't parse a year-make-model query - or a sold VDP keeps showing up in answers - Nobi's cited answer layer handles both. Every answer is grounded in your live inventory and cites the specific VDP or policy page it pulled from, so neither your shoppers nor your GM gets a price or vehicle that no longer exists. [See how Nobi handles year/make/model queries with grounded answers](https://nobi.ai).
+If shoppers are bouncing because site search can't parse a year-make-model query, Nobi's answer layer is grounded in your connected inventory and cites the specific VDP or policy page behind every response - so there's an audit trail when something looks off. [See how Nobi handles year/make/model queries](https://nobi.ai).
 
 <div className="my-8 flex justify-center">
  <a

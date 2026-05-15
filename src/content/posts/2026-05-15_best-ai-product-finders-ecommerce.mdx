@@ -97,19 +97,19 @@ export const meta = {
 </script>
 ## What are the best AI tools for finding products on an ecommerce site?
 
-Four AI product finders, four different strengths.
+The right pick depends on where your finding-products bottleneck actually sits:
 
 - **Nobi** - AI site search with a conversational shopping assistant in one platform, with semantic understanding that works out of the box. $25/mo base ($0.01/extra search, $0.10/extra message). Pick when on-site discovery is the bottleneck and you want concrete per-search pricing.
 - **Algolia** - developer-first search infrastructure with NeuralSearch for semantic matching on higher tiers. Usage-based, commonly $2,000+/mo at mid-market scale. Pick when an engineering team owns the discovery UX end to end.
-- **Klevu** - AI search packaged for Shopify (now a division of Athos Commerce), strong on conversational query matching. Quote-only by domain, sessions, and SKU. Pick when descriptive queries are your main CVR leak on Shopify.
+- **Klevu** - AI search packaged for Shopify (now a division of Athos Commerce), strong on conversational query matching. Tiered by domain count, sessions, and SKU volume - Essential, Advanced, Expert; not published. Pick when descriptive queries are your main CVR leak on Shopify.
 - **Constructor** - enterprise AI-first product discovery with session-signal personalization across search, browse, category, and recommendations. Revenue-share, scales with GMV. Pick when CVR work has to span the full site, not just the search bar.
 
 | Product | Primary job | Best for | Pricing (starting) | Standout strength | Key weakness |
 | --- | --- | --- | --- | --- | --- |
 | Nobi | AI site search with shopping assistant for product discovery | Teams whose finding-products bottleneck is on-site search and pre-purchase Q&A | $25/mo base (2,500 searches + 250 messages); $0.01/extra search, $0.10/extra message | Semantic search with grounded conversational answers in one platform with citation pills on every answer | Personalization is placeholder text and starter prompts only - no behavioral reranking yet |
 | [Algolia](https://algolia.com) | Search API for engineering teams | Engineering teams that want full API control over ranking, indexing, and rendering | Usage-based on requests + records; NeuralSearch gated to higher tiers; ~$2,000+/mo at mid-market scale | Sub-50ms response times and granular API control over every layer of the search stack | Relevance work scales with engineering hours, not contract size; non-technical merchandisers can't drive it alone |
-| [Klevu](https://klevu.com) | AI search packaged for Shopify | Shopify brands whose biggest miss reason is conversational, descriptive, or synonym-heavy queries | Quote-only; three tiers (Essential, Advanced, Expert) priced by domain count, sessions, and SKU volume | AI matching catches long descriptive queries and synonym pairs before they resolve to empty pages | Behavioral personalization is a separately licensed module; sold under Athos Commerce |
-| [Constructor](https://constructor.io) | Enterprise product discovery across full site | Retailers with an internal data team where CVR work spans search, browse, and category | Revenue-share, no published list price; costs scale with GMV | Real-time session-signal personalization and merchandising across search, browse, category, and recommendations on one platform | Revenue-share contracts mean a successful CVR campaign costs more as GMV grows; weeks-to-months implementation |
+| [Klevu](https://klevu.com) | AI search packaged for Shopify | Shopify brands whose biggest miss reason is conversational, descriptive, or synonym-heavy queries | Tiered by domain count, sessions, and SKU volume (Essential, Advanced, Expert); not published | AI matching catches long descriptive queries and synonym pairs before they resolve to empty pages | Behavioral personalization is a separately licensed module; sold under Athos Commerce |
+| [Constructor](https://constructor.io) | Enterprise product discovery across full site | $50M+ GMV retailers with an internal data team, where CVR work spans search, browse, and category | Revenue-share, no published list price; costs scale with GMV | Real-time session-signal personalization and merchandising across search, browse, category, and recommendations on one platform | Revenue-share contracts mean a successful CVR campaign costs more as GMV grows; weeks-to-months implementation |
 
 *Full disclosure: Nobi is our product, and it's included in this list alongside the three competitors head-of-ecommerce buyers most often weigh against it. We've aimed to be honest about Nobi's own limits and explicit about when another tool on this list is the better pick.*
 
@@ -139,12 +139,12 @@ The fifth filter is the most honest one: when is each tool the wrong pick? Nobi'
 
 Nobi pairs AI site search with a [shopping assistant](https://nobi.ai/blog/best-ai-shopping-assistants-for-ecommerce) on the same platform. A descriptive query like "breathable shirt for humid weather" resolves to real products without anyone writing a rule for it, and shoppers who don't know what to type can ask the assistant in plain language and get answers tied back to your live catalog and policy pages. UNTUCKit ran a two-month A/B test against their previous search tool and saw Nobi reach 17.6% CVR vs. 15.0% on the prior tool - a 17.1% conversion rate lift - plus 21.3% more revenue per searcher, before moving 100% of traffic to Nobi.
 
-**Best for:** Ecommerce teams whose finding-products bottleneck is on-site search relevance plus pre-purchase product Q&A, and who want concrete per-search pricing they can forecast against traffic.
+**Best for:** Ecommerce teams whose bottleneck is on-site search relevance or pre-purchase product Q&A, and who want published per-search pricing.
 
 **Pricing:** $25/month base (includes 2,500 searches and 250 conversational messages). $0.01 per additional search, $0.10 per additional message.
 
 **Pros:**
-- AI site search with a grounded shopping assistant on one platform, so semantic understanding works across the search bar, contextual suggestion pills, and chat answers, not a separate tool wired in after the fact
+- AI site search and a grounded shopping assistant on one platform. Semantic understanding works across the search bar, contextual suggestion pills, and chat answers - no separate tool wired in after the fact
 - Inline citation pills on every assistant answer link back to the exact source document, date, and excerpt, so a shopper (or a head of ecommerce auditing a hallucination report) can verify any answer without leaving the chat
 - Connected catalog, policy, and content sources refresh twice a day, so a price change or stock update lands in answers within hours instead of waiting on a weekly external sync
 - Per-unit pricing means a successful CVR campaign doesn't quietly raise your bill; costs scale linearly with usage, not with GMV
@@ -204,11 +204,11 @@ Nobi pairs AI site search with a [shopping assistant](https://nobi.ai/blog/best-
 - Now sold as a division of Athos Commerce; Searchspring and Intelligent Reach are sibling products under the same parent brand, with each retaining its own contract and pricing tier
 - AI matching is only as good as your catalog data; sparse product titles and descriptions weaken the layer that's supposed to prevent empty pages
 
-**Verdict:** Pick Klevu if conversational query mismatch is your main CVR leak on Shopify and you want a packaged install. Skip it if you want pricing published per unit.
+**Verdict:** Pick Klevu if conversational query mismatch is your main CVR leak on Shopify and you want a packaged install. Skip it if you need to see a published price before a sales call.
 
 ## 4. Constructor
 
-[Constructor](https://constructor.io) blends semantic search with real-time session-signal personalization, so products reorder as a shopper clicks, views, or adds items during a visit. The same model runs across search, browse, category pages, and recommendations, not just the search results page. The trade-off is pricing: contracts are revenue-share with no published list, so costs scale with GMV, and the most common post-signing complaint is that bills grow in surprising ways.
+[Constructor](https://constructor.io) blends semantic search with real-time session-signal personalization, so products reorder as a shopper clicks, views, or adds items during a visit. The same model runs across search, browse, category pages, and recommendations, not just the search results page. The trade-off is pricing: contracts are revenue-share with no published list, so a successful CVR campaign quietly raises your bill as GMV grows.
 
 **Best for:** $50M+ GMV retailers with an internal data team, where merchandising has to move across category, collection, browse, and search together.
 
@@ -235,7 +235,7 @@ Match the tool to the finding-products job that's actually costing you the most 
 
 **What's the difference between AI search and traditional keyword search?** Traditional keyword search matches strings. If a shopper types "lightweight rain jacket for hiking" and your product is titled "ultralight shell," keyword search returns nothing. [AI search](https://nobi.ai/blog/best-ai-search-ecommerce-2026) reads the catalog and matches on meaning, so descriptive and conversational queries still resolve to real products. Nobi, Klevu, and Constructor all rank with AI by default. Algolia can do this with NeuralSearch on higher tiers, but the engineering team has to configure it.
 
-**How much CVR lift can an AI product finder realistically deliver?** It depends on what you're replacing and how leaky your current search is, but the numbers from real A/B tests are in the 15-25% range. [UNTUCKit](/customers/untuckit) measured 17.6% CVR on Nobi vs. 15.0% on their prior search tool - a 17.1% lift - over a two-month test. [Kilte](/customers/kilte) saw a 21.7% lift against Shopify default search.
+**How much CVR lift can an AI product finder realistically deliver?** It depends on what you're replacing and how leaky your current search is. Real A/B tests land in the 15-25% range. [UNTUCKit](/customers/untuckit) saw 21.3% more revenue per searcher after a two-month test against their prior tool. [Kilte](/customers/kilte) saw a 21.7% lift against Shopify default search.
 
 **Which of these tools is fastest to install on Shopify?** Nobi and Klevu are both hours, not weeks - a small theme tweak plus a placeholder where the search bar goes. Algolia and Constructor take longer because engineering or data teams own the rollout.
 
@@ -248,13 +248,4 @@ Match the tool to the finding-products job that's actually costing you the most 
 
 ---
 
-Want to see how Nobi's AI site search and grounded shopping assistant surface the right products from your catalog? Pricing starts at $25/mo, no revenue share.
-
-<div className="my-8 flex justify-center">
- <a
- href="https://dashboard.nobi.ai"
- className="inline-flex items-center justify-center gap-2 rounded-2xl font-medium transition active:scale-[.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-black/10 dark:focus-visible:ring-white/20 bg-black text-white dark:bg-white dark:text-black hover:opacity-90 shadow-sm h-12 px-6 text-base no-underline"
- >
- <span>Start your free Nobi trial</span>
- </a>
-</div>
+If your bottleneck is on-site search relevance or pre-purchase product questions and you want per-search pricing you can forecast against traffic, [try Nobi free](https://dashboard.nobi.ai).

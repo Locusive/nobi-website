@@ -25,7 +25,7 @@ export const meta = {
  },
  {
  question: "2. Algolia",
- answer: "Algolia is a search API built for engineering teams that want to own the ranking logic in code, with documented sub-100 ms response times in many deployments and strong scale for large catalogs. It is fast and flexible, but the configuration work is yours to do."
+ answer: "Algolia is a search API built for engineering teams that want to own the ranking logic in code, with sub-50 ms response times at catalog scale and strong scale for large catalogs. It is fast and flexible, but the configuration work is yours to do."
  },
  {
  question: "3. Coveo",
@@ -100,15 +100,15 @@ export const meta = {
 Four platforms handle most of what marketplace teams actually need:
 
 - **Nobi** - [AI site search](https://nobi.ai/blog/best-ai-search-ecommerce-2026) plus a shopping assistant with cited answers in one platform, $25/mo base + $0.01 per search. Pick when shopper-facing discovery and Q&A on top of a marketplace storefront is the bottleneck, not raw multi-tenant indexing.
-- **Algolia** - developer-first search API with sub-50 ms responses at catalog scale, usage-based pricing that commonly runs $2K+/month at mid-market volumes. Pick when an engineering team owns ranking and the catalog runs into the millions of SKUs.
-- **Coveo** - enterprise AI relevance across commerce, support, and internal knowledge on one engine, $100K+ per year all-in. Pick when a marketplace also needs seller-portal and buyer-portal search under unified relevance.
-- **Hawk Search** - enterprise faceted search built for deep catalogs and B2B-style buyers, enterprise pricing quoted per catalog size and contract scope. Pick when filter-driven discovery across hundreds of attributes is how buyers actually shop.
+- **[Algolia](https://algolia.com)** - developer-first search API with sub-50 ms responses at catalog scale, usage-based pricing that commonly runs $2K+/month at mid-market volumes. Pick when an engineering team owns ranking and the catalog runs into the millions of SKUs.
+- **[Coveo](https://coveo.com)** - enterprise AI relevance across commerce, support, and internal knowledge on one engine, $100K+ per year all-in. Pick when a marketplace also needs seller-portal and buyer-portal search under unified relevance.
+- **[Hawk Search](https://hawksearch.com)** - enterprise faceted search built for deep catalogs and B2B-style buyers, enterprise pricing quoted per catalog size and contract scope. Pick when filter-driven discovery across hundreds of attributes is how buyers actually shop.
 
 | Product | Primary job | Best for | Pricing (starting) | Standout strength | Key weakness |
 | --- | --- | --- | --- | --- | --- |
 | Nobi | AI site search plus a cited shopping assistant | Marketplaces that want shopper-facing search and buyer Q&A in one platform | $25/mo base (2,500 searches, 250 messages); $0.01 per additional search, $0.10 per additional message | Inline numbered citation pills on every answer, with a sources sidebar that links back to the official content used | Curates the search results page, not category or seller storefront merchandising - dedicated tool still needed for site-wide merchandising |
 | [Algolia](https://algolia.com) | Developer-first search API at catalog scale | Engineering teams that want full API control over ranking on multi-million-SKU catalogs | Usage-based pricing, commonly $2K+/month at mid-market volumes; enterprise tier quoted through sales | Sub-50 ms search response times and a deep widget ecosystem | Usage-based pricing scales aggressively with query volume; relevance tuning is engineering work |
-| [Coveo](https://coveo.com) | Enterprise AI relevance unified across surfaces | Marketplaces unifying commerce search with buyer-support and seller-support portals | Quote-only; real all-in deployments commonly run $100K+/year (≈$50K+ license, ≈$20K+ implementation, $200-$300/hr services) | ML-driven relevance across commerce, support, and workplace search on a single engine | Sales-led 6-9 month rollouts; services budget often equals 30-50% of first-year license |
+| [Coveo](https://coveo.com) | Enterprise AI relevance unified across surfaces | Marketplaces unifying commerce search with buyer-support and seller-support portals | Around $600/month base per third-party reports; real all-in deployments commonly $100K+/year (≈$50K+ license, ≈$20K+ implementation, $200-$300/hr services) | ML-driven relevance across commerce, support, and workplace search on a single engine | Sales-led 6-9 month rollouts; services budget often equals 30-50% of first-year license |
 | [Hawk Search](https://hawksearch.com) | Enterprise faceted site search for deep catalogs | Marketplaces and B2B sellers whose buyers discover via filters across hundreds of attributes | Enterprise pricing quoted per catalog size and contract scope | Mature faceted navigation and merchandiser controls for category- and refinement-level ranking | Implementation runs in months; no native Shopify connector |
 
 *Full disclosure: Nobi is our product, and it's included in this list alongside the three competitors head-of-ecommerce buyers most often weigh against it. We've aimed to be honest about Nobi's own limits and explicit about when another tool on this list is the better pick.*
@@ -117,9 +117,9 @@ Four platforms handle most of what marketplace teams actually need:
 
 ## What should a marketplace look for in a search platform?
 
-Marketplace search has to do three things at once that ordinary catalog search doesn't. It has to scale to millions of listings from third-party sellers without query latency creeping past a few hundred milliseconds. It has to hold relevance steady while the catalog churns, with sellers adding and pulling listings every hour. And it has to answer buyer and seller questions in different contexts without crossing the wires. Platforms that win marketplace deals treat catalog scale and freshness as the floor and then differentiate on ranking control, unified surfaces, or shopper-facing assistant features layered on top.
+Marketplace search has to do three things at once that ordinary catalog search doesn't. It has to scale to millions of listings from third-party sellers without query latency creeping past a few hundred milliseconds. It has to hold relevance steady while the catalog churns, with sellers adding and pulling listings every hour. And it has to answer buyer and seller questions in different contexts without crossing the wires. Platforms that win marketplace deals get catalog scale and freshness right first. What separates them is ranking control, how cleanly they handle buyer and seller contexts separately, and whether they add AI assistant features on top.
 
-A few things matter more than the feature checklist. Per-query latency under load is the one shoppers feel first - phone buyers abandon a results page that takes more than a second. Ranking control needs to flex between buyer-side discovery and seller-side admin without mixing the answer sets. And total cost of ownership is rarely just the license; usage-based pricing, professional services, and engineering hours all land in the year-one bill.
+A few things matter more than the feature checklist. Per-query latency under load is the one shoppers feel first - mobile buyers drop slow results pages fast. Buyer search and seller admin are different jobs, and a good platform keeps those two result sets separate. Total cost of ownership is rarely just the license; usage-based pricing, professional services, and engineering hours all land in the year-one bill.
 
 ## How did we evaluate these search platforms?
 
@@ -179,11 +179,11 @@ Nobi works best on marketplaces where the catalog is already indexed and the rea
 
 ## 3. Coveo
 
-[Coveo](https://coveo.com) brings AI-powered relevance to commerce search, customer support portals, and internal knowledge in a single engine. The commerce module uses machine learning to personalize product results based on session signals, catalog attributes, and behavioral history, and the same ranking engine runs on every other property you point it at. For a marketplace that also runs a buyer-support portal and a separate seller-support knowledge base, that cross-surface unification is the reason to buy. One engine ranks listings on the storefront, answers in the buyer portal, and policy lookups for sellers, with user signals flowing across all three. For a team whose actual job is marketplace listing search and nothing else, Coveo is a lot of platform - and a lot of sales cycle - for one job.
+[Coveo](https://coveo.com) runs one ML ranking engine across commerce search, customer support portals, and internal knowledge bases. The ranker weights results by session signals, catalog attributes, and cross-shopper behavioral history, and the same engine runs on every property you point it at. For a marketplace that also runs a buyer-support portal and a separate seller-support knowledge base, that cross-surface unification is the reason to buy. One engine ranks listings on the storefront, answers in the buyer portal, and policy lookups for sellers, with user signals flowing across all three. For a team whose actual job is marketplace listing search and nothing else, Coveo is a lot of platform - and a lot of sales cycle - for one job.
 
 **Best for:** Marketplaces unifying AI relevance across their commerce site, buyer-support portal, and seller-support knowledge base under one engine.
 
-**Pricing:** Quote-only through sales. Real all-in deployments commonly run $100K+ per year once annual licensing (around $50K+), implementation (around $20K+), and professional services ($200-$300/hour) are added.
+**Pricing:** Around $600/month base per third-party reports; real all-in deployments commonly run $100K+ per year once annual licensing (around $50K+), implementation (around $20K+), and professional services ($200-$300/hour) are added. No public price list - quoted through sales.
 
 **Pros:**
 - Machine-learning relevance that spans commerce, support, and workplace search on one engine
@@ -191,7 +191,7 @@ Nobi works best on marketplaces where the catalog is already indexed and the rea
 - Mature analytics and reporting tooling built for enterprise governance and audit needs
 
 **Cons:**
-- Sales-led 6-9 month rollouts with a services budget that often equals 30-50% of first-year license before the engine is live
+- Sales-led 6-9 month rollouts; professional services fees routinely double the license bill in year one before the engine is live
 - Overkill when standalone marketplace listing search is the actual job
 - Not built for Shopify-native workflows or smaller engineering teams
 
@@ -236,7 +236,7 @@ Hawk Search is the closest fit when buyers discover primarily through deep facet
 
 **What does AI site search add to a marketplace beyond keyword matching?** [AI site search](https://nobi.ai/blog/the-top-ecommerce-platforms-for-native-ai-search-and-product-discovery) ranks results from the catalog and shopper behavior instead of from hand-written rules, so a query like "waterproof hiking boots size 10" surfaces the right listings without a merchandiser pinning each one by hand. On marketplaces with millions of listings from third-party sellers, that automatic ranking is the difference between a relevant results page and a wall of near-matches the buyer has to filter through. Nobi pairs that AI ranking with a buyer-facing assistant that answers questions about purchase protection, returns, and listing policies from connected content, with inline citation pills on every answer.
 
-**Which platforms support Shopify natively?** Algolia has a native Shopify connector. Hawk Search does not - Shopify teams pay for a custom integration build before search is live.
+**Which platforms support Shopify natively?** Algolia has a native Shopify connector. Nobi goes live on Shopify through a snippet install - no custom integration build needed. Coveo and Hawk Search are not built for Shopify-native workflows; both require a custom integration build before search is live on Shopify.
 
 
 <BlogEmailCapture hook="Picking a search platform that scales with your marketplace catalog?" subtext="Drop your email and we'll show you how Nobi's AI search handles long-tail marketplace queries across your full catalog." />

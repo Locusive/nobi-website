@@ -108,19 +108,19 @@ const VARIANT_CONTENT = {
     ],
   },
   agents: {
-    headline: "AI agents can now find and talk to your business",
-    subline:  "Your Nobi assistant is already an MCP endpoint. AI agents - Claude, ChatGPT, Gemini - can discover your business and query it directly. No extra setup.",
-    problemHeading: "Most businesses are invisible to AI agents",
-    problemBody:    "When someone asks an AI agent to find the best tool for their store, the agent visits websites, reads llms.txt files, and calls MCP endpoints. Businesses without a discoverable agent endpoint don't show up.",
+    headline: "When customers use AI to shop, their agent calls yours",
+    subline:  "Every Nobi assistant is also a callable agent endpoint. When a customer's AI looks up your store, it queries your Nobi agent directly - products, policies, follow-ups - all server to server, instantly.",
+    problemHeading: "AI assistants are becoming a new shopping channel",
+    problemBody:    "People are using Claude, ChatGPT, and other AI assistants to research products and ask follow-up questions. Those agents call business endpoints directly. Stores without one don't show up.",
     problemPoints: [
-      { Icon: SearchIcon,            label: "Agents can't find you",     desc: "AI agents actively discover businesses through MCP endpoints. Without one, you're not in the conversation when an agent researches your category." },
-      { Icon: MessageCircleQuestion, label: "No way to answer agents",   desc: "Even if an agent finds your site, it can't get a grounded answer about your products or pricing without a callable endpoint." },
-      { Icon: ShoppingCart,          label: "Competitors get there first", desc: "Businesses that set up agent discoverability now are establishing presence in a channel that's growing fast." },
+      { Icon: SearchIcon,            label: "Agents skip stores with no endpoint", desc: "AI shopping assistants look for callable endpoints. If you don't have one, the agent moves on to a competitor that does." },
+      { Icon: MessageCircleQuestion, label: "One query, unlimited follow-ups",     desc: "A customer's agent doesn't stop at the first answer. It asks about sizing, shipping, gift options - anything your knowledge base covers." },
+      { Icon: ShoppingCart,          label: "It's already happening",              desc: "Millions of people use AI assistants to research purchases. The stores with agent endpoints are getting found. The ones without aren't." },
     ],
-    numbersHeading: "The new channel is already active",
+    numbersHeading: "Your endpoint goes live with Nobi",
     stats: [
-      { number: "Live", label: "for every Nobi customer",  desc: "Your MCP endpoint is active the moment you install Nobi. No configuration required." },
-      { number: "Auto", label: "listed in llms.txt",       desc: "Nobi registers your agent endpoint in your site's llms.txt automatically so agents can find it." },
+      { number: "Zero", label: "setup required",      desc: "Your agent endpoint is live the moment you install Nobi. No configuration, no separate deployment, nothing to maintain." },
+      { number: "Auto", label: "listed in llms.txt",  desc: "Nobi registers your endpoint in your site's llms.txt automatically so AI agents can discover it without you lifting a finger." },
     ],
   },
   leads: {
@@ -786,7 +786,7 @@ function renderHeadline(variant) {
     case "answer":
       return <>Every question answered before it costs you{" "}<span className={GRADIENT}>a sale or a ticket</span></>;
     case "agents":
-      return <>AI agents can now find and{" "}<span className={GRADIENT}>talk to your business</span></>;
+      return <>When customers use AI to shop, their agent{" "}<span className={GRADIENT}>calls yours</span></>;
     default:
       return <>Turn your website into your best{" "}<span className={GRADIENT}>sales associate</span></>;
   }

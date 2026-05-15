@@ -3,7 +3,7 @@ import { useSEO } from "../hooks/useSEO";
 import PageLayout from "../components/PageLayout";
 import { useDemoForm } from "../context/DemoFormContext";
 import { getSignupUrl } from "../utils/signupUrl";
-import { Bot, Globe, MessageSquare, Code2, ArrowRight } from "lucide-react";
+import { Bot, Globe, MessageSquare, Code2, ArrowRight, Sparkles } from "lucide-react";
 
 export default function AgentEndpoint() {
   const { onOpen: openDemoForm } = useDemoForm();
@@ -62,37 +62,56 @@ export default function AgentEndpoint() {
               {/* Visual */}
               <div className="relative">
                 <div className="absolute -inset-8 bg-gradient-to-r from-violet-200/70 via-white to-indigo-200/70 rounded-[34px] blur-3xl opacity-90" aria-hidden />
-                <div className="relative overflow-hidden rounded-3xl bg-white border border-slate-100 shadow-[0_28px_80px_-30px_rgba(15,23,42,0.45)] p-6 space-y-4">
-                  <div className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">Incoming agent request</div>
-                  <div className="rounded-xl border border-violet-200 bg-violet-50 p-4 space-y-3">
-                    <div className="flex items-center gap-3">
-                      <div className="flex h-8 w-8 items-center justify-center rounded-full bg-violet-600 text-white">
-                        <Bot size={16} />
+                <div className="relative overflow-hidden rounded-3xl bg-white border border-slate-100 shadow-[0_28px_80px_-30px_rgba(15,23,42,0.45)]">
+
+                  {/* Customer's AI */}
+                  <div className="p-5 border-b border-slate-100">
+                    <div className="flex items-center gap-2 mb-3">
+                      <div className="w-6 h-6 rounded-md bg-gradient-to-br from-blue-500 to-violet-600 flex items-center justify-center flex-shrink-0">
+                        <Sparkles className="w-3.5 h-3.5 text-white" />
                       </div>
-                      <div className="text-sm font-semibold text-slate-800">AI Agent</div>
-                      <div className="ml-auto text-xs text-slate-400">via MCP</div>
+                      <span className="text-sm font-semibold text-slate-700">Customer's AI</span>
                     </div>
-                    <div className="rounded-lg bg-white border border-violet-100 px-4 py-3 text-sm text-slate-700">
-                      "Does Nobi have any automotive or car dealership customers? Any data on search performance?"
+                    <div className="flex justify-end">
+                      <div className="bg-slate-100 rounded-2xl rounded-br-sm px-4 py-3 text-sm text-slate-700 max-w-[90%]">
+                        "What cashmere sweaters does summitcashmere.com carry? Do they gift wrap?"
+                      </div>
                     </div>
                   </div>
-                  <div className="rounded-xl border border-slate-200 bg-slate-50 p-4 space-y-3">
-                    <div className="flex items-center gap-3">
-                      <div className="h-6 w-6 rounded-full bg-black flex items-center justify-center">
-                        <span className="text-white text-[10px] font-bold">N</span>
+
+                  {/* Wire */}
+                  <div className="flex items-center justify-center gap-2 py-2.5 bg-slate-50 border-b border-slate-100">
+                    <div className="h-px flex-1 bg-slate-200" />
+                    <span className="font-mono text-[10px] text-slate-400 tracking-wide">agent endpoint</span>
+                    <div className="h-px flex-1 bg-slate-200" />
+                  </div>
+
+                  {/* Store's Nobi agent - server log style */}
+                  <div className="bg-slate-900">
+                    <div className="flex items-center gap-2 px-4 py-2.5 bg-slate-800 border-b border-slate-700">
+                      <svg className="h-4 w-auto flex-shrink-0" viewBox="0 0 22 18" fill="none">
+                        <path d="M11 2L20 16H2L11 2Z" stroke="white" strokeWidth="1.5" strokeLinejoin="round"/>
+                        <path d="M7.5 16L11 10.5L14.5 16" stroke="white" strokeWidth="1" strokeLinejoin="round" strokeOpacity="0.5"/>
+                      </svg>
+                      <div className="flex-1 min-w-0">
+                        <div className="text-xs font-semibold text-white truncate">Summit Cashmere</div>
+                        <div className="text-[10px] text-slate-400">Agent · Powered by Nobi</div>
                       </div>
-                      <div className="text-sm font-semibold text-slate-800">Nobi</div>
-                      <div className="ml-auto text-xs text-emerald-600 font-medium">Answered</div>
+                      <div className="flex items-center gap-1">
+                        <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
+                        <span className="text-[10px] text-slate-400">online</span>
+                      </div>
                     </div>
-                    <div className="text-sm text-slate-700 leading-relaxed">
-                      Yes - Lucchese (Western boots, Shopify Plus) used Nobi for search and generated $1M+ in incremental revenue in year one, verified in an A/B test...
-                    </div>
-                    <div className="flex items-center gap-1.5 text-xs text-slate-400">
-                      <span className="inline-flex h-4 w-4 items-center justify-center rounded bg-slate-200 text-[9px] font-bold text-slate-600">1</span>
-                      nobi.ai/customers/lucchese
+                    <div className="p-4 font-mono text-xs space-y-2">
+                      <div className="text-slate-500">POST /mcp/query</div>
+                      <div className="text-slate-300 pl-2">"What cashmere sweaters do you carry?"</div>
+                      <div className="text-emerald-400">200 OK · products: [3]</div>
+                      <div className="mt-1 text-slate-500">POST /mcp/query</div>
+                      <div className="text-slate-300 pl-2">"Do they gift wrap?"</div>
+                      <div className="text-emerald-400">200 OK · "Yes, complimentary on all orders"</div>
                     </div>
                   </div>
-                  <div className="text-center text-xs text-slate-400">Real conversation recorded May 2026</div>
+
                 </div>
               </div>
             </div>

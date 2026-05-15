@@ -830,149 +830,153 @@ function SupportQADemo({ isActive }) {
   );
 }
 
+const AGENT_PRODUCTS = [
+  { img: "/media/prod-1.webp", name: "Classic Crew", price: "$175" },
+  { img: "/media/prod-2.webp", name: "Turtleneck",   price: "$195" },
+  { img: "/media/prod-3.webp", name: "V-Neck Wrap",  price: "$185" },
+];
+
+const SCAN_STORES = ["zara.com", "nordstrom.com", "gap.com", "alpesandmeters.com", "uniqlo.com"];
+
 function AgentDemo({ isActive }) {
-  const [phase, setPhase] = React.useState(0);
-  // 0=idle 1=cards appear 2=query types 3=beam draws 4=nobi glows 5=response appears 6=badge
+  const [queryText, setQueryText] = React.useState("");
+  const [showStores, setShowStores] = React.useState(false);
+  const [litStore, setLitStore] = React.useState(-1);
+  const [locked, setLocked] = React.useState(false);
+  const [showProducts, setShowProducts] = React.useState(false);
+  const [showBadge, setShowBadge] = React.useState(false);
+
+  const QUERY = "Find me a cashmere sweater gift under $200";
 
   React.useEffect(() => {
     if (!isActive) return;
-    setPhase(0);
+    setQueryText(""); setShowStores(false); setLitStore(-1); setLocked(false); setShowProducts(false); setShowBadge(false);
+
     const timers = [];
-    const at = (fn, ms) => { const t = setTimeout(fn, ms); timers.push(t); };
-    at(() => setPhase(1), 200);
-    at(() => setPhase(2), 700);
-    at(() => setPhase(3), 1800);
-    at(() => setPhase(4), 2800);
-    at(() => setPhase(5), 3600);
-    at(() => setPhase(6), 4600);
+    const at = (fn, ms) => timers.push(setTimeout(fn, ms));
+
+    // Type query
+    let i = 0;
+    const type = () => {
+      if (i <= QUERY.length) { setQueryText(QUERY.slice(0, i)); i++; timers.push(setTimeout(type, 30)); }
+    };
+    at(type, 400);
+
+    // Show store cards
+    at(() => setShowStores(true), 400 + QUERY.length * 30 + 400);
+
+    // Scan through stores
+    const scanStart = 400 + QUERY.length * 30 + 800;
+    SCAN_STORES.forEach((_, idx) => {
+      at(() => setLitStore(idx), scanStart + idx * 280);
+    });
+
+    // Lock onto Alps & Meters (index 3)
+    at(() => { setLitStore(3); setLocked(true); }, scanStart + SCAN_STORES.length * 280 + 100);
+    at(() => setShowProducts(true), scanStart + SCAN_STORES.length * 280 + 700);
+    at(() => setShowBadge(true), scanStart + SCAN_STORES.length * 280 + 1600);
+
     return () => timers.forEach(clearTimeout);
   }, [isActive]);
 
+  const typing = queryText.length > 0 && queryText.length < QUERY.length;
+
   return (
-    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.4 }} className="select-none space-y-4">
+    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.4 }} className="select-none space-y-3">
 
-      {/* Two cards */}
-      <div className="grid grid-cols-2 gap-3">
-
-        {/* LEFT — shopper's AI agent */}
-        <motion.div
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: phase >= 1 ? 1 : 0, y: phase >= 1 ? 0 : 12 }}
-          transition={{ duration: 0.45 }}
-          className="rounded-2xl bg-gradient-to-br from-slate-900 to-indigo-950 border border-white/10 shadow-xl shadow-slate-900/30 p-4 flex flex-col gap-3 min-h-[160px]"
-        >
-          {/* Agent identity */}
-          <div className="flex items-center gap-2">
-            <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-white/10 border border-white/10">
-              <svg viewBox="0 0 24 24" className="h-4 w-4 text-violet-300" fill="currentColor">
-                <path d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456z" />
-              </svg>
-            </div>
-            <span className="text-xs font-semibold text-white/70 tracking-wide uppercase">AI Agent</span>
-          </div>
-
-          {/* User query appears */}
-          {phase >= 2 && (
-            <motion.div initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.35 }}>
-              <div className="text-xs text-white/40 mb-1.5">User asked:</div>
-              <div className="rounded-xl bg-white/10 border border-white/10 px-3.5 py-2.5 text-sm font-medium text-white leading-snug">
-                "Find me cashmere sweaters under $200"
-              </div>
-            </motion.div>
-          )}
-
-          {phase >= 3 && (
-            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.3 }} className="flex items-center gap-1.5">
-              <div className="h-1.5 w-1.5 rounded-full bg-violet-400 animate-pulse" />
-              <span className="text-xs text-violet-300">Contacting store...</span>
-            </motion.div>
-          )}
-        </motion.div>
-
-        {/* RIGHT — store's Nobi agent */}
-        <motion.div
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: phase >= 1 ? 1 : 0, y: phase >= 1 ? 0 : 12 }}
-          transition={{ duration: 0.45, delay: 0.08 }}
-          className={`rounded-2xl border shadow-xl p-4 flex flex-col gap-3 min-h-[160px] transition-all duration-500 ${
-            phase >= 4
-              ? "bg-white dark:bg-zinc-900 border-violet-300 dark:border-violet-700 shadow-violet-200/50 dark:shadow-violet-900/30"
-              : "bg-white dark:bg-zinc-900 border-slate-200 dark:border-white/10 shadow-slate-100/50"
-          }`}
-        >
-          {/* Nobi identity — use logo image */}
-          <div className="flex items-center gap-2">
-            <div className={`flex h-8 w-8 items-center justify-center rounded-xl transition-all duration-500 ${phase >= 4 ? "bg-black shadow-sm" : "bg-slate-100 dark:bg-white/10"}`}>
-              <span className={`text-sm font-bold transition-colors duration-300 ${phase >= 4 ? "text-white" : "text-slate-700 dark:text-white"}`}>N</span>
-            </div>
-            <span className="text-xs font-semibold text-slate-500 tracking-wide uppercase">Nobi · Your Store</span>
-          </div>
-
-          {/* Waiting / processing */}
-          {phase >= 4 && phase < 5 && (
-            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="flex items-center gap-2 flex-1">
-              {[0,1,2].map(i => (
-                <span key={i} className="h-2 w-2 rounded-full bg-violet-400 animate-bounce" style={{ animationDelay: `${i*120}ms` }} />
-              ))}
-            </motion.div>
-          )}
-
-          {/* Response */}
-          {phase >= 5 && (
-            <motion.div initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }} className="flex-1 space-y-2">
-              <div className="text-sm text-slate-800 dark:text-white leading-snug font-medium">
-                We have 4 cashmere styles under $200.
-              </div>
-              <div className="rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 px-3 py-2 text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
-                Best seller: Classic Crew in oatmeal, $175 — 6 colors, true to size, free shipping.
-              </div>
-            </motion.div>
-          )}
-        </motion.div>
+      {/* User message */}
+      <div className="flex justify-end">
+        <div className="rounded-2xl rounded-br-sm bg-black/5 px-4 py-3 text-sm text-black/80 max-w-[85%]">
+          {queryText || <span className="text-black/30">...</span>}
+          {typing && <span className="animate-pulse ml-0.5">|</span>}
+        </div>
       </div>
 
-      {/* Connection beam — draws AFTER query fires */}
-      {phase >= 3 && (
-        <div className="relative px-4 flex items-center gap-2">
-          <div className="h-1 flex-1 rounded-full overflow-hidden bg-slate-100 dark:bg-white/5">
-            <motion.div
-              initial={{ width: "0%" }}
-              animate={{ width: "100%" }}
-              transition={{ duration: 0.9, ease: "easeInOut" }}
-              className="h-full rounded-full bg-gradient-to-r from-violet-500 via-indigo-400 to-violet-500"
-              style={{ boxShadow: "0 0 12px 2px rgba(139,92,246,0.5)" }}
-            />
+      {/* Scanning stores */}
+      {showStores && (
+        <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.35 }} className="space-y-2">
+
+          {/* Store pills */}
+          <div className="flex flex-wrap gap-2">
+            {SCAN_STORES.map((store, idx) => {
+              const isLit = litStore === idx && !locked;
+              const isChosen = locked && idx === 3;
+              return (
+                <motion.div
+                  key={store}
+                  animate={{
+                    opacity: isChosen ? 1 : locked ? 0.2 : isLit ? 1 : 0.35,
+                    scale: isChosen ? 1.05 : 1,
+                  }}
+                  transition={{ duration: 0.2 }}
+                  className={`flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-medium border transition-all ${
+                    isChosen
+                      ? "bg-violet-50 border-violet-300 text-violet-700 shadow-md shadow-violet-100"
+                      : isLit
+                      ? "bg-fuchsia-50 border-fuchsia-200 text-fuchsia-700"
+                      : "bg-white border-black/10 text-black/40"
+                  }`}
+                >
+                  <span className={`h-1.5 w-1.5 rounded-full ${isChosen ? "bg-violet-500" : isLit ? "bg-fuchsia-400 animate-pulse" : "bg-black/20"}`} />
+                  {store}
+                  {isChosen && <span className="ml-0.5 text-violet-400">✓</span>}
+                </motion.div>
+              );
+            })}
           </div>
-          {phase >= 5 && (
+
+          {/* Product reveal from chosen store */}
+          {showProducts && (
             <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.3 }}
-              className="h-1 flex-1 rounded-full overflow-hidden bg-slate-100 dark:bg-white/5 rotate-180"
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4 }}
+              className="rounded-2xl border border-violet-200 bg-white shadow-lg shadow-violet-100/50 overflow-hidden"
             >
-              <motion.div
-                initial={{ width: "0%" }}
-                animate={{ width: "100%" }}
-                transition={{ duration: 0.7, ease: "easeInOut" }}
-                className="h-full rounded-full bg-gradient-to-r from-emerald-400 to-emerald-500"
-                style={{ boxShadow: "0 0 10px 2px rgba(52,211,153,0.5)" }}
-              />
+              {/* Store header */}
+              <div className="flex items-center gap-2 px-4 py-2.5 bg-gradient-to-r from-violet-50 to-fuchsia-50 border-b border-violet-100">
+                <div className="h-5 w-5 rounded-md bg-black flex items-center justify-center">
+                  <span className="text-white text-[9px] font-bold">N</span>
+                </div>
+                <span className="text-xs font-semibold text-violet-800">Alps & Meters · via Nobi</span>
+              </div>
+
+              {/* Products */}
+              <div className="grid grid-cols-3 gap-3 p-3">
+                {AGENT_PRODUCTS.map((p, i) => (
+                  <motion.div
+                    key={p.name}
+                    initial={{ opacity: 0, y: 8 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.35, delay: i * 0.1 }}
+                    className="rounded-xl overflow-hidden border border-black/5 bg-white shadow-sm"
+                  >
+                    <div className="aspect-[3/4] bg-slate-100">
+                      <img src={p.img} alt={p.name} className="w-full h-full object-cover" />
+                    </div>
+                    <div className="p-2">
+                      <div className="text-xs font-medium text-black/80 truncate">{p.name}</div>
+                      <div className="text-xs text-black/50">{p.price}</div>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
             </motion.div>
           )}
-        </div>
+        </motion.div>
       )}
 
       {/* Badge */}
-      {phase >= 6 && (
+      {showBadge && (
         <motion.div
           initial={{ opacity: 0, y: 6 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4 }}
-          className="flex items-center gap-2.5 rounded-xl bg-violet-50 dark:bg-violet-900/20 border border-violet-200 dark:border-violet-800 px-4 py-3"
+          className="flex items-center gap-2.5 rounded-xl bg-violet-50 border border-violet-200 px-4 py-3"
         >
           <span className="h-2 w-2 rounded-full bg-violet-500 flex-shrink-0" />
-          <span className="text-sm font-medium text-violet-800 dark:text-violet-300">
-            A new channel — AI agents are now shopping on behalf of real customers
+          <span className="text-sm font-medium text-violet-700">
+            Your store got found — through a customer's AI agent
           </span>
         </motion.div>
       )}

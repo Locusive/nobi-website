@@ -62,54 +62,51 @@ export default function AgentEndpoint() {
               {/* Visual */}
               <div className="relative">
                 <div className="absolute -inset-8 bg-gradient-to-r from-violet-200/70 via-white to-indigo-200/70 rounded-[34px] blur-3xl opacity-90" aria-hidden />
-                <div className="relative overflow-hidden rounded-3xl bg-white border border-slate-100 shadow-[0_28px_80px_-30px_rgba(15,23,42,0.45)]">
+                <div className="relative overflow-hidden rounded-3xl bg-white border border-slate-100 shadow-[0_28px_80px_-30px_rgba(15,23,42,0.45)] p-5 space-y-4">
 
-                  {/* Customer's AI */}
-                  <div className="p-5 border-b border-slate-100">
-                    <div className="flex items-center gap-2 mb-3">
-                      <div className="w-6 h-6 rounded-md bg-gradient-to-br from-blue-500 to-violet-600 flex items-center justify-center flex-shrink-0">
-                        <Sparkles className="w-3.5 h-3.5 text-white" />
-                      </div>
-                      <span className="text-sm font-semibold text-slate-700">Customer's AI</span>
-                    </div>
-                    <div className="flex justify-end">
-                      <div className="bg-slate-100 rounded-2xl rounded-br-sm px-4 py-3 text-sm text-slate-700 max-w-[90%]">
-                        "What cashmere sweaters does summitcashmere.com carry? Do they gift wrap?"
-                      </div>
+                  {/* Customer asking their AI */}
+                  <div className="flex justify-end">
+                    <div className="bg-slate-100 rounded-2xl rounded-br-sm px-4 py-3 text-sm text-slate-700 max-w-[85%]">
+                      Find me a luxury cashmere sweater as a gift
                     </div>
                   </div>
 
-                  {/* Wire */}
-                  <div className="flex items-center justify-center gap-2 py-2.5 bg-slate-50 border-b border-slate-100">
-                    <div className="h-px flex-1 bg-slate-200" />
-                    <span className="font-mono text-[10px] text-slate-400 tracking-wide">agent endpoint</span>
-                    <div className="h-px flex-1 bg-slate-200" />
+                  {/* AI response with products */}
+                  <div className="flex items-start gap-3">
+                    <div className="w-7 h-7 rounded-full bg-gradient-to-br from-blue-500 to-violet-600 flex items-center justify-center flex-shrink-0 mt-0.5">
+                      <Sparkles className="w-3.5 h-3.5 text-white" />
+                    </div>
+                    <div className="flex-1 space-y-3">
+                      <p className="text-sm text-slate-700 leading-relaxed">
+                        Summit Cashmere has a great selection - here are their top picks:
+                      </p>
+                      <div className="grid grid-cols-3 gap-2">
+                        {[
+                          { name: "Classic Crew", price: "$265", img: "https://www.alpsandmeters.com/cdn/shop/products/Cashmere_Alpine_Guide_Sweater_Camel.jpg?v=1753426053&width=200" },
+                          { name: "Rib Turtleneck", price: "$295", img: "https://www.alpsandmeters.com/cdn/shop/products/Ski_Race_Knit_Sports_Club_Navy.jpg?v=1753426053&width=200" },
+                          { name: "Cable Knit", price: "$245", img: "https://www.alpsandmeters.com/cdn/shop/products/Classic_Cable_Knit_IVORY_Front.jpg?v=1753426168&width=200" },
+                        ].map((p) => (
+                          <div key={p.name} className="rounded-xl overflow-hidden border border-slate-100 bg-white shadow-sm">
+                            <div className="aspect-[3/4] bg-slate-50">
+                              <img src={p.img} alt={p.name} className="w-full h-full object-cover" />
+                            </div>
+                            <div className="px-2 py-1.5">
+                              <div className="text-xs font-medium text-slate-700 truncate">{p.name}</div>
+                              <div className="text-xs text-slate-400">{p.price}</div>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                      <p className="text-sm text-slate-600">
+                        They also offer complimentary gift wrapping on all orders.
+                      </p>
+                    </div>
                   </div>
 
-                  {/* Store's Nobi agent - server log style */}
-                  <div className="bg-slate-900">
-                    <div className="flex items-center gap-2 px-4 py-2.5 bg-slate-800 border-b border-slate-700">
-                      <svg className="h-4 w-auto flex-shrink-0" viewBox="0 0 22 18" fill="none">
-                        <path d="M11 2L20 16H2L11 2Z" stroke="white" strokeWidth="1.5" strokeLinejoin="round"/>
-                        <path d="M7.5 16L11 10.5L14.5 16" stroke="white" strokeWidth="1" strokeLinejoin="round" strokeOpacity="0.5"/>
-                      </svg>
-                      <div className="flex-1 min-w-0">
-                        <div className="text-xs font-semibold text-white truncate">Summit Cashmere</div>
-                        <div className="text-[10px] text-slate-400">Agent · Powered by Nobi</div>
-                      </div>
-                      <div className="flex items-center gap-1">
-                        <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
-                        <span className="text-[10px] text-slate-400">online</span>
-                      </div>
-                    </div>
-                    <div className="p-4 font-mono text-xs space-y-2">
-                      <div className="text-slate-500">POST /mcp/query</div>
-                      <div className="text-slate-300 pl-2">"What cashmere sweaters do you carry?"</div>
-                      <div className="text-emerald-400">200 OK · products: [3]</div>
-                      <div className="mt-1 text-slate-500">POST /mcp/query</div>
-                      <div className="text-slate-300 pl-2">"Do they gift wrap?"</div>
-                      <div className="text-emerald-400">200 OK · "Yes, complimentary on all orders"</div>
-                    </div>
+                  {/* Attribution */}
+                  <div className="flex items-center gap-2 rounded-xl bg-violet-50 border border-violet-100 px-3 py-2">
+                    <span className="h-2 w-2 rounded-full bg-violet-500 flex-shrink-0" />
+                    <span className="text-xs text-violet-700 font-medium">Summit Cashmere's products surfaced through their Nobi agent</span>
                   </div>
 
                 </div>

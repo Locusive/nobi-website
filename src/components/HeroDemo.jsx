@@ -831,10 +831,12 @@ function SupportQADemo({ isActive }) {
 }
 
 const AGENT_PRODUCTS = [
-  { img: "/media/prod-1.webp", name: "Classic Crew", price: "$175" },
-  { img: "/media/prod-2.webp", name: "Turtleneck",   price: "$195" },
-  { img: "/media/prod-3.webp", name: "V-Neck Wrap",  price: "$185" },
+  { img: "https://www.alpsandmeters.com/cdn/shop/products/Cashmere_Alpine_Guide_Sweater_Camel.jpg?v=1753426053&width=400", name: "Alpine Guide Sweater", price: "$295" },
+  { img: "https://www.alpsandmeters.com/cdn/shop/products/Ski_Race_Knit_Sports_Club_Navy.jpg?v=1753426053&width=400",       name: "Ski Race Knit",        price: "$345" },
+  { img: "https://www.alpsandmeters.com/cdn/shop/products/Classic_Cable_Knit_IVORY_Front.jpg?v=1753426168&width=400",       name: "Cable 8 Sweater",      price: "$265" },
 ];
+
+const ALPS_LOGO = "https://www.alpsandmeters.com/cdn/shop/files/A_M_Logo_Horizontal_White_1_2_abe9e239-e615-4034-95ba-24eff405a137.png?v=1775660739&width=200";
 
 const SCAN_STORES = ["zara.com", "nordstrom.com", "gap.com", "alpesandmeters.com", "uniqlo.com"];
 
@@ -846,7 +848,7 @@ function AgentDemo({ isActive }) {
   const [showProducts, setShowProducts] = React.useState(false);
   const [showBadge, setShowBadge] = React.useState(false);
 
-  const QUERY = "Find me a cashmere sweater gift under $200";
+  const QUERY = "Find me a luxury cashmere ski sweater as a gift";
 
   React.useEffect(() => {
     if (!isActive) return;
@@ -934,11 +936,9 @@ function AgentDemo({ isActive }) {
               className="rounded-2xl border border-violet-200 bg-white shadow-lg shadow-violet-100/50 overflow-hidden"
             >
               {/* Store header */}
-              <div className="flex items-center gap-2 px-4 py-2.5 bg-gradient-to-r from-violet-50 to-fuchsia-50 border-b border-violet-100">
-                <div className="h-5 w-5 rounded-md bg-black flex items-center justify-center">
-                  <span className="text-white text-[9px] font-bold">N</span>
-                </div>
-                <span className="text-xs font-semibold text-violet-800">Alps & Meters · via Nobi</span>
+              <div className="flex items-center gap-3 px-4 py-3 bg-[#1c1c1c] border-b border-black/30">
+                <img src={ALPS_LOGO} alt="Alps & Meters" className="h-4 object-contain" />
+                <span className="ml-auto text-[10px] text-white/40 font-medium tracking-wide">via Nobi</span>
               </div>
 
               {/* Products */}

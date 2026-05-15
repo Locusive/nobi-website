@@ -838,133 +838,151 @@ const AGENT_PRODUCTS = [
 
 const ALPS_LOGO = "https://www.alpsandmeters.com/cdn/shop/files/A_M_Logo_Horizontal_White_1_2_abe9e239-e615-4034-95ba-24eff405a137.png?v=1775660739&width=200";
 
-const SCAN_STORES = ["zara.com", "nordstrom.com", "gap.com", "alpesandmeters.com", "uniqlo.com"];
-
 function AgentDemo({ isActive }) {
-  const [queryText, setQueryText] = React.useState("");
-  const [showStores, setShowStores] = React.useState(false);
-  const [litStore, setLitStore] = React.useState(-1);
-  const [locked, setLocked] = React.useState(false);
-  const [showProducts, setShowProducts] = React.useState(false);
-  const [showBadge, setShowBadge] = React.useState(false);
+  const [queryText, setQueryText] = useState("");
+  const [showFlow, setShowFlow] = useState(false);
+  const [showProducts, setShowProducts] = useState(false);
+  const [showBadge, setShowBadge] = useState(false);
 
-  const QUERY = "Find me a luxury cashmere ski sweater as a gift";
+  const QUERY = "What are the latest cashmere sweaters on alpsandmeters.com?";
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (!isActive) return;
-    setQueryText(""); setShowStores(false); setLitStore(-1); setLocked(false); setShowProducts(false); setShowBadge(false);
+    setQueryText("");
+    setShowFlow(false);
+    setShowProducts(false);
+    setShowBadge(false);
 
     const timers = [];
     const at = (fn, ms) => timers.push(setTimeout(fn, ms));
 
-    // Type query
-    let i = 0;
-    const type = () => {
-      if (i <= QUERY.length) { setQueryText(QUERY.slice(0, i)); i++; timers.push(setTimeout(type, 30)); }
-    };
-    at(type, 400);
-
-    // Show store cards
-    at(() => setShowStores(true), 400 + QUERY.length * 30 + 400);
-
-    // Scan through stores
-    const scanStart = 400 + QUERY.length * 30 + 800;
-    SCAN_STORES.forEach((_, idx) => {
-      at(() => setLitStore(idx), scanStart + idx * 280);
-    });
-
-    // Lock onto Alps & Meters (index 3)
-    at(() => { setLitStore(3); setLocked(true); }, scanStart + SCAN_STORES.length * 280 + 100);
-    at(() => setShowProducts(true), scanStart + SCAN_STORES.length * 280 + 700);
-    at(() => setShowBadge(true), scanStart + SCAN_STORES.length * 280 + 1600);
+    for (let i = 1; i <= QUERY.length; i++) {
+      const idx = i;
+      at(() => setQueryText(QUERY.slice(0, idx)), 400 + idx * 26);
+    }
+    const queryDone = 400 + QUERY.length * 26;
+    at(() => setShowFlow(true), queryDone + 300);
+    at(() => setShowProducts(true), queryDone + 1500);
+    at(() => setShowBadge(true), queryDone + 2400);
 
     return () => timers.forEach(clearTimeout);
   }, [isActive]);
 
   const typing = queryText.length > 0 && queryText.length < QUERY.length;
+  const flowing = showFlow && !showProducts;
 
   return (
     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.4 }} className="select-none space-y-3">
 
-      {/* User message */}
-      <div className="flex justify-end">
-        <div className="rounded-2xl rounded-br-sm bg-black/5 px-4 py-3 text-sm text-black/80 max-w-[85%]">
-          {queryText || <span className="text-black/30">...</span>}
-          {typing && <span className="animate-pulse ml-0.5">|</span>}
-        </div>
-      </div>
+      <div className="flex items-stretch gap-2 sm:gap-3">
 
-      {/* Scanning stores */}
-      {showStores && (
-        <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.35 }} className="space-y-2">
-
-          {/* Store pills */}
-          <div className="flex flex-wrap gap-2">
-            {SCAN_STORES.map((store, idx) => {
-              const isLit = litStore === idx && !locked;
-              const isChosen = locked && idx === 3;
-              return (
-                <motion.div
-                  key={store}
-                  animate={{
-                    opacity: isChosen ? 1 : locked ? 0.2 : isLit ? 1 : 0.35,
-                    scale: isChosen ? 1.05 : 1,
-                  }}
-                  transition={{ duration: 0.2 }}
-                  className={`flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-medium border transition-all ${
-                    isChosen
-                      ? "bg-violet-50 border-violet-300 text-violet-700 shadow-md shadow-violet-100"
-                      : isLit
-                      ? "bg-fuchsia-50 border-fuchsia-200 text-fuchsia-700"
-                      : "bg-white border-black/10 text-black/40"
-                  }`}
-                >
-                  <span className={`h-1.5 w-1.5 rounded-full ${isChosen ? "bg-violet-500" : isLit ? "bg-fuchsia-400 animate-pulse" : "bg-black/20"}`} />
-                  {store}
-                  {isChosen && <span className="ml-0.5 text-violet-400">✓</span>}
-                </motion.div>
-              );
-            })}
+        {/* Left: Customer's AI agent */}
+        <div className="flex-1 min-w-0 rounded-2xl border border-black/10 bg-white shadow-sm overflow-hidden">
+          <div className="flex items-center gap-2 px-3 py-2.5 bg-slate-50 border-b border-black/5">
+            <div className="w-5 h-5 rounded-md bg-gradient-to-br from-blue-500 to-violet-600 flex items-center justify-center flex-shrink-0">
+              <Sparkles className="w-3 h-3 text-white" />
+            </div>
+            <span className="text-xs font-semibold text-black/50">Customer's AI</span>
           </div>
+          <div className="p-3 min-h-[80px]">
+            {queryText ? (
+              <p className="text-sm text-black/80 leading-relaxed">
+                {queryText}
+                {typing && <span className="animate-pulse ml-0.5">|</span>}
+              </p>
+            ) : (
+              <span className="text-sm text-black/20">...</span>
+            )}
+          </div>
+        </div>
 
-          {/* Product reveal from chosen store */}
-          {showProducts && (
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4 }}
-              className="rounded-2xl border border-violet-200 bg-white shadow-lg shadow-violet-100/50 overflow-hidden"
-            >
-              {/* Store header */}
-              <div className="flex items-center gap-3 px-4 py-3 bg-[#1c1c1c] border-b border-black/30">
-                <img src={ALPS_LOGO} alt="Alps & Meters" className="h-4 object-contain" />
-                <span className="ml-auto text-[10px] text-white/40 font-medium tracking-wide">via Nobi</span>
-              </div>
+        {/* Center: signal connection */}
+        <div className="flex-shrink-0 w-10 sm:w-14 flex flex-col items-center justify-center pt-5">
+          <div className="relative w-full flex items-center" style={{ height: 20 }}>
+            {/* track */}
+            <div className="absolute inset-x-0 h-px bg-violet-200" />
+            {/* flowing packets */}
+            {flowing && [0, 1, 2].map((i) => (
+              <motion.div
+                key={i}
+                className="absolute top-1/2 -translate-y-1/2 h-2 w-2 rounded-full bg-violet-500 shadow-[0_0_6px_2px_rgba(139,92,246,0.5)]"
+                initial={{ left: "0%", opacity: 0 }}
+                animate={{ left: "100%", opacity: [0, 1, 1, 0] }}
+                transition={{ duration: 0.75, delay: i * 0.22, repeat: Infinity, ease: "easeInOut" }}
+              />
+            ))}
+            {/* success ping */}
+            {showProducts && (
+              <motion.div
+                className="absolute inset-0 flex items-center justify-center"
+                initial={{ scale: 0, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                transition={{ type: "spring", stiffness: 400, damping: 18 }}
+              >
+                <div className="relative flex items-center justify-center">
+                  <motion.div
+                    className="absolute h-5 w-5 rounded-full bg-emerald-400/30"
+                    animate={{ scale: [1, 2], opacity: [0.6, 0] }}
+                    transition={{ duration: 0.8, ease: "easeOut" }}
+                  />
+                  <div className="h-3.5 w-3.5 rounded-full bg-emerald-500 flex items-center justify-center shadow-sm">
+                    <svg className="w-2 h-2 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3.5}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                    </svg>
+                  </div>
+                </div>
+              </motion.div>
+            )}
+          </div>
+        </div>
 
-              {/* Products */}
-              <div className="grid grid-cols-3 gap-3 p-3">
+        {/* Right: Alps & Meters Nobi endpoint */}
+        <div className="flex-1 min-w-0 rounded-2xl border border-violet-200 bg-white shadow-sm shadow-violet-100/50 overflow-hidden">
+          <div className="flex items-center gap-2 px-3 py-2.5 bg-[#1c1c1c]">
+            <img src={ALPS_LOGO} alt="Alps & Meters" className="h-3 object-contain" />
+            <span className="ml-auto text-[9px] text-white/35 font-medium tracking-wide">via Nobi</span>
+          </div>
+          <div className="p-2.5 min-h-[80px]">
+            {showProducts ? (
+              <div className="grid grid-cols-3 gap-1.5">
                 {AGENT_PRODUCTS.map((p, i) => (
                   <motion.div
                     key={p.name}
-                    initial={{ opacity: 0, y: 8 }}
+                    initial={{ opacity: 0, y: 6 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.35, delay: i * 0.1 }}
-                    className="rounded-xl overflow-hidden border border-black/5 bg-white shadow-sm"
+                    transition={{ duration: 0.3, delay: i * 0.12 }}
+                    className="rounded-lg overflow-hidden border border-black/5"
                   >
-                    <div className="aspect-[3/4] bg-slate-100">
+                    <div className="aspect-[3/4]">
                       <img src={p.img} alt={p.name} className="w-full h-full object-cover" />
                     </div>
-                    <div className="p-2">
-                      <div className="text-xs font-medium text-black/80 truncate">{p.name}</div>
-                      <div className="text-xs text-black/50">{p.price}</div>
+                    <div className="px-1.5 py-1">
+                      <div className="text-[9px] font-medium text-black/70 truncate leading-tight">{p.name}</div>
+                      <div className="text-[9px] text-black/45">{p.price}</div>
                     </div>
                   </motion.div>
                 ))}
               </div>
-            </motion.div>
-          )}
-        </motion.div>
-      )}
+            ) : (
+              <div className="flex items-center justify-center h-16">
+                {showFlow && (
+                  <div className="flex gap-1.5">
+                    {[0, 1, 2].map((i) => (
+                      <motion.div
+                        key={i}
+                        className="h-1.5 w-1.5 rounded-full bg-violet-300"
+                        animate={{ opacity: [0.3, 1, 0.3] }}
+                        transition={{ duration: 0.7, delay: i * 0.18, repeat: Infinity }}
+                      />
+                    ))}
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
+        </div>
+
+      </div>
 
       {/* Badge */}
       {showBadge && (
@@ -976,7 +994,7 @@ function AgentDemo({ isActive }) {
         >
           <span className="h-2 w-2 rounded-full bg-violet-500 flex-shrink-0" />
           <span className="text-sm font-medium text-violet-700">
-            Your store got found — through a customer's AI agent
+            A customer's AI agent called your Nobi endpoint directly
           </span>
         </motion.div>
       )}

@@ -44,6 +44,7 @@ const CHIPS = [
   { id: "product", label: "Help shoppers decide" },
   { id: "support", label: "Automate support answers" },
   { id: "leads",   label: "Capture more leads" },
+  { id: "agents",  label: "Reach AI agents" },
 ];
 
 const VALID_VARIANTS = CHIPS.map((c) => c.id);
@@ -121,6 +122,22 @@ const VARIANT_CONTENT = {
     stats: [
       { number: "Zero",  label: "new tickets",       desc: "Questions answered in chat never become support tickets. Your team stops repeating themselves and focuses on the cases that actually need a human." },
       { number: "Every", label: "answer is cited",   desc: "Nobi links to the exact help article or policy page it pulled the answer from. Visitors trust the response, and agents can verify it in one click." },
+    ],
+  },
+  agents: {
+    headline: "AI agents can now find and talk to your business",
+    subline:  "Your Nobi assistant is already an MCP endpoint. AI agents - Claude, ChatGPT, Gemini - can discover your business and query it directly. No extra setup.",
+    problemHeading: "Most businesses are invisible to AI agents",
+    problemBody:    "When someone asks an AI agent to find the best tool for their store, the agent visits websites, reads llms.txt files, and calls MCP endpoints. Businesses without a discoverable agent endpoint don't show up.",
+    problemPoints: [
+      { Icon: SearchIcon,            label: "Agents can't find you",     desc: "AI agents actively discover businesses through MCP endpoints. Without one, you're not in the conversation when an agent researches your category." },
+      { Icon: MessageCircleQuestion, label: "No way to answer agents",   desc: "Even if an agent finds your site, it can't get a grounded answer about your products or pricing without a callable endpoint." },
+      { Icon: ShoppingCart,          label: "Competitors get there first", desc: "Businesses that set up agent discoverability now are establishing presence in a channel that's growing fast." },
+    ],
+    numbersHeading: "The new channel is already active",
+    stats: [
+      { number: "Live", label: "for every Nobi customer",  desc: "Your MCP endpoint is active the moment you install Nobi. No configuration required." },
+      { number: "Auto", label: "listed in llms.txt",       desc: "Nobi registers your agent endpoint in your site's llms.txt automatically so agents can find it." },
     ],
   },
   leads: {

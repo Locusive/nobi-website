@@ -41,8 +41,7 @@ const DEMO_QUERY =
 // ===== Personalization variant content =====
 const CHIPS = [
   { id: "search",  label: "Better search" },
-  { id: "product", label: "Help shoppers decide" },
-  { id: "support", label: "Automate support answers" },
+  { id: "answer",  label: "Answer every question" },
   { id: "leads",   label: "Capture more leads" },
   { id: "agents",  label: "Reach AI agents" },
 ];
@@ -91,37 +90,21 @@ const VARIANT_CONTENT = {
 
     ],
   },
-  product: {
-    headline: "Shoppers won't buy what they still have doubts about",
-    subline:  "Nobi answers fit, material, shipping, and compatibility questions right on the product page, so visitors stop bouncing to competitors to figure it out.",
-    problemHeading: "One unresolved doubt and the add-to-cart is gone",
-    problemBody:    "Shoppers reach the product page with a specific question. If they can't confirm the answer in under a minute, most leave to compare elsewhere and don't come back.",
+  answer: {
+    headline: "Every question answered before it costs you a sale or a ticket",
+    subline:  "Nobi answers product questions on the page and support questions before they hit your queue — both cited, both instant, both from your own content.",
+    problemHeading: "Unanswered questions bleed revenue on both ends",
+    problemBody:    "A shopper on a product page who can't confirm sizing bounces. A customer who can't find your return policy files a ticket. Both are avoidable with an AI that actually knows your content.",
     problemPoints: [
-      { Icon: MessageCircleQuestion, label: "Unanswered product doubts", desc: "Questions about fit, material, or shipping that aren't obvious from the PDP push shoppers to go check a competitor instead." },
-      { Icon: LayoutGrid,            label: "Info buried in the page",   desc: "The answer is on your site somewhere — in specs, reviews, or FAQs — but scanning for it is slower than bouncing to look elsewhere." },
-      { Icon: MousePointerClick,     label: "Lost to competitors",       desc: "A competitor whose PDP feels easier to decide on wins the sale, even when your product is better." },
+      { Icon: MousePointerClick,     label: "Doubts kill add-to-carts",  desc: "Questions about fit, material, or compatibility that go unanswered send shoppers to a competitor whose page makes it easier to decide." },
+      { Icon: LayoutGrid,            label: "Buried answers create tickets", desc: "Your help center has the answer, but it's three clicks deep. Visitors file a ticket instead. Your team answers the same five questions all week." },
+      { Icon: MessageCircleQuestion, label: "Support handles what the site should", desc: "Agents spend the day on deflectable questions — returns, shipping, billing — instead of the cases that actually need a human." },
     ],
-    numbersHeading: "What happens when every product question gets a confident answer",
+    numbersHeading: "What changes when every question gets answered",
     stats: [
-      { number: "6x",    label: "more purchases",    desc: "Shoppers who click a suggested product question and get an answer are 6x more likely to buy than those who don't engage." },
+      { number: "6x",    label: "more purchases",    desc: "Shoppers who engage with a product question and get a cited answer are 6x more likely to buy than those who don't." },
       { number: "2.5x",  label: "higher conversion", desc: "Nobi-assisted shoppers convert at 2.5x the rate of unassisted visitors, measured across Lucchese and UNTUCKit in A/B tests." },
-      { number: "Zero",  label: "hallucinations",    desc: "Before sending, Nobi runs a second AI pass that verifies every claim against your product data. It won't say what it can't prove." },
-    ],
-  },
-  support: {
-    headline: "Your knowledge base should be answering tickets, not collecting dust",
-    subline:  "Nobi answers policy, billing, and account questions instantly — with a citation to the doc it pulled from — so repeat support tickets stop landing in your queue.",
-    problemHeading: "Support spends the day answering the same five questions",
-    problemBody:    "The answer is in your help center, but visitors can't find it fast enough. So they file a ticket, email support, or leave frustrated. Your team spends the week on deflectable questions instead of the ones that actually need a human.",
-    problemPoints: [
-      { Icon: MessageCircleQuestion, label: "Repeat tickets",           desc: "Returns, billing, cancellations, shipping — the same questions fill your queue, even though the answer is already published." },
-      { Icon: LayoutGrid,            label: "Buried documentation",    desc: "Your help center has the answer, but it's three clicks deep and most visitors give up before they find it." },
-      { Icon: MousePointerClick,     label: "Wasted support hours",    desc: "Agents spend the day on deflectable questions instead of the tickets that actually need a human." },
-    ],
-    numbersHeading: "What your team gets when the website answers its own questions",
-    stats: [
-      { number: "Zero",  label: "new tickets",       desc: "Questions answered in chat never become support tickets. Your team stops repeating themselves and focuses on the cases that actually need a human." },
-      { number: "Every", label: "answer is cited",   desc: "Nobi links to the exact help article or policy page it pulled the answer from. Visitors trust the response, and agents can verify it in one click." },
+      { number: "Zero",  label: "new tickets",       desc: "Questions answered in chat never become support tickets. Your team focuses on the cases that actually need a human." },
     ],
   },
   agents: {

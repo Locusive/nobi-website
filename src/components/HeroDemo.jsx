@@ -832,146 +832,135 @@ function SupportQADemo({ isActive }) {
 
 function AgentDemo({ isActive }) {
   const [phase, setPhase] = React.useState(0);
-  // phases: 0=idle, 1=nodes visible, 2=query traveling, 3=nobi thinking, 4=response traveling, 5=card visible, 6=badge
+  // 0=idle 1=cards appear 2=query types 3=beam draws 4=nobi glows 5=response appears 6=badge
 
   React.useEffect(() => {
     if (!isActive) return;
     setPhase(0);
     const timers = [];
     const at = (fn, ms) => { const t = setTimeout(fn, ms); timers.push(t); };
-    at(() => setPhase(1), 300);
-    at(() => setPhase(2), 900);
-    at(() => setPhase(3), 2100);
-    at(() => setPhase(4), 2900);
-    at(() => setPhase(5), 4000);
-    at(() => setPhase(6), 4800);
+    at(() => setPhase(1), 200);
+    at(() => setPhase(2), 700);
+    at(() => setPhase(3), 1800);
+    at(() => setPhase(4), 2800);
+    at(() => setPhase(5), 3600);
+    at(() => setPhase(6), 4600);
     return () => timers.forEach(clearTimeout);
   }, [isActive]);
 
-  const queryText = "Find me cashmere under $200";
-  const responseText = "4 styles in stock. Best seller: Classic Crew in oatmeal, $175, 6 colors, true to size.";
-
   return (
-    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.4 }} className="select-none">
-      {/* Two-node horizontal layout */}
-      <div className="relative flex items-center justify-between gap-0 px-2">
+    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.4 }} className="select-none space-y-4">
 
-        {/* Left node — shopper's AI agent */}
+      {/* Two cards */}
+      <div className="grid grid-cols-2 gap-3">
+
+        {/* LEFT — shopper's AI agent */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.85 }}
-          animate={{ opacity: phase >= 1 ? 1 : 0, scale: phase >= 1 ? 1 : 0.85 }}
-          transition={{ duration: 0.4 }}
-          className="flex flex-col items-center gap-2 w-[38%]"
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: phase >= 1 ? 1 : 0, y: phase >= 1 ? 0 : 12 }}
+          transition={{ duration: 0.45 }}
+          className="rounded-2xl bg-gradient-to-br from-slate-900 to-indigo-950 border border-white/10 shadow-xl shadow-slate-900/30 p-4 flex flex-col gap-3 min-h-[160px]"
         >
-          <div className="relative flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-slate-800 to-slate-900 border border-white/10 shadow-xl">
-            {/* Generic AI agent icon - sparkle/brain */}
-            <svg viewBox="0 0 24 24" className="h-8 w-8 text-white" fill="none" stroke="currentColor" strokeWidth="1.5">
-              <path d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z" strokeLinecap="round" strokeLinejoin="round" />
-              <path d="M18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456z" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-            {phase >= 2 && phase < 3 && (
-              <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} className="absolute -top-1 -right-1 h-3 w-3 rounded-full bg-violet-500 border-2 border-white" />
-            )}
+          {/* Agent identity */}
+          <div className="flex items-center gap-2">
+            <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-white/10 border border-white/10">
+              <svg viewBox="0 0 24 24" className="h-4 w-4 text-violet-300" fill="currentColor">
+                <path d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456z" />
+              </svg>
+            </div>
+            <span className="text-xs font-semibold text-white/70 tracking-wide uppercase">AI Agent</span>
           </div>
-          <div className="text-center">
-            <div className="text-[11px] font-semibold text-slate-700 dark:text-slate-200">Shopper</div>
-            <div className="text-[10px] text-slate-400">AI agent</div>
-          </div>
-          {/* Query bubble */}
-          {phase >= 1 && (
-            <motion.div
-              initial={{ opacity: 0, y: 4 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.3 }}
-              className="rounded-xl rounded-tl-sm bg-slate-800 dark:bg-slate-700 px-3 py-2 text-[11px] text-white shadow-sm max-w-full"
-            >
-              "{queryText}"
+
+          {/* User query appears */}
+          {phase >= 2 && (
+            <motion.div initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.35 }}>
+              <div className="text-xs text-white/40 mb-1.5">User asked:</div>
+              <div className="rounded-xl bg-white/10 border border-white/10 px-3.5 py-2.5 text-sm font-medium text-white leading-snug">
+                "Find me cashmere sweaters under $200"
+              </div>
+            </motion.div>
+          )}
+
+          {phase >= 3 && (
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.3 }} className="flex items-center gap-1.5">
+              <div className="h-1.5 w-1.5 rounded-full bg-violet-400 animate-pulse" />
+              <span className="text-xs text-violet-300">Contacting store...</span>
             </motion.div>
           )}
         </motion.div>
 
-        {/* Center — animated connection */}
-        <div className="relative flex-1 flex flex-col items-center justify-center h-16 overflow-visible">
-          {/* Static dashed line */}
-          {phase >= 1 && (
-            <motion.div initial={{ scaleX: 0 }} animate={{ scaleX: 1 }} transition={{ duration: 0.5 }} className="absolute inset-x-0 top-1/2 -translate-y-1/2 h-px bg-gradient-to-r from-slate-300 via-violet-300 to-slate-300 dark:from-slate-600 dark:via-violet-600 dark:to-slate-600" />
-          )}
-
-          {/* Traveling query packet → */}
-          {phase === 2 && (
-            <motion.div
-              initial={{ left: "0%" }}
-              animate={{ left: "100%" }}
-              transition={{ duration: 1.1, ease: "easeInOut" }}
-              className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2"
-              style={{ position: "absolute" }}
-            >
-              <div className="flex items-center gap-1 rounded-full bg-violet-600 px-2 py-1 shadow-lg shadow-violet-500/40">
-                <svg viewBox="0 0 24 24" className="h-2.5 w-2.5 text-white" fill="currentColor">
-                  <path d="M3.478 2.405a.75.75 0 00-.926.94l2.432 7.905H13.5a.75.75 0 010 1.5H4.984l-2.432 7.905a.75.75 0 00.926.94 60.519 60.519 0 0018.445-8.986.75.75 0 000-1.218A60.517 60.517 0 003.478 2.405z" />
-                </svg>
-              </div>
-            </motion.div>
-          )}
-
-          {/* Traveling response packet ← */}
-          {phase === 4 && (
-            <motion.div
-              initial={{ left: "100%" }}
-              animate={{ left: "0%" }}
-              transition={{ duration: 1.0, ease: "easeInOut" }}
-              className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2"
-              style={{ position: "absolute" }}
-            >
-              <div className="flex items-center gap-1 rounded-full bg-emerald-600 px-2 py-1 shadow-lg shadow-emerald-500/40">
-                <svg viewBox="0 0 24 24" className="h-2.5 w-2.5 text-white rotate-180" fill="currentColor">
-                  <path d="M3.478 2.405a.75.75 0 00-.926.94l2.432 7.905H13.5a.75.75 0 010 1.5H4.984l-2.432 7.905a.75.75 0 00.926.94 60.519 60.519 0 0018.445-8.986.75.75 0 000-1.218A60.517 60.517 0 003.478 2.405z" />
-                </svg>
-              </div>
-            </motion.div>
-          )}
-        </div>
-
-        {/* Right node — store's Nobi agent */}
+        {/* RIGHT — store's Nobi agent */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.85 }}
-          animate={{ opacity: phase >= 1 ? 1 : 0, scale: phase >= 1 ? 1 : 0.85 }}
-          transition={{ duration: 0.4, delay: 0.1 }}
-          className="flex flex-col items-center gap-2 w-[38%]"
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: phase >= 1 ? 1 : 0, y: phase >= 1 ? 0 : 12 }}
+          transition={{ duration: 0.45, delay: 0.08 }}
+          className={`rounded-2xl border shadow-xl p-4 flex flex-col gap-3 min-h-[160px] transition-all duration-500 ${
+            phase >= 4
+              ? "bg-white dark:bg-zinc-900 border-violet-300 dark:border-violet-700 shadow-violet-200/50 dark:shadow-violet-900/30"
+              : "bg-white dark:bg-zinc-900 border-slate-200 dark:border-white/10 shadow-slate-100/50"
+          }`}
         >
-          <div className={`relative flex h-16 w-16 items-center justify-center rounded-2xl border shadow-xl transition-all duration-300 ${
-            phase >= 3 ? "bg-black border-violet-400 shadow-violet-500/30" : "bg-black border-white/10"
-          }`}>
-            {/* Nobi N */}
-            <span className="text-white text-2xl font-bold tracking-tight">N</span>
-            {phase === 3 && (
-              <motion.div
-                animate={{ scale: [1, 1.3, 1] }}
-                transition={{ repeat: Infinity, duration: 0.7 }}
-                className="absolute inset-0 rounded-2xl border-2 border-violet-400 opacity-60"
-              />
-            )}
-            {phase >= 5 && (
-              <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} className="absolute -top-1 -right-1 h-3 w-3 rounded-full bg-emerald-500 border-2 border-white" />
-            )}
+          {/* Nobi identity — use logo image */}
+          <div className="flex items-center gap-2">
+            <div className={`flex h-8 w-8 items-center justify-center rounded-xl transition-all duration-500 ${phase >= 4 ? "bg-black shadow-sm" : "bg-slate-100 dark:bg-white/10"}`}>
+              <span className={`text-sm font-bold transition-colors duration-300 ${phase >= 4 ? "text-white" : "text-slate-700 dark:text-white"}`}>N</span>
+            </div>
+            <span className="text-xs font-semibold text-slate-500 tracking-wide uppercase">Nobi · Your Store</span>
           </div>
-          <div className="text-center">
-            <div className="text-[11px] font-semibold text-slate-700 dark:text-slate-200">Your store</div>
-            <div className="text-[10px] text-slate-400">Nobi agent</div>
-          </div>
-          {/* Response bubble */}
+
+          {/* Waiting / processing */}
+          {phase >= 4 && phase < 5 && (
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="flex items-center gap-2 flex-1">
+              {[0,1,2].map(i => (
+                <span key={i} className="h-2 w-2 rounded-full bg-violet-400 animate-bounce" style={{ animationDelay: `${i*120}ms` }} />
+              ))}
+            </motion.div>
+          )}
+
+          {/* Response */}
           {phase >= 5 && (
-            <motion.div
-              initial={{ opacity: 0, y: 4 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.3 }}
-              className="rounded-xl rounded-tr-sm bg-emerald-50 dark:bg-emerald-900/20 border border-emerald-200 dark:border-emerald-800 px-3 py-2 text-[11px] text-emerald-900 dark:text-emerald-200 shadow-sm max-w-full"
-            >
-              {responseText}
+            <motion.div initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }} className="flex-1 space-y-2">
+              <div className="text-sm text-slate-800 dark:text-white leading-snug font-medium">
+                We have 4 cashmere styles under $200.
+              </div>
+              <div className="rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 px-3 py-2 text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+                Best seller: Classic Crew in oatmeal, $175 — 6 colors, true to size, free shipping.
+              </div>
             </motion.div>
           )}
         </motion.div>
       </div>
+
+      {/* Connection beam — draws AFTER query fires */}
+      {phase >= 3 && (
+        <div className="relative px-4 flex items-center gap-2">
+          <div className="h-1 flex-1 rounded-full overflow-hidden bg-slate-100 dark:bg-white/5">
+            <motion.div
+              initial={{ width: "0%" }}
+              animate={{ width: "100%" }}
+              transition={{ duration: 0.9, ease: "easeInOut" }}
+              className="h-full rounded-full bg-gradient-to-r from-violet-500 via-indigo-400 to-violet-500"
+              style={{ boxShadow: "0 0 12px 2px rgba(139,92,246,0.5)" }}
+            />
+          </div>
+          {phase >= 5 && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.3 }}
+              className="h-1 flex-1 rounded-full overflow-hidden bg-slate-100 dark:bg-white/5 rotate-180"
+            >
+              <motion.div
+                initial={{ width: "0%" }}
+                animate={{ width: "100%" }}
+                transition={{ duration: 0.7, ease: "easeInOut" }}
+                className="h-full rounded-full bg-gradient-to-r from-emerald-400 to-emerald-500"
+                style={{ boxShadow: "0 0 10px 2px rgba(52,211,153,0.5)" }}
+              />
+            </motion.div>
+          )}
+        </div>
+      )}
 
       {/* Badge */}
       {phase >= 6 && (
@@ -979,11 +968,11 @@ function AgentDemo({ isActive }) {
           initial={{ opacity: 0, y: 6 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4 }}
-          className="mt-5 flex items-center gap-2 rounded-xl bg-violet-50 dark:bg-violet-900/20 border border-violet-200 dark:border-violet-800 px-4 py-3"
+          className="flex items-center gap-2.5 rounded-xl bg-violet-50 dark:bg-violet-900/20 border border-violet-200 dark:border-violet-800 px-4 py-3"
         >
           <span className="h-2 w-2 rounded-full bg-violet-500 flex-shrink-0" />
-          <span className="text-xs font-medium text-violet-800 dark:text-violet-300">
-            A new customer channel — AI agents are already shopping on behalf of users
+          <span className="text-sm font-medium text-violet-800 dark:text-violet-300">
+            A new channel — AI agents are now shopping on behalf of real customers
           </span>
         </motion.div>
       )}

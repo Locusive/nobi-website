@@ -849,7 +849,8 @@ const AGENT_PRODUCTS = [
 
 const AGENT_Q1 = "What cashmere sweaters does summitcashmere.com carry?";
 const AGENT_Q2 = "Do they offer gift wrapping?";
-const AGENT_A2 = "Yes, Summit Cashmere offers complimentary gift wrapping on all orders.";
+const AGENT_A2_AGENT = "Yes, we offer complimentary gift wrapping on all orders.";
+const AGENT_A2_RELAY  = "Yes, they offer complimentary gift wrapping on all orders.";
 
 function AgentDemo({ isActive }) {
   const [userQ1, setUserQ1] = useState("");
@@ -992,7 +993,7 @@ function AgentDemo({ isActive }) {
                   <Sparkles className="w-3 h-3 text-white" />
                 </div>
                 <div className="bg-slate-50 border border-black/8 rounded-2xl rounded-bl-sm px-3 py-2 text-sm text-black/80 leading-relaxed">
-                  {AGENT_A2}
+                  {AGENT_A2_RELAY}
                 </div>
               </motion.div>
             )}
@@ -1066,7 +1067,7 @@ function AgentDemo({ isActive }) {
               <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="space-y-1 text-xs">
                 <div className="text-slate-500">POST /mcp/query</div>
                 <div className="text-slate-300 pl-2">"{AGENT_Q2}"</div>
-                <div className="text-emerald-400 mt-1">200 OK · "{AGENT_A2}"</div>
+                <div className="text-emerald-400 mt-1">200 OK · "{AGENT_A2_AGENT}"</div>
               </motion.div>
             )}
           </div>

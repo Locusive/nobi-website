@@ -837,7 +837,7 @@ const HERO_SLIDES = [
   { id: "leads",   label: "Lead capture",       Component: LeadsDemo },
 ];
 
-const VARIANT_TO_INDEX = { search: 0, product: 1, support: 2, leads: 3 };
+const VARIANT_TO_INDEX = { search: 0, product: 1, support: 2, leads: 3, answer: 1, agents: 0 };
 
 const SLIDE_DURATIONS_MS = [
   4200 + 1200,

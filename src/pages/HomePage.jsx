@@ -783,6 +783,10 @@ function renderHeadline(variant) {
       return <>Your knowledge base should be{" "}<span className={GRADIENT}>answering the tickets</span></>;
     case "leads":
       return <>Turn website conversations into{" "}<span className={GRADIENT}>qualified leads</span></>;
+    case "answer":
+      return <>Every question answered before it costs you{" "}<span className={GRADIENT}>a sale or a ticket</span></>;
+    case "agents":
+      return <>AI agents can now find and{" "}<span className={GRADIENT}>talk to your business</span></>;
     default:
       return <>Turn your website into your best{" "}<span className={GRADIENT}>sales associate</span></>;
   }

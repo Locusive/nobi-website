@@ -831,52 +831,78 @@ function SupportQADemo({ isActive }) {
 }
 
 const AGENT_PRODUCTS = [
-  { img: "https://www.alpsandmeters.com/cdn/shop/products/Cashmere_Alpine_Guide_Sweater_Camel.jpg?v=1753426053&width=400", name: "Alpine Guide Sweater", price: "$295" },
-  { img: "https://www.alpsandmeters.com/cdn/shop/products/Ski_Race_Knit_Sports_Club_Navy.jpg?v=1753426053&width=400",       name: "Ski Race Knit",        price: "$345" },
-  { img: "https://www.alpsandmeters.com/cdn/shop/products/Classic_Cable_Knit_IVORY_Front.jpg?v=1753426168&width=400",       name: "Cable 8 Sweater",      price: "$265" },
+  { img: "https://www.alpsandmeters.com/cdn/shop/products/Cashmere_Alpine_Guide_Sweater_Camel.jpg?v=1753426053&width=400", name: "Classic Crew",    price: "$265" },
+  { img: "https://www.alpsandmeters.com/cdn/shop/products/Ski_Race_Knit_Sports_Club_Navy.jpg?v=1753426053&width=400",       name: "Rib Turtleneck", price: "$295" },
+  { img: "https://www.alpsandmeters.com/cdn/shop/products/Classic_Cable_Knit_IVORY_Front.jpg?v=1753426168&width=400",       name: "Cable Knit",      price: "$245" },
 ];
 
-const ALPS_LOGO = "https://www.alpsandmeters.com/cdn/shop/files/A_M_Logo_Horizontal_White_1_2_abe9e239-e615-4034-95ba-24eff405a137.png?v=1775660739&width=200";
+const AGENT_Q1 = "What cashmere sweaters does summitcashmere.com carry?";
+const AGENT_Q2 = "Do they offer gift wrapping?";
+const AGENT_A2 = "Yes, Summit Cashmere offers complimentary gift wrapping on all orders.";
 
 function AgentDemo({ isActive }) {
-  const [queryText, setQueryText] = useState("");
-  const [showFlow, setShowFlow] = useState(false);
+  const [q1Text, setQ1Text] = useState("");
+  const [flowLR, setFlowLR] = useState(false);
+  const [rightBusy, setRightBusy] = useState(false);
+  const [flowRL, setFlowRL] = useState(false);
   const [showProducts, setShowProducts] = useState(false);
+  const [q2Text, setQ2Text] = useState("");
+  const [flowLR2, setFlowLR2] = useState(false);
+  const [rightBusy2, setRightBusy2] = useState(false);
+  const [flowRL2, setFlowRL2] = useState(false);
+  const [showAnswer, setShowAnswer] = useState(false);
   const [showBadge, setShowBadge] = useState(false);
 
-  const QUERY = "What are the latest cashmere sweaters on alpsandmeters.com?";
+  const TS = 23;
 
   useEffect(() => {
     if (!isActive) return;
-    setQueryText("");
-    setShowFlow(false);
-    setShowProducts(false);
-    setShowBadge(false);
+    setQ1Text(""); setFlowLR(false); setRightBusy(false); setFlowRL(false);
+    setShowProducts(false); setQ2Text(""); setFlowLR2(false); setRightBusy2(false);
+    setFlowRL2(false); setShowAnswer(false); setShowBadge(false);
 
     const timers = [];
     const at = (fn, ms) => timers.push(setTimeout(fn, ms));
 
-    for (let i = 1; i <= QUERY.length; i++) {
+    let t = 400;
+    for (let i = 1; i <= AGENT_Q1.length; i++) {
       const idx = i;
-      at(() => setQueryText(QUERY.slice(0, idx)), 400 + idx * 26);
+      at(() => setQ1Text(AGENT_Q1.slice(0, idx)), t + idx * TS);
     }
-    const queryDone = 400 + QUERY.length * 26;
-    at(() => setShowFlow(true), queryDone + 300);
-    at(() => setShowProducts(true), queryDone + 1500);
-    at(() => setShowBadge(true), queryDone + 2400);
+    t += AGENT_Q1.length * TS + 350;
+
+    at(() => setFlowLR(true), t);       t += 1100;
+    at(() => { setFlowLR(false); setRightBusy(true); }, t);  t += 600;
+    at(() => { setRightBusy(false); setFlowRL(true); }, t);  t += 1100;
+    at(() => { setFlowRL(false); setShowProducts(true); }, t); t += 900;
+
+    for (let i = 1; i <= AGENT_Q2.length; i++) {
+      const idx = i;
+      at(() => setQ2Text(AGENT_Q2.slice(0, idx)), t + idx * TS);
+    }
+    t += AGENT_Q2.length * TS + 350;
+
+    at(() => setFlowLR2(true), t);      t += 950;
+    at(() => { setFlowLR2(false); setRightBusy2(true); }, t); t += 500;
+    at(() => { setRightBusy2(false); setFlowRL2(true); }, t); t += 950;
+    at(() => { setFlowRL2(false); setShowAnswer(true); }, t); t += 700;
+    at(() => setShowBadge(true), t);
 
     return () => timers.forEach(clearTimeout);
   }, [isActive]);
 
-  const typing = queryText.length > 0 && queryText.length < QUERY.length;
-  const flowing = showFlow && !showProducts;
+  const flowingLR = flowLR || flowLR2;
+  const flowingRL = flowRL || flowRL2;
+  const rightProcessing = rightBusy || rightBusy2;
+  const rightGotQ1 = showProducts || !!q2Text || flowLR2 || rightBusy2 || flowRL2 || showAnswer;
+  const rightGotQ2 = showAnswer;
 
   return (
     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.4 }} className="select-none space-y-3">
 
       <div className="flex items-stretch gap-2 sm:gap-3">
 
-        {/* Left: Customer's AI agent */}
+        {/* Left: Customer's AI */}
         <div className="flex-1 min-w-0 rounded-2xl border border-black/10 bg-white shadow-sm overflow-hidden">
           <div className="flex items-center gap-2 px-3 py-2.5 bg-slate-50 border-b border-black/5">
             <div className="w-5 h-5 rounded-md bg-gradient-to-br from-blue-500 to-violet-600 flex items-center justify-center flex-shrink-0">
@@ -884,118 +910,136 @@ function AgentDemo({ isActive }) {
             </div>
             <span className="text-xs font-semibold text-black/50">Customer's AI</span>
           </div>
-          <div className="p-3 min-h-[80px]">
-            {queryText ? (
-              <p className="text-sm text-black/80 leading-relaxed">
-                {queryText}
-                {typing && <span className="animate-pulse ml-0.5">|</span>}
-              </p>
-            ) : (
-              <span className="text-sm text-black/20">...</span>
+          <div className="p-3 space-y-2 min-h-[130px]">
+            {q1Text && (
+              <div className="flex justify-end">
+                <div className="bg-black/5 rounded-2xl rounded-br-sm px-3 py-2 text-xs text-black/80 max-w-[95%]">
+                  {q1Text}{q1Text.length < AGENT_Q1.length && <span className="animate-pulse ml-0.5">|</span>}
+                </div>
+              </div>
             )}
-          </div>
-        </div>
-
-        {/* Center: signal connection */}
-        <div className="flex-shrink-0 w-10 sm:w-14 flex flex-col items-center justify-center pt-5">
-          <div className="relative w-full flex items-center" style={{ height: 20 }}>
-            {/* track */}
-            <div className="absolute inset-x-0 h-px bg-violet-200" />
-            {/* flowing packets */}
-            {flowing && [0, 1, 2].map((i) => (
-              <motion.div
-                key={i}
-                className="absolute top-1/2 -translate-y-1/2 h-2 w-2 rounded-full bg-violet-500 shadow-[0_0_6px_2px_rgba(139,92,246,0.5)]"
-                initial={{ left: "0%", opacity: 0 }}
-                animate={{ left: "100%", opacity: [0, 1, 1, 0] }}
-                transition={{ duration: 0.75, delay: i * 0.22, repeat: Infinity, ease: "easeInOut" }}
-              />
-            ))}
-            {/* success ping */}
             {showProducts && (
-              <motion.div
-                className="absolute inset-0 flex items-center justify-center"
-                initial={{ scale: 0, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                transition={{ type: "spring", stiffness: 400, damping: 18 }}
-              >
-                <div className="relative flex items-center justify-center">
-                  <motion.div
-                    className="absolute h-5 w-5 rounded-full bg-emerald-400/30"
-                    animate={{ scale: [1, 2], opacity: [0.6, 0] }}
-                    transition={{ duration: 0.8, ease: "easeOut" }}
-                  />
-                  <div className="h-3.5 w-3.5 rounded-full bg-emerald-500 flex items-center justify-center shadow-sm">
-                    <svg className="w-2 h-2 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3.5}>
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                    </svg>
-                  </div>
+              <motion.div initial={{ opacity: 0, y: 4 }} animate={{ opacity: 1, y: 0 }} className="flex items-start gap-1.5">
+                <div className="w-4 h-4 mt-0.5 rounded-full bg-gradient-to-br from-violet-500 to-fuchsia-500 flex items-center justify-center flex-shrink-0">
+                  <Sparkles className="w-2 h-2 text-white" />
+                </div>
+                <div className="flex gap-1.5 flex-1">
+                  {AGENT_PRODUCTS.map((p, i) => (
+                    <motion.div key={p.name} initial={{ opacity: 0, scale: 0.88 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: i * 0.1 }} className="flex-1 rounded-lg overflow-hidden border border-black/5 bg-white shadow-sm">
+                      <div className="aspect-[3/4]"><img src={p.img} alt={p.name} className="w-full h-full object-cover" /></div>
+                      <div className="px-1.5 py-1">
+                        <div className="text-[9px] font-medium text-black/70 truncate">{p.name}</div>
+                        <div className="text-[9px] text-black/45">{p.price}</div>
+                      </div>
+                    </motion.div>
+                  ))}
+                </div>
+              </motion.div>
+            )}
+            {q2Text && (
+              <div className="flex justify-end">
+                <div className="bg-black/5 rounded-2xl rounded-br-sm px-3 py-2 text-xs text-black/80 max-w-[95%]">
+                  {q2Text}{q2Text.length < AGENT_Q2.length && <span className="animate-pulse ml-0.5">|</span>}
+                </div>
+              </div>
+            )}
+            {showAnswer && (
+              <motion.div initial={{ opacity: 0, y: 4 }} animate={{ opacity: 1, y: 0 }} className="flex items-start gap-1.5">
+                <div className="w-4 h-4 mt-0.5 rounded-full bg-gradient-to-br from-violet-500 to-fuchsia-500 flex items-center justify-center flex-shrink-0">
+                  <Sparkles className="w-2 h-2 text-white" />
+                </div>
+                <div className="bg-violet-50 border border-violet-100 rounded-2xl rounded-bl-sm px-3 py-2 text-xs text-black/80 leading-relaxed">
+                  {AGENT_A2}
                 </div>
               </motion.div>
             )}
           </div>
         </div>
 
-        {/* Right: Alps & Meters Nobi endpoint */}
-        <div className="flex-1 min-w-0 rounded-2xl border border-violet-200 bg-white shadow-sm shadow-violet-100/50 overflow-hidden">
-          <div className="flex items-center gap-2 px-3 py-2.5 bg-[#1c1c1c]">
-            <img src={ALPS_LOGO} alt="Alps & Meters" className="h-3 object-contain" />
-            <span className="ml-auto text-[9px] text-white/35 font-medium tracking-wide">via Nobi</span>
+        {/* Center: bidirectional signal wire */}
+        <div className="flex-shrink-0 w-10 sm:w-12 flex flex-col items-center justify-center">
+          <div className="relative w-full" style={{ height: 24 }}>
+            <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 h-px bg-slate-200" />
+            {flowingLR && [0, 1, 2].map((i) => (
+              <motion.div key={`lr${i}`}
+                className="absolute top-1/2 -translate-y-1/2 h-2 w-2 rounded-full bg-violet-500 shadow-[0_0_7px_3px_rgba(139,92,246,0.45)]"
+                initial={{ left: "0%", opacity: 0 }}
+                animate={{ left: "100%", opacity: [0, 1, 1, 0] }}
+                transition={{ duration: 0.8, delay: i * 0.2, ease: "easeInOut" }}
+              />
+            ))}
+            {flowingRL && [0, 1, 2].map((i) => (
+              <motion.div key={`rl${i}`}
+                className="absolute top-1/2 -translate-y-1/2 h-2 w-2 rounded-full bg-emerald-500 shadow-[0_0_7px_3px_rgba(16,185,129,0.45)]"
+                initial={{ left: "100%", opacity: 0 }}
+                animate={{ left: "0%", opacity: [0, 1, 1, 0] }}
+                transition={{ duration: 0.8, delay: i * 0.2, ease: "easeInOut" }}
+              />
+            ))}
           </div>
-          <div className="p-2.5 min-h-[80px]">
-            {showProducts ? (
-              <div className="grid grid-cols-3 gap-1.5">
-                {AGENT_PRODUCTS.map((p, i) => (
-                  <motion.div
-                    key={p.name}
-                    initial={{ opacity: 0, y: 6 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.3, delay: i * 0.12 }}
-                    className="rounded-lg overflow-hidden border border-black/5"
-                  >
-                    <div className="aspect-[3/4]">
-                      <img src={p.img} alt={p.name} className="w-full h-full object-cover" />
-                    </div>
-                    <div className="px-1.5 py-1">
-                      <div className="text-[9px] font-medium text-black/70 truncate leading-tight">{p.name}</div>
-                      <div className="text-[9px] text-black/45">{p.price}</div>
-                    </div>
-                  </motion.div>
+        </div>
+
+        {/* Right: Nobi Agent (business side — looks like an AI, not a website) */}
+        <div className="flex-1 min-w-0 rounded-2xl border border-black/10 bg-white shadow-sm overflow-hidden">
+          <div className="flex items-center gap-2 px-3 py-2.5 bg-slate-50 border-b border-black/5">
+            <div className="w-5 h-5 rounded-md bg-gradient-to-br from-fuchsia-500 to-violet-600 flex items-center justify-center flex-shrink-0">
+              <span className="text-white text-[9px] font-bold">N</span>
+            </div>
+            <span className="text-xs font-semibold text-black/50">Summit Cashmere · Nobi</span>
+            <div className="ml-auto h-1.5 w-1.5 rounded-full bg-emerald-500" />
+          </div>
+          <div className="p-3 space-y-2 min-h-[130px]">
+            {rightGotQ1 && (
+              <motion.div initial={{ opacity: 0, y: 4 }} animate={{ opacity: 1, y: 0 }} className="space-y-1.5">
+                <div className="flex items-start gap-1.5">
+                  <span className="text-[9px] uppercase tracking-wider text-black/25 mt-0.5 w-5 flex-shrink-0">In</span>
+                  <div className="bg-black/5 rounded-xl px-2.5 py-1.5 text-[10px] text-black/60 leading-snug">{AGENT_Q1}</div>
+                </div>
+                <div className="flex items-start gap-1.5">
+                  <span className="text-[9px] uppercase tracking-wider text-black/25 mt-0.5 w-5 flex-shrink-0">Out</span>
+                  <div className="bg-emerald-50 border border-emerald-100 rounded-xl px-2.5 py-1.5 text-[10px] text-emerald-700 leading-snug">Returned 3 cashmere sweaters</div>
+                </div>
+              </motion.div>
+            )}
+            {rightProcessing && (
+              <div className="flex gap-1.5 px-1 pt-1">
+                {[0, 1, 2].map((i) => (
+                  <motion.div key={i} className="h-1.5 w-1.5 rounded-full bg-violet-300" animate={{ opacity: [0.3, 1, 0.3] }} transition={{ duration: 0.65, delay: i * 0.16, repeat: Infinity }} />
                 ))}
               </div>
-            ) : (
-              <div className="flex items-center justify-center h-16">
-                {showFlow && (
-                  <div className="flex gap-1.5">
-                    {[0, 1, 2].map((i) => (
-                      <motion.div
-                        key={i}
-                        className="h-1.5 w-1.5 rounded-full bg-violet-300"
-                        animate={{ opacity: [0.3, 1, 0.3] }}
-                        transition={{ duration: 0.7, delay: i * 0.18, repeat: Infinity }}
-                      />
-                    ))}
-                  </div>
-                )}
-              </div>
+            )}
+            {rightGotQ2 && (
+              <motion.div initial={{ opacity: 0, y: 4 }} animate={{ opacity: 1, y: 0 }} className="space-y-1.5">
+                <div className="flex items-start gap-1.5">
+                  <span className="text-[9px] uppercase tracking-wider text-black/25 mt-0.5 w-5 flex-shrink-0">In</span>
+                  <div className="bg-black/5 rounded-xl px-2.5 py-1.5 text-[10px] text-black/60 leading-snug">{AGENT_Q2}</div>
+                </div>
+                <div className="flex items-start gap-1.5">
+                  <span className="text-[9px] uppercase tracking-wider text-black/25 mt-0.5 w-5 flex-shrink-0">Out</span>
+                  <div className="bg-emerald-50 border border-emerald-100 rounded-xl px-2.5 py-1.5 text-[10px] text-emerald-700 leading-snug">{AGENT_A2}</div>
+                </div>
+              </motion.div>
             )}
           </div>
         </div>
 
       </div>
 
-      {/* Badge */}
+      {/* Badge - black to stand out */}
       {showBadge && (
         <motion.div
-          initial={{ opacity: 0, y: 6 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4 }}
-          className="flex items-center gap-2.5 rounded-xl bg-violet-50 border border-violet-200 px-4 py-3"
+          initial={{ opacity: 0, y: 8, scale: 0.96 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          transition={{ type: "spring", stiffness: 280, damping: 22 }}
+          className="flex items-center gap-3 rounded-xl bg-black text-white px-4 py-3.5"
         >
-          <span className="h-2 w-2 rounded-full bg-violet-500 flex-shrink-0" />
-          <span className="text-sm font-medium text-violet-700">
-            A customer's AI agent called your Nobi endpoint directly
-          </span>
+          <div className="h-7 w-7 rounded-lg bg-white/10 flex items-center justify-center flex-shrink-0">
+            <Sparkles className="h-4 w-4 text-white" />
+          </div>
+          <div>
+            <div className="text-sm font-semibold leading-snug">Two customer queries, zero human effort</div>
+            <div className="text-xs text-white/50 mt-0.5">Your Nobi agent handled both automatically</div>
+          </div>
         </motion.div>
       )}
     </motion.div>

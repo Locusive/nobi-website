@@ -841,12 +841,13 @@ const AGENT_Q2 = "Do they offer gift wrapping?";
 const AGENT_A2 = "Yes, Summit Cashmere offers complimentary gift wrapping on all orders.";
 
 function AgentDemo({ isActive }) {
-  const [q1Text, setQ1Text] = useState("");
+  const [userQ1, setUserQ1] = useState("");
+  const [showThinking, setShowThinking] = useState(false);
   const [flowLR, setFlowLR] = useState(false);
   const [rightBusy, setRightBusy] = useState(false);
   const [flowRL, setFlowRL] = useState(false);
   const [showProducts, setShowProducts] = useState(false);
-  const [q2Text, setQ2Text] = useState("");
+  const [userQ2, setUserQ2] = useState("");
   const [flowLR2, setFlowLR2] = useState(false);
   const [rightBusy2, setRightBusy2] = useState(false);
   const [flowRL2, setFlowRL2] = useState(false);
@@ -857,8 +858,8 @@ function AgentDemo({ isActive }) {
 
   useEffect(() => {
     if (!isActive) return;
-    setQ1Text(""); setFlowLR(false); setRightBusy(false); setFlowRL(false);
-    setShowProducts(false); setQ2Text(""); setFlowLR2(false); setRightBusy2(false);
+    setUserQ1(""); setShowThinking(false); setFlowLR(false); setRightBusy(false); setFlowRL(false);
+    setShowProducts(false); setUserQ2(""); setFlowLR2(false); setRightBusy2(false);
     setFlowRL2(false); setShowAnswer(false); setShowBadge(false);
 
     const timers = [];
@@ -867,25 +868,37 @@ function AgentDemo({ isActive }) {
     let t = 400;
     for (let i = 1; i <= AGENT_Q1.length; i++) {
       const idx = i;
-      at(() => setQ1Text(AGENT_Q1.slice(0, idx)), t + idx * TS);
+      at(() => setUserQ1(AGENT_Q1.slice(0, idx)), t + idx * TS);
     }
-    t += AGENT_Q1.length * TS + 350;
+    t += AGENT_Q1.length * TS + 300;
 
-    at(() => setFlowLR(true), t);       t += 1100;
-    at(() => { setFlowLR(false); setRightBusy(true); }, t);  t += 600;
-    at(() => { setRightBusy(false); setFlowRL(true); }, t);  t += 1100;
-    at(() => { setFlowRL(false); setShowProducts(true); }, t); t += 900;
+    // Show thinking step — the agent decides to reach out to Summit Cashmere's Nobi agent
+    at(() => setShowThinking(true), t);
+    t += 900;
+
+    at(() => setFlowLR(true), t);
+    t += 1100;
+    at(() => { setFlowLR(false); setRightBusy(true); }, t);
+    t += 650;
+    at(() => { setRightBusy(false); setFlowRL(true); }, t);
+    t += 1100;
+    at(() => { setFlowRL(false); setShowProducts(true); }, t);
+    t += 950;
 
     for (let i = 1; i <= AGENT_Q2.length; i++) {
       const idx = i;
-      at(() => setQ2Text(AGENT_Q2.slice(0, idx)), t + idx * TS);
+      at(() => setUserQ2(AGENT_Q2.slice(0, idx)), t + idx * TS);
     }
-    t += AGENT_Q2.length * TS + 350;
+    t += AGENT_Q2.length * TS + 300;
 
-    at(() => setFlowLR2(true), t);      t += 950;
-    at(() => { setFlowLR2(false); setRightBusy2(true); }, t); t += 500;
-    at(() => { setRightBusy2(false); setFlowRL2(true); }, t); t += 950;
-    at(() => { setFlowRL2(false); setShowAnswer(true); }, t); t += 700;
+    at(() => setFlowLR2(true), t);
+    t += 950;
+    at(() => { setFlowLR2(false); setRightBusy2(true); }, t);
+    t += 500;
+    at(() => { setRightBusy2(false); setFlowRL2(true); }, t);
+    t += 950;
+    at(() => { setFlowRL2(false); setShowAnswer(true); }, t);
+    t += 700;
     at(() => setShowBadge(true), t);
 
     return () => timers.forEach(clearTimeout);
@@ -894,7 +907,7 @@ function AgentDemo({ isActive }) {
   const flowingLR = flowLR || flowLR2;
   const flowingRL = flowRL || flowRL2;
   const rightProcessing = rightBusy || rightBusy2;
-  const rightGotQ1 = showProducts || !!q2Text || flowLR2 || rightBusy2 || flowRL2 || showAnswer;
+  const rightGotQ1 = showProducts || !!userQ2 || flowLR2 || rightBusy2 || flowRL2 || showAnswer;
   const rightGotQ2 = showAnswer;
 
   return (
@@ -908,46 +921,53 @@ function AgentDemo({ isActive }) {
             <div className="w-5 h-5 rounded-md bg-gradient-to-br from-blue-500 to-violet-600 flex items-center justify-center flex-shrink-0">
               <Sparkles className="w-3 h-3 text-white" />
             </div>
-            <span className="text-xs font-semibold text-black/50">Customer's AI</span>
+            <span className="text-xs font-semibold text-black/60">Customer's AI</span>
           </div>
-          <div className="p-3 space-y-2 min-h-[130px]">
-            {q1Text && (
+          <div className="p-3 space-y-2 min-h-[150px]">
+            {userQ1 && (
               <div className="flex justify-end">
-                <div className="bg-black/5 rounded-2xl rounded-br-sm px-3 py-2 text-xs text-black/80 max-w-[95%]">
-                  {q1Text}{q1Text.length < AGENT_Q1.length && <span className="animate-pulse ml-0.5">|</span>}
+                <div className="bg-black/5 rounded-2xl rounded-br-sm px-3 py-2 text-xs text-black/80 max-w-[95%] leading-relaxed">
+                  {userQ1}{userQ1.length < AGENT_Q1.length && <span className="animate-pulse ml-0.5">|</span>}
                 </div>
               </div>
             )}
+
+            {/* Reasoning step — agent decides to query Summit Cashmere's Nobi endpoint */}
+            {showThinking && (
+              <motion.div initial={{ opacity: 0, y: 3 }} animate={{ opacity: 1, y: 0 }} className="flex items-center gap-2 py-0.5">
+                <motion.div className="h-1.5 w-1.5 rounded-full bg-violet-400 flex-shrink-0" animate={{ opacity: [1, 0.3, 1] }} transition={{ duration: 1, repeat: Infinity }} />
+                <span className="text-xs text-violet-500 italic">Found Nobi agent at summitcashmere.com - connecting...</span>
+              </motion.div>
+            )}
+
             {showProducts && (
-              <motion.div initial={{ opacity: 0, y: 4 }} animate={{ opacity: 1, y: 0 }} className="flex items-start gap-1.5">
-                <div className="w-4 h-4 mt-0.5 rounded-full bg-gradient-to-br from-violet-500 to-fuchsia-500 flex items-center justify-center flex-shrink-0">
-                  <Sparkles className="w-2 h-2 text-white" />
-                </div>
-                <div className="flex gap-1.5 flex-1">
+              <motion.div initial={{ opacity: 0, y: 4 }} animate={{ opacity: 1, y: 0 }} className="flex items-start gap-2">
+                <img src="/favicon.svg" alt="Nobi" className="h-4 w-4 mt-0.5 flex-shrink-0" />
+                <div className="flex gap-1.5 flex-1 min-w-0">
                   {AGENT_PRODUCTS.map((p, i) => (
-                    <motion.div key={p.name} initial={{ opacity: 0, scale: 0.88 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: i * 0.1 }} className="flex-1 rounded-lg overflow-hidden border border-black/5 bg-white shadow-sm">
+                    <motion.div key={p.name} initial={{ opacity: 0, scale: 0.88 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: i * 0.1 }} className="flex-1 min-w-0 rounded-lg overflow-hidden border border-black/5 bg-white shadow-sm">
                       <div className="aspect-[3/4]"><img src={p.img} alt={p.name} className="w-full h-full object-cover" /></div>
-                      <div className="px-1.5 py-1">
-                        <div className="text-[9px] font-medium text-black/70 truncate">{p.name}</div>
-                        <div className="text-[9px] text-black/45">{p.price}</div>
+                      <div className="px-1.5 py-1.5">
+                        <div className="text-[10px] font-medium text-black/70 truncate leading-tight">{p.name}</div>
+                        <div className="text-[10px] text-black/45">{p.price}</div>
                       </div>
                     </motion.div>
                   ))}
                 </div>
               </motion.div>
             )}
-            {q2Text && (
+
+            {userQ2 && (
               <div className="flex justify-end">
-                <div className="bg-black/5 rounded-2xl rounded-br-sm px-3 py-2 text-xs text-black/80 max-w-[95%]">
-                  {q2Text}{q2Text.length < AGENT_Q2.length && <span className="animate-pulse ml-0.5">|</span>}
+                <div className="bg-black/5 rounded-2xl rounded-br-sm px-3 py-2 text-xs text-black/80 max-w-[95%] leading-relaxed">
+                  {userQ2}{userQ2.length < AGENT_Q2.length && <span className="animate-pulse ml-0.5">|</span>}
                 </div>
               </div>
             )}
+
             {showAnswer && (
-              <motion.div initial={{ opacity: 0, y: 4 }} animate={{ opacity: 1, y: 0 }} className="flex items-start gap-1.5">
-                <div className="w-4 h-4 mt-0.5 rounded-full bg-gradient-to-br from-violet-500 to-fuchsia-500 flex items-center justify-center flex-shrink-0">
-                  <Sparkles className="w-2 h-2 text-white" />
-                </div>
+              <motion.div initial={{ opacity: 0, y: 4 }} animate={{ opacity: 1, y: 0 }} className="flex items-start gap-2">
+                <img src="/favicon.svg" alt="Nobi" className="h-4 w-4 mt-0.5 flex-shrink-0" />
                 <div className="bg-violet-50 border border-violet-100 rounded-2xl rounded-bl-sm px-3 py-2 text-xs text-black/80 leading-relaxed">
                   {AGENT_A2}
                 </div>
@@ -956,13 +976,13 @@ function AgentDemo({ isActive }) {
           </div>
         </div>
 
-        {/* Center: bidirectional signal wire */}
+        {/* Center: bidirectional wire */}
         <div className="flex-shrink-0 w-10 sm:w-12 flex flex-col items-center justify-center">
           <div className="relative w-full" style={{ height: 24 }}>
             <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 h-px bg-slate-200" />
             {flowingLR && [0, 1, 2].map((i) => (
               <motion.div key={`lr${i}`}
-                className="absolute top-1/2 -translate-y-1/2 h-2 w-2 rounded-full bg-violet-500 shadow-[0_0_7px_3px_rgba(139,92,246,0.45)]"
+                className="absolute top-1/2 -translate-y-1/2 h-2 w-2 rounded-full bg-violet-500 shadow-[0_0_7px_3px_rgba(139,92,246,0.5)]"
                 initial={{ left: "0%", opacity: 0 }}
                 animate={{ left: "100%", opacity: [0, 1, 1, 0] }}
                 transition={{ duration: 0.8, delay: i * 0.2, ease: "easeInOut" }}
@@ -970,7 +990,7 @@ function AgentDemo({ isActive }) {
             ))}
             {flowingRL && [0, 1, 2].map((i) => (
               <motion.div key={`rl${i}`}
-                className="absolute top-1/2 -translate-y-1/2 h-2 w-2 rounded-full bg-emerald-500 shadow-[0_0_7px_3px_rgba(16,185,129,0.45)]"
+                className="absolute top-1/2 -translate-y-1/2 h-2 w-2 rounded-full bg-emerald-500 shadow-[0_0_7px_3px_rgba(16,185,129,0.5)]"
                 initial={{ left: "100%", opacity: 0 }}
                 animate={{ left: "0%", opacity: [0, 1, 1, 0] }}
                 transition={{ duration: 0.8, delay: i * 0.2, ease: "easeInOut" }}
@@ -979,25 +999,29 @@ function AgentDemo({ isActive }) {
           </div>
         </div>
 
-        {/* Right: Nobi Agent (business side — looks like an AI, not a website) */}
-        <div className="flex-1 min-w-0 rounded-2xl border border-black/10 bg-white shadow-sm overflow-hidden">
-          <div className="flex items-center gap-2 px-3 py-2.5 bg-slate-50 border-b border-black/5">
-            <div className="w-5 h-5 rounded-md bg-gradient-to-br from-fuchsia-500 to-violet-600 flex items-center justify-center flex-shrink-0">
-              <span className="text-white text-[9px] font-bold">N</span>
+        {/* Right: Summit Cashmere's Nobi Agent — clearly AI-powered, not a website */}
+        <div className="flex-1 min-w-0 rounded-2xl border border-violet-200 bg-white shadow-sm overflow-hidden">
+          <div className="flex items-center gap-2 px-3 py-2 bg-gradient-to-r from-violet-600 to-fuchsia-600">
+            <img src="/favicon.svg" alt="Nobi" className="h-4 w-4 flex-shrink-0" />
+            <div className="min-w-0 flex-1">
+              <div className="text-xs font-semibold text-white leading-tight truncate">Summit Cashmere</div>
+              <div className="text-[10px] text-white/60 leading-tight">Powered by Nobi</div>
             </div>
-            <span className="text-xs font-semibold text-black/50">Summit Cashmere · Nobi</span>
-            <div className="ml-auto h-1.5 w-1.5 rounded-full bg-emerald-500" />
+            <div className="flex items-center gap-1 flex-shrink-0">
+              <div className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
+              <span className="text-[10px] text-white/50">online</span>
+            </div>
           </div>
-          <div className="p-3 space-y-2 min-h-[130px]">
+          <div className="p-3 space-y-2 min-h-[150px]">
             {rightGotQ1 && (
-              <motion.div initial={{ opacity: 0, y: 4 }} animate={{ opacity: 1, y: 0 }} className="space-y-1.5">
-                <div className="flex items-start gap-1.5">
-                  <span className="text-[9px] uppercase tracking-wider text-black/25 mt-0.5 w-5 flex-shrink-0">In</span>
-                  <div className="bg-black/5 rounded-xl px-2.5 py-1.5 text-[10px] text-black/60 leading-snug">{AGENT_Q1}</div>
+              <motion.div initial={{ opacity: 0, y: 4 }} animate={{ opacity: 1, y: 0 }} className="space-y-2">
+                <div className="rounded-xl bg-black/5 px-3 py-2">
+                  <div className="text-[10px] font-semibold uppercase tracking-wide text-black/30 mb-1">Request</div>
+                  <div className="text-xs text-black/70 leading-snug">{AGENT_Q1}</div>
                 </div>
-                <div className="flex items-start gap-1.5">
-                  <span className="text-[9px] uppercase tracking-wider text-black/25 mt-0.5 w-5 flex-shrink-0">Out</span>
-                  <div className="bg-emerald-50 border border-emerald-100 rounded-xl px-2.5 py-1.5 text-[10px] text-emerald-700 leading-snug">Returned 3 cashmere sweaters</div>
+                <div className="rounded-xl bg-emerald-50 border border-emerald-100 px-3 py-2">
+                  <div className="text-[10px] font-semibold uppercase tracking-wide text-emerald-500 mb-1">Response</div>
+                  <div className="text-xs text-emerald-800 leading-snug">Returned 3 cashmere sweaters</div>
                 </div>
               </motion.div>
             )}
@@ -1009,14 +1033,14 @@ function AgentDemo({ isActive }) {
               </div>
             )}
             {rightGotQ2 && (
-              <motion.div initial={{ opacity: 0, y: 4 }} animate={{ opacity: 1, y: 0 }} className="space-y-1.5">
-                <div className="flex items-start gap-1.5">
-                  <span className="text-[9px] uppercase tracking-wider text-black/25 mt-0.5 w-5 flex-shrink-0">In</span>
-                  <div className="bg-black/5 rounded-xl px-2.5 py-1.5 text-[10px] text-black/60 leading-snug">{AGENT_Q2}</div>
+              <motion.div initial={{ opacity: 0, y: 4 }} animate={{ opacity: 1, y: 0 }} className="space-y-2">
+                <div className="rounded-xl bg-black/5 px-3 py-2">
+                  <div className="text-[10px] font-semibold uppercase tracking-wide text-black/30 mb-1">Request</div>
+                  <div className="text-xs text-black/70 leading-snug">{AGENT_Q2}</div>
                 </div>
-                <div className="flex items-start gap-1.5">
-                  <span className="text-[9px] uppercase tracking-wider text-black/25 mt-0.5 w-5 flex-shrink-0">Out</span>
-                  <div className="bg-emerald-50 border border-emerald-100 rounded-xl px-2.5 py-1.5 text-[10px] text-emerald-700 leading-snug">{AGENT_A2}</div>
+                <div className="rounded-xl bg-emerald-50 border border-emerald-100 px-3 py-2">
+                  <div className="text-[10px] font-semibold uppercase tracking-wide text-emerald-500 mb-1">Response</div>
+                  <div className="text-xs text-emerald-800 leading-snug">{AGENT_A2}</div>
                 </div>
               </motion.div>
             )}
@@ -1025,7 +1049,7 @@ function AgentDemo({ isActive }) {
 
       </div>
 
-      {/* Badge - black to stand out */}
+      {/* Badge - black so it stands out */}
       {showBadge && (
         <motion.div
           initial={{ opacity: 0, y: 8, scale: 0.96 }}

@@ -11,7 +11,7 @@ export default function AgentEndpoint() {
   useSEO({
     title: "Nobi as an MCP Server - Your Business, Discoverable by AI Agents | Nobi",
     description: "Every Nobi assistant is also an MCP endpoint. AI agents can discover and query your business automatically - no extra setup required.",
-    path: "/why-nobi/agent-endpoint",
+    path: "/why-nobi/ai-agents",
     schema: {
       "@context": "https://schema.org",
       "@type": "Product",

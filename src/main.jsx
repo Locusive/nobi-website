@@ -55,6 +55,7 @@ function App() {
           <Route path="/blog/:slug" element={<BlogPost />} />
           <Route path="/why-nobi/better-search" element={<BetterSearch />} />
           <Route path="/why-nobi/automated-support" element={<AutomatedSupport />} />
+          <Route path="/why-nobi/ai-agents" element={<AgentEndpoint />} />
           <Route path="/why-nobi/agent-endpoint" element={<AgentEndpoint />} />
           <Route path="/lead-capture" element={<LeadCapture />} />
           <Route path="/custom-actions" element={<CustomActions />} />

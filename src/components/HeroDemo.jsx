@@ -830,126 +830,118 @@ function SupportQADemo({ isActive }) {
   );
 }
 
-const AGENT_QUESTION = "Does Nobi have any ecommerce customers with real A/B test results?";
-const AGENT_ANSWER = "Yes — Lucchese generated $1M+ in incremental revenue in year one with a 21% conversion lift, verified in a head-to-head A/B test. UNTUCKit saw +17.1% CVR and +21.3% revenue per searcher in a two-month pilot.";
-const AGENT_SOURCE = "nobi.ai/customers/lucchese";
+const USER_PROMPT = "Find me the best cashmere sweater under $200";
+const AGENT_ACTION = "Searching store assistant...";
+const AGENT_QUESTION = "Do you carry cashmere sweaters under $200? What styles are available?";
+const AGENT_ANSWER = "Yes — we have 4 cashmere styles under $200. Our best seller is the Classic Crew in oatmeal at $175. It comes in 6 colors and runs true to size. Free shipping and 30-day returns.";
+const AGENT_SOURCE = "alpesandmeters.com/cashmere";
 
 function AgentDemo({ isActive }) {
-  const [agentText, setAgentText] = React.useState("");
-  const [showCalling, setShowCalling] = React.useState(false);
+  const [userText, setUserText] = React.useState("");
+  const [showAction, setShowAction] = React.useState(false);
+  const [showAgentQ, setShowAgentQ] = React.useState(false);
   const [showAnswer, setShowAnswer] = React.useState(false);
   const [showSource, setShowSource] = React.useState(false);
   const [showBadge, setShowBadge] = React.useState(false);
 
   React.useEffect(() => {
     if (!isActive) return;
-    setAgentText(""); setShowCalling(false); setShowAnswer(false); setShowSource(false); setShowBadge(false);
+    setUserText(""); setShowAction(false); setShowAgentQ(false); setShowAnswer(false); setShowSource(false); setShowBadge(false);
     const timers = [];
-    const schedule = (fn, ms) => { const t = setTimeout(fn, ms); timers.push(t); return ms; };
+    const schedule = (fn, ms) => { const t = setTimeout(fn, ms); timers.push(t); };
 
     let cursor = 300;
     let i = 0;
     const typeStep = () => {
-      if (i <= AGENT_QUESTION.length) {
-        setAgentText(AGENT_QUESTION.slice(0, i));
+      if (i <= USER_PROMPT.length) {
+        setUserText(USER_PROMPT.slice(0, i));
         i++;
-        const t = setTimeout(typeStep, 28);
-        timers.push(t);
+        timers.push(setTimeout(typeStep, 26));
       }
     };
-    setTimeout(typeStep, cursor);
-    cursor += AGENT_QUESTION.length * 28 + 400;
-    schedule(() => setShowCalling(true), cursor);
-    cursor += 700;
-    schedule(() => setShowAnswer(true), cursor);
-    cursor += 600;
-    schedule(() => setShowSource(true), cursor);
-    cursor += 600;
+    timers.push(setTimeout(typeStep, cursor));
+    cursor += USER_PROMPT.length * 26 + 500;
+    schedule(() => setShowAction(true), cursor); cursor += 900;
+    schedule(() => setShowAgentQ(true), cursor); cursor += 700;
+    schedule(() => setShowAnswer(true), cursor); cursor += 600;
+    schedule(() => setShowSource(true), cursor); cursor += 500;
     schedule(() => setShowBadge(true), cursor);
 
-    return () => timers.forEach((t) => clearTimeout(t));
+    return () => timers.forEach(clearTimeout);
   }, [isActive]);
 
-  const agentTyping = agentText.length > 0 && agentText.length < AGENT_QUESTION.length;
+  const userTyping = userText.length > 0 && userText.length < USER_PROMPT.length;
 
   return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.4 }}
-      className="flex flex-col gap-3"
-    >
-      {/* Agent header */}
-      <div className="flex items-center gap-2 rounded-xl border border-violet-200 dark:border-violet-800 bg-violet-50 dark:bg-violet-900/20 px-4 py-2.5">
-        <div className="flex h-6 w-6 items-center justify-center rounded-full bg-violet-600 text-white text-[11px] font-bold flex-shrink-0">
-          AI
+    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.4 }} className="flex flex-col gap-2">
+
+      {/* ChatGPT-style user interface */}
+      <div className="rounded-2xl border border-slate-200 dark:border-white/10 bg-white dark:bg-zinc-900 shadow-sm overflow-hidden">
+        <div className="flex items-center gap-2 px-4 py-2.5 border-b border-slate-100 dark:border-white/5">
+          <div className="h-2 w-2 rounded-full bg-slate-300" />
+          <span className="text-[11px] text-slate-400 font-medium">Shopper's AI agent</span>
         </div>
-        <span className="text-sm font-medium text-violet-800 dark:text-violet-300">AI Agent</span>
-        <span className="ml-auto text-[10px] uppercase tracking-[0.16em] text-violet-500 dark:text-violet-400">via MCP</span>
-      </div>
-
-      {/* Conversation */}
-      <div className="rounded-2xl border border-black/10 dark:border-white/10 bg-white/90 dark:bg-zinc-900/80 shadow-lg overflow-hidden">
-        <div className="p-4 space-y-3 min-h-[200px]">
-          {/* Agent question */}
-          {agentText && (
-            <motion.div initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.25 }} className="flex justify-end">
-              <div className="max-w-[90%] rounded-2xl rounded-br-sm bg-violet-100 dark:bg-violet-900/40 px-3.5 py-2 text-sm text-black/80 dark:text-white/90">
-                {agentText}
-                {agentTyping && <span className="ml-0.5 animate-pulse">|</span>}
+        <div className="p-4 space-y-3 min-h-[60px]">
+          {userText && (
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="flex justify-end">
+              <div className="max-w-[90%] rounded-2xl rounded-br-sm bg-slate-100 dark:bg-white/10 px-3.5 py-2 text-sm text-black/80 dark:text-white/90">
+                {userText}{userTyping && <span className="ml-0.5 animate-pulse">|</span>}
               </div>
             </motion.div>
           )}
 
-          {/* Calling indicator */}
-          {showCalling && (
-            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.3 }} className="flex items-center gap-2">
-              <div className="h-5 w-5 rounded-full bg-black dark:bg-white flex items-center justify-center flex-shrink-0">
-                <span className="text-white dark:text-black text-[9px] font-bold">N</span>
-              </div>
-              <div className="flex items-center gap-1.5">
-                {!showAnswer && [0, 1, 2].map((i) => (
-                  <span key={i} className="h-1.5 w-1.5 rounded-full bg-slate-400 animate-bounce" style={{ animationDelay: `${i * 150}ms` }} />
-                ))}
+          {/* Agent discovering and calling Nobi */}
+          {showAction && (
+            <motion.div initial={{ opacity: 0, y: 4 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.3 }} className="flex items-center gap-2">
+              <div className="flex items-center gap-2 rounded-lg border border-violet-200 dark:border-violet-800 bg-violet-50 dark:bg-violet-900/20 px-3 py-1.5 text-xs text-violet-700 dark:text-violet-300">
+                <div className="h-1.5 w-1.5 rounded-full bg-violet-500 animate-pulse" />
+                {AGENT_ACTION}
               </div>
             </motion.div>
           )}
 
-          {/* Nobi answer */}
-          {showAnswer && (
-            <motion.div initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.3 }} className="flex items-start gap-2">
-              <div className="h-5 w-5 rounded-full bg-black dark:bg-white flex items-center justify-center flex-shrink-0 mt-0.5">
-                <span className="text-white dark:text-black text-[9px] font-bold">N</span>
-              </div>
-              <div className="max-w-[90%] space-y-2">
-                <div className="rounded-2xl rounded-bl-sm bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 px-3.5 py-2 text-sm text-black/80 dark:text-white/90 leading-relaxed">
-                  {AGENT_ANSWER}
-                </div>
-                {showSource && (
-                  <motion.div initial={{ opacity: 0, y: 4 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.3 }} className="inline-flex items-center gap-1.5 rounded-lg bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 px-2 py-1">
-                    <svg className="h-3 w-3 text-slate-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
-                      <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
-                    </svg>
-                    <span className="text-[11px] font-medium text-slate-600 dark:text-slate-300">
-                      Source: <span className="text-violet-600 dark:text-violet-400">{AGENT_SOURCE}</span>
-                    </span>
-                  </motion.div>
-                )}
-              </div>
+          {/* Agent's question to Nobi */}
+          {showAgentQ && !showAnswer && (
+            <motion.div initial={{ opacity: 0, y: 4 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.25 }} className="flex items-center gap-2 text-[11px] text-slate-400">
+              <span className="italic">Asking: "{AGENT_QUESTION}"</span>
             </motion.div>
           )}
         </div>
-
-        {showBadge && (
-          <motion.div initial={{ opacity: 0, scale: 0.92 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.35, ease: "easeOut" }} className="mx-4 mb-4 flex items-center gap-2 rounded-lg bg-violet-50 dark:bg-violet-900/20 border border-violet-200 dark:border-violet-800 px-3 py-2">
-            <span className="h-2 w-2 rounded-full bg-violet-500" />
-            <span className="text-xs font-medium text-violet-800 dark:text-violet-300">
-              New channel — your business is reachable by AI agents
-            </span>
-          </motion.div>
-        )}
       </div>
+
+      {/* Nobi's response */}
+      {showAnswer && (
+        <motion.div initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.3 }} className="rounded-2xl border border-black/10 dark:border-white/10 bg-white/90 dark:bg-zinc-900/80 shadow-lg overflow-hidden">
+          <div className="flex items-center gap-2 px-4 py-2.5 border-b border-slate-100 dark:border-white/5">
+            <div className="h-5 w-5 rounded-full bg-black dark:bg-white flex items-center justify-center flex-shrink-0">
+              <span className="text-white dark:text-black text-[9px] font-bold">N</span>
+            </div>
+            <span className="text-[11px] text-slate-500 font-medium">Your store's Nobi agent</span>
+          </div>
+          <div className="p-4 space-y-2">
+            <p className="text-sm text-black/80 dark:text-white/90 leading-relaxed">{AGENT_ANSWER}</p>
+            {showSource && (
+              <motion.div initial={{ opacity: 0, y: 4 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.3 }} className="inline-flex items-center gap-1.5 rounded-lg bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 px-2 py-1">
+                <svg className="h-3 w-3 text-slate-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
+                  <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
+                </svg>
+                <span className="text-[11px] font-medium text-slate-600 dark:text-slate-300">
+                  Source: <span className="text-violet-600 dark:text-violet-400">{AGENT_SOURCE}</span>
+                </span>
+              </motion.div>
+            )}
+          </div>
+          {showBadge && (
+            <motion.div initial={{ opacity: 0, scale: 0.92 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.35, ease: "easeOut" }} className="mx-4 mb-4 flex items-center gap-2 rounded-lg bg-violet-50 dark:bg-violet-900/20 border border-violet-200 dark:border-violet-800 px-3 py-2">
+              <span className="h-2 w-2 rounded-full bg-violet-500" />
+              <span className="text-xs font-medium text-violet-800 dark:text-violet-300">
+                New channel — shoppers' AI agents are finding and talking to your store
+              </span>
+            </motion.div>
+          )}
+        </motion.div>
+      )}
     </motion.div>
   );
 }

@@ -9,7 +9,7 @@ const FEATURES = [
   { label: "Automated support", href: "/why-nobi/automated-support",  desc: "Answer repeat tickets before they hit your queue",   Icon: LifeBuoy },
   { label: "Lead capture",      href: "/lead-capture",                desc: "Collect contact info through conversation",          Icon: UserPlus },
   { label: "Custom actions",    href: "/custom-actions",              desc: "Trigger any workflow from inside the chat",          Icon: Zap },
-  { label: "AI agent endpoint", href: "/why-nobi/agent-endpoint",     desc: "Your business, discoverable and callable by AI agents", Icon: Bot },
+  { label: "AI agents",         href: "/why-nobi/ai-agents",          desc: "Your business, discoverable and callable by AI agents", Icon: Bot },
 ];
 
 export default function Nav() {

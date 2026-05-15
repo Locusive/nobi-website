@@ -830,6 +830,17 @@ function SupportQADemo({ isActive }) {
   );
 }
 
+const AGENT_SYMBOLS = ["{ }", "</>", ">>>", "0x1f", "[ ]", "fn()", "=>", "0101", "GET", "JSON"];
+
+function SummitLogo({ className = "" }) {
+  return (
+    <svg className={className} viewBox="0 0 22 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M11 2L20 16H2L11 2Z" stroke="white" strokeWidth="1.5" strokeLinejoin="round"/>
+      <path d="M7.5 16L11 10.5L14.5 16" stroke="white" strokeWidth="1" strokeLinejoin="round" strokeOpacity="0.5"/>
+    </svg>
+  );
+}
+
 const AGENT_PRODUCTS = [
   { img: "https://www.alpsandmeters.com/cdn/shop/products/Cashmere_Alpine_Guide_Sweater_Camel.jpg?v=1753426053&width=400", name: "Classic Crew",    price: "$265" },
   { img: "https://www.alpsandmeters.com/cdn/shop/products/Ski_Race_Knit_Sports_Club_Navy.jpg?v=1753426053&width=400",       name: "Rib Turtleneck", price: "$295" },
@@ -853,6 +864,7 @@ function AgentDemo({ isActive }) {
   const [flowRL2, setFlowRL2] = useState(false);
   const [showAnswer, setShowAnswer] = useState(false);
   const [showBadge, setShowBadge] = useState(false);
+  const [symIdx, setSymIdx] = useState(0);
 
   const TS = 23;
 
@@ -860,7 +872,7 @@ function AgentDemo({ isActive }) {
     if (!isActive) return;
     setUserQ1(""); setShowThinking(false); setFlowLR(false); setRightBusy(false); setFlowRL(false);
     setShowProducts(false); setUserQ2(""); setFlowLR2(false); setRightBusy2(false);
-    setFlowRL2(false); setShowAnswer(false); setShowBadge(false);
+    setFlowRL2(false); setShowAnswer(false); setShowBadge(false); setSymIdx(0);
 
     const timers = [];
     const at = (fn, ms) => timers.push(setTimeout(fn, ms));
@@ -872,7 +884,6 @@ function AgentDemo({ isActive }) {
     }
     t += AGENT_Q1.length * TS + 300;
 
-    // Show thinking step — the agent decides to reach out to Summit Cashmere's Nobi agent
     at(() => setShowThinking(true), t);
     t += 900;
 
@@ -882,7 +893,7 @@ function AgentDemo({ isActive }) {
     t += 650;
     at(() => { setRightBusy(false); setFlowRL(true); }, t);
     t += 1100;
-    at(() => { setFlowRL(false); setShowProducts(true); }, t);
+    at(() => { setFlowRL(false); setShowThinking(false); setShowProducts(true); }, t);
     t += 950;
 
     for (let i = 1; i <= AGENT_Q2.length; i++) {
@@ -904,8 +915,17 @@ function AgentDemo({ isActive }) {
     return () => timers.forEach(clearTimeout);
   }, [isActive]);
 
+  // Cycle computer symbols while data is in flight
+  useEffect(() => {
+    const flowing = flowLR || flowRL || flowLR2 || flowRL2;
+    if (!flowing) return;
+    const id = setInterval(() => setSymIdx(i => (i + 1) % AGENT_SYMBOLS.length), 180);
+    return () => clearInterval(id);
+  }, [flowLR, flowRL, flowLR2, flowRL2]);
+
   const flowingLR = flowLR || flowLR2;
   const flowingRL = flowRL || flowRL2;
+  const isFlowing = flowingLR || flowingRL;
   const rightProcessing = rightBusy || rightBusy2;
   const rightGotQ1 = showProducts || !!userQ2 || flowLR2 || rightBusy2 || flowRL2 || showAnswer;
   const rightGotQ2 = showAnswer;
@@ -926,30 +946,31 @@ function AgentDemo({ isActive }) {
           <div className="p-3 space-y-2 min-h-[150px]">
             {userQ1 && (
               <div className="flex justify-end">
-                <div className="bg-black/5 rounded-2xl rounded-br-sm px-3 py-2 text-xs text-black/80 max-w-[95%] leading-relaxed">
+                <div className="bg-black/5 rounded-2xl rounded-br-sm px-3 py-2 text-sm text-black/80 max-w-[95%] leading-relaxed">
                   {userQ1}{userQ1.length < AGENT_Q1.length && <span className="animate-pulse ml-0.5">|</span>}
                 </div>
               </div>
             )}
 
-            {/* Reasoning step — agent decides to query Summit Cashmere's Nobi endpoint */}
             {showThinking && (
-              <motion.div initial={{ opacity: 0, y: 3 }} animate={{ opacity: 1, y: 0 }} className="flex items-center gap-2 py-0.5">
+              <motion.div initial={{ opacity: 0, y: 3 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} className="flex items-center gap-2 py-0.5">
                 <motion.div className="h-1.5 w-1.5 rounded-full bg-violet-400 flex-shrink-0" animate={{ opacity: [1, 0.3, 1] }} transition={{ duration: 1, repeat: Infinity }} />
-                <span className="text-xs text-violet-500 italic">Found Nobi agent at summitcashmere.com - connecting...</span>
+                <span className="text-sm text-violet-500 italic">Routing to Summit Cashmere's agent...</span>
               </motion.div>
             )}
 
             {showProducts && (
               <motion.div initial={{ opacity: 0, y: 4 }} animate={{ opacity: 1, y: 0 }} className="flex items-start gap-2">
-                <img src="/favicon.svg" alt="Nobi" className="h-4 w-4 mt-0.5 flex-shrink-0" />
+                <div className="w-5 h-5 mt-0.5 rounded-full bg-gradient-to-br from-blue-500 to-violet-600 flex items-center justify-center flex-shrink-0">
+                  <Sparkles className="w-3 h-3 text-white" />
+                </div>
                 <div className="flex gap-1.5 flex-1 min-w-0">
                   {AGENT_PRODUCTS.map((p, i) => (
                     <motion.div key={p.name} initial={{ opacity: 0, scale: 0.88 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: i * 0.1 }} className="flex-1 min-w-0 rounded-lg overflow-hidden border border-black/5 bg-white shadow-sm">
                       <div className="aspect-[3/4]"><img src={p.img} alt={p.name} className="w-full h-full object-cover" /></div>
                       <div className="px-1.5 py-1.5">
-                        <div className="text-[10px] font-medium text-black/70 truncate leading-tight">{p.name}</div>
-                        <div className="text-[10px] text-black/45">{p.price}</div>
+                        <div className="text-xs font-medium text-black/70 truncate leading-tight">{p.name}</div>
+                        <div className="text-xs text-black/45">{p.price}</div>
                       </div>
                     </motion.div>
                   ))}
@@ -959,7 +980,7 @@ function AgentDemo({ isActive }) {
 
             {userQ2 && (
               <div className="flex justify-end">
-                <div className="bg-black/5 rounded-2xl rounded-br-sm px-3 py-2 text-xs text-black/80 max-w-[95%] leading-relaxed">
+                <div className="bg-black/5 rounded-2xl rounded-br-sm px-3 py-2 text-sm text-black/80 max-w-[95%] leading-relaxed">
                   {userQ2}{userQ2.length < AGENT_Q2.length && <span className="animate-pulse ml-0.5">|</span>}
                 </div>
               </div>
@@ -967,8 +988,10 @@ function AgentDemo({ isActive }) {
 
             {showAnswer && (
               <motion.div initial={{ opacity: 0, y: 4 }} animate={{ opacity: 1, y: 0 }} className="flex items-start gap-2">
-                <img src="/favicon.svg" alt="Nobi" className="h-4 w-4 mt-0.5 flex-shrink-0" />
-                <div className="bg-violet-50 border border-violet-100 rounded-2xl rounded-bl-sm px-3 py-2 text-xs text-black/80 leading-relaxed">
+                <div className="w-5 h-5 mt-0.5 rounded-full bg-gradient-to-br from-blue-500 to-violet-600 flex items-center justify-center flex-shrink-0">
+                  <Sparkles className="w-3 h-3 text-white" />
+                </div>
+                <div className="bg-slate-50 border border-black/8 rounded-2xl rounded-bl-sm px-3 py-2 text-sm text-black/80 leading-relaxed">
                   {AGENT_A2}
                 </div>
               </motion.div>
@@ -976,9 +999,9 @@ function AgentDemo({ isActive }) {
           </div>
         </div>
 
-        {/* Center: bidirectional wire */}
-        <div className="flex-shrink-0 w-10 sm:w-12 flex flex-col items-center justify-center">
-          <div className="relative w-full" style={{ height: 24 }}>
+        {/* Center: bidirectional wire with cycling computer symbols */}
+        <div className="flex-shrink-0 w-10 sm:w-12 flex flex-col items-center justify-center gap-1.5">
+          <div className="relative w-full" style={{ height: 20 }}>
             <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 h-px bg-slate-200" />
             {flowingLR && [0, 1, 2].map((i) => (
               <motion.div key={`lr${i}`}
@@ -997,51 +1020,53 @@ function AgentDemo({ isActive }) {
               />
             ))}
           </div>
+          {isFlowing && (
+            <motion.div
+              key={symIdx}
+              initial={{ opacity: 0, y: 2 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.12 }}
+              className="font-mono text-[9px] text-violet-400 text-center leading-none select-none"
+            >
+              {AGENT_SYMBOLS[symIdx]}
+            </motion.div>
+          )}
         </div>
 
-        {/* Right: Summit Cashmere's Nobi Agent — clearly AI-powered, not a website */}
-        <div className="flex-1 min-w-0 rounded-2xl border border-violet-200 bg-white shadow-sm overflow-hidden">
-          <div className="flex items-center gap-2 px-3 py-2 bg-gradient-to-r from-violet-600 to-fuchsia-600">
-            <img src="/favicon.svg" alt="Nobi" className="h-4 w-4 flex-shrink-0" />
+        {/* Right: Summit Cashmere's agent — server-side API log, not a user chat */}
+        <div className="flex-1 min-w-0 rounded-2xl border border-slate-700 bg-slate-900 shadow-sm overflow-hidden">
+          <div className="flex items-center gap-2 px-3 py-2 bg-slate-800 border-b border-slate-700">
+            <SummitLogo className="h-4 w-auto flex-shrink-0" />
             <div className="min-w-0 flex-1">
               <div className="text-xs font-semibold text-white leading-tight truncate">Summit Cashmere</div>
-              <div className="text-[10px] text-white/60 leading-tight">Powered by Nobi</div>
+              <div className="text-[10px] text-slate-400 leading-tight">Agent · Powered by Nobi</div>
             </div>
             <div className="flex items-center gap-1 flex-shrink-0">
               <div className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
-              <span className="text-[10px] text-white/50">online</span>
+              <span className="text-[10px] text-slate-400">online</span>
             </div>
           </div>
-          <div className="p-3 space-y-2 min-h-[150px]">
+          <div className="p-3 font-mono space-y-3 min-h-[150px]">
             {rightGotQ1 && (
-              <motion.div initial={{ opacity: 0, y: 4 }} animate={{ opacity: 1, y: 0 }} className="space-y-2">
-                <div className="rounded-xl bg-black/5 px-3 py-2">
-                  <div className="text-[10px] font-semibold uppercase tracking-wide text-black/30 mb-1">Request</div>
-                  <div className="text-xs text-black/70 leading-snug">{AGENT_Q1}</div>
-                </div>
-                <div className="rounded-xl bg-emerald-50 border border-emerald-100 px-3 py-2">
-                  <div className="text-[10px] font-semibold uppercase tracking-wide text-emerald-500 mb-1">Response</div>
-                  <div className="text-xs text-emerald-800 leading-snug">Returned 3 cashmere sweaters</div>
-                </div>
+              <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="space-y-1 text-xs">
+                <div className="text-slate-500">POST /mcp/query</div>
+                <div className="text-slate-300 pl-2 line-clamp-2">"{AGENT_Q1}"</div>
+                <div className="text-emerald-400 mt-1">200 OK · products: [3]</div>
               </motion.div>
             )}
             {rightProcessing && (
-              <div className="flex gap-1.5 px-1 pt-1">
+              <div className="flex gap-1.5">
                 {[0, 1, 2].map((i) => (
-                  <motion.div key={i} className="h-1.5 w-1.5 rounded-full bg-violet-300" animate={{ opacity: [0.3, 1, 0.3] }} transition={{ duration: 0.65, delay: i * 0.16, repeat: Infinity }} />
+                  <motion.div key={i} className="h-1.5 w-1.5 rounded-full bg-slate-600" animate={{ opacity: [0.3, 1, 0.3] }} transition={{ duration: 0.65, delay: i * 0.16, repeat: Infinity }} />
                 ))}
               </div>
             )}
             {rightGotQ2 && (
-              <motion.div initial={{ opacity: 0, y: 4 }} animate={{ opacity: 1, y: 0 }} className="space-y-2">
-                <div className="rounded-xl bg-black/5 px-3 py-2">
-                  <div className="text-[10px] font-semibold uppercase tracking-wide text-black/30 mb-1">Request</div>
-                  <div className="text-xs text-black/70 leading-snug">{AGENT_Q2}</div>
-                </div>
-                <div className="rounded-xl bg-emerald-50 border border-emerald-100 px-3 py-2">
-                  <div className="text-[10px] font-semibold uppercase tracking-wide text-emerald-500 mb-1">Response</div>
-                  <div className="text-xs text-emerald-800 leading-snug">{AGENT_A2}</div>
-                </div>
+              <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="space-y-1 text-xs">
+                <div className="text-slate-500">POST /mcp/query</div>
+                <div className="text-slate-300 pl-2">"{AGENT_Q2}"</div>
+                <div className="text-emerald-400 mt-1">200 OK · "{AGENT_A2}"</div>
               </motion.div>
             )}
           </div>
@@ -1049,7 +1074,7 @@ function AgentDemo({ isActive }) {
 
       </div>
 
-      {/* Badge - black so it stands out */}
+      {/* Badge */}
       {showBadge && (
         <motion.div
           initial={{ opacity: 0, y: 8, scale: 0.96 }}
@@ -1062,7 +1087,7 @@ function AgentDemo({ isActive }) {
           </div>
           <div>
             <div className="text-sm font-semibold leading-snug">Two customer queries, zero human effort</div>
-            <div className="text-xs text-white/50 mt-0.5">Your Nobi agent handled both automatically</div>
+            <div className="text-xs text-white/50 mt-0.5">Summit Cashmere's agent handled both automatically</div>
           </div>
         </motion.div>
       )}

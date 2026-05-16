@@ -142,70 +142,73 @@ export default function AgentEndpoint() {
         </section>
 
         {/* ── Story beat 1 ─────────────────────────────────────────────────── */}
-        <section className="min-h-screen flex flex-col border-b border-slate-100 bg-white">
-          {/* Story progress indicator */}
-          <div className="flex items-center gap-3 px-8 py-5 border-b border-slate-100">
-            <div className="flex gap-1.5">
-              <div className="h-1.5 w-6 rounded-full bg-slate-900" />
-              <div className="h-1.5 w-1.5 rounded-full bg-slate-200" />
-              <div className="h-1.5 w-1.5 rounded-full bg-slate-200" />
-              <div className="h-1.5 w-1.5 rounded-full bg-slate-200" />
-            </div>
-            <span className="text-xs text-slate-400">The moment</span>
+        <section className="min-h-screen flex flex-col items-center justify-center border-b border-slate-100 bg-[#0a0a12] px-6 py-20 gap-12 relative overflow-hidden">
+
+          {/* Background glow */}
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(109,40,217,0.15),transparent_70%)]" aria-hidden />
+
+          {/* Story dots */}
+          <div className="relative flex items-center gap-2">
+            <div className="h-1 w-8 rounded-full bg-violet-400" />
+            <div className="h-1 w-1 rounded-full bg-white/20" />
+            <div className="h-1 w-1 rounded-full bg-white/20" />
+            <div className="h-1 w-1 rounded-full bg-white/20" />
           </div>
 
-          {/* ChatGPT-style interface mock */}
-          <div className="flex-1 flex flex-col">
-            {/* Sidebar hint */}
-            <div className="flex flex-1">
-              <div className="hidden md:flex w-56 border-r border-slate-100 flex-col gap-1 p-3 flex-shrink-0">
-                <div className="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-slate-50">
-                  <div className="w-4 h-4 rounded-full bg-slate-200" />
-                  <span className="text-xs text-slate-400">New chat</span>
+          {/* Stylized AI interface */}
+          <div className="relative w-full max-w-2xl">
+            {/* Outer glow */}
+            <div className="absolute -inset-px rounded-3xl bg-gradient-to-b from-violet-500/40 to-fuchsia-500/20" style={{ filter: "blur(1px)" }} aria-hidden />
+            <div className="absolute -inset-8 bg-violet-500/10 rounded-[3rem] blur-3xl" aria-hidden />
+
+            <div className="relative rounded-3xl overflow-hidden border border-white/10 bg-[#111118]">
+              {/* Header bar */}
+              <div className="flex items-center gap-3 px-6 py-4 border-b border-white/5">
+                <div className="flex gap-1.5">
+                  <div className="w-2.5 h-2.5 rounded-full bg-white/10" />
+                  <div className="w-2.5 h-2.5 rounded-full bg-white/10" />
+                  <div className="w-2.5 h-2.5 rounded-full bg-white/10" />
                 </div>
-                {["Find cashmere gifts", "Weekend travel ideas", "Home office setup"].map((item) => (
-                  <div key={item} className="px-3 py-2 rounded-lg">
-                    <span className="text-xs text-slate-300 truncate block">{item}</span>
-                  </div>
-                ))}
+                <div className="flex-1 flex justify-center">
+                  <span className="text-xs text-white/30 font-mono">chatgpt.com</span>
+                </div>
               </div>
 
-              {/* Main chat area */}
-              <div className="flex-1 flex flex-col items-center justify-center gap-10 px-6 py-16">
-                <h2 className="text-2xl sm:text-3xl font-medium text-slate-800">What's on the agenda today?</h2>
+              {/* Chat body */}
+              <div className="px-8 py-16 flex flex-col items-center gap-10">
+                <p className="text-2xl font-semibold text-white/80">What's on the agenda today?</p>
 
-                {/* Input bar — matches ChatGPT exactly */}
-                <div className="w-full max-w-2xl">
-                  <div className="flex items-center gap-3 rounded-2xl border border-slate-200 bg-white shadow-sm px-4 py-3.5">
-                    <div className="w-7 h-7 rounded-full border border-slate-200 flex items-center justify-center text-slate-400 flex-shrink-0">
-                      <span className="text-lg leading-none">+</span>
-                    </div>
-                    <span className="flex-1 text-slate-800 text-base">Find me a luxury cashmere sweater gift</span>
-                    <span className="w-px h-5 bg-slate-400 animate-pulse" />
-                    <div className="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center flex-shrink-0">
+                {/* Input */}
+                <div className="w-full relative">
+                  <div className="absolute -inset-px rounded-2xl bg-gradient-to-r from-violet-500 to-fuchsia-500 opacity-70" />
+                  <div className="relative flex items-center gap-3 rounded-2xl bg-[#1a1a28] px-5 py-4">
+                    <span className="text-white/30 text-xl flex-shrink-0">+</span>
+                    <span className="flex-1 text-white text-lg font-light">Find me a luxury cashmere sweater gift</span>
+                    <span className="w-0.5 h-6 bg-violet-400 animate-pulse flex-shrink-0" />
+                    <div className="w-9 h-9 rounded-full bg-gradient-to-br from-violet-500 to-fuchsia-600 flex items-center justify-center flex-shrink-0 shadow-lg shadow-violet-500/30">
                       <svg className="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                         <path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14M12 5l7 7-7 7" />
                       </svg>
                     </div>
                   </div>
-                  <p className="text-center text-xs text-slate-400 mt-3">AI can make mistakes. Consider checking important information.</p>
                 </div>
+
+                <p className="text-xs text-white/20">AI can make mistakes. Consider checking important information.</p>
               </div>
             </div>
           </div>
 
-          {/* Caption + scroll cue */}
-          <div className="flex items-end justify-between px-8 py-6 border-t border-slate-100">
-            <p className="text-lg font-medium text-slate-700 max-w-sm">
-              Someone just asked their AI to find a business like yours.
-            </p>
-            <div className="flex flex-col items-center gap-1.5 text-slate-300">
-              <span className="text-xs tracking-widest uppercase">Scroll</span>
+          {/* Caption + scroll */}
+          <div className="relative flex items-center justify-between w-full max-w-2xl">
+            <p className="text-xl font-medium text-white/70">Someone just asked their AI to find a business like yours.</p>
+            <div className="flex flex-col items-center gap-1 text-white/20 flex-shrink-0 ml-8">
+              <span className="text-[10px] tracking-widest uppercase">Scroll</span>
               <svg className="w-4 h-4 animate-bounce" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
               </svg>
             </div>
           </div>
+
         </section>
 
         {/* ── Three concrete scenarios ──────────────────────────────────────── */}

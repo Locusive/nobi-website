@@ -21,7 +21,7 @@ export const meta = {
  },
  {
  question: "1. Nobi",
- answer: "Nobi pairs AI site search with a shopping assistant on one bill. A shopper searching for an eternity band in 14k white gold can ask \"does this come in a half-size?\" or \"is it hypoallergenic?\" on the same page and get an answer with inline citation pills linking back to your sizing chart or allergen disclosure. The default ranker reads your catalog and shopper behavior, so synonym work and rule pinning are not a daily chore. Connected catalog, policy pages, sizing references, and care guides refresh twice a day. The honest gap: Nobi curates the search results page, not category or collection pages."
+ answer: "Nobi pairs AI site search with a shopping assistant on one bill. A shopper searching for an eternity band in 14k white gold can ask \"does this come in a half-size?\" or \"is it hypoallergenic?\" on the same page and get an answer with inline citation pills linking back to your sizing chart or allergen disclosure. Merchants can lock exact verbatim responses to allergen disclosures, warranty terms, and compliance-sensitive questions. The default ranker reads your catalog and shopper behavior, so synonym work and rule pinning are not a daily chore. The honest gap: Nobi curates the search results page, not category or collection pages."
  },
  {
  question: "2. Algolia",
@@ -49,7 +49,7 @@ export const meta = {
   "headline": "Best AI Search for Jewelry Brands",
   "description": "Compare AI search tools for jewelry ecommerce - faceted metal, stone, carat, and setting search across Nobi, Algolia, Klevu, and Fast Simon.",
   "datePublished": "2026-05-11",
-  "dateModified": "2026-05-11",
+  "dateModified": "2026-05-16",
   "author": {
     "@type": "Person",
     "name": "Shanif Dhanani",
@@ -106,7 +106,7 @@ Shoppers searching for jewelry care about specifics: metal, stone, carat, settin
 
 | Product | Primary job | Best for | Pricing (starting) | Standout strength | Key weakness |
 | --- | --- | --- | --- | --- | --- |
-| Nobi | AI search + shopping assistant grounded in catalog and policies | Jewelry brands whose shoppers mix attribute search with sizing, allergen, and care questions in one session | $25/mo base (2,500 searches + 250 messages); $0.01/extra search, $0.10/extra message | Cited inline answers refresh twice daily, so a metal-allergen disclosure or sizing-chart edit reaches shopper answers within hours | No site-wide merchandising beyond the search results page; not an API-first developer platform |
+| Nobi | AI search + shopping assistant grounded in catalog and policies | Jewelry brands whose shoppers mix attribute search with sizing, allergen, and care questions in one session | $25/mo base (2,500 searches + 250 messages); $0.01/extra search, $0.10/extra message | Inline citation pills on every answer; merchants can lock exact verbatim responses to allergen disclosures, warranty terms, and compliance-sensitive questions | No site-wide merchandising beyond the search results page; not an API-first developer platform |
 | [Algolia](https://algolia.com) | Developer-first search API with deep faceting | Engineering teams that want to own ranking logic on metal, stone, carat, and setting attributes | Usage-based on search requests and records indexed; mid-market deployments often $2,000+/month before custom relevance work | Sub-50ms response and NeuralSearch on higher tiers for queries like "vintage halo setting in rose gold" | Custom ranking and NeuralSearch tuning all scale with engineering hours, not contract size; usage-based pricing spikes around launches and gifting season |
 | [Klevu](https://klevu.com) | AI search for Shopify jewelry catalogs | Shopify jewelry brands whose biggest miss is conversational and synonym-heavy queries | Quote-only (Essential / Advanced / Expert tiers; priced by sessions and SKU volume) | AI matching catches "solitaire" / "engagement ring" / "diamond ring" without manual synonym lists | Behavioral personalization is a separately licensed module, not bundled with Smart Search; now a division of Athos Commerce alongside Searchspring and Intelligent Reach |
 | [Fast Simon](https://fastsimon.com) | Shopify search plus visual merchandising for collection curation | Shopify jewelry brands whose bottleneck is visual collection curation (birthstone edits, anniversary capsules) | Quote-only; scales with catalog and traffic | Visual merchandising tools that non-technical merchandisers can run daily for birthstone edits and capsule layouts | Lighter on natural-language understanding than AI-native engines; personalization is a secondary strength |
@@ -125,7 +125,7 @@ We graded each tool on the jobs that actually move a jewelry shopper from browse
 
 ## 1. Nobi
 
-Nobi pairs AI site search with a shopping assistant in the same tool, which fits how jewelry shoppers actually browse. A visitor filtering for "14k gold solitaire under $2,000" can ask "is this nickel-free?" or "how does resizing work?" on the same page and get an answer with inline citation pills that link back to your sizing chart, allergen disclosure, or care guide. Connected catalog, policy pages, sizing references, and care guides refresh twice a day, so a return-window change before Mother's Day or an updated metal disclosure reaches shopper answers within hours instead of waiting on a weekly sync. The default ranker reads your catalog and shopper behavior, so a merchandiser isn't writing a synonym rule for every "studs vs earrings" or "solitaire vs engagement ring" variation.
+Nobi pairs AI site search with a shopping assistant in the same tool, which fits how jewelry shoppers actually browse. A visitor filtering for "14k gold solitaire under $2,000" can ask "is this nickel-free?" or "how does resizing work?" on the same page and get an answer with inline citation pills that link back to your sizing chart, allergen disclosure, or care guide. Merchants can also lock exact verbatim responses to specific questions - allergen disclosures, warranty terms, and compliance-sensitive topics get merchant-approved word-for-word answers instead of LLM paraphrasing. Connected catalog, policy pages, sizing references, and care guides refresh regularly, so a return-window change before Mother's Day or an updated metal disclosure reaches shopper answers within hours. The default ranker reads your catalog and shopper behavior, so a merchandiser isn't writing a synonym rule for every "studs vs earrings" or "solitaire vs engagement ring" variation.
 
 **Best for:** Jewelry brands whose shoppers mix attribute filtering with sizing, allergen, care, and policy questions in the same session and want both jobs handled by one tool.
 
@@ -134,7 +134,7 @@ Nobi pairs AI site search with a shopping assistant in the same tool, which fits
 **Pros:**
 - Faceted attribute search and a conversational assistant in one tool, so a shopper filtering for "round diamond halo ring under $3,000" can ask "is this hypoallergenic?" without leaving the page.
 - Inline numbered citation pills on every answer link to the exact source document, date, and excerpt - a real signal of trust on a category where shoppers are already wary of online claims.
-- Connected catalog, sizing charts, allergen disclosures, and policy pages refresh twice a day, so a return-window update lands in shopper answers within hours instead of on a weekly external sync.
+- Merchants can lock exact verbatim responses to allergen disclosures, warranty questions, and other compliance-sensitive topics - those get merchant-approved word-for-word answers instead of LLM paraphrasing.
 - Transparent per-unit pricing with no revenue share or surprise gifting-season bill.
 
 **Cons:**

@@ -147,12 +147,18 @@ export default function AgentEndpoint() {
           {/* Background glow */}
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(109,40,217,0.15),transparent_70%)]" aria-hidden />
 
-          {/* Story dots */}
-          <div className="relative flex items-center gap-2">
-            <div className="h-1 w-8 rounded-full bg-violet-400" />
-            <div className="h-1 w-1 rounded-full bg-white/20" />
-            <div className="h-1 w-1 rounded-full bg-white/20" />
-            <div className="h-1 w-1 rounded-full bg-white/20" />
+          {/* Big bold heading */}
+          <div className="relative text-center space-y-3">
+            <div className="flex items-center justify-center gap-2 mb-4">
+              <div className="h-1 w-8 rounded-full bg-violet-400" />
+              <div className="h-1 w-1 rounded-full bg-white/20" />
+              <div className="h-1 w-1 rounded-full bg-white/20" />
+              <div className="h-1 w-1 rounded-full bg-white/20" />
+            </div>
+            <h2 className="text-5xl sm:text-6xl lg:text-7xl font-black text-white leading-none tracking-tight">
+              Right now,<br />
+              <span className="bg-gradient-to-r from-violet-400 to-fuchsia-400 bg-clip-text text-transparent">someone is searching.</span>
+            </h2>
           </div>
 
           {/* Stylized AI interface */}
@@ -198,21 +204,31 @@ export default function AgentEndpoint() {
             </div>
           </div>
 
-          {/* Caption + scroll */}
-          <div className="relative flex items-center justify-between w-full max-w-2xl">
-            <p className="text-xl font-medium text-white/70">Someone just asked their AI to find a business like yours.</p>
-            <div className="flex flex-col items-center gap-1 text-white/20 flex-shrink-0 ml-8">
-              <span className="text-[10px] tracking-widest uppercase">Scroll</span>
-              <svg className="w-4 h-4 animate-bounce" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+          {/* Caption */}
+          <p className="relative text-2xl font-medium text-white/60 text-center max-w-xl">
+            Someone just asked their AI to find a business like yours.
+          </p>
+
+          {/* Big scroll button */}
+          <button
+            className="relative flex flex-col items-center gap-3 group"
+            onClick={() => {
+              const next = document.getElementById("beat-2");
+              if (next) next.scrollIntoView({ behavior: "smooth" });
+            }}
+          >
+            <span className="text-sm font-semibold tracking-[0.3em] uppercase text-white/40 group-hover:text-white/70 transition-colors">Scroll to see what happens</span>
+            <div className="w-14 h-14 rounded-full border-2 border-white/20 group-hover:border-violet-400 flex items-center justify-center transition-colors animate-bounce">
+              <svg className="w-6 h-6 text-white/40 group-hover:text-violet-400 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
               </svg>
             </div>
-          </div>
+          </button>
 
         </section>
 
         {/* ── Three concrete scenarios ──────────────────────────────────────── */}
-        <section className="py-24 border-b border-slate-100">
+        <section id="beat-2" className="py-24 border-b border-slate-100">
           <div className="mx-auto max-w-6xl xl:max-w-7xl px-6 space-y-12">
             <div className="text-center max-w-2xl mx-auto space-y-3">
               <h2 className="text-3xl sm:text-4xl font-semibold text-slate-900">What becomes possible</h2>

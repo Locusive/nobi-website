@@ -256,7 +256,7 @@ export default function AgentEndpoint() {
           <StoryDots active={1} total={4} />
           <div className="text-center space-y-3 max-w-2xl">
             <h2 className="text-3xl sm:text-4xl font-semibold text-slate-900">Fortunately, your site had FAQs generated from Nobi conversations.</h2>
-            <p className="text-lg text-slate-500">Every question your Nobi assistant answered became published FAQ content — on your pages, indexed by AI crawlers.</p>
+            <p className="text-lg text-slate-500">Real visitor conversations became structured content on your pages — the kind AI crawlers can find and index.</p>
           </div>
 
           {/* Product page mock with FAQ section */}

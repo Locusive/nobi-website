@@ -5,6 +5,35 @@ import { useDemoForm } from "../context/DemoFormContext";
 import { getSignupUrl } from "../utils/signupUrl";
 import { Bot, Globe, Sparkles, FileText, MessageSquare, ArrowRight } from "lucide-react";
 
+function StoryDots({ active, total, dark }) {
+  return (
+    <div className="flex items-center gap-2">
+      {Array.from({ length: total }).map((_, i) => (
+        <div key={i} className={`rounded-full transition-all ${i === active
+          ? dark ? "h-1.5 w-8 bg-violet-400" : "h-1.5 w-8 bg-slate-800"
+          : dark ? "h-1.5 w-1.5 bg-white/20" : "h-1.5 w-1.5 bg-slate-300"
+        }`} />
+      ))}
+    </div>
+  );
+}
+
+function StoryScroll({ to, dark }) {
+  return (
+    <button
+      className="flex flex-col items-center gap-2 group"
+      onClick={() => { const el = document.getElementById(to); if (el) el.scrollIntoView({ behavior: "smooth" }); }}
+    >
+      <span className={`text-xs font-medium tracking-widest uppercase transition-colors ${dark ? "text-white/30 group-hover:text-white/60" : "text-slate-400 group-hover:text-slate-600"}`}>Continue</span>
+      <div className={`w-10 h-10 rounded-full border flex items-center justify-center transition-colors animate-bounce ${dark ? "border-white/20 group-hover:border-violet-400" : "border-slate-200 group-hover:border-slate-400"}`}>
+        <svg className={`w-5 h-5 transition-colors ${dark ? "text-white/30 group-hover:text-violet-400" : "text-slate-400 group-hover:text-slate-600"}`} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+          <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+        </svg>
+      </div>
+    </button>
+  );
+}
+
 export default function AgentEndpoint() {
   const { onOpen: openDemoForm } = useDemoForm();
 
@@ -155,9 +184,8 @@ export default function AgentEndpoint() {
               <div className="h-1 w-1 rounded-full bg-white/20" />
               <div className="h-1 w-1 rounded-full bg-white/20" />
             </div>
-            <h2 className="text-5xl sm:text-6xl lg:text-7xl font-black text-white leading-none tracking-tight">
-              Right now,<br />
-              <span className="bg-gradient-to-r from-violet-400 to-fuchsia-400 bg-clip-text text-transparent">someone is searching.</span>
+            <h2 className="text-3xl sm:text-4xl font-semibold text-white">
+              Right now, <span className="bg-gradient-to-r from-violet-400 to-fuchsia-400 bg-clip-text text-transparent">someone is searching.</span>
             </h2>
           </div>
 
@@ -227,120 +255,188 @@ export default function AgentEndpoint() {
 
         </section>
 
-        {/* ── Three concrete scenarios ──────────────────────────────────────── */}
-        <section id="beat-2" className="py-24 border-b border-slate-100">
-          <div className="mx-auto max-w-6xl xl:max-w-7xl px-6 space-y-12">
-            <div className="text-center max-w-2xl mx-auto space-y-3">
-              <h2 className="text-3xl sm:text-4xl font-semibold text-slate-900">What becomes possible</h2>
-              <p className="text-lg text-slate-500">Three things that now happen automatically, with no extra work from you.</p>
+        {/* ── Beat 2: Your site had FAQs ───────────────────────────────────── */}
+        <section id="beat-2" className="min-h-screen flex flex-col items-center justify-center border-b border-slate-100 bg-white px-6 py-20 gap-10">
+          <StoryDots active={1} total={4} />
+          <div className="text-center space-y-3 max-w-2xl">
+            <h2 className="text-3xl sm:text-4xl font-semibold text-slate-900">Fortunately, your site was ready.</h2>
+            <p className="text-lg text-slate-500">Nobi had been turning your visitors' questions into structured FAQ content — the kind AI crawlers read and index.</p>
+          </div>
+          <div className="w-full max-w-2xl rounded-3xl border border-slate-200 bg-white shadow-xl overflow-hidden">
+            <div className="bg-slate-50 border-b border-slate-100 px-6 py-4">
+              <div className="flex items-center gap-2">
+                <div className="w-2 h-2 rounded-full bg-violet-500" />
+                <span className="text-sm font-semibold text-slate-600">summitcashmere.com — AI-generated FAQs</span>
+                <span className="ml-auto text-xs text-slate-400">Powered by Nobi</span>
+              </div>
             </div>
+            <div className="p-6 space-y-3">
+              {[
+                { q: "Do you ship internationally?",    a: "Yes — we ship to over 40 countries with free shipping on orders over $300." },
+                { q: "Is gift wrapping available?",     a: "Complimentary gift wrapping is available on all orders. Add a note at checkout." },
+                { q: "What is the return policy?",      a: "30-day returns on unworn items in original packaging. Refunds within 5 business days." },
+                { q: "Are these real cashmere?",        a: "Yes — 100% Grade-A Mongolian cashmere. Our Classic Crew is our most popular style." },
+              ].map((item) => (
+                <div key={item.q} className="rounded-2xl border border-slate-100 bg-slate-50 px-4 py-3.5 space-y-1">
+                  <p className="text-sm font-semibold text-slate-800">{item.q}</p>
+                  <p className="text-sm text-slate-500">{item.a}</p>
+                </div>
+              ))}
+            </div>
+            <div className="px-6 py-3 bg-violet-50 border-t border-violet-100 flex items-center gap-2">
+              <span className="h-1.5 w-1.5 rounded-full bg-violet-500" />
+              <span className="text-xs text-violet-600 font-medium">This content is indexed by GPTBot, ClaudeBot, and Perplexity.</span>
+            </div>
+          </div>
+          <StoryScroll to="beat-3" />
+        </section>
 
-            <div className="grid md:grid-cols-3 gap-6">
+        {/* ── Beat 3: Agent learns about your brand ─────────────────────────── */}
+        <section id="beat-3" className="min-h-screen flex flex-col items-center justify-center border-b border-slate-100 bg-[#0a0a12] px-6 py-20 gap-10 relative overflow-hidden">
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(109,40,217,0.12),transparent_70%)]" aria-hidden />
+          <StoryDots active={2} total={4} dark />
+          <div className="relative text-center space-y-3 max-w-2xl">
+            <h2 className="text-3xl sm:text-4xl font-semibold text-white">So their AI learned about you.</h2>
+            <p className="text-lg text-white/50">The agent searched for cashmere brands. Your indexed content made you findable — and showed you had a live endpoint to call.</p>
+          </div>
+          <div className="relative w-full max-w-2xl rounded-3xl border border-white/10 bg-[#111118] overflow-hidden shadow-2xl">
+            <div className="px-6 py-4 border-b border-white/5 flex items-center justify-between">
+              <span className="text-xs font-mono text-white/30">Agent · discovery phase</span>
+              <span className="flex items-center gap-1.5 text-xs text-emerald-400"><span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />searching</span>
+            </div>
+            <div className="p-6 space-y-3">
+              <div className="rounded-2xl border border-white/5 bg-white/5 px-4 py-3">
+                <p className="text-xs text-white/30 font-mono mb-1">query</p>
+                <p className="text-sm text-white/70">"luxury cashmere sweater gift"</p>
+              </div>
+              <div className="space-y-2">
+                {[
+                  { name: "Summit Cashmere", url: "summitcashmere.com", note: "FAQ content indexed · agent endpoint found", highlight: true },
+                  { name: "Other brand",     url: "otherbrand.com",     note: "No agent endpoint",                            highlight: false },
+                  { name: "Another brand",   url: "anotherbrand.com",   note: "No structured content",                       highlight: false },
+                ].map((r) => (
+                  <div key={r.name} className={`flex items-center gap-3 rounded-xl px-4 py-3 border ${r.highlight ? "border-violet-500/40 bg-violet-500/10" : "border-white/5 bg-white/3 opacity-30"}`}>
+                    <div className={`h-2 w-2 rounded-full flex-shrink-0 ${r.highlight ? "bg-emerald-400" : "bg-white/20"}`} />
+                    <div className="flex-1 min-w-0">
+                      <span className={`text-sm font-semibold ${r.highlight ? "text-white" : "text-white/40"}`}>{r.name}</span>
+                      <span className="text-xs text-white/30 ml-2">{r.url}</span>
+                    </div>
+                    <span className={`text-xs flex-shrink-0 ${r.highlight ? "text-emerald-400" : "text-white/20"}`}>{r.note}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+          <StoryScroll to="beat-4" dark />
+        </section>
 
-              {/* Card 1: queries coming in while you sleep */}
-              <div className="rounded-3xl border border-slate-200 bg-white overflow-hidden shadow-sm flex flex-col">
-                <div className="flex-1 p-8 flex flex-col items-center justify-center gap-4 bg-slate-50">
-                  <div className="text-7xl font-black text-slate-900 tracking-tight">47</div>
-                  <div className="flex items-center gap-6">
+        {/* ── Beat 4: Agent calls your endpoint ────────────────────────────── */}
+        <section id="beat-4" className="min-h-screen flex flex-col items-center justify-center border-b border-slate-100 bg-white px-6 py-20 gap-10">
+          <StoryDots active={3} total={4} />
+          <div className="text-center space-y-3 max-w-2xl">
+            <h2 className="text-3xl sm:text-4xl font-semibold text-slate-900">Then it called you directly.</h2>
+            <p className="text-lg text-slate-500">Your Nobi assistant is a live agent endpoint. The AI called it and got real answers — products, policies, follow-ups.</p>
+          </div>
+          <div className="w-full max-w-2xl flex items-stretch gap-3">
+            <div className="flex-1 rounded-2xl border border-black/10 bg-white shadow-lg overflow-hidden">
+              <div className="flex items-center gap-2 px-4 py-3 bg-slate-50 border-b border-black/5">
+                <div className="w-5 h-5 rounded-md bg-gradient-to-br from-blue-500 to-violet-600 flex items-center justify-center">
+                  <Sparkles className="w-3 h-3 text-white" />
+                </div>
+                <span className="text-xs font-semibold text-black/60">Customer's AI</span>
+              </div>
+              <div className="p-4 space-y-2">
+                <div className="flex justify-end">
+                  <div className="bg-black/5 rounded-2xl rounded-br-sm px-3 py-2 text-sm text-black/80">Find me a luxury cashmere sweater gift</div>
+                </div>
+                <div className="flex justify-end">
+                  <div className="bg-black/5 rounded-2xl rounded-br-sm px-3 py-2 text-sm text-black/80">Do they gift wrap?</div>
+                </div>
+              </div>
+            </div>
+            <div className="flex flex-col items-center justify-center gap-2 w-10 flex-shrink-0">
+              <div className="relative w-full" style={{ height: 16 }}>
+                <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 h-px bg-slate-300" />
+                {[0.1, 0.45, 0.78].map((pos, i) => (
+                  <div key={i} className="absolute top-1/2 -translate-y-1/2 h-2 w-2 rounded-full bg-violet-500 shadow-[0_0_6px_2px_rgba(139,92,246,0.5)]" style={{ left: `${pos * 100}%` }} />
+                ))}
+              </div>
+              <div className="font-mono text-[8px] text-violet-400">{"{}"}</div>
+            </div>
+            <div className="flex-1 rounded-2xl border border-slate-700 bg-slate-900 shadow-lg overflow-hidden">
+              <div className="flex items-center gap-2 px-4 py-3 bg-slate-800 border-b border-slate-700">
+                <svg className="h-3.5 w-auto" viewBox="0 0 22 18" fill="none">
+                  <path d="M11 2L20 16H2L11 2Z" stroke="white" strokeWidth="1.5" strokeLinejoin="round"/>
+                  <path d="M7.5 16L11 10.5L14.5 16" stroke="white" strokeWidth="1" strokeLinejoin="round" strokeOpacity="0.5"/>
+                </svg>
+                <div className="flex-1 min-w-0">
+                  <div className="text-xs font-bold text-white">Summit Cashmere</div>
+                  <div className="text-[9px] text-slate-400">Powered by Nobi</div>
+                </div>
+                <div className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
+              </div>
+              <div className="p-4 font-mono text-xs space-y-2">
+                <div className="text-slate-500">POST /mcp/query</div>
+                <div className="text-slate-300 pl-2">"cashmere sweater gift"</div>
+                <div className="text-emerald-400">200 OK · products: [3]</div>
+                <div className="text-slate-500 mt-2">POST /mcp/query</div>
+                <div className="text-slate-300 pl-2">"do you gift wrap?"</div>
+                <div className="text-emerald-400">200 OK · "Yes, complimentary"</div>
+              </div>
+            </div>
+          </div>
+          <StoryScroll to="beat-5" />
+        </section>
+
+        {/* ── Beat 5: Introduction made ─────────────────────────────────────── */}
+        <section id="beat-5" className="min-h-screen flex flex-col items-center justify-center border-b border-slate-100 bg-[#0a0a12] px-6 py-20 gap-10 relative overflow-hidden">
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(16,185,129,0.08),transparent_70%)]" aria-hidden />
+          <StoryDots active={4} total={4} dark />
+          <div className="relative text-center space-y-3 max-w-2xl">
+            <h2 className="text-3xl sm:text-4xl font-semibold text-white">Your business got introduced.</h2>
+            <p className="text-lg text-white/50">The customer met Summit Cashmere inside their own AI. No website visit. No ad. No effort on your part.</p>
+          </div>
+          <div className="relative w-full max-w-xl rounded-3xl border border-white/10 bg-[#111118] overflow-hidden shadow-2xl">
+            <div className="px-5 py-4 border-b border-white/5 flex items-center gap-2">
+              <div className="w-5 h-5 rounded-md bg-gradient-to-br from-blue-500 to-violet-600 flex items-center justify-center">
+                <Sparkles className="w-3 h-3 text-white" />
+              </div>
+              <span className="text-xs font-semibold text-white/50">Customer's AI</span>
+            </div>
+            <div className="p-5 space-y-3">
+              <div className="flex justify-end">
+                <div className="bg-white/10 rounded-2xl rounded-br-sm px-3 py-2 text-sm text-white/80">Find me a luxury cashmere sweater gift</div>
+              </div>
+              <div className="flex items-start gap-2">
+                <div className="w-5 h-5 mt-0.5 rounded-full bg-gradient-to-br from-blue-500 to-violet-600 flex items-center justify-center flex-shrink-0">
+                  <Sparkles className="w-2.5 h-2.5 text-white" />
+                </div>
+                <div className="space-y-2 flex-1">
+                  <p className="text-sm text-white/70">Summit Cashmere has exactly what you're looking for:</p>
+                  <div className="grid grid-cols-3 gap-2">
                     {[
-                      { initial: "C", color: "bg-amber-400",   label: "Claude" },
-                      { initial: "G", color: "bg-emerald-500", label: "ChatGPT" },
-                      { initial: "P", color: "bg-indigo-500",  label: "Perplexity" },
-                    ].map((ai) => (
-                      <div key={ai.label} className="flex flex-col items-center gap-1">
-                        <div className={`w-8 h-8 rounded-full ${ai.color} flex items-center justify-center text-white text-xs font-bold`}>{ai.initial}</div>
-                        <span className="text-[9px] text-slate-400">{ai.label}</span>
+                      { name: "Classic Crew",   price: "$265", img: "https://www.alpsandmeters.com/cdn/shop/products/Cashmere_Alpine_Guide_Sweater_Camel.jpg?v=1753426053&width=200" },
+                      { name: "Rib Turtleneck", price: "$295", img: "https://www.alpsandmeters.com/cdn/shop/products/Ski_Race_Knit_Sports_Club_Navy.jpg?v=1753426053&width=200" },
+                      { name: "Cable Knit",     price: "$245", img: "https://www.alpsandmeters.com/cdn/shop/products/Classic_Cable_Knit_IVORY_Front.jpg?v=1753426168&width=200" },
+                    ].map((p) => (
+                      <div key={p.name} className="rounded-xl overflow-hidden border border-white/10 bg-white/5">
+                        <div className="aspect-[3/4]"><img src={p.img} alt={p.name} className="w-full h-full object-cover" /></div>
+                        <div className="px-2 py-1.5">
+                          <div className="text-[10px] font-medium text-white/70 truncate">{p.name}</div>
+                          <div className="text-[10px] text-white/40">{p.price}</div>
+                        </div>
                       </div>
                     ))}
                   </div>
-                  <div className="flex items-center gap-1.5 rounded-full bg-emerald-50 border border-emerald-100 px-3 py-1">
-                    <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
-                    <span className="text-xs font-medium text-emerald-700">0 human hours</span>
+                  <div className="rounded-xl bg-emerald-500/10 border border-emerald-500/20 px-3 py-2 text-xs text-emerald-400">
+                    They also offer complimentary gift wrapping on all orders.
                   </div>
-                </div>
-                <div className="px-6 py-4 border-t border-slate-100">
-                  <p className="text-base font-semibold text-slate-900">AI queries answered this week.</p>
                 </div>
               </div>
-
-              {/* Card 2: surfacing in AI results */}
-              <div className="rounded-3xl border border-slate-200 bg-white overflow-hidden shadow-sm flex flex-col">
-                <div className="flex-1 p-8 bg-slate-50 space-y-3">
-                  <div className="flex items-center gap-2 mb-4">
-                    <div className="w-5 h-5 rounded-md bg-indigo-600 flex items-center justify-center flex-shrink-0">
-                      <span className="text-white text-[8px] font-bold">P</span>
-                    </div>
-                    <span className="text-sm font-semibold text-slate-600">Perplexity</span>
-                  </div>
-                  <div className="rounded-2xl border-2 border-violet-300 bg-violet-50 px-4 py-3 shadow-md">
-                    <div className="text-sm font-bold text-violet-800">Summit Cashmere</div>
-                    <div className="text-xs text-violet-500 mt-0.5">summitcashmere.com</div>
-                  </div>
-                  <div className="rounded-2xl border border-slate-200 bg-white px-4 py-3 opacity-40">
-                    <div className="text-sm font-semibold text-slate-600">Other brand</div>
-                    <div className="text-xs text-slate-400 mt-0.5">otherbrand.com</div>
-                  </div>
-                  <div className="rounded-2xl border border-slate-200 bg-white px-4 py-3 opacity-20">
-                    <div className="text-sm font-semibold text-slate-600">Another brand</div>
-                    <div className="text-xs text-slate-400 mt-0.5">anotherbrand.com</div>
-                  </div>
-                </div>
-                <div className="px-6 py-4 border-t border-slate-100">
-                  <p className="text-base font-semibold text-slate-900">Your business, first in AI results.</p>
-                </div>
-              </div>
-
-              {/* Card 3: live agent call */}
-              <div className="rounded-3xl border border-slate-200 bg-white overflow-hidden shadow-sm flex flex-col">
-                <div className="flex-1 bg-slate-900 p-8 space-y-4">
-                  <div className="flex items-center gap-2">
-                    <span className="h-2 w-2 rounded-full bg-emerald-400" />
-                    <span className="text-xs text-slate-400 font-mono">live</span>
-                  </div>
-                  <div className="space-y-3 font-mono text-sm">
-                    <div>
-                      <div className="text-slate-500 text-xs">question →</div>
-                      <div className="text-white mt-0.5">"Do you gift wrap?"</div>
-                    </div>
-                    <div>
-                      <div className="text-slate-500 text-xs">answer →</div>
-                      <div className="text-emerald-400 mt-0.5">"Yes, complimentary."</div>
-                    </div>
-                  </div>
-                </div>
-                <div className="px-6 py-4 border-t border-slate-100">
-                  <p className="text-base font-semibold text-slate-900">Real answers. No human in the loop.</p>
-                </div>
-              </div>
-
             </div>
-          </div>
-        </section>
-
-        {/* ── How ──────────────────────────────────────────────────────────── */}
-        <section className="py-24 bg-slate-50 border-b border-slate-100">
-          <div className="mx-auto max-w-6xl xl:max-w-7xl px-6 space-y-16">
-            <div className="text-center max-w-2xl mx-auto space-y-3">
-              <h2 className="text-3xl sm:text-4xl font-semibold text-slate-900">How Nobi makes it happen</h2>
-              <p className="text-lg text-slate-500">Two things, both automatic, both included.</p>
-            </div>
-            <div className="grid md:grid-cols-2 gap-8">
-              <div className="rounded-3xl border border-slate-200 bg-white p-8 space-y-4 shadow-sm">
-                <div className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-violet-50 border border-violet-100 text-violet-600">
-                  <FileText size={18} />
-                </div>
-                <div className="text-xs font-semibold uppercase tracking-widest text-violet-500">Get found</div>
-                <h3 className="text-xl font-semibold text-slate-900">Real conversations become indexed content</h3>
-                <p className="text-slate-500 leading-relaxed">Visitor questions to your Nobi assistant get sanitized and rendered as structured FAQ content on your pages. AI crawlers read it and index it. You get AI discoverability from conversations that were already happening.</p>
-              </div>
-              <div className="rounded-3xl border border-slate-200 bg-white p-8 space-y-4 shadow-sm">
-                <div className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-violet-50 border border-violet-100 text-violet-600">
-                  <Bot size={18} />
-                </div>
-                <div className="text-xs font-semibold uppercase tracking-widest text-violet-500">Get called</div>
-                <h3 className="text-xl font-semibold text-slate-900">Your assistant is already a live endpoint</h3>
-                <p className="text-slate-500 leading-relaxed">Every Nobi assistant is an MCP endpoint, auto-registered in your llms.txt. AI agents discover it and call it directly for live answers on products, pricing, policies, and follow-ups. No setup needed.</p>
-              </div>
+            <div className="px-5 py-3 border-t border-white/5 flex items-center gap-2">
+              <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
+              <span className="text-xs text-white/30">This customer never visited summitcashmere.com</span>
             </div>
           </div>
         </section>

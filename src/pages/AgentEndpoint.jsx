@@ -424,8 +424,8 @@ export default function AgentEndpoint() {
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(16,185,129,0.08),transparent_70%)]" aria-hidden />
           <StoryDots active={4} total={4} dark />
           <div className="relative text-center space-y-3 max-w-2xl">
-            <h2 className="text-3xl sm:text-4xl font-semibold text-white">Your business got introduced.</h2>
-            <p className="text-lg text-white/50">The customer met Summit Cashmere inside their own AI. No website visit. No ad. No effort on your part.</p>
+            <h2 className="text-3xl sm:text-4xl font-semibold text-white">A potential customer just discovered your business.</h2>
+            <p className="text-lg text-white/50">Inside their own AI. No website visit. No ad. No effort on your part.</p>
           </div>
           <div className="relative w-full max-w-xl rounded-3xl border border-white/10 bg-[#111118] overflow-hidden shadow-2xl">
             <div className="px-5 py-4 border-b border-white/5 flex items-center gap-2">

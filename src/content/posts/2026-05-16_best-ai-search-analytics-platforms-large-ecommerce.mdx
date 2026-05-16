@@ -29,11 +29,11 @@ export const meta = {
  },
  {
  question: "3. Bloomreach",
- answer: "Bloomreach folds search analytics into a broader Discovery suite that includes marketing automation. Pricing is modular and quoted by usage. It's the right pick when search analytics sit inside a larger customer-data play rather than standing on their own."
+ answer: "Bloomreach folds search analytics into a broader Discovery suite that also includes CDP, CMS, and commerce experience tools. Pricing is enterprise-only; six-figure annual contracts are common, priced on catalog size, customers served, and events. It's the right pick when search analytics has to sit next to customer data and content in one platform."
  },
  {
  question: "4. Coveo",
- answer: "Coveo wraps query reporting inside its enterprise search suite and unifies search across 30+ content sources. Base plans start at $600/month, with annual contracts at $50k+ and implementation fees on top. Pick it when you need search across product, knowledge, and support content in one index."
+ answer: "Coveo wraps query reporting inside its enterprise search suite and unifies search across commerce, support, and workplace content sources. All-in costs commonly reach $100K+/year once annual licensing, implementation, and professional services are added. Pick it when you need search across product, knowledge, and support content in one index."
  },
  {
  question: "5. Algolia",
@@ -110,7 +110,7 @@ Five platforms lead, each strong in a different analytics lane:
 - **Nobi** - search-funnel analytics with zero-result queries, intent gaps, and trend reports surfaced for the merchandising team. $25/mo base. Pick when search insights need to feed weekly merchandising decisions without a separate BI lift.
 - **Constructor** - behavioral and A/B test analytics across category, browse, and search, fed by in-session signals. Revenue-share pricing that scales with GMV. Pick when behavioral attribution across the full site is the analytics job.
 - **Bloomreach** - search analytics tied to unified CDP customer profiles inside one commerce experience cloud. Enterprise-only pricing with six-figure annual contracts common. Pick when search analytics has to sit next to CMS and CDP data.
-- **Coveo** - enterprise-grade reporting with governance and audit tooling, spanning commerce, support, and workplace surfaces. Base at $600/mo, with annual licensing at $50k+ and $20k+ implementation fees on top. Pick when search analytics has to satisfy enterprise audit requirements.
+- **Coveo** - enterprise-grade reporting with governance and audit tooling, spanning commerce, support, and workplace surfaces. All-in costs commonly reach $100K+/year (base $600/mo, annual licensing $50k+, implementation $20k+ on top). Pick when search analytics has to satisfy enterprise audit requirements.
 - **Algolia** - granular dashboard analytics with click-through, no-results rate, and ranking analysis, plus an export API. Usage-based pricing above a free 10K-search tier, often landing $2k+/mo at mid-market volumes. Pick when engineers want raw analytics data they can pipe anywhere.
 
 | Product | Primary job | Best for | Pricing (starting) | Standout strength | Key weakness |
@@ -146,7 +146,7 @@ We picked the [five platforms a head of ecommerce at a large brand would actuall
 **Pros:**
 - Out-of-the-box semantic search and personalization, so the analytics reflect real shopper behavior rather than a hand-curated rule list
 - Hooks API gives engineering teams developer-controlled customization of how Nobi displays products - originally built at UNTUCKit's request and now standard for every Nobi customer
-- Transparent per-unit pricing ($0.01/search, $0.10/message), so analytics traffic spikes don't produce surprise bills
+- Transparent per-unit pricing, so analytics traffic spikes don't produce surprise bills
 - Twice-daily refresh on connected sources, so catalog and policy changes land in shopper-facing answers within hours
 
 **Cons:**
@@ -266,12 +266,3 @@ If raw event data going to your warehouse is the priority, Algolia fits. Usage-b
 ---
 
 Want to see which queries are sending shoppers away empty-handed? Nobi's search analytics pull zero-result queries and intent gaps straight to your merchandising team. Start at $25/month at [nobi.ai](https://nobi.ai).
-
-<div className="my-8 flex justify-center">
- <a
- href="https://dashboard.nobi.ai"
- className="inline-flex items-center justify-center gap-2 rounded-2xl font-medium transition active:scale-[.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-black/10 dark:focus-visible:ring-white/20 bg-black text-white dark:bg-white dark:text-black hover:opacity-90 shadow-sm h-12 px-6 text-base no-underline"
- >
- <span>Start your free Nobi trial</span>
- </a>
-</div>

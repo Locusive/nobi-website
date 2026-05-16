@@ -151,90 +151,79 @@ export default function AgentEndpoint() {
 
             <div className="grid md:grid-cols-3 gap-6">
 
-              {/* Scenario 1: AI queries coming in */}
-              <div className="rounded-3xl border border-slate-200 bg-white overflow-hidden shadow-sm">
-                <div className="p-6 border-b border-slate-100 bg-slate-50 space-y-4">
-                  <div className="flex items-center justify-between">
-                    <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider">AI agent queries</span>
-                    <span className="text-xs text-slate-400">This week</span>
-                  </div>
-                  <div className="text-4xl font-bold text-slate-900">47</div>
-                  <div className="space-y-2">
+              {/* Card 1: queries coming in while you sleep */}
+              <div className="rounded-3xl border border-slate-200 bg-white overflow-hidden shadow-sm flex flex-col">
+                <div className="flex-1 p-8 flex flex-col items-center justify-center gap-4 bg-slate-50">
+                  <div className="text-7xl font-black text-slate-900 tracking-tight">47</div>
+                  <div className="flex items-center gap-6">
                     {[
-                      { name: "Claude",     pct: 52, color: "bg-amber-400" },
-                      { name: "ChatGPT",    pct: 31, color: "bg-emerald-400" },
-                      { name: "Perplexity", pct: 17, color: "bg-indigo-400" },
+                      { initial: "C", color: "bg-amber-400",   label: "Claude" },
+                      { initial: "G", color: "bg-emerald-500", label: "ChatGPT" },
+                      { initial: "P", color: "bg-indigo-500",  label: "Perplexity" },
                     ].map((ai) => (
-                      <div key={ai.name} className="flex items-center gap-2">
-                        <span className="text-xs text-slate-500 w-16 flex-shrink-0">{ai.name}</span>
-                        <div className="flex-1 h-1.5 bg-slate-100 rounded-full overflow-hidden">
-                          <div className={`h-full rounded-full ${ai.color}`} style={{ width: `${ai.pct}%` }} />
-                        </div>
-                        <span className="text-xs text-slate-400 w-8 text-right">{ai.pct}%</span>
+                      <div key={ai.label} className="flex flex-col items-center gap-1">
+                        <div className={`w-8 h-8 rounded-full ${ai.color} flex items-center justify-center text-white text-xs font-bold`}>{ai.initial}</div>
+                        <span className="text-[9px] text-slate-400">{ai.label}</span>
                       </div>
                     ))}
                   </div>
-                  <div className="flex items-center gap-1.5">
+                  <div className="flex items-center gap-1.5 rounded-full bg-emerald-50 border border-emerald-100 px-3 py-1">
                     <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
-                    <span className="text-xs text-slate-500">0 human hours used</span>
+                    <span className="text-xs font-medium text-emerald-700">0 human hours</span>
                   </div>
                 </div>
-                <div className="px-6 py-4">
-                  <p className="text-sm font-medium text-slate-700">Answered automatically. Zero humans involved.</p>
+                <div className="px-6 py-4 border-t border-slate-100">
+                  <p className="text-base font-semibold text-slate-900">AI queries answered this week.</p>
                 </div>
               </div>
 
-              {/* Scenario 2: Showing up in AI results */}
-              <div className="rounded-3xl border border-slate-200 bg-white overflow-hidden shadow-sm">
-                <div className="p-6 border-b border-slate-100 bg-slate-50 space-y-4">
-                  <div className="flex items-center gap-2">
+              {/* Card 2: surfacing in AI results */}
+              <div className="rounded-3xl border border-slate-200 bg-white overflow-hidden shadow-sm flex flex-col">
+                <div className="flex-1 p-8 bg-slate-50 space-y-3">
+                  <div className="flex items-center gap-2 mb-4">
                     <div className="w-5 h-5 rounded-md bg-indigo-600 flex items-center justify-center flex-shrink-0">
                       <span className="text-white text-[8px] font-bold">P</span>
                     </div>
-                    <span className="text-xs font-semibold text-slate-500">Perplexity</span>
+                    <span className="text-sm font-semibold text-slate-600">Perplexity</span>
                   </div>
-                  <div className="text-xs text-slate-400 italic">"best luxury cashmere brands online"</div>
-                  <div className="space-y-3">
-                    {[
-                      { name: "Summit Cashmere", url: "summitcashmere.com", excerpt: "Classic Crew from $245 · complimentary gift wrap on all orders", highlight: true },
-                      { name: "Other brand",     url: "otherbrand.com",    excerpt: "Cashmere collection starting at...",                               highlight: false },
-                    ].map((r) => (
-                      <div key={r.name} className={`rounded-xl border px-3 py-2.5 ${r.highlight ? "border-violet-200 bg-violet-50" : "border-slate-100 bg-white"}`}>
-                        <div className="flex items-center gap-1.5 mb-1">
-                          <span className={`text-xs font-semibold ${r.highlight ? "text-violet-700" : "text-slate-600"}`}>{r.name}</span>
-                          <span className="text-[10px] text-slate-400">{r.url}</span>
-                        </div>
-                        <p className="text-[11px] text-slate-500 leading-snug">{r.excerpt}</p>
-                      </div>
-                    ))}
+                  <div className="rounded-2xl border-2 border-violet-300 bg-violet-50 px-4 py-3 shadow-md">
+                    <div className="text-sm font-bold text-violet-800">Summit Cashmere</div>
+                    <div className="text-xs text-violet-500 mt-0.5">summitcashmere.com</div>
+                  </div>
+                  <div className="rounded-2xl border border-slate-200 bg-white px-4 py-3 opacity-40">
+                    <div className="text-sm font-semibold text-slate-600">Other brand</div>
+                    <div className="text-xs text-slate-400 mt-0.5">otherbrand.com</div>
+                  </div>
+                  <div className="rounded-2xl border border-slate-200 bg-white px-4 py-3 opacity-20">
+                    <div className="text-sm font-semibold text-slate-600">Another brand</div>
+                    <div className="text-xs text-slate-400 mt-0.5">anotherbrand.com</div>
                   </div>
                 </div>
-                <div className="px-6 py-4">
-                  <p className="text-sm font-medium text-slate-700">Your business, surfacing in AI search results.</p>
+                <div className="px-6 py-4 border-t border-slate-100">
+                  <p className="text-base font-semibold text-slate-900">Your business, first in AI results.</p>
                 </div>
               </div>
 
-              {/* Scenario 3: Live endpoint exchange */}
-              <div className="rounded-3xl border border-slate-200 bg-white overflow-hidden shadow-sm">
-                <div className="p-6 border-b border-slate-100 bg-slate-900 space-y-3">
-                  <div className="flex items-center justify-between">
-                    <span className="text-[10px] font-mono text-slate-500 uppercase tracking-wider">Live agent exchange</span>
-                    <div className="flex items-center gap-1">
-                      <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
-                      <span className="text-[10px] text-slate-400">online</span>
+              {/* Card 3: live agent call */}
+              <div className="rounded-3xl border border-slate-200 bg-white overflow-hidden shadow-sm flex flex-col">
+                <div className="flex-1 bg-slate-900 p-8 space-y-4">
+                  <div className="flex items-center gap-2">
+                    <span className="h-2 w-2 rounded-full bg-emerald-400" />
+                    <span className="text-xs text-slate-400 font-mono">live</span>
+                  </div>
+                  <div className="space-y-3 font-mono text-sm">
+                    <div>
+                      <div className="text-slate-500 text-xs">question →</div>
+                      <div className="text-white mt-0.5">"Do you gift wrap?"</div>
+                    </div>
+                    <div>
+                      <div className="text-slate-500 text-xs">answer →</div>
+                      <div className="text-emerald-400 mt-0.5">"Yes, complimentary."</div>
                     </div>
                   </div>
-                  <div className="font-mono text-xs space-y-2">
-                    <div className="text-slate-500">POST /mcp/query</div>
-                    <div className="text-slate-300 pl-2">"Do you carry cashmere turtlenecks?"</div>
-                    <div className="text-emerald-400">200 OK · products: [2]</div>
-                    <div className="border-t border-white/5 pt-2 text-slate-500">POST /mcp/query</div>
-                    <div className="text-slate-300 pl-2">"Do you gift wrap?"</div>
-                    <div className="text-emerald-400">200 OK · "Yes, complimentary"</div>
-                  </div>
                 </div>
-                <div className="px-6 py-4">
-                  <p className="text-sm font-medium text-slate-700">Direct agent call. No website visit needed.</p>
+                <div className="px-6 py-4 border-t border-slate-100">
+                  <p className="text-base font-semibold text-slate-900">Real answers. No human in the loop.</p>
                 </div>
               </div>
 

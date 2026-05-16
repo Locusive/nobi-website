@@ -43,7 +43,8 @@ export default function AgentEndpoint() {
               <div className="space-y-7">
                 <p className="text-sm font-semibold tracking-[0.2em] text-violet-600 uppercase">A new channel</p>
                 <h1 className="text-4xl sm:text-5xl lg:text-[3.5rem] font-semibold leading-[1.05] text-slate-900 text-balance">
-                  Your business, inside every AI your customers use
+                  Your business, inside every AI your{" "}
+                  <span className="bg-gradient-to-r from-indigo-500 via-violet-500 to-fuchsia-500 bg-clip-text text-transparent">customers use</span>
                 </h1>
                 <p className="text-lg text-slate-500 leading-relaxed max-w-lg">
                   When someone asks Claude or ChatGPT for a recommendation, Nobi makes sure your business shows up - and can answer follow-up questions directly. No website visit required.
@@ -58,65 +59,48 @@ export default function AgentEndpoint() {
                 </div>
               </div>
 
-              {/* Hero visual: what a customer sees in their AI */}
+              {/* Hero visual: merchant's view — AI agent queries handled automatically */}
               <div className="relative">
                 <div className="absolute -inset-6 bg-gradient-to-br from-violet-100/80 to-indigo-100/80 rounded-[2rem] blur-2xl" aria-hidden />
                 <div className="relative rounded-3xl bg-white border border-slate-200/80 shadow-2xl overflow-hidden">
 
-                  {/* Chat header */}
-                  <div className="flex items-center gap-2.5 px-4 py-3.5 border-b border-slate-100 bg-slate-50">
-                    <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-blue-500 to-violet-600 flex items-center justify-center">
-                      <Sparkles className="w-3.5 h-3.5 text-white" />
+                  {/* Header */}
+                  <div className="flex items-center justify-between px-5 py-4 border-b border-slate-100 bg-slate-50">
+                    <div className="flex items-center gap-2">
+                      <span className="h-2 w-2 rounded-full bg-emerald-500" />
+                      <span className="text-sm font-semibold text-slate-700">Your Nobi agent</span>
                     </div>
-                    <span className="text-sm font-semibold text-slate-700">Customer's AI assistant</span>
-                    <div className="ml-auto flex gap-1">
-                      <div className="w-2.5 h-2.5 rounded-full bg-slate-200" />
-                      <div className="w-2.5 h-2.5 rounded-full bg-slate-200" />
-                      <div className="w-2.5 h-2.5 rounded-full bg-slate-200" />
-                    </div>
+                    <span className="text-xs text-slate-400">Live · today</span>
                   </div>
 
-                  <div className="p-5 space-y-4">
-                    {/* User message */}
-                    <div className="flex justify-end">
-                      <div className="bg-slate-100 rounded-2xl rounded-br-sm px-4 py-2.5 text-sm text-slate-800 max-w-[80%]">
-                        Find me a luxury cashmere sweater gift
-                      </div>
-                    </div>
-
-                    {/* AI response */}
-                    <div className="flex items-start gap-3">
-                      <div className="w-7 h-7 rounded-full bg-gradient-to-br from-blue-500 to-violet-600 flex items-center justify-center flex-shrink-0 mt-0.5">
-                        <Sparkles className="w-3.5 h-3.5 text-white" />
-                      </div>
-                      <div className="flex-1 space-y-3">
-                        <p className="text-sm text-slate-700 leading-relaxed">
-                          Summit Cashmere has exactly what you're looking for, and they offer complimentary gift wrapping:
-                        </p>
-                        <div className="grid grid-cols-3 gap-2">
-                          {HERO_PRODUCTS.map((p) => (
-                            <div key={p.name} className="rounded-xl overflow-hidden border border-slate-100 shadow-sm bg-white">
-                              <div className="aspect-[3/4]">
-                                <img src={p.img} alt={p.name} className="w-full h-full object-cover" />
-                              </div>
-                              <div className="px-2 py-1.5">
-                                <div className="text-xs font-semibold text-slate-700 truncate">{p.name}</div>
-                                <div className="text-xs text-slate-400">{p.price}</div>
-                              </div>
-                            </div>
-                          ))}
+                  {/* Query rows */}
+                  <div className="divide-y divide-slate-50">
+                    {[
+                      { query: "Find me a luxury cashmere sweater gift", result: "3 products returned", from: "Claude" },
+                      { query: "Do they offer gift wrapping?",            result: "Yes, complimentary on all orders", from: "ChatGPT" },
+                      { query: "What is the return policy?",              result: "30-day returns, free shipping", from: "Perplexity" },
+                    ].map((item, i) => (
+                      <div key={i} className="flex items-start gap-4 px-5 py-4">
+                        <div className="w-5 h-5 rounded-full bg-emerald-100 flex items-center justify-center flex-shrink-0 mt-0.5">
+                          <svg className="w-3 h-3 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                          </svg>
                         </div>
+                        <div className="flex-1 min-w-0">
+                          <div className="text-sm text-slate-700 leading-snug">"{item.query}"</div>
+                          <div className="text-xs text-slate-400 mt-0.5">{item.result}</div>
+                        </div>
+                        <div className="text-xs font-medium text-slate-300 flex-shrink-0 mt-0.5">{item.from}</div>
                       </div>
-                    </div>
-
-                    {/* Attribution */}
-                    <div className="flex items-center gap-2 rounded-xl bg-emerald-50 border border-emerald-100 px-3 py-2.5">
-                      <span className="h-2 w-2 rounded-full bg-emerald-500 flex-shrink-0" />
-                      <span className="text-xs font-medium text-emerald-800">
-                        Summit Cashmere's products - the shopper never visited the site
-                      </span>
-                    </div>
+                    ))}
                   </div>
+
+                  {/* Footer */}
+                  <div className="flex items-center justify-between px-5 py-3.5 bg-violet-50 border-t border-violet-100">
+                    <span className="text-xs font-medium text-violet-700">3 queries answered automatically</span>
+                    <span className="text-xs text-violet-400">0 human hours used</span>
+                  </div>
+
                 </div>
               </div>
 

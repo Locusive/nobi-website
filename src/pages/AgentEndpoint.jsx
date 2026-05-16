@@ -141,129 +141,132 @@ export default function AgentEndpoint() {
           </div>
         </section>
 
-        {/* ── The channel pitch ────────────────────────────────────────────── */}
+        {/* ── Three concrete scenarios ──────────────────────────────────────── */}
         <section className="py-24 border-b border-slate-100">
           <div className="mx-auto max-w-6xl xl:max-w-7xl px-6 space-y-12">
-            <div className="max-w-2xl space-y-4">
-              <p className="text-sm font-semibold tracking-[0.2em] text-violet-600 uppercase">Why this matters</p>
-              <h2 className="text-3xl sm:text-4xl font-semibold text-slate-900 leading-tight">
-                This is the next channel. And you're already in it.
-              </h2>
-              <p className="text-lg text-slate-500 leading-relaxed">
-                Millions of people use Claude, ChatGPT, and Perplexity to discover businesses every day. Unlike search, there's no auction to win — AI agents find you based on what you know and whether you have an endpoint to call. If you're on Nobi, you're already there.
-              </p>
+            <div className="text-center max-w-2xl mx-auto space-y-3">
+              <h2 className="text-3xl sm:text-4xl font-semibold text-slate-900">What becomes possible</h2>
+              <p className="text-lg text-slate-500">Three things that now happen automatically, with no extra work from you.</p>
             </div>
-            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-              {[
-                { stat: "Included",    label: "with Nobi",               desc: "No extra tier. No new tool. It's built into your existing assistant.", palette: "violet" },
-                { stat: "24/7",        label: "automatic",               desc: "Your endpoint answers AI agent queries around the clock.", palette: "blue" },
-                { stat: "Every major", label: "AI assistant",            desc: "Claude, ChatGPT, Perplexity, Gemini — any MCP-compatible agent.", palette: "violet" },
-                { stat: "First mover", label: "advantage available now", desc: "Most businesses aren't here yet. Being early compounds.", palette: "blue" },
-              ].map((s) => (
-                <div key={s.label} className={`relative overflow-hidden rounded-2xl text-white p-6 space-y-3 shadow-lg ${
-                  s.palette === "violet"
-                    ? "bg-gradient-to-br from-violet-500 via-violet-600 to-fuchsia-600 shadow-violet-200"
-                    : "bg-gradient-to-br from-indigo-500 via-violet-500 to-violet-600 shadow-indigo-200"
-                }`}>
-                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(255,255,255,0.15),transparent_50%)]" aria-hidden />
-                  <div className="relative">
-                    <div className="text-2xl font-bold tracking-tight">{s.stat}</div>
-                    <div className="text-sm font-medium text-white/80 mt-0.5">{s.label}</div>
-                    <p className="text-xs text-white/60 leading-relaxed mt-2">{s.desc}</p>
+
+            <div className="grid md:grid-cols-3 gap-6">
+
+              {/* Scenario 1: AI queries coming in */}
+              <div className="rounded-3xl border border-slate-200 bg-white overflow-hidden shadow-sm">
+                <div className="p-6 border-b border-slate-100 bg-slate-50 space-y-4">
+                  <div className="flex items-center justify-between">
+                    <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider">AI agent queries</span>
+                    <span className="text-xs text-slate-400">This week</span>
+                  </div>
+                  <div className="text-4xl font-bold text-slate-900">47</div>
+                  <div className="space-y-2">
+                    {[
+                      { name: "Claude",     pct: 52, color: "bg-amber-400" },
+                      { name: "ChatGPT",    pct: 31, color: "bg-emerald-400" },
+                      { name: "Perplexity", pct: 17, color: "bg-indigo-400" },
+                    ].map((ai) => (
+                      <div key={ai.name} className="flex items-center gap-2">
+                        <span className="text-xs text-slate-500 w-16 flex-shrink-0">{ai.name}</span>
+                        <div className="flex-1 h-1.5 bg-slate-100 rounded-full overflow-hidden">
+                          <div className={`h-full rounded-full ${ai.color}`} style={{ width: `${ai.pct}%` }} />
+                        </div>
+                        <span className="text-xs text-slate-400 w-8 text-right">{ai.pct}%</span>
+                      </div>
+                    ))}
+                  </div>
+                  <div className="flex items-center gap-1.5">
+                    <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
+                    <span className="text-xs text-slate-500">0 human hours used</span>
                   </div>
                 </div>
-              ))}
+                <div className="px-6 py-4">
+                  <p className="text-sm text-slate-600">AI assistants queried your business and got answers automatically — while you were doing other things.</p>
+                </div>
+              </div>
+
+              {/* Scenario 2: Showing up in AI results */}
+              <div className="rounded-3xl border border-slate-200 bg-white overflow-hidden shadow-sm">
+                <div className="p-6 border-b border-slate-100 bg-slate-50 space-y-4">
+                  <div className="flex items-center gap-2">
+                    <div className="w-5 h-5 rounded-md bg-indigo-600 flex items-center justify-center flex-shrink-0">
+                      <span className="text-white text-[8px] font-bold">P</span>
+                    </div>
+                    <span className="text-xs font-semibold text-slate-500">Perplexity</span>
+                  </div>
+                  <div className="text-xs text-slate-400 italic">"best luxury cashmere brands online"</div>
+                  <div className="space-y-3">
+                    {[
+                      { name: "Summit Cashmere", url: "summitcashmere.com", excerpt: "Classic Crew from $245 · complimentary gift wrap on all orders", highlight: true },
+                      { name: "Other brand",     url: "otherbrand.com",    excerpt: "Cashmere collection starting at...",                               highlight: false },
+                    ].map((r) => (
+                      <div key={r.name} className={`rounded-xl border px-3 py-2.5 ${r.highlight ? "border-violet-200 bg-violet-50" : "border-slate-100 bg-white"}`}>
+                        <div className="flex items-center gap-1.5 mb-1">
+                          <span className={`text-xs font-semibold ${r.highlight ? "text-violet-700" : "text-slate-600"}`}>{r.name}</span>
+                          <span className="text-[10px] text-slate-400">{r.url}</span>
+                        </div>
+                        <p className="text-[11px] text-slate-500 leading-snug">{r.excerpt}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+                <div className="px-6 py-4">
+                  <p className="text-sm text-slate-600">Your real answers — pulled from actual visitor conversations — make you a citable source for AI search results.</p>
+                </div>
+              </div>
+
+              {/* Scenario 3: Live endpoint exchange */}
+              <div className="rounded-3xl border border-slate-200 bg-white overflow-hidden shadow-sm">
+                <div className="p-6 border-b border-slate-100 bg-slate-900 space-y-3">
+                  <div className="flex items-center justify-between">
+                    <span className="text-[10px] font-mono text-slate-500 uppercase tracking-wider">Live agent exchange</span>
+                    <div className="flex items-center gap-1">
+                      <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
+                      <span className="text-[10px] text-slate-400">online</span>
+                    </div>
+                  </div>
+                  <div className="font-mono text-xs space-y-2">
+                    <div className="text-slate-500">POST /mcp/query</div>
+                    <div className="text-slate-300 pl-2">"Do you carry cashmere turtlenecks?"</div>
+                    <div className="text-emerald-400">200 OK · products: [2]</div>
+                    <div className="border-t border-white/5 pt-2 text-slate-500">POST /mcp/query</div>
+                    <div className="text-slate-300 pl-2">"Do you gift wrap?"</div>
+                    <div className="text-emerald-400">200 OK · "Yes, complimentary"</div>
+                  </div>
+                </div>
+                <div className="px-6 py-4">
+                  <p className="text-sm text-slate-600">An AI agent called your Nobi endpoint directly and got live answers — no website visit, no human involved.</p>
+                </div>
+              </div>
+
             </div>
           </div>
         </section>
 
-        {/* ── Dark: How it actually works ───────────────────────────────────── */}
-        <section className="bg-gradient-to-b from-[#17122f] via-[#1c1540] to-[#17122f] py-24 text-white">
-          <div className="mx-auto max-w-6xl xl:max-w-7xl px-6 space-y-20">
-
-            <div className="text-center space-y-4 max-w-2xl mx-auto">
-              <p className="text-sm uppercase tracking-[0.2em] text-violet-300 font-semibold">How it works</p>
-              <h2 className="text-3xl sm:text-4xl font-semibold">Two things Nobi does for you automatically</h2>
+        {/* ── How ──────────────────────────────────────────────────────────── */}
+        <section className="py-24 bg-slate-50 border-b border-slate-100">
+          <div className="mx-auto max-w-6xl xl:max-w-7xl px-6 space-y-16">
+            <div className="text-center max-w-2xl mx-auto space-y-3">
+              <h2 className="text-3xl sm:text-4xl font-semibold text-slate-900">How Nobi makes it happen</h2>
+              <p className="text-lg text-slate-500">Two things, both automatic, both included.</p>
             </div>
-
-            {/* Part 1: FAQ pipeline */}
-            <div className="grid md:grid-cols-2 gap-12 items-center">
-              <div className="space-y-5">
-                <div className="inline-flex items-center gap-2 rounded-full bg-violet-500/20 border border-violet-400/30 px-3 py-1">
-                  <FileText size={13} className="text-violet-300" />
-                  <span className="text-xs font-semibold text-violet-300 uppercase tracking-wider">Get found</span>
+            <div className="grid md:grid-cols-2 gap-8">
+              <div className="rounded-3xl border border-slate-200 bg-white p-8 space-y-4 shadow-sm">
+                <div className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-violet-50 border border-violet-100 text-violet-600">
+                  <FileText size={18} />
                 </div>
-                <h3 className="text-2xl sm:text-3xl font-semibold leading-tight">
-                  Visitor conversations become your AI presence
-                </h3>
-                <p className="text-slate-300 leading-relaxed">
-                  Every question a visitor asks your Nobi assistant gets sanitized and surfaced as structured FAQ content on your pages. AI crawlers index it. When someone later asks Claude or ChatGPT about your category, your answers are already in its knowledge — automatically built from real conversations, not articles you had to write.
-                </p>
+                <div className="text-xs font-semibold uppercase tracking-widest text-violet-500">Get found</div>
+                <h3 className="text-xl font-semibold text-slate-900">Real conversations become indexed content</h3>
+                <p className="text-slate-500 leading-relaxed">Visitor questions to your Nobi assistant get sanitized and rendered as structured FAQ content on your pages. AI crawlers read it and index it. You get AI discoverability from conversations that were already happening.</p>
               </div>
-
-              {/* Visual pipeline flow */}
-              <div className="space-y-2">
-                {[
-                  { label: "Visitor asks a question",          sub: "on your site, in plain language",         color: "bg-violet-500/20 border-violet-400/20", dot: "bg-violet-400" },
-                  { label: "Nobi answers it",                  sub: "instantly, cited from your content",      color: "bg-violet-500/20 border-violet-400/20", dot: "bg-violet-400" },
-                  { label: "Conversation becomes an FAQ",      sub: "sanitized, structured, on your page",     color: "bg-indigo-500/20 border-indigo-400/20",  dot: "bg-indigo-400" },
-                  { label: "AI crawlers read and index it",    sub: "GPTBot, ClaudeBot, Perplexity",           color: "bg-fuchsia-500/20 border-fuchsia-400/20", dot: "bg-fuchsia-400" },
-                  { label: "AI assistants know about you",     sub: "before the customer even asks",           color: "bg-emerald-500/20 border-emerald-400/20", dot: "bg-emerald-400" },
-                ].map((step, i) => (
-                  <div key={i}>
-                    <div className={`flex items-center gap-3 rounded-xl border ${step.color} px-4 py-3`}>
-                      <div className={`h-2 w-2 rounded-full flex-shrink-0 ${step.dot}`} />
-                      <div className="flex-1 min-w-0">
-                        <div className="text-sm font-semibold text-white">{step.label}</div>
-                        <div className="text-xs text-slate-400">{step.sub}</div>
-                      </div>
-                    </div>
-                    {i < 4 && <div className="flex justify-start pl-[1.35rem]"><div className="w-px h-2 bg-white/15" /></div>}
-                  </div>
-                ))}
+              <div className="rounded-3xl border border-slate-200 bg-white p-8 space-y-4 shadow-sm">
+                <div className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-violet-50 border border-violet-100 text-violet-600">
+                  <Bot size={18} />
+                </div>
+                <div className="text-xs font-semibold uppercase tracking-widest text-violet-500">Get called</div>
+                <h3 className="text-xl font-semibold text-slate-900">Your assistant is already a live endpoint</h3>
+                <p className="text-slate-500 leading-relaxed">Every Nobi assistant is an MCP endpoint, auto-registered in your llms.txt. AI agents discover it and call it directly for live answers on products, pricing, policies, and follow-ups. No setup needed.</p>
               </div>
             </div>
-
-            <div className="border-t border-white/10" />
-
-            {/* Part 2: Live endpoint */}
-            <div className="grid md:grid-cols-2 gap-12 items-center">
-              <div className="order-last md:order-first rounded-2xl border border-white/10 bg-white/5 p-6 space-y-4">
-                <div className="text-xs font-semibold uppercase tracking-widest text-slate-400 mb-4">What an agent call looks like</div>
-                <div className="space-y-4 font-mono text-xs">
-                  <div className="space-y-1.5">
-                    <div className="text-slate-500"># AI agent reads your llms.txt</div>
-                    <div className="text-violet-300">GET summitcashmere.com/llms.txt</div>
-                    <div className="text-emerald-400 pl-2">→ agent endpoint: api.nobi.ai/mcp/summit/rpc</div>
-                  </div>
-                  <div className="border-t border-white/5 pt-4 space-y-1.5">
-                    <div className="text-slate-500"># Agent calls your endpoint directly</div>
-                    <div className="text-violet-300">POST /mcp/query</div>
-                    <div className="text-slate-300 pl-2">"What cashmere sweaters do you carry?"</div>
-                    <div className="text-emerald-400">200 OK · 3 products returned</div>
-                  </div>
-                  <div className="border-t border-white/5 pt-4 space-y-1.5">
-                    <div className="text-slate-500"># Follow-up, same session</div>
-                    <div className="text-violet-300">POST /mcp/query</div>
-                    <div className="text-slate-300 pl-2">"Do you offer gift wrapping?"</div>
-                    <div className="text-emerald-400">200 OK · "Yes, complimentary on all orders"</div>
-                  </div>
-                </div>
-              </div>
-              <div className="space-y-5">
-                <div className="inline-flex items-center gap-2 rounded-full bg-emerald-500/20 border border-emerald-400/30 px-3 py-1">
-                  <Bot size={13} className="text-emerald-300" />
-                  <span className="text-xs font-semibold text-emerald-300 uppercase tracking-wider">Get called</span>
-                </div>
-                <h3 className="text-2xl sm:text-3xl font-semibold leading-tight">
-                  When an AI agent finds you, it talks to you directly
-                </h3>
-                <p className="text-slate-300 leading-relaxed">
-                  Your Nobi assistant is already an MCP endpoint, auto-registered in your llms.txt. When Claude or ChatGPT finds your listing, it calls your endpoint for live answers — products, pricing, policies, follow-ups. No separate setup. Same knowledge base, now serving AI agents too.
-                </p>
-              </div>
-            </div>
-
           </div>
         </section>
 

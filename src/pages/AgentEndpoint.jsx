@@ -143,32 +143,36 @@ export default function AgentEndpoint() {
 
         {/* ── The channel pitch ────────────────────────────────────────────── */}
         <section className="py-24 border-b border-slate-100">
-          <div className="mx-auto max-w-6xl xl:max-w-7xl px-6">
-            <div className="grid md:grid-cols-2 gap-16 items-start">
-              <div className="space-y-6">
-                <p className="text-sm font-semibold tracking-[0.2em] text-violet-600 uppercase">Why this matters</p>
-                <h2 className="text-3xl sm:text-4xl font-semibold text-slate-900 leading-tight">
-                  This is the next channel. And you're already in it.
-                </h2>
-                <div className="space-y-5 text-lg text-slate-500 leading-relaxed">
-                  <p>Millions of people use Claude, ChatGPT, and Perplexity to research and discover businesses every day. That number is growing faster than any other channel. And unlike search, there's no ad auction to win — AI agents find you based on what you know and whether you have an endpoint to call.</p>
-                  <p>If you're on Nobi, you're already in this channel. Your assistant is already an MCP endpoint. AI agents can already find your llms.txt and call you for live answers. Most of your competitors don't have this yet.</p>
-                </div>
-              </div>
-              <div className="grid grid-cols-2 gap-4 pt-2">
-                {[
-                  { stat: "Included",      label: "with Nobi",              desc: "No extra tier. No new tool. The AI agent channel is part of what your Nobi assistant already does." },
-                  { stat: "24/7",          label: "automatic",              desc: "Your agent endpoint answers queries around the clock with no human involvement." },
-                  { stat: "Every major",   label: "AI assistant supported", desc: "Claude, ChatGPT, Perplexity, Gemini — any MCP-compatible agent can call you directly." },
-                  { stat: "First mover",   label: "advantage available now", desc: "Most businesses are not in this channel yet. Being early compounds over time as AI indexing grows." },
-                ].map((s) => (
-                  <div key={s.label} className="rounded-2xl bg-violet-50 border border-violet-100 p-6 space-y-2">
-                    <div className="text-xl font-bold text-slate-900">{s.stat}</div>
-                    <div className="text-sm font-semibold text-violet-600">{s.label}</div>
-                    <p className="text-xs text-slate-500 leading-relaxed">{s.desc}</p>
+          <div className="mx-auto max-w-6xl xl:max-w-7xl px-6 space-y-12">
+            <div className="max-w-2xl space-y-4">
+              <p className="text-sm font-semibold tracking-[0.2em] text-violet-600 uppercase">Why this matters</p>
+              <h2 className="text-3xl sm:text-4xl font-semibold text-slate-900 leading-tight">
+                This is the next channel. And you're already in it.
+              </h2>
+              <p className="text-lg text-slate-500 leading-relaxed">
+                Millions of people use Claude, ChatGPT, and Perplexity to discover businesses every day. Unlike search, there's no auction to win — AI agents find you based on what you know and whether you have an endpoint to call. If you're on Nobi, you're already there.
+              </p>
+            </div>
+            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+              {[
+                { stat: "Included",    label: "with Nobi",               desc: "No extra tier. No new tool. It's built into your existing assistant.", palette: "violet" },
+                { stat: "24/7",        label: "automatic",               desc: "Your endpoint answers AI agent queries around the clock.", palette: "blue" },
+                { stat: "Every major", label: "AI assistant",            desc: "Claude, ChatGPT, Perplexity, Gemini — any MCP-compatible agent.", palette: "violet" },
+                { stat: "First mover", label: "advantage available now", desc: "Most businesses aren't here yet. Being early compounds.", palette: "blue" },
+              ].map((s) => (
+                <div key={s.label} className={`relative overflow-hidden rounded-2xl text-white p-6 space-y-3 shadow-lg ${
+                  s.palette === "violet"
+                    ? "bg-gradient-to-br from-violet-500 via-violet-600 to-fuchsia-600 shadow-violet-200"
+                    : "bg-gradient-to-br from-indigo-500 via-violet-500 to-violet-600 shadow-indigo-200"
+                }`}>
+                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(255,255,255,0.15),transparent_50%)]" aria-hidden />
+                  <div className="relative">
+                    <div className="text-2xl font-bold tracking-tight">{s.stat}</div>
+                    <div className="text-sm font-medium text-white/80 mt-0.5">{s.label}</div>
+                    <p className="text-xs text-white/60 leading-relaxed mt-2">{s.desc}</p>
                   </div>
-                ))}
-              </div>
+                </div>
+              ))}
             </div>
           </div>
         </section>
@@ -192,29 +196,29 @@ export default function AgentEndpoint() {
                 <h3 className="text-2xl sm:text-3xl font-semibold leading-tight">
                   Visitor conversations become your AI presence
                 </h3>
-                <div className="space-y-4 text-slate-300 leading-relaxed">
-                  <p>Every question a visitor asks your Nobi assistant is a signal. Nobi captures those conversations, sanitizes them, and surfaces them as structured FAQ content directly on your pages.</p>
-                  <p>AI crawlers — GPTBot, ClaudeBot, Perplexity's crawler — read that structured content and index it. When someone later asks an AI assistant about your category, your answers are already in its knowledge. You didn't write a single SEO article. Your visitors did the work for you.</p>
-                  <p>The more your Nobi assistant is used, the richer your AI presence gets. It compounds automatically.</p>
-                </div>
+                <p className="text-slate-300 leading-relaxed">
+                  Every question a visitor asks your Nobi assistant gets sanitized and surfaced as structured FAQ content on your pages. AI crawlers index it. When someone later asks Claude or ChatGPT about your category, your answers are already in its knowledge — automatically built from real conversations, not articles you had to write.
+                </p>
               </div>
-              <div className="rounded-2xl border border-white/10 bg-white/5 p-6 space-y-3">
-                <div className="text-xs font-semibold uppercase tracking-widest text-slate-400 mb-4">The pipeline</div>
+
+              {/* Visual pipeline flow */}
+              <div className="space-y-2">
                 {[
-                  { icon: MessageSquare, text: "Visitor asks: \"Do you ship to Canada?\"",    sub: "Natural language question on your page" },
-                  { icon: Sparkles,      text: "Nobi answers instantly, from your content",   sub: "Cited response from your knowledge base" },
-                  { icon: FileText,      text: "Conversation becomes structured FAQ content", sub: "Sanitized and rendered on your page" },
-                  { icon: Globe,         text: "AI crawlers index it",                        sub: "GPTBot, ClaudeBot, Perplexity read your pages" },
-                  { icon: Bot,           text: "AI assistants know you have the answer",      sub: "Before the customer even asks their AI" },
+                  { label: "Visitor asks a question",          sub: "on your site, in plain language",         color: "bg-violet-500/20 border-violet-400/20", dot: "bg-violet-400" },
+                  { label: "Nobi answers it",                  sub: "instantly, cited from your content",      color: "bg-violet-500/20 border-violet-400/20", dot: "bg-violet-400" },
+                  { label: "Conversation becomes an FAQ",      sub: "sanitized, structured, on your page",     color: "bg-indigo-500/20 border-indigo-400/20",  dot: "bg-indigo-400" },
+                  { label: "AI crawlers read and index it",    sub: "GPTBot, ClaudeBot, Perplexity",           color: "bg-fuchsia-500/20 border-fuchsia-400/20", dot: "bg-fuchsia-400" },
+                  { label: "AI assistants know about you",     sub: "before the customer even asks",           color: "bg-emerald-500/20 border-emerald-400/20", dot: "bg-emerald-400" },
                 ].map((step, i) => (
-                  <div key={i} className="flex items-start gap-3">
-                    <div className="w-7 h-7 rounded-lg bg-violet-500/20 border border-violet-400/20 flex items-center justify-center flex-shrink-0 mt-0.5">
-                      <step.icon size={13} className="text-violet-300" />
+                  <div key={i}>
+                    <div className={`flex items-center gap-3 rounded-xl border ${step.color} px-4 py-3`}>
+                      <div className={`h-2 w-2 rounded-full flex-shrink-0 ${step.dot}`} />
+                      <div className="flex-1 min-w-0">
+                        <div className="text-sm font-semibold text-white">{step.label}</div>
+                        <div className="text-xs text-slate-400">{step.sub}</div>
+                      </div>
                     </div>
-                    <div>
-                      <div className="text-sm font-medium text-white">{step.text}</div>
-                      <div className="text-xs text-slate-400 mt-0.5">{step.sub}</div>
-                    </div>
+                    {i < 4 && <div className="flex justify-start pl-[1.35rem]"><div className="w-px h-2 bg-white/15" /></div>}
                   </div>
                 ))}
               </div>
@@ -254,11 +258,9 @@ export default function AgentEndpoint() {
                 <h3 className="text-2xl sm:text-3xl font-semibold leading-tight">
                   When an AI agent finds you, it talks to you directly
                 </h3>
-                <div className="space-y-4 text-slate-300 leading-relaxed">
-                  <p>Your Nobi assistant is already an MCP endpoint. Nobi auto-registers it in your site's llms.txt file — the file AI agents read to discover what businesses they can call and how.</p>
-                  <p>When Claude or ChatGPT finds your listing, it doesn't just read your website. It calls your endpoint and gets live answers. Products, pricing, policies, availability, follow-ups — everything your Nobi assistant knows, now available to any AI agent in real time.</p>
-                  <p>No separate setup. No new dashboard. It runs on the same knowledge base powering your on-site assistant, right now.</p>
-                </div>
+                <p className="text-slate-300 leading-relaxed">
+                  Your Nobi assistant is already an MCP endpoint, auto-registered in your llms.txt. When Claude or ChatGPT finds your listing, it calls your endpoint for live answers — products, pricing, policies, follow-ups. No separate setup. Same knowledge base, now serving AI agents too.
+                </p>
               </div>
             </div>
 

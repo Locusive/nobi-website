@@ -3,8 +3,8 @@ export const meta = {
  slug: "Nobi-mcp-server-ai-agent-endpoint-ecommerce",
  date: "2026-05-16",
  publishedAt: "2026-05-16",
- description: "MCP servers let AI agents query your store directly. Here's how Nobi, Rep AI, Alby, and Gorgias compare on agent-readiness for ecommerce.",
- excerpt: "MCP servers let AI agents query your store directly. Here's how Nobi, Rep AI, Alby, and Gorgias compare on agent-readiness for ecommerce.",
+ description: "When someone asks an AI agent a question, how does your business get found - and how does the agent get answers without the user having to browse? Here's how it works.",
+ excerpt: "When someone asks an AI agent a question, how does your business get found - and how does the agent get answers without the user having to browse? Here's how it works.",
  tags: ["best tools", "sales assistance", "ecommerce", "ecommerce search"],
  author: "Shanif Dhanani",
  heroImage: "https://storage.googleapis.com/nobi-public/docs_and_marketing_websites/posts/nobi-mcp-server-ai-agent-endpoint-ecommerce/hero.webp",
@@ -12,32 +12,24 @@ export const meta = {
  draft: false,
  faqItems: [
  {
- question: "What is an MCP server, and why does it matter for an ecommerce store?",
- answer: "An MCP server is a callable endpoint that speaks the Model Context Protocol, an open standard that AI agents like Claude, ChatGPT, and Perplexity use to discover and query external data and actions. For an ecommerce store, it lets an agent ask your business directly about stock, pricing, return policies, and product fit. As shopper research moves into AI agents, exposing a callable endpoint is becoming the agent-era equivalent of having a website. Most ecommerce chat and helpdesk tools don't yet expose one."
+ question: "How does an AI agent find my business when someone asks it a question?",
+ answer: "AI agents like Claude, ChatGPT, and Perplexity surface businesses whose content they can actually read and query. The more structured, specific, and crawlable your knowledge is - your FAQ, your policies, your product or service details - the more likely an agent is to pull your business into an answer. Businesses that also expose a callable endpoint (an MCP server) go one step further: the agent can query them directly, in real time, rather than relying on indexed content alone."
  },
  {
- question: "How did we evaluate these AI-agent endpoints for ecommerce?",
- answer: "We used four criteria: whether the tool ships a callable endpoint an AI agent can discover and query, how often its connected sources refresh, what it costs at real volume, and how its answers are grounded so an agent won't repeat a fabricated price or policy. The callable-endpoint question is the first cut because it's binary, refresh cadence is second because agents quote whatever they're told, pricing is third because 'contact sales' doesn't help anyone modeling a bill, and grounding is fourth. The four tools we looked at are Nobi, Rep AI, Alby, and Gorgias, ordered by job-fit for the agent-endpoint question rather than by who built them."
+ question: "What does 'answered by an AI agent' mean without browsing?",
+ answer: "When an AI agent finds your business, it can query your knowledge base directly through a callable endpoint and return specific answers to the person asking - pricing, availability, policies, product details - without that person having to click through to your website. The conversation stays in the AI interface. Your business is effectively present in that conversation even though the user never opened a browser tab."
  },
  {
- question: "1. Nobi",
- answer: "Nobi runs as on-site search and a shopping assistant, and the same endpoint that grounds shopper chats also answers agent queries through the Model Context Protocol. There's no second integration or parallel content pipeline. It reads from the product catalog and connected knowledge sources, refreshes them twice a day, and ships every answer with inline citation pills back to the source document. Pricing starts at $25/month for 2,500 searches and 250 conversations."
+ question: "How does Nobi help businesses get found and answered by AI agents?",
+ answer: "Every customer question answered through Nobi gets cleaned and added to a structured FAQ on your pages. That FAQ is crawlable, structured, and grows with every real customer interaction - so your business builds a richer, more specific knowledge base over time. Nobi also exposes every deployment as an MCP endpoint, which means AI agents like Claude and ChatGPT can query your business directly in real time. The two things work together: the FAQ builds discoverability, the endpoint enables direct interaction."
  },
  {
- question: "2. Rep AI",
- answer: "The article does not provide detailed information about Rep AI beyond noting that it is built for human shoppers in a browser, not for an agent calling an API on the shopper's behalf. Rep AI does not currently expose a callable MCP-style endpoint based on what is covered here."
+ question: "Which tools help businesses become findable and queryable by AI agents?",
+ answer: "Nobi is the only tool in this comparison whose deployment automatically includes both a growing FAQ knowledge base and a callable MCP endpoint. Rep AI, Alby, and Gorgias are built primarily for human visitors or human support agents - they handle customer conversations and ticket workflows well, but aren't designed to be queried by external AI agents on someone's behalf."
  },
  {
- question: "3. Alby",
- answer: "The article does not provide detailed information about Alby beyond noting that it is built for human shoppers in a browser, not for an agent calling an API on the shopper's behalf. Alby does not currently expose a callable MCP-style endpoint based on what is covered here."
- },
- {
- question: "4. Gorgias",
- answer: "The article does not provide detailed information about Gorgias beyond noting that it is built for human agents in an inbox, not for an AI agent calling an API on the shopper's behalf. Gorgias does not currently expose a callable MCP-style endpoint based on what is covered here."
- },
- {
- question: "Which agent endpoint fits the job you're actually trying to do?",
- answer: "The article does not include a dedicated section answering this question directly. Based on what is covered, Nobi is the only tool on the list whose endpoint doubles as an MCP server with no extra setup, while Rep AI, Alby, and Gorgias are built for human shoppers or human support agents rather than for AI agents calling an API."
+ question: "How do I keep an AI agent from quoting wrong or outdated information about my business?",
+ answer: "Ground your answers in live, connected sources and make sure they refresh often. Nobi connects to your knowledge sources, refreshes them twice a day, and ships every answer with an inline citation back to the exact document and excerpt it came from. That way, if an agent quotes something wrong, there's an audit trail - and stale content gets corrected automatically rather than sitting in a cached index for weeks."
  }
  ],
 };
@@ -95,68 +87,68 @@ export const meta = {
   "articleSection": "best of article"
 }`}
 </script>
-## Which tools let AI agents find and query your store?
+## Which tools help AI agents find and answer for your business?
 
-AI assistants like Claude, ChatGPT, and Perplexity are starting to act on behalf of users - researching products, answering questions, comparing options, and surfacing specific businesses based on what someone asked. For a store owner, that creates a new problem: if an AI agent can't query your store directly, it's working from whatever it happens to know, not from your actual catalog, pricing, or policies. These four tools represent the main approaches ecommerce teams take when they want to be on the right side of that gap.
+AI assistants like Claude, ChatGPT, and Perplexity are starting to act on behalf of users - researching options, answering questions, and surfacing specific businesses based on what someone asked. For any business, that creates two problems: getting found in the first place, and being able to answer the agent's questions once it arrives - without requiring the user to open a browser tab. These four tools represent the main approaches teams take when they want to be on the right side of that gap.
 
-- **Nobi** - site search plus a shopping assistant whose endpoint doubles as an MCP server. Every shopper question answered on your site gets cleaned and added to a structured FAQ that AI agents can query - so your store gets more findable and answerable the more people use it. $25/mo base ($0.01/extra search, $0.10/extra message). Pick when you want one tool that handles on-site shoppers AND builds the knowledge base that external AI agents draw from.
-- **Rep AI** - Shopify proactive-chat with an in-chat agent that executes cancellations, returns, and tracking inside the widget. From $12 per 1,000 visitors. Pick when shopper-side post-purchase task execution is the conversion lever.
-- **Alby** - PDP-only Q&A inside the Bluecore stack. No standalone public price; bundled into Bluecore platform pricing after the acquisition. Pick when you already run Bluecore and want product-page Q&A inside it.
-- **Gorgias** - helpdesk with structured ticket, return, and refund workflows that an internal AI agent can invoke. Tiered by ticket volume with the AI Agent add-on on higher tiers. Pick when agent-side workflow tooling is the bottleneck.
+- **Nobi** - an AI assistant whose deployment automatically builds a growing, structured FAQ from real customer conversations - so your business becomes more findable and answerable to AI agents over time. The same deployment also exposes an MCP endpoint AI agents can query directly. $25/mo base ($0.01/extra search, $0.10/extra message). Pick when you want one tool that handles on-site visitors AND builds the knowledge base external AI agents draw from.
+- **Rep AI** - proactive chat for Shopify with an in-chat agent that handles cancellations, returns, and order tracking inside the widget. From $12 per 1,000 visitors. Pick when post-purchase self-service inside chat is the primary job.
+- **Alby** - product-page Q&A inside the Bluecore stack. No standalone public price; bundled into Bluecore platform pricing after the acquisition. Pick when you already run Bluecore and want product-page Q&A added to it.
+- **Gorgias** - helpdesk with structured ticket, return, and refund workflows. Tiered by ticket volume with the AI Agent add-on on higher tiers. Pick when the bottleneck is agent-side support workflow, not discovery.
 
 | Product | Primary job | Best for | Pricing (starting) | Standout strength | Key weakness |
 | --- | --- | --- | --- | --- | --- |
-| Nobi | Site search + shopping assistant whose endpoint is also an MCP server | Teams who want one tool that serves on-site shoppers AND builds a growing knowledge base that external AI agents can query | $25/mo base (2,500 searches + 250 messages); $0.01 per extra search, $0.10 per extra message | Shopper conversations automatically build a structured FAQ that AI agents surface; every Nobi deployment is also an MCP endpoint with no extra setup | Doesn't execute in-chat post-purchase transactions like cancellations, returns, or tracking lookups |
-| [Rep AI](https://hellorep.ai) | Shopify proactive-chat with in-chat post-purchase task execution | Shopify merchants who want shoppers to self-serve cancellations, returns, and tracking inside chat, plus visual flow-builder campaigns | $12 per 1,000 visitors on Pay As You Grow; Pro tiers $280-$740/mo at ~125K sessions | Post-Order Tasks Agent runs cancellations, returns, and tracking lookups inside the chat widget; live-agent drop-in hybrid mode | Sales-chat only - no site search, and personalization is scoped to the chat session |
-| [Alby](https://alby.com) | PDP Q&A inside the Bluecore stack | Shopify brands already on Bluecore who want product-page Q&A as one more layer of that platform | Bundled into Bluecore platform pricing after the acquisition; no standalone public price | Focused PDP Q&A UX at the moment of add-to-cart intent; plugs directly into Bluecore identity and predictive-marketing | Chat only with no search capability; standalone roadmap uncertain after the Bluecore acquisition |
-| [Gorgias](https://gorgias.com) | Helpdesk with structured ticket, return, and refund workflows | Support-heavy brands whose bottleneck is ticket throughput, case routing, and structured returns processing rather than pre-purchase discovery | Tiered by ticket volume; base starts low with an AI Agent add-on on higher-tier plans | Deep Shopify order context inside every ticket; mature returns and refund workflows that AI-chat-only tools don't replicate | No product discovery or site search; AI features only ship on higher-tier plans |
+| Nobi | AI assistant that builds a growing FAQ from real customer conversations and exposes it as a callable endpoint | Businesses that want to become more findable and answerable to AI agents over time, without a separate integration | $25/mo base (2,500 searches + 250 messages); $0.01 per extra search, $0.10 per extra message | Customer conversations automatically build a structured FAQ that AI agents surface; every deployment also includes an MCP endpoint with no extra setup | Doesn't handle post-purchase transactions like cancellations or returns inside chat |
+| [Rep AI](https://hellorep.ai) | Proactive chat with in-chat post-purchase task execution | Businesses on Shopify who want customers to self-serve cancellations, returns, and order tracking inside chat | $12 per 1,000 visitors on Pay As You Grow; Pro tiers $280-$740/mo at ~125K sessions | Post-Order Tasks Agent handles cancellations, returns, and tracking inside the chat widget; live-agent drop-in hybrid mode | Chat only - no site search; not designed to be queried by external AI agents |
+| [Alby](https://alby.com) | Product-page Q&A inside the Bluecore stack | Brands already on Bluecore who want product-page Q&A added to that platform | Bundled into Bluecore platform pricing; no standalone public price | Focused Q&A at the moment a visitor is considering a specific product; integrates directly into Bluecore | Chat only; standalone roadmap uncertain after the Bluecore acquisition |
+| [Gorgias](https://gorgias.com) | Helpdesk with structured ticket, return, and refund workflows | Support-heavy teams whose bottleneck is ticket routing, case management, and returns processing | Tiered by ticket volume; AI Agent add-on on higher-tier plans | Deep order context inside every ticket; mature returns and refund workflows | No discovery or site search; AI features only on higher-tier plans |
 
-*Full disclosure: Nobi is our product, and it's included in this list alongside the three competitors head-of-ecommerce buyers most often weigh against it. We've aimed to be honest about Nobi's own limits and explicit about when another tool on this list is the better pick.*
+*Full disclosure: Nobi is our product, and it's included in this list alongside the three tools buyers most often weigh against it. We've aimed to be honest about Nobi's own limits and explicit about when another tool on this list is the better pick.*
 
-<BlogQualifier context="getting their ecommerce store surfaced by AI agents" />
+<BlogQualifier context="getting their business found and answered by AI agents" />
 
-## What is an MCP server, and why does it matter for an ecommerce store?
+## What is an MCP server, and why does it matter for your business?
 
-An MCP server is a callable endpoint that speaks the Model Context Protocol, an open standard AI agents like Claude, ChatGPT, and Perplexity use to discover and query external data and actions. For an ecommerce store, it's what lets an agent ask your business directly: what's in stock, what does this product cost, what's your return policy, what fits a 6'1" runner. As more shopper research moves into AI agents, exposing a callable endpoint is becoming the agent-era equivalent of having a website. Most ecommerce tools, including the chat and helpdesk tools listed below, don't yet expose one.
+An MCP server is a callable endpoint that speaks the Model Context Protocol - an open standard AI agents like Claude, ChatGPT, and Perplexity use to discover and query external data. It's what lets an agent ask your business directly: what are your hours, what does this cost, what's your return policy, what options do you have for someone in situation X. The user stays in their AI interface. Your business answers in real time, as if it's part of the conversation.
 
-A typical ecommerce MCP server makes products, inventory, pricing, policies, and FAQ answers available to agents through a standard the agent already knows how to call. ChatGPT Operator, Claude with tool use, and Perplexity Shopping are early examples consuming endpoints in this shape.
+As more research and discovery moves into AI agents, exposing a callable endpoint is becoming the agent-era equivalent of having a website. Most chat and helpdesk tools don't yet expose one - they were built to render a widget for a human visitor, not to answer an API call from an agent operating on someone's behalf.
 
-## How did we evaluate these AI-agent endpoints for ecommerce?
+## How did we evaluate these tools?
 
-Four criteria did the heavy lifting: whether the tool ships a callable endpoint an AI agent can discover and query, how often its connected sources refresh, what it actually costs at real volume, and how its answers are grounded so an agent won't repeat a fabricated price or policy. The four tools we looked at are Nobi, Rep AI, Alby, and Gorgias - the ones ecommerce teams actually deploy when they want to answer shopper questions or expose store data programmatically.
+Four things mattered: whether the tool builds and exposes a knowledge base AI agents can actually find, whether it ships a callable endpoint an agent can query directly, how fresh its content stays, and how its answers are grounded so an agent won't repeat something fabricated. The four tools we looked at are Nobi, Rep AI, Alby, and Gorgias - the ones businesses most often deploy when they want to answer customer questions through AI.
 
-The callable-endpoint question is the first cut, because it's binary. Either an agent like Claude or Perplexity can call the tool over a standard protocol or it can't. Most chat and helpdesk tools today don't expose one - they were built to render a widget on the storefront, not to answer an API call from somewhere off-site.
+The knowledge-base question comes first, because it's the discovery layer. An agent that can't find structured, specific content about your business won't surface it. The tools differ sharply here: some build a growing FAQ from real customer conversations, others rely on content the team manually maintains.
 
-Refresh cadence is the second cut, and it matters more for agents than for human shoppers. A human reading a stale FAQ page will at least notice the date in the footer. An agent will quote whatever it's told, so a knowledge base that syncs once a week ships week-old prices into agent answers. We checked how often each tool re-reads connected sources.
+The callable-endpoint question is the second cut. Either an agent like Claude or Perplexity can call the tool over a standard protocol, or the user has to go browse. Most chat and support tools don't expose one - they were built for a human in a widget, not an agent calling an API.
 
-Pricing is the third cut. "Contact sales" doesn't help anyone modeling a bill at 50,000 messages a month, so we pulled concrete numbers where they're published and flagged the gaps where they aren't.
+Refresh cadence is the third cut. A person reading stale content will notice the date. An agent will quote whatever it finds. A knowledge base that syncs once a week puts week-old information into AI answers.
 
-Grounding is the fourth. For each tool we looked at what its answers are anchored to and whether the source is visible to the end shopper or just to the operator.
+Grounding is the fourth. We looked at what each tool's answers are anchored to and whether the source is visible to whoever reads the answer.
 
 ## 1. Nobi
 
-Nobi runs as on-site search and an [AI shopping assistant](https://nobi.ai/blog/ai-shopping-assistant-ecommerce), and the same endpoint that grounds shopper chats also answers agent queries through the Model Context Protocol. There's no second integration, no separate API to maintain, no parallel content pipeline.
+Nobi is an [AI assistant](https://nobi.ai/blog/ai-shopping-assistant-ecommerce) that sits on your site and answers visitor questions - and the same deployment that handles those conversations also exposes a callable MCP endpoint that external AI agents can query directly. No second integration, no parallel content pipeline.
 
-What makes this compounding is what happens to those shopper conversations. Every question a real visitor asks on a product page gets cleaned, sanitized, and added to a structured FAQ that lives on that page and becomes part of what the endpoint serves. A shopper who asks about sizing at 2pm is contributing to the answer an AI agent surfaces at 8pm - and the answer the next agent gets three months from now. The more people interact with your store through Nobi, the richer and more specific your store's answers get, and the better it performs when AI agents query it.
+What makes it compounding is what happens to every real customer conversation. Each question a visitor asks gets cleaned, sanitized, and added to a structured FAQ on your pages. That FAQ grows with every interaction and becomes part of what the endpoint serves - so a customer who asks about sizing, availability, or your return policy at 2pm is contributing to the answer a Claude or ChatGPT agent surfaces at 8pm, and the answer the next agent gets three months from now. The more people interact with your business through Nobi, the richer and more specific your answers get, and the more findable your business becomes to AI agents looking for exactly what you offer.
 
-The answer engine reads from your product catalog and the knowledge sources you connect (product pages, FAQ routes, policy docs, PDFs), refreshes those sources twice a day, and ships every answer with inline citation pills back to the exact document and excerpt it came from.
+The answer engine connects to the knowledge sources you configure (pages, policy docs, FAQs, PDFs), refreshes them twice a day, and ships every answer with inline citation pills back to the exact document and excerpt it came from.
 
-**Best for:** Ecommerce teams who want one platform that answers shopper questions on the storefront and exposes a callable endpoint that ChatGPT, Claude, and Perplexity agents can discover and query.
+**Best for:** Businesses that want to become more findable and answerable to AI agents over time - through a growing FAQ knowledge base and a callable endpoint - without a separate integration for each.
 
 **Pricing:** $25/month base (includes 2,500 searches and 250 conversational messages). $0.01 per additional search, $0.10 per additional message.
 
 **Pros:**
-- Every Nobi deployment is also an MCP endpoint with no extra integration work; the agent-callable surface ships alongside the on-site shopper experience.
-- Shopper conversations automatically build a structured, crawlable FAQ on your product pages - so your store gets more findable and answerable to AI agents the more customers interact with it.
-- Connected knowledge sources refresh twice a day, so a price or policy change lands in agent answers within hours instead of waiting on a weekly sync.
-- Inline numbered citation pills on every answer; hovering shows the source document name, date, and the exact excerpt, so an agent (or anyone auditing one) can trace any claim back to your published content.
-- An optional second AI review checks each draft answer against the raw cited sources before it sends, on by default for high-consideration categories.
+- Customer conversations automatically build a structured, crawlable FAQ - so your business gets more findable and answerable to AI agents the more people use it.
+- Every deployment includes a callable MCP endpoint with no extra setup; AI agents like Claude and ChatGPT can query your business directly, in real time.
+- Connected knowledge sources refresh twice a day, so a pricing or policy change lands in agent answers within hours.
+- Inline numbered citation pills on every answer; the source document, date, and exact excerpt are visible, so any claim can be traced back to your published content.
+- An optional second AI review checks each draft answer against the raw cited sources before it sends.
 
 **Cons:**
-- Doesn't execute in-chat post-purchase transactions like cancellations, returns, or order tracking; those still need a helpdesk or a dedicated post-order task agent.
-- Personalization today is limited to personalized placeholder text and starter messages; behavioral reranking that reorders results by individual shopper history isn't shipped yet.
+- Doesn't handle post-purchase transactions like cancellations, returns, or order tracking inside chat; those still need a dedicated helpdesk.
+- Personalization today is limited to personalized placeholder text and starter messages.
 
-**Verdict:** Pick Nobi when you want one platform handling on-site shopper discovery and a callable agent endpoint in the same deployment; pair it with a helpdesk or a post-purchase task agent if shoppers also need to cancel or return inside chat.
+**Verdict:** Pick Nobi when the job is getting your business found and answered by AI agents - both through a growing knowledge base and a callable endpoint - and you want that to happen in the same deployment that handles your on-site visitors.
 
 <div className="my-8 flex justify-center">
  <a
@@ -169,89 +161,90 @@ The answer engine reads from your product catalog and the knowledge sources you 
 
 ## 2. Rep AI
 
-[Rep AI](https://hellorep.ai) is a proactive-chat tool built for Shopify whose strongest move is in-chat post-purchase task execution. Its Post-Order Tasks Agent lets a shopper cancel an order, start a return, or check tracking inside the chat widget on the storefront, without a handoff to an email queue or a helpdesk ticket. Marketing-ops teams can also script campaign-specific conversation flows in Flow Studio, a visual no-code builder, so a Black Friday flow or a product-launch pitch can go live without filing engineering tickets. A live-agent drop-in feature lets a human join an ongoing AI session while the AI keeps handling it, instead of a hard handoff that pauses the AI.
+[Rep AI](https://hellorep.ai) is a proactive-chat tool built for Shopify whose strongest move is in-chat post-purchase task execution. Its Post-Order Tasks Agent lets a customer cancel an order, start a return, or check tracking inside the chat widget, without a handoff to an email queue or a helpdesk ticket. Marketing teams can also script campaign-specific conversation flows in Flow Studio, a visual no-code builder. A live-agent drop-in feature lets a human join an ongoing AI session while the AI keeps handling it, instead of a hard handoff that pauses the conversation.
 
-**Best for:** Shopify merchants who want shoppers to self-serve cancellations, returns, and tracking inside the chat widget, or marketing-ops teams who want to script campaign-specific conversation flows without engineering.
+**Best for:** Shopify businesses who want customers to self-serve cancellations, returns, and tracking inside chat, or marketing teams who want to script campaign-specific conversation flows without engineering.
 
 **Pricing:** $12 per 1,000 visitors on the Pay As You Grow tier (unlimited sessions, 500-product catalog cap). At ~125K monthly sessions, Pro tiers run $280/mo (Support), $616/mo (Sales), $740/mo (Bundle). Enterprise custom above ~500K sessions. 30-day free trial.
 
 **Pros:**
-- Post-Order Tasks Agent lets shoppers self-serve cancellations, returns, and tracking lookups inside the chat widget
-- Flow Studio is a visual no-code builder, so marketing can design conversation flows for promos, product launches, and abandoned-cart rescue without engineering
-- Live-agent drop-in is a true hybrid: a human can join an AI session while the AI keeps handling it, instead of a binary handoff
-- Drop-off-reason analytics tell you why shoppers abandoned, not just that they did
+- Post-Order Tasks Agent handles cancellations, returns, and tracking lookups inside the chat widget
+- Flow Studio is a visual no-code builder for campaign-specific conversation flows
+- Live-agent drop-in is a true hybrid: a human can join an AI session while the AI keeps going
+- Drop-off-reason analytics show why visitors left, not just that they did
 
 **Cons:**
-- Sales-chat only, with no site search; product discovery on category and search pages isn't covered
-- The 500-product catalog cap on the entry Pay As You Grow tier is tight for many ecommerce catalogs
-- Personalization is scoped to the chat session, not the wider storefront experience
+- Chat only, no site search or discovery layer
+- Not designed to be queried by external AI agents; built for a human visitor in a browser
+- The 500-product cap on the entry tier is tight for larger catalogs
 
-**Verdict:** Pick Rep AI when in-chat post-purchase task execution or no-code flow design is the conversion lever you most need.
+**Verdict:** Pick Rep AI when in-chat post-purchase task execution or no-code flow design is the primary job.
 
 ## 3. Alby
 
-[Alby](https://alby.com) answers shopper questions right on the Shopify product detail page, at the moment someone is staring at a specific item and weighing whether to add to cart. The widget is built for human shoppers on a PDP, with shopper intent already narrowed to a specific SKU, and its UX is tuned for that moment of add-to-cart consideration. Bluecore acquired Alby in November 2024, so the product now sits inside Bluecore's identity and predictive-marketing stack rather than running standalone. For brands already on Bluecore, that means PDP Q&A becomes one more layer of the platform they already use.
+[Alby](https://alby.com) answers visitor questions on the product detail page, at the moment someone is looking at a specific item and deciding whether to buy. The widget is built for a human visitor on a product page, with intent already narrowed to a specific item, and its UX is tuned for that moment of consideration. Bluecore acquired Alby in November 2024, so the product now sits inside Bluecore's identity and predictive-marketing stack rather than running standalone.
 
-**Best for:** Shopify brands already on Bluecore who want product-page Q&A inside that stack.
+**Best for:** Businesses already on Bluecore who want product-page Q&A added to that platform.
 
 **Pricing:** Bundled into Bluecore platform pricing after the acquisition; no standalone public price.
 
 **Pros:**
-- Focused UX for product-page Q&A, where shopper intent is already locked to a specific SKU
-- Plugs into Bluecore's identity and predictive-marketing stack without a second integration
-- Cuts pre-purchase support email volume by answering common PDP questions inline
+- Focused Q&A at the moment a visitor is considering a specific item
+- Plugs into Bluecore's stack without a second integration
+- Reduces pre-purchase support volume by answering common questions inline
 
 **Cons:**
-- Chat only, with no search; shoppers earlier in the discovery funnel aren't covered by the widget
-- Scope is the product page; category, collection, and search-page moments aren't part of the product
-- Standalone roadmap is uncertain after the Bluecore acquisition; future direction depends on Bluecore's strategy
+- Chat only, no search; visitors earlier in the discovery process aren't covered
+- Scope is the product page; broader discovery moments aren't part of the product
+- Not designed to be queried by external AI agents
+- Standalone roadmap uncertain after the Bluecore acquisition
 
-**Verdict:** Pick Alby if Bluecore is already your predictive-marketing platform and PDP Q&A is the one gap; look elsewhere if you need anything beyond the product page.
+**Verdict:** Pick Alby if Bluecore is already your platform and product-page Q&A is the one gap; look elsewhere if you need discovery, search, or agent-endpoint coverage.
 
 ## 4. Gorgias
 
-[Gorgias](https://gorgias.com) is an ecommerce helpdesk built around agent-side workflow: tickets, routing, macros, returns, and refund processing, with Shopify order context rendered directly inside each ticket so an agent can cancel, refund, or modify an order without leaving the case. A newer AI Agent layer sits on top on higher-priced plans and handles repetitive inbound tickets. The AI runs inside Gorgias's own workflow to help agents close tickets faster - the focus is on the support team's inbox, not on programmatic access from outside systems.
+[Gorgias](https://gorgias.com) is a helpdesk built around support-team workflow: tickets, routing, macros, returns, and refund processing, with order context rendered directly inside each ticket. A newer AI Agent layer on higher-priced plans handles repetitive inbound tickets, helping support teams close cases faster. The focus is on the support team's inbox, not on being queryable by external AI agents.
 
-**Best for:** Support-heavy brands whose bottleneck is ticket workflow, case routing, and structured returns handling rather than pre-purchase discovery.
+**Best for:** Support-heavy teams whose bottleneck is ticket routing, case management, and structured returns processing.
 
-**Pricing:** Tiered by ticket volume. The base plan starts low; the AI Agent add-on sits on higher-tier plans. Gorgias publishes the plan-by-plan breakdown on its pricing page.
+**Pricing:** Tiered by ticket volume. The base plan starts low; the AI Agent add-on is on higher-tier plans. Gorgias publishes the breakdown on its pricing page.
 
 **Pros:**
-- Deep Shopify order context surfaced inside every ticket, so agents can cancel, refund, or modify an order from the ticket view
-- Mature agent-side automation: macros, routing rules, SLA tracking, multi-brand tenant support
-- Structured returns and refund workflows that AI-chat-only tools don't replicate
-- Multi-channel coverage across email, chat, and social for teams consolidating support inboxes
+- Mature support workflow: macros, routing rules, SLA tracking, multi-brand support
+- Structured returns and refund workflows that chat-only tools don't replicate
+- Multi-channel coverage across email, chat, and social
 
 **Cons:**
-- No product discovery or site search; this is a helpdesk for managing tickets, not a pre-purchase shopping experience
-- AI features only ship on higher-tier plans, so total cost jumps once you turn them on
+- No discovery layer or site search
+- Not designed to be queried by external AI agents
+- AI features only on higher-tier plans
 
-**Verdict:** Pick Gorgias when agent-side support workflow is the problem you're solving - tickets, routing, macros, returns processing.
+**Verdict:** Pick Gorgias when the problem is support ticket throughput, case routing, and returns processing - not discoverability or agent-endpoint coverage.
 
-## Which agent endpoint fits the job you're actually trying to do?
+## Which tool fits the job you're actually trying to do?
 
-Start with the buyer, not the tool. If your job is exposing store data to external AI agents that research and shop on behalf of users, Nobi is the only tool in this list whose endpoint is also an MCP server out of the box. If the job is shopper-side post-purchase task execution inside a chat widget on Shopify, Rep AI is the strongest pick - its Post-Order Tasks Agent handles cancellations, returns, and tracking lookups. If you're already on Bluecore and the gap is PDP Q&A, Alby plugs in without a second integration. If your bottleneck is agent-side ticket throughput - returns, refunds, case routing - Gorgias is the mature answer.
+Start with the problem. If you want your business to be findable and answerable when someone asks an AI agent a question - and you want that capability to grow over time as more customers interact with you - Nobi is the only tool here that handles both the knowledge-base layer and the callable endpoint in a single deployment. If the job is letting customers self-serve cancellations and returns inside a chat widget, Rep AI is the right pick. If you're already on Bluecore and want product-page Q&A added to that platform, Alby fits. If your bottleneck is support ticket throughput and case routing, Gorgias is the mature answer.
 
-Most teams end up running two of these together - Nobi for [product discovery](https://nobi.ai/blog/best-ai-product-finders-ecommerce) and agent-endpoint coverage, plus a helpdesk like Gorgias for structured post-purchase workflows.
+Most businesses end up running two of these together - Nobi for [discovery](https://nobi.ai/blog/best-ai-product-finders-ecommerce) and agent-endpoint coverage, plus a helpdesk like Gorgias for structured post-purchase support workflows.
 
 ## Frequently asked questions
 
-**What is MCP, in one sentence?** Model Context Protocol is an open standard AI agents use to discover and call external data sources and tools, so a ChatGPT or Claude session can query your store without a custom integration for each agent.
+**What is MCP, in one sentence?** Model Context Protocol is an open standard AI agents use to discover and call external data sources and tools, so a ChatGPT or Claude session can query your business directly without a custom integration for each agent.
 
-**Do AI agents actually drive traffic and purchases today?** It's still early, but the direction is clear. ChatGPT, Claude, and Perplexity all now run shopping-style queries on behalf of users, and the brands whose data agents can actually reach are the ones showing up in those answers. Exposing a callable endpoint is the agent-era equivalent of having a sitemap.
+**Do AI agents actually drive real interactions today?** It's still early, but the direction is clear. Claude, ChatGPT, and Perplexity all now handle research and discovery queries on behalf of users, and the businesses whose information agents can actually reach are the ones showing up in those answers. A callable endpoint is the agent-era equivalent of having a website.
 
-**Does Shopify already give me an agent endpoint?** Shopify is rolling out agent-facing surfaces, but they cover catalog basics like products and prices. They don't expose your FAQ, return policy, sizing notes, or any custom knowledge content. A dedicated assistant like Nobi handles that layer.
+**What should my business expose to AI agents?** Pricing, availability, policies, and the specific Q&A content your customers actually ask about. Anything an agent might quote on your behalf belongs in connected, refreshing sources - not in a static document that gets stale.
 
-**What should an ecommerce MCP server expose?** Products, inventory, pricing, shipping and return policies, and the FAQ content shoppers actually ask about. Anything an agent might quote on your behalf belongs in the connected sources.
+**How does the FAQ content from customer conversations help discoverability?** Every real question a customer asks and gets answered adds to a structured knowledge base that AI agents can find and query. The more specific and rich that content gets, the more accurately an agent can surface your business when someone asks something relevant. It compounds - the FAQ you have six months from now is more valuable than the one you launched with.
 
-**How do I keep an agent from quoting wrong prices or stale policies?** Pick a tool that grounds answers in your live sources and cites them. Nobi refreshes connected sources twice a day and ships every answer with a citation back to the document and excerpt it came from, so a wrong answer leaves an audit trail rather than a mystery.
+**How do I keep an agent from quoting wrong or outdated information?** Pick a tool that grounds answers in live, connected sources and refreshes them often. Nobi refreshes connected sources twice a day and ships every answer with a citation back to the exact document and excerpt it came from - so stale content gets corrected automatically rather than getting quoted for weeks.
 
 
-<BlogEmailCapture hook="Want AI agents to find and answer for your store?" subtext="Drop your email and we'll show you how Nobi exposes your catalog and policies to AI agents so they answer shopper questions with your data." />
+<BlogEmailCapture hook="Want AI agents to find and answer for your business?" subtext="Drop your email and we'll show you how Nobi builds the knowledge base and callable endpoint that let AI agents surface your business and answer questions on your behalf." />
 
 ---
 
-Launch a Nobi assistant on your store and the MCP endpoint ships with it. No separate build. No extra setup. AI agents can discover and query your catalog from day one.
+Launch a Nobi assistant on your site and the MCP endpoint ships with it. Every customer conversation builds the knowledge base. AI agents can discover and query your business from day one - and the answers get better the more people use it.
 
 <div className="my-8 flex justify-center">
  <a

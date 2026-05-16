@@ -180,7 +180,7 @@ export default function AgentEndpoint() {
                   </div>
                 </div>
                 <div className="px-6 py-4">
-                  <p className="text-sm text-slate-600">AI assistants queried your business and got answers automatically — while you were doing other things.</p>
+                  <p className="text-sm font-medium text-slate-700">Answered automatically. Zero humans involved.</p>
                 </div>
               </div>
 
@@ -210,7 +210,7 @@ export default function AgentEndpoint() {
                   </div>
                 </div>
                 <div className="px-6 py-4">
-                  <p className="text-sm text-slate-600">Your real answers — pulled from actual visitor conversations — make you a citable source for AI search results.</p>
+                  <p className="text-sm font-medium text-slate-700">Your business, surfacing in AI search results.</p>
                 </div>
               </div>
 
@@ -234,7 +234,7 @@ export default function AgentEndpoint() {
                   </div>
                 </div>
                 <div className="px-6 py-4">
-                  <p className="text-sm text-slate-600">An AI agent called your Nobi endpoint directly and got live answers — no website visit, no human involved.</p>
+                  <p className="text-sm font-medium text-slate-700">Direct agent call. No website visit needed.</p>
                 </div>
               </div>
 

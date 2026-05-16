@@ -1,20 +1,50 @@
 import MixpanelClient from '../service-clients/mixpanel-client';
 import { EVENTS } from '../constants/events';
 
+function toGaEventName(eventName) {
+  return String(eventName)
+    .trim()
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '_')
+    .replace(/^_+|_+$/g, '');
+}
+
 /**
  * Track an event to multiple analytics providers
- * Currently supports: Mixpanel and Google Analytics
+ * Currently supports: Mixpanel and Google Analytics via Google Tag Manager.
  *
  * @param {string} eventName - The name of the event
  * @param {Object} properties - Event properties
+ * @param {Object} options - Provider-specific options
+ * @param {string} options.gaEventName - Override for the GA/GTM event name
+ * @param {Object} options.gaProperties - GA/GTM-specific event properties
+ * @param {Object} options.mixpanelProperties - Mixpanel-specific event properties
+ * @param {string} options.visitorContext - Context to add to the Nobi visitor profile
  */
-export function trackEvent(eventName, properties = {}) {
-  // Track to Mixpanel
-  MixpanelClient.track(eventName, properties);
+export function trackEvent(eventName, properties = {}, options = {}) {
+  const mixpanelProperties = options.mixpanelProperties || properties;
+  const gaProperties = options.gaProperties || properties;
 
-  // Track to Google Analytics
-  if (typeof window !== 'undefined' && window.gtag) {
-    window.gtag('event', eventName, properties);
+  // Track to Mixpanel
+  MixpanelClient.track(eventName, mixpanelProperties);
+
+  // Track to GA through GTM. GA event names should be stable snake_case,
+  // while Mixpanel can keep the readable event names above.
+  if (typeof window !== 'undefined') {
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({
+      event: options.gaEventName || toGaEventName(eventName),
+      mixpanel_event_name: eventName,
+      ...gaProperties,
+    });
+  }
+
+  if (
+    options.visitorContext &&
+    typeof window !== 'undefined' &&
+    window.Nobi?.addVisitorContext
+  ) {
+    window.Nobi.addVisitorContext(options.visitorContext);
   }
 }
 

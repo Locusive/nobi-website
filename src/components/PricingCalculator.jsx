@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { Loader2 } from "lucide-react";
-import MixpanelClient from "../service-clients/mixpanel-client";
 import { EVENTS } from "../constants/events";
+import { trackEvent } from "../utils/eventTracker";
 
 const PLAN_BASE_PRICE = 25;
 const INCLUDED_SEARCHES = 2500;
@@ -122,6 +122,14 @@ function computeMonthlyCost(searches, messages) {
   return PLAN_BASE_PRICE + searchOver + messageOver;
 }
 
+function formatEventLabel(value) {
+  return String(value)
+    .split("_")
+    .filter(Boolean)
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(" ");
+}
+
 export default function PricingCalculator() {
   const [sessions, setSessions] = useState(DEFAULT_SESSIONS);
   const [searchRatePct, setSearchRatePct] = useState(DEFAULT_SEARCH_RATE_PCT);
@@ -134,6 +142,40 @@ export default function PricingCalculator() {
   );
   const [searches, setSearches] = useState(initial.searches);
   const [messages, setMessages] = useState(initial.messages);
+  const estimateInteractionTrackedRef = useRef(false);
+
+  const trackEstimateInteraction = (interactionType, overrides = {}) => {
+    if (estimateInteractionTrackedRef.current) return;
+    estimateInteractionTrackedRef.current = true;
+
+    const trackedSearches = overrides.searches ?? searches;
+    const trackedMessages = overrides.messages ?? messages;
+
+    const addsUrlSpecificContext = interactionType.startsWith("url_lookup");
+
+    trackEvent(EVENTS.PRICING_CALCULATOR_ESTIMATE_INTERACTION, {
+      "Source": "Marketing Pricing Calculator",
+      "Interaction Type": formatEventLabel(interactionType),
+      "Monthly Visitors": overrides.sessions ?? sessions,
+      "Searches": trackedSearches,
+      "Messages": trackedMessages,
+      "Has Search": overrides.hasSearch ?? hasSearch,
+      "Estimated Monthly Cost": computeMonthlyCost(trackedSearches, trackedMessages),
+    }, {
+      gaProperties: {
+        source: "marketing_pricing_calculator",
+        interaction_type: formatEventLabel(interactionType),
+        monthly_visitors: overrides.sessions ?? sessions,
+        searches: trackedSearches,
+        messages: trackedMessages,
+        has_search: overrides.hasSearch ?? hasSearch,
+        estimated_monthly_cost: computeMonthlyCost(trackedSearches, trackedMessages),
+      },
+      visitorContext: addsUrlSpecificContext
+        ? undefined
+        : "High-intent signal: visitor interacted with the pricing calculator to estimate Nobi cost.",
+    });
+  };
 
   const recomputeFromSessions = (s, sr, mr, search = hasSearch) => {
     const derived = deriveFromSessions(s, sr, mr);
@@ -141,33 +183,76 @@ export default function PricingCalculator() {
     setMessages(derived.messages);
   };
 
-  const handleSessionsChange = (next) => {
+  const handleSessionsChange = (next, interactionType = "monthly_visitors_changed") => {
     const clamped = Math.max(SLIDER_MIN, Math.min(10_000_000, next));
+    const derived = deriveFromSessions(clamped, searchRatePct, messageRatePct);
+    const nextSearches = hasSearch ? derived.searches : 0;
     setSessions(clamped);
     recomputeFromSessions(clamped, searchRatePct, messageRatePct);
+    trackEstimateInteraction(interactionType, {
+      sessions: clamped,
+      searches: nextSearches,
+      messages: derived.messages,
+    });
   };
 
   const handleSearchRateChange = (next) => {
     const clamped = Math.max(0, Math.min(100, next));
+    const derived = deriveFromSessions(sessions, clamped, messageRatePct);
+    const nextSearches = hasSearch ? derived.searches : 0;
     setSearchRatePct(clamped);
     recomputeFromSessions(sessions, clamped, messageRatePct);
+    trackEstimateInteraction("search_rate_changed", {
+      searches: nextSearches,
+      messages: derived.messages,
+    });
   };
 
   const handleToggleSearch = () => {
     if (hasSearch) {
       setHasSearch(false);
       setSearches(0);
+      trackEstimateInteraction("search_toggled", {
+        searches: 0,
+        hasSearch: false,
+      });
     } else {
       setHasSearch(true);
       const derived = deriveFromSessions(sessions, searchRatePct, messageRatePct);
       setSearches(derived.searches);
+      trackEstimateInteraction("search_toggled", {
+        searches: derived.searches,
+        hasSearch: true,
+      });
     }
   };
 
   const handleMessageRateChange = (next) => {
     const clamped = Math.max(0, Math.min(100, next));
+    const derived = deriveFromSessions(sessions, searchRatePct, clamped);
+    const nextSearches = hasSearch ? derived.searches : 0;
     setMessageRatePct(clamped);
     recomputeFromSessions(sessions, searchRatePct, clamped);
+    trackEstimateInteraction("message_rate_changed", {
+      searches: nextSearches,
+      messages: derived.messages,
+    });
+  };
+
+  const handleSearchesChange = (next) => {
+    const clamped = Math.max(0, next);
+    setSearches(clamped);
+    trackEstimateInteraction("searches_changed", {
+      searches: clamped,
+    });
+  };
+
+  const handleMessagesChange = (next) => {
+    const clamped = Math.max(0, next);
+    setMessages(clamped);
+    trackEstimateInteraction("messages_changed", {
+      messages: clamped,
+    });
   };
 
   const monthlyCost = computeMonthlyCost(searches, messages);
@@ -225,7 +310,7 @@ export default function PricingCalculator() {
               <CalcRow
                 label="Searches"
                 value={searches}
-                onChange={(v) => setSearches(Math.max(0, v))}
+                onChange={handleSearchesChange}
                 sub={
                   <>
                     ≈ <RateInput value={searchRatePct} onChange={handleSearchRateChange} max={20} />% of visitors
@@ -236,7 +321,7 @@ export default function PricingCalculator() {
             <CalcRow
               label="Messages"
               value={messages}
-              onChange={(v) => setMessages(Math.max(0, v))}
+              onChange={handleMessagesChange}
               sub={
                 <>
                   ≈ <RateInput value={messageRatePct} onChange={handleMessageRateChange} max={20} />% of visitors
@@ -276,7 +361,10 @@ export default function PricingCalculator() {
           </div>
         </div>
 
-        <UrlEstimateForm onTrafficLookup={handleSessionsChange} />
+        <UrlEstimateForm
+          onEstimateInteraction={() => trackEstimateInteraction("url_lookup_submitted")}
+          onTrafficLookup={(visits) => handleSessionsChange(visits, "url_lookup_estimated")}
+        />
       </div>
     </section>
   );
@@ -376,7 +464,7 @@ function buildLeadFormData({ url, name, email }) {
   return formData;
 }
 
-function UrlEstimateForm({ onTrafficLookup }) {
+function UrlEstimateForm({ onEstimateInteraction, onTrafficLookup }) {
   const [step, setStep] = useState("idle");
   const [url, setUrl] = useState("");
   const [name, setName] = useState("");
@@ -408,7 +496,7 @@ function UrlEstimateForm({ onTrafficLookup }) {
         body: formData,
         keepalive: true,
       }).catch(() => {});
-      MixpanelClient.track(EVENTS.PRICING_CALCULATOR_LEAD_SUBMITTED, {
+      trackEvent(EVENTS.PRICING_CALCULATOR_LEAD_SUBMITTED, {
         website: latestRef.current.url,
         hasContact: Boolean(latestRef.current.email),
         estimatedVisits: latestRef.current.estimatedVisits,
@@ -439,6 +527,7 @@ function UrlEstimateForm({ onTrafficLookup }) {
       setError("Drop your site URL.");
       return;
     }
+    onEstimateInteraction?.();
     submittedRef.current = true;
     setStep("loading");
     let visits = null;
@@ -467,7 +556,7 @@ function UrlEstimateForm({ onTrafficLookup }) {
     if (window.Nobi?.addVisitorContext) {
       const site = resolvedName || url.trim();
       window.Nobi.addVisitorContext(
-        `Visitor entered their site URL on the Nobi pricing page${site ? ` (${site})` : ""} to get a pricing estimate.`
+        `High-intent signal: visitor entered their site URL on the Nobi pricing page${site ? ` (${site})` : ""} to get a pricing estimate.`
       );
     }
 

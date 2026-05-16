@@ -26,6 +26,8 @@ import {VideoModal} from "../components/VideoModal";
 import {useDemoForm} from "../context/DemoFormContext";
 import DemoCTAButton from "../components/DemoCTAButton";
 import {getSignupUrl} from "../utils/signupUrl";
+import { trackEvent } from "../utils/eventTracker";
+import { EVENTS } from "../constants/events";
 
 
 // ===== feature flags (hide sections/links without deleting code) =====
@@ -795,20 +797,35 @@ function renderHeadline(variant) {
 
 function Hero({ onOpenVideo, onOpenDemo, variant, setVariant }) {
   const content = VARIANT_CONTENT[variant] || VARIANT_CONTENT.default;
+  const visitorContextSentRef = useRef(false);
 
   const handleChip = (id) => {
     const previous = variant;
+    const chip = CHIPS.find((item) => item.id === id);
+    const visitorContext = visitorContextSentRef.current
+      ? undefined
+      : `Visitor selected "${chip?.label || id}" as their primary homepage interest.`;
+    visitorContextSentRef.current = true;
     setVariant(id);
     try { localStorage.setItem("nobi_hero_variant", id); } catch (_) {}
-    try {
-      window.dataLayer = window.dataLayer || [];
-      window.dataLayer.push({
-        event: "hero_chip_click",
+    trackEvent(EVENTS.HERO_CHIP_CLICKED, {
+      "Intent Type": chip?.label || id,
+      "Intent ID": id,
+      "Chip Label": chip?.label || id,
+      "Previous Intent ID": previous,
+      "Source": "Marketing Homepage",
+    }, {
+      gaEventName: "hero_chip_click",
+      gaProperties: {
         chip_id: id,
+        chip_label: chip?.label || id,
+        intent_type: chip?.label || id,
         hero_variant: id,
         previous_variant: previous,
-      });
-    } catch (_) {}
+        source: "marketing_homepage",
+      },
+      visitorContext,
+    });
   };
 
   return (

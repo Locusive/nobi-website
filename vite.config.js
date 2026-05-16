@@ -5,6 +5,23 @@ import mdx from '@mdx-js/rollup'
 import remarkFrontmatter from 'remark-frontmatter'
 import remarkGfm from 'remark-gfm'
 import rehypeSlug from 'rehype-slug'
+import { visit } from 'unist-util-visit'
+
+// Add rel="nofollow noopener noreferrer" to every external link in MDX
+// content. Internal links (nobi.ai and relative paths) are left alone.
+function rehypeNofollow() {
+  return (tree) => {
+    visit(tree, 'element', (node) => {
+      if (node.tagName !== 'a') return
+      const href = node.properties?.href
+      if (typeof href !== 'string') return
+      if (!href.startsWith('http://') && !href.startsWith('https://')) return
+      if (href.includes('nobi.ai')) return
+      node.properties.rel = ['nofollow', 'noopener', 'noreferrer']
+      node.properties.target = '_blank'
+    })
+  }
+}
 
 export default defineConfig({
   // macOS FSEvents can miss file-save events silently (especially when
@@ -28,7 +45,7 @@ export default defineConfig({
     {
       ...mdx({
         remarkPlugins: [remarkFrontmatter, remarkGfm],
-        rehypePlugins: [rehypeSlug],
+        rehypePlugins: [rehypeSlug, rehypeNofollow],
       }),
       enforce: 'pre',
     },

@@ -786,7 +786,7 @@ function renderHeadline(variant) {
     case "answer":
       return <>Every question answered before it costs you{" "}<span className={GRADIENT}>a sale or a ticket</span></>;
     case "agents":
-      return <>AI agents can now find — and talk to —{" "}<span className={GRADIENT}>your business</span></>;
+      return <>AI agents can now find and talk to{" "}<span className={GRADIENT}>your business</span></>;
     default:
       return <>Turn your website into your best{" "}<span className={GRADIENT}>sales associate</span></>;
   }

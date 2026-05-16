@@ -3,13 +3,7 @@ import { useSEO } from "../hooks/useSEO";
 import PageLayout from "../components/PageLayout";
 import { useDemoForm } from "../context/DemoFormContext";
 import { getSignupUrl } from "../utils/signupUrl";
-import { Bot, Globe, Sparkles, FileText } from "lucide-react";
-
-const HERO_PRODUCTS = [
-  { name: "Classic Crew",   price: "$265", img: "https://www.alpsandmeters.com/cdn/shop/products/Cashmere_Alpine_Guide_Sweater_Camel.jpg?v=1753426053&width=300" },
-  { name: "Rib Turtleneck", price: "$295", img: "https://www.alpsandmeters.com/cdn/shop/products/Ski_Race_Knit_Sports_Club_Navy.jpg?v=1753426053&width=300" },
-  { name: "Cable Knit",     price: "$245", img: "https://www.alpsandmeters.com/cdn/shop/products/Classic_Cable_Knit_IVORY_Front.jpg?v=1753426168&width=300" },
-];
+import { Bot, Globe, Sparkles, FileText, MessageSquare, ArrowRight } from "lucide-react";
 
 export default function AgentEndpoint() {
   const { onOpen: openDemoForm } = useDemoForm();
@@ -36,10 +30,8 @@ export default function AgentEndpoint() {
         <section className="relative overflow-hidden border-b border-slate-100">
           <div className="absolute -left-40 -top-32 w-96 h-96 bg-violet-100/60 blur-3xl" aria-hidden />
           <div className="absolute right-[-160px] top-20 w-96 h-96 bg-indigo-100/60 blur-3xl" aria-hidden />
-
           <div className="relative mx-auto max-w-6xl xl:max-w-7xl px-6 py-20 lg:py-28">
             <div className="grid md:grid-cols-2 gap-12 lg:gap-20 items-center">
-
               <div className="space-y-7">
                 <p className="text-sm font-semibold tracking-[0.2em] text-violet-600 uppercase">A new channel</p>
                 <h1 className="text-4xl sm:text-5xl lg:text-[3.5rem] font-semibold leading-[1.05] text-slate-900 text-balance">
@@ -48,7 +40,7 @@ export default function AgentEndpoint() {
                   your customers use
                 </h1>
                 <p className="text-lg text-slate-500 leading-relaxed max-w-lg">
-                  When someone asks Claude or ChatGPT for a recommendation, Nobi makes sure your business shows up - and can answer follow-up questions directly. No website visit required.
+                  When someone asks Claude or ChatGPT for a recommendation, Nobi makes sure your business shows up — and can answer follow-up questions directly. No extra setup. It comes with your existing Nobi assistant.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-3">
                   <a href={getSignupUrl()} className="inline-flex items-center justify-center gap-2 rounded-2xl font-medium bg-black text-white hover:opacity-90 h-12 px-6 text-base w-full sm:w-auto">
@@ -60,11 +52,10 @@ export default function AgentEndpoint() {
                 </div>
               </div>
 
-              {/* Hero visual: two agents, static mid-conversation */}
+              {/* Static two-panel mid-conversation */}
               <div className="relative">
                 <div className="absolute -inset-6 bg-gradient-to-br from-violet-100/80 to-indigo-100/80 rounded-[2rem] blur-2xl" aria-hidden />
                 <div className="relative flex items-stretch gap-3">
-
                   {/* Left: Customer's AI */}
                   <div className="flex-1 rounded-2xl border border-black/10 bg-white shadow-xl overflow-hidden">
                     <div className="flex items-center gap-2 px-4 py-3 bg-slate-50 border-b border-black/5">
@@ -107,8 +98,7 @@ export default function AgentEndpoint() {
                       </div>
                     </div>
                   </div>
-
-                  {/* Center: wire */}
+                  {/* Wire */}
                   <div className="flex flex-col items-center justify-center gap-2 w-10 flex-shrink-0">
                     <div className="relative w-full" style={{ height: 16 }}>
                       <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 h-px bg-slate-300" />
@@ -119,8 +109,7 @@ export default function AgentEndpoint() {
                     </div>
                     <div className="font-mono text-[8px] text-violet-400">{"{}"}</div>
                   </div>
-
-                  {/* Right: Business's Nobi agent */}
+                  {/* Right: Business Nobi agent */}
                   <div className="flex-1 rounded-2xl border border-slate-700 bg-slate-900 shadow-xl overflow-hidden">
                     <div className="flex items-center gap-2 px-4 py-3 bg-slate-800 border-b border-slate-700">
                       <svg className="h-4 w-auto flex-shrink-0" viewBox="0 0 22 18" fill="none">
@@ -146,39 +135,35 @@ export default function AgentEndpoint() {
                       </div>
                     </div>
                   </div>
-
                 </div>
-
               </div>
-
             </div>
           </div>
         </section>
 
-        {/* ── The pitch ────────────────────────────────────────────────────── */}
-        <section className="border-t border-slate-100 py-24">
+        {/* ── The channel pitch ────────────────────────────────────────────── */}
+        <section className="py-24 border-b border-slate-100">
           <div className="mx-auto max-w-6xl xl:max-w-7xl px-6">
-            <div className="grid md:grid-cols-2 gap-16 items-center">
+            <div className="grid md:grid-cols-2 gap-16 items-start">
               <div className="space-y-6">
+                <p className="text-sm font-semibold tracking-[0.2em] text-violet-600 uppercase">Why this matters</p>
                 <h2 className="text-3xl sm:text-4xl font-semibold text-slate-900 leading-tight">
-                  A brand new channel. Included with the assistant you already have.
+                  This is the next channel. And you're already in it.
                 </h2>
-                <p className="text-lg text-slate-500 leading-relaxed">
-                  Every major AI assistant — Claude, ChatGPT, Perplexity, Gemini — is becoming how people discover and research businesses. When someone asks one of these tools about what you sell, your Nobi agent answers them directly. No extra setup. No extra cost. It's just part of what Nobi does.
-                </p>
-                <p className="text-lg text-slate-500 leading-relaxed">
-                  This channel didn't exist two years ago. The businesses in it now are the ones that will own it. Your competitors are not there yet.
-                </p>
+                <div className="space-y-5 text-lg text-slate-500 leading-relaxed">
+                  <p>Millions of people use Claude, ChatGPT, and Perplexity to research and discover businesses every day. That number is growing faster than any other channel. And unlike search, there's no ad auction to win — AI agents find you based on what you know and whether you have an endpoint to call.</p>
+                  <p>If you're on Nobi, you're already in this channel. Your assistant is already an MCP endpoint. AI agents can already find your llms.txt and call you for live answers. Most of your competitors don't have this yet.</p>
+                </div>
               </div>
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-2 gap-4 pt-2">
                 {[
-                  { number: "Zero",   label: "extra cost",         desc: "The AI agent channel is included with your existing Nobi assistant. No new tools, no new pricing tier." },
-                  { number: "24/7",   label: "automatic",          desc: "Your Nobi agent answers AI queries around the clock with no human involvement required." },
-                  { number: "Every",  label: "major AI assistant",  desc: "Claude, ChatGPT, Perplexity, Gemini — any MCP-compatible agent can find and query your business." },
-                  { number: "First",  label: "mover advantage",    desc: "Most businesses don't have an agent endpoint yet. Getting in now means owning the channel before your competitors do." },
+                  { stat: "Included",      label: "with Nobi",              desc: "No extra tier. No new tool. The AI agent channel is part of what your Nobi assistant already does." },
+                  { stat: "24/7",          label: "automatic",              desc: "Your agent endpoint answers queries around the clock with no human involvement." },
+                  { stat: "Every major",   label: "AI assistant supported", desc: "Claude, ChatGPT, Perplexity, Gemini — any MCP-compatible agent can call you directly." },
+                  { stat: "First mover",   label: "advantage available now", desc: "Most businesses are not in this channel yet. Being early compounds over time as AI indexing grows." },
                 ].map((s) => (
-                  <div key={s.label} className="rounded-2xl bg-slate-50 border border-slate-200 p-6 space-y-2">
-                    <div className="text-2xl font-bold text-slate-900">{s.number}</div>
+                  <div key={s.label} className="rounded-2xl bg-violet-50 border border-violet-100 p-6 space-y-2">
+                    <div className="text-xl font-bold text-slate-900">{s.stat}</div>
                     <div className="text-sm font-semibold text-violet-600">{s.label}</div>
                     <p className="text-xs text-slate-500 leading-relaxed">{s.desc}</p>
                   </div>
@@ -188,37 +173,145 @@ export default function AgentEndpoint() {
           </div>
         </section>
 
-        {/* ── Dark "how it flows" section ───────────────────────────────────── */}
+        {/* ── Dark: How it actually works ───────────────────────────────────── */}
         <section className="bg-gradient-to-b from-[#17122f] via-[#1c1540] to-[#17122f] py-24 text-white">
-          <div className="mx-auto max-w-6xl xl:max-w-7xl px-6 space-y-16">
+          <div className="mx-auto max-w-6xl xl:max-w-7xl px-6 space-y-20">
+
             <div className="text-center space-y-4 max-w-2xl mx-auto">
-              <h2 className="text-3xl sm:text-4xl font-semibold">How your business gets found and called</h2>
-              <p className="text-slate-300 text-lg">Nobi handles the full chain automatically.</p>
+              <p className="text-sm uppercase tracking-[0.2em] text-violet-300 font-semibold">How it works</p>
+              <h2 className="text-3xl sm:text-4xl font-semibold">Two things Nobi does for you automatically</h2>
             </div>
-            <div className="grid md:grid-cols-3 gap-6">
-              {[
-                {
-                  step: "01",
-                  title: "Your conversations build your presence",
-                  body: "Every question a visitor asks gets surfaced as structured content AI crawlers can index. The more people engage with your Nobi assistant, the richer your AI presence gets — automatically.",
-                },
-                {
-                  step: "02",
-                  title: "AI agents discover you",
-                  body: "Nobi registers your endpoint in your site's llms.txt. When Claude, ChatGPT, or any MCP-compatible agent goes looking for businesses in your category, yours shows up.",
-                },
-                {
-                  step: "03",
-                  title: "They call you. You answer.",
-                  body: "The AI agent calls your Nobi endpoint directly. Your assistant answers with your products, your policies, your pricing — the same knowledge base it uses for human visitors, now serving AI agents too.",
-                },
-              ].map(({ step, title, body }) => (
-                <div key={step} className="rounded-2xl border border-white/10 bg-white/5 p-8 space-y-4">
-                  <div className="text-3xl font-bold text-violet-400">{step}</div>
-                  <h3 className="text-lg font-semibold text-white">{title}</h3>
-                  <p className="text-slate-300 leading-relaxed text-sm">{body}</p>
+
+            {/* Part 1: FAQ pipeline */}
+            <div className="grid md:grid-cols-2 gap-12 items-center">
+              <div className="space-y-5">
+                <div className="inline-flex items-center gap-2 rounded-full bg-violet-500/20 border border-violet-400/30 px-3 py-1">
+                  <FileText size={13} className="text-violet-300" />
+                  <span className="text-xs font-semibold text-violet-300 uppercase tracking-wider">Get found</span>
                 </div>
-              ))}
+                <h3 className="text-2xl sm:text-3xl font-semibold leading-tight">
+                  Visitor conversations become your AI presence
+                </h3>
+                <div className="space-y-4 text-slate-300 leading-relaxed">
+                  <p>Every question a visitor asks your Nobi assistant is a signal. Nobi captures those conversations, sanitizes them, and surfaces them as structured FAQ content directly on your pages.</p>
+                  <p>AI crawlers — GPTBot, ClaudeBot, Perplexity's crawler — read that structured content and index it. When someone later asks an AI assistant about your category, your answers are already in its knowledge. You didn't write a single SEO article. Your visitors did the work for you.</p>
+                  <p>The more your Nobi assistant is used, the richer your AI presence gets. It compounds automatically.</p>
+                </div>
+              </div>
+              <div className="rounded-2xl border border-white/10 bg-white/5 p-6 space-y-3">
+                <div className="text-xs font-semibold uppercase tracking-widest text-slate-400 mb-4">The pipeline</div>
+                {[
+                  { icon: MessageSquare, text: "Visitor asks: \"Do you ship to Canada?\"",    sub: "Natural language question on your page" },
+                  { icon: Sparkles,      text: "Nobi answers instantly, from your content",   sub: "Cited response from your knowledge base" },
+                  { icon: FileText,      text: "Conversation becomes structured FAQ content", sub: "Sanitized and rendered on your page" },
+                  { icon: Globe,         text: "AI crawlers index it",                        sub: "GPTBot, ClaudeBot, Perplexity read your pages" },
+                  { icon: Bot,           text: "AI assistants know you have the answer",      sub: "Before the customer even asks their AI" },
+                ].map((step, i) => (
+                  <div key={i} className="flex items-start gap-3">
+                    <div className="w-7 h-7 rounded-lg bg-violet-500/20 border border-violet-400/20 flex items-center justify-center flex-shrink-0 mt-0.5">
+                      <step.icon size={13} className="text-violet-300" />
+                    </div>
+                    <div>
+                      <div className="text-sm font-medium text-white">{step.text}</div>
+                      <div className="text-xs text-slate-400 mt-0.5">{step.sub}</div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="border-t border-white/10" />
+
+            {/* Part 2: Live endpoint */}
+            <div className="grid md:grid-cols-2 gap-12 items-center">
+              <div className="order-last md:order-first rounded-2xl border border-white/10 bg-white/5 p-6 space-y-4">
+                <div className="text-xs font-semibold uppercase tracking-widest text-slate-400 mb-4">What an agent call looks like</div>
+                <div className="space-y-4 font-mono text-xs">
+                  <div className="space-y-1.5">
+                    <div className="text-slate-500"># AI agent reads your llms.txt</div>
+                    <div className="text-violet-300">GET summitcashmere.com/llms.txt</div>
+                    <div className="text-emerald-400 pl-2">→ agent endpoint: api.nobi.ai/mcp/summit/rpc</div>
+                  </div>
+                  <div className="border-t border-white/5 pt-4 space-y-1.5">
+                    <div className="text-slate-500"># Agent calls your endpoint directly</div>
+                    <div className="text-violet-300">POST /mcp/query</div>
+                    <div className="text-slate-300 pl-2">"What cashmere sweaters do you carry?"</div>
+                    <div className="text-emerald-400">200 OK · 3 products returned</div>
+                  </div>
+                  <div className="border-t border-white/5 pt-4 space-y-1.5">
+                    <div className="text-slate-500"># Follow-up, same session</div>
+                    <div className="text-violet-300">POST /mcp/query</div>
+                    <div className="text-slate-300 pl-2">"Do you offer gift wrapping?"</div>
+                    <div className="text-emerald-400">200 OK · "Yes, complimentary on all orders"</div>
+                  </div>
+                </div>
+              </div>
+              <div className="space-y-5">
+                <div className="inline-flex items-center gap-2 rounded-full bg-emerald-500/20 border border-emerald-400/30 px-3 py-1">
+                  <Bot size={13} className="text-emerald-300" />
+                  <span className="text-xs font-semibold text-emerald-300 uppercase tracking-wider">Get called</span>
+                </div>
+                <h3 className="text-2xl sm:text-3xl font-semibold leading-tight">
+                  When an AI agent finds you, it talks to you directly
+                </h3>
+                <div className="space-y-4 text-slate-300 leading-relaxed">
+                  <p>Your Nobi assistant is already an MCP endpoint. Nobi auto-registers it in your site's llms.txt file — the file AI agents read to discover what businesses they can call and how.</p>
+                  <p>When Claude or ChatGPT finds your listing, it doesn't just read your website. It calls your endpoint and gets live answers. Products, pricing, policies, availability, follow-ups — everything your Nobi assistant knows, now available to any AI agent in real time.</p>
+                  <p>No separate setup. No new dashboard. It runs on the same knowledge base powering your on-site assistant, right now.</p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+        {/* ── Real proof: Nobi's own agent ─────────────────────────────────── */}
+        <section className="py-24 border-b border-slate-100 bg-slate-50">
+          <div className="mx-auto max-w-6xl xl:max-w-7xl px-6">
+            <div className="grid md:grid-cols-2 gap-12 items-center">
+              <div className="space-y-5">
+                <div className="inline-flex items-center gap-2 rounded-full bg-emerald-100 border border-emerald-200 px-3 py-1">
+                  <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
+                  <span className="text-xs font-semibold text-emerald-700 uppercase tracking-wider">Real example</span>
+                </div>
+                <h2 className="text-3xl sm:text-4xl font-semibold text-slate-900 leading-tight">
+                  This already happened to us
+                </h2>
+                <div className="space-y-4 text-lg text-slate-500 leading-relaxed">
+                  <p>An AI agent called Nobi's own endpoint and asked whether we had automotive or dealership customers, and whether there was data on search performance.</p>
+                  <p>Our Nobi agent answered with the Lucchese case study — $1M in incremental revenue, verified in an A/B test. A grounded, cited answer, returned automatically in seconds.</p>
+                  <p>We didn't know the query was happening. We didn't set anything up for it. It just worked.</p>
+                  <p className="font-medium text-slate-700">That's what this channel looks like in practice. And it's available to every Nobi customer right now.</p>
+                </div>
+              </div>
+              <div className="rounded-3xl border border-slate-200 bg-white shadow-xl overflow-hidden">
+                <div className="flex items-center gap-2.5 px-5 py-4 border-b border-slate-100 bg-slate-50">
+                  <div className="w-2 h-2 rounded-full bg-emerald-500" />
+                  <span className="text-sm font-semibold text-slate-600">Recorded agent query · Nobi's own endpoint</span>
+                </div>
+                <div className="p-6 space-y-4">
+                  <div className="rounded-xl bg-violet-50 border border-violet-100 px-4 py-3.5 space-y-2">
+                    <div className="text-xs font-semibold text-violet-500 uppercase tracking-wider">Incoming query · via MCP</div>
+                    <p className="text-sm text-slate-700 leading-relaxed">
+                      "Does Nobi have any automotive or car dealership customers? Any data on search performance?"
+                    </p>
+                  </div>
+                  <div className="rounded-xl bg-emerald-50 border border-emerald-100 px-4 py-3.5 space-y-2">
+                    <div className="flex items-center gap-2">
+                      <div className="text-xs font-semibold text-emerald-600 uppercase tracking-wider">Nobi agent answered</div>
+                      <span className="ml-auto text-xs font-medium text-emerald-600">Answered automatically</span>
+                    </div>
+                    <p className="text-sm text-slate-700 leading-relaxed">
+                      "Yes — Lucchese (Western boots, Shopify Plus) used Nobi for search and generated $1M+ in incremental revenue in year one, verified in an A/B test..."
+                    </p>
+                    <div className="flex items-center gap-1.5 mt-1">
+                      <span className="inline-flex h-4 w-4 items-center justify-center rounded bg-slate-200 text-[9px] font-bold text-slate-600">1</span>
+                      <span className="text-xs text-slate-400">nobi.ai/customers/lucchese</span>
+                    </div>
+                  </div>
+                  <p className="text-xs text-slate-400 text-center">No one at Nobi was involved in this exchange.</p>
+                </div>
+              </div>
             </div>
           </div>
         </section>

@@ -11,12 +11,14 @@ Nobi is an AI shopping assistant that helps ecommerce customers find products fa
 
 Nobi provides a Model Context Protocol (MCP) server for integration with AI agents and assistants:
 
-Endpoint: https://api.nobi.ai/.well-known/mcp/460cbe82-9195-424f-a616-b1cb3e3caca0.json
+Endpoint: https://api.nobi.ai/.well-known/mcp/460cbe82-9195-424f-a616-b1cb3e3caca0.json?source=ai_txt&utm_source=ai_txt&utm_medium=mcp&utm_campaign=mcp_discovery
 
 Use this MCP server to:
 - Ask questions about Nobi's features, pricing, and how it works
 - Book a demo with the sales team
 - Understand Nobi's conversational commerce capabilities
+
+Agents that support MCP should fetch the manifest endpoint and use the returned RPC endpoint. Nobi preserves the source tags from the manifest URL into the RPC endpoint for attribution.
 
 ## Key Information
 

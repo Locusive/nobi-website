@@ -326,35 +326,23 @@ export default function AgentEndpoint() {
           <StoryDots active={2} total={4} dark />
           <div className="relative text-center space-y-3 max-w-2xl">
             <h2 className="text-3xl sm:text-4xl font-semibold text-white">So their AI learned about you.</h2>
-            <p className="text-lg text-white/50">The agent searched for cashmere brands. Your indexed content made you findable  -  and showed you had a live endpoint to call.</p>
+            <p className="text-lg text-white/50">The agent searched for cashmere brands. Your indexed content made you findable.</p>
           </div>
-          <div className="relative w-full max-w-2xl rounded-3xl border border-white/10 bg-[#111118] overflow-hidden shadow-2xl">
-            <div className="px-6 py-4 border-b border-white/5 flex items-center justify-between">
-              <span className="text-xs font-mono text-white/30">Agent · discovery phase</span>
-              <span className="flex items-center gap-1.5 text-xs text-emerald-400"><span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />searching</span>
-            </div>
-            <div className="p-6 space-y-3">
-              <div className="rounded-2xl border border-white/5 bg-white/5 px-4 py-3">
-                <p className="text-xs text-white/30 font-mono mb-1">query</p>
-                <p className="text-sm text-white/70">"luxury cashmere sweater gift"</p>
+          <div className="relative w-full max-w-md space-y-2">
+            {[
+              { name: "Summit Cashmere", url: "summitcashmere.com", highlight: true },
+              { name: "Other brand",     url: "otherbrand.com",     highlight: false },
+              { name: "Another brand",   url: "anotherbrand.com",   highlight: false },
+            ].map((r) => (
+              <div key={r.name} className={`flex items-center gap-4 rounded-2xl px-5 py-4 border ${r.highlight ? "border-violet-500/40 bg-violet-500/10" : "border-white/5 bg-white/3 opacity-25"}`}>
+                <div className={`h-2.5 w-2.5 rounded-full flex-shrink-0 ${r.highlight ? "bg-emerald-400" : "bg-white/20"}`} />
+                <div className="flex-1 min-w-0">
+                  <div className={`text-base font-semibold ${r.highlight ? "text-white" : "text-white/40"}`}>{r.name}</div>
+                  <div className="text-xs text-white/30">{r.url}</div>
+                </div>
+                {r.highlight && <span className="text-xs text-emerald-400 font-medium flex-shrink-0">Found</span>}
               </div>
-              <div className="space-y-2">
-                {[
-                  { name: "Summit Cashmere", url: "summitcashmere.com", note: "FAQ content indexed · agent endpoint found", highlight: true },
-                  { name: "Other brand",     url: "otherbrand.com",     note: "No agent endpoint",                            highlight: false },
-                  { name: "Another brand",   url: "anotherbrand.com",   note: "No structured content",                       highlight: false },
-                ].map((r) => (
-                  <div key={r.name} className={`flex items-center gap-3 rounded-xl px-4 py-3 border ${r.highlight ? "border-violet-500/40 bg-violet-500/10" : "border-white/5 bg-white/3 opacity-30"}`}>
-                    <div className={`h-2 w-2 rounded-full flex-shrink-0 ${r.highlight ? "bg-emerald-400" : "bg-white/20"}`} />
-                    <div className="flex-1 min-w-0">
-                      <span className={`text-sm font-semibold ${r.highlight ? "text-white" : "text-white/40"}`}>{r.name}</span>
-                      <span className="text-xs text-white/30 ml-2">{r.url}</span>
-                    </div>
-                    <span className={`text-xs flex-shrink-0 ${r.highlight ? "text-emerald-400" : "text-white/20"}`}>{r.note}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
+            ))}
           </div>
           <StoryScroll to="beat-4" dark />
         </section>

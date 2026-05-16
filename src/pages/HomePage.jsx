@@ -120,7 +120,7 @@ const VARIANT_CONTENT = {
     numbersHeading: "Your AI presence goes live with Nobi",
     stats: [
       { number: "Auto", label: "indexed from real conversations", desc: "Nobi turns real visitor conversations into structured content AI crawlers can read. Your knowledge base builds itself from actual questions people ask." },
-      { number: "Zero", label: "setup for your agent endpoint",   desc: "Your Nobi assistant is already a callable agent endpoint. Any AI agent can discover and query it the moment you go live." },
+      { number: "Reach",    label: "customers inside their AI",      desc: "When someone uses Claude, ChatGPT, or any AI assistant to research what you offer, your Nobi endpoint answers them directly." },
     ],
   },
   leads: {
@@ -991,9 +991,11 @@ function Numbers({ variant }) {
                 </div>
               ))}
             </div>
-            <p className="mt-4 text-xs text-black/50 dark:text-white/50">
-              Results measured in A/B tests with a one-day conversion window.
-            </p>
+            {!["agents", "leads"].includes(variant) && (
+              <p className="mt-4 text-xs text-black/50 dark:text-white/50">
+                Results measured in A/B tests with a one-day conversion window.
+              </p>
+            )}
           </motion.div>
         </AnimatePresence>
       </div>

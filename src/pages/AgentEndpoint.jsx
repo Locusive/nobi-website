@@ -141,22 +141,70 @@ export default function AgentEndpoint() {
           </div>
         </section>
 
-        {/* ── Beat 1: The moment ───────────────────────────────────────────── */}
-        <section className="py-32 border-b border-slate-100">
-          <div className="mx-auto max-w-4xl px-6 text-center space-y-12">
-            <p className="text-sm font-semibold tracking-[0.2em] text-slate-400 uppercase">Right now</p>
-            <div className="space-y-6">
-              <div className="inline-flex items-center gap-3 rounded-2xl bg-slate-50 border border-slate-200 px-6 py-4 shadow-sm">
-                <div className="w-6 h-6 rounded-md bg-gradient-to-br from-blue-500 to-violet-600 flex items-center justify-center flex-shrink-0">
-                  <Sparkles className="w-3.5 h-3.5 text-white" />
+        {/* ── Story beat 1 ─────────────────────────────────────────────────── */}
+        <section className="min-h-screen flex flex-col border-b border-slate-100 bg-white">
+          {/* Story progress indicator */}
+          <div className="flex items-center gap-3 px-8 py-5 border-b border-slate-100">
+            <div className="flex gap-1.5">
+              <div className="h-1.5 w-6 rounded-full bg-slate-900" />
+              <div className="h-1.5 w-1.5 rounded-full bg-slate-200" />
+              <div className="h-1.5 w-1.5 rounded-full bg-slate-200" />
+              <div className="h-1.5 w-1.5 rounded-full bg-slate-200" />
+            </div>
+            <span className="text-xs text-slate-400">The moment</span>
+          </div>
+
+          {/* ChatGPT-style interface mock */}
+          <div className="flex-1 flex flex-col">
+            {/* Sidebar hint */}
+            <div className="flex flex-1">
+              <div className="hidden md:flex w-56 border-r border-slate-100 flex-col gap-1 p-3 flex-shrink-0">
+                <div className="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-slate-50">
+                  <div className="w-4 h-4 rounded-full bg-slate-200" />
+                  <span className="text-xs text-slate-400">New chat</span>
                 </div>
-                <span className="text-2xl sm:text-3xl font-medium text-slate-800">Find me a luxury cashmere sweater gift</span>
-                <span className="w-0.5 h-7 bg-slate-400 animate-pulse" />
+                {["Find cashmere gifts", "Weekend travel ideas", "Home office setup"].map((item) => (
+                  <div key={item} className="px-3 py-2 rounded-lg">
+                    <span className="text-xs text-slate-300 truncate block">{item}</span>
+                  </div>
+                ))}
+              </div>
+
+              {/* Main chat area */}
+              <div className="flex-1 flex flex-col items-center justify-center gap-10 px-6 py-16">
+                <h2 className="text-2xl sm:text-3xl font-medium text-slate-800">What's on the agenda today?</h2>
+
+                {/* Input bar — matches ChatGPT exactly */}
+                <div className="w-full max-w-2xl">
+                  <div className="flex items-center gap-3 rounded-2xl border border-slate-200 bg-white shadow-sm px-4 py-3.5">
+                    <div className="w-7 h-7 rounded-full border border-slate-200 flex items-center justify-center text-slate-400 flex-shrink-0">
+                      <span className="text-lg leading-none">+</span>
+                    </div>
+                    <span className="flex-1 text-slate-800 text-base">Find me a luxury cashmere sweater gift</span>
+                    <span className="w-px h-5 bg-slate-400 animate-pulse" />
+                    <div className="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center flex-shrink-0">
+                      <svg className="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14M12 5l7 7-7 7" />
+                      </svg>
+                    </div>
+                  </div>
+                  <p className="text-center text-xs text-slate-400 mt-3">AI can make mistakes. Consider checking important information.</p>
+                </div>
               </div>
             </div>
-            <p className="text-xl text-slate-500 max-w-xl mx-auto">
-              Someone just typed this into their AI. They're about to be introduced to a business. Is it yours?
+          </div>
+
+          {/* Caption + scroll cue */}
+          <div className="flex items-end justify-between px-8 py-6 border-t border-slate-100">
+            <p className="text-lg font-medium text-slate-700 max-w-sm">
+              Someone just asked their AI to find a business like yours.
             </p>
+            <div className="flex flex-col items-center gap-1.5 text-slate-300">
+              <span className="text-xs tracking-widest uppercase">Scroll</span>
+              <svg className="w-4 h-4 animate-bounce" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+              </svg>
+            </div>
           </div>
         </section>
 

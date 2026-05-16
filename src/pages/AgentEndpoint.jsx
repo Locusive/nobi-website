@@ -527,10 +527,10 @@ export default function AgentEndpoint() {
         <section className="py-24">
           <div className="mx-auto max-w-3xl px-6 text-center space-y-6">
             <h2 className="text-3xl sm:text-4xl font-semibold text-slate-900">
-              Get in the channel before your competitors do
+              That could be your business next.
             </h2>
             <p className="text-lg text-slate-500">
-              If you're already on Nobi, your agent endpoint is live. If you're not, now is the time.
+              Nobi sets up everything you just saw: the FAQs, the agent endpoint, the discoverability. Add it to your site and start showing up where your customers are already searching.
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center pt-2">
               <a href={getSignupUrl()} className="inline-flex items-center justify-center gap-2 rounded-2xl font-medium bg-black text-white hover:opacity-90 h-12 px-6 text-base">

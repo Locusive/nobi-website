@@ -43,8 +43,9 @@ export default function AgentEndpoint() {
               <div className="space-y-7">
                 <p className="text-sm font-semibold tracking-[0.2em] text-violet-600 uppercase">A new channel</p>
                 <h1 className="text-4xl sm:text-5xl lg:text-[3.5rem] font-semibold leading-[1.05] text-slate-900 text-balance">
-                  Your business, inside every AI your{" "}
-                  <span className="bg-gradient-to-r from-indigo-500 via-violet-500 to-fuchsia-500 bg-clip-text text-transparent">customers use</span>
+                  Your business,{" "}
+                  <span className="bg-gradient-to-r from-indigo-500 via-violet-500 to-fuchsia-500 bg-clip-text text-transparent">inside every AI</span>{" "}
+                  your customers use
                 </h1>
                 <p className="text-lg text-slate-500 leading-relaxed max-w-lg">
                   When someone asks Claude or ChatGPT for a recommendation, Nobi makes sure your business shows up - and can answer follow-up questions directly. No website visit required.
@@ -59,78 +60,61 @@ export default function AgentEndpoint() {
                 </div>
               </div>
 
-              {/* Hero visual: static frame of the two-agent handoff */}
+              {/* Hero visual: three-zone diagram — AI systems → Nobi → your products */}
               <div className="relative">
                 <div className="absolute -inset-6 bg-gradient-to-br from-violet-100/80 to-indigo-100/80 rounded-[2rem] blur-2xl" aria-hidden />
-                <div className="relative rounded-3xl bg-white border border-slate-200/80 shadow-2xl p-5">
-                  <div className="flex items-stretch gap-3">
+                <div className="relative rounded-3xl bg-white border border-slate-200/80 shadow-2xl overflow-hidden">
+                  <div className="grid grid-cols-[1fr,auto,1fr]">
 
-                    {/* Left: Customer's AI */}
-                    <div className="flex-1 min-w-0 rounded-2xl border border-black/10 bg-white shadow-sm overflow-hidden">
-                      <div className="flex items-center gap-2 px-3 py-2.5 bg-slate-50 border-b border-black/5">
-                        <div className="w-5 h-5 rounded-md bg-gradient-to-br from-blue-500 to-violet-600 flex items-center justify-center flex-shrink-0">
-                          <Sparkles className="w-3 h-3 text-white" />
-                        </div>
-                        <span className="text-xs font-semibold text-black/60">Customer's AI</span>
-                      </div>
-                      <div className="p-3 space-y-2">
-                        <div className="flex justify-end">
-                          <div className="bg-black/5 rounded-2xl rounded-br-sm px-3 py-2 text-xs text-black/80 max-w-[95%]">
-                            Find me a luxury cashmere sweater gift
+                    {/* Zone 1: AI systems calling in */}
+                    <div className="p-6 space-y-3">
+                      <div className="text-[10px] font-semibold uppercase tracking-widest text-slate-400">Asking</div>
+                      {[
+                        { name: "Claude",     bg: "bg-amber-500" },
+                        { name: "ChatGPT",    bg: "bg-emerald-600" },
+                        { name: "Perplexity", bg: "bg-indigo-600" },
+                      ].map((ai) => (
+                        <div key={ai.name} className="flex items-center gap-3 rounded-xl bg-slate-50 border border-slate-100 px-3 py-2.5">
+                          <div className={`w-6 h-6 rounded-full ${ai.bg} flex items-center justify-center text-white text-[10px] font-bold flex-shrink-0`}>
+                            {ai.name[0]}
                           </div>
+                          <span className="text-sm font-medium text-slate-700">{ai.name}</span>
+                          <svg className="ml-auto w-3.5 h-3.5 text-slate-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                          </svg>
                         </div>
-                        <div className="flex items-start gap-1.5">
-                          <div className="w-4 h-4 mt-0.5 rounded-full bg-gradient-to-br from-blue-500 to-violet-600 flex items-center justify-center flex-shrink-0">
-                            <Sparkles className="w-2 h-2 text-white" />
-                          </div>
-                          <div className="flex gap-1.5 flex-1 min-w-0">
-                            {[
-                              { name: "Classic Crew",   img: "https://www.alpsandmeters.com/cdn/shop/products/Cashmere_Alpine_Guide_Sweater_Camel.jpg?v=1753426053&width=200" },
-                              { name: "Rib Turtleneck", img: "https://www.alpsandmeters.com/cdn/shop/products/Ski_Race_Knit_Sports_Club_Navy.jpg?v=1753426053&width=200" },
-                              { name: "Cable Knit",     img: "https://www.alpsandmeters.com/cdn/shop/products/Classic_Cable_Knit_IVORY_Front.jpg?v=1753426168&width=200" },
-                            ].map((p) => (
-                              <div key={p.name} className="flex-1 min-w-0 rounded-lg overflow-hidden border border-black/5 bg-white shadow-sm">
-                                <div className="aspect-[3/4]"><img src={p.img} alt={p.name} className="w-full h-full object-cover" /></div>
-                                <div className="px-1.5 py-1">
-                                  <div className="text-[9px] font-medium text-black/60 truncate">{p.name}</div>
-                                </div>
-                              </div>
-                            ))}
-                          </div>
-                        </div>
-                      </div>
+                      ))}
                     </div>
 
-                    {/* Center: wire with frozen data packets */}
-                    <div className="flex-shrink-0 w-10 flex flex-col items-center justify-center gap-2">
-                      <div className="relative w-full" style={{ height: 20 }}>
-                        <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 h-px bg-slate-200" />
-                        {/* Frozen violet dots going L→R */}
-                        {[0.15, 0.5, 0.82].map((pos, i) => (
-                          <div key={i} className="absolute top-1/2 -translate-y-1/2 h-2 w-2 rounded-full bg-violet-500 shadow-[0_0_6px_2px_rgba(139,92,246,0.45)]"
-                            style={{ left: `${pos * 100}%` }} />
+                    {/* Zone 2: Nobi routing hub */}
+                    <div className="flex flex-col items-center justify-center px-5 gap-2 border-x border-slate-100 bg-gradient-to-b from-violet-50/80 to-fuchsia-50/80">
+                      <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-violet-500 to-fuchsia-600 flex items-center justify-center shadow-lg shadow-violet-200">
+                        <img src="/favicon.svg" alt="Nobi" className="w-6 h-6" />
+                      </div>
+                      <span className="text-xs font-semibold text-violet-600">Nobi</span>
+                    </div>
+
+                    {/* Zone 3: Your products appearing */}
+                    <div className="p-6">
+                      <div className="text-[10px] font-semibold uppercase tracking-widest text-slate-400 mb-3">Appearing</div>
+                      <div className="grid grid-cols-3 gap-2">
+                        {[
+                          { name: "Classic Crew",   price: "$265", img: "https://www.alpsandmeters.com/cdn/shop/products/Cashmere_Alpine_Guide_Sweater_Camel.jpg?v=1753426053&width=200" },
+                          { name: "Rib Turtleneck", price: "$295", img: "https://www.alpsandmeters.com/cdn/shop/products/Ski_Race_Knit_Sports_Club_Navy.jpg?v=1753426053&width=200" },
+                          { name: "Cable Knit",     price: "$245", img: "https://www.alpsandmeters.com/cdn/shop/products/Classic_Cable_Knit_IVORY_Front.jpg?v=1753426168&width=200" },
+                        ].map((p) => (
+                          <div key={p.name} className="rounded-xl overflow-hidden border border-slate-100 shadow-sm bg-white">
+                            <div className="aspect-[3/4]"><img src={p.img} alt={p.name} className="w-full h-full object-cover" /></div>
+                            <div className="px-2 py-1.5 text-center">
+                              <div className="text-[9px] font-semibold text-slate-700 truncate">{p.name}</div>
+                              <div className="text-[9px] text-slate-400">{p.price}</div>
+                            </div>
+                          </div>
                         ))}
                       </div>
-                      <div className="font-mono text-[8px] text-violet-400 text-center leading-none">{ "{ }" }</div>
-                    </div>
-
-                    {/* Right: Summit Cashmere's Nobi agent */}
-                    <div className="flex-1 min-w-0 rounded-2xl border border-slate-700 bg-slate-900 shadow-sm overflow-hidden">
-                      <div className="flex items-center gap-2 px-3 py-2 bg-slate-800 border-b border-slate-700">
-                        <svg className="h-3.5 w-auto flex-shrink-0" viewBox="0 0 22 18" fill="none">
-                          <path d="M11 2L20 16H2L11 2Z" stroke="white" strokeWidth="1.5" strokeLinejoin="round"/>
-                          <path d="M7.5 16L11 10.5L14.5 16" stroke="white" strokeWidth="1" strokeLinejoin="round" strokeOpacity="0.5"/>
-                        </svg>
-                        <div className="min-w-0 flex-1">
-                          <div className="text-[10px] font-semibold text-white truncate">Summit Cashmere</div>
-                          <div className="text-[9px] text-slate-400">Powered by Nobi</div>
-                        </div>
-                        <div className="h-1.5 w-1.5 rounded-full bg-emerald-400 flex-shrink-0" />
-                      </div>
-                      <div className="p-3 font-mono space-y-2 text-[10px]">
-                        <div className="text-slate-500">POST /mcp/query</div>
-                        <div className="text-slate-300 pl-2 truncate">"cashmere sweater gift"</div>
-                        <div className="text-emerald-400">200 OK · products: [3]</div>
+                      <div className="mt-3 flex items-center gap-1.5">
+                        <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 flex-shrink-0" />
+                        <span className="text-xs text-slate-400">Answered automatically</span>
                       </div>
                     </div>
 

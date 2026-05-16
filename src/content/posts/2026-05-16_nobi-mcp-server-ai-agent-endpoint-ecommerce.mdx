@@ -137,6 +137,8 @@ Grounding is the fourth. For each tool we looked at what its answers are anchore
 
 Nobi runs as on-site search and an [AI shopping assistant](https://nobi.ai/blog/ai-shopping-assistant-ecommerce), and the same endpoint that grounds shopper chats also answers agent queries through the Model Context Protocol. There's no second integration, no separate API to maintain, no parallel content pipeline. The answer engine reads from the product catalog and the knowledge sources you connect (product pages, FAQ routes, policy docs, PDFs), refreshes those sources twice a day, and ships every answer with inline citation pills back to the exact document and excerpt it came from.
 
+Every shopper conversation on a product page also feeds a crowd-sourced FAQ that gets cleaned, sanitized, and surfaced as structured content on that page. That FAQ becomes part of what the endpoint serves - so the more shoppers ask, the richer the answers agents get back.
+
 **Best for:** Ecommerce teams who want one platform that answers shopper questions on the storefront and exposes a callable endpoint that ChatGPT, Claude, and Perplexity agents can discover and query.
 
 **Pricing:** $25/month base (includes 2,500 searches and 250 conversational messages). $0.01 per additional search, $0.10 per additional message.

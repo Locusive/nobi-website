@@ -3,6 +3,7 @@ import { useSEO } from "../hooks/useSEO";
 import {AnimatePresence, motion} from "framer-motion";
 import {
     BarChart3,
+    Bot,
     CheckCircle2,
     ChevronDown,
     Heart,
@@ -1355,10 +1356,10 @@ function Features() {
       desc: "Collects contact info naturally through conversation. Every lead includes a summary of what the visitor was asking about, so follow-ups aren't cold.",
     },
     {
-      icon: <BarChart3 className="h-5 w-5" />,
-      title: "Know what's working",
-      stat: "A/B tested",
-      desc: "See what visitors are asking, where they get stuck, and which conversations led to conversions. A/B test configurations and measure results directly in Nobi's dashboard.",
+      icon: <Bot className="h-5 w-5" />,
+      title: "Reach AI agents",
+      stat: "New channel",
+      desc: "Every Nobi assistant is also a callable agent endpoint. When someone uses Claude, ChatGPT, or any AI assistant to research what you offer, your Nobi agent answers them directly.",
     },
   ];
 
@@ -1366,7 +1367,7 @@ function Features() {
     <section id="features" className="scroll-mt-20 py-20 border-t border-black/5 dark:border-white/5">
       <div className="mx-auto max-w-6xl px-6">
         <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight text-balance">
-          One assistant for everything your visitors need
+          One assistant. Four ways it grows your business.
         </h2>
         <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 gap-6">
           {capabilities.map((cap) => (

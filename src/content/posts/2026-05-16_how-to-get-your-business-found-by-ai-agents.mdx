@@ -93,47 +93,27 @@ AI assistants like Claude, ChatGPT, and Perplexity are starting to act on behalf
 
 ## How AI agents find your business
 
-When someone asks Claude or ChatGPT a question - "where can I find handmade ceramics under $100" or "what's a good running shoe for overpronators" or "which tool should I use for X" - the agent looks for businesses whose content it can actually read, understand, and cite. Generic homepages and marketing copy don't help. What helps is structured, specific, crawlable content that directly answers the kinds of questions your customers ask.
+AI agents don't browse. They query. When someone asks Claude to help them find a running shoe for overpronators, or asks Perplexity to recommend a ceramics studio, the agent isn't opening tabs and scrolling pages the way a person would. It's pulling from what it can read, index, and call - structured content it knows how to work with.
 
-That content is your FAQ - not the static FAQ page most businesses maintain manually, but a living record of what real visitors actually ask and what accurate answers look like. An agent that finds a well-structured FAQ covering your pricing, your policies, your product or service details, and the specific edge cases your customers care about is far more likely to surface your business in a relevant answer than one that finds a hero section and a few taglines.
+There are two ways your business shows up in that process, and they work at different layers.
 
-**What makes FAQ content effective for AI discoverability:**
+The first is indexed content - your pages, your FAQ, your policies, your product details - anything that's crawlable and specific enough for an agent to understand and cite. This is the passive layer. The agent finds it the way a search engine would, but the bar for what's useful is higher. Generic homepage copy doesn't tell an agent what you sell, who you serve, or whether you're the right fit for a specific question. A detailed, specific FAQ built from real customer questions does. Every answered question your customers have ever asked is a signal that makes your business more findable to the next agent that goes looking for something you offer.
 
-The specificity bar is higher than most businesses expect. "Do you offer returns?" is not useful to an AI agent. "Returns are accepted within 30 days of delivery on unworn items with the original tags attached; final sale items marked at checkout are excluded" is. The more precisely your FAQ mirrors the actual questions customers ask - with complete, specific answers - the more an agent can do with it.
+The second layer is active discoverability - a published endpoint that agents can find and call directly, rather than relying on indexed content alone. The emerging standard for this is the Model Context Protocol (MCP), which Claude, ChatGPT, and Perplexity all support. Businesses list their MCP endpoint in a file called `llms.txt` - the agent-era equivalent of `robots.txt` - and agents that encounter your site know exactly where to query for live, real-time information. This moves your business from "something an agent might have read about" to "something an agent can actively ask."
 
-Coverage matters too. Agents synthesize across topics. A business that has detailed answers about shipping, materials, sizing, warranty, and compatibility is one an agent can confidently recommend for a wide range of relevant questions. A business with two FAQ entries about store hours isn't.
+The difference matters more than it sounds. A business that only shows up in training data or indexed content is a static presence - the agent knows what it knew when it last read your site. A business with a callable endpoint is a live presence. The agent can ask what's in stock right now, what your current pricing is, what your return policy says today. It's the difference between a listing in a directory and a conversation.
 
-**Building FAQ content at scale:**
+## How the agent-to-agent interaction actually works
 
-Writing FAQ content manually is slow and tends to miss the real questions. The questions your customers are actually asking are already flowing through your business every day - in chat, in support tickets, on product pages. The effective approach is capturing those conversations, cleaning them up, and turning them into structured FAQ content automatically.
+When a user asks their AI assistant something that leads to your business - whether through indexed content, an MCP endpoint, or both - what happens next is an agent-to-agent exchange that the user never sees.
 
-This is what makes discoverability compound over time. A customer who asks about return windows on a specific product at 2pm is contributing to the answer an AI agent surfaces at 8pm - and the answer the next agent gets three months from now. The FAQ you have six months in, built from thousands of real customer questions, is far more valuable than anything you could write at launch. Your business gets more findable the more people interact with it, without anyone on your team writing a word.
+The user's AI (Claude, ChatGPT, whatever they're using) sends a query to your business agent. Not a search query - a real question, the same way a person would ask it. "Do you carry this in a wide width?" "What's your turnaround time on custom orders?" "How does your pricing work for teams?" Your business agent receives that query, pulls the answer from your connected knowledge sources, and returns a grounded, cited response. The user's AI delivers that answer in the conversation the user is already having.
 
-## How AI agents answer for your business without the user browsing
+From the user's perspective, they asked their AI a question and got a specific, accurate answer about your business. They never opened your website. They never searched. Your business was just... there, in the conversation, answering.
 
-Getting found is the first problem. The second is what happens once an agent finds you.
+This is what makes the business agent framing meaningful. It's not a database lookup. Your business agent isn't a read-only index - it's an active participant in the conversation. It knows your business the way a knowledgeable employee does: what you sell, what you don't, what questions come up most, what the edge cases are, what you'd want a customer to know before they buy. When another AI agent talks to it, it responds the way your best salesperson would - specifically, accurately, and from the ground truth of what you've actually published.
 
-Most websites are built for humans - for clicking, scrolling, reading. An AI agent querying your business on someone's behalf can't do any of that. It needs to ask a specific question and get a specific, structured answer back, in real time, through an interface it already knows how to use.
-
-That interface is your business agent. Not a chatbot on your site - your business's own AI representative. It knows your prices, your policies, your products and services, your return windows, the edge cases, the questions your customers ask most. When Claude or ChatGPT is helping someone and your business is relevant to what they're looking for, they talk to your agent. Your agent answers. The user gets a real, specific answer in the AI interface they were already in - without opening a browser tab, without navigating your site, without hunting through pages.
-
-Think of it as having your best salesperson and customer support rep available to every AI assistant, all the time, on behalf of anyone who might be looking for what you offer. Not a form. Not a widget. An agent that represents your business and can speak to anything you've equipped it to know.
-
-**What your business agent needs to handle:**
-
-Pricing and availability - the first things any buyer wants to know. If your agent can't answer "how much is X" or "do you have Y in stock," it fails the first test.
-
-Policies - returns, shipping, warranties, guarantees. These are the questions that determine whether someone trusts your business enough to buy. An agent that can answer them confidently, with a citation back to your published policy, closes the trust gap without a human in the loop.
-
-Product and service specifics - dimensions, compatibility, ingredients, process, requirements, timelines. The details a buyer needs to make a decision. The more granular your agent can be here, the more it can do for someone who is genuinely trying to figure out whether you're the right fit.
-
-The questions your customers already ask - the real ones, not the ones you think they ask. These are in your conversations. They're the ones your team answers fifty times a week. Those are the ones an agent needs to handle, because those are the ones the next agent will ask too.
-
-**How grounding and accuracy work:**
-
-An agent that makes things up about your business is worse than no agent. Every answer your business agent gives needs to be anchored to something you've actually published - a product page, a policy document, an FAQ entry - and that source needs to be visible so anyone can verify it. When a pricing answer cites your published pricing page, the user knows it's real. When a policy answer cites the exact paragraph from your returns policy, the agent is representing you accurately, not improvising.
-
-The standard most AI agents use to find and interact with business agents is the Model Context Protocol (MCP). Claude, ChatGPT, and Perplexity all support it. A business with an MCP-compatible agent is present in any AI conversation where it's relevant - the way a website made you present in any search that matched your content. Most tools haven't built this yet. Most chat and support products are designed for a human visitor in a widget, not for an external AI agent calling on someone's behalf.
+The accuracy part is non-negotiable. An agent that improvises about your business - inventing a price, guessing at a policy - does real damage. Every answer your business agent gives needs to be anchored to a source you control and cite it visibly, so the user's AI (and the user themselves) can verify any claim against your published content. When a pricing answer traces back to your pricing page, and a policy answer traces back to the exact paragraph in your return policy, the interaction carries the credibility of your actual business - not an AI's best guess about it.
 
 ## How to set this up
 

@@ -155,86 +155,37 @@ export default function AgentEndpoint() {
           </div>
         </section>
 
-        {/* ── Two mechanisms ───────────────────────────────────────────────── */}
-        <section className="py-24 border-b border-slate-100">
+        {/* ── Three things ─────────────────────────────────────────────────── */}
+        <section className="py-20 border-b border-slate-100">
           <div className="mx-auto max-w-6xl xl:max-w-7xl px-6">
-            <div className="text-center mb-14 space-y-3">
-              <h2 className="text-3xl sm:text-4xl font-semibold text-slate-900">
-                Two ways Nobi puts you in front of AI
-              </h2>
-              <p className="text-lg text-slate-500 max-w-2xl mx-auto">
-                Being present in the AI channel means two different things. Nobi handles both.
-              </p>
-            </div>
-
-            <div className="grid md:grid-cols-2 gap-6">
-              {/* Find */}
-              <div className="rounded-3xl border border-slate-200 bg-white p-8 space-y-5 shadow-sm">
-                <div className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-violet-50 border border-violet-100 text-violet-600">
-                  <FileText size={22} />
-                </div>
-                <div>
-                  <div className="text-xs font-semibold uppercase tracking-widest text-violet-500 mb-2">Get found</div>
-                  <h3 className="text-xl font-semibold text-slate-900 mb-3">AI systems learn who you are</h3>
-                  <p className="text-slate-500 leading-relaxed">
-                    Nobi turns real visitor conversations into structured content that AI crawlers can read and index. When an AI is asked about your category, it already knows you exist and what you offer - before the customer even asks a follow-up.
-                  </p>
-                </div>
-              </div>
-
-              {/* Talk */}
-              <div className="rounded-3xl border border-slate-200 bg-white p-8 space-y-5 shadow-sm">
-                <div className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-violet-50 border border-violet-100 text-violet-600">
-                  <Bot size={22} />
-                </div>
-                <div>
-                  <div className="text-xs font-semibold uppercase tracking-widest text-violet-500 mb-2">Get called</div>
-                  <h3 className="text-xl font-semibold text-slate-900 mb-3">AI agents get live answers from you</h3>
-                  <p className="text-slate-500 leading-relaxed">
-                    Every Nobi assistant is also a callable endpoint. When an AI agent wants real answers about your products, pricing, or policies, it calls your Nobi agent directly and gets a grounded response - with follow-ups handled too.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* ── How Nobi handles it ──────────────────────────────────────────── */}
-        <section className="py-24 bg-slate-50 border-b border-slate-100">
-          <div className="mx-auto max-w-6xl xl:max-w-7xl px-6 space-y-14">
-            <div className="text-center space-y-3">
-              <h2 className="text-3xl sm:text-4xl font-semibold text-slate-900">
-                Nobi sets it all up for you
-              </h2>
-              <p className="text-lg text-slate-500 max-w-xl mx-auto">
-                No separate configuration. No new tools.
-              </p>
-            </div>
-
             <div className="grid md:grid-cols-3 gap-6">
               {[
                 {
                   Icon: FileText,
-                  title: "Conversations become indexed content",
-                  body: "Real questions your visitors ask get sanitized and surfaced as structured FAQ content on your site. AI crawlers read it, index it, and use it when someone asks about your category.",
+                  label: "Get found",
+                  title: "Your conversations become indexed content",
+                  body: "Real questions visitors ask get surfaced as structured content AI crawlers can read. When an AI is asked about your category, it already knows you exist.",
                 },
                 {
                   Icon: Globe,
-                  title: "Your endpoint is auto-registered",
-                  body: "Nobi adds your agent endpoint to your site's llms.txt file automatically. Any AI agent that does discovery finds your business and knows it can call you for live answers.",
+                  label: "Get registered",
+                  title: "Your endpoint is listed automatically",
+                  body: "Nobi registers your agent endpoint in your site's llms.txt. Any AI agent doing discovery finds your business and knows it can call you directly.",
                 },
                 {
                   Icon: Bot,
-                  title: "Multi-turn questions, all answered",
-                  body: "Your Nobi agent handles the full conversation - products, policies, pricing, follow-ups - the same knowledge base that answers your human visitors answers AI agents too.",
+                  label: "Get called",
+                  title: "AI agents get live answers from you",
+                  body: "Your Nobi agent handles products, policies, pricing, and follow-ups - the same knowledge base that answers human visitors answers AI agents too.",
                 },
-              ].map(({ Icon, title, body }) => (
-                <div key={title} className="rounded-2xl bg-white border border-slate-200 p-7 space-y-4 shadow-sm">
-                  <div className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-violet-50 border border-violet-100 text-violet-600">
-                    <Icon size={18} />
+              ].map(({ Icon, label, title, body }) => (
+                <div key={title} className="rounded-3xl border border-slate-200 bg-white p-8 space-y-4 shadow-sm">
+                  <div className="inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-violet-50 border border-violet-100 text-violet-600">
+                    <Icon size={20} />
                   </div>
                   <div>
-                    <h3 className="font-semibold text-slate-900 mb-2">{title}</h3>
+                    <div className="text-xs font-semibold uppercase tracking-widest text-violet-500 mb-2">{label}</div>
+                    <h3 className="text-lg font-semibold text-slate-900 mb-2">{title}</h3>
                     <p className="text-sm text-slate-500 leading-relaxed">{body}</p>
                   </div>
                 </div>

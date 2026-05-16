@@ -141,6 +141,25 @@ export default function AgentEndpoint() {
           </div>
         </section>
 
+        {/* ── Beat 1: The moment ───────────────────────────────────────────── */}
+        <section className="py-32 border-b border-slate-100">
+          <div className="mx-auto max-w-4xl px-6 text-center space-y-12">
+            <p className="text-sm font-semibold tracking-[0.2em] text-slate-400 uppercase">Right now</p>
+            <div className="space-y-6">
+              <div className="inline-flex items-center gap-3 rounded-2xl bg-slate-50 border border-slate-200 px-6 py-4 shadow-sm">
+                <div className="w-6 h-6 rounded-md bg-gradient-to-br from-blue-500 to-violet-600 flex items-center justify-center flex-shrink-0">
+                  <Sparkles className="w-3.5 h-3.5 text-white" />
+                </div>
+                <span className="text-2xl sm:text-3xl font-medium text-slate-800">Find me a luxury cashmere sweater gift</span>
+                <span className="w-0.5 h-7 bg-slate-400 animate-pulse" />
+              </div>
+            </div>
+            <p className="text-xl text-slate-500 max-w-xl mx-auto">
+              Someone just typed this into their AI. They're about to be introduced to a business. Is it yours?
+            </p>
+          </div>
+        </section>
+
         {/* ── Three concrete scenarios ──────────────────────────────────────── */}
         <section className="py-24 border-b border-slate-100">
           <div className="mx-auto max-w-6xl xl:max-w-7xl px-6 space-y-12">

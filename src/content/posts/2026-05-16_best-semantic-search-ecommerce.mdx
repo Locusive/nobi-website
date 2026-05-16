@@ -1,0 +1,271 @@
+export const meta = {
+ title: "Best Semantic Search for Ecommerce",
+ slug: "best-semantic-search-ecommerce",
+ date: "2026-05-16",
+ publishedAt: "2026-05-16",
+ description: "A head-of-ecommerce shortlist of the best semantic search platforms - Nobi, Algolia, Klevu, Constructor - with concrete pricing, fit, and tradeoffs.",
+ excerpt: "A head-of-ecommerce shortlist of the best semantic search platforms - Nobi, Algolia, Klevu, Constructor - with concrete pricing, fit, and tradeoffs.",
+ tags: ["best tools", "site search", "ecommerce", "ecommerce search"],
+ author: "Shanif Dhanani",
+ heroImage: "https://storage.googleapis.com/nobi-public/docs_and_marketing_websites/posts/best-semantic-search-ecommerce/hero.webp",
+ featured: true,
+ draft: false,
+ faqItems: [
+ {
+ question: "What is semantic search for ecommerce, and why does it matter for conversion?",
+ answer: "Semantic search uses embeddings and large language models to match shopper queries to products by meaning instead of exact keyword overlap, so a query like 'lightweight overshirt for transitional weather' can surface wool overshirts and twill chore jackets even when those words aren't in the titles. That fixes the wording-mismatch problem that drives most thin-result pages on keyword engines. The conversion case is direct: UNTUCKit ran a two-month A/B test and saw a +17.1% lift on Nobi (17.6% CVR vs. 15.0%) before moving 100% of traffic over."
+ },
+ {
+ question: "How did we evaluate these semantic search platforms?",
+ answer: "We scored each platform on four things a head of ecommerce has to defend in a tool-selection meeting: semantic relevance out of the box, pricing transparency, time to ship, and what else comes bundled besides search. Nobi and Klevu ship semantic matching by default, Algolia gates it behind the NeuralSearch add-on, and Constructor bundles it into a broader personalization platform. Pricing ranges from Nobi's published per-search and per-message rates to Constructor's GMV-based revenue-share contracts, and implementation time splits the field into hours-to-days versus weeks-to-months."
+ },
+ {
+ question: "1. Nobi",
+ answer: "Nobi pairs semantic site search with a conversational shopping assistant on one platform, and both pull answers from the same retrieval layer. A shopper searching 'merino base layer for skiing' and a shopper asking 'is the heritage merino crew warm enough for skiing' in chat get answered against the same product and policy data, with no parallel content set to maintain and no second contract. For a head of ecommerce that means one bill and one set of analytics across search and chat."
+ },
+ {
+ question: "2. Algolia",
+ answer: "The article content provided does not include a dedicated section on Algolia, so a complete answer isn't possible here. From the evaluation section: Algolia is keyword-led at its base tier, with semantic matching available as a separate paid NeuralSearch add-on, and it takes longer to implement because the rule logic is yours to build."
+ },
+ {
+ question: "3. Klevu",
+ answer: "The article content provided does not include a dedicated section on Klevu, so a complete answer isn't possible here. From the evaluation section: Klevu ships semantic relevance by default and installs as a Shopify app in hours to days, but it quotes pricing by store size without listing numbers publicly and sells merchandising and recommendations as separate paid modules."
+ },
+ {
+ question: "4. Constructor",
+ answer: "The article content provided does not include a dedicated section on Constructor, so a complete answer isn't possible here. From the evaluation section: Constructor builds semantic matching into a broader personalization engine, runs revenue-share contracts that scale with GMV, and is a multi-month enterprise rollout that assumes a data team on both sides."
+ },
+ {
+ question: "How should a head of ecommerce pick between these semantic search platforms?",
+ answer: "Start with what you actually need bundled. If you want semantic search and a shopping assistant on one contract with published per-search and per-message pricing and an hours-to-ship install, Nobi fits. Pick Klevu if a Shopify-app install with semantic defaults is enough and you're fine quoting by store size, Algolia if you want a keyword-first engine with custom rule logic and are willing to pay for NeuralSearch on top, and Constructor if you have the team to run a multi-month personalization rollout on a GMV revenue-share contract."
+ }
+ ],
+};
+
+<script type="application/ld+json" data-nobi-schema>
+{`{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Best Semantic Search for Ecommerce",
+  "description": "A head-of-ecommerce shortlist of the best semantic search platforms - Nobi, Algolia, Klevu, Constructor - with concrete pricing, fit, and tradeoffs.",
+  "datePublished": "2026-05-16",
+  "dateModified": "2026-05-16",
+  "author": {
+    "@type": "Person",
+    "name": "Shanif Dhanani",
+    "url": "https://www.linkedin.com/in/shanifdhanani/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Nobi",
+    "url": "https://nobi.ai"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://nobi.ai/blog/best-semantic-search-ecommerce"
+  },
+  "about": [
+    {
+      "@type": "Thing",
+      "name": "site search"
+    },
+    {
+      "@type": "Thing",
+      "name": "ecommerce"
+    }
+  ],
+  "mentions": [
+    {
+      "@type": "Thing",
+      "name": "Nobi"
+    },
+    {
+      "@type": "Thing",
+      "name": "[Algolia](https://algolia.com)"
+    },
+    {
+      "@type": "Thing",
+      "name": "[Klevu](https://klevu.com)"
+    },
+    {
+      "@type": "Thing",
+      "name": "[Constructor](https://constructor.io)"
+    }
+  ],
+  "articleSection": "best of article"
+}`}
+</script>
+## What are the best semantic search solutions for ecommerce?
+
+Keyword search fails when shoppers describe what they want rather than type the exact product name. "Breathable running top for hot weather" returns nothing on a keyword engine even when the catalog has a dozen exact matches. Semantic search closes that gap by matching intent rather than words - but the four platforms that ecommerce teams actually evaluate (Nobi, Algolia, Klevu, and Constructor) do it differently depending on your catalog size, platform, and how much engineering you want to own:
+
+- **Nobi** - semantic site search plus a conversational shopping assistant in one platform, $25/mo base ($0.01 per extra search). Pick when natural-language queries are missing your catalog and you want relevance live in hours, not months.
+- **Algolia** - developer-first search API with NeuralSearch on higher tiers, usage-based on search requests and records indexed (often $2k+/mo at mid-market volumes). Pick when you have a search engineering team and want full API control over ranking.
+- **Klevu** - AI search built for Shopify, tiered by store size. Pick when long, conversational queries are your main miss reason on a Shopify store.
+- **Constructor** - semantic search plus session-signal personalization across category, browse, and search, revenue-share contracts that scale with GMV. Pick when discovery has to move across the full site, not just the search bar.
+
+| Product | Primary job | Best for | Pricing (starting) | Standout strength | Key weakness |
+| --- | --- | --- | --- | --- | --- |
+| Nobi | Semantic search + conversational shopping assistant | Ecommerce teams whose natural-language queries miss the catalog and who want relevance live in hours | $25/mo base (2,500 searches, 250 messages); $0.01/extra search, $0.10/extra message | Semantic relevance plus a grounded shopping assistant with citation pills, no manual rule tuning | No API-first developer platform - teams writing custom ranking logic in code will need a different tool |
+| [Algolia](https://algolia.com) | Developer-first search API with optional NeuralSearch | Engineering teams that want full API control over ranking and indexing | Usage-based on search requests and records indexed; often $2k+/mo at mid-market volumes; enterprise tier is opaque | Sub-50ms response times and granular API control | Usage-based pricing produces surprise bills during traffic spikes; relevance scales with engineering hours |
+| [Klevu](https://klevu.com) | AI search and merchandising for Shopify | Shopify brands whose empty pages come from conversational queries a basic engine can't handle | Tiered by store size; pricing quoted privately, not published | AI matching catches long, conversational queries before they go zero-result | Personalization is upsold as a separate module; now a division of Athos Commerce, where feature parity varies across the portfolio |
+| [Constructor](https://constructor.io) | Semantic search plus session-signal personalization across category, browse, and search | Retailers with $50M+ GMV and an internal data team who need discovery across the full site | Revenue-share, no published list price; costs scale with GMV | Real-time product reordering on in-session behavior across the full site, not just the search bar | Revenue-share pricing can scale unpredictably with GMV; weeks-to-months implementation |
+
+*Full disclosure: Nobi is our product, and it's included in this list alongside the three competitors head-of-ecommerce buyers most often weigh against it. We've aimed to be honest about Nobi's own limits and explicit about when another tool on this list is the better pick.*
+
+<BlogQualifier context="Algolia, Klevu, and Constructor for semantic ecommerce search" />
+
+## What is semantic search for ecommerce, and why does it matter for conversion?
+
+Semantic search uses embeddings and large language models to match shopper queries to products by meaning rather than by exact keyword overlap. For an ecommerce catalog, that means a query like "lightweight overshirt for transitional weather" can return wool overshirts and twill chore jackets even when those exact words don't appear in product titles. Keyword search ranks by token overlap, so a query that doesn't share words with your titles returns a thin grid or nothing at all. Semantic retrieval fixes the [wording-mismatch problem](https://nobi.ai/blog/handling-long-tail-queries) that drives most of those misses - synonyms, attribute paraphrasing, multi-attribute descriptions.
+
+The conversion case is direct. [UNTUCKit](/customers/untuckit) ran a two-month A/B test against its prior search tool and saw a +17.1% lift on Nobi (17.6% CVR vs. 15.0%), then moved 100% of traffic over.
+
+This is now table stakes on [AI-native engines](https://nobi.ai/blog/best-ai-search-ecommerce-2026). Nobi and Klevu ship semantic relevance by default; Algolia gates it behind the NeuralSearch add-on; Constructor builds it into a broader personalization platform. Semantic search alone isn't the whole job, though - real discovery also needs merchandising controls and a conversational layer for the questions shoppers want to ask in plain language.
+
+## How did we evaluate these semantic search platforms?
+
+We scored each platform on four things a head of ecommerce actually has to defend in a tool-selection meeting: how good the semantic matching is out of the box, how transparent the pricing is, how fast it ships, and what else comes in the box besides search.
+
+Klevu and Nobi treat natural-language matching as the default - shoppers can describe what they want in plain words and the engine resolves it. Algolia is different. The base product is keyword-led, with neural matching available as a separate NeuralSearch add-on you turn on and pay for on top of the core tier. Constructor builds semantic matching into a broader personalization engine, so it's strong but arrives bundled with site-wide personalization you have to commit to.
+
+Pricing transparency mattered more than we expected. Nobi publishes per-search and per-message rates anyone can model in a spreadsheet. Klevu quotes by store size and doesn't list numbers publicly. Algolia publishes a starting tier but NeuralSearch is a separate quote on top of it. Constructor runs revenue-share contracts that scale with GMV - fine if your finance team is comfortable with that, a problem if it isn't.
+
+Implementation time splits the field into hours-to-days versus weeks-to-months. Nobi is a small theme drop-in you can ship in hours. Klevu installs as a Shopify app in similar time. Algolia takes longer because the rule logic is yours to build. Constructor is a multi-month enterprise rollout with a data team on both sides.
+
+Nobi includes site search and a shopping assistant on one contract. Klevu sells merchandising and recommendations as separate paid modules. Algolia is search-first with everything else built in code. Constructor covers personalization broadly but assumes you have the team to run it.
+
+## 1. Nobi
+
+Nobi pairs semantic site search with a conversational shopping assistant on one platform, and both pull answers from the same retrieval layer. A shopper who types "merino base layer for skiing" into the search bar and a shopper who asks "is the heritage merino crew warm enough for skiing" in chat get answered against the same product and policy data - no parallel content set to maintain, no second contract to negotiate. [Lucchese](/customers/lucchese) runs Nobi for search plus a cart assistant and a PDP assistant on Shopify Plus, and has attributed $3.46M in cumulative revenue to the stack with a 39x ROI in year one.
+
+**Best for:** Ecommerce stores whose natural-language queries miss the catalog and want semantic relevance plus a grounded shopping assistant live in hours, not months.
+
+**Pricing:** $25/month base, including 2,500 searches and 250 conversational messages. $0.01 per additional search and $0.10 per additional message.
+
+**Pros:**
+- Semantic relevance is the default, not a higher tier or an add-on. Long, conversational queries match the catalog without rule tuning or weekly merchandiser pinning.
+- Search and the shopping assistant share one retrieval layer, and every answer carries inline citation pills that show the source document, date, and exact excerpt the answer came from.
+- Connected knowledge sources refresh twice a day, so a price change or a return-policy update reaches shopper answers within hours instead of waiting on a weekly sync.
+- Per-unit pricing is published, so a finance team can model the monthly bill before signing anything.
+
+**Cons:**
+- Not an API-first developer platform. Teams that want to write custom ranking logic or embed search in a heavily bespoke frontend will prefer Algolia.
+- Smaller third-party integration marketplace than Algolia.
+- No site-wide merchandising. Nobi curates the search results page, not category or collection pages.
+
+**Verdict:** Pick Nobi when semantic search and a grounded shopping assistant are the job and you want transparent per-unit pricing with a fast install. Skip it if you need a code-first search API or merchandising that extends across category pages.
+
+<div className="my-8 flex justify-center">
+ <a
+ href="https://dashboard.nobi.ai"
+ className="inline-flex items-center justify-center gap-2 rounded-2xl font-medium transition active:scale-[.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-black/10 dark:focus-visible:ring-white/20 bg-black text-white dark:bg-white dark:text-black hover:opacity-90 shadow-sm h-12 px-6 text-base no-underline"
+ >
+ <span>Get started with Nobi free</span>
+ </a>
+</div>
+
+## 2. Algolia
+
+[Algolia](https://algolia.com) is a search API built for engineering teams. Rules, ranking, synonyms, and merchandising are all configured in code, and response times stay under 50ms even at catalog scale. NeuralSearch adds semantic matching on top of keyword relevance on higher tiers, which is what catches the descriptive queries keyword-only ranking drops. The trade-off is who does the work. Every rule, synonym set, and ranking tweak is engineering time, and usage-based pricing scales with traffic - which means surprise bills during the spikes when CVR pressure is already highest.
+
+**Best for:** Engineering teams that want full API control over ranking and indexing and have the developer hours to keep semantic relevance tuned as the catalog evolves.
+
+**Pricing:** Usage-based on search requests and records indexed, with NeuralSearch gated to higher tiers. The enterprise tier is opaque, and mid-market deployments often run $2k+/month before custom relevance engineering.
+
+**Pros:**
+- Sub-50ms response times and fast indexing at catalog scale
+- Large ecosystem of libraries, InstantSearch widgets, and platform integrations across every major frontend stack
+- NeuralSearch adds semantic matching on top of keyword relevance on higher tiers, catching the conversational queries keyword-only ranking misses
+- Granular API-level control over ranking, indexing, synonyms, and frontend rendering
+
+**Cons:**
+- Relevance work scales with engineering hours, not contract size, so non-technical merchandisers can't drive ranking changes alone
+- Usage-based pricing produces surprise bills during seasonal traffic spikes, exactly when CVR pressure is highest
+- NeuralSearch is gated to higher tiers, so the cheapest Algolia setup doesn't include the semantic matching most ecommerce catalogs actually need
+
+**Verdict:** Pick Algolia when you have a dedicated search engineering team and want to own ranking, indexing, and the frontend end to end. Skip it if non-technical merchandisers need to drive relevance work without filing tickets.
+
+## 3. Klevu
+
+[Klevu](https://klevu.com) brings AI-driven semantic matching to Shopify with a packaged install that goes live in hours. The engine reads your catalog and figures out what shoppers actually mean, so long, conversational queries that would otherwise miss often find real products. A "did you mean" feature handles the typos shoppers reliably produce on product names, colors, and brands. Klevu is now a division of Athos Commerce alongside Searchspring and Intelligent Reach - the three products are still sold separately, with their own contracts and pricing.
+
+**Best for:** Shopify brands whose miss reason is conversational queries the default search can't handle, and who want a packaged App Store install rather than a custom build.
+
+**Pricing:** Tiered by store size. Klevu doesn't list numbers publicly.
+
+**Pros:**
+- AI matching catches long, conversational queries and synonyms before they resolve to empty
+- "Did you mean" suggestions handle most typos and misspellings without merchandiser intervention
+- Packaged Shopify install goes live quickly compared to a custom-built setup
+- Merchandiser-friendly dashboard for redirects, no-results rules, and recommendation slots
+
+**Cons:**
+- Personalization is licensed as a separate module, not included with Smart Search
+- Klevu is now part of Athos Commerce alongside Searchspring and Intelligent Reach; feature parity, contracts, and pricing vary across the three products under the same parent
+- AI matching is only as good as your catalog data - sparse product info weakens the layer that's supposed to prevent empty pages
+
+**Verdict:** Pick Klevu when your search problem is Shopify wording mismatch and you want a packaged install; skip it if you also need conversational Q&A bundled in.
+
+## 4. Constructor
+
+[Constructor](https://constructor.io) blends semantic search with real-time session-signal personalization, so products reorder as a shopper clicks, views, or adds items during a visit. The same model runs across search, browse, category pages, and recommendations - not just the search results page. The trade-off is the commitment: revenue-share pricing with no published list, weeks-to-months to implement, and an assumed data team on your side to extract the value the contract is priced against.
+
+**Best for:** $50M+ GMV retailers with an internal data team, where merchandising has to move across category, collection, browse, and search together.
+
+**Pricing:** Revenue-share with no published list price; costs scale with GMV.
+
+**Pros:**
+- Session-signal personalization reorders results in real time, so ranking moves on every individual visit instead of only on aggregate quality
+- Merchandising covers the whole site - category, collection, browse, recommendations - so discovery work isn't trapped in the search bar
+- Built-in A/B testing and behavioral analytics, so you can measure which change actually moved CVR
+- Search, browse, category, and recommendations run on one platform, so signals from any surface feed the shared ranking model
+
+**Cons:**
+- Revenue-share contracts mean a successful CVR campaign costs more as GMV grows, and bills can scale in surprising ways during peak season
+- Implementation runs weeks to months and requires internal data science or analytics resources to get full value
+- Brands without an internal data team generally can't extract the value the contract is priced against
+
+**Verdict:** Pick Constructor when you need behavioral personalization and merchandising across the full site and have the data team and budget to match; skip it if you want transparent per-unit pricing or just the search bar without a full discovery platform attached.
+
+## How should a head of ecommerce pick between these semantic search platforms?
+
+Match the tool to the actual job, not the marketing label. Pricing model, install time, and what comes in the box besides search will sort the four faster than any feature checklist.
+
+Pick Nobi when the bottleneck is natural-language queries falling through the catalog and you also want a grounded shopping assistant answering catalog questions on the page. Semantic relevance and chat run on the same retrieval layer, the install is a small theme drop-in that goes live in hours, and the per-unit pricing is published so finance can model the bill before signing. [Kilte](/customers/kilte) ran an A/B test against Shopify's default search and saw a +21.7% CVR lift on Nobi - the kind of result that argues for trying the relevance layer before rebuilding the rule engine.
+
+Pick Algolia when you have a search engineering team and want to own ranking code end to end. Every rule, synonym, and ranking tweak is yours to write, NeuralSearch adds semantic matching on higher tiers, and the API control is what you're buying. The trade-off is that relevance work scales with engineering hours, not contract size.
+
+Pick Klevu if you're on Shopify and the miss reason is conversational queries the default search can't handle, and you want a packaged App Store install over a custom build.
+
+Pick Constructor when discovery has to move across category, browse, search, and recommendations together and you have the data team and budget to feed the personalization model.
+
+One pricing question to ask every vendor before signing: per-unit or revenue-share? Revenue-share creates surprise bills as GMV grows; per-unit lets a finance team build a real spend model first.
+
+## Frequently asked questions
+
+**What is the difference between semantic search and AI search?** Semantic search is one capability inside the broader ["AI search"](https://nobi.ai/blog/the-top-ecommerce-platforms-for-native-ai-search-and-product-discovery) bucket. It uses embeddings to match queries by meaning rather than keyword overlap. "AI search" usually bundles semantic retrieval with other things - conversational answers, personalized ranking, generated summaries. When a vendor says "AI search," ask which of those pieces they actually ship.
+
+**How long does semantic search implementation take on Shopify?** Hours to weeks, depending on the tool. Nobi is a small theme drop-in that goes live the same day. Klevu installs as a packaged Shopify app on a similar timeline. Algolia takes longer because you write the ranking rules yourself. Constructor runs weeks to months and assumes a data team on both sides.
+
+**Is revenue-share pricing always more expensive than per-unit pricing?** Not always, but it's harder to predict. Per-unit rates let finance model a spend ceiling before signing. Revenue-share scales with GMV, so a successful CVR campaign costs more next month.
+
+**Do semantic search platforms replace your existing merchandising tools?** Not usually. Most curate the search results page; category and collection merchandising still needs its own tooling.
+
+**How much CVR lift should I expect?** Real ranges vary by catalog, but A/B tests on Nobi have shown +17.1% at [UNTUCKit](/customers/untuckit) and +21.7% at [Kilte](/customers/kilte) against prior search.
+
+
+<BlogEmailCapture hook="Picking semantic search for your ecommerce catalog?" subtext="Drop your email and we'll run Nobi's AI search on your catalog so you have a real data point alongside Algolia, Klevu, and Constructor." />
+
+---
+
+Want to see how Nobi's semantic search and shopping assistant handle your own catalog? Book a demo at nobi.ai, or jump in on the $25/mo plan and start today.
+
+<div className="my-8 flex justify-center">
+ <a
+ href="https://dashboard.nobi.ai"
+ className="inline-flex items-center justify-center gap-2 rounded-2xl font-medium transition active:scale-[.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-black/10 dark:focus-visible:ring-white/20 bg-black text-white dark:bg-white dark:text-black hover:opacity-90 shadow-sm h-12 px-6 text-base no-underline"
+ >
+ <span>Start your free Nobi trial</span>
+ </a>
+</div>

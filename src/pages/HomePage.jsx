@@ -108,19 +108,19 @@ const VARIANT_CONTENT = {
     ],
   },
   agents: {
-    headline: "When customers use AI to shop, their agent calls yours",
-    subline:  "Every Nobi assistant is also a callable agent endpoint. When a customer's AI looks up your store, it queries your Nobi agent directly - products, policies, follow-ups - all server to server, instantly.",
-    problemHeading: "AI assistants are becoming a new shopping channel",
-    problemBody:    "People are using Claude, ChatGPT, and other AI assistants to research products and ask follow-up questions. Those agents call business endpoints directly. Stores without one don't show up.",
+    headline: "AI agents can now find your business and talk to it directly",
+    subline:  "Nobi gives you two things automatically: structured content that AI crawlers index so agents know you exist, and a live endpoint they can call to get real answers. Both happen the moment you install Nobi.",
+    problemHeading: "AI systems discover and query businesses — most aren't ready",
+    problemBody:    "People are using AI assistants to research, evaluate, and get recommendations. Those agents read indexed content to find businesses, then call endpoints to get live answers. Without both, you're invisible.",
     problemPoints: [
-      { Icon: SearchIcon,            label: "Agents skip stores with no endpoint", desc: "AI shopping assistants look for callable endpoints. If you don't have one, the agent moves on to a competitor that does." },
-      { Icon: MessageCircleQuestion, label: "One query, unlimited follow-ups",     desc: "A customer's agent doesn't stop at the first answer. It asks about sizing, shipping, gift options - anything your knowledge base covers." },
-      { Icon: ShoppingCart,          label: "It's already happening",              desc: "Millions of people use AI assistants to research purchases. The stores with agent endpoints are getting found. The ones without aren't." },
+      { Icon: SearchIcon,            label: "Not findable by AI crawlers",    desc: "AI systems index structured content to learn what businesses offer. If your knowledge lives in chat logs or unformatted pages, it never gets indexed." },
+      { Icon: MessageCircleQuestion, label: "No endpoint to answer agents",   desc: "When an AI agent wants live answers about your offering, it calls an endpoint. Businesses without one can't respond — the agent moves on." },
+      { Icon: BarChart3,             label: "Two channels, both growing fast", desc: "Indexed content determines whether AI knows you exist. Callable endpoints determine whether AI can serve you to someone right now. Nobi handles both." },
     ],
-    numbersHeading: "Your endpoint goes live with Nobi",
+    numbersHeading: "Your AI presence goes live with Nobi",
     stats: [
-      { number: "Zero", label: "setup required",      desc: "Your agent endpoint is live the moment you install Nobi. No configuration, no separate deployment, nothing to maintain." },
-      { number: "Auto", label: "listed in llms.txt",  desc: "Nobi registers your endpoint in your site's llms.txt automatically so AI agents can discover it without you lifting a finger." },
+      { number: "Auto", label: "indexed from real conversations", desc: "Nobi turns real visitor conversations into structured content AI crawlers can read. Your knowledge base builds itself from actual questions people ask." },
+      { number: "Zero", label: "setup for your agent endpoint",   desc: "Your Nobi assistant is already a callable agent endpoint. Any AI agent can discover and query it the moment you go live." },
     ],
   },
   leads: {
@@ -786,7 +786,7 @@ function renderHeadline(variant) {
     case "answer":
       return <>Every question answered before it costs you{" "}<span className={GRADIENT}>a sale or a ticket</span></>;
     case "agents":
-      return <>When customers use AI to shop, their agent{" "}<span className={GRADIENT}>calls yours</span></>;
+      return <>AI agents can now find your business{" "}<span className={GRADIENT}>and talk to it directly</span></>;
     default:
       return <>Turn your website into your best{" "}<span className={GRADIENT}>sales associate</span></>;
   }

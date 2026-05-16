@@ -365,8 +365,8 @@ export default function AgentEndpoint() {
         <section id="beat-4" className="min-h-screen flex flex-col items-center justify-center border-b border-slate-100 bg-white px-6 py-20 gap-10">
           <StoryDots active={3} total={4} />
           <div className="text-center space-y-3 max-w-2xl">
-            <h2 className="text-3xl sm:text-4xl font-semibold text-slate-900">Then it called you directly.</h2>
-            <p className="text-lg text-slate-500">Your Nobi assistant is a live agent endpoint. The AI called it and got real answers  -  products, policies, follow-ups.</p>
+            <h2 className="text-3xl sm:text-4xl font-semibold text-slate-900">Their AI reached out and asked questions.</h2>
+            <p className="text-lg text-slate-500">Your Nobi assistant answered directly. Products, pricing, gift wrapping - all of it, automatically.</p>
           </div>
           <div className="w-full max-w-2xl flex items-stretch gap-3">
             <div className="flex-1 rounded-2xl border border-black/10 bg-white shadow-lg overflow-hidden">

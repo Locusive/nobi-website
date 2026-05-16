@@ -144,7 +144,7 @@ export default function Footer() {
         </div>
       </section>
 
-      <footer className="border-t border-black/10 bg-white py-12 dark:border-white/10 dark:bg-black">
+      <footer className="border-t border-black/10 bg-white pt-12 pb-28 dark:border-white/10 dark:bg-black">
         <div className="mx-auto max-w-6xl px-6 grid gap-10 sm:grid-cols-[1fr,2fr] sm:items-start">
           <div className="space-y-4">
             <Logo />
@@ -170,6 +170,7 @@ export default function Footer() {
                 <a href="/why-nobi/automated-support" className="hover:opacity-80">Automated support</a>
                 <a href="/lead-capture" className="hover:opacity-80">Lead capture</a>
                 <a href="/custom-actions" className="hover:opacity-80">Custom actions</a>
+                <a href="/why-nobi/ai-agents" className="hover:opacity-80">Reach AI agents</a>
               </div>
             </div>
 

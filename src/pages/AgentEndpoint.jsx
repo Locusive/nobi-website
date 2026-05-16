@@ -155,39 +155,68 @@ export default function AgentEndpoint() {
           </div>
         </section>
 
-        {/* ── Three things ─────────────────────────────────────────────────── */}
-        <section className="py-20 border-b border-slate-100">
+        {/* ── The pitch ────────────────────────────────────────────────────── */}
+        <section className="border-t border-slate-100 py-24">
           <div className="mx-auto max-w-6xl xl:max-w-7xl px-6">
+            <div className="grid md:grid-cols-2 gap-16 items-center">
+              <div className="space-y-6">
+                <h2 className="text-3xl sm:text-4xl font-semibold text-slate-900 leading-tight">
+                  A brand new channel. Included with the assistant you already have.
+                </h2>
+                <p className="text-lg text-slate-500 leading-relaxed">
+                  Every major AI assistant — Claude, ChatGPT, Perplexity, Gemini — is becoming how people discover and research businesses. When someone asks one of these tools about what you sell, your Nobi agent answers them directly. No extra setup. No extra cost. It's just part of what Nobi does.
+                </p>
+                <p className="text-lg text-slate-500 leading-relaxed">
+                  This channel didn't exist two years ago. The businesses in it now are the ones that will own it. Your competitors are not there yet.
+                </p>
+              </div>
+              <div className="grid grid-cols-2 gap-4">
+                {[
+                  { number: "Zero",   label: "extra cost",         desc: "The AI agent channel is included with your existing Nobi assistant. No new tools, no new pricing tier." },
+                  { number: "24/7",   label: "automatic",          desc: "Your Nobi agent answers AI queries around the clock with no human involvement required." },
+                  { number: "Every",  label: "major AI assistant",  desc: "Claude, ChatGPT, Perplexity, Gemini — any MCP-compatible agent can find and query your business." },
+                  { number: "First",  label: "mover advantage",    desc: "Most businesses don't have an agent endpoint yet. Getting in now means owning the channel before your competitors do." },
+                ].map((s) => (
+                  <div key={s.label} className="rounded-2xl bg-slate-50 border border-slate-200 p-6 space-y-2">
+                    <div className="text-2xl font-bold text-slate-900">{s.number}</div>
+                    <div className="text-sm font-semibold text-violet-600">{s.label}</div>
+                    <p className="text-xs text-slate-500 leading-relaxed">{s.desc}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ── Dark "how it flows" section ───────────────────────────────────── */}
+        <section className="bg-gradient-to-b from-[#17122f] via-[#1c1540] to-[#17122f] py-24 text-white">
+          <div className="mx-auto max-w-6xl xl:max-w-7xl px-6 space-y-16">
+            <div className="text-center space-y-4 max-w-2xl mx-auto">
+              <h2 className="text-3xl sm:text-4xl font-semibold">How your business gets found and called</h2>
+              <p className="text-slate-300 text-lg">Nobi handles the full chain automatically.</p>
+            </div>
             <div className="grid md:grid-cols-3 gap-6">
               {[
                 {
-                  Icon: FileText,
-                  label: "Get found",
-                  title: "Your conversations become indexed content",
-                  body: "Real questions visitors ask get surfaced as structured content AI crawlers can read. When an AI is asked about your category, it already knows you exist.",
+                  step: "01",
+                  title: "Your conversations build your presence",
+                  body: "Every question a visitor asks gets surfaced as structured content AI crawlers can index. The more people engage with your Nobi assistant, the richer your AI presence gets — automatically.",
                 },
                 {
-                  Icon: Globe,
-                  label: "Get registered",
-                  title: "Your endpoint is listed automatically",
-                  body: "Nobi registers your agent endpoint in your site's llms.txt. Any AI agent doing discovery finds your business and knows it can call you directly.",
+                  step: "02",
+                  title: "AI agents discover you",
+                  body: "Nobi registers your endpoint in your site's llms.txt. When Claude, ChatGPT, or any MCP-compatible agent goes looking for businesses in your category, yours shows up.",
                 },
                 {
-                  Icon: Bot,
-                  label: "Get called",
-                  title: "AI agents get live answers from you",
-                  body: "Your Nobi agent handles products, policies, pricing, and follow-ups - the same knowledge base that answers human visitors answers AI agents too.",
+                  step: "03",
+                  title: "They call you. You answer.",
+                  body: "The AI agent calls your Nobi endpoint directly. Your assistant answers with your products, your policies, your pricing — the same knowledge base it uses for human visitors, now serving AI agents too.",
                 },
-              ].map(({ Icon, label, title, body }) => (
-                <div key={title} className="rounded-3xl border border-slate-200 bg-white p-8 space-y-4 shadow-sm">
-                  <div className="inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-violet-50 border border-violet-100 text-violet-600">
-                    <Icon size={20} />
-                  </div>
-                  <div>
-                    <div className="text-xs font-semibold uppercase tracking-widest text-violet-500 mb-2">{label}</div>
-                    <h3 className="text-lg font-semibold text-slate-900 mb-2">{title}</h3>
-                    <p className="text-sm text-slate-500 leading-relaxed">{body}</p>
-                  </div>
+              ].map(({ step, title, body }) => (
+                <div key={step} className="rounded-2xl border border-white/10 bg-white/5 p-8 space-y-4">
+                  <div className="text-3xl font-bold text-violet-400">{step}</div>
+                  <h3 className="text-lg font-semibold text-white">{title}</h3>
+                  <p className="text-slate-300 leading-relaxed text-sm">{body}</p>
                 </div>
               ))}
             </div>
@@ -198,10 +227,10 @@ export default function AgentEndpoint() {
         <section className="py-24">
           <div className="mx-auto max-w-3xl px-6 text-center space-y-6">
             <h2 className="text-3xl sm:text-4xl font-semibold text-slate-900">
-              Be present before your competitors are
+              Get in the channel before your competitors do
             </h2>
             <p className="text-lg text-slate-500">
-              The businesses establishing a presence in the AI channel now will be the ones AI systems recommend later.
+              If you're already on Nobi, your agent endpoint is live. If you're not, now is the time.
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center pt-2">
               <a href={getSignupUrl()} className="inline-flex items-center justify-center gap-2 rounded-2xl font-medium bg-black text-white hover:opacity-90 h-12 px-6 text-base">

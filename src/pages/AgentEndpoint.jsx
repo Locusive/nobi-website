@@ -62,52 +62,87 @@ export default function AgentEndpoint() {
               {/* Visual */}
               <div className="relative">
                 <div className="absolute -inset-8 bg-gradient-to-r from-violet-200/70 via-white to-indigo-200/70 rounded-[34px] blur-3xl opacity-90" aria-hidden />
-                <div className="relative overflow-hidden rounded-3xl bg-white border border-slate-100 shadow-[0_28px_80px_-30px_rgba(15,23,42,0.45)] p-6 space-y-5">
+                <div className="relative overflow-hidden rounded-3xl bg-slate-50 border border-slate-200 shadow-[0_28px_80px_-30px_rgba(15,23,42,0.45)] p-5">
 
-                  {/* Context label */}
-                  <div className="flex items-center gap-2">
-                    <div className="w-6 h-6 rounded-full bg-gradient-to-br from-blue-500 to-violet-600 flex items-center justify-center flex-shrink-0">
-                      <Sparkles className="w-3.5 h-3.5 text-white" />
-                    </div>
-                    <span className="text-sm font-semibold text-slate-500">What a shopper sees in their AI assistant</span>
-                  </div>
+                  <div className="flex items-stretch gap-3">
 
-                  {/* Shopper's message */}
-                  <div className="flex justify-end">
-                    <div className="bg-slate-100 rounded-2xl rounded-br-sm px-4 py-3 text-base text-slate-800">
-                      Find me a luxury cashmere sweater gift
-                    </div>
-                  </div>
-
-                  {/* AI response — your products */}
-                  <div className="flex items-start gap-3">
-                    <div className="w-7 h-7 rounded-full bg-gradient-to-br from-blue-500 to-violet-600 flex items-center justify-center flex-shrink-0 mt-0.5">
-                      <Sparkles className="w-3.5 h-3.5 text-white" />
-                    </div>
-                    <div className="flex-1 min-w-0 space-y-3">
-                      <p className="text-sm text-slate-700 leading-relaxed">Summit Cashmere has exactly what you need — and they offer complimentary gift wrapping:</p>
-                      <div className="grid grid-cols-3 gap-2.5">
-                        {[
-                          { name: "Classic Crew",  price: "$265", img: "https://www.alpsandmeters.com/cdn/shop/products/Cashmere_Alpine_Guide_Sweater_Camel.jpg?v=1753426053&width=300" },
-                          { name: "Rib Turtleneck", price: "$295", img: "https://www.alpsandmeters.com/cdn/shop/products/Ski_Race_Knit_Sports_Club_Navy.jpg?v=1753426053&width=300" },
-                          { name: "Cable Knit",    price: "$245", img: "https://www.alpsandmeters.com/cdn/shop/products/Classic_Cable_Knit_IVORY_Front.jpg?v=1753426168&width=300" },
-                        ].map((p) => (
-                          <div key={p.name} className="rounded-xl overflow-hidden border border-slate-100 bg-white shadow-sm">
-                            <div className="aspect-[3/4]"><img src={p.img} alt={p.name} className="w-full h-full object-cover" /></div>
-                            <div className="px-2.5 py-2">
-                              <div className="text-xs font-semibold text-slate-700 truncate">{p.name}</div>
-                              <div className="text-xs text-slate-400">{p.price}</div>
-                            </div>
-                          </div>
-                        ))}
+                    {/* Left node: Customer's AI */}
+                    <div className="flex-1 min-w-0 rounded-2xl bg-white border border-slate-200 shadow-sm overflow-hidden">
+                      <div className="flex items-center gap-2 px-4 py-3 border-b border-slate-100 bg-slate-50">
+                        <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-blue-500 to-violet-600 flex items-center justify-center flex-shrink-0">
+                          <Bot size={14} className="text-white" />
+                        </div>
+                        <div className="min-w-0">
+                          <div className="text-xs font-bold text-slate-800">Customer's AI</div>
+                          <div className="text-[10px] text-slate-400">Claude · ChatGPT · Gemini</div>
+                        </div>
+                      </div>
+                      <div className="p-4 space-y-3">
+                        <div className="text-[10px] font-mono font-semibold uppercase tracking-widest text-slate-400">Query</div>
+                        <div className="rounded-xl bg-violet-50 border border-violet-100 px-3 py-2.5 text-sm text-slate-700 leading-snug">
+                          "Find me a luxury cashmere sweater gift"
+                        </div>
+                        <div className="text-[10px] font-mono font-semibold uppercase tracking-widest text-emerald-500 mt-2">Response received</div>
+                        <div className="rounded-xl bg-emerald-50 border border-emerald-100 px-3 py-2.5 text-sm text-slate-700 leading-snug">
+                          3 products + gift wrap info
+                        </div>
                       </div>
                     </div>
-                  </div>
 
-                  {/* The insight — what this means for the merchant */}
-                  <div className="flex items-center gap-3 rounded-2xl bg-emerald-50 border border-emerald-100 px-4 py-3.5">
-                    <span className="h-2.5 w-2.5 rounded-full bg-emerald-500 flex-shrink-0" />
-                    <span className="text-sm font-medium text-emerald-900">Your products were recommended — the shopper never visited your site</span>
+                    {/* Wire — the centrepiece */}
+                    <div className="flex flex-col items-center justify-center gap-2 w-14 flex-shrink-0">
+                      {/* Query arrow L→R */}
+                      <div className="flex items-center w-full">
+                        <div className="flex-1 h-[2px] bg-violet-400 rounded-full" />
+                        <svg width="8" height="8" viewBox="0 0 8 8" className="flex-shrink-0 -ml-px">
+                          <path d="M0 0 L8 4 L0 8 Z" fill="#a78bfa" />
+                        </svg>
+                      </div>
+                      <div className="text-[9px] font-mono text-slate-400 text-center leading-tight">agent<br/>endpoint</div>
+                      {/* Response arrow R→L */}
+                      <div className="flex items-center w-full">
+                        <svg width="8" height="8" viewBox="0 0 8 8" className="flex-shrink-0 -mr-px">
+                          <path d="M8 0 L0 4 L8 8 Z" fill="#34d399" />
+                        </svg>
+                        <div className="flex-1 h-[2px] bg-emerald-400 rounded-full" />
+                      </div>
+                    </div>
+
+                    {/* Right node: Summit Cashmere's Nobi agent */}
+                    <div className="flex-1 min-w-0 rounded-2xl bg-white border border-violet-200 shadow-sm overflow-hidden">
+                      <div className="flex items-center gap-2 px-4 py-3 border-b border-violet-100 bg-gradient-to-r from-violet-600 to-fuchsia-600">
+                        <svg className="h-5 w-auto flex-shrink-0" viewBox="0 0 22 18" fill="none">
+                          <path d="M11 2L20 16H2L11 2Z" stroke="white" strokeWidth="1.5" strokeLinejoin="round"/>
+                          <path d="M7.5 16L11 10.5L14.5 16" stroke="white" strokeWidth="1" strokeLinejoin="round" strokeOpacity="0.5"/>
+                        </svg>
+                        <div className="min-w-0">
+                          <div className="text-xs font-bold text-white">Summit Cashmere</div>
+                          <div className="text-[10px] text-white/60">Powered by Nobi</div>
+                        </div>
+                        <div className="ml-auto flex items-center gap-1 flex-shrink-0">
+                          <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
+                        </div>
+                      </div>
+                      <div className="p-4 space-y-2">
+                        <div className="text-[10px] font-mono font-semibold uppercase tracking-widest text-emerald-500">Products returned</div>
+                        <div className="grid grid-cols-3 gap-1.5">
+                          {[
+                            { name: "Classic Crew",   price: "$265", img: "https://www.alpsandmeters.com/cdn/shop/products/Cashmere_Alpine_Guide_Sweater_Camel.jpg?v=1753426053&width=200" },
+                            { name: "Rib Turtleneck", price: "$295", img: "https://www.alpsandmeters.com/cdn/shop/products/Ski_Race_Knit_Sports_Club_Navy.jpg?v=1753426053&width=200" },
+                            { name: "Cable Knit",     price: "$245", img: "https://www.alpsandmeters.com/cdn/shop/products/Classic_Cable_Knit_IVORY_Front.jpg?v=1753426168&width=200" },
+                          ].map((p) => (
+                            <div key={p.name} className="rounded-lg overflow-hidden border border-slate-100 bg-white shadow-sm">
+                              <div className="aspect-[3/4]"><img src={p.img} alt={p.name} className="w-full h-full object-cover" /></div>
+                              <div className="px-1.5 py-1.5">
+                                <div className="text-[9px] font-semibold text-slate-700 truncate">{p.name}</div>
+                                <div className="text-[9px] text-slate-400">{p.price}</div>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+
                   </div>
 
                 </div>

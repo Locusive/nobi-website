@@ -93,35 +93,63 @@ AI assistants like Claude, ChatGPT, and Perplexity are starting to act on behalf
 
 ## How AI agents find your business
 
-When someone asks Claude or ChatGPT a question - "where can I find handmade ceramics under $100" or "what's a good running shoe for overpronators" - the agent looks for businesses whose content it can actually read and make sense of. Generic homepages don't help much. What helps is structured, specific, crawlable content that directly answers the kinds of questions your customers ask.
+When someone asks Claude or ChatGPT a question - "where can I find handmade ceramics under $100" or "what's a good running shoe for overpronators" or "which tool should I use for X" - the agent looks for businesses whose content it can actually read, understand, and cite. Generic homepages and marketing copy don't help. What helps is structured, specific, crawlable content that directly answers the kinds of questions your customers ask.
 
-That's where FAQ content becomes your primary discoverability asset. An agent that finds a well-structured FAQ covering your pricing, your policies, your product details, and the specific questions your customers ask is much more likely to surface your business in a relevant answer than an agent that finds a homepage with a hero image and a few marketing taglines.
+That content is your FAQ - not the static FAQ page most businesses maintain manually, but a living record of what real visitors actually ask and what accurate answers look like. An agent that finds a well-structured FAQ covering your pricing, your policies, your product or service details, and the specific edge cases your customers care about is far more likely to surface your business in a relevant answer than one that finds a hero section and a few taglines.
 
-The challenge is building that FAQ content at scale. Writing it manually is slow and tends to miss the real questions customers actually have. The more effective approach is capturing it from real customer conversations - every question a visitor asks and gets answered becomes a candidate for your FAQ, cleaned up, structured, and made crawlable.
+**What makes FAQ content effective for AI discoverability:**
 
-This is what makes a good AI assistant compounding rather than static. A customer who asks about return windows at 2pm is contributing to the answer an AI agent surfaces at 8pm. Three months from now, your business has a richer, more specific, more findable knowledge base than it did at launch - without anyone on your team writing a word of it.
+The specificity bar is higher than most businesses expect. "Do you offer returns?" is not useful to an AI agent. "Returns are accepted within 30 days of delivery on unworn items with the original tags attached; final sale items marked at checkout are excluded" is. The more precisely your FAQ mirrors the actual questions customers ask - with complete, specific answers - the more an agent can do with it.
+
+Coverage matters too. Agents synthesize across topics. A business that has detailed answers about shipping, materials, sizing, warranty, and compatibility is one an agent can confidently recommend for a wide range of relevant questions. A business with two FAQ entries about store hours isn't.
+
+**Building FAQ content at scale:**
+
+Writing FAQ content manually is slow and tends to miss the real questions. The questions your customers are actually asking are already flowing through your business every day - in chat, in support tickets, on product pages. The effective approach is capturing those conversations, cleaning them up, and turning them into structured FAQ content automatically.
+
+This is what makes discoverability compound over time. A customer who asks about return windows on a specific product at 2pm is contributing to the answer an AI agent surfaces at 8pm - and the answer the next agent gets three months from now. The FAQ you have six months in, built from thousands of real customer questions, is far more valuable than anything you could write at launch. Your business gets more findable the more people interact with it, without anyone on your team writing a word.
 
 ## How AI agents answer for your business without the user browsing
 
-Getting found is the first problem. The second is what happens when an agent finds you.
+Getting found is the first problem. The second is what happens once an agent finds you.
 
-Most business websites are built for humans who can click, scroll, and read. An AI agent querying your business on someone's behalf can't do any of that. It needs to ask a question and get a structured answer back - in real time, through a standard interface it already knows how to use.
+Most websites are built for humans - for clicking, scrolling, reading. An AI agent querying your business on someone's behalf can't do any of that. It needs to ask a specific question and get a specific, structured answer back, in real time, through an interface it already knows how to use.
 
-That interface is a business agent - your own AI that knows everything about you. It knows your prices, your policies, your products, your return windows, the questions your customers ask most. When Claude or ChatGPT is helping someone and your business is relevant, they talk to your agent directly. Your agent answers. The user gets a real, specific answer in the AI interface they were already in - without ever opening a browser tab or visiting your site.
+That interface is your business agent. Not a chatbot on your site - your business's own AI representative. It knows your prices, your policies, your products and services, your return windows, the edge cases, the questions your customers ask most. When Claude or ChatGPT is helping someone and your business is relevant to what they're looking for, they talk to your agent. Your agent answers. The user gets a real, specific answer in the AI interface they were already in - without opening a browser tab, without navigating your site, without hunting through pages.
 
-Think of it less as a technical integration and more as having your best salesperson and customer support rep available to every AI assistant, all the time, on behalf of anyone who might be looking for what you offer.
+Think of it as having your best salesperson and customer support rep available to every AI assistant, all the time, on behalf of anyone who might be looking for what you offer. Not a form. Not a widget. An agent that represents your business and can speak to anything you've equipped it to know.
 
-The standard most AI agents use to find and call these endpoints is called the Model Context Protocol (MCP). Claude, ChatGPT, and Perplexity all support it. A business with an MCP-compatible endpoint is effectively present in any AI conversation where it's relevant - the way a website made you present in any Google search that matched your content.
+**What your business agent needs to handle:**
 
-Most chat tools and helpdesks don't expose one of these endpoints. They were built to render a widget for a human visitor. An agent calling an API from somewhere off-site is a different job, and most tools weren't designed for it.
+Pricing and availability - the first things any buyer wants to know. If your agent can't answer "how much is X" or "do you have Y in stock," it fails the first test.
+
+Policies - returns, shipping, warranties, guarantees. These are the questions that determine whether someone trusts your business enough to buy. An agent that can answer them confidently, with a citation back to your published policy, closes the trust gap without a human in the loop.
+
+Product and service specifics - dimensions, compatibility, ingredients, process, requirements, timelines. The details a buyer needs to make a decision. The more granular your agent can be here, the more it can do for someone who is genuinely trying to figure out whether you're the right fit.
+
+The questions your customers already ask - the real ones, not the ones you think they ask. These are in your conversations. They're the ones your team answers fifty times a week. Those are the ones an agent needs to handle, because those are the ones the next agent will ask too.
+
+**How grounding and accuracy work:**
+
+An agent that makes things up about your business is worse than no agent. Every answer your business agent gives needs to be anchored to something you've actually published - a product page, a policy document, an FAQ entry - and that source needs to be visible so anyone can verify it. When a pricing answer cites your published pricing page, the user knows it's real. When a policy answer cites the exact paragraph from your returns policy, the agent is representing you accurately, not improvising.
+
+The standard most AI agents use to find and interact with business agents is the Model Context Protocol (MCP). Claude, ChatGPT, and Perplexity all support it. A business with an MCP-compatible agent is present in any AI conversation where it's relevant - the way a website made you present in any search that matched your content. Most tools haven't built this yet. Most chat and support products are designed for a human visitor in a widget, not for an external AI agent calling on someone's behalf.
 
 ## How to set this up
 
-The practical path is an AI assistant that handles both sides at once: it answers questions from real visitors on your site (building your FAQ knowledge base in the process) and exposes that same knowledge base as a callable endpoint that external AI agents can query.
+The practical path is a single deployment that handles both sides: answering questions from visitors on your site (building your FAQ knowledge base from those conversations) while simultaneously exposing your business as an agent that external AI can find and query.
 
-[Nobi](https://nobi.ai) does this in a single deployment. Every customer question answered through Nobi gets cleaned, sanitized, and added to a structured FAQ on your pages - crawlable, growing, and specific to what your customers actually ask. That FAQ, along with the knowledge sources you connect (your policy pages, your product details, your PDFs), is also served through a live MCP endpoint. AI agents like Claude and ChatGPT can discover it and query it directly.
+**Step 1: Connect your knowledge sources.** Your product or service pages, your policy documents, your help center, your PDFs. These become the ground truth your business agent draws from - what it's allowed to cite, what it will answer from. Anything an AI agent might quote on your behalf should be in here.
 
-Every answer comes with inline citation pills back to the exact source document and excerpt - so an agent (or anyone auditing one) can verify any claim against your published content. Knowledge sources refresh twice a day, so a pricing or policy change lands in agent answers within hours, not weeks. An optional second AI review checks each draft answer against the raw cited sources before it sends.
+**Step 2: Install the assistant on your site.** A small site-side install - a snippet and a placeholder where the assistant appears. Once it's live, visitors can ask questions and get grounded, cited answers. Each answered conversation starts building your FAQ.
+
+**Step 3: Let conversations build your FAQ.** Every question a real visitor asks gets cleaned, sanitized, and added to structured FAQ content on your pages. You don't write it - it emerges from real interactions. Over time it covers your actual long tail: the specific product questions, the edge cases in your return policy, the compatibility questions your support team fields every week.
+
+**Step 4: Your business agent is now live and callable.** The same deployment that handles on-site visitors is also discoverable and queryable by Claude, ChatGPT, Perplexity, and any other AI agent that supports the MCP standard. No second integration. No separate API to configure. When an AI agent finds your business relevant to what it's helping someone with, it can query your agent directly and surface a real, grounded answer.
+
+**What changes over time:** Your business agent gets better the more people use it. Each new conversation adds specificity. The pricing questions get more granular. The product questions cover more edge cases. The policy questions capture the scenarios your team previously answered by hand. Six months in, you have a business agent that knows your business the way a long-tenured employee does - because it learned from the same conversations they would have had.
+
+[Nobi](https://nobi.ai) is built to do all of this in one product. Every customer question answered through Nobi gets added to your structured FAQ automatically. Every deployment includes a live MCP endpoint - no separate build, no extra configuration. Answers carry inline citation pills back to the exact source document and excerpt, so every claim is traceable. Knowledge sources refresh twice a day, so a pricing or policy change lands in agent answers within hours. An optional second AI review checks each draft answer against the raw cited sources before it sends.
 
 **Pricing:** $25/month base (2,500 searches and 250 conversational messages included). $0.01 per additional search, $0.10 per additional message.
 
@@ -133,18 +161,6 @@ Every answer comes with inline citation pills back to the exact source document 
  <span>Get started with Nobi free</span>
  </a>
 </div>
-
-## What about other tools?
-
-Most chat and support tools handle the human visitor side of the equation well - but aren't designed to be queried by external AI agents.
-
-[Rep AI](https://hellorep.ai) is built for Shopify and its strongest feature is letting customers self-serve post-purchase tasks - cancellations, returns, order tracking - inside a chat widget without a handoff to a helpdesk. It doesn't expose an agent-queryable endpoint and doesn't build a growing FAQ knowledge base from conversations. Pick it when in-chat post-purchase self-service is the primary job.
-
-[Alby](https://alby.com) answers visitor questions on product pages at the moment someone is considering a specific item. It was acquired by Bluecore in 2024 and now sits inside their platform. It's built for human visitors, not for external agents querying your business. Pick it if you're already on Bluecore and product-page Q&A is the gap.
-
-[Gorgias](https://gorgias.com) is a helpdesk built around support-team workflow - tickets, routing, macros, returns processing, with order context inside every ticket. An AI layer on higher-tier plans helps agents close tickets faster. The focus is the support inbox, not discoverability or agent endpoints. Pick it when support ticket throughput and case routing is the bottleneck.
-
-Many businesses run Nobi alongside a helpdesk like Gorgias - Nobi handles [discovery](https://nobi.ai/blog/best-ai-product-finders-ecommerce) and agent-endpoint coverage, Gorgias handles post-purchase support workflows.
 
 ## Frequently asked questions
 

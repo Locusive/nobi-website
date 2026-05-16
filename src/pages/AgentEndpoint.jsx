@@ -255,7 +255,7 @@ export default function AgentEndpoint() {
         <section id="beat-2" className="min-h-screen flex flex-col items-center justify-center border-b border-slate-100 bg-white px-6 py-20 gap-10">
           <StoryDots active={1} total={4} />
           <div className="text-center space-y-3 max-w-2xl">
-            <h2 className="text-3xl sm:text-4xl font-semibold text-slate-900">Your site already had answers AI could read.</h2>
+            <h2 className="text-3xl sm:text-4xl font-semibold text-slate-900">Fortunately, your site had FAQs generated from Nobi conversations.</h2>
             <p className="text-lg text-slate-500">Every question your Nobi assistant answered became published FAQ content — on your pages, indexed by AI crawlers.</p>
           </div>
 

@@ -59,48 +59,82 @@ export default function AgentEndpoint() {
                 </div>
               </div>
 
-              {/* Hero visual: merchant's view — AI agent queries handled automatically */}
+              {/* Hero visual: static frame of the two-agent handoff */}
               <div className="relative">
                 <div className="absolute -inset-6 bg-gradient-to-br from-violet-100/80 to-indigo-100/80 rounded-[2rem] blur-2xl" aria-hidden />
-                <div className="relative rounded-3xl bg-white border border-slate-200/80 shadow-2xl overflow-hidden">
+                <div className="relative rounded-3xl bg-white border border-slate-200/80 shadow-2xl p-5">
+                  <div className="flex items-stretch gap-3">
 
-                  {/* Header */}
-                  <div className="flex items-center justify-between px-5 py-4 border-b border-slate-100 bg-slate-50">
-                    <div className="flex items-center gap-2">
-                      <span className="h-2 w-2 rounded-full bg-emerald-500" />
-                      <span className="text-sm font-semibold text-slate-700">Your Nobi agent</span>
-                    </div>
-                    <span className="text-xs text-slate-400">Live · today</span>
-                  </div>
-
-                  {/* Query rows */}
-                  <div className="divide-y divide-slate-50">
-                    {[
-                      { query: "Find me a luxury cashmere sweater gift", result: "3 products returned", from: "Claude" },
-                      { query: "Do they offer gift wrapping?",            result: "Yes, complimentary on all orders", from: "ChatGPT" },
-                      { query: "What is the return policy?",              result: "30-day returns, free shipping", from: "Perplexity" },
-                    ].map((item, i) => (
-                      <div key={i} className="flex items-start gap-4 px-5 py-4">
-                        <div className="w-5 h-5 rounded-full bg-emerald-100 flex items-center justify-center flex-shrink-0 mt-0.5">
-                          <svg className="w-3 h-3 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                          </svg>
+                    {/* Left: Customer's AI */}
+                    <div className="flex-1 min-w-0 rounded-2xl border border-black/10 bg-white shadow-sm overflow-hidden">
+                      <div className="flex items-center gap-2 px-3 py-2.5 bg-slate-50 border-b border-black/5">
+                        <div className="w-5 h-5 rounded-md bg-gradient-to-br from-blue-500 to-violet-600 flex items-center justify-center flex-shrink-0">
+                          <Sparkles className="w-3 h-3 text-white" />
                         </div>
-                        <div className="flex-1 min-w-0">
-                          <div className="text-sm text-slate-700 leading-snug">"{item.query}"</div>
-                          <div className="text-xs text-slate-400 mt-0.5">{item.result}</div>
-                        </div>
-                        <div className="text-xs font-medium text-slate-300 flex-shrink-0 mt-0.5">{item.from}</div>
+                        <span className="text-xs font-semibold text-black/60">Customer's AI</span>
                       </div>
-                    ))}
-                  </div>
+                      <div className="p-3 space-y-2">
+                        <div className="flex justify-end">
+                          <div className="bg-black/5 rounded-2xl rounded-br-sm px-3 py-2 text-xs text-black/80 max-w-[95%]">
+                            Find me a luxury cashmere sweater gift
+                          </div>
+                        </div>
+                        <div className="flex items-start gap-1.5">
+                          <div className="w-4 h-4 mt-0.5 rounded-full bg-gradient-to-br from-blue-500 to-violet-600 flex items-center justify-center flex-shrink-0">
+                            <Sparkles className="w-2 h-2 text-white" />
+                          </div>
+                          <div className="flex gap-1.5 flex-1 min-w-0">
+                            {[
+                              { name: "Classic Crew",   img: "https://www.alpsandmeters.com/cdn/shop/products/Cashmere_Alpine_Guide_Sweater_Camel.jpg?v=1753426053&width=200" },
+                              { name: "Rib Turtleneck", img: "https://www.alpsandmeters.com/cdn/shop/products/Ski_Race_Knit_Sports_Club_Navy.jpg?v=1753426053&width=200" },
+                              { name: "Cable Knit",     img: "https://www.alpsandmeters.com/cdn/shop/products/Classic_Cable_Knit_IVORY_Front.jpg?v=1753426168&width=200" },
+                            ].map((p) => (
+                              <div key={p.name} className="flex-1 min-w-0 rounded-lg overflow-hidden border border-black/5 bg-white shadow-sm">
+                                <div className="aspect-[3/4]"><img src={p.img} alt={p.name} className="w-full h-full object-cover" /></div>
+                                <div className="px-1.5 py-1">
+                                  <div className="text-[9px] font-medium text-black/60 truncate">{p.name}</div>
+                                </div>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
 
-                  {/* Footer */}
-                  <div className="flex items-center justify-between px-5 py-3.5 bg-violet-50 border-t border-violet-100">
-                    <span className="text-xs font-medium text-violet-700">3 queries answered automatically</span>
-                    <span className="text-xs text-violet-400">0 human hours used</span>
-                  </div>
+                    {/* Center: wire with frozen data packets */}
+                    <div className="flex-shrink-0 w-10 flex flex-col items-center justify-center gap-2">
+                      <div className="relative w-full" style={{ height: 20 }}>
+                        <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 h-px bg-slate-200" />
+                        {/* Frozen violet dots going L→R */}
+                        {[0.15, 0.5, 0.82].map((pos, i) => (
+                          <div key={i} className="absolute top-1/2 -translate-y-1/2 h-2 w-2 rounded-full bg-violet-500 shadow-[0_0_6px_2px_rgba(139,92,246,0.45)]"
+                            style={{ left: `${pos * 100}%` }} />
+                        ))}
+                      </div>
+                      <div className="font-mono text-[8px] text-violet-400 text-center leading-none">{ "{ }" }</div>
+                    </div>
 
+                    {/* Right: Summit Cashmere's Nobi agent */}
+                    <div className="flex-1 min-w-0 rounded-2xl border border-slate-700 bg-slate-900 shadow-sm overflow-hidden">
+                      <div className="flex items-center gap-2 px-3 py-2 bg-slate-800 border-b border-slate-700">
+                        <svg className="h-3.5 w-auto flex-shrink-0" viewBox="0 0 22 18" fill="none">
+                          <path d="M11 2L20 16H2L11 2Z" stroke="white" strokeWidth="1.5" strokeLinejoin="round"/>
+                          <path d="M7.5 16L11 10.5L14.5 16" stroke="white" strokeWidth="1" strokeLinejoin="round" strokeOpacity="0.5"/>
+                        </svg>
+                        <div className="min-w-0 flex-1">
+                          <div className="text-[10px] font-semibold text-white truncate">Summit Cashmere</div>
+                          <div className="text-[9px] text-slate-400">Powered by Nobi</div>
+                        </div>
+                        <div className="h-1.5 w-1.5 rounded-full bg-emerald-400 flex-shrink-0" />
+                      </div>
+                      <div className="p-3 font-mono space-y-2 text-[10px]">
+                        <div className="text-slate-500">POST /mcp/query</div>
+                        <div className="text-slate-300 pl-2 truncate">"cashmere sweater gift"</div>
+                        <div className="text-emerald-400">200 OK · products: [3]</div>
+                      </div>
+                    </div>
+
+                  </div>
                 </div>
               </div>
 

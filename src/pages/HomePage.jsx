@@ -3,6 +3,7 @@ import { useSEO } from "../hooks/useSEO";
 import {AnimatePresence, motion} from "framer-motion";
 import {
     BarChart3,
+    Bot,
     CheckCircle2,
     ChevronDown,
     Heart,
@@ -41,9 +42,9 @@ const DEMO_QUERY =
 // ===== Personalization variant content =====
 const CHIPS = [
   { id: "search",  label: "Better search" },
-  { id: "product", label: "Help shoppers decide" },
-  { id: "support", label: "Automate support answers" },
+  { id: "answer",  label: "Answer every question" },
   { id: "leads",   label: "Capture more leads" },
+  { id: "agents",  label: "Reach AI agents" },
 ];
 
 const VALID_VARIANTS = CHIPS.map((c) => c.id);
@@ -90,44 +91,44 @@ const VARIANT_CONTENT = {
 
     ],
   },
-  product: {
-    headline: "Shoppers won't buy what they still have doubts about",
-    subline:  "Nobi answers fit, material, shipping, and compatibility questions right on the product page, so visitors stop bouncing to competitors to figure it out.",
-    problemHeading: "One unresolved doubt and the add-to-cart is gone",
-    problemBody:    "Shoppers reach the product page with a specific question. If they can't confirm the answer in under a minute, most leave to compare elsewhere and don't come back.",
+  answer: {
+    headline: "Every question answered before it costs you a sale or a ticket",
+    subline:  "Nobi answers product questions on the page and support questions before they hit your queue. Both cited, both instant, both from your own content.",
+    problemHeading: "Unanswered questions bleed revenue on both ends",
+    problemBody:    "A shopper on a product page who can't confirm sizing bounces. A customer who can't find your return policy files a ticket. Both are avoidable with an AI that actually knows your content.",
     problemPoints: [
-      { Icon: MessageCircleQuestion, label: "Unanswered product doubts", desc: "Questions about fit, material, or shipping that aren't obvious from the PDP push shoppers to go check a competitor instead." },
-      { Icon: LayoutGrid,            label: "Info buried in the page",   desc: "The answer is on your site somewhere — in specs, reviews, or FAQs — but scanning for it is slower than bouncing to look elsewhere." },
-      { Icon: MousePointerClick,     label: "Lost to competitors",       desc: "A competitor whose PDP feels easier to decide on wins the sale, even when your product is better." },
+      { Icon: MousePointerClick,     label: "Doubts kill add-to-carts",  desc: "Questions about fit, material, or compatibility that go unanswered send shoppers to a competitor whose page makes it easier to decide." },
+      { Icon: LayoutGrid,            label: "Buried answers create tickets", desc: "Your help center has the answer, but it's three clicks deep. Visitors file a ticket instead. Your team answers the same five questions all week." },
+      { Icon: MessageCircleQuestion, label: "Support handles what the site should", desc: "Agents spend the day on deflectable questions - returns, shipping, billing - instead of the cases that actually need a human." },
     ],
-    numbersHeading: "What happens when every product question gets a confident answer",
+    numbersHeading: "What changes when every question gets answered",
     stats: [
-      { number: "6x",    label: "more purchases",    desc: "Shoppers who click a suggested product question and get an answer are 6x more likely to buy than those who don't engage." },
+      { number: "6x",    label: "more purchases",    desc: "Shoppers who engage with a product question and get a cited answer are 6x more likely to buy than those who don't." },
       { number: "2.5x",  label: "higher conversion", desc: "Nobi-assisted shoppers convert at 2.5x the rate of unassisted visitors, measured across Lucchese and UNTUCKit in A/B tests." },
-      { number: "Zero",  label: "hallucinations",    desc: "Before sending, Nobi runs a second AI pass that verifies every claim against your product data. It won't say what it can't prove." },
+      { number: "Zero",  label: "new tickets",       desc: "Questions answered in chat never become support tickets. Your team focuses on the cases that actually need a human." },
     ],
   },
-  support: {
-    headline: "Your knowledge base should be answering tickets, not collecting dust",
-    subline:  "Nobi answers policy, billing, and account questions instantly — with a citation to the doc it pulled from — so repeat support tickets stop landing in your queue.",
-    problemHeading: "Support spends the day answering the same five questions",
-    problemBody:    "The answer is in your help center, but visitors can't find it fast enough. So they file a ticket, email support, or leave frustrated. Your team spends the week on deflectable questions instead of the ones that actually need a human.",
+  agents: {
+    headline: "AI agents can now find your business and talk to it directly",
+    subline:  "Nobi gives you two things automatically: structured content that AI crawlers index so agents know you exist, and a live endpoint they can call to get real answers.",
+    problemHeading: "Your customers' AI agents want to talk to you. Most businesses can't respond.",
+    problemBody:    "People are using AI assistants to research, evaluate, and get recommendations. Those agents read indexed content to find businesses, then call endpoints to get live answers. Without both, you're invisible.",
     problemPoints: [
-      { Icon: MessageCircleQuestion, label: "Repeat tickets",           desc: "Returns, billing, cancellations, shipping — the same questions fill your queue, even though the answer is already published." },
-      { Icon: LayoutGrid,            label: "Buried documentation",    desc: "Your help center has the answer, but it's three clicks deep and most visitors give up before they find it." },
-      { Icon: MousePointerClick,     label: "Wasted support hours",    desc: "Agents spend the day on deflectable questions instead of the tickets that actually need a human." },
+      { Icon: SearchIcon,            label: "Not findable by AI crawlers",    desc: "AI systems index structured content to learn what businesses offer. If your knowledge lives in chat logs or unformatted pages, it never gets indexed." },
+      { Icon: MessageCircleQuestion, label: "No endpoint to answer agents",   desc: "When an AI agent wants live answers about your offering, it calls an endpoint. Businesses without one can't respond, and the agent moves on." },
+      { Icon: BarChart3,             label: "Two channels, both growing fast", desc: "Indexed content determines whether AI knows you exist. Callable endpoints determine whether AI can serve you to someone right now. Nobi handles both." },
     ],
-    numbersHeading: "What your team gets when the website answers its own questions",
+    numbersHeading: "Your AI presence goes live with Nobi",
     stats: [
-      { number: "Zero",  label: "new tickets",       desc: "Questions answered in chat never become support tickets. Your team stops repeating themselves and focuses on the cases that actually need a human." },
-      { number: "Every", label: "answer is cited",   desc: "Nobi links to the exact help article or policy page it pulled the answer from. Visitors trust the response, and agents can verify it in one click." },
+      { number: "Auto", label: "indexed from real conversations", desc: "Nobi turns real visitor conversations into structured content AI crawlers can read. Your knowledge base builds itself from actual questions people ask." },
+      { number: "Reach",    label: "customers inside their AI",      desc: "When someone uses Claude, ChatGPT, or any AI assistant to research what you offer, your Nobi endpoint answers them directly." },
     ],
   },
   leads: {
     headline: "Turn website conversations into qualified leads",
     subline:  "Nobi answers visitor questions, makes prospects comfortable enough to share who they are, and sends every lead to your CRM with the full chat so sales knows exactly what to say.",
     problemHeading: "Your best prospects leave without telling you who they are",
-    problemBody:    "Visitors arrive with real intent, get their questions answered, and leave — without your sales team ever knowing they were there.",
+    problemBody:    "Visitors arrive with real intent, get their questions answered, and leave without your sales team ever knowing they were there.",
     problemPoints: [
       { Icon: MousePointerClick, label: "Silent exits",         desc: "Visitors land, read, and leave. Even high-intent ones disappear without a trace, no contact info, no chance for sales to follow up." },
       { Icon: Heart,             label: "Pop-ups get ignored",  desc: "Generic email-capture pop-ups interrupt at the wrong moment. Visitors dismiss them on reflex, so you get neither the answer nor the lead." },
@@ -783,6 +784,10 @@ function renderHeadline(variant) {
       return <>Your knowledge base should be{" "}<span className={GRADIENT}>answering the tickets</span></>;
     case "leads":
       return <>Turn website conversations into{" "}<span className={GRADIENT}>qualified leads</span></>;
+    case "answer":
+      return <>Every question answered before it costs you{" "}<span className={GRADIENT}>a sale or a ticket</span></>;
+    case "agents":
+      return <>AI agents can now find and talk to{" "}<span className={GRADIENT}>your business</span></>;
     default:
       return <>Turn your website into your best{" "}<span className={GRADIENT}>sales associate</span></>;
   }
@@ -987,9 +992,11 @@ function Numbers({ variant }) {
                 </div>
               ))}
             </div>
-            <p className="mt-4 text-xs text-black/50 dark:text-white/50">
-              Results measured in A/B tests with a one-day conversion window.
-            </p>
+            {!["agents", "leads"].includes(variant) && (
+              <p className="mt-4 text-xs text-black/50 dark:text-white/50">
+                Results measured in A/B tests with a one-day conversion window.
+              </p>
+            )}
           </motion.div>
         </AnimatePresence>
       </div>
@@ -1349,10 +1356,10 @@ function Features() {
       desc: "Collects contact info naturally through conversation. Every lead includes a summary of what the visitor was asking about, so follow-ups aren't cold.",
     },
     {
-      icon: <BarChart3 className="h-5 w-5" />,
-      title: "Know what's working",
-      stat: "A/B tested",
-      desc: "See what visitors are asking, where they get stuck, and which conversations led to conversions. A/B test configurations and measure results directly in Nobi's dashboard.",
+      icon: <Bot className="h-5 w-5" />,
+      title: "Reach AI agents",
+      stat: "New channel",
+      desc: "Every Nobi assistant is also a callable agent endpoint. When someone uses Claude, ChatGPT, or any AI assistant to research what you offer, your Nobi agent answers them directly.",
     },
   ];
 
@@ -1360,7 +1367,7 @@ function Features() {
     <section id="features" className="scroll-mt-20 py-20 border-t border-black/5 dark:border-white/5">
       <div className="mx-auto max-w-6xl px-6">
         <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight text-balance">
-          One assistant for everything your visitors need
+          One assistant. Four ways it grows your business.
         </h2>
         <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 gap-6">
           {capabilities.map((cap) => (
@@ -1521,7 +1528,7 @@ function Pricing() {
     <section id="pricing" className="scroll-mt-20 py-20 border-t border-black/5 dark:border-white/5">
       <div className="mx-auto max-w-6xl px-6">
         <h2 className="text-3xl font-semibold mb-2">Simple, usage-based pricing</h2>
-        <p className="text-black/60 dark:text-white/60 mb-8">A low monthly base with per-use rates. Try free in your dashboard — no credit card needed.</p>
+        <p className="text-black/60 dark:text-white/60 mb-8">A low monthly base with per-use rates. Try free in your dashboard, no credit card needed.</p>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-stretch">
           {tiers.map((t) => (
             <div key={t.name} className={`flex flex-col rounded-3xl border bg-white/70 dark:bg-white/5 p-8 ${t.highlighted ? "border-purple-300 ring-2 ring-purple-200" : "border-black/10 dark:border-white/10"}`}>

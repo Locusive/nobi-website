@@ -228,7 +228,6 @@ export default function AgentEndpoint() {
                   </div>
                 </div>
 
-                <p className="text-xs text-white/20">AI can make mistakes. Consider checking important information.</p>
               </div>
             </div>
           </div>

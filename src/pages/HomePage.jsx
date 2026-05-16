@@ -109,7 +109,7 @@ const VARIANT_CONTENT = {
   },
   agents: {
     headline: "AI agents can now find your business and talk to it directly",
-    subline:  "Nobi gives you two things automatically: structured content that AI crawlers index so agents know you exist, and a live endpoint they can call to get real answers. Both happen the moment you install Nobi.",
+    subline:  "Nobi gives you two things automatically: structured content that AI crawlers index so agents know you exist, and a live endpoint they can call to get real answers.",
     problemHeading: "AI systems discover and query businesses — most aren't ready",
     problemBody:    "People are using AI assistants to research, evaluate, and get recommendations. Those agents read indexed content to find businesses, then call endpoints to get live answers. Without both, you're invisible.",
     problemPoints: [
@@ -786,7 +786,7 @@ function renderHeadline(variant) {
     case "answer":
       return <>Every question answered before it costs you{" "}<span className={GRADIENT}>a sale or a ticket</span></>;
     case "agents":
-      return <>AI agents can now find your business{" "}<span className={GRADIENT}>and talk to it directly</span></>;
+      return <>AI agents can now find — and talk to —{" "}<span className={GRADIENT}>your business</span></>;
     default:
       return <>Turn your website into your best{" "}<span className={GRADIENT}>sales associate</span></>;
   }

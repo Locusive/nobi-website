@@ -185,7 +185,7 @@ export default function AgentEndpoint() {
               <div className="h-1 w-1 rounded-full bg-white/20" />
             </div>
             <h2 className="text-3xl sm:text-4xl font-semibold text-white">
-              Right now, someone is asking <span className="bg-gradient-to-r from-violet-400 to-fuchsia-400 bg-clip-text text-transparent">their AI</span> to find what they need.
+              Right now, someone is asking <span className="bg-gradient-to-r from-violet-400 to-fuchsia-400 bg-clip-text text-transparent">their AI</span> for a recommendation.
             </h2>
             <p className="text-lg text-white/50">Someone just asked their AI to find a business like yours.</p>
           </div>

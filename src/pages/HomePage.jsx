@@ -92,13 +92,13 @@ const VARIANT_CONTENT = {
   },
   answer: {
     headline: "Every question answered before it costs you a sale or a ticket",
-    subline:  "Nobi answers product questions on the page and support questions before they hit your queue — both cited, both instant, both from your own content.",
+    subline:  "Nobi answers product questions on the page and support questions before they hit your queue. Both cited, both instant, both from your own content.",
     problemHeading: "Unanswered questions bleed revenue on both ends",
     problemBody:    "A shopper on a product page who can't confirm sizing bounces. A customer who can't find your return policy files a ticket. Both are avoidable with an AI that actually knows your content.",
     problemPoints: [
       { Icon: MousePointerClick,     label: "Doubts kill add-to-carts",  desc: "Questions about fit, material, or compatibility that go unanswered send shoppers to a competitor whose page makes it easier to decide." },
       { Icon: LayoutGrid,            label: "Buried answers create tickets", desc: "Your help center has the answer, but it's three clicks deep. Visitors file a ticket instead. Your team answers the same five questions all week." },
-      { Icon: MessageCircleQuestion, label: "Support handles what the site should", desc: "Agents spend the day on deflectable questions — returns, shipping, billing — instead of the cases that actually need a human." },
+      { Icon: MessageCircleQuestion, label: "Support handles what the site should", desc: "Agents spend the day on deflectable questions - returns, shipping, billing - instead of the cases that actually need a human." },
     ],
     numbersHeading: "What changes when every question gets answered",
     stats: [
@@ -110,11 +110,11 @@ const VARIANT_CONTENT = {
   agents: {
     headline: "AI agents can now find your business and talk to it directly",
     subline:  "Nobi gives you two things automatically: structured content that AI crawlers index so agents know you exist, and a live endpoint they can call to get real answers.",
-    problemHeading: "AI systems discover and query businesses — most aren't ready",
+    problemHeading: "Your customers' AI agents want to talk to you. Most businesses can't respond.",
     problemBody:    "People are using AI assistants to research, evaluate, and get recommendations. Those agents read indexed content to find businesses, then call endpoints to get live answers. Without both, you're invisible.",
     problemPoints: [
       { Icon: SearchIcon,            label: "Not findable by AI crawlers",    desc: "AI systems index structured content to learn what businesses offer. If your knowledge lives in chat logs or unformatted pages, it never gets indexed." },
-      { Icon: MessageCircleQuestion, label: "No endpoint to answer agents",   desc: "When an AI agent wants live answers about your offering, it calls an endpoint. Businesses without one can't respond — the agent moves on." },
+      { Icon: MessageCircleQuestion, label: "No endpoint to answer agents",   desc: "When an AI agent wants live answers about your offering, it calls an endpoint. Businesses without one can't respond, and the agent moves on." },
       { Icon: BarChart3,             label: "Two channels, both growing fast", desc: "Indexed content determines whether AI knows you exist. Callable endpoints determine whether AI can serve you to someone right now. Nobi handles both." },
     ],
     numbersHeading: "Your AI presence goes live with Nobi",
@@ -127,7 +127,7 @@ const VARIANT_CONTENT = {
     headline: "Turn website conversations into qualified leads",
     subline:  "Nobi answers visitor questions, makes prospects comfortable enough to share who they are, and sends every lead to your CRM with the full chat so sales knows exactly what to say.",
     problemHeading: "Your best prospects leave without telling you who they are",
-    problemBody:    "Visitors arrive with real intent, get their questions answered, and leave — without your sales team ever knowing they were there.",
+    problemBody:    "Visitors arrive with real intent, get their questions answered, and leave without your sales team ever knowing they were there.",
     problemPoints: [
       { Icon: MousePointerClick, label: "Silent exits",         desc: "Visitors land, read, and leave. Even high-intent ones disappear without a trace, no contact info, no chance for sales to follow up." },
       { Icon: Heart,             label: "Pop-ups get ignored",  desc: "Generic email-capture pop-ups interrupt at the wrong moment. Visitors dismiss them on reflex, so you get neither the answer nor the lead." },
@@ -1525,7 +1525,7 @@ function Pricing() {
     <section id="pricing" className="scroll-mt-20 py-20 border-t border-black/5 dark:border-white/5">
       <div className="mx-auto max-w-6xl px-6">
         <h2 className="text-3xl font-semibold mb-2">Simple, usage-based pricing</h2>
-        <p className="text-black/60 dark:text-white/60 mb-8">A low monthly base with per-use rates. Try free in your dashboard — no credit card needed.</p>
+        <p className="text-black/60 dark:text-white/60 mb-8">A low monthly base with per-use rates. Try free in your dashboard, no credit card needed.</p>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-stretch">
           {tiers.map((t) => (
             <div key={t.name} className={`flex flex-col rounded-3xl border bg-white/70 dark:bg-white/5 p-8 ${t.highlighted ? "border-purple-300 ring-2 ring-purple-200" : "border-black/10 dark:border-white/10"}`}>

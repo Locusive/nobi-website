@@ -177,7 +177,7 @@ export default function AgentEndpoint() {
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(109,40,217,0.15),transparent_70%)]" aria-hidden />
 
           {/* Big bold heading */}
-          <div className="relative text-center space-y-3">
+          <div className="relative text-center space-y-4">
             <div className="flex items-center justify-center gap-2 mb-4">
               <div className="h-1 w-8 rounded-full bg-violet-400" />
               <div className="h-1 w-1 rounded-full bg-white/20" />
@@ -187,6 +187,7 @@ export default function AgentEndpoint() {
             <h2 className="text-3xl sm:text-4xl font-semibold text-white">
               Right now, <span className="bg-gradient-to-r from-violet-400 to-fuchsia-400 bg-clip-text text-transparent">someone is searching.</span>
             </h2>
+            <p className="text-lg text-white/50">Someone just asked their AI to find a business like yours.</p>
           </div>
 
           {/* Stylized AI interface */}
@@ -210,7 +211,7 @@ export default function AgentEndpoint() {
 
               {/* Chat body */}
               <div className="px-8 py-16 flex flex-col items-center gap-10">
-                <p className="text-2xl font-semibold text-white/80">What's on the agenda today?</p>
+                <p className="text-2xl font-semibold text-white/80">How can I help?</p>
 
                 {/* Input */}
                 <div className="w-full relative">
@@ -231,11 +232,6 @@ export default function AgentEndpoint() {
               </div>
             </div>
           </div>
-
-          {/* Caption */}
-          <p className="relative text-2xl font-medium text-white/60 text-center max-w-xl">
-            Someone just asked their AI to find a business like yours.
-          </p>
 
           {/* Big scroll button */}
           <button

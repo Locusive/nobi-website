@@ -210,7 +210,7 @@ export default function AgentEndpoint() {
               </div>
 
               {/* Chat body */}
-              <div className="px-8 py-16 flex flex-col items-center gap-10">
+              <div className="px-8 py-10 flex flex-col items-center gap-8">
                 <p className="text-2xl font-semibold text-white/80">How can I help?</p>
 
                 {/* Input */}

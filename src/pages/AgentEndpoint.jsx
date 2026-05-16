@@ -62,74 +62,52 @@ export default function AgentEndpoint() {
               {/* Visual */}
               <div className="relative">
                 <div className="absolute -inset-8 bg-gradient-to-r from-violet-200/70 via-white to-indigo-200/70 rounded-[34px] blur-3xl opacity-90" aria-hidden />
-                <div className="relative overflow-hidden rounded-3xl bg-white border border-slate-100 shadow-[0_28px_80px_-30px_rgba(15,23,42,0.45)]">
+                <div className="relative overflow-hidden rounded-3xl bg-white border border-slate-100 shadow-[0_28px_80px_-30px_rgba(15,23,42,0.45)] p-6 space-y-5">
 
-                  <div className="grid grid-cols-2 divide-x divide-slate-100">
-
-                    {/* Left: the customer's AI */}
-                    <div className="p-5 space-y-3">
-                      <div className="text-[10px] font-semibold uppercase tracking-widest text-slate-400">Their AI</div>
-                      <div className="flex justify-end">
-                        <div className="bg-slate-100 rounded-2xl rounded-br-sm px-3 py-2 text-xs text-slate-700">
-                          Find me a cashmere sweater gift
-                        </div>
-                      </div>
-                      <div className="flex items-start gap-2">
-                        <div className="w-5 h-5 rounded-full bg-gradient-to-br from-blue-500 to-violet-600 flex items-center justify-center flex-shrink-0 mt-0.5">
-                          <Sparkles className="w-3 h-3 text-white" />
-                        </div>
-                        <div className="space-y-2 flex-1 min-w-0">
-                          <p className="text-xs text-slate-600 leading-relaxed">Summit Cashmere has a great selection:</p>
-                          <div className="grid grid-cols-3 gap-1.5">
-                            {[
-                              { name: "Classic Crew",   img: "https://www.alpsandmeters.com/cdn/shop/products/Cashmere_Alpine_Guide_Sweater_Camel.jpg?v=1753426053&width=200" },
-                              { name: "Turtleneck",     img: "https://www.alpsandmeters.com/cdn/shop/products/Ski_Race_Knit_Sports_Club_Navy.jpg?v=1753426053&width=200" },
-                              { name: "Cable Knit",     img: "https://www.alpsandmeters.com/cdn/shop/products/Classic_Cable_Knit_IVORY_Front.jpg?v=1753426168&width=200" },
-                            ].map((p) => (
-                              <div key={p.name} className="rounded-lg overflow-hidden border border-slate-100 bg-white shadow-sm">
-                                <div className="aspect-[3/4]"><img src={p.img} alt={p.name} className="w-full h-full object-cover" /></div>
-                                <div className="px-1.5 py-1"><div className="text-[9px] font-medium text-slate-600 truncate">{p.name}</div></div>
-                              </div>
-                            ))}
-                          </div>
-                          <p className="text-xs text-slate-500">They also gift wrap — complimentary.</p>
-                        </div>
-                      </div>
+                  {/* Context label */}
+                  <div className="flex items-center gap-2">
+                    <div className="w-6 h-6 rounded-full bg-gradient-to-br from-blue-500 to-violet-600 flex items-center justify-center flex-shrink-0">
+                      <Sparkles className="w-3.5 h-3.5 text-white" />
                     </div>
-
-                    {/* Right: the store's end */}
-                    <div className="p-5 bg-violet-50/40 space-y-3">
-                      <div className="text-[10px] font-semibold uppercase tracking-widest text-violet-400">Your store · Nobi agent</div>
-                      <div className="space-y-2">
-                        <div className="rounded-xl bg-white border border-violet-100 px-3 py-2.5 shadow-sm">
-                          <div className="flex items-center gap-1.5 mb-1">
-                            <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
-                            <span className="text-xs font-semibold text-slate-700">Query answered automatically</span>
-                          </div>
-                          <p className="text-xs text-slate-500 leading-relaxed">"Find me a cashmere sweater gift"</p>
-                        </div>
-                        <div className="rounded-xl bg-white border border-violet-100 px-3 py-2.5 shadow-sm">
-                          <div className="flex items-center gap-1.5 mb-1">
-                            <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
-                            <span className="text-xs font-semibold text-slate-700">3 products surfaced</span>
-                          </div>
-                          <p className="text-xs text-slate-500 leading-relaxed">No website visit · no human in the loop</p>
-                        </div>
-                        <div className="rounded-xl bg-white border border-violet-100 px-3 py-2.5 shadow-sm">
-                          <div className="flex items-center gap-1.5 mb-1">
-                            <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
-                            <span className="text-xs font-semibold text-slate-700">Gift wrap confirmed</span>
-                          </div>
-                          <p className="text-xs text-slate-500 leading-relaxed">Follow-up handled in the same session</p>
-                        </div>
-                      </div>
-                    </div>
-
+                    <span className="text-sm font-semibold text-slate-500">What a shopper sees in their AI assistant</span>
                   </div>
 
-                  {/* Footer */}
-                  <div className="border-t border-slate-100 px-5 py-3 flex items-center justify-center">
-                    <span className="text-xs text-slate-400">Connected through your Nobi agent endpoint · no setup required</span>
+                  {/* Shopper's message */}
+                  <div className="flex justify-end">
+                    <div className="bg-slate-100 rounded-2xl rounded-br-sm px-4 py-3 text-base text-slate-800">
+                      Find me a luxury cashmere sweater gift
+                    </div>
+                  </div>
+
+                  {/* AI response — your products */}
+                  <div className="flex items-start gap-3">
+                    <div className="w-7 h-7 rounded-full bg-gradient-to-br from-blue-500 to-violet-600 flex items-center justify-center flex-shrink-0 mt-0.5">
+                      <Sparkles className="w-3.5 h-3.5 text-white" />
+                    </div>
+                    <div className="flex-1 min-w-0 space-y-3">
+                      <p className="text-sm text-slate-700 leading-relaxed">Summit Cashmere has exactly what you need — and they offer complimentary gift wrapping:</p>
+                      <div className="grid grid-cols-3 gap-2.5">
+                        {[
+                          { name: "Classic Crew",  price: "$265", img: "https://www.alpsandmeters.com/cdn/shop/products/Cashmere_Alpine_Guide_Sweater_Camel.jpg?v=1753426053&width=300" },
+                          { name: "Rib Turtleneck", price: "$295", img: "https://www.alpsandmeters.com/cdn/shop/products/Ski_Race_Knit_Sports_Club_Navy.jpg?v=1753426053&width=300" },
+                          { name: "Cable Knit",    price: "$245", img: "https://www.alpsandmeters.com/cdn/shop/products/Classic_Cable_Knit_IVORY_Front.jpg?v=1753426168&width=300" },
+                        ].map((p) => (
+                          <div key={p.name} className="rounded-xl overflow-hidden border border-slate-100 bg-white shadow-sm">
+                            <div className="aspect-[3/4]"><img src={p.img} alt={p.name} className="w-full h-full object-cover" /></div>
+                            <div className="px-2.5 py-2">
+                              <div className="text-xs font-semibold text-slate-700 truncate">{p.name}</div>
+                              <div className="text-xs text-slate-400">{p.price}</div>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* The insight — what this means for the merchant */}
+                  <div className="flex items-center gap-3 rounded-2xl bg-emerald-50 border border-emerald-100 px-4 py-3.5">
+                    <span className="h-2.5 w-2.5 rounded-full bg-emerald-500 flex-shrink-0" />
+                    <span className="text-sm font-medium text-emerald-900">Your products were recommended — the shopper never visited your site</span>
                   </div>
 
                 </div>

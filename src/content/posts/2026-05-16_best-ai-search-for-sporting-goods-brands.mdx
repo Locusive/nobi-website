@@ -29,7 +29,7 @@ export const meta = {
  },
  {
  question: "3. Hawk Search",
- answer: "Hawk Search is enterprise site search for B2B and mid-market catalogs, priced from $500/month on the Core plan and $850/month on Premium. It scored well on faceted navigation and customer-specific pricing, which is useful when consumer and team-sales catalogs share one storefront. It's a fit for retailers running complex B2B sporting goods catalogs alongside DTC, and less of a fit for smaller brands who want search live in days, not months."
+ answer: "Hawk Search is enterprise site search for B2B and mid-market catalogs; pricing is quoted by catalog size and contract scope through a sales-led process. It scored well on faceted navigation and customer-specific pricing, which is useful when consumer and team-sales catalogs share one storefront. It's a fit for retailers running complex B2B sporting goods catalogs alongside DTC, and less of a fit for smaller brands who want search live in days, not months."
  },
  {
  question: "4. Coveo",
@@ -99,10 +99,10 @@ export const meta = {
 
 Sporting goods catalogs are a mess to search across. Gear, apparel, consumables, and queries like "running shoes for flat feet" land right next to attribute-heavy filters for size, width, and material. Four tools cover the realistic shortlist:
 
-- **Nobi** - AI search plus a conversational assistant that answers sport-intent and fit questions in one platform. $25/mo base ($0.01 per extra search). Pick when free-text sport-intent queries and on-PDP customer questions are the bottleneck and a Shopify-native rollout in hours matters more than custom ranking code.
-- **Algolia** - developer-first search API with sub-50ms response times and NeuralSearch on higher tiers. Usage-based, with higher-volume deployments commonly landing at $2K+/month before custom relevance work. Pick when you have a search engineering team that wants to own ranking on sport, fit, and gear attributes end to end.
-- **Hawk Search** - enterprise faceted search built for catalogs with hundreds of attributes per product. Tiered pricing sold through a sales-led process; plans are quoted by catalog size and contract scope. Pick when filter-driven discovery on a deep multi-category catalog is the dominant customer behavior.
-- **Coveo** - AI relevance unified across commerce, support, and internal knowledge on one engine. Quote-only; all-in deployments commonly $100K+/year. Pick when a sporting goods retailer is unifying search across the site and a support portal at enterprise scale.
+- **[Nobi](https://nobi.ai)** - AI search plus a conversational assistant that answers sport-intent and fit questions in one platform. $25/mo base ($0.01 per extra search). Pick when free-text sport-intent queries and on-PDP customer questions are the bottleneck and a Shopify-native rollout in hours matters more than custom ranking code.
+- **[Algolia](https://algolia.com)** - developer-first search API with sub-50ms response times and NeuralSearch on higher tiers. Usage-based, with higher-volume deployments commonly landing at $2K+/month before custom relevance work. Pick when you have a search engineering team that wants to own ranking on sport, fit, and gear attributes end to end.
+- **[Hawk Search](https://hawksearch.com)** - enterprise faceted search built for catalogs with hundreds of attributes per product. Tiered pricing sold through a sales-led process; plans are quoted by catalog size and contract scope. Pick when filter-driven discovery on a deep multi-category catalog is the dominant customer behavior.
+- **[Coveo](https://coveo.com)** - AI relevance unified across commerce, support, and internal knowledge on one engine. Quote-only; all-in deployments commonly $100K+/year. Pick when a sporting goods retailer is unifying search across the site and a support portal at enterprise scale.
 
 | Product | Primary job | Best for | Pricing (starting) | Standout strength | Key weakness |
 | --- | --- | --- | --- | --- | --- |
@@ -119,7 +119,7 @@ Sporting goods catalogs are a mess to search across. Gear, apparel, consumables,
 
 Sporting goods catalogs ask search to handle three jobs at once: free-text sport-intent queries ("trail running vest with hydration", "beginner road bike under $1,000"), deep faceted filtering across gear, apparel, and consumables, and personalization that tells a marathon runner from a casual jogger without making either of them take a quiz. The [best tools in this category](https://nobi.ai/blog/best-ai-search-ecommerce-2026) rank from your catalog and customer signals, so merchandisers aren't hand-pinning products to queries every week. They also handle pre-purchase questions on the product page - fit, sizing, compatibility - because sporting goods customers ask far more of these than fashion or beauty buyers.
 
-[Nobi](https://nobi.ai) pairs semantic site search with a conversational assistant on one platform. Results rank from your catalog and customer behavior by default, so a query like "running shoes for flat feet" surfaces the right gear without a rule. Install is a site-side install - live in hours. The honest limit: Nobi curates the search results page, not category or collection pages, so site-wide merchandising still needs a separate tool.
+[Nobi](https://nobi.ai) pairs semantic site search with a conversational assistant on one platform. Results rank from your catalog and customer behavior by default, so a query like "running shoes for flat feet" surfaces the right gear without a rule. Installs on your site in hours. The honest limit: Nobi curates the search results page, not category or collection pages, so site-wide merchandising still needs a separate tool.
 
 Algolia is a search API built for engineering teams. Rules, ranking, synonyms, and merchandising are all configured in code. Fast response times and granular control, but the work is yours to do. Pick it when you have a dedicated search engineer and want to own every ranking decision; skip it if you don't have the team to keep up with it.
 
@@ -131,7 +131,7 @@ Coveo brings AI relevance and personalization across search, recommendations, an
 
 We graded each tool on five things sporting goods buyers actually have to defend in production: how well it handles sport-intent free-text queries, how deep its faceted filtering runs across gear, apparel, and consumables, what the implementation calendar looks like on Shopify and other commerce platforms, how transparent its pricing is at sporting goods catalog scale, and whether it ships a conversational layer for the fit and compatibility questions that drive returns in this category.
 
-Nobi scored well on sport-intent queries and conversational coverage. The semantic ranker maps phrases like "trail running shoes for wide feet" to real products without a hand-tuned rule, and the conversational assistant answers fit and compatibility questions on the product page. Pricing is fully public: $25/month base with 2,500 searches and 250 messages included, then $0.01 per additional search and $0.10 per additional message. The weaker spot is site-wide merchandising. Nobi curates the search results page, not category or collection pages.
+Nobi scored well on sport-intent queries and conversational coverage. The semantic ranker maps phrases like "trail running shoes for wide feet" to real products without a hand-tuned rule, and the conversational assistant answers fit and compatibility questions on the product page. Pricing is fully public at $25/month base; the full breakdown is in the vendor section below. The weaker spot is site-wide merchandising. Nobi curates the search results page, not category or collection pages.
 
 Algolia scored highest on raw faceted depth and query speed, but it's a search API rather than a finished product. Rules, ranking, and synonyms all get configured in code, so a dedicated search engineer is the price of entry. Pricing is usage-based on search requests and records indexed, which makes cost modelable once you know your volume.
 
@@ -141,7 +141,7 @@ Coveo scored well on personalization across search, browse, and recommendations,
 
 ## 1. Nobi
 
-Sporting goods catalogs put two distinct pressures on search at once: free-text sport-intent queries that have to surface the right gear from sparse product titles, and on-PDP questions about fit, sizing, and gear compatibility that often decide the purchase. Nobi handles both on one platform. The semantic ranker reads your catalog and customer signals out of the box, so a query like "running shoes for flat feet" returns ranked products without a merchandiser pinning anything. The conversational assistant sits on the product page and answers follow-ups like "will these work for marathon training?" from your own copy and policy pages, with inline citation pills that link back to the source. Connected sources refresh twice a day, so a sizing chart update lands in customer answers within hours instead of waiting on a weekly sync.
+Sporting goods catalogs put two distinct pressures on search. Sport-intent free-text queries have to surface the right gear from sparse product titles. On-PDP questions about fit, sizing, and gear compatibility often decide the purchase. Nobi handles both on one platform. The semantic ranker reads your catalog and customer signals out of the box, so a query like "ski boots for wide calves" returns ranked products without a merchandiser pinning anything. The conversational assistant sits on the product page and answers follow-ups like "will these work for marathon training?" from your own copy and policy pages, with inline citation pills that link back to the source. Connected sources refresh twice a day, so a sizing chart update lands in customer answers within hours instead of waiting on a weekly sync.
 
 **Best for:** Sporting goods teams whose biggest conversion leak is sport-intent free-text search and on-PDP customer questions about fit, sizing, and gear compatibility, with a Shopify-native rollout in hours.
 
@@ -192,7 +192,7 @@ Algolia is a search API built for engineering teams. Rules, ranking, synonyms, a
 
 ## 3. Hawk Search
 
-Hawk Search is enterprise site search built for catalogs with hundreds of attributes per product, where faceted navigation - sport, gender, fit, size, capacity, compatibility - is the dominant way customers find what they want. The product has a mature footprint with B2B sellers and native integrations into BigCommerce and Optimizely's B2B and B2C platforms. For a sporting goods catalog with deep SKU hierarchies, contract pricing on team-uniform or fleet lines, or category structures that need merchandiser-level control over how products rank inside a refinement, Hawk Search has spent years solving exactly that problem. The trade-off is calendar time. Implementation is sales-led and services-heavy, so the gap between contract and live search reads more like a quarter than a sprint.
+Hawk Search is enterprise site search built for catalogs with hundreds of attributes per product, where faceted navigation - sport, gender, fit, size, capacity, compatibility - is the dominant way customers find what they want. The product has a mature footprint with B2B sellers and native integrations into BigCommerce and Optimizely's B2B and B2C platforms. Hawk Search has spent years solving those catalog problems: deep SKU hierarchies, contract pricing on team-uniform and fleet lines, and merchandiser-level control over how products rank inside a category refinement. The trade-off is calendar time. Implementation is sales-led and services-heavy, so the gap between contract and live search reads more like a quarter than a sprint.
 
 **Best for:** B2B sporting goods sellers and large multi-category catalogs where filter-driven discovery across sport, fit, size, and compatibility attributes is the primary path, not free-text search.
 
@@ -217,7 +217,7 @@ Coveo brings AI-powered relevance to commerce search, support portals, and inter
 
 **Best for:** Enterprise sporting goods retailers unifying AI relevance across their site, customer support portal, and internal knowledge base under one engine.
 
-**Pricing:** Quote-only; the vendor sells direct through sales rather than via published tiers. Real all-in deployments commonly run $100K+ per year once annual licensing (about $50K+), implementation (about $20K+), and professional services ($200-$300/hour) are added.
+**Pricing:** Quote-only; third-party reports put the commerce module's base around $600/month. Real all-in deployments commonly run $100K+ per year once annual licensing (about $50K+), implementation (about $20K+), and professional services ($200-$300/hour) are added.
 
 **Pros:**
 - Machine-learning relevance that spans commerce, support, and workplace search on one engine
@@ -235,7 +235,7 @@ Coveo brings AI-powered relevance to commerce search, support portals, and inter
 
 Map the choice to the job that's actually losing you revenue. If sport-intent free-text queries and on-PDP customer Q&A are the two leaks, Nobi is the fast-deploy default. If a search engineering team wants to own ranking on sport, fit, and gear attributes line by line, Algolia is the platform. If filter-driven discovery on a deep B2B or multi-category catalog is the dominant customer behavior, Hawk Search is built for that catalog. If you're an enterprise retailer unifying search across the site, a support portal, and an internal knowledge base, Coveo is the unification play.
 
-Nobi is the right pick when sport-intent free-text plus on-PDP customer questions about fit, sizing, and gear compatibility are the bottleneck, you're on Shopify, and you need search and a conversational assistant live this quarter. The semantic ranker reads your catalog and customer signals out of the box, so merchandisers don't hand-pin products to queries each week, and pricing starts at $25/month base with 2,500 searches and 250 messages included, then $0.01 per additional search and $0.10 per additional message.
+Nobi is the right pick when sport-intent free-text plus on-PDP customer questions about fit, sizing, and gear compatibility are the bottleneck, you're on Shopify, and you need search and a conversational assistant live this quarter. The semantic ranker reads your catalog and customer signals out of the box, so merchandisers don't hand-pin products to queries each week, and pricing starts at $25/month base.
 
 Algolia is the right pick when you have a dedicated search engineer who wants full API control over how sport, fit, and gear attributes get weighted. Every ranking tweak is engineering time, not a merchandiser action - that's the trade for the control.
 
@@ -249,7 +249,7 @@ The honest call against Nobi: if you need API-level control over custom ranking 
 
 ### Does AI search handle queries like "running shoes for flat feet" out of the box?
 
-Nobi and Coveo do; their semantic rankers map intent to products without a hand-tuned rule. Algolia needs NeuralSearch on a higher tier. Hawk Search leans on faceted filtering more than free-text semantics.
+Nobi and Coveo do; their semantic rankers map intent to products without a hand-tuned rule. Algolia needs NeuralSearch on a higher tier. Hawk Search relies on faceted filtering rather than natural-language search.
 
 ### How long does implementation take on Shopify versus BigCommerce or Adobe Commerce?
 
@@ -257,7 +257,7 @@ Nobi is live in hours with a site-side install. Algolia rolls out in weeks with 
 
 ### What does pricing look like at catalog scale once seasonal spikes hit?
 
-Nobi is $25/month base with 2,500 searches and 250 messages included, then $0.01 per additional search and $0.10 per message. Algolia is usage-based, so traffic spikes lift the bill. Hawk Search is sales-led with tiered enterprise pricing quoted by catalog size and contract scope. Coveo is quote-only.
+Nobi is $25/month base with published overage rates; the full breakdown is in the vendor section. Algolia is usage-based, so traffic spikes lift the bill. Hawk Search is sales-led with tiered enterprise pricing quoted by catalog size and contract scope. Coveo is quote-only.
 
 ### Can one tool handle gear, apparel, and consumables in one index?
 
@@ -265,14 +265,14 @@ Yes for all four. Nobi reads your catalog without per-category setup. Algolia an
 
 ### How does personalization tell a marathon runner from a casual jogger without a quiz?
 
-Nobi and Coveo learn from session and behavioral signals - clicks, dwell time, prior purchases - so the second visit ranks differently from the first. Algolia exposes the signals via API; Hawk Search leans on faceted refinements.
+Nobi and Coveo learn from session and behavioral signals - clicks, dwell time, prior purchases - so the second visit ranks differently from the first. Algolia gives engineers the signals to build personalization themselves; Hawk Search relies on filters rather than per-shopper ranking, so shoppers narrow by attribute rather than getting results ranked to them.
 
 
 <BlogEmailCapture hook="Picking AI search for your sporting goods catalog?" subtext="Drop your email and we'll run Nobi's AI search on your catalog so shoppers find the right gear instead of bouncing on zero results." />
 
 ---
 
-Want sport-intent search and on-PDP customer questions running on your site in hours instead of quarters? [Start with Nobi](https://nobi.ai) at $25/mo base.
+If sport-intent queries and on-PDP fit questions are the conversion leaks and you're on Shopify, [Nobi](https://nobi.ai) is live at $25/month - no implementation sprint required.
 
 <div className="my-8 flex justify-center">
  <a

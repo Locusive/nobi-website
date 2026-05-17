@@ -105,13 +105,13 @@ export const meta = {
 </script>
 ## What are the best API-powered AI site search platforms with personalization for ecommerce?
 
-Picking [AI site search](https://nobi.ai/blog/best-ai-search-ecommerce-2026) for a headless stack means weighing five different bets.
+The right [AI site search](https://nobi.ai/blog/best-ai-search-ecommerce-2026) platform depends on four trade-offs: how much API control your team needs, how deep the personalization has to go, what pricing model you can budget against, and how fast you need to be live. Five platforms are worth evaluating for a headless or hybrid ecommerce stack.
 
 - **Nobi** - AI site search plus a grounded shopping assistant with cited answers, $25/mo base (2,500 searches + 250 conversational messages). Pick when AI search and conversational discovery in one platform is the job and you want transparent per-unit pricing.
-- **Algolia** - Sub-50ms search API with NeuralSearch on higher tiers, usage-based pricing that often lands at $2,000+/mo at mid-market scale. Pick when a dedicated engineering team will own the ranking layer end to end.
-- **Constructor** - Semantic search plus real-time session-signal personalization across search, browse, category, and recommendations, revenue-share pricing with no published list. Pick when behavioral reranking across the full site is the CVR lever and you have an internal data team.
-- **Bloomreach** - Search, CMS, and CDP unified into one commerce experience platform, quote-only enterprise contracts in the six-figure annual range. Pick when you're consolidating the whole commerce stack into one contract.
-- **Klevu** - AI matching for Shopify with a no-code merchandising dashboard, quote-only and tiered by store size. Pick when conversational query mismatch on Shopify is your main CVR leak.
+- **[Algolia](https://algolia.com)** - Sub-50ms search API with NeuralSearch on higher tiers, usage-based pricing that often lands at $2,000+/mo at mid-market scale. Pick when a dedicated engineering team will own the ranking layer end to end.
+- **[Constructor](https://constructor.io)** - Semantic search plus real-time session-signal personalization across search, browse, category, and recommendations, revenue-share pricing with no published list. Pick when behavioral reranking across the full site is the CVR lever and you have an internal data team.
+- **[Bloomreach](https://bloomreach.com)** - Search, CMS, and CDP unified into one commerce experience platform, quote-only enterprise contracts in the six-figure annual range. Pick when you're consolidating the whole commerce stack into one contract.
+- **[Klevu](https://klevu.com)** - AI matching for Shopify with a no-code merchandising dashboard, quote-only and tiered by store size. Pick when conversational query mismatch on Shopify is your main CVR leak.
 
 | Product | Primary job | Best for | Pricing (starting) | Standout strength | Key weakness |
 | --- | --- | --- | --- | --- | --- |
@@ -127,7 +127,12 @@ Picking [AI site search](https://nobi.ai/blog/best-ai-search-ecommerce-2026) for
 
 ## What should ecommerce teams look for in an API-powered AI search platform with personalization?
 
-An API-powered AI search platform for ecommerce needs four things: a real API surface with SDKs, ranking hooks, and rendering control for headless or hybrid storefronts; AI-native relevance that handles natural-language and synonym-heavy queries; personalization that goes beyond placeholder copy into actual product reordering; and pricing transparent enough to budget without a quote cycle.
+An API-powered AI search platform for ecommerce has four requirements:
+
+- A real API surface: SDKs, ranking hooks, and rendering control for headless or hybrid storefronts
+- AI-native relevance that handles natural-language and synonym-heavy queries
+- Personalization that goes beyond placeholder copy into actual product reordering
+- Pricing transparent enough to budget without a quote cycle
 
 API depth is the first filter. A headless or hybrid store needs SDKs, indexing endpoints, ranking hooks, and rendering control - the things that let your frontend actually call the search engine without fighting it. Algolia sits at the deep end of this spectrum; Klevu and Nobi sit closer to the drop-in end.
 
@@ -155,7 +160,7 @@ Time to live used what each vendor publishes about typical implementation. Klevu
 
 ## 1. Nobi
 
-Nobi runs AI site search and a grounded conversational shopping assistant on the same catalog index. A shopper whose query lands as zero-result in search has a conversational fallback in the same session - the assistant picks up the question and answers from the same products and policies. For developers, a Hooks API gives explicit control over how Nobi renders products and responses in the storefront, so the look and feel stays yours. Connected knowledge sources refresh twice a day, so a pricing or policy change lands in shopper answers within hours. Every assistant answer carries an inline numbered citation pill - hover it to see the source document, date, and the exact excerpt the answer came from. That's how Nobi keeps answers grounded instead of producing the confident lies that have burned teams trying AI chat before.
+Nobi runs AI site search and a grounded conversational shopping assistant on the same catalog index. A shopper whose query lands as zero-result in search has a conversational fallback in the same session - the assistant picks up the question and answers from the same products and policies. For developers, a Hooks API gives explicit control over how Nobi renders products and responses in the storefront, so the look and feel stays yours. Answers only pull from your connected sources - product catalog, policy docs, FAQ pages - not from the model's general training data. That grounding is what prevents the confident-lie problem: a recommendation for a discontinued SKU, a price that's since changed, a policy that no longer applies.
 
 **Best for:** Ecommerce teams who want AI site search plus a cited, grounded shopping assistant on the same catalog, with developer-controlled rendering through a Hooks API and per-unit pricing they can model before signing.
 
@@ -192,7 +197,7 @@ Nobi runs AI site search and a grounded conversational shopping assistant on the
 **Pricing:** Usage-based on search requests and records indexed, with NeuralSearch gated to higher tiers. Mid-market deployments often land at $2,000+/month before custom relevance engineering.
 
 **Pros:**
-- Sub-50ms response times at catalog scale, and faster search directly lifts CVR
+- Sub-50ms response times at catalog scale, with consistent latency even during traffic peaks
 - Granular API-level control over ranking, indexing, synonyms, and frontend rendering, with InstantSearch widgets across every major frontend stack
 - NeuralSearch adds semantic matching on top of keyword relevance on higher tiers, catching natural-language queries that keyword-only ranking misses
 - Largest third-party integration ecosystem in this category
@@ -221,7 +226,7 @@ Nobi runs AI site search and a grounded conversational shopping assistant on the
 **Cons:**
 - Revenue-share contracts mean a successful CVR campaign costs more as GMV grows, and bills can scale in surprising ways during peak season
 - Implementation runs weeks to months and needs internal data-team hours to keep tuning
-- Brands below $50M GMV generally can't extract the value the contract is priced against
+- Constructor positions for retailers with significant GMV - the revenue-share model and data-team requirement mean the math works best at scale, and the contract is sized accordingly
 
 **Verdict:** Pick Constructor when behavioral reranking across the full site is the CVR lever you actually need and you have the data team and GMV to justify it. Skip it if you want transparent per-unit pricing or just the search bar without a full merchandising platform attached.
 
@@ -263,7 +268,7 @@ Nobi runs AI site search and a grounded conversational shopping assistant on the
 **Cons:**
 - Behavioral personalization is a separately licensed module on top of Smart Search, not included in the base price, so the personalization story requires a second contract
 - The roadmap and support footprint sit inside Athos Commerce, the parent company that also owns Searchspring and Intelligent Reach
-- AI matching is only as good as the catalog data feeding it - sparse product titles and descriptions weaken the layer that's supposed to prevent empty pages
+- The Smart Merchandising dashboard is functional but dated - drag-and-drop visual editing is absent, and the UI design lags newer tools in the category
 
 **Verdict:** Pick Klevu when conversational query mismatch is your main CVR leak on Shopify and you want a packaged install. Skip it if personalization needs to be in your base contract.
 

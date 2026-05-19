@@ -135,6 +135,7 @@ export default function PricingCalculator() {
   const [searchRatePct, setSearchRatePct] = useState(DEFAULT_SEARCH_RATE_PCT);
   const [messageRatePct, setMessageRatePct] = useState(DEFAULT_MESSAGE_RATE_PCT);
   const [hasSearch, setHasSearch] = useState(true);
+  const [hasMessages, setHasMessages] = useState(true);
 
   const initial = useMemo(
     () => deriveFromSessions(DEFAULT_SESSIONS, DEFAULT_SEARCH_RATE_PCT, DEFAULT_MESSAGE_RATE_PCT),
@@ -177,10 +178,10 @@ export default function PricingCalculator() {
     });
   };
 
-  const recomputeFromSessions = (s, sr, mr, search = hasSearch) => {
+  const recomputeFromSessions = (s, sr, mr, search = hasSearch, msgs = hasMessages) => {
     const derived = deriveFromSessions(s, sr, mr);
     setSearches(search ? derived.searches : 0);
-    setMessages(derived.messages);
+    setMessages(msgs ? derived.messages : 0);
   };
 
   const handleSessionsChange = (next, interactionType = "monthly_visitors_changed") => {
@@ -212,18 +213,25 @@ export default function PricingCalculator() {
     if (hasSearch) {
       setHasSearch(false);
       setSearches(0);
-      trackEstimateInteraction("search_toggled", {
-        searches: 0,
-        hasSearch: false,
-      });
+      trackEstimateInteraction("search_toggled", { searches: 0, hasSearch: false });
     } else {
       setHasSearch(true);
       const derived = deriveFromSessions(sessions, searchRatePct, messageRatePct);
       setSearches(derived.searches);
-      trackEstimateInteraction("search_toggled", {
-        searches: derived.searches,
-        hasSearch: true,
-      });
+      trackEstimateInteraction("search_toggled", { searches: derived.searches, hasSearch: true });
+    }
+  };
+
+  const handleToggleMessages = () => {
+    if (hasMessages) {
+      setHasMessages(false);
+      setMessages(0);
+      trackEstimateInteraction("messages_toggled", { messages: 0, hasMessages: false });
+    } else {
+      setHasMessages(true);
+      const derived = deriveFromSessions(sessions, searchRatePct, messageRatePct);
+      setMessages(derived.messages);
+      trackEstimateInteraction("messages_toggled", { messages: derived.messages, hasMessages: true });
     }
   };
 
@@ -305,58 +313,72 @@ export default function PricingCalculator() {
         </div>
 
         <div className="rounded-2xl bg-white border border-slate-200 shadow-[0_18px_50px_-30px_rgba(15,23,42,0.18)] px-6 py-5">
-          <div className="space-y-1">
-            {hasSearch ? (
-              <CalcRow
-                label="Searches"
-                value={searches}
-                onChange={handleSearchesChange}
-                sub={
-                  <>
-                    ≈ <RateInput value={searchRatePct} onChange={handleSearchRateChange} max={20} />% of visitors
-                  </>
-                }
-              />
-            ) : null}
-            <CalcRow
-              label="Messages"
-              value={messages}
-              onChange={handleMessagesChange}
-              sub={
-                <>
-                  ≈ <RateInput value={messageRatePct} onChange={handleMessageRateChange} max={20} />% of visitors
-                </>
-              }
-            />
-          </div>
-
-          <div className="mt-4 flex items-center justify-between gap-2">
-            <span className="text-xs text-slate-500">Use Nobi for search</span>
-            <PurpleToggle
-              checked={hasSearch}
-              onChange={handleToggleSearch}
-              label="Use Nobi for search"
-            />
-          </div>
-
-          <div className="mt-4 pt-5 border-t border-slate-100">
-            <div className="flex items-baseline justify-end gap-2">
-              <span className="text-5xl font-semibold text-slate-900 tabular-nums tracking-tight">
-                ${formatCurrency(monthlyCost)}
-              </span>
-              <span className="text-base text-slate-500 font-medium">/ month</span>
+          {!hasSearch && !hasMessages ? (
+            <div className="py-4 text-center">
+              <p className="text-2xl mb-1">🦗</p>
+              <p className="text-sm font-semibold text-slate-700">Nothing to estimate</p>
+              <p className="text-xs text-slate-400 mt-1">Turn on search, messages, or both to see your cost.</p>
             </div>
-            <div className="text-sm text-slate-600 mt-2 tabular-nums text-right">
-              $25 base
-              {overage > 0 ? (
-                <>
-                  <span className="text-slate-400 mx-2">+</span>
-                  <span className="text-slate-900 font-medium">${formatCurrency(overage)}</span>
-                  <span className="text-slate-500"> over the included tier</span>
-                </>
-              ) : (
-                <span className="text-emerald-600 font-medium ml-2">· fits in plan</span>
-              )}
+          ) : (
+            <>
+              <div className="space-y-1">
+                {hasSearch ? (
+                  <CalcRow
+                    label="Searches"
+                    value={searches}
+                    onChange={handleSearchesChange}
+                    sub={
+                      <>
+                        ≈ <RateInput value={searchRatePct} onChange={handleSearchRateChange} max={20} />% of visitors
+                      </>
+                    }
+                  />
+                ) : null}
+                {hasMessages ? (
+                  <CalcRow
+                    label="Messages"
+                    value={messages}
+                    onChange={handleMessagesChange}
+                    sub={
+                      <>
+                        ≈ <RateInput value={messageRatePct} onChange={handleMessageRateChange} max={20} />% of visitors
+                      </>
+                    }
+                  />
+                ) : null}
+              </div>
+
+              <div className="mt-4 pt-5 border-t border-slate-100">
+                <div className="flex items-baseline justify-end gap-2">
+                  <span className="text-5xl font-semibold text-slate-900 tabular-nums tracking-tight">
+                    ${formatCurrency(monthlyCost)}
+                  </span>
+                  <span className="text-base text-slate-500 font-medium">/ month</span>
+                </div>
+                <div className="text-sm text-slate-600 mt-2 tabular-nums text-right">
+                  $25 base
+                  {overage > 0 ? (
+                    <>
+                      <span className="text-slate-400 mx-2">+</span>
+                      <span className="text-slate-900 font-medium">${formatCurrency(overage)}</span>
+                      <span className="text-slate-500"> over the included tier</span>
+                    </>
+                  ) : (
+                    <span className="text-emerald-600 font-medium ml-2">· fits in plan</span>
+                  )}
+                </div>
+              </div>
+            </>
+          )}
+
+          <div className="mt-4 space-y-2">
+            <div className="flex items-center justify-between gap-2">
+              <span className="text-xs text-slate-500">Use Nobi for search</span>
+              <PurpleToggle checked={hasSearch} onChange={handleToggleSearch} label="Use Nobi for search" />
+            </div>
+            <div className="flex items-center justify-between gap-2">
+              <span className="text-xs text-slate-500">Use Nobi for messages</span>
+              <PurpleToggle checked={hasMessages} onChange={handleToggleMessages} label="Use Nobi for messages" />
             </div>
           </div>
         </div>

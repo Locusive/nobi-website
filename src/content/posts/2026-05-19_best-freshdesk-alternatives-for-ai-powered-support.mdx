@@ -21,7 +21,7 @@ export const meta = {
  },
  {
  question: "1. Nobi",
- answer: "Nobi is AI customer support that lives on your website rather than inside a helpdesk. It answers questions from your existing help center, FAQ pages, policy documents, and PDFs, with citations back to the exact source. Pricing starts at $25/month base with $0.01 per additional search and $0.10 per additional message past included amounts, and connected sources refresh twice a day."
+ answer: "Nobi is AI customer support that lives on your website rather than inside a helpdesk. It answers questions from your existing help center, FAQ pages, policy documents, and PDFs, with citations back to the exact source. Pricing is usage-based with no per-seat fee, and connected sources refresh twice a day."
  },
  {
  question: "2. Intercom",
@@ -99,17 +99,17 @@ export const meta = {
 
 Four tools cover the main exit routes off Freshdesk, and each one sits in a different lane:
 
-- **Nobi** - site-side AI assistant that answers customer questions on the website before a ticket is filed, with inline citation pills, query overrides, and a KB built from your existing pages and PDFs. $25/mo base (2,500 searches + 250 messages). Pick when the volume problem is questions arriving on the site.
+- **Nobi** - site-side AI assistant that answers customer questions on the website before a ticket is filed, with inline citation pills, query overrides, and a KB built from your existing pages and PDFs. Usage-based pricing, no per-seat fee. Pick when the volume problem is questions arriving on the site.
 - **Intercom Fin** - Fin AI Agent inside the full Intercom messenger and helpdesk. $29/seat/mo annual ($39 monthly) up to $132/$139 Expert, plus $0.99 per Fin resolution. Pick when you're moving from Freshdesk to Intercom as your full platform.
 - **Zendesk + AI** - AI Agents and Copilot bolted to the Zendesk Suite ticket workflow. Suite + Copilot Professional $155/agent/mo annual; Enterprise $209; standalone Copilot $50/agent/mo. Pick when you need AI tightly coupled to a mature ticket workflow.
-- **Ada** - autonomous AI agent across web, app, email, SMS, and messaging from one setup. Quote-only; vendor explicitly fits 300K+ annual conversations. Pick when you need cross-channel autonomous resolution at enterprise scale.
+- **Ada** - autonomous AI agent across web, app, email, SMS, and messaging from one setup. Quote-only enterprise pricing. Pick when you need cross-channel autonomous resolution at enterprise scale.
 
 | Product | Primary job | Best for | Pricing (starting) | Standout strength | Key weakness |
 | --- | --- | --- | --- | --- | --- |
-| Nobi | Website-side AI assistant that answers customer questions before tickets land | Teams whose bottleneck is question volume on the site | $25/mo base (2,500 searches + 250 messages); $0.01 per extra search, $0.10 per extra message | Inline citation pills + query overrides; KB built from existing site content with no manual re-entry | Web chat only - no email and no ticket workflow |
+| Nobi | Website-side AI assistant that answers customer questions before tickets land | Teams whose bottleneck is question volume on the site | Usage-based, no per-seat fee (starts at $25/mo) | Inline citation pills + query overrides; KB built from existing site content with no manual re-entry | Web chat only - no email and no ticket workflow |
 | Intercom Fin | Fin AI Agent inside the Intercom helpdesk and messenger platform | Teams moving from Freshdesk to Intercom who want AI in the same platform | $29/seat/mo annual ($39 monthly) Essential, up to $132/$139 Expert, plus $0.99 per Fin resolution | Native AI-to-human handoff inside the same platform your team already works in | Requires the full Intercom subscription; external knowledge sources refresh weekly |
 | [Zendesk](https://zendesk.com) | AI Agents and Copilot bolted to the Zendesk Suite ticket workflow | Teams replacing Freshdesk with Zendesk who need AI coupled to mature tickets | Suite + Copilot Professional $155/agent/mo annual; Enterprise $209; standalone Copilot $50/agent/mo | AI tightly coupled to mature tickets, macros, triggers, SLAs, and routing | Months-long rollout; per-agent licensing is a real line item before the AI pays back |
-| [Ada](https://ada.cx) | Autonomous AI agent across web, app, email, SMS, and messaging | Enterprises with 300K+ annual conversations spread across many channels | Quote-only; vendor explicitly fits 300K+ annual customer service conversations | One AI agent across every channel from one setup | Multi-quarter rollout; no public pricing |
+| [Ada](https://ada.cx) | Autonomous AI agent across web, app, email, SMS, and messaging | Large enterprise support orgs with volume spread across many channels | Quote-only; vendor explicitly fits 300K+ annual customer service conversations | One AI agent across every channel from one setup | Multi-quarter rollout; no public pricing |
 
 *Full disclosure: Nobi is our product, and it's included in this list alongside the three competitors customer-support buyers most often weigh against it. We've aimed to be honest about Nobi's own limits and explicit about when another tool on this list is the better pick.*
 
@@ -135,9 +135,9 @@ Where the AI runs matters most. Nobi sits on the website itself - it answers cus
 
 Knowledge sources decide answer quality. Nobi indexes pages you connect from anywhere on the web - your existing help center, FAQ routes, policy docs, PDFs, third-party docs. Connected sources refresh twice a day. Intercom Fin supports public URL syncs, PDFs, DOCX, and direct syncs with Notion, Confluence, Guru, Salesforce, and Zendesk. Zendesk and Ada both ground primarily in their own help-center content plus connected sources. When a policy or price changes, how fast the AI knows is the difference between an accurate answer and a customer escalation.
 
-Pricing scales differently for each. Nobi charges $25/month base with $0.01 per additional search and $0.10 per additional message past the included amounts. The rest charge per seat, per resolution, or both, and the numbers move with how big your team is and how many cases the AI handles.
+Pricing scales differently for each. Nobi uses usage-based pricing with no per-seat fee. The rest charge per seat, per resolution, or both, and the numbers move with how big your team is and how many cases the AI handles.
 
-Implementation runs from hours to multiple quarters. A site-side install lands in a day. A full helpdesk migration to Intercom or Zendesk is a quarter of work, sometimes more.
+Implementation runs from hours to multiple quarters. A site-side install lands in a day. A full helpdesk migration to Intercom or Zendesk is a quarter of work, sometimes more. The four alternatives below are rated on all five criteria.
 
 ## 1. Nobi
 
@@ -155,7 +155,7 @@ Nobi is [AI customer support](https://nobi.ai/blog/best-ai-chatbot-for-customer-
 
 **Cons:**
 - Web chat only - Nobi doesn't send or receive email, so teams whose primary support channel is an email inbox will still need a separate tool
-- Not a ticket workflow platform - Nobi reduces the volume of incoming questions but doesn't manage tickets, route cases, run macros, or process returns; [pair it with a helpdesk](https://nobi.ai/blog/the-top-ai-assistants-that-plug-into-existing-help-desks) like Gorgias or Zendesk for the agent side
+- Not a ticket workflow platform - Nobi reduces the volume of incoming questions but doesn't manage tickets, route cases, run macros, or process returns; [pair it with your existing helpdesk](https://nobi.ai/blog/the-top-ai-assistants-that-plug-into-existing-help-desks) for the agent side
 
 **Verdict:** Pick Nobi when the real problem behind leaving Freshdesk is the volume of questions arriving on your site. Skip it if your team's job is managing tickets after they land and you need a workflow tool with macros, routing, and SLA management.
 
@@ -182,7 +182,7 @@ Nobi is [AI customer support](https://nobi.ai/blog/best-ai-chatbot-for-customer-
 - Mature handoff, routing, and escalation tooling built into the helpdesk itself
 
 **Cons:**
-- External sources only update once a week, so a policy change in Notion can sit stale in answers for up to six days
+- External knowledge sources (Notion, Confluence, public URLs) update on a slower cadence than native Help Center content, so recent policy changes may not land in answers immediately
 - You're paying per seat and per Fin resolution, which adds up fast as volume grows
 - You can't buy Fin on its own - the full Intercom subscription is required to use it
 
@@ -212,7 +212,7 @@ Nobi is [AI customer support](https://nobi.ai/blog/best-ai-chatbot-for-customer-
 
 [Ada](https://ada.cx) deploys one AI agent across your website, app, email, and messaging channels, then connects to whichever helpdesk you keep for ticketing and escalation. One agent answers on the marketing site, inside the mobile app, on inbound email, and across SMS and messaging, with a single set of integrations powering all of them. Ada is built for companies running 300,000 or more support conversations a year - roughly 25,000 a month - so most smaller teams are too small for it to make sense. The trade-off is enterprise weight: data integration, intent tuning, and rollout are typically a multi-quarter project.
 
-**Best for:** Enterprise teams handling 300K+ annual conversations across web, app, email, SMS, and messaging at the same time.
+**Best for:** High-volume enterprise teams with support spread across web, app, email, SMS, and messaging at the same time.
 
 **Pricing:** Quote-only. Ada doesn't publish public numbers and explicitly fits companies running 300,000+ annual customer service conversations.
 
@@ -233,7 +233,7 @@ Nobi is [AI customer support](https://nobi.ai/blog/best-ai-chatbot-for-customer-
 
 Start with where your volume actually sits. If most of the questions you'd rather not see in Freshdesk are arriving on the website, the layer that answers them goes on the website - that's Nobi. If you're already planning to replace Freshdesk with a new full helpdesk, pick the platform that fits the rest of your stack and use its native AI. If your volume is genuinely spread across web, app, email, and messaging at enterprise scale, Ada is the cross-channel pick.
 
-Nobi is the right call when your real problem is the volume of questions hitting your site before a ticket ever exists. It runs on the website and answers from your existing help center, FAQ pages, and policy documents, with a citation back to the source on every answer. Connected sources refresh twice a day, so a price or policy change lands in answers within hours. It's $25/month base with $0.01 per additional search and $0.10 per additional message - readable pricing you can model before signing anything. Skip it if email is your primary support channel or if you need a ticket workflow with macros, routing, and SLA management.
+Nobi is the right call when your real problem is the volume of questions hitting your site before a ticket ever exists. It runs on the website and answers from your existing help center, FAQ pages, and policy documents, with a citation back to the source on every answer. Connected sources refresh twice a day, so a price or policy change lands in answers within hours. Pricing is usage-based with no per-seat fee, so you can model the cost before signing anything. Skip it if email is your primary support channel or if you need a ticket workflow with macros, routing, and SLA management.
 
 Intercom Fin is the right call when leaving Freshdesk also means committing to Intercom as your full helpdesk. The AI ships inside the same platform your team will use for tickets and routing, which makes the handoff native. Skip it if you don't want to buy the whole Intercom stack just to get an AI layer.
 
@@ -241,7 +241,7 @@ Zendesk with its AI add-ons is the right call when you're swapping Freshdesk for
 
 Ada is the right call at enterprise scale when web, app, email, SMS, and messaging are all carrying real volume. Skip it if your volume is concentrated on the website or if you need to be live this quarter - pricing is quote-only and a full rollout runs a quarter or more.
 
-The honest combo most teams land on: Nobi for the questions arriving on the site, plus a helpdesk like Zendesk or Gorgias for the tickets that still land. That covers the volume problem and the workflow problem without forcing one tool to do both.
+The honest combo most teams land on: Nobi for the questions arriving on the site, plus your existing helpdesk for the tickets that still land. That covers the volume problem and the workflow problem without forcing one tool to do both.
 
 ## Frequently asked questions
 
@@ -259,14 +259,14 @@ Nobi is hours to days for a website install. Intercom and Zendesk are weeks to m
 
 **Which option has the most transparent pricing?**
 
-Nobi publishes a $25/month base with $0.01 per additional search and $0.10 per additional message. Intercom and Zendesk publish per-seat plans plus a charge for each conversation the AI resolves or each agent on the AI add-on. Ada is quote-only.
+Nobi publishes usage-based pricing with no per-seat fee. Intercom and Zendesk publish per-seat plans plus a charge for each conversation the AI resolves or each agent on the AI add-on. Ada is quote-only.
 
 
 <BlogEmailCapture hook="Shopping a Freshdesk alternative for AI-powered support?" subtext="Drop your email and we'll show you how Nobi answers customer questions on your site with cited sources before they turn into Freshdesk tickets." />
 
 ---
 
-If the real reason you're leaving Freshdesk is the volume of questions hitting your site, watch Nobi answer them live on your site before the next ticket lands.
+If the real reason you're leaving Freshdesk is the volume of questions hitting your site, add Nobi and see how many questions it resolves before the next ticket opens.
 
 <div className="my-8 flex justify-center">
  <a

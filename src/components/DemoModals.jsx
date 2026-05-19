@@ -50,6 +50,8 @@ export function RequestDemoModal({ open, onClose }) {
       formData.append("platform", form.platform);
       formData.append("message", form.message);
       formData.append("botcheck", form.botcheck);
+      formData.append("page_url", window.location.href);
+      formData.append("referrer", document.referrer || "(direct)");
 
       const r = await fetch("https://api.web3forms.com/submit", {
         method: "POST",

@@ -308,7 +308,7 @@ export default function PricingCalculator() {
           />
           <div className="flex justify-between text-[11px] text-slate-400 mt-1 tabular-nums">
             <span>1,000</span>
-            <span>500,000+</span>
+            <span>500,000+ — type a custom number above</span>
           </div>
         </div>
 

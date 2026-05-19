@@ -282,7 +282,7 @@ export default function PricingCalculator() {
             Estimate your monthly cost
           </h2>
           <p className="text-sm text-slate-500">
-            Drag the slider to your monthly traffic and we'll do the math.
+            Drag the slider or edit the number directly.
           </p>
         </div>
 
@@ -308,7 +308,7 @@ export default function PricingCalculator() {
           />
           <div className="flex justify-between text-[11px] text-slate-400 mt-1 tabular-nums">
             <span>1,000</span>
-            <span>500,000+ — type a custom number above</span>
+            <span>500,000</span>
           </div>
         </div>
 

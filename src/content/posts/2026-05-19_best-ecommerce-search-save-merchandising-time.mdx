@@ -258,6 +258,18 @@ The choice maps to one question: who do you want doing the relevance work? If th
 If merchandising has to move across category, collection, and browse - not just search - and there's a data team to feed the ranker, Constructor is the platform built for that. The revenue-share contract is the cost of admission. If the merch team genuinely wants explicit, auditable control over every query and has the bandwidth for the rule list as the catalog grows, Searchspring is still the option - just budget the maintenance hours honestly. If a search engineer owns ranking in code and you want full API control over the rendering layer, Algolia is the right pick.
 
 
+## Frequently asked questions
+
+**How do I know if my search platform is costing my merchandising team too much time?** Count the number of synonym groups, pinned queries, and zero-result rules your team maintains. If that number grows every quarter and there's no end in sight, the engine is pushing work onto people that should be handled automatically.
+
+**Is AI-powered search always less work to maintain than rule-based search?** For most catalogs, yes - the engine handles vocabulary mismatch by default so you're not writing a synonym rule for every alternate phrasing a shopper might use. The exception is very specific or regulated catalogs where a wrong automatic match has real consequences. In those cases, a rule-based tool with explicit controls gives you the auditability you need.
+
+**What happens to existing synonym rules and pinned products when switching to AI search?** Most platforms let you import existing rules as a starting point. With AI search, those rules become overrides rather than the primary relevance mechanism - the engine handles the common cases automatically and your existing rules handle the exceptions you already know about.
+
+**How long does it take to see merchandising time savings after switching?** On Nobi, the semantic ranker is on by default from day one so there's nothing to configure before it starts handling synonym matching. Most teams see the change in their weekly rule queue within the first two or three weeks.
+
+**Does reducing manual merchandising work affect search quality?** It shouldn't - the goal of AI search is to match shopper intent more accurately than a rule list can, not to reduce quality in exchange for less work. A/B test results help confirm this: UNTUCKit saw a 17.1% CVR lift when moving to Nobi's AI ranker versus their prior search setup.
+
 <BlogEmailCapture hook="Comparing Klevu, Constructor, and Searchspring to free up merchandising time?" subtext="Drop your email and we'll show you how Nobi's AI search auto-ranks your catalog so your merchandising team stops hand-tuning results." />
 
 ---

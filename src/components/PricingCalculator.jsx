@@ -214,11 +214,17 @@ export default function PricingCalculator() {
       setHasSearch(false);
       setSearches(0);
       trackEstimateInteraction("search_toggled", { searches: 0, hasSearch: false });
+      window.Nobi?.addVisitorContext?.(
+        "Pricing calculator: visitor turned off search — evaluating Nobi for messages/Q&A only."
+      );
     } else {
       setHasSearch(true);
       const derived = deriveFromSessions(sessions, searchRatePct, messageRatePct);
       setSearches(derived.searches);
       trackEstimateInteraction("search_toggled", { searches: derived.searches, hasSearch: true });
+      window.Nobi?.addVisitorContext?.(
+        "Pricing calculator: visitor turned on search — evaluating Nobi for search."
+      );
     }
   };
 
@@ -227,11 +233,17 @@ export default function PricingCalculator() {
       setHasMessages(false);
       setMessages(0);
       trackEstimateInteraction("messages_toggled", { messages: 0, hasMessages: false });
+      window.Nobi?.addVisitorContext?.(
+        "Pricing calculator: visitor turned off messages — evaluating Nobi for search only."
+      );
     } else {
       setHasMessages(true);
       const derived = deriveFromSessions(sessions, searchRatePct, messageRatePct);
       setMessages(derived.messages);
       trackEstimateInteraction("messages_toggled", { messages: derived.messages, hasMessages: true });
+      window.Nobi?.addVisitorContext?.(
+        "Pricing calculator: visitor turned on messages — evaluating Nobi for conversational Q&A."
+      );
     }
   };
 

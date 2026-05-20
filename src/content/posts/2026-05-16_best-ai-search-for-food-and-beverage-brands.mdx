@@ -53,7 +53,7 @@ export const meta = {
   "headline": "Best AI Search for Food and Beverage Brands",
   "description": "Five AI search tools for specialty food, beverage, and grocery catalogs - compared on dietary filters, allergen accuracy, and pricing.",
   "datePublished": "2026-05-16",
-  "dateModified": "2026-05-16",
+  "dateModified": "2026-05-20",
   "author": {
     "@type": "Person",
     "name": "Shanif Dhanani",
@@ -109,15 +109,15 @@ Food and beverage shoppers describe what they want in ways keyword search was ne
 
 - **Nobi** - site search plus a shopping assistant that answers dietary and allergen questions from your connected catalog and policy pages, $25/month base ($0.01/extra search, $0.10/extra message). Pick when shoppers ask conversational questions like "gluten-free pasta under $15" and you want cited answers grounded in your own product data - every answer shows the source document and excerpt so allergen claims are verifiable.
 - **[Klevu](https://klevu.com)** - AI search built for Shopify catalogs, tiered pricing scaled to store size. Pick when a long-tail query like "low-FODMAP marinara" is the miss reason and you want a packaged install that ships in days.
-- **[Algolia](https://algolia.com)** - developer-first search API with NeuralSearch on higher tiers, usage-based ($2,000+/month typical at mid-market volumes). Pick when you have engineers who want to model dietary attributes, allergen flags, and pack-size facets exactly the way your catalog data is shaped.
+- **[Algolia](https://algolia.com)** - developer-first search API with NeuralSearch on the top-tier Elevate plan, usage-based pricing that scales with query volume. Pick when you have engineers who want to model dietary attributes, allergen flags, and pack-size facets exactly the way your catalog data is shaped.
 - **[Searchspring](https://searchspring.com)** - mid-market search and merchandising with rule-by-rule control, pricing not published publicly. Pick when allergen accuracy matters enough that merchandisers need to audit and override what specific queries return.
 - **[Fast Simon](https://fastsimon.com)** - Shopify-focused AI search and visual merchandising, from $99/month. Pick when collection curation by recipe occasion or seasonal flavor matters more than long-tail semantic relevance.
 
 | Product | Primary job | Best for | Pricing (starting) | Standout strength | Key weakness |
 | --- | --- | --- | --- | --- | --- |
 | Nobi | Site search + shopping assistant grounded in catalog and policy data | Food and beverage brands whose shoppers ask conversational dietary, allergen, and ingredient questions | $25/month base (2,500 searches and 250 messages); $0.01/extra search, $0.10/extra message | Inline citation pills on every answer - hover to see source doc, date, and exact excerpt - so allergen and ingredient claims are verifiable on the spot | No site-wide merchandising on category or collection pages - curates the search results page only |
-| [Klevu](https://klevu.com) | AI search and merchandising for Shopify catalogs | Shopify food and beverage brands whose miss reason is long, conversational queries | Tiered by store size; starter rates not published publicly | AI matching that resolves long-tail dietary and ingredient queries before they hit zero | Personalization is a separately licensed module; now consolidated under Athos Commerce |
-| [Algolia](https://algolia.com) | Developer-first search API with optional NeuralSearch | Engineering teams modeling dietary attributes, allergen flags, and pack-size facets in code | Usage-based on search requests; mid-market deployments often $2,000+/month before custom relevance work | Sub-50ms response and granular API control over ranking, indexing, and frontend rendering | Quality scales with engineering hours, and usage-based pricing produces surprise bills during traffic spikes |
+| [Klevu](https://klevu.com) | AI search and merchandising for Shopify catalogs | Shopify food and beverage brands whose miss reason is long, conversational queries | Tiered by store size; starter rates not published publicly | AI matching that resolves long-tail dietary and ingredient queries before they hit zero | Personalization features are included in the Expert tier only, not available on Essential or Advanced plans; now consolidated under Athos Commerce |
+| [Algolia](https://algolia.com) | Developer-first search API with optional NeuralSearch | Engineering teams modeling dietary attributes, allergen flags, and pack-size facets in code | Usage-based on search requests; pay-as-you-go rates scale with query volume; NeuralSearch requires the Elevate enterprise plan | Sub-50ms response and granular API control over ranking, indexing, and frontend rendering | Quality scales with engineering hours, and usage-based pricing produces surprise bills during traffic spikes |
 | [Searchspring](https://searchspring.com) | Mid-market search + merchandising with rule-by-rule control | Merch teams that need exact, auditable control over what each dietary or allergen query returns | Not published publicly; confirm directly with Searchspring | Rule-level control means every result on every query traces back to a specific merchandiser rule | Rule list grows one-to-one with query patterns; less AI-native on conversational searches; consolidated under Athos Commerce |
 | [Fast Simon](https://fastsimon.com) | AI-assisted Shopify search and visual merchandising | Shopify F&B brands whose bottleneck is collection curation, not semantic relevance | From $99/month via Shopify App Store, scaling with catalog and traffic | Visual merchandising and collection curation workflows non-technical merchandisers can run daily | Lighter natural-language understanding than AI-native engines on long-tail dietary queries |
 
@@ -189,7 +189,7 @@ Nobi pairs site search with a shopping assistant that answers shopper questions 
 - Packaged Shopify install ships in days compared to a custom-built setup
 
 **Cons:**
-- Personalizing the fallback experience is a separately licensed feature, not included with Smart Search
+- Personalization features require the Expert tier; Essential and Advanced plans do not include them
 - Klevu is now part of Athos Commerce, the parent that also owns Searchspring and Intelligent Reach
 - AI matching is only as good as your catalog data; sparse ingredient or dietary fields weaken the layer that's supposed to catch conversational queries
 
@@ -201,7 +201,7 @@ Nobi pairs site search with a shopping assistant that answers shopper questions 
 
 **Best for:** Engineering teams that want full API control over how the catalog's dietary and allergen attributes are modeled and ranked.
 
-**Pricing:** Usage-based on search requests, with NeuralSearch gated to higher tiers. Mid-market deployments often land at $2,000+/month before custom relevance engineering.
+**Pricing:** Usage-based on search requests; pay-as-you-go rates scale with query volume. NeuralSearch requires the top-tier Elevate enterprise plan.
 
 **Pros:**
 - Sub-50ms search response and fast indexing at catalog scale

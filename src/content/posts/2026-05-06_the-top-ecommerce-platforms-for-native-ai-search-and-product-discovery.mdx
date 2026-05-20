@@ -53,7 +53,7 @@ export const meta = {
   "headline": "The Top Ecommerce Platforms For Native AI Search And Product Discovery",
   "description": "Compare AI search and product discovery platforms for ecommerce on pricing, semantic depth, ease of integration, and real conversion impact.",
   "datePublished": "2026-05-06",
-  "dateModified": "2026-05-16",
+  "dateModified": "2026-05-20",
   "author": {
     "@type": "Person",
     "name": "Shanif Dhanani",
@@ -108,7 +108,7 @@ export const meta = {
 Here's how the five platforms break down for AI search and product discovery, each owning a different lane:
 
 - **Nobi** - AI site search for ecommerce with a cited shopping assistant grounded in your catalog and policies, $25/month base ($0.01/extra search, $0.10/extra message). Pick when on-site search relevance is the bottleneck and you want a shopping assistant in the same contract without engineering work.
-- **[Algolia](https://algolia.com)** - developer-first search API with sub-50ms response times and NeuralSearch on higher tiers, usage-based pricing that often runs $2k+/month at mid-market volumes. Pick when you have a search engineer who wants full API control over ranking and frontend.
+- **[Algolia](https://algolia.com)** - developer-first search API with sub-50ms response times and NeuralSearch on the top-tier Elevate plan, usage-based pricing that scales with query volume. Pick when you have a search engineer who wants full API control over ranking and frontend.
 - **[Klevu](https://klevu.com)** - AI-native search on Shopify with merchandiser-managed fallbacks; tiered pricing with enterprise tiers quoted per store size. Pick when long, conversational queries are missing your catalog on a Shopify storefront.
 - **[Constructor](https://constructor.io)** - AI-first product discovery with session-signal personalization across search, browse, and category, revenue-share pricing that scales with GMV. Pick when merchandising has to move across the full site, not just the search bar, and you have a data team to feed it.
 - **[Bloomreach](https://www.bloomreach.com)** - enterprise discovery plus CDP and content in one stack, six-figure annual contracts common. Pick when you're consolidating search, CMS, and customer data into a single multi-quarter rollout.
@@ -116,9 +116,9 @@ Here's how the five platforms break down for AI search and product discovery, ea
 | Product | Primary job | Best for | Pricing (starting) | Standout strength | Key weakness |
 | --- | --- | --- | --- | --- | --- |
 | Nobi | AI site search + cited shopping assistant grounded in your catalog | Ecommerce teams who want AI site search with a cited shopping assistant live in days without engineering or revenue-share contracts | $25/mo base (2,500 searches + 250 messages); $0.01/extra search, $0.10/extra message | Out-of-the-box semantic ranking plus inline citation pills on every shopping-assistant answer - shoppers can verify any claim against the source doc | Curates the search results page, not full site-wide category and collection merchandising |
-| [Algolia](https://algolia.com) | Developer-first search infrastructure | Engineering teams that want full API control over ranking and frontend rendering | Usage-based; often $2k+/month at mid-market volumes before custom relevance engineering | Sub-50ms response times, deep widget ecosystem, NeuralSearch on higher tiers | Relevance is only as good as the engineering hours you spend tuning it; usage-based bills spike during traffic peaks |
-| [Klevu](https://klevu.com) | AI search and merchandising for Shopify | Shopify brands whose biggest miss is long, conversational queries against the catalog | Tiered pricing; enterprise tiers quoted per store size | AI matching catches conversational queries before they hit zero results; merchandiser-managed fallbacks and 'did you mean' built in | Personalization is a separately licensed module; now a division of Athos Commerce alongside Searchspring and Intelligent Reach |
-| [Constructor](https://constructor.io) | AI-first product discovery across the full site | $50M+ GMV retailers with a data team that needs ranking and merchandising across search, browse, and category pages together | Revenue-share with no published list price; costs scale with GMV | Semantic search plus real-time session-signal personalization across search, browse, and category pages, with strong A/B testing infrastructure | Revenue-share pricing scales unpredictably as GMV grows; weeks-to-months implementation requires internal data resources |
+| [Algolia](https://algolia.com) | Developer-first search infrastructure | Engineering teams that want full API control over ranking and frontend rendering | Usage-based; pay-as-you-go rates scale with query volume; NeuralSearch requires the top-tier Elevate enterprise plan | Sub-50ms response times, deep widget ecosystem, NeuralSearch on the Elevate plan | Relevance is only as good as the engineering hours you spend tuning it; usage-based bills spike during traffic peaks |
+| [Klevu](https://klevu.com) | AI search and merchandising for Shopify | Shopify brands whose biggest miss is long, conversational queries against the catalog | Tiered pricing; enterprise tiers quoted per store size | AI matching catches conversational queries before they hit zero results; merchandiser-managed fallbacks and 'did you mean' built in | Personalization features are included in the Expert tier only; not available on Essential or Advanced plans; now a division of Athos Commerce alongside Searchspring and Intelligent Reach |
+| [Constructor](https://constructor.io) | AI-first product discovery across the full site | High-volume retailers with a data team that needs ranking and merchandising across search, browse, and category pages together | Revenue-share with no published list price; costs scale with GMV | Semantic search plus real-time session-signal personalization across search, browse, and category pages, with strong A/B testing infrastructure | Revenue-share pricing scales unpredictably as GMV grows; weeks-to-months implementation requires internal data resources |
 | [Bloomreach](https://bloomreach.com) | Enterprise discovery + content + CDP in one platform | Omnichannel retailers consolidating search, CMS, and customer data into a single contract | Quote-only; six-figure annual contracts common | Unified customer profiles drive personalization across the entire experience layer, not just the search bar | Quote-only enterprise contracts and multi-month implementation; overkill for teams that just want better search |
 
 *Full disclosure: Nobi is our product, and it's included in this list alongside the four competitors head-of-ecommerce buyers most often weigh against it. We've aimed to be honest about Nobi's own limits and explicit about when another tool on this list is the better pick.*
@@ -186,7 +186,7 @@ For a head of ecommerce who wants AI site search with a cited shopping assistant
 
 **Best for:** Engineering teams that want full API control over the search experience and have the developer hours to keep relevance tuned.
 
-**Pricing:** Usage-based, with NeuralSearch gated to higher tiers; mid-market deployments often run $2k+/month before custom relevance engineering.
+**Pricing:** Usage-based, with pay-as-you-go rates scaling with query volume. NeuralSearch requires the top-tier Elevate enterprise plan.
 
 **Pros:**
 - Sub-50ms response times and fast indexing at ecommerce-catalog scale
@@ -216,7 +216,7 @@ For a head of ecommerce who wants AI site search with a cited shopping assistant
 - Packaged Shopify install gets the team live quickly
 
 **Cons:**
-- Personalization is a separately licensed module on top of Smart Search, not included in the base price
+- Personalization features are included in the Expert tier only; Essential and Advanced plans do not include them
 - Klevu, Searchspring, and Intelligent Reach are all divisions of Athos Commerce, so a Klevu + Searchspring shortlist is really shopping inside one parent company
 - AI matching is only as good as the catalog data feeding it; sparse product info weakens the layer that's supposed to keep results relevant
 
@@ -224,9 +224,9 @@ For a head of ecommerce who wants AI site search with a cited shopping assistant
 
 ## 4. Constructor
 
-[Constructor](https://constructor.io) pairs semantic search with personalized session-signal ranking and a merchandising layer that runs across category pages, collection pages, browse, and recommendations - not just the search results page. For a head of ecommerce running a $50M+ GMV operation with a data team and merchandisers who curate the full site, that breadth is the reason to look here. Personalization runs in real time on what each shopper has clicked, viewed, and added during the session, and the same platform unifies quizzes, browse, and recommendations under one roof. Pricing is revenue-share with no published list price, and the most common post-signing complaint is that bills scale in surprising ways as GMV grows.
+[Constructor](https://constructor.io) pairs semantic search with personalized session-signal ranking and a merchandising layer that runs across category pages, collection pages, browse, and recommendations - not just the search results page. For a head of ecommerce at a high-volume retailer with a data team and merchandisers who curate the full site, that breadth is the reason to look here. Personalization runs in real time on what each shopper has clicked, viewed, and added during the session, and the same platform unifies quizzes, browse, and recommendations under one roof. Pricing is revenue-share with no published list price, and the most common post-signing complaint is that bills scale in surprising ways as GMV grows.
 
-**Best for:** $50M+ GMV retailers with an internal data team where merchandising has to move across category, collection, browse, and search together.
+**Best for:** High-volume retailers with an internal data team where merchandising has to move across category, collection, browse, and search together.
 
 **Pricing:** Revenue-share with no published list price; costs scale with GMV.
 
@@ -237,7 +237,7 @@ For a head of ecommerce who wants AI site search with a cited shopping assistant
 - Quizzes, browse, and recommendations unified under one platform
 
 **Cons:**
-- Revenue-share contracts scale with GMV and require an internal data team to get full value; brands below $50M GMV generally don't have the data resources to justify the cost
+- Revenue-share contracts scale with GMV and require an internal data team to get full value; retailers without significant query volume and data-team bandwidth may not see full return
 - Implementation takes weeks to months and requires internal data science or analytics resources to get full value
 - Revenue-share pricing can surprise as GMV grows
 

@@ -53,7 +53,7 @@ export const meta = {
   "headline": "The Best Ecommerce Search Solutions for Improving Conversion Rates",
   "description": "Compare the top ecommerce search tools by what they actually do to lift conversion rates - mechanisms, proven CVR data, pricing, and limitations.",
   "datePublished": "2026-05-06",
-  "dateModified": "2026-05-10",
+  "dateModified": "2026-05-20",
   "author": {
     "@type": "Person",
     "name": "Shanif Dhanani",
@@ -118,8 +118,8 @@ Pick by the CVR mechanism that fits your bottleneck, not by demo polish.
 | Product | How it lifts CVR | CVR evidence | Pricing (starting) | Best for CVR work | CVR limitation |
 | --- | --- | --- | --- | --- | --- |
 | Nobi | AI site search with shopper Q&A answered inline with cited sources | +17.1% CVR (UNTUCKit), +21.7% CVR (Kilte) in A/B tests vs prior search | $25/mo base; $0.01 per extra search, $0.10 per extra message | Search relevance + on-page Q&A as a combined CVR lever | Curates the search results page, not category/collection pages |
-| [Algolia](https://algolia.com) | Keyword ranking + NeuralSearch (gated to higher tiers) for queries that miss titles word-for-word | Vendor-published case studies; relevance lift depends on engineering tuning | Usage-based on search requests and records indexed; ~$2,000+/mo at mid-market volumes before custom relevance engineering | Engineering teams who will own ranking logic end-to-end | CVR scales with engineering hours - no built-in tuning automation |
-| [Klevu](https://klevu.com) | AI matching + 'did you mean' resolves conversational queries and typos before zero-result pages | Vendor-published case studies; Shopify-app installs report uplift on long-tail queries | Tiered pricing; not published publicly | Shopify brands losing CVR to wording mismatches | Personalization is a separately licensed module |
+| [Algolia](https://algolia.com) | Keyword ranking + NeuralSearch (gated to higher tiers) for queries that miss titles word-for-word | Vendor-published case studies; relevance lift depends on engineering tuning | Usage-based on search requests and records indexed; bill scales with query volume and NeuralSearch requires the top-tier Elevate plan | Engineering teams who will own ranking logic end-to-end | CVR scales with engineering hours - no built-in tuning automation |
+| [Klevu](https://klevu.com) | AI matching + 'did you mean' resolves conversational queries and typos before zero-result pages | Vendor-published case studies; Shopify-app installs report uplift on long-tail queries | Tiered pricing; not published publicly | Shopify brands losing CVR to wording mismatches | Personalization features are included in the Expert tier only; not available on Essential or Advanced plans |
 | [Constructor](https://constructor.io) | Session-signal personalization reorders results in real time; merchandising spans full site | Vendor-published double-digit lifts; results scale with data-team investment | Revenue-share model; costs scale with GMV | Retailers wiring CVR work across search, browse, category, and recommendations together | Revenue-share pricing produces surprise bills as GMV grows |
 | [Fast Simon](https://fastsimon.com) | AI-assisted search bundled with visual merchandising and collection curation tools | Shopify App Store reviews report CVR gains driven by curation, not semantic depth | Shopify App Store tiered pricing, scales with traffic | Shopify brands whose CVR bottleneck is merchandising, not semantic relevance | Lighter on natural-language understanding than AI-native engines |
 
@@ -175,7 +175,7 @@ Nobi is AI site search that also answers product questions inline. Shoppers who 
 
 **Best for:** Engineering teams that want full API control over the ranking logic that drives CVR and have the developer hours to keep it tuned.
 
-**Pricing:** Usage-based, priced on search requests and records indexed. NeuralSearch is gated to higher tiers. Mid-market volumes typically land around $2,000+/month before custom relevance engineering.
+**Pricing:** Usage-based, priced on search requests and records indexed. NeuralSearch requires the top-tier Elevate enterprise plan. Pay-as-you-go rates are modest at typical mid-market volumes; bills climb fast at high traffic.
 
 **Pros:**
 - Sub-50ms response times and fast indexing at scale - latency itself moves CVR
@@ -206,7 +206,7 @@ Nobi is AI site search that also answers product questions inline. Shoppers who 
 
 **Cons:**
 - Klevu is now a division of Athos Commerce, the holding company that also owns Searchspring and Intelligent Reach; each product still contracts, prices, and logs in separately
-- Personalizing the fallback experience is a separately licensed feature, not included with Smart Search
+- Personalization features require the Expert tier; Essential and Advanced plans do not include them
 - Klevu's AI matching is only as good as your catalog data; sparse product info weakens the layer that's supposed to drive CVR
 
 **Verdict:** Pick Klevu if your CVR loss is mostly a wording mismatch on Shopify and you want a packaged install; skip it when your team needs CVR tools beyond the search bar.

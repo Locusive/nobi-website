@@ -13,7 +13,7 @@ export const meta = {
  faqItems: [
  {
  question: "How does pricing compare across Constructor, Algolia, and Nobi?",
- answer: "The three use different pricing models. Constructor is revenue-share with no published list price, so the bill scales with GMV and a CVR lift increases what you pay next quarter. Algolia is usage-based on search requests and records indexed, with mid-market deployments typically $2,000+/month and NeuralSearch gated to higher tiers. Nobi is flat per-unit at $25/month base, including 2,500 searches and 250 conversational messages, then $0.01 per extra search and $0.10 per extra message, so the bill is forecastable before you sign."
+ answer: "The three use different pricing models. Constructor is revenue-share with no published list price, so the bill scales with GMV and a CVR lift increases what you pay next quarter. Algolia is usage-based on search requests and records indexed, with pay-as-you-go rates that scale with query volume and NeuralSearch gated to the top-tier Elevate enterprise plan. Nobi is flat per-unit at $25/month base, including 2,500 searches and 250 conversational messages, then $0.01 per extra search and $0.10 per extra message, so the bill is forecastable before you sign."
  },
  {
  question: "Which one delivers better AI relevance and personalization out of the box?",
@@ -45,7 +45,7 @@ export const meta = {
   "headline": "Constructor vs. Algolia vs. Nobi: Picking Site Search and Product Discovery",
   "description": "Compare Constructor, Algolia, and Nobi on pricing, AI relevance, implementation effort, and fit. Concrete numbers, honest trade-offs, and when each one wins.",
   "datePublished": "2026-05-10",
-  "dateModified": "2026-05-16",
+  "dateModified": "2026-05-20",
   "author": {
     "@type": "Person",
     "name": "Shanif Dhanani",
@@ -103,13 +103,13 @@ These three tools represent fundamentally different philosophies.
 Each produces a very different product, and the right pick depends on which one matches your team's reality.
 
 - **[Constructor](https://constructor.io)** - product discovery built primarily for large retailers. It personalizes search results, browse pages, category pages, and recommendations based on what each shopper clicks during their visit. Pricing is revenue-share with no published rate. Pick it when conversion work needs to touch the whole site and you have a data team to support it.
-- **[Algolia](https://algolia.com)** - a developer-first search API that gives engineering teams full control over ranking, rules, and how results appear. Pricing is usage-based; mid-market teams typically pay around $2,000+/month before adding custom relevance work. Pick it when a search engineer will own the setup and keep it tuned.
+- **[Algolia](https://algolia.com)** - a developer-first search API that gives engineering teams full control over ranking, rules, and how results appear. Pricing is usage-based and scales with query volume; NeuralSearch requires the top-tier Elevate enterprise plan. Pick it when a search engineer will own the setup and keep it tuned.
 - **Nobi** - [AI-native site search](https://nobi.ai/blog/best-ai-search-ecommerce-2026) plus a shopping assistant with cited answers. Pricing starts at $25/month ($0.01 per extra search, $0.10 per extra message). Pick it when you want better search relevance and the conversion lift that follows, without a revenue-share contract or a dedicated engineer.
 
 | Product | Primary job | Best for | Pricing (starting) | Standout strength | Key weakness |
 | --- | --- | --- | --- | --- | --- |
-| [Constructor](https://constructor.io) | Enterprise product discovery across search, browse, category, recommendations | $50M+ GMV retailers with a data team where merchandising spans the full site | Revenue-share, no published list; scales with GMV | Real-time session-signal personalization that reorders results across search, browse, category, and recommendations, not just the search page | Revenue-share contracts scale with GMV - a successful CVR campaign costs you more |
-| [Algolia](https://algolia.com) | Developer-first search API with granular ranking control | Engineering teams that want full API control and have the developer hours to keep relevance tuned | Usage-based; mid-market volumes typically land around $2,000+/mo before custom relevance engineering | Low-latency response at catalog scale plus NeuralSearch on higher tiers for semantic matching | Relevance work scales with engineering hours, not contract size; non-technical merch teams cannot drive ranking work alone |
+| [Constructor](https://constructor.io) | Enterprise product discovery across search, browse, category, recommendations | High-volume retailers with a data team where merchandising spans the full site | Revenue-share, no published list; scales with GMV | Real-time session-signal personalization that reorders results across search, browse, category, and recommendations, not just the search page | Revenue-share contracts scale with GMV - a successful CVR campaign costs you more |
+| [Algolia](https://algolia.com) | Developer-first search API with granular ranking control | Engineering teams that want full API control and have the developer hours to keep relevance tuned | Usage-based; pay-as-you-go rates scale with query volume; NeuralSearch requires the top-tier Elevate enterprise plan | Low-latency response at catalog scale plus NeuralSearch on the Elevate plan for semantic matching | Relevance work scales with engineering hours, not contract size; non-technical merch teams cannot drive ranking work alone |
 | Nobi | AI site search plus shopping assistant | Teams whose biggest CVR leak is on-site discovery and want transparent per-unit pricing | $25/mo base (2,500 searches + 250 messages); $0.01 per extra search, $0.10 per extra message | Inline citation pills on every answer plus merchant-controlled query overrides for return policies, warranties, and compliance-sensitive topics | Personalization today is starter-message and placeholder-text only, no behavioral reranking yet |
 
 *Full disclosure: Nobi is our product, included alongside two competitors heads of ecommerce most often weigh against it. We've aimed to be honest about Nobi's limits and explicit about when another tool is the better pick.*
@@ -124,7 +124,7 @@ The three use different pricing models - and the model matters as much as the he
 
 Constructor is revenue-share with no published list price. Your bill scales with GMV, which means when your conversion rate improves, you pay Constructor more next quarter. The most common post-signing complaint is that costs grow in ways buyers didn't model upfront.
 
-Algolia charges by search requests and records indexed. Mid-market teams typically pay around $2,000+/month before any custom relevance work, and semantic search is only available on pricier plans. Because the bill moves with traffic, a big promotion or a viral product page can produce an overage you didn't plan for.
+Algolia charges by search requests and records indexed at pay-as-you-go rates that scale with query volume. Semantic search via NeuralSearch is only available on the top-tier Elevate enterprise plan. Because the bill moves with traffic, a big promotion or a viral product page can produce an overage you didn't plan for.
 
 Nobi charges a flat per-unit rate: $25/month base, including 2,500 searches and 250 chat messages, then $0.01 per extra search and $0.10 per extra message. You can plug your actual volume into that math and know the bill before you sign.
 

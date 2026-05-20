@@ -53,7 +53,7 @@ export const meta = {
   "headline": "Best Ecommerce Search Tools to Save Merchandising Time",
   "description": "Compare ecommerce search platforms by how much merchandising time they actually give back - automation vs manual rules, with pricing and trade-offs.",
   "datePublished": "2026-05-19",
-  "dateModified": "2026-05-19",
+  "dateModified": "2026-05-20",
   "author": {
     "@type": "Person",
     "name": "Shanif Dhanani",
@@ -116,8 +116,8 @@ Running keyword search means someone on your team is writing rules: synonyms for
 | Product | Primary job | Best for | Pricing (starting) | Standout strength | Key weakness |
 | --- | --- | --- | --- | --- | --- |
 | Nobi | AI search + shopping assistant with minimal manual tuning | Merch teams who want the engine to absorb synonym and zero-result work | $25/mo base (2,500 searches, 250 messages); $0.01/extra search, $0.10/extra message | Semantic matching out of the box - no synonym lists or manual relevance tuning required | Limited behavioral personalization today (placeholder text and starter messages, not in-session reranking) |
-| [Klevu](https://klevu.com) | AI search for Shopify with no-code merchandising dashboard | Shopify brands whose biggest leak is conversational query mismatch | Quote-only; three tiers (Essential, Advanced, Expert) priced by domain count, sessions, and SKU volume | AI matching handles synonyms and 'did you mean' so merch doesn't write them by hand | Behavioral personalization is a separately licensed module on top of Smart Search |
-| [Constructor](https://constructor.io) | Enterprise AI search + product discovery across the full site | $50M+ GMV retailers with a data team unifying search, browse, and recommendations | Revenue-share, no published list; costs scale with GMV | Session-signal personalization reorders results in real time across search, browse, category, and recommendations | Revenue-share contracts get more expensive as GMV grows; weeks-to-months implementation |
+| [Klevu](https://klevu.com) | AI search for Shopify with no-code merchandising dashboard | Shopify brands whose biggest leak is conversational query mismatch | Quote-only; three tiers (Essential, Advanced, Expert) priced by domain count, sessions, and SKU volume | AI matching handles synonyms and 'did you mean' so merch doesn't write them by hand | Personalization features are available in the Expert tier only; lower tiers do not include them |
+| [Constructor](https://constructor.io) | Enterprise AI search + product discovery across the full site | large-volume retailers with a data team unifying search, browse, and recommendations | Revenue-share, no published list; costs scale with GMV | Session-signal personalization reorders results in real time across search, browse, category, and recommendations | Revenue-share contracts get more expensive as GMV grows; weeks-to-months implementation |
 | [Searchspring](https://searchspring.com) | Mid-market rule-by-rule merchandising and search | Merch teams who want explicit, auditable control over every query pattern | Quote-only; third-party references put mid-market plans at $1,500-$3,500/mo | Every pin, boost, and zero-result redirect is configured from one merch dashboard with full auditability | Rule list grows one-to-one with query patterns; maintenance load compounds with catalog size |
 | [Algolia](https://algolia.com) | Developer-first search API with NeuralSearch on higher tiers | Engineering teams that want to own ranking and rendering in code | Usage-based on requests and records; ~$2,000+/mo at scale before relevance engineering | Sub-50ms response times and granular API control over ranking, indexing, and rendering | Rule and relevance work scale with engineering hours, not contract size - merch can't drive it alone |
 
@@ -185,7 +185,7 @@ Nobi is AI-powered ecommerce search and a shopping assistant in one platform. Th
 - Packaged Shopify install gets the team live in days, not months
 
 **Cons:**
-- Behavioral personalization is a separately licensed module on top of Smart Search, not bundled with the base AI matching
+- Behavioral personalization is a available in the Expert tier only; Essential and Advanced tiers do not include it
 - Klevu is now a division of Athos Commerce
 
 **Verdict:** Pick Klevu when conversational query mismatch is your main miss reason on Shopify and you need pinning occasionally on top. Skip it if your team wants per-unit transparent pricing or explicit rule-by-rule auditability for every query.
@@ -194,7 +194,7 @@ Nobi is AI-powered ecommerce search and a shopping assistant in one platform. Th
 
 [Constructor](https://constructor.io) pairs semantic search with real-time session-signal personalization, so products reorder as a shopper clicks, views, or adds items during a visit. The same ranking model runs across search, browse, category pages, and recommendations, not just the search results page. For a head of ecommerce whose merch team has to move across the full site - category curation, collection ordering, browse, and search together - that breadth is the reason to look here. In exchange, you commit to revenue-share pricing with no published list, weeks-to-months of implementation, and an internal data team to feed the ranker after launch.
 
-**Best for:** $50M+ GMV retailers with an internal data team where merchandising has to move across category, collection, browse, and search together.
+**Best for:** large-volume retailers with an internal data team where merchandising has to move across category, collection, browse, and search together.
 
 **Pricing:** Revenue-share with no published list price; costs scale with GMV.
 
@@ -207,7 +207,7 @@ Nobi is AI-powered ecommerce search and a shopping assistant in one platform. Th
 **Cons:**
 - Revenue-share contracts mean a successful CVR campaign costs more as GMV grows, and bills can scale in surprising ways during peak season
 - Implementation runs weeks to months and needs data-team hours to keep tuning the ranker after launch
-- Brands below $50M GMV generally lack the traffic volume and data-team bandwidth the ranker needs to keep improving after launch
+- Smaller brands without sufficient query volume generally lack the traffic and data-team bandwidth the ranker needs to keep improving after launch
 
 **Verdict:** Pick Constructor when behavioral personalization and full-site merchandising are the headline requirements and the data team is there to feed it; skip it when you want transparent per-unit pricing or just the search bar without the rest of the platform attached.
 
@@ -236,7 +236,7 @@ Nobi is AI-powered ecommerce search and a shopping assistant in one platform. Th
 
 **Best for:** Engineering teams that want full API control over the rule engine and rendering layer and have the developer hours to keep relevance tuned.
 
-**Pricing:** Free tier (10K search requests/month, 100K records). Usage-based scaling above, often landing $2k+/month at mid-market volumes. NeuralSearch is gated to higher tiers.
+**Pricing:** Free tier (10K search requests/month, 1M records). Usage-based scaling above, scaling with query volume. NeuralSearch is gated to higher tiers.
 
 **Pros:**
 - Sub-50ms response times at catalog scale, so search itself never becomes the CVR bottleneck

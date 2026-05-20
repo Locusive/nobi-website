@@ -49,7 +49,7 @@ export const meta = {
   "headline": "Best AI Search for Developer Documentation",
   "description": "Compare Nobi, Algolia, Coveo, and Yext for AI search on developer documentation. Pricing, fit, and when each tool is the right pick for docs sites.",
   "datePublished": "2026-05-18",
-  "dateModified": "2026-05-18",
+  "dateModified": "2026-05-20",
   "author": {
     "@type": "Person",
     "name": "Shanif Dhanani",
@@ -109,8 +109,8 @@ Pick by the specific job - grounded Q&A, raw search API, unified cross-property 
 | Product | Primary job | Best for | Pricing (starting) | Standout strength | Key weakness |
 | --- | --- | --- | --- | --- | --- |
 | Nobi | Semantic search + grounded Q&A layer on existing docs content | DevRel and engineering teams who want developers to get cited answers, not just search results | $25/mo base (2,500 searches + 250 messages); $0.01/search, $0.10/msg overage | Inline numbered citation pills on every answer link back to the source doc, date, and exact excerpt - plus an optional second AI review that checks each draft against the cited content before it sends | Not an API-first developer platform - teams that want to build custom ranking logic or a bespoke search UI will prefer Algolia |
-| [Algolia](https://algolia.com) | Developer-first search API and infrastructure | Engineering teams who want full API control and run DocSearch on an open-source docs site | Free tier (10K requests/mo, 100K records); usage-based above, often $2k+/mo at mid-market; NeuralSearch on higher tiers | DocSearch crawler + InstantSearch widgets are the de facto standard across OSS docs sites, with sub-50ms response and a huge ecosystem | Quality scales with engineering hours - search-only API; usage-based pricing produces surprise bills during traffic spikes |
-| [Coveo](https://coveo.com) | Enterprise AI search across commerce, support, and workplace | Enterprises unifying docs, customer support portal, and internal knowledge on one engine | Base around $600/mo; $50k+ annual license + ~$20k+ implementation + $200-$300/hr services; all-in often $100K+ | Cross-surface ML relevance and analytics that roll up across docs, support, and workplace search under one governance layer | Sales-led 6-9 month rollouts with services budget that often equals 30-50% of first-year license - overkill for a docs-only project |
+| [Algolia](https://algolia.com) | Developer-first search API and infrastructure | Engineering teams who want full API control and run DocSearch on an open-source docs site | Free tier (10K requests/mo, 1M records); usage-based above; NeuralSearch requires the top-tier Elevate enterprise plan | DocSearch crawler + InstantSearch widgets are the de facto standard across OSS docs sites, with sub-50ms response and a huge ecosystem | Quality scales with engineering hours - search-only API; usage-based pricing produces surprise bills during traffic spikes |
+| [Coveo](https://coveo.com) | Enterprise AI search across commerce, support, and workplace | Enterprises unifying docs, customer support portal, and internal knowledge on one engine | Quote-only; annual licensing $50K+; substantial implementation and services costs; all-in often $100K+ | Cross-surface ML relevance and analytics that roll up across docs, support, and workplace search under one governance layer | Sales-led multi-month rollouts with services budget that often equals 30-50% of first-year license - overkill for a docs-only project |
 | [Yext](https://yext.com) | Knowledge graph and structured answers across owned + third-party surfaces | Teams whose 'docs' are really structured policy, FAQ, and product-spec answers they want syndicated across Google, AI Overviews, and LLM surfaces | Quote-only; sold per location/module | Structured answers feed AI search engines and Google's AI Overviews, so the same source of truth powers on-site answers and zero-click AI surfaces | Answers-and-listings focused, not purpose-built for technical reference docs with code samples and deep API hierarchies |
 
 *Full disclosure: Nobi is our product, and it's included in this list alongside the three competitors head-of-CX buyers most often weigh against it. We've aimed to be honest about Nobi's own limits and explicit about when another tool on this list is the better pick.*
@@ -168,7 +168,7 @@ Nobi is a semantic search and grounded Q&A layer that sits on top of your existi
 
 **Best for:** Engineering teams who want full API control over docs search and have the developer hours to render the UI and layer their own answer logic on top.
 
-**Pricing:** Free tier (10K search requests/month, 100K records). Usage-based scaling above, often landing $2k+/month at mid-market volumes. NeuralSearch is gated to higher tiers.
+**Pricing:** Free tier (10K search requests/month, 1M records). Usage-based scaling above, scaling with query volume. NeuralSearch is gated to higher tiers.
 
 **Pros:**
 - DocSearch's crawler and prebuilt UI components already run on a large share of open-source docs sites, with public configs you can copy from
@@ -198,7 +198,7 @@ Nobi is a semantic search and grounded Q&A layer that sits on top of your existi
 - Strong A/B testing and ranking experimentation infrastructure inside the analytics layer for teams that want to test docs IA changes against engagement
 
 **Cons:**
-- Sales-led 6-9 month rollouts with a services budget that often equals 30-50% of first-year license before search is live.
+- Sales-led procurement with implementation and services that add substantially to first-year cost.
 - Built for cross-property consolidation: support portals, internal knowledge, partner sites, and docs unified under one engine. Most of the platform's value comes from running it across multiple properties at once.
 
 **Verdict:** Pick Coveo when you're unifying docs, support, and internal knowledge at enterprise scale and have the appetite for an enterprise sales cycle; skip it when standalone developer-docs search is the actual job.

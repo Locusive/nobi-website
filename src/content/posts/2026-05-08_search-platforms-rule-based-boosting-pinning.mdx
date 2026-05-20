@@ -53,7 +53,7 @@ export const meta = {
   "headline": "Best Search Platforms with Rule-Based Boosting and Pinning",
   "description": "Compare ecommerce search platforms that let merchandisers pin hero SKUs and boost margin products without engineering tickets. Real pricing and trade-offs.",
   "datePublished": "2026-05-08",
-  "dateModified": "2026-05-10",
+  "dateModified": "2026-05-20",
   "author": {
     "@type": "Person",
     "name": "Shanif Dhanani",
@@ -109,7 +109,7 @@ These five platforms all support rule-based boosting and pinning. The right pick
 
 - **[Nobi](https://nobi.ai)** - AI-powered site search and shopping assistant starting at $25/mo. Rather than writing a rule for every query, you let the AI ranker handle day-to-day results and reach for pinning or boosting only when you have a real exception - a campaign hero SKU, a margin push, a stockout to bury. Good fit for merch teams who want control available without making it a daily job.
 - **[Searchspring](https://searchspring.com)** - Merch-team-controlled search where every query pattern gets its own explicit rule. Pricing is quoted, not published. Pick it when your team wants total, auditable control over what each query returns and has the bandwidth to maintain a growing rule list.
-- **[Algolia](https://algolia.com)** - Developer-first search API with programmatic control over rules, ranking, and synonyms. Usage-based pricing, typically $2k+/mo at scale. Pick it when a search engineer will own the rule engine and you want full API control over the stack.
+- **[Algolia](https://algolia.com)** - Developer-first search API with programmatic control over rules, ranking, and synonyms. Usage-based pricing that scales with query volume. Pick it when a search engineer will own the rule engine and you want full API control over the stack.
 - **[Klevu](https://klevu.com)** - AI-powered search with a no-code merchandising dashboard on Shopify. Pricing quoted by store size. Pick it when conversational query mismatch is your main CVR leak and pinning is something you need occasionally, not constantly.
 - **[Fast Simon](https://fastsimon.com)** - Visual merchandising and collection curation for Shopify, available through the App Store. Pick it when your CVR bottleneck is collection presentation rather than semantic search, and your rule list is short.
 
@@ -117,8 +117,8 @@ These five platforms all support rule-based boosting and pinning. The right pick
 | --- | --- | --- | --- | --- | --- |
 | Nobi | AI site search and shopping assistant, with pinning when you need it | Heads of ecommerce who want pinning available without a rule-maintenance treadmill | $25/mo base (2,500 searches, 250 messages); $0.01/search, $0.10/message overage | AI ranking handles the long tail; rules are exceptions, not the daily job | Less granular rule-by-rule control than Searchspring; no site-wide merchandising beyond the search results page |
 | [Searchspring](https://searchspring.com) | Rule-by-rule merchandising and pinning across every query pattern | Merch teams that want exact control over what each query returns and the bandwidth to maintain it | Not published; quoted by store size | Total rule-level control with audit trail back to a specific rule for every result | Rule list grows one-to-one with query patterns; conversational queries remain a weak spot |
-| [Algolia](https://algolia.com) | Developer-first search API with full rule and ranking control in code | Engineering teams that want to own the rule engine and rendering layer themselves | Usage-based; scaled deployments often $2,000+/mo before relevance engineering | Granular API control over rules, ranking, synonyms, and rendering | Rule and relevance work scale with engineering hours; usage pricing produces traffic-spike bills |
-| [Klevu](https://klevu.com) | AI matching with rule overrides on Shopify | Shopify brands whose main miss is conversational queries, with pinning as a secondary need | Not published; mid-market tiers typically exceed Nobi's $25/mo base | AI matching catches conversational queries before they hit zero results, with rule overrides on top | Personalization is a separately licensed module; part of Athos Commerce (same parent as Searchspring) |
+| [Algolia](https://algolia.com) | Developer-first search API with full rule and ranking control in code | Engineering teams that want to own the rule engine and rendering layer themselves | Usage-based; pay-as-you-go rates scale with query volume; NeuralSearch requires the Elevate enterprise plan | Granular API control over rules, ranking, synonyms, and rendering | Rule and relevance work scale with engineering hours; usage pricing produces traffic-spike bills |
+| [Klevu](https://klevu.com) | AI matching with rule overrides on Shopify | Shopify brands whose main miss is conversational queries, with pinning as a secondary need | Not published; mid-market tiers typically exceed Nobi's $25/mo base | AI matching catches conversational queries before they hit zero results, with rule overrides on top | Personalization features are included in the Expert tier only, not on Essential or Advanced plans; part of Athos Commerce (same parent as Searchspring) |
 | [Fast Simon](https://fastsimon.com) | Visual merchandising and curation on Shopify | Shopify brands whose CVR bottleneck is collection curation, not semantic matching | Shopify App Store tiered pricing | Quick App Store install with merchandiser-friendly visual curation tools | Lighter on natural-language understanding; long, conversational queries still leak |
 
 *Full disclosure: Nobi is our product, and it's included in this list alongside the four competitors head-of-ecommerce buyers most often weigh against it. We've aimed to be honest about Nobi's own limits and explicit about when another tool on this list is the better pick.*
@@ -193,7 +193,7 @@ On pricing: Nobi publishes its rates ($25/month base, $0.01 per search, $0.10 pe
 
 **Best for:** Engineering teams that want full API control over the rule engine and rendering layer and have the developer hours to keep relevance tuned.
 
-**Pricing:** Usage-based, priced on search requests and records indexed; NeuralSearch is gated to higher tiers. Scaled volumes typically land around $2,000+/month before custom relevance engineering.
+**Pricing:** Usage-based, priced on search requests and records indexed; pay-as-you-go rates scale with query volume. NeuralSearch requires the Elevate enterprise plan.
 
 **Pros:**
 - Sub-50ms response times at catalog scale - faster search directly lifts CVR
@@ -223,7 +223,7 @@ On pricing: Nobi publishes its rates ($25/month base, $0.01 per search, $0.10 pe
 - Packaged Shopify install gets the team live quickly
 
 **Cons:**
-- Personalization is a separately licensed module on top of Smart Search, not included in the base price
+- Personalization features are included in the Expert tier only; Essential and Advanced plans do not include them
 - AI matching is only as good as the catalog data feeding it; sparse product titles and descriptions weaken it
 
 **Verdict:** Pick Klevu when conversational query mismatch is your main CVR leak and you need occasional pinning on top. Skip it if your merch team wants explicit rule-by-rule control over every query - Searchspring is deeper there.

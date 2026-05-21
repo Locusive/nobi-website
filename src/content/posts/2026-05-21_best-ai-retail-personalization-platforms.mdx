@@ -105,9 +105,9 @@ export const meta = {
 </script>
 ## What are the best AI retail personalization platforms?
 
-A head of ecommerce shopping for a personalization platform is usually staring at one of three specific gaps: search results that don't reorder for an individual shopper mid-session, a search bar that drops descriptive queries while the PDP buries the answers shoppers actually need, or recommendation widgets and segment campaigns that aren't pulling their weight. Pick the wrong lane and the contract funds features the team never touches while the real CVR leak keeps bleeding through peak season. The platform has to match the specific personalization job - behavioral reranking, conversational discovery, or recommendations and segmentation - and the pricing model has to hold up when GMV scales. These are the five AI retail personalization platforms heads of ecommerce most often weigh against each other:
+Shoppers who type a natural-language query and hit zero results leave. Product grids that never adapt mid-session serve a first-time visitor and a returning one the same ranking. Recommendation widgets that ignore behavior surface last month's bestsellers to everyone. That's the revenue AI personalization is supposed to recover - and picking the wrong platform for the specific gap leaves the leak open through peak season. A head of ecommerce shopping for a personalization platform is usually staring at one of three specific gaps: search results that don't reorder for an individual shopper mid-session, a search bar that drops descriptive queries while the PDP buries the answers shoppers actually need, or recommendation widgets and segment campaigns that aren't pulling their weight. Pick the wrong lane and the contract funds features the team never touches. The platform has to match the specific personalization job - behavioral reranking, conversational discovery, or recommendations and segmentation - and the pricing model has to hold up when GMV scales. These are the five AI retail personalization platforms heads of ecommerce most often weigh against each other:
 
-- **Nobi** - AI shopping assistant and site search with contextual suggestion pills and grounded shopper Q&A, $25/mo base (2,500 searches + 250 messages). Pick when conversational discovery is the bottleneck and behavioral reranking is not your headline requirement.
+- **Nobi** - AI shopping assistant and site search with contextual suggestion pills and grounded shopper Q&A, $25/mo base (2,500 searches + 250 messages). Pick when conversational discovery and page-aware Q&A are the gap; behavioral reranking is not shipped yet.
 - **Constructor** - session-signal behavioral reranking across search, browse, and category pages. Revenue-share, scales with GMV. Pick when in-session behavioral personalization across search, browse, and category pages is the job.
 - **Nosto** - ecommerce personalization platform with onsite recommendations, segmentation, and campaign targeting. Quote-only, enterprise-leaning. Pick when recommendation widgets and segment-based targeting are the primary use case.
 - **Dynamic Yield** - enterprise personalization and A/B testing platform owned by Mastercard. Quote-only, multi-module bundles. Pick when experimentation tooling matters as much as the personalization layer.
@@ -129,13 +129,13 @@ A head of ecommerce shopping for a personalization platform is usually staring a
 
 The first job is behavioral reranking: results reorder in real time based on what each shopper clicks, views, and adds during a visit. [Constructor](https://constructor.io) and [Nosto](https://www.nosto.com) lead here; [Klevu](https://www.klevu.com) offers it on the Expert tier. The second job is conversational and contextual personalization: page-aware suggestion pills, grounded shopper Q&A, and semantic search that reads descriptive queries. Nobi sits here. The third job is recommendation and segmentation: widget-based product picks and segment-targeted campaigns. Nosto and [Dynamic Yield](https://www.dynamicyield.com) are built around this work.
 
-Two other things matter as much as features. Pricing model compounds at peak. Revenue-share and quote-only enterprise contracts can swing your bill hard when GMV scales; transparent per-unit pricing protects the budget. And implementation runs from a few hours on Shopify-native tools to multiple quarters on enterprise platforms. Match the rollout to the calendar pressure you're actually under.
+Two other things matter as much as features. Pricing model: revenue-share and quote-only enterprise contracts can swing your bill hard when GMV scales; transparent per-unit pricing holds steady. And implementation: from a few hours for Nobi to a few days for Klevu to multiple quarters for the enterprise platforms - match the rollout to the calendar pressure you're actually under.
 
 ## How did we evaluate these platforms?
 
 We compared five platforms across four things that actually matter when a head of ecommerce is signing a contract: the type of personalization each one ships today, the pricing model, the time to go live, and an honest read on where each one fits.
 
-Personalization type is the first cut because vendors use the same word for different work. Constructor and Nosto lead with behavioral reranking - results reorder in real time based on what a shopper clicks during the session, with Constructor using reinforcement learning on full clickstream data. Dynamic Yield sits in segment-based personalization and A/B testing across the site. Klevu offers behavioral personalization, but only on its Expert tier. Nobi's lane is conversational and contextual: page-aware suggestion pills and semantic search that reads descriptive queries. Behavioral reranking on individual click history isn't shipped yet.
+Personalization type is the first cut because vendors use the same word for different work. Constructor and Nosto lead with behavioral reranking - results reorder in real time based on what a shopper clicks during the session, with Constructor using reinforcement learning on full clickstream data. Dynamic Yield sits in segment-based personalization and A/B testing across the site. Klevu offers behavioral personalization, but only on its Expert tier. Nobi's lane is conversational and contextual: page-aware suggestion pills and semantic search that reads descriptive queries.
 
 Pricing model matters as much as price. Constructor runs on revenue-share, so the bill scales with GMV. Nosto and Dynamic Yield are quote-only enterprise contracts. Klevu publishes three tiers but no dollar figures; third-party reporting puts the range at roughly $499 to $1,598 per month. Nobi is the only one with public per-unit pricing: $25 a month base, then $0.01 per additional search and $0.10 per additional message.
 
@@ -143,7 +143,7 @@ Implementation runs from a few hours on Nobi to several weeks or months on the e
 
 ## 1. Nobi
 
-Nobi is an [AI shopping assistant](https://nobi.ai/blog/best-ai-shopping-assistants-for-ecommerce) and site search platform where personalization shows up as page-aware suggestion pills, grounded shopper Q&A with inline citation pills, and semantic search that reads long descriptive queries instead of exact-title strings. The same semantic layer runs the search bar, the collection filters, and the product discovery experience, so a homepage visitor and a PDP visitor see different starter prompts based on the page they're actually on. For a head of ecommerce whose CVR leak is shoppers typing natural-language queries that keyword search drops, or asking sizing and policy questions the FAQ buries, this is what Nobi covers. Behavioral reranking on individual click history isn't shipped yet, so if that's the headline requirement, the picks later in this list fit closer.
+[Nobi](https://nobi.ai/blog/best-ai-shopping-assistants-for-ecommerce) is an AI shopping assistant and site search platform. The personalization layer runs as page-aware suggestion pills, grounded Q&A with inline citation pills, and semantic search that reads long descriptive queries instead of exact-title strings. The same semantic layer runs the search bar, the collection filters, and the product discovery experience, so a homepage visitor and a PDP visitor see different starter prompts based on the page they're actually on. This covers two CVR leaks: shoppers whose natural-language queries keyword search can't match, and shoppers asking sizing and policy questions the FAQ buries. Behavioral reranking on individual click history isn't shipped yet, so if that's the headline requirement, the picks later in this list fit closer.
 
 **Best for:** Teams whose personalization need is conversational and page-aware - suggestion pills tied to the homepage or PDP, grounded Q&A on materials and policies, semantic search that reads long descriptive queries - rather than behavioral reranking of product grids.
 
@@ -186,7 +186,7 @@ Nobi is an [AI shopping assistant](https://nobi.ai/blog/best-ai-shopping-assista
 **Cons:**
 - Revenue-share contracts mean a successful CVR campaign costs more as GMV grows, and bills can scale in surprising ways during peak season
 - Implementation runs weeks to months and needs data-team hours to keep tuning the ranker after launch
-- Smaller brands without sufficient query volume generally lack the traffic and data-team bandwidth the ranker needs to keep improving
+- Smaller brands that don't generate enough click-and-purchase signals give the ranker too little to learn from - without a steady stream of behavioral data, the model doesn't improve after launch
 
 **Verdict:** Pick Constructor when behavioral personalization across search, browse, and category pages is the headline requirement and the data team is there to feed it. Skip it when you want transparent per-unit pricing or just the personalization layer without the full discovery platform attached.
 
@@ -244,7 +244,7 @@ Nobi is an [AI shopping assistant](https://nobi.ai/blog/best-ai-shopping-assista
 
 **Cons:**
 - Behavioral personalization is gated to the Expert tier; Essential and Advanced plans do not include it, so the headline personalization feature lives behind the highest contract
-- Klevu is now a division of Athos Commerce, the parent that also owns Searchspring and Intelligent Reach, so shortlisting Klevu alongside either of them means picking between products from the same parent
+- Klevu is now a division of Athos Commerce alongside Searchspring and Intelligent Reach
 
 **Verdict:** Pick Klevu when conversational query mismatch is your main miss reason on Shopify and the Expert-tier budget gets you the personalization layer you need. Skip it when personalization is the headline job and you don't want it gated to the top tier.
 
@@ -265,7 +265,7 @@ Two downstream filters narrow the list further. Pricing model: revenue-share (Co
 
 ---
 
-Curious what conversational, page-aware personalization actually feels like on your own catalog? Spin up a Nobi trial on the $25/mo base tier and connect a knowledge source in under an hour.
+If conversational discovery or page-aware Q&A is your personalization gap, Nobi is worth a quick look: the $25/mo base tier gets you live with a connected knowledge source in under an hour.
 
 <div className="my-8 flex justify-center">
  <a

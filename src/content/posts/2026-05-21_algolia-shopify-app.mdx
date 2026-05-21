@@ -29,16 +29,12 @@ export const meta = {
  },
  {
  question: "What are the best alternatives to the Algolia Shopify app?",
- answer: "The article does not enumerate specific alternatives to the Algolia Shopify app, so we cannot list named competitors here. It does make clear that if you want a shopper-facing Q&A or grounded answer layer over your catalog and policy pages, that is a separate build from Algolia, which is one signal that a shopping assistant like Nobi solves a different problem than a search index."
+ answer: "The five alternatives the article covers are Nobi (AI search and grounded shopping assistant on one install), Klevu (AI matching for long conversational queries), Searchspring (rule-by-rule merchandising control), Fast Simon (visual collection curation), and Boost Commerce (budget-friendly filter and search upgrade). Each solves a different primary job, so the right pick depends on where your CVR is leaking."
  },
  {
  question: "How do you decide between Algolia and its Shopify alternatives?",
- answer: "The article does not provide a side-by-side decision framework against named alternatives. The cues it does give: pick Algolia if you need fast indexed search with faceting and your team has the engineering hours to own the storefront UI and the tuning loop, and look elsewhere if you need a grounded shopping assistant that answers shopper questions in plain language from your catalog and policy pages, since that is not what the Algolia Shopify app ships."
+ answer: "Match the tool to the job. Pick Algolia if you have frontend engineering capacity, want raw API control, and are building a custom UI. Pick Klevu when long conversational queries are your main CVR miss. Pick Searchspring when merchandisers need rule-by-rule audit control. Pick Fast Simon when visual collection curation drives your discovery model. Pick Nobi when you want semantic search and a grounded shopping assistant on one install with transparent per-unit pricing."
  },
- {
- question: "Frequently asked questions about the Algolia Shopify app",
- answer: "Common questions cover what the Algolia Shopify app does, how to install it, how much it costs, where its strengths and limits show up on Shopify, and how it compares to alternatives. The short version: Algolia is a fast indexed search engine with a managed Shopify connector, but the storefront UI, the relevance tuning, and any conversational answer layer are engineering work your team owns end to end."
- }
  ],
 };
 
@@ -78,22 +74,22 @@ export const meta = {
 </script>
 ## What does the Algolia Shopify app actually do, and is it the right search for your store?
 
-A shopper types "wide-leg cropped trouser" into a Shopify search bar running on the Algolia app and gets zero results, because the product title says "cropped wide pant" and nobody has written the synonym rule yet. That shopper leaves and buys somewhere else. The next morning, a frontend engineer spends another sprint rebuilding the search results page in InstantSearch widgets instead of shipping the new PDP. The month after that, a viral product moment pushes search request volume past the included baseline and the Algolia bill compounds exactly when revenue is good news. Algolia ships fast indexed search and a deep widget library, but the storefront UI, the relevance tuning, and any conversational answer layer are engineering work your team owns end to end. Here's what the Algolia Shopify app actually ships, what it costs at real traffic, and which [alternatives Shopify merchants put on the shortlist](https://nobi.ai/blog/algolia-alternatives-ecommerce) next to it:
+A shopper types "wide-leg cropped trouser" into a Shopify search bar running on the Algolia app and gets zero results, because the product title says "cropped wide pant" and nobody has written the synonym rule yet. That shopper leaves and buys somewhere else. The next morning, a frontend engineer spends another sprint rebuilding the search results page in InstantSearch widgets instead of shipping the new PDP. The month after that, a viral product moment pushes search request volume past the included baseline and the Algolia bill spikes at the same moment your traffic does. Algolia ships fast indexed search and a deep widget library, but you own the storefront UI, the relevance tuning, and any conversational answer layer. Here's what the Algolia Shopify app actually ships, what it costs at real traffic, and which [alternatives Shopify merchants put on the shortlist](https://nobi.ai/blog/algolia-alternatives-ecommerce) next to it:
 
 | Product | Primary job | Best for | Pricing (starting) | Standout strength | Key weakness |
 | --- | --- | --- | --- | --- | --- |
-| Nobi | Site search + grounded shopping assistant on one platform | Shopify merchants who want semantic search and conversational Q&A without engineering overhead or revenue-share contracts | $25/mo base (2,500 searches and 250 conversational messages included); $0.01/extra search, $0.10/extra message | Search results plus a grounded assistant with citation pills and query overrides in one install; transparent per-unit pricing | Personalization today is placeholder text and starter messages only - no behavioral reranking yet |
+| Nobi | Site search + grounded shopping assistant on one platform | Shopify merchants who want semantic search and conversational Q&A without engineering overhead or revenue-share contracts | $25/mo base (2,500 searches and 250 conversational messages included); $0.01/extra search, $0.10/extra message | Search and a grounded shopping assistant on one install; citation-backed answers; transparent per-unit pricing | Personalization today is placeholder text and starter messages only - no behavioral reranking yet |
 | [Algolia](https://algolia.com) | Developer-first search infrastructure with full API control | Shopify engineering teams that want raw API control over ranking and are happy rendering the storefront UI themselves | Free up to 10K search requests/mo and 1M records; Grow bills $0.50 per 1,000 requests above the baseline, Grow Plus $1.75 per 1,000; NeuralSearch gated to the top-tier Elevate plan | Sub-50ms response times, large InstantSearch widget ecosystem, full ranking and synonym control via API | Quality scales with engineering hours; usage-based pricing produces surprise bills during traffic spikes |
 | [Klevu](https://klevu.com) | Packaged AI search for Shopify catalogs | Shopify brands whose miss reason is long conversational queries the default search can't handle | Three tiers (Essential, Advanced, Expert) quoted by store size; no published dollar figures, all tiers show "Get a demo" | AI matching catches long conversational queries and 'did you mean' handles typos without merchandiser intervention | Personalization features are only in the Expert tier; now part of Athos Commerce alongside Searchspring and Intelligent Reach |
 | [Searchspring](https://searchspring.com) | Mid-market ecommerce search and merchandising built around rule-by-rule control | Merchandising teams that want exact, auditable control over what each query returns | Not published publicly; tiered for the mid-market and quoted by store size | Merchandisers can audit any result back to a specific rule; redirect-on-zero-results sends dead-end queries to curated landing pages | Rule list grows one-to-one with query patterns; less AI-native on long conversational queries |
 | [Fast Simon](https://fastsimon.com) | Shopify-tuned merchandiser toolkit with AI-assisted search, recommendations, and visual merchandising | Shopify stores where visual collection curation and seasonal edits lead the discovery model | Free Starter (100 sessions/mo); paid entry at $39.99/mo, Essential $99.99, Top Pro $299.99, scaling by monthly session volume | Visual merchandising tools a non-technical team can run daily; quick App Store install in days | Lighter on natural-language understanding than AI-native engines; personalization is a secondary strength |
-| [Boost Commerce](https://boostcommerce.net) | Affordable Shopify search and filter app | Shopify stores that need a budget-friendly filter and search upgrade over native Shopify search | Free tier with paid plans tiered by orders/month; check Shopify App Store for current numbers | Keyword-matching engine with deep faceted-search and filter controls inside the Shopify dashboard | Keyword-first matching; light on semantic understanding for conversational queries |
+| [Boost Commerce](https://boostcommerce.net) | Affordable Shopify search and filter app | Shopify stores that need a budget-friendly filter and search upgrade over native Shopify search | Launch $29/mo, Convert $299/mo, Accelerate $699/mo; 21-day free trial; costs scale with store GMV | Keyword-matching engine with deep faceted-search and filter controls inside the Shopify dashboard | Keyword-first matching; light on semantic understanding for conversational queries |
 
 <BlogQualifier context="Algolia, Klevu, and Searchspring for Shopify search" />
 
 ## What is the Algolia Shopify app, and what does it actually do?
 
-The Algolia Shopify app is a managed connector that syncs your Shopify catalog into an [Algolia](https://www.algolia.com) search index and exposes it to your storefront through Algolia's API and InstantSearch widgets. It handles indexing, faceting, and ranking at sub-50ms response times. But the search results page, relevance tuning, synonym groups, and any conversational layer are engineering work your team owns end to end. It's a search engine, not a packaged merchandising suite or a grounded shopping assistant.
+The Algolia Shopify app is a managed connector that syncs your Shopify catalog into an [Algolia](https://www.algolia.com) search index and exposes it to your storefront through Algolia's API and InstantSearch widgets. It handles indexing, faceting, and ranking at sub-50ms response times. But you own the search results page, relevance tuning, synonym groups, and any conversational layer. It's a search engine, not a packaged merchandising suite or a grounded shopping assistant.
 
 The connector keeps your products, collections, and metafields synced into an Algolia index. You get faceted search, manual synonyms, ranking rules, and an analytics dashboard. Storefront integration runs through Algolia's JavaScript SDK and InstantSearch widgets, which means your developers render the UI in React, Vue, or vanilla JS and wire it to the index.
 
@@ -117,7 +113,7 @@ Above the free tier, pricing is usage-based across three meters: search requests
 
 NeuralSearch, Algolia's semantic matching layer that learns query intent from clicks and conversions, is gated to the top-tier Elevate plan. Elevate pricing isn't published - you have to talk to sales. It's not available on Build, Grow, or Grow Plus at any volume.
 
-The pattern operators flag most often is that bills scale with traffic. A spike during a Black Friday push or a viral product moment can push the meter past your included baseline, and costs compound exactly when CVR matters most. Algolia publishes the per-1,000 rates so you can model it, but the model has to assume your peak month, not your average one.
+The pattern that catches merchants off guard is that bills scale with traffic. A Black Friday push or a viral product moment can push the meter past your included baseline — and the bill spikes at the same moment you need CVR most. Algolia publishes the per-1,000 rates so you can model it, but the model has to assume your peak month, not your average one.
 
 ## What are Algolia's biggest strengths and weaknesses on Shopify?
 
@@ -125,18 +121,20 @@ Algolia's strengths: sub-50ms response times, one of the deepest widget ecosyste
 
 Response times are fast enough that search feels instant even on large catalogs. The InstantSearch widget library covers JavaScript, React, Vue, and Angular, so your developers can build the results UI in whichever framework your storefront already uses. Ranking rules, custom relevance strategies, and synonym groups are all configured in the dashboard or via API, which means a search engineer can tune the index without filing a vendor ticket. Analytics show which queries return zero results, which products get clicked, and how that converts into revenue.
 
-The trade-off is that quality scales with engineering hours. Algolia ships the index and the widgets, but the storefront UI, the relevance tuning, and any answer layer are your team's work end to end. Usage-based pricing creates compounding bills exactly when traffic is good news. A successful Black Friday push or a viral product moment can push you past your included baseline, and the meter keeps running until the spike ends.
+The trade-off is that quality scales with engineering hours. Algolia ships the index and the widgets, but the storefront UI, the relevance tuning, and any answer layer are your team's work end to end. Usage-based pricing means bills spike when traffic does. A successful Black Friday push or a viral product moment can push you past your included baseline, and the meter keeps running until the spike ends.
 
 NeuralSearch, the semantic matching layer that learns query intent from clicks and conversions, is gated to the Elevate plan. The cheapest paid plans ship keyword search only. If you want the AI matching most shoppers actually want, you're either paying for Elevate or building it on top of the keyword index yourself.
 
 ## How we evaluated these alternatives, and what criteria each one had to meet
 
-The five alternatives below are the ones Shopify merchants actually shortlist when they're looking for something else. The criteria each pick had to meet:
+When Shopify merchants outgrow native search, these are the tools that show up on the shortlist. The criteria each pick had to meet:
 
 - **Shopify-native install.** Each tool ships a managed Shopify connector or App Store listing, so the catalog sync and most of the frontend work are vendor-owned, not engineering projects.
 - **Public pricing or a verifiable starting tier.** We list real dollar figures where the vendor publishes them and flag the tiers that are quote-only.
 - **A clear primary job.** Each pick is described by what it does well (semantic search, rule-based merchandising, visual curation, conversational Q&A), not by a generic "AI search" label.
 - **Real adoption among Shopify merchants.** Each tool ships a verified Shopify integration with public customer references or App Store reviews, not just a partnership listing.
+
+Nobi is included because it answers a job none of the pure search tools in this list cover: semantic search and a grounded shopping assistant on one install, without a separate engineering build for the Q&A layer.
 
 ## 1. Nobi - AI site search and a grounded shopping assistant on one install
 
@@ -147,7 +145,7 @@ Nobi is [AI-powered site search](https://nobi.ai/blog/best-ai-search-ecommerce-2
 **Pricing:** $25/month base (2,500 searches and 250 conversational messages included), then $0.01 per additional search and $0.10 per additional message.
 
 **Pros:**
-- Search results and a grounded shopping assistant ship in one install, not two procurement cycles.
+- Search results and a grounded shopping assistant ship in one install, not two separate purchases.
 - Inline citation pills and a sources sidebar let shoppers verify any answer against your live content.
 - Query overrides pin exact verbatim answers to high-stakes prompts like return policy or warranty.
 - Transparent per-unit pricing you can model against real traffic; no revenue-share or quote-only tiers.
@@ -198,7 +196,7 @@ Nobi is [AI-powered site search](https://nobi.ai/blog/best-ai-search-ecommerce-2
 **Pricing:** Not published publicly. Tiered for the mid-market and quoted by store size.
 
 **Pros:**
-- Every ranking decision can be traced back to a specific rule in the dashboard - merchandisers can audit any result.
+- Merchandisers can audit any result back to a specific rule in the dashboard.
 - Redirect-on-zero-results sends dead-end queries to curated landing pages instead of an empty state.
 - Intent-based merchandising and recommendations span site pages plus external channels like email and SMS.
 
@@ -234,35 +232,35 @@ Nobi is [AI-powered site search](https://nobi.ai/blog/best-ai-search-ecommerce-2
 
 **Best for:** Shopify stores that need a budget-friendly filter and search upgrade over native Shopify search, where conversational queries aren't the main miss reason.
 
-**Pricing:** Free tier with paid plans tiered by monthly orders. Specific tier pricing wasn't confirmed in research for this article, so check the App Store listing before signing anything.
+**Pricing:** Launch at $29/month, Convert at $299/month, Accelerate at $699/month. A 21-day free trial is available on all paid plans. Costs scale with store GMV at higher revenue levels.
 
 **Pros:**
 - Deep faceted-search and filter controls live inside the Shopify dashboard.
-- Lower price point than the AI-native engines, with a free tier for testing.
+- Launch tier starts at $29/month, lower than most AI-native engines; 21-day free trial available.
 - A non-developer can configure filters without context-switching to a separate vendor admin.
 
 **Cons:**
 - Keyword-first matching; light on semantic understanding for conversational queries.
-- Specific paid tier pricing requires checking the current App Store listing.
+- Convert and Accelerate tiers are priced for stores with serious traffic; the $29/month Launch tier has limited filter tree depth.
 - Less AI-native than the packaged search tools above.
 
 **Verdict:** Pick it when better filters on a budget are the priority and conversational queries aren't your main miss reason.
 
 ## How do you decide between Algolia and its Shopify alternatives?
 
-Match the tool to the job and to who owns the work. If you have a frontend engineering team, want raw API control, and your roadmap calls for custom ranking or a bespoke UI, Algolia is the right call. If your team is merchandising-led and your shoppers ask conversational questions, a packaged Shopify-native engine pays back faster because the install ships the UI, the relevance, and (with Nobi) a grounded shopping assistant in one place.
+Match the tool to the job and to who owns the work. If you have a frontend engineering team, want raw API control, and your roadmap calls for custom ranking or a bespoke UI, Algolia is the right call. If your team is merchandising-led and your shoppers ask conversational questions, a packaged Shopify-native engine pays back faster because the install ships the UI and the relevance without a storefront engineering build.
 
-Pick Nobi when you want [semantic search and a grounded shopping assistant](https://nobi.ai/blog/best-semantic-search-ecommerce) on one install, with transparent per-unit pricing and no engineering build. The $25/month base covers 2,500 searches and 250 conversational messages, with $0.01 per additional search and $0.10 per additional message above that. You can model the bill against your real traffic before signing anything.
+Pick Nobi when you want [semantic search and a grounded shopping assistant](https://nobi.ai/blog/best-semantic-search-ecommerce) on one install, with transparent per-unit pricing and no engineering build. The $25/month base covers 2,500 searches and 250 conversational messages; see the pricing section above for overage rates.
 
-Pick Klevu when your main miss reason is long conversational queries on Shopify and you want a packaged install. The AI matching layer reads your catalog so a query like "wide-leg cropped trouser" still finds the right product even if the title says "cropped wide pant." Pricing is quote-only across Essential, Advanced, and Expert tiers.
+Pick Klevu when your main miss reason is long conversational queries on Shopify and you want a packaged install. The AI matching layer reads catalog vocabulary without merchandiser-written synonym rules. Pricing is quote-only across Essential, Advanced, and Expert tiers.
 
-Pick Searchspring when merchandisers need rule-by-rule audit control over results. Every ranking decision can be traced back to a specific rule in the dashboard, which is what merchandising-led teams actually want. Pricing is quoted by store size.
+Pick Searchspring when merchandisers need rule-by-rule audit control over results. They can trace any result back to a specific rule and override it without filing a vendor ticket. Pricing is quoted by store size.
 
 Pick Fast Simon when visual collection curation leads your discovery model. The paid tiers start at $39.99/month, with Essential at $99.99 and Top Pro at $299.99, scaling by monthly session volume.
 
 Pick Boost Commerce when deep filters on a tight budget are the priority and conversational queries aren't your main miss reason.
 
-Honest acknowledgement: Nobi isn't the right pick if you need behavioral reranking today - Constructor and Klevu's Expert tier go further on personalization that reorders results from individual shopper history. And if you need API-first developer control of a custom frontend, Algolia is still the right answer.
+Nobi isn't the right pick if you need behavioral reranking today - Constructor and Klevu's Expert tier go further on personalization that reorders results from individual shopper history. And if you need API-first developer control of a custom frontend, Algolia is still the right answer.
 
 ## Frequently asked questions about the Algolia Shopify app
 
@@ -274,7 +272,7 @@ Honest acknowledgement: Nobi isn't the right pick if you need behavioral reranki
 
 **Does Algolia ship a shopper-facing conversational assistant?** No. Algolia returns ranked search results. Building a grounded Q&A layer that answers questions in plain language from your catalog is engineering work your team owns.
 
-**What happens to pricing during a traffic spike?** Usage-based billing scales with search requests, so bills compound during peak season. Operators flag this consistently as the part that hurts.
+**What happens to pricing during a traffic spike?** Usage-based billing scales with search requests, so bills spike during peak season. A Black Friday traffic doubling can double your Algolia bill the same month.
 
 **What's the closest packaged alternative for Shopify?** [Nobi](https://nobi.ai) for search plus a grounded shopping assistant on one install, [Klevu](https://www.klevu.com) for AI search only, [Searchspring](https://searchspring.com) for rule-based merchandising, and [Fast Simon](https://www.fastsimon.com) for visual collection curation.
 

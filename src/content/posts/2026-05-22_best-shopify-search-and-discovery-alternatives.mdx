@@ -13,7 +13,7 @@ export const meta = {
  faqItems: [
  {
  question: "Why look for a Shopify Search and Discovery alternative?",
- answer: "Shopify's free Search & Discovery app is a keyword-matching layer with no semantic understanding, no first-class zero-result rate metric, and no conversational layer. Heads of ecommerce outgrow it when long descriptive queries land on null pages, search abandonment drags CVR, or merchandisers spend hours each week writing synonym groups that the next vocabulary mismatch still misses. Personalization and behavioral ranking aren't part of the native app either."
+ answer: "Shopify's free Search & Discovery app is a keyword-matching layer with no semantic understanding, no zero-result rate in the dashboard, and no conversational layer. Heads of ecommerce outgrow it when long descriptive queries land on null pages, search abandonment drags CVR, or merchandisers spend hours each week writing synonym groups that the next vocabulary mismatch still misses. Personalization and behavioral ranking aren't part of the native app either."
  },
  {
  question: "How did we evaluate these tools?",
@@ -97,12 +97,12 @@ export const meta = {
 </script>
 ## What are the best Shopify Search and Discovery alternatives?
 
-A shopper types "wide-leg cropped trouser in linen" into your Shopify search bar and gets a null page because the product title reads "cropped wide pant." That shopper had buying intent, hit a dead end, and left for Google - which sent them to a competitor's PDP for the exact item you stock. [Zero-result rate](https://nobi.ai/blog/fix-zero-result-searches) climbs into the 10-30% range on a typical store, dragging CVR down every week while merchandisers burn hours writing synonym groups the next vocabulary mismatch still misses. The replacement has to rank semantically against your live Shopify catalog, surface zero-result rate as a first-class metric, and let merchandisers fix misses without shipping code. These are the four alternatives Shopify heads of ecommerce actually shortlist:
+Shopify's native Search & Discovery app does keyword matching only. A shopper who types "wide-leg cropped trouser in linen" hits a null page when your title reads "cropped wide pant" - buying intent gone, sale handed to a competitor. [Zero-result rate runs 10-30% on a typical store](https://nobi.ai/blog/fix-zero-result-searches). Merchandisers try to close the gap by writing synonym groups, but each vocabulary mismatch just adds another rule to the list. The replacement has to rank semantically against your live Shopify catalog, report zero-result rate in the dashboard, and let merchandisers fix misses without shipping code. These are the four alternatives Shopify heads of ecommerce actually shortlist:
 
 - **Nobi** - semantic site search plus a grounded shopping assistant in one platform, $25/mo base. Pick when AI-powered matching and conversational discovery are both the job, and you want published per-unit pricing.
-- **Klevu** - AI semantic matching tuned for Shopify catalogs, tiered pricing not published. Pick when long, conversational queries on a Shopify store are the main miss reason.
-- **Searchspring** - rule-by-rule merchandiser control under Athos Commerce, quote-only. Pick when your merch team wants exact, auditable control over every query result.
-- **Fast Simon** - visual merchandising and collection curation on Shopify, starts at $39.99/mo via the App Store. Pick when seasonal collection edits and pinning are the bottleneck, not semantic relevance.
+- **[Klevu](https://klevu.com)** - AI semantic matching tuned for Shopify catalogs, tiered pricing not published. Pick when long, conversational queries on a Shopify store are the main miss reason.
+- **[Searchspring](https://searchspring.com)** - rule-by-rule merchandiser control under Athos Commerce, quote-only. Pick when your merch team wants exact, auditable control over every query result.
+- **[Fast Simon](https://fastsimon.com)** - visual merchandising and collection curation on Shopify, starts at $39.99/mo via the App Store. Pick when seasonal collection edits and pinning are the bottleneck, not semantic relevance.
 
 | Product | Primary job | Best for | Pricing (starting) | Standout strength | Key weakness |
 | --- | --- | --- | --- | --- | --- |
@@ -117,13 +117,13 @@ A shopper types "wide-leg cropped trouser in linen" into your Shopify search bar
 
 ## Why look for a Shopify Search and Discovery alternative?
 
-Shopify's free Search & Discovery app handles synonyms, redirects, and basic filters from the admin, but it's a keyword-matching layer with no semantic understanding, no first-class zero-result rate metric, and no conversational layer. Heads of ecommerce outgrow it when long descriptive queries land on null pages, when search abandonment shows up as a CVR drag, or when a merchandiser spends hours each week building synonym groups that the next vocabulary mismatch still misses. Personalization and behavioral ranking aren't part of the native app either.
+Shopify's free Search & Discovery app handles synonyms, redirects, and basic filters from the admin, but it's a keyword-matching layer with no semantic understanding, no way to track zero-result rate in the dashboard, and no conversational layer. Heads of ecommerce outgrow it when long descriptive queries land on null pages, when search abandonment shows up as a CVR drag, or when a merchandiser spends hours each week building synonym groups that the next vocabulary mismatch still misses. Personalization and behavioral ranking aren't part of the native app either.
 
 ## How did we evaluate these tools?
 
 We picked the four alternatives a head of ecommerce on Shopify would actually shortlist after deciding the native app isn't enough: Nobi, Klevu, Searchspring, and Fast Simon. Each one is graded on the same five criteria: semantic matching quality, analytics depth, merchandising workflow, pricing transparency, and time to live on a Shopify store.
 
-Semantic matching is the first cut. Shopify's native app does keyword matching, so long descriptive queries like "wide-leg cropped trouser in linen" land on null pages when the title says "cropped wide pant." We graded each tool on how it resolves conversational queries without a merchandiser writing a synonym rule for every variant. Nobi and Klevu both [rank semantically by default](https://nobi.ai/blog/best-semantic-search-ecommerce). Searchspring leans on rule-based relevance with custom sorts. Fast Simon ships multimodal search (text and image) with drag-and-drop merchandising on top.
+Semantic matching is the first cut. Shopify's native app does keyword matching, so long descriptive queries like "wide-leg cropped trouser in linen" land on null pages when the title says "cropped wide pant." We graded each tool on how it resolves conversational queries without a merchandiser writing a synonym rule for every variant. Nobi and Klevu both [rank semantically by default](https://nobi.ai/blog/best-semantic-search-ecommerce). Searchspring leans on rule-based relevance with category-level custom sorts that let merchandisers pin promoted SKUs into specific positions. Fast Simon ships multimodal search (text and image) with drag-and-drop merchandising on top.
 
 Analytics depth matters because zero-result rate, search abandonment, and query-to-CVR are the metrics a head of ecommerce actually reports on. We looked at whether each tool surfaces those numbers to merchandisers in a dashboard, or buries them in logs an engineer has to pull.
 
@@ -145,7 +145,7 @@ Nobi is AI-powered site search and a grounded shopping assistant bundled on one 
 - Semantic matching handles long, conversational queries from day one - your merchandisers don't have to write synonym rules every week to keep search honest
 - The shopping assistant answers pre-purchase questions in the same widget, with inline citation pills that link back to the exact source so shoppers can verify any claim
 - Per-unit pricing is published at $0.01 per search and $0.10 per message - no revenue-share contract and no surprise bill during a traffic spike
-- Hours-to-deploy install on Shopify; UNTUCKit ran a two-month A/B test against their prior search tool and saw a 17.1% CVR lift and 21.3% revenue per searcher before moving 100% of traffic to Nobi
+- Hours-to-deploy install on Shopify; [UNTUCKit](/customers/untuckit) ran a two-month A/B test against their prior search tool and saw a 17.1% CVR lift and 21.3% revenue per searcher before moving 100% of traffic to Nobi
 
 **Cons:**
 - Personalization today is limited to personalized placeholder text and starter messages - there's no behavioral reranking based on individual click and purchase history yet, which Klevu's Expert tier and Constructor both offer
@@ -213,10 +213,10 @@ Nobi is AI-powered site search and a grounded shopping assistant bundled on one 
 **Pros:**
 - Strong Shopify integration and visual merchandising tools a non-technical team can run daily
 - Quick install through the App Store, so a store goes live in days rather than months
-- Pinning, boosting, and collection curation all run from one dashboard tuned for seasonal and campaign edits
+- Campaign scheduling and seasonal capsule creation run without engineering tickets, so a non-technical team can update the storefront month over month
 
 **Cons:**
-- Natural-language understanding is a secondary strength, so long descriptive queries land softer than the visual merchandising and drag-and-drop curation that anchor the product
+- Long descriptive queries are where Fast Simon misses most often; visual merchandising and collection curation are what it does best
 - Personalization is a secondary strength, not a headline capability
 
 **Verdict:** Pick Fast Simon when visual collection curation leads your discovery model and search needs are straightforward; skip it if conversational shopper queries are what's costing you sales.
@@ -225,7 +225,7 @@ Nobi is AI-powered site search and a grounded shopping assistant bundled on one 
 
 Start by naming which gap in Shopify's native Search & Discovery app is actually costing you CVR, then match the tool to that gap. Long conversational queries landing on null pages plus pre-purchase questions stalling on the PDP point to one kind of tool. A merchandiser hand-pinning every promoted SKU points to another. Visual collection curation for seasonal capsules points to a third.
 
-Nobi fits when site search and shopper Q&A are both jobs and you want to model the bill before signing. Pricing is published at $25/month base, $0.01 per additional search, and $0.10 per additional message, and a typical store goes live in hours. [UNTUCKit](/customers/untuckit) ran a two-month A/B test against their prior search tool and saw a 17.1% CVR lift before moving 100% of traffic to Nobi. Skip it if behavioral reranking on individual click history is the headline requirement.
+Nobi fits when site search and shopper Q&A are both jobs and you want to model the bill before signing. Pricing is published at $25/month base, $0.01 per additional search, and $0.10 per additional message, and a typical store goes live in hours. [UNTUCKit](/customers/untuckit) ran a two-month A/B test against their prior search tool and moved 100% of traffic to Nobi after two months, with 21.3% higher revenue per searcher on the Nobi side. Skip it if behavioral reranking on individual click history is the headline requirement.
 
 Klevu fits when conversational vocabulary mismatch is the only miss reason and a packaged Shopify App Store install matters more than bundled Q&A.
 

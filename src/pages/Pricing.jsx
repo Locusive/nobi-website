@@ -6,7 +6,6 @@ import PricingCalculator from "../components/PricingCalculator.jsx";
 import { Check, Search, Smile, BarChart3, MessageSquare, ArrowRight, Gift } from "lucide-react";
 import Marquee from "react-fast-marquee";
 import { getSignupUrl } from "../utils/signupUrl";
-import { useDemoForm } from "../context/DemoFormContext";
 
 const CUSTOMER_LOGOS = [
   { alt: "UNTUCKit", src: "/media/logos/untuckit.svg" },
@@ -100,7 +99,6 @@ const PRICING_FAQS = [
 ];
 
 export default function Pricing() {
-  const { onOpen: openDemoForm } = useDemoForm();
 
   useSEO({
     title: "Pricing | Nobi",
@@ -242,12 +240,12 @@ export default function Pricing() {
                     ))}
                   </ul>
 
-                  <button
-                    onClick={openDemoForm}
+                  <a
+                    href="mailto:hello@nobi.ai"
                     className="block w-full rounded-xl py-3 text-sm font-semibold text-center transition active:scale-[.98] bg-white text-black border border-black hover:bg-black/5"
                   >
                     Get in Touch
-                  </button>
+                  </a>
                 </div>
               </div>
             </div>

@@ -1,24 +1,13 @@
 import React from "react";
-import Button from "./Button";
-import { useDemoForm } from "../context/DemoFormContext";
-import { trackDemoFormOpened } from "../utils/eventTracker";
 
-export default function DemoCTAButton({ children = "Try Nobi on your site", className = "", ...props }) {
-  const { onOpen } = useDemoForm();
-
-  const handleClick = () => {
-    trackDemoFormOpened();
-    onOpen();
-  };
-
+export default function DemoCTAButton({ children = "Get started free", className = "", ...props }) {
   return (
-    <Button
-      size="lg"
-      className={`w-full sm:w-auto ${className}`}
-      onClick={handleClick}
+    <a
+      href="https://dashboard.nobi.ai"
+      className={`inline-flex items-center justify-center gap-2 rounded-2xl font-medium transition active:scale-[.98] bg-black text-white hover:opacity-90 shadow-sm h-12 px-6 text-base w-full sm:w-auto ${className}`}
       {...props}
     >
-      <span>{children}</span>
-    </Button>
+      {children}
+    </a>
   );
 }

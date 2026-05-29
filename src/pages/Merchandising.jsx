@@ -1,14 +1,11 @@
 import React, { useEffect } from "react";
 import PageLayout from "../components/PageLayout";
-import DemoCTAButton from "../components/DemoCTAButton";
 import { getSignupUrl } from "../utils/signupUrl";
-import { useDemoForm } from "../context/DemoFormContext";
 import { BarChart3, ShoppingCart, Search, Sparkles } from "lucide-react";
 
 const GRADIENT = "bg-gradient-to-r from-indigo-500 via-violet-500 to-fuchsia-500 bg-clip-text text-transparent";
 
 export default function Merchandising() {
-  const { onOpen } = useDemoForm();
 
   useEffect(() => {
     document.title = "Merchandising Controls | Nobi";
@@ -36,15 +33,9 @@ export default function Merchandising() {
                 </p>
 
                 <div className="flex flex-col sm:flex-row gap-4 pt-2">
-                  <button
-                    onClick={onOpen}
-                    className="inline-flex items-center justify-center gap-2 rounded-2xl font-medium transition bg-black text-white hover:opacity-90 shadow-sm h-12 px-6 text-base"
-                  >
-                    Get a demo
-                  </button>
                   <a
-                    href={getSignupUrl()}
-                    className="inline-flex items-center justify-center gap-2 rounded-2xl font-medium transition border border-black/10 bg-white/70 h-12 px-6 text-base hover:border-black/30"
+                    href="https://dashboard.nobi.ai"
+                    className="inline-flex items-center justify-center gap-2 rounded-2xl font-medium transition bg-black text-white hover:opacity-90 shadow-sm h-12 px-6 text-base"
                   >
                     Get started free
                   </a>
@@ -210,15 +201,9 @@ export default function Merchandising() {
               </div>
 
               <div className="flex flex-col sm:flex-row gap-4 justify-center pt-2">
-                <button
-                  onClick={onOpen}
-                  className="inline-flex items-center justify-center gap-2 rounded-2xl font-medium transition bg-white text-black hover:bg-white/90 shadow-sm h-12 px-6 text-base"
-                >
-                  Get a demo
-                </button>
                 <a
-                  href={getSignupUrl()}
-                  className="inline-flex items-center justify-center gap-2 rounded-2xl font-medium transition border border-white/30 bg-white/10 text-white h-12 px-6 text-base hover:border-white/50"
+                  href="https://dashboard.nobi.ai"
+                  className="inline-flex items-center justify-center gap-2 rounded-2xl font-medium transition bg-white text-black hover:bg-white/90 shadow-sm h-12 px-6 text-base"
                 >
                   Get started free
                 </a>

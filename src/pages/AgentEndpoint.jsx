@@ -1,7 +1,6 @@
 import React from "react";
 import { useSEO } from "../hooks/useSEO";
 import PageLayout from "../components/PageLayout";
-import { useDemoForm } from "../context/DemoFormContext";
 import { getSignupUrl } from "../utils/signupUrl";
 import { Bot, Globe, Sparkles, FileText, MessageSquare, ArrowRight } from "lucide-react";
 
@@ -35,7 +34,6 @@ function StoryScroll({ to, dark }) {
 }
 
 export default function AgentEndpoint() {
-  const { onOpen: openDemoForm } = useDemoForm();
 
   useSEO({
     title: "Reach AI Agents - Your Business, Inside Every AI Your Customers Use | Nobi",
@@ -75,9 +73,9 @@ export default function AgentEndpoint() {
                   <a href={getSignupUrl()} className="inline-flex items-center justify-center gap-2 rounded-2xl font-medium bg-black text-white hover:opacity-90 h-12 px-6 text-base w-full sm:w-auto">
                     Get started free
                   </a>
-                  <button onClick={openDemoForm} className="inline-flex items-center justify-center gap-2 rounded-2xl font-medium border border-black/10 bg-white h-12 px-6 text-base w-full sm:w-auto hover:border-black/30">
-                    Get a demo
-                  </button>
+                  <a href="https://dashboard.nobi.ai" className="inline-flex items-center justify-center gap-2 rounded-2xl font-medium border border-black/10 bg-white h-12 px-6 text-base w-full sm:w-auto hover:border-black/30">
+                    Get started free
+                  </a>
                 </div>
               </div>
 
@@ -536,9 +534,9 @@ export default function AgentEndpoint() {
               <a href={getSignupUrl()} className="inline-flex items-center justify-center gap-2 rounded-2xl font-medium bg-black text-white hover:opacity-90 h-12 px-6 text-base">
                 Get started free
               </a>
-              <button onClick={openDemoForm} className="inline-flex items-center justify-center gap-2 rounded-2xl font-medium border border-black/10 bg-white h-12 px-6 text-base hover:border-black/30">
-                Get a demo
-              </button>
+              <a href="https://dashboard.nobi.ai" className="inline-flex items-center justify-center gap-2 rounded-2xl font-medium border border-black/10 bg-white h-12 px-6 text-base hover:border-black/30">
+                Get started free
+              </a>
             </div>
           </div>
         </section>

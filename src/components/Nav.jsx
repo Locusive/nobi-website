@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 import { ChevronDown, LifeBuoy, Menu, Search as SearchIcon, UserPlus, X, ExternalLink, Sparkles, Zap, BarChart2, Bot } from "lucide-react";
-import { useDemoForm } from "../context/DemoFormContext";
-import { trackDemoFormOpened } from "../utils/eventTracker";
 import { getSignupUrl } from "../utils/signupUrl";
 
 const FEATURES = [
@@ -15,7 +13,6 @@ const FEATURES = [
 export default function Nav() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [mobileFeaturesOpen, setMobileFeaturesOpen] = useState(false);
-  const { onOpen } = useDemoForm();
 
   const handleAskNobi = () => {
     if (window.Nobi) window.Nobi.openChat();
@@ -24,11 +21,6 @@ export default function Nav() {
   const closeMobileMenu = () => {
     setMobileMenuOpen(false);
     setMobileFeaturesOpen(false);
-  };
-
-  const handleDemoClick = () => {
-    trackDemoFormOpened();
-    onOpen();
   };
 
   return (
@@ -96,9 +88,6 @@ export default function Nav() {
 
       {/* Right side CTAs */}
       <div className="flex items-center gap-8 ml-auto">
-        <button className="hidden md:block text-sm font-semibold hover:opacity-80 transition-opacity" onClick={handleDemoClick}>
-          Get a Demo
-        </button>
         <a href="https://dashboard.nobi.ai/login" className="hidden md:block text-sm font-semibold hover:opacity-80 transition-opacity">
           Log in
         </a>
@@ -149,9 +138,6 @@ export default function Nav() {
               <a href={getSignupUrl()} onClick={closeMobileMenu} className="inline-flex items-center justify-center gap-2 rounded-2xl font-medium transition active:scale-[.98] bg-black text-white hover:opacity-90 shadow-sm h-10 px-5 text-base w-full">
                 Sign Up Free
               </a>
-              <button className="inline-flex items-center justify-center gap-2 rounded-2xl font-medium transition active:scale-[.98] bg-white text-black border border-black hover:bg-black/5 shadow-sm h-10 px-5 text-base w-full" onClick={() => { handleDemoClick(); closeMobileMenu(); }}>
-                Get a Demo
-              </button>
             </div>
           </nav>
         </div>

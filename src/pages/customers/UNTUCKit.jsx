@@ -3,7 +3,6 @@ import { useSEO } from "../../hooks/useSEO";
 import { motion } from "framer-motion";
 import PageLayout from "../../components/PageLayout";
 import { getSignupUrl } from "../../utils/signupUrl";
-import { useDemoForm } from "../../context/DemoFormContext";
 
 const GRADIENT = "bg-gradient-to-r from-indigo-500 via-violet-500 to-fuchsia-500 bg-clip-text text-transparent";
 
@@ -98,7 +97,6 @@ function StatCallout({ value, label }) {
 }
 
 export default function UNTUCKitCustomer() {
-  const { onOpen } = useDemoForm();
 
   useSEO({
     title: "UNTUCKit + Nobi: +21.3% Revenue Per Searcher | Case Study",
@@ -567,12 +565,12 @@ export default function UNTUCKitCustomer() {
                 >
                   Sign up free
                 </a>
-                <button
-                  onClick={onOpen}
+                <a
+                  href="https://dashboard.nobi.ai"
                   className="inline-flex items-center justify-center gap-2 rounded-2xl font-medium transition border border-white/30 bg-white/10 text-white h-12 px-6 text-base hover:border-white/50"
                 >
-                  Get a demo
-                </button>
+                  Get started free
+                </a>
               </div>
             </div>
           </div>

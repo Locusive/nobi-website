@@ -23,8 +23,6 @@ import ScrollPreview from "../components/ScrollPreview";
 import {posts, formatPostDate} from "../content/utils/mdxPostLoader";
 import HeroDemo from "../components/HeroDemo";
 import {VideoModal} from "../components/VideoModal";
-import {useDemoForm} from "../context/DemoFormContext";
-import DemoCTAButton from "../components/DemoCTAButton";
 import {getSignupUrl} from "../utils/signupUrl";
 import { trackEvent } from "../utils/eventTracker";
 import { EVENTS } from "../constants/events";
@@ -795,7 +793,7 @@ function renderHeadline(variant) {
   }
 }
 
-function Hero({ onOpenVideo, onOpenDemo, variant, setVariant }) {
+function Hero({ onOpenVideo, variant, setVariant }) {
   const content = VARIANT_CONTENT[variant] || VARIANT_CONTENT.default;
   const visitorContextSentRef = useRef(false);
 
@@ -889,12 +887,6 @@ function Hero({ onOpenVideo, onOpenDemo, variant, setVariant }) {
             >
               Get started free
             </a>
-            <button
-              onClick={onOpenDemo}
-              className="inline-flex items-center justify-center gap-2 rounded-2xl font-medium transition active:scale-[.98] border border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/5 h-12 px-6 text-base w-full sm:w-auto hover:border-black/30 dark:hover:border-white/30"
-            >
-              Get a demo
-            </button>
           </div>
 
         </div>
@@ -1536,10 +1528,9 @@ function HowItWorks() {
 }
 
 function Pricing() {
-  const { onOpen } = useDemoForm();
   const tiers = [
     { name: "Standard", price: "$25", blurb: "Everything you need to get started", points: ["100 free messages/month to try in your dashboard", "2,500 searches and 250 messages included", "Up to 5,000 products and KB documents"], cta: "Start for Free", href: getSignupUrl(), highlighted: true },
-    { name: "Enterprise", price: "Custom", blurb: "For high-volume brands with large catalogs", points: ["Volume discounts on usage", "Custom integrations and onboarding", "Dedicated support"], cta: "Contact Sales", onClick: onOpen },
+    { name: "Enterprise", price: "Custom", blurb: "For high-volume brands with large catalogs", points: ["Volume discounts on usage", "Custom integrations and onboarding", "Dedicated support"], cta: "Contact Sales", href: "mailto:hello@nobi.ai" },
   ];
   return (
     <section id="pricing" className="scroll-mt-20 py-20 border-t border-black/5 dark:border-white/5">
@@ -1729,7 +1720,7 @@ function MultiLineChart({ seriesList = [] }) {
   );
 }
 
-function Insights({ onOpenForm }) {
+function Insights() {
   const intents = [
     { label: "Buying a Gift", value: 124 },
     { label: "Shopping for an upcoming trip", value: 96 },
@@ -1881,204 +1872,6 @@ function Insights({ onOpenForm }) {
   );
 }
 
-function RequestDemoModal({ open, onClose }) {
-  const [form, setForm] = React.useState({
-    name: "",
-    email: "",
-    company: "",
-    website: "",
-    platform: "Shopify",
-    message: "",
-    botcheck: "", // honeypot
-  });
-  const [submitting, setSubmitting] = React.useState(false);
-  const [done, setDone] = React.useState(false);
-  const [error, setError] = React.useState("");
-
-  React.useEffect(() => {
-    if (!open) return;
-    const onKey = (e) => e.key === "Escape" && onClose?.();
-    document.addEventListener("keydown", onKey);
-    const prev = document.documentElement.style.overflow;
-    document.documentElement.style.overflow = "hidden";
-    return () => {
-      document.removeEventListener("keydown", onKey);
-      document.documentElement.style.overflow = prev;
-    };
-  }, [open, onClose]);
-
-  if (!open) return null;
-
-  const update = (e) => setForm((f) => ({ ...f, [e.target.name]: e.target.value }));
-
-  async function submit(e) {
-    e.preventDefault();
-    setSubmitting(true);
-    setError("");
-    try {
-      // Web3Forms endpoint
-      const accessKey = "c7a3fd79-0e4f-47ce-aa30-c141616d21e3";
-
-      const formData = new FormData();
-      formData.append("access_key", accessKey);
-      formData.append("subject", "Nobi Demo Request: " + (form.company || form.name || "(no name)"));
-      formData.append("from_name", "Nobi Website");
-      formData.append("name", form.name);
-      formData.append("email", form.email);
-      formData.append("company", form.company);
-      formData.append("website", form.website);
-      formData.append("platform", form.platform);
-      formData.append("message", form.message);
-      formData.append("botcheck", form.botcheck);
-
-      const r = await fetch("https://api.web3forms.com/submit", {
-        method: "POST",
-        body: formData,
-      });
-
-      const j = await r.json();
-      if (!r.ok || !j.success) throw new Error(j.message || "Something went wrong.");
-      setDone(true);
-    } catch (err) {
-      setError(err.message || "Failed to submit.");
-    } finally {
-      setSubmitting(false);
-    }
-  }
-
-  return (
-    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4" role="dialog" aria-modal="true">
-      <button className="absolute inset-0 bg-black/60 backdrop-blur-sm" aria-label="Close form" onClick={onClose} />
-      <div className="relative w-full max-w-xl rounded-2xl bg-white dark:bg-zinc-900 p-6 shadow-2xl">
-        <div className="flex items-center justify-between">
-          <h2 className="text-xl font-semibold">Try it on your store</h2>
-          <button
-            onClick={onClose}
-            className="inline-flex items-center rounded-full bg-black/5 dark:bg-white/10 px-2 py-1 hover:opacity-80"
-            aria-label="Close"
-          >
-            ✕
-          </button>
-        </div>
-
-        {!done ? (
-          <form onSubmit={submit} className="mt-4 space-y-4">
-            {/* honeypot */}
-            <input type="text" name="botcheck" value={form.botcheck} onChange={update} className="hidden" tabIndex={-1} autoComplete="off" />
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              <div>
-                <label className="text-sm block mb-1">Name</label>
-                <input
-                  name="name"
-                  value={form.name}
-                  onChange={update}
-                  required
-                  className="w-full rounded-xl border border-black/10 dark:border-white/10 bg-transparent px-3 py-2 outline-none"
-                />
-              </div>
-              <div>
-                <label className="text-sm block mb-1">Email</label>
-                <input
-                  name="email"
-                  type="email"
-                  value={form.email}
-                  onChange={update}
-                  required
-                  className="w-full rounded-xl border border-black/10 dark:border-white/10 bg-transparent px-3 py-2 outline-none"
-                />
-              </div>
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              <div>
-                <label className="text-sm block mb-1">Company</label>
-                <input
-                  name="company"
-                  value={form.company}
-                  onChange={update}
-                  className="w-full rounded-xl border border-black/10 dark:border-white/10 bg-transparent px-3 py-2 outline-none"
-                />
-              </div>
-              <div>
-                <label className="text-sm block mb-1">Website</label>
-                <input
-                  name="website"
-                  value={form.website}
-                  onChange={update}
-                  placeholder="https://yourstore.com"
-                  className="w-full rounded-xl border border-black/10 dark:border-white/10 bg-transparent px-3 py-2 outline-none"
-                />
-              </div>
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              <div>
-                <label className="text-sm block mb-1">Platform</label>
-                <select
-                  name="platform"
-                  value={form.platform}
-                  onChange={update}
-                  className="w-full rounded-xl border border-black/10 dark:border-white/10 bg-transparent px-3 py-2 outline-none"
-                >
-                  <option>Shopify</option>
-                  <option>Headless</option>
-                  <option>Magento</option>
-                  <option>BigCommerce</option>
-                  <option>Other</option>
-                </select>
-              </div>
-            </div>
-
-            <div>
-              <label className="text-sm block mb-1">Anything else?</label>
-              <textarea
-                name="message"
-                rows={4}
-                value={form.message}
-                onChange={update}
-                className="w-full rounded-xl border border-black/10 dark:border-white/10 bg-transparent px-3 py-2 outline-none"
-                placeholder="Goal, timeline, questions…"
-              />
-            </div>
-
-            {error && <div className="text-sm text-red-600 dark:text-rose-400">{error}</div>}
-
-            <div className="flex items-center gap-3 pt-2">
-              <Button type="submit" disabled={submitting}>
-                {submitting ? "Sending…" : "Submit"}
-              </Button>
-              <Button type="button" variant="ghost" onClick={onClose}>
-                Cancel
-              </Button>
-            </div>
-          </form>
-        ) : (
-          <div className="mt-4">
-            <p className="text-black/80 dark:text-white/90">
-              Thanks! We’ve received your request and will reach out shortly.
-            </p>
-            <p className="text-black/60 dark:text-white/70 mt-2 text-sm">
-              Want to skip the wait? Book a time directly.
-            </p>
-            <div className="mt-4 flex gap-3">
-              <a
-                href="https://calendly.com/shanif/nobi"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 rounded-2xl font-medium transition active:scale-[.98] bg-black text-white dark:bg-white dark:text-black hover:opacity-90 shadow-sm h-10 px-5 text-base no-underline"
-              >
-                Book a Call
-              </a>
-              <Button variant="ghost" onClick={onClose}>Close</Button>
-            </div>
-          </div>
-        )}
-      </div>
-    </div>
-  );
-}
-
 function LatestPosts() {
   const featured = posts.filter((p) => p.meta.featured);
   const nonFeatured = posts.filter((p) => !p.meta.featured);
@@ -2178,7 +1971,6 @@ function WorksWith() {
 
 export default function HomePage() {
   const [isVideoOpen, setIsVideoOpen] = useState(false);
-  const { onOpen: onOpenForm } = useDemoForm();
 
   const [variant, setVariant] = useState(() => {
     try {
@@ -2223,14 +2015,14 @@ export default function HomePage() {
     <div className="min-h-screen bg-gradient-to-b from-white to-slate-50 dark:from-[#0a0a0a] dark:to-black text-black dark:text-white">
       <Header />
       <main>
-        <Hero onOpenVideo={() => setIsVideoOpen(true)} onOpenDemo={onOpenForm} variant={variant} setVariant={setVariant} />
+        <Hero onOpenVideo={() => setIsVideoOpen(true)} variant={variant} setVariant={setVariant} />
         <Problem variant={variant} />
         <Numbers variant={variant} />
         <Features />
         <Testimonial />
         <HowItWorks />
         <WorksWith />
-        <Insights onOpenForm={onOpenForm} />
+        <Insights />
         <LatestPosts />
         {SHOW_PRICING && <Pricing />}
         <FAQList

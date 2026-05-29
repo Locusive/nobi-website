@@ -3,6 +3,7 @@ import { useSEO } from "../../hooks/useSEO";
 import { motion } from "framer-motion";
 import PageLayout from "../../components/PageLayout";
 import { getSignupUrl } from "../../utils/signupUrl";
+import { useDemoForm } from "../../context/DemoFormContext";
 
 const GRADIENT = "bg-gradient-to-r from-indigo-500 via-violet-500 to-fuchsia-500 bg-clip-text text-transparent";
 
@@ -51,6 +52,7 @@ const ResultRow = ({ pos, name, sub, colorHex, highlight = false }) => (
 );
 
 export default function KilteCustomer() {
+  const { onOpen } = useDemoForm();
 
   useSEO({
     title: "Kilte + Nobi: 21.7% More Conversions | Case Study",
@@ -208,12 +210,12 @@ export default function KilteCustomer() {
                 >
                   Sign up free
                 </a>
-                <a
-                  href="https://dashboard.nobi.ai"
+                <button
+                  onClick={onOpen}
                   className="inline-flex items-center justify-center gap-2 rounded-2xl font-medium transition border border-white/30 bg-white/10 text-white h-12 px-6 text-base hover:border-white/50"
                 >
-                  Get started free
-                </a>
+                  Get a demo
+                </button>
               </div>
             </div>
           </div>

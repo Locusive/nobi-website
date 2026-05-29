@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useSEO } from "../hooks/useSEO";
 import PageLayout from "../components/PageLayout";
 import { getSignupUrl } from "../utils/signupUrl";
+import { useDemoForm } from "../context/DemoFormContext";
 import Marquee from "react-fast-marquee";
 
 const GRADIENT = "bg-gradient-to-r from-indigo-500 via-violet-500 to-fuchsia-500 bg-clip-text text-transparent";
@@ -15,6 +16,7 @@ const CUSTOMER_LOGOS = [
 ];
 
 export default function CustomActions() {
+  const { onOpen } = useDemoForm();
 
   useSEO({
     title: "Custom Actions & Hooks for AI Search | Nobi",
@@ -61,12 +63,12 @@ export default function CustomActions() {
                   >
                     Sign up free
                   </a>
-                  <a
-                    href="https://dashboard.nobi.ai"
+                  <button
+                    onClick={onOpen}
                     className="inline-flex items-center justify-center gap-2 rounded-2xl font-medium transition border border-black/10 bg-white/70 h-12 px-6 text-base w-full sm:w-auto hover:border-black/30"
                   >
-                    Get started free
-                  </a>
+                    Get a demo
+                  </button>
                 </div>
               </div>
 
@@ -268,12 +270,12 @@ export default function CustomActions() {
                 >
                   Sign up free
                 </a>
-                <a
-                  href="https://dashboard.nobi.ai"
+                <button
+                  onClick={onOpen}
                   className="inline-flex items-center justify-center gap-2 rounded-2xl font-medium transition border border-white/30 bg-white/10 text-white h-12 px-6 text-base hover:border-white/50"
                 >
-                  Get started free
-                </a>
+                  Get a demo
+                </button>
               </div>
             </div>
           </div>

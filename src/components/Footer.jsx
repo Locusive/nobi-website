@@ -1,9 +1,18 @@
 import React from "react";
 import Logo from "./Logo";
 import { ArrowRight, CheckCircle2, ExternalLink, Search, ShoppingBag, Sparkles } from "lucide-react";
+import { useDemoForm } from "../context/DemoFormContext";
+import { trackDemoFormOpened } from "../utils/eventTracker";
 import { getSignupUrl } from "../utils/signupUrl";
 
 export default function Footer() {
+  const { onOpen } = useDemoForm();
+
+  const handleDemoClick = () => {
+    trackDemoFormOpened();
+    onOpen();
+  };
+
   return (
     <>
       <section className="relative overflow-hidden border-t border-black/5 bg-[linear-gradient(180deg,#ffffff_0%,#fff7ff_42%,#f8fafc_100%)]">
@@ -27,6 +36,13 @@ export default function Footer() {
                 Try Nobi free
                 <ArrowRight className="h-4 w-4" />
               </a>
+              <button
+                type="button"
+                onClick={handleDemoClick}
+                className="inline-flex h-12 w-full items-center justify-center rounded-2xl border border-slate-200 bg-white px-6 text-base font-semibold text-slate-950 shadow-sm transition hover:border-slate-300 hover:bg-slate-50 active:scale-[.98] sm:w-auto"
+              >
+                Get a demo
+              </button>
             </div>
             <div className="mt-5 flex flex-col items-center justify-center gap-2 text-sm text-slate-500 sm:flex-row sm:gap-4">
               {["100 free messages monthly", "No credit card", "Go live when ready"].map((item) => (

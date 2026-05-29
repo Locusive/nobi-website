@@ -3,6 +3,7 @@ import { useSEO } from "../../hooks/useSEO";
 import { Link } from "react-router-dom";
 import PageLayout from "../../components/PageLayout";
 import { getSignupUrl } from "../../utils/signupUrl";
+import { useDemoForm } from "../../context/DemoFormContext";
 
 const GRADIENT = "bg-gradient-to-r from-indigo-500 via-violet-500 to-fuchsia-500 bg-clip-text text-transparent";
 
@@ -45,6 +46,7 @@ const STORIES = [
 ];
 
 export default function CustomersIndex() {
+  const { onOpen } = useDemoForm();
 
   useSEO({
     title: "Customer Stories | Nobi",
@@ -124,12 +126,12 @@ export default function CustomersIndex() {
                 >
                   Sign up free
                 </a>
-                <a
-                  href="https://dashboard.nobi.ai"
+                <button
+                  onClick={onOpen}
                   className="inline-flex items-center justify-center gap-2 rounded-2xl font-medium transition border border-white/30 bg-white/10 text-white h-12 px-6 text-base hover:border-white/50"
                 >
-                  Get started free
-                </a>
+                  Get a demo
+                </button>
               </div>
             </div>
           </div>

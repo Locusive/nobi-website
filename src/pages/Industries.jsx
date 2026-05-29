@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import PageLayout from "../components/PageLayout";
 import { getSignupUrl } from "../utils/signupUrl";
-import { useDemoForm } from "../context/DemoFormContext";
 import {
   BookOpen,
   MessageCircleQuestion,
@@ -13,7 +12,6 @@ const GRADIENT =
   "bg-gradient-to-r from-indigo-500 via-violet-500 to-fuchsia-500 bg-clip-text text-transparent";
 
 export default function Industries() {
-  const { onOpen } = useDemoForm();
 
   useEffect(() => {
     document.title = "Industries | Nobi";
@@ -114,15 +112,9 @@ export default function Industries() {
               </p>
 
               <div className="flex flex-col sm:flex-row gap-3 justify-center pt-2">
-                <button
-                  onClick={onOpen}
-                  className="inline-flex items-center justify-center gap-2 rounded-2xl font-medium transition bg-black text-white hover:opacity-90 shadow-sm h-12 px-6 text-base"
-                >
-                  Get a demo
-                </button>
                 <a
-                  href={getSignupUrl()}
-                  className="inline-flex items-center justify-center gap-2 rounded-2xl font-medium transition border border-black/10 bg-white/70 h-12 px-6 text-base hover:border-black/30"
+                  href="https://dashboard.nobi.ai"
+                  className="inline-flex items-center justify-center gap-2 rounded-2xl font-medium transition bg-black text-white hover:opacity-90 shadow-sm h-12 px-6 text-base"
                 >
                   Get started free
                 </a>
@@ -232,21 +224,14 @@ export default function Industries() {
                   See Nobi for your industry
                 </h2>
                 <p className="text-base text-slate-300">
-                  Get a personalized demo showing how Nobi converts visitors in
-                  your specific industry.
+                  Start free and see how Nobi converts visitors in your specific industry.
                 </p>
               </div>
 
               <div className="flex flex-col sm:flex-row gap-3 justify-center">
-                <button
-                  onClick={onOpen}
-                  className="inline-flex items-center justify-center gap-2 rounded-2xl font-medium transition bg-white text-black hover:opacity-90 shadow-sm h-12 px-6 text-base"
-                >
-                  Get a demo
-                </button>
                 <a
-                  href={getSignupUrl()}
-                  className="inline-flex items-center justify-center gap-2 rounded-2xl font-medium transition border border-white/20 text-white hover:border-white/40 h-12 px-6 text-base"
+                  href="https://dashboard.nobi.ai"
+                  className="inline-flex items-center justify-center gap-2 rounded-2xl font-medium transition bg-white text-black hover:opacity-90 shadow-sm h-12 px-6 text-base"
                 >
                   Get started free
                 </a>

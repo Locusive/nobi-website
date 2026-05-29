@@ -75,7 +75,6 @@ function App() {
         </Routes>
       </Suspense>
 
-      <RequestDemoModal open={isFormOpen} onClose={() => setIsFormOpen(false)} />
     </DemoFormProvider>
   );
 }

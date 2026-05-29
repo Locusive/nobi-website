@@ -2,7 +2,6 @@ import React from "react";
 import { useSEO } from "../hooks/useSEO";
 import PageLayout from "../components/PageLayout";
 import { getSignupUrl } from "../utils/signupUrl";
-import { useDemoForm } from "../context/DemoFormContext";
 import Marquee from "react-fast-marquee";
 
 const GRADIENT = "bg-gradient-to-r from-indigo-500 via-violet-500 to-fuchsia-500 bg-clip-text text-transparent";
@@ -16,7 +15,6 @@ const CUSTOMER_LOGOS = [
 ];
 
 export default function AutomatedSupport() {
-  const { onOpen } = useDemoForm();
 
   useSEO({
     title: "Automated Support That Cuts Repeat Tickets | Nobi",
@@ -63,12 +61,12 @@ export default function AutomatedSupport() {
                   >
                     Sign up free
                   </a>
-                  <button
-                    onClick={onOpen}
+                  <a
+                    href="https://dashboard.nobi.ai"
                     className="inline-flex items-center justify-center gap-2 rounded-2xl font-medium transition border border-black/10 bg-white/70 h-12 px-6 text-base w-full sm:w-auto hover:border-black/30"
                   >
-                    Get a demo
-                  </button>
+                    Get started free
+                  </a>
                 </div>
               </div>
 
@@ -326,12 +324,12 @@ export default function AutomatedSupport() {
                 >
                   Sign up free
                 </a>
-                <button
-                  onClick={onOpen}
+                <a
+                  href="https://dashboard.nobi.ai"
                   className="inline-flex items-center justify-center gap-2 rounded-2xl font-medium transition border border-white/30 bg-white/10 text-white h-12 px-6 text-base hover:border-white/50"
                 >
-                  Get a demo
-                </button>
+                  Get started free
+                </a>
               </div>
             </div>
           </div>

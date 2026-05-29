@@ -37,7 +37,7 @@ const Privacy = () => {
       <ul className="list-disc list-inside space-y-2">
         <li>
           <strong>Account & Contact Data</strong> — name, email, role, company
-          and similar details when you create an account, request a demo, start
+          and similar details when you create an account, start
           a trial or contact us. When you sign up through our self-service
           onboarding, we collect your Google account information (name and email)
           via Google authentication, your website URL, and business details you

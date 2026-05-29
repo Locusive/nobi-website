@@ -3,7 +3,6 @@ import { useSEO } from "../../hooks/useSEO";
 import { motion } from "framer-motion";
 import PageLayout from "../../components/PageLayout";
 import { getSignupUrl } from "../../utils/signupUrl";
-import { useDemoForm } from "../../context/DemoFormContext";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
@@ -28,7 +27,6 @@ function Quote({ text, name, title }) {
 }
 
 export default function LuccheseCustomer() {
-  const { onOpen } = useDemoForm();
 
   useSEO({
     title: "Lucchese Generated $1M+ With Nobi AI Search | Case Study",
@@ -450,12 +448,12 @@ export default function LuccheseCustomer() {
                 >
                   Sign up free
                 </a>
-                <button
-                  onClick={onOpen}
+                <a
+                  href="https://dashboard.nobi.ai"
                   className="inline-flex items-center justify-center gap-2 rounded-2xl font-medium transition border border-white/30 bg-white/10 text-white h-12 px-6 text-base hover:border-white/50"
                 >
-                  Get a demo
-                </button>
+                  Get started free
+                </a>
               </div>
             </div>
           </div>

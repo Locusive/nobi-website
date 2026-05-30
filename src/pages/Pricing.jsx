@@ -266,7 +266,7 @@ export default function Pricing() {
                     </div>
                     <h3 className="text-xl font-semibold text-slate-900">Partner Program</h3>
                     <p className="text-sm text-slate-500 mt-1">
-                      Work closely with our team. Get Nobi search for a year at a fraction of the cost.
+                      Work closely with our team. Get Nobi search for just $7/month for your first year.
                     </p>
                   </div>
 
@@ -276,7 +276,8 @@ export default function Pricing() {
                       <span className="text-4xl font-bold tracking-tight text-slate-900">$7</span>
                       <span className="text-base text-slate-500">/month</span>
                     </div>
-                    <p className="text-xs text-slate-500 mt-0.5">100,000 searches · 1,000 messages/mo</p>
+                    <p className="text-xs text-slate-500 mt-0.5">for your first year</p>
+                    <p className="text-xs text-slate-500">100,000 searches · 1,000 messages/mo</p>
                     <div className="mt-3">
                       <div className="flex sm:justify-end gap-1 mb-1.5">
                         {[...Array(5)].map((_, i) => (

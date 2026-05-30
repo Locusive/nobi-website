@@ -258,53 +258,47 @@ export default function Pricing() {
               <div className="relative">
 
                 {/* Header row */}
-                <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-6">
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-6">
                   <div>
-                    <div className="inline-flex items-center gap-1.5 rounded-full bg-violet-100 px-3 py-1 text-xs font-semibold text-violet-700 mb-3">
+                    <div className="inline-flex items-center gap-1.5 rounded-full bg-violet-100 px-3 py-1 text-xs font-semibold text-violet-700 mb-2">
                       <span className="w-1.5 h-1.5 rounded-full bg-violet-500 animate-pulse" />
                       Limited availability
                     </div>
                     <h3 className="text-xl font-semibold text-slate-900">Partner Program</h3>
                     <p className="text-sm text-slate-500 mt-1">
-                      Work closely with our team. Get Nobi search for just $7/month for your first year.
+                      Work closely with our team for your first year at $7/month.
                     </p>
                   </div>
 
                   {/* Price + slots */}
-                  <div className="flex-shrink-0 sm:text-right">
-                    <div className="flex items-baseline gap-1 sm:justify-end">
+                  <div className="flex-shrink-0 flex sm:flex-col sm:items-end gap-4 sm:gap-1.5">
+                    <div className="flex items-baseline gap-1">
                       <span className="text-4xl font-bold tracking-tight text-slate-900">$7</span>
-                      <span className="text-base text-slate-500">/month</span>
+                      <span className="text-base text-slate-500">/month, first year</span>
                     </div>
-                    <p className="text-xs text-slate-500 mt-0.5">for your first year</p>
-                    <p className="text-xs text-slate-500">100,000 searches · 1,000 messages/mo</p>
-                    <div className="mt-3">
-                      <div className="flex sm:justify-end gap-1 mb-1.5">
+                    <div className="flex flex-col items-end gap-1">
+                      <div className="flex gap-1">
                         {[...Array(5)].map((_, i) => (
-                          <div
-                            key={i}
-                            className={`h-2 w-8 rounded-sm ${i < 1 ? "bg-violet-500" : "bg-slate-200"}`}
-                          />
+                          <div key={i} className={`h-2 w-7 rounded-sm ${i < 1 ? "bg-violet-500" : "bg-slate-200"}`} />
                         ))}
                       </div>
-                      <p className="text-xs text-slate-500 sm:text-right">
-                        <span className="font-semibold text-violet-600">1 of 5 spots taken</span> — 4 remaining
+                      <p className="text-xs text-slate-500">
+                        <span className="font-semibold text-violet-600">1 of 5 spots</span> taken
                       </p>
                     </div>
                   </div>
                 </div>
 
                 {/* Two-column body */}
-                <div className="grid sm:grid-cols-2 gap-6 mb-6">
+                <div className="grid sm:grid-cols-2 gap-x-8 gap-y-4 mb-6">
                   <div>
-                    <p className="text-xs font-semibold uppercase tracking-wide text-slate-400 mb-3">What you get</p>
-                    <ul className="space-y-2">
+                    <p className="text-xs font-semibold uppercase tracking-wide text-slate-400 mb-2">What you get</p>
+                    <ul className="space-y-1.5">
                       {[
-                        "100,000 searches and 1,000 messages every month",
-                        "We'll build and customize Nobi to your exact standards",
+                        "100,000 searches + 1,000 messages/month",
+                        "We'll customize Nobi to your standards",
                         "Direct line to our founders",
-                        "Input on our product roadmap",
-                        "Priority support via Slack Connect",
+                        "Input on our roadmap + Slack support",
                       ].map((item) => (
                         <li key={item} className="flex items-start gap-2 text-sm text-slate-600">
                           <Check className="w-4 h-4 text-violet-500 flex-shrink-0 mt-0.5" />
@@ -314,13 +308,13 @@ export default function Pricing() {
                     </ul>
                   </div>
                   <div>
-                    <p className="text-xs font-semibold uppercase tracking-wide text-slate-400 mb-3">What we ask</p>
-                    <ul className="space-y-2">
+                    <p className="text-xs font-semibold uppercase tracking-wide text-slate-400 mb-2">What we ask</p>
+                    <ul className="space-y-1.5">
                       {[
-                        "Catalog between 100 and 10,000 products",
-                        "Leave a 5-star review on G2 or Capterra by month 3",
-                        "Share ongoing feedback as you use Nobi",
-                        "Work closely with our team throughout the year",
+                        "100–10,000 products in your catalog",
+                        "5-star review on G2 or Capterra by month 3",
+                        "One monthly meeting with our team",
+                        "Ongoing feedback + close collaboration",
                       ].map((item) => (
                         <li key={item} className="flex items-start gap-2 text-sm text-slate-600">
                           <Star className="w-4 h-4 text-violet-400 flex-shrink-0 mt-0.5" />

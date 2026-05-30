@@ -3,7 +3,7 @@ import { useSEO } from "../hooks/useSEO";
 import PageLayout from "../components/PageLayout";
 import FAQList from "../components/FAQList.jsx";
 import PricingCalculator from "../components/PricingCalculator.jsx";
-import { Check, Search, Smile, BarChart3, MessageSquare, ArrowRight, Gift, Star } from "lucide-react";
+import { Check, Search, Smile, BarChart3, MessageSquare, ArrowRight, Gift } from "lucide-react";
 import Marquee from "react-fast-marquee";
 import { getSignupUrl } from "../utils/signupUrl";
 import { useDemoForm } from "../context/DemoFormContext";
@@ -249,88 +249,6 @@ export default function Pricing() {
                     Get in Touch
                   </button>
                 </div>
-              </div>
-            </div>
-
-            {/* Foundational Partner Program */}
-            <div className="mt-6 rounded-2xl border border-violet-200 bg-gradient-to-br from-violet-50/60 to-purple-50/20 p-6 sm:p-8 shadow-[0_18px_46px_-32px_rgba(109,40,217,0.2)] relative overflow-hidden">
-              <div className="absolute top-0 right-0 w-72 h-72 bg-purple-200/20 blur-3xl pointer-events-none" aria-hidden />
-              <div className="relative">
-
-                {/* Header row */}
-                <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-6">
-                  <div>
-                    <div className="inline-flex items-center gap-1.5 rounded-full bg-violet-100 px-3 py-1 text-xs font-semibold text-violet-700 mb-3">
-                      <span className="w-1.5 h-1.5 rounded-full bg-violet-500 animate-pulse" />
-                      Limited availability
-                    </div>
-                    <h3 className="text-xl font-semibold text-slate-900">Foundational Partner</h3>
-                    <p className="text-sm text-slate-500 mt-1">
-                      Work closely with our team. Get Nobi search completely free for a year.
-                    </p>
-                  </div>
-
-                  {/* Price + slots */}
-                  <div className="flex-shrink-0 sm:text-right">
-                    <div className="flex items-baseline gap-1 sm:justify-end">
-                      <span className="text-4xl font-bold tracking-tight text-slate-900">Free</span>
-                      <span className="text-base text-slate-500">for 1 year</span>
-                    </div>
-                    <div className="mt-2 flex sm:justify-end gap-1.5 items-center">
-                      {[...Array(5)].map((_, i) => (
-                        <div
-                          key={i}
-                          className={`w-3 h-3 rounded-full transition-colors ${i < 1 ? "bg-violet-500" : "bg-slate-200"}`}
-                        />
-                      ))}
-                    </div>
-                    <p className="text-xs text-slate-500 mt-1">1 of 5 slots taken</p>
-                  </div>
-                </div>
-
-                {/* Two-column body */}
-                <div className="grid sm:grid-cols-2 gap-6 mb-6">
-                  <div>
-                    <p className="text-xs font-semibold uppercase tracking-wide text-slate-400 mb-3">What you get</p>
-                    <ul className="space-y-2">
-                      {[
-                        "Full Nobi search — completely free for 12 months",
-                        "Direct line to our founders",
-                        "Input on our product roadmap",
-                        "Priority support via Slack Connect",
-                      ].map((item) => (
-                        <li key={item} className="flex items-start gap-2 text-sm text-slate-600">
-                          <Check className="w-4 h-4 text-violet-500 flex-shrink-0 mt-0.5" />
-                          {item}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                  <div>
-                    <p className="text-xs font-semibold uppercase tracking-wide text-slate-400 mb-3">What we ask</p>
-                    <ul className="space-y-2">
-                      {[
-                        "Leave an honest review on G2 or Capterra",
-                        "Share feedback as you use Nobi",
-                        "Catalog of up to 20,000 products",
-                        "Work closely with our team throughout the year",
-                      ].map((item) => (
-                        <li key={item} className="flex items-start gap-2 text-sm text-slate-600">
-                          <Star className="w-4 h-4 text-violet-400 flex-shrink-0 mt-0.5" />
-                          {item}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
-
-                <a
-                  href="mailto:hello@nobi.ai?subject=Foundational Partner Program"
-                  className="inline-flex items-center gap-2 rounded-xl py-3 px-6 text-sm font-semibold transition active:scale-[.98] bg-violet-600 text-white hover:bg-violet-700 shadow-sm"
-                >
-                  Apply to Partner Program
-                  <ArrowRight className="w-4 h-4" />
-                </a>
               </div>
             </div>
 

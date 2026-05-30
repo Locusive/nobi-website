@@ -266,25 +266,30 @@ export default function Pricing() {
                     </div>
                     <h3 className="text-xl font-semibold text-slate-900">Partner Program</h3>
                     <p className="text-sm text-slate-500 mt-1">
-                      Work closely with our team. Get Nobi search completely free for a year.
+                      Work closely with our team. Get Nobi search for a year at a fraction of the cost.
                     </p>
                   </div>
 
                   {/* Price + slots */}
                   <div className="flex-shrink-0 sm:text-right">
                     <div className="flex items-baseline gap-1 sm:justify-end">
-                      <span className="text-4xl font-bold tracking-tight text-slate-900">Free</span>
-                      <span className="text-base text-slate-500">for 1 year</span>
+                      <span className="text-4xl font-bold tracking-tight text-slate-900">$7</span>
+                      <span className="text-base text-slate-500">/month</span>
                     </div>
-                    <div className="mt-2 flex sm:justify-end gap-1.5 items-center">
-                      {[...Array(5)].map((_, i) => (
-                        <div
-                          key={i}
-                          className={`w-3 h-3 rounded-full transition-colors ${i < 1 ? "bg-violet-500" : "bg-slate-200"}`}
-                        />
-                      ))}
+                    <p className="text-xs text-slate-500 mt-0.5">100,000 searches · 1,000 messages/mo</p>
+                    <div className="mt-3">
+                      <div className="flex sm:justify-end gap-1 mb-1.5">
+                        {[...Array(5)].map((_, i) => (
+                          <div
+                            key={i}
+                            className={`h-2 w-8 rounded-sm ${i < 1 ? "bg-violet-500" : "bg-slate-200"}`}
+                          />
+                        ))}
+                      </div>
+                      <p className="text-xs text-slate-500 sm:text-right">
+                        <span className="font-semibold text-violet-600">1 of 5 spots taken</span> — 4 remaining
+                      </p>
                     </div>
-                    <p className="text-xs text-slate-500 mt-1">1 of 5 slots taken</p>
                   </div>
                 </div>
 
@@ -294,9 +299,9 @@ export default function Pricing() {
                     <p className="text-xs font-semibold uppercase tracking-wide text-slate-400 mb-3">What you get</p>
                     <ul className="space-y-2">
                       {[
-                        "Full Nobi search — completely free for 12 months",
-                        "Direct line to our founders",
+                        "100,000 searches and 1,000 messages every month",
                         "We'll build and customize Nobi to your exact standards",
+                        "Direct line to our founders",
                         "Input on our product roadmap",
                         "Priority support via Slack Connect",
                       ].map((item) => (
@@ -311,9 +316,9 @@ export default function Pricing() {
                     <p className="text-xs font-semibold uppercase tracking-wide text-slate-400 mb-3">What we ask</p>
                     <ul className="space-y-2">
                       {[
-                        "Leave an honest review on G2 or Capterra",
-                        "Share feedback as you use Nobi",
-                        "Catalog of up to 20,000 products",
+                        "Catalog between 100 and 10,000 products",
+                        "Leave a 5-star review on G2 or Capterra by month 3",
+                        "Share ongoing feedback as you use Nobi",
                         "Work closely with our team throughout the year",
                       ].map((item) => (
                         <li key={item} className="flex items-start gap-2 text-sm text-slate-600">

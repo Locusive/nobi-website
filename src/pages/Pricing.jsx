@@ -277,15 +277,19 @@ export default function Pricing() {
                       <span className="text-base text-slate-500">/month</span>
                     </div>
                     <p className="text-xs text-slate-500 mt-0.5">100,000 searches · 1,000 messages/mo</p>
-                    <div className="mt-2 flex sm:justify-end gap-1.5 items-center">
-                      {[...Array(5)].map((_, i) => (
-                        <div
-                          key={i}
-                          className={`w-3 h-3 rounded-full transition-colors ${i < 1 ? "bg-violet-500" : "bg-slate-200"}`}
-                        />
-                      ))}
+                    <div className="mt-3">
+                      <div className="flex sm:justify-end gap-1 mb-1.5">
+                        {[...Array(5)].map((_, i) => (
+                          <div
+                            key={i}
+                            className={`h-2 w-8 rounded-sm ${i < 1 ? "bg-violet-500" : "bg-slate-200"}`}
+                          />
+                        ))}
+                      </div>
+                      <p className="text-xs text-slate-500 sm:text-right">
+                        <span className="font-semibold text-violet-600">1 of 5 spots taken</span> — 4 remaining
+                      </p>
                     </div>
-                    <p className="text-xs text-slate-500 mt-1">1 of 5 slots taken</p>
                   </div>
                 </div>
 

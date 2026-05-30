@@ -264,7 +264,7 @@ export default function Pricing() {
                       <span className="w-1.5 h-1.5 rounded-full bg-violet-500 animate-pulse" />
                       Limited availability
                     </div>
-                    <h3 className="text-xl font-semibold text-slate-900">Foundational Partner</h3>
+                    <h3 className="text-xl font-semibold text-slate-900">Partner Program</h3>
                     <p className="text-sm text-slate-500 mt-1">
                       Work closely with our team. Get Nobi search completely free for a year.
                     </p>
@@ -324,13 +324,13 @@ export default function Pricing() {
                   </div>
                 </div>
 
-                <a
-                  href="mailto:hello@nobi.ai?subject=Foundational Partner Program"
+                <button
+                  onClick={openDemoForm}
                   className="inline-flex items-center gap-2 rounded-xl py-3 px-6 text-sm font-semibold transition active:scale-[.98] bg-violet-600 text-white hover:bg-violet-700 shadow-sm"
                 >
                   Apply to Partner Program
                   <ArrowRight className="w-4 h-4" />
-                </a>
+                </button>
               </div>
             </div>
 

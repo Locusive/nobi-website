@@ -296,6 +296,7 @@ export default function Pricing() {
                       {[
                         "Full Nobi search — completely free for 12 months",
                         "Direct line to our founders",
+                        "We'll build and customize Nobi to your exact standards",
                         "Input on our product roadmap",
                         "Priority support via Slack Connect",
                       ].map((item) => (

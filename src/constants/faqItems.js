@@ -1,10 +1,5 @@
 export const FAQ_ITEMS = [
     {
-        q: "Can I see a live demo?",
-        a: "Yes! If you want to see Nobi's search in action, you can try it out on <a href='https://www.lucchese.com' target='_blank' rel='noopener noreferrer'>lucchese.com</a>. For our automated support, just use the floating chat bar on this page!",
-        category: "Product",
-    },
-    {
         q: "What can I do with Nobi?",
         a: "So we recommend enabling it in your search bar, on collection pages, and anywhere else where shoppers may prefer to just describe what they're looking for.",
         category: "Product",
@@ -87,6 +82,11 @@ export const FAQ_ITEMS = [
     {
         q: "Does Nobi work with my platform?",
         a: "Nobi is designed to work on any site. For product search, you can point Nobi to your product feed, or if you’re on Shopify, Nobi will pick up your feed automatically. For general Q&A or sales associate capabilities without a product catalog, Nobi will work with whatever information you have available to ensure your site’s visitors get accurate information. You can also add custom actions and overrides to ensure Nobi works with your visitor’s requests.",
+        category: "Product",
+    },
+    {
+        q: "Can I see a live demo?",
+        a: "Yes! If you want to see Nobi’s search in action, you can try it out on <a href=’https://www.lucchese.com’ target=’_blank’ rel=’noopener noreferrer’>lucchese.com</a>. For our automated support, just use the floating chat bar on this page!",
         category: "Product",
     }
 ];

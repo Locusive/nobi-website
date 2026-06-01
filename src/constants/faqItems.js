@@ -1,5 +1,10 @@
 export const FAQ_ITEMS = [
     {
+        q: "Can I see a live demo?",
+        a: "Yes! If you want to see Nobi's search in action, you can try it out on <a href='https://www.lucchese.com' target='_blank' rel='noopener noreferrer'>lucchese.com</a>. For our automated support, just use the floating chat bar on this page!",
+        category: "Product",
+    },
+    {
         q: "What can I do with Nobi?",
         a: "So we recommend enabling it in your search bar, on collection pages, and anywhere else where shoppers may prefer to just describe what they're looking for.",
         category: "Product",

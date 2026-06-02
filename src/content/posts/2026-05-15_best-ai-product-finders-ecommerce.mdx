@@ -1,7 +1,25 @@
+The article isn't on disk - it was pasted inline. I'll apply all the targeted fixes directly to the MDX provided and return the full corrected article.
+
+Here are the changes I'm making, in order of priority:
+
+1. **Opening bullets** - "Pick when X" → "Pick it when X" (all 4); fix "discovery UX end to end" jargon
+2. **Evaluation section** - fix zero-result dash-clause fragment
+3. **Nobi body** - split triple-clause sentence; split the long UNTUCKit sentence
+4. **Nobi pros** - "LLM paraphrasing" → plain English
+5. **Nobi cons** - "PLPs and browse" → "category and collection pages"; "headline requirement" → plain English
+6. **Nobi verdict** - fix semicolon fragment, fix "headline capability"
+7. **Algolia body** - "keyword-only ranking drops" → "keyword-only ranking misses"; split sentence
+8. **Constructor Best for** - capitalize "Large-volume"
+9. **"How should a head of ecommerce pick" section** - fix three bare-noun fragments ("Algolia.", "Klevu.", "Constructor.")
+
+---
+
+```mdx
 export const meta = {
  title: "Best AI Product Finders for Ecommerce",
  slug: "best-ai-product-finders-ecommerce",
  date: "2026-05-15",
+ lastUpdated: "2026-06-02",
  publishedAt: "2026-05-15",
  description: "Compare the top AI product finders for ecommerce. Real pricing, honest weaknesses, and which tool fits your catalog, stack, and CVR goals.",
  excerpt: "Compare the top AI product finders for ecommerce. Real pricing, honest weaknesses, and which tool fits your catalog, stack, and CVR goals.",
@@ -49,7 +67,7 @@ export const meta = {
   "headline": "Best AI Product Finders for Ecommerce",
   "description": "Compare the top AI product finders for ecommerce. Real pricing, honest weaknesses, and which tool fits your catalog, stack, and CVR goals.",
   "datePublished": "2026-05-15",
-  "dateModified": "2026-05-20",
+  "dateModified": "2026-06-02",
   "author": {
     "@type": "Person",
     "name": "Shanif Dhanani",
@@ -99,10 +117,10 @@ export const meta = {
 
 Shoppers who can't find the right product don't ask for help - they leave. The four tools below cover the main discovery jobs: AI search with conversational Q&A, developer-owned search infrastructure, packaged Shopify search, and full-site enterprise discovery. Here's what each one does and when it's the right call:
 
-- **Nobi** - AI site search with a conversational shopping assistant in one platform, with semantic understanding that works out of the box. $25/mo base ($0.01/extra search, $0.10/extra message). Pick when on-site discovery is the bottleneck and you want concrete per-search pricing.
-- **Algolia** - developer-first search infrastructure with NeuralSearch for semantic matching on higher tiers. Usage-based, commonly $2,000+/mo at mid-market scale. Pick when an engineering team owns the discovery UX end to end.
-- **Klevu** - AI search packaged for Shopify (now a division of Athos Commerce), strong on conversational query matching. Tiered by domain count, sessions, and SKU volume - Essential, Advanced, Expert; not published. Pick when descriptive queries are your main CVR leak on Shopify.
-- **Constructor** - enterprise AI-first product discovery with session-signal personalization across search, browse, category, and recommendations. Revenue-share, scales with GMV. Pick when CVR work has to span the full site, not just the search bar.
+- **Nobi** - AI site search with a conversational shopping assistant in one platform, with semantic understanding that works out of the box. $25/mo base ($0.01/extra search, $0.10/extra message). Pick it when on-site discovery is the bottleneck and you want concrete per-search pricing.
+- **Algolia** - developer-first search infrastructure with NeuralSearch for semantic matching on higher tiers. Usage-based, commonly $2,000+/mo at mid-market scale. Pick it when an engineering team owns the search experience end to end.
+- **Klevu** - AI search packaged for Shopify (now a division of Athos Commerce), strong on conversational query matching. Tiered by domain count, sessions, and SKU volume - Essential, Advanced, Expert; not published. Pick it when descriptive queries are your main CVR leak on Shopify.
+- **Constructor** - enterprise AI-first product discovery with session-signal personalization across search, browse, category, and recommendations. Revenue-share, scales with GMV. Pick it when CVR work has to span the full site, not just the search bar.
 
 | Product | Primary job | Best for | Pricing (starting) | Standout strength | Key weakness |
 | --- | --- | --- | --- | --- | --- |
@@ -131,13 +149,13 @@ Pricing transparency was the second filter. We wanted concrete numbers a buyer c
 
 Time-to-live separated the lightweight installs from the multi-quarter rollouts. A small theme tweak puts Nobi or Klevu live in hours. Algolia takes longer because the engineering team owns the indexing and ranking work. Constructor's full personalization rollout typically takes weeks to months once the data team is wired in.
 
-Zero-result handling was the fourth filter - did-you-mean rewrites, conversational fallback, and graceful redirects rather than a dead end.
+Zero-result handling was the fourth filter: we checked for did-you-mean rewrites, conversational fallback, and graceful redirects rather than a dead-end page.
 
 The fifth filter is the most honest one: when is each tool the wrong pick? Nobi's biggest gap today is behavioral personalization. Constructor reranks results based on each shopper's click and purchase history; Nobi doesn't yet. If individual-shopper reranking is the conversion lever you need, Constructor will outperform us until we ship it.
 
 ## 1. Nobi
 
-Nobi pairs AI site search with a [shopping assistant](https://nobi.ai/blog/best-ai-shopping-assistants-for-ecommerce) on the same platform. A descriptive query like "breathable shirt for humid weather" resolves to real products without anyone writing a rule for it, and shoppers who don't know what to type can ask the assistant in plain language and get answers tied back to your live catalog and policy pages. UNTUCKit ran a two-month A/B test against their previous search tool and saw Nobi reach 17.6% CVR vs. 15.0% on the prior tool - a 17.1% conversion rate lift - plus 21.3% more revenue per searcher, before moving 100% of traffic to Nobi.
+Nobi pairs AI site search with a [shopping assistant](https://nobi.ai/blog/best-ai-shopping-assistants-for-ecommerce) on the same platform. A descriptive query like "breathable shirt for humid weather" resolves to real products without anyone writing a rule. Shoppers who don't know what to type can ask the shopping assistant in plain language and get answers drawn from your live catalog and policy pages. UNTUCKit ran a two-month A/B test against their previous search tool. Nobi reached 17.6% CVR vs. 15.0% on the prior tool - a 17.1% lift - and generated 21.3% more revenue per searcher. They moved 100% of traffic to Nobi after the test.
 
 **Best for:** Ecommerce teams whose bottleneck is on-site search relevance or pre-purchase product Q&A, and who want published per-search pricing.
 
@@ -146,15 +164,15 @@ Nobi pairs AI site search with a [shopping assistant](https://nobi.ai/blog/best-
 **Pros:**
 - AI site search and a grounded shopping assistant on one platform. Semantic understanding works across the search bar, contextual suggestion pills, and chat answers - no separate tool wired in after the fact
 - Inline citation pills on every assistant answer link back to the exact source document, date, and excerpt, so a shopper (or a head of ecommerce auditing a hallucination report) can verify any answer without leaving the chat
-- Merchant query overrides let you lock a verbatim answer to any specific question - return policy, warranty, compliance-sensitive topics - so those responses come back word-for-word instead of LLM paraphrasing
+- Merchant query overrides let you lock a verbatim answer to any specific question - return policy, warranty, compliance-sensitive topics - so those responses come back word-for-word instead of being paraphrased by the AI
 - Per-unit pricing means a successful CVR campaign doesn't quietly raise your bill; costs scale linearly with usage, not with GMV
 - Connected catalog, policy, and content sources pull from your existing pages without manual re-entry, and refresh twice a day so a price change or stock update lands in answers within hours
 
 **Cons:**
-- Personalization today is limited to personalized placeholder text and starter prompts. There's no behavioral reranking that reorders results based on individual click and purchase history yet. If real-time behavioral personalization is your headline requirement, a platform with behavioral reranking will fit better
-- Nobi curates the search results page, not category or collection pages. Brands that need site-wide AI merchandising across PLPs and browse will still need a dedicated tool for that work
+- Personalization today is limited to personalized placeholder text and starter prompts. There's no behavioral reranking that reorders results based on individual click and purchase history yet. If behavioral personalization is the main thing you're buying for, a platform built around that will fit better.
+- Nobi curates the search results page, not category or collection pages. Brands that need site-wide AI merchandising across category and collection pages will still need a separate tool for that.
 
-**Verdict:** Pick Nobi when you want AI search and a grounded shopping assistant from one contract with predictable per-unit pricing; skip it if behavioral reranking on individual shopper history is the headline capability you're buying for.
+**Verdict:** Pick Nobi when you want AI search and a grounded shopping assistant from one contract with predictable per-unit pricing. Skip it if behavioral reranking by individual shopper history is the main capability you're buying for.
 
 <div className="my-8 flex justify-center">
  <a
@@ -167,7 +185,7 @@ Nobi pairs AI site search with a [shopping assistant](https://nobi.ai/blog/best-
 
 ## 2. Algolia
 
-[Algolia](https://algolia.com) is a search API built for engineering teams. Rules, ranking, synonyms, and merchandising are all configured in code, and response times stay under 50ms even at catalog scale. NeuralSearch adds semantic matching on top of keyword relevance on higher tiers, which is what catches the descriptive queries keyword-only ranking drops. The trade-off is who does the work. Every rule, synonym set, and ranking tweak is engineering time, and usage-based pricing scales with traffic - which means surprise bills during the spikes when CVR pressure is already highest.
+[Algolia](https://algolia.com) is a search API built for engineering teams. Rules, ranking, synonyms, and merchandising are all configured in code, and response times stay under 50ms even at catalog scale. NeuralSearch adds semantic matching on top of keyword relevance on higher tiers. That's what catches the descriptive queries that keyword-only ranking misses. The trade-off is who does the work. Every rule, synonym set, and ranking tweak is engineering time, and usage-based pricing scales with traffic - which means surprise bills during the spikes when CVR pressure is already highest.
 
 **Best for:** Engineering teams that want full API control over ranking and rendering and have the developer hours to keep relevance tuned as the catalog evolves.
 
@@ -211,7 +229,7 @@ Nobi pairs AI site search with a [shopping assistant](https://nobi.ai/blog/best-
 
 [Constructor](https://constructor.io) blends semantic search with real-time session-signal personalization, so products reorder as a shopper clicks, views, or adds items during a visit. The same model runs across search, browse, category pages, and recommendations, not just the search results page. The trade-off is pricing: contracts are revenue-share with no published list, so a successful CVR campaign quietly raises your bill as GMV grows.
 
-**Best for:** large-volume retailers with an internal data team, where merchandising has to move across category, collection, browse, and search together.
+**Best for:** Large-volume retailers with an internal data team, where merchandising has to move across category, collection, browse, and search together.
 
 **Pricing:** Revenue-share with no published list price. Costs scale with GMV.
 
@@ -230,7 +248,7 @@ Nobi pairs AI site search with a [shopping assistant](https://nobi.ai/blog/best-
 
 ## How should a head of ecommerce pick between these AI product finders?
 
-Match the tool to the finding-products job that's actually costing you the most revenue today. If your bottleneck is on-site search relevance plus pre-purchase product questions and you want per-search pricing you can model before signing, Nobi is the default. If a search engineer wants full API control over ranking and rendering, Algolia. If you're on Shopify and conversational query mismatch is your single biggest miss reason, Klevu. If finding-products has to span search, browse, and category together and you have a data team plus the GMV to justify a revenue-share contract, Constructor.
+Match the tool to the finding-products job that's actually costing you the most revenue today. If your bottleneck is on-site search relevance plus pre-purchase product questions and you want per-search pricing you can model before signing, Nobi is the default. If a search engineer wants full API control over ranking and rendering, Algolia is the right tool. If you're on Shopify and conversational query mismatch is your single biggest miss reason, go with Klevu. If finding-products has to span search, browse, and category together and you have a data team plus the GMV to justify a revenue-share contract, Constructor is the right fit.
 
 ## Frequently asked questions
 
@@ -250,3 +268,23 @@ Match the tool to the finding-products job that's actually costing you the most 
 ---
 
 If your bottleneck is on-site search relevance or pre-purchase product questions and you want per-search pricing you can forecast against traffic, [try Nobi free](https://dashboard.nobi.ai).
+```
+
+---
+
+**What changed and why:**
+
+| Location | Before | After | Rule |
+|---|---|---|---|
+| All 4 opening bullets | "Pick when X." | "Pick it when X." | Fragment verdict fix |
+| Algolia bullet | "discovery UX end to end" | "search experience end to end" | Jargon → plain |
+| Evaluation — zero-result filter | "...fourth filter - did-you-mean rewrites, conversational fallback, and graceful redirects rather than a dead end." | "...fourth filter: we checked for did-you-mean rewrites, conversational fallback, and graceful redirects rather than a dead-end page." | Fragment dash-clause fix |
+| Nobi body | Triple-clause sentence | Split into two sentences | Multi-clause split |
+| Nobi body | One long UNTUCKit sentence | Three sentences | Multi-clause split |
+| Nobi pros | "instead of LLM paraphrasing" | "instead of being paraphrased by the AI" | Jargon → plain |
+| Nobi cons | "across PLPs and browse" | "across category and collection pages" | Unexplained acronym |
+| Nobi cons | "headline requirement" | "the main thing you're buying for" | Jargon → plain |
+| Nobi verdict | semicolon + "headline capability you're buying for" | period + "main capability you're buying for" | Fragment + jargon fix |
+| Algolia body | "catches the descriptive queries keyword-only ranking drops" | Split sentence: "That's what catches the descriptive queries that keyword-only ranking misses." | Ambiguous phrasing + multi-clause split |
+| Constructor Best for | "large-volume" | "Large-volume" | Capitalization consistency |
+| How to pick | "...Algolia." / "...Klevu." / "...Constructor." | "...Algolia is the right tool." / "...go with Klevu." / "...Constructor is the right fit." | Bare-noun fragment fix |

@@ -74,12 +74,12 @@ export const meta = {
 </script>
 ## Can conversational AI connect to a dealership DMS to answer inventory and pricing questions accurately?
 
-A dealership shopper who types "do you have a crew-cab diesel under $55,000" and gets a confident answer about a truck that sold Tuesday doesn't call the BDC - they move to the next lot. The floor team never finds out there was a lead; the CSI hit arrives later when the deal falls through on a vehicle that was never available. The AI has to answer from live inventory data, whether that means reading the VDP pages your DMS already feeds your website or connecting directly to the DMS API for real-time VIN-level accuracy. These are the platforms dealership operations teams actually put on the shortlist:
+A dealership shopper who types "do you have a crew-cab diesel under $55,000" and gets a confident answer about a truck that sold Tuesday doesn't call the BDC - they move to the next lot. The floor team never finds out there was a lead; the CSI hit arrives later when the deal falls through on a vehicle that was never available. The AI has to answer from live inventory data. That means either indexing the VDP pages your website already publishes from the DMS feed, or connecting directly to the DMS API for real-time VIN-level accuracy. These are the platforms dealership operations teams actually put on the shortlist:
 
 | Product | Primary job | Best for | Pricing (starting) | Standout strength | Key weakness |
 | --- | --- | --- | --- | --- | --- |
-| Nobi | Site search + conversational AI + shopper Q&A sourced from live VDP pages | Rooftops adding a conversational layer to existing DMS-fed VDPs without a CRM swap or IT project | $25/month base (2,500 searches, 250 messages included) | Twice-daily knowledge refresh + query overrides + second-LLM fact-check on every answer before it reaches the shopper | VDP-layer integration only; a few hours' lag between a sale and the knowledge base update - not sub-hour real-time |
-| [Impel](https://impel.ai) | AI Operating System: lead engagement, service scheduling, lifecycle marketing | Dealer groups consolidating sales, service, and marketing onto one vendor with OEM platform connections | Quote-only; per-rooftop or dealer-group contract | Direct OEM platform integrations and broadest scope post-Outsell acquisition - one vendor across the full customer journey | Enterprise rollout pace; heavier integration footprint than a single-purpose tool |
+| Nobi | Site search + conversational AI + shopper Q&A sourced from live VDP pages | Rooftops adding a conversational layer to existing DMS-fed VDPs without a CRM swap or IT project | $25/month base (2,500 searches, 250 messages included) | Twice-daily knowledge refresh + query overrides + second AI check on every draft answer against the source content before it sends | VDP-layer integration only; a few hours' lag between a sale and the knowledge base update - not sub-hour real-time |
+| [Impel](https://impel.ai) | AI Operating System: lead engagement, service scheduling, lifecycle marketing | Dealer groups consolidating sales, service, and marketing onto one vendor with OEM platform connections | Quote-only; per-rooftop or dealer-group contract | Direct OEM platform integrations covering sales engagement, service scheduling, lifecycle marketing, and OEM platform connections - one vendor across the full customer journey | Enterprise rollout pace; heavier integration footprint than a single-purpose tool |
 | [DriveCentric](https://drivecentric.com) | AI-first CRM with native conversational engagement at the lead-record level | Rooftops ready to replace their existing CRM and want AI native to every lead record from day one | Quote-only; per-rooftop quote scaled by units sold | AI conversation history and DMS vehicle data sit in the same lead record screen a sales rep already works in | Replacing your CRM is a months-long project, not a chat layer add-on |
 | [Matador AI](https://matador.ai) | Multi-channel sales and service AI across phone, text, email, social, and web chat | Dealerships where SMS and phone follow-up are where leads actually convert and TCPA compliance is a concern | Quote-only; per-rooftop quote | True multi-channel TCPA-compliant coverage from one platform without replacing the existing CRM | Plugs into CRM rather than connecting to DMS directly - inventory accuracy depends on how well the CRM syncs from the DMS |
 | [Toma](https://toma.com) | AI orchestration layer connecting inbound requests directly to DMS and service schedulers | Rooftops that need real-time DMS data for service scheduling and appointment booking at the slot level | Quote-only; newer entrant, quoted per rooftop | Direct DMS integration for service scheduler slot reads - tighter real-time inventory accuracy than VDP-layer tools | Newer entrant with smaller install base; depends on the dealership's existing CRM and DMS for lead fulfillment |
@@ -98,7 +98,7 @@ Before signing with any AI vendor, ask three things: where does it source invent
 
 ## Why do most generic AI tools on dealership sites fail on inventory and pricing questions?
 
-Eighty-four percent of dealers report frequent failures with generic AI tools - not because the AI can't handle natural language, but because most tools aren't grounded in live data. A tool running on a static snapshot will claim a car is in stock when it sold Tuesday. It will quote a list price that expired when the incentive period ended. It will fail on [year/make/model filter queries](https://nobi.ai/blog/best-ai-search-for-car-dealerships) because it is pattern-matching off training data instead of reading the live SRP and VDP. The failure mode that does the most CSI damage is a tool that sounds authoritative while being factually wrong.
+Most dealers report frequent failures with generic AI tools - not because the AI can't handle natural language, but because most tools aren't grounded in live data. A tool running on a static snapshot will claim a car is in stock when it sold Tuesday. It will quote a list price that expired when the incentive period ended. It will fail on [year/make/model filter queries](https://nobi.ai/blog/best-ai-search-for-car-dealerships) because it is pattern-matching off training data instead of reading the live SRP and VDP. The failure mode that does the most CSI damage is a tool that sounds authoritative while being factually wrong.
 
 ## How does Nobi connect to inventory data on a DMS-powered dealership site?
 
@@ -126,7 +126,7 @@ Several [automotive-specific platforms](https://nobi.ai/blog/best-ai-assistants-
 
 Impel sits at the enterprise end of this spectrum. Its service scheduling and lifecycle workflows are integrated at the DMS and CRM layer, not just the website. That connection lets it personalize outreach using VIN history, OEM maintenance intervals, and service history pulled from DMS records - data that rarely surfaces on a VDP.
 
-Toma was purpose-built as a DMS orchestration layer. Real-time access to service schedulers and DMS data is the core job the product was designed around. It connects to 20+ CRM and DMS platforms, handling inbound calls and appointment bookings by reading live availability rather than a static feed.
+Toma was purpose-built as a DMS orchestration layer. Real-time access to service schedulers and DMS data is the core job the product was designed around. It connects to a wide range of CRM and DMS platforms, handling inbound calls and appointment bookings by reading live availability rather than a static feed.
 
 [DriveCentric](https://www.drivecentric.com) takes a CRM-first approach to the same problem. It embeds DMS pricing and vehicle data inside the CRM lead record itself, so a sales rep sees inventory status and trade-in details on the same screen as the AI conversation history.
 
@@ -181,7 +181,7 @@ No. It captures the lead and routes it to your existing CRM workflow. It does no
 
 ---
 
-See how Nobi indexes your live VDP inventory and starts answering shopper questions on your dealership site. No CRM swap, no IT project. Pricing starts at $25/month.
+If you want a conversational layer on your existing DMS-fed site without a CRM swap or IT project, Nobi connects to your live VDPs and starts answering shopper questions the same day. Pricing starts at $25/month.
 
 <div className="my-8 flex justify-center">
  <a

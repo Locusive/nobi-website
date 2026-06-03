@@ -1,9 +1,8 @@
-```mdx
 export const meta = {
  title: "Best AI Search for Developer Documentation",
  slug: "best-ai-search-for-developer-documentation",
  date: "2026-05-18",
- lastUpdated: "2026-06-02",
+ lastUpdated: "2026-06-03",
  publishedAt: "2026-05-18",
  description: "Compare Nobi, Algolia, Coveo, and Yext for AI search on developer documentation. Pricing, fit, and when each tool is the right pick for docs sites.",
  excerpt: "Compare Nobi, Algolia, Coveo, and Yext for AI search on developer documentation. Pricing, fit, and when each tool is the right pick for docs sites.",
@@ -51,7 +50,7 @@ export const meta = {
   "headline": "Best AI Search for Developer Documentation",
   "description": "Compare Nobi, Algolia, Coveo, and Yext for AI search on developer documentation. Pricing, fit, and when each tool is the right pick for docs sites.",
   "datePublished": "2026-05-18",
-  "dateModified": "2026-06-02",
+  "dateModified": "2026-06-03",
   "author": {
     "@type": "Person",
     "name": "Shanif Dhanani",
@@ -99,12 +98,12 @@ export const meta = {
 </script>
 ## What is the best AI search for developer documentation?
 
-Developers who can't find the answer in your docs don't open a ticket — they open a GitHub issue, ping someone on Slack, or leave. A search bar that returns a list of loosely related pages doesn't solve it. The tools below take different approaches to making docs actually answerable: semantic search, grounded Q&A with citations, and full-text indexing for code-heavy content. These four are the ones DevRel and engineering teams actually evaluate:
+Developers who can't find the answer in your docs don't open a ticket - they open a GitHub issue, ping someone on Slack, or leave. A search bar that returns a list of loosely related pages doesn't solve it. The tools below take different approaches to making docs actually answerable: semantic search, grounded Q&A with citations, and full-text indexing for code-heavy content. These four are the ones DevRel and engineering teams actually evaluate:
 
-- **Nobi** - semantic search plus grounded Q&A with inline citation pills layered on your existing docs, $25/mo base. Pick when DevRel needs developers to get an answer (with the source doc, date, and exact excerpt visible) instead of ten links.
-- **Algolia** - developer-first search infrastructure with the DocSearch program already running on a large share of OSS docs sites. Free for qualifying open-source projects; commercial docs pay usage-based pricing. Pick when you want full API control and your team renders the docs search UI itself.
-- **Coveo** - enterprise AI search unifying docs, support, and internal knowledge on one engine, $50k+ annually all-in. Pick when developer docs are one surface inside a broader cross-property search rollout.
-- **Yext** - knowledge graph and answers platform, quote-only and sold per module. Pick when your "docs" are really structured policy and FAQ-style answers you want syndicated across Google, AI Overviews, and other LLM surfaces.
+- **Nobi** - semantic search plus grounded Q&A with inline citation pills layered on your existing docs, $25/mo base. Pick it when DevRel needs developers to get an answer (with the source doc, date, and exact excerpt visible) instead of ten links.
+- **Algolia** - developer-first search infrastructure with the DocSearch program already running on a large share of OSS docs sites. Free for qualifying open-source projects; commercial docs pay usage-based pricing. Pick it when you want full API control and your team renders the docs search UI itself.
+- **Coveo** - enterprise AI search unifying docs, support, and internal knowledge on one engine, $50k+ annually all-in. Pick it when developer docs are one surface inside a broader cross-property search rollout.
+- **Yext** - knowledge graph and answers platform, quote-only and sold per module. Pick it when your "docs" are really structured policy and FAQ-style answers you want syndicated across Google, AI Overviews, and other LLM surfaces.
 
 Pick by the specific job - grounded Q&A, raw search API, unified cross-property relevance, or structured-answer syndication - not by which logo is biggest.
 
@@ -133,11 +132,11 @@ Grounding came first, because the rest is noise if the answer is wrong. We check
 
 Refresh latency came next. A docs site changes constantly - new endpoint added, flag deprecated, version bumped - and answers have to follow within hours, not days. We looked at default reindex cadence and whether you can force a refresh on demand when something ships.
 
-Implementation effort and total cost we treated together. An afternoon to a live docs search beats a quarter of integration work, and engineering hours usually dwarf the license fee. Where vendors publish concrete prices, we used them. Where they only point at a sales conversation with no anchor number, we noted that too.
+We treated implementation effort and total cost together. An afternoon to a live docs search beats a quarter of integration work, and engineering hours usually dwarf the license fee. Where vendors publish concrete prices, we used them. Where they only point at a sales conversation with no anchor number, we noted that too.
 
 ## 1. Nobi
 
-Nobi is a semantic search and grounded Q&A layer that sits on top of your existing developer documentation. Connect a URL or upload a file - API reference, help-center articles, FAQ routes, PDFs, changelog - and it becomes part of what the assistant can answer. Every reply carries inline numbered citation pills that link back to the exact source document, date, and excerpt the answer came from, and a sources sidebar lists every reference with direct links. Nobi is the shortest path from connected source to working answer. It's designed for engineering and DevRel teams who want cited answers from existing docs without building a custom retrieval pipeline or search UI.
+Nobi is a semantic search and grounded Q&A layer that sits on top of your existing developer documentation. Connect a URL or upload a file - API reference, help-center articles, FAQ routes, PDFs, changelog - and it becomes part of what the assistant can answer. Every reply carries inline numbered citation pills linking back to the exact source document, date, and excerpt. A sources sidebar lists every reference with direct links. Nobi is the shortest path from connected source to working answer. It's designed for engineering and DevRel teams who want cited answers from existing docs without building a custom retrieval pipeline or search UI.
 
 **Best for:** Engineering and DevRel teams who want developers to get cited answers from existing docs without standing up a custom retrieval pipeline or rendering their own search UI.
 
@@ -166,7 +165,7 @@ Nobi is a semantic search and grounded Q&A layer that sits on top of your existi
 
 ## 2. Algolia
 
-[Algolia](https://algolia.com) is a search API built for engineering teams, and its DocSearch program is the de facto standard for open-source documentation sites. The hosted crawler, prebuilt UI components, and ready-to-go index drop into most static site generators with a config file, which is why a large share of public docs sites already run on it. For commercial docs above the free tier, the same primitives apply - but the engineering work and any answer layer are yours to build. Choosing Algolia for a commercial docs site is really a decision about build time. Your team renders the search UI, tunes the ranking, and adds an LLM layer if you want generated answers instead of ranked results.
+[Algolia](https://algolia.com) is a search API built for engineering teams, and its DocSearch program is the de facto standard for open-source documentation sites. The hosted crawler, prebuilt UI components, and ready-to-go index drop into most static site generators with a config file. That's why a large share of public docs sites already run on it. For commercial docs above the free tier, the same primitives apply - but the engineering work and any answer layer are yours to build. Choosing Algolia for a commercial docs site is really a decision about build time. Your team renders the search UI, tunes the ranking, and adds an LLM layer if you want generated answers instead of ranked results.
 
 **Best for:** Engineering teams who want full API control over docs search and have the developer hours to render the UI and layer their own answer logic on top.
 
@@ -195,13 +194,13 @@ Nobi is a semantic search and grounded Q&A layer that sits on top of your existi
 
 **Pros:**
 - Machine-learning relevance spans docs, support, and workplace search on one engine, so the same query ranks consistently across every surface.
-- Mature analytics and reporting tools built for enterprise governance and audit needs - useful when docs search performance has to be reported to a CX or revenue team.
+- The analytics and reporting tools cover enterprise governance and audit needs. They're useful when docs search performance has to be reported to a CX or revenue team.
 - Personalization signals carry across every property, so a developer who searched the API reference yesterday gets ranked results informed by that session today.
-- Strong A/B testing tools for teams that want to test how changes to docs structure affect engagement.
+- It ships strong A/B testing tools for teams that want to measure how docs structure changes affect engagement.
 
 **Cons:**
-- Sales-led procurement with implementation and services that add substantially to first-year cost.
-- Built for cross-property consolidation: support portals, internal knowledge, partner sites, and docs unified under one engine. Most of the platform's value comes from running it across multiple properties at once.
+- Procurement is sales-led, and implementation plus services add substantially to first-year cost.
+- It's built for cross-property consolidation - support portals, internal knowledge, partner sites, and docs on one engine. Most of the platform's value comes from running it across multiple properties at once.
 
 **Verdict:** Pick Coveo when you're unifying docs, support, and internal knowledge at enterprise scale and have the appetite for an enterprise sales cycle; skip it when standalone developer-docs search is the actual job.
 
@@ -273,3 +272,17 @@ Point Nobi at your docs site and you'll have grounded answers with inline citati
  </a>
 </div>
 ```
+
+---
+
+**Changes made:**
+
+- Opening sentence: `—` → ` - `
+- All four intro bullets: `Pick when` → `Pick it when`
+- Nobi intro paragraph: split "Every reply carries...and a sources sidebar lists..." into two sentences
+- Evaluation section: "Implementation effort and total cost we treated together." → "We treated implementation effort and total cost together."
+- Algolia intro: split the long relative clause ("...with a config file, which is why...") into two sentences
+- Coveo Pros bullet 2: fixed fragment ("Mature analytics and reporting tools built for...") → "The analytics and reporting tools cover... They're useful when..."
+- Coveo Pros bullet 4: fixed fragment ("Strong A/B testing tools for...") → "It ships strong A/B testing tools for..."
+- Coveo Cons bullet 1: fixed fragment ("Sales-led procurement with...") → "Procurement is sales-led, and..."
+- Coveo Cons bullet 2: fixed fragment ("Built for cross-property consolidation...") → "It's built for cross-property consolidation..."

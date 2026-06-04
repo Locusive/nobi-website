@@ -109,7 +109,7 @@ An ecommerce team whose search surfaces the wrong products - or nothing at all -
 | Nobi | AI site search + conversational shopping assistant | Search relevance and AI shopper Q&A without rule maintenance | $25/mo base (2,500 searches + 250 messages) | No manual rule tuning; grounded answers with inline source citations | Search results page only; no behavioral reranking |
 | [Constructor](https://constructor.io) | AI behavioral merchandising across full site | Large-volume retailers with a data team needing full-site personalization | Revenue-share; no published list price, scales with GMV | Session-signal reranking across category, collection, browse, and search in one ranker | Revenue-share costs are hard to forecast at peak; implementation runs weeks to months |
 | [Searchspring](https://searchspring.com) | Rule-based ecommerce search and merchandising | Merch teams that want exact, auditable control over every query | Mid-market tiered pricing; quote-only | Rule-level control that merchandisers can audit back to a specific pin or boost | Rule list grows one-to-one with query patterns; maintenance compounds with catalog size |
-| [Fast Simon](https://fastsimon.com) | Visual collection curation + AI-assisted search | Shopify merch teams with a visual and seasonal curation bottleneck | From $39.99/mo via Shopify App Store | Non-technical merchandisers run seasonal edits and gift guides without engineering tickets | Lighter on semantic NLU; long conversational queries match less crisply |
+| [Fast Simon](https://fastsimon.com) | Visual collection curation + AI-assisted search | Shopify merch teams with a visual and seasonal curation bottleneck | From $39.99/mo via Shopify App Store | Non-technical merchandisers run seasonal edits and gift guides without engineering tickets | Handles long, descriptive shopper queries less precisely than a dedicated semantic engine |
 
 *Full disclosure: Nobi is our product, and it's included in this list alongside the three competitors head-of-ecommerce buyers most often weigh against it. We've aimed to be honest about Nobi's own limits and explicit about when another tool on this list is the better pick.*
 
@@ -119,7 +119,7 @@ An ecommerce team whose search surfaces the wrong products - or nothing at all -
 
 E-merchandising software controls which products appear to shoppers - and in what order - across search results, category pages, and recommendations. The job is closing the gap between what a shopper types and what converts. That gap comes from vocabulary mismatch between shoppers and catalog titles, collection pages surfacing the wrong products, and pre-purchase questions that go unanswered. Not every platform covers all three.
 
-[Searchspring](https://searchspring.com), now a division of Athos Commerce, delivers AI-driven search and intent-based merchandising on Shopify. It automates relevance well but still expects manual tuning from your team.
+[Searchspring](https://searchspring.com), now a division of Athos Commerce, gives merchandising teams rule-based control over search results and category pages. Pins, boosts, and zero-result redirects let your team decide exactly what each query returns.
 
 [Fast Simon](https://fastsimon.com) covers search, merchandising, personalization, and AI shopping assistance on Shopify and Shopify Plus. It's a Shopify Plus Certified Partner; pick it when you want all of those capabilities under one Shopify contract.
 
@@ -129,7 +129,7 @@ We tested four platforms against what a head of ecommerce actually needs: search
 
 Constructor's relevance engine runs on behavioral clickstream and reinforcement learning, which lets it personalize across search, browse, and category pages simultaneously. That breadth is real. But the pricing model - revenue-share tied to GMV with no published rate - means your bill during a Black Friday week is hard to predict until after the fact.
 
-Searchspring, now a division of Athos Commerce, uses AI-driven search and automates synonym generation, which cuts some of the manual tuning load. The platform still expects your team to step in when relevance misses. And the Athos consolidation - Searchspring, Klevu, and Intelligent Reach under one parent - is worth knowing if you were planning to evaluate those products as separate options on your shortlist.
+Searchspring, now a division of Athos Commerce, gives merch teams rule-based control over what each query returns - pins, boosts, zero-result redirects, and synonym rules all live in one dashboard. Synonym generation is automated, which cuts some of the upfront setup, but the platform still expects your team to step in when a query misses. The Athos consolidation - Searchspring, Klevu, and Intelligent Reach under one parent - is worth knowing if you were planning to evaluate those products as separate options on your shortlist.
 
 Fast Simon ships search, merchandising, personalization, and AI shopping assistance together on Shopify and Shopify Plus. It's a Shopify Plus Certified Partner, and the all-in-one packaging means fewer vendor relationships to manage. Pricing starts at $39.99/month on the Shopify App Store.
 
@@ -149,16 +149,9 @@ Nobi combines AI site search with a [conversational shopping assistant](https://
 - Pricing is per-query with no revenue-share model, so a CVR lift campaign doesn't produce a surprise bill at month-end
 
 **Cons:**
-- Limited personalization today.
-- No site-wide merchandising.
-- Not an API-first developer platform.
-- No shopper-facing in-chat post-purchase transactional execution.
-- No quiz-led product finder flows.
-- No visual no-code scripted conversation flow builder.
-- No live agent drop-in on AI conversations.
-- Analytics focus on search + CVR metrics, not shopper-behavior drop-off reasons.
-- Not a ticket workflow platform.
-- Smaller third-party integration marketplace than enterprise incumbents like Algolia.
+- Covers the search results page only; category pages and collection ordering are out of scope.
+- No behavioral reranking based on session signals.
+- No category-page or collection curation tools.
 - Less brand recognition than Algolia or Bloomreach.
 
 **Verdict:** Pick Nobi when search relevance and pre-purchase shopper Q&A are the CVR bottleneck and transparent per-query pricing matters; skip it if you need full-site collection curation or behavioral reranking across category and browse pages.
@@ -216,7 +209,7 @@ Nobi combines AI site search with a [conversational shopping assistant](https://
 
 **Best for:** Shopify merch teams whose bottleneck is visual collection curation by season, campaign, or gift occasion rather than conversational query relevance.
 
-**Pricing:** Shopify App Store tiered pricing (verified 2026-05). Starter plan (free, 100 sessions/mo), then paid tiers: entry at $39.99/mo, Essential at $99.99/mo, Top Pro at $299.99/mo. Scales by monthly session volume. Do NOT say "starts at $99/month" - the entry paid tier is $39.99/month.
+**Pricing:** Shopify App Store tiered pricing (verified 2026-05). Starter plan (free, 100 sessions/mo), then paid tiers: entry at $39.99/mo, Essential at $99.99/mo, Top Pro at $299.99/mo. Scales by monthly session volume.
 
 **Pros:**
 - Quick App Store install - a store goes live in days rather than months
@@ -230,7 +223,7 @@ Nobi combines AI site search with a [conversational shopping assistant](https://
 
 ## Which e-merchandising tool fits your ecommerce operation?
 
-The right pick depends on where your CVR gap actually lives - the search bar, category and collection pages, or in shopper questions the site cannot answer at scale. Each platform covered here optimizes for a different surface, and forcing the wrong tool onto the wrong job is where most failed implementations start.
+The right pick depends on where your CVR gap actually lives - the search bar, category and collection pages, or in shopper questions the site cannot answer at scale. Each platform covered here targets a different part of the site, and forcing the wrong tool onto the wrong job is where most failed implementations start.
 
 **Nobi** is the fit when search relevance and unanswered pre-purchase questions are the bottleneck. It handles vocabulary mismatches on the search results page without rule maintenance, and pairs that with a conversational assistant grounded in your connected catalog and policy content. Pricing is per-query with no revenue-share, so a peak-season traffic spike doesn't produce a surprise bill. The real limit: Nobi covers the search results page, not category or collection pages, and behavioral reranking isn't there yet.
 
@@ -240,7 +233,7 @@ The right pick depends on where your CVR gap actually lives - the search bar, ca
 
 **Fast Simon** is right for a non-technical Shopify merch team whose bottleneck is visual collection curation by season or campaign. The dashboard lets one person reorganize a collection or build a gift guide without filing an engineering ticket. It covers the basics on search but handles long, descriptive shopper queries less deeply than a dedicated semantic engine.
 
-If you need full-site behavioral reranking and transparent per-query pricing for the search bar, no single tool on this list covers both today. Some teams run Constructor for site-wide behavioral work and Nobi for search plus conversational Q&A - different surfaces, separate bills.
+If you need full-site behavioral reranking and transparent per-query pricing for the search bar, no single tool on this list covers both today. Some teams run Constructor for site-wide behavioral work and Nobi for search plus conversational Q&A - separate parts of the site, separate bills.
 
 ## Frequently asked questions
 

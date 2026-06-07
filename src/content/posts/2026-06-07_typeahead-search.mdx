@@ -98,15 +98,35 @@ It runs as a layer on your existing storefront - your catalog, your search bar, 
 
 ## How do I install Nobi's typeahead search on my Shopify or ecommerce store?
 
-Getting Nobi live is deliberately light. The search widget goes live with a quick theme drop-in - no rebuild, no engineering sprint, no backend work required. A developer pastes the Nobi snippet into your storefront theme and points it at the slot where your search bar lives. The typeahead dropdown is active the same day.
+Installing typeahead is two snippets: load the Nobi script, then drop the search bar into your theme where your search box lives. It works on Shopify, Shopify Plus, and most headless storefronts.
 
-No manual catalog export required. Nobi indexes your product pages, FAQ routes, policy documents, and help-center articles directly from your existing URLs on the initial connection. Point Nobi at your pages and it reads the content where it already lives - no data migration, no re-entering product information into a new system. Connected sources refresh twice a day, so a new product launch, an updated price, or a revised return policy shows up in typeahead results within hours, not after the next manual push.
+**1. Load the Nobi script.** Copy your merchant ID from the Installation page of your Nobi dashboard, then add this just before the closing `</head>` tag of your theme. On Shopify that's `theme.liquid`; placing it in the layout gives you site-wide coverage.
 
-For questions where the exact wording matters - return windows, warranty terms, promotional cutoffs - query overrides let you pin the precise response you want. When a shopper's query matches, Nobi returns your approved text word for word.
+```html
+<script async src="https://assistant-script.nobi.ai/nobi.bundle.js"
+  onload="window.Nobi.initialize({ accountId: 'YOUR_MERCHANT_ID' });"></script>
+```
 
-Developers who need tighter control over how results display in the dropdown have a dedicated path for that. Nobi's Hooks API gives engineering teams direct control over the product display logic inside the typeahead. [UNTUCKit](/customers/untuckit) drove this capability - they needed precise control over how products appeared in results, and that feedback became what is now Hooks. It's available to every Nobi customer.
+Swap `YOUR_MERCHANT_ID` for your own ID.
 
-The install works across Shopify, Shopify Plus, and most headless storefronts - the widget drops into the search slot your frontend already uses.
+**2. Add the search bar.** Place the search-bar component in your template wherever the search box should appear:
+
+```html
+<nobi-search-bar
+  default-mode="ai"
+  size="regular"
+  show-mode-toggle="false"
+  show-hint-row="false">
+</nobi-search-bar>
+```
+
+Typeahead is on by default (the `enable-typeahead` attribute defaults to `true`), so the dropdown starts surfacing matching products the moment a shopper types:
+
+![Nobi's typeahead dropdown returning product matches as a shopper types](https://imagedelivery.net/IEMzXmjRvW0g933AN5ejrA/assetsbulletsitefiles-2e1c7ba9-c3dd-80cc-a2c8-d535296cb71c-attachmentf5e8b7d1-e8b3-4960-94c2-2de0d790fe6fjacket-minpng/public)
+
+**Using Google Tag Manager?** Add the script as a Custom HTML tag triggered on All Pages and publish it, then place the `<nobi-search-bar>` tag in your theme template.
+
+That's the whole install - no catalog export, no data migration. Nobi indexes your product pages, FAQ routes, and policy documents from your existing URLs on the first connection, and refreshes them twice a day, so a new product, an updated price, or a revised return policy shows up in typeahead within hours. For answers where exact wording matters - return windows, warranty terms, promotional cutoffs - query overrides let you pin the precise response, returned word for word when a query matches. And if your team needs tighter control over how products render in the dropdown, the Hooks API exposes that display logic - a capability [UNTUCKit](/customers/untuckit) drove, now available to every customer.
 
 ## How does Nobi match partial and misspelled queries to the right products in my catalog?
 

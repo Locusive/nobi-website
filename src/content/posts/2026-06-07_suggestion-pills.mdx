@@ -114,25 +114,25 @@ The prompts draw from whatever sources you've connected: product pages, FAQ rout
 A developer adds the Nobi runtime (the Quick Start guide covers this) and places the pill component on the relevant pages. The default renders three pills in a carousel:
 
 ```html
-<Nobi-suggestion-pills pill-count="3"></nobi-suggestion-pills>
+<nobi-suggestion-pills pill-count="3"></nobi-suggestion-pills>
 ```
 
 For more pills or a wrapped grid layout (up to ten pills per component):
 
 ```html
-<Nobi-suggestion-pills pill-count="6" multi-row="true"></nobi-suggestion-pills>
+<nobi-suggestion-pills pill-count="6" multi-row="true"></nobi-suggestion-pills>
 ```
 
 You can also scope pills to specific types - cross-sell suggestions, answerable Q&A questions, or custom slugs:
 
 ```html
-<Nobi-suggestion-pills pill-count="3" pill-types="cross-sell,qa"></nobi-suggestion-pills>
+<nobi-suggestion-pills pill-count="3" pill-types="cross-sell,qa"></nobi-suggestion-pills>
 ```
 
 On Shopify, the product ID auto-detects from the page. On other platforms, pass it explicitly:
 
 ```html
-<Nobi-suggestion-pills pill-count="3" product-id="YOUR_PRODUCT_ID"></nobi-suggestion-pills>
+<nobi-suggestion-pills pill-count="3" product-id="YOUR_PRODUCT_ID"></nobi-suggestion-pills>
 ```
 
 Suggestion pills are part of the standard assistant - no premium tier required. The base plan is $25/month and includes 2,500 searches and 250 conversational messages. Overages run $0.01 per search and $0.10 per conversational message, so you can estimate your cost at volume before committing.

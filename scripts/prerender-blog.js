@@ -13,9 +13,11 @@
 // src/content/posts/, write dist/blog/<slug>/index.html with the
 // article's title, meta description, og/twitter tags, canonical
 // link, and Article + FAQPage + ItemList JSON-LD schemas injected
-// into the head. The body remains the SPA shell (<div id="root">),
-// so client-side hydration takes over from there - we're only
-// fixing the initial HTML the crawler/preview-bot sees.
+// into the head, AND the rendered article body injected inside
+// <div id="root">. React's createRoot() clears and replaces #root on
+// mount, so real users get the live SPA while JS-blind crawlers
+// (GPTBot, ClaudeBot, PerplexityBot, Bing) can read the actual prose
+// they'd otherwise never see - the part they cite.
 //
 // Run via: node scripts/prerender-blog.js (chained from `build`).
 
@@ -72,6 +74,106 @@ function htmlEscape(s) {
     .replace(/>/g, "&gt;")
     .replace(/"/g, "&quot;")
     .replace(/'/g, "&#39;");
+}
+
+// ── Article body rendering ──────────────────────────────────────────
+// Crawlers that don't run JS (GPTBot, ClaudeBot, PerplexityBot, Bing)
+// fetch the page and read the HTML. Without the article body in that
+// HTML they see only the <head> schema - not the prose they'd cite.
+// We render the MDX body to static HTML and drop it inside #root.
+// React's createRoot() clears #root and re-renders on mount, so real
+// users never see this copy - it exists purely for JS-blind fetchers.
+
+// Pull the markdown body (everything after the meta block) and strip
+// the things a crawler shouldn't or can't use: the JSON-LD script
+// (already in <head>), import lines, and JSX/custom-element widgets.
+function readBody(mdxPath) {
+  const content = readFileSync(mdxPath, "utf8");
+  const m = content.match(/export const meta\s*=\s*\{[\s\S]*?\n\s*\};/);
+  if (!m) return "";
+  let body = content.slice(m.index + m[0].length);
+  body = body.replace(/<script[\s\S]*?<\/script>/gi, "");
+  body = body.replace(/^import .*$/gm, "");
+  // Paired JSX component blocks (<Comp ...> ... </Comp>) and custom
+  // elements (<nobi-button ...> ... </nobi-button>) - interactive
+  // widgets with no crawler-relevant prose.
+  body = body.replace(/<([A-Z][A-Za-z0-9]*)\b[^>]*>[\s\S]*?<\/\1>/g, "");
+  body = body.replace(/<([a-z]+-[a-z-]+)\b[^>]*>[\s\S]*?<\/\1>/g, "");
+  // Self-closing JSX / custom elements (<BlogQualifier ... />).
+  body = body.replace(/<[A-Za-z][\w-]*\b[^>]*\/>/g, "");
+  return body.trim();
+}
+
+// Inline markdown -> HTML: links, bold, italic. HTML is escaped first,
+// so the URL/text inside a link are already escaped when we wrap them.
+function mdInline(s) {
+  let e = htmlEscape(s);
+  e = e.replace(/\[([^\]]+)\]\(([^)]+)\)/g, (mt, t, u) => `<a href="${u}">${t}</a>`);
+  e = e.replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>");
+  e = e.replace(/(^|[^*])\*([^*]+)\*(?!\*)/g, "$1<em>$2</em>");
+  return e;
+}
+
+function renderTable(rows) {
+  const cells = rows.map((l) =>
+    l.replace(/^\s*\|/, "").replace(/\|\s*$/, "").split("|").map((c) => c.trim())
+  );
+  if (cells.length < 2) return "";
+  const th = cells[0].map((c) => `<th>${mdInline(c)}</th>`).join("");
+  const trs = cells
+    .slice(2) // row 1 is the |---|---| separator
+    .map((r) => `<tr>${r.map((c) => `<td>${mdInline(c)}</td>`).join("")}</tr>`)
+    .join("");
+  return `<table><thead><tr>${th}</tr></thead><tbody>${trs}</tbody></table>`;
+}
+
+// Convert the subset of markdown our MDX bodies use: ##/### headings,
+// paragraphs, - bullet lists, and | tables |. Good enough for crawler
+// extraction; React renders the real thing for humans.
+function mdToHtml(md) {
+  const lines = md.split("\n");
+  const out = [];
+  let i = 0;
+  while (i < lines.length) {
+    const line = lines[i];
+    if (!line.trim()) { i++; continue; }
+    const h = line.match(/^(#{1,4})\s+(.*)$/);
+    if (h) {
+      const lvl = h[1].length;
+      out.push(`<h${lvl}>${mdInline(h[2].trim())}</h${lvl}>`);
+      i++;
+      continue;
+    }
+    if (line.trim().startsWith("|")) {
+      const tbl = [];
+      while (i < lines.length && lines[i].trim().startsWith("|")) { tbl.push(lines[i]); i++; }
+      out.push(renderTable(tbl));
+      continue;
+    }
+    if (/^\s*[-*]\s+/.test(line)) {
+      const items = [];
+      while (i < lines.length && /^\s*[-*]\s+/.test(lines[i])) {
+        items.push(`<li>${mdInline(lines[i].replace(/^\s*[-*]\s+/, ""))}</li>`);
+        i++;
+      }
+      out.push(`<ul>${items.join("")}</ul>`);
+      continue;
+    }
+    const para = [];
+    while (
+      i < lines.length && lines[i].trim() &&
+      !/^#{1,4}\s/.test(lines[i]) &&
+      !lines[i].trim().startsWith("|") &&
+      !/^\s*[-*]\s+/.test(lines[i])
+    ) { para.push(lines[i].trim()); i++; }
+    if (para.length) out.push(`<p>${mdInline(para.join(" "))}</p>`);
+  }
+  return out.join("\n");
+}
+
+function renderBodyHtml(mdxPath) {
+  const body = readBody(mdxPath);
+  return body ? mdToHtml(body) : "";
 }
 
 // Resolve a heroImage value to an absolute URL. The frontmatter can
@@ -223,7 +325,7 @@ function stripHomepageMeta(shell) {
   return out;
 }
 
-function prerenderOne(meta, slug, shell) {
+function prerenderOne(meta, slug, shell, bodyHtml) {
   const headBlock = buildHeadInjection(meta, slug);
   let html = stripHomepageMeta(shell);
 
@@ -238,6 +340,16 @@ function prerenderOne(meta, slug, shell) {
     "<!--__PRERENDER_DESC__-->",
     `<meta name="description" content="${htmlEscape(meta.description || meta.excerpt || "")}">\n    ${headBlock}`
   );
+
+  // Inject the rendered article body INSIDE #root. createRoot() clears
+  // and replaces #root on mount, so real users never see this copy -
+  // it exists only so JS-blind crawlers can read (and cite) the prose.
+  if (bodyHtml) {
+    html = html.replace(
+      '<div id="root"></div>',
+      `<div id="root"><article class="prerendered-article">\n${bodyHtml}\n</article></div>`
+    );
+  }
 
   // Write BOTH dist/blog/<slug>.html AND dist/blog/<slug>/index.html
   // so the prerendered file is served regardless of trailing-slash
@@ -285,7 +397,8 @@ function main() {
       continue;
     }
     try {
-      prerenderOne(meta, meta.slug, shell);
+      const bodyHtml = renderBodyHtml(join(POSTS_DIR, file));
+      prerenderOne(meta, meta.slug, shell, bodyHtml);
       written++;
     } catch (e) {
       console.warn(`prerender: failed for ${meta.slug}: ${e.message}`);

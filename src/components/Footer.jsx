@@ -1,6 +1,6 @@
 import React from "react";
 import Logo from "./Logo";
-import { ArrowRight, CheckCircle2, ExternalLink, Linkedin, Search, ShoppingBag, Sparkles } from "lucide-react";
+import { ArrowRight, CheckCircle2, ExternalLink, Search, ShoppingBag, Sparkles } from "lucide-react";
 import { useDemoForm } from "../context/DemoFormContext";
 import { trackDemoFormOpened } from "../utils/eventTracker";
 import { getSignupUrl } from "../utils/signupUrl";
@@ -158,7 +158,12 @@ export default function Footer() {
               aria-label="Nobi on LinkedIn"
               className="inline-flex items-center gap-2 text-sm text-black/60 hover:opacity-80 dark:text-white/60"
             >
-              <Linkedin className="h-4 w-4" />
+              <img
+                src="https://storage.googleapis.com/nobi-public/docs_and_marketing_websites/linkedin.png"
+                alt=""
+                className="h-5 w-5"
+                loading="lazy"
+              />
               LinkedIn
             </a>
           </div>

@@ -156,15 +156,14 @@ export default function Footer() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Nobi on LinkedIn"
-              className="inline-flex items-center gap-2 text-sm text-black/60 hover:opacity-80 dark:text-white/60"
+              className="inline-flex transition hover:opacity-80"
             >
               <img
                 src="https://storage.googleapis.com/nobi-public/docs_and_marketing_websites/linkedin.png"
-                alt=""
-                className="h-5 w-5"
+                alt="LinkedIn"
+                className="h-6 w-6"
                 loading="lazy"
               />
-              LinkedIn
             </a>
           </div>
 

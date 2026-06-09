@@ -1,6 +1,6 @@
 import React from "react";
 import Logo from "./Logo";
-import { ArrowRight, CheckCircle2, ExternalLink, Search, ShoppingBag, Sparkles } from "lucide-react";
+import { ArrowRight, CheckCircle2, ExternalLink, Linkedin, Search, ShoppingBag, Sparkles } from "lucide-react";
 import { useDemoForm } from "../context/DemoFormContext";
 import { trackDemoFormOpened } from "../utils/eventTracker";
 import { getSignupUrl } from "../utils/signupUrl";
@@ -151,6 +151,16 @@ export default function Footer() {
             <div className="text-sm text-black/60 dark:text-white/60">
               © {new Date().getFullYear()} Nobi: a conversational site assistant to help you grow
             </div>
+            <a
+              href="https://www.linkedin.com/company/nobiai"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Nobi on LinkedIn"
+              className="inline-flex items-center gap-2 text-sm text-black/60 hover:opacity-80 dark:text-white/60"
+            >
+              <Linkedin className="h-4 w-4" />
+              LinkedIn
+            </a>
           </div>
 
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 text-sm">

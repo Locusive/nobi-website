@@ -1,0 +1,175 @@
+export const meta = {
+ title: "How to Retarget Shoppers Who Chat but Don't Buy",
+ slug: "remarketing-pixels-chat",
+ date: "2026-06-11",
+ publishedAt: "2026-06-11",
+ description: "Nobi's Hooks API fires chat intent signals, category queries, product interest, conversation drop-off, to GTM so your pixels build sharper retargeting audiences.",
+ excerpt: "Nobi's Hooks API fires chat intent signals, category queries, product interest, conversation drop-off, to GTM so your pixels build sharper retargeting audiences.",
+ tags: ["how-to", "sales assistance", "ecommerce", "ecommerce search"],
+ author: "Shanif Dhanani",
+ heroImage: "https://storage.googleapis.com/nobi-public/docs_and_marketing_websites/posts/remarketing-pixels-chat/hero.webp",
+ featured: true,
+ draft: false,
+ faqItems: [
+ {
+ question: "Why is a shopper who chats but doesn't buy your sharpest retargeting candidate?",
+ answer: "A chat message captures declared intent - the shopper named a product type, price ceiling, or specific attribute before leaving. A page view only confirms arrival; it says nothing about what the shopper wanted. Conversation abandonment is a high-intent non-convert signal that standard pixels never capture. That specificity makes the shopper far easier to retarget with relevant creative than anyone who simply browsed a category page."
+ },
+ {
+ question: "What is Nobi, and how does it expose chat intent as taggable retargeting signals?",
+ answer: "Nobi is an AI-powered site search and shopping assistant for ecommerce brands. When a shopper types a query or has a conversation, Nobi records the interaction as a structured event - what category they asked about, which product they engaged with, and where they dropped off. Through the Hooks API, those events fire to your tag manager, which routes them to the ad pixels you already run. Nobi surfaces the signal; your ad platform builds the audience."
+ },
+ {
+ question: "What chat intent signals does Nobi expose for retargeting?",
+ answer: "Nobi surfaces three categories of structured events: category interest, product intent, and conversation abandonment. Category interest captures what a shopper named in plain language - 'leather boots' or 'gifts under $50' - rather than inferring it from browse behavior. Each event fires as a named payload your tag manager can consume and route to existing ad pixels."
+ },
+ {
+ question: "How do you wire Nobi's Hooks API to Google Tag Manager?",
+ answer: "The article describes the Hooks API as the developer-facing layer that makes Nobi's internal events available to Google Tag Manager, but does not walk through the specific wiring steps. Check Nobi's developer documentation for the full integration guide."
+ },
+ {
+ question: "What does Nobi handle versus what do you configure in your ad platform?",
+ answer: "Nobi records shopper queries and conversations as structured events and fires them to your tag manager through the Hooks API. Your tag manager then routes those events to whatever ad pixels you already run - Meta, Google, TikTok, or others. Nobi does not push data directly into any ad platform, and your existing pixel setup stays intact."
+ },
+ {
+ question: "Why does a chat-derived audience outperform a page-view audience for mid-funnel retargeting?",
+ answer: "A chat-derived audience is built on declared signals - a shopper named a product type, a price range, or a specific attribute in plain language. A page-view audience is built on inferred signals that only confirm a shopper arrived. Mid-funnel retargeting performs best on intent density, not list size, so a smaller chat-derived segment routinely outperforms a larger page-view pool on cost per conversion."
+ },
+ {
+ question: "How do you know if your chat-derived retargeting audiences are working?",
+ answer: "The article does not cover how to measure chat-derived audience performance. Your ad platform's standard campaign reporting - cost per conversion, return on ad spend - is where you would compare chat-derived segments against your existing page-view audiences to see the difference in signal quality."
+ }
+ ],
+};
+
+<script type="application/ld+json" data-nobi-schema>
+{`{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "How to Retarget Shoppers Who Chat but Don't Buy",
+  "description": "Nobi's Hooks API fires chat intent signals, category queries, product interest, conversation drop-off, to GTM so your pixels build sharper retargeting audiences.",
+  "datePublished": "2026-06-11",
+  "dateModified": "2026-06-11",
+  "author": {
+    "@type": "Person",
+    "name": "Shanif Dhanani",
+    "url": "https://www.linkedin.com/in/shanifdhanani/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Nobi",
+    "url": "https://nobi.ai"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://nobi.ai/blog/remarketing-pixels-chat"
+  },
+  "about": [
+    {
+      "@type": "Thing",
+      "name": "sales assistance"
+    },
+    {
+      "@type": "Thing",
+      "name": "ecommerce"
+    }
+  ]
+}`}
+</script>
+## How do you retarget shoppers who chat on your site but don't buy?
+
+Your retargeting pixels fire on page views. Shoppers who type questions into your chat assistant leave a stronger signal. That signal goes untagged. A shopper who asked about waterproof boots under $150 told you exactly what they want. Your pixel filed them under the generic boots audience instead. Retargeting that shopper means capturing those chat queries as structured events and routing them to your existing pixels. Here is how to wire that up.
+
+## Why is a shopper who chats but doesn't buy your sharpest retargeting candidate?
+
+A page view tells you a shopper found your site. A chat message tells you what they want - category, product type, price range, the specific question that made them hesitate. Most ecommerce retargeting pools are built on the weak signal, and the stronger signal goes untagged. The shopper who typed "do you carry waterproof boots under $150?" and then left is a far more qualified mid-funnel candidate than anyone who scrolled the boots category page.
+
+Conversation abandonment - asking a question and leaving without buying - is a high-intent non-convert signal no standard pixel captures. A shopper who mentioned a specific attribute in chat (waterproof, vegan, size 12 wide) told you more about their intent than any browse session can.
+
+Mid-funnel retargeting performs best on intent density, not list size. A smaller chat-derived audience routinely outperforms a larger page-view pool on cost per conversion, because the signal behind it is declared, not inferred.
+
+## What is Nobi, and how does it expose chat intent as taggable retargeting signals?
+
+That declared intent only becomes retargetable if something captures it as a structured event instead of a raw session log. Nobi does that. Nobi is an AI-powered site search and shopping assistant for ecommerce brands. When a shopper types a query or has a conversation with Nobi's assistant, the platform records the interaction as a structured event - what category they asked about, which product they engaged with, where they dropped off. Through the Hooks API, those events fire to your tag manager so your existing ad pixels can act on them. Nobi exposes the signal; your ad platform builds the audience.
+
+The platform combines three things in one integration: AI-powered site search, a conversational shopping assistant, and automatic shopper Q&A on product pages and policy questions. One install covers both search relevance and conversational intent capture. A shopper who types "slim fit chinos in dark blue" into search generates the same structured event as one who asks the assistant whether a jacket runs true to size - both signals flow through the same Hooks layer.
+
+Pricing starts at $25/month, which includes 2,500 searches and 250 conversational messages. Beyond that: $0.01 per additional search, $0.10 per additional message.
+
+## What chat intent signals does Nobi expose for retargeting?
+
+The events that Hooks API fires aren't generic page-view signals - they fall into three distinct categories. Nobi surfaces category interest, product intent, and conversation abandonment from each shopper session. Each fires as a named event with a payload your tag manager can consume and route to the ad pixels you already run.
+
+**Category interest** captures what area a shopper was shopping in. A query like "leather boots" or "gifts under $50" names a purchase category directly - not inferred from a browsed collection, but declared in plain language. Nobi fires that category as part of the event payload, so your retargeting ad can reference it by name rather than serving a generic "come back" message.
+
+**Product intent** goes narrower. Clicks on specific products the assistant surfaced, add-to-cart prompts the assistant issued, and questions about a specific SKU on a product page all fire as distinct events. Each carries a product ID, so your creative can show the exact item the shopper touched rather than a broad category ad.
+
+**Conversation abandonment** is the most valuable trigger of the three. A session that ends mid-conversation - after a question but before a purchase - is a high-intent non-convert signal no standard pixel captures on its own.
+
+All three fire in real time, not in a batch export. Audience membership in your ad platform reflects sessions from within hours to a day, depending on your ad platform. The payload attached to each event - the category queried, the product ID, the point in the conversation where the session ended - is what makes the downstream creative work.
+
+## How do you wire Nobi's Hooks API to Google Tag Manager?
+
+Getting those payloads into GTM is a two-part job. A dashboard toggle handles the base search event - it pushes `Nobi_search` to your dataLayer automatically. The richer Hooks events that carry product clicks and session abandonment signals require a JavaScript listener on the page as well. That listener is a developer or GTM-admin task; it's not achievable from the dashboard alone.
+
+The documented steps for the GTM integration:
+
+1. Confirm Google Tag Manager is already installed on your site.
+2. In the Nobi dashboard, go to **Assistant → Behavior**, then scroll to **Remarketing**.
+3. Toggle on **Send search data to Google Tag Manager**. This pushes a `Nobi_search` event to your dataLayer with the shopper's query in the `Nobi_search_query` field.
+4. In GTM, create a Custom Event trigger matching the `Nobi_search` event name.
+5. Attach the trigger to your Google Ads Remarketing tag, then build a remarketing audience in Google Ads based on that event.
+
+For the richer Hooks events - product clicks, session abandonment, category-level queries - a JavaScript listener registered on the page catches each named event (`Nobi:product_click`, `Nobi:session_abandoned`, and others) and calls `dataLayer.push()` with the event name and its payload: the product ID, session ID, and the category the shopper queried. In GTM, configure a Custom Event trigger matching the event name and attach it to your Meta Pixel, Google Ads Remarketing, or TikTok Pixel tag. Pass the payload fields as custom parameters. No Nobi-specific GTM template is required - it's the same custom-event wiring pattern GTM already uses.
+
+The listener requires someone comfortable writing dataLayer code. Once the listener is live, it runs on every page load and routes events automatically - no per-session work after setup.
+
+## What does Nobi handle versus what do you configure in your ad platform?
+
+The listener running on every page load is Nobi's half of the job done. From that point, three separate systems each take their slice.
+
+Nobi's scope stops at the event. It detects what a shopper did inside the assistant - the category they queried, the product they clicked, the point where the conversation ended - and fires a named event with that structured payload to your tag manager. Nobi has no direct connection to Meta, Google Ads, or TikTok. It doesn't build audiences, set bids, or read ROAS. It produces the signal; your infrastructure acts on it.
+
+Your tag manager sits in the middle. GTM receives the event from the dataLayer and routes it to whichever ad pixel tags you've configured as triggers. A Custom Event trigger matching the event name fires your Meta Pixel, Google Ads Remarketing tag, or TikTok Pixel - the same wiring pattern GTM uses for any custom event.
+
+Your ad platform is where the audience actually forms. Meta Ads Manager, Google Ads, and TikTok Ads each let you define a custom audience from an incoming pixel event - select the event name, filter by payload fields like category or product ID, set the lookback window. As events accumulate, the audience grows. Your retargeting campaign serves creative to that audience. Writing the ads and managing bids are yours entirely.
+
+The full pipeline in one line: shopper asks a question → Nobi fires the event → GTM pushes it to your dataLayer → the ad pixel fires → the custom audience adds the visitor → your retargeting campaign serves the ad.
+
+## Why does a chat-derived audience outperform a page-view audience for mid-funnel retargeting?
+
+That pixel firing at the end of the pipeline isn't just another browsing event. Page-view audiences capture everyone who landed on a URL - window-shoppers, accidental visitors, returning customers checking order status. A chat-derived audience captures only shoppers who took an active step: they typed a question, expressed a preference, or engaged with a product recommendation before dropping off. That selectivity produces a smaller, higher-intent pool, and mid-funnel retargeting performs better on intent density than on list size.
+
+Smaller also means cheaper to reach. On a mid-funnel campaign, lower audience size typically produces lower cost per conversion, because every impression lands on someone who declared an interest rather than someone who happened to scroll past a URL. This isn't an argument against broad top-of-funnel prospecting, where large audiences are the right call. It's specific to mid-funnel retargeting, where intent density matters more than reach.
+
+Chat intent also gives your creative team something to work with that page views don't. If a shopper asked specifically about waterproof features, you can serve a waterproofing-focused ad rather than a generic category banner. That specificity raises ad relevance scores and gives the shopper a reason to click back.
+
+The smaller audience and the richer creative signal compound. [Lucchese](/customers/lucchese) attributed $3.46M in cumulative revenue to Nobi, with cart and PDP assistants driving incremental checkouts across the site.
+
+## How do you know if your chat-derived retargeting audiences are working?
+
+The core metrics are three: audience size growth in your ad platform, cost per conversion for the chat-derived audience versus your existing page-view campaigns, and on-site CVR when those retargeted shoppers return.
+
+Start with a baseline before you go live. Pull your current CPC and CVR from your page-view retargeting campaigns so you have a clean comparison point. Then isolate the chat-derived audience in its own campaign or ad set - blending it with page-view retargeting makes it impossible to read performance separately.
+
+The first health check is audience growth. If the Hooks API is firing correctly, your custom audience in Meta or Google should grow within 24-48 hours of going live. Zero growth after 48 hours points to an event not reaching the pixel - check whether the listener is live and the trigger is configured.
+
+CVR is the primary success metric. A chat-derived audience should convert at a meaningfully higher rate than a same-funnel page-view audience. If it doesn't, verify the right events are in the audience definition - `Nobi:session_abandoned` and product click events, not a generic page_view. That specificity is what makes the audience high-intent; a generic trigger undermines it.
+
+Nobi's dashboard shows search engagement, assistant CVR, and session counts. ROAS and audience-level attribution belong in your ad platform - that's where the audience was built and where the budget runs.
+
+
+<BlogEmailCapture hook="Shoppers chatting on your store but leaving without buying?" subtext="Drop your email and we'll show you how Nobi's AI assistant captures the intent signals from chat sessions so your remarketing pixels can actually bring those shoppers back." />
+
+---
+
+Start a free Nobi trial and you can have your first Hooks API event firing to GTM within the first week. The base plan is $25 a month. No revenue share, no per-seat fees.
+
+<div className="my-8 flex justify-center">
+ <a
+ href="https://dashboard.nobi.ai"
+ className="inline-flex items-center justify-center gap-2 rounded-2xl font-medium transition active:scale-[.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-black/10 dark:focus-visible:ring-white/20 bg-black text-white dark:bg-white dark:text-black hover:opacity-90 shadow-sm h-12 px-6 text-base no-underline"
+ >
+ <span>Start your free Nobi trial</span>
+ </a>
+</div>

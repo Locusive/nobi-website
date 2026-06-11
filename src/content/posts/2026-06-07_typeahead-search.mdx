@@ -100,7 +100,7 @@ It runs as a layer on your existing storefront - your catalog, your search bar, 
 
 Installing typeahead is two snippets: load the Nobi script, then drop the search bar into your theme where your search box lives. It works on Shopify, Shopify Plus, and most headless storefronts.
 
-**1. Load the Nobi script.** Copy your merchant ID from the Installation page of your Nobi dashboard, then add this just before the closing `</head>` tag of your theme. On Shopify that's `theme.liquid`; placing it in the layout gives you site-wide coverage.
+**1. Load the Nobi script.** Copy your merchant ID from the Install tab under Implementation > Website in your Nobi dashboard, then add this just before the closing `</head>` tag of your theme. On Shopify that's `theme.liquid`; placing it in the layout gives you site-wide coverage.
 
 ```html
 <script async src="https://assistant-script.nobi.ai/nobi.bundle.js"
@@ -142,15 +142,15 @@ The synonym layer works the same way. Nobi infers equivalences from your catalog
 
 ## What shows up in the Nobi search dropdown, products, collections, or content?
 
-The Nobi typeahead dropdown surfaces products, collection pages, and content - FAQ answers, policy docs, and help articles - in a single result layer as the shopper types. Contextual suggestion pills appear as tappable starting points before the shopper types anything. They are scoped to the page the visitor is on, so the search bar gives shoppers a place to start even when they don't know what to type.
+The Nobi typeahead dropdown surfaces two things as the shopper types: matching products and suggested search queries that complete what they've started, plus a "View all" row to run the full search. Contextual suggestion pills appear as tappable starting points before the shopper types anything. They are scoped to the page the visitor is on, so the search bar gives shoppers a place to start even when they don't know what to type.
 
-Product results show the matched SKU with image, title, and price. For high-confidence matches, one tap takes the shopper to the PDP - no full results page in between. On broad queries like "jackets" or "boots," Nobi surfaces collection links instead, so the shopper can browse the right category rather than work through a mixed result set.
+Product results show the matched SKU with image, title, and price. For high-confidence matches, one tap takes the shopper to the PDP - no full results page in between. Suggested query completions give the shopper a one-tap way to run a fuller search when the right product isn't already showing.
 
-The content layer handles everything that isn't a product search. A "where is my order?" query or a question about your return window pulls the relevant FAQ answer or policy text straight into the dropdown. The shopper reads the answer in place without opening a new page or reaching out to your team.
+Content answers and collection browsing live in the full search and assistant experience the shopper reaches after they submit, not in the instant dropdown. A "where is my order?" query or a question about your return window pulls the relevant FAQ answer or policy text once the search runs, so the shopper reads it in place without opening a new page or reaching out to your team.
 
 Clicking a suggestion pill opens the assistant with the full answer to that prompt. On a homepage, a PDP, or a collection page, Nobi generates a small set of recommended prompts based on what's on the page.
 
-The dashboard controls which result types show up and in what order. Switching a type on or off, or reordering them, takes no code change. [Kilte](/customers/kilte) runs three Nobi-powered placements from the same semantic layer - the search bar, collection filters, and product discovery - each drawing on the same catalog and content understanding.
+Typeahead is on by default, and the search bar itself is configured through the `<nobi-search-bar>` component's attributes in your theme - no separate console to wire up. [Kilte](/customers/kilte) runs three Nobi-powered placements from the same semantic layer - the search bar, collection filters, and product discovery - each drawing on the same catalog and content understanding.
 
 ## How do I measure the revenue lift from typeahead search using Nobi analytics?
 

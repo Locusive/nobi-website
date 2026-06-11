@@ -3,8 +3,8 @@ export const meta = {
  slug: "remarketing-pixels-chat",
  date: "2026-06-11",
  publishedAt: "2026-06-11",
- description: "Nobi's Hooks API fires chat intent signals, category queries, product interest, conversation drop-off, to GTM so your pixels build sharper retargeting audiences.",
- excerpt: "Nobi's Hooks API fires chat intent signals, category queries, product interest, conversation drop-off, to GTM so your pixels build sharper retargeting audiences.",
+ description: "Nobi's Hooks API fires search-intent signals, category queries, product interest, conversation drop-off, to GTM so your pixels build sharper retargeting audiences.",
+ excerpt: "Nobi's Hooks API fires search-intent signals, category queries, product interest, conversation drop-off, to GTM so your pixels build sharper retargeting audiences.",
  tags: ["how-to", "sales assistance", "ecommerce", "ecommerce search"],
  author: "Shanif Dhanani",
  heroImage: "https://storage.googleapis.com/nobi-public/docs_and_marketing_websites/posts/remarketing-pixels-chat/hero.webp",
@@ -13,14 +13,14 @@ export const meta = {
  faqItems: [
  {
  question: "Why is a shopper who searches but doesn't buy your sharpest retargeting candidate?",
- answer: "A chat message captures declared intent - the shopper named a product type, price ceiling, or specific attribute before leaving. A page view only confirms arrival; it says nothing about what the shopper wanted. Conversation abandonment is a high-intent non-convert signal that standard pixels never capture. That specificity makes the shopper far easier to retarget with relevant creative than anyone who simply browsed a category page."
+ answer: "A search captures declared intent - the shopper named a product type, price ceiling, or specific attribute before leaving. A page view only confirms arrival; it says nothing about what the shopper wanted. Conversation abandonment is a high-intent non-convert signal that standard pixels never capture. That specificity makes the shopper far easier to retarget with relevant creative than anyone who simply browsed a category page."
  },
  {
- question: "What is Nobi, and how does it expose chat intent as taggable retargeting signals?",
+ question: "What is Nobi, and how does it expose search intent as taggable retargeting signals?",
  answer: "Nobi is an AI-powered site search and shopping assistant for ecommerce brands. When a shopper types a query or has a conversation, Nobi records the interaction as a structured event - what category they asked about, which product they engaged with, and where they dropped off. Through the Hooks API, those events fire to your tag manager, which routes them to the ad pixels you already run. Nobi surfaces the signal; your ad platform builds the audience."
  },
  {
- question: "What chat intent signals does Nobi expose for retargeting?",
+ question: "What search-intent signals does Nobi expose for retargeting?",
  answer: "Nobi surfaces three categories of structured events: category interest, product intent, and conversation abandonment. Category interest captures what a shopper named in plain language - 'leather boots' or 'gifts under $50' - rather than inferring it from browse behavior. Each event fires as a named payload your tag manager can consume and route to existing ad pixels."
  },
  {
@@ -32,12 +32,12 @@ export const meta = {
  answer: "Nobi records shopper queries and conversations as structured events and fires them to your tag manager through the Hooks API. Your tag manager then routes those events to whatever ad pixels you already run - Meta, Google, TikTok, or others. Nobi does not push data directly into any ad platform, and your existing pixel setup stays intact."
  },
  {
- question: "Why does a chat-derived audience outperform a page-view audience for mid-funnel retargeting?",
- answer: "A chat-derived audience is built on declared signals - a shopper named a product type, a price range, or a specific attribute in plain language. A page-view audience is built on inferred signals that only confirm a shopper arrived. Mid-funnel retargeting performs best on intent density, not list size, so a smaller chat-derived segment routinely outperforms a larger page-view pool on cost per conversion."
+ question: "Why does a search-derived audience outperform a page-view audience for mid-funnel retargeting?",
+ answer: "A search-derived audience is built on declared signals - a shopper named a product type, a price range, or a specific attribute in plain language. A page-view audience is built on inferred signals that only confirm a shopper arrived. Mid-funnel retargeting performs best on intent density, not list size, so a smaller search-derived segment routinely outperforms a larger page-view pool on cost per conversion."
  },
  {
- question: "How do you know if your chat-derived retargeting audiences are working?",
- answer: "Measure it in your ad platform's standard campaign reporting - cost per conversion and return on ad spend - by comparing your chat-derived segments against your existing page-view audiences. Because a chat-derived audience is built from shoppers who told the assistant exactly what they wanted, it should retarget more efficiently than a broad page-view pool, and that side-by-side gap is the clearest sign the signal is working."
+ question: "How do you know if your search-derived retargeting audiences are working?",
+ answer: "Measure it in your ad platform's standard campaign reporting - cost per conversion and return on ad spend - by comparing your search-derived segments against your existing page-view audiences. Because a search-derived audience is built from shoppers who told the assistant exactly what they wanted, it should retarget more efficiently than a broad page-view pool, and that side-by-side gap is the clearest sign the signal is working."
  }
  ],
 };
@@ -47,7 +47,7 @@ export const meta = {
   "@context": "https://schema.org",
   "@type": "Article",
   "headline": "How To Retarget Shoppers Who Search But Don't Buy",
-  "description": "Nobi's Hooks API fires chat intent signals, category queries, product interest, conversation drop-off, to GTM so your pixels build sharper retargeting audiences.",
+  "description": "Nobi's Hooks API fires search-intent signals, category queries, product interest, conversation drop-off, to GTM so your pixels build sharper retargeting audiences.",
   "datePublished": "2026-06-11",
   "dateModified": "2026-06-11",
   "author": {
@@ -86,13 +86,13 @@ This guide walks through how to turn those searches and questions into events yo
 
 ## Why is a shopper who searches but doesn't buy your sharpest retargeting candidate?
 
-A page view tells you a shopper found your site. A chat message tells you what they want - category, product type, price range, the specific question that made them hesitate. Most ecommerce retargeting pools are built on the weak signal, and the stronger signal goes untagged. The shopper who typed "do you carry waterproof boots under $150?" and then left is a far more qualified mid-funnel candidate than anyone who scrolled the boots category page.
+A page view tells you a shopper found your site. A search tells you what they want - category, product type, price range, the specific question that made them hesitate. Most ecommerce retargeting pools are built on the weak signal, and the stronger signal goes untagged. The shopper who typed "do you carry waterproof boots under $150?" and then left is a far more qualified mid-funnel candidate than anyone who scrolled the boots category page.
 
-Conversation abandonment - asking a question and leaving without buying - is a high-intent non-convert signal no standard pixel captures. A shopper who mentioned a specific attribute in chat (waterproof, vegan, size 12 wide) told you more about their intent than any browse session can.
+Conversation abandonment - asking a question and leaving without buying - is a high-intent non-convert signal no standard pixel captures. A shopper who mentioned a specific attribute in their search (waterproof, vegan, size 12 wide) told you more about their intent than any browse session can.
 
-Mid-funnel retargeting performs best on intent density, not list size. A smaller chat-derived audience routinely outperforms a larger page-view pool on cost per conversion, because the signal behind it is declared, not inferred.
+Mid-funnel retargeting performs best on intent density, not list size. A smaller search-derived audience routinely outperforms a larger page-view pool on cost per conversion, because the signal behind it is declared, not inferred.
 
-## What is Nobi, and how does it expose chat intent as taggable retargeting signals?
+## What is Nobi, and how does it expose search intent as taggable retargeting signals?
 
 That declared intent only becomes retargetable if something captures it as a structured event instead of a raw session log. Nobi does that. Nobi is an AI-powered site search and shopping assistant for ecommerce brands. When a shopper types a query or has a conversation with Nobi's assistant, the platform records the interaction as a structured event - what category they asked about, which product they engaged with, where they dropped off. Through the Hooks API, those events fire to your tag manager so your existing ad pixels can act on them. Nobi exposes the signal; your ad platform builds the audience.
 
@@ -100,7 +100,7 @@ The platform combines three things in one integration: AI-powered site search, a
 
 Pricing starts at $25/month, which includes 2,500 searches and 250 conversational messages. Beyond that: $0.01 per additional search, $0.10 per additional message.
 
-## What chat intent signals does Nobi expose for retargeting?
+## What search-intent signals does Nobi expose for retargeting?
 
 The events that Hooks API fires aren't generic page-view signals - they fall into three distinct categories. Nobi surfaces category interest, product intent, and conversation abandonment from each shopper session. Each fires as a named event with a payload your tag manager can consume and route to the ad pixels you already run.
 
@@ -140,30 +140,30 @@ Your ad platform is where the audience actually forms. Meta Ads Manager, Google 
 
 The full pipeline in one line: shopper asks a question → Nobi fires the event → GTM pushes it to your dataLayer → the ad pixel fires → the custom audience adds the visitor → your retargeting campaign serves the ad.
 
-## Why does a chat-derived audience outperform a page-view audience for mid-funnel retargeting?
+## Why does a search-derived audience outperform a page-view audience for mid-funnel retargeting?
 
-That pixel firing at the end of the pipeline isn't just another browsing event. Page-view audiences capture everyone who landed on a URL - window-shoppers, accidental visitors, returning customers checking order status. A chat-derived audience captures only shoppers who took an active step: they typed a question, expressed a preference, or engaged with a product recommendation before dropping off. That selectivity produces a smaller, higher-intent pool, and mid-funnel retargeting performs better on intent density than on list size.
+That pixel firing at the end of the pipeline isn't just another browsing event. Page-view audiences capture everyone who landed on a URL - window-shoppers, accidental visitors, returning customers checking order status. A search-derived audience captures only shoppers who took an active step: they typed a question, expressed a preference, or engaged with a product recommendation before dropping off. That selectivity produces a smaller, higher-intent pool, and mid-funnel retargeting performs better on intent density than on list size.
 
 Smaller also means cheaper to reach. On a mid-funnel campaign, lower audience size typically produces lower cost per conversion, because every impression lands on someone who declared an interest rather than someone who happened to scroll past a URL. This isn't an argument against broad top-of-funnel prospecting, where large audiences are the right call. It's specific to mid-funnel retargeting, where intent density matters more than reach.
 
-Chat intent also gives your creative team something to work with that page views don't. If a shopper asked specifically about waterproof features, you can serve a waterproofing-focused ad rather than a generic category banner. That specificity raises ad relevance scores and gives the shopper a reason to click back.
+Search intent also gives your creative team something to work with that page views don't. If a shopper asked specifically about waterproof features, you can serve a waterproofing-focused ad rather than a generic category banner. That specificity raises ad relevance scores and gives the shopper a reason to click back.
 
 The smaller audience and the richer creative signal compound. [Lucchese](/customers/lucchese) attributed $3.46M in cumulative revenue to Nobi, with cart and PDP assistants driving incremental checkouts across the site.
 
-## How do you know if your chat-derived retargeting audiences are working?
+## How do you know if your search-derived retargeting audiences are working?
 
-The core metrics are three: audience size growth in your ad platform, cost per conversion for the chat-derived audience versus your existing page-view campaigns, and on-site CVR when those retargeted shoppers return.
+The core metrics are three: audience size growth in your ad platform, cost per conversion for the search-derived audience versus your existing page-view campaigns, and on-site CVR when those retargeted shoppers return.
 
-Start with a baseline before you go live. Pull your current CPC and CVR from your page-view retargeting campaigns so you have a clean comparison point. Then isolate the chat-derived audience in its own campaign or ad set - blending it with page-view retargeting makes it impossible to read performance separately.
+Start with a baseline before you go live. Pull your current CPC and CVR from your page-view retargeting campaigns so you have a clean comparison point. Then isolate the search-derived audience in its own campaign or ad set - blending it with page-view retargeting makes it impossible to read performance separately.
 
 The first health check is audience growth. If the Hooks API is firing correctly, your custom audience in Meta or Google should grow within 24-48 hours of going live. Zero growth after 48 hours points to an event not reaching the pixel - check whether the listener is live and the trigger is configured.
 
-CVR is the primary success metric. A chat-derived audience should convert at a meaningfully higher rate than a same-funnel page-view audience. If it doesn't, verify the right events are in the audience definition - `Nobi:session_abandoned` and product click events, not a generic page_view. That specificity is what makes the audience high-intent; a generic trigger undermines it.
+CVR is the primary success metric. A search-derived audience should convert at a meaningfully higher rate than a same-funnel page-view audience. If it doesn't, verify the right events are in the audience definition - `Nobi:session_abandoned` and product click events, not a generic page_view. That specificity is what makes the audience high-intent; a generic trigger undermines it.
 
 Nobi's dashboard shows search engagement, assistant CVR, and session counts. ROAS and audience-level attribution belong in your ad platform - that's where the audience was built and where the budget runs.
 
 
-<BlogEmailCapture hook="Shoppers chatting on your store but leaving without buying?" subtext="Drop your email and we'll show you how Nobi's AI assistant captures the intent signals from chat sessions so your remarketing pixels can actually bring those shoppers back." />
+<BlogEmailCapture hook="Shoppers searching your store but leaving without buying?" subtext="Drop your email and we'll show you how Nobi's AI assistant captures the intent signals from their searches so your remarketing pixels can actually bring those shoppers back." />
 
 ---
 

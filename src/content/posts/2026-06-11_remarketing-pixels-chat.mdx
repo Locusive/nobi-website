@@ -3,8 +3,8 @@ export const meta = {
  slug: "remarketing-pixels-chat",
  date: "2026-06-11",
  publishedAt: "2026-06-11",
- description: "Nobi's Hooks API fires search-intent signals, category queries, product interest, conversation drop-off, to GTM so your pixels build sharper retargeting audiences.",
- excerpt: "Nobi's Hooks API fires search-intent signals, category queries, product interest, conversation drop-off, to GTM so your pixels build sharper retargeting audiences.",
+ description: "When a shopper searches your store, Nobi sends the query to your Facebook Pixel and Google Tag Manager - so you can retarget the high-intent shoppers who searched but didn't buy.",
+ excerpt: "When a shopper searches your store, Nobi sends the query to your Facebook Pixel and Google Tag Manager - so you can retarget the high-intent shoppers who searched but didn't buy.",
  tags: ["how-to", "sales assistance", "ecommerce", "ecommerce search"],
  author: "Shanif Dhanani",
  heroImage: "https://storage.googleapis.com/nobi-public/docs_and_marketing_websites/posts/remarketing-pixels-chat/hero.webp",
@@ -12,32 +12,28 @@ export const meta = {
  draft: false,
  faqItems: [
  {
- question: "Why is a shopper who searches but doesn't buy your sharpest retargeting candidate?",
- answer: "A search captures declared intent - the shopper named a product type, price ceiling, or specific attribute before leaving. A page view only confirms arrival; it says nothing about what the shopper wanted. Conversation abandonment is a high-intent non-convert signal that standard pixels never capture. That specificity makes the shopper far easier to retarget with relevant creative than anyone who simply browsed a category page."
+ question: "Why is a shopper who searches but doesn't buy worth retargeting?",
+ answer: "A search is declared intent - the shopper named a product, a feature, or a budget in their own words. A page view only tells you they arrived; it says nothing about what they wanted. So a shopper who searched 'waterproof boots under $150' and left is a far more qualified retargeting candidate than someone who scrolled a category page, and they're easier to win back with a relevant ad."
  },
  {
- question: "What is Nobi, and how does it expose search intent as taggable retargeting signals?",
- answer: "Nobi is an AI-powered site search and shopping assistant for ecommerce brands. When a shopper types a query or has a conversation, Nobi records the interaction as a structured event - what category they asked about, which product they engaged with, and where they dropped off. Through the Hooks API, those events fire to your tag manager, which routes them to the ad pixels you already run. Nobi surfaces the signal; your ad platform builds the audience."
+ question: "What does Nobi actually send to your ad pixels?",
+ answer: "The shopper's search query, on each search, to whichever channel you enable. With Facebook on, Nobi fires a standard Search event to your Facebook Pixel with the query in the search_string parameter. With Google on, Nobi pushes a nobi_search event to your site's dataLayer with the query in a nobi_search_query field. That is the whole signal - the search query - and it fires only on a search, not on browsing or assistant questions."
  },
  {
- question: "What search-intent signals does Nobi expose for retargeting?",
- answer: "Nobi surfaces three categories of structured events: category interest, product intent, and conversation abandonment. Category interest captures what a shopper named in plain language - 'leather boots' or 'gifts under $50' - rather than inferring it from browse behavior. Each event fires as a named payload your tag manager can consume and route to existing ad pixels."
+ question: "Do you need a developer to set it up?",
+ answer: "No. It's two toggles in the Nobi dashboard under Account, Settings, Remarketing. For Facebook there's nothing else to do on the Nobi side. For Google you add one standard Custom Event trigger in Google Tag Manager that matches the nobi_search event. The only prerequisite is that your Facebook Pixel or GTM container is already installed on your site."
  },
  {
- question: "How do you wire Nobi's Hooks API to Google Tag Manager?",
- answer: "The article describes the Hooks API as the developer-facing layer that makes Nobi's internal events available to Google Tag Manager, but does not walk through the specific wiring steps. Check Nobi's developer documentation for the full integration guide."
+ question: "How do you build a retargeting audience from Nobi searches?",
+ answer: "In Meta, the Search event flows into your Pixel and you create a custom audience from it in Ads Manager. In Google, add a Custom Event trigger on nobi_search in GTM, attach it to your Google Ads remarketing tag, and build the audience in Google Ads. Nobi fires the event; your ad platform builds and targets the audience."
  },
  {
- question: "What does Nobi handle versus what do you configure in your ad platform?",
- answer: "Nobi records shopper queries and conversations as structured events and fires them to your tag manager through the Hooks API. Your tag manager then routes those events to whatever ad pixels you already run - Meta, Google, TikTok, or others. Nobi does not push data directly into any ad platform, and your existing pixel setup stays intact."
+ question: "What does Nobi handle versus what stays in your ad platform?",
+ answer: "Nobi only fires the search event with the query. It has no direct connection to Meta, Google, or TikTok, and it does not build audiences, set bids, or report ROAS - all of that happens in your ad account. Your existing pixel and campaign setup stays exactly as it is."
  },
  {
- question: "Why does a search-derived audience outperform a page-view audience for mid-funnel retargeting?",
- answer: "A search-derived audience is built on declared signals - a shopper named a product type, a price range, or a specific attribute in plain language. A page-view audience is built on inferred signals that only confirm a shopper arrived. Mid-funnel retargeting performs best on intent density, not list size, so a smaller search-derived segment routinely outperforms a larger page-view pool on cost per conversion."
- },
- {
- question: "How do you know if your search-derived retargeting audiences are working?",
- answer: "Measure it in your ad platform's standard campaign reporting - cost per conversion and return on ad spend - by comparing your search-derived segments against your existing page-view audiences. Because a search-derived audience is built from shoppers who told the assistant exactly what they wanted, it should retarget more efficiently than a broad page-view pool, and that side-by-side gap is the clearest sign the signal is working."
+ question: "How do you know if it's working?",
+ answer: "After you turn it on, your custom audience in Meta or Google should start growing within a day or two. Then compare its cost per conversion and return on ad spend against your existing page-view retargeting. A search-built audience should convert more efficiently, because everyone in it told you what they were looking for. If the audience stays flat, the event isn't reaching your pixel - check the toggle and, for Google, the nobi_search trigger."
  }
  ],
 };
@@ -47,7 +43,7 @@ export const meta = {
   "@context": "https://schema.org",
   "@type": "Article",
   "headline": "How To Retarget Shoppers Who Search But Don't Buy",
-  "description": "Nobi's Hooks API fires search-intent signals, category queries, product interest, conversation drop-off, to GTM so your pixels build sharper retargeting audiences.",
+  "description": "When a shopper searches your store, Nobi sends the query to your Facebook Pixel and Google Tag Manager so you can retarget the high-intent shoppers who searched but didn't buy.",
   "datePublished": "2026-06-11",
   "dateModified": "2026-06-11",
   "author": {
@@ -80,94 +76,66 @@ export const meta = {
 
 If you run retargeting ads, you're already paying to win back the shoppers who came to your store and left without buying. The catch is what those audiences are built on. Almost all of them are assembled from page views: someone landed on your boots collection, so now they see boots ads for a week. That's better than nothing, but it's a blunt signal. The shopper who glanced for three seconds and the one who was genuinely close to buying end up in the same bucket, getting the same generic ad.
 
-But a lot of those shoppers already told you exactly what they wanted. When someone types "waterproof boots under $150" into your search bar or asks your assistant for it, they've handed you the category, the feature, and the budget in a single line - a far sharper signal than a page view, and a clear pointer to the shoppers most worth chasing. The trouble is that signal usually goes nowhere. Unless you capture it, that intent never reaches your ad pixels, and a high-intent shopper gets retargeted like any random browser, or missed entirely.
+But a lot of those shoppers already told you exactly what they wanted. When someone types "waterproof boots under $150" into your store's search, they've handed you the category, the feature, and the budget in a single line - a far sharper signal than a page view, and a clear pointer to the shoppers most worth chasing. The trouble is that signal usually goes nowhere. Unless something passes it to your ad pixels, that search never reaches your retargeting, and a high-intent shopper gets retargeted like any random browser, or missed entirely.
 
-This guide walks through how to turn those searches and questions into events your existing Meta, Google, and TikTok pixels can read - so your retargeting follows what shoppers were actually after, not just which page they happened to open.
+This guide shows how to send those searches to your existing Facebook and Google pixels, so your retargeting follows what shoppers were actually after, not just which page they happened to open.
 
 ## Why is a shopper who searches but doesn't buy your sharpest retargeting candidate?
 
-A page view tells you a shopper found your site. A search tells you what they want - category, product type, price range, the specific question that made them hesitate. Most ecommerce retargeting pools are built on the weak signal, and the stronger signal goes untagged. The shopper who typed "do you carry waterproof boots under $150?" and then left is a far more qualified mid-funnel candidate than anyone who scrolled the boots category page.
+A page view tells you a shopper found your site. A search tells you what they came for - the category, the product type, the price range, the exact thing they typed. Most ecommerce retargeting audiences are built on the page view, the weaker signal, while the stronger one goes unused. The shopper who searched "waterproof boots under $150" and then left is a far more qualified retargeting candidate than anyone who scrolled the boots category page.
 
-Conversation abandonment - asking a question and leaving without buying - is a high-intent non-convert signal no standard pixel captures. A shopper who mentioned a specific attribute in their search (waterproof, vegan, size 12 wide) told you more about their intent than any browse session can.
+That's the whole idea behind search retargeting. Instead of chasing everyone who landed on a URL, you chase the people who told you, in their own words, what they were shopping for. There are fewer of them, and each one is worth more, because the intent is declared rather than guessed.
 
-Mid-funnel retargeting performs best on intent density, not list size. A smaller search-derived audience routinely outperforms a larger page-view pool on cost per conversion, because the signal behind it is declared, not inferred.
+## What is Nobi, and how does it send search intent to your pixels?
 
-## What is Nobi, and how does it expose search intent as taggable retargeting signals?
+Nobi is an AI-powered site search and shopping assistant for ecommerce brands. The piece that matters here is the search. When a shopper runs a search on your store, Nobi can pass that query straight to the ad pixels you already run.
 
-That declared intent only becomes retargetable if something captures it as a structured event instead of a raw session log. Nobi does that. Nobi is an AI-powered site search and shopping assistant for ecommerce brands. When a shopper types a query or has a conversation with Nobi's assistant, the platform records the interaction as a structured event - what category they asked about, which product they engaged with, where they dropped off. Through the Hooks API, those events fire to your tag manager so your existing ad pixels can act on them. Nobi exposes the signal; your ad platform builds the audience.
+It works on two channels, each behind its own toggle. With Facebook turned on, Nobi fires a standard `Search` event to your Facebook Pixel, with the shopper's query in the `search_string` parameter. With Google turned on, Nobi pushes a `nobi_search` event to your site's dataLayer, with the query in a `nobi_search_query` field, where Google Tag Manager can pick it up. That is the signal: the search query, sent the moment a shopper searches.
 
-The platform combines three things in one integration: AI-powered site search, a conversational shopping assistant, and automatic shopper Q&A on product pages and policy questions. One install covers both search relevance and conversational intent capture. A shopper who types "slim fit chinos in dark blue" into search generates the same structured event as one who asks the assistant whether a jacket runs true to size - both signals flow through the same Hooks layer.
+## What exactly does Nobi send to your pixels - and what it doesn't?
 
-Pricing starts at $25/month, which includes 2,500 searches and 250 conversational messages. Beyond that: $0.01 per additional search, $0.10 per additional message.
+Being precise here keeps your setup simple. Nobi sends one thing: the search query. It sends it on a search, to whichever of the two channels you've turned on. The Facebook side is the standard `Search` event every pixel already understands. The Google side is a `nobi_search` dataLayer event with the query attached.
 
-## What search-intent signals does Nobi expose for retargeting?
+It does not send product clicks, add-to-cart actions, or where a shopper dropped off, and it doesn't fire on browsing or on questions a shopper asks the assistant - only on a search. There's no separate events API to wire up and no custom JavaScript to write. If you've seen integrations that stream a dozen behavioral events into your pixels, this isn't that. It's the search query, and that single signal is already a strong one to retarget on.
 
-The events that Hooks API fires aren't generic page-view signals - they fall into three distinct categories. Nobi surfaces category interest, product intent, and conversation abandonment from each shopper session. Each fires as a named event with a payload your tag manager can consume and route to the ad pixels you already run.
+## How do you turn on Nobi search retargeting?
 
-**Category interest** captures what area a shopper was shopping in. A query like "leather boots" or "gifts under $50" names a purchase category directly - not inferred from a browsed collection, but declared in plain language. Nobi fires that category as part of the event payload, so your retargeting ad can reference it by name rather than serving a generic "come back" message.
+Setup is mostly toggles. The one prerequisite is that the pixel or container you're sending to is already installed on your site - Nobi sends the event, it doesn't install your pixel for you.
 
-**Product intent** goes narrower. Clicks on specific products the assistant surfaced, add-to-cart prompts the assistant issued, and questions about a specific SKU on a product page all fire as distinct events. Each carries a product ID, so your creative can show the exact item the shopper touched rather than a broad category ad.
+1. In the Nobi dashboard, open **Account → Settings → Remarketing**.
+2. Turn on **Send search data to Facebook Pixel**, **Send search data to Google Tag Manager**, or both. Facebook needs your Pixel already on the site; Google needs your GTM container installed.
+3. For Facebook, that's all you do in Nobi. The `Search` event starts flowing to your Pixel, and you build the custom audience in Meta Ads Manager.
+4. For Google, open GTM and create a Custom Event trigger that matches the event name `nobi_search`. Attach it to your Google Ads remarketing tag. If you want to use the query itself for segmenting, read it from the `nobi_search_query` field in the dataLayer.
 
-**Conversation abandonment** is the most valuable trigger of the three. A session that ends mid-conversation - after a question but before a purchase - is a high-intent non-convert signal no standard pixel captures on its own.
+No Nobi-specific GTM template is required. `nobi_search` is just a custom event, wired up the same way as any other event in your container.
 
-All three fire in real time, not in a batch export. Audience membership in your ad platform reflects sessions from within hours to a day, depending on your ad platform. The payload attached to each event - the category queried, the product ID, the point in the conversation where the session ended - is what makes the downstream creative work.
+## What does Nobi handle versus what you set up in your ad platform?
 
-## How do you wire Nobi's Hooks API to Google Tag Manager?
+The split is clean. Nobi's job ends at the event: when a shopper searches, it fires the query to your Pixel and your dataLayer. It has no direct connection to Meta, Google, or TikTok, and it doesn't build audiences, set bids, or report on spend.
 
-Getting those payloads into GTM is a two-part job. A dashboard toggle handles the base search event - it pushes `Nobi_search` to your dataLayer automatically. The richer Hooks events that carry product clicks and session abandonment signals require a JavaScript listener on the page as well. That listener is a developer or GTM-admin task; it's not achievable from the dashboard alone.
+Everything downstream is yours. For Google, your tag manager routes the event to your remarketing tag. Your ad platform is where the audience actually forms - you define a custom audience from the incoming event, set the lookback window, and the audience grows as searches come in. Writing the ads and managing the campaign are yours too. Nobi produces the signal; your ad stack does the targeting.
 
-The documented steps for the GTM integration:
+## Why does a search-built audience beat a page-view audience?
 
-1. Confirm Google Tag Manager is already installed on your site.
-2. In the Nobi dashboard, go to **Assistant → Behavior**, then scroll to **Remarketing**.
-3. Toggle on **Send search data to Google Tag Manager**. This pushes a `Nobi_search` event to your dataLayer with the shopper's query in the `Nobi_search_query` field.
-4. In GTM, create a Custom Event trigger matching the `Nobi_search` event name.
-5. Attach the trigger to your Google Ads Remarketing tag, then build a remarketing audience in Google Ads based on that event.
+A page-view audience scoops up everyone who landed on a URL: window-shoppers, accidental clicks, customers checking an order. A search-built audience only contains people who took an active step and told you what they wanted. It's smaller and higher-intent, and for retargeting that's the trade you want - intent density over reach.
 
-For the richer Hooks events - product clicks, session abandonment, category-level queries - a JavaScript listener registered on the page catches each named event (`Nobi:product_click`, `Nobi:session_abandoned`, and others) and calls `dataLayer.push()` with the event name and its payload: the product ID, session ID, and the category the shopper queried. In GTM, configure a Custom Event trigger matching the event name and attach it to your Meta Pixel, Google Ads Remarketing, or TikTok Pixel tag. Pass the payload fields as custom parameters. No Nobi-specific GTM template is required - it's the same custom-event wiring pattern GTM already uses.
+Smaller usually means cheaper to convert, too, because every impression lands on someone who declared an interest rather than someone who happened to scroll past. And because the query rides along in the `nobi_search_query` field, your creative has something to work with: a shopper who searched for waterproof boots can get a waterproofing-led ad instead of a generic banner.
 
-The listener requires someone comfortable writing dataLayer code. Once the listener is live, it runs on every page load and routes events automatically - no per-session work after setup.
+[Lucchese](/customers/lucchese) attributed $3.46M in cumulative revenue to Nobi, with its cart and product-page assistants driving incremental checkouts across the site.
 
-## What does Nobi handle versus what do you configure in your ad platform?
+## How do you know if it's working?
 
-The listener running on every page load is Nobi's half of the job done. From that point, three separate systems each take their slice.
+Three checks. First, audience growth. Once the toggle is on and the trigger is live, your custom audience in Meta or Google should start filling within a day or two. If it's flat after that, the event isn't reaching your pixel - confirm the toggle is on and, for Google, that the `nobi_search` trigger is configured.
 
-Nobi's scope stops at the event. It detects what a shopper did inside the assistant - the category they queried, the product they clicked, the point where the conversation ended - and fires a named event with that structured payload to your tag manager. Nobi has no direct connection to Meta, Google Ads, or TikTok. It doesn't build audiences, set bids, or read ROAS. It produces the signal; your infrastructure acts on it.
+Second, efficiency. Pull cost per conversion and return on ad spend for the search-built audience and compare them against your page-view retargeting. A search audience should convert more efficiently. If it doesn't, check that the audience is defined on the `Search` or `nobi_search` event and not a generic page view.
 
-Your tag manager sits in the middle. GTM receives the event from the dataLayer and routes it to whichever ad pixel tags you've configured as triggers. A Custom Event trigger matching the event name fires your Meta Pixel, Google Ads Remarketing tag, or TikTok Pixel - the same wiring pattern GTM uses for any custom event.
+Third, on-site conversion when those shoppers come back. Nobi's dashboard shows search engagement and assistant performance; the audience-level ROAS and attribution live in your ad platform, since that's where the audience was built and where the budget runs.
 
-Your ad platform is where the audience actually forms. Meta Ads Manager, Google Ads, and TikTok Ads each let you define a custom audience from an incoming pixel event - select the event name, filter by payload fields like category or product ID, set the lookback window. As events accumulate, the audience grows. Your retargeting campaign serves creative to that audience. Writing the ads and managing bids are yours entirely.
-
-The full pipeline in one line: shopper asks a question → Nobi fires the event → GTM pushes it to your dataLayer → the ad pixel fires → the custom audience adds the visitor → your retargeting campaign serves the ad.
-
-## Why does a search-derived audience outperform a page-view audience for mid-funnel retargeting?
-
-That pixel firing at the end of the pipeline isn't just another browsing event. Page-view audiences capture everyone who landed on a URL - window-shoppers, accidental visitors, returning customers checking order status. A search-derived audience captures only shoppers who took an active step: they typed a question, expressed a preference, or engaged with a product recommendation before dropping off. That selectivity produces a smaller, higher-intent pool, and mid-funnel retargeting performs better on intent density than on list size.
-
-Smaller also means cheaper to reach. On a mid-funnel campaign, lower audience size typically produces lower cost per conversion, because every impression lands on someone who declared an interest rather than someone who happened to scroll past a URL. This isn't an argument against broad top-of-funnel prospecting, where large audiences are the right call. It's specific to mid-funnel retargeting, where intent density matters more than reach.
-
-Search intent also gives your creative team something to work with that page views don't. If a shopper asked specifically about waterproof features, you can serve a waterproofing-focused ad rather than a generic category banner. That specificity raises ad relevance scores and gives the shopper a reason to click back.
-
-The smaller audience and the richer creative signal compound. [Lucchese](/customers/lucchese) attributed $3.46M in cumulative revenue to Nobi, with cart and PDP assistants driving incremental checkouts across the site.
-
-## How do you know if your search-derived retargeting audiences are working?
-
-The core metrics are three: audience size growth in your ad platform, cost per conversion for the search-derived audience versus your existing page-view campaigns, and on-site CVR when those retargeted shoppers return.
-
-Start with a baseline before you go live. Pull your current CPC and CVR from your page-view retargeting campaigns so you have a clean comparison point. Then isolate the search-derived audience in its own campaign or ad set - blending it with page-view retargeting makes it impossible to read performance separately.
-
-The first health check is audience growth. If the Hooks API is firing correctly, your custom audience in Meta or Google should grow within 24-48 hours of going live. Zero growth after 48 hours points to an event not reaching the pixel - check whether the listener is live and the trigger is configured.
-
-CVR is the primary success metric. A search-derived audience should convert at a meaningfully higher rate than a same-funnel page-view audience. If it doesn't, verify the right events are in the audience definition - `Nobi:session_abandoned` and product click events, not a generic page_view. That specificity is what makes the audience high-intent; a generic trigger undermines it.
-
-Nobi's dashboard shows search engagement, assistant CVR, and session counts. ROAS and audience-level attribution belong in your ad platform - that's where the audience was built and where the budget runs.
-
-
-<BlogEmailCapture hook="Shoppers searching your store but leaving without buying?" subtext="Drop your email and we'll show you how Nobi's AI assistant captures the intent signals from their searches so your remarketing pixels can actually bring those shoppers back." />
+<BlogEmailCapture hook="Shoppers searching your store but leaving without buying?" subtext="Drop your email and we'll show you how Nobi sends every on-site search to your Facebook and Google pixels, so you can retarget the shoppers who told you exactly what they wanted." />
 
 ---
 
-Start a free Nobi trial and you can have your first Hooks API event firing to GTM within the first week. The base plan is $25 a month. No revenue share, no per-seat fees.
+Start a free Nobi trial and you can have search events firing to your pixels within the first week. The base plan is $25 a month - 2,500 searches and 250 conversational messages included, then $0.01 per additional search and $0.10 per additional message. No revenue share, no per-seat fees.
 
 <div className="my-8 flex justify-center">
  <a

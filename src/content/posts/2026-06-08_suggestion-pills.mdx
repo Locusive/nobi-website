@@ -179,11 +179,11 @@ Certain prompt categories tend to work well across most storefronts:
 
 Avoid pills that are too generic to answer well ("Show me your best products") or too SKU-specific for a page carrying a wide assortment.
 
-For prompts on sensitive topics - allergens, exact dimensions, compatibility claims - Nobi can run a second AI review that checks each draft answer against the source content before it sends. That extra pass reduces the chance a fabricated answer erodes trust on a question where accuracy matters most.
+Nobi runs a second AI review - an LLM judge - on every generated pill, checking each draft answer against the source content before it ships. That always-on pass reduces the chance a fabricated answer erodes trust, and it matters most on sensitive questions like allergens, exact dimensions, or compatibility claims, where accuracy is critical.
 
 ## Can I customize suggestion pills for different pages or audiences?
 
-The prompt categories that work for your storefront don't all belong on every page. Nobi generates suggestion pills based on the specific page type a visitor is on - homepage, PDP, or collection page - so the questions shift based on where the shopper is in the funnel without any manual segmentation work on your end. Merchants can override the LLM-generated defaults and pin specific prompts to specific page types, giving marketing control over key surfaces without an engineering dependency.
+The prompt categories that work for your storefront don't all belong on every page. Nobi generates suggestion pills based on the specific page type a visitor is on - homepage, PDP, or collection page - so the questions shift based on where the shopper is in the funnel without any manual segmentation work on your end. Merchants can override the LLM-generated defaults with specific prompts, but pinning one means adding a fixed pill to the storefront markup (or setting up a query-override rule) - a light dev or theme change, not a no-code dashboard toggle.
 
 Page type determines the category of question each pill asks. On the homepage, pills skew broad: gift finders, category guidance, use-case entry points that work across the full catalog. On a PDP, the AI narrows to the item in view - size guidance, material questions, compatibility checks, return and exchange policy for that specific product type. On a collection page, pills help shoppers narrow a wide result set: "What's the difference between X and Y in this collection?" or "What's the most popular option for [use case]?"
 

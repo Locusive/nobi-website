@@ -1,13 +1,3 @@
-The article is in the prompt itself, not on disk yet. I'll rewrite only the opening paragraph and return the full MDX.
-
-
-<BlogEmailCapture hook="Hitting Algolia's free tier limits on your storefront?" subtext="Drop your email and we'll show you how Nobi's AI search surfaces the right products for the queries your store is currently missing." />
-
----
-
-Here is the full article with only the opening paragraph rewritten:
-
-```mdx
 export const meta = {
  title: "Algolia Free Tier: Limits, Costs, and Alternatives",
  slug: "algolia-free-tier-limits-alternatives",
@@ -26,8 +16,8 @@ export const meta = {
  answer: "Algolia's free Build plan includes 10,000 search requests per month, 1 million indexed records, full API access, and the InstantSearch widget library. That is enough to build a working search experience without spending anything up front. NeuralSearch - Algolia's semantic matching layer - is not included on Build or any plan below the enterprise Elevate tier."
  },
  {
- question: "When do small stores typically hit Algolia's 10K search limit?",
- answer: "A predictive search widget fires one API call per keystroke, not once per search session. A visitor typing a five-character query sends four or five requests before seeing any results. A store with 2,000 to 3,000 active monthly users running a predictive widget can exhaust the 10,000-request cap within the first few weeks of the month. There is no configurable warning - you find out when overage charges appear on the bill or when responses start throttling."
+ question: "When do small sites typically hit Algolia's 10K search limit?",
+ answer: "A predictive search widget fires one API call per keystroke, not once per search session. A visitor typing a five-character query sends four or five requests before seeing any results. A site with 2,000 to 3,000 active monthly users running a predictive widget can exhaust the 10,000-request cap within the first few weeks of the month. There is no configurable warning - you find out when overage charges appear on the bill or when responses start throttling."
  },
  {
  question: "How much does Algolia cost once you're past the free tier?",
@@ -39,11 +29,11 @@ export const meta = {
  },
  {
  question: "What are the main alternatives to Algolia when the free tier isn't enough?",
- answer: "The article does not cover alternatives to Algolia. For a side-by-side comparison of site search tools, you would need to consult a broader resource."
+ answer: "The right alternative depends on which gap matters most. For semantic search and conversational Q&A without an enterprise contract, Nobi starts at $25/month and includes 2,500 searches and 250 conversational messages. Hawk Search is built for B2B and large multi-category catalogs but requires months of implementation. Coveo and Yext are enterprise-grade tools requiring sales procurement — not practical for a team that just hit the free-tier ceiling."
  },
  {
  question: "Should I upgrade Algolia or switch to something else?",
- answer: "The article does not make a direct upgrade-or-switch recommendation. The clearest decision point it surfaces is whether semantic search is a hard requirement - if it is, that means an Improve enterprise contract regardless of how much you spend on Grow or Grow Plus."
+ answer: "Stay on Algolia if you have a developer who can maintain synonym lists and ranking rules and pay-as-you-go billing fits your traffic. Upgrade to Grow for more headroom; move to Grow Plus for AI Synonyms, AI Ranking, and 90-day analytics retention. Spending more on Algolia does not unlock NeuralSearch - that requires an Elevate enterprise contract. Switch to Nobi if you need semantic search and conversational Q&A without an enterprise contract, starting at $25/month."
  }
  ],
 };
@@ -84,7 +74,7 @@ export const meta = {
 </script>
 ## What are Algolia's free tier limits, and what should you do when you hit them?
 
-You signed up for Algolia's free tier - or you're about to - and you want to know if it'll last. Probably not as long as you think. The Build plan gives you 10,000 search requests per month and a million indexed records at no cost, which sounds generous until you see how a predictive search widget counts requests. Every keystroke fires a separate API call. A visitor typing five characters sends four or five requests before a single result appears. A store with 2,000 active monthly users can exhaust that cap in two or three weeks of normal usage. When you do hit it, there's no warning - the bill appears, or results start throttling, or both. This article covers what you actually get on the free tier, what it costs when you outgrow it, and which alternatives are worth comparing.
+You signed up for Algolia's free tier - or you're about to - and you want to know if it'll last. Probably not as long as you think. The Build plan gives you 10,000 search requests per month and a million indexed records at no cost, which sounds generous until you see how a predictive search widget counts requests. Every keystroke fires a separate API call. A visitor typing five characters sends four or five requests before a single result appears. A site with 2,000 active monthly users can exhaust that cap in two or three weeks of normal usage. When you do hit it, there's no warning - the bill appears, or results start throttling, or both. This article covers what you actually get on the free tier, what it costs when you outgrow it, and which alternatives are worth comparing.
 
 ## What does Algolia's free tier actually include?
 
@@ -96,7 +86,7 @@ Being on the free tier does not change how much configuration work is involved. 
 
 One more thing worth knowing before you start: there is no warning gate on the Build plan's limits. When usage goes over 10,000 requests or 1 million records, overage billing kicks in automatically.
 
-## When do small stores typically hit Algolia's 10K search limit?
+## When do small sites typically hit Algolia's 10K search limit?
 
 That automatic overage billing arrives faster than most founders expect - and the reason is how predictive search actually counts requests.
 
@@ -118,17 +108,15 @@ What spending more on either plan does NOT get you is NeuralSearch. Algolia's se
 
 The last cost worth accounting for doesn't appear on an invoice: developer time. Synonym lists and ranking rules need to be written and maintained at every paid tier. Grow caps rules at 10 per index; Grow Plus raises that limit to 10,000. Regardless of the cap, someone has to write and update them. As your catalog grows or your search patterns shift, that list grows with it. A team without a dedicated search engineer will feel this cost most.
 
-Looking at the violations, both flagged strings contain em dashes (`, `) and are located entirely within the H2 heading, which must be kept exactly as-is. The body text already uses ` - ` throughout. The section is already compliant in the body, and the heading violations are explicitly exempted. Returning the section as-is:
-
 ## What does Algolia's free tier, and every tier below Elevate, leave out?
 
-Spending more on Grow or Grow Plus doesn't close the capability gap - it narrows the symptom at most. Below Elevate, Algolia's matching is keyword-first: a visitor who types "something lightweight for a summer wedding" gets results that match those exact words, not the intent behind them.
+Spending more on Grow or Grow Plus reduces the manual maintenance burden at most, but doesn't change what the matching layer can understand. Below Elevate, Algolia's matching is keyword-first: a visitor who types "something lightweight for a summer wedding" gets results that match those exact words, not the intent behind them.
 
 NeuralSearch - Algolia's semantic matching layer - is exclusive to the Elevate enterprise tier. There's no add-on or spend threshold that unlocks it on any self-serve plan. A user typing a descriptive or long-tail query that doesn't match catalog titles word-for-word simply falls through. They get irrelevant results, or nothing.
 
 On Build and standard Grow, the only vocabulary workaround is a manually maintained synonym list. Grow Plus adds AI-assisted synonym generation, which reduces the manual load but doesn't change the underlying architecture. Results are still keyword-driven. Every synonym you add papers over one specific phrasing gap; the next variation opens another.
 
-The second gap runs deeper and holds at every tier: there's no native conversational Q&A anywhere in Algolia's lineup. A customer who asks "is this fabric machine washable?" gets a search results page, not a direct answer. That's true on Build, Grow, Grow Plus, and Improve alike. Algolia can surface products based on keywords in the question, but it can't read the question and answer it. The visitor either rewrites their question as a keyword or leaves. Closing the true Q&A gap requires either a custom build on top of the API or a separate tool entirely.
+The second gap runs deeper and holds at every tier: there's no native conversational Q&A anywhere in Algolia's lineup. A customer who asks "is this fabric machine washable?" gets a search results page, not a direct answer. That's true on Build, Grow, Grow Plus, and Premium alike. Algolia can surface products based on keywords in the question, but it can't read the question and answer it. The visitor either rewrites their question as a keyword or leaves. Closing the true Q&A gap requires either a custom build on top of the API or a separate tool entirely.
 
 Both are capability gaps. Spending more on self-serve plans doesn't close either one. They are structural limits of keyword-first matching, and the only path through them on Algolia is an enterprise contract.
 
@@ -136,13 +124,21 @@ Both are capability gaps. Spending more on self-serve plans doesn't close either
 
 The right alternative depends on why the free tier stopped working: too much search volume, no semantic layer, or no conversational Q&A. Algolia is still the right call for teams with a developer who wants full API control over every ranking decision. The options below fill different gaps.
 
-**Nobi** is an AI-powered site search and conversational assistant platform that starts at $25/month, including 2,500 searches and 250 conversational messages. Beyond that, it's $0.01 per additional search and $0.10 per additional message. Semantic search and direct customer Q&A are both available at entry pricing - no enterprise contract required to get what Algolia gates behind Improve. Setup doesn't require a developer. Honest limitation: personalization today covers personalized placeholder text and starter messages only. Behavioral reranking based on individual visitor history isn't available yet.
+## 1. Nobi
 
-**[Hawk Search](https://www.hawksearch.com)** uses enterprise-tiered pricing - contact HawkSearch for current rates. It's purpose-built for B2B and large multi-category catalogs with complex faceted navigation. There's no native Shopify connector - teams on Shopify pay for a custom integration build before search is live. Implementation runs months, not days.
+[Nobi](https://nobi.ai) is an AI-powered site search and conversational assistant platform that starts at $25/month, including 2,500 searches and 250 conversational messages. Beyond that, it's $0.01 per additional search and $0.10 per additional message. Semantic search and direct customer Q&A are both available at entry pricing - no enterprise contract required to get what Algolia gates behind the Elevate tier. A small theme edit and you're live the same day. Honest limitation: personalization today covers personalized placeholder text and starter messages only. Behavioral reranking based on individual visitor history isn't available yet.
 
-**[Coveo](https://www.coveo.com)** is enterprise AI search built for organizations unifying search across multiple properties. Procurement is sales-led and the rollout is services-heavy - first-year costs routinely reach six figures once implementation is included. It's the wrong fit for a single-site team.
+## 2. Hawk Search
 
-**[Yext](https://www.yext.com)** is a knowledge graph platform built for structured FAQ and direct-answer syndication. Its primary use case is getting content into Google AI Overviews and other AI-generated surfaces - not product discovery on a site. Pricing is enterprise, quote-only.
+[Hawk Search](https://www.hawksearch.com) uses enterprise-tiered pricing - contact HawkSearch for current rates. It's purpose-built for B2B and large multi-category catalogs with complex faceted navigation. There's no native Shopify connector - teams on Shopify pay for a custom integration build before search is live. Implementation runs months, not days.
+
+## 3. Coveo
+
+[Coveo](https://www.coveo.com) is enterprise AI search built for organizations unifying search across multiple properties. Procurement is sales-led and the rollout is services-heavy - first-year costs routinely reach six figures once implementation is included. It's the wrong fit for a single-site team.
+
+## 4. Yext
+
+[Yext](https://www.yext.com) is a knowledge graph platform built for structured FAQ and direct-answer syndication. Its primary use case is getting content into Google AI Overviews and other AI-generated surfaces - not product discovery on a site. Pricing is enterprise, quote-only.
 
 ## Should I upgrade Algolia or switch to something else?
 
@@ -150,17 +146,13 @@ Coveo and Yext both require enterprise procurement - the sales cycle and contrac
 
 Stay with Algolia if a developer actively maintains your synonym lists and ranking rules and the pay-as-you-go billing fits your traffic profile. Upgrade to Grow for more headroom; move to Grow Plus if you need AI Synonyms, AI Ranking, and 90-day analytics retention. More spending on Algolia does not buy you NeuralSearch - that requires an Elevate enterprise contract. Elevate pricing is not published, so get a quote before you commit.
 
-Switch to Nobi if you need semantic search and conversational Q&A without an enterprise contract. It starts at $25/month, includes 2,500 searches and 250 conversational messages, and a quick site-side install means you're live the same day. One honest limitation: behavioral reranking based on individual visitor history is not yet on the roadmap.
+Switch to Nobi if you need semantic search and conversational Q&A without an enterprise contract. It starts at $25/month, includes 2,500 searches and 250 conversational messages, and a quick site-side install means you're live the same day. One honest limitation: behavioral reranking based on individual visitor history is not yet available.
 
 Consider Hawk Search if you run a B2B or large multi-category catalog where filter-driven discovery is the primary path and you have months for implementation. Contact HawkSearch for pricing.
 
 ---
 
-If search relevance and direct visitor Q&A at a predictable price is what you need, <a href="https://dashboard.nobi.ai">try Nobi free</a>.
-
----
-
-Check what Nobi would cost at your store's search volume, and get semantic search plus visitor Q&A running today without touching a line of code.
+Check what Nobi would cost at your site's search volume - <a href="https://dashboard.nobi.ai">try Nobi free</a> and get semantic search plus visitor Q&A live today with a quick site-side install.
 
 <div className="my-8 flex justify-center">
  <a
@@ -170,8 +162,3 @@ Check what Nobi would cost at your store's search volume, and get semantic searc
  <span>Start your free Nobi trial</span>
  </a>
 </div>
-```
-
----
-
-The new opening paragraph grounds the reader in their actual situation first ("you signed up, or you're about to"), names the concrete problem (keystroke-level request counting), gives real stakes (cap in 2-3 weeks, no warning, bill or throttling), and hands off cleanly to the article structure. Sentence lengths vary from two words ("Probably not."-adjacent short) through medium to a longer explanatory sentence, avoiding the machine-gun rhythm of the original.

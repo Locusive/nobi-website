@@ -25,11 +25,11 @@ export const meta = {
  },
  {
  question: "How does Nobi generate recommendations from shopper signals without manual pinning or synonym rules?",
- answer: "The article does not detail the specific mechanics of how Nobi processes shopper signals to generate recommendations without manual rules. It notes that the grounded catalog layer handles relevance without requiring merchant-maintained synonym lists, but does not describe the signal-processing side in further detail."
+ answer: "Nobi reads in-session signals — queries typed, pages visited, and time spent on a product page — and pairs them with a shared semantic catalog index to decide which products surface next. The index handles plain-language matching without a synonym list: when a shopper describes a product, Nobi matches it to catalog items that fit the description, not just the literal title words. Suggestion pills are generated from product page context, so a boot PDP generates different prompts than the homepage without any merchant configuration."
  },
  {
  question: "How do AI-generated recommendations surface inside the chat widget and on the search results page?",
- answer: "On any page - homepage, product detail page, or collection - contextual suggestion pills appear as tappable buttons with prompts scoped to that specific page. A shopper on a boot PDP might see 'Does this run wide?' or 'Is this available in size 11?' - clicking one opens the shopping assistant with the answer to that prompt. Merchants can also configure activation rules tied to exit intent or time on page to surface a prompt card or popup before a shopper leaves."
+ answer: "On any page - homepage, product detail page, or collection - contextual suggestion pills appear as tappable buttons with prompts scoped to that specific page. A shopper on a boot PDP might see 'Does this run wide?' or 'Is this available in size 11?' - clicking one opens the shopping assistant with the answer to that prompt. Merchants can also configure activation rules tied to exit intent to surface a prompt card or popup before a shopper leaves."
  },
  {
  question: "How do you keep AI recommendations grounded and accurate, not hallucinated or stale?",
@@ -37,7 +37,7 @@ export const meta = {
  },
  {
  question: "How do you measure whether AI product recommendations are lifting attach rate and AOV?",
- answer: "The article does not cover how to measure attach rate or AOV lift from AI recommendations. Standard approaches involve A/B testing recommendation placements against a control and tracking revenue per session or items per order, but those methods are not described here."
+ answer: "Start with attach rate segmented by where the recommendation appeared — shopping assistant versus the search results page. Compare average basket size for sessions that included a recommendation interaction against matched sessions that didn't: that delta is the AOV lift number. For CVR, compare add-to-cart rate for sessions where a shopper clicked a suggestion pill against sessions that only used traditional search. Revenue per visit pulls both effects together. Nobi's analytics connect those numbers to what shoppers searched, clicked, and bought."
  },
  {
  question: "When is a different tool the better fit for AI product recommendations?",

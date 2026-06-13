@@ -97,10 +97,10 @@ export const meta = {
 </script>
 ## What are the best Yext alternatives for ecommerce site search?
 
-You found Yext because someone said it handles site search - and it does handle something, just not the ecommerce version. Yext was built for directory listings: keeping your business name, address, and hours consistent across Google, Apple Maps, and third-party sites. Its Knowledge Graph is a database your team builds by hand. Products, prices, and seasonal inventory don't flow in from your catalog feed automatically. Put a shopper question like "do these run narrow?" in front of it, and there's no live catalog to answer it. When that happens, the shopper doesn't wait - they leave, and the sale is gone. Most ecommerce brands discover the mismatch after they're already on contract. These four alternatives were built for the job Yext wasn't:
+You found Yext because someone said it handles site search - and it does handle something, just not the ecommerce version. Yext was built for directory listings: keeping your business name, address, and hours consistent across Google, Apple Maps, and third-party sites. Its Knowledge Graph is a database your team builds by hand. Products, prices, and seasonal inventory don't flow in from your catalog feed automatically. Put a shopper question like "do these run narrow?" in front of it, and there's no live catalog to answer it. When that happens, the shopper doesn't wait — they leave, and the sale is gone. Zero-result pages spike, search-to-cart conversion drops, and the revenue leak usually doesn't get traced back to the search stack until you're already on a multi-year contract. These four alternatives were built for the job Yext wasn't:
 
 - **Nobi** - AI-powered site search plus a shopping assistant grounded in your live catalog and policy docs with inline source citations. Starts at $25/mo. Pick when you need search and conversational shopper Q&A in one platform without building or maintaining a manual knowledge graph.
-- **Klevu** - AI search for Shopify that closes vocabulary gaps between how shoppers describe products and how your catalog titles them. ~$499/mo (Essential, quote-based). Pick when vocabulary mismatch is driving your zero-result rate on Shopify.
+- **Klevu** - AI search for Shopify that closes vocabulary gaps between how shoppers describe products and how your catalog titles them. ~$499-$1,598/mo (Essential to Expert, quote-only). Pick when vocabulary mismatch is driving your zero-result rate on Shopify.
 - **Algolia** - search API with full API-level control over ranking logic for engineering teams. Free up to 10K searches/mo; paid tiers scale with query volume. Pick when your engineering team wants to own every attribute that factors into results.
 - **Fast Simon** - Shopify search and visual merchandising for marketing teams running seasonal campaigns and collection edits without engineering tickets. Free tier; paid from $39.99/mo. Pick when visual collection curation is the main discovery bottleneck.
 
@@ -125,7 +125,7 @@ Nobi is an [AI-powered site search](https://nobi.ai/blog/best-ai-search-ecommerc
 
 We compared them on four things: how well each handles the gap between what shoppers type and how your catalog labels products; whether answers are grounded in your live catalog and policy docs, with citations shoppers can check; how quickly a non-engineering team can reach a working search experience; and what the real monthly cost looks like once you move past the base tier. One tool here - Nobi - is our own product. We applied the same criteria to it that we used for every other tool.
 
-Klevu leans hardest on vocabulary matching - its AI layer maps colloquial shopper queries to catalog titles that use different words. Pricing is quote-only with no published dollar figure; third-party sources put the range at roughly $499-$1,598/month depending on tier, but you won't see a number until you talk to sales.
+Klevu's core strength is vocabulary matching — its AI layer maps colloquial shopper queries to catalog titles that use different words. Pricing is quote-only with no published dollar figure; third-party sources put the range at roughly $499-$1,598/month depending on tier, but you won't see a number until you talk to sales.
 
 Algolia handles vocabulary matching through manual configuration - synonym rules and ranking logic that an engineering team writes and maintains. Pricing scales with query volume, which means the real monthly bill requires a usage estimate to model before you commit.
 
@@ -173,12 +173,14 @@ Nobi is AI-powered site search and a shopping assistant in one. Where Yext requi
 **Pricing:** Three tiers: Essential, Advanced, Expert. Quote-only - no published dollar figures on athoscommerce.com/pricing; all tiers show "Get a demo" CTA. Third-party sources cite roughly $499-$1,598/month range. Personalization features are included in Expert tier only, not lower tiers.
 
 **Pros:**
+- AI vocabulary layer maps shopper phrasing to catalog titles without building synonym lists — "wide-leg cropped trouser in navy" surfaces the right product even when the catalog title says "cropped wide pant"
+- Smart Merchandising dashboard lets non-technical teams handle seasonal pushes and priority pinning without an engineering ticket
 
 **Cons:**
 - Expensive relative to brand size
 - Merchandising UI is dated
 - Personalization features are only in the Expert tier; Essential and Advanced tiers do not include them
-- Consolidated under Athos Commerce (alongside Searchspring and Intelligent Reach) - shortlisting Klevu + Searchspring means picking between two products of the same parent company
+- Now a division of Athos Commerce (alongside Searchspring and Intelligent Reach); both are sold as distinct products with separate contracts but share the same parent company
 
 **Verdict:** Pick Klevu when vocabulary mismatch is your main CVR leak on Shopify and you need occasional pinning on top; skip it if personalization matters and Expert-tier pricing is out of range.
 
@@ -211,6 +213,7 @@ Nobi is AI-powered site search and a shopping assistant in one. Where Yext requi
 
 **Pros:**
 - App Store install gets a store live in days rather than months
+- Non-technical merchandising controls — pinning, boosting, and layout edits all sit on one dashboard a marketing manager can run daily without an engineering ticket
 
 **Cons:**
 - Primary strength is visual merchandising and collection curation; search personalization is a secondary strength
@@ -256,12 +259,3 @@ Fast Simon is built primarily for Shopify. Its merchandising controls and App St
 ---
 
 If shoppers are landing on dead-end results pages instead of answers, [try Nobi free](https://dashboard.nobi.ai) - setup is a theme drop-in, no data migration required.
-
-<div className="my-8 flex justify-center">
- <a
- href="https://dashboard.nobi.ai"
- className="inline-flex items-center justify-center gap-2 rounded-2xl font-medium transition active:scale-[.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-black/10 dark:focus-visible:ring-white/20 bg-black text-white dark:bg-white dark:text-black hover:opacity-90 shadow-sm h-12 px-6 text-base no-underline"
- >
- <span>Start your free Nobi trial</span>
- </a>
-</div>

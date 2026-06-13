@@ -94,11 +94,11 @@ There's a quieter problem: shoppers who hit a dead-end search - [zero results](/
 
 ## What is Nobi, and how does it handle search A/B testing without custom plumbing?
 
-Nobi is an AI-powered site search and shopping assistant platform for ecommerce brands, and the clean split your test needs ships built in - no separate holdout cookie, no tag-manager trigger, and no custom event instrumentation for Shopify's conversion signals.
+Nobi is an AI-powered site search and shopping assistant platform for ecommerce brands, and the clean split your test needs ships built in - no custom tracking setup, no code changes to run the test, and Shopify conversion events fire automatically.
 
 The AI search matters here because it changes what you're actually testing. A keyword engine needs the query to match the catalog title. Nobi reads natural language, so a shopper typing "relaxed-fit chino in olive" still lands on the right product even when the catalog title says "slim chino, dark green." That relevance difference is what a clean A/B test surfaces.
 
-Setting the control group takes one attribute on whichever Nobi component you're testing:
+Setting the control group takes one attribute on whichever Nobi component you're testing - your developer makes this one change:
 
 ```html
 <!-- 50% control group (won't see Nobi), 50% treatment group (will see Nobi) -->
@@ -180,7 +180,7 @@ Wait until each bucket reaches 1,000 add-to-cart events before drawing conclusio
 
 ---
 
-Nobi plans start at $25/month, including 2,500 searches and 250 conversational messages. Beyond that, it's $0.01 per additional search and $0.10 per additional message - so a store running 50,000 searches and 5,000 messages a month lands around $995. The A/B testing infrastructure ships built in at every tier. To see how the holdout performs against your own catalog, [try Nobi free](https://dashboard.nobi.ai).
+Nobi plans start at $25/month, including 2,500 searches and 250 conversational messages. Beyond that, it's $0.01 per additional search and $0.10 per additional message. The A/B testing infrastructure ships built in at every tier. To see how the holdout performs against your own catalog, [try Nobi free](https://dashboard.nobi.ai).
 
 <div className="my-8 flex justify-center">
  <a

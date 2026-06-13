@@ -1,0 +1,193 @@
+The article was passed inline. Here is the full MDX with only the opening paragraph rewritten:
+
+
+<BlogEmailCapture hook="Running A/B tests on your ecommerce search experience?" subtext="Drop your email and we'll show you how Nobi's AI search gives you a meaningful variant to run against your current setup." />
+
+---
+
+```mdx
+export const meta = {
+ title: "How to Prove a Search Change Actually Lifted Conversions",
+ slug: "ab-test-search",
+ date: "2026-06-13",
+ publishedAt: "2026-06-13",
+ description: "Set up a stable A/B holdout for ecommerce search using one HTML attribute - no custom cookies or tag-manager wiring. Shopify events fire automatically.",
+ excerpt: "Set up a stable A/B holdout for ecommerce search using one HTML attribute - no custom cookies or tag-manager wiring. Shopify events fire automatically.",
+ tags: ["how-to", "site search", "ecommerce", "ecommerce search"],
+ author: "Shanif Dhanani",
+ heroImage: "https://storage.googleapis.com/nobi-public/docs_and_marketing_websites/posts/ab-test-search/hero.webp",
+ featured: true,
+ draft: false,
+ faqItems: [
+ {
+ question: "Why does a before/after comparison miss most of what a search change actually does?",
+ answer: "A before/after comparison mixes your search change with everything else running that week - promotions, email campaigns, paid traffic spikes, and seasonal shifts you didn't control for. Traffic mix adds another layer: search visitors and browse visitors convert at different base rates, so a paid campaign bringing in high-intent shoppers can lift CVR even if your search change did nothing. Shoppers who hit dead-end searches leave without a trace, showing up only in aggregate abandonment numbers rather than as an identifiable cause. A stable holdout group that never sees the new experience is the only way to isolate what the search change itself actually did."
+ },
+ {
+ question: "What is Nobi, and how does it handle search A/B testing without custom plumbing?",
+ answer: "Nobi is an AI-powered site search and shopping assistant platform for ecommerce brands. The A/B testing infrastructure ships built in - no holdout cookie, no tag-manager trigger, and no custom event instrumentation required for Shopify stores. Rather than matching query strings to catalog titles, Nobi reads natural language, so a search for \"relaxed-fit chino in olive\" still lands on the right product even when the catalog title says something different - and that relevance difference is exactly what a clean test can surface."
+ },
+ {
+ question: "How do I set the control-group split with a single HTML attribute?",
+ answer: "You add the `ab-test-control-group` attribute to whichever Nobi component you are testing - `nobi-button`, `nobi-search-bar`, or `nobi-toggle` - and set its value to the fraction of visitors you want in the control group. A value of `0.5` routes 50% to control and 50% to treatment; `0.3` routes 30% to control and 70% to treatment. To show a fallback search experience to control-group visitors, you listen for the `nobi-component-loaded` window event and check the `isInTreatmentGroup` flag in the event detail."
+ },
+ {
+ question: "How does Nobi keep each visitor in the same test group across sessions and page loads?",
+ answer: "On each visitor's first load, Nobi assigns a persistent random number and stores it in the browser. That number determines whether the visitor falls below the control threshold or above it, and the assignment stays fixed across page loads, sessions, and referral sources for the full test window."
+ },
+ {
+ question: "Which conversion events does Nobi capture automatically, and which require an API call?",
+ answer: "For Shopify stores, Nobi captures add-to-cart and checkout events automatically with no manual instrumentation. For non-Shopify stores, you pass transactional data to Nobi through their API."
+ },
+ {
+ question: "How do I read A/B test results in GA4 or my own analytics stack - and when is the data ready to act on?",
+ answer: "Nobi sends a test-group dimension to GA4, Segment, or your data warehouse, so your analytics team can read results in the tools they already use. The article does not specify a minimum run length or a threshold for when results are ready to act on - UNTUCKit ran their test for two months before moving Nobi to 100% of traffic."
+ }
+ ],
+};
+
+<script type="application/ld+json" data-nobi-schema>
+{`{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "How to Prove a Search Change Actually Lifted Conversions",
+  "description": "Set up a stable A/B holdout for ecommerce search using one HTML attribute - no custom cookies or tag-manager wiring. Shopify events fire automatically.",
+  "datePublished": "2026-06-13",
+  "dateModified": "2026-06-13",
+  "author": {
+    "@type": "Person",
+    "name": "Shanif Dhanani",
+    "url": "https://www.linkedin.com/in/shanifdhanani/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Nobi",
+    "url": "https://nobi.ai"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://nobi.ai/blog/ab-test-search"
+  },
+  "about": [
+    {
+      "@type": "Thing",
+      "name": "site search"
+    },
+    {
+      "@type": "Thing",
+      "name": "ecommerce"
+    }
+  ]
+}`}
+</script>
+## How do you A/B test ecommerce search to prove a change lifted conversions?
+
+You've made a change to your ecommerce search - new ranking logic, a different tool, or an AI assistant you're evaluating for a full rollout. Now you want to know if it actually moved add-to-cart or checkout. The obvious approach is comparing CVR this week against last week. It looks simple, but that week also had a promotion, an email send, or a traffic mix shift you didn't control for - and you can't separate your search change from any of it. Call it wrong and you ship an update that's quietly hurting you, or you pull one that would have helped. This guide walks through how to run a clean holdout test against your search or AI assistant, read the results in your existing analytics tools, and know when the data is ready to act on.
+
+## Why does a before/after comparison miss most of what a search change actually does?
+
+Comparing CVR the week before a search change to the week after confounds your change with everything else running at the same time - promotions, email sends, paid traffic shifts, seasonal swings. A stable holdout - a fixed share of visitors who never see the new experience - isolates the one variable you changed. Without one, a CVR bump could be your search update or the sale email that landed the same morning; you have no way to tell.
+
+Traffic mix makes it worse. Search traffic and browse traffic convert at different base rates. If a paid campaign drove more high-intent visitors that week, CVR goes up regardless of what your search engine did. A clean split captures both groups in the same window, so the mix stays constant across treatment and control.
+
+There's a quieter problem: shoppers who hit a dead-end search - [zero results](/blog/fix-zero-result-searches), a vocabulary mismatch - leave without a trace. That shows up in aggregate abandonment, not as a cause, unless you're measuring per bucket. Once you have a clean split, revenue per searcher and AOV are more stable than raw CVR; a single high-AOV order can swing CVR on small samples.
+
+## What is Nobi, and how does it handle search A/B testing without custom plumbing?
+
+Nobi is an AI-powered site search and shopping assistant platform for ecommerce brands, and the clean split your test needs ships built in - no separate holdout cookie, no tag-manager trigger, and no custom event instrumentation for Shopify's conversion signals.
+
+The AI search matters here because it changes what you're actually testing. A keyword engine needs the query to match the catalog title. Nobi reads natural language, so a shopper typing "relaxed-fit chino in olive" still lands on the right product even when the catalog title says "slim chino, dark green." That relevance difference is what a clean A/B test surfaces.
+
+Setting the control group takes one attribute on whichever Nobi component you're testing:
+
+```html
+<!-- 50% control group (won't see Nobi), 50% treatment group (will see Nobi) -->
+<nobi-button ab-test-control-group="0.5">Shop With AI</nobi-button>
+
+<!-- 30% control group, 70% treatment group -->
+<nobi-search-bar ab-test-control-group="0.3"></nobi-search-bar>
+
+<!-- 80% control group, 20% treatment group -->
+<nobi-toggle ab-test-control-group="0.8"></nobi-toggle>
+```
+
+On first visit, Nobi assigns each user a persistent random number stored in the browser. Anyone below the threshold sees the control experience - Nobi hidden; everyone above sees Nobi. That assignment holds across page loads, sessions, and referral sources for the full test window. To show a fallback search experience to control-group visitors, you listen for one window event:
+
+```js
+window.addEventListener("nobi-component-loaded", (event) => {
+ const { componentType, isInTreatmentGroup } = event.detail.data;
+ if (!isInTreatmentGroup) {
+ // User is in the control group -- Nobi is hidden for this component.
+ // Show your fallback UX here.
+ console.log(`Nobi ${componentType} hidden -- showing fallback`);
+ document.getElementById("my-fallback-search").style.display = "block";
+ }
+});
+```
+
+Shopify add-to-cart and checkout events fire automatically - no manual instrumentation. For non-Shopify stores, you pass transactional data to Nobi via their API. The test-group dimension flows to GA4, Segment, or your data warehouse, so your analytics team reads the results in their own tools.
+
+[UNTUCKit](/customers/untuckit) ran this setup over two months: Nobi came in at 17.6% CVR versus 15.0% for their prior search tool, and revenue per searcher lifted 21.3% ($39.17 vs. $32.30). After the test, they moved Nobi to 100% of traffic.
+
+## How do I set the control-group split with a single HTML attribute?
+
+UNTUCKit's two-month test ran at 50/50 - but that's not where any test should start. Open at an even split before you've confirmed instrumentation and you're reading noisy data from day one.
+
+Nobi's split lives on the embed element as a single attribute: `ab-test-control-group`. The value is a decimal between 0.0 and 1.0 representing what fraction of visitors see the control experience - your existing search, Nobi hidden. Start at 0.8 (80% control, 20% treatment) while you verify that add-to-cart and checkout events are landing cleanly in both buckets:
+
+```html
+<!-- 80% control group, 20% treatment group -->
+<nobi-toggle ab-test-control-group="0.8"></nobi-toggle>
+```
+
+Once the event firing looks right in your analytics tool, change the value to 0.5. That's one attribute edit. No engineering ticket, no separate config file to keep in sync across environments.
+
+Assignment is at the visitor level, not the session level. On first visit, Nobi assigns each browser a persistent random number stored locally. A visitor whose number falls below your threshold stays in the control group for every session during the test window. Changing the attribute mid-test only applies to new visitors - anyone already assigned keeps their group. The split ratios you read at week three reflect the same population you started with, not a reshuffled one.
+
+The attribute is read on page load. There's no JavaScript variable to propagate across staging and production. The same snippet behaves consistently in both environments; update the control fraction in one place and it takes effect on the next load.
+
+Start at 0.8 or 0.9 - giving Nobi 10% to 20% of traffic - until you're confident the conversion plumbing is clean. A week there is worth it when the number you're staking the decision on is revenue per searcher.
+
+## How does Nobi keep each visitor in the same test group across sessions and page loads?
+
+Revenue per searcher is only as clean as your group membership - and group membership starts on the first page load. Nobi assigns each visitor to control or treatment when they first arrive and holds that assignment for the full test window. The same shopper who searches Monday, returns from an email Thursday, and browses on mobile Saturday stays in the same bucket. You're not counting the same high-intent visitor in both groups, and bucket drift doesn't inflate one side's numbers.
+
+The mechanism is a persistent random number Nobi assigns on first visit, stored in the browser without requiring a custom first-party cookie. Every subsequent page load reads the same number and applies the same threshold. A visitor below 0.5 on day one stays in control on day fifteen. Referral source, device, session count - none of it changes the assignment.
+
+That stability is what makes AOV comparisons reliable. AOV and revenue per searcher are both sensitive to individual high-value orders - one big purchase can swing a metric significantly on smaller samples. If the same shopper drifts between groups across sessions, that order lands in whichever bucket they happened to convert in, not the one they were assigned to. [UNTUCKit](/customers/untuckit) saw AOV climb from $215 to $222 - a 3.3% gain - over their two-month test. A number that precise is only meaningful if the group boundaries held throughout.
+
+One edge case worth knowing: if a visitor clears browser storage mid-test, Nobi assigns a new random number. They may land in a different group. This is expected behavior in any holdout system and doesn't materially affect results at normal traffic volumes, but it's useful context when something looks off in a small cohort.
+
+## Which conversion events does Nobi capture automatically, and which require an API call?
+
+Stable groups are only useful if conversion events land reliably in both buckets. On Shopify, Nobi captures add-to-cart and checkout events automatically - these are the two signals most directly tied to revenue, and they fire without any custom instrumentation on your end. Search queries, result clicks, and zero-result queries are also automatic. So is every conversational event: every message a shopper sends, every suggestion pill they tap, every proactive prompt they engage or dismiss.
+
+That covers most Shopify stores without a single line of custom tracking. The zero-result rate is worth calling out specifically: Nobi tracks it per bucket from day one. If the treatment group sees a spike in null results early in the test - before CVR data has matured - that's an early warning you can act on. A spike usually points to a vocabulary mismatch between what shoppers type and what the catalog says. Catching it in week one is better than waiting for CVR to soften in week three.
+
+Events outside the standard Shopify funnel require an API push. Custom wishlist actions on a headless frontend (Next.js, Hydrogen), post-purchase upsell completions, loyalty point redemptions, subscription activations - these don't fire through Shopify's native event layer, so you pass them to Nobi via their API. You're attaching the event to the visitor's existing session; the group assignment is already there waiting for it.
+
+Every event - automatic or API-pushed - carries the test-group identifier automatically. That means GA4, Segment, or your data warehouse can segment any metric by control vs treatment without a manual join. Decide mid-test that revenue per searcher matters more than raw CVR, and the dimension is already in your data from day one.
+
+## How do I read A/B test results in GA4 or my own analytics stack - and when is the data ready to act on?
+
+That dimension being in your data from day one means there's nothing to wire up when you're ready to read results. Nobi passes the test-group assignment as a custom dimension with every event, so your existing GA4 or Segment setup can segment any metric by control vs treatment without logging into a separate tool.
+
+In GA4, register the test-group parameter as a custom dimension, then use Explorations to compare CVR and revenue per searcher side by side. In Segment, the property flows downstream automatically - to your data warehouse, Mixpanel, Amplitude - from the first session.
+
+The three metrics worth reading in order are add-to-cart rate (add-to-cart events divided by sessions) as the primary test signal, revenue per searcher, and AOV. They compound: a treatment group with higher add-to-cart rate and higher AOV is a strong signal. Zero-result rate per bucket is a useful secondary check - if treatment shows meaningfully lower null results, that explains part of the lift and confirms the semantic matching is doing its job.
+
+Wait until each bucket reaches 1,000 add-to-cart events before drawing conclusions. On a store doing 50,000 monthly sessions at a 3% add-to-cart rate with a 50/50 split, that's roughly five to six weeks. [UNTUCKit](/customers/untuckit) ran two full months and saw meaningful lifts across all three metrics. Those numbers held because the sample was large enough to absorb the noise.
+
+---
+
+Nobi plans start at $25/month, including 2,500 searches and 250 conversational messages. Beyond that, it's $0.01 per additional search and $0.10 per additional message - so a store running 50,000 searches and 5,000 messages a month lands around $995. The A/B testing infrastructure ships built in at every tier. To see how the holdout performs against your own catalog, [try Nobi free](https://dashboard.nobi.ai).
+
+<div className="my-8 flex justify-center">
+ <a
+ href="https://dashboard.nobi.ai"
+ className="inline-flex items-center justify-center gap-2 rounded-2xl font-medium transition active:scale-[.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-black/10 dark:focus-visible:ring-white/20 bg-black text-white dark:bg-white dark:text-black hover:opacity-90 shadow-sm h-12 px-6 text-base no-underline"
+ >
+ <span>Start your free Nobi trial</span>
+ </a>
+</div>
+```

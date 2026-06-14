@@ -33,11 +33,11 @@ export const meta = {
  },
  {
  question: "How do you personalize the returning-visitor experience without making shoppers feel surveilled?",
- answer: "Nobi stores visitor data in first-party local browser storage - the same mechanism a site uses for a saved cart or a language preference - with no login required and nothing shared with ad networks or third-party trackers. The signals it uses come entirely from the visitor's own browsing and search activity on your site. The article does not address disclosure UI or consent flows, so for guidance on those specifics you would need to consult Nobi directly."
+ answer: "Nobi runs on first-party browser signals from your site only - no cross-site tracking, no demographic inferences, no off-site behavior data. Personalization appears as relevant prompts and contextual suggestions, not explicit 'we saw you browsing X last week' messaging that reads as intrusive. The data relationship is between the shopper and your site: Nobi records what visitors actively did on your domain - queries they typed, pages they viewed, topics they covered in chat - and nothing from ad networks or third-party data brokers. That setup fits inside your existing consent framework; if a visitor has already consented to functional cookies on your site, the memory layer runs within that consent."
  },
  {
  question: "How do you measure whether returning-visitor personalization is actually moving conversion?",
- answer: "The article does not cover how to measure whether returning-visitor personalization is moving conversion, so a specific answer here would go beyond what's documented. For measurement guidance, consult Nobi's analytics documentation or team directly."
+ answer: "Segment new versus returning visitors in Google Analytics and run a clean 30-60 day baseline window before enabling cross-session personalization, then a matching window after. The primary metric is returning visitor CVR; Nobi's analytics dashboard surfaces search-to-cart rate and CVR from the personalized entry points. Two secondary signals worth watching: zero-result rate for returning visitors (a drop means personalized entry points are landing closer to intent) and repeat assistant engagement rate. The business-level summary is revenue per visit for returning visitors - if personalization is working, returning visitor RPV should widen its gap above new visitor RPV over time."
  }
  ],
 };
@@ -84,7 +84,7 @@ A returning shopper already knows your store. They came back on purpose, which p
 
 Session-based signals vanish when the browser closes, and because most shoppers don't log in, there's no account history for the search layer to draw from.
 
-That gap hurts more than it might look. Returning visitors arrive with higher purchase intent than first-timers, but they get the same zero-context experience - the same default placeholder in the search bar, the same generic suggested queries, the same opening assistant message. Their browsing history, prior searches, and any chat they started are gone. A shopper on their fifth visit in two weeks still starts from zero.
+That gap hurts more than it might look. Returning visitors arrive with higher purchase intent than first-timers, but their browsing history, prior searches, and any chat they started are gone. A shopper on their fifth visit in two weeks still starts from zero.
 
 On mobile it compounds. Short sessions spread across multiple days produce multiple zero-context experiences, making it harder for the shopper to pick up where they left off.
 

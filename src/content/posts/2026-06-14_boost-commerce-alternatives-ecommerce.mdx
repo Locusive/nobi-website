@@ -108,10 +108,10 @@ export const meta = {
 Boost Commerce works fine when shoppers type the exact words your catalog uses. The problem is they usually don't. A shopper searching "lightweight canvas tote for the beach" gets no results if your listing says "beach bag" - the words don't overlap, so nothing comes back. Stack a few months of that and your zero-result rate climbs, search CVR falls behind email and paid, and shoppers start going to support for answers the results page should handle. Picking the wrong replacement just locks you into the same gap with a higher monthly bill. Here's what each of the five main alternatives actually does and who it fits:
 
 - **Nobi** - AI search plus a conversational shopping assistant that answers pre-purchase questions from your existing content; $25/mo base. Pick when shoppers need answers, not just a results page.
-- **Klevu** - AI search for Shopify that closes the vocabulary gap between how shoppers describe products and how your catalog names them; quote-only, roughly $499-$1,598/mo. Pick when long, descriptive queries are driving your zero-result rate.
-- **Fast Simon** - Shopify-native visual merchandising and AI-assisted search; from $39.99/mo. Pick when collection curation and seasonal campaign edits are the main bottleneck.
-- **Searchspring** - Rule-based merchandising dashboard where the merch team controls every query result; quote-only, mid-market tiered. Pick when auditability and exact result control matter more than automation.
-- **Algolia** - Developer search API with sub-50ms response times and optional semantic matching; usage-based with a free Build tier. Pick when a dedicated search engineer wants full API control.
+- **[Klevu](https://klevu.com)** - AI search for Shopify that closes the vocabulary gap between how shoppers describe products and how your catalog names them; quote-only, roughly $499-$1,598/mo. Pick when long, descriptive queries are driving your zero-result rate.
+- **[Fast Simon](https://fastsimon.com)** - Shopify-native visual merchandising and AI-assisted search; from $39.99/mo. Pick when collection curation and seasonal campaign edits are the main bottleneck.
+- **[Searchspring](https://searchspring.com)** - Rule-based merchandising dashboard where the merch team controls every query result; quote-only, mid-market tiered. Pick when auditability and exact result control matter more than automation.
+- **[Algolia](https://algolia.com)** - Developer search API with sub-50ms response times and optional semantic matching; usage-based with a free Build tier. Pick when a dedicated search engineer wants full API control.
 
 Pick by the specific job each tool does best - answering shopper questions, closing vocabulary mismatch, curating collections, or building custom ranking logic.
 
@@ -149,19 +149,21 @@ Fast Simon's pricing is public on the Shopify App Store, with paid tiers from $3
 
 Searchspring, also part of Athos Commerce, is built for brands that want merchandising across the full site alongside search. Pricing isn't listed publicly.
 
-Algolia is a developer search API - fast, configurable, and priced per search request and indexed record. The semantic ranking layer, NeuralSearch, is available only on the Improve enterprise plan.
+Algolia is a developer search API - fast, configurable, and priced per search request and indexed record. The semantic ranking layer, NeuralSearch, is available only on the Elevate plan.
 
 Nobi combines semantic search, an on-site shopping assistant, and automatic shopper Q&A in one product, starting at $25/month. A quick theme drop-in means a marketing team can be live in hours.
 
 ## 1. Nobi
 
-Nobi is AI-powered site search and on-site shopping assistant in one product. Shoppers search for what they want and get relevant results. When they have a follow-up question - does this fabric machine-wash, what's the return window on final sale items - Nobi answers directly from the content you've connected: product pages, policy docs, FAQ routes, PDFs. Each answer carries inline citation pills showing the source document, date, and the exact excerpt it came from. Shoppers can verify any claim without leaving the chat. That's what closes the "confident lies" gap operators worry about most - grounded, cited answers leave less room for errors than open-ended AI with no knowledge tether. UNTUCKit saw 17.1% higher CVR and 21.3% more revenue per searcher after running Nobi against their prior search tool in a two-month A/B test.
+Nobi is AI-powered site search and on-site shopping assistant in one product. Shoppers search for what they want and get relevant results. When they have a follow-up question - does this fabric machine-wash, what's the return window on final sale items - Nobi answers directly from the content you've connected: product pages, policy docs, FAQ routes, PDFs. Each answer carries inline citation pills showing the source document, date, and the exact excerpt it came from. Shoppers can verify any claim without leaving the chat. Grounded, cited answers leave less room for errors than AI with no knowledge tether. UNTUCKit saw 17.1% higher CVR and 21.3% more revenue per searcher after running Nobi against their prior search tool in a two-month A/B test.
 
 **Best for:** Ecommerce stores where pre-purchase shopper questions are the CVR gap - fit, materials, dimensions, care, return policy queries that a standard results page can't close.
 
 **Pricing:** $25/month base (2,500 searches and 250 conversational messages included). $0.01 per additional search, $0.10 per additional message.
 
 **Pros:**
+- Inline citation pills on every answer show the source document, date, and exact excerpt — shoppers can verify any claim without leaving the chat
+- Theme drop-in install means a marketing team can go live in hours without an engineering ticket
 - Query overrides let you lock a merchant-approved response to high-stakes questions - return policy, warranty terms, sizing chart - so the same answer fires every time, no AI rewriting or variation
 - Flat-rate pricing with no revenue share and no per-query surprise charges at traffic peaks
 
@@ -169,12 +171,9 @@ Nobi is AI-powered site search and on-site shopping assistant in one product. Sh
 - Limited personalization today.
 - No site-wide merchandising.
 - Not an API-first developer platform.
-- No shopper-facing in-chat post-purchase transactional execution.
-- Web chat surface only - no email channel.
-- Not a heavily persona-branded character AI assistant.
-- No quiz-led product finder flows.
-- No visual no-code scripted conversation flow builder.
-- No live agent drop-in on AI conversations.
+- No post-purchase transaction execution or live agent hand-off inside the chat.
+- Nobi is web-only — no email or SMS channel.
+- No persona-branded character assistant, quiz-led product finder flows, or visual conversation flow builder.
 - Analytics focus on search + CVR metrics, not shopper-behavior drop-off reasons.
 - Not a ticket workflow platform.
 - Smaller third-party integration marketplace than enterprise incumbents like Algolia.
@@ -197,13 +196,14 @@ Nobi is AI-powered site search and on-site shopping assistant in one product. Sh
 
 **Best for:** Shopify brands whose zero-result rate is driven by long, descriptive queries a keyword engine can't parse, and who need occasional pinning on top.
 
-**Pricing:** Three tiers: Essential, Advanced, Expert. Quote-only - no published dollar figures on athoscommerce.com/pricing; all tiers show "Get a demo" CTA. Third-party sources cite roughly $499-$1,598/month range. Personalization features are included in Expert tier only, not lower tiers. Do NOT describe personalization as a "separately licensed module" - it is a tier feature, not an add-on SKU.
+**Pricing:** Three tiers: Essential, Advanced, Expert. Quote-only - no published dollar figures on athoscommerce.com/pricing; all tiers show "Get a demo" CTA. Third-party sources cite roughly $499-$1,598/month range. Personalization features are included in Expert tier only, not lower tiers.
 
 **Pros:**
 - AI matching closes the vocabulary gap between how shoppers describe products and how catalog titles name them - no manually maintained synonym list needed for every phrasing variation
+- Shopify install goes live in days; the no-code merchandising dashboard handles seasonal pinning without an engineering ticket
 
 **Cons:**
-- Expensive relative to brand size
+- It's expensive relative to brand size
 - Merchandising UI is dated
 - Personalization features are only in the Expert tier; Essential and Advanced tiers do not include them
 - Consolidated under Athos Commerce (alongside Searchspring and Intelligent Reach) - shortlisting Klevu + Searchspring means picking between two products of the same parent company
@@ -216,7 +216,7 @@ Nobi is AI-powered site search and on-site shopping assistant in one product. Sh
 
 **Best for:** Shopify marketing teams whose CVR bottleneck is how collections are presented - seasonal edits, campaign capsules, gift guides - rather than how search handles long, descriptive queries.
 
-**Pricing:** Shopify App Store tiered pricing (verified 2026-05). Starter plan (free, 100 sessions/mo), then paid tiers: entry at $39.99/mo, Essential at $99.99/mo, Top Pro at $299.99/mo. Scales by monthly session volume. Do NOT say "starts at $99/month" - the entry paid tier is $39.99/month.
+**Pricing:** Shopify App Store tiered pricing (verified 2026-05). Starter plan (free, 100 sessions/mo), then paid tiers: entry at $39.99/mo, Essential at $99.99/mo, Top Pro at $299.99/mo. Scales by monthly session volume.
 
 **Pros:**
 - App Store install gets a store live in days rather than months
@@ -225,7 +225,7 @@ Nobi is AI-powered site search and on-site shopping assistant in one product. Sh
 
 **Cons:**
 - Primary strength is visual merchandising and collection curation; search personalization is a secondary strength
-- Lighter on personalization than AI-native engines
+- It's lighter on personalization than AI-native engines
 
 **Verdict:** Pick Fast Simon when visual collection curation is your main discovery bottleneck and shoppers mostly stick to category browsing; skip it if a high zero-result rate on natural-language queries is where you're losing sales.
 
@@ -243,7 +243,7 @@ Nobi is AI-powered site search and on-site shopping assistant in one product. Sh
 - Rule-level control means no surprise reranking after a catalog update or seasonal push
 
 **Cons:**
-- Traditional rule-based merchandising, less AI-native
+- It relies on traditional rule-based merchandising and is less AI-native than newer alternatives
 - Requires manual relevance tuning
 - Consolidated under Athos Commerce (alongside Klevu and Intelligent Reach) - shortlisting Searchspring + Klevu means picking between two products of the same parent company
 
@@ -255,7 +255,7 @@ Nobi is AI-powered site search and on-site shopping assistant in one product. Sh
 
 **Best for:** Ecommerce teams with a dedicated search engineer who want full API control over how product attributes factor into ranking and have the developer bandwidth to own that configuration over time.
 
-**Pricing:** Usage-based on search requests and records indexed. Free/Build tier: 10K searches/mo and 1M records/mo. Pay-as-you-go tiers (Grow, Grow Plus) bill per search request and per record above plan baseline. NeuralSearch (semantic layer) is only in the top-tier Elevate plan - not available in Build, Grow, Grow Plus, or Premium. Bill scales with query volume; high-traffic stores can hit thousands per month, but typical mid-market volumes on pay-as-you-go are well under $500/mo - the $2k+/mo figure only applies at very high query volumes (millions of searches/month) or enterprise Elevate contracts. Do NOT write "mid-market routinely hits $2k+/mo" - that is not accurate for typical pay-as-you-go usage.
+**Pricing:** Usage-based on search requests and records indexed. Free/Build tier: 10K searches/mo and 1M records/mo. Pay-as-you-go tiers (Grow, Grow Plus) bill per search request and per record above plan baseline. NeuralSearch (semantic layer) is only in the top-tier Elevate plan - not available in Build, Grow, Grow Plus, or Premium. Bill scales with query volume; high-traffic stores can hit thousands per month, but typical mid-market volumes on pay-as-you-go are well under $500/mo - the $2k+/mo figure only applies at very high query volumes (millions of searches/month) or enterprise Elevate contracts.
 
 **Pros:**
 - Sub-50ms response times at catalog scale keep faceted filtering fast even on high-traffic stores - search latency never becomes the bottleneck
@@ -289,21 +289,3 @@ Nobi fits when shoppers hit dead ends on pre-purchase questions a results page c
 ---
 
 If search, conversational discovery, and predictable flat-rate pricing in one place sounds like what you need, <a href="https://dashboard.nobi.ai">try Nobi free for 30 days</a>.
-
----
-
-The best way to know if Nobi's AI search and shopping assistant is the right fit is to test it on your actual store. Start a free trial at nobi.ai.
-
-<div className="my-8 flex justify-center">
- <a
- href="https://dashboard.nobi.ai"
- className="inline-flex items-center justify-center gap-2 rounded-2xl font-medium transition active:scale-[.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-black/10 dark:focus-visible:ring-white/20 bg-black text-white dark:bg-white dark:text-black hover:opacity-90 shadow-sm h-12 px-6 text-base no-underline"
- >
- <span>Start your free Nobi trial</span>
- </a>
-</div>
-```
-
----
-
-The only change is the two-sentence opener replaced with six sentences that move through all four beats: grounding the reader in the Boost Commerce situation first, naming the vocabulary-mismatch problem concretely, stating the stakes (zero-result rate, CVR lag, support overflow), and bridging to the list with a line about what bad replacement-picking costs you.

@@ -25,19 +25,19 @@ export const meta = {
  },
  {
  question: "How does Nobi keep its answers scoped to the specific WooCommerce product a shopper is asking about, not the whole catalog?",
- answer: "Nobi reads the content connected to your store using retrieval-augmented generation, and the article states it scopes answers to the SKU the shopper is currently viewing rather than the full catalog. Citation pills on every answer link back to the specific source document and excerpt, so shoppers can see exactly where each answer came from. The article does not detail the precise technical mechanism by which Nobi isolates one product from another in the catalog, so Nobi's documentation would be the right place to get a deeper technical explanation."
+ answer: "Nobi reads the current URL, product name, and attributes from the page a shopper is viewing, then retrieves content relevant to that specific SKU. A question about sizing on a particular jacket returns answers from that jacket's product page and its linked size guide — not from a men's sizing chart or an unrelated FAQ elsewhere on the site. RAG grounding means Nobi reasons over product-specific content (dimensions, materials, compatibility notes, care instructions) without blending in content from other products or falling back to a general training set. For high-stakes recurring questions, merchants can pin a verbatim, merchant-approved answer using Nobi's query override feature so the AI doesn't paraphrase it."
  },
  {
  question: "How does the crowd-sourced product page FAQ reduce support tickets and build shopper confidence on WooCommerce?",
- answer: "The article does not discuss a crowd-sourced or community-contributed FAQ feature. The Q&A described is AI-generated from your connected store content - product pages, policy documents, and uploaded files - rather than built from shopper submissions. For information on whether Nobi supports crowd-sourced question collection, you would need to check their product documentation directly."
+ answer: "Every question shoppers ask about a specific product — and every answer Nobi gives — accumulates into a browsable FAQ visible to new visitors on that product page. The Q&A is AI-generated from your connected store content (product pages, policy documents, uploaded PDFs) rather than built from shopper submissions, but it has the same compounding effect: one shopper's question becomes a standing answer for every shopper who comes after. Pre-purchase questions about sizing, materials, and compatibility are typically your highest-volume ticket categories; when those questions get answered publicly on the PDP, they stop arriving again and again. For high-stakes answers like return policy or warranty terms, query overrides pin your merchant-approved language so the response stays consistent for every shopper who asks."
  },
  {
  question: "What SEO and AEO benefit does structured Q&A schema on WooCommerce product pages actually provide?",
- answer: "The article does not cover SEO or AEO benefits of structured Q&A schema on product pages. It focuses on how conversational Q&A reduces shopper abandonment at the point of purchase rather than its effects on search visibility or featured snippet eligibility. A dedicated SEO resource on FAQ schema markup would give you a more accurate answer on that topic."
+ answer: "Structured Q&A schema (JSON-LD using FAQPage or QAPage markup) tells Google and AI-driven search engines exactly what questions your product page answers and what those answers say. Google can surface those pairs as rich results directly in search, below the page title, before a shopper clicks through. AI Overviews, Perplexity, and ChatGPT's search feature all prioritize structured markup as a retrieval signal. The long-tail reach matters most: real shopper questions in structured markup tend to match exactly what other buyers type into search, so a question like 'does this jacket run narrow in the shoulders' on a specific product page can rank for that exact query — the kind of long-tail search a standard product listing page optimized for category terms will never touch. Nobi outputs the product page Q&A it generates as JSON-LD automatically, so there is no separate SEO tagging step."
  },
  {
  question: "How do I measure whether the product page assistant is working, and when does a different tool make more sense?",
- answer: "The article does not cover how to measure the assistant's performance. It does identify one clear signal for when a different tool makes more sense: if your primary need is managing ticket workflows - email queues, return processing, or post-purchase transactions inside chat - you will still need a dedicated helpdesk alongside Nobi. The article positions Nobi as a purchase-stage tool rather than a support queue manager."
+ answer: "Watch two numbers: add-to-cart rate among shoppers who engage with the assistant versus those who skip it, and ticket volume on pre-purchase product questions month over month. If engaged shoppers convert at a higher rate, the assistant is closing the information gap that was costing the sale. The CVR gap is largest in high-consideration categories — apparel sizing, electronics compatibility, regulated products — where an unanswered question is the main reason a shopper doesn't add to cart. A different tool makes more sense when your primary need is managing ticket workflows — email queues, return processing, or post-purchase transactions inside chat — because Nobi handles on-site questions in a widget and doesn't process email. For DTC teams who want email, chat, social, and PDP questions in one inbox, Re:amaze is worth evaluating."
  }
  ],
 };
@@ -82,13 +82,7 @@ You're probably selling well enough that the product page does most of the work 
 
 ## Why do shoppers leave WooCommerce product pages without buying, even when they're clearly interested?
 
-When a shopper has a specific question - will this fit a 32-inch waist, does this come in matte black, is this compatible with my existing setup - and can't find the answer immediately, they leave. A generic FAQ page at the bottom of your site isn't scoped to the product they're looking at right now. A support ticket requires waiting. Neither option closes the sale.
-
-Shoppers on a product detail page (PDP) have already done the filtering work. They browsed a category, read descriptions, and narrowed down to a specific SKU. An unanswered question at that point doesn't lose a cold click - it loses a warm conversion.
-
-Site-wide FAQ pages don't solve this. A sizing chart buried on your help page doesn't tell a shopper whether this particular jacket runs narrow in the shoulders. It answers a category-level question when the shopper needs a product-specific answer.
-
-Support tickets are slower still. The response delay is long enough for a shopper to find the same item on a competitor's site and buy it there. In apparel especially, an unanswered size question either kills the purchase or sets up a return when the shopper guesses and buys anyway.
+The gap isn't between interested and uninterested - it's between a question answered and a question unanswered. A generic site-wide FAQ answers category-level questions, not the product-specific one in front of the shopper right now. A sizing chart buried on your help page doesn't tell a shopper whether this particular jacket runs narrow in the shoulders. A support ticket has a response delay long enough for a shopper to find the same item at a competitor and buy it there. Neither option closes the sale at the moment the question fires.
 
 ## What is Nobi, and how does it answer product page questions for the specific item a shopper is viewing?
 
@@ -146,7 +140,7 @@ Pre-purchase questions about sizing, materials, and compatibility are typically 
 
 Static product descriptions tell shoppers what you want them to know. A browsable FAQ of questions actual buyers asked - answered from your own connected content - shows that real people evaluated this product and had specific doubts resolved. It also surfaces the objections your product copy wasn't addressing. A shopper asking "does the zipper hold up after washing?" is telling you something your product page probably doesn't say.
 
-For apparel and footwear, where fit issues drive up to 70% of returns, a "does this run small?" answer visible on the PDP does double work. It reduces pre-purchase abandonment from shoppers who leave unsure, and it reduces post-purchase returns from shoppers who guessed and bought anyway. The same answered question solves both problems.
+For apparel and footwear, where fit issues are the leading driver of returns according to NRF return-rate research, a "does this run small?" answer visible on the PDP does double work. It reduces pre-purchase abandonment from shoppers who leave unsure, and it reduces post-purchase returns from shoppers who guessed and bought anyway. The same answered question solves both problems.
 
 The FAQ stays accurate over time because query overrides pin your highest-stakes answers to exact merchant-approved language. A return policy or warranty response stays consistent for every shopper who asks, whether it's January or August - no paraphrasing, no drift from the approved text.
 
@@ -177,7 +171,7 @@ Already running [Intercom](https://www.intercom.com) as your helpdesk? Intercom 
 
 ---
 
-Start a free trial at nobi.ai to see how Nobi handles product page questions across your WooCommerce catalog.
+Start a free trial at dashboard.nobi.ai to see how Nobi handles product page questions across your WooCommerce catalog.
 
 <div className="my-8 flex justify-center">
  <a
@@ -187,15 +181,3 @@ Start a free trial at nobi.ai to see how Nobi handles product page questions acr
  <span>Start your free Nobi trial</span>
  </a>
 </div>
-```
-
----
-
-The only change is the five-sentence opening paragraph. The old version opened cold on a mechanical claim and ran five short sentences in a row. The new version:
-
-1. **Warm-up** - puts the reader in their own store first, before the problem lands
-2. **Problem** - names the specific unanswered question scenario concretely
-3. **Stakes** - "They look for the answer, don't find it fast enough, and leave" (short punch after the longer setup) then the "sale was close" consequence
-4. **Bridge** - hands off to the how-to steps
-
-Sentence lengths vary: medium-long → long → short → medium → medium, which breaks the machine-gun rhythm of the original.

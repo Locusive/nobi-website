@@ -1,0 +1,176 @@
+export const meta = {
+ title: "How to Answer Shopper Questions Directly on the Product Page on Salesforce Commerce Cloud",
+ slug: "pdp-product-questions-salesforce-commerce-cloud",
+ date: "2026-06-15",
+ publishedAt: "2026-06-15",
+ description: "Stop losing sales to unanswered PDP questions on SFCC. Add a context-aware product Q&A assistant to your Salesforce Commerce Cloud pages with a small theme update.",
+ excerpt: "Stop losing sales to unanswered PDP questions on SFCC. Add a context-aware product Q&A assistant to your Salesforce Commerce Cloud pages with a small theme update.",
+ tags: ["how-to", "product qa", "ecommerce", "ecommerce search"],
+ author: "Shanif Dhanani",
+ heroImage: "https://storage.googleapis.com/nobi-public/docs_and_marketing_websites/posts/pdp-product-questions-salesforce-commerce-cloud/hero.webp",
+ featured: true,
+ draft: false,
+ faqItems: [
+ {
+ question: "Why do shoppers abandon the product page without buying even when they have a specific question?",
+ answer: "Shoppers who stop on a product page to ask about sizing, materials, or compatibility are in the middle of a buying decision, not casually browsing. A generic FAQ link or a contact form adds friction at exactly the wrong moment, and most shoppers leave rather than track down the answer. For merchants running paid traffic to product pages, every unanswered question is ad spend that did not convert."
+ },
+ {
+ question: "What is Nobi, and how does it answer product questions on a Salesforce Commerce Cloud PDP?",
+ answer: "Nobi is a conversational website assistant that answers shopper questions in context, drawing from your catalog, policy docs, and FAQ content rather than a generic AI training set. On Salesforce Commerce Cloud product pages, Nobi scopes every answer to the specific SKU the shopper is viewing, so a question about fabric gets the answer for that jacket rather than a pooled response from across the catalog. Every answer includes inline citation pills showing the source document and exact excerpt, so shoppers can verify any claim before adding to cart."
+ },
+ {
+ question: "Can I install a product Q&A assistant on Salesforce Commerce Cloud without touching cartridges or controllers?",
+ answer: "Yes. Installation is two steps: add a small JavaScript snippet to your storefront page template, then replace the placeholder with your merchant ID from the Nobi dashboard. No cartridge builds, no custom controllers, and no Business Manager configuration are required. If your team uses Google Tag Manager, you can skip the template edit entirely by pasting the Nobi tag into your GTM container and publishing."
+ },
+ {
+ question: "How does Nobi keep answers scoped to the exact SKU the shopper is viewing?",
+ answer: "Nobi scopes every answer to the product the shopper is currently viewing by reading the current page URL and product details. A question about materials on a wool-blend jacket pulls from content connected to that jacket - the product page, a linked spec sheet, a care guide - not from other variants or styles in the catalog. For recurring high-stakes questions like return policy or warranty terms, merchants can use query overrides to pin an exact approved response so every PDP delivers the same wording every time."
+ },
+ {
+ question: "How does a crowd-sourced PDP FAQ build social proof and reduce support tickets over time?",
+ answer: "Every question a visitor asks on the PDP, and every answer Nobi provides, accumulates into a browsable FAQ block that surfaces on that product page for every shopper who visits after. Each FAQ entry carries the same inline source citations as a live answer - shoppers can hover a citation pill to see exactly which product page, care guide, or spec sheet the answer came from. A sizing question answered once stops arriving as a support ticket. Over time, the FAQ grows to reflect what shoppers actually ask, in their words, which a static product description written by a content team can't replicate."
+ },
+ {
+ question: "How do I get structured Q&A schema onto SFCC product pages so search engines and AI engines can use it?",
+ answer: "The Q&A content Nobi accumulates on each product page can be marked up as FAQPage structured data. Search engines and AI engines - Google AI Overviews, Perplexity, ChatGPT search - consume FAQPage structured data to pull specific Q&A pairs directly into results, not just a link to your PDP. Because each block is built from real questions shoppers asked about that specific product with grounded answers, the structured data matches the same long-tail queries other buyers search for."
+ },
+ {
+ question: "When does a different tool fit better than Nobi for product page Q&A on Salesforce Commerce Cloud?",
+ answer: "Yext fits when the primary need is consistent answers and business information syndicated across Google, directories, and third-party AI engines beyond your own pages. Re:amaze fits when shoppers need to execute post-purchase tasks - cancellations, returns, order modifications - inside a chat interface; it's a helpdesk that manages tickets, order actions, and resolutions in one place. Zendesk fits for teams managing high-volume support with agent workflow tooling, routing, and SLAs. For teams whose primary support channel is email rather than web chat, Intercom and Re:amaze both operate unified inboxes that pull web chat, email, and social into one view."
+ }
+ ],
+};
+
+<script type="application/ld+json" data-nobi-schema>
+{`{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "How to Answer Shopper Questions Directly on the Product Page on Salesforce Commerce Cloud",
+  "description": "Stop losing sales to unanswered PDP questions on SFCC. Deploy a context-aware product Q&A assistant in one line of code.",
+  "datePublished": "2026-06-15",
+  "dateModified": "2026-06-15",
+  "author": {
+    "@type": "Person",
+    "name": "Shanif Dhanani",
+    "url": "https://www.linkedin.com/in/shanifdhanani/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Nobi",
+    "url": "https://nobi.ai"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://nobi.ai/blog/pdp-product-questions-salesforce-commerce-cloud"
+  },
+  "about": [
+    {
+      "@type": "Thing",
+      "name": "product qa"
+    },
+    {
+      "@type": "Thing",
+      "name": "ecommerce"
+    }
+  ]
+}`}
+</script>
+## How do Salesforce Commerce Cloud merchants answer shopper questions directly on the product detail page?
+
+You're running paid traffic to product pages on Salesforce Commerce Cloud. A shopper lands, starts reading, and stops - they have a question. Does this jacket run true to size? Is it machine washable? Will this cable work with their setup? When your PDP can't answer it right there, most shoppers close the tab instead of hunting down a generic FAQ or waiting on a support reply. For merchants paying to drive traffic to those pages, every unanswered question is ad spend that didn't convert.
+
+## Why do shoppers abandon the product page without buying even when they have a specific question?
+
+A shopper who pauses on the PDP to ask about sizing, materials, or compatibility is deciding, not browsing - that question is a buying signal. A link to a generic FAQ page or a contact form adds friction at exactly the wrong moment: the shopper leaves, the question becomes a bounce, and the sale is gone.
+
+Generic FAQs are catalog-wide, not SKU-specific. A shopper who wants to know whether a jacket runs small has to navigate away to find the answer - and most don't come back. A support ticket filed from the PDP is no better: the reply arrives after the shopper has moved on. PDP-sourced tickets convert at near-zero rates.
+
+The damage goes further than your analytics show. Fit, materials, and compatibility questions are consistently the leading driver of apparel returns - and a PDP that can't answer them at the point of purchase doesn't reduce that rate. The shoppers who leave without a trace are the bigger loss: they never file a ticket, raise a complaint, or give you a chance to fix the gap. They just stop returning.
+
+## What is Nobi, and how does it answer product questions on a Salesforce Commerce Cloud PDP?
+
+Nobi is a conversational website assistant that answers shopper questions in context - grounded in your catalog, policy docs, and FAQ content, not in a generic AI training set. On SFCC PDPs, Nobi scopes every answer to the specific SKU the shopper is viewing. A question about fabric content gets the answer for that jacket, not a response pooled from across your catalog.
+
+The knowledge base Nobi draws on is built from sources you connect: product pages, FAQ routes, help-center articles, PDFs, policy docs. No manual re-entry. You point at the URL or upload the file, and that content becomes part of what the assistant can answer. Those sources refresh twice a day, so a spec update or policy change lands in shopper answers within hours.
+
+Every answer carries inline numbered citation pills showing the source document name, date, and the exact excerpt. Shoppers can verify any claim against your own content without leaving the page. That's different from a generic FAQ: they don't have to trust the answer on faith - they can see where it came from before they add to cart.
+
+For merchants selling products where the details matter - sizing, technical specs, care instructions - the bigger risk is an answer that sounds right but isn't. Nobi offers an optional second AI review that reads each draft answer against the raw cited content and flags inaccuracies before the answer reaches the shopper. It's off by default for ecommerce but can be turned on for any product category where a wrong answer costs more than a bounce.
+
+## Can I install a product Q&A assistant on Salesforce Commerce Cloud without touching cartridges or controllers?
+
+Yes. Getting all of that onto your SFCC PDPs starts with a small theme change and stops there - no cartridge builds, no custom controllers, no Business Manager configuration.
+
+The direct install is two steps:
+
+1. Add the Nobi snippet to your storefront page template, in the head of every page:
+
+```html
+<script async src="https://assistant-script.nobi.ai/nobi.bundle.js" onload="window.Nobi.initialize({ accountId: 'YOUR_MERCHANT_ID' });">
+</script>
+```
+
+2. Replace `YOUR_MERCHANT_ID` with your merchant ID from the Installation page of your Nobi dashboard.
+
+If your team uses Google Tag Manager, there's an alternative path that skips the SFCC template edit entirely - paste the Nobi tag into your GTM container, set it to fire on all pages, and publish.
+
+Everything else connects through the Nobi dashboard after the snippet is live. You point Nobi at your product feeds, policy pages, FAQ URLs, or uploaded PDFs, and those sources become part of what the assistant can answer.
+
+Contextual suggestion pills appear as tappable buttons with recommended prompts scoped to the product a shopper is viewing. The pills are generated per SKU - a shopper on a waterproof jacket PDP sees different starting prompts than one browsing running shoes - so visitors who don't know what to type get a relevant entry point before they've composed a question. Clicking any pill opens the assistant with the answer ready.
+
+## How does Nobi keep answers scoped to the exact SKU the shopper is viewing?
+
+Nobi scopes every answer to the product the shopper is currently viewing. A shopper asking "what is this made of?" on a wool-blend jacket PDP gets the answer for that jacket - pulled from the jacket's product page, a linked spec sheet, or a care guide - not a pooled response from a different variant or style in your catalog.
+
+For questions with a fixed answer - return policy, warranty terms, shipping timelines - query overrides let you pin an exact merchant-approved response. When a shopper asks about returns on any PDP, the override fires and delivers your exact wording every time - no paraphrasing, no variation between sessions. Everything else routes through the standard grounded-answer pipeline, drawing from whatever connected content maps to the current SKU.
+
+Hallucinated inventory claims - "yes, we have that in stock" when the item is gone - are harder to produce when every answer is grounded in sources you control. If the answer isn't in your connected content, the assistant says so rather than guessing.
+
+## How does a crowd-sourced PDP FAQ build social proof and reduce support tickets over time?
+
+Those citation pills don't just serve the shopper who asked the question - they feed every shopper who lands on that product page afterward. Every question a visitor asks on the PDP, and every answer Nobi provides, aggregates automatically into a browsable FAQ block that surfaces directly on that product page. New shoppers browse real questions from prior buyers, with grounded, cited answers, rather than hitting a dead end. No content team has to maintain it.
+
+Each FAQ entry carries the same inline source citations as a live conversation answer. A shopper reading a FAQ entry can hover over the citation pill to see exactly which product page, care guide, or spec sheet the response came from before they decide to buy.
+
+A sizing question answered once on a jacket PDP surfaces in the FAQ every time a new shopper visits that product page. That question never becomes a support ticket again. Over weeks and months, the FAQ builds out to cover what shoppers actually ask - in the words they use, not the questions a content team predicted they'd ask.
+
+Visible questions from prior buyers signal that others have purchased this product and cared enough to ask. A polished product description doesn't produce that signal.
+
+## How do I get structured Q&A schema onto SFCC product pages so search engines and AI engines can use it?
+
+The Q&A content Nobi accumulates on each product page - real questions shoppers asked, with grounded answers pulled from your connected content - can be marked up as FAQPage structured data. Search engines and AI engines - Google AI Overviews, Perplexity, ChatGPT search - consume FAQPage structured data to pull specific Q&A pairs directly into results, not just a blue link to your PDP.
+
+A Google rich result can show an expandable Q&A pair on the SERP before a shopper ever clicks through. A shopper asking a specific pre-purchase question in Perplexity or a Google AI Overview can get your exact answer - sourced from your PDP - without a click.
+
+What makes it work is specificity. Each FAQPage block is built from real questions shoppers asked about that product, with grounded answers pulled from your connected content. There's no boilerplate repeated across the catalog - a structured data block on a waterproof jacket PDP answers jacket questions only. A well-structured product FAQ makes it more likely that your specific answer - not a competitor's category page - shows up for a pre-purchase query.
+
+[Yext](https://www.yext.com) takes a different approach. It syndicates structured answers across Google, third-party directories, Yelp, Bing, and other AI engines broadly - it's built for brands that need consistent answers across many platforms and listing types. Pick it when your primary need is consistent answers and business information across Google, directories, and third-party AI engines - not just on your own product pages.
+
+## When does a different tool fit better than Nobi for product page Q&A on Salesforce Commerce Cloud?
+
+[Yext](https://www.yext.com) is already the answer for one of those scenarios - cross-platform answer syndication beyond your own pages.
+
+Nobi fits when the primary job is answering pre-purchase questions on the PDP and building those answers into a FAQ that reduces future ticket volume.
+
+If shoppers need to execute post-purchase tasks inside chat - cancellations, returns, order modifications - Nobi answers those questions but doesn't run the transactions. [Re:amaze](https://www.reamaze.com) is a helpdesk built for ecommerce that manages tickets, order actions, and resolutions in one place. [Zendesk](https://www.zendesk.com) is an enterprise support platform with ticket management, agent workflows, and customer history in a unified queue.
+
+If your team runs email as the primary support channel, Nobi doesn't cover the inbox. [Intercom](https://www.intercom.com) and Re:amaze both operate unified inboxes that pull web chat, email, SMS, and social into one view.
+
+If behavioral reranking based on individual purchase history is a requirement, Nobi isn't there yet. Constructor, Klevu, and Dynamic Yield reorder search results based on what each shopper has clicked and bought. Nobi's personalization today covers placeholder text and starter messages - that's the honest boundary.
+
+
+<BlogEmailCapture hook="Shoppers bouncing from product pages on Salesforce Commerce Cloud?" subtext="Drop your email and we'll show you how Nobi answers product questions directly on your Salesforce Commerce Cloud pages so shoppers stop bouncing and start buying." />
+
+---
+
+Nobi answers product questions in context on your SFCC PDPs, starting at $25/month.
+
+<div className="my-8 flex justify-center">
+ <a
+ href="https://dashboard.nobi.ai"
+ className="inline-flex items-center justify-center gap-2 rounded-2xl font-medium transition active:scale-[.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-black/10 dark:focus-visible:ring-white/20 bg-black text-white dark:bg-white dark:text-black hover:opacity-90 shadow-sm h-12 px-6 text-base no-underline"
+ >
+ <span>Start your free Nobi trial</span>
+ </a>
+</div>

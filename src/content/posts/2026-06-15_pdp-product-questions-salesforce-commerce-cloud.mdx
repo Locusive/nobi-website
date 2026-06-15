@@ -3,8 +3,8 @@ export const meta = {
  slug: "pdp-product-questions-salesforce-commerce-cloud",
  date: "2026-06-15",
  publishedAt: "2026-06-15",
- description: "Stop losing sales to unanswered PDP questions on SFCC. Deploy a context-aware product Q&A assistant in one line of code.",
- excerpt: "Stop losing sales to unanswered PDP questions on SFCC. Deploy a context-aware product Q&A assistant in one line of code.",
+ description: "Stop losing sales to unanswered PDP questions on SFCC. Add a context-aware product Q&A assistant to your Salesforce Commerce Cloud pages with a small theme update.",
+ excerpt: "Stop losing sales to unanswered PDP questions on SFCC. Add a context-aware product Q&A assistant to your Salesforce Commerce Cloud pages with a small theme update.",
  tags: ["how-to", "product qa", "ecommerce", "ecommerce search"],
  author: "Shanif Dhanani",
  heroImage: "https://storage.googleapis.com/nobi-public/docs_and_marketing_websites/posts/pdp-product-questions-salesforce-commerce-cloud/hero.webp",
@@ -25,19 +25,19 @@ export const meta = {
  },
  {
  question: "How does Nobi keep answers scoped to the exact SKU the shopper is viewing?",
- answer: "The article states that Nobi scopes every answer to the specific SKU the shopper is viewing, so a question about fabric content returns the answer for that jacket rather than a pooled response from across the catalog. The article does not detail the underlying technical mechanism that enforces that SKU-level scoping."
+ answer: "Nobi scopes every answer to the product the shopper is currently viewing by reading the current page URL and product details. A question about materials on a wool-blend jacket pulls from content connected to that jacket — the product page, a linked spec sheet, a care guide — not from other variants or styles in the catalog. For recurring high-stakes questions like return policy or warranty terms, merchants can use query overrides to pin an exact approved response so every PDP delivers the same wording every time."
  },
  {
  question: "How does a crowd-sourced PDP FAQ build social proof and reduce support tickets over time?",
- answer: "The article does not cover crowd-sourced PDP FAQs or their effect on social proof and support ticket volume."
+ answer: "Every question a visitor asks on the PDP, and every answer Nobi provides, accumulates into a browsable FAQ block that surfaces on that product page for every shopper who visits after. Each FAQ entry carries the same inline source citations as a live answer — shoppers can hover a citation pill to see exactly which product page, care guide, or spec sheet the answer came from. A sizing question answered once stops arriving as a support ticket. Over time, the FAQ grows to reflect what shoppers actually ask, in their words, which a static product description written by a content team can't replicate."
  },
  {
  question: "How do I get structured Q&A schema onto SFCC product pages so search engines and AI engines can use it?",
- answer: "The article does not cover structured Q&A schema markup for search engines or AI engines on SFCC product pages."
+ answer: "The Q&A content Nobi accumulates on each product page can be marked up as FAQPage structured data. Search engines and AI engines — Google AI Overviews, Perplexity, ChatGPT search — consume FAQPage structured data to pull specific Q&A pairs directly into results, not just a link to your PDP. Because each block is built from real questions shoppers asked about that specific product with grounded answers, the structured data matches the same long-tail queries other buyers search for."
  },
  {
  question: "When does a different tool fit better than Nobi for product page Q&A on Salesforce Commerce Cloud?",
- answer: "The article does not address scenarios where a different tool would be a better fit than Nobi for product page Q&A on Salesforce Commerce Cloud."
+ answer: "Yext fits when the primary need is consistent answers and business information syndicated across Google, directories, and third-party AI engines beyond your own pages. Re:amaze fits when shoppers need to execute post-purchase tasks — cancellations, returns, order modifications — inside a chat interface; it's a helpdesk that manages tickets, order actions, and resolutions in one place. Zendesk fits for teams managing high-volume support with agent workflow tooling, routing, and SLAs. For teams whose primary support channel is email rather than web chat, Intercom and Re:amaze both operate unified inboxes that pull web chat, email, and social into one view."
  }
  ],
 };
@@ -86,7 +86,7 @@ A shopper who pauses on the PDP to ask about sizing, materials, or compatibility
 
 Generic FAQs are catalog-wide, not SKU-specific. A shopper who wants to know whether a jacket runs small has to navigate away to find the answer - and most don't come back. A support ticket filed from the PDP is no better: the reply arrives after the shopper has moved on. PDP-sourced tickets convert at near-zero rates.
 
-The damage goes further than your analytics show. Research suggests poor answers to fit, materials, and compatibility questions drive up to 70% of apparel returns. The shoppers who leave without a trace are the bigger loss: research also finds that 71% of consumers abandon a brand after a single poor AI interaction without saying why.
+The damage goes further than your analytics show. Fit, materials, and compatibility questions are consistently the leading driver of apparel returns — and a PDP that can't answer them at the point of purchase doesn't reduce that rate. The shoppers who leave without a trace are the bigger loss: they never file a ticket, raise a complaint, or give you a chance to fix the gap. They just stop returning.
 
 ## What is Nobi, and how does it answer product questions on a Salesforce Commerce Cloud PDP?
 
@@ -121,7 +121,7 @@ Contextual suggestion pills appear as tappable buttons with recommended prompts 
 
 ## How does Nobi keep answers scoped to the exact SKU the shopper is viewing?
 
-Nobi reads the current page URL and product identifiers to scope every answer to the SKU in view before querying your knowledge base. A shopper asking "what is this made of?" on a wool-blend jacket PDP gets the answer for that jacket - not a pooled response from a different variant or style. Page-level scoping works because the knowledge base query itself is filtered to the product currently in view. When a shopper's question matches connected content for that specific SKU - the product page, a linked spec sheet, a care guide - that's what the answer draws from. Content from other products in your catalog doesn't enter the retrieval window for that query.
+Nobi scopes every answer to the product the shopper is currently viewing. A shopper asking "what is this made of?" on a wool-blend jacket PDP gets the answer for that jacket - pulled from the jacket's product page, a linked spec sheet, or a care guide - not a pooled response from a different variant or style in your catalog.
 
 For questions with a fixed answer - return policy, warranty terms, shipping timelines - query overrides let you pin an exact merchant-approved response. When a shopper asks about returns on any PDP, the override fires and delivers your exact wording every time - no paraphrasing, no variation between sessions. Everything else routes through the standard grounded-answer pipeline, drawing from whatever connected content maps to the current SKU.
 
@@ -143,7 +143,7 @@ The Q&A content Nobi accumulates on each product page - real questions shoppers 
 
 A Google rich result can show an expandable Q&A pair on the SERP before a shopper ever clicks through. A shopper asking a specific pre-purchase question in Perplexity or a Google AI Overview can get your exact answer - sourced from your PDP - without a click.
 
-What makes it work is specificity. Each FAQPage block is built from real questions shoppers asked about that product, with grounded answers pulled from your connected content. There's no boilerplate repeated across the catalog - a structured data block on a waterproof jacket PDP answers jacket questions only. AI engines chunk content by heading and structured data; a well-marked-up PDP FAQ increases the probability that your answer, not a competitor's category page, gets retrieved for specific pre-purchase queries.
+What makes it work is specificity. Each FAQPage block is built from real questions shoppers asked about that product, with grounded answers pulled from your connected content. There's no boilerplate repeated across the catalog - a structured data block on a waterproof jacket PDP answers jacket questions only. A well-structured product FAQ makes it more likely that your specific answer — not a competitor's category page — shows up for a pre-purchase query.
 
 [Yext](https://www.yext.com) takes a different approach. It syndicates structured answers across Google, third-party directories, Yelp, Bing, and other AI engines broadly - it's built for brands that need consistent answers across many platforms and listing types. Pick it when your primary need is consistent answers and business information across Google, directories, and third-party AI engines - not just on your own product pages.
 

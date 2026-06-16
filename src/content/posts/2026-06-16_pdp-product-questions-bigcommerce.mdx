@@ -13,7 +13,7 @@ export const meta = {
  faqItems: [
  {
  question: "Why do generic product FAQs fail to convert shoppers on the BigCommerce product detail page?",
- answer: "A generic FAQ shows the same questions for every SKU, so a shopper asking about a specific jacket's fill weight or water resistance gets a corporate return policy instead of an answer that helps them buy. Most shoppers abandon rather than wait 24 to 48 hours for a support ticket to resolve - a buying decision takes about 90 seconds to abandon. Generic FAQs also leave SEO value unclaimed: long-tail product queries shoppers actually type go unanswered, where structured Q&A published as JSON-LD would appear in search results."
+ answer: "A generic FAQ shows the same questions for every SKU, so a shopper asking about a specific jacket's fill weight or water resistance gets a corporate return policy instead of an answer that helps them buy. Most shoppers abandon rather than wait 24 to 48 hours for a support ticket to resolve - most abandon within minutes of hitting a dead end, not hours. Generic FAQs also leave SEO value unclaimed: long-tail product queries shoppers actually type go unanswered, where structured Q&A published as JSON-LD would appear in search results."
  },
  {
  question: "What is Nobi, and how does it answer questions about the specific product a shopper is viewing?",
@@ -78,13 +78,13 @@ export const meta = {
 </script>
 ## How do BigCommerce merchants answer shopper questions directly on the product page without losing the sale to a support ticket?
 
-Most product pages on BigCommerce give shoppers exactly one option when a question comes up: file a support ticket or leave. Neither is the sale. The gap is usually a generic FAQ that shows the same eight questions for every SKU, so a shopper on your $299 technical jacket asking about fill weight gets a return policy instead of an answer that moves them to buy. They don't wait 24 hours for email. They close the tab. This guide walks through installing Nobi's in-context assistant on your BigCommerce product pages, scoping answers to the exact SKU a shopper is viewing, and publishing those answered questions as structured data for search and AI surfaces. A few hours, not weeks.
+Most product pages on BigCommerce give shoppers exactly one option when a question comes up: file a support ticket or leave. Neither is the sale. The gap is usually a generic FAQ that shows the same eight questions for every SKU, so a shopper on your premium technical jacket asking about fill weight gets a return policy instead of an answer that moves them to buy. They don't wait 24 hours for email. They close the tab. This guide walks through installing Nobi's in-context assistant on your BigCommerce product pages, scoping answers to the exact SKU a shopper is viewing, and publishing those answered questions as structured data for search and AI surfaces. A few hours, not weeks.
 
 ## Why do generic product FAQs fail to convert shoppers on the BigCommerce product detail page?
 
 A generic FAQ page lists the same questions for every SKU. A shopper on a specific jacket PDP asking about fill weight or water resistance gets a corporate return policy - not the answer that moves them to add to cart. When the product page can't answer the question a shopper has right then, most abandon rather than file a ticket and wait.
 
-The problem starts with scope. That same eight-question FAQ appears whether a shopper is on a $29 t-shirt or a $299 technical jacket. Sizing and fit questions are the leading driver of apparel returns. A shopper who can't verify fit either buys elsewhere or gambles and ships the item back at your cost.
+The problem starts with scope. That same eight-question FAQ appears whether a shopper is on a budget tee or a premium technical jacket. Sizing and fit questions are the leading driver of apparel returns. A shopper who can't verify fit either buys elsewhere or gambles and ships the item back at your cost.
 
 Sending someone to support doesn't fix it. A ticket takes 24 to 48 hours to resolve - most shoppers abandon within minutes of hitting a dead end, not hours. A bot that loops or gives a non-answer is worse than nothing - a bad AI answer actively damages trust more than silence does. Static FAQ pages also leave SEO value on the table. Long-tail product queries - the ones shoppers actually type - go unanswered in search results, where structured Q&A published as JSON-LD would have shown up instead.
 
@@ -104,7 +104,7 @@ A second AI review checks each draft answer against the source content before it
 
 ## How do I install Nobi's assistant on my BigCommerce product pages?
 
-That knowledge base - product pages, FAQ routes, and policy docs already indexed and refreshing twice a day - reaches your shoppers the moment the Nobi snippet is live on your storefront. In BigCommerce, setup starts in Storefront > Script Manager: add one snippet there and the assistant is running. No developer project, no BigCommerce app to install.
+That knowledge base - product pages, FAQ routes, and policy docs already indexed and refreshing twice a day - reaches your shoppers the moment the Nobi snippet is live on your storefront. In BigCommerce, setup starts in Storefront > Script Manager: a script tag and a search-bar placement element are all it takes. No developer project, no BigCommerce app to install.
 
 Grab your account ID from the Installation page of your Nobi dashboard, then add the following in Script Manager:
 
@@ -134,7 +134,7 @@ Go-live is measured in hours. There are no ranking rules to configure or synonym
 
 That first answer is accurate because it's scoped - Nobi passes the current page's product context with every query, so retrieval is anchored to that SKU's indexed content. A shopper on a waterproof hiking boot PDP gets answers drawn from that boot's product page and connected specs - not a search across the full catalog that might surface another product's answer.
 
-Every query carries the product title, the variant identifier, and the page URL. The retrieval layer uses those to treat that SKU as the primary scope before evaluating any content - so a question about materials pulls from that product's specs, and a question about sizing pulls from its fit guide, if one is connected.
+Every query carries the product title, the variant identifier, and the page URL. Nobi uses that context to search that SKU's indexed content first - so a question about materials pulls from that product's specs, and a question about sizing pulls from its fit guide, if one is connected.
 
 When the answer isn't in the connected knowledge base, Nobi says so. It doesn't generate a plausible-sounding response from context clues or fill the gap from general product knowledge. That's the right call - a fabricated answer about fill weight, waterproofing, or material safety is worse than no answer.
 

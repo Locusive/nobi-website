@@ -104,7 +104,7 @@ All of those features run on your Magento PDP after one small theme edit - no mo
 
 **1. Add the Nobi script to your PDP template.**
 
-Open `catalog_product_view.xml` in your active Magento theme and add the Nobi script to the page's head section. Scoping it through Magento's layout update system keeps the script off category listings, the cart, and checkout - only PDPs load it.
+Your developer adds the Nobi script to `catalog_product_view.xml` in your active Magento theme, scoped to product pages only. Magento's layout update system keeps the script off category listings, the cart, and checkout - only PDPs load it.
 
 ```html
 <script async src="https://assistant-script.nobi.ai/nobi.bundle.js" onload="window.Nobi.initialize({ accountId: 'YOUR_MERCHANT_ID' });">
@@ -127,7 +127,7 @@ Confirm the assistant loads, verify answers are grounded to the correct SKU rath
 
 ## How does Nobi scope answers to the specific SKU a shopper is looking at?
 
-That staging check - confirming answers are grounded to the correct SKU rather than a sitewide response - works because of how Nobi scopes its retrieval. When a shopper asks a question on a product page, Nobi uses the canonical URL of that page as retrieval context. The knowledge base entry for that SKU - its product description, attached spec PDFs, linked policy pages - becomes the scope for that session. A shopper asking about the inseam on a specific pair of pants gets an answer drawn from that product's data, not a brand-level sizing guide that may not apply to the item they're actually considering.
+That staging check works because of how Nobi scopes its retrieval. It grounds answers to the specific SKU, not a sitewide pool. When a shopper asks a question on a product page, Nobi uses the canonical URL of that page as retrieval context. The knowledge base entry for that SKU - its product description, attached spec PDFs, linked policy pages - becomes the scope for that session. A shopper asking about the inseam on a specific pair of pants gets an answer drawn from that product's data, not a brand-level sizing guide that may not apply to the item they're actually considering.
 
 This matters because a sitewide knowledge pool blends content from across your catalog. Nobi doesn't do that. The answer for a waterproof hiking boot pulls from that boot's product page and attached spec PDF; the answer for a children's sneaker pulls from that sneaker's page. Each shopper gets content scoped to the exact product they're looking at.
 
@@ -159,7 +159,7 @@ The structured data refreshes as new questions are added and approved. No manual
 
 ## When is Nobi the right call for a Magento store, and when is something else a better fit?
 
-Nobi fits when the conversion bottleneck is unanswered pre-purchase questions on the PDP - the shopper who can't confirm sizing, compatibility, or a return window before adding to cart. The self-updating JSON-LD is part of the same logic: if you want a layer that generates structured data, builds FAQ blocks per SKU, and scopes answers to each product on its own without developer involvement each time, Nobi runs that autonomously.
+Nobi fits when the conversion bottleneck is unanswered pre-purchase questions on the PDP - the shopper who can't confirm sizing, compatibility, or a return window before adding to cart. The self-updating structured data works the same way: Nobi generates FAQ blocks per SKU, scopes answers to each product, and handles both automatically - no developer involvement each time.
 
 Pick Nobi when you want the AI answering questions on the PDP rather than routing them to a support team to handle. Pricing is $25/month base, which includes 2,500 searches and 250 conversational messages. Beyond that, $0.01 per additional search and $0.10 per additional message - no revenue-share.
 

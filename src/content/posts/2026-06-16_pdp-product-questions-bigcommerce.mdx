@@ -17,11 +17,11 @@ export const meta = {
  },
  {
  question: "What is Nobi, and how does it answer questions about the specific product a shopper is viewing?",
- answer: "Nobi is a conversational website assistant that connects to your BigCommerce catalog, policy docs, and help content and answers questions scoped to the exact SKU the visitor is viewing. The knowledge base builds automatically from sources you connect - product pages, FAQ routes, policy docs, and PDFs - with no manual re-entry required. Every answer carries inline numbered citation pills showing the source document, date, and exact excerpt, so shoppers can verify claims without leaving the chat."
+ answer: "Nobi is a conversational website assistant that connects to your product catalog, policy docs, and help content and answers questions scoped to the exact SKU the visitor is viewing. The knowledge base builds automatically from sources you connect - product pages, FAQ routes, policy docs, and PDFs - with no manual re-entry required. Every answer carries inline numbered citation pills showing the source document, date, and exact excerpt, so shoppers can verify claims without leaving the chat."
  },
  {
  question: "How do I install Nobi's assistant on my BigCommerce product pages?",
- answer: "Setup requires adding one snippet in BigCommerce's Storefront > Script Manager - no developer project and no app to install. Grab your account ID from the Nobi dashboard, paste it into the script tag, and set it to load on all pages; Nobi detects page type automatically and scopes its behavior accordingly. Connect knowledge sources from the dashboard by pasting your catalog URL, pointing at your FAQ route, or uploading policy PDFs, and Nobi indexes them for the assistant to answer from."
+ answer: "Setup requires adding one snippet in BigCommerce's Storefront > Script Manager - no developer project and no app to install. Grab your account ID from the Nobi dashboard, paste it into the script tag, and set it to load on all pages; Nobi detects page type automatically and scopes its behavior accordingly. Connect knowledge sources from the dashboard by pasting a link to your product feed (CSV or JSON), pointing at your FAQ route, or uploading policy PDFs, and Nobi indexes them for the assistant to answer from."
  },
  {
  question: "How do Nobi's answers stay scoped to the specific SKU a shopper is viewing instead of pulling from the wrong product?",
@@ -90,7 +90,7 @@ Sending someone to support doesn't fix it. A ticket takes 24 to 48 hours to reso
 
 ## What is Nobi, and how does it answer questions about the specific product a shopper is viewing?
 
-That SEO gap and the abandoned shopper are two sides of the same problem: a product page that can't answer what's in front of it. Nobi is a conversational website assistant. It connects to your BigCommerce catalog, policy docs, and help content, then answers shopper questions scoped to the exact SKU the visitor is viewing. Unlike a generic chat widget trained on static help articles, Nobi reads the current product and grounds every answer in that product's data, so a question about a specific color variant's sizing gets an answer about that variant.
+That SEO gap and the abandoned shopper are two sides of the same problem: a product page that can't answer what's in front of it. Nobi is a conversational website assistant. It connects to your product catalog, policy docs, and help content, then answers shopper questions scoped to the exact SKU the visitor is viewing. Unlike a generic chat widget trained on static help articles, Nobi reads the current product and grounds every answer in that product's data, so a question about a specific color variant's sizing gets an answer about that variant.
 
 The knowledge base builds automatically from sources you connect: your BigCommerce product pages, FAQ routes, policy docs, and PDFs. No manual re-entry. Point Nobi at the URLs or upload a file and it becomes part of what the assistant can answer.
 
@@ -122,7 +122,7 @@ To give visitors a way to open the assistant, place the search bar where you wan
 </nobi-search-bar>
 ```
 
-Once the snippet is live, connect your knowledge sources from the Nobi dashboard: paste your catalog URL, point at your FAQ route, or upload policy PDFs. Nobi indexes the content and it becomes part of what the assistant can answer. On the PDP, contextual suggestion pills appear automatically - tappable prompts scoped to that product's category, like "Does this run true to size?" or "Is this waterproof?" Visitors tap a pill and the assistant opens with the answer; it gives shoppers who don't know what to type a starting point.
+Once the snippet is live, connect your knowledge sources from the Nobi dashboard: paste a link to your product feed (CSV or JSON), point at your FAQ route, or upload policy PDFs. Nobi indexes the content and it becomes part of what the assistant can answer. On the PDP, contextual suggestion pills appear automatically - tappable prompts scoped to that product's category, like "Does this run true to size?" or "Is this waterproof?" Visitors tap a pill and the assistant opens with the answer; it gives shoppers who don't know what to type a starting point.
 
 Widget position, exit-intent triggers, and branding are all adjustable from the dashboard without touching the storefront again.
 

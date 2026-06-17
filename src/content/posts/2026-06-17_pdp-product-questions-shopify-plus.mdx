@@ -33,7 +33,7 @@ export const meta = {
  },
  {
  question: "What SEO and AEO benefit does structured Q&A schema add to my Shopify Plus product pages?",
- answer: "When the PDP Q&A thread is output as JSON-LD FAQPage schema, search engines can read each question-and-answer pair and render them as rich results below your product listing in the SERP - no top-three ranking position required. Google AI Overviews and Perplexity pull from structured Q&A chunks when generating answers to product-specific queries, so a well-structured PDP Q&A block can earn citations in AI-generated answers for long-tail queries you would never rank for with standard page-level SEO. AI engines chunk content by heading, so a well-structured Q&A block on the PDP gives search engines and AI tools a direct answer to pull from for the exact question a shopper typed before clicking anywhere. Because the schema is built from questions shoppers actually ask, it grows with traffic and stays current rather than going stale like a static FAQ page."
+ answer: "When the PDP Q&A thread is output as JSON-LD FAQPage schema, search engines can read each question-and-answer pair and render them as rich results below your product listing in the SERP - no top-three ranking position required. Google AI Overviews and Perplexity pull from structured Q&A chunks when generating answers to product-specific queries. A well-structured PDP Q&A block can earn citations in those AI-generated answers for long-tail queries you would never rank for with standard page-level SEO. AI engines chunk content by heading, so a well-structured Q&A block on the PDP gives search engines and AI tools a direct answer to pull from for the exact question a shopper typed before clicking anywhere. Because the schema is built from questions shoppers actually ask, it grows with traffic and stays current rather than going stale like a static FAQ page."
  },
  {
  question: "When does a product-page AI assistant not fit, and what should I use instead?",
@@ -123,7 +123,7 @@ That SKU-level awareness isn't configuration - it's how Shopify's product object
 
 Answer retrieval is filtered accordingly. When a shopper asks a question, Nobi pulls from content associated with that specific product: the product page itself, any linked PDF spec sheets, connected policy documents. If you sell a boot in six widths and a shopper is on the wide version, the answer is about that width - what you've published about that SKU, not a rollup across the product line.
 
-When you update a product description, add a new material spec, or change a variant's dimensions, the twice-daily refresh cycle makes those changes available in answers within hours. No manual re-indexing needed.
+When you update a product description, add a new material spec, or change a variant's dimensions, those changes flow into shopper answers automatically — no manual re-indexing needed.
 
 Contextual suggestion pills follow the same logic. The prompts a shopper sees on a specific PDP are generated for that product - not a generic list of questions the assistant can answer site-wide. A visitor on a jacket page sees different prompts than a visitor on a boot page. Navigate to a different PDP and the pills update automatically to match.
 
@@ -141,7 +141,7 @@ The social proof signal is quieter but real. Visible Q&A on a product page tells
 
 ## What SEO and AEO benefit does structured Q&A schema add to my Shopify Plus product pages?
 
-Nobi outputs the Q&A content as JSON-LD FAQPage schema automatically, so search engines can read each question-and-answer pair directly. Google renders those pairs as rich results below your product listing in the SERP - before a shopper even clicks through. Google AI Overviews and Perplexity pull from structured Q&A chunks when generating answers to product-specific queries, which means a well-structured PDP Q&A block can earn citations in AI-generated answers for long-tail queries you'd never rank for with standard page-level SEO.
+Nobi outputs the Q&A content as JSON-LD FAQPage schema automatically, so search engines can read each question-and-answer pair directly. Google renders those pairs as rich results below your product listing in the SERP - before a shopper even clicks through. Google AI Overviews and Perplexity pull from structured Q&A chunks when generating answers to product-specific queries. A well-structured PDP Q&A block can earn citations in those AI-generated answers for long-tail queries you'd never rank for with standard page-level SEO.
 
 That matters because FAQ rich results don't require a top-three ranking position. A question like "does [product] work with [accessory]?" is answerable directly from the Q&A block on your PDP. When that Q&A is structured correctly, Google can surface the answer below your listing, pulling clicks from high-intent searches that would otherwise land on a competitor page or a review site.
 

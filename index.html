@@ -27,6 +27,15 @@
       :root {
           --nobi-button-background: #000000;
       }
+      /* The prerendered article body is injected inside #root for
+         JS-blind crawlers (see scripts/prerender-blog.js). Real browsers
+         parse this style block before the body paints, so the raw,
+         unstyled prose never flashes; React replaces #root on mount.
+         Crawlers read the HTML source and ignore CSS, so they still get
+         the prose. */
+      .prerendered-article {
+          display: none;
+      }
     </style>
 
     <title>Nobi: Site & search assistant to help you convert more visitors</title>

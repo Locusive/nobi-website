@@ -25,7 +25,7 @@ export const meta = {
     },
     {
       question: "Should I show a zero-result page or redirect to a category?",
-      answer: "Never show a bare zero-result page. At minimum, show suggested alternatives, popular products, or relevant category links. Redirecting to a related category can work but feels jarring — a better approach is showing a helpful fallback page that acknowledges the search and offers paths forward."
+      answer: "Never show a bare zero-result page. At minimum, show suggested alternatives, popular products, or relevant category links. Redirecting to a related category can work but feels jarring - a better approach is showing a helpful fallback page that acknowledges the search and offers paths forward."
     },
     {
       question: "Can AI search completely eliminate zero-result pages?",
@@ -33,7 +33,7 @@ export const meta = {
     },
     {
       question: "How often should I audit my zero-result queries?",
-      answer: "Review your top zero-result queries weekly if you're using keyword search. Look for patterns — if many queries relate to a product category you carry, that's a synonym gap. If they relate to products you don't carry, that's market intelligence for your buying team."
+      answer: "Review your top zero-result queries weekly if you're using keyword search. Look for patterns - if many queries relate to a product category you carry, that's a synonym gap. If they relate to products you don't carry, that's market intelligence for your buying team."
     }
   ],
 };
@@ -55,7 +55,7 @@ Before jumping to solutions, you need to understand why zero results happen. The
 
 This is the most common cause and the hardest to fix with keyword search alone. Your merchandising team uses industry terminology. Your shoppers use human language. The gap between the two creates constant zero-result failures.
 
-**Typos and misspellings.** "Runnign shoes." "Wirless headphones." "Moisturizor." If your search engine requires exact text matches, every typo is a potential zero-result page. On mobile — where most ecommerce traffic now comes from — typos are the norm, not the exception.
+**Typos and misspellings.** "Runnign shoes." "Wirless headphones." "Moisturizor." If your search engine requires exact text matches, every typo is a potential zero-result page. On mobile - where most ecommerce traffic now comes from - typos are the norm, not the exception.
 
 **Conceptual queries.** "Something warm for winter." "Gift for a coffee lover." "Work from home setup." These queries describe a concept or use case, not a product. Keyword search has no mechanism to interpret them.
 
@@ -67,7 +67,7 @@ Before fixing anything, measure. You need three data points:
 
 **Your zero-result rate.** What percentage of search queries return zero products? Check your search analytics dashboard. Most search platforms (Algolia, Elasticsearch, Searchspring - now a division of Athos Commerce) track this automatically. If you're above 10%, this should be a top priority.
 
-**Your top zero-result queries.** What specific queries are returning nothing? Export the list and sort by frequency. You'll likely see patterns — clusters of queries around products you definitely sell but that aren't matching.
+**Your top zero-result queries.** What specific queries are returning nothing? Export the list and sort by frequency. You'll likely see patterns - clusters of queries around products you definitely sell but that aren't matching.
 
 **Revenue impact estimate.** Here's a rough formula: (Monthly search sessions) x (zero-result rate) x (average search conversion rate) x (average order value) = monthly revenue lost to zero results. For a store doing $2M/year with a 15% zero-result rate, this number is often $15,000-30,000/month.
 
@@ -117,13 +117,13 @@ Before fixing anything, measure. You need three data points:
 
 **What it is:** Designing intelligent zero-result pages that analyze the partial intent from the query and show contextually relevant content.
 
-**How to do it:** Use query analysis to extract any recognizable terms and show products from related categories. If someone searches "blue wool sweater" and you don't match all three terms, show blue sweaters, wool sweaters, or sweaters in general — in that priority order.
+**How to do it:** Use query analysis to extract any recognizable terms and show products from related categories. If someone searches "blue wool sweater" and you don't match all three terms, show blue sweaters, wool sweaters, or sweaters in general - in that priority order.
 
 **Pros:** Much better than a blank page. Shows the shopper you're trying to help.
 
 **Cons:** Still requires the shopper to compromise on what they actually wanted. The user experience is "we didn't have exactly what you wanted, but here's something sort of close."
 
-**Impact:** Further reduces bounce rate on zero-result pages. But the root cause — the search engine not understanding the query — remains unsolved.
+**Impact:** Further reduces bounce rate on zero-result pages. But the root cause - the search engine not understanding the query - remains unsolved.
 
 ### Fix 5: AI Semantic Search
 
@@ -172,10 +172,10 @@ Check your search analytics tool (most search platforms provide this data). If y
 Research shows 80% of shoppers leave after seeing a zero-result page. If 15% of your search queries return zero results and search drives 45% of revenue, you can estimate the impact: roughly 5-7% of total potential revenue lost to zero-result dead ends alone.
 
 ### Should I show a zero-result page or redirect to a category?
-Never show a bare zero-result page. At minimum, show suggested alternatives, popular products, or relevant category links. Redirecting to a related category can work but feels jarring — a better approach is showing a helpful fallback page that acknowledges the search and offers paths forward.
+Never show a bare zero-result page. At minimum, show suggested alternatives, popular products, or relevant category links. Redirecting to a related category can work but feels jarring - a better approach is showing a helpful fallback page that acknowledges the search and offers paths forward.
 
 ### Can AI search completely eliminate zero-result pages?
 AI search reduces zero-result rates to near-zero (typically under 2%) because it understands intent and finds conceptually relevant products even when no keyword match exists. The remaining cases are usually queries for products you genuinely don't carry.
 
 ### How often should I audit my zero-result queries?
-Review your top zero-result queries weekly if you're using keyword search. Look for patterns — if many queries relate to a product category you carry, that's a synonym gap. If they relate to products you don't carry, that's market intelligence for your buying team.
+Review your top zero-result queries weekly if you're using keyword search. Look for patterns - if many queries relate to a product category you carry, that's a synonym gap. If they relate to products you don't carry, that's market intelligence for your buying team.

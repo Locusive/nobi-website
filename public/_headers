@@ -1,0 +1,5 @@
+# Serve the prerendered article markdown copies as text/markdown so
+# AI fetchers (and browsers) get plain text, not a forced download.
+/blog/*.md
+  Content-Type: text/markdown; charset=utf-8
+  X-Robots-Tag: all

@@ -19,6 +19,13 @@
 // (GPTBot, ClaudeBot, PerplexityBot, Bing) can read the actual prose
 // they'd otherwise never see - the part they cite.
 //
+// It also writes dist/blog/<slug>.md - a clean-markdown copy of each
+// article (title, description, prose; no nav, CSS, or widgets) served
+// at /blog/<slug>.md. AI fetchers increasingly request a .md variant
+// to get plain text instead of digging prose out of the DOM; each
+// prerendered page advertises its copy via <link rel="alternate"
+// type="text/markdown">.
+//
 // Run via: node scripts/prerender-blog.js (chained from `build`).
 
 import { readFileSync, writeFileSync, readdirSync, mkdirSync, existsSync } from "fs";
@@ -102,6 +109,83 @@ function readBody(mdxPath) {
   // Self-closing JSX / custom elements (<BlogQualifier ... />).
   body = body.replace(/<[A-Za-z][\w-]*\b[^>]*\/>/g, "");
   return body.trim();
+}
+
+// Like readBody, but produces clean *markdown* for the .md endpoint
+// rather than markdown destined for HTML conversion. readBody leaves
+// lowercase HTML wrappers (the <div className="..."> CTA blocks, inline
+// <a> links, and the FAQ-accordion JSX template) untouched - harmless
+// when we render to HTML, but noise in a plain-text .md file. Clean
+// those up while preserving real prose, links, and code examples.
+function readMarkdownBody(mdxPath) {
+  const content = readFileSync(mdxPath, "utf8");
+  const meta = content.match(/export const meta\s*=\s*\{[\s\S]*?\n\s*\};/);
+  if (!meta) return "";
+  let md = content.slice(meta.index + meta[0].length);
+
+  // Protect fenced code blocks - install snippets contain literal HTML
+  // (<nobi-search-bar>, </head>) that must survive verbatim.
+  const fences = [];
+  md = md.replace(/```[\s\S]*?```/g, (m) => {
+    fences.push(m);
+    return `%%FENCE${fences.length - 1}%%`;
+  });
+
+  // JSON-LD script (already in <head>) and import lines.
+  md = md.replace(/<script[\s\S]*?<\/script>/gi, "");
+  md = md.replace(/^import .*$/gm, "");
+  // FAQ-accordion JSX map. The real Q&A lives in frontmatter and is
+  // re-emitted by buildMarkdown, so drop the template here.
+  md = md.replace(/\{[\s\S]*?\.map\([\s\S]*?\)\)\}/g, "");
+  // Paired JSX components (<Comp>...</Comp>) and custom elements
+  // (<nobi-button>...</nobi-button>) - interactive widgets, no prose.
+  md = md.replace(/<([A-Z][A-Za-z0-9]*)\b[^>]*>[\s\S]*?<\/\1>/g, "");
+  md = md.replace(/<([a-z]+-[a-z-]+)\b[^>]*>[\s\S]*?<\/\1>/g, "");
+  md = md.replace(/<[A-Za-z][\w-]*\b[^>]*\/>/g, "");
+  // Paired <div>...</div> wrappers (CTA buttons).
+  md = md.replace(/<div\b[^>]*>[\s\S]*?<\/div>/gi, "");
+  // Inline <a href="...">text</a> -> [text](url), keeping the link.
+  md = md.replace(/<a\b[^>]*\bhref="([^"]+)"[^>]*>([\s\S]*?)<\/a>/gi, "[$2]($1)");
+  // Any remaining real HTML tags (keep inner text). Requiring a leading
+  // letter/slash avoids eating a "<" used as a comparison operator.
+  md = md.replace(/<\/?[a-zA-Z][\w-]*(?:\s[^>]*)?>/g, "");
+  // A bare "---" horizontal rule reads as stray syntax once widgets are
+  // gone; drop it. Then collapse the blank lines the removals leave.
+  md = md.replace(/^\s*---\s*$/gm, "");
+  md = md.replace(/[ \t]+$/gm, "");
+  md = md.replace(/\n{3,}/g, "\n\n");
+
+  // Restore code fences.
+  md = md.replace(/%%FENCE(\d+)%%/g, (_, i) => fences[Number(i)]);
+  return md.trim();
+}
+
+// Assemble the served markdown file: an H1 title, the description as a
+// blockquote, a source link back to the canonical URL, the prose, and
+// the article's FAQs (from frontmatter). This is what an AI fetcher
+// gets when it requests /blog/<slug>.md - plain text, no nav, no CSS,
+// no DOM to dig through.
+function buildMarkdown(meta, slug, mdBody) {
+  const url = `${BASE_URL}/blog/${slug}`;
+  const parts = [`# ${meta.title || "Nobi"}`, ""];
+  const desc = meta.description || meta.excerpt || "";
+  if (desc) parts.push(`> ${desc}`, "");
+  parts.push(`_Source: ${url}_`, "", mdBody, "");
+
+  // Append real FAQs from frontmatter. Skip the "1. Nobi" numbered
+  // vendor pseudo-FAQs the assembler stores in the same array, and skip
+  // any whose question already appears in the prose (no duplication).
+  const faqs = (Array.isArray(meta.faqItems) ? meta.faqItems : []).filter(
+    (i) =>
+      i && i.question && i.answer &&
+      !/^\d+\.\s+/.test(i.question) &&
+      !mdBody.includes(i.question)
+  );
+  if (faqs.length) {
+    parts.push("## Frequently asked questions", "");
+    for (const f of faqs) parts.push(`### ${f.question}`, "", f.answer, "");
+  }
+  return parts.join("\n").replace(/\n{3,}/g, "\n\n");
 }
 
 // Inline markdown -> HTML: links, bold, italic. HTML is escaped first,
@@ -268,6 +352,9 @@ function buildHeadInjection(meta, slug) {
   // description here or they end up duplicated in the rendered HTML.
   const tags = [
     `<link rel="canonical" href="${htmlEscape(url)}">`,
+    // Advertise the clean-markdown copy of this page. AI fetchers that
+    // prefer plain text over a JS-rendered DOM can follow this instead.
+    `<link rel="alternate" type="text/markdown" href="${htmlEscape(url)}.md">`,
     `<meta property="og:type" content="article">`,
     `<meta property="og:url" content="${htmlEscape(url)}">`,
     `<meta property="og:title" content="${htmlEscape(meta.title || "Nobi")}">`,
@@ -399,6 +486,13 @@ function main() {
     try {
       const bodyHtml = renderBodyHtml(join(POSTS_DIR, file));
       prerenderOne(meta, meta.slug, shell, bodyHtml);
+      // Also emit a clean-markdown copy at /blog/<slug>.md for AI
+      // fetchers that ask for plain text instead of HTML.
+      const mdBody = readMarkdownBody(join(POSTS_DIR, file));
+      writeFileSync(
+        join(DIST, "blog", `${meta.slug}.md`),
+        buildMarkdown(meta, meta.slug, mdBody)
+      );
       written++;
     } catch (e) {
       console.warn(`prerender: failed for ${meta.slug}: ${e.message}`);

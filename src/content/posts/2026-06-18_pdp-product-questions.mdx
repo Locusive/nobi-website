@@ -1,0 +1,201 @@
+export const meta = {
+ title: "How to Answer Shopper Questions Directly on Your Product Page",
+ slug: "pdp-product-questions",
+ date: "2026-06-18",
+ publishedAt: "2026-06-18",
+ description: "Deploy a context-aware Q&A assistant on your product pages in minutes. Answers stay scoped to the SKU, cut support tickets, and output JSON-LD for AI search engines.",
+ excerpt: "Deploy a context-aware Q&A assistant on your product pages in minutes. Answers stay scoped to the SKU, cut support tickets, and output JSON-LD for AI search engines.",
+ tags: ["how-to", "product qa", "ecommerce", "ecommerce search"],
+ author: "Shanif Dhanani",
+ heroImage: "https://storage.googleapis.com/nobi-public/docs_and_marketing_websites/posts/pdp-product-questions/hero.webp",
+ featured: true,
+ draft: false,
+ faqItems: [
+ {
+ question: "Why do generic FAQs fail shoppers who have questions on a product detail page?",
+ answer: "Generic FAQs list the questions a brand predicted shoppers would ask, not the questions shoppers actually have about the specific variant or size they're looking at right now. A shopper on a product page is deciding, not browsing - questions like \"Does the 34x30 run true to length?\" can't be answered by a site-wide FAQ. By the time a shopper opens a support ticket because they couldn't get an answer, the sale is already lost. Poor fit is the most-cited reason for apparel returns, so leaving a sizing question unanswered before checkout costs both the sale and the return."
+ },
+ {
+ question: "What is Nobi, and how does it answer questions scoped to the specific product a shopper is viewing?",
+ answer: "Nobi is a conversational website assistant that places an AI-powered Q&A layer directly on the product page. It reads the specific product, variant, and content at the URL it's embedded on, and limits every answer to that SKU - pulling from your connected catalog content like product pages, PDFs, and policy docs rather than static training data. Every answer carries inline citation pills that show the source document and the exact excerpt the answer came from, so shoppers can verify what the assistant told them without leaving the page. For high-stakes questions like return policy or warranty terms, query overrides lock an exact merchant-approved answer so no paraphrasing occurs regardless of how the question is phrased."
+ },
+ {
+ question: "How do I add a product-page Q&A assistant to my store?",
+ answer: "Nobi installs via a small theme edit or Google Tag Manager - no developer sprint or platform migration required. For Shopify, you add a script tag to your product template or main layout; for GTM, you create a Custom HTML tag with the provided snippet and set the trigger to All Pages. After install, connect your catalog by pointing Nobi at your product URLs, policy pages, and PDFs - it indexes the content automatically with no manual re-entry. Then set query overrides for high-stakes answers and configure suggestion pills so visitors see relevant starting points rather than a blank input."
+ },
+ {
+ question: "How does the assistant keep its answers scoped to the product the shopper is looking at, and not the whole catalog?",
+ answer: "When Nobi runs on a product detail page, the content at that URL - descriptions, specs, variant data, and linked policy docs - is what the assistant draws from for that visit, not the whole catalog. A question about a specific jacket variant draws from that exact SKU's data, not a blended spec from every version of the product, and if the answer isn't in the connected content for that SKU, Nobi doesn't reach across the catalog to fill the gap. When the second AI review is enabled - toggleable per merchant, off by default for ecommerce - it checks the draft against the raw source content; if the draft makes a claim the source doesn't support, the answer doesn't send. On inventory, Nobi won't assert stock status it can't verify from a connected and current source."
+ },
+ {
+ question: "How do past shopper questions become a browsable FAQ that deflects future support tickets?",
+ answer: "Nobi logs every question shoppers ask on a product page, and the highest-frequency ones surface automatically as a browsable FAQ below the chat widget, along with verified, grounded answers. The most common questions also appear as tappable suggestion pills above the chat input, so a visitor landing on a PDP sees prompts like \"Do these run true to size?\" as starting points rather than a blank text field. As the FAQ grows, repeat questions stop generating support tickets - a shopper who finds the sizing answer on the page doesn't need to email. There's also a subtler effect: a hesitant buyer sees that other real shoppers raised the same question, which normalizes asking and makes tapping a pill feel less like speaking up in public."
+ },
+ {
+ question: "How does outputting Q&A as structured schema help my product pages rank and get cited by AI search engines?",
+ answer: "Nobi outputs the FAQ pairs it generates as JSON-LD schema markup, which tells search engines and AI answer engines the page contains extractable question-and-answer content. Google's FAQ rich results can display those pairs directly beneath your listing in search results, giving shoppers a grounded answer before they click through. AI search engines like Perplexity and Google AI Overviews prioritize question-phrased entries with direct answers over marketing prose - and Q&A sourced from real shopper behavior captures the actual vocabulary shoppers use, which a hand-crafted FAQ often misses. Connected sources refresh twice a day, so both the live chat answers and the underlying indexed content stay current as specs or policies change."
+ },
+ {
+ question: "When is a different tool a better fit for product-page shopper Q&A?",
+ answer: "Nobi is strongest on pre-purchase questions - sizing, materials, compatibility, policies - but it doesn't execute post-purchase transactions like cancellations, order modifications, or return initiations inside the chat. It's a site chat widget, not an email channel, so teams that run Intercom or Zendesk as their primary inbox will still need those platforms for email-based support. Nobi reduces how many questions become tickets but doesn't manage ticket routing, case assignment, or SLA macros, so most brands will pair it with a helpdesk rather than replace one. It also doesn't rerank results based on individual shopper behavior history, and it isn't built for deterministic scripted conversation flows like a visual flow-builder provides."
+ }
+ ],
+};
+
+<script type="application/ld+json" data-nobi-schema>
+{`{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "How to Answer Shopper Questions Directly on Your Product Page",
+  "description": "Deploy a context-aware Q&A assistant on your product pages in minutes. Answers stay scoped to the SKU, cut support tickets, and output JSON-LD for AI search engines.",
+  "datePublished": "2026-06-18",
+  "dateModified": "2026-06-18",
+  "author": {
+    "@type": "Person",
+    "name": "Shanif Dhanani",
+    "url": "https://www.linkedin.com/in/shanifdhanani/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Nobi",
+    "url": "https://nobi.ai"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://nobi.ai/blog/pdp-product-questions"
+  },
+  "about": [
+    {
+      "@type": "Thing",
+      "name": "product qa"
+    },
+    {
+      "@type": "Thing",
+      "name": "ecommerce"
+    }
+  ]
+}`}
+</script>
+## How can I answer shopper questions directly on the product page to reduce abandonment and win more sales?
+
+A shopper on your product page is one question away from buying. They've found what they want and they're reading specs. What they need is a specific answer - does this run true to size, will it ship before Thursday, does the material hold up to machine washing - and if they can't find it, they leave. Not because the price was wrong. Because the answer wasn't there.
+
+A generic site-wide FAQ can't solve this. It lists questions the brand predicted people would ask, not the question a shopper has about the specific variant or configuration they're looking at right now. The cost of that gap shows up two ways: the abandoned cart you never recover, and the return you absorb from the shopper who bought without getting a real answer first. Poor fit is the most-cited reason for apparel returns.
+
+Here's how to put a context-aware Q&A assistant on your product pages, scope its answers to the exact SKU being viewed, and turn the highest-frequency questions into structured FAQ schema that AI search engines can cite.
+
+## Why do generic FAQs fail shoppers who have questions on a product detail page?
+
+A product FAQ lists the questions the brand predicted shoppers would ask - not the questions shoppers actually have about the specific variant, size, or configuration they're looking at right now. The result is a dead end: the shopper scans the FAQ, finds nothing, and either opens a support ticket after the session or closes the tab. By the time the ticket arrives, the sale is already lost.
+
+Shoppers on a PDP are deciding, not browsing. Their questions are SKU-specific: "Does the 34x30 run true to length?" is not something a site-wide FAQ can answer. That specificity matters - a sizing question a shopper can't get answered before checkout is a lost sale. A shopper who buys without a real answer and gets the wrong fit returns the item, and many don't come back.
+
+Support tickets are a lagging indicator. They measure questions that already cost you a sale. Generic Q&A widgets not scoped to the current product compound the problem - a shopper who gets an answer meant for a different variant loses trust and leaves. A bad AI interaction - wrong specs, confident hallucinations, an answer that loops - often ends the relationship for good. An assistant that gets product facts wrong is a liability, not a fix.
+
+## What is Nobi, and how does it answer questions scoped to the specific product a shopper is viewing?
+
+Nobi is a conversational website assistant that places an AI-powered Q&A layer directly on the product page. What separates it from an assistant that loops or gets specs wrong is how it reads context: Nobi looks at the specific product, variant, and content at the URL it's embedded on, and limits every answer to that SKU. Answers come from your connected catalog content - product pages, PDFs, policy docs - not from static training data, so they reflect your current specs and policies.
+
+The knowledge base builds from any site content you connect: product pages, FAQ routes, policy docs, PDFs, help-center articles. No manual re-entry. Point Nobi at a URL or upload a file and it becomes part of what the assistant can answer.
+
+Every answer carries inline numbered citation pills. Hovering over a pill shows the source document name, date, and the exact excerpt the answer came from. Shoppers can verify what the assistant told them without leaving the page - which directly addresses the fear that the AI is making things up.
+
+Before an answer sends, a second AI review can check each draft against the raw content from the cited sources - this is toggleable per merchant and off by default for ecommerce stores. If the draft doesn't match what's in the source, the answer doesn't go out. It isn't a guarantee against every possible error, but grounded, cited answers with an internal check leave far less room for errors than an unconstrained LLM.
+
+For high-stakes questions - return policy, warranty terms, shipping cutoffs - query overrides lock an exact merchant-approved answer to that question. No paraphrasing, no variation. Whatever phrasing the shopper uses, the locked answer fires.
+
+Connected sources refresh twice a day, so a spec update or pricing change lands in shopper answers within hours.
+
+## How do I add a product-page Q&A assistant to my store?
+
+All of that - the grounded answers, the override locks, the twice-daily refresh - starts working as soon as Nobi is installed and your catalog is connected. Getting there takes a small theme edit, not a developer sprint or a platform migration.
+
+Two install paths exist. The direct route means adding the Nobi embed to your storefront theme. For Shopify, that's a quick edit to your product template - no developer sprint, no app review queue:
+
+```html
+<script async src="https://assistant-script.nobi.ai/nobi.bundle.js" onload="window.Nobi.initialize({ accountId: 'YOUR_MERCHANT_ID' });">
+</script>
+```
+
+Swap `YOUR_MERCHANT_ID` for the ID on the Installation page of your Nobi dashboard. Add it to your main layout for site-wide coverage, or to the product template alone if you want it on PDPs only.
+
+If your team uses Google Tag Manager, you can skip the theme edit entirely. Create a Custom HTML tag, paste in the GTM snippet (replacing `YOUR_ACCOUNT_ID`), set the trigger to All Pages, and publish.
+
+After install, three configuration steps matter before going live:
+
+1. **Connect your catalog.** Point Nobi at your product URLs, policy pages, and any PDFs you want it to draw from. It indexes the content automatically - no manual re-entry.
+2. **Set query overrides** in the dashboard. Lock your return policy, warranty language, and shipping cutoff answers to exact approved responses so they never get paraphrased.
+3. **Configure suggestion pills.** Nobi generates context-aware prompts for each page a shopper lands on. Visitors who don't know what to type see relevant starting points rather than a blank input.
+
+Optionally, turn on exit-intent engagement. When a shopper moves to leave the PDP, Nobi surfaces a prompt before they abandon.
+
+Nobi starts at $25/month, including 2,500 searches and 250 conversational messages. Beyond that: $0.01 per additional search and $0.10 per additional message.
+
+## How does the assistant keep its answers scoped to the product the shopper is looking at, and not the whole catalog?
+
+Connecting your catalog to Nobi does more than build the knowledge base - it sets the scope for each answer to the specific page the shopper is on. When the assistant runs on a product detail page, the content at that URL - descriptions, specs, variant data, and linked policy docs - is what the assistant draws from for that visit. A question about washing instructions on a linen throw gets an answer sourced from that product's own content, not a generic care guide applied across your whole catalog.
+
+That per-page grounding extends to variant-level specifics. If a shopper asks about sizing on a jacket that comes in five colorways, the answer draws from the variant-specific data for the exact SKU they're viewing - not a blended spec from every version of the product. If the answer isn't in the connected content for that SKU, Nobi doesn't reach across the catalog to fill the gap.
+
+For questions where the exact wording matters - return policy, warranty terms, shipping cutoffs - query overrides enforce an additional layer of scoping. When a shopper's question matches an override, the locked merchant-approved answer fires instead of the standard grounded pipeline. No paraphrasing, no variation, regardless of how the question was phrased. That's a hard scope boundary, not a probabilistic one.
+
+On inventory, Nobi won't assert stock status it can't verify from a connected and current source. That directly addresses what operators worry about most - an assistant confidently telling a shopper something is available when it isn't.
+
+Every answer carries inline citation pills. Hovering over a pill shows the source document name, date, and the exact excerpt the answer came from. A sources sidebar lists every reference with direct links so shoppers can check any answer against your official content without leaving the page. Trust comes from transparency, not from taking the AI's word for it.
+
+## How do past shopper questions become a browsable FAQ that deflects future support tickets?
+
+Every question a shopper asks on a product page is a data point about what stops real buyers from converting. That transparency doesn't stop at citation pills - Nobi logs the questions real shoppers ask, and the highest-frequency ones surface as a browsable FAQ below the chat widget. New visitors see what other shoppers already asked - along with the grounded, verified answers - before they have to type anything themselves.
+
+The most common questions for each product also appear as tappable suggestion pills above the chat input. A visitor landing on a jacket PDP sees prompts like "Do these run true to size?" or "What is the return window?" as starting points rather than a blank text input. Clicking a pill opens the assistant with the answer already loaded.
+
+Answers in the browsable FAQ aren't user-generated text. For merchants who've enabled the second AI review, FAQ answers go through the same check before they appear. For high-stakes questions - return policy, warranty terms, shipping cutoffs - query overrides lock the exact merchant-approved language so the FAQ shows your words, not a paraphrase.
+
+As the FAQ grows, repeat questions stop generating new tickets. A shopper who sees the sizing answer on the page doesn't need to email. That compounds: every question the FAQ answers is one fewer conversation your team handles.
+
+There's also a subtler effect. A hesitant buyer who's reluctant to ask "is this true to size?" on a public page sees that other real shoppers raised that exact question. That volume signal - the visible record that others already asked - normalizes it. Tapping a pill feels a lot less like speaking up in a crowd.
+
+## How does outputting Q&A as structured schema help my product pages rank and get cited by AI search engines?
+
+The FAQ that grows from real shopper questions doesn't just help visitors who land on the page - it becomes a structured SEO asset when Nobi outputs those Q&A pairs as FAQ schema markup (JSON-LD). That markup tells search engines and AI answer engines the page contains extractable question-and-answer pairs, not just prose product copy.
+
+Google's FAQ rich results can display those pairs directly in the search results, appearing beneath your product page listing and occupying more space on the page. A shopper who searches "does [product] work with [compatible device]" may see your exact grounded answer before they even click through. That pre-purchase answer in the SERP is visibility you didn't pay for.
+
+AI search engines like Perplexity and Google AI Overviews chunk content by heading and Q&A pair when deciding what to cite. A question-phrased entry with a direct grounded answer is more likely to get cited by an AI answer engine than a paragraph of marketing copy covering the same specification. The phrasing itself matters: real shoppers type "does this work with" or "what is this made from," not the polished catalog copy a brand's copywriter would write. A hand-crafted FAQ is likely to miss that vocabulary. Q&A sourced from real shopper behavior captures it.
+
+As new high-frequency questions surface, updating the JSON-LD keeps the structured data aligned with current shopper intent - and the AEO lift compounds rather than decays.
+
+Nobi's connected sources refresh twice a day. When a spec, a policy, or pricing changes, both the live chat answer and the underlying source content are current within hours, not a week. What a search crawler indexes and what Perplexity cites reflects that same freshness, so the structured data stays accurate alongside the live assistant.
+
+## When is a different tool a better fit for product-page shopper Q&A?
+
+The schema and twice-daily refresh show where Nobi is strongest. Pre-purchase questions on the product page - sizing, materials, compatibility, policies - are its territory. The jobs listed below are where a different tool fits better - and the wrong tool is expensive to replace after launch.
+
+- **Post-purchase transactions in chat.** Nobi answers WISMO (Where Is My Order) questions but doesn't execute cancellations, order modifications, or return initiations inside the chat. Brands that want shoppers to self-serve those tasks in chat need a tool built for it.
+
+- **Email-first teams.** Nobi is a chat widget on your site, not an email channel. If email is your primary support channel, or your team already runs [Intercom](https://www.intercom.com) or [Zendesk](https://www.zendesk.com) as the inbox where all conversations land, those platforms handle email natively.
+
+- **Agent-side ticket workflow.** Nobi reduces how many questions turn into tickets, but it doesn't manage tickets, route cases, or run SLA macros. Zendesk, Gorgias, and similar helpdesks manage tickets, route cases to agents, run macros, and handle returns and refunds in a structured workflow. Use one when agent-side workflow tooling is the primary need.
+
+- **Personalized result ordering.** Nobi's personalization today is configurable placeholder text and starter messages. It doesn't rerank results based on individual shopper click and purchase history. Brands whose conversion strategy centers on behavioral reranking need a different tool.
+
+- **Scripted campaign flows.** Nobi is LLM-grounded and flexible but not deterministic. Marketing teams who want specific conversation trees for a Black Friday campaign or product launch - without engineering help - will prefer a visual flow-builder.
+
+
+<BlogEmailCapture hook="Shoppers leaving your product pages with unanswered questions?" subtext="Drop your email and we'll show you how Nobi answers shopper questions directly on your product pages before they bounce to a competitor." />
+
+---
+
+If pre-purchase questions on the product page are the gap you're solving for - sizing, materials, compatibility, policies - Nobi is built for that job. Get started at nobi.ai.
+
+<div className="my-8 flex justify-center">
+ <a
+ href="https://dashboard.nobi.ai"
+ className="inline-flex items-center justify-center gap-2 rounded-2xl font-medium transition active:scale-[.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-black/10 dark:focus-visible:ring-white/20 bg-black text-white dark:bg-white dark:text-black hover:opacity-90 shadow-sm h-12 px-6 text-base no-underline"
+ >
+ <span>Start your free Nobi trial</span>
+ </a>
+</div>
+```
+
+The only change is the five sentences of the original opening paragraph, replaced with three paragraphs that move through context (shopper one question from buying), problem (FAQ can't answer variant-specific questions), stakes (abandoned cart + 70% return stat), and bridge (here's how to...). Sentence length varies from two-word punches ("Because the answer wasn't there.") through medium to longer specifics.

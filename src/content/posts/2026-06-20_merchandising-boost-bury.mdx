@@ -1,0 +1,201 @@
+export const meta = {
+ title: "How to Get Your Highest-Priority Products to the Top of Search Results",
+ slug: "merchandising-boost-bury",
+ date: "2026-06-20",
+ publishedAt: "2026-06-20",
+ description: "Boost, bury, pin, and hide products in ecommerce search without breaking relevance. A practical guide using Nobi's merchandising controls.",
+ excerpt: "Boost, bury, pin, and hide products in ecommerce search without breaking relevance. A practical guide using Nobi's merchandising controls.",
+ tags: ["how-to", "merchandising", "ecommerce", "ecommerce search"],
+ author: "Shanif Dhanani",
+ heroImage: "https://storage.googleapis.com/nobi-public/docs_and_marketing_websites/posts/merchandising-boost-bury/hero.webp",
+ featured: true,
+ draft: false,
+ faqItems: [
+ {
+ question: "What is search merchandising, and which products should it control?",
+ answer: "Search merchandising is the practice of applying business intent on top of relevance ranking - overriding which products appear in specific positions for specific reasons like campaign launches, clearance pushes, or margin priorities. The four control types are boost, bury, pin, and hide, each firing only on the queries you target rather than catalog-wide. Legitimate triggers include seasonal campaigns, new arrivals, overstock clearance, margin prioritization, and out-of-stock suppression. The danger is using these controls to paper over weak relevance ranking, which manufactures dead ends for shoppers and drives silent abandonment."
+ },
+ {
+ question: "What is Nobi, and how does it apply merchandising rules without breaking search?",
+ answer: "Nobi is a conversational website assistant that combines product search, automated shopper Q&A, and lead generation in one platform. Its hybrid relevance ranking - semantic understanding plus behavioral signals - resolves natural language queries like \"breathable trail shoe for wide feet\" without synonym lists or manual vocabulary rules. Merchandising rules sit on top of that ranking layer rather than replacing it, so a boost or pin promotes the product you want without forcing an irrelevant result onto a shopper who wasn't looking for it. Pricing starts at $25/month, which includes 2,500 searches and 250 conversational messages."
+ },
+ {
+ question: "When should I create a merchandising rule, and which trigger fits which situation?",
+ answer: "Create a rule when a genuine business reason exists and the product you want to surface is actually relevant to the query you're targeting. For seasonal campaigns and launches, boost or pin hero SKUs on matching queries and set an expiration date when you create the rule, not later. For new arrivals, boost on broad category queries so shoppers discover them before organic ranking catches up. For overstock and margin situations, a boost works on broad queries where several products genuinely qualify - on narrow queries, boosting a second choice just creates a dead end."
+ },
+ {
+ question: "How do I boost a product to the top of search results, and bury one that shouldn't surface?",
+ answer: "Boosting raises a product's effective rank on matching queries without locking it to a specific slot, while burying drops a demoted item below products that would naturally rank beneath it. Both controls preserve relative ordering among untouched products, keeping underlying precision intact as your rule library grows. Boosts work best for campaign hero SKUs, high-margin alternatives on broad category searches, and new arrivals on navigational terms where historical performance would push them to the back. Buries make sense for near-clearance items, low-rated products on high-intent queries, and SKUs with high return rates."
+ },
+ {
+ question: "How do I pin a product to a specific slot, or hide it from search entirely?",
+ answer: "Pinning locks a product to a fixed slot - position one, position two - regardless of how relevance ranking would otherwise order results, while hiding removes a product from search entirely. Pinning belongs on non-negotiable campaign moments: a launch-day SKU, a Black Friday door-buster, or a co-op placement commitment to a brand partner. Resist pinning multiple slots on a high-volume query, because shoppers who typed something specific and landed on products chosen for business reasons register the miss and leave quietly. Hiding is the right control for discontinued SKUs, out-of-stock items with no restock date, and products under a price hold."
+ },
+ {
+ question: "How do I keep search relevance intact while merchandising rules are active?",
+ answer: "Target rules at specific, high-intent queries rather than broad terms - a pin on \"black leather Chelsea boot\" is far safer than a pin on \"boots,\" where thousands of shoppers with different intents all hit the same override. Check zero-result rate and search abandonment before and after activating a rule set, since a spike in either signals a rule is blocking products shoppers actually wanted. Review active rules monthly and delete campaign rules when the promotion ends, because rules that outlive their purpose silently distort every subsequent search on that term. In Nobi, a structural backstop prevents the worst outcomes: a boosted product still needs to meet a relevance threshold, so you can't push an off-topic SKU into results even with a strong boost."
+ },
+ {
+ question: "How do I know if my merchandising rules are actually moving revenue?",
+ answer: "The metrics that tell you whether a rule is working are CVR on the targeted queries, add-to-cart rate on the boosted SKU, and revenue per visit on the pages those queries land on. Track these per query, not site-wide - a rule that hurts CVR on one query while lifting it on another nets to zero in aggregate and looks fine until you inspect query-level data. Search abandonment rate on the targeted query is the clearest warning sign: if it climbs after you activate a rule, the boosted product isn't convincing shoppers. Run a two-week review cycle when a new rule set goes live, and kill any rule where CVR on the targeted query hasn't moved."
+ }
+ ],
+};
+
+<script type="application/ld+json" data-nobi-schema>
+{`{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "How to Get Your Highest-Priority Products to the Top of Search Results",
+  "description": "Boost, bury, pin, and hide products in ecommerce search without breaking relevance. A practical guide using Nobi's merchandising controls.",
+  "datePublished": "2026-06-20",
+  "dateModified": "2026-06-20",
+  "author": {
+    "@type": "Person",
+    "name": "Shanif Dhanani",
+    "url": "https://www.linkedin.com/in/shanifdhanani/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Nobi",
+    "url": "https://nobi.ai"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://nobi.ai/blog/merchandising-boost-bury"
+  },
+  "about": [
+    {
+      "@type": "Thing",
+      "name": "merchandising"
+    },
+    {
+      "@type": "Thing",
+      "name": "ecommerce"
+    }
+  ]
+}`}
+</script>
+## How do ecommerce search merchandising rules work?
+
+Search results don't know about your sale that starts Friday. They don't know you're sitting on 300 units of a jacket that needs to move, or that a new colorway just dropped and nobody's found it yet. Relevance scores rank by what's worked in the past - and that's usually fine. But it leaves a gap between what the algorithm surfaces and what your business actually needs right now. Stack too many workarounds on top of weak ranking and you get a results page that looks curated but reads as broken. Nobi's boost, bury, pin, and hide controls sit on top of AI ranking so you can apply business intent without making search feel like a dead end for everyone else.
+
+## What is search merchandising, and which products should it control?
+
+Search merchandising - sometimes called searchandising - is the practice of applying business intent on top of relevance ranking. Instead of letting the algorithm decide what appears in slot one, you override specific results for specific reasons: a campaign launch, a clearance push, a margin-priority SKU. Done right, it lifts CVR on the queries you care about most. Done carelessly, it manufactures [dead ends for shoppers](https://nobi.ai/blog/fix-zero-result-searches) whose query doesn't match what you forced to the top. Shoppers who hit irrelevant results simply leave without bouncing loudly - that's the invisible churn problem.
+
+Four control types cover most use cases. A boost surfaces a product higher in results. A bury sinks it. A pin locks it to a specific position. A hide removes it from results entirely. Each rule fires only on the queries you target - a pin on "leather boots" applies when a shopper searches that phrase, not catalog-wide.
+
+Business triggers that justify writing a rule: seasonal campaigns, new-arrival launches, overstock clearance, margin prioritization, and out-of-stock suppression. These are legitimate reasons to override the algorithm.
+
+The danger is stacking rules on top of weak relevance ranking. A high-intent query that surfaces the wrong product reads as a negative interaction even if no error message appears. One industry study put the cost plainly: 71% of consumers abandon a brand after a single negative AI interaction. Merchandising rules are a precision tool - applied to the right queries, with the right products behind them, they convert. Applied broadly or carelessly, they manufacture the exact dead ends they were meant to prevent.
+
+## What is Nobi, and how does it apply merchandising rules without breaking search?
+
+That precision starts with the ranking underneath your rules. Nobi is a conversational website assistant that combines product search, automated shopper Q&A, and lead generation in one platform. Its search engine uses hybrid relevance ranking - semantic understanding plus behavioral signals - so results already reflect what shoppers mean, not just what they typed. Merchandising rules in Nobi sit on top of that ranking layer rather than replacing it. A boost, bury, pin, or hide rule promotes the product you want without forcing an irrelevant result on a shopper who wasn't looking for it.
+
+The hybrid layer does real work. A query like "breathable trail shoe for wide feet" resolves correctly without a synonym list or a manually configured vocabulary rule. Nobi reads intent from natural language and maps it to your catalog. That means your merchandising rules start from a strong baseline instead of papering over gaps in a keyword matcher.
+
+Boost, bury, pin, and hide controls are set per query in the merchandising dashboard - no engineering ticket, no code change. A rule fires only when a shopper's search matches the condition you set. Shoppers searching something different get standard ranked results; your campaign override doesn't touch them.
+
+Catalog changes land quickly too. Connected knowledge sources refresh twice a day, so new arrivals, restocks, and discontinuations show up in search results within hours - no manual rule update required. You're not chasing stale data with new rules to compensate.
+
+Pricing starts at $25/month, which includes 2,500 searches and 250 conversational messages. Beyond that, additional searches run $0.01 each and additional messages $0.10 each, with no revenue-share and no per-seat fees.
+
+## When should I create a merchandising rule, and which trigger fits which situation?
+
+Catalog changes landing within hours is a strong foundation, but a fast-refreshing catalog doesn't know your margin targets, your launch dates, or your overstock position - those are business reasons you have to supply. Create a rule when one of those reasons exists and the product you want to surface is genuinely relevant to the query you're targeting. The worst merchandising rules push an irrelevant product onto a shopper with clear intent. The best ones surface a product the shopper would have found anyway, just sooner.
+
+**Seasonal campaigns and launches.** When you run a promotion, boost or pin the hero SKUs on the queries that match the campaign - "summer dresses," "Father's Day gifts," whatever shoppers will actually type. Set an expiration date when you create the rule, not later. Rules that outlive their campaign silently distort results for every shopper who searches that phrase after the sale ends, and those distortions compound if you keep adding rules without removing old ones.
+
+**New arrivals.** Category queries like "women's dresses" or "running shoes" rank by historical performance by default - new SKUs sit at the back. Boost new arrivals on those broad category queries so shoppers discover them before organic ranking catches up.
+
+**Overstock and margin.** On broad queries where several products genuinely qualify, a boost nudges a high-margin or overstocked item up the list without forcing irrelevance. The key word is broad - if only one product fits a narrow query, boosting a second choice is just a dead end waiting to happen.
+
+**Out-of-stock suppression.** Hide or bury discontinued items and out-of-stock SKUs so shoppers don't land on dead PDPs. A shopper who gets an out-of-stock result after a high-intent search is close to gone - this is one of the fastest ways to hand a buyer to a competitor.
+
+The discipline that ties all of these together: match rule scope to rule lifespan. Campaign rules get expiration dates. Suppression rules stay until the product is back in stock or delisted. Overstock boosts come down when inventory clears. A rule library that never shrinks is a sign that rules are accumulating faster than they're being retired - and that's when the precision erodes.
+
+## How do I boost a product to the top of search results - and bury one that shouldn't surface?
+
+Boosting raises a product's effective rank on matching queries without locking it to a specific slot - it still competes on relevance, just from a higher starting position. Burying does the reverse: the demoted item drops below products that would naturally rank beneath it. Both controls preserve relative ordering among products you didn't explicitly touch. That's what keeps underlying precision intact - even as your rule library grows.
+
+Setting up a boost in Nobi takes a few clicks, no code required:
+
+1. Go to **Account → Products → Merchandising**
+2. Click **Create Rule**
+3. Select **Boost** as the action
+4. Choose a boost strength: Weak for a gentle nudge, Medium for a noticeable lift, Strong for a major priority shift
+5. Set conditions to define which products the rule applies to - product type, tags, vendor, inventory level, or price range
+6. Click **Preview Products** to confirm which SKUs match and their boost percentage
+7. Adjust conditions if the match looks wrong, then save
+
+To bury a product, follow the same steps but select **Bury** at step 3 and choose a bury strength of Low, Medium, or High.
+
+Boosts are most useful on a hero SKU for a campaign query, a high-margin alternative on a broad category search, or a new arrival on a navigational term where historical performance would otherwise push it to the back. Buries make sense for near-clearance items the brand doesn't want in slot one, low-rated products on high-intent queries, and SKUs with a high return rate that inflate refunds without contributing margin.
+
+One limit to know: Nobi's hybrid ranking still applies underneath your rule. A boosted product needs some relevance to the query to surface at all - boosting a completely off-topic SKU won't force it into results. Stack boosts carefully too: promoting five products on the same broad query collapses the relevance signal for shoppers whose intent doesn't match any of the five SKUs you promoted.
+
+## How do I pin a product to a specific slot, or hide it from search entirely?
+
+Stacking five boosts on a broad query manufactures a ceiling on relevance - and when you need guaranteed position one, not "probably position one," boosting isn't the right control. Pinning locks a product to a fixed slot - slot one, slot two - regardless of how relevance ranking would otherwise order results. Hiding removes a product from search entirely, either for a specific query or catalog-wide. Both are the highest-force controls in the toolkit and warrant the most care.
+
+Pinning belongs on campaign hero moments where position one is non-negotiable: a launch-day SKU, a Black Friday door-buster, a co-op placement commitment to a brand partner. To set a slotting rule in Nobi:
+
+1. Go to **Account → Products → Merchandising**
+2. Click **Create Rule**
+3. Select **Slot** as the action
+4. Enter the search queries that should trigger the rule
+5. Search for your products and assign each one to a specific position (1, 2, 3, etc.)
+
+The slot fires only on the queries you name - shoppers searching anything else get standard ranked results.
+
+Resist the temptation to pin slots one through four on a high-volume query. When every top result is hardcoded regardless of what the shopper typed, search abandonment climbs. A shopper who typed something specific and landed on four products chosen for business reasons, not for their query, registers the miss and leaves quietly.
+
+Hiding is the right control for discontinued SKUs, out-of-stock items with no restock date, and products under a price-hold policy that can't be shown publicly. In Nobi, a hide rule can be scoped to a specific query or applied catalog-wide - use query-level hides for situational suppression and catalog-level hides for inventory that is genuinely unavailable.
+
+One more control worth knowing about: Nobi's query override feature lets you lock a verbatim answer to a specific shopper question. This is distinct from pinning a product to a slot. When a shopper asks about your return policy or a warranty, you may want an exact merchant-approved response - not a paraphrase. The override fires whenever the shopper's question matches; everything else routes through the standard answer pipeline.
+
+## How do I keep search relevance intact while merchandising rules are active?
+
+Pinning position one and locking verbatim answers are the highest-force controls in the toolkit - individually precise, but that precision doesn't add up to a healthy results page on its own. Every rule you add is a vote to override what the relevance signal would have shown. One or two well-targeted rules sharpen results for campaigns. A dozen poorly scoped rules turn the results page into a curated catalog that doesn't match what the shopper typed - and unlike a 404 page, there's no error to log. Shoppers who found the wrong product just left.
+
+Target rules at specific, high-intent queries rather than broad terms. A pin on "black leather Chelsea boot" is safer than a pin on "boots," where thousands of shoppers with different intents all hit the same rule. Broad overrides on broad terms are where relevance quietly breaks.
+
+Check zero-result rate and search abandonment before and after activating a rule set. A spike in either means a rule is blocking products shoppers actually wanted - not surfacing the ones you intended.
+
+Review active rules monthly too. Campaign rules that outlive their promotion silently distort every subsequent search on that term. The fix is simple: delete the rule when the campaign ends, not later.
+
+In Nobi, there's also a structural backstop. Rules sit on top of AI ranking rather than replacing it, so a boosted product still needs to meet a relevance threshold to appear at the improved position. You can't push an off-topic SKU into results, even with a Strong boost.
+
+[Searchspring](https://www.searchspring.io) is built on exact, auditable control - every result traces back to a specific rule with no AI layer in between. That's genuinely the right fit when the team wants full manual authority and has the bandwidth to maintain a growing rule list. The trade-off is that every new query pattern the algorithm can't handle needs its own entry. Teams managing a large catalog without a dedicated merchandising operator tend to find that overhead compounds over time.
+
+## How do I know if my merchandising rules are actually moving revenue?
+
+Reducing the maintenance burden only matters if the rules you keep are actually doing something. The metrics that tell you whether a rule is working are CVR on the targeted queries, add-to-cart rate on the boosted SKU, and revenue per visit on the pages those queries land on. A rule that boosts a SKU but doesn't move CVR on that query has one of two problems: it's targeting the wrong query, or it's pushing a product the shopper wasn't looking for. Diagnose which before adding more rules on top.
+
+Track those metrics per query, not site-wide. A rule that hurts CVR on one query while lifting it on another nets out to zero in aggregate and looks fine until you inspect query-level data. Compare the targeted SKU's performance during the rule period against a baseline with no rule active. Search abandonment rate on that query is the canary - if it climbs after you activate the rule, you're surfacing the product without convincing the shopper.
+
+Nobi shows what shoppers searched, clicked, and added to cart, so you can check whether a boosted SKU is actually converting on the queries you targeted. If it isn't, that's a product-page or pricing problem, not a search problem. One honest limit: Nobi's analytics focus on search and CVR metrics rather than drop-off-reason analysis. If understanding specifically why shoppers abandon is a primary need, tools built around that diagnostic will give more targeted insight.
+
+Run a 2-week review cycle when a new rule set goes live. If CVR on the targeted query hasn't moved, kill the rule before it becomes background noise.
+
+
+<BlogEmailCapture hook="Struggling to control which products surface in search results?" subtext="Drop your email and we'll show you how Nobi's AI search lets you surface the right products for every query without manual rule upkeep." />
+
+---
+
+If your team is spending time maintaining a growing rule list - chasing expired campaign overrides and manually suppressing out-of-stock SKUs - [try Nobi](https://dashboard.nobi.ai) and see how AI-ranked search changes what your rules actually need to cover. No engineering ticket required, and setup takes hours, not months.
+
+<div className="my-8 flex justify-center">
+ <a
+ href="https://dashboard.nobi.ai"
+ className="inline-flex items-center justify-center gap-2 rounded-2xl font-medium transition active:scale-[.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-black/10 dark:focus-visible:ring-white/20 bg-black text-white dark:bg-white dark:text-black hover:opacity-90 shadow-sm h-12 px-6 text-base no-underline"
+ >
+ <span>Get started with Nobi free</span>
+ </a>
+</div>
+
+```
+
+The rewritten paragraph grounds the reader in their actual situation before naming the mechanism - the algorithm doesn't know about Friday's sale or the overstock problem - then names the stakes (results that look curated but read as broken), and bridges to what the article covers.

@@ -1,8 +1,10 @@
 import React, { useState } from "react";
-import { ChevronDown, LifeBuoy, Menu, Search as SearchIcon, UserPlus, X, ExternalLink, Sparkles, Zap, BarChart2, Bot } from "lucide-react";
+import { ChevronDown, LifeBuoy, Menu, Search as SearchIcon, UserPlus, X, ExternalLink, FileText, Zap, BarChart2, Bot } from "lucide-react";
 import { useDemoForm } from "../context/DemoFormContext";
-import { trackDemoFormOpened } from "../utils/eventTracker";
+import { trackDemoFormOpened, trackEvent } from "../utils/eventTracker";
 import { getSignupUrl } from "../utils/signupUrl";
+import { summarizeCurrentPageWithNobi } from "../utils/pageSummaryPrompt";
+import { EVENTS } from "../constants/events";
 
 const FEATURES = [
   { label: "Better search",     href: "/why-nobi/better-search",      desc: "Semantic search that understands natural language",  Icon: SearchIcon },
@@ -17,8 +19,13 @@ export default function Nav() {
   const [mobileFeaturesOpen, setMobileFeaturesOpen] = useState(false);
   const { onOpen } = useDemoForm();
 
-  const handleAskNobi = () => {
-    if (window.Nobi) window.Nobi.openChat();
+  const handleSummarizePage = async () => {
+    const result = await summarizeCurrentPageWithNobi();
+    trackEvent(EVENTS.PAGE_SUMMARY_REQUESTED, {
+      source: "navigation",
+      path: window.location.pathname,
+      method: result.method,
+    });
   };
 
   const closeMobileMenu = () => {
@@ -87,10 +94,10 @@ export default function Nav() {
 
         <button
           className="flex items-center gap-1 bg-gradient-to-r from-indigo-500 via-violet-500 to-fuchsia-500 bg-clip-text text-transparent hover:opacity-80 transition-opacity"
-          onClick={handleAskNobi}
+          onClick={handleSummarizePage}
         >
-          <Sparkles className="w-4 h-4 text-fuchsia-500" />
-          Ask Nobi
+          <FileText className="w-4 h-4 text-fuchsia-500" />
+          Summarize With Nobi
         </button>
       </nav>
 
@@ -141,9 +148,9 @@ export default function Nav() {
               Docs <ExternalLink className="w-4 h-4" />
             </a>
             <div className="pt-2 border-t border-black/10 dark:border-white/10 flex flex-col gap-3 mt-2">
-              <button className="flex items-center gap-1 py-2 text-sm font-semibold bg-gradient-to-r from-indigo-500 via-violet-500 to-fuchsia-500 bg-clip-text text-transparent" onClick={() => { handleAskNobi(); closeMobileMenu(); }}>
-                <Sparkles className="w-4 h-4 text-fuchsia-500" />
-                Ask Nobi
+              <button className="flex items-center gap-1 py-2 text-sm font-semibold bg-gradient-to-r from-indigo-500 via-violet-500 to-fuchsia-500 bg-clip-text text-transparent" onClick={() => { handleSummarizePage(); closeMobileMenu(); }}>
+                <FileText className="w-4 h-4 text-fuchsia-500" />
+                Summarize With Nobi
               </button>
               <a href="https://dashboard.nobi.ai/login" onClick={closeMobileMenu} className="text-sm font-semibold hover:opacity-80 py-2">Log in</a>
               <a href={getSignupUrl()} onClick={closeMobileMenu} className="inline-flex items-center justify-center gap-2 rounded-2xl font-medium transition active:scale-[.98] bg-black text-white hover:opacity-90 shadow-sm h-10 px-5 text-base w-full">

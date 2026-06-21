@@ -4,6 +4,7 @@ import { ArrowRight, CheckCircle2, ExternalLink, Search, ShoppingBag, Sparkles }
 import { useDemoForm } from "../context/DemoFormContext";
 import { trackDemoFormOpened } from "../utils/eventTracker";
 import { getSignupUrl } from "../utils/signupUrl";
+import { CUSTOMER_PROOF, LINKEDIN_URL } from "../constants/positioning";
 
 export default function Footer() {
   const { onOpen } = useDemoForm();
@@ -152,7 +153,7 @@ export default function Footer() {
               © {new Date().getFullYear()} Nobi: a conversational site assistant to help you grow
             </div>
             <a
-              href="https://www.linkedin.com/company/nobiai"
+              href={LINKEDIN_URL}
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Nobi on LinkedIn"
@@ -167,7 +168,7 @@ export default function Footer() {
             </a>
           </div>
 
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 text-sm">
+          <div className="grid grid-cols-2 sm:grid-cols-5 gap-6 text-sm">
             <div className="space-y-2">
               <div className="font-semibold text-black dark:text-white">Product</div>
               <div className="flex flex-col gap-2">
@@ -196,6 +197,18 @@ export default function Footer() {
                 <a href="https://docs.nobi.ai" target="_blank" rel="noopener noreferrer" className="hover:opacity-80 flex items-center gap-1">
                   Docs <ExternalLink className="w-4 h-4" />
                 </a>
+              </div>
+            </div>
+
+            <div className="space-y-2">
+              <div className="font-semibold text-black dark:text-white">Customers</div>
+              <div className="flex flex-col gap-2">
+                {CUSTOMER_PROOF.map((customer) => (
+                  <a key={customer.href} href={customer.href} className="hover:opacity-80">
+                    <span className="font-medium">{customer.name}</span>
+                    <span className="block text-xs text-black/50 dark:text-white/50">{customer.proof}</span>
+                  </a>
+                ))}
               </div>
             </div>
 

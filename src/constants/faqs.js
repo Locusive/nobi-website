@@ -1,15 +1,30 @@
 const FAQ_ITEMS = [
   {
     q: "What can I do with Nobi?",
-    a: "So we recommend enabling it in your search bar, on collection pages, and anywhere else where shoppers may prefer to just describe what they're looking for.",
+    a: "Nobi combines modern site search, automated support, and lead capture in one conversational website assistant. You can use it as your main search engine, a sales assistant for visitors, a product or page Q&A layer, and a way to collect high-intent leads from conversations.",
     category: "Product",
     topics: ["search"],
+  },
+  {
+    q: "Is Nobi only for ecommerce?",
+    a: "No. Ecommerce is Nobi's strongest current use case because product catalogs make search impact easy to measure, but Nobi works beyond ecommerce for businesses that need better website search, automated support, and lead generation from site visitors.",
+    category: "Product",
   },
   {
     q: "Does Nobi replace my current search?",
     a: "Up to you. Nobi can become your default search bar experience, or you can use other elements like our suggestion pills or button to prompt shoppers to use Nobi outside of search.",
     category: "Product",
     topics: ["search"],
+  },
+  {
+    q: "How does Nobi help with support?",
+    a: "Nobi connects to your knowledge base, website content, documents, policies, and other approved sources. When visitors ask support questions, Nobi answers from those sources before the question becomes a helpdesk ticket.",
+    category: "Product",
+  },
+  {
+    q: "How does Nobi capture leads?",
+    a: "Nobi can detect high-intent moments in a conversation, ask for the fields you configure, and send the lead with the conversation summary. That gives your team the visitor's contact information plus the context behind the request.",
+    category: "Product",
   },
   {
     q: "How does Nobi handle accessibility?",

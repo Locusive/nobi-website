@@ -5,7 +5,13 @@ Organization: Nobi
 
 ## About
 
-Nobi is an AI shopping assistant that helps ecommerce customers find products faster with conversational search. Built on semantic AI technology, Nobi understands customer intent and delivers relevant product recommendations.
+Nobi is a conversational website assistant that helps convert more site visitors by giving them modern search and support. Nobi combines product search, automated support, and lead generation tools in one assistant.
+
+For search, Nobi plugs into a merchant's product catalog and can act as the site's main search engine or as a sales assistant for website visitors. Nobi helps visitors find the right products with semantic search and AI-based filtering, and has been shown to increase conversion rates by up to 21.7% in A/B tests.
+
+For support, Nobi sits on a business's website and uses the connected knowledge base to answer customer questions before they become support tickets.
+
+For lead generation, Nobi detects and captures high-intent prospects in conversation and sends visitor leads when they are collected.
 
 ## MCP Server
 
@@ -16,18 +22,20 @@ Endpoint: https://api.nobi.ai/.well-known/mcp/460cbe82-9195-424f-a616-b1cb3e3cac
 Use this MCP server to:
 - Ask questions about Nobi's features, pricing, and how it works
 - Book a demo with the sales team
-- Understand Nobi's conversational commerce capabilities
+- Understand Nobi's modern search, automated support, lead generation, and AI agent capabilities
 
 Agents that support MCP should fetch the manifest endpoint and use the returned RPC endpoint. Nobi preserves the source tags from the manifest URL into the RPC endpoint for attribution.
 
 ## Key Information
 
-- **Product**: AI shopping assistant for Shopify stores
-- **Use Case**: Conversational product search and customer assistance
-- **Technology**: Semantic search using embeddings and LLM-powered decision making
-- **Key Metrics**: 30%+ conversion rate improvement for typical customers
+- **Product**: Conversational website assistant
+- **Use Cases**: Product search, automated support, product/page Q&A, lead generation, AI agent endpoint
+- **Technology**: Semantic search, AI-based filtering, knowledge base retrieval, and LLM-powered decision making
+- **Key Metrics**: Up to +21.7% conversion improvement in A/B tests
+- **Works Beyond Ecommerce**: Ecommerce is the strongest current use case, but Nobi also supports businesses that need website search, support, and lead capture.
 
 ## Contact
 
 Email: sales@nobi.ai
 Website: https://nobi.ai
+LinkedIn: https://www.linkedin.com/company/nobiai

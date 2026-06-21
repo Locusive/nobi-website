@@ -11,4 +11,5 @@ export const EVENTS = {
   PRICING_CALCULATOR_MODE_CHANGED: 'Pricing Calculator: Mode Changed',
   PRICING_CALCULATOR_ESTIMATE_INTERACTION: 'Pricing Calculator: Estimate Interaction',
   PRICING_CALCULATOR_LEAD_SUBMITTED: 'Pricing Calculator: Lead Submitted',
+  PAGE_SUMMARY_REQUESTED: 'Page Summary Requested',
 };

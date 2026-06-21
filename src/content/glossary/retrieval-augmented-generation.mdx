@@ -1,0 +1,49 @@
+export const meta = {
+  term: "Retrieval-augmented generation (RAG)",
+  slug: "retrieval-augmented-generation",
+  category: "AI",
+  definition: "Retrieval-augmented generation (RAG) retrieves relevant facts from a trusted knowledge source and feeds them to a language model at answer time, so responses are grounded in real, current data rather than the model's training alone. It combines the fluency of a language model with the accuracy of a live knowledge base.",
+  faqItems: [
+  {
+    "question": "How is RAG different from fine-tuning a language model?",
+    "answer": "Fine-tuning bakes knowledge into the model's weights during training, which means it goes stale and requires retraining to update. RAG keeps the knowledge external and live - you update the source document and the model immediately reads the new version at answer time, with no retraining needed."
+  },
+  {
+    "question": "What counts as a 'trusted source' in a RAG setup?",
+    "answer": "Anything the operator controls and can keep current: product catalogs, support documentation, spec sheets, pricing pages, or dealer inventory feeds. The quality of RAG answers is only as good as the accuracy and freshness of the connected source content."
+  },
+  {
+    "question": "Can RAG hallucinate?",
+    "answer": "It reduces hallucination significantly but does not eliminate it entirely. If the retriever surfaces a passage that is itself wrong or incomplete, the model may repeat that error. The main protection is keeping the source content accurate and well-structured so the retriever finds the right passage in the first place."
+  }
+],
+};
+
+## What is Retrieval-augmented generation (RAG)?
+
+A RAG system has two main parts: a retriever that finds relevant content from a document store or database, and a language model that reads that content and composes an answer. The model never guesses from memory - it only synthesizes what the retriever hands it. This makes RAG well-suited for domains where facts change frequently, such as product catalogs, pricing, or inventory. Because the source content is separate from the model, operators can update it without retraining anything.
+
+## How does retrieval-augmented generation work?
+
+- A user submits a question
+- The retriever searches a connected knowledge base - typically using semantic similarity - and pulls the most relevant passages
+- Those passages are inserted into the prompt alongside the question
+- The language model reads the retrieved context and writes an answer grounded in it
+- The original source can be cited or surfaced alongside the response
+
+## Why does it matter?
+
+For ecommerce and dealership operators, product details and pricing shift constantly - a model trained even weeks ago can give shoppers outdated specs or wrong prices. RAG closes that gap by reading from the authoritative source at the moment a question is asked, not from stale training data. This reduces the risk of confident but incorrect answers, which erodes shopper trust and can create compliance problems around advertised pricing.
+
+Grounding answers in the merchant's own connected content - not stale training data - is how [Nobi](https://dashboard.nobi.ai) keeps spec and availability answers accurate for every shopper question.
+
+## Frequently asked questions
+
+**How is RAG different from fine-tuning a language model?**
+Fine-tuning bakes knowledge into the model's weights during training, which means it goes stale and requires retraining to update. RAG keeps the knowledge external and live - you update the source document and the model immediately reads the new version at answer time, with no retraining needed.
+
+**What counts as a 'trusted source' in a RAG setup?**
+Anything the operator controls and can keep current: product catalogs, support documentation, spec sheets, pricing pages, or dealer inventory feeds. The quality of RAG answers is only as good as the accuracy and freshness of the connected source content.
+
+**Can RAG hallucinate?**
+It reduces hallucination significantly but does not eliminate it entirely. If the retriever surfaces a passage that is itself wrong or incomplete, the model may repeat that error. The main protection is keeping the source content accurate and well-structured so the retriever finds the right passage in the first place.

@@ -1,0 +1,48 @@
+export const meta = {
+  term: "Hybrid search",
+  slug: "hybrid-search",
+  category: "AI search",
+  definition: "Hybrid search combines keyword (lexical) matching with semantic (vector) matching so results capture both exact terms and intended meaning. It blends two retrieval methods into a single ranked result set.",
+  faqItems: [
+  {
+    "question": "How is hybrid search different from semantic search?",
+    "answer": "Semantic search relies entirely on meaning-based vector similarity. Hybrid search adds a keyword matching layer on top, so exact-term queries (like a product SKU or a specific model name) are still retrieved with high precision even when the semantic model is uncertain."
+  },
+  {
+    "question": "Does hybrid search require more infrastructure than keyword search?",
+    "answer": "Yes, it requires both a traditional inverted index and a vector index, plus a fusion layer. Most modern search platforms bundle all three, so the operational overhead is lower than building each piece separately, but storage and compute costs are higher than keyword-only setups."
+  },
+  {
+    "question": "What is Reciprocal Rank Fusion (RRF)?",
+    "answer": "RRF is a common method for combining two ranked lists without needing to calibrate their raw scores against each other. Each document earns a score based on its position in each list - higher rank means higher score - and those position-based scores are summed to produce the final order."
+  }
+],
+};
+
+## What is Hybrid search?
+
+Traditional keyword search finds documents that contain the exact words a user typed. Semantic search finds documents that match the meaning behind a query, even when the wording differs. Hybrid search runs both approaches in parallel and merges their scores, so a query like 'comfortable running shoes for bad knees' can surface results that mention 'joint support' or 'cushioned trainers' alongside exact keyword hits. The result is a search layer that handles precise lookups and exploratory, conversational queries alike.
+
+## How does hybrid search work?
+
+- A lexical engine (such as BM25) scores documents by term frequency and exact match.
+- A vector engine converts the query and documents into numerical embeddings and measures meaning similarity.
+- A fusion step - often Reciprocal Rank Fusion or a weighted blend - combines both score lists into one ranked output.
+- The merged list is returned to the user or downstream component.
+
+## Why does it matter?
+
+Shoppers and site visitors rarely type perfectly. They abbreviate, misspell, or describe what they want in their own words. Pure keyword search misses those queries; pure semantic search can rank vague results too highly when an exact match exists. Hybrid search narrows that gap, which typically lifts click-through rates and reduces 'no results' pages. For automotive dealerships, it also means inventory searches for partial VINs or colloquial trim names still surface the right vehicles.
+
+[Nobi](https://dashboard.nobi.ai) uses hybrid relevance ranking - semantic understanding plus behavioral signals - so results reflect what shoppers mean, not just what they typed.
+
+## Frequently asked questions
+
+**How is hybrid search different from semantic search?**
+Semantic search relies entirely on meaning-based vector similarity. Hybrid search adds a keyword matching layer on top, so exact-term queries (like a product SKU or a specific model name) are still retrieved with high precision even when the semantic model is uncertain.
+
+**Does hybrid search require more infrastructure than keyword search?**
+Yes, it requires both a traditional inverted index and a vector index, plus a fusion layer. Most modern search platforms bundle all three, so the operational overhead is lower than building each piece separately, but storage and compute costs are higher than keyword-only setups.
+
+**What is Reciprocal Rank Fusion (RRF)?**
+RRF is a common method for combining two ranked lists without needing to calibrate their raw scores against each other. Each document earns a score based on its position in each list - higher rank means higher score - and those position-based scores are summed to produce the final order.

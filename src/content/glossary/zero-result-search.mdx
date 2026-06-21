@@ -1,0 +1,49 @@
+export const meta = {
+  term: "Zero-result search",
+  slug: "zero-result-search",
+  category: "Ecommerce",
+  definition: "A zero-result search is a query that returns no matching products, typically because the words a shopper used do not align with the terminology in the catalog. It is one of the clearest signals that a store's search experience has a gap.",
+  related: {"label": "How to stop your ecommerce search from returning empty pages", "href": "/blog/reduce-zero-results"},
+  faqItems: [
+  {
+    "question": "What is a good zero-result rate benchmark?",
+    "answer": "Most ecommerce benchmarks suggest keeping zero-result searches below 5% of total search sessions, though this varies by catalog size and search tool. Any rate above 10% typically points to a systematic problem with synonyms or catalog language."
+  },
+  {
+    "question": "How can I fix zero-result searches without changing my product catalog?",
+    "answer": "The most common fix is adding synonym rules or query expansions to your search configuration, so that informal or variant terms map to existing catalog entries. Redirects and curated landing pages are also used for high-volume queries that do not map cleanly to a single product."
+  },
+  {
+    "question": "Do zero-result searches affect SEO?",
+    "answer": "Indirectly, yes. If shoppers repeatedly bounce from empty search pages, it raises exit rates and reduces time on site - signals that can weigh on organic rankings over time. More directly, the zero-result data tells you which terms your content and product pages may be missing entirely."
+  }
+],
+};
+
+## What is Zero-result search?
+
+Zero-result searches happen when a catalog's indexed text - product titles, descriptions, tags - does not contain the words or phrases a shopper types. Common causes include synonym mismatches, regional language differences, misspellings, and informal product names. Every zero-result page is a missed sale opportunity, because the shopper arrived with intent and left with nothing. Tracking these queries over time reveals patterns that can inform both catalog copy and search configuration.
+
+## How does zero-result search work?
+
+- A shopper submits a query to the site search engine.
+- The engine scans indexed product data for matching terms and finds none.
+- Instead of returning products, it returns an empty results page, sometimes with a generic message.
+- The query is logged (if analytics are configured), creating a record operators can review to decide whether to add synonyms, create redirects, or adjust product data.
+
+## Why does it matter?
+
+A high zero-result rate means a meaningful share of shoppers with purchase intent are hitting a dead end, which directly reduces conversion rate. For dealerships, a shopper searching 'used SUV under 30k' and finding nothing may leave the site entirely rather than browsing inventory manually. Monitoring and reducing zero-result queries is one of the highest-return improvements a store or dealership can make to its search experience.
+
+Reducing zero-result pages is a core [Nobi](https://dashboard.nobi.ai) outcome - its dashboard surfaces the exact queries still coming up empty so operators know where to act first.
+
+## Frequently asked questions
+
+**What is a good zero-result rate benchmark?**
+Most ecommerce benchmarks suggest keeping zero-result searches below 5% of total search sessions, though this varies by catalog size and search tool. Any rate above 10% typically points to a systematic problem with synonyms or catalog language.
+
+**How can I fix zero-result searches without changing my product catalog?**
+The most common fix is adding synonym rules or query expansions to your search configuration, so that informal or variant terms map to existing catalog entries. Redirects and curated landing pages are also used for high-volume queries that do not map cleanly to a single product.
+
+**Do zero-result searches affect SEO?**
+Indirectly, yes. If shoppers repeatedly bounce from empty search pages, it raises exit rates and reduces time on site - signals that can weigh on organic rankings over time. More directly, the zero-result data tells you which terms your content and product pages may be missing entirely.

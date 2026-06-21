@@ -1,0 +1,48 @@
+export const meta = {
+  term: "Large language model (LLM)",
+  slug: "large-language-model",
+  category: "AI",
+  definition: "A large language model (LLM) is an AI system trained on massive amounts of text data that can understand, reason about, and generate human-like language. LLMs power a wide range of applications, from search assistants to content tools, by predicting and producing contextually relevant text.",
+  faqItems: [
+  {
+    "question": "What is the difference between an LLM and a traditional search engine?",
+    "answer": "A traditional search engine matches keywords and returns a ranked list of links. An LLM interprets the intent behind a question and generates a direct, conversational answer - it understands context and follow-up questions rather than just pattern-matching on words."
+  },
+  {
+    "question": "Can an LLM give wrong answers?",
+    "answer": "Yes. LLMs can produce plausible-sounding but incorrect information, especially on topics not well represented in their training data. This is why most production systems pair the LLM with a retrieval layer that pulls from a verified, up-to-date knowledge source before generating a response."
+  },
+  {
+    "question": "Do I need to train my own LLM to use one in my business?",
+    "answer": "No. Most businesses access LLMs through an API or a pre-built platform. The important configuration step is connecting the model to your own content - product catalogs, FAQs, policy documents - so it answers from your data rather than from general training knowledge."
+  }
+],
+};
+
+## What is Large language model (LLM)?
+
+LLMs are neural networks with billions of learned parameters that encode patterns from books, websites, and other text sources. They can answer questions, summarize content, translate languages, and hold multi-turn conversations. Because they learn from general text, they work across many domains without task-specific programming. Most commercial AI assistants and search tools today are built on top of one or more LLMs.
+
+## How does large language model work?
+
+- The model is pre-trained on a large corpus of text, learning statistical relationships between words and ideas.
+- It is then fine-tuned or prompted to behave in a specific way - for example, as a customer assistant or a coding helper.
+- When a user submits a query, the model processes the input and generates a response word by word, drawing on what it learned during training.
+- Many production systems ground the model in a specific knowledge base so it answers from verified content rather than relying on training data alone.
+
+## Why does it matter?
+
+For ecommerce operators and dealerships, LLMs make it possible to handle a large volume of natural-language shopper or buyer questions without scaling a human support team. They can surface product details, explain inventory, and guide decisions in the same conversational way a knowledgeable sales associate would. Choosing a solution built on a well-grounded LLM reduces the risk of the system inventing answers that do not match your actual catalog or policies.
+
+[Nobi](https://dashboard.nobi.ai) uses language models to understand shopper and buyer queries in natural language and generate answers grounded in the content and data you connect - so responses reflect your actual inventory, policies, and products rather than generic training data.
+
+## Frequently asked questions
+
+**What is the difference between an LLM and a traditional search engine?**
+A traditional search engine matches keywords and returns a ranked list of links. An LLM interprets the intent behind a question and generates a direct, conversational answer - it understands context and follow-up questions rather than just pattern-matching on words.
+
+**Can an LLM give wrong answers?**
+Yes. LLMs can produce plausible-sounding but incorrect information, especially on topics not well represented in their training data. This is why most production systems pair the LLM with a retrieval layer that pulls from a verified, up-to-date knowledge source before generating a response.
+
+**Do I need to train my own LLM to use one in my business?**
+No. Most businesses access LLMs through an API or a pre-built platform. The important configuration step is connecting the model to your own content - product catalogs, FAQs, policy documents - so it answers from your data rather than from general training knowledge.

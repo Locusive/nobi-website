@@ -1,0 +1,48 @@
+export const meta = {
+  term: "Structured data",
+  slug: "structured-data",
+  category: "AEO",
+  definition: "Structured data is a standardized way of labeling webpage content - using formats like JSON-LD or microdata - so that search and answer engines can read and interpret what a page is about without guessing.",
+  faqItems: [
+  {
+    "question": "What is the difference between JSON-LD and microdata?",
+    "answer": "JSON-LD is a separate script block added to the page head or body - it does not touch the visible HTML. Microdata embeds attributes directly into existing HTML elements. Google and most AI platforms prefer JSON-LD because it is easier to maintain and less likely to break when the page design changes."
+  },
+  {
+    "question": "Does structured data directly improve search rankings?",
+    "answer": "Structured data does not directly boost rankings in the traditional sense, but it makes pages eligible for rich results and featured answer placements, which tend to get higher click-through rates. It also helps AI answer engines attribute information correctly to your site."
+  },
+  {
+    "question": "Which Schema.org types matter most for ecommerce?",
+    "answer": "Product (with offers, price, and availability), Review and AggregateRating, FAQPage, and BreadcrumbList are the highest-value types for most online stores. Automotive dealers also benefit from Vehicle schema and LocalBusiness markup for their location pages."
+  }
+],
+};
+
+## What is Structured data?
+
+Search engines and AI answer systems parse plain HTML with limited confidence about meaning. Structured data adds explicit labels - product name, price, rating, FAQ pairs - that remove ambiguity. These labels follow shared vocabularies, most commonly Schema.org, which major search engines and AI platforms recognize. When a page includes valid structured data, it becomes eligible for enhanced search features like rich results, knowledge panels, and cited AI answers.
+
+## How does structured data work?
+
+- A developer (or platform) adds a JSON-LD script block to the page's HTML, or embeds microdata attributes directly in the markup.
+- That block describes the content using Schema.org types - for example, Product, FAQPage, or Review.
+- When a crawler indexes the page, it reads the structured labels and stores them alongside the page content.
+- Search and AI systems can then surface that information in answer boxes, carousels, or voice responses without needing to re-parse unstructured prose.
+
+## Why does it matter?
+
+For an ecommerce operator, valid structured data is one of the highest-leverage technical investments available - it can turn a standard product page into a rich search result showing price, availability, and star ratings before a shopper even clicks. For a dealership, FAQ and vehicle schema can push inventory answers directly into search results, reducing inbound calls for basic questions. As AI-generated answer engines become a larger share of search traffic, pages with well-formed structured data are far more likely to be cited as sources.
+
+[Nobi](https://dashboard.nobi.ai) emits structured data for shopper Q&A interactions, which improves a page's eligibility to appear in rich results and AI-generated answers - giving your content more surface area in search without additional copywriting.
+
+## Frequently asked questions
+
+**What is the difference between JSON-LD and microdata?**
+JSON-LD is a separate script block added to the page head or body - it does not touch the visible HTML. Microdata embeds attributes directly into existing HTML elements. Google and most AI platforms prefer JSON-LD because it is easier to maintain and less likely to break when the page design changes.
+
+**Does structured data directly improve search rankings?**
+Structured data does not directly boost rankings in the traditional sense, but it makes pages eligible for rich results and featured answer placements, which tend to get higher click-through rates. It also helps AI answer engines attribute information correctly to your site.
+
+**Which Schema.org types matter most for ecommerce?**
+Product (with offers, price, and availability), Review and AggregateRating, FAQPage, and BreadcrumbList are the highest-value types for most online stores. Automotive dealers also benefit from Vehicle schema and LocalBusiness markup for their location pages.

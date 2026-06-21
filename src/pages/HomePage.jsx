@@ -28,6 +28,7 @@ import DemoCTAButton from "../components/DemoCTAButton";
 import {getSignupUrl} from "../utils/signupUrl";
 import { trackEvent } from "../utils/eventTracker";
 import { EVENTS } from "../constants/events";
+import { CANONICAL_DESCRIPTION, LINKEDIN_URL } from "../constants/positioning";
 
 
 // ===== feature flags (hide sections/links without deleting code) =====
@@ -2188,8 +2189,8 @@ export default function HomePage() {
   });
 
   useSEO({
-    title: "Nobi: Your Website's AI Sales Associate",
-    description: "Lucchese generated $1M+ in year one. Add Nobi to your website in minutes and start converting more visitors.",
+    title: "Nobi: Conversational Website Assistant for Search and Support",
+    description: CANONICAL_DESCRIPTION,
     path: "/",
     schema: [
       {
@@ -2198,7 +2199,7 @@ export default function HomePage() {
         "name": "Nobi",
         "url": "https://nobi.ai",
         "logo": "https://nobi.ai/og-image.png",
-        "sameAs": ["https://www.linkedin.com/company/heynobi"],
+        "sameAs": [LINKEDIN_URL],
       },
       {
         "@context": "https://schema.org",
@@ -2212,7 +2213,7 @@ export default function HomePage() {
         "name": "Nobi",
         "applicationCategory": "BusinessApplication",
         "operatingSystem": "Web",
-        "description": "AI-powered website assistant. Understands natural language queries and helps visitors find what they need, answer questions, and take action.",
+        "description": CANONICAL_DESCRIPTION,
         "url": "https://nobi.ai",
         "offers": { "@type": "Offer", "price": "25", "priceCurrency": "USD", "availability": "https://schema.org/InStock" },
       },

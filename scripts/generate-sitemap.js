@@ -14,6 +14,7 @@ const STATIC_PAGES = [
   { path: "/",                       priority: "1.0", changefreq: "weekly"  },
   { path: "/why-nobi/better-search",     priority: "0.8", changefreq: "monthly" },
   { path: "/why-nobi/automated-support", priority: "0.8", changefreq: "monthly" },
+  { path: "/why-nobi/ai-agents",          priority: "0.8", changefreq: "monthly" },
   { path: "/lead-capture",               priority: "0.8", changefreq: "monthly" },
   { path: "/custom-actions",             priority: "0.8", changefreq: "monthly" },
   { path: "/pricing",                priority: "0.8", changefreq: "monthly" },

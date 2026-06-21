@@ -1,23 +1,23 @@
 # Nobi AI
 
-> Nobi is an AI site assistant for ecommerce and other businesses. It turns any website into a place where visitors can ask questions, find the right products, and take action — powered by the business's own data.
+> Nobi is a conversational website assistant that helps convert more site visitors with modern search and support. It combines product search, automated support, and lead generation tools in one assistant.
 
 ## What Nobi Does
 
-Nobi sits on a business's website and acts as a conversational sales associate. It understands what visitors mean (not just what they type), answers their questions in real time, and guides them toward the right products, services, or next steps.
+Nobi sits on a business's website and acts as a conversational assistant for visitors. It understands what visitors mean, answers questions from the business's own data, helps people find the right products or information, and captures high-intent leads when a visitor is ready for follow-up.
 
 ### Core Capabilities
 
-- **Semantic search**: Understands natural-language queries like "brown boots for wide feet under $200" and surfaces the right results instantly — even when the product is tagged with a brand-specific name like "Cappuccino Boot."
-- **Conversational Q&A**: Answers product, sizing, shipping, and service questions without visitors needing to dig through pages or wait for support.
-- **Product recommendations**: Suggests products based on the visitor's stated needs and intent.
-- **Lead capture**: Identifies high-intent visitors and captures their contact before they bounce.
-- **Proactive engagement**: Suggestion pills and inline triggers keep visitors exploring instead of leaving.
-- **Flexible placement**: Search bar, PDP assistant, collection pages, modals, or triggered from any button via JS API.
+- **Modern search**: Plugs into a merchant's product catalog and can act as the site's main search engine or as a sales assistant that helps visitors find the right products. Nobi uses semantic search and AI-based filtering to understand natural-language queries like "brown boots for wide feet under $200."
+- **Automated support**: Uses the business's connected knowledge base, website content, documents, and policies to answer customer questions before they become support tickets.
+- **Lead generation**: Detects and captures high-intent prospects in conversation and sends visitor leads when they are collected.
+- **Product and page Q&A**: Answers product, sizing, shipping, service, and policy questions without making visitors dig through pages or wait for support.
+- **Flexible placement**: Search bar, PDP assistant, collection pages, modals, suggestion pills, or triggered from any button via JavaScript API.
+- **AI agent reach**: Publishes agent-readable content and an MCP endpoint so external AI agents can learn about and interact with the business.
 
 ### Verticals
 
-Nobi started in ecommerce (Shopify and other platforms) and is expanding into automotive and other verticals. The platform generalizes to any business that wants an AI agent on its website.
+Nobi started in ecommerce and Shopify, but the platform works beyond ecommerce for businesses that want better website search, automated support, lead capture, or an AI agent on their site.
 
 ## Proven Results
 
@@ -27,6 +27,7 @@ Nobi has outperformed the default shopping experience in every A/B test run to d
 - **+21.3%** revenue per searcher for UNTUCKit vs. their prior search tool
 - **+17.1%** conversion rate lift for UNTUCKit (17.6% vs 15.0%)
 - **+21.7%** conversion improvement for Kilte vs. Shopify default search
+- **Up to +21.7%** conversion lift in A/B tests, including against other modern search experiences
 - **2.5x** more likely to convert — Nobi searchers vs. non-Nobi visitors (combined Lucchese + UNTUCKit A/B data)
 - **17–22%** consistent conversion improvement across customers vs. prior search tool
 
@@ -54,3 +55,4 @@ Available tools:
 
 - Website: https://nobi.ai
 - Email: sales@nobi.ai
+- LinkedIn: https://www.linkedin.com/company/nobiai

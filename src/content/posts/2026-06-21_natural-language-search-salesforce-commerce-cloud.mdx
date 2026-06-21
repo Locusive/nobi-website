@@ -12,7 +12,7 @@ export const meta = {
  draft: false,
  faqItems: [
  {
- question: "Why does Salesforce Commerce Cloud's default search return dead ends for descriptive queries?",
+ question: "Why do descriptive searches come up empty on Salesforce Commerce Cloud?",
  answer: "Salesforce Commerce Cloud's built-in search matches exact words against product titles and attributes. When a shopper types a descriptive phrase like \"warm hiking jacket under $200\" but your catalog says \"men's insulated shell\" or \"mountain parka,\" the engine sees no match and returns a zero-result page. You can add synonym groups and boosting rules to close some gaps, but every new phrasing variation needs its own manual entry - and shoppers who hit dead ends simply leave without telling you why."
  },
  {
@@ -78,15 +78,15 @@ export const meta = {
 </script>
 ## Can I add natural-language search to Salesforce Commerce Cloud without replacing the platform?
 
-Your Salesforce Commerce Cloud store has a search problem that's easy to miss: it only works when shoppers use the exact words from your product titles. Most don't. They type "warm hiking jacket under $200," "gift for a trail runner," or "does this run narrow" - and your built-in search returns nothing. No error, no suggestion, just a dead-end page. Those shoppers leave quietly, and your analytics log a bounce instead of a vocabulary gap you could fix. Nobi adds semantic search directly to your SFCC storefront so those descriptive queries resolve from your connected catalog. Here's how to connect it, configure it for spec and compatibility questions, and track the improvement in the dashboard.
+Shoppers rarely search using the exact words in your product titles. They type "warm hiking jacket under $200," "gift for a trail runner," or "does this run narrow" - plain descriptions of what they're after. Salesforce Commerce Cloud's built-in search matches on the words in your catalog, so a descriptive query like those can come back empty: no error, no suggestion, just a results page with nothing on it. The good news is you can close that gap without leaving SFCC. Nobi adds semantic search directly to your storefront so descriptive queries resolve from your connected catalog. Here's how to connect it, configure it for spec and compatibility questions, and track the improvement in the dashboard.
 
-## Why does Salesforce Commerce Cloud's default search return dead ends for descriptive queries?
+## Why do descriptive searches come up empty on Salesforce Commerce Cloud?
 
-Salesforce Commerce Cloud's built-in search engine matches tokens - it looks for the exact words a shopper typed in product titles, descriptions, and attributes. When a shopper types "warm hiking jacket under $200" and your catalog titles say "men's insulated shell" or "mountain parka," the engine sees no match and returns a [zero-result page](/blog/fix-zero-result-searches). That dead end costs the sale silently: the shopper abandons, and your analytics log a bounce rather than a vocabulary mismatch you could fix.
+Salesforce Commerce Cloud's built-in search matches on keywords - the exact words a shopper typed against the words in your product titles, descriptions, and attributes. So when a shopper types "warm hiking jacket under $200" and your catalog says "men's insulated shell" or "mountain parka," the engine finds no overlap and returns a [zero-result page](/blog/fix-zero-result-searches). The shopper usually just moves on, and your analytics record a bounce rather than the vocabulary mismatch behind it.
 
-The problem compounds as shoppers describe what they want in plain terms. Intent-based queries like "gift for a trail runner" or sizing questions like "does this run narrow" don't map to keyword patterns the engine recognizes. SFCC does give you synonym groups and boosting rules to close some of those gaps, but every new phrasing variation needs its own manual entry. As your catalog grows, so does the list.
+This shows up more as shoppers describe what they want in plain terms. Queries like "gift for a trail runner" or sizing questions like "does this run narrow" don't map to the keyword patterns the engine recognizes. SFCC does give you synonym groups and boosting rules to close some of those gaps, and they help - but every new phrasing variation needs its own manual entry, so the list grows along with your catalog.
 
-The real cost is that you never see it. Shoppers who hit dead ends don't complain - they leave. There's no ticket to flag the gap. And because these shoppers often arrive from paid campaigns or email, they're your highest-intent traffic. Dead-end searches don't just lose sales; they waste the spend that brought those shoppers there in the first place.
+It's also easy to overlook, because there's no signal: shoppers who come up empty don't file a ticket, they just move on. And since many of them arrive from paid campaigns or email - often your highest-intent traffic - those empty results quietly work against the spend that brought them in.
 
 ## What is Nobi, and how does it handle natural-language search on Salesforce Commerce Cloud?
 

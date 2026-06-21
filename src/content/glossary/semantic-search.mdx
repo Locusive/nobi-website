@@ -1,0 +1,86 @@
+export const meta = {
+  term: "Semantic search",
+  slug: "semantic-search",
+  category: "AI search",
+  definition:
+    "Semantic search interprets the meaning and intent behind a query rather than matching exact keywords, so a search for \"warm jacket for hiking\" can return the right product even when those words aren't in its title.",
+  related: {
+    label: "How to stop your ecommerce search from returning empty pages",
+    href: "/blog/reduce-zero-results",
+  },
+  faqItems: [
+    {
+      question: "What is the difference between semantic search and keyword search?",
+      answer:
+        "Keyword search matches the literal words a shopper types against the words in your catalog, so it fails when they describe a product differently than you labeled it. Semantic search interprets meaning and intent, so descriptive and long-tail queries still return relevant results.",
+    },
+    {
+      question: "Does semantic search replace filters and facets?",
+      answer:
+        "No. Semantic search handles how shoppers describe what they want; filters and facets let them narrow results by attributes like size, color, and price. The two work together - meaning-based matching first, structured refinement second.",
+    },
+    {
+      question: "How do you measure whether semantic search is working?",
+      answer:
+        "The clearest signals are a falling zero-result rate (fewer searches that return nothing) and a rising search-to-cart or conversion rate on search sessions.",
+    },
+  ],
+};
+
+## What does "semantic search" mean?
+
+Semantic search is a search approach that interprets the **meaning and intent**
+behind a query rather than scanning for exact word matches. A shopper who types
+"warm jacket for hiking" can reach a product titled "thermal trail shell"
+because semantic search reads what the person means, not just the words they
+typed.
+
+It is the opposite of traditional keyword search, which only returns results
+when the shopper's words appear in your product titles, descriptions, or tags.
+
+## How does semantic search work?
+
+Semantic search converts text into **numerical representations called
+embeddings** that capture meaning, then finds results whose embeddings are
+closest to the query's. Because similarity is measured by meaning, synonyms,
+paraphrases, and descriptive phrases all map to the right products without
+anyone hand-writing synonym rules.
+
+In practice that means:
+
+- "running shoes for flat feet" can surface stability shoes even if "flat feet"
+  never appears in a title.
+- Misspellings and alternate phrasings still resolve to the right items.
+- New phrasings work without a merchandiser adding a rule for each one.
+
+## Why does semantic search matter?
+
+When search only matches keywords, every query a shopper phrases in their own
+words risks a dead-end "no results" page - and most shoppers who hit one simply
+leave. Semantic search closes that gap, which is why it tends to move the
+metrics that matter: a lower zero-result rate and a higher conversion rate on
+search sessions.
+
+It also reduces ongoing work. Teams running keyword search spend time writing
+synonym lists and pinning fixes for queries the engine gets wrong; meaning-based
+matching removes much of that maintenance.
+
+For stores using [Nobi](https://dashboard.nobi.ai), semantic matching is the
+default: a shopper's natural-language query is matched against the live catalog,
+so descriptive searches resolve without manual synonym upkeep.
+
+## Frequently asked questions
+
+**What is the difference between semantic search and keyword search?**
+Keyword search matches literal words against your catalog, so it fails when
+shoppers describe a product differently than you labeled it. Semantic search
+interprets meaning and intent, so descriptive and long-tail queries still
+return relevant results.
+
+**Does semantic search replace filters and facets?**
+No. Semantic search handles how shoppers describe what they want; filters let
+them narrow by attributes like size, color, and price. The two work together.
+
+**How do you measure whether semantic search is working?**
+Watch the zero-result rate (it should fall) and the search-to-cart or
+conversion rate on search sessions (it should rise).

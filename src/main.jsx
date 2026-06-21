@@ -11,6 +11,8 @@ const Privacy            = lazy(() => import("./pages/Privacy.jsx"));
 const FAQs               = lazy(() => import("./pages/FAQs.jsx"));
 const Blog               = lazy(() => import("./pages/Blog.jsx"));
 const BlogPost           = lazy(() => import("./pages/BlogPost.jsx"));
+const Glossary           = lazy(() => import("./pages/Glossary.jsx"));
+const GlossaryTerm       = lazy(() => import("./pages/GlossaryTerm.jsx"));
 const BetterSearch       = lazy(() => import("./pages/BetterSearch.jsx"));
 const LeadCapture        = lazy(() => import("./pages/LeadCapture.jsx"));
 const CustomActions      = lazy(() => import("./pages/CustomActions.jsx"));
@@ -53,6 +55,8 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/blog/:slug" element={<BlogPost />} />
+          <Route path="/glossary" element={<Glossary />} />
+          <Route path="/glossary/:slug" element={<GlossaryTerm />} />
           <Route path="/why-nobi/better-search" element={<BetterSearch />} />
           <Route path="/why-nobi/automated-support" element={<AutomatedSupport />} />
           <Route path="/why-nobi/ai-agents" element={<AgentEndpoint />} />

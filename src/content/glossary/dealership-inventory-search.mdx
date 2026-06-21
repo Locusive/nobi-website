@@ -1,0 +1,75 @@
+export const meta = {
+  term: "Dealership inventory search",
+  slug: "dealership-inventory-search",
+  category: "Automotive",
+  definition:
+    "Dealership inventory search is how shoppers find vehicles on a dealer website - traditionally through make/model/year/trim dropdowns, and increasingly through natural-language queries like \"used SUV with third row under 30k miles.\"",
+  faqItems: [
+    {
+      question: "What is the difference between filter-based and AI-powered dealership inventory search?",
+      answer:
+        "Filter-based search makes the shopper translate what they want into dropdown selections - make, model, year, trim. AI-powered (natural-language) search lets them describe the vehicle in their own words and matches it against the live inventory feed.",
+    },
+    {
+      question: "Why do dealership searches return no results?",
+      answer:
+        "Usually because the shopper's phrasing doesn't map to the dropdown options or the exact words in the listing, or because filters combine into a set no current vehicle matches. Natural-language search and a live inventory feed reduce both.",
+    },
+    {
+      question: "Does inventory search need to stay in sync with what's on the lot?",
+      answer:
+        "Yes. Results should reflect the live inventory feed so a sold vehicle drops out and a new arrival shows up - otherwise shoppers land on detail pages for cars that are already gone.",
+    },
+  ],
+};
+
+## What does "dealership inventory search" mean?
+
+Dealership inventory search is the way shoppers find vehicles on a dealer's
+website. Traditionally it's a set of **dropdown filters** - make, model, year,
+trim, price - that the shopper combines to narrow the lot. More recently it also
+means **natural-language search**, where a shopper types a full description like
+"used SUV with third row under 30k miles" and gets matching vehicles.
+
+It's the automotive equivalent of ecommerce product search, run against the
+dealership's vehicle detail pages and inventory feed.
+
+## How does dealership inventory search work?
+
+Filter-based search asks the shopper to translate their need into selections:
+pick a make, then a model, then a price band. Natural-language search flips
+that - it reads the shopper's phrasing, maps it to vehicle attributes (body
+style, mileage, features, price), and returns matches from the live inventory
+feed.
+
+Either way, the search should be tied to the **live feed** so results reflect
+what's actually on the lot: a vehicle that just sold drops out, and a new
+arrival appears.
+
+## Why does dealership inventory search matter?
+
+Most car shopping happens on the website before anyone contacts the dealership,
+and much of it after hours. If a shopper can't find a vehicle that fits - or
+hits a dead end because their wording didn't match the dropdowns - they leave
+for another dealer's site. Search quality therefore affects both lead volume
+and the shopper's first impression of the store.
+
+[Nobi](https://dashboard.nobi.ai) lets car shoppers search a dealership's live
+inventory in plain language instead of guessing filter combinations, so
+descriptive queries resolve to real vehicles on the lot.
+
+## Frequently asked questions
+
+**What is the difference between filter-based and AI-powered dealership
+inventory search?**
+Filter-based search makes the shopper translate their need into dropdowns;
+AI-powered search lets them describe the vehicle in their own words and matches
+it against the live inventory feed.
+
+**Why do dealership searches return no results?**
+Usually because the shopper's phrasing doesn't map to the dropdowns or listing
+text, or filters combine into a set no current vehicle matches.
+
+**Does inventory search need to stay in sync with the lot?**
+Yes - results should reflect the live feed so sold vehicles drop out and new
+arrivals show up.

@@ -1,0 +1,48 @@
+export const meta = {
+  term: "Search relevance",
+  slug: "search-relevance",
+  category: "AI search",
+  definition: "Search relevance is how well the results a search engine returns match what a shopper actually intended to find. It is a primary driver of whether a shopper completes a purchase or abandons the session.",
+  faqItems: [
+  {
+    "question": "What is the difference between search relevance and search ranking?",
+    "answer": "Ranking is the ordered list of results the search engine produces. Relevance is the quality criterion that ranking tries to optimize - a well-ranked list should place the most relevant results first. You can have fast, consistent ranking with poor relevance if the underlying signals do not reflect shopper intent."
+  },
+  {
+    "question": "How do I know if my site search has a relevance problem?",
+    "answer": "Common signs include a high zero-results rate, low click-through on results pages, shoppers refining the same query multiple times, or analytics showing searches that end without a product view. An A/B test comparing two ranking configurations against conversion rate is the most direct measurement."
+  },
+  {
+    "question": "Can merchandising rules override relevance?",
+    "answer": "Yes, most search platforms let operators pin, boost, or bury specific products. Used sparingly - for clearance pushes or hero promotions - this is useful. Heavy manual overrides tend to fight the relevance signal over time and can degrade the overall experience for shoppers whose intent does not match the pinned items."
+  }
+],
+};
+
+## What is Search relevance?
+
+A relevant search surfaces the right products - not just keyword matches - in a ranked order that reflects the shopper's likely goal. Relevance accounts for query intent (navigational, informational, transactional), product attributes, and contextual signals like past behavior or session context. A search that returns technically matching but commercially wrong results is considered low-relevance even if the keyword appears in every result. Improving relevance typically raises click-through rates on results and downstream conversion.
+
+## How does search relevance work?
+
+- The search engine scores each candidate result against the query using signals such as text similarity, popularity, and attribute completeness.
+- Intent detection layers interpret whether a shopper means a brand, a category, or a specific product - then routes the query accordingly.
+- Ranking algorithms blend those signals with business rules (margin, inventory, promotions) to produce the final ordered list.
+- Feedback loops update the model over time using click and purchase data to keep rankings aligned with actual shopper behavior.
+
+## Why does it matter?
+
+Low relevance is one of the fastest ways to lose a shopper - when someone types a query and sees irrelevant results, most will leave rather than refine their search. For ecommerce operators, even a small gain in relevance can translate directly into higher conversion rates and larger average order values. Dealership operators benefit similarly: a shopper searching for 'fuel-efficient SUV under $35k' needs inventory results ranked by that intent, not just vehicles with those words in their descriptions.
+
+[Nobi](https://dashboard.nobi.ai) treats relevance as its primary conversion lever, and its A/B tests link relevance improvements directly to measurable conversion-rate lift for the merchants and dealerships it works with.
+
+## Frequently asked questions
+
+**What is the difference between search relevance and search ranking?**
+Ranking is the ordered list of results the search engine produces. Relevance is the quality criterion that ranking tries to optimize - a well-ranked list should place the most relevant results first. You can have fast, consistent ranking with poor relevance if the underlying signals do not reflect shopper intent.
+
+**How do I know if my site search has a relevance problem?**
+Common signs include a high zero-results rate, low click-through on results pages, shoppers refining the same query multiple times, or analytics showing searches that end without a product view. An A/B test comparing two ranking configurations against conversion rate is the most direct measurement.
+
+**Can merchandising rules override relevance?**
+Yes, most search platforms let operators pin, boost, or bury specific products. Used sparingly - for clearance pushes or hero promotions - this is useful. Heavy manual overrides tend to fight the relevance signal over time and can degrade the overall experience for shoppers whose intent does not match the pinned items.

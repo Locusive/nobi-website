@@ -1,0 +1,48 @@
+export const meta = {
+  term: "Keyword search",
+  slug: "keyword-search",
+  category: "AI search",
+  definition: "Keyword search matches the literal words a shopper types against the words in your product catalog - titles, descriptions, tags, and other indexed fields. If the words match, the product surfaces; if they don't, it doesn't.",
+  faqItems: [
+  {
+    "question": "What is the difference between keyword search and semantic search?",
+    "answer": "Keyword search matches exact words or close variants. Semantic search interprets the meaning behind a query and can return relevant results even when the shopper's words don't appear in the listing. Most modern site search engines layer both approaches together."
+  },
+  {
+    "question": "Why do shoppers get zero results even when the product exists?",
+    "answer": "Usually because the listing uses different words than the shopper did. If a shopper searches 'sofa' and your catalog says 'couch,' a pure keyword engine finds no match. Synonym dictionaries, copy improvements, or meaning-based matching can close that gap."
+  },
+  {
+    "question": "How can an operator improve keyword search performance without changing the engine?",
+    "answer": "The most direct lever is catalog copy - adding common synonyms, shopper-facing language, and relevant attributes to product titles and descriptions. Merchandising rules and curated redirects for high-traffic queries are a second layer that doesn't require touching individual listings."
+  }
+],
+};
+
+## What is Keyword search?
+
+Keyword search is the foundational layer of most site search engines. It works by building an index of every word in your catalog and scanning that index when a shopper submits a query. Results are ranked by how often and how prominently the query terms appear in each listing. It is fast and predictable, but it depends entirely on your catalog copy using the same words your shoppers use.
+
+## How does keyword search work?
+
+- A shopper types a query into the search bar.
+- The search engine scans its index for product records that contain those exact words (or close variants like plurals and stemmed forms).
+- Matching products are scored and ranked - typically by term frequency and field weight (a title match outranks a description match).
+- Results are returned in ranked order, usually in milliseconds.
+
+## Why does it matter?
+
+Keyword search gives operators a predictable, auditable baseline - you can read a product listing and know roughly whether it will surface for a given query. For ecommerce operators, this makes it easier to diagnose gaps: if a product isn't appearing, the fix is usually copy. For dealership operators, it means a VIN, trim name, or feature keyword typed by a buyer will reliably pull the right vehicle as long as the inventory feed is accurate.
+
+[Nobi](https://dashboard.nobi.ai) adds meaning-based matching on top of keyword search, so a shopper who types a descriptive phrase like 'something warm for camping' still gets relevant results even when no listing uses those exact words.
+
+## Frequently asked questions
+
+**What is the difference between keyword search and semantic search?**
+Keyword search matches exact words or close variants. Semantic search interprets the meaning behind a query and can return relevant results even when the shopper's words don't appear in the listing. Most modern site search engines layer both approaches together.
+
+**Why do shoppers get zero results even when the product exists?**
+Usually because the listing uses different words than the shopper did. If a shopper searches 'sofa' and your catalog says 'couch,' a pure keyword engine finds no match. Synonym dictionaries, copy improvements, or meaning-based matching can close that gap.
+
+**How can an operator improve keyword search performance without changing the engine?**
+The most direct lever is catalog copy - adding common synonyms, shopper-facing language, and relevant attributes to product titles and descriptions. Merchandising rules and curated redirects for high-traffic queries are a second layer that doesn't require touching individual listings.

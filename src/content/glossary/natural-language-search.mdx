@@ -1,0 +1,49 @@
+export const meta = {
+  term: "Natural language search",
+  slug: "natural-language-search",
+  category: "AI search",
+  definition: "Natural language search lets people find information by typing or speaking in everyday phrases and questions, rather than carefully chosen keywords, and still receive relevant results.",
+  related: {"label": "How to stop your ecommerce search from returning empty pages", "href": "/blog/reduce-zero-results"},
+  faqItems: [
+  {
+    "question": "How is natural language search different from semantic search?",
+    "answer": "The terms overlap significantly. Natural language search describes the input style - queries written as phrases or questions. Semantic search describes the matching technique - comparing meaning rather than exact words. Most natural language search engines use semantic matching under the hood, but semantic search can also apply to keyword inputs."
+  },
+  {
+    "question": "Does natural language search work for voice queries?",
+    "answer": "Yes. Voice queries are almost always phrased as natural speech, so natural language search systems handle them well once the audio is transcribed to text. The same intent-parsing logic applies regardless of whether the query arrived by keyboard or microphone."
+  },
+  {
+    "question": "Will it return too many results if the query is vague?",
+    "answer": "A well-tuned natural language search engine uses confidence scoring to rank results, not just retrieve them. Vague queries return broadly relevant results near the top and let shoppers refine with filters. Most implementations also track which results shoppers interact with, so ranking improves over time."
+  }
+],
+};
+
+## What is Natural language search?
+
+Traditional keyword search requires users to predict the exact words a product or document contains. Natural language search removes that requirement by interpreting the intent behind a query - handling synonyms, descriptive phrases, and full questions. The system matches what the user means, not just what they typed. This closes the gap between how people communicate and how databases are indexed.
+
+## How does natural language search work?
+
+- The search engine parses the incoming phrase to identify the core intent and key attributes (product type, color, size, use case, etc.)
+- It maps those attributes to catalog or content fields using semantic models trained on large amounts of text
+- Results are ranked by relevance to the interpreted intent, not by literal word overlap
+- Filters and facets can be applied on top, so the experience still feels familiar to shoppers
+
+## Why does it matter?
+
+Shoppers rarely know a product's exact title, so keyword-only search produces zero-result pages and lost sales. For dealerships, customers describe vehicles by feel or use case rather than trim codes. Natural language search reduces search abandonment, surfaces more of the catalog, and lets operators stop maintaining exhaustive synonym tables by hand.
+
+[Nobi](https://dashboard.nobi.ai) resolves natural-language queries against the merchant's live catalog, so shoppers can ask 'something waterproof for hiking under $100' and get relevant results without guessing the right product-title words.
+
+## Frequently asked questions
+
+**How is natural language search different from semantic search?**
+The terms overlap significantly. Natural language search describes the input style - queries written as phrases or questions. Semantic search describes the matching technique - comparing meaning rather than exact words. Most natural language search engines use semantic matching under the hood, but semantic search can also apply to keyword inputs.
+
+**Does natural language search work for voice queries?**
+Yes. Voice queries are almost always phrased as natural speech, so natural language search systems handle them well once the audio is transcribed to text. The same intent-parsing logic applies regardless of whether the query arrived by keyboard or microphone.
+
+**Will it return too many results if the query is vague?**
+A well-tuned natural language search engine uses confidence scoring to rank results, not just retrieve them. Vague queries return broadly relevant results near the top and let shoppers refine with filters. Most implementations also track which results shoppers interact with, so ranking improves over time.

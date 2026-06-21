@@ -1,0 +1,49 @@
+export const meta = {
+  term: "Search merchandising",
+  slug: "search-merchandising",
+  category: "Ecommerce",
+  definition: "Search merchandising applies business rules on top of relevance ranking - boosting, burying, pinning, or hiding products for specific queries - to reflect campaigns, margins, or inventory goals.",
+  related: {"label": "How to get your highest-priority products to the top of search results", "href": "/blog/merchandising-boost-bury"},
+  faqItems: [
+  {
+    "question": "How is search merchandising different from SEO?",
+    "answer": "SEO targets how external search engines rank your site's pages. Search merchandising controls how products are ordered inside your own site search - it has no effect on Google or Bing results."
+  },
+  {
+    "question": "Can too many merchandising rules hurt the shopper experience?",
+    "answer": "Yes. Heavy use of boosts and pins can override signals that shoppers actually respond to, leading to irrelevant results and lower conversion. Best practice is to apply rules sparingly and review their performance regularly."
+  },
+  {
+    "question": "Do merchandising rules work with AI-powered search?",
+    "answer": "Most AI search platforms support a rule layer that fires after the model scores results. The overrides take precedence for the specified queries, while the AI continues to rank everything else by relevance."
+  }
+],
+};
+
+## What is Search merchandising?
+
+When a shopper types a query, the search engine returns results ranked by relevance signals like text match, popularity, and conversion history. Search merchandising lets operators layer intentional overrides on top of that baseline ranking. Common use cases include surfacing high-margin products during a sale, hiding out-of-stock items, and pinning a hero product to the first slot for a branded keyword. The goal is to align what shoppers see with what the business needs to sell.
+
+## How does search merchandising work?
+
+- A merchandiser defines a rule tied to a query or query pattern (for example, 'winter boots').
+- The rule assigns a boost score, a bury penalty, a fixed pin position, or a hard exclude to one or more products.
+- At query time, the search engine blends those rule scores with its relevance scores before returning results.
+- Rules are usually managed through a visual interface and can be scheduled to activate and expire automatically.
+
+## Why does it matter?
+
+Without merchandising controls, a retailer loses the ability to act on time-sensitive business context that the algorithm cannot see - a vendor co-op commitment, a warehouse overstock, or a seasonal campaign. Dealerships face a similar need: a new model launch or an end-of-month inventory push requires surfacing specific units that organic ranking would not prioritize. Precise overrides protect margin and keep promotions coherent across the site.
+
+[Nobi](https://dashboard.nobi.ai)'s merchandising controls sit on top of AI ranking, so overrides stay precision tools for genuine exceptions rather than a workaround for weak relevance.
+
+## Frequently asked questions
+
+**How is search merchandising different from SEO?**
+SEO targets how external search engines rank your site's pages. Search merchandising controls how products are ordered inside your own site search - it has no effect on Google or Bing results.
+
+**Can too many merchandising rules hurt the shopper experience?**
+Yes. Heavy use of boosts and pins can override signals that shoppers actually respond to, leading to irrelevant results and lower conversion. Best practice is to apply rules sparingly and review their performance regularly.
+
+**Do merchandising rules work with AI-powered search?**
+Most AI search platforms support a rule layer that fires after the model scores results. The overrides take precedence for the specified queries, while the AI continues to rank everything else by relevance.

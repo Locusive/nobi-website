@@ -24,9 +24,28 @@ const STATIC_PAGES = [
   { path: "/customers/untuckit",     priority: "0.8", changefreq: "monthly" },
   { path: "/customers/kilte",        priority: "0.8", changefreq: "monthly" },
   { path: "/blog",                   priority: "0.7", changefreq: "daily"   },
+  { path: "/glossary",               priority: "0.7", changefreq: "weekly"  },
   { path: "/s/search",               priority: "0.6", changefreq: "monthly" },
   { path: "/s/ai-assistant",         priority: "0.6", changefreq: "monthly" },
 ];
+
+function getGlossaryEntries() {
+  const dir = join(ROOT, "src/content/glossary");
+  let files = [];
+  try {
+    files = readdirSync(dir).filter((f) => f.endsWith(".mdx"));
+  } catch {
+    return [];
+  }
+  const entries = [];
+  for (const file of files) {
+    const content = readFileSync(join(dir, file), "utf8");
+    if (/\bdraft:\s*true/.test(content)) continue;
+    const slugMatch = content.match(/\bslug:\s*["']([^"']+)["']/);
+    entries.push({ slug: slugMatch?.[1] ?? file.replace(/\.mdx$/, "") });
+  }
+  return entries;
+}
 
 function getBlogEntries() {
   const postsDir = join(ROOT, "src/content/posts");
@@ -62,6 +81,7 @@ function urlEntry({ loc, lastmod, changefreq, priority }) {
 
 function generateSitemap() {
   const blogEntries = getBlogEntries();
+  const glossaryEntries = getGlossaryEntries();
 
   const urls = [
     ...STATIC_PAGES.map(({ path, priority, changefreq }) =>
@@ -69,6 +89,9 @@ function generateSitemap() {
     ),
     ...blogEntries.map(({ slug, date }) =>
       urlEntry({ loc: `${BASE_URL}/blog/${slug}`, lastmod: date, changefreq: "monthly", priority: "0.6" })
+    ),
+    ...glossaryEntries.map(({ slug }) =>
+      urlEntry({ loc: `${BASE_URL}/glossary/${slug}`, lastmod: today, changefreq: "monthly", priority: "0.6" })
     ),
   ];
 
@@ -80,7 +103,7 @@ function generateSitemap() {
   ].join("\n") + "\n";
 
   writeFileSync(join(ROOT, "public/sitemap.xml"), xml);
-  console.log(`✓ sitemap.xml — ${STATIC_PAGES.length} static + ${blogEntries.length} blog posts (${STATIC_PAGES.length + blogEntries.length} total)`);
+  console.log(`✓ sitemap.xml — ${STATIC_PAGES.length} static + ${blogEntries.length} blog + ${glossaryEntries.length} glossary (${urls.length} total)`);
 }
 
 generateSitemap();

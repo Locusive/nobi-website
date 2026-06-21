@@ -56,7 +56,7 @@ function loadAuthorsJson() {
 // and evaluate it in a sandboxed VM context. Safer than eval; the
 // MDX files are checked into our repo so we trust the input but
 // still want isolation.
-function readMeta(mdxPath) {
+export function readMeta(mdxPath) {
   const content = readFileSync(mdxPath, "utf8");
   const match = content.match(/export const meta\s*=\s*(\{[\s\S]*?\n\s*\};)/);
   if (!match) return null;
@@ -73,7 +73,7 @@ function readMeta(mdxPath) {
 // Escape any character that would break out of an HTML attribute or
 // element body. Used for content we inject into the head (title,
 // description, og:* values).
-function htmlEscape(s) {
+export function htmlEscape(s) {
   if (s === null || s === undefined) return "";
   return String(s)
     .replace(/&/g, "&amp;")
@@ -117,7 +117,7 @@ function readBody(mdxPath) {
 // <a> links, and the FAQ-accordion JSX template) untouched - harmless
 // when we render to HTML, but noise in a plain-text .md file. Clean
 // those up while preserving real prose, links, and code examples.
-function readMarkdownBody(mdxPath) {
+export function readMarkdownBody(mdxPath) {
   const content = readFileSync(mdxPath, "utf8");
   const meta = content.match(/export const meta\s*=\s*\{[\s\S]*?\n\s*\};/);
   if (!meta) return "";
@@ -255,7 +255,7 @@ function mdToHtml(md) {
   return out.join("\n");
 }
 
-function renderBodyHtml(mdxPath) {
+export function renderBodyHtml(mdxPath) {
   const body = readBody(mdxPath);
   return body ? mdToHtml(body) : "";
 }
@@ -383,7 +383,7 @@ function buildHeadInjection(meta, slug) {
 // shell so the per-article values we inject aren't competing with
 // stale homepage tags. We replace specific tag sets, not the whole
 // head, so the Vite-injected scripts/styles stay intact.
-function stripHomepageMeta(shell) {
+export function stripHomepageMeta(shell) {
   let out = shell;
 
   // Replace the static <title>.
@@ -503,4 +503,8 @@ function main() {
   console.log(`✓ prerender — ${written} blog posts (${skipped} skipped)`);
 }
 
-main();
+// Run the blog prerender only when this file is executed directly, not when
+// another script (prerender-glossary.js) imports its helpers.
+if (process.argv[1] && process.argv[1].endsWith("prerender-blog.js")) {
+  main();
+}

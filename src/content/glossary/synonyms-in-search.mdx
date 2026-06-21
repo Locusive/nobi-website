@@ -1,0 +1,48 @@
+export const meta = {
+  term: "Synonyms in search",
+  slug: "synonyms-in-search",
+  category: "AI search",
+  definition: "Synonyms in search allow a search engine to treat different words for the same concept as interchangeable, so a query for 'sneakers' returns the same results as a query for 'trainers' or 'athletic shoes'.",
+  faqItems: [
+  {
+    "question": "What is the difference between a synonym and a stemming rule?",
+    "answer": "Stemming normalizes word forms - 'running', 'runs', and 'ran' all reduce to the same root. Synonyms map entirely different words to one another, such as 'couch' and 'sofa'. Most search engines apply both techniques independently."
+  },
+  {
+    "question": "Should synonyms be one-way or two-way?",
+    "answer": "It depends on the relationship. 'TV' and 'television' are true equivalents, so two-way works. But 'dress' and 'gown' are not always the same thing, so a one-way rule - 'gown' expands to also search 'dress' - is safer and avoids surfacing unrelated results."
+  },
+  {
+    "question": "How many synonym pairs does a typical ecommerce site need?",
+    "answer": "There is no universal answer, but high-traffic sites often maintain hundreds of pairs. The practical starting point is zero-result queries - any search that returns nothing is a candidate for a new synonym rule or a catalog data fix."
+  }
+],
+};
+
+## What is Synonyms in search?
+
+When a shopper types a word that differs from the terms used in product data, synonym rules bridge that gap. Without them, a catalog full of 'trainers' returns nothing when someone searches 'sneakers', even though the products are identical. Synonym handling can be one-way (a maps to b) or two-way (a and b are fully equivalent), and it applies at query time without changing the underlying product data.
+
+## How does synonyms in search work?
+
+- A search engine receives the raw query and checks it against a synonym dictionary or expansion rules.
+- Matching words are expanded or replaced with their equivalents before the query runs against the index.
+- The engine then retrieves and ranks results as if the shopper had used the catalog's preferred terminology.
+- Some systems apply synonyms at index time instead, writing multiple word forms into the index entries themselves.
+
+## Why does it matter?
+
+Shoppers use the language they know, not the language a catalog was built with. Missed synonyms mean missed revenue - a visitor who sees zero results is likely to leave. For dealerships, the same problem appears when a buyer searches 'used trucks' but inventory is labeled 'pre-owned pickups'. Closing those gaps directly lifts conversion without touching product data or ad spend.
+
+[Nobi](https://dashboard.nobi.ai)'s semantic matching reduces the burden of hand-maintaining synonym lists by understanding query intent rather than relying on exact word matches.
+
+## Frequently asked questions
+
+**What is the difference between a synonym and a stemming rule?**
+Stemming normalizes word forms - 'running', 'runs', and 'ran' all reduce to the same root. Synonyms map entirely different words to one another, such as 'couch' and 'sofa'. Most search engines apply both techniques independently.
+
+**Should synonyms be one-way or two-way?**
+It depends on the relationship. 'TV' and 'television' are true equivalents, so two-way works. But 'dress' and 'gown' are not always the same thing, so a one-way rule - 'gown' expands to also search 'dress' - is safer and avoids surfacing unrelated results.
+
+**How many synonym pairs does a typical ecommerce site need?**
+There is no universal answer, but high-traffic sites often maintain hundreds of pairs. The practical starting point is zero-result queries - any search that returns nothing is a candidate for a new synonym rule or a catalog data fix.

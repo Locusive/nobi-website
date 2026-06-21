@@ -1,0 +1,45 @@
+export const meta = {
+  term: "Faceted search",
+  slug: "faceted-search",
+  category: "Ecommerce",
+  definition: "Faceted search lets shoppers narrow a product catalog by attributes such as size, color, price, and brand, using filters derived directly from product metadata. Each attribute becomes a selectable dimension that progressively reduces the visible result set.",
+  faqItems: [
+  {
+    "question": "What is the difference between faceted search and keyword search?",
+    "answer": "Keyword search finds products that match words in a query. Faceted search filters an existing result set by structured attributes like size or price. Most modern search experiences use both together - keywords retrieve a broad set and facets let the shopper narrow it."
+  },
+  {
+    "question": "How many facets should a product page show?",
+    "answer": "A common guideline is to surface the five to eight most-used attributes by default and hide the rest behind a 'show more' option. Too many visible facets at once create visual clutter and slow filter decisions; too few force shoppers to scroll through irrelevant results."
+  },
+  {
+    "question": "Can faceted search work for small catalogs?",
+    "answer": "Yes, though the benefit scales with catalog size. A store with fewer than a few hundred products may find that a simple sort-and-filter dropdown is enough. Faceted navigation becomes more valuable as the number of SKUs and attribute combinations grows, because manual browsing becomes impractical."
+  }
+],
+};
+
+## What is Faceted search?
+
+In a faceted search system, every filterable attribute is called a facet. Shoppers can combine multiple facets at once - for example, filtering by color and price range simultaneously. The available filter options update dynamically based on what products remain in the result set, so shoppers never see a facet value that would return zero results. This guided narrowing reduces decision fatigue and helps people reach relevant products faster than keyword search alone.
+
+## How does faceted search work?
+
+When a shopper applies a filter, the search engine intersects the selected facet values against an index of product attributes. Results are ranked and the facet panel recalculates counts to reflect only the products that match all active filters. Most implementations use a structured index - such as Elasticsearch or Solr - that stores attribute values alongside product records so facet queries return in milliseconds even across large catalogs.
+
+## Why does it matter?
+
+For ecommerce operators, faceted search directly reduces pogo-sticking - shoppers leaving to browse elsewhere because results felt irrelevant. Dealerships benefit similarly: a shopper filtering by trim level, fuel type, and monthly payment range arrives at a much shorter, more qualified list. Higher filter engagement typically correlates with longer sessions and stronger conversion rates, making faceted navigation one of the higher-leverage catalog investments a merchant can make.
+
+[Nobi](https://dashboard.nobi.ai) pairs attribute filtering with semantic understanding, so a shopper can describe what they want in natural language and then refine the results with facets - combining the flexibility of conversation with the precision of structured filters.
+
+## Frequently asked questions
+
+**What is the difference between faceted search and keyword search?**
+Keyword search finds products that match words in a query. Faceted search filters an existing result set by structured attributes like size or price. Most modern search experiences use both together - keywords retrieve a broad set and facets let the shopper narrow it.
+
+**How many facets should a product page show?**
+A common guideline is to surface the five to eight most-used attributes by default and hide the rest behind a 'show more' option. Too many visible facets at once create visual clutter and slow filter decisions; too few force shoppers to scroll through irrelevant results.
+
+**Can faceted search work for small catalogs?**
+Yes, though the benefit scales with catalog size. A store with fewer than a few hundred products may find that a simple sort-and-filter dropdown is enough. Faceted navigation becomes more valuable as the number of SKUs and attribute combinations grows, because manual browsing becomes impractical.

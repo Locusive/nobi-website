@@ -1,0 +1,48 @@
+export const meta = {
+  term: "Query understanding",
+  slug: "query-understanding",
+  category: "AI search",
+  definition: "Query understanding is how a search system interprets a shopper's input - identifying intent, product attributes, and constraints - before deciding which results to retrieve.",
+  faqItems: [
+  {
+    "question": "How is query understanding different from keyword matching?",
+    "answer": "Keyword matching looks for exact or near-exact word overlap between the query and product data. Query understanding goes further - it infers intent, resolves synonyms, extracts attributes like size or color, and applies constraints like price or availability before retrieval begins."
+  },
+  {
+    "question": "What happens when a shopper's query is ambiguous?",
+    "answer": "A well-designed system uses context - session history, popular queries, or follow-up questions - to resolve ambiguity. In some cases it may surface results for the most likely interpretation while offering refinement options so the shopper can clarify."
+  },
+  {
+    "question": "Does query understanding require structured product data?",
+    "answer": "It helps significantly. When catalog fields like category, material, and size are consistent and populated, the system has clear targets to map inferred attributes against. Sparse or inconsistent product data limits how accurately intent can be translated into results."
+  }
+],
+};
+
+## What is Query understanding?
+
+When a shopper types or speaks a query, the system does more than match keywords. It infers what the person is trying to accomplish, which product attributes matter (color, size, price range), and any hard constraints ('under $50', 'in stock only'). Good query understanding means a search for 'warm jacket for toddler under $80' surfaces relevant results rather than every item containing the word 'jacket'.
+
+## How does query understanding work?
+
+- The system parses the raw input and identifies the core product type the shopper wants.
+- It extracts attributes and filters mentioned explicitly or implied by context.
+- It maps those signals to fields in the product catalog.
+- It passes the structured intent to the retrieval layer, which fetches and ranks matching items.
+
+## Why does it matter?
+
+Shoppers rarely type exact product names - they describe problems, occasions, or needs. A system that treats every query as a bag of keywords misses intent and surfaces irrelevant results, which drives shoppers to bounce. Strong query understanding increases the share of sessions that end in a click or purchase, and it reduces the volume of zero-result searches that frustrate buyers and hide revenue.
+
+[Nobi](https://dashboard.nobi.ai) reads intent and constraints from natural-language queries and maps them directly to catalog attributes, so shoppers who describe what they need in plain language still reach the right products.
+
+## Frequently asked questions
+
+**How is query understanding different from keyword matching?**
+Keyword matching looks for exact or near-exact word overlap between the query and product data. Query understanding goes further - it infers intent, resolves synonyms, extracts attributes like size or color, and applies constraints like price or availability before retrieval begins.
+
+**What happens when a shopper's query is ambiguous?**
+A well-designed system uses context - session history, popular queries, or follow-up questions - to resolve ambiguity. In some cases it may surface results for the most likely interpretation while offering refinement options so the shopper can clarify.
+
+**Does query understanding require structured product data?**
+It helps significantly. When catalog fields like category, material, and size are consistent and populated, the system has clear targets to map inferred attributes against. Sparse or inconsistent product data limits how accurately intent can be translated into results.

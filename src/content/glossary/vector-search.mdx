@@ -1,0 +1,78 @@
+export const meta = {
+  term: "Vector search",
+  slug: "vector-search",
+  category: "AI search",
+  definition:
+    "Vector search represents text (and other data) as numerical embeddings and finds results by similarity in that vector space, which is what lets search match on meaning instead of literal words.",
+  related: {
+    label: "How to stop your ecommerce search from returning empty pages",
+    href: "/blog/reduce-zero-results",
+  },
+  faqItems: [
+    {
+      question: "Is vector search the same as semantic search?",
+      answer:
+        "They're closely related. Vector search is the underlying technique - matching by similarity between embeddings. Semantic search is the outcome that technique enables: results matched by meaning rather than exact keywords.",
+    },
+    {
+      question: "What is an embedding?",
+      answer:
+        "An embedding is a list of numbers that represents the meaning of a piece of text. Texts with similar meanings get embeddings that sit close together, so similarity can be measured mathematically.",
+    },
+    {
+      question: "Do I need a separate vector database to use vector search?",
+      answer:
+        "Not necessarily. Some teams run a standalone vector database; many use a search product that handles embedding and similarity for them, so there's no separate infrastructure to operate.",
+    },
+  ],
+};
+
+## What does "vector search" mean?
+
+Vector search is a technique that represents text as **embeddings** - lists of
+numbers that capture meaning - and retrieves results by finding the embeddings
+most **similar** to the query's. Because closeness in this vector space
+reflects closeness in meaning, vector search can match a query to a product
+even when they share no exact words.
+
+It's the engine under most "search by meaning" experiences, including
+[semantic search](/glossary/semantic-search).
+
+## How does vector search work?
+
+1. **Embed the catalog.** Each product's text (title, description, attributes)
+   is converted into an embedding and stored.
+2. **Embed the query.** When a shopper searches, their query is converted into
+   an embedding the same way.
+3. **Find nearest neighbors.** The system returns the products whose embeddings
+   are closest to the query's, ranked by similarity.
+
+Because the comparison is mathematical, synonyms, paraphrases, and descriptive
+phrases all land near the right products without hand-written rules.
+
+## Why does vector search matter?
+
+Vector search is what makes meaning-based retrieval possible at scale. For a
+store, the practical payoff is fewer dead-end searches on descriptive or
+long-tail queries and less time spent maintaining synonym lists. It's also the
+retrieval step behind grounded AI answers: a system can pull the most relevant
+facts by vector similarity before generating a response, which keeps answers
+tied to your real content.
+
+In [Nobi](https://dashboard.nobi.ai), embeddings power both search and the
+shopping assistant, so a shopper can describe what they want and get matched to
+the live catalog.
+
+## Frequently asked questions
+
+**Is vector search the same as semantic search?**
+They're closely related. Vector search is the underlying technique; semantic
+search is the meaning-based outcome it enables.
+
+**What is an embedding?**
+A list of numbers representing the meaning of a piece of text. Similar meanings
+produce embeddings that sit close together.
+
+**Do I need a separate vector database?**
+Not necessarily - many teams use a search product that handles embedding and
+similarity for them, with no separate infrastructure to run.

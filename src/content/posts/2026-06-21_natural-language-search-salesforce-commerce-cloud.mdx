@@ -3,8 +3,8 @@ export const meta = {
  slug: "natural-language-search-salesforce-commerce-cloud",
  date: "2026-06-21",
  publishedAt: "2026-06-21",
- description: "Salesforce Commerce Cloud's keyword search misses descriptive queries. Add Nobi to resolve natural-language searches from your live catalog.",
- excerpt: "Salesforce Commerce Cloud's keyword search misses descriptive queries. Add Nobi to resolve natural-language searches from your live catalog.",
+ description: "Salesforce Commerce Cloud's keyword search misses descriptive queries. Add Nobi to resolve natural-language searches from your connected catalog.",
+ excerpt: "Salesforce Commerce Cloud's keyword search misses descriptive queries. Add Nobi to resolve natural-language searches from your connected catalog.",
  tags: ["how-to", "site search", "ecommerce", "ecommerce search"],
  author: "Shanif Dhanani",
  heroImage: "https://storage.googleapis.com/nobi-public/docs_and_marketing_websites/posts/natural-language-search-salesforce-commerce-cloud/hero.webp",
@@ -17,7 +17,7 @@ export const meta = {
  },
  {
  question: "What is Nobi, and how does it handle natural-language search on Salesforce Commerce Cloud?",
- answer: "Nobi is a conversational website assistant that adds semantic product search and automated shopper Q&A to your SFCC storefront without requiring a platform migration. It uses semantic embeddings to match what a shopper means to products in your live catalog, so descriptive queries return results even when the words don't overlap with product titles. The knowledge base builds from your existing SFCC content - product pages, PDPs, policy docs, FAQ routes, PDFs - and refreshes twice a day, so pricing and availability updates reach shopper answers within hours. Every answer carries an inline citation back to the exact source document and excerpt, so shoppers can verify any claim against your own published content."
+ answer: "Nobi is a conversational website assistant that adds semantic product search and automated shopper Q&A to your SFCC storefront without requiring a platform migration. It uses semantic embeddings to match what a shopper means to products in your connected catalog, so descriptive queries return results even when the words don't overlap with product titles. The knowledge base builds from your existing SFCC content - product pages, PDPs, policy docs, FAQ routes, PDFs - and refreshes twice a day, so pricing and availability updates reach shopper answers within hours. Every answer carries an inline citation back to the exact source document and excerpt, so shoppers can verify any claim against your own published content."
  },
  {
  question: "How does semantic search map a shopper's words to the right products in my SFCC catalog?",
@@ -25,7 +25,7 @@ export const meta = {
  },
  {
  question: "How do I install Nobi and connect my Salesforce Commerce Cloud catalog?",
- answer: "Getting Nobi running on your SFCC storefront requires two additions to your storefront template: one that loads the Nobi runtime across every page and one that places the search widget where you want it - no cartridge development or custom builds required, and most SFCC stores go live the same day. You connect your catalog by pointing Nobi at a product feed URL or uploading a CSV or JSON export, and Nobi builds the semantic index from titles, descriptions, attributes, pricing, and availability. Policy docs, FAQ pages, and help-center content add as additional sources via URL or PDF upload, and all sources refresh twice a day. For the search widget, you can either replace your existing search form with Nobi's search bar or add an AI mode toggle that intercepts queries through your existing field."
+ answer: "Getting Nobi running on your SFCC storefront requires two additions to your storefront template: one that loads the Nobi runtime across every page and one that places the search widget where you want it - no cartridge development or custom builds required, and most SFCC stores are live within hours. You connect your catalog by pointing Nobi at a product feed URL or uploading a CSV or JSON export, and Nobi builds the semantic index from titles, descriptions, attributes, pricing, and availability. Policy docs, FAQ pages, and help-center content add as additional sources via URL or PDF upload, and all sources refresh twice a day. For the search widget, you can either replace your existing search form with Nobi's search bar or add an AI mode toggle that intercepts queries through your existing field."
  },
  {
  question: "How does Nobi handle spec, compatibility, and use-case queries without fabricating answers?",
@@ -84,7 +84,7 @@ Your Salesforce Commerce Cloud store has a search problem that's easy to miss: i
 
 Salesforce Commerce Cloud's built-in search engine matches tokens - it looks for the exact words a shopper typed in product titles, descriptions, and attributes. When a shopper types "warm hiking jacket under $200" and your catalog titles say "men's insulated shell" or "mountain parka," the engine sees no match and returns a [zero-result page](/blog/fix-zero-result-searches). That dead end costs the sale silently: the shopper abandons, and your analytics log a bounce rather than a vocabulary mismatch you could fix.
 
-The problem compounds as shoppers describe what they want in plain terms. Intent-based queries like "gift for a trail runner under $150" or sizing questions like "does this run narrow" don't map to keyword patterns the engine recognizes. SFCC does give you synonym groups and boosting rules to close some of those gaps, but every new phrasing variation needs its own manual entry. As your catalog grows, so does the list.
+The problem compounds as shoppers describe what they want in plain terms. Intent-based queries like "gift for a trail runner" or sizing questions like "does this run narrow" don't map to keyword patterns the engine recognizes. SFCC does give you synonym groups and boosting rules to close some of those gaps, but every new phrasing variation needs its own manual entry. As your catalog grows, so does the list.
 
 The real cost is that you never see it. Shoppers who hit dead ends don't complain - they leave. There's no ticket to flag the gap. And because these shoppers often arrive from paid campaigns or email, they're your highest-intent traffic. Dead-end searches don't just lose sales; they waste the spend that brought those shoppers there in the first place.
 
@@ -193,6 +193,3 @@ Descriptive search queries are where keyword engines break down. Connect your Sa
  <span>Start your free Nobi trial</span>
  </a>
 </div>
-```
-
-The only change is the opening paragraph, which now moves through all four beats - situating the reader on their SFCC storefront first, naming the exact problem (keyword-only matching), stating the stakes (silent bounces from your highest-intent traffic), then handing off to the guide structure.

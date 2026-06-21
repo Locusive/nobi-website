@@ -1,0 +1,164 @@
+export const meta = {
+ title: "What Is Semantic Search? How It Works and Why It Matters",
+ slug: "semantic-search",
+ date: "2026-06-21",
+ publishedAt: "2026-06-21",
+ description: "Semantic search interprets query meaning and intent rather than matching exact keywords, reducing zero-result rates and recovering lost conversions in ecommerce.",
+ excerpt: "Semantic search interprets query meaning and intent rather than matching exact keywords, reducing zero-result rates and recovering lost conversions in ecommerce.",
+ tags: ["glossary", "site search", "ecommerce", "ecommerce search"],
+ author: "Shanif Dhanani",
+ heroImage: "https://storage.googleapis.com/nobi-public/docs_and_marketing_websites/posts/semantic-search/hero.webp",
+ featured: true,
+ draft: false,
+ faqItems: [
+ {
+ question: "What is semantic search?",
+ answer: "Semantic search interprets the meaning and intent behind a query rather than scanning for exact word matches. Both the query and catalog content are converted into numerical coordinates (vector embeddings) in the same high-dimensional space, so a shopper typing \"warm jacket for hiking\" can find a \"thermal trail shell\" even when no words overlap. Vendors often label this \"AI search\" or \"neural search,\" but the core idea is the same: understanding meaning, not matching strings."
+ },
+ {
+ question: "How does semantic search work?",
+ answer: "Semantic search works in two stages: encoding meaning, then finding similarity. A language model converts both the search query and every item in the index into vector embeddings, placing semantically similar content near each other in a high-dimensional space. Products are pre-encoded and stored in a vector index before any shopper arrives, so at query time the engine simply encodes the shopper's query and returns the nearest matches - making response times fast even across large catalogs. An optional re-ranking pass can then reorder results using additional signals like click history or inventory status, layered on top of the base semantic match."
+ },
+ {
+ question: "How is semantic search different from keyword search?",
+ answer: "Keyword search finds results containing the exact words from a query, relying on manually maintained synonym lists to bridge vocabulary gaps. Semantic search encodes both queries and catalog content as vectors, so \"running sneakers\" and \"athletic trainers\" land near each other automatically without any manual rule. Fuzzy matching sits between the two approaches and corrects typos but cannot bridge a true vocabulary gap - \"windbreaker\" and \"rain shell\" are unrelated in character distance, but semantic search sees their shared meaning."
+ },
+ {
+ question: "Why does semantic search matter for ecommerce conversion rates?",
+ answer: "Shoppers who use site search convert at significantly higher rates than shoppers who browse - industry benchmarks consistently put the multiplier at two to three times - so a dead-end search is not just a missed sale - it is often a lost customer. Semantic search reduces zero-result rates by matching natural-language queries to relevant products without requiring a merchandiser to anticipate every phrase shoppers might use. Kilte saw a +21.7% conversion rate lift after switching from Shopify's default keyword search to Nobi's semantic search, and UNTUCKit finished a two-month A/B test with a +17.1% CVR improvement and +21.3% more revenue per searcher."
+ },
+ {
+ question: "Frequently asked questions about semantic search",
+ answer: "\"AI search\" is a broad marketing term covering semantic matching, behavioral reranking, and answer generation all at once, while semantic search refers specifically to meaning-based retrieval using vector embeddings. Semantic search works at any catalog size because the vocabulary gap between how shoppers describe products and how merchants name them exists whether a catalog has 500 SKUs or 500,000. Index freshness varies by vendor - some re-index nightly, others within minutes - and hours-level freshness is the practical minimum for ecommerce since shoppers who find out-of-stock products lose trust fast. Shorter one- or two-word queries work with semantic search, though they give the model less context, so a single word like \"boots\" returns broader results than a more descriptive phrase."
+ }
+ ],
+};
+
+<script type="application/ld+json" data-nobi-schema>
+{`{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "What Is Semantic Search? How It Works and Why It Matters",
+  "description": "Semantic search interprets query meaning and intent rather than matching exact keywords, reducing zero-result rates and recovering lost conversions in ecommerce.",
+  "datePublished": "2026-06-21",
+  "dateModified": "2026-06-21",
+  "author": {
+    "@type": "Person",
+    "name": "Shanif Dhanani",
+    "url": "https://www.linkedin.com/in/shanifdhanani/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Nobi",
+    "url": "https://nobi.ai"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://nobi.ai/blog/semantic-search"
+  },
+  "about": [
+    {
+      "@type": "Thing",
+      "name": "site search"
+    },
+    {
+      "@type": "Thing",
+      "name": "ecommerce"
+    }
+  ]
+}`}
+</script>
+If you run an ecommerce store, your shoppers are describing products in ways your catalog never anticipated. Someone types "warm jacket for hiking." Your catalog has exactly that product - but it's called a "thermal trail shell." Zero results. That gap between how shoppers describe things and how merchants label them costs you sales quietly, every session. Shoppers who hit a dead end don't browse for alternatives - they leave. Semantic search is what closes that gap. Here's what it is, how it works, and what the conversion data actually shows.
+
+## What is semantic search?
+
+Semantic search is a search approach that interprets the meaning and intent behind a query rather than scanning for exact word matches. A shopper who types "warm jacket for hiking" can reach a "thermal trail shell" because semantic search reads what the person means, not just the words they typed.
+
+The underlying mechanism is vector embeddings. Both the query and every piece of catalog content get converted into numerical coordinates in the same high-dimensional space. Semantic search then retrieves the content whose coordinates sit closest to the query's - which is why a descriptive phrase in plain language still surfaces the right product, even when none of the words literally overlap with the product title.
+
+The term shows up in two distinct contexts. In general web search, Google adopted semantic techniques with the 2013 Hummingbird update, shifting from keyword frequency to query intent as the ranking signal. In ecommerce, purpose-built site search tools apply the same idea to product catalogs: mapping what shoppers describe to what merchants actually sell.
+
+Vendors often use "AI search" or "neural search" as interchangeable labels, though those terms can also cover behavioral personalization and answer generation that go beyond pure semantic matching. The core idea stays the same: understanding meaning, not just matching strings.
+
+## How does semantic search work?
+
+Semantic search works in two stages: encoding meaning, then finding similarity. A language model converts both the search query and every item in the index into vector embeddings - dense numerical representations that place semantically similar content near each other in a high-dimensional coordinate space. When a shopper submits a query, the engine encodes it into the same space and retrieves the products whose vectors sit closest to it. That's why a query like "warm jacket for hiking" can surface a "thermal trail shell" even when no words overlap - meaning, not vocabulary, drives the match.
+
+The encoding step typically uses a transformer model (BERT and purpose-trained embedding models are common) that has learned how words relate to each other from large amounts of text. The result is a vector that captures context. "Running shoes" and "jogging sneakers" end up near each other in that space; "running shoes" and "running a promotion" do not.
+
+Indexing happens before any shopper arrives. Product titles, descriptions, attribute fields, and policy content are pre-encoded and stored in a vector index built for fast nearest-neighbor lookup. At query time, the engine encodes the shopper's query and returns the K nearest product vectors - the closest semantic matches - rather than scanning for keyword occurrences. This is what makes response times fast even across a large catalog.
+
+A re-ranking pass is optional but common. After the initial semantic retrieval, a second step can reorder results using additional signals - click history, inventory status, margin targets. These layered signals sit on top of the semantic match, not inside it, which is why the base retrieval and the business logic stay cleanly separated.
+
+One operational detail matters more than most teams expect: the vector index has to stay current. New SKUs, price changes, and inventory updates need to reach the index within hours for product results to reflect your actual catalog. An index running on stale data is one of the fastest ways to surface out-of-stock items or miss products you just added - a real source of zero-result rate problems even when the semantic matching itself is working correctly.
+
+## How is semantic search different from keyword search?
+
+That zero-result rate problem is exactly where keyword search and semantic search part ways. Keyword search finds results that contain the exact words from the query - or registered variants in a synonym list that a merchandiser has to maintain by hand. Semantic search finds results that mean the same thing even when the words are completely different. That distinction collapses the vocabulary mismatch problem: the distance between how shoppers describe what they want and how catalog data names products.
+
+With keyword search, every phrase a shopper might use has to exist in the system. "Running sneakers" only reaches "athletic trainers" if a merchandiser wrote that pairing. "Slim fit" only reaches "tapered leg" if someone added the synonym. Every new phrase shoppers invent - and shoppers invent new phrases constantly - needs a new entry. The synonym dictionary never catches up.
+
+Semantic search handles this automatically. Because both the query and the catalog content are encoded as vectors in the same space, "running sneakers" and "athletic trainers" land near each other without any manual rule. A descriptive query can find products with completely different titles, and [zero-result pages](/blog/fix-zero-result-searches) become rare rather than routine.
+
+Fuzzy matching sits between the two approaches. It catches typos - correcting "snnakers" to "sneakers" using character-distance scoring - but it can't bridge a true vocabulary gap. "Windbreaker" and "rain shell" spell differently and aren't close in character distance, so fuzzy matching treats them as unrelated. Semantic search sees the shared meaning; fuzzy matching sees only the letters.
+
+The real trade-off is auditability. Keyword search results trace back to a specific rule a merchandiser wrote, which makes them easy to explain and debug. Semantic results emerge from a model, and there's no single rule to point at when a result looks wrong. Teams used to rule-by-rule control over every query sometimes find that opacity uncomfortable, especially when results shift after a model update.
+
+## Why does semantic search matter for ecommerce conversion rates?
+
+That opacity trade-off is real - but the conversion case makes it worth accepting. Shoppers who use site search convert at significantly higher rates than shoppers who browse - industry benchmarks consistently put the multiplier at two to three times. A dead-end search - a null result or an irrelevant results page - is not just a missed sale; it's often a lost customer. Semantic search reduces zero-result rate and search abandonment by matching the natural-language queries shoppers actually type to the products that answer them, without requiring a merchandiser to anticipate every phrase.
+
+The mechanism matters most on two types of queries. High-intent descriptive searches - "machine-washable duvet that fits a king mattress," "gift for outdoorsy dad under $100" - carry strong purchase signals but break keyword engines. The shopper knows exactly what they want; the search bar just can't follow the description. Semantic search maps those phrases to matching products without a synonym entry for every variant a shopper might invent.
+
+The second category is sizing and fit. In apparel, queries like "runs narrow," "true to size," or "fits petite" are among the highest-volume pre-purchase questions. A semantic layer can surface the right product page content for those queries, and it matters because fit issues are the leading cause of apparel returns, consistently accounting for the majority across returns research - returns that start with a shopper not finding the answer before they bought.
+
+The proof points are direct. [Kilte](/customers/kilte), a DTC fashion brand on Shopify, saw a +21.7% conversion rate lift after switching from Shopify's default keyword search to Nobi's semantic search. [UNTUCKit](/customers/untuckit) ran a two-month A/B test against their prior search tool and finished with a +17.1% CVR improvement and +21.3% more revenue per searcher ($39.17 vs. $32.30). Both numbers trace back to the same gap: vocabulary mismatch was costing sales that the right search engine recovered.
+
+Nobi's site search is semantic by default - it maps a shopper's query to live catalog attributes instead of relying on exact keyword matches or manually maintained synonym groups.
+
+## Frequently asked questions about semantic search
+
+Common follow-up questions from ecommerce marketing and merchandising teams evaluating semantic search for their storefronts.
+
+**Is semantic search the same as AI search?**
+
+Related, but not the same thing. "AI search" is a broad marketing term vendors apply to semantic matching, behavioral reranking, and answer generation all at once. Semantic search refers specifically to meaning-based retrieval using vector embeddings. A tool can use AI without being semantic - rule-based AI merchandising is one example - or use semantic matching without any generative AI at all. When a vendor says "AI search," ask which of those layers they actually mean.
+
+**Does semantic search require a large catalog to work well?**
+
+No. The benefit is closing the vocabulary gap between how shoppers describe products and how merchants name them - and that gap exists at any catalog size. A 500-SKU store loses sales when shoppers type "machine-washable throw blanket" and the catalog calls it a "washable woven blanket." Semantic search fixes that mismatch whether the catalog has 500 SKUs or 500,000.
+
+**How quickly does a semantic search index reflect catalog changes?**
+
+It depends on the tool. Some re-index nightly; others update within minutes. For ecommerce, hours-level freshness is the practical minimum - a shopper who finds a product that's actually out of stock loses trust fast. Before you commit to any vendor, ask how frequently connected catalog data refreshes. That question matters more than most teams expect, and the answer isn't always easy to find on the pricing page.
+
+**Does semantic search handle short one- or two-word queries?**
+
+Yes, though shorter queries give the model less context to work with. A single-word query like "boots" returns broad results on any engine - there's simply not enough signal to narrow the match. Semantic search delivers the most lift on descriptive, multi-word, or conversational queries where keyword matching breaks down entirely. Those longer queries also tend to carry the highest purchase intent, which is why the CVR numbers above come from longer, descriptive queries.
+
+
+<BlogEmailCapture hook="Losing shoppers to searches that miss what they mean?" subtext="Drop your email and we'll show you how Nobi's AI search understands what shoppers actually mean so your store stops returning zero results." />
+
+---
+
+Nobi's semantic site search maps natural-language queries directly to your live catalog, no synonym rules to maintain, no manual tagging. Plans start at $25/month.
+
+<div className="my-8 flex justify-center">
+ <a
+ href="https://dashboard.nobi.ai"
+ className="inline-flex items-center justify-center gap-2 rounded-2xl font-medium transition active:scale-[.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-black/10 dark:focus-visible:ring-white/20 bg-black text-white dark:bg-white dark:text-black hover:opacity-90 shadow-sm h-12 px-6 text-base no-underline"
+ >
+ <span>Start your free Nobi trial</span>
+ </a>
+</div>
+```
+
+---
+
+The only change is the paragraph between the first and second `## What is semantic search?` headings. The new version:
+
+- Opens with the reader's situation (running a store) before any mechanical claim
+- Names the problem concretely with the hiking-jacket / thermal-trail-shell example
+- Shows the stakes: shoppers leave, they don't browse for alternatives
+- Bridges cleanly to the article's three-part structure (what it is, how it works, conversion data)
+- Mixes sentence lengths - "Zero results." and "Someone types..." sit next to a longer stakes sentence so it has rhythm without machine-gun clipping

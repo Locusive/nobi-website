@@ -49,7 +49,7 @@ export const meta = {
   "headline": "How to Add Typeahead Search to Your Ecommerce Store",
   "description": "Step-by-step guide to adding typeahead (instant search) to your ecommerce store with Nobi, setup, fuzzy matching, dropdown config, and measuring CVR lift.",
   "datePublished": "2026-06-07",
-  "dateModified": "2026-06-07",
+  "dateModified": "2026-06-22",
   "author": {
     "@type": "Person",
     "name": "Shanif Dhanani",
@@ -78,23 +78,23 @@ export const meta = {
 </script>
 ## How do I add typeahead search to my ecommerce store?
 
-A shopper types three characters and sees a blank box. They don't keep typing. That exit never shows in your zero-result data - the shopper left before search could respond. To catch them, typeahead returns matching products after just a few keystrokes - instant feedback instead of a blank box. Here's how to add it.
+A shopper types three characters and sees a blank box. They don't keep typing. That exit never shows in your zero-result data; the shopper left before search could respond. To catch them, typeahead returns matching products after just a few keystrokes, giving instant feedback instead of a blank box. Here's how to add it.
 
 ## What is typeahead search, and why does waiting for a full query cost you sales?
 
-Typeahead search (also called instant or predictive search) returns matching results as the shopper types - before they press Enter or finish a word. The default storefront search box waits for a complete, submitted query; a shopper who types "wireless nois" sees nothing and leaves. Search abandonment from dead-end zero-result pages is one of the most directly measurable CVR leaks in ecommerce, and it starts the moment the search box fails to respond in real time.
+Typeahead search (also called instant or predictive search) returns matching results as the shopper types, before they press Enter or finish a word. The default storefront search box waits for a complete, submitted query; a shopper who types "wireless nois" sees nothing and leaves. Search abandonment from dead-end zero-result pages is one of the most directly measurable CVR leaks in ecommerce, and it starts the moment the search box fails to respond in real time.
 
-What typeahead fixes is responsiveness. A shopper who types and sees nothing until they commit to a full query assumes the store is slow or has nothing, and many abandon before they ever press Enter. Returning matches after the first few characters keeps them engaged - immediate proof the store has what they want, plus a one-tap path to it.
+What typeahead fixes is responsiveness. A shopper who types and sees nothing until they commit to a full query assumes the store is slow or has nothing, and many abandon before they ever press Enter. Returning matches after the first few characters keeps them engaged: immediate proof the store has what they want, plus a one-tap path to it.
 
-Relevance is the other half, and it's a separate problem. When a shopper does submit a query, their wording often won't match your catalog titles - "cozy oversized pullover" versus whatever the product is actually called - and a keyword engine returns a null page. The bar to aim for is zero dead ends: a storefront should never serve a [zero-result page](/blog/fix-zero-result-searches). Closing that gap takes search that understands meaning, not just strings - which is the other thing Nobi does, covered below.
+Relevance is the other half, and it's a separate problem. When a shopper does submit a query, their wording often won't match your catalog titles ("cozy oversized pullover" versus whatever the product is actually called), and a keyword engine returns a null page. The bar to aim for is zero dead ends: a storefront should never serve a [zero-result page](/blog/fix-zero-result-searches). Closing that gap takes search that understands meaning, not just strings, which is the other thing Nobi does, covered below.
 
 There's also a measurement problem worth naming. Analytics can tell you how many sessions ended on a zero-result page. They can't tell you how many shoppers were quietly put off by a slow, unresponsive search experience and didn't come back. Fixing typeahead closes a leak your dashboards will always under-report.
 
 ## What is Nobi, and how does it deliver typeahead?
 
-Nobi is an AI-powered search and shopping assistant for ecommerce. Its typeahead returns matching products instantly as a shopper types, so they get immediate feedback instead of a blank box. And when a shopper runs a full search, Nobi's semantic engine matches their intent against your whole catalog - attributes, descriptions, and the natural-language way people describe what they want - so a query like "cozy oversized pullover" finds the right product even when those exact words never appear in a title. Typeahead keeps them moving; semantic search makes sure what they land on is right.
+Nobi is an AI-powered search and shopping assistant for ecommerce. Its typeahead returns matching products instantly as a shopper types, so they get immediate feedback instead of a blank box. And when a shopper runs a full search, Nobi's semantic engine matches their intent against your whole catalog (attributes, descriptions, and the natural-language way people describe what they want) so a query like "cozy oversized pullover" finds the right product even when those exact words never appear in a title. Typeahead keeps them moving; semantic search makes sure what they land on is right.
 
-It runs as a layer on your existing storefront - your catalog, your search bar, your theme - so there's nothing to re-platform and no second system to maintain. The rest of this guide covers getting it live, tuning what shows in the dropdown, and measuring the lift.
+It runs as a layer on your existing storefront (your catalog, your search bar, your theme), so there's nothing to re-platform and no second system to maintain. The rest of this guide covers getting it live, tuning what shows in the dropdown, and measuring the lift.
 
 ## How do I install Nobi's typeahead search on my Shopify or ecommerce store?
 
@@ -126,15 +126,15 @@ Typeahead is on by default (the `enable-typeahead` attribute defaults to `true`)
 
 **Using Google Tag Manager?** Add the script as a Custom HTML tag triggered on All Pages and publish it, then place the `<nobi-search-bar>` tag in your theme template.
 
-That's the whole install - no catalog export, no data migration. Nobi indexes your product pages, FAQ routes, and policy documents from your existing URLs on the first connection, and refreshes them twice a day, so a new product, an updated price, or a revised return policy shows up in typeahead within hours. For answers where exact wording matters - return windows, warranty terms, promotional cutoffs - query overrides let you pin the precise response, returned word for word when a query matches. And if your team needs tighter control over how products render in the dropdown, the Hooks API exposes that display logic - a capability [UNTUCKit](/customers/untuckit) drove, now available to every customer.
+That's the whole install - no catalog export, no data migration. Nobi indexes your product pages, FAQ routes, and policy documents from your existing URLs on the first connection, and refreshes them twice a day, so a new product, an updated price, or a revised return policy shows up in typeahead within hours. For answers where exact wording matters (return windows, warranty terms, promotional cutoffs), query overrides let you pin the precise response, returned word for word when a query matches. And if your team needs tighter control over how products render in the dropdown, the Hooks API exposes that display logic, a capability [UNTUCKit](/customers/untuckit) drove, now available to every customer.
 
 ## How does Nobi match partial and misspelled queries to the right products in my catalog?
 
-As a shopper types, typeahead surfaces instant matches against your catalog so they get immediate feedback. When they run the full search, Nobi's semantic engine takes over: it matches intent to catalog attributes rather than title strings, catches common misspellings, and reads [natural-language phrasing](https://nobi.ai/blog/handling-long-tail-queries) against your catalog attributes - so you don't need a manual synonym list for every phrase variant shoppers might use.
+As a shopper types, typeahead surfaces instant matches against your catalog so they get immediate feedback. When they run the full search, Nobi's semantic engine takes over: it matches intent to catalog attributes rather than title strings, catches common misspellings, and reads [natural-language phrasing](https://nobi.ai/blog/handling-long-tail-queries) against your catalog attributes, so you don't need a manual synonym list for every phrase variant shoppers might use.
 
-That distinction matters more than it sounds. A keyword engine matches strings. When a shopper searches "waterproof jacket for fall" and your catalog title says "autumn rain shell," a keyword match fails. On the submitted query, Nobi's semantic layer maps the search against attributes - material, use case, category, season - so the right product surfaces even when the exact words don't line up. That's the vocabulary mismatch gap that keyword search leaves open, and it accounts for a significant share of zero-result pages.
+That distinction matters more than it sounds. A keyword engine matches strings. When a shopper searches "waterproof jacket for fall" and your catalog title says "autumn rain shell," a keyword match fails. On the submitted query, Nobi's semantic layer maps the search against attributes (material, use case, category, season) so the right product surfaces even when the exact words don't line up. That's the vocabulary mismatch gap that keyword search leaves open, and it accounts for a significant share of zero-result pages.
 
-Fuzzy tolerance handles the other common failure: misspellings and transpositions. "Wirelss headphons" or "sneacker" still resolve cleanly. The tolerance is calibrated to catch errors without degrading precision on clean queries - you don't trade one problem for another.
+Fuzzy tolerance handles the other common failure: misspellings and transpositions. "Wirelss headphons" or "sneacker" still resolve cleanly. The tolerance is calibrated to catch errors without degrading precision on clean queries, so you don't trade one problem for another.
 
 The synonym layer works the same way. Nobi infers equivalences from your catalog signal rather than requiring you to maintain a manual synonym list. "Wireless noise-canceling headphones" and "ANC earbuds for travel" resolve to the same SKU set. Your merchandising team doesn't have to anticipate every phrase variant a shopper might reach for.
 
@@ -144,33 +144,33 @@ The synonym layer works the same way. Nobi infers equivalences from your catalog
 
 The Nobi typeahead dropdown surfaces two things as the shopper types: matching products and suggested search queries that complete what they've started, plus a "View all" row to run the full search. Contextual suggestion pills appear as tappable starting points before the shopper types anything. They are scoped to the page the visitor is on, so the search bar gives shoppers a place to start even when they don't know what to type.
 
-Product results show the matched SKU with image, title, and price. For high-confidence matches, one tap takes the shopper to the PDP - no full results page in between. Suggested query completions give the shopper a one-tap way to run a fuller search when the right product isn't already showing.
+Product results show the matched SKU with image, title, and price. For high-confidence matches, one tap takes the shopper to the PDP, with no full results page in between. Suggested query completions give the shopper a one-tap way to run a fuller search when the right product isn't already showing.
 
 Content answers and collection browsing live in the full search and assistant experience the shopper reaches after they submit, not in the instant dropdown. A "where is my order?" query or a question about your return window pulls the relevant FAQ answer or policy text once the search runs, so the shopper reads it in place without opening a new page or reaching out to your team.
 
 Clicking a suggestion pill opens the assistant with the full answer to that prompt. On a homepage, a PDP, or a collection page, Nobi generates a small set of recommended prompts based on what's on the page.
 
-Typeahead is on by default, and the search bar itself is configured through the `<nobi-search-bar>` component's attributes in your theme - no separate console to wire up. [Kilte](/customers/kilte) runs three Nobi-powered placements from the same semantic layer - the search bar, collection filters, and product discovery - each drawing on the same catalog and content understanding.
+Typeahead is on by default, and the search bar itself is configured through the `<nobi-search-bar>` component's attributes in your theme - no separate console to wire up. [Kilte](/customers/kilte) runs three Nobi-powered placements from the same semantic layer (the search bar, collection filters, and product discovery), each drawing on the same catalog and content understanding.
 
 ## How do I measure the revenue lift from typeahead search using Nobi analytics?
 
-Nobi's [analytics dashboard](https://nobi.ai/blog/best-ai-search-analytics-platforms-large-ecommerce) tracks zero-result rate, click-through rate, add-to-cart rate, and conversion rate per search session - so you can tie the typeahead investment directly to revenue in the same metrics your weekly standup already uses. When [UNTUCKit](/customers/untuckit) added Nobi's typeahead, its conversion rate rose half a percentage point on an absolute basis - a direct, measurable lift from closing the instant-search gap. UNTUCKit reviews those search insights in a standing weekly meeting, using zero-result query logs as a recurring backlog of catalog and content gaps to close.
+Nobi's [analytics dashboard](https://nobi.ai/blog/best-ai-search-analytics-platforms-large-ecommerce) tracks zero-result rate, click-through rate, add-to-cart rate, and conversion rate per search session, so you can tie the typeahead investment directly to revenue in the same metrics your weekly standup already uses. When [UNTUCKit](/customers/untuckit) added Nobi's typeahead, its conversion rate rose half a percentage point on an absolute basis, a direct, measurable lift from closing the instant-search gap. UNTUCKit reviews those search insights in a standing weekly meeting, using zero-result query logs as a recurring backlog of catalog and content gaps to close.
 
 Start with zero-result rate as your baseline. High single-digit or double-digit rates are a reliable signal of vocabulary mismatch the engine should be closing. Run a clean before-and-after comparison: record your zero-result rate in the two weeks before going live, then track the drop after Nobi's typeahead is active. That number is your clearest early signal that the install is working.
 
-From there, compare CVR between search sessions and non-search sessions. This isolates the impact of typeahead specifically from other on-site changes running at the same time - a homepage redesign, a new promotion, a seasonal push. If CVR in search sessions rises while non-search CVR stays flat, typeahead is doing the work.
+From there, compare CVR between search sessions and non-search sessions. This isolates the impact of typeahead specifically from other on-site changes running at the same time: a homepage redesign, a new promotion, a seasonal push. If CVR in search sessions rises while non-search CVR stays flat, typeahead is doing the work.
 
 Revenue per searcher is the sharpest single number for executive reporting. In a two-month A/B test, UNTUCKit saw +21.3% revenue per searcher ($39.17 vs. $32.30) against their prior paid search tool. Conversion rate from search sessions came in at +17.1% (17.6% vs. 15.0%) in the same test - enough that UNTUCKit moved to 100% Nobi traffic once the test closed, rather than running the split any longer.
 
-Zero-result query logs do double duty. The queries that still return nothing after go-live are a direct content brief for merchandising: these are the shopper intents your catalog does not yet answer. Running through that log in a weekly meeting turns a search metric into a standing editorial workflow.
+Zero-result query logs do double duty. The queries that still return nothing after go-live are a direct content brief for merchandising. These are the shopper intents your catalog does not yet answer. Running through that log in a weekly meeting turns a search metric into a standing editorial workflow.
 
 ## When should you choose a different typeahead search solution instead of Nobi?
 
 Nobi covers typeahead search, conversational shopper Q&A, and a content answer layer in one platform at a predictable per-unit price. A few buying situations point elsewhere.
 
-**Full attribute-level ranking control.** Nobi's engine is semantic and self-tuning - it reads your catalog and learns from shopper behavior without you writing rules for it. But if your engineering team wants to define exactly how specific spec fields (color, material, compatibility, price band) factor into scoring, [Algolia](https://www.algolia.com)'s developer-configurable search API gives you that level of control. You get explicit weighting and the ability to inspect and override it in code.
+**Full attribute-level ranking control.** Nobi's engine is semantic and self-tuning: it reads your catalog and learns from shopper behavior without you writing rules for it. But if your engineering team wants to define exactly how specific spec fields (color, material, compatibility, price band) factor into scoring, [Algolia](https://www.algolia.com)'s developer-configurable search API gives you that level of control. You get explicit weighting and the ability to inspect and override it in code.
 
-**Site-wide merchandising.** Nobi curates the search results page. Brands that need merchandising rules across category and collection pages - boosting, burying, pinning products in browse and navigation contexts beyond search - will still need a dedicated merchandising tool to cover those surfaces.
+**Site-wide merchandising.** Nobi curates the search results page. Brands that need merchandising rules across category and collection pages (boosting, burying, pinning products in browse and navigation contexts beyond search) will still need a dedicated merchandising tool to cover those surfaces.
 
 **Behavioral reranking.** Nobi's personalization today is personalized placeholder text and starter messages. It does not reorder results based on individual click and purchase history during a session. Brands whose primary evaluation criterion is that kind of behavioral reranking should factor the gap into their decision.
 

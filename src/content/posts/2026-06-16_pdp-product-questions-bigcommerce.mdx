@@ -13,15 +13,15 @@ export const meta = {
  faqItems: [
  {
  question: "Why do generic product FAQs fail to convert shoppers on the BigCommerce product detail page?",
- answer: "A generic FAQ shows the same questions for every SKU, so a shopper asking about a specific jacket's fill weight or water resistance gets a corporate return policy instead of an answer that helps them buy. Most shoppers abandon rather than wait 24 to 48 hours for a support ticket to resolve - most abandon within minutes of hitting a dead end, not hours. Generic FAQs also leave SEO value unclaimed: long-tail product queries shoppers actually type go unanswered, where structured Q&A published as JSON-LD would appear in search results."
+ answer: "A generic FAQ shows the same questions for every SKU, so a shopper asking about a specific jacket's fill weight or water resistance gets a corporate return policy instead of an answer that helps them buy. Most shoppers abandon rather than wait 24 to 48 hours for a support ticket to resolve; most abandon within minutes of hitting a dead end, not hours. Generic FAQs also leave SEO value unclaimed: long-tail product queries shoppers actually type go unanswered, where structured Q&A published as JSON-LD would appear in search results."
  },
  {
  question: "What is Nobi, and how does it answer questions about the specific product a shopper is viewing?",
- answer: "Nobi is a conversational website assistant that connects to your product catalog, policy docs, and help content and answers questions scoped to the exact SKU the visitor is viewing. The knowledge base builds automatically from sources you connect - product pages, FAQ routes, policy docs, and PDFs - with no manual re-entry required. Every answer carries inline numbered citation pills showing the source document, date, and exact excerpt, so shoppers can verify claims without leaving the chat."
+ answer: "Nobi is a conversational website assistant that connects to your product catalog, policy docs, and help content and answers questions scoped to the exact SKU the visitor is viewing. The knowledge base builds automatically from sources you connect (product pages, FAQ routes, policy docs, and PDFs) with no manual re-entry required. Every answer carries inline numbered citation pills showing the source document, date, and exact excerpt, so shoppers can verify claims without leaving the chat."
  },
  {
  question: "How do I install Nobi's assistant on my BigCommerce product pages?",
- answer: "Setup requires adding one snippet in BigCommerce's Storefront > Script Manager - no developer project and no app to install. Grab your account ID from the Nobi dashboard, paste it into the script tag, and set it to load on all pages; Nobi detects page type automatically and scopes its behavior accordingly. Connect knowledge sources from the dashboard by pasting a link to your product feed (CSV or JSON), pointing at your FAQ route, or uploading policy PDFs, and Nobi indexes them for the assistant to answer from."
+ answer: "Setup requires adding one snippet in BigCommerce's Storefront > Script Manager, with no developer project and no app to install. Grab your account ID from the Nobi dashboard, paste it into the script tag, and set it to load on all pages; Nobi detects page type automatically and scopes its behavior accordingly. Connect knowledge sources from the dashboard by pasting a link to your product feed (CSV or JSON), pointing at your FAQ route, or uploading policy PDFs, and Nobi indexes them for the assistant to answer from."
  },
  {
  question: "How do Nobi's answers stay scoped to the specific SKU a shopper is viewing instead of pulling from the wrong product?",
@@ -29,15 +29,15 @@ export const meta = {
  },
  {
  question: "How does a crowd-sourced FAQ on the BigCommerce PDP build social proof and deflect repeat support tickets?",
- answer: "Each question a shopper asks on the PDP - and Nobi's grounded answer - can surface as a persistent Q&A block visible to every visitor who lands there afterward. Common pre-purchase questions about sizing, materials, and return eligibility accumulate into a visible record, so new visitors find answers before they reach the contact form. Only grounded, source-cited answers enter the visible block, and merchants can review any Q&A pair from the dashboard and suppress it before it appears publicly."
+ answer: "Each question a shopper asks on the PDP (and Nobi's grounded answer) can surface as a persistent Q&A block visible to every visitor who lands there afterward. Common pre-purchase questions about sizing, materials, and return eligibility accumulate into a visible record, so new visitors find answers before they reach the contact form. Only grounded, source-cited answers enter the visible block, and merchants can review any Q&A pair from the dashboard and suppress it before it appears publicly."
  },
  {
  question: "Does adding structured Q&A to BigCommerce product pages help with SEO and AI search rankings?",
- answer: "A product-page Q&A block that outputs as JSON-LD FAQPage schema lets Google surface individual pairs as rich results in organic search without additional markup work from your team. AI search engines like Perplexity, ChatGPT Search, and Google's AI Overviews treat question-shaped chunks with sourced answers as stronger retrieval signals than prose paragraphs, so they can cite the answer with confidence. Product-level Q&A also covers long-tail queries scoped to a specific SKU - queries that a category FAQ page ranks poorly for because it isn't about that product - and Nobi generates the JSON-LD output automatically."
+ answer: "A product-page Q&A block that outputs as JSON-LD FAQPage schema lets Google surface individual pairs as rich results in organic search without additional markup work from your team. AI search engines like Perplexity, ChatGPT Search, and Google's AI Overviews treat question-shaped chunks with sourced answers as stronger retrieval signals than prose paragraphs, so they can cite the answer with confidence. Product-level Q&A also covers long-tail queries scoped to a specific SKU (queries that a category FAQ page ranks poorly for because it isn't about that product), and Nobi generates the JSON-LD output automatically."
  },
  {
  question: "When would a different tool fit better than Nobi for answering BigCommerce product-page questions?",
- answer: "Nobi doesn't execute post-purchase transactions like order cancellations, return initiations, or tracking lookups inside the chat, so brands whose primary need is shopper self-service on post-order tasks need a different tool. Re:amaze is the right pick when the job is unifying a support team's channels - email, chat, social, and SMS - under one ecommerce-aware platform. Zendesk fits when the real bottleneck is agent-side workflow for tickets that have already been filed."
+ answer: "Nobi doesn't execute post-purchase transactions like order cancellations, return initiations, or tracking lookups inside the chat, so brands whose primary need is shopper self-service on post-order tasks need a different tool. Re:amaze is the right pick when the job is unifying a support team's channels (email, chat, social, and SMS) under one ecommerce-aware platform. Zendesk fits when the real bottleneck is agent-side workflow for tickets that have already been filed."
  }
  ],
 };
@@ -49,7 +49,7 @@ export const meta = {
   "headline": "How to Turn BigCommerce Product-Page Questions Into Sales Instead of Support Tickets",
   "description": "BigCommerce merchants: answer SKU-specific shopper questions in real time on the PDP, build a crowd-sourced FAQ, and publish JSON-LD schema for SEO and AI search.",
   "datePublished": "2026-06-16",
-  "dateModified": "2026-06-16",
+  "dateModified": "2026-06-22",
   "author": {
     "@type": "Person",
     "name": "Shanif Dhanani",
@@ -86,7 +86,7 @@ A generic FAQ page lists the same questions for every SKU. A shopper on a specif
 
 The problem starts with scope. That same eight-question FAQ appears whether a shopper is on a budget tee or a premium technical jacket. Sizing and fit questions are the leading driver of apparel returns. A shopper who can't verify fit either buys elsewhere or gambles and ships the item back at your cost.
 
-Sending someone to support doesn't fix it. A ticket takes 24 to 48 hours to resolve - most shoppers abandon within minutes of hitting a dead end, not hours. A bot that loops or gives a non-answer is worse than nothing - a bad AI answer actively damages trust more than silence does. Static FAQ pages also leave SEO value on the table. Long-tail product queries - the ones shoppers actually type - go unanswered in search results, where structured Q&A published as JSON-LD would have shown up instead.
+Sending someone to support doesn't fix it. A ticket takes 24 to 48 hours to resolve - most shoppers abandon within minutes of hitting a dead end, not hours. A bot that loops or gives a non-answer is worse than nothing - a bad AI answer actively damages trust more than silence does. Static FAQ pages also leave SEO value on the table. Long-tail product queries (the ones shoppers actually type) go unanswered in search results, where structured Q&A published as JSON-LD would have shown up instead.
 
 ## What is Nobi, and how does it answer questions about the specific product a shopper is viewing?
 
@@ -96,7 +96,7 @@ The knowledge base builds automatically from sources you connect: your BigCommer
 
 Every answer carries inline numbered citation pills. Hover one and you see the source document name, the date, and the exact excerpt the answer came from. A shopper asking about a jacket's fill weight can verify the claim against your own spec page without leaving the chat.
 
-PDP context - product title, variant, SKU - travels with every query, so retrieval stays scoped to that product's indexed content rather than pulling from a broad catalog search. A question on a specific waterproof shell returns answers about that shell.
+PDP context (product title, variant, SKU) travels with every query, so retrieval stays scoped to that product's indexed content rather than pulling from a broad catalog search. A question on a specific waterproof shell returns answers about that shell.
 
 For high-stakes questions like warranty terms or return policy, query overrides let you pin exact verbatim text. No AI paraphrasing, no variation - just the answer you wrote, every time.
 
@@ -104,7 +104,7 @@ A second AI review checks each draft answer against the source content before it
 
 ## How do I install Nobi's assistant on my BigCommerce product pages?
 
-That knowledge base - product pages, FAQ routes, and policy docs already indexed and refreshing twice a day - reaches your shoppers the moment the Nobi snippet is live on your storefront. In BigCommerce, setup starts in Storefront > Script Manager: a script tag and a search-bar placement element are all it takes. No developer project, no BigCommerce app to install.
+That knowledge base (product pages, FAQ routes, and policy docs already indexed and refreshing twice a day) reaches your shoppers the moment the Nobi snippet is live on your storefront. In BigCommerce, setup starts in Storefront > Script Manager: a script tag and a search-bar placement element are all it takes. No developer project, no BigCommerce app to install.
 
 Grab your account ID from the Installation page of your Nobi dashboard, then add the following in Script Manager:
 
@@ -113,7 +113,7 @@ Grab your account ID from the Installation page of your Nobi dashboard, then add
 </script>
 ```
 
-Set it to load on all pages. Nobi detects page type automatically - PDP, PLP, or homepage - and scopes its behavior accordingly. On a product detail page, everything the assistant can answer is drawn from that product's indexed content.
+Set it to load on all pages. Nobi detects page type automatically (PDP, PLP, or homepage) and scopes its behavior accordingly. On a product detail page, everything the assistant can answer is drawn from that product's indexed content.
 
 To give visitors a way to open the assistant, place the search bar where you want it to appear on the page:
 
@@ -122,7 +122,7 @@ To give visitors a way to open the assistant, place the search bar where you wan
 </nobi-search-bar>
 ```
 
-Once the snippet is live, connect your knowledge sources from the Nobi dashboard: paste a link to your product feed (CSV or JSON), point at your FAQ route, or upload policy PDFs. Nobi indexes the content and it becomes part of what the assistant can answer. On the PDP, contextual suggestion pills appear automatically - tappable prompts scoped to that product's category, like "Does this run true to size?" or "Is this waterproof?" Visitors tap a pill and the assistant opens with the answer; it gives shoppers who don't know what to type a starting point.
+Once the snippet is live, connect your knowledge sources from the Nobi dashboard: paste a link to your product feed (CSV or JSON), point at your FAQ route, or upload policy PDFs. Nobi indexes the content and it becomes part of what the assistant can answer. On the PDP, contextual suggestion pills appear automatically: tappable prompts scoped to that product's category, like "Does this run true to size?" or "Is this waterproof?" Visitors tap a pill and the assistant opens with the answer; it gives shoppers who don't know what to type a starting point.
 
 Widget position, exit-intent triggers, and branding are all adjustable from the dashboard without touching the storefront again.
 
@@ -138,17 +138,17 @@ Every query carries the product title, the variant identifier, and the page URL.
 
 When the answer isn't in the connected knowledge base, Nobi says so. It doesn't generate a plausible-sounding response from context clues or fill the gap from general product knowledge. That's the right call - a fabricated answer about fill weight, waterproofing, or material safety is worse than no answer.
 
-When a product has multiple variants - colors, sizes, or materials - Nobi ties retrieval to the variant identifier the shopper is currently viewing. A question about fabric content on the navy version doesn't pull specs from the charcoal version if those specs are different.
+When a product has multiple variants (colors, sizes, or materials), Nobi ties retrieval to the variant identifier the shopper is currently viewing. A question about fabric content on the navy version doesn't pull specs from the charcoal version if those specs are different.
 
 A sources sidebar lists every reference behind the answer with direct links. Shoppers can verify any claim against your own product content without leaving the chat.
 
 ## How does a crowd-sourced FAQ on the BigCommerce PDP build social proof and deflect repeat support tickets?
 
-Those verified, source-cited answers don't have to disappear when the chat window closes. Each question a shopper asks on the PDP - and Nobi's grounded answer - can surface as a persistent Q&A block on the product page, visible to every visitor who lands there afterward. The first shopper who asks "does this come in a wide width?" generates an answer that every subsequent shopper can find without asking again.
+Those verified, source-cited answers don't have to disappear when the chat window closes. Each question a shopper asks on the PDP (and Nobi's grounded answer) can surface as a persistent Q&A block on the product page, visible to every visitor who lands there afterward. The first shopper who asks "does this come in a wide width?" generates an answer that every subsequent shopper can find without asking again.
 
-The benefit compounds over time. The most common pre-purchase questions - sizing, materials, compatibility, return eligibility - accumulate into a visible record on the PDP. New visitors browse real questions from prior shoppers alongside verified answers, which means those questions get answered before anyone reaches the contact form. Fewer questions arrive as support tickets because the FAQ block handled them first.
+The benefit compounds over time. The most common pre-purchase questions (sizing, materials, compatibility, return eligibility) accumulate into a visible record on the PDP. New visitors browse real questions from prior shoppers alongside verified answers, which means those questions get answered before anyone reaches the contact form. Fewer questions arrive as support tickets because the FAQ block handled them first.
 
-Only grounded answers enter the visible Q&A. Nobi pulls from the sources you've connected - product pages, policy docs, spec sheets - and cites each answer back to the exact document it came from. A freeform LLM response never makes it into the public block; what appears is what Nobi retrieved and cited. That distinction matters: a wrong material claim on a published PDP is harder to walk back than a chat message that disappears.
+Only grounded answers enter the visible Q&A. Nobi pulls from the sources you've connected (product pages, policy docs, spec sheets) and cites each answer back to the exact document it came from. A freeform LLM response never makes it into the public block; what appears is what Nobi retrieved and cited. That distinction matters: a wrong material claim on a published PDP is harder to walk back than a chat message that disappears.
 
 Merchants keep editorial control throughout. From the Nobi dashboard, you can review any Q&A pair and suppress it before it appears publicly. That's useful for questions with context-specific answers or any pair you'd rather handle through another channel. The process doesn't require manually authoring a FAQ; you're curating what the assistant already answered from your own content.
 
@@ -164,13 +164,13 @@ AI search engines work the same way, but for different reasons. Tools like Perpl
 
 Product-level Q&A also covers ground a category FAQ page never will. A shopper asking "does this jacket come in a wide width" or "what is the fill weight of this shell" is running a long-tail query scoped to that SKU. A category FAQ page ranks poorly for those queries because it isn't about that product. A Q&A block on the PDP is.
 
-Nobi generates the JSON-LD output automatically. Every question a shopper asks - and every verified answer Nobi returns from your connected sources - becomes schema markup without anyone on the team writing or maintaining it by hand. As crowd-sourced Q&A accumulates, the structured data grows with it. More questions, more schema, more surface area in organic search and AI results. The team adds no work; the compounding happens on its own.
+Nobi generates the JSON-LD output automatically. Every question a shopper asks (and every verified answer Nobi returns from your connected sources) becomes schema markup without anyone on the team writing or maintaining it by hand. As crowd-sourced Q&A accumulates, the structured data grows with it. More questions, more schema, more surface area in organic search and AI results. The team adds no work; the compounding happens on its own.
 
 ## When would a different tool fit better than Nobi for answering BigCommerce product-page questions?
 
 That compounding Q&A record is a pre-purchase asset. Nobi is the right call when the primary job is answering shopper questions on the product page, reducing ticket volume, and building structured Q&A for SEO. It's the wrong call when the bottleneck is post-purchase transaction execution inside chat, mid-thread agent handoff, or agent-side ticket routing and SLA management.
 
-Nobi doesn't execute post-purchase transactions - order cancellations, return initiations, tracking lookups - inside the chat. Brands whose primary need is shopper self-service on post-order tasks will need a different tool. There's also no live agent drop-in: no hybrid mode where a human joins an active AI conversation mid-thread. Brands that want AI and human working together in the same session should evaluate platforms built for that model.
+Nobi doesn't execute post-purchase transactions (order cancellations, return initiations, tracking lookups) inside the chat. Brands whose primary need is shopper self-service on post-order tasks will need a different tool. There's also no live agent drop-in: no hybrid mode where a human joins an active AI conversation mid-thread. Brands that want AI and human working together in the same session should evaluate platforms built for that model.
 
 [Re:amaze](https://www.reamaze.com) covers email, chat, social, SMS, and a PDP widget in one inbox. Pick it when the job is unifying a support team's channels under one ecommerce-aware platform.
 

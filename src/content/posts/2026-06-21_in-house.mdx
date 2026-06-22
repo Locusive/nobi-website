@@ -13,11 +13,11 @@ export const meta = {
  faqItems: [
  {
  question: "Should you build or buy AI site search for your ecommerce store?",
- answer: "For most ecommerce teams, buying a productized AI search solution wins on the parts that are hardest to get right: keeping answers grounded to a live catalog and maintaining that accuracy as inventory changes. The real cost of building isn't the initial setup - it's the ongoing engineering work competing with the rest of your roadmap. 71% of consumers abandon a brand after a single negative AI interaction, so a hallucinated answer about stock or pricing isn't a recoverable error. Build if your team wants to own the stack end-to-end and has roadmap space to maintain it; buy if catalog accuracy and speed to market matter more."
+ answer: "For most ecommerce teams, buying a productized AI search solution wins on the parts that are hardest to get right: keeping answers grounded to a live catalog and maintaining that accuracy as inventory changes. The real cost of building isn't the initial setup - it's the ongoing engineering work competing with the rest of your roadmap. A hallucinated answer about stock or pricing isn't a recoverable error - shoppers who get a confident wrong answer don't complain, they just leave. Build if your team wants to own the stack end-to-end and has roadmap space to maintain it; buy if catalog accuracy and speed to market matter more."
  },
  {
  question: "What does building your own AI site search actually require?",
- answer: "Building requires four layers: a retrieval layer (vector store plus embedding pipeline), an LLM-based answer generation layer, a search and chat UI, and a catalog sync mechanism tied to live inventory. The hardest part isn't any single layer - it's keeping all of them accurate as your catalog changes, your models evolve, and shoppers surface edge cases your tests didn't cover. Catalog sync is the most persistent risk: if your vector index lags, the assistant quotes stale prices or confirms stock that sold out. You also need a separate architectural solution for typeahead latency, since routing through an LLM adds response time incompatible with the sub-200ms speeds that correlate with conversion."
+ answer: "Building requires four layers: a retrieval layer (vector store plus embedding pipeline), an LLM-based answer generation layer, a search and chat UI, and a catalog sync mechanism tied to live inventory. The hardest part isn't any single layer - it's keeping all of them accurate as your catalog changes, your models evolve, and shoppers surface edge cases your tests didn't cover. Catalog sync is the most persistent risk: if your vector index lags, the assistant quotes stale prices or confirms stock that sold out. Typeahead is a separate problem: LLMs are too slow to route every keystroke through, so you need a dedicated fast-path for real-time search suggestions."
  },
  {
  question: "Why is catalog grounding the hardest part - and what goes wrong when it fails?",
@@ -33,7 +33,7 @@ export const meta = {
  },
  {
  question: "What do ecommerce teams most often ask when comparing a DIY build to a purpose-built AI search product?",
- answer: "Most teams estimate 2 to 6 months to ship a working DIY first version, while a purpose-built product typically goes live in days to weeks - a gap that widens once you factor in post-launch time spent catching grounding failures. Nobi costs $25/month base, including 2,500 searches and 250 conversational messages, with additional searches at $0.01 each and messages at $0.10 each, and no revenue share or GMV-tied billing. Switching from a DIY build to a purpose-built product later is feasible - your catalog data stays in place, and the main cost is retiring the custom retrieval and answer layers. Nobi doesn't offer behavioral reranking today; brands where personalization is the headline requirement should evaluate Constructor or Klevu's Expert tier instead."
+ answer: "Most teams estimate 2 to 6 months to ship a working DIY first version, while a purpose-built product typically goes live in hours - a gap that widens once you factor in post-launch time spent catching grounding failures. Nobi costs $25/month base, including 2,500 searches and 250 conversational messages, with additional searches at $0.01 each and messages at $0.10 each, and no revenue share or GMV-tied billing. Switching from a DIY build to a purpose-built product later is feasible - your catalog data stays in place, and the main cost is retiring the custom retrieval and answer layers. Nobi doesn't offer behavioral reranking today; brands where personalization is the headline requirement should evaluate Constructor or Klevu's Expert tier instead."
  }
  ],
 };
@@ -104,7 +104,7 @@ The catalog sync piece carries the most day-to-day risk. Prices, inventory count
 
 Retrieval quality is the next hard problem. Keyword search misses semantic meaning; pure vector search can surface irrelevant results. Getting a hybrid that handles short queries ("black boots") alongside long, descriptive ones takes real evaluation - and regular tuning as the catalog grows and shopper behavior shifts.
 
-Latency matters at certain points in the experience. Routing queries through an LLM adds response time that works fine for conversational Q&A. For typeahead search, where sub-200ms response times correlate with CVR, that overhead needs a separate architectural solution.
+Latency matters at certain points in the experience. Routing queries through an LLM adds response time that works fine for conversational Q&A. For typeahead, an LLM in the loop adds enough latency that you need a separate fast-path - you can't route every keystroke through an LLM call and hit the response times shoppers expect.
 
 Then there's everything else: a test suite that catches fabricated product specs before shoppers do (and grows with the catalog), prompt injection resistance, PII handling in chat transcripts, data retention policies, and a plan for every upstream model deprecation or API change on a vendor's schedule.
 
@@ -150,7 +150,7 @@ Build is not the right call if reducing engineering overhead is the goal, if the
 
 Teams that reach that maintenance question most often land on three concrete ones before deciding: how long a build actually takes, what a purpose-built product costs, and whether personalization gaps matter for their store. Here are direct answers to each.
 
-**How long does a DIY build take?** Most teams estimate 2 to 6 months to ship a working first version - longer if the eval suite and catalog sync are built from scratch. A purpose-built product typically goes live in days to weeks. The gap widens once you factor in time spent catching grounding failures post-launch.
+**How long does a DIY build take?** Most teams estimate 2 to 6 months to ship a working first version - longer if the eval suite and catalog sync are built from scratch. A purpose-built product typically goes live in hours. The gap widens once you factor in time spent catching grounding failures post-launch.
 
 **What does Nobi cost?** $25/month base, including 2,500 searches and 250 conversational messages. Additional searches are $0.01 each; additional messages are $0.10 each. No revenue share, no usage-based billing tied to GMV.
 
@@ -175,6 +175,3 @@ If you want catalog-accurate search without the maintenance burden, start a free
  <span>Start your free Nobi trial</span>
  </a>
 </div>
-```
-
-The only change is the opening paragraph under the first `## Should you build or buy AI site search for your ecommerce store?` heading. The new version opens by grounding the reader in their situation (you can build this, the APIs are there), names the real problem (catalog grounding post-launch, not the initial assembly), stakes the consequence (71% abandon rate, quiet tab-closes), then bridges to the article structure.

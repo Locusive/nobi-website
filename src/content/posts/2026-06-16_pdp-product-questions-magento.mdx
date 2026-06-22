@@ -49,7 +49,7 @@ export const meta = {
   "headline": "How to Stop Losing Magento Sales to Unanswered Product Page Questions",
   "description": "Stop losing Magento PDP sales to unanswered questions. One JS snippet adds a context-aware Q&A assistant and auto-generates FAQ JSON-LD for SEO.",
   "datePublished": "2026-06-16",
-  "dateModified": "2026-06-16",
+  "dateModified": "2026-06-22",
   "author": {
     "@type": "Person",
     "name": "Shanif Dhanani",
@@ -82,21 +82,21 @@ Shoppers land on a Magento product page knowing roughly what they want. They jus
 
 ## Why do Magento shoppers abandon the product page when they have a question?
 
-A shopper who can't confirm that a jacket runs true to size, or that a replacement part fits a specific model, doesn't wait for a support response - they navigate away. The product detail page shows the product but rarely answers the specific question a purchase depends on. Generic FAQ pages and contact links are one more click away from the sale, which is one click too many when the shopper is already deciding.
+A shopper who can't confirm that a jacket runs true to size, or that a replacement part fits a specific model, doesn't wait for a support response. They navigate away. The product detail page shows the product but rarely answers the specific question a purchase depends on. Generic FAQ pages and contact links are one more click away from the sale, which is one click too many when the shopper is already deciding.
 
 Fit and compatibility questions drive a large share of apparel and electronics returns. A question answered before checkout is a return avoided. But a sitewide FAQ doesn't know which product the shopper is viewing, so it can't give a product-specific answer even when that answer exists somewhere in your catalog.
 
 ## What is Nobi, and how does it answer product questions on a Magento PDP?
 
-Nobi is a conversational website assistant that embeds on your Magento store and answers shopper questions from your connected product catalog, policy docs, and help content - closing the gap a sitewide FAQ can't close. When a shopper asks a question on the product detail page, Nobi reads the URL context of the page and grounds the answer in the indexed content for that specific SKU, not a generic sitewide response. Every answer includes inline numbered citation pills so shoppers can verify the source without leaving the chat.
+Nobi is a conversational website assistant that embeds on your Magento store and answers shopper questions from your connected product catalog, policy docs, and help content, closing the gap a sitewide FAQ can't close. When a shopper asks a question on the product detail page, Nobi reads the URL context of the page and grounds the answer in the indexed content for that specific SKU, not a generic sitewide response. Every answer includes inline numbered citation pills so shoppers can verify the source without leaving the chat.
 
-The knowledge base builds from content you already have. You connect your product pages, PDFs, policy docs, and FAQ routes - no manual re-entry. Nobi indexes whatever is there. Sources refresh twice a day, so a spec update or a price change reaches customer answers within hours, not at the next scheduled re-index.
+The knowledge base builds from content you already have. You connect your product pages, PDFs, policy docs, and FAQ routes. No manual re-entry. Nobi indexes whatever is there. Sources refresh twice a day, so a spec update or a price change reaches customer answers within hours, not at the next scheduled re-index.
 
-The citation pills do more than point to a source. Each one shows shoppers the document name, the date, and the exact excerpt behind the answer. Shoppers can verify anything rather than taking the assistant's word for it - which matters on a PDP where a wrong answer about dimensions, materials, or compatibility is a return waiting to happen.
+The citation pills do more than point to a source. Each one shows shoppers the document name, the date, and the exact excerpt behind the answer. Shoppers can verify anything rather than taking the assistant's word for it, which matters on a PDP where a wrong answer about dimensions, materials, or compatibility is a return waiting to happen.
 
-For high-stakes questions - return windows, warranty terms, compatibility guarantees - query overrides let you pin an exact merchant-approved response. No AI paraphrasing on those answers. The override fires whenever a shopper's question matches; everything else routes through the standard grounded pipeline.
+For high-stakes questions (return windows, warranty terms, compatibility guarantees), query overrides let you pin an exact merchant-approved response. No AI paraphrasing on those answers. The override fires whenever a shopper's question matches; everything else routes through the standard grounded pipeline.
 
-A second AI review is also available. It reads every draft answer against the raw content from the cited sources and flags inaccuracies before the answer reaches the shopper. It's toggleable per merchant - on by default for industries like customer support, healthcare, and insurance, but off by default for ecommerce.
+A second AI review is also available. It reads every draft answer against the raw content from the cited sources and flags inaccuracies before the answer reaches the shopper. It's toggleable per merchant, on by default for industries like customer support, healthcare, and insurance, but off by default for ecommerce.
 
 ## How do I add Nobi's Q&A assistant to my Magento product pages?
 
@@ -104,7 +104,7 @@ All of those features run on your Magento PDP after one small theme edit - no mo
 
 **1. Add the Nobi script to your PDP template.**
 
-Your developer adds the Nobi script to `catalog_product_view.xml` in your active Magento theme, scoped to product pages only. Magento's layout update system keeps the script off category listings, the cart, and checkout - only PDPs load it.
+Your developer adds the Nobi script to `catalog_product_view.xml` in your active Magento theme, scoped to product pages only. Magento's layout update system keeps the script off category listings, the cart, and checkout; only PDPs load it.
 
 ```html
 <script async src="https://assistant-script.nobi.ai/nobi.bundle.js" onload="window.Nobi.initialize({ accountId: 'YOUR_MERCHANT_ID' });">
@@ -115,11 +115,11 @@ Replace `YOUR_MERCHANT_ID` with the merchant ID on the Installation page of your
 
 **2. Connect your knowledge sources.**
 
-In the Nobi dashboard, add your product page URLs, policy PDFs, and FAQ routes as knowledge sources - paste a URL or upload a file. Nobi indexes what you connect. You can add more sources at any time from the dashboard - no theme edits required after the initial script change.
+In the Nobi dashboard, add your product page URLs, policy PDFs, and FAQ routes as knowledge sources: paste a URL or upload a file. Nobi indexes what you connect. You can add more sources at any time from the dashboard. No theme edits are required after the initial script change.
 
 **3. Configure suggestion pills for the PDP.**
 
-Set the pill prompts for PDP pages specifically. Shoppers on a product page see relevant opening questions - fit and material prompts for apparel, dimensions or compatibility questions for parts - not the generic prompts from the homepage. You control all of this from the dashboard; no code change needed.
+Set the pill prompts for PDP pages specifically. Shoppers on a product page see relevant opening questions (fit and material prompts for apparel, dimensions or compatibility questions for parts), not the generic prompts from the homepage. You control all of this from the dashboard; no code change needed.
 
 **4. Test on staging before going live.**
 
@@ -127,15 +127,15 @@ Confirm the assistant loads, verify answers are grounded to the correct SKU rath
 
 ## How does Nobi scope answers to the specific SKU a shopper is looking at?
 
-That staging check works because of how Nobi scopes its retrieval. It grounds answers to the specific SKU, not a sitewide pool. When a shopper asks a question on a product page, Nobi uses the canonical URL of that page as retrieval context. The knowledge base entry for that SKU - its product description, attached spec PDFs, linked policy pages - becomes the scope for that session. A shopper asking about the inseam on a specific pair of pants gets an answer drawn from that product's data, not a brand-level sizing guide that may not apply to the item they're actually considering.
+That staging check works because of how Nobi scopes its retrieval. It grounds answers to the specific SKU, not a sitewide pool. When a shopper asks a question on a product page, Nobi uses the canonical URL of that page as retrieval context. The knowledge base entry for that SKU (its product description, attached spec PDFs, linked policy pages) becomes the scope for that session. A shopper asking about the inseam on a specific pair of pants gets an answer drawn from that product's data, not a brand-level sizing guide that may not apply to the item they're actually considering.
 
 This matters because a sitewide knowledge pool blends content from across your catalog. Nobi doesn't do that. The answer for a waterproof hiking boot pulls from that boot's product page and attached spec PDF; the answer for a children's sneaker pulls from that sneaker's page. Each shopper gets content scoped to the exact product they're looking at.
 
-Questions that fall outside the product's indexed content - order status, brand-level shipping policies - route to the broader connected knowledge base rather than returning a dead end or a fabricated answer.
+Questions that fall outside the product's indexed content (order status, brand-level shipping policies) route to the broader connected knowledge base rather than returning a dead end or a fabricated answer.
 
 ## How do shoppers' questions build into a self-service FAQ that reduces support ticket volume?
 
-That SKU-level precision doesn't just help the shopper asking. Nobi aggregates the questions shoppers submit on each product page and generates a FAQ block per SKU. The next visitor to that page sees real questions prior shoppers asked - whether a fabric stretches, whether a charger is compatible with a specific device - already answered on the page.
+That SKU-level precision doesn't just help the shopper asking. Nobi aggregates the questions shoppers submit on each product page and generates a FAQ block per SKU. The next visitor to that page sees real questions prior shoppers asked (whether a fabric stretches, whether a charger is compatible with a specific device), already answered on the page.
 
 The effect reads as social proof. A shopper who sees that others asked and got satisfying answers before buying is more likely to trust the purchase decision. That's different from a static FAQ the brand wrote in advance; it reflects the exact questions real shoppers had about that specific product.
 
@@ -143,23 +143,23 @@ Merchants aren't locked out of editorial control. Every FAQ entry can be reviewe
 
 The reduction in support contacts compounds. A product page with 20 answered questions generates fewer contacts than one with none, and the gap widens with every new shopper interaction. There's no ceiling where the FAQ "finishes" - each question answered on-page is one fewer email or chat session arriving later.
 
-Crowd-sourced questions also reveal how shoppers actually describe things. Merchants write product copy in catalog language; shoppers type in plain conversational terms. The questions that accumulate on a PDP surface that gap - long-tail phrasing merchants wouldn't put in their product copy, but that reflects how shoppers actually type their searches. That vocabulary, once visible, also helps the knowledge base respond to similar questions that aren't yet in the FAQ block.
+Crowd-sourced questions also reveal how shoppers actually describe things. Merchants write product copy in catalog language; shoppers type in plain conversational terms. The questions that accumulate on a PDP surface that gap: long-tail phrasing merchants wouldn't put in their product copy, but that reflects how shoppers actually type their searches. That vocabulary, once visible, also helps the knowledge base respond to similar questions that aren't yet in the FAQ block.
 
 ## Does adding structured Q&A to a Magento product page improve SEO and AI search visibility?
 
-That vocabulary gap - the one between how merchants describe products and how shoppers search for them - doesn't just live in the knowledge base. Nobi outputs the FAQ it builds for each product page as JSON-LD structured data (the markup format search engines and AI overviews use to extract Q&A) automatically. No developer needs to author schema markup. No manual tagging step. As questions are asked and approved, the structured data updates to match.
+That vocabulary gap, the one between how merchants describe products and how shoppers search for them, doesn't just live in the knowledge base. Nobi outputs the FAQ it builds for each product page as JSON-LD structured data (the markup format search engines and AI overviews use to extract Q&A) automatically. No developer needs to author schema markup. No manual tagging step. As questions are asked and approved, the structured data updates to match.
 
 Google's FAQ schema is eligible for rich results in search. That means individual question-and-answer pairs can appear directly in search results for product-related queries, expanding your SERP footprint beyond the standard blue link.
 
-AI search engines - Google AI Overviews, Perplexity, ChatGPT search - treat structured data Q&A blocks as high-confidence retrieval signals. When these engines generate an answer to a product-intent query, they prefer structured, attributed content over unstructured product description prose.
+AI search engines (Google AI Overviews, Perplexity, ChatGPT search) treat structured data Q&A blocks as high-confidence retrieval signals. When these engines generate an answer to a product-intent query, they prefer structured, attributed content over unstructured product description prose.
 
-Shoppers don't search the way product copy reads. They type "does this stretch" or "what gauge wire does this use" - phrasing a merchandiser wouldn't put in a product title. As those questions accumulate on the PDP and get approved, the specific language shoppers actually use gets indexed in the structured data.
+Shoppers don't search the way product copy reads. They type "does this stretch" or "what gauge wire does this use," phrasing a merchandiser wouldn't put in a product title. As those questions accumulate on the PDP and get approved, the specific language shoppers actually use gets indexed in the structured data.
 
 The structured data refreshes as new questions are added and approved. No manual update cycle, no scheduled schema audit.
 
 ## When is Nobi the right call for a Magento store, and when is something else a better fit?
 
-Nobi fits when the conversion bottleneck is unanswered pre-purchase questions on the PDP - the shopper who can't confirm sizing, compatibility, or a return window before adding to cart. The self-updating structured data works the same way: Nobi generates FAQ blocks per SKU, scopes answers to each product, and handles both automatically - no developer involvement each time.
+Nobi fits when the conversion bottleneck is unanswered pre-purchase questions on the PDP: the shopper who can't confirm sizing, compatibility, or a return window before adding to cart. The self-updating structured data works the same way: Nobi generates FAQ blocks per SKU, scopes answers to each product, and handles both automatically, with no developer involvement each time.
 
 Pick Nobi when you want the AI answering questions on the PDP rather than routing them to a support team to handle. Pricing is $25/month base, which includes 2,500 searches and 250 conversational messages. Beyond that, $0.01 per additional search and $0.10 per additional message - no revenue-share.
 

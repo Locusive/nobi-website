@@ -1,0 +1,176 @@
+export const meta = {
+ title: "Build vs. Buy: Should You Build Your Own AI Site Search?",
+ slug: "build-vs-buy-ai-site-search",
+ date: "2026-06-21",
+ publishedAt: "2026-06-21",
+ description: "Honest breakdown of building vs. buying AI site search for any website. Real costs, catalog grounding risks, and when each path makes sense.",
+ excerpt: "Honest breakdown of building vs. buying AI site search for any website. Real costs, catalog grounding risks, and when each path makes sense.",
+ tags: ["comparison", "site search", "website", "build vs buy"],
+ author: "Shanif Dhanani",
+ heroImage: "https://storage.googleapis.com/nobi-public/docs_and_marketing_websites/posts/in-house/hero.webp",
+ featured: true,
+ draft: false,
+ faqItems: [
+ {
+ question: "Should you build or buy AI site search for your website?",
+ answer: "For most website teams, buying a productized AI search solution wins on the parts that are hardest to get right: keeping search results accurate against a live catalog - and the answer layer grounded - as inventory and pricing change. The real cost of building isn't the initial setup; it's the ongoing engineering work competing with the rest of your roadmap. A stale index that surfaces sold-out or mispriced products, or an answer that invents a detail, isn't a recoverable error - the shopper just leaves without complaining. Build if your team wants to own the stack end-to-end and has roadmap space to maintain it; buy if catalog accuracy and speed to market matter more."
+ },
+ {
+ question: "What does building your own AI site search actually require?",
+ answer: "Building requires four layers: a retrieval layer (vector store plus embedding pipeline), an LLM-based answer generation layer, a search and chat UI, and a catalog sync mechanism tied to live inventory. The hardest part isn't any single layer - it's keeping all of them accurate as your catalog changes, your models evolve, and visitors surface edge cases your tests didn't cover. Catalog sync is the most persistent risk: if your vector index lags, the assistant quotes stale prices or confirms stock that sold out. Typeahead is a separate problem: LLMs are too slow to route every keystroke through, so you need a dedicated fast-path for real-time search suggestions."
+ },
+ {
+ question: "Why is catalog grounding the hardest part - and what goes wrong when it fails?",
+ answer: "Grounding fails when search and answers run off a stale snapshot instead of a live catalog connection. An index built from a point-in-time catalog goes out of date the moment it ships - last week's price change, a sold-out colorway, a new collection - none of it is reflected until you sync. On the search side that means results keep surfacing products that are gone or mispriced; on the answer side, the highest-stakes failure is a confident 'yes' on a size that's actually unavailable. Either way the shopper leaves quietly and it never shows up in your analytics."
+ },
+ {
+ question: "What does a purpose-built AI search product handle out of the box?",
+ answer: "Nobi ships catalog grounding, a second-AI answer review, and query overrides out of the box, covering what most teams would otherwise spend months building and maintaining. Knowledge sources refresh twice a day, so price changes and policy updates reach visitor answers within hours with no deployment required. Every answer includes an inline citation back to the exact source document, so visitors can verify claims and merchandisers can audit without digging through logs. Built-in analytics cover zero-result rate, CVR lift by search session, and revenue per searcher - UNTUCKit saw +17.1% CVR and +21.3% revenue per searcher versus their prior search tool; Lucchese attributed $1M+ in incremental revenue in year one."
+ },
+ {
+ question: "When is building your own AI search the right call?",
+ answer: "Building makes sense when your customization needs are genuine - custom product attribute weighting, proprietary behavioral signals, or a frontend too bespoke for a standard search widget - and when your team has dedicated engineering headcount to own the stack long-term. A search API sits between a full custom build and a fully productized layer, giving you granular control over ranking signals and fast typeahead without building a vector store from scratch, though the conversational Q&A answer layer is still yours to build on top. Building is the wrong call if reducing engineering overhead is the goal, if the team that ships version one will be pulled to other priorities, or if you need to go live within weeks rather than quarters. A build that gets deprioritized post-launch is the worst outcome: accuracy degrades quietly as the catalog changes with no headcount to fix it."
+ },
+ {
+ question: "What do website teams most often ask when comparing a DIY build to a purpose-built AI search product?",
+ answer: "Most teams estimate 2 to 6 months to ship a working DIY first version, while a purpose-built product typically goes live in hours - a gap that widens once you factor in post-launch time spent catching grounding failures. Nobi costs $25/month base, including 2,500 searches and 250 conversational messages, with additional searches at $0.01 each and messages at $0.10 each, and no revenue share or GMV-tied billing. Switching from a DIY build to a purpose-built product later is feasible - your catalog data stays in place, and the main cost is retiring the custom retrieval and answer layers. Nobi doesn't offer behavioral reranking today; brands where personalization is the headline requirement should evaluate a platform built specifically around behavioral reranking instead."
+ }
+ ],
+};
+
+<script type="application/ld+json" data-nobi-schema>
+{`{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Build vs. Buy: Should You Build Your Own AI Site Search?",
+  "description": "Honest breakdown of building vs. buying AI site search for any website. Real costs, catalog grounding risks, and when each path makes sense.",
+  "datePublished": "2026-06-21",
+  "dateModified": "2026-06-21",
+  "author": {
+    "@type": "Person",
+    "name": "Shanif Dhanani",
+    "url": "https://www.linkedin.com/in/shanifdhanani/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Nobi",
+    "url": "https://nobi.ai"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://nobi.ai/blog/build-vs-buy-ai-site-search"
+  },
+  "about": [
+    {
+      "@type": "Thing",
+      "name": "site search"
+    },
+    {
+      "@type": "Thing",
+      "name": "website"
+    }
+  ]
+}`}
+</script>
+## Should you build or buy AI site search for your website?
+
+Your engineering team can absolutely build AI site search. LLM APIs and vector databases are accessible enough now that assembling the pieces isn't the hard part. The harder part is everything after: keeping the index accurate against a live catalog as prices change, variants sell out, and new products drop - and keeping the answer layer grounded on top of it. That's ongoing maintenance, not a one-time setup, and it competes with everything else on your roadmap. When it slips, the cost is real: search points shoppers at products that are gone or mispriced, they hit a dead end, and they leave without a word. This article walks through what building actually requires, what a purpose-built product handles for you, and when each path makes sense.
+
+| Option | Primary job | Best for | Pricing (starting) | Standout strength | Key weakness |
+| --- | --- | --- | --- | --- | --- |
+| Nobi | AI site search + conversational shopping assistant grounded to your catalog | Website teams that need catalog-accurate answers live fast, without ongoing engineering ownership | $25/mo (2,500 searches + 250 messages included; $0.01/additional search, $0.10/additional message) | Catalog-grounded answers with inline source citations; quick theme drop-in, live in hours; built-in CVR and zero-result analytics | No behavioral reranking today; not an API-first platform for teams that want to own bespoke ranking logic |
+| Build your own | Custom AI search assembled from LLMs, a vector store, retrieval pipeline, and UI, or a search API with the answer layer built on top | Engineering teams that want full ownership of ranking logic, model choice, and UI, with roadmap space to maintain all of it | LLM API + vector DB + hosting fees scale with usage; no fixed product fee, but engineering time is the dominant cost | Full control over every layer: model, retrieval strategy, ranking weights, and interface | You own every maintenance burden: catalog freshness, grounding accuracy, eval, latency, security, and model deprecations |
+
+<BlogQualifier context="building vs buying AI site search" />
+
+## How do building and buying AI site search actually compare?
+
+Building your own AI site search is genuinely viable today. Modern LLM APIs and vector stores have made the pieces accessible. For most website teams, though, a productized option wins on the parts that are hardest to get right: keeping search results accurate against a live catalog (the right products, actually in stock, at the price you're showing) and holding that accuracy as your inventory and product line change.
+
+That second part carries real risk. When the index falls behind your live catalog, search keeps surfacing products that have sold out, been discontinued, or changed price - the shopper clicks the result, lands on a dead end, and leaves. They don't complain; the lost sale just never shows up in your analytics.
+
+The work that separates good AI search from bad (catalog grounding, evaluation, ongoing tuning) also competes with the rest of your engineering roadmap. That's the real cost of building.
+
+Developer-first search APIs sit between a full custom build and a fully productized SaaS layer - more control than a packaged product without building the full infrastructure yourself.
+
+Build if your team wants to own the stack end-to-end and has roadmap space to maintain it. Buy if catalog accuracy and speed to market matter more than bespoke control.
+
+## What does building your own AI site search actually require?
+
+Owning the stack means assembling four layers: a retrieval layer (a vector store plus an embedding pipeline), an answer generation layer (LLM API calls), a search and chat UI, and a catalog sync mechanism that keeps everything grounded to live inventory. Each layer is manageable in isolation. The complexity lives in the seams between them - and in keeping every layer accurate as your catalog changes, your models evolve, and visitors find edge cases your test suite didn't cover.
+
+The catalog sync piece carries the most day-to-day risk. Prices, inventory counts, and variants change constantly. If your index lags, search surfaces products that have sold out or changed price, and the conversational layer answers from the same stale data - telling a visitor a size is available when it isn't, or quoting last week's price. Keeping the index current isn't a one-time setup; it's ongoing engineering work you own permanently.
+
+Retrieval quality is the next hard problem. Keyword search misses semantic meaning; pure vector search can surface irrelevant results. Getting a hybrid that handles short queries ("black boots") alongside long, descriptive ones takes real evaluation - and regular tuning as the catalog grows and visitor behavior shifts.
+
+Shoppers increasingly expect to both search and ask. They type a few words for quick results, then ask a follow-up in plain language, so a chat-style surface is fast becoming something they look for, not a bonus. The two have very different speed budgets, though, which in practice means two different systems. Instant search (typeahead, ranked results as someone types) has to come back in milliseconds, so it runs on a search index, not a model call per query. A conversational answer can afford the extra time an LLM needs to read the retrieved context and compose a grounded reply. The build challenge is running both paths and routing each query to the right one: you can't push every keystroke through a model and still feel instant, and you can't answer a real question with a results grid.
+
+Then there's everything else: a test suite that catches fabricated product specs before visitors do (and grows with the catalog), prompt injection resistance, PII handling in chat transcripts, data retention policies, and a plan for every upstream model deprecation or API change on a vendor's schedule.
+
+A developer search API handles the retrieval and ranking layers without covering answer generation or chat UI. Building further up the stack, the parts that turn a search index into a conversational assistant, is still yours to own.
+
+## Why is catalog grounding the hardest part - and what goes wrong when it fails?
+
+Owning the full stack means owning grounding too - and grounding is where most builds quietly fail. Grounding ties both halves of the experience to your live catalog: search returns products that are actually available at the price shown, and the answer layer responds only from your connected content instead of inventing specs, prices, or ship dates. Getting this right requires a live data connection, not a one-time training run.
+
+The core problem is that any index built from a snapshot of your catalog starts going stale the moment it's deployed. Last week's price change, the colorway you sold out of, the new collection that dropped yesterday: none of it is reflected until you sync. A stale index does a specific kind of damage: search keeps showing shoppers items that are gone or mispriced, and a result that leads nowhere sends them straight to a competitor. They don't complain; they just go.
+
+Hallucinated inventory is the highest-stakes version of this. A visitor who asks "do you have this in a size 10?" and gets a confident yes, when the real answer is no, doesn't just abandon the purchase. They lose trust in the brand permanently. You may never know it happened.
+
+Zero-result searches are the same failure from the other direction. A shopper searches in their own words, the index has no good match, and they assume you don't carry it - when you do. On the answer side it shows up as circular conversations: the assistant can't find something in the catalog, it hedges, the visitor rephrases, it hedges again, they give up. Zero-result rate and session drop-off are at least measurable - the shoppers who hit a bad result or a dead-end answer and quietly leave are not.
+
+Two techniques reduce these failures. First, a second AI review: every draft answer gets checked against the raw source content by a separate model call before it sends - catching mismatches before the visitor sees them. Second, query overrides: lock an exact approved response to high-stakes questions like return policies or warranty terms, so no AI paraphrase introduces variation on the questions where precision matters most.
+
+## What does a purpose-built AI search product handle out of the box?
+
+Both of those techniques - a second AI review and query overrides - ship with Nobi already in place. They're two pieces of a wider productized layer your team would otherwise build and maintain from scratch.
+
+Catalog grounding is automatic. Connected knowledge sources (product pages, PDFs, policy docs) refresh twice a day, so a price change or a new return policy lands in visitor answers within hours, no deployment required. Every answer carries an inline citation back to the exact source document and excerpt it came from, so visitors can verify any claim and merchandisers can audit answers without digging through logs.
+
+Getting live is fast. Most implementations go live in hours with a small theme tweak - no vector database to provision, no embedding pipeline to wire up. That's the months of integration work you skip.
+
+Query overrides handle the questions where you can't allow variation. Return policies, warranty terms, anything where precision matters more than fluency - you pin an exact merchant-approved response, and that fires whenever the question matches. Everything else routes through the standard grounded pipeline.
+
+The analytics come built in. Zero-result rate, CVR lift by search session, and revenue per searcher are all in the dashboard, with no separate reporting project to instrument. [UNTUCKit](/customers/untuckit) ran a two-month A/B test and saw +17.1% CVR and +21.3% revenue per searcher versus their prior search tool, enough to move Nobi to 100% of traffic. [Lucchese](/customers/lucchese) attributed $1M+ in incremental revenue in year one, with a 39x ROI on cumulative basis.
+
+One honest gap: Nobi doesn't do behavioral reranking today. Results don't reorder based on individual visitor click and purchase history. Brands where that personalization is the primary requirement should evaluate alternatives. For most sites, the grounding, speed, and built-in analytics are what move the needle.
+
+## When is building your own AI search the right call?
+
+Grounded answers, built-in analytics, and a fast install cover most sites' needs. Building makes sense when they don't - specifically when the customization required is genuine, not just a preference for control, and when your team has dedicated engineering headcount to own the stack long-term. Custom product attribute weighting, proprietary behavioral signals, or a frontend so bespoke that a standard search widget can't accommodate it: those are the real build cases. The same applies to teams that want to own search as a core differentiator and already run a search or ML practice with the infrastructure for ongoing reliability and relevance work.
+
+A developer search API gives you full API control over how product attributes factor into ranking, plus a mature ecosystem of search widgets and client libraries. You get fast response times for typeahead and granular control over ranking signals without building a vector store from scratch.
+
+The key limitation: a search API doesn't include a grounded answer layer. A visitor who types "does this run narrow?" or "what's the return policy on sale items?" still gets a results page, not an answer. The conversational Q&A layer is yours to build and maintain on top.
+
+Build is not the right call if reducing engineering overhead is the goal, if the team that ships version one will be pulled to other priorities once it's live, or if you need to be running within weeks rather than quarters. A build that gets deployed and then deprioritized is the worst outcome: you own the maintenance with no headcount to do it, and accuracy degrades quietly as the catalog changes.
+
+## What do website teams most often ask when comparing a DIY build to a purpose-built AI search product?
+
+Teams that reach that maintenance question most often land on three concrete ones before deciding: how long a build actually takes, what a purpose-built product costs, and whether personalization gaps matter for their site. Here are direct answers to each.
+
+**How long does a DIY build take?** Most teams estimate 2 to 6 months to ship a working first version - longer if the eval suite and catalog sync are built from scratch. A purpose-built product typically goes live in hours. The gap widens once you factor in time spent catching grounding failures post-launch.
+
+**What does Nobi cost?** $25/month base, including 2,500 searches and 250 conversational messages. Additional searches are $0.01 each; additional messages are $0.10 each. No revenue share, no usage-based billing tied to GMV.
+
+**Can we switch from a DIY build to a purpose-built product later?** Yes. Most purpose-built products integrate at the search widget layer. Your catalog data stays in place; the main cost is retiring the custom retrieval and answer layers your team built.
+
+**What if we need behavioral reranking?** Nobi doesn't offer it today - that's an honest gap. Results don't reorder based on an individual visitor's click and purchase history. If full-site behavioral personalization is your headline requirement, a platform built specifically around that will serve you better - and that's a legitimate reason to pick a different tool.
+
+**Does building give better search quality than buying?** Not automatically. A well-tuned purpose-built product typically outperforms a first-version DIY build on catalog accuracy - catalog grounding is the product's core job, not a layer bolted on after the core functionality ships.
+
+
+<BlogEmailCapture hook="Building your own AI search instead of buying it off the shelf?" subtext="Drop your email and we'll show you how Nobi's AI search gets you live in days, not quarters, without the engineering overhead of building it yourself." />
+
+---
+
+If you want catalog-accurate search without the maintenance burden, start a free Nobi trial and see how Nobi goes live in hours.
+
+<div className="my-8 flex justify-center">
+ <a
+ href="https://dashboard.nobi.ai"
+ className="inline-flex items-center justify-center gap-2 rounded-2xl font-medium transition active:scale-[.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-black/10 dark:focus-visible:ring-white/20 bg-black text-white dark:bg-white dark:text-black hover:opacity-90 shadow-sm h-12 px-6 text-base no-underline"
+ >
+ <span>Start your free Nobi trial</span>
+ </a>
+</div>

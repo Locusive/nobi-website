@@ -75,12 +75,12 @@ You've seen what ChatGPT can do, and the idea of building your own shopping assi
 - **Nobi (Buy)** - catalog-grounded search, conversational shopping assistant, and lead capture in one platform. $25/mo base (2,500 searches + 250 messages included). Pick when you need an accurate ecommerce assistant live this week without committing an engineering team to own it permanently.
 - **[Build with ChatGPT](https://openai.com/chatgpt)** - a capable general-purpose AI and a reasonable prototyping foundation. OpenAI API usage-based rates plus engineering, hosting, retrieval infrastructure, and ongoing maintenance. Pick when you need full control of ranking logic, a deeply differentiated UX, or a custom stack your team wants to own entirely.
 
-For most ecommerce marketing teams, the productized option wins on time-to-value and on the grounding, security, and analytics work that is easy to underestimate from the prototype.
+For most ecommerce marketing teams, the productized option ships faster and skips the grounding, security, and analytics work that is easy to underestimate from a prototype.
 
 | Product | Primary job | Best for | Pricing (starting) | Standout strength | Key weakness |
 | --- | --- | --- | --- | --- | --- |
 | Nobi (Buy) | Catalog-grounded site search + conversational shopping assistant + lead capture | Ecommerce teams who need accurate on-site AI search and Q&A live quickly without dedicating engineering to own it | $25/mo base (2,500 searches + 250 conversational messages; $0.01/additional search, $0.10/additional message) | Catalog grounding with inline source citations shoppers can verify; query overrides lock high-stakes answers to exact merchant-approved text; knowledge refreshes twice daily | Limited behavioral reranking today; no in-chat post-purchase transaction execution; website chat only |
-| Build with ChatGPT (Build) | General-purpose AI prototyping foundation for a custom ecommerce assistant | Engineering teams who need bespoke ranking logic, a highly differentiated UX, or a custom stack they want to own entirely | OpenAI API: usage-based rates (see openai.com/api/pricing); total cost adds engineering, retrieval infrastructure, hosting, and ongoing maintenance | Full control over model behavior, retrieval logic, UI, and integration depth with no vendor dependency | Catalog grounding, hallucination prevention, latency management, analytics, and maintenance are all on your team to build and sustain |
+| Build with ChatGPT (Build) | General-purpose AI prototyping foundation for a custom ecommerce assistant | Engineering teams who need bespoke ranking logic, a highly differentiated UX, or a custom stack they want to own entirely | OpenAI API: usage-based rates (see openai.com/api/pricing); total cost adds engineering, retrieval infrastructure, hosting, and ongoing maintenance | Full control over model behavior, retrieval logic, UI, and how every system connects - no vendor dependency | Catalog grounding, hallucination prevention, latency management, analytics, and maintenance are all on your team to build and sustain |
 
 <BlogQualifier context="building on ChatGPT versus buying a ready-made ecommerce assistant" />
 
@@ -102,9 +102,9 @@ The hardest part is grounding. A general-purpose model answers from its training
 
 That grounding pipeline also has to stay current. A shopper asking about a product discontinued last week gets a confident wrong answer if the sync hasn't run. And getting retrieval quality right takes iteration: the retrieval layer needs tuning, and the right settings only reveal themselves in testing.
 
-Everything above the retrieval layer is custom too. The chat widget, product-card rendering, contextual prompt suggestions, mobile UX - none of that ships with the API. At ecommerce traffic volumes, per-call costs and response latency compound, especially during traffic spikes where multi-step retrieval plus generation runs on every session.
+Everything above the retrieval layer is custom too. The chat widget, product-card rendering, contextual prompt suggestions, mobile UX - none of that ships with the API. API costs and page speed both suffer during traffic spikes - every session runs the full retrieval step and the AI generation step before anything renders.
 
-Security is your team's responsibility: shopper PII flows through the API, and data processing agreements, retention limits, and regional data residency requirements are all yours to implement and audit.
+Shopper personal data flows through a third-party API. Data agreements, retention limits, and regional residency rules are yours to set up and maintain.
 
 Out of the box, there's also no CVR attribution, zero-result tracking, or search-abandonment reporting. Those have to be built. So does the person responsible for model updates, prompt drift, catalog sync failures, and circular conversations when they surface.
 

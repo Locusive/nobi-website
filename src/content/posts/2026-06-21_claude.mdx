@@ -1,0 +1,185 @@
+export const meta = {
+ title: "Nobi vs Claude: Should You Build Your Own Site Search?",
+ slug: "claude",
+ date: "2026-06-21",
+ publishedAt: "2026-06-21",
+ description: "Build your own site search with Claude, or buy Nobi? A clear-eyed breakdown of what each path actually costs you.",
+ excerpt: "Build your own site search with Claude, or buy Nobi? A clear-eyed breakdown of what each path actually costs you.",
+ tags: ["comparison", "sales assistance", "website", "site search"],
+ author: "Shanif Dhanani",
+ heroImage: "https://storage.googleapis.com/nobi-public/docs_and_marketing_websites/posts/claude/hero.webp",
+ featured: true,
+ draft: false,
+ faqItems: [
+ {
+ question: "Should you build your own site search with Claude, or buy a purpose-built tool?",
+ answer: "Building on Claude means owning every layer the model doesn't include: catalog grounding, zero-result handling, answer quality monitoring, latency management, and ongoing maintenance as your catalog changes. A purpose-built tool ships those layers ready to connect, so your job is configuration rather than infrastructure. The build path is viable, but it is a much larger engineering commitment than most teams plan for at the start."
+ },
+ {
+ question: "What does building your own site search with Claude actually take?",
+ answer: "Claude arrives with no connection to your catalog, so every query goes to the model cold unless you build and maintain a grounding layer fed by live product data. That grounding work - embedding product pages, policy docs, and FAQs into a vector index and keeping it current as prices change and SKUs go in and out of stock - is the majority of the engineering project, not a launch task. On top of that you are building faceted filtering, synonym handling, fuzzy matching, fallback handling, a chat widget, latency and cost management, answer quality monitoring, and a security review of how visitor and catalog data flow through a third-party API."
+ },
+ {
+ question: "Where does a purpose-built on-site assistant win over a custom build?",
+ answer: "A purpose-built product ships the catalog-grounding layer, search UI, answer-quality checks, and analytics as a single install rather than a project backlog. With Nobi, product pages, FAQ routes, policy docs, and PDFs connect without an embedding pipeline to write or maintain, connected sources refresh twice a day, and every answer carries inline citation pills so visitors can verify the source. Lucchese, a luxury Western boot brand on Shopify Plus, attributed $1M+ in incremental revenue in year one running Nobi - a 39x ROI - with installation as a quick theme drop-in and no data-handling architecture to stand up."
+ },
+ {
+ question: "When is building your own the right call instead of buying?",
+ answer: "Building with Claude is the right call for teams with dedicated engineering capacity, non-standard integration requirements, or product needs a packaged tool cannot satisfy - particularly if you want to own custom ranking logic, build session-level personalization, or support headless sites with highly custom UX patterns. If your roadmap treats the AI assistant as a core product capability you will differentiate on and staff a team to own, building is a deliberate strategic choice. It is also worth knowing where Nobi's fit ends: it answers questions in a web chat widget but does not send or receive email, does not execute transactions like cancellations or returns inside the chat, and does not offer a no-code conversation flow builder for campaign-specific sequences."
+ },
+ {
+ question: "Frequently asked questions about building vs buying a website AI assistant",
+ answer: "Claude is capable enough for on-site Q&A - the gap is not model quality but the engineering work you add on top: live catalog grounding, answer monitoring, and search UI. Nobi costs $25/month base (2,500 searches and 250 conversational messages included), with additional searches at $0.01 each and additional messages at $0.10 each, and no revenue-share or per-seat fees. A Nobi integration goes live in hours as a theme drop-in; a custom Claude build realistically takes weeks to months depending on catalog size. The biggest risk of building yourself is catalog drift - if the vector index falls behind live inventory, pricing, and policy changes, the assistant gives confidently wrong answers, which is exactly the failure mode that drives visitors away."
+ }
+ ],
+};
+
+<script type="application/ld+json" data-nobi-schema>
+{`{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Nobi vs Claude: Should You Build Your Own Site Search?",
+  "description": "Build your own site search with Claude, or buy Nobi? A clear-eyed breakdown of what each path actually costs you.",
+  "datePublished": "2026-06-21",
+  "dateModified": "2026-06-21",
+  "author": {
+    "@type": "Person",
+    "name": "Shanif Dhanani",
+    "url": "https://www.linkedin.com/in/shanifdhanani/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Nobi",
+    "url": "https://nobi.ai"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://nobi.ai/blog/claude"
+  },
+  "about": [
+    {
+      "@type": "Thing",
+      "name": "sales assistance"
+    },
+    {
+      "@type": "Thing",
+      "name": "website"
+    }
+  ]
+}`}
+</script>
+## Should you build your own site search with Claude, or buy a purpose-built tool?
+
+You're looking at Claude - capable model, reasonable API pricing, and your dev team is pretty sure they can wire it to your product catalog. The question isn't whether Claude can do Q&A. It can. The real question is what you're committing to build on top of it: catalog grounding, live-data refresh, answer monitoring, and search UI - all of it ongoing. Get any of that wrong and visitors get confidently wrong answers about prices and stock, which is exactly the kind of interaction that loses customers for good. Here's what each path actually requires:
+
+- **Nobi** - purpose-built, catalog-grounded search and conversational assistant at $25/month base (2,500 searches + 250 messages included). Quick theme drop-in, live-catalog grounding, built-in analytics, maintenance handled. Right when on-site discovery and converting existing traffic is the bottleneck and you'd rather not own the plumbing.
+- **Build with Claude** - you own everything: catalog grounding (RAG), retrieval, search UI, latency management, hallucination monitoring, security, and ongoing maintenance as your catalog and the model evolve. Right for engineering teams that want full control or have requirements a packaged tool can't satisfy.
+
+For most website marketing teams, the productized path gets a grounded assistant live in front of visitors faster.
+
+| Option | Primary job | Best for | Pricing (starting) | Standout strength | Key weakness |
+| --- | --- | --- | --- | --- | --- |
+| Nobi | Catalog-grounded product search + conversational shopping assistant + capturing high-intent visitors in one product | Website teams whose bottleneck is on-site discovery and CVR, who want live-catalog-grounded answers without building and maintaining the retrieval pipeline themselves | $25/mo base, 2,500 searches + 250 messages; $0.01/additional search, $0.10/additional message | Inline numbered citations on every answer, twice-daily catalog refresh, and query overrides that lock exact merchant-approved responses to high-stakes questions | No behavioral reranking today; website chat only, no email channel, no in-chat post-purchase transaction execution |
+| Build with Claude | General-purpose LLM for reasoning, writing, and coding, adaptable to custom assistant and search flows | Engineering teams with dedicated capacity who need custom ranking logic, bespoke UX, or non-standard catalog integration that a packaged widget won't satisfy | Anthropic API token-based pricing; no flat per-feature rate, research current API costs before modeling | Full control over ranking logic, UX, conversation design, and integration surface | Catalog grounding, retrieval, search UI, latency tuning, hallucination monitoring, security review, and ongoing maintenance are all yours to build and sustain |
+
+<BlogQualifier context="building with Claude versus buying a ready-made website assistant" />
+
+## What does each path actually require you to own?
+
+Claude is a genuinely excellent general-purpose model - strong at reasoning, Q&A, and writing. That's not the question here. The question is what comes pre-built and what you own.
+
+Building a on-site assistant on top of Claude means you are responsible for every layer the model doesn't include: catalog grounding so the assistant doesn't invent product specs, prices, or stock availability; zero-result handling so visitors don't hit dead ends; answer quality monitoring at scale; latency, security, and UI management; and ongoing maintenance as your catalog changes.
+
+That list is substantial. And it matters because the failure modes are visible to visitors. When an AI assistant tells a visitor a product ships in two days when it doesn't, or quotes a price that doesn't exist, that's the kind of interaction most visitors say leads them to abandon a brand entirely. Hallucinated inventory or a policy the assistant invented is exactly that negative interaction.
+
+A purpose-built tool ships those grounding and retrieval layers ready to connect. Your job is pointing it at your catalog and configuring the experience - not building the infrastructure that keeps answers accurate. The build path is viable; it's just a much larger engineering commitment than most teams plan for when they start.
+
+## What does building your own site search with Claude actually take?
+
+Claude is a general-purpose model - it arrives with no connection to your catalog. Every query goes to the model cold unless you build and maintain a grounding layer that feeds it live product data. For a on-site assistant that won't invent specs, prices, or policies, that grounding layer is the majority of the engineering project - and it requires ongoing attention as your catalog changes.
+
+The grounding work starts with embedding your product pages, PDFs, policy docs, and FAQ content into a vector index, then wiring that retrieval step into every query path. But the index goes stale the moment a price changes, a SKU goes out of stock, or a new product line lands. Stale embeddings mean the model answers from old data with full confidence - exactly the "confident lies" operators dread most. Keeping the index current is an ongoing job, not a launch task.
+
+Beyond grounding, you're building the search experience from scratch. Faceted filtering, synonym handling, fuzzy matching, and a graceful fallback for dead-end searches don't come with the model - each is a separate build. Neither does the chat widget itself.
+
+There's also latency and cost to manage. Each LLM call takes time and costs money. At real production scale you'll need a caching strategy, retrieval pre-filtering, and prompt compression. Nobody gets these right on the first pass.
+
+Then there's monitoring. Nothing built into the API catches the model recommending an out-of-stock item or quoting an outdated price. You need an evaluation loop that samples real queries and flags fabricated product specs before visitors see them.
+
+Security adds another layer. Visitor queries and catalog data traveling through a third-party API require a data-handling review: how PII is treated, how long data is retained, and what the vendor's terms actually allow.
+
+And this isn't a set-and-forget build. Model updates, catalog schema changes, new product lines, and seasonal inventory swaps all require re-testing and re-grounding. The work continues as long as the catalog does.
+
+## Are you building a search engine, or just a chat box?
+
+It's easy to miss when you start from a model API: Claude gives you a chat box, not a search engine. Those are two different things, and a good site needs both.
+
+Start with search-result quality. A visitor who types "waterproof boots under $200" expects results ranked by relevance in milliseconds - not a paragraph of prose a second or two later. Good site search is semantic: it matches on meaning, so "rain boots" and "waterproof footwear" surface the same products, and it handles synonyms, plurals, and the way people actually phrase things. It ranks those results, returns them as instant typeahead, and runs against an index that stays current with live inventory and pricing. None of that comes with a language model. You build the embedding and indexing pipeline, the relevance ranking, and the fast retrieval layer yourself, then keep them tuned as the catalog changes.
+
+Then there's the format. Visitors expect two experiences, not one: a search bar that returns instant, ranked products when they know what they want, and a conversational answer when they have a question - "does this ship to Canada?", "what's your return window?". Building on Claude naturally gets you the second one, the chat. The instant search-engine surface is a separate build, and routing each query to the right experience is more work still.
+
+This is where buying changes the math. Nobi delivers both from a single input and routes every query automatically: a short product search takes the fast instant-search path and comes back as ranked results, while a question routes to a grounded conversational answer with citations. You aren't choosing between a search engine and an assistant, and you aren't building either one.
+
+## Where does a purpose-built on-site assistant win over a custom build?
+
+That ongoing maintenance commitment is exactly where a purpose-built product changes the equation. The catalog-grounding layer, the search UI, the answer-quality checks, and the analytics ship as a single install - not as a project backlog. For a marketing manager whose job is converting existing traffic, the relevant comparison is not raw model capability. It is which path gets a grounded, accurate assistant live on the site faster, with less ongoing upkeep.
+
+With Nobi, product pages, FAQ routes, policy docs, and PDFs connect without an embedding pipeline to write or maintain. Every answer carries inline numbered citation pills - visitors can tap any pill to see the source document, date, and exact excerpt the answer came from. That's a direct answer to the "confident lies" fear without building a custom fact-check layer.
+
+Connected sources refresh twice a day, so a price change or an updated return policy lands in visitor answers within hours. For high-stakes questions like return policy or warranty inquiries, query overrides let merchants lock in exact approved responses - no AI paraphrasing, no variation. A second AI review also checks every draft answer against the cited content before it sends, catching inaccuracies before they reach a visitor.
+
+The business case is concrete. [Lucchese](/customers/lucchese), a luxury Western boot brand on Shopify Plus, attributed $1M+ in incremental revenue in year one running Nobi for search plus a cart assistant and PDP assistant - a 39x ROI.
+
+Installation is a quick theme drop-in. There's no data-handling architecture to stand up, no security review of a homegrown retrieval pipeline, and no re-indexing job to trigger when the catalog changes.
+
+## When is building your own the right call instead of buying?
+
+That operational picture - the ongoing re-indexing, the answer monitoring, the security review - is exactly the context in which the build path makes the most sense for some teams. Building with Claude is the right call for a specific profile: a team with dedicated engineering capacity, non-standard integration requirements, or product needs a packaged tool can't satisfy. For those teams, the control is worth the cost. For teams without that profile, the burden of maintaining a homegrown system typically outweighs the flexibility it offers.
+
+The clearest case for building is custom ranking logic. If your team wants to own the ranking algorithm, build session-level personalization, or integrate signals a packaged product doesn't expose, a custom build gives you that surface. Same for bespoke frontends: headless sites or highly custom UX patterns that a packaged chat widget can't accommodate are a real reason to own the stack.
+
+There's also a strategic framing that makes building legitimate regardless of what packaged tools offer. If your roadmap treats the AI assistant as a core product capability - something you'll differentiate on, iterate against your own data, and staff a team to own - then building is a deliberate choice, not a workaround.
+
+That said, it's worth knowing where Nobi's fit ends, even if you're evaluating it honestly against the build path. Nobi answers questions in a web chat widget - it doesn't send or receive email, so teams whose primary support channel is email need a different tool. It answers post-purchase questions but doesn't execute transactions like cancellations or returns inside the chat. It doesn't offer a no-code conversation flow builder for campaign-specific sequences. And behavioral reranking from individual visitor history isn't available yet - teams whose bottleneck is specifically that kind of personalization may need a different tool regardless of build vs. buy.
+
+Those limits don't make the build path the default. They make it the right call when one of them is your actual bottleneck - and a distraction when none of them are.
+
+## Frequently asked questions about building vs buying a website AI assistant
+
+These are the specific questions that come up once teams map their actual bottleneck against the build vs. buy decision.
+
+**Is Claude capable enough to power a on-site assistant?**
+
+Yes. Claude is a strong general-purpose model for reasoning and Q&A. The gap isn't model capability - it's that live catalog grounding, answer quality monitoring, and search UI are engineering work you add on top. The model doesn't ship with any of that.
+
+**How much does Nobi cost?**
+
+$25/month base, which includes 2,500 searches and 250 conversational messages. Additional searches are $0.01 each; additional messages are $0.10 each. No revenue-share, no per-seat fees, and no usage-based surprises beyond those per-unit rates.
+
+**How long does a custom Claude build take versus a Nobi integration?**
+
+Nobi is a quick theme drop-in - live in hours for most sites. A custom Claude build requires a catalog grounding pipeline, retrieval layer, search UI, quality monitoring, and a security review. Depending on catalog size and complexity, that work realistically takes weeks to months.
+
+**Can I use Claude for other tasks while using Nobi on my site?**
+
+Yes. Nobi is an independent product and doesn't expose which model it uses internally. You can use Claude for writing, analysis, coding, or anything else without any conflict with a Nobi deployment.
+
+**What is the biggest risk of building a grounded on-site assistant yourself?**
+
+The biggest risk is catalog drift. If the vector index isn't kept current with live inventory, pricing, and policy changes, the assistant gives confidently wrong answers - exactly the failure mode that drives visitors away. Purpose-built products handle catalog refresh automatically; a homegrown system means you own that job indefinitely.
+
+
+<BlogEmailCapture hook="Weighing building with Claude against a ready-made site assistant?" subtext="Drop your email and we'll show you how Nobi deploys on your catalog in days, with search, chat, and high-intent visitor capture already wired together." />
+
+---
+
+See how Nobi's catalog-grounded assistant - a quick theme drop-in - turns your existing traffic into more completed purchases, without the build cost.
+
+<div className="my-8 flex justify-center">
+ <a
+ href="https://dashboard.nobi.ai"
+ className="inline-flex items-center justify-center gap-2 rounded-2xl font-medium transition active:scale-[.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-black/10 dark:focus-visible:ring-white/20 bg-black text-white dark:bg-white dark:text-black hover:opacity-90 shadow-sm h-12 px-6 text-base no-underline"
+ >
+ <span>Start your free Nobi trial</span>
+ </a>
+</div>

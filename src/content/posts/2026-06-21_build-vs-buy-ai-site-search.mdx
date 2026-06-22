@@ -13,7 +13,7 @@ export const meta = {
  faqItems: [
  {
  question: "Should you build or buy AI site search for your website?",
- answer: "For most website teams, buying a productized AI search solution wins on the parts that are hardest to get right: keeping answers grounded to a live catalog and maintaining that accuracy as inventory changes. The real cost of building isn't the initial setup - it's the ongoing engineering work competing with the rest of your roadmap. A hallucinated answer about stock or pricing isn't a recoverable error - visitors who get a confident wrong answer don't complain, they just leave. Build if your team wants to own the stack end-to-end and has roadmap space to maintain it; buy if catalog accuracy and speed to market matter more."
+ answer: "For most website teams, buying a productized AI search solution wins on the parts that are hardest to get right: keeping search results accurate against a live catalog - and the answer layer grounded - as inventory and pricing change. The real cost of building isn't the initial setup; it's the ongoing engineering work competing with the rest of your roadmap. A stale index that surfaces sold-out or mispriced products, or an answer that invents a detail, isn't a recoverable error - the shopper just leaves without complaining. Build if your team wants to own the stack end-to-end and has roadmap space to maintain it; buy if catalog accuracy and speed to market matter more."
  },
  {
  question: "What does building your own AI site search actually require?",
@@ -21,7 +21,7 @@ export const meta = {
  },
  {
  question: "Why is catalog grounding the hardest part - and what goes wrong when it fails?",
- answer: "Grounding fails when the assistant answers from a stale snapshot instead of a live catalog connection. Any model trained on a point-in-time catalog starts going out of date the moment it's deployed - last week's price change, a sold-out colorway, a new collection - none of that exists in a static training set. The highest-stakes failure is hallucinated inventory: a visitor who gets a confident 'yes' on a size that's actually unavailable doesn't complain, they lose trust in the brand permanently. That invisible churn - visitors who close the tab after a confident wrong answer - never shows up in your analytics."
+ answer: "Grounding fails when search and answers run off a stale snapshot instead of a live catalog connection. An index built from a point-in-time catalog goes out of date the moment it ships - last week's price change, a sold-out colorway, a new collection - none of it is reflected until you sync. On the search side that means results keep surfacing products that are gone or mispriced; on the answer side, the highest-stakes failure is a confident 'yes' on a size that's actually unavailable. Either way the shopper leaves quietly and it never shows up in your analytics."
  },
  {
  question: "What does a purpose-built AI search product handle out of the box?",
@@ -74,7 +74,7 @@ export const meta = {
 </script>
 ## Should you build or buy AI site search for your website?
 
-Your engineering team can absolutely build AI site search. LLM APIs and vector databases are accessible enough now that assembling the pieces isn't the hard part. The harder part is everything after: keeping answers grounded to a live catalog as prices change, variants sell out, and new products drop. That's ongoing maintenance, not a one-time setup - and it competes with everything else on your roadmap. When grounding slips, the cost is real. A visitor who gets a confident wrong answer about inventory doesn't complain - they just leave. This article walks through what building actually requires, what a purpose-built product handles for you, and when each path makes sense.
+Your engineering team can absolutely build AI site search. LLM APIs and vector databases are accessible enough now that assembling the pieces isn't the hard part. The harder part is everything after: keeping the index accurate against a live catalog as prices change, variants sell out, and new products drop - and keeping the answer layer grounded on top of it. That's ongoing maintenance, not a one-time setup, and it competes with everything else on your roadmap. When it slips, the cost is real: search points shoppers at products that are gone or mispriced, they hit a dead end, and they leave without a word. This article walks through what building actually requires, what a purpose-built product handles for you, and when each path makes sense.
 
 | Option | Primary job | Best for | Pricing (starting) | Standout strength | Key weakness |
 | --- | --- | --- | --- | --- | --- |
@@ -85,9 +85,9 @@ Your engineering team can absolutely build AI site search. LLM APIs and vector d
 
 ## How do building and buying AI site search actually compare?
 
-Building your own AI site search is genuinely viable today - modern LLM APIs and vector stores have made the pieces accessible. For most website teams, though, a productized option wins on the parts that are hardest to get right: keeping answers grounded to a live catalog so the assistant doesn't invent specs or prices, and holding that accuracy as your inventory and product line change.
+Building your own AI site search is genuinely viable today - modern LLM APIs and vector stores have made the pieces accessible. For most website teams, though, a productized option wins on the parts that are hardest to get right: keeping search results accurate against a live catalog - the right products, actually in stock, at the price you're showing - and holding that accuracy as your inventory and product line change.
 
-That second part carries real risk. A visitor who gets a confident wrong answer about availability doesn't complain; they close the tab. That churn is invisible in your analytics - you never see the conversion that didn't happen.
+That second part carries real risk. When the index falls behind your live catalog, search keeps surfacing products that have sold out, been discontinued, or changed price - the shopper clicks the result, lands on a dead end, and leaves. They don't complain; the lost sale just never shows up in your analytics.
 
 The work that separates good AI search from bad - catalog grounding, evaluation, ongoing tuning - also competes with the rest of your engineering roadmap. That's the real cost of building.
 
@@ -111,13 +111,13 @@ A developer search API handles the retrieval and ranking layers without covering
 
 ## Why is catalog grounding the hardest part - and what goes wrong when it fails?
 
-Owning the full stack means owning grounding too - and grounding is where most builds quietly fail. Grounding means the assistant answers only from what's in your connected catalog and content. It doesn't invent product specs, fabricate prices, or tell a visitor an item ships this week when it doesn't. Getting this right requires a live data connection, not a one-time training run.
+Owning the full stack means owning grounding too - and grounding is where most builds quietly fail. Grounding ties both halves of the experience to your live catalog: search returns products that are actually available at the price shown, and the answer layer responds only from your connected content instead of inventing specs, prices, or ship dates. Getting this right requires a live data connection, not a one-time training run.
 
-The core problem is that any model trained on a snapshot of your catalog starts going stale the moment it's deployed. Last week's price change, the colorway you sold out of, the new collection that dropped yesterday - none of that exists in a static training set. Stale answers create a specific kind of damage: a visitor who gets a confident wrong answer about availability doesn't complain. They close the tab.
+The core problem is that any index built from a snapshot of your catalog starts going stale the moment it's deployed. Last week's price change, the colorway you sold out of, the new collection that dropped yesterday - none of it is reflected until you sync. A stale index does a specific kind of damage: search keeps showing shoppers items that are gone or mispriced, and a result that leads nowhere sends them straight to a competitor. They don't complain - they just go.
 
 Hallucinated inventory is the highest-stakes version of this. A visitor who asks "do you have this in a size 10?" and gets a confident yes - when the answer is no - doesn't just abandon the purchase. They lose trust in the brand permanently. You may never know it happened.
 
-Circular conversations are a symptom of the same problem. When the assistant can't find an answer in the catalog, it hedges. The visitor rephrases. The assistant hedges again. They abandon before reaching a human. Zero-result rates and session drop-off are measurable; the population of visitors turned off by a confident wrong answer who close the tab and never return is not. That invisible churn is the cost that never shows up in your analytics.
+Zero-result searches are the same failure from the other direction. A shopper searches in their own words, the index has no good match, and they assume you don't carry it - when you do. On the answer side it shows up as circular conversations: the assistant can't find something in the catalog, it hedges, the visitor rephrases, it hedges again, they give up. Zero-result rate and session drop-off are at least measurable - the shoppers who hit a bad result or a dead-end answer and quietly leave are not.
 
 Two techniques reduce these failures. First, a second AI review: every draft answer gets checked against the raw source content by a separate model call before it sends - catching mismatches before the visitor sees them. Second, query overrides: lock an exact approved response to high-stakes questions like return policies or warranty terms, so no AI paraphrase introduces variation on the questions where precision matters most.
 

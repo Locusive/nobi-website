@@ -25,7 +25,7 @@ export const meta = {
  },
  {
  question: "When is building your own ecommerce assistant with ChatGPT the right call?",
- answer: "Building is the right call under three conditions: your store needs custom behavioral reranking driven by proprietary ML signals or deep API access for a headless frontend; you need a bespoke branded AI persona or PDP experience no widget can replicate; or you have engineers who want to own the stack long-term and the appetite to treat it as a product. It is also worth noting specific gaps in Nobi's coverage - Nobi does not execute post-purchase transactions like cancellations or order tracking inside chat, does not offer a hybrid mode where a human agent joins an active AI session mid-thread, and does not send or receive email."
+ answer: "Building is the right call under three conditions: your site needs custom behavioral reranking driven by proprietary ML signals or deep API access for a headless frontend; you need a bespoke branded AI persona or PDP experience no widget can replicate; or you have engineers who want to own the stack long-term and the appetite to treat it as a product. It is also worth noting specific gaps in Nobi's coverage - Nobi does not execute post-purchase transactions like cancellations or order tracking inside chat, does not offer a hybrid mode where a human agent joins an active AI session mid-thread, and does not send or receive email."
  },
  {
  question: "Frequently asked questions about building vs buying an ecommerce AI assistant",
@@ -98,7 +98,7 @@ The honest framing: building is the right call if your team wants to own the sta
 
 "Engineering time" is the honest answer - and spelling out where that time goes changes the calculus for most teams. Getting from a working ChatGPT prototype to a production ecommerce assistant means solving catalog grounding, building a retrieval pipeline, designing the on-site experience, and managing API cost at session scale. Each is a real project. Then add securing shopper data, adding analytics, and keeping all of it running as your catalog changes - none of those are follow-up tasks either.
 
-The hardest part is grounding. A general-purpose model answers from its training data by default. To make it reliable on your store's actual products, you need to embed your product catalog, policy docs, and FAQ content into a vector store the model can query at inference time. Without this, it fabricates specs, quotes prices that don't exist, and confirms availability for items that are out of stock - what operators call hallucinated inventory.
+The hardest part is grounding. A general-purpose model answers from its training data by default. To make it reliable on your site's actual products, you need to embed your product catalog, policy docs, and FAQ content into a vector store the model can query at inference time. Without this, it fabricates specs, quotes prices that don't exist, and confirms availability for items that are out of stock - what operators call hallucinated inventory.
 
 That grounding pipeline also has to stay current. A shopper asking about a product discontinued last week gets a confident wrong answer if the sync hasn't run. And getting retrieval quality right takes iteration: the retrieval layer needs tuning, and the right settings only reveal themselves in testing.
 
@@ -124,7 +124,7 @@ Knowledge sources refresh twice daily, so a policy update lands in shopper answe
 
 That 39x return depends on shipping quickly - and it matters most when a productized tool covers what you need. Building is the right call when it doesn't - and when you have the engineering capacity to own what you build long-term.
 
-Three conditions point toward a custom build. First, custom ranking logic: if your store requires behavioral reranking driven by proprietary ML signals - results that shift based on what each shopper clicks and buys - or you need deep API access to embed search in a headless frontend, Nobi isn't an API-first developer platform. A custom build gives you that control. Second, a deeply differentiated UX: brands building a branded AI persona with a specific character, or a bespoke PDP experience that no widget can replicate, may need a canvas a productized tool won't provide. Third, a team that wants to own the stack: a build is a long-term ownership commitment. If you have engineers who want to own it and the appetite to treat it as a product, the payoff is zero vendor dependency and full control over every decision.
+Three conditions point toward a custom build. First, custom ranking logic: if your site requires behavioral reranking driven by proprietary ML signals - results that shift based on what each shopper clicks and buys - or you need deep API access to embed search in a headless frontend, Nobi isn't an API-first developer platform. A custom build gives you that control. Second, a deeply differentiated UX: brands building a branded AI persona with a specific character, or a bespoke PDP experience that no widget can replicate, may need a canvas a productized tool won't provide. Third, a team that wants to own the stack: a build is a long-term ownership commitment. If you have engineers who want to own it and the appetite to treat it as a product, the payoff is zero vendor dependency and full control over every decision.
 
 It's also worth being clear about what Nobi specifically doesn't cover, so you can scope this decision honestly. Nobi doesn't execute post-purchase transactions inside the chat - cancellations, returns, or order tracking lookups; [Rep AI](https://repai.com)'s Post-Order Tasks Agent is built for that job. Nobi also doesn't offer a hybrid mode where a human agent joins an active AI session mid-thread while the AI continues; Rep AI covers that pattern too.
 
@@ -150,11 +150,11 @@ Yes, and more than most teams expect. Model updates, prompt drift, catalog sync 
 It can generate text that reads like recommendations. Without a live catalog connection, it draws on general training data - not your actual inventory, current prices, or real stock status. Grounding it to your catalog so recommendations are accurate is exactly the engineering work the build path requires.
 
 
-<BlogEmailCapture hook="Building an ecommerce assistant on ChatGPT vs buying one?" subtext="Drop your email and we'll show you how Nobi delivers AI-powered search and shopper Q&A on your store without the engineering overhead of a custom ChatGPT build." />
+<BlogEmailCapture hook="Building an ecommerce assistant on ChatGPT vs buying one?" subtext="Drop your email and we'll show you how Nobi delivers AI-powered search and shopper Q&A on your site without the engineering overhead of a custom ChatGPT build." />
 
 ---
 
-Try Nobi's catalog-grounded assistant on your own store. There's no retrieval pipeline to build and no maintenance to own. Plans start at $25/month at [dashboard.nobi.ai](https://dashboard.nobi.ai).
+Try Nobi's catalog-grounded assistant on your own site. There's no retrieval pipeline to build and no maintenance to own. Plans start at $25/month at [dashboard.nobi.ai](https://dashboard.nobi.ai).
 
 <div className="my-8 flex justify-center">
  <a

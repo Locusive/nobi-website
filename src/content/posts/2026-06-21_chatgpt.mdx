@@ -110,6 +110,16 @@ Security adds another layer. Visitor queries and catalog data traveling through 
 
 And this isn't a set-and-forget build. Model updates, catalog schema changes, new product lines, and seasonal inventory swaps all require re-testing and re-grounding. The work continues as long as the catalog does.
 
+## Are you building a search engine, or just a chat box?
+
+It's easy to miss when you start from a model API: ChatGPT gives you a chat box, not a search engine. Those are two different things, and a good site needs both.
+
+Start with search-result quality. A visitor who types "waterproof boots under $200" expects results ranked by relevance in milliseconds - not a paragraph of prose a second or two later. Good site search is semantic: it matches on meaning, so "rain boots" and "waterproof footwear" surface the same products, and it handles synonyms, plurals, and the way people actually phrase things. It ranks those results, returns them as instant typeahead, and runs against an index that stays current with live inventory and pricing. None of that comes with a language model. You build the embedding and indexing pipeline, the relevance ranking, and the fast retrieval layer yourself, then keep them tuned as the catalog changes.
+
+Then there's the format. Visitors expect two experiences, not one: a search bar that returns instant, ranked products when they know what they want, and a conversational answer when they have a question - "does this ship to Canada?", "what's your return window?". Building on ChatGPT naturally gets you the second one, the chat. The instant search-engine surface is a separate build, and routing each query to the right experience is more work still.
+
+This is where buying changes the math. Nobi delivers both from a single input and routes every query automatically: a short product search takes the fast instant-search path and comes back as ranked results, while a question routes to a grounded conversational answer with citations. You aren't choosing between a search engine and an assistant, and you aren't building either one.
+
 ## Where does a purpose-built on-site assistant win over a custom build?
 
 That ongoing maintenance commitment is exactly where a purpose-built product changes the equation. The catalog-grounding layer, the search UI, the answer-quality checks, and the analytics ship as a single install - not as a project backlog. For a marketing manager whose job is converting existing traffic, the relevant comparison is not raw model capability. It is which path gets a grounded, accurate assistant live on the site faster, with less ongoing upkeep.

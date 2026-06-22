@@ -4,16 +4,6 @@
       "source": "/knowledge-base",
       "destination": "/why-nobi/automated-support",
       "permanent": true
-    },
-    {
-      "source": "/blog/claude",
-      "destination": "/blog/nobi-vs-claude-site-search",
-      "permanent": true
-    },
-    {
-      "source": "/blog/chatgpt",
-      "destination": "/blog/nobi-vs-chatgpt-site-search",
-      "permanent": true
     }
   ],
   "routes": [

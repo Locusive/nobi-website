@@ -25,7 +25,7 @@ export const meta = {
     },
     {
       question: "How fast is AI-powered site search?",
-      answer: "Modern AI search engines return results in under 200 milliseconds - fast enough that shoppers don't notice any difference from keyword search. The heavy computation (embedding products) happens during indexing, not at query time."
+      answer: "Modern AI search engines return results in under 200 milliseconds, fast enough that shoppers don't notice any difference from keyword search. The heavy computation (embedding products) happens during indexing, not at query time."
     },
     {
       question: "Can AI search handle typos and misspellings?",
@@ -54,10 +54,10 @@ This works fine when the shopper uses the exact same words that appear in your p
 
 But most real queries aren't that clean. Consider these common searches that break keyword matching:
 
-- **"something warm for a ski trip"** - No product is tagged "something warm." The engine matches "ski" and returns ski poles.
-- **"gift for mom who loves gardening"** - The engine matches "gardening" and ignores the gift context entirely.
-- **"casual shoes that won't hurt my feet"** - "Won't hurt my feet" has no keyword equivalent in product data.
-- **"outfit for a job interview"** - This is a use-case query. Keyword search has no concept of "interview-appropriate."
+- **"something warm for a ski trip"**: No product is tagged "something warm." The engine matches "ski" and returns ski poles.
+- **"gift for mom who loves gardening"**: The engine matches "gardening" and ignores the gift context entirely.
+- **"casual shoes that won't hurt my feet"**: "Won't hurt my feet" has no keyword equivalent in product data.
+- **"outfit for a job interview"**: This is a use-case query. Keyword search has no concept of "interview-appropriate."
 
 Each of these queries makes perfect sense to a human. To a keyword engine, they're mostly gibberish.
 
@@ -76,13 +76,13 @@ This is the difference between knowing what words look like and knowing what wor
 
 Here's where it gets technical - but stay with me, because this is actually elegant.
 
-Every product in your catalog and every query a shopper types gets converted into a **vector embedding** - a list of numbers (typically 768 or more dimensions) that represents its meaning in mathematical space.
+Every product in your catalog and every query a shopper types gets converted into a **vector embedding**: a list of numbers (typically 768 or more dimensions) that represents its meaning in mathematical space.
 
-Think of it like coordinates on a map, but instead of two dimensions (latitude, longitude), you have hundreds of dimensions. Each dimension captures some aspect of meaning - formality, category, material, price tier, use case, season, and hundreds of other subtle features that the model learned from training data.
+Think of it like coordinates on a map, but instead of two dimensions (latitude, longitude), you have hundreds of dimensions. Each dimension captures some aspect of meaning: formality, category, material, price tier, use case, season, and hundreds of other subtle features that the model learned from training data.
 
 The magic: **things that mean similar things end up near each other in this space.**
 
-"Cozy throw blanket" and "soft fleece lap blanket" end up close together in vector space even though they share almost no words. "Throw pillow" - despite sharing the word "throw" - ends up far away because it means something fundamentally different.
+"Cozy throw blanket" and "soft fleece lap blanket" end up close together in vector space even though they share almost no words. "Throw pillow" (despite sharing the word "throw") ends up far away because it means something fundamentally different.
 
 When a shopper searches, here's what happens:
 
@@ -91,7 +91,7 @@ When a shopper searches, here's what happens:
 3. Products whose vectors are closest to the query vector are returned as results
 4. The closer the vectors, the higher the relevance score
 
-This comparison happens in milliseconds using specialized nearest-neighbor algorithms. The heavy computation - converting all your products to vectors - happens once during indexing, not at query time.
+This comparison happens in milliseconds using specialized nearest-neighbor algorithms. The heavy computation (converting all your products to vectors) happens once during indexing, not at query time.
 
 ## How NLP Processes a Query
 
@@ -116,7 +116,7 @@ No manual filter selection. No query refinement. No guessing.
 
 Three trends are making keyword search increasingly inadequate:
 
-**Shoppers expect conversational interfaces.** Thanks to ChatGPT and voice assistants, people are used to asking questions in natural language and getting intelligent responses. Typing "formal" into a search box and scrolling through 400 results feels archaic. Research from [Baymard Institute shows that 72% of ecommerce sites fail site search expectations](https://baymard.com/blog/ecommerce-search-query-types) - and shopper expectations are rising fast.
+**Shoppers expect conversational interfaces.** Thanks to ChatGPT and voice assistants, people are used to asking questions in natural language and getting intelligent responses. Typing "formal" into a search box and scrolling through 400 results feels archaic. Research from [Baymard Institute shows that 72% of ecommerce sites fail site search expectations](https://baymard.com/blog/ecommerce-search-query-types); shopper expectations are rising fast.
 
 **Product catalogs are getting more complex.** More SKUs, more variants, more attributes. The combinatorial explosion of possible queries against possible products makes manual synonym mapping and rule-based tuning increasingly impractical. You can't hand-configure your way to good search when you have 50,000 products and shoppers use thousands of unique query patterns.
 
@@ -129,7 +129,7 @@ Here are real-world query patterns that demonstrate the gap:
 | Query | Keyword Search Does | AI Search Does |
 |---|---|---|
 | "laptop for video editing" | Returns all laptops | Returns laptops with dedicated GPUs and high RAM |
-| "birthday gift for 10 year old boy" | Matches "birthday" - returns party supplies | Returns toys, games, and age-appropriate tech |
+| "birthday gift for 10 year old boy" | Matches "birthday", returns party supplies | Returns toys, games, and age-appropriate tech |
 | "non-toxic sippy cup" | Returns any sippy cup with "non-toxic" in description | Understands safety concern and returns BPA-free, certified products |
 | "shoes like my last pair but in black" | Fails completely | With session context, can reference previous purchases |
 | "professional but comfortable" | Returns nothing useful | Understands the tension and finds smart-casual products |
@@ -162,7 +162,7 @@ Vector embeddings are numerical representations of text that capture meaning. Ea
 No. Traditional keyword search requires you to manually map synonyms (sneakers = trainers = running shoes). AI search understands these relationships natively through its language model training, so it handles synonyms, slang, and regional terminology automatically.
 
 ### How fast is AI-powered site search?
-Modern AI search engines return results in under 200 milliseconds - fast enough that shoppers don't notice any difference from keyword search. The heavy computation (embedding products) happens during indexing, not at query time.
+Modern AI search engines return results in under 200 milliseconds, fast enough that shoppers don't notice any difference from keyword search. The heavy computation (embedding products) happens during indexing, not at query time.
 
 ### Can AI search handle typos and misspellings?
 Yes. Because AI search understands context and meaning, it can typically infer the correct intent even from misspelled queries. A search for "runnign shoees" is understood as "running shoes" without needing a separate typo-correction layer.

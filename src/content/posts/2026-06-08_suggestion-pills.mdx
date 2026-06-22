@@ -13,11 +13,11 @@ export const meta = {
  faqItems: [
  {
  question: "Why does a blank search box cause undecided shoppers to bounce?",
- answer: "Undecided shoppers arrive with purchase intent but can't translate a vague need - a gift for a runner, a rug for dark floors - into a catalog-specific search term. A blank search box signals they're on their own, and the friction of forming a query combined with fear of hitting a dead end tips them toward leaving. Because they never submit a query, their exit never registers in your analytics, making it invisible churn that standard zero-result tracking won't catch. Vocabulary mismatches compound the problem: a shopper searching 'vegan leather bag' hits a dead end if your catalog tags the same item 'faux leather.'"
+ answer: "Undecided shoppers arrive with purchase intent but can't translate a vague need (a gift for a runner, a rug for dark floors) into a catalog-specific search term. A blank search box signals they're on their own, and the friction of forming a query combined with fear of hitting a dead end tips them toward leaving. Because they never submit a query, their exit never registers in your analytics, making it invisible churn that standard zero-result tracking won't catch. Vocabulary mismatches compound the problem: a shopper searching 'vegan leather bag' hits a dead end if your catalog tags the same item 'faux leather.'"
  },
  {
  question: "What is Nobi, and how does it turn a blank search box into a guided starting point?",
- answer: "Nobi is an AI-powered site search and shopping assistant platform that combines site search, conversational Q&A, and automatic shopper question-answering. Its solution for undecided shoppers is suggestion pills - tappable, LLM-generated buttons that appear before a visitor types anything, drawn from the context of the page they're on. Tapping a pill opens Nobi with that question pre-filled and a sourced answer already loading from your connected product pages, FAQ routes, and policy docs. Every answer includes numbered citation pills so shoppers can verify any claim against your official content without leaving the chat."
+ answer: "Nobi is an AI-powered site search and shopping assistant platform that combines site search, conversational Q&A, and automatic shopper question-answering. Its solution for undecided shoppers is suggestion pills: tappable, LLM-generated buttons that appear before a visitor types anything, drawn from the context of the page they're on. Tapping a pill opens Nobi with that question pre-filled and a sourced answer already loading from your connected product pages, FAQ routes, and policy docs. Every answer includes numbered citation pills so shoppers can verify any claim against your official content without leaving the chat."
  },
  {
  question: "How do I add Nobi's suggestion pills to my store?",
@@ -33,7 +33,7 @@ export const meta = {
  },
  {
  question: "How do I measure whether suggestion pills are lifting engagement and revenue?",
- answer: "The article notes that search abandonment - leaving without submitting a query - is invisible to most analytics platforms, which is the core problem suggestion pills address, but it doesn't detail specific metrics or dashboards for measuring pill performance. For revenue impact, it cites Lucchese's $1M+ incremental revenue in their first year with Nobi, but doesn't walk through how that was attributed or measured."
+ answer: "The article notes that search abandonment (leaving without submitting a query) is invisible to most analytics platforms, which is the core problem suggestion pills address, but it doesn't detail specific metrics or dashboards for measuring pill performance. For revenue impact, it cites Lucchese's $1M+ incremental revenue in their first year with Nobi, but doesn't walk through how that was attributed or measured."
  },
  {
  question: "When does a different tool fit better than Nobi for guiding undecided shoppers?",
@@ -49,7 +49,7 @@ export const meta = {
   "headline": "How to Guide Shoppers Who Don't Know What to Search For",
   "description": "Turn a blank search box into a guided starting point with tappable suggestion prompts that surface high-intent queries for undecided shoppers.",
   "datePublished": "2026-06-07",
-  "dateModified": "2026-06-07",
+  "dateModified": "2026-06-22",
   "author": {
     "@type": "Person",
     "name": "Shanif Dhanani",
@@ -82,11 +82,11 @@ A shopper looking for a gift for a runner, or a rug for dark floors, has real pu
 
 ## Why does a blank search box cause undecided shoppers to bounce?
 
-Undecided shoppers land with purchase intent but no ready search term - they want a gift for a runner, a moisturizer for sensitive skin, or a rug that works with dark floors, but they can't translate that into a catalog-specific query. A search box with no starting point signals "you're on your own," and the friction of formulating a query - combined with the fear of hitting a dead end - tips them toward leaving. Because these shoppers never submit a query, their exit doesn't register as a [null result or zero-result rate](/blog/fix-zero-result-searches).
+Undecided shoppers land with purchase intent but no ready search term. They want a gift for a runner, a moisturizer for sensitive skin, or a rug that works with dark floors, but they can't translate that into a catalog-specific query. A search box with no starting point signals "you're on your own," and the friction of formulating a query (combined with the fear of hitting a dead end) tips them toward leaving. Because these shoppers never submit a query, their exit doesn't register as a [null result or zero-result rate](/blog/fix-zero-result-searches).
 
-Vocabulary mismatch compounds it for shoppers who do try. A visitor searching "vegan leather bag" hits a dead end if your catalog tags the same item "faux leather" - a motivated query still returns nothing.
+Vocabulary mismatch compounds it for shoppers who do try. A visitor searching "vegan leather bag" hits a dead end if your catalog tags the same item "faux leather." A motivated query still returns nothing.
 
-High-intent paid and email traffic is especially exposed. The CAC you spent to get that visitor evaporates if the on-site experience offers no direction on arrival. Search abandonment - leaving without submitting a query - is distinct from a null result, and most analytics platforms track only the latter.
+High-intent paid and email traffic is especially exposed. The CAC you spent to get that visitor evaporates if the on-site experience offers no direction on arrival. Search abandonment (leaving without submitting a query) is distinct from a null result, and most analytics platforms track only the latter.
 
 Improving what shoppers see when the search box is empty converts visitors who are already on site.
 
@@ -114,9 +114,9 @@ Getting those pills live takes three steps: connect your knowledge sources, add 
 
 **Step 2: Install the widget.** A small theme tweak gets it live. Developer-level customization is optional - most stores don't need it to get started.
 
-**Step 3: Pills appear automatically.** Once the knowledge base is active, Nobi generates pills for each page context out of the box - homepage, PDP, collection. Nobi scopes them to where the visitor is on your site without any per-page configuration from you.
+**Step 3: Pills appear automatically.** Once the knowledge base is active, Nobi generates pills for each page context out of the box: homepage, PDP, collection. Nobi scopes them to where the visitor is on your site without any per-page configuration from you.
 
-The component has a few controls worth knowing. `pill-count` sets how many pills appear (1-10, default 3). `multi-row` switches from a carousel to a grid. `pill-types` locks the category to `cross-sell`, `qa`, or a custom slug - or leave it unset and the AI classifies each one:
+The component has a few controls worth knowing. `pill-count` sets how many pills appear (1-10, default 3). `multi-row` switches from a carousel to a grid. `pill-types` locks the category to `cross-sell`, `qa`, or a custom slug, or leave it unset and the AI classifies each one:
 
 ```html
 <!-- Default: 3 carousel pills -->
@@ -157,7 +157,7 @@ Pill colors and spacing match your brand through CSS variables:
 }
 ```
 
-For high-stakes prompts - return windows, warranty terms, shipping cutoffs - query overrides let you pin exact merchant-approved answers to specific questions. Those prompts always fire the answer you set, with no variation.
+For high-stakes prompts (return windows, warranty terms, shipping cutoffs), query overrides let you pin exact merchant-approved answers to specific questions. Those prompts always fire the answer you set, with no variation.
 
 If your storefront design needs a custom layout for how products render inside the assistant, the Hooks API gives your dev team that control. [UNTUCKit](/customers/untuckit) originally asked for it; that request became a standard feature available to every Nobi merchant.
 
@@ -179,15 +179,15 @@ Certain prompt categories tend to work well across most storefronts:
 
 Avoid pills that are too generic to answer well ("Show me your best products") or too SKU-specific for a page carrying a wide assortment.
 
-Nobi runs a second AI review - an LLM judge - on every generated pill, checking each draft answer against the source content before it ships. That always-on pass reduces the chance a fabricated answer erodes trust, and it matters most on sensitive questions like allergens, exact dimensions, or compatibility claims, where accuracy is critical.
+Nobi runs a second AI review (an LLM judge) on every generated pill, checking each draft answer against the source content before it ships. That always-on pass reduces the chance a fabricated answer erodes trust, and it matters most on sensitive questions like allergens, exact dimensions, or compatibility claims, where accuracy is critical.
 
 ## Can I customize suggestion pills for different pages or audiences?
 
-The prompt categories that work for your storefront don't all belong on every page. Nobi generates suggestion pills based on the specific page type a visitor is on - homepage, PDP, or collection page - so the questions shift based on where the shopper is in the funnel without any manual segmentation work on your end. Merchants can override the LLM-generated defaults with specific prompts, but pinning one means adding a fixed pill to the storefront markup (or setting up a query-override rule) - a light dev or theme change, not a no-code dashboard toggle.
+The prompt categories that work for your storefront don't all belong on every page. Nobi generates suggestion pills based on the specific page type a visitor is on (homepage, PDP, or collection page), so the questions shift based on where the shopper is in the funnel without any manual segmentation work on your end. Merchants can override the LLM-generated defaults with specific prompts, but pinning one means adding a fixed pill to the storefront markup (or setting up a query-override rule), a light dev or theme change, not a no-code dashboard toggle.
 
 Page type determines the category of question each pill asks. On the homepage, pills skew broad: gift finders, category guidance, use-case entry points that work across the full catalog. On a PDP, the AI narrows to the item in view - size guidance, material questions, compatibility checks, return and exchange policy for that specific product type. On a collection page, pills help shoppers narrow a wide result set: "What's the difference between X and Y in this collection?" or "What's the most popular option for [use case]?"
 
-For high-stakes questions - return windows, warranty terms, shipping cutoffs - query overrides let you lock exact merchant-approved text to a specific prompt. When a shopper asks a question that matches the override, the pinned answer fires every time. The AI won't rephrase it; the response is exactly what you wrote.
+For high-stakes questions (return windows, warranty terms, shipping cutoffs), query overrides let you lock exact merchant-approved text to a specific prompt. When a shopper asks a question that matches the override, the pinned answer fires every time. The AI won't rephrase it; the response is exactly what you wrote.
 
 Because connected knowledge sources refresh twice a day, a policy update or a new FAQ entry lands in pill responses within hours. You don't need to trigger a re-index.
 
@@ -195,7 +195,7 @@ Because connected knowledge sources refresh twice a day, a policy update or a ne
 
 Track pill tap rate, assisted CVR, and revenue per visit as your primary signals. Nobi surfaces search and CVR metrics in the dashboard so you can compare assisted and unassisted session performance directly.
 
-Pill tap rate is a prompt-relevance signal, not a traffic metric. A low tap rate usually means the copy doesn't match what shoppers want to know on that page - test alternative phrasings before drawing conclusions about the feature itself. A pill that reads "What's in this?" may underperform one that reads "What are the materials?"
+Pill tap rate is a prompt-relevance signal, not a traffic metric. A low tap rate usually means the copy doesn't match what shoppers want to know on that page. Test alternative phrasings before drawing conclusions about the feature itself. A pill that reads "What's in this?" may underperform one that reads "What are the materials?"
 
 Assisted CVR is the clearest measure of whether the pills are doing their job. Sessions where a shopper tapped a pill should convert at a higher rate than sessions where they didn't. That gap is your lift. If the gap is narrow, the problem is usually with which questions are surfacing, not with the mechanism itself.
 
@@ -205,13 +205,13 @@ Revenue per visit is the most useful number to bring to a growth or marketing le
 
 ## When does a different tool fit better than Nobi for guiding undecided shoppers?
 
-Nobi's suggestion pills work best when shoppers need conversational guidance that flows into grounded search and Q&A - that covers most discovery needs. Two cases point to a different tool: when your main product-finder experience is a structured quiz, and when marketing ops needs to build campaign-specific conversation flows without engineering support. Nobi also has real limits worth knowing before you commit.
+Nobi's suggestion pills work best when shoppers need conversational guidance that flows into grounded search and Q&A. That covers most discovery needs. Two cases point to a different tool: when your main product-finder experience is a structured quiz, and when marketing ops needs to build campaign-specific conversation flows without engineering support. Nobi also has real limits worth knowing before you commit.
 
 **Quiz-led discovery.** [Octane AI](https://www.octaneai.com) is built for quiz-led product finding - skincare routine-builders, fit finders, supplement regimens. It ships pre-built Shopify templates with deep product-attribute mapping and native Klaviyo integration. Pricing starts at $50/month for 400 quiz completions.
 
-**Scripted campaign flows.** [Rep AI](https://www.rep.ai)'s Flow Studio is a no-code builder for designing deterministic conversation paths - Black Friday promos, product-launch walkthroughs, abandoned-cart rescues - without engineering tickets. Pricing starts at $12 per 1,000 visitors.
+**Scripted campaign flows.** [Rep AI](https://www.rep.ai)'s Flow Studio is a no-code builder for designing deterministic conversation paths (Black Friday promos, product-launch walkthroughs, abandoned-cart rescues) without engineering tickets. Pricing starts at $12 per 1,000 visitors.
 
-**Where Nobi falls short.** Nobi's current personalization covers placeholder text and starter messages only - it doesn't yet rerank results based on individual shopper click and purchase history. Brands whose main need is behavioral reranking will need a platform built for that. Nobi also answers shopper questions and reduces the volume landing in your support queue, but it doesn't manage tickets, route cases to agents, or process returns in a structured workflow. For that layer, pair it with a dedicated helpdesk.
+**Where Nobi falls short.** Nobi's current personalization covers placeholder text and starter messages only; it doesn't yet rerank results based on individual shopper click and purchase history. Brands whose main need is behavioral reranking will need a platform built for that. Nobi also answers shopper questions and reduces the volume landing in your support queue, but it doesn't manage tickets, route cases to agents, or process returns in a structured workflow. For that layer, pair it with a dedicated helpdesk.
 
 
 <BlogEmailCapture hook="Losing shoppers who can't find the right words to search?" subtext="Drop your email and we'll show you how Nobi's AI search guides undecided shoppers to the right products before they give up and leave." />

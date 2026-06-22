@@ -12,7 +12,7 @@ export const meta = {
  draft: false,
  faqItems: [
  {
- question: "Should you build or buy AI site search for your ecommerce store?",
+ question: "Should you build or buy AI site search for your ecommerce site?",
  answer: "For most ecommerce teams, buying a productized AI search solution wins on the parts that are hardest to get right: keeping answers grounded to a live catalog and maintaining that accuracy as inventory changes. The real cost of building isn't the initial setup - it's the ongoing engineering work competing with the rest of your roadmap. A hallucinated answer about stock or pricing isn't a recoverable error - shoppers who get a confident wrong answer don't complain, they just leave. Build if your team wants to own the stack end-to-end and has roadmap space to maintain it; buy if catalog accuracy and speed to market matter more."
  },
  {
@@ -72,7 +72,7 @@ export const meta = {
   ]
 }`}
 </script>
-## Should you build or buy AI site search for your ecommerce store?
+## Should you build or buy AI site search for your ecommerce site?
 
 Your engineering team can absolutely build AI site search. LLM APIs and vector databases are accessible enough now that assembling the pieces isn't the hard part. The harder part is everything after: keeping answers grounded to a live catalog as prices change, variants sell out, and new products drop. That's ongoing maintenance, not a one-time setup - and it competes with everything else on your roadmap. When grounding slips, the cost is real. A shopper who gets a confident wrong answer about inventory doesn't complain - they just leave. This article walks through what building actually requires, what a purpose-built product handles for you, and when each path makes sense.
 
@@ -134,11 +134,11 @@ Query overrides handle the questions where you can't allow variation. Return pol
 
 The analytics come built in. Zero-result rate, CVR lift by search session, and revenue per searcher are all in the dashboard - no separate reporting project to instrument. [UNTUCKit](/customers/untuckit) ran a two-month A/B test and saw +17.1% CVR and +21.3% revenue per searcher versus their prior search tool - enough to move Nobi to 100% of traffic. [Lucchese](/customers/lucchese) attributed $1M+ in incremental revenue in year one, with a 39x ROI on cumulative basis.
 
-One honest gap: Nobi doesn't do behavioral reranking today. Results don't reorder based on individual shopper click and purchase history. Brands where that personalization is the primary requirement should evaluate alternatives. For most stores, the grounding, speed, and built-in analytics are what move the needle.
+One honest gap: Nobi doesn't do behavioral reranking today. Results don't reorder based on individual shopper click and purchase history. Brands where that personalization is the primary requirement should evaluate alternatives. For most sites, the grounding, speed, and built-in analytics are what move the needle.
 
 ## When is building your own AI search the right call?
 
-Grounded answers, built-in analytics, and a fast install cover most stores' needs. Building makes sense when they don't - specifically when the customization required is genuine, not just a preference for control, and when your team has dedicated engineering headcount to own the stack long-term. Custom product attribute weighting, proprietary behavioral signals, or a frontend so bespoke that a standard search widget can't accommodate it: those are the real build cases. The same applies to teams that want to own search as a core differentiator and already run a search or ML practice with the infrastructure for ongoing reliability and relevance work.
+Grounded answers, built-in analytics, and a fast install cover most sites' needs. Building makes sense when they don't - specifically when the customization required is genuine, not just a preference for control, and when your team has dedicated engineering headcount to own the stack long-term. Custom product attribute weighting, proprietary behavioral signals, or a frontend so bespoke that a standard search widget can't accommodate it: those are the real build cases. The same applies to teams that want to own search as a core differentiator and already run a search or ML practice with the infrastructure for ongoing reliability and relevance work.
 
 [Algolia](https://www.algolia.com) is a developer search API with full API control over how product attributes factor into ranking, plus a large ecosystem of InstantSearch widgets and client libraries. You get fast response times for typeahead and granular control over ranking signals without building a vector store from scratch.
 
@@ -148,7 +148,7 @@ Build is not the right call if reducing engineering overhead is the goal, if the
 
 ## What do ecommerce teams most often ask when comparing a DIY build to a purpose-built AI search product?
 
-Teams that reach that maintenance question most often land on three concrete ones before deciding: how long a build actually takes, what a purpose-built product costs, and whether personalization gaps matter for their store. Here are direct answers to each.
+Teams that reach that maintenance question most often land on three concrete ones before deciding: how long a build actually takes, what a purpose-built product costs, and whether personalization gaps matter for their site. Here are direct answers to each.
 
 **How long does a DIY build take?** Most teams estimate 2 to 6 months to ship a working first version - longer if the eval suite and catalog sync are built from scratch. A purpose-built product typically goes live in hours. The gap widens once you factor in time spent catching grounding failures post-launch.
 

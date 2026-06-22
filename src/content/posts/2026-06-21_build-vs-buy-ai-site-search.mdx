@@ -79,17 +79,17 @@ Your engineering team can absolutely build AI site search. LLM APIs and vector d
 | Option | Primary job | Best for | Pricing (starting) | Standout strength | Key weakness |
 | --- | --- | --- | --- | --- | --- |
 | Nobi | AI site search + conversational shopping assistant grounded to your catalog | Website teams that need catalog-accurate answers live fast, without ongoing engineering ownership | $25/mo (2,500 searches + 250 messages included; $0.01/additional search, $0.10/additional message) | Catalog-grounded answers with inline source citations; quick theme drop-in, live in hours; built-in CVR and zero-result analytics | No behavioral reranking today; not an API-first platform for teams that want to own bespoke ranking logic |
-| Build your own | Custom AI search assembled from LLMs, a vector store, retrieval pipeline, and UI - or a search API with the answer layer built on top | Engineering teams that want full ownership of ranking logic, model choice, and UI - and have roadmap space to maintain all of it | LLM API + vector DB + hosting fees scale with usage; no fixed product fee - but engineering time is the dominant cost | Full control over every layer: model, retrieval strategy, ranking weights, and interface | You own every maintenance burden: catalog freshness, grounding accuracy, eval, latency, security, and model deprecations |
+| Build your own | Custom AI search assembled from LLMs, a vector store, retrieval pipeline, and UI, or a search API with the answer layer built on top | Engineering teams that want full ownership of ranking logic, model choice, and UI, with roadmap space to maintain all of it | LLM API + vector DB + hosting fees scale with usage; no fixed product fee, but engineering time is the dominant cost | Full control over every layer: model, retrieval strategy, ranking weights, and interface | You own every maintenance burden: catalog freshness, grounding accuracy, eval, latency, security, and model deprecations |
 
 <BlogQualifier context="building vs buying AI site search" />
 
 ## How do building and buying AI site search actually compare?
 
-Building your own AI site search is genuinely viable today - modern LLM APIs and vector stores have made the pieces accessible. For most website teams, though, a productized option wins on the parts that are hardest to get right: keeping search results accurate against a live catalog - the right products, actually in stock, at the price you're showing - and holding that accuracy as your inventory and product line change.
+Building your own AI site search is genuinely viable today. Modern LLM APIs and vector stores have made the pieces accessible. For most website teams, though, a productized option wins on the parts that are hardest to get right: keeping search results accurate against a live catalog (the right products, actually in stock, at the price you're showing) and holding that accuracy as your inventory and product line change.
 
 That second part carries real risk. When the index falls behind your live catalog, search keeps surfacing products that have sold out, been discontinued, or changed price - the shopper clicks the result, lands on a dead end, and leaves. They don't complain; the lost sale just never shows up in your analytics.
 
-The work that separates good AI search from bad - catalog grounding, evaluation, ongoing tuning - also competes with the rest of your engineering roadmap. That's the real cost of building.
+The work that separates good AI search from bad (catalog grounding, evaluation, ongoing tuning) also competes with the rest of your engineering roadmap. That's the real cost of building.
 
 Developer-first search APIs sit between a full custom build and a fully productized SaaS layer - more control than a packaged product without building the full infrastructure yourself.
 
@@ -103,19 +103,19 @@ The catalog sync piece carries the most day-to-day risk. Prices, inventory count
 
 Retrieval quality is the next hard problem. Keyword search misses semantic meaning; pure vector search can surface irrelevant results. Getting a hybrid that handles short queries ("black boots") alongside long, descriptive ones takes real evaluation - and regular tuning as the catalog grows and visitor behavior shifts.
 
-Shoppers increasingly expect to both search and ask - type a few words for quick results, then ask a follow-up in plain language - so a chat-style surface is fast becoming something they look for, not a bonus. The two have very different speed budgets, though, which in practice means two different systems. Instant search - typeahead, ranked results as someone types - has to come back in milliseconds, so it runs on a search index, not a model call per query. A conversational answer can afford the extra time an LLM needs to read the retrieved context and compose a grounded reply. The build challenge is running both paths and routing each query to the right one - you can't push every keystroke through a model and still feel instant, and you can't answer a real question with a results grid.
+Shoppers increasingly expect to both search and ask. They type a few words for quick results, then ask a follow-up in plain language, so a chat-style surface is fast becoming something they look for, not a bonus. The two have very different speed budgets, though, which in practice means two different systems. Instant search (typeahead, ranked results as someone types) has to come back in milliseconds, so it runs on a search index, not a model call per query. A conversational answer can afford the extra time an LLM needs to read the retrieved context and compose a grounded reply. The build challenge is running both paths and routing each query to the right one: you can't push every keystroke through a model and still feel instant, and you can't answer a real question with a results grid.
 
 Then there's everything else: a test suite that catches fabricated product specs before visitors do (and grows with the catalog), prompt injection resistance, PII handling in chat transcripts, data retention policies, and a plan for every upstream model deprecation or API change on a vendor's schedule.
 
-A developer search API handles the retrieval and ranking layers without covering answer generation or chat UI. Building further up the stack - the parts that turn a search index into a conversational assistant - is still yours to own.
+A developer search API handles the retrieval and ranking layers without covering answer generation or chat UI. Building further up the stack, the parts that turn a search index into a conversational assistant, is still yours to own.
 
 ## Why is catalog grounding the hardest part - and what goes wrong when it fails?
 
 Owning the full stack means owning grounding too - and grounding is where most builds quietly fail. Grounding ties both halves of the experience to your live catalog: search returns products that are actually available at the price shown, and the answer layer responds only from your connected content instead of inventing specs, prices, or ship dates. Getting this right requires a live data connection, not a one-time training run.
 
-The core problem is that any index built from a snapshot of your catalog starts going stale the moment it's deployed. Last week's price change, the colorway you sold out of, the new collection that dropped yesterday - none of it is reflected until you sync. A stale index does a specific kind of damage: search keeps showing shoppers items that are gone or mispriced, and a result that leads nowhere sends them straight to a competitor. They don't complain - they just go.
+The core problem is that any index built from a snapshot of your catalog starts going stale the moment it's deployed. Last week's price change, the colorway you sold out of, the new collection that dropped yesterday: none of it is reflected until you sync. A stale index does a specific kind of damage: search keeps showing shoppers items that are gone or mispriced, and a result that leads nowhere sends them straight to a competitor. They don't complain; they just go.
 
-Hallucinated inventory is the highest-stakes version of this. A visitor who asks "do you have this in a size 10?" and gets a confident yes - when the answer is no - doesn't just abandon the purchase. They lose trust in the brand permanently. You may never know it happened.
+Hallucinated inventory is the highest-stakes version of this. A visitor who asks "do you have this in a size 10?" and gets a confident yes, when the real answer is no, doesn't just abandon the purchase. They lose trust in the brand permanently. You may never know it happened.
 
 Zero-result searches are the same failure from the other direction. A shopper searches in their own words, the index has no good match, and they assume you don't carry it - when you do. On the answer side it shows up as circular conversations: the assistant can't find something in the catalog, it hedges, the visitor rephrases, it hedges again, they give up. Zero-result rate and session drop-off are at least measurable - the shoppers who hit a bad result or a dead-end answer and quietly leave are not.
 
@@ -125,13 +125,13 @@ Two techniques reduce these failures. First, a second AI review: every draft ans
 
 Both of those techniques - a second AI review and query overrides - ship with Nobi already in place. They're two pieces of a wider productized layer your team would otherwise build and maintain from scratch.
 
-Catalog grounding is automatic. Connected knowledge sources - product pages, PDFs, policy docs - refresh twice a day, so a price change or a new return policy lands in visitor answers within hours, no deployment required. Every answer carries an inline citation back to the exact source document and excerpt it came from, so visitors can verify any claim and merchandisers can audit answers without digging through logs.
+Catalog grounding is automatic. Connected knowledge sources (product pages, PDFs, policy docs) refresh twice a day, so a price change or a new return policy lands in visitor answers within hours, no deployment required. Every answer carries an inline citation back to the exact source document and excerpt it came from, so visitors can verify any claim and merchandisers can audit answers without digging through logs.
 
 Getting live is fast. Most implementations go live in hours with a small theme tweak - no vector database to provision, no embedding pipeline to wire up. That's the months of integration work you skip.
 
 Query overrides handle the questions where you can't allow variation. Return policies, warranty terms, anything where precision matters more than fluency - you pin an exact merchant-approved response, and that fires whenever the question matches. Everything else routes through the standard grounded pipeline.
 
-The analytics come built in. Zero-result rate, CVR lift by search session, and revenue per searcher are all in the dashboard - no separate reporting project to instrument. [UNTUCKit](/customers/untuckit) ran a two-month A/B test and saw +17.1% CVR and +21.3% revenue per searcher versus their prior search tool - enough to move Nobi to 100% of traffic. [Lucchese](/customers/lucchese) attributed $1M+ in incremental revenue in year one, with a 39x ROI on cumulative basis.
+The analytics come built in. Zero-result rate, CVR lift by search session, and revenue per searcher are all in the dashboard, with no separate reporting project to instrument. [UNTUCKit](/customers/untuckit) ran a two-month A/B test and saw +17.1% CVR and +21.3% revenue per searcher versus their prior search tool, enough to move Nobi to 100% of traffic. [Lucchese](/customers/lucchese) attributed $1M+ in incremental revenue in year one, with a 39x ROI on cumulative basis.
 
 One honest gap: Nobi doesn't do behavioral reranking today. Results don't reorder based on individual visitor click and purchase history. Brands where that personalization is the primary requirement should evaluate alternatives. For most sites, the grounding, speed, and built-in analytics are what move the needle.
 

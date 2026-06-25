@@ -1,6 +1,6 @@
 export function buildPageSummaryPrompt() {
   if (typeof window === "undefined" || typeof document === "undefined") {
-    return "Summarize this Nobi page for a buyer evaluating conversational website assistants.";
+    return "Summarize this Nobi page for a buyer evaluating options.";
   }
 
   const title = document.title || "Nobi";
@@ -9,13 +9,13 @@ export function buildPageSummaryPrompt() {
   const url = window.location.href;
 
   return [
-    "Summarize this Nobi page for a buyer evaluating conversational website assistants.",
+    "Summarize this Nobi page for a buyer evaluating options.",
     "",
     `Page title: ${title}`,
     description ? `Meta description: ${description}` : null,
     `Page URL: ${url}`,
     "",
-    "Focus on what the page says Nobi does, who it is for, the proof points, and the next best action for the visitor.",
+    "Cover the main options or recommendations on the page. For comparison pages, include the alternatives and key tradeoffs. Explain where Nobi fits, who the page is for, important proof points, and the best next step.",
   ].filter(Boolean).join("\n");
 }
 

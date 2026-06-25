@@ -1,5 +1,5 @@
 export function buildPageSummaryPrompt() {
-  return "Summarize the current page.";
+  return "Summarize the current page for a visitor. Focus on the page's substantive content, not metadata like the title or author. If the page compares options or makes recommendations, cover the options, key tradeoffs, and who each option is best for.";
 }
 
 export async function summarizeCurrentPageWithNobi() {

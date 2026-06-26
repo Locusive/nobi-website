@@ -1,0 +1,177 @@
+export const meta = {
+ title: "How to Stop Policy, Shipping, and Returns Questions From Becoming Support Tickets",
+ slug: "knowledge-base",
+ date: "2026-06-26",
+ publishedAt: "2026-06-26",
+ description: "Learn how to use AI grounded in your own site content to answer shipping, returns, and policy questions before shoppers open a ticket.",
+ excerpt: "Learn how to use AI grounded in your own site content to answer shipping, returns, and policy questions before shoppers open a ticket.",
+ tags: ["how-to", "support deflection", "ecommerce", "ecommerce search"],
+ author: "Shanif Dhanani",
+ heroImage: "https://storage.googleapis.com/nobi-public/docs_and_marketing_websites/posts/knowledge-base/hero.webp",
+ featured: true,
+ draft: false,
+ faqItems: [
+ {
+ question: "Why do shoppers keep emailing about shipping, returns, and warranties even when those answers are on your site?",
+ answer: "Policy pages are rarely where shoppers look, and product search bars aren't built to answer questions - they return SKUs or nothing when a shopper types something like 'do you accept returns on sale items?' That dead end becomes a support ticket. WISMO questions (shipping timelines, order status) are the highest-volume ticket category for many DTC brands, and most have a published answer somewhere on the site the shopper simply couldn't reach. Shoppers who can't get a sizing answer while browsing either buy the wrong size and return it, or leave - and that loss never shows up as a search problem, only as a return rate or a missed conversion."
+ },
+ {
+ question: "What is Nobi, and how does it answer policy questions from your own content?",
+ answer: "Nobi is a conversational website assistant that handles both instant product search and policy Q&A in one widget. Policy questions - return windows, shipping timelines, warranty terms - get answers pulled from the pages and files you've connected to its knowledge base, not from general AI training data. Every response includes inline citation pills that show the source document name, the indexing date, and the exact excerpt the answer came from, so shoppers can verify any claim without leaving the chat. Knowledge sources refresh twice a day, so a policy update you publish in the morning reaches shoppers by afternoon."
+ },
+ {
+ question: "How do I connect my policy pages, PDFs, and help content to Nobi's knowledge base?",
+ answer: "Connect a URL or upload a file under Assistant → Knowledge Base in your dashboard and it becomes part of what Nobi can answer, with no reformatting required. For web pages, paste the URL and it indexes in 30 seconds to 2 minutes depending on length; for sitemaps, import the sitemap URL and Nobi will also pick up newly published pages automatically on twice-daily checks. PDFs - warranty certificates, sizing charts, downloadable return forms - can be uploaded directly without being published as web pages first, as long as they are text-based, under 25 MB, and not password-protected. Once added, the status column shows Indexing while processing and Ready when the document is live and answerable."
+ },
+ {
+ question: "How does Nobi answer a policy question without fabricating details that aren't in my documents?",
+ answer: "Every answer Nobi gives is drawn from the documents you've connected, not from anything the AI was trained on - so it won't invent a return window or describe a shipping timeline you never published. The mechanism is retrieval: Nobi locates the relevant passage in your connected sources, synthesizes an answer from that passage, and attaches an inline citation pill showing exactly where the answer came from. For high-consideration industries, a second AI model can review the draft answer against the cited source before it reaches the shopper, and this check is on by default with a toggle per merchant. When Nobi doesn't have a confident grounded answer, it says so rather than filling the gap with a confident-sounding guess."
+ },
+ {
+ question: "How do I make sure certain policy answers never get paraphrased or varied?",
+ answer: "Nobi's query override feature lets you pin an exact merchant-approved response to a specific question, so that answer is sent word-for-word every time a shopper's query matches, with no paraphrasing. This is the right tool for a narrow set of questions - return deadlines, warranty exclusions, sale restrictions, shipping cutoff dates - where even a correctly summarized answer creates legal or operational ambiguity. Overrides also work as a fast path when something changes mid-day: if a shipping deadline shifts, you can pin the corrected answer immediately without waiting for the next scheduled knowledge-base sync. All other questions continue to route through the standard grounded-answer pipeline."
+ },
+ {
+ question: "What happens to Nobi's answers when my return window or shipping rates change?",
+ answer: "Nobi re-indexes connected knowledge sources twice a day, so a policy change you publish to your site lands in customer-facing answers within hours, with no manual cache-clearing or admin work required. That matters because an AI answering from stale data won't fabricate anything - it will answer accurately from what it knew last time, which is just as damaging if the policy has since changed. For changes that can't wait a few hours - a carrier-delayed shipping cutoff, a return window extended mid-promotion - a query override puts the corrected answer live immediately. The two mechanisms work together: automatic refresh for most updates, manual overrides for the rare case where minutes matter."
+ },
+ {
+ question: "When is Nobi the right fit for policy Q&A, and when should I look at a different tool?",
+ answer: "Nobi fits when the bottleneck is the volume of policy questions arriving before a ticket is ever filed - WISMO, return windows, shipping timelines, warranty terms - and you want those answered on-site from your own content alongside the product search shoppers use in the same session. It starts at $25/month with 2,500 searches and 250 conversational messages included, plus $0.01 per additional search and $0.10 per additional message. It does not manage a support inbox, route tickets, process return authorizations, or execute post-purchase transactions - those still go through a human or a purpose-built helpdesk. If your primary bottleneck is agent-side workflow such as sorting tickets, SLA management, or channel consolidation, pair Nobi with a helpdesk rather than use it as a replacement."
+ }
+ ],
+};
+
+<script type="application/ld+json" data-nobi-schema>
+{`{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "How to Stop Policy, Shipping, and Returns Questions From Becoming Support Tickets",
+  "description": "Learn how to use AI grounded in your own site content to answer shipping, returns, and policy questions before shoppers open a ticket.",
+  "datePublished": "2026-06-26",
+  "dateModified": "2026-06-26",
+  "author": {
+    "@type": "Person",
+    "name": "Shanif Dhanani",
+    "url": "https://www.linkedin.com/in/shanifdhanani/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Nobi",
+    "url": "https://nobi.ai"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://nobi.ai/blog/knowledge-base"
+  },
+  "about": [
+    {
+      "@type": "Thing",
+      "name": "support deflection"
+    },
+    {
+      "@type": "Thing",
+      "name": "ecommerce"
+    }
+  ]
+}`}
+</script>
+## Can AI answer shoppers' policy, shipping, and returns questions directly from my site content?
+
+Your return policy, shipping timelines, and warranty terms are probably already published somewhere on your site. The problem is shoppers can't find them when it matters. They don't browse footer links before checkout. They type "do you accept returns on sale items?" into your [search bar](https://nobi.ai/blog/ai-vs-traditional-site-search) and get back a page of SKUs - or nothing at all.
+
+That dead end has two costs. Some shoppers open a support ticket. Others close the tab. Neither shows up in your analytics as a policy-discoverability problem. It shows up as ticket volume or a missed conversion.
+
+This guide walks through how to connect your existing site content to an AI assistant that answers those questions directly, before the shopper ever reaches your support queue.
+
+## Why do shoppers keep emailing about shipping, returns, and warranties even when those answers are on your site?
+
+Policy pages exist, but shoppers rarely find them on their own. They're buried in footers, written in legal-style prose that doesn't match how a shopper phrases a question, and invisible to your site's search bar.
+
+WISMO questions - where is my order, how long does shipping take - are the highest-volume ticket category for many DTC brands. Most of those questions have a published answer somewhere on the site. The shopper just couldn't find it.
+
+The same gap shows up before checkout, not just after. Fit is the leading driver of apparel returns. A shopper who can't get a sizing answer while browsing either guesses wrong and returns the item, or doesn't buy at all. Neither outcome shows up as a search problem in your analytics - it shows up as a return rate or a conversion miss.
+
+## What is Nobi, and how does it answer policy questions from your own content?
+
+Those dead ends the prior section described - the shopper who typed a real question and got SKUs back, or nothing - happen because product search bars aren't built to answer questions. Nobi is a [conversational website assistant](https://nobi.ai/blog/ai-shopping-assistant-ecommerce) that combines instant product search and automated Q&A in one widget, and the two paths work differently by design. Short product searches take the fast instant-search path and return ranked results in milliseconds. Policy questions - return windows, shipping timelines, warranty terms - get a grounded conversational answer pulled from the documents you've connected to it.
+
+That distinction matters because of where the answers come from. Nobi doesn't draw on general training data or guess when the connected sources are silent. Every answer comes from pages and files you've added to the knowledge base: your return policy page, your shipping FAQ, a sizing guide, warranty terms, a help-center article. You point Nobi at the URL or upload the file, and it becomes part of what the assistant can answer. Grounding answers in your connected content leaves less room for fabrication than an AI running without a knowledge tether - though no AI system is a complete guarantee against error.
+
+Transparency is built into every answer. Each response carries inline numbered citation pills. Hovering over one shows the source document name, the date it was indexed, and the exact excerpt the answer came from. A sources sidebar lists every reference with direct links, so a shopper can verify any claim against your official content without leaving the chat. That audit trail also matters on your side - when an answer looks off, you can see exactly which source produced it and update that source if it's stale.
+
+Knowledge sources refresh twice a day. So if you update your return policy on Tuesday morning, shoppers are seeing the new answer by Tuesday afternoon - not next week, and not after someone remembers to push a manual update.
+
+## How do I connect my policy pages, PDFs, and help content to Nobi's knowledge base?
+
+Connect a URL or upload a file and it becomes part of what Nobi's assistant can answer - no manual re-entry or reformatting required. That same knowledge base the prior section described, the one that grounds every answer and powers the citation trail, gets built from your existing site content: return policy pages, shipping FAQs, sizing guides, warranty PDFs, help-center articles. You're not migrating to a new content system or duplicating anything.
+
+The setup lives under **Assistant → Knowledge Base** in your dashboard. Click **Add Document** and you have three paths:
+
+1. **Index a URL** - select the Index URL tab, enter the full address (must start with https:// and be publicly accessible), click **Add Document**. Simple pages index in 30-60 seconds; longer help-center articles take 1-2 minutes.
+2. **Import from a sitemap** - click **Import from sitemap**, enter your sitemap URL, click **Preview pages**, deselect anything you don't want included, then **Import selected pages**. After that, Nobi checks the sitemap twice daily and adds any newly published pages automatically.
+3. **Upload a file** - click **Add Document**, choose **Upload File**, and drag in a PDF. Warranty certificates, downloadable return forms, sizing charts that live as PDFs - none of them need to be published as web pages first. Files under 10 pages index in under a minute; larger documents take a few minutes more. Files must be text-based, under 25 MB, and not password-protected.
+
+Once a document is added, watch the status column. **Indexing** means it's still processing. **Ready** means it's live and answerable. If a document shows **Error**, the most common cause is a URL that requires a login or returns no text content.
+
+Start with the content that drives the most tickets: shipping timelines, return eligibility windows, sizing information, and warranty terms. Those four categories cover the bulk of WISMO and pre-purchase questions for most brands. Add them first, confirm their status shows Ready, and you'll have answered most of your repeat volume before you've uploaded a single marketing asset.
+
+## How does Nobi answer a policy question without fabricating details that aren't in my documents?
+
+Once those documents show Ready in your knowledge base, every answer Nobi gives a shopper is drawn from them - not from anything the AI was trained on. The assistant can only cite what's in your connected sources, so it won't invent a return window that isn't in your policy or describe a shipping timeline you never published.
+
+The mechanism is retrieval, not generation. When a shopper asks about your return policy, Nobi locates the relevant passage in the documents you connected, synthesizes an answer from that passage, and attaches an inline citation pill to the response. Hovering over the pill shows exactly where the answer came from.
+
+For policy questions where a wrong answer is a real business risk, Nobi can run a second AI review before the response reaches the shopper. A separate model receives the draft answer alongside the raw content from the cited source and checks for inaccuracies. It's on by default for high-consideration industries and toggleable per merchant.
+
+When Nobi doesn't have a confident grounded answer, it says so. It won't fill the gap with a confident-sounding guess or loop the shopper through a non-answer. That restraint matters. The failure mode operators worry about most is an AI that states a policy with full confidence when that policy doesn't exist - an invented return window, a shipping promise that was never in the docs.
+
+## How do I make sure certain policy answers never get paraphrased or varied?
+
+For questions where even a paraphrased answer creates operational or legal risk - a return deadline, a warranty limitation, a promotion restriction - Nobi's query override feature lets you pin an exact merchant-approved response to a specific question. When a shopper's query matches the override, Nobi sends that exact text every time, with no variation. Everything else routes through the standard grounded-answer pipeline described in the previous section.
+
+That restraint in the standard pipeline - the one that keeps answers tethered to your connected sources - is the right default for most questions. But there's a small category where even a correct paraphrase is the wrong move. A return window stated in different words than your legal policy creates ambiguity. A warranty exclusion summarized loosely could be read as a promise you didn't make. A discount restriction reworded slightly might give shoppers grounds to push back. For those questions, the override fires the exact approved text and nothing else.
+
+The right use is narrow on purpose. Query overrides aren't a replacement for the grounded pipeline - they're the right tool for the handful of questions where your business needs zero paraphrase variance. Return deadlines, warranty carve-outs, sale exclusions, shipping cutoff dates. The override fires whenever a shopper's question matches; unrelated queries aren't affected.
+
+They also work well as a fast path when something time-sensitive changes. If a flash-sale shipping deadline shifts mid-day, you can pin the corrected answer immediately without waiting for the next knowledge-base refresh. The standard sync runs twice a day, which is fast enough for most updates - but when minutes matter, an override gets the right answer in front of shoppers right now.
+
+## What happens to Nobi's answers when my return window or shipping rates change?
+
+The grounded pipeline those overrides sit on top of refreshes on its own. Nobi re-indexes connected knowledge sources twice a day, so a policy change you publish to your site lands in customer-facing answers within hours. Update the page, and Nobi's next sync picks it up - no manual cache-clearing, no admin work to push the update. The source of truth is your live content, not a static snapshot baked in at setup.
+
+That matters because stale knowledge is where the confident-lie failure mode starts. An AI that answers from data that no longer reflects your current policy won't fabricate something - it will answer accurately from what it knew last time, which is just as damaging. A shopper told the wrong return window by a confident AI doesn't think "the bot was out of date." They think "the store misled me."
+
+By contrast, [Intercom](https://www.intercom.com)'s external knowledge sources - public URLs, Notion syncs, Confluence - refresh weekly by default. For stable content that's usually fine. But if you update a promotional shipping rate on a Tuesday, shoppers asking about it are still getting last week's answer until the weekly sync runs. For brands that update policies or promotions frequently, that's a real lag.
+
+For changes that genuinely can't wait - a shipping cutoff moved by a carrier delay, a return window extended mid-promotion - a query override gets the corrected answer live immediately. The two mechanisms work together: automatic refresh for everything that can wait a few hours, manual overrides for the rare case where minutes matter.
+
+## When is Nobi the right fit for policy Q&A, and when should I look at a different tool?
+
+Nobi fits best when you need a single assistant that answers policy questions on your site - before they reach your support team - grounded in your own content and paired with the product search shoppers use in the same session.
+
+Pick Nobi when the bottleneck is volume of questions arriving - WISMO, return windows, shipping timelines, warranty terms - before a ticket is ever filed. It starts at $25/month (2,500 searches and 250 conversational messages included), with $0.01 per additional search and $0.10 per additional message.
+
+What Nobi doesn't do: manage a support inbox, route tickets, run macros, or execute post-purchase transactions inside the chat. Cancellations, return authorizations, and order modifications still go through a human or a purpose-built helpdesk workflow. If your primary bottleneck is agent-side workflow - sorting and routing tickets, SLA management, processing returns - pair Nobi with a helpdesk rather than replace it.
+
+[Re:amaze](https://www.reamaze.com) is the right call when your team needs email, live chat, social, and SMS in one Shopify-connected inbox with agents handling each conversation. It consolidates channels and equips agents with AI assistance. Pick it when your bottleneck is agents managing multi-channel conversations, not on-site automated Q&A volume.
+
+[Intercom](https://www.intercom.com) Fin fits when you already run the Intercom platform and want AI layered into that same system. Worth knowing: Fin runs inside Intercom Messenger, on top of an Intercom subscription that includes seats, an inbox, and the rest of the helpdesk platform. For teams already on Intercom, that's additive. For teams who aren't, Fin is not a standalone purchase.
+
+One genuine Nobi limitation to name: it answers questions in a web chat widget and doesn't send or receive email. Teams whose primary support channel is email will need a different tool for that channel.
+
+
+<BlogEmailCapture hook="Shoppers asking shipping and returns questions before they convert?" subtext="Drop your email and we'll show you how Nobi answers shipping, returns, and policy questions directly on your site before shoppers abandon their cart." />
+
+---
+
+Connect your first knowledge source in minutes and start answering policy and shipping questions from your own content. Try Nobi free.
+
+<div className="my-8 flex justify-center">
+ <a
+ href="https://dashboard.nobi.ai"
+ className="inline-flex items-center justify-center gap-2 rounded-2xl font-medium transition active:scale-[.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-black/10 dark:focus-visible:ring-white/20 bg-black text-white dark:bg-white dark:text-black hover:opacity-90 shadow-sm h-12 px-6 text-base no-underline"
+ >
+ <span>Start your free Nobi trial</span>
+ </a>
+</div>

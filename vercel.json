@@ -4,6 +4,11 @@
       "source": "/knowledge-base",
       "destination": "/why-nobi/automated-support",
       "permanent": true
+    },
+    {
+      "source": "/blog/dealership-website-qa",
+      "destination": "/blog/ai-assistant-dealership-website",
+      "permanent": true
     }
   ],
   "routes": [

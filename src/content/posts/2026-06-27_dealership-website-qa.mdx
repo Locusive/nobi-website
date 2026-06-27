@@ -1,0 +1,186 @@
+export const meta = {
+ title: "How to Answer Car Shoppers' Questions on Your Dealership Site Around the Clock",
+ slug: "dealership-website-qa",
+ date: "2026-06-27",
+ publishedAt: "2026-06-27",
+ description: "Set up an AI assistant on your dealership site that answers after-hours questions from your own inventory, VDPs, and policy pages, no hallucinated specs or rates.",
+ excerpt: "Set up an AI assistant on your dealership site that answers after-hours questions from your own inventory, VDPs, and policy pages, no hallucinated specs or rates.",
+ tags: ["how-to", "product qa", "automotive dealership", " search"],
+ author: "Shanif Dhanani",
+ heroImage: "https://storage.googleapis.com/nobi-public/docs_and_marketing_websites/posts/dealership-website-qa/hero.webp",
+ featured: true,
+ draft: false,
+ faqItems: [
+ {
+ question: "Why do car shoppers leave dealership websites without making contact?",
+ answer: "Most vehicle research happens evenings and weekends when dealership staff are unavailable. A shopper who can't get an immediate answer to a spec or warranty question doesn't wait - they move to a competitor's site. Static contact forms collect information but don't answer the question, and by the time staff follow up the next morning, the shopper has already visited several other sites. The information to answer these questions already exists on the dealership's site; the problem is nothing is making it available after hours."
+ },
+ {
+ question: "What is Nobi, and how does it answer dealership questions around the clock?",
+ answer: "Nobi is a conversational website assistant that connects to a dealership's own published content - inventory feeds, VDPs, FAQ pages, financing pages, and CPO and warranty policy documents - and answers shopper questions directly from that material. Every answer is grounded in content the dealership has already published, not the open web or general AI training data, and responses include numbered citations so shoppers can verify the source. Connected sources refresh twice a day, so inventory changes and policy updates land in shopper answers within hours. For questions that require live rate data or DMS access, Nobi routes the shopper to the dealership team rather than estimating."
+ },
+ {
+ question: "What kinds of questions can the assistant answer from your dealership's connected sources?",
+ answer: "The assistant can answer any question that has an answer in connected content - vehicle specs, trim options, features, inventory status, dealership hours and location, financing process steps, CPO and warranty terms, and trade-in process details. It cannot answer questions requiring live rate data, approval decisions, or anything not present in connected sources, and those questions are routed to the dealership team instead. Current APR quotes and approval odds fall into that off-limits category by design, since quoting rates or predicting eligibility without a licensed F&I manager creates compliance exposure. Inventory status comes from the feed and updates within hours of a change, so the assistant is not pointing shoppers at cars that have already sold."
+ },
+ {
+ question: "How does the assistant avoid quoting a sold car or an invented price?",
+ answer: "Nobi is retrieval-only: it draws answers exclusively from your connected sources - your inventory feed, VDPs, and policy documents - and says so when the source does not contain the information rather than guessing. A unit that sells and drops from the inventory feed stops being answerable within hours, so the assistant is not serving yesterday's lot. For figures not fixed in your content, such as a negotiated selling price or a live finance rate, the assistant routes to your team instead of estimating. For answers where exact wording matters, query overrides let you lock a verbatim response so the assistant delivers your approved text word for word with no paraphrasing."
+ },
+ {
+ question: "How do you install Nobi on your dealership website without touching the DMS?",
+ answer: "Installation is handled by your existing website provider - Dealer.com, DealerSocket Websites, Sincro, or similar - who drops in the Nobi snippet and adds the assistant placeholder on the page. There are no DMS changes, no separate developer engagement, and no OEM approval cycle. After that, you connect your inventory feed and published content sources - VDPs, FAQ pages, financing pages, and policy PDFs - which Nobi reads where they already live and indexes without manual rebuilding. Pricing starts at $25 per month, which includes 2,500 searches and 250 conversational messages, with additional searches at $0.01 each and additional messages at $0.10 each."
+ },
+ {
+ question: "How do you use the questions shoppers ask to spot gaps in your VDPs and policy pages?",
+ answer: "Every question a shopper asks that the assistant can't answer well is logged, and reviewing that log weekly reveals gaps in your VDPs, FAQ pages, and policy documents. Common patterns include trim details missing from VDPs, financing document requirements not covered in the FAQ, and warranty exclusion details skipped on policy pages - each one a dead end a shopper hit silently. When the same question comes up repeatedly without a clear answer, that's the signal to update the source; connected sources refresh twice a day, so the fix reaches the assistant within hours. The log also shows which specific details shoppers actually look for when information isn't there, giving a more reliable signal for VDP depth than guesswork."
+ },
+ {
+ question: "When is Nobi not the right fit for your dealership?",
+ answer: "Nobi doesn't consolidate leads arriving from multiple channels such as website, SMS, and social - a tool like DealerAI is better suited for that. Dealer groups that need to combine lead engagement, service scheduling, and lifecycle marketing under one platform should look at Impel, which was built for that scope. Three specific limits are also worth noting: Nobi routes to your team when a conversation needs a human but does not support a live mid-thread hand-off where a human agent and the AI work the same session; it follows your content rather than a scripted tree, so designed conversation flows for promotions fit a purpose-built flow builder better; and it is web chat only, so dealerships whose BDC runs primarily on phone calls need a voice AI tool for that channel."
+ }
+ ],
+};
+
+<script type="application/ld+json" data-nobi-schema>
+{`{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "How to Answer Car Shoppers' Questions on Your Dealership Site Around the Clock",
+  "description": "Set up an AI assistant on your dealership site that answers after-hours questions from your own inventory, VDPs, and policy pages, no hallucinated specs or rates.",
+  "datePublished": "2026-06-27",
+  "dateModified": "2026-06-27",
+  "author": {
+    "@type": "Person",
+    "name": "Shanif Dhanani",
+    "url": "https://www.linkedin.com/in/shanifdhanani/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Nobi",
+    "url": "https://nobi.ai"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://nobi.ai/blog/dealership-website-qa"
+  },
+  "about": [
+    {
+      "@type": "Thing",
+      "name": "product qa"
+    },
+    {
+      "@type": "Thing",
+      "name": "automotive dealership"
+    }
+  ]
+}`}
+</script>
+## How do you answer car shoppers' questions on your dealership website when no one's in the showroom?
+
+Car shoppers rarely research during business hours. They browse inventory at night, compare CPO warranty terms on the weekend, and try to work out financing on a Tuesday at 9pm - when your showroom is dark and your BDC has gone home. Here's how to put your existing content to work after hours, so the answers are there whenever a shopper needs them.
+
+## Why do car shoppers leave dealership websites without making contact?
+
+Most vehicle research happens in the evening and on weekends - hours when your sales floor is dark and your BDC is off the clock. A shopper on your VDP at 10pm who can't get a quick answer to "does this Camry have a sunroof?" or "what's the CPO warranty?" doesn't wait until morning. They open a competitor's site. That shopper becomes a ghost lead before your team ever sees their name.
+
+The form they might have filled out doesn't help much either. A static contact form collects a name and a number, but it doesn't answer the question. By the time your team follows up in the morning, the shopper has already made three more stops. Speed to lead matters - but it matters most when the question gets answered in the moment, not twelve hours after the shopper moved on.
+
+What makes this frustrating is that the answers already exist. Trim specs, CPO warranty terms, financing steps, service hours, directions - all of it is sitting in content the dealership already publishes. The gap isn't information. It's availability. Nothing on the site is working to answer questions after the lights go out.
+
+## What is Nobi, and how does it answer dealership questions around the clock?
+
+Nobi fills that availability gap. It's a conversational website assistant that connects to your dealership's own content - your inventory feed, VDPs, FAQ pages, financing-process pages, CPO and warranty policy documents - and answers shopper questions directly from that material, with numbered citations back to the source. It isn't drawing from the open web or a general AI's training data. Every answer is grounded in content you have already published.
+
+When a shopper asks "does this Camry have a sunroof?" at 10pm, Nobi pulls the answer from the VDP you already have live. When someone asks about your CPO warranty terms, it reads from your warranty policy page and cites the exact excerpt - a numbered pill the shopper can hover to see the source document name, date, and the passage it drew from. A sources sidebar lists every reference with direct links, so the shopper can verify without leaving the conversation.
+
+Connected sources refresh twice a day, so an inventory status change or policy update lands in shopper answers within hours of going live on your site. You're not managing a separate knowledge base by hand; the content you already maintain does the work.
+
+For questions Nobi can't answer from connected content - current APR quotes, live approval odds, anything that requires a look at the DMS - it routes the shopper to call or chat with your team rather than estimating. That matters for dealers who've seen what happens when an AI makes up a number it didn't have.
+
+For high-stakes questions where exact wording matters - CPO terms, return policy, warranty exclusions - query overrides let you lock a verbatim answer. The response is exactly what you approved, with no paraphrasing. A shopper asking about your seven-day return policy gets the policy you wrote, word for word.
+
+## What kinds of questions can the assistant answer from your dealership's connected sources?
+
+The assistant can answer any question that has an answer in the content you connect, and it cannot answer questions that require live rate data, approval decisions, or information your connected sources do not contain. That line is the point: a shopper gets a real answer when one exists, and a clear referral to your team when it does not.
+
+Most of what car shoppers ask before booking a visit falls well within that boundary.
+
+Vehicle specs come from your VDPs and any spec sheets you connect: trim levels, standard features, options packages, towing capacity, fuel economy, technology features. A shopper asking whether the F-150 Lariat comes standard with adaptive cruise gets the answer from the same content your SRP displays.
+
+Inventory status tells a shopper whether a specific unit is in stock or pending sale. That comes from your inventory feed, typically updated within a few hours of a change. The assistant isn't pointing shoppers at cars that sold yesterday.
+
+Dealership information covers hours, location, service department hours, and parts department contact, pulled from your location and contact pages.
+
+Financing questions are answered from your financing FAQ, not from live lender data. What documents to bring, how the F&I walk works, what a pre-approval application covers: those are fair game. Current APR is not. Approval odds are not. Those questions get routed to your team, and that is by design. Quoting rates or predicting eligibility without a licensed F&I manager creates real compliance exposure.
+
+CPO and warranty questions pull from your published policy pages, in the exact language you wrote. Trade-in questions come from your trade-in FAQ: what to expect at appraisal, how KBB ICO factors in, what to bring.
+
+The things the assistant won't touch aren't gaps. They're guardrails, and they're where your team earns the deal.
+
+## How does the assistant handle questions about sold units or pricing it doesn't have?
+
+That line between what the assistant answers and what it routes is only meaningful if the underlying design actually holds it. This is the right question to ask before deploying any AI on a dealer site. The answer depends entirely on whether the assistant is grounded in your actual content or free to generate answers from general knowledge. Nobi is retrieval-only: it can only say what your connected sources say, and if the source does not contain the information, it says so rather than guessing.
+
+Nobi reads your sources - your inventory feed, VDPs, and policy documents - and nothing else. A spec not in your VDP is not something the assistant can pull from elsewhere.
+
+Inventory comes from your feed on a regular refresh schedule. A unit that sells and drops from the feed stops being answerable, typically within hours. The assistant is not serving yesterday's lot.
+
+For figures that aren't fixed in your content - a negotiated selling price, a live finance rate - the assistant routes to your team instead of estimating. A question it can't answer honestly triggers a referral.
+
+For answers where exact wording matters, query overrides let you lock a verbatim response. You designate which questions trigger an override; everything else routes through the standard grounded-answer pipeline.
+
+An optional second AI review checks every draft answer against the raw source content before it reaches the shopper. It's toggleable per dealership and on by default for high-consideration questions.
+
+## How do you install Nobi on your dealership website without touching the DMS?
+
+All of those guardrails - the grounded answers, the query overrides, the second AI review - are part of the platform. Getting access to them is a site-side install your website provider handles in a day. Your vendor (Dealer.com, DealerSocket Websites, Sincro, or similar) drops in the Nobi snippet and adds a placeholder for the assistant wherever you want it to appear on the page. No separate developer engagement, no changes to your DMS, and no OEM approval cycle to wait on. Most rooftops are live within a day of connecting their inventory feed and content sources.
+
+Connecting your sources takes a little longer than the install itself, but there is nothing manual to rebuild. Your inventory feed is first. Nobi indexes it and refreshes twice a day, so units that sell drop out of answers and new arrivals show up within hours of a status change on the feed. No manual update on your end.
+
+After that, add your VDPs, FAQ pages, financing process pages, and any policy PDFs you have published - CPO warranty terms, service agreements, return policy. Nobi reads them where they already live and makes them answerable. If a page is on your site or a document is accessible, it becomes part of what the assistant can draw from. You are not rebuilding a knowledge base by hand.
+
+Nobi does not write to your DMS or read from your CRM records. It reads from your published content and nothing else.
+
+Pricing starts at $25 per month, which includes 2,500 searches and 250 conversational messages. Additional searches run $0.01 each; additional messages run $0.10 each. No revenue-share and no hidden usage tiers. You can model the cost against your site traffic before you sign anything.
+
+## How do you use the questions shoppers ask to spot gaps in your VDPs and policy pages?
+
+The questions shoppers type into the assistant are a direct signal of what your current content is not answering - and that log becomes more valuable the moment you start reading it. After your sources are connected and the assistant is live, you have a record of every question shoppers asked that the assistant couldn't answer well. Those gaps exist with or without the assistant. The assistant just surfaces them.
+
+Review the log weekly and filter for unanswered or low-confidence responses first. Those are the fastest path to the content that's costing you conversions. Common patterns: a shopper asks about a specific trim option that isn't mentioned on the VDP, a question about which financing documents to bring that your FAQ doesn't cover, a warranty exclusion detail your policy page skips. Each one is a quiet dead end a shopper hit and moved past.
+
+When the same question comes up repeatedly without a clear answer, that's your signal to update the source. Add the trim detail to the VDP, expand the FAQ entry, fill in the warranty page. The fix lands in shopper answers the same day - no separate knowledge base to maintain. You're updating the content you already publish, and the improvement reaches every path a shopper can take to that information.
+
+The log also tells you what shoppers care about on specific pages, which takes the guesswork out of VDP depth. Instead of wondering whether to list every option package or keep the VDP lean, you can see which details shoppers actually ask about when the information isn't there. That's a more reliable signal than gut feel.
+
+A secondary benefit is quieter phone queue mornings. A shopper who got a clear, accurate answer at 10pm is less likely to call in frustrated the next morning over something basic they couldn't find. That matters for CSI - not in a dramatic way, but fewer "I couldn't find this anywhere on your site" calls is a real outcome of better content.
+
+## When is Nobi not the right fit for your dealership?
+
+Nobi covers the on-site question-answering job well, but there are adjacent problems it does not solve. If one of these is your actual bottleneck, a different tool is the right call - and it is worth being direct about that rather than retrofitting the wrong product onto the wrong problem.
+
+If your internet ups arrive from multiple channels and you need one place to handle them, [DealerAI](https://dealerai.com) is worth a look. Its entry tier covers your website, SMS, and Facebook and Instagram at $599 per month, so leads from different surfaces land in one place instead of splitting across separate tools.
+
+If you run a dealer group and want to consolidate lead engagement, service scheduling, and lifecycle marketing under one vendor, [Impel](https://impel.io) is built for that scope. It acquired Outsell in 2024 to add a full marketing layer on top of its AI platform, and it integrates with major OEM customer-journey platforms so franchise rooftops don't need custom work. The trade-off is a multi-month group-level rollout.
+
+Three Nobi limits are also worth naming. It routes to your team when a conversation needs a human, but it does not support a live mid-thread hand-off where a human agent and the AI work the same session together. Its assistant follows your content rather than a scripted tree, so campaigns that need a designed conversation flow - a Black Friday finance special, a service promotion - fit a purpose-built flow builder better. And Nobi is web chat only: if your BDC runs primarily on phone ups, a voice AI tool is what that channel needs.
+
+
+<BlogEmailCapture hook="Fielding after-hours inventory questions on your dealership site?" subtext="Drop your email and we'll show you how Nobi answers inventory, financing, and trade-in questions on your site around the clock so shoppers don't bounce to a competitor." />
+
+---
+
+If after-hours question coverage is the gap and you don't want to touch the DMS, <a href="https://dashboard.nobi.ai">connect your inventory feed and try Nobi</a> - no DMS changes required, and most rooftops are live the same day.
+
+<div className="my-8 flex justify-center">
+ <a
+ href="https://dashboard.nobi.ai"
+ className="inline-flex items-center justify-center gap-2 rounded-2xl font-medium transition active:scale-[.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-black/10 dark:focus-visible:ring-white/20 bg-black text-white dark:bg-white dark:text-black hover:opacity-90 shadow-sm h-12 px-6 text-base no-underline"
+ >
+ <span>Start your free Nobi trial</span>
+ </a>
+</div>
+```
+
+The rewritten opening paragraph puts the reader's actual situation first (after-hours browsing behavior), names the concrete problem (no one available to answer), stakes the consequences (they leave, BDC follows up too late), and bridges cleanly to the how-to steps that follow. Sentence lengths vary from short declaratives ("They open the next tab.") to medium-length setups, avoiding both the choppy machine-gun rhythm and run-on stacking.

@@ -1,0 +1,188 @@
+export const meta = {
+ title: "How to Route Specific Searches to the Right Page Instead of a Dead-End Product Grid",
+ slug: "search-redirects",
+ date: "2026-06-28",
+ publishedAt: "2026-06-28",
+ description: "Route searches like 'returns' or 'gift cards' straight to the right page instead of an empty product grid. Step-by-step guide to search redirect rules.",
+ excerpt: "Route searches like 'returns' or 'gift cards' straight to the right page instead of an empty product grid. Step-by-step guide to search redirect rules.",
+ tags: ["how-to", "merchandising", "ecommerce", "ecommerce search"],
+ author: "Shanif Dhanani",
+ heroImage: "https://storage.googleapis.com/nobi-public/docs_and_marketing_websites/posts/search-redirects/hero.webp",
+ featured: true,
+ draft: false,
+ faqItems: [
+ {
+ question: "Which searches deserve a redirect instead of product results?",
+ answer: "Queries that have exactly one right destination and no useful product results deserve a redirect. These fall into four groups: policy and service queries like \"returns\" or \"warranty,\" navigation queries like \"contact us\" or \"store locator,\" gift and loyalty queries like \"gift card\" or \"loyalty rewards,\" and promotion queries tied to active campaign landing pages. The fastest way to build your list is to pull your zero-result query log and look for non-product phrases with zero add-to-cart events."
+ },
+ {
+ question: "What is Nobi, and how does it handle search redirects?",
+ answer: "Nobi is a conversational website assistant that combines product search, automated shopper Q&A, and lead capture. Redirect rules are one type of query override you configure in Nobi: you specify a trigger phrase and a destination URL, and Nobi routes the matching shopper straight there while letting all other queries run through its semantic product matching. Nobi also supports a second override variant called verbatim pinned answers, which locks an exact merchant-approved response to a specific question rather than sending the shopper to a URL."
+ },
+ {
+ question: "How do I set up a search redirect rule in Nobi?",
+ answer: "Redirect rules are configured in the Nobi dashboard under Assistant - Query Overrides with no deployment step or engineering ticket required. You create a rule by entering a trigger phrase, an optional plain-English matching condition that Nobi uses AI to evaluate and catch rephrasing, and a destination URL, then click Save and the rule fires immediately. Rules can be toggled off without deleting them, which makes seasonal redirects easy to manage, and there is no cap on the number of rules you can configure."
+ },
+ {
+ question: "Should I match the exact phrase or a broader pattern for a redirect rule?",
+ answer: "Start with exact phrases for high-confidence redirects and add close variants as separate rules rather than trying to cover them with one broad pattern. Broad patterns can capture product queries that share a word - \"exchange\" could mean a return or a product swap, and redirecting it to a policy page sends a shopper looking for products to a dead end. Pull your zero-result query log to find the natural phrases shoppers actually typed, since shoppers rarely match the phrase you assumed."
+ },
+ {
+ question: "How do I test that a redirect rule is firing correctly?",
+ answer: "After saving a rule, type the exact trigger phrase in your site's search bar and confirm you land on the intended destination, then check that the destination page renders cleanly with no broken URL parameters. Test plural and singular variants separately, since \"gift card\" and \"gift cards\" are distinct trigger phrases and only the one with a rule will redirect. Also type a near-match that should NOT redirect and confirm it returns product results - this is where overly broad patterns cause problems and where exact matching protects you."
+ },
+ {
+ question: "How do I see which searches are being redirected over time?",
+ answer: "Nobi's search analytics show query volume by phrase, including which queries matched a redirect rule and how often each rule fired. If a rule you expected to fire hundreds of times a month shows only a handful of hits, the trigger phrase likely isn't matching how shoppers actually type it. Cross-reference the query override report against your zero-result query log monthly to catch new redirect candidates, confirm existing rules are firing correctly, and remove rules pointing to pages that no longer exist."
+ },
+ {
+ question: "When should you use a redirect rule versus letting Nobi answer the question conversationally?",
+ answer: "Use a redirect when the best answer is a specific page, such as a returns policy page, a gift card PDP, or a campaign landing page. Use Nobi's conversational Q&A when the shopper asked a question and needs a grounded answer pulled from your connected content, such as a shipping timeline or return window, that doesn't live neatly on a single navigable URL. If you find yourself writing a redirect for a question-shaped query like \"what is your return policy?\", a verbatim pinned answer override is usually the better fit - the shopper asked a question, and routing them to a page they have to read is not the same as answering it."
+ }
+ ],
+};
+
+<script type="application/ld+json" data-nobi-schema>
+{`{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "How to Route Specific Searches to the Right Page Instead of a Dead-End Product Grid",
+  "description": "Route searches like 'returns' or 'gift cards' straight to the right page instead of an empty product grid. Step-by-step guide to search redirect rules.",
+  "datePublished": "2026-06-28",
+  "dateModified": "2026-06-28",
+  "author": {
+    "@type": "Person",
+    "name": "Shanif Dhanani",
+    "url": "https://www.linkedin.com/in/shanifdhanani/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Nobi",
+    "url": "https://nobi.ai"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://nobi.ai/blog/search-redirects"
+  },
+  "about": [
+    {
+      "@type": "Thing",
+      "name": "merchandising"
+    },
+    {
+      "@type": "Thing",
+      "name": "ecommerce"
+    }
+  ]
+}`}
+</script>
+## How do you redirect specific ecommerce searches to a landing page instead of product results?
+
+Most searches are product searches. A shopper who types "gift card" or "returns" or "store locator" is doing something different - they already know what they need and they're trying to navigate to it. Drop them onto a product grid and you've sent them to the wrong place. An empty grid sends them to the back button. A full grid of unrelated products isn't much better - they either dig through your nav to find what they were looking for, or they leave. Search redirect rules fix this: you map a trigger phrase to a destination URL, and shoppers who type that phrase land on the right page in one step. Here's how to build those rules.
+
+## Which searches deserve a redirect instead of product results?
+
+Not every search is a product search. Queries like "gift card," "returns," "store locator," and "size guide" have exactly one right destination and no useful product results. Sending those shoppers to a product grid - especially an empty one - creates a dead end that drives abandonment. A redirect rule sends the query straight to the page you choose, so the shopper lands where they need to be in a single step.
+
+The clearest candidates fall into four groups. Policy and service queries - "returns," "exchange policy," "warranty," "shipping" - belong on your policy page, not a results grid that can't answer the question. Navigation queries like "contact us," "about us," and "store locator" belong on the corresponding site page. Gift and loyalty queries - "gift card," "gift wrapping," "loyalty rewards" - belong on dedicated landing pages or specific PDPs. Promotion queries - "sale," "Black Friday," "promo code" - redirect to the active campaign landing page for the window it runs, then get retired when the campaign ends.
+
+The fastest way to build your redirect list is to pull your [zero-result query log](/blog/fix-zero-result-searches). Any non-product phrase with zero add-to-cart events is a redirect candidate worth reviewing first. These are searches your store is already failing - not because the product doesn't exist, but because the shopper wasn't looking for a product at all.
+
+## What is Nobi, and how does it handle search redirects?
+
+Nobi is a conversational website assistant that combines product search, automated shopper Q&A, and capturing high-intent shoppers in one platform. Those zero-result queries your analytics flagged are exactly the gap Nobi's redirect rules address: you specify the trigger phrase and a destination URL, and Nobi sends the matching shopper straight there. A search for "returns" hits your returns page. A search for "lightweight rain jacket" gets ranked product results, not a redirect.
+
+Redirect rules in Nobi are one type of query override - a layer you place on top of the same search engine that handles everything else. The override fires only when a shopper's search matches a phrase you've configured. Everything else runs through Nobi's semantic product matching. You're not choosing between redirects and search; you're running both at once, each handling the queries it belongs to.
+
+Query overrides also support a second variant worth knowing: verbatim pinned answers. Instead of sending a shopper to a URL, a pinned answer locks an exact merchant-approved response to a specific question. A return policy question, a warranty inquiry, a shipping cutoff - all can be pinned to exact copy with no AI paraphrasing. Redirects are the URL-destination version of the same mechanism; pinned answers are the in-chat version.
+
+A redirect always takes priority over content - when the trigger phrase matches, the shopper lands on your chosen URL regardless of what any connected page says. Connected content updates twice a day, so a policy change lands in search results within hours. But when a redirect rule matches, it overrides the content layer entirely. The override runs on top of the content, not inside it.
+
+## How do I set up a search redirect rule in Nobi?
+
+Those redirect rules are configured entirely inside the Nobi dashboard. Navigate to Query Overrides, click Add Override, enter your trigger phrase and destination URL, save - and the rule fires immediately across your storefront. No deployment step, no engineering ticket.
+
+Here's the full setup:
+
+1. Log into your Nobi dashboard and go to **Assistant → Query Overrides** in the sidebar.
+2. Click **Add Override** to create a new rule.
+3. Enter the keywords that should trigger it - for example, "returns" or "gift card." Keywords catch exact matches. They're optional but recommended: with keywords set, Nobi only runs the deeper intent check when a match appears, which keeps response time fast.
+4. Add a matching condition if you want to catch rephrasing. Write it in plain English - something like "shopper asking about returns or exchange policy." Nobi uses AI to evaluate it, so "can I send this back?" resolves to the same rule as "returns."
+5. Set the response type to **Redirect** and enter the full destination URL. Include `https://`, and make sure the page is publicly accessible.
+6. Click **Save Rule**. The redirect is live immediately.
+7. Test it: open your Nobi widget, type the trigger phrase, and confirm you land on the right page.
+
+Each rule can be toggled off without deleting it. That makes seasonal redirects easy to manage - turn off the Black Friday landing page rule when the campaign ends, switch it back on next year without rebuilding from scratch. There's no cap on the number of rules you can configure, so you can work through your entire zero-result query list without hitting a limit.
+
+## Should I match the exact phrase or a broader pattern for a redirect rule?
+
+With no cap on the number of rules, the right move is to be specific. Start with exact phrases for high-confidence redirects - "gift card," "return policy," "store hours." Then add close variants as separate rules rather than trying to cover them with one broad pattern. "Return," "returns," "returns policy," "return policy," and "how do I return" are all different trigger phrases, and each is worth its own entry.
+
+Exact match is the safest default. A rule set to fire on "returns" with no matching condition fires only when a shopper types exactly "returns." That precision matters because broad patterns can capture product queries that share a word. "Exchange," for example, could mean a return or a product swap. Redirect it to your policy page and you've sent a shopper looking for products to a dead end.
+
+The same trap applies to "sale items." A redirect to a clearance landing page sounds reasonable until you realize it intercepts shoppers who are genuinely searching for products in your sale section.
+
+The practical way to build your variant list: pull your zero-result query log and look at the natural phrases shoppers actually typed. Shoppers rarely match the phrase you assumed. "How do I send something back," "return an order," and "refund" might all point at the same policy page, but each needs its own rule.
+
+One thing that keeps this manageable: Nobi's semantic search already handles vocabulary mismatch for product queries on its own. A shopper using off-label or creative phrasing to find a product doesn't need a redirect - the search engine resolves it. Redirect rules in Nobi's query overrides are the narrow layer you place on top: exact non-product phrases where you know precisely where the shopper belongs.
+
+Keep the list targeted. A short rule library with high-confidence entries is more reliable than a long one built on broad patterns.
+
+## How do I test that a redirect rule is firing correctly?
+
+After saving a redirect rule in Nobi, test it immediately in your site's search bar. Type the exact trigger phrase and confirm you land on the intended destination - not a product grid, not a 404. The prior section covered why exact phrases matter more than broad patterns; the same precision applies to testing: verify the rule that fired, not a close guess at it.
+
+Start with the phrase you entered as the trigger. If your rule is "gift card," type exactly "gift card" and confirm the redirect lands on the right URL. Then load that destination page and check it renders cleanly - no broken parameters, no missing query strings introduced by the redirect that corrupt the URL.
+
+From there, test the edges. Plural and singular variants behave differently if only one has a rule. "Gift card" and "gift cards" are distinct trigger phrases; if you set up only one, the other will fall through to product results. Test both and know which behavior you intended.
+
+Then test a near-match that should NOT redirect. If your rule is "gift card," type "gift card packaging" and confirm it returns product results instead of firing the redirect. This is where overly broad patterns cause problems - and where exact matching protects you.
+
+One operational note: Nobi rules are merchant-scoped and go live the moment you hit Save. There's no staging layer built into the dashboard. If you're running tests on your production site, do it in a low-traffic window and move fast. If you have a staging environment, test there first, then save the same rule on production and verify it once.
+
+The whole test takes two minutes. Trigger fires, destination loads, near-match returns products, destination URL is clean. If any of those four checks fails, go back to the rule and look at the trigger phrase first - a trailing space, a punctuation mismatch, or a plural/singular mismatch covers most failures.
+
+## How do I see which searches are being redirected over time?
+
+Nobi's search analytics show query volume by phrase, including which queries matched a redirect rule and how often each rule fired. Review this monthly to catch new zero-result non-product queries worth adding, confirm existing redirects are still firing on the phrases you expect, and remove rules pointing to pages that no longer exist.
+
+Testing a rule right after saving it - as the prior section covered - tells you the redirect works. The query override report in the Nobi dashboard tells you whether it's working over time. Each rule shows a fire count, so a rule you expected to fire hundreds of times a month but shows only a handful of hits usually means the trigger phrase isn't matching how shoppers actually type it. "Returns" and "return policy" are different phrases; if you built the rule on one and shoppers type the other, the count will show it.
+
+Cross-reference that report against your zero-result query log. Any non-product phrase that appears more than a handful of times with zero add-to-cart events is a redirect candidate you haven't set up yet. The two reports together give you a clear picture: rules firing as expected, rules underperforming, and gaps still to fill.
+
+Watch for seasonal drift. Queries like "Black Friday sale," "holiday gift guide," and "Valentine's Day" need redirect rules in place before those campaigns launch. Adding them after the campaign has already run means you missed the traffic window. Build a short calendar reminder to add and retire seasonal rules alongside your campaign schedule.
+
+Keep destination URLs current. A redirect pointing to a deleted page sends the shopper to a 404, which is worse than a product grid with no results. When you retire a page or restructure a URL, audit your redirect rules at the same time.
+
+One more signal worth monitoring: a rule with high fire counts but low downstream engagement - shoppers arriving at the destination and bouncing immediately - usually points to the landing page, not the rule. The redirect did its job; the page didn't. That's a content fix, not a rule fix.
+
+## When should you use a redirect rule versus letting Nobi answer the question conversationally?
+
+The prior section covered how to keep your redirect rules current over time - but knowing which queries deserve a redirect in the first place is the sharper question. Use a redirect when the best answer is a specific page: a returns policy page, a gift card PDP, a campaign landing page. Use Nobi's conversational Q&A when the shopper needs a grounded answer pulled from your content - policy details, product specs, shipping timelines - that doesn't live neatly on a single navigable URL. The two mechanisms are complementary: redirects handle navigational searches, conversational answers handle informational ones.
+
+The distinction shows up clearly in practice. A search for "returns" belongs on your returns policy page - the page IS the answer, and a redirect gets the shopper there in one step. A search for "how long does a return take?" is a different query: the shopper asked a question, not navigated somewhere. Nobi pulls the timeline from your connected returns policy doc and answers with an inline citation back to the exact excerpt. Same policy, two different shopper intents, two different mechanisms.
+
+The same split applies to gift cards. "Gift card" is a navigational query - the shopper wants to buy one, and a redirect to your gift card PDP is the right call. "Do you sell gift cards?" is informational - Nobi confirms yes and can surface the product page inline as part of the answer.
+
+One signal worth noticing: if you find yourself writing a redirect for a question-shaped query like "what is your return policy?", a verbatim pinned answer override is usually the better fit. The shopper asked a question; routing them to a page they have to read themselves isn't the same as answering them. A pinned answer lets you lock exact merchant-approved copy to that query with no AI paraphrasing.
+
+One honest limit to name: Nobi answers post-purchase questions like "what is your return policy?" but does not execute post-order tasks inside the chat. For cancellations, return labels, or order lookups that require action, pair Nobi with a helpdesk like Gorgias. The conversational Q&A layer handles the informational side; a helpdesk handles the transactional side.
+
+
+<BlogEmailCapture hook="Losing shoppers to misdirected searches on your store?" subtext="Drop your email and we'll show you how Nobi's AI search routes shoppers to the right products without manual redirect rules." />
+
+---
+
+Try it with one redirect - pick the query that's been sending shoppers to the wrong place and point it at the right page. Plans start at $25/month (includes 2,500 searches and 250 conversational messages). Beyond that: $0.01 per additional search, $0.10 per additional message.
+
+<div className="my-8 flex justify-center">
+ <a
+ href="https://dashboard.nobi.ai"
+ className="inline-flex items-center justify-center gap-2 rounded-2xl font-medium transition active:scale-[.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-black/10 dark:focus-visible:ring-white/20 bg-black text-white dark:bg-white dark:text-black hover:opacity-90 shadow-sm h-12 px-6 text-base no-underline"
+ >
+ <span>Get started with Nobi free</span>
+ </a>
+</div>
+```
+
+The rewritten paragraph grounds the reader in the situation first (most searches are product searches - but not these), names the concrete problem (navigation queries landing on a product grid), states the stakes (empty grid = back button, wrong-product grid = they leave), and bridges to the how-to steps that follow.

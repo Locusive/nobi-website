@@ -17,11 +17,11 @@ export const meta = {
  },
  {
  question: "Can Nobi quote a wrong price or a sold vehicle?",
- answer: "Nobi answers from your connected inventory feed, which refreshes twice a day. Answers are grounded in that feed rather than invented, so the most common source of a wrong answer is the feed itself lagging a sale or price change between refreshes."
+ answer: "Nobi answers from your connected inventory feed, which refreshes twice a day. Grounding in that feed leaves less room for error than a model working from memory, though no AI system can guarantee it's never wrong. In practice, the most common cause of a wrong answer is the feed itself lagging a sale or price change between refreshes."
  },
  {
  question: "Does this replace our BDC?",
- answer: "No. Nobi captures the request and routes it with the vehicle attached. Your BDC still makes the call, owns the calendar, and closes the deal."
+ answer: "Nobi captures the request and routes it with the vehicle attached. Your BDC still makes the call, owns the calendar, and closes the deal."
  },
  {
  question: "Will this hurt our CSI score?",
@@ -96,7 +96,7 @@ Timing matters for CSI, not just conversion. An assistant that pushes the test-d
 
 ## How do I connect test-drive requests to my CRM?
 
-That confirmed request still has to land somewhere your BDC actually works leads. Nobi's Custom Actions is a JavaScript API. It fires your dealership's own workflow, a CRM lead, a scheduler call, a lead form submission, the moment a shopper confirms a test-drive request. The vehicle and shopper details from that conversation ride along with it. You wire it once to whatever system your BDC already works leads in. Nobi doesn't need to replace your CRM or DMS to do this.
+That confirmed request still has to land somewhere your BDC actually works leads. Nobi's Custom Actions is a JavaScript API that fires the moment a shopper confirms a test-drive request, triggering whatever workflow your dealership already runs: a CRM lead, a scheduler call, a lead form submission. The vehicle and shopper details from that conversation ride along with it. You wire it once to whatever system your BDC already works leads in. Nobi doesn't need to replace your CRM or DMS to do this.
 
 When Custom Actions fires, it sends structured data, not just a name and a phone number. The vehicle rides along: year, make, model, trim, and VIN if your inventory feed has it. So does whatever contact info the shopper gave up in the conversation. That's the difference between a lead your BDC has to chase down ("who is this and what were they even looking at?") and one that arrives already qualified: someone wants to drive this specific Silverado, here's how to reach them.
 
@@ -128,7 +128,7 @@ The base plan is $25 a month, which covers 2,500 searches and 250 conversational
 
 ### Can Nobi quote a wrong price or a sold vehicle?
 
-Nobi answers from your connected inventory feed, which refreshes twice a day. Answers are grounded in that feed rather than invented, so the most common source of a wrong answer is the feed itself lagging a sale or price change between refreshes.
+Nobi answers from your connected inventory feed, which refreshes twice a day. Grounding in that feed leaves less room for error than a model working from memory, though no AI system can guarantee it's never wrong. In practice, the most common cause of a wrong answer is the feed itself lagging a sale or price change between refreshes.
 
 ### Does this replace our BDC?
 

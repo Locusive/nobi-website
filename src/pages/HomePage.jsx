@@ -827,7 +827,7 @@ function Hero({ onOpenVideo, onOpenDemo, variant, setVariant }) {
   const pills = [
     { label: "Lead captured", Icon: CheckCircle2, cls: "left-0 top-[16%]", x: "-75%", ring: "bg-emerald-100 text-emerald-600", delay: 0 },
     { label: "+36% add-to-cart", Icon: ShoppingCart, cls: "right-0 top-[38%]", x: "75%", ring: "bg-blue-100 text-blue-600", delay: 0.7 },
-    { label: "2.5x more likely to buy", Icon: Heart, cls: "left-0 bottom-[6%]", x: "-75%", ring: "bg-violet-100 text-violet-600", delay: 1.4 },
+    { label: "2.5x more likely to buy", Icon: Heart, cls: "left-0 bottom-[5%]", x: "-85%", ring: "bg-violet-100 text-violet-600", delay: 1.4 },
   ];
 
   return (

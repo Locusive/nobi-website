@@ -2623,6 +2623,9 @@ function InteractiveDemo() {
   const [phase, setPhase] = useState("idle"); // idle | thinking | results
   const [result, setResult] = useState(null);
   const timer = useRef(null);
+  const rootRef = useRef(null);
+  const inView = useInView(rootRef, { once: true, amount: 0.45 });
+  const seeded = useRef(false);
 
   const run = (raw) => {
     const q = raw.trim();
@@ -2656,8 +2659,16 @@ function InteractiveDemo() {
 
   useEffect(() => () => timer.current && clearTimeout(timer.current), []);
 
+  // Seed one worked example when the section scrolls into view, so it never sits empty
+  useEffect(() => {
+    if (inView && !seeded.current && phase === "idle") {
+      seeded.current = true;
+      run(DEMO_CHIPS[0]);
+    }
+  }, [inView, phase]);
+
   return (
-    <div className="rounded-3xl border border-violet-900/10 bg-white p-4 shadow-[0_32px_80px_-40px_rgba(76,50,180,0.45)] sm:p-6">
+    <div ref={rootRef} className="rounded-3xl border border-violet-900/10 bg-white p-4 shadow-[0_32px_80px_-40px_rgba(76,50,180,0.45)] sm:p-6">
       {/* Input */}
       <form
         onSubmit={(e) => {

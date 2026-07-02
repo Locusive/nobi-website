@@ -1,6 +1,7 @@
 import React, {useEffect, useMemo, useRef, useState} from "react";
 import { useSEO } from "../hooks/useSEO";
-import {AnimatePresence, motion} from "framer-motion";
+import {AnimatePresence, animate, motion, useInView, useReducedMotion} from "framer-motion";
+import Marquee from "react-fast-marquee";
 import {
     BarChart3,
     Bot,
@@ -62,7 +63,7 @@ const PREVIEW_SECTIONS = [
 const VARIANT_CONTENT = {
   default: {
     headline: "Turn your website into your best sales associate",
-    subline:  "An AI assistant that answers questions, finds products, and captures leads. Works on ecommerce, services, real estate, and more.",
+    subline:  "An AI assistant that answers every question, finds the right product, and turns more visitors into buyers.",
     problemHeading: "Most visitors leave without finding what they need",
     problemBody:    "Your search needs exact words. Your FAQ takes patience. Most visitors bounce before they get an answer.",
     problemPoints: [
@@ -775,7 +776,16 @@ function HeroSkeletonLine({ w = "60%" }) {
 // --- HERO PREVIEW HELPERS (names are unique to avoid clashes) ---
 
 
-const GRADIENT = "bg-gradient-to-r from-indigo-500 via-violet-500 to-fuchsia-500 bg-clip-text text-transparent";
+const GRADIENT = "bg-gradient-to-r from-blue-500 via-violet-500 to-fuchsia-500 bg-clip-text text-transparent";
+
+// Inline gradient icon-chip echoing the Nobi logo mark (Apptics-style headline motif)
+function IconChip({ Icon = Sparkles }) {
+  return (
+    <span className="mx-[0.12em] inline-grid h-[0.86em] w-[0.86em] shrink-0 translate-y-[0.02em] place-items-center rounded-[0.24em] bg-gradient-to-br from-blue-500 via-violet-500 to-fuchsia-500 align-middle shadow-sm">
+      <Icon className="h-[56%] w-[56%] text-white" strokeWidth={2.5} />
+    </span>
+  );
+}
 
 function renderHeadline(variant) {
   switch (variant) {
@@ -796,131 +806,121 @@ function renderHeadline(variant) {
   }
 }
 
+const HERO_STAGGER = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.09, delayChildren: 0.04 } },
+};
+const HERO_ITEM = {
+  hidden: { opacity: 0, y: 16 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] } },
+};
+
 function Hero({ onOpenVideo, onOpenDemo, variant, setVariant }) {
   const content = VARIANT_CONTENT[variant] || VARIANT_CONTENT.default;
-  const visitorContextSentRef = useRef(false);
+  const reduce = useReducedMotion();
 
-  const handleChip = (id) => {
-    const previous = variant;
-    const chip = CHIPS.find((item) => item.id === id);
-    const visitorContext = visitorContextSentRef.current
-      ? undefined
-      : `Visitor selected "${chip?.label || id}" as their primary homepage interest.`;
-    visitorContextSentRef.current = true;
-    setVariant(id);
-    try { localStorage.setItem("nobi_hero_variant", id); } catch (_) {}
-    trackEvent(EVENTS.HERO_CHIP_CLICKED, {
-      "Intent Type": chip?.label || id,
-      "Intent ID": id,
-      "Chip Label": chip?.label || id,
-      "Previous Intent ID": previous,
-      "Source": "Marketing Homepage",
-    }, {
-      gaEventName: "hero_chip_click",
-      gaProperties: {
-        chip_id: id,
-        chip_label: chip?.label || id,
-        intent_type: chip?.label || id,
-        hero_variant: id,
-        previous_variant: previous,
-        source: "marketing_homepage",
-      },
-      visitorContext,
-    });
-  };
+  // Floating value pills that bob around the demo (real Nobi stats)
+  // Clipped onto the demo card's edges (~25% overlapping) so they read as attached to it.
+  // x offset goes through framer-motion (not Tailwind translate) because motion owns the
+  // transform for the bob. Heights avoid the query text, Ask AI button, answer copy, and
+  // product name/price — only card padding and box corners get overlapped.
+  const pills = [
+    { label: "Lead captured", Icon: CheckCircle2, cls: "left-0 top-[16%]", x: "-75%", ring: "bg-emerald-100 text-emerald-600", delay: 0 },
+    { label: "+36% add-to-cart", Icon: ShoppingCart, cls: "right-0 top-[38%]", x: "75%", ring: "bg-blue-100 text-blue-600", delay: 0.7 },
+    { label: "2.5x more likely to buy", Icon: Heart, cls: "left-0 bottom-[6%]", x: "-75%", ring: "bg-violet-100 text-violet-600", delay: 1.4 },
+  ];
 
   return (
     <section id="home" className="relative overflow-hidden">
-      <div className="mx-auto max-w-7xl px-6 pt-4 sm:pt-6 lg:pt-8 pb-24">
-        <div className="max-w-4xl mx-auto text-center space-y-6">
+      {/* Animated brand aurora */}
+      <div aria-hidden className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
+        <motion.div
+          className="absolute left-1/2 top-[-12%] h-[520px] w-[820px] max-w-full -translate-x-1/2 rounded-full blur-3xl bg-[radial-gradient(closest-side,rgba(37,99,235,0.22),rgba(139,92,246,0.14),transparent)]"
+          animate={reduce ? {} : { x: [-40, 40, -40], y: [0, 24, 0], scale: [1, 1.08, 1] }}
+          transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
+        />
+        <motion.div
+          className="absolute right-[6%] top-[6%] h-[360px] w-[360px] rounded-full blur-3xl bg-[radial-gradient(closest-side,rgba(236,72,153,0.16),transparent)]"
+          animate={reduce ? {} : { x: [0, -30, 0], y: [0, 30, 0], scale: [1, 1.12, 1] }}
+          transition={{ duration: 11, repeat: Infinity, ease: "easeInOut" }}
+        />
+      </div>
 
-          {/* Personalization chips */}
-          <div className="pb-6">
-            <p className="text-xs font-medium text-black/40 dark:text-white/40 uppercase tracking-widest mb-3">
-              What matters most to you?
-            </p>
-            <div className="flex flex-wrap items-center justify-center gap-2">
-              {CHIPS.map((chip) => (
-                <button
-                  key={chip.id}
-                  onClick={() => handleChip(chip.id)}
-                  className={`rounded-full border px-4 py-1.5 text-sm font-medium transition ${
-                    variant === chip.id
-                      ? "border-fuchsia-400 bg-fuchsia-50 text-fuchsia-700 dark:bg-fuchsia-900/30 dark:text-fuchsia-300 dark:border-fuchsia-700"
-                      : "border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/5 text-black/70 dark:text-white/70 hover:border-fuchsia-300 hover:bg-fuchsia-50 hover:text-fuchsia-700 dark:hover:border-fuchsia-700 dark:hover:bg-fuchsia-900/20"
-                  }`}
-                >
-                  {chip.label}
-                </button>
-              ))}
-            </div>
-          </div>
+      <div className="mx-auto max-w-7xl px-6 pt-10 sm:pt-14 lg:pt-16 pb-24">
+        <motion.div variants={HERO_STAGGER} initial="hidden" animate="show" className="max-w-3xl mx-auto text-center space-y-6">
 
-          <AnimatePresence mode="wait">
-            <motion.h1
-              key={content.headline}
-              initial={{ opacity: 0, y: 8 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -8 }}
-              transition={{ duration: 0.3 }}
-              className="text-5xl sm:text-6xl font-semibold tracking-tight text-balance"
-            >
-              {renderHeadline(variant)}
-            </motion.h1>
-          </AnimatePresence>
+          <motion.div variants={HERO_ITEM} className="flex justify-center">
+            <span className="inline-flex items-center gap-2 rounded-full border border-black/10 bg-white/70 px-3.5 py-1.5 text-sm font-medium text-black/70 backdrop-blur">
+              <Sparkles className="h-4 w-4 text-blue-500" />
+              For ecommerce, dealerships, and service sites
+            </span>
+          </motion.div>
 
-          <AnimatePresence mode="wait">
-            <motion.p
-              key={content.subline}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.3 }}
-              className="text-lg text-black/70 dark:text-white/70 max-w-2xl mx-auto"
-            >
-              {content.subline}
-            </motion.p>
-          </AnimatePresence>
+          <motion.h1 variants={HERO_ITEM} className="text-balance text-5xl sm:text-6xl lg:text-[4.25rem] font-semibold leading-[1.05] tracking-tight">
+            {renderHeadline(variant)}
+          </motion.h1>
 
-          {/* CTAs */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 max-w-xl mx-auto">
+          <motion.p variants={HERO_ITEM} className="mx-auto max-w-2xl text-lg sm:text-xl text-black/70">
+            {content.subline}
+          </motion.p>
+
+          <motion.div variants={HERO_ITEM} className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
             <a
               href={getSignupUrl()}
-              className="inline-flex items-center justify-center gap-2 rounded-2xl font-medium transition active:scale-[.98] bg-black text-white hover:opacity-90 shadow-sm h-12 px-6 text-base w-full sm:w-auto"
+              className="inline-flex items-center justify-center gap-2 rounded-2xl font-medium transition active:scale-[.98] bg-gradient-to-r from-blue-600 via-violet-600 to-fuchsia-600 text-white hover:opacity-95 shadow-lg shadow-fuchsia-500/25 h-12 px-7 text-base w-full sm:w-auto"
             >
               Get started free
             </a>
             <button
               onClick={onOpenDemo}
-              className="inline-flex items-center justify-center gap-2 rounded-2xl font-medium transition active:scale-[.98] border border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/5 h-12 px-6 text-base w-full sm:w-auto hover:border-black/30 dark:hover:border-white/30"
+              className="inline-flex items-center justify-center gap-2 rounded-2xl font-medium transition active:scale-[.98] border border-black/10 bg-white/70 h-12 px-7 text-base w-full sm:w-auto hover:border-black/30"
             >
               Get a demo
             </button>
-          </div>
+          </motion.div>
 
-        </div>
+        </motion.div>
 
-        {/* Hero animation */}
-        <div className="mt-10 max-w-3xl mx-auto">
+        {/* Hero product demo with floating, bobbing value pills */}
+        <div className="relative mt-14 max-w-3xl mx-auto">
+          {pills.map((p) => (
+            <motion.div
+              key={p.label}
+              className={`absolute z-20 hidden items-center gap-2 rounded-2xl border border-black/5 bg-white px-3.5 py-2.5 shadow-xl xl:flex ${p.cls}`}
+              style={{ x: p.x }}
+              initial={{ opacity: 0, scale: 0.85 }}
+              animate={reduce ? { opacity: 1, scale: 1 } : { opacity: 1, scale: 1, y: [0, -10, 0] }}
+              transition={{
+                opacity: { delay: 0.7 + p.delay * 0.18, duration: 0.4 },
+                scale: { delay: 0.7 + p.delay * 0.18, duration: 0.4 },
+                y: { duration: 3.2 + p.delay, repeat: Infinity, ease: "easeInOut", delay: p.delay },
+              }}
+            >
+              <span className={`grid h-6 w-6 shrink-0 place-items-center rounded-full ${p.ring}`}>
+                <p.Icon className="h-3.5 w-3.5" />
+              </span>
+              <span className="whitespace-nowrap text-sm font-medium text-black/80">{p.label}</span>
+            </motion.div>
+          ))}
           <HeroDemo variant={variant} />
         </div>
 
-        {/* Logo strip */}
-        <div className="mt-16 max-w-5xl mx-auto text-center">
-          <p className="text-sm font-semibold text-fuchsia-600">
-            Trusted by leading brands
-          </p>
-          <div className="mt-6 flex flex-wrap items-center justify-center gap-x-14 gap-y-8">
-            {CUSTOMER_LOGOS.map((logo) => (
-              <img
-                key={logo.alt}
-                src={logo.src}
-                alt={logo.alt}
-                className="h-8 w-28 object-contain select-none grayscale opacity-70 transition hover:grayscale-0 hover:opacity-100"
-                loading="lazy"
-                decoding="async"
-              />
-            ))}
+        {/* Moving logo marquee */}
+        <div className="mt-16 max-w-5xl mx-auto">
+          <p className="text-center text-sm font-medium text-black/40">Trusted by leading brands</p>
+          <div className="mt-6 [mask-image:linear-gradient(to_right,transparent,black_12%,black_88%,transparent)]">
+            <Marquee speed={32} gradient={false} pauseOnHover autoFill>
+              {CUSTOMER_LOGOS.map((logo) => (
+                <img
+                  key={logo.alt}
+                  src={logo.src}
+                  alt={logo.alt}
+                  className="mx-10 h-8 w-28 select-none object-contain opacity-70 grayscale transition hover:opacity-100 hover:grayscale-0"
+                  loading="lazy"
+                  decoding="async"
+                />
+              ))}
+            </Marquee>
           </div>
         </div>
 
@@ -943,13 +943,13 @@ function Problem({ variant }) {
             exit={{ opacity: 0, y: -8 }}
             transition={{ duration: 0.3 }}
           >
-            <p className="text-sm font-semibold text-fuchsia-600 uppercase tracking-widest mb-3">
+            <p className="text-sm font-semibold text-blue-600 uppercase tracking-widest mb-3">
               Sound familiar?
             </p>
-            <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight text-balance max-w-3xl mx-auto">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-tight text-balance max-w-3xl mx-auto">
               {content.problemHeading}
             </h2>
-            <p className="mt-4 text-lg text-black/70 dark:text-white/70 max-w-2xl mx-auto">
+            <p className="mt-4 text-lg text-zinc-500 dark:text-white/60 max-w-2xl mx-auto">
               {content.problemBody}
             </p>
             {content.problemPoints && (
@@ -977,46 +977,87 @@ function Problem({ variant }) {
   );
 }
 
+// Card reveal + hover-lift, shared across section cards. Delay lives inside the
+// show variant so the hover/unhover spring stays snappy instead of inheriting the stagger.
+const cardReveal = (i = 0) => ({
+  variants: {
+    hidden: { opacity: 0, y: 24 },
+    show: { opacity: 1, y: 0, transition: { duration: 0.5, delay: i * 0.08, ease: [0.16, 1, 0.3, 1] } },
+  },
+  initial: "hidden",
+  whileInView: "show",
+  viewport: { once: true, amount: 0.25 },
+  whileHover: { y: -6, transition: { type: "spring", stiffness: 320, damping: 24 } },
+});
+
+// Rolls a stat like "2.5x" / "39x" / "21.7%" from zero when scrolled into view.
+// Non-numeric stats ("Zero", "Auto") and trivial targets ("$1M+") render static.
+function CountUp({ value, className }) {
+  const ref = useRef(null);
+  const inView = useInView(ref, { once: true, amount: 0.6 });
+  const reduce = useReducedMotion();
+  const parsed = useMemo(() => {
+    const m = String(value).match(/^([^0-9]*)([0-9]+(?:\.[0-9]+)?)([^0-9]*)$/);
+    if (!m) return null;
+    const target = parseFloat(m[2]);
+    const decimals = (m[2].split(".")[1] || "").length;
+    if (target < 2 && decimals === 0) return null;
+    return { prefix: m[1], target, decimals, suffix: m[3] };
+  }, [value]);
+  const [display, setDisplay] = useState(() => (parsed ? (0).toFixed(parsed.decimals) : null));
+  useEffect(() => {
+    if (!parsed || !inView) return;
+    if (reduce) {
+      setDisplay(parsed.target.toFixed(parsed.decimals));
+      return;
+    }
+    const controls = animate(0, parsed.target, {
+      duration: 1.4,
+      ease: [0.16, 1, 0.3, 1],
+      onUpdate: (v) => setDisplay(v.toFixed(parsed.decimals)),
+    });
+    return () => controls.stop();
+  }, [parsed, inView, reduce]);
+  if (!parsed) return <div ref={ref} className={className}>{value}</div>;
+  return (
+    <div ref={ref} className={`${className} tabular-nums`}>
+      {parsed.prefix}{display}{parsed.suffix}
+    </div>
+  );
+}
+
 // ===== Numbers section =====
 function Numbers({ variant }) {
   const content = VARIANT_CONTENT[variant] || VARIANT_CONTENT.default;
   return (
-    <section id="results" className="scroll-mt-20 py-20 border-t border-black/5 dark:border-white/5">
+    <section id="results" className="scroll-mt-20 py-24 border-t border-black/5 dark:border-white/5">
       <div className="mx-auto max-w-6xl px-6">
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={content.numbersHeading}
-            initial={{ opacity: 0, y: 8 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -8 }}
-            transition={{ duration: 0.3 }}
-          >
-            <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight">
-              {content.numbersHeading}
-            </h2>
-            <div className="mt-10 grid grid-cols-1 sm:grid-cols-3 gap-6">
-              {content.stats.map((stat) => (
-                <div
-                  key={stat.number + stat.label}
-                  className="rounded-3xl border border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/5 p-8 shadow-sm"
-                >
-                  <div className="text-4xl font-semibold bg-gradient-to-r from-indigo-500 via-violet-500 to-fuchsia-500 bg-clip-text text-transparent">
-                    {stat.number}
-                  </div>
-                  <div className="mt-1 text-base font-semibold text-black/80 dark:text-white/80">
-                    {stat.label}
-                  </div>
-                  <p className="mt-3 text-sm text-black/60 dark:text-white/60">{stat.desc}</p>
-                </div>
-              ))}
-            </div>
-            {!["agents", "leads"].includes(variant) && (
-              <p className="mt-4 text-xs text-black/50 dark:text-white/50">
-                Results measured in A/B tests with a one-day conversion window.
-              </p>
-            )}
-          </motion.div>
-        </AnimatePresence>
+        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-tight max-w-2xl">
+          {content.numbersHeading}
+        </h2>
+        <div className="mt-12 grid grid-cols-1 sm:grid-cols-3 gap-6">
+          {content.stats.map((stat, i) => (
+            <motion.div
+              key={stat.number + stat.label}
+              {...cardReveal(i)}
+              className="rounded-3xl border border-black/8 dark:border-white/10 bg-white dark:bg-white/5 p-8 shadow-[0_1px_3px_rgba(0,0,0,0.04)] transition-shadow hover:shadow-[0_16px_40px_-16px_rgba(37,99,235,0.25)]"
+            >
+              <CountUp
+                value={stat.number}
+                className="text-5xl lg:text-6xl font-semibold tracking-tight text-blue-600 dark:text-blue-400"
+              />
+              <div className="mt-2 text-base font-semibold text-zinc-800 dark:text-white/80">
+                {stat.label}
+              </div>
+              <p className="mt-3 text-sm leading-relaxed text-zinc-500 dark:text-white/60">{stat.desc}</p>
+            </motion.div>
+          ))}
+        </div>
+        {!["agents", "leads"].includes(variant) && (
+          <p className="mt-5 text-xs text-zinc-400 dark:text-white/40">
+            Results measured in A/B tests with a one-day conversion window.
+          </p>
+        )}
       </div>
     </section>
   );
@@ -1248,11 +1289,11 @@ function PillPicker() {
                   onClick={() => setActive(pill.id)}
                   className={[
                     "group inline-flex items-center gap-2 rounded-full border bg-white/80 dark:bg-white/10 px-4 py-2 text-sm font-medium text-black dark:text-white transition",
-                    "border-black/10 dark:border-white/10 hover:border-fuchsia-200 hover:bg-fuchsia-50/60 dark:hover:bg-white/20",
-                    isActive ? "border-fuchsia-200 bg-fuchsia-50/70 dark:bg-white/20" : "",
+                    "border-black/10 dark:border-white/10 hover:border-blue-200 hover:bg-blue-50/60 dark:hover:bg-white/20",
+                    isActive ? "border-blue-200 bg-blue-50/70 dark:bg-white/20" : "",
                   ].join(" ")}
                 >
-                  <span className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-fuchsia-100 text-fuchsia-600 dark:bg-fuchsia-500/20 dark:text-fuchsia-300">
+                  <span className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-blue-100 text-blue-600 dark:bg-blue-500/20 dark:text-blue-300">
                     <Icon className="h-3.5 w-3.5" />
                   </span>
                   {pill.label}
@@ -1274,7 +1315,7 @@ function PillPicker() {
               <div className="pt-1">
                 <a
                   href={detail.ctaHref}
-                  className="inline-flex items-center gap-2 rounded-xl border border-black/10 bg-white px-4 py-2 text-sm font-semibold text-black hover:border-fuchsia-200 hover:bg-fuchsia-50 transition"
+                  className="inline-flex items-center gap-2 rounded-xl border border-black/10 bg-white px-4 py-2 text-sm font-semibold text-black hover:border-blue-200 hover:bg-blue-50 transition"
                 >
                   {detail.ctaLabel}
                 </a>
@@ -1353,60 +1394,223 @@ function BrandMark({ src, label, className = "" }) {
   );
 }
 
+// ===== Animated bento tile visuals (Apptics-style live tiles) =====
+function SearchViz() {
+  const reduce = useReducedMotion();
+  // Uses the site's own existing demo product data — no invented products.
+  const results = [
+    { img: "/media/prod-1.webp", name: "St. Bernard x Stark Maxi", price: "$98" },
+    { img: "/media/prod-2.webp", name: "Lulus Bow Backless Maxi", price: "$55" },
+    { img: "/media/prod-3.webp", name: "Maygel Coronel Cover-Up", price: "$178" },
+  ];
+  return (
+    <div className="rounded-2xl bg-white/80 dark:bg-white/5 border border-black/5 dark:border-white/10 p-3">
+      <div className="flex items-center gap-2 rounded-xl bg-white dark:bg-zinc-800 border border-black/5 dark:border-white/10 px-3 py-2 shadow-sm">
+        <SearchIcon className="h-4 w-4 text-black/40 dark:text-white/40 shrink-0" />
+        <span className="text-sm text-black/70 dark:text-white/70 truncate">red dress under $200</span>
+        <motion.span
+          className="h-4 w-px bg-blue-500 shrink-0"
+          animate={reduce ? {} : { opacity: [1, 0, 1] }}
+          transition={{ duration: 1, repeat: Infinity }}
+        />
+        <span className="ml-auto inline-flex items-center gap-1 rounded-full bg-gradient-to-r from-blue-600 via-violet-600 to-fuchsia-600 px-2.5 py-1 text-xs font-semibold text-white shrink-0">
+          <Sparkles className="h-3 w-3" /> Ask AI
+        </span>
+      </div>
+      <div className="mt-3 grid grid-cols-3 gap-2">
+        {results.map((r, i) => (
+          <motion.div
+            key={r.name}
+            initial={{ opacity: 0, y: 12 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.5 }}
+            transition={{ delay: 0.15 + i * 0.12, duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+            className="overflow-hidden rounded-lg border border-black/5 dark:border-white/10 bg-white dark:bg-zinc-800 shadow-sm"
+          >
+            <img src={r.img} alt={r.name} loading="lazy" decoding="async" className="aspect-[3/4] w-full object-cover" />
+            <div className="px-1.5 py-1.5">
+              <p className="truncate text-[11px] font-medium text-black/70 dark:text-white/70">{r.name}</p>
+              <p className="text-[11px] font-semibold text-blue-600">{r.price}</p>
+            </div>
+          </motion.div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function QAViz() {
+  const qs = [
+    "Does this ship to Canada?",
+    "Is the red dress true to size?",
+    "Anything under $200 for a wedding?",
+    "Do you have this in a size 8?",
+  ];
+  return (
+    <div className="rounded-2xl bg-white/80 dark:bg-white/5 border border-black/5 dark:border-white/10 p-3 space-y-2">
+      {qs.map((q, i) => (
+        <motion.div
+          key={q}
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.5 }}
+          transition={{ delay: i * 0.15, duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+          className="flex items-center gap-2 rounded-xl bg-white dark:bg-zinc-800 border border-black/5 dark:border-white/10 px-3 py-2 shadow-sm"
+        >
+          <span className="grid h-5 w-5 shrink-0 place-items-center rounded-full bg-emerald-100 text-emerald-600 dark:bg-emerald-900/40 dark:text-emerald-300">
+            <CheckCircle2 className="h-3.5 w-3.5" />
+          </span>
+          <span className="truncate text-sm text-black/70 dark:text-white/70">{q}</span>
+        </motion.div>
+      ))}
+    </div>
+  );
+}
+
+function LeadViz() {
+  const rows = [
+    { label: "Name", val: "Jordan Reyes" },
+    { label: "Email", val: "jordan@maison.co" },
+    { label: "Wants", val: "Beach wedding dress, size 8" },
+  ];
+  return (
+    <div className="rounded-2xl bg-white/80 dark:bg-white/5 border border-black/5 dark:border-white/10 p-3 space-y-2">
+      {rows.map((r, i) => (
+        <motion.div
+          key={r.label}
+          initial={{ opacity: 0, x: -10 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true, amount: 0.5 }}
+          transition={{ delay: i * 0.18, duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+          className="flex items-center gap-2 rounded-xl bg-white dark:bg-zinc-800 border border-black/5 dark:border-white/10 px-3 py-2"
+        >
+          <span className="grid h-5 w-5 shrink-0 place-items-center rounded-full bg-emerald-100 text-emerald-600 dark:bg-emerald-900/40 dark:text-emerald-300">
+            <CheckCircle2 className="h-3 w-3" />
+          </span>
+          <span className="w-14 shrink-0 text-xs text-black/40 dark:text-white/40">{r.label}</span>
+          <span className="truncate text-sm text-black/70 dark:text-white/70">{r.val}</span>
+        </motion.div>
+      ))}
+    </div>
+  );
+}
+
+function AgentViz() {
+  return (
+    <div className="rounded-2xl bg-white/5 border border-white/10 p-3 space-y-2">
+      <div className="flex justify-start">
+        <div className="rounded-2xl rounded-bl-sm bg-white/10 px-3 py-2 text-xs text-white/70 max-w-[80%]">
+          Where can I buy boots like these?
+        </div>
+      </div>
+      <motion.div
+        className="flex justify-end"
+        initial={{ opacity: 0, y: 8 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.5 }}
+        transition={{ delay: 0.4, duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+      >
+        <div className="rounded-2xl rounded-br-sm bg-gradient-to-r from-blue-600 via-violet-600 to-fuchsia-600 px-3 py-2 text-xs text-white max-w-[85%]">
+          Lucchese carries them. Here's the exact pair and a link.
+        </div>
+      </motion.div>
+    </div>
+  );
+}
+
 function Features() {
-  const capabilities = [
+  const tiles = [
     {
       icon: <SearchIcon className="h-5 w-5" />,
-      title: "Find anything on your site",
+      title: "Finds anything on your site",
       stat: "+36% add-to-cart",
-      desc: "Visitors search in plain language and Nobi finds the right match even when the exact words don't appear in your content. No more dead-end searches.",
+      desc: "Visitors search in plain language. Nobi surfaces the right product even when the exact words never appear in your catalog.",
+      span: "md:col-span-3",
+      tone: "gradient",
+      Viz: SearchViz,
     },
     {
       icon: <CheckCircle2 className="h-5 w-5" />,
-      title: "Answer every question accurately",
+      title: "Answers every question",
       stat: "6x more purchases",
-      desc: "Pulls from your knowledge base, cites its sources, and runs a fact-check before responding. Visitors get a straight answer they can trust.",
+      desc: "Pulls from your knowledge base, cites sources, and fact-checks before replying. Shoppers get an answer they can trust.",
+      span: "md:col-span-3",
+      tone: "plain",
+      Viz: QAViz,
     },
     {
       icon: <Heart className="h-5 w-5" />,
-      title: "Capture and qualify leads",
+      title: "Captures and qualifies leads",
       stat: "Higher-intent leads",
-      desc: "Collects contact info naturally through conversation. Every lead includes a summary of what the visitor was asking about, so follow-ups aren't cold.",
+      desc: "Collects contact details mid-conversation and hands you a summary of exactly what each visitor wanted. No more cold follow-ups.",
+      span: "md:col-span-3",
+      tone: "plain",
+      Viz: LeadViz,
     },
     {
       icon: <Bot className="h-5 w-5" />,
-      title: "Reach AI agents",
+      title: "Answers AI agents too",
       stat: "New channel",
-      desc: "Every Nobi assistant is also a callable agent endpoint. When someone uses Claude, ChatGPT, or any AI assistant to research what you offer, your Nobi agent answers them directly.",
+      desc: "When a shopper researches you through ChatGPT or Claude, Nobi responds as a callable endpoint, so you show up there as well.",
+      span: "md:col-span-3",
+      tone: "dark",
+      Viz: AgentViz,
     },
   ];
 
   return (
-    <section id="features" className="scroll-mt-20 py-20 border-t border-black/5 dark:border-white/5">
+    <section id="features" className="scroll-mt-20 py-24 border-t border-black/5 dark:border-white/5">
       <div className="mx-auto max-w-6xl px-6">
-        <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight text-balance">
-          One assistant. Four ways it grows your business.
-        </h2>
-        <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 gap-6">
-          {capabilities.map((cap) => (
-            <div
-              key={cap.title}
-              className="rounded-3xl border border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/5 p-8 shadow-sm flex flex-col gap-4"
-            >
-              <div className="flex items-center justify-between gap-3">
-                <div className="flex items-center gap-3">
-                  <div className="p-2 rounded-xl bg-fuchsia-50 dark:bg-fuchsia-900/20 text-fuchsia-600 shrink-0">
-                    {cap.icon}
+        <div className="max-w-2xl">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-tight text-balance">
+            One assistant. Everything a great salesperson does.
+          </h2>
+          <p className="mt-4 text-lg text-black/60 dark:text-white/60">
+            Nobi greets every visitor, understands what they want, and helps them buy, all in one conversation.
+          </p>
+        </div>
+
+        <div className="mt-12 grid grid-cols-1 md:grid-cols-6 gap-4">
+          {tiles.map((t, i) => {
+            const Viz = t.Viz;
+            return (
+              <motion.div
+                key={t.title}
+                {...cardReveal(i)}
+                className={[
+                  "relative overflow-hidden rounded-3xl border p-6 flex flex-col gap-5",
+                  t.span,
+                  t.tone === "dark"
+                    ? "border-white/10 bg-[#1b1740] text-white"
+                    : t.tone === "gradient"
+                    ? "border-blue-200/60 dark:border-blue-900/40 bg-gradient-to-br from-blue-50 via-white to-fuchsia-50 dark:from-blue-950/40 dark:via-zinc-900 dark:to-fuchsia-950/30"
+                    : "border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/5",
+                ].join(" ")}
+              >
+                <Viz />
+                <div className="flex flex-col gap-2">
+                  <div className="flex items-center justify-between">
+                    <div className={[
+                      "p-2 rounded-xl shrink-0",
+                      t.tone === "dark" ? "bg-white/10 text-blue-300" : "bg-blue-50 dark:bg-blue-900/20 text-blue-600",
+                    ].join(" ")}>
+                      {t.icon}
+                    </div>
+                    <span className={[
+                      "text-xs font-semibold rounded-full px-2.5 py-1 border",
+                      t.tone === "dark"
+                        ? "text-blue-200 bg-white/5 border-white/10"
+                        : "text-blue-700 dark:text-blue-300 bg-blue-50 dark:bg-blue-900/30 border-blue-200 dark:border-blue-800/50",
+                    ].join(" ")}>
+                      {t.stat}
+                    </span>
                   </div>
-                  <h3 className="font-semibold text-lg">{cap.title}</h3>
+                  <h3 className="font-semibold text-xl tracking-tight">{t.title}</h3>
+                  <p className={t.tone === "dark" ? "text-sm text-white/70" : "text-sm text-black/60 dark:text-white/60"}>{t.desc}</p>
                 </div>
-                <span className="shrink-0 text-xs font-semibold text-fuchsia-700 dark:text-fuchsia-300 bg-fuchsia-50 dark:bg-fuchsia-900/30 border border-fuchsia-200 dark:border-fuchsia-800/50 rounded-full px-2.5 py-1">
-                  {cap.stat}
-                </span>
-              </div>
-              <p className="text-black/70 dark:text-white/70">{cap.desc}</p>
-            </div>
-          ))}
+              </motion.div>
+            );
+          })}
         </div>
       </div>
     </section>
@@ -1446,18 +1650,24 @@ function Testimonial() {
 }, []);
 
   return (
-    <section id="testimonial" className="py-20 border-t border-black/5 dark:border-white/5">
+    <section id="testimonial" className="pb-24 pt-2">
       <div className="mx-auto max-w-6xl px-6">
         {/* Do NOT stretch children; align them to the start */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
+          className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start"
+        >
           {/* Quote card — natural height, not stretched */}
           <div
             ref={leftRef}
             className="lg:col-span-2 self-start rounded-3xl border border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/5 p-8 shadow-sm"
           >
-            <Quote className="h-6 w-6 text-fuchsia-600 mb-4" />
-            <p className="text-2xl leading-snug font-medium text-black/90 dark:text-white">
-              “If you want to learn and be inspired, you should look to implement a tool like Nobi. We've seen great incremental results, where conversion rates have been significantly higher through Nobi than on our binary search. But I think the biggest reason a brand should implement a tool like this is that you have the opportunity to apply more information towards optimizing broader campaigns and your broader e-comm goals.”
+            <Quote className="h-6 w-6 text-blue-600 mb-4" />
+            <p className="text-2xl sm:text-3xl leading-snug font-medium tracking-tight text-black/90 dark:text-white">
+              “We've seen great incremental results, where conversion rates have been significantly higher through Nobi than on our binary search.”
             </p>
             <div className="mt-6 flex items-center gap-4">
               {!avatarFailed ? (
@@ -1500,14 +1710,85 @@ function Testimonial() {
             <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
             <div className="absolute bottom-5 left-5 right-5 text-white text-center">
               <div className="text-3xl sm:text-4xl font-semibold leading-tight">
-                $1m+ in revenue
+                $1M+ in revenue
               </div>
               <div className="text-lg sm:text-xl font-medium text-white/90">
                 from Nobi in 2025
               </div>
             </div>
           </div>
-        </div>
+        </motion.div>
+      </div>
+    </section>
+  );
+}
+
+function ComparisonTable() {
+  const cols = [
+    { key: "nobi", label: "Nobi", accent: true },
+    { key: "search", label: "Plain site search" },
+    { key: "chatbot", label: "A basic chatbot" },
+  ];
+  const rows = [
+    { f: "Understands plain-language questions", nobi: true, search: false, chatbot: "partial" },
+    { f: "Finds products without exact keywords", nobi: true, search: false, chatbot: false },
+    { f: "Answers from your knowledge base", nobi: true, search: false, chatbot: "partial" },
+    { f: "Cites its sources and fact-checks", nobi: true, search: false, chatbot: false },
+    { f: "Captures and qualifies leads", nobi: true, search: false, chatbot: false },
+    { f: "Answers AI agents like ChatGPT and Claude", nobi: true, search: false, chatbot: false },
+    { f: "Live in about 15 minutes", nobi: true, search: "partial", chatbot: true },
+  ];
+  const Mark = ({ v, accent }) => {
+    if (v === true) return <CheckCircle2 className={`mx-auto h-5 w-5 ${accent ? "text-blue-600" : "text-zinc-400 dark:text-white/40"}`} />;
+    if (v === "partial") return <span className="mx-auto block h-3.5 w-3.5 rounded-full border-2 border-zinc-300 dark:border-white/25" />;
+    return <span className="mx-auto block h-0.5 w-3.5 rounded-full bg-zinc-200 dark:bg-white/15" />;
+  };
+  return (
+    <section className="scroll-mt-20 py-24 border-t border-black/5 dark:border-white/5">
+      <div className="mx-auto max-w-5xl px-6">
+        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-tight max-w-2xl">
+          What sets Nobi apart
+        </h2>
+        <p className="mt-3 text-lg text-zinc-500 dark:text-white/60 max-w-2xl">
+          Search boxes match keywords. Basic chatbots read scripts. Nobi actually understands your shopper.
+        </p>
+
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+          className="mt-12 overflow-hidden rounded-3xl border border-black/8 dark:border-white/10 bg-white dark:bg-white/5"
+        >
+          <div className="grid grid-cols-[1.6fr_repeat(3,1fr)]">
+            <div className="px-6 py-4" />
+            {cols.map((c) => (
+              <div
+                key={c.key}
+                className={`px-4 py-4 text-center text-sm font-semibold ${
+                  c.accent ? "bg-gradient-to-b from-blue-600 via-violet-600 to-fuchsia-600 text-white" : "text-zinc-500 dark:text-white/60"
+                }`}
+              >
+                {c.label}
+              </div>
+            ))}
+          </div>
+          {rows.map((r, i) => (
+            <div
+              key={r.f}
+              className={`grid grid-cols-[1.6fr_repeat(3,1fr)] items-center border-t border-black/5 dark:border-white/10 ${
+                i % 2 ? "bg-zinc-50/60 dark:bg-white/[0.02]" : ""
+              }`}
+            >
+              <div className="px-6 py-4 text-sm text-zinc-700 dark:text-white/80">{r.f}</div>
+              {cols.map((c) => (
+                <div key={c.key} className={`px-4 py-4 ${c.accent ? "bg-blue-50/50 dark:bg-blue-950/20" : ""}`}>
+                  <Mark v={r[c.key]} accent={c.accent} />
+                </div>
+              ))}
+            </div>
+          ))}
+        </motion.div>
       </div>
     </section>
   );
@@ -1515,22 +1796,32 @@ function Testimonial() {
 
 function HowItWorks() {
   const steps = [
-    { h: "Connect your site", p: "Paste one script tag or install the Shopify app. Nobi reads your catalog, pages, and PDFs automatically." },
-    { h: "Customize and launch", p: "Pick where Nobi appears, configure your brand voice, and go live. Knowledge base refreshes twice a day with no maintenance needed." },
-    { h: "Measure the results", p: "Track conversions, revenue, and what visitors are asking in a simple dashboard. A/B test configurations and see the lift directly." },
+    { n: "01", h: "Connect your site", p: "Paste one script tag or install the Shopify app. Nobi reads your catalog, pages, and PDFs automatically." },
+    { n: "02", h: "Customize and launch", p: "Pick where Nobi appears, set your brand voice, and go live. Your knowledge base refreshes twice a day, hands-free." },
+    { n: "03", h: "Measure the lift", p: "Track conversions, revenue, and what visitors ask in one dashboard. A/B test configurations and see the impact directly." },
   ];
   return (
-    <section id="how" className="scroll-mt-20 py-20 border-t border-black/5 dark:border-white/5">
+    <section id="how" className="scroll-mt-20 py-24 border-t border-black/5 dark:border-white/5">
       <div className="mx-auto max-w-6xl px-6">
-        <h2 className="text-3xl font-semibold mb-8">Low code setup in 15 minutes</h2>
-        <ol className="grid grid-cols-1 md:grid-cols-3 gap-6 list-decimal list-inside">
-          {steps.map((s) => (
-            <li key={s.h} className="rounded-3xl border border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/5 p-6">
-              <div className="font-medium">{s.h}</div>
-              <p className="mt-2 text-sm text-black/70 dark:text-white/70">{s.p}</p>
-            </li>
+        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-tight max-w-2xl">
+          Live in 15 minutes. No engineers required.
+        </h2>
+        <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
+          {steps.map((s, i) => (
+            <motion.div
+              key={s.n}
+              {...cardReveal(i)}
+              className="rounded-3xl border border-black/8 dark:border-white/10 bg-white dark:bg-white/5 p-7 transition-shadow hover:shadow-[0_16px_40px_-16px_rgba(0,0,0,0.15)]"
+            >
+              <div className="font-mono text-sm font-semibold text-blue-600">{s.n}</div>
+              <div className="mt-3 text-lg font-semibold tracking-tight">{s.h}</div>
+              <p className="mt-2 text-sm leading-relaxed text-zinc-500 dark:text-white/60">{s.p}</p>
+            </motion.div>
           ))}
-        </ol>
+        </div>
+        <p className="mt-8 text-sm text-zinc-500 dark:text-white/60 max-w-3xl">
+          Works with Shopify, WooCommerce, headless, and custom sites. Reads your pages, PDFs, and documents, connects to your existing forms and CRM, and refreshes automatically twice a day.
+        </p>
       </div>
     </section>
   );
@@ -1543,36 +1834,53 @@ function Pricing() {
     { name: "Enterprise", price: "Custom", blurb: "For high-volume brands with large catalogs", points: ["Volume discounts on usage", "Custom integrations and onboarding", "Dedicated support"], cta: "Contact Sales", onClick: onOpen },
   ];
   return (
-    <section id="pricing" className="scroll-mt-20 py-20 border-t border-black/5 dark:border-white/5">
+    <section id="pricing" className="scroll-mt-20 py-24 border-t border-black/5 dark:border-white/5">
       <div className="mx-auto max-w-6xl px-6">
-        <h2 className="text-3xl font-semibold mb-2">Simple, usage-based pricing</h2>
-        <p className="text-black/60 dark:text-white/60 mb-8">A low monthly base with per-use rates. Try free in your dashboard, no credit card needed.</p>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-stretch">
-          {tiers.map((t) => (
-            <div key={t.name} className={`flex flex-col rounded-3xl border bg-white/70 dark:bg-white/5 p-8 ${t.highlighted ? "border-purple-300 ring-2 ring-purple-200" : "border-black/10 dark:border-white/10"}`}>
-              <div className="text-sm font-semibold tracking-wide text-indigo-600">{t.name}</div>
-              <div className="mt-2 text-3xl font-semibold">
-                {t.price}{t.price !== "Custom" && <span className="text-base font-normal opacity-70"> monthly base</span>}
+        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-tight">Simple, usage-based pricing</h2>
+        <p className="mt-3 text-lg text-zinc-500 dark:text-white/60 max-w-2xl">A low monthly base with per-use rates. Try it free in your dashboard, no credit card needed.</p>
+        <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-6 items-stretch">
+          {tiers.map((t, i) => (
+            <motion.div
+              key={t.name}
+              {...cardReveal(i)}
+              className={`flex flex-col rounded-3xl border p-8 transition-shadow ${
+                t.highlighted
+                  ? "border-blue-300 dark:border-blue-800 bg-white dark:bg-white/5 ring-1 ring-blue-200 dark:ring-blue-900 shadow-[0_8px_30px_rgba(37,99,235,0.10)] hover:shadow-[0_20px_50px_-16px_rgba(37,99,235,0.30)]"
+                  : "border-black/8 dark:border-white/10 bg-white dark:bg-white/5 hover:shadow-[0_16px_40px_-16px_rgba(0,0,0,0.15)]"
+              }`}
+            >
+              <div className="text-sm font-semibold tracking-wide text-blue-600">{t.name}</div>
+              <div className="mt-3 text-4xl font-semibold tracking-tight">
+                {t.price}{t.price !== "Custom" && <span className="text-base font-normal text-zinc-400"> / mo base</span>}
               </div>
-              <div className="text-sm opacity-80 mt-1">{t.blurb}</div>
-              <div className="mt-4 flex-1 text-sm space-y-2">
-                {t.points.map((p) => (<div key={p} className="flex items-center gap-2"><CheckCircle2 className="h-4 w-4" /> {p}</div>))}
+              <div className="mt-2 text-sm text-zinc-500 dark:text-white/60">{t.blurb}</div>
+              <div className="mt-6 flex-1 space-y-3 text-sm">
+                {t.points.map((p) => (
+                  <div key={p} className="flex items-start gap-2.5">
+                    <CheckCircle2 className="h-4 w-4 mt-0.5 text-blue-600 shrink-0" />
+                    <span className="text-zinc-600 dark:text-white/70">{p}</span>
+                  </div>
+                ))}
               </div>
               {t.href ? (
                 <a
                   href={t.href}
-                  className="mt-6 inline-flex items-center justify-center gap-2 rounded-2xl font-medium transition active:scale-[.98] bg-black text-white dark:bg-white dark:text-black hover:opacity-90 shadow-sm h-10 px-5 text-base w-full"
+                  className={`mt-8 inline-flex items-center justify-center gap-2 rounded-2xl font-medium transition active:scale-[.98] h-11 px-5 text-base w-full ${
+                    t.highlighted
+                      ? "bg-gradient-to-r from-blue-600 via-violet-600 to-fuchsia-600 text-white hover:opacity-95 shadow-lg shadow-fuchsia-500/25"
+                      : "bg-zinc-900 text-white dark:bg-white dark:text-black hover:opacity-90"
+                  }`}
                 >
                   {t.cta}
                 </a>
               ) : (
-                <Button className="mt-6 w-full" variant="outline" onClick={t.onClick}>{t.cta}</Button>
+                <Button className="mt-8 w-full" variant="outline" onClick={t.onClick}>{t.cta}</Button>
               )}
-            </div>
+            </motion.div>
           ))}
         </div>
-        <p className="mt-6 text-center text-sm text-black/50 dark:text-white/50">
-          <a href="/pricing" className="underline hover:text-purple-600">See full pricing</a> &middot; Overages: $0.10/message, $0.01/search
+        <p className="mt-6 text-sm text-zinc-400 dark:text-white/50">
+          <a href="/pricing" className="underline hover:text-blue-600">See full pricing</a> · Overages: $0.10/message, $0.01/search
         </p>
       </div>
     </section>
@@ -1585,7 +1893,7 @@ function Bar({ value, maxValue }) {
   return (
     <div className="h-2 w-full rounded-full bg-black/5 dark:bg-white/10">
       <div
-        className="h-2 rounded-full bg-gradient-to-r from-indigo-500 via-violet-500 to-fuchsia-500"
+        className="h-2 rounded-full bg-blue-600"
         style={{ width: `${pct}%` }}
       />
     </div>
@@ -1612,7 +1920,7 @@ function InsightsBar({ value, maxValue }) {
   return (
     <div className="h-2 w-full rounded-full bg-black/5 dark:bg-white/10">
       <div
-        className="h-2 rounded-full bg-gradient-to-r from-indigo-500 via-violet-500 to-fuchsia-500"
+        className="h-2 rounded-full bg-blue-600"
         style={{ width: `${pct}%` }}
       />
     </div>
@@ -1731,151 +2039,68 @@ function MultiLineChart({ seriesList = [] }) {
 }
 
 function Insights({ onOpenForm }) {
+  // Illustrative dashboard using the site's existing example data.
   const intents = [
-    { label: "Buying a Gift", value: 124 },
+    { label: "Buying a gift", value: 124 },
     { label: "Shopping for an upcoming trip", value: 96 },
-    { label: "Requesting sizing/fit", value: 88 },
+    { label: "Sizing and fit questions", value: 88 },
     { label: "Shopping by product type", value: 54 },
   ];
-
-  const objections = [
-    { label: "Unsure about sizing/fit", value: 63 },
-    { label: "Shipping cost/timing", value: 49 },
-    { label: "Material care/durability", value: 31 },
-    { label: "Out of stock / color", value: 24 },
+  const prompts = [
+    "Shirts and pants for a boy going off to college (probably a large).",
+    "Outfits for a trip to Puerto Vallarta for a girlfriend's 30th.",
+    "Will the Legend shirt shrink in the wash?",
   ];
-
-  const products = ["Button downs", "Polos", "Dresses"];
-  const attrs = ["Linen", "Gauze", "Terry"];
-  const affinity = {
-    "Button downs": { Linen: 0.78, "Gauze": 0.32, "Terry": 0.55 },
-    Polos: { Linen: 0.22, "Gauze": 0.81, "Terry": 0.08 },
-    "Dresses": { Linen: 0.93, "Gauze": 0.05, "Terry": 0.06 },
-  };
-
-  const max = (arr) => Math.max(...arr.map((d) => d.value));
-
+  const maxV = Math.max(...intents.map((d) => d.value));
   return (
-    <section id="insights" className="scroll-mt-20 py-20 border-t border-black/5 dark:border-white/5">
+    <section id="insights" className="scroll-mt-20 py-24 border-t border-black/5 dark:border-white/5">
       <div className="mx-auto max-w-6xl px-6">
-        <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
-          <div>
-            <p className="text-sm font-semibold text-fuchsia-600">Insights</p>
-            <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight mt-2">
-              Hear your customers in their own words.
-            </h2>
-            <p className="mt-3 text-black/70 dark:text-white/70">
-              Nobi turns real conversations into structured signals. Your merchandising, creative, and CX teams have never moved faster.
-            </p>
-          </div>
-        </div>
-
-        {/* Grid */}
-        <div className="mt-8 grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
-          {/* Left column */}
-          <div className="space-y-6">
-            {/* Intents */}
-            <div className="rounded-3xl border border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/5 p-6 shadow-sm">
-              <div className="font-semibold flex items-center gap-2">
-                <Sparkles className="h-4 w-4 text-fuchsia-600" />
-                Top customer intents
-              </div>
-              <div className="mt-4 space-y-3">
-                {intents.map((d) => (
-                  <div key={d.label}>
-                    <div className="flex items-center justify-between text-sm">
-                      <span className="text-black/80 dark:text-white/90">{d.label}</span>
-                      <span className="tabular-nums text-black/60 dark:text-white/60">{d.value}</span>
-                    </div>
-                    <InsightsBar value={d.value} maxValue={max(intents)} />
-                  </div>
-                ))}
-              </div>
+        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-tight max-w-2xl">
+          Every conversation becomes insight
+        </h2>
+        <p className="mt-3 text-lg text-zinc-500 dark:text-white/60 max-w-2xl">
+          Nobi turns real shopper conversations into structured signals, so you see what customers actually want in their own words.
+        </p>
+        <div className="mt-12 grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+            className="rounded-3xl border border-black/8 dark:border-white/10 bg-white dark:bg-white/5 p-7"
+          >
+            <div className="flex items-center gap-2 text-sm font-semibold text-zinc-500 dark:text-white/60">
+              <BarChart3 className="h-4 w-4 text-blue-600" /> Top customer intents
             </div>
-
-            {/* Attribute affinity by product (heatmap) */}
-            <div className="rounded-3xl border border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/5 p-6 shadow-sm">
-              <div className="font-semibold flex items-center gap-2">
-                <Heart className="h-4 w-4 text-fuchsia-600" aria-hidden="true" />
-                Attribute affinity by product
-              </div>
-              <p className="mt-1 text-xs text-black/60 dark:text-white/60">
-                Likelihood a shopper will request an attribute when browsing a product type.
-              </p>
-
-              <div className="mt-4 overflow-x-auto [-webkit-overflow-scrolling:touch]">
-                <div className="w-full">
-                  <div
-                    className="grid gap-2 sm:gap-3"
-                    style={{
-                      gridTemplateColumns: `clamp(112px, 20vw, 140px) repeat(${attrs.length}, minmax(clamp(58px, 8vw, 84px), 1fr))`,
-                    }}
-                  >
-                    <div />
-                    {attrs.map((a) => (
-                      <div key={a} className="px-2 py-1 text-xs sm:text-sm text-center text-black/70 dark:text-white/70">
-                        {a}
-                      </div>
-                    ))}
-                    {products.map((p) => (
-                      <React.Fragment key={p}>
-                        <div className="px-2 py-2 text-sm font-medium text-black/80 dark:text-white/90 flex items-center">
-                          {p}
-                        </div>
-                        {attrs.map((a) => (
-                          <HeatCell key={`${p}-${a}`} v={affinity[p][a] || 0} />
-                        ))}
-                      </React.Fragment>
-                    ))}
+            <div className="mt-6 space-y-4">
+              {intents.map((d) => (
+                <div key={d.label}>
+                  <div className="mb-1.5 text-sm text-zinc-700 dark:text-white/80">{d.label}</div>
+                  <div className="h-2 w-full rounded-full bg-zinc-100 dark:bg-white/10">
+                    <div className="h-2 rounded-full bg-blue-600" style={{ width: `${Math.round((d.value / maxV) * 100)}%` }} />
                   </div>
                 </div>
-              </div>
+              ))}
             </div>
-          </div>
-
-          {/* Right column */}
-          <div className="space-y-6">
-            {/* Objections */}
-            <div className="rounded-3xl border border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/5 p-6 shadow-sm">
-              <div className="font-semibold flex items-center gap-2">
-                <BarChart3 className="h-4 w-4 text-fuchsia-600" />
-                Common objections & barriers
-              </div>
-              <div className="mt-4 space-y-3">
-                {objections.map((d) => (
-                  <div key={d.label}>
-                    <div className="flex items-center justify-between text-sm">
-                      <span className="text-black/80 dark:text-white/90">{d.label}</span>
-                      <span className="tabular-nums text-black/60 dark:text-white/60">{d.value}</span>
-                    </div>
-                    <InsightsBar value={d.value} maxValue={max(objections)} />
-                  </div>
-                ))}
-              </div>
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.5, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+            className="rounded-3xl border border-black/8 dark:border-white/10 bg-white dark:bg-white/5 p-7"
+          >
+            <div className="flex items-center gap-2 text-sm font-semibold text-zinc-500 dark:text-white/60">
+              <Quote className="h-4 w-4 text-blue-600" /> In their own words
             </div>
-
-            {/* Voice of customer */}
-            <div className="rounded-3xl border border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/5 p-6 shadow-sm">
-              <div className="font-semibold flex items-center gap-2">
-                <Quote className="h-4 w-4 text-fuchsia-600" />
-                Example Prompts
-              </div>
-              <div className="mt-3 space-y-3 text-sm text-black/80 dark:text-white/90">
-                <blockquote className="rounded-xl p-3 bg-black/5 dark:bg-white/10">
-                  “Shirts and pants for a boy going off to college (probably a large).”
+            <div className="mt-6 space-y-3">
+              {prompts.map((p) => (
+                <blockquote key={p} className="rounded-2xl bg-zinc-50 dark:bg-white/[0.03] border border-black/5 dark:border-white/10 px-4 py-3 text-sm text-zinc-700 dark:text-white/80">
+                  “{p}”
                 </blockquote>
-                <blockquote className="rounded-xl p-3 bg-black/5 dark:bg-white/10">
-                  “Outfits for a trip to Puerto Vallarta for a girlfriend's 30th.”
-                </blockquote>
-                <blockquote className="rounded-xl p-3 bg-black/5 dark:bg-white/10">
-                  “Will the Legend shirt shrink in the wash?”
-                </blockquote>
-                <blockquote className="rounded-xl p-3 bg-black/5 dark:bg-white/10">
-                  “Men's sale items in sizes small and medium and pants size 32.”
-                </blockquote>
-              </div>
+              ))}
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>
@@ -2104,7 +2329,7 @@ function LatestPosts() {
       <div className="mx-auto max-w-6xl px-6">
         <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
           <div>
-            <p className="text-sm font-semibold text-fuchsia-600">Thoughts</p>
+            <p className="text-sm font-semibold text-blue-600">Thoughts</p>
             <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight mt-2">Latest from Nobi</h2>
             <p className="mt-2 text-black/70 dark:text-white/70 max-w-2xl">Playbooks and experiments for conversational shopping.</p>
           </div>
@@ -2127,7 +2352,7 @@ function LatestPosts() {
                 </div>
               )}
               <div className="p-5">
-                <h3 className="mt-2 text-xl font-semibold group-hover:text-purple-600 transition-colors">{post.meta.title}</h3>
+                <h3 className="mt-2 text-xl font-semibold group-hover:text-blue-600 transition-colors">{post.meta.title}</h3>
                 <p className="mt-2 text-sm text-black/70 dark:text-white/70 line-clamp-3">{post.meta.excerpt}</p>
                 <div className="mt-3 text-xs text-black/50 dark:text-white/60">
                   {formatPostDate(post.meta.date, { month: "short", day: "numeric", year: "numeric" })}
@@ -2137,7 +2362,7 @@ function LatestPosts() {
           ))}
         </div>
         <div className="mt-8 flex justify-center">
-          <a href="/blog" className="text-sm font-semibold text-black hover:text-purple-600">
+          <a href="/blog" className="text-sm font-semibold text-black hover:text-blue-600">
             View all →
           </a>
         </div>
@@ -2159,15 +2384,15 @@ function WorksWith() {
     "Knowledge base refreshes automatically twice a day",
   ];
   return (
-    <section className="py-20 border-t border-black/5 dark:border-white/5">
+    <section className="py-24 border-t border-black/5 dark:border-white/5">
       <div className="mx-auto max-w-6xl px-6">
-        <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight">
+        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-tight max-w-2xl">
           Works with what you already have
         </h2>
-        <ul className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <ul className="mt-10 grid grid-cols-1 sm:grid-cols-2 gap-4">
           {items.map((item) => (
-            <li key={item} className="flex items-start gap-3 text-black/80 dark:text-white/80">
-              <CheckCircle2 className="h-5 w-5 text-fuchsia-600 mt-0.5 shrink-0" />
+            <li key={item} className="flex items-start gap-3 rounded-2xl border border-black/8 dark:border-white/10 bg-white dark:bg-white/5 px-5 py-4 text-zinc-700 dark:text-white/80">
+              <CheckCircle2 className="h-5 w-5 text-blue-600 mt-0.5 shrink-0" />
               <span>{item}</span>
             </li>
           ))}
@@ -2177,16 +2402,46 @@ function WorksWith() {
   );
 }
 
+function FinalCTA({ onOpenDemo }) {
+  return (
+    <section className="px-6 pb-24 pt-4">
+      <div className="mx-auto max-w-6xl">
+        <div className="relative overflow-hidden rounded-[2rem] bg-gradient-to-br from-blue-600 via-violet-600 to-fuchsia-600 px-8 py-16 sm:px-16 sm:py-20 text-center">
+          <div aria-hidden className="pointer-events-none absolute -top-24 left-1/2 h-72 w-72 -translate-x-1/2 rounded-full bg-white/20 blur-3xl" />
+          <div className="relative">
+            <h2 className="mx-auto max-w-2xl text-balance text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-tight text-white">
+              Turn more of your visitors into buyers
+            </h2>
+            <p className="mx-auto mt-4 max-w-xl text-lg text-white/80">
+              Add Nobi to your site in about 15 minutes. Try it free, no credit card needed.
+            </p>
+            <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
+              <a
+                href={getSignupUrl()}
+                className="inline-flex items-center justify-center gap-2 rounded-2xl font-medium transition active:scale-[.98] bg-white text-blue-700 hover:bg-white/95 shadow-lg h-12 px-7 text-base w-full sm:w-auto"
+              >
+                Get started free
+              </a>
+              <button
+                onClick={onOpenDemo}
+                className="inline-flex items-center justify-center gap-2 rounded-2xl font-medium transition active:scale-[.98] border border-white/30 bg-white/10 text-white hover:bg-white/20 h-12 px-7 text-base w-full sm:w-auto"
+              >
+                Get a demo
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 export default function HomePage() {
   const [isVideoOpen, setIsVideoOpen] = useState(false);
   const { onOpen: onOpenForm } = useDemoForm();
 
-  const [variant, setVariant] = useState(() => {
-    try {
-      const stored = localStorage.getItem("nobi_hero_variant");
-      return VALID_VARIANTS.includes(stored) ? stored : "search";
-    } catch (_) { return "search"; }
-  });
+  // Redesign: one clear message for everyone — no search-first personalization.
+  const [variant, setVariant] = useState("default");
 
   useSEO({
     title: "Nobi: Conversational Website Assistant for Search and Support",
@@ -2221,18 +2476,16 @@ export default function HomePage() {
   });
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-white to-slate-50 dark:from-[#0a0a0a] dark:to-black text-black dark:text-white">
+    <div className="min-h-screen bg-[#fdf6fb] text-black">
       <Header />
       <main>
         <Hero onOpenVideo={() => setIsVideoOpen(true)} onOpenDemo={onOpenForm} variant={variant} setVariant={setVariant} />
-        <Problem variant={variant} />
-        <Numbers variant={variant} />
+        {/* Lean structure: lead with WHAT NOBI IS, then proof, then how/pricing. */}
         <Features />
+        <Numbers variant={variant} />
         <Testimonial />
+        <ComparisonTable />
         <HowItWorks />
-        <WorksWith />
-        <Insights onOpenForm={onOpenForm} />
-        <LatestPosts />
         {SHOW_PRICING && <Pricing />}
         <FAQList
           limit={4}
@@ -2244,11 +2497,12 @@ export default function HomePage() {
         <div className="mx-auto max-w-6xl px-6 -mt-6 mb-14 flex justify-center">
           <a
             href="/faqs"
-            className="text-sm font-semibold text-black hover:text-purple-600 transition-colors underline"
+            className="text-sm font-semibold text-black hover:text-blue-600 transition-colors underline"
           >
             See all FAQs
           </a>
         </div>
+        <LatestPosts />
       </main>
       <Footer />
       <VideoModal

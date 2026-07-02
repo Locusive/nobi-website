@@ -2758,7 +2758,7 @@ function InteractiveDemo() {
           {phase === "results" && result?.products && (
             <motion.div key={`p-${query}`} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}>
               <div className="text-xs font-semibold uppercase tracking-wider text-slate-400">
-                {result.exact ? `Matches for "${query}"` : `Closest matches for "${query}"`}
+                {result.exact ? `Matches for "${query}"` : "This little demo store mostly carries dresses. Closest we've got:"}
               </div>
               <div className="mt-3 grid grid-cols-2 gap-3 sm:grid-cols-4">
                 {result.products.map((p, i) => (

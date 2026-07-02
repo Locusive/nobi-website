@@ -21,23 +21,21 @@ export default function Header() {
   }, []);
 
   return (
+    // Floating pill island over the hero (Shanif's design); total height 68px = mt-3 + h-14
     <header className="sticky top-0 z-40 px-3 sm:px-4">
       <div
         className={[
-          "mx-auto flex items-center gap-4 relative",
-          "transition-all duration-500 [transition-timing-function:cubic-bezier(0.32,0.72,0,1)]",
+          "mx-auto flex items-center gap-5 relative max-w-5xl mt-3 h-14 px-4 sm:px-6",
+          "rounded-full border border-black/[0.05] bg-white/95 backdrop-blur-xl",
+          "transition-shadow duration-300",
           scrolled
-            ? "max-w-6xl mt-3 h-14 px-4 sm:px-5 rounded-2xl border border-black/[0.06] bg-white/85 backdrop-blur-xl shadow-[0_16px_40px_-16px_rgba(0,0,0,0.22)]"
-            : "max-w-7xl mt-0 h-16 px-4 sm:px-6 rounded-2xl border border-transparent bg-transparent shadow-none",
+            ? "shadow-[0_16px_40px_-14px_rgba(0,0,0,0.28)]"
+            : "shadow-[0_12px_36px_-16px_rgba(30,20,90,0.35)]",
         ].join(" ")}
       >
         {/* Logo */}
         <a href="/" className="flex items-center gap-3 shrink-0">
-          <Logo
-            className={`transition-all duration-500 [transition-timing-function:cubic-bezier(0.32,0.72,0,1)] ${
-              scrolled ? "h-8 md:h-10" : "h-10 md:h-12 lg:h-14"
-            }`}
-          />
+          <Logo className="h-8" />
         </a>
 
         {/* Navigation */}

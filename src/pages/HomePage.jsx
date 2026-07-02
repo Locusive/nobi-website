@@ -1,6 +1,6 @@
 import React, {useEffect, useMemo, useRef, useState} from "react";
 import { useSEO } from "../hooks/useSEO";
-import {AnimatePresence, animate, motion, useInView, useReducedMotion} from "framer-motion";
+import {AnimatePresence, animate, motion, useInView, useReducedMotion, useScroll} from "framer-motion";
 import Marquee from "react-fast-marquee";
 import {
     BarChart3,
@@ -2437,6 +2437,354 @@ function FinalCTA({ onOpenDemo }) {
   );
 }
 
+/* ================================================================== */
+/* ============ V3 — radical simplicity (Shanif's direction) ========= */
+/* ================================================================== */
+
+// Types, holds, deletes, and cycles through example queries in the hero search bar
+function useTypedLoop(strings, enabled = true) {
+  const [text, setText] = useState(enabled ? "" : strings[0]);
+  useEffect(() => {
+    if (!enabled) return;
+    let i = 0;
+    let char = 0;
+    let deleting = false;
+    let t;
+    const tick = () => {
+      const full = strings[i % strings.length];
+      char += deleting ? -1 : 1;
+      setText(full.slice(0, char));
+      let delay = deleting ? 28 : 62;
+      if (!deleting && char === full.length) {
+        delay = 1700;
+        deleting = true;
+      } else if (deleting && char === 0) {
+        deleting = false;
+        i += 1;
+        delay = 400;
+      }
+      t = setTimeout(tick, delay);
+    };
+    t = setTimeout(tick, 700);
+    return () => clearTimeout(t);
+  }, [enabled]);
+  return text;
+}
+
+const HERO_QUERIES = [
+  "noise-cancelling headphones",
+  "red dress for a beach wedding",
+  "boots that run wide",
+  "do you ship to Canada?",
+];
+
+function HeroV2({ onOpenDemo }) {
+  const reduce = useReducedMotion();
+  const typed = useTypedLoop(HERO_QUERIES, !reduce);
+  return (
+    <section className="relative isolate overflow-hidden -mt-[68px] pt-[68px]">
+      {/* Purple blob field (Shanif's hero) */}
+      <div aria-hidden className="absolute inset-0 -z-10 bg-[#7263d8] overflow-hidden">
+        <motion.div
+          className="absolute left-[-12%] top-[-25%] h-[720px] w-[720px] rounded-full blur-3xl bg-[radial-gradient(closest-side,#4f3fc0,transparent)]"
+          animate={reduce ? {} : { x: [0, 50, 0], y: [0, 30, 0] }}
+          transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
+        />
+        <motion.div
+          className="absolute left-[28%] top-[8%] h-[640px] w-[820px] rounded-full blur-3xl bg-[radial-gradient(closest-side,#a598f5,transparent)] opacity-90"
+          animate={reduce ? {} : { x: [0, -40, 0], y: [0, 40, 0], scale: [1, 1.06, 1] }}
+          transition={{ duration: 14, repeat: Infinity, ease: "easeInOut" }}
+        />
+        <motion.div
+          className="absolute right-[-14%] top-[-18%] h-[560px] w-[560px] rounded-full blur-3xl bg-[radial-gradient(closest-side,#f09d63,transparent)]"
+          animate={reduce ? {} : { x: [0, -30, 0], y: [0, 26, 0] }}
+          transition={{ duration: 16, repeat: Infinity, ease: "easeInOut" }}
+        />
+        <div className="absolute right-[2%] bottom-[-30%] h-[520px] w-[520px] rounded-full blur-3xl bg-[radial-gradient(closest-side,#e8935e,transparent)] opacity-70" />
+        <div className="absolute left-[-6%] bottom-[-24%] h-[480px] w-[560px] rounded-full blur-3xl bg-[radial-gradient(closest-side,#c88fdd,transparent)] opacity-80" />
+      </div>
+
+      <motion.div
+        variants={HERO_STAGGER}
+        initial="hidden"
+        animate="show"
+        className="mx-auto max-w-3xl px-6 pt-16 sm:pt-20 pb-24 sm:pb-28 text-center"
+      >
+        <motion.div variants={HERO_ITEM} className="flex justify-center">
+          <span className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/15 px-3.5 py-1.5 text-xs font-semibold tracking-wide text-white/90 backdrop-blur">
+            <span className="h-1.5 w-1.5 rounded-full bg-white/80" />
+            AI-native site search
+          </span>
+        </motion.div>
+
+        <motion.h1
+          variants={HERO_ITEM}
+          className="mt-6 text-balance text-5xl sm:text-6xl lg:text-[4.5rem] font-semibold leading-[1.04] tracking-tight text-white"
+        >
+          Modern site search that converts
+        </motion.h1>
+
+        <motion.p variants={HERO_ITEM} className="mx-auto mt-5 max-w-xl text-lg sm:text-xl leading-relaxed text-white/85">
+          Keyword search is outdated. Nobi understands what your visitors actually mean, so more of them convert.
+        </motion.p>
+
+        <motion.div variants={HERO_ITEM} className="mx-auto mt-8 max-w-xl">
+          <a
+            href="#try"
+            className="flex items-center gap-3 rounded-2xl bg-white p-1.5 pl-4 text-left shadow-[0_24px_60px_-20px_rgba(30,20,90,0.45)]"
+          >
+            <SearchIcon className="h-4.5 w-4.5 h-[18px] w-[18px] shrink-0 text-slate-400" />
+            <span className="flex-1 truncate text-[15px] text-slate-800">
+              {typed}
+              <span className="ml-px inline-block h-4 w-px translate-y-[3px] animate-pulse bg-slate-500" />
+            </span>
+            <span className="inline-flex h-9 items-center gap-1.5 rounded-xl bg-violet-600 px-4 text-sm font-semibold text-white">
+              <Sparkles className="h-3.5 w-3.5" />
+              Search
+            </span>
+          </a>
+        </motion.div>
+
+        <motion.div variants={HERO_ITEM} className="mt-6 flex flex-col sm:flex-row items-center justify-center gap-3">
+          <a
+            href={getSignupUrl()}
+            className="inline-flex h-11 w-full sm:w-auto items-center justify-center rounded-xl bg-white px-6 text-sm font-semibold text-violet-700 shadow-sm transition hover:bg-violet-50 active:scale-[.98]"
+          >
+            Start Completely Free
+          </a>
+          <button
+            onClick={onOpenDemo}
+            className="inline-flex h-11 w-full sm:w-auto items-center justify-center rounded-xl border border-white/30 bg-white/10 px-6 text-sm font-semibold text-white backdrop-blur transition hover:bg-white/20 active:scale-[.98]"
+          >
+            Book A Demo
+          </button>
+        </motion.div>
+      </motion.div>
+    </section>
+  );
+}
+
+// Proof bar — logos + one killer stat, one line
+function ProofBar() {
+  return (
+    <section className="border-b border-violet-900/5 bg-[#f7f5ff] py-8">
+      <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-center gap-x-10 gap-y-5 px-6">
+        {CUSTOMER_LOGOS.map((logo) => (
+          <img key={logo.alt} src={logo.src} alt={logo.alt} className="h-6 w-auto select-none object-contain opacity-50 grayscale" />
+        ))}
+        <span className="hidden h-5 w-px bg-violet-900/10 sm:block" />
+        <p className="text-sm text-slate-600">
+          <span className="font-semibold text-violet-700">21.7% more conversions</span> in head-to-head A/B tests
+        </p>
+      </div>
+    </section>
+  );
+}
+
+// Try it live — the interactive demo is the centerpiece
+function TryItLive() {
+  return (
+    <section id="try" className="relative isolate scroll-mt-20 overflow-hidden bg-[#f7f5ff] py-20 sm:py-24">
+      <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
+        <div className="absolute left-[8%] top-[18%] h-[420px] w-[420px] rounded-full blur-3xl bg-[radial-gradient(closest-side,rgba(139,92,246,0.16),transparent)]" />
+        <div className="absolute right-[6%] bottom-[4%] h-[380px] w-[380px] rounded-full blur-3xl bg-[radial-gradient(closest-side,rgba(240,157,99,0.14),transparent)]" />
+      </div>
+      <div className="mx-auto max-w-4xl px-6 text-center">
+        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-tight">Try it live</h2>
+        <p className="mt-3 text-lg text-slate-500">Search like a shopper would. Real store, real results.</p>
+      </div>
+      <div className="mx-auto mt-10 max-w-3xl px-6">
+        <HeroDemo variant="default" />
+      </div>
+    </section>
+  );
+}
+
+// The problem, sharply — one visual, no cards
+function ProblemSharp() {
+  const RESULTS = [
+    { title: "St. Bernard x Stark Maxi", price: "$98", img: "/media/prod-1.webp" },
+    { title: "Maygel Coronel Cover-Up", price: "$178", img: "/media/prod-2.webp" },
+    { title: "Hunter Puff-Sleeve Mini", price: "$124", img: "/media/prod-3.webp" },
+  ];
+  const QUERY = "dress for a beach wedding under $200";
+  return (
+    <section className="border-t border-violet-900/5 bg-white py-20 sm:py-24">
+      <div className="mx-auto max-w-4xl px-6 text-center">
+        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-tight text-balance">Keyword search is dumb.</h2>
+        <p className="mt-3 text-lg text-slate-500">It matches letters. Your shoppers speak in intent.</p>
+      </div>
+      <motion.div
+        initial={{ opacity: 0, y: 24 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.25 }}
+        transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
+        className="mx-auto mt-12 grid max-w-5xl grid-cols-1 overflow-hidden rounded-3xl border border-violet-900/10 bg-white shadow-[0_32px_80px_-40px_rgba(76,50,180,0.45)] md:grid-cols-2"
+      >
+        {/* Before */}
+        <div className="border-b border-black/5 bg-slate-50/80 p-6 sm:p-8 md:border-b-0 md:border-r">
+          <div className="text-xs font-semibold uppercase tracking-wider text-slate-400">Your current search</div>
+          <div className="mt-4 flex items-center gap-2 rounded-xl border border-slate-200 bg-slate-50 px-3.5 py-2.5 text-sm text-slate-600">
+            <SearchIcon className="h-4 w-4 shrink-0 text-slate-400" />
+            <span className="truncate">{QUERY}</span>
+          </div>
+          <div className="flex flex-col items-center py-10 text-center">
+            <div className="text-4xl font-semibold tracking-tight text-slate-300">0 results</div>
+            <div className="mt-2 text-sm text-slate-400">Try different keywords</div>
+          </div>
+        </div>
+        {/* After */}
+        <div className="bg-gradient-to-br from-violet-50/70 via-white to-orange-50/40 p-6 sm:p-8">
+          <div className="text-xs font-semibold uppercase tracking-wider text-violet-600">With Nobi</div>
+          <div className="mt-4 flex items-center gap-2 rounded-xl border border-violet-200 bg-violet-50/60 px-3.5 py-2.5 text-sm text-slate-800">
+            <SearchIcon className="h-4 w-4 shrink-0 text-violet-500" />
+            <span className="truncate">{QUERY}</span>
+          </div>
+          <div className="mt-5 grid grid-cols-3 gap-3">
+            {RESULTS.map((p) => (
+              <div key={p.title} className="overflow-hidden rounded-xl border border-black/5 bg-white">
+                <div className="aspect-[5/6] bg-slate-100">
+                  <img src={p.img} alt={p.title} className="h-full w-full object-cover" loading="lazy" />
+                </div>
+                <div className="p-2">
+                  <div className="truncate text-[11px] font-medium text-slate-700">{p.title}</div>
+                  <div className="text-[11px] text-slate-400">{p.price}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </motion.div>
+    </section>
+  );
+}
+
+// Capability sequence — Search → Support → Leads, pinned with a dots rail
+const CAPABILITIES = [
+  { key: "search", n: "01", title: "Search", body: "Shoppers describe what they want. Nobi finds it.", href: "/why-nobi/better-search", Viz: SearchViz },
+  { key: "support", n: "02", title: "Support", body: "Every question answered instantly, from your own content.", href: "/why-nobi/automated-support", Viz: QAViz },
+  { key: "leads", n: "03", title: "Leads", body: "High-intent visitors leave their contact info in the conversation.", href: "/lead-capture", Viz: LeadViz },
+];
+
+function CapabilityRail() {
+  const ref = useRef(null);
+  const [active, setActive] = useState(0);
+  const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end end"] });
+  useEffect(
+    () =>
+      scrollYProgress.on("change", (p) => {
+        setActive(Math.max(0, Math.min(CAPABILITIES.length - 1, Math.floor(p * CAPABILITIES.length))));
+      }),
+    [scrollYProgress]
+  );
+  const cap = CAPABILITIES[active];
+  return (
+    <section ref={ref} className="relative bg-[#f7f5ff]" style={{ height: `${CAPABILITIES.length * 100}vh` }}>
+      <div className="sticky top-0 flex h-screen items-center overflow-hidden border-t border-violet-900/5">
+        <div aria-hidden className="pointer-events-none absolute inset-0">
+          <div className="absolute right-[-8%] top-[10%] h-[560px] w-[560px] rounded-full blur-3xl bg-[radial-gradient(closest-side,rgba(139,92,246,0.14),transparent)]" />
+          <div className="absolute left-[-10%] bottom-[-10%] h-[480px] w-[480px] rounded-full blur-3xl bg-[radial-gradient(closest-side,rgba(240,157,99,0.12),transparent)]" />
+        </div>
+        <div className="mx-auto grid w-full max-w-6xl grid-cols-1 items-center gap-10 px-6 lg:grid-cols-2 lg:gap-16">
+          <div>
+            <div className="text-xs font-semibold uppercase tracking-wider text-slate-400">Everything Nobi does</div>
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={cap.key}
+                initial={{ opacity: 0, y: 18 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -18 }}
+                transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+              >
+                <div className="mt-5 font-mono text-sm font-semibold text-violet-600">{cap.n}</div>
+                <h2 className="mt-2 text-5xl sm:text-6xl font-semibold tracking-tight">{cap.title}</h2>
+                <p className="mt-4 max-w-sm text-lg text-slate-500">{cap.body}</p>
+                <a href={cap.href} className="mt-6 inline-block text-sm font-semibold text-violet-600 hover:text-violet-800">
+                  Learn more →
+                </a>
+              </motion.div>
+            </AnimatePresence>
+          </div>
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={cap.key}
+              initial={{ opacity: 0, scale: 0.96 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.98 }}
+              transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+              className="rounded-3xl border border-violet-900/10 bg-white p-6 shadow-[0_32px_80px_-40px_rgba(76,50,180,0.5)]"
+            >
+              <cap.Viz />
+            </motion.div>
+          </AnimatePresence>
+        </div>
+        {/* Dots rail */}
+        <div className="absolute right-5 top-1/2 hidden -translate-y-1/2 flex-col items-center gap-2.5 md:flex lg:right-8">
+          {CAPABILITIES.map((c, i) => (
+            <span
+              key={c.key}
+              className={`w-1.5 rounded-full transition-all duration-300 ${i === active ? "h-7 bg-violet-600" : "h-1.5 bg-slate-300"}`}
+            />
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// Case study — Lucchese: one quote, real numbers
+function CaseStudy() {
+  const NUMBERS = [
+    { number: "$1M+", label: "extra revenue in year one" },
+    { number: "39x", label: "return on investment" },
+    { number: "2.5x", label: "more likely to buy" },
+  ];
+  return (
+    <section className="relative isolate overflow-hidden bg-[#3d2f96] py-20 sm:py-28">
+      {/* Echo the hero's blob field, deeper */}
+      <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
+        <div className="absolute left-[-10%] top-[-30%] h-[560px] w-[560px] rounded-full blur-3xl bg-[radial-gradient(closest-side,#6d5ce0,transparent)]" />
+        <div className="absolute right-[-8%] bottom-[-35%] h-[540px] w-[540px] rounded-full blur-3xl bg-[radial-gradient(closest-side,#e8935e,transparent)] opacity-60" />
+        <div className="absolute left-[35%] bottom-[-20%] h-[420px] w-[520px] rounded-full blur-3xl bg-[radial-gradient(closest-side,#8b7cf0,transparent)] opacity-70" />
+      </div>
+      <div className="mx-auto max-w-5xl px-6">
+        <div className="text-center text-xs font-semibold uppercase tracking-wider text-white/50">
+          Case study · Lucchese Bootmaker
+        </div>
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.25 }}
+          transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
+          className="mt-10 grid grid-cols-1 gap-10 lg:grid-cols-3"
+        >
+          <div className="lg:col-span-2">
+            <Quote className="h-6 w-6 text-orange-300" />
+            <p className="mt-4 text-2xl sm:text-3xl font-medium leading-snug tracking-tight text-white">
+              “We've seen great incremental results, where conversion rates have been significantly higher through Nobi than on our binary search.”
+            </p>
+            <div className="mt-6 flex items-center gap-3">
+              <img src="/media/lourdes.png" alt="" className="h-10 w-10 rounded-full bg-white/10 object-cover" />
+              <div>
+                <div className="text-sm font-semibold text-white">Lourdes Servin</div>
+                <div className="text-sm text-white/60">Sr. Director, Digital and E-Commerce</div>
+              </div>
+            </div>
+          </div>
+          <div className="flex flex-col justify-center divide-y divide-white/10">
+            {NUMBERS.map((s) => (
+              <div key={s.number} className="flex items-baseline gap-3 py-4">
+                <CountUp value={s.number} className="w-24 shrink-0 text-4xl font-semibold tracking-tight text-white" />
+                <div className="text-sm text-white/60">{s.label}</div>
+              </div>
+            ))}
+          </div>
+        </motion.div>
+      </div>
+    </section>
+  );
+}
+
 export default function HomePage() {
   const [isVideoOpen, setIsVideoOpen] = useState(false);
   const { onOpen: onOpenForm } = useDemoForm();
@@ -2477,41 +2825,18 @@ export default function HomePage() {
   });
 
   return (
-    <div className="min-h-screen bg-[#fdf6fb] text-black">
+    <div className="min-h-screen bg-white text-black">
       <Header />
       <main>
-        <Hero onOpenVideo={() => setIsVideoOpen(true)} onOpenDemo={onOpenForm} variant={variant} setVariant={setVariant} />
-        {/* Lean structure: lead with WHAT NOBI IS, then proof, then how/pricing. */}
-        <Features />
-        <Numbers variant={variant} />
-        <Testimonial />
-        <ComparisonTable />
-        <HowItWorks />
-        {SHOW_PRICING && <Pricing />}
-        <FAQList
-          limit={4}
-          showBorderTop
-          padding="py-20"
-          columns={2}
-          headingAlign="center"
-        />
-        <div className="mx-auto max-w-6xl px-6 -mt-6 mb-14 flex justify-center">
-          <a
-            href="/faqs"
-            className="text-sm font-semibold text-black hover:text-blue-600 transition-colors underline"
-          >
-            See all FAQs
-          </a>
-        </div>
-        <LatestPosts />
+        {/* Radical simplicity: hero → proof → try it → problem → capabilities → case study */}
+        <HeroV2 onOpenDemo={onOpenForm} />
+        <ProofBar />
+        <TryItLive />
+        <ProblemSharp />
+        <CapabilityRail />
+        <CaseStudy />
       </main>
       <Footer />
-      <VideoModal
-        open={isVideoOpen}
-        onClose={() => setIsVideoOpen(false)}
-        youtube="https://www.youtube.com/watch?v=RKqGC3CVZd0"
-      />
-      <ScrollPreview sections={PREVIEW_SECTIONS} label="Next up" side="right" />
     </div>
   );
 }

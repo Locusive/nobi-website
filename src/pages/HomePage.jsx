@@ -836,7 +836,8 @@ function Hero({ onOpenVideo, onOpenDemo, variant, setVariant }) {
       <div aria-hidden className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
         <motion.div
           className="absolute left-1/2 top-[-12%] h-[520px] w-[820px] max-w-full -translate-x-1/2 rounded-full blur-3xl bg-[radial-gradient(closest-side,rgba(37,99,235,0.22),rgba(139,92,246,0.14),transparent)]"
-          animate={reduce ? {} : { x: [-40, 40, -40], y: [0, 24, 0], scale: [1, 1.08, 1] }}
+          // framer replaces the class transform, so centering (-50%) must live in the keyframes
+          animate={reduce ? {} : { x: ["-55%", "-45%", "-55%"], y: [0, 24, 0], scale: [1, 1.08, 1] }}
           transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
         />
         <motion.div

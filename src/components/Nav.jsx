@@ -119,7 +119,7 @@ export default function Nav() {
 
       {/* Mobile drawer */}
       {mobileMenuOpen && (
-        <div className="md:hidden border-t border-black/10 dark:border-white/10 absolute top-16 left-0 right-0 bg-white dark:bg-black z-50">
+        <div className="md:hidden absolute top-full mt-2 left-0 right-0 rounded-2xl border border-black/[0.06] bg-white dark:bg-black shadow-[0_24px_60px_-20px_rgba(0,0,0,0.25)] overflow-hidden z-50">
           <nav className="mx-auto max-w-7xl px-6 py-4 flex flex-col gap-1">
             {/* Features expandable */}
             <button

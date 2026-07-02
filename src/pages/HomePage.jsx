@@ -2785,6 +2785,61 @@ function CaseStudy() {
   );
 }
 
+// Minimal homepage footer (shared Footer stays untouched for blog/glossary).
+// One compact CTA line + links + legal — same simplicity standard as the page.
+function FooterMin({ onOpenDemo }) {
+  const LINKS = [
+    { label: "Search", href: "/why-nobi/better-search" },
+    { label: "Support", href: "/why-nobi/automated-support" },
+    { label: "Leads", href: "/lead-capture" },
+    { label: "FAQs", href: "/faqs" },
+    { label: "Pricing", href: "/pricing" },
+    { label: "Blog", href: "/blog" },
+    { label: "Docs", href: "https://docs.nobi.ai" },
+  ];
+  return (
+    <footer className="border-t border-violet-900/5 bg-[#f7f5ff]">
+      <div className="mx-auto max-w-6xl px-6 py-14">
+        <div className="flex flex-col items-start justify-between gap-6 sm:flex-row sm:items-center">
+          <div>
+            <div className="text-xl font-semibold tracking-tight">Ready when you are.</div>
+            <div className="mt-1 text-sm text-slate-500">Live on your site in about 15 minutes.</div>
+          </div>
+          <div className="flex items-center gap-3">
+            <a
+              href={getSignupUrl()}
+              className="inline-flex h-10 items-center justify-center rounded-full bg-violet-600 px-5 text-sm font-semibold text-white transition hover:bg-violet-700 active:scale-[.98]"
+            >
+              Start Free
+            </a>
+            <button
+              onClick={onOpenDemo}
+              className="inline-flex h-10 items-center justify-center rounded-full border border-black/10 bg-white px-5 text-sm font-semibold transition hover:bg-black/5 active:scale-[.98]"
+            >
+              Book A Demo
+            </button>
+          </div>
+        </div>
+        <div className="mt-10 flex flex-col items-start justify-between gap-4 border-t border-violet-900/10 pt-6 sm:flex-row sm:items-center">
+          <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-sm font-medium text-slate-600">
+            {LINKS.map((l) => (
+              <a key={l.label} href={l.href} className="hover:text-violet-700">
+                {l.label}
+              </a>
+            ))}
+          </div>
+          <div className="flex items-center gap-5 text-sm text-slate-400">
+            <a href="/terms" className="hover:text-slate-600">Terms</a>
+            <a href="/privacy" className="hover:text-slate-600">Privacy</a>
+            <a href={LINKEDIN_URL} target="_blank" rel="noopener noreferrer" className="hover:text-slate-600">LinkedIn</a>
+            <span>© {new Date().getFullYear()} Nobi</span>
+          </div>
+        </div>
+      </div>
+    </footer>
+  );
+}
+
 export default function HomePage() {
   const [isVideoOpen, setIsVideoOpen] = useState(false);
   const { onOpen: onOpenForm } = useDemoForm();
@@ -2836,7 +2891,7 @@ export default function HomePage() {
         <CapabilityRail />
         <CaseStudy />
       </main>
-      <Footer />
+      <FooterMin onOpenDemo={onOpenForm} />
     </div>
   );
 }

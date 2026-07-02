@@ -2581,6 +2581,201 @@ function ProofBar() {
   );
 }
 
+// Try it live — a search the visitor actually drives.
+// Client-side matching over a small demo catalog; honest footnote says so.
+const DEMO_PRODUCTS = [
+  { title: "St. Bernard x Stark Maxi", price: 98, img: "/media/prod-1.webp", tags: ["red", "maxi", "dress", "beach", "wedding", "guest", "summer", "weekend"] },
+  { title: "Lulus Bow Backless Maxi", price: 55, img: "/media/prod-2.webp", tags: ["red", "maxi", "dress", "backless", "party", "beach", "weekend", "date"] },
+  { title: "Maygel Coronel Cover-Up", price: 178, img: "/media/prod-3.webp", tags: ["red", "cover-up", "beach", "swim", "resort", "vacation"] },
+  { title: "Hunter Puff-Sleeve Mini", price: 124, img: "/media/prod-4.webp", tags: ["red", "mini", "dress", "date", "weekend", "night", "party"] },
+  { title: "Banjanan Cotton Maxi", price: 172, img: "/media/prod-5.webp", tags: ["red", "cotton", "maxi", "dress", "summer", "casual", "day"] },
+  { title: "Majestic Coconut Maxi", price: 189, img: "/media/prod-6.webp", tags: ["red", "maxi", "dress", "evening", "wedding", "guest", "formal"] },
+];
+
+const DEMO_ANSWERS = [
+  {
+    keys: ["ship", "shipping", "canada", "deliver", "delivery", "international"],
+    a: "Yes, we ship to Canada. Standard shipping takes 5 to 7 business days and is free over $150.",
+    source: "Shipping policy",
+  },
+  {
+    keys: ["return", "refund", "exchange"],
+    a: "Free returns within 30 days, sale items included. Refunds land in 3 to 5 business days.",
+    source: "Returns FAQ",
+  },
+  {
+    keys: ["size", "sizing", "fit", "fits", "run", "wide", "petite"],
+    a: "Most of our styles run true to size. If you're between sizes, we recommend sizing up.",
+    source: "Size guide",
+  },
+];
+
+const DEMO_CHIPS = [
+  "dress for a beach wedding under $150",
+  "red maxi under $100",
+  "do you ship to Canada?",
+  "what's your return policy?",
+];
+
+function InteractiveDemo() {
+  const [value, setValue] = useState("");
+  const [query, setQuery] = useState("");
+  const [phase, setPhase] = useState("idle"); // idle | thinking | results
+  const [result, setResult] = useState(null);
+  const timer = useRef(null);
+
+  const run = (raw) => {
+    const q = raw.trim();
+    if (!q) return;
+    setValue(q);
+    setQuery(q);
+    setPhase("thinking");
+    if (timer.current) clearTimeout(timer.current);
+    timer.current = setTimeout(() => {
+      const ql = q.toLowerCase();
+      const answer = DEMO_ANSWERS.find((x) => x.keys.some((k) => ql.includes(k)));
+      if (answer) {
+        setResult({ answer });
+        setPhase("results");
+        return;
+      }
+      const tokens = ql.split(/[^a-z0-9]+/).filter(Boolean);
+      const priceCap = Number((ql.match(/under\s*\$?(\d+)/) || [])[1] || 0);
+      let scored = DEMO_PRODUCTS.map((p) => ({
+        p,
+        s: tokens.reduce((s, t) => s + (p.tags.includes(t) || p.title.toLowerCase().includes(t) ? 1 : 0), 0),
+      }));
+      if (priceCap) scored = scored.filter(({ p }) => p.price <= priceCap);
+      scored.sort((a, b) => b.s - a.s);
+      const hits = scored.filter(({ s }) => s > 0).map(({ p }) => p);
+      const products = (hits.length ? hits : DEMO_PRODUCTS.slice()).slice(0, 4);
+      setResult({ products, exact: hits.length > 0 });
+      setPhase("results");
+    }, 800);
+  };
+
+  useEffect(() => () => timer.current && clearTimeout(timer.current), []);
+
+  return (
+    <div className="rounded-3xl border border-violet-900/10 bg-white p-4 shadow-[0_32px_80px_-40px_rgba(76,50,180,0.45)] sm:p-6">
+      {/* Input */}
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          run(value);
+        }}
+        className="flex items-center gap-2 rounded-2xl border border-slate-200 bg-white p-1.5 pl-4 shadow-sm focus-within:border-violet-300"
+      >
+        <SearchIcon className="h-[18px] w-[18px] shrink-0 text-slate-400" />
+        <input
+          value={value}
+          onChange={(e) => setValue(e.target.value)}
+          placeholder="Ask anything, like you'd say it out loud"
+          className="min-w-0 flex-1 bg-transparent text-[15px] outline-none placeholder:text-slate-400"
+          aria-label="Search the demo store"
+        />
+        <button
+          type="submit"
+          className="inline-flex h-9 shrink-0 items-center gap-1.5 rounded-xl bg-violet-600 px-4 text-sm font-semibold text-white transition hover:bg-violet-700 active:scale-[.98]"
+        >
+          <Sparkles className="h-3.5 w-3.5" />
+          Search
+        </button>
+      </form>
+
+      {/* Suggestion chips */}
+      <div className="mt-3 flex flex-wrap items-center gap-2">
+        {DEMO_CHIPS.map((c) => (
+          <button
+            key={c}
+            type="button"
+            onClick={() => run(c)}
+            className="rounded-full border border-violet-200 bg-violet-50/60 px-3 py-1.5 text-xs font-medium text-violet-700 transition hover:bg-violet-100"
+          >
+            {c}
+          </button>
+        ))}
+      </div>
+
+      {/* Results */}
+      <div className="mt-5 min-h-[280px]">
+        <AnimatePresence mode="wait">
+          {phase === "idle" && (
+            <motion.div
+              key="idle"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="flex h-[280px] items-center justify-center text-sm text-slate-400"
+            >
+              Type a search or tap an example
+            </motion.div>
+          )}
+          {phase === "thinking" && (
+            <motion.div
+              key="thinking"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="flex h-[280px] items-center justify-center gap-1.5"
+            >
+              {[0, 1, 2].map((i) => (
+                <motion.span
+                  key={i}
+                  className="h-2 w-2 rounded-full bg-violet-400"
+                  animate={{ y: [0, -6, 0] }}
+                  transition={{ duration: 0.7, repeat: Infinity, delay: i * 0.12 }}
+                />
+              ))}
+            </motion.div>
+          )}
+          {phase === "results" && result?.answer && (
+            <motion.div
+              key={`a-${query}`}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0 }}
+              className="flex h-[280px] flex-col items-center justify-center px-4 text-center"
+            >
+              <p className="max-w-md text-lg font-medium leading-relaxed text-slate-800">{result.answer.a}</p>
+              <span className="mt-4 inline-flex items-center gap-1.5 rounded-full border border-violet-200 bg-violet-50 px-3 py-1 text-xs font-medium text-violet-700">
+                <CheckCircle2 className="h-3.5 w-3.5" />
+                Source: {result.answer.source}
+              </span>
+            </motion.div>
+          )}
+          {phase === "results" && result?.products && (
+            <motion.div key={`p-${query}`} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}>
+              <div className="text-xs font-semibold uppercase tracking-wider text-slate-400">
+                {result.exact ? `Matches for "${query}"` : `Closest matches for "${query}"`}
+              </div>
+              <div className="mt-3 grid grid-cols-2 gap-3 sm:grid-cols-4">
+                {result.products.map((p, i) => (
+                  <motion.div
+                    key={p.title}
+                    initial={{ opacity: 0, scale: 0.94 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ delay: i * 0.06 }}
+                    className="overflow-hidden rounded-xl border border-black/5 bg-white"
+                  >
+                    <div className="aspect-[4/5] bg-slate-100">
+                      <img src={p.img} alt={p.title} className="h-full w-full object-cover" loading="lazy" />
+                    </div>
+                    <div className="p-2.5">
+                      <div className="truncate text-xs font-medium text-slate-700">{p.title}</div>
+                      <div className="text-xs text-slate-400">${p.price}</div>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
+    </div>
+  );
+}
+
 // Try it live — the interactive demo is the centerpiece
 function TryItLive() {
   return (
@@ -2591,10 +2786,13 @@ function TryItLive() {
       </div>
       <div className="mx-auto max-w-4xl px-6 text-center">
         <h2 className="text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-tight">Try it live</h2>
-        <p className="mt-3 text-lg text-slate-500">Search like a shopper would. Real store, real results.</p>
+        <p className="mt-3 text-lg text-slate-500">Type it like you'd say it. See what comes back.</p>
       </div>
       <div className="mx-auto mt-10 max-w-3xl px-6">
-        <HeroDemo variant="default" />
+        <InteractiveDemo />
+        <p className="mt-4 text-center text-xs text-slate-400">
+          Demo store with sample products. On your site, Nobi searches your live catalog.
+        </p>
       </div>
     </section>
   );

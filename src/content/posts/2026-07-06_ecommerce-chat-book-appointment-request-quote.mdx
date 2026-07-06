@@ -1,0 +1,162 @@
+export const meta = {
+ title: "How to Let Shoppers Book, Request a Quote, or Open a Ticket Without Leaving Chat",
+ slug: "ecommerce-chat-book-appointment-request-quote",
+ date: "2026-07-06",
+ publishedAt: "2026-07-06",
+ description: "How to wire booking, quote, and ticket requests from your chat assistant into the systems that complete them, using Nobi's JavaScript API custom actions.",
+ excerpt: "How to wire booking, quote, and ticket requests from your chat assistant into the systems that complete them, using Nobi's JavaScript API custom actions.",
+ tags: ["how-to", "sales assistance", "ecommerce", "ecommerce search"],
+ author: "Shanif Dhanani",
+ heroImage: "https://storage.googleapis.com/nobi-public/docs_and_marketing_websites/posts/ecommerce-chat-book-appointment-request-quote/hero.webp",
+ featured: true,
+ draft: false,
+};
+
+<script type="application/ld+json" data-nobi-schema>
+{`{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "How to Let Shoppers Book, Request a Quote, or Open a Ticket Without Leaving Chat",
+  "description": "How to wire booking, quote, and ticket requests from your chat assistant into the systems that complete them, using Nobi's JavaScript API custom actions.",
+  "datePublished": "2026-07-06",
+  "dateModified": "2026-07-06",
+  "author": {
+    "@type": "Person",
+    "name": "Shanif Dhanani",
+    "url": "https://www.linkedin.com/in/shanifdhanani/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Nobi",
+    "url": "https://nobi.ai"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://nobi.ai/blog/ecommerce-chat-book-appointment-request-quote"
+  },
+  "about": [
+    {
+      "@type": "Thing",
+      "name": "sales assistance"
+    },
+    {
+      "@type": "Thing",
+      "name": "ecommerce"
+    }
+  ]
+}`}
+</script>
+## How do I let shoppers book an appointment, request a quote, or open a ticket from a chat conversation?
+
+When someone requests a booking, a quote, or a support ticket in your chat, the last thing you want is to bounce them to a separate form. Nobi's JavaScript API solves that by wiring the request directly into your own systems. As the shopper types out what they need, the assistant collects those details mid-conversation and sends them straight to the tool that owns the outcome: your booking calendar, your quoting system, your helpdesk. Nobi isn't the one running your calendar or writing the quote. It captures the request accurately and passes it along, so the conversation ends with an action instead of a dead link.
+
+## Which shopper chat requests are worth turning into bookings, quotes, or tickets?
+
+Not every chat exchange needs to trigger anything. If a shopper asks what a jacket is made of or when an order ships, that's a plain grounded answer, no action required. Wire in a custom action only when the shopper is asking for something that requires your system to actually do something: book a service appointment, request a quote, or open a ticket that needs a paper trail.
+
+Booking requests show up when a shopper names a date or a need: a fitting, an install, a consultation, anything that has to land on a calendar instead of just an answer. Quote requests come from bulk orders, custom configurations, or any SKU priced on request instead of shown on the PDP. A shopper asking "what would 500 units cost?" isn't looking for a number pulled from a product page. They're starting a process your team has to run. Ticket-worthy issues are the ones that need a record beyond a single reply: a damaged item, a high-value order problem, anything an agent needs to follow up on later.
+
+Leaving these as plain text answers just pushes the shopper to a separate contact form.
+
+## What is Nobi, and how does it trigger my booking, quote, and ticket systems from chat?
+
+Nobi is a conversational website assistant that answers shopper questions from your connected content and cites its sources, which is what handles the plain Q&A from the last section. Custom actions are what fire when a shopper wants something done instead: a JavaScript API you register with Nobi, where each action names a shopper intent like book, request-quote, or open-ticket. When a conversation matches one of those intents, Nobi collects the details it needs, then calls a function you've written instead of just replying in text.
+
+Custom actions sit alongside Nobi's normal answer pipeline. They don't replace it. Anything a shopper asks that isn't tied to a registered action still gets answered the regular way, grounded in your connected content with a citation. You only get a custom action firing when the shopper's request matches one you've explicitly defined.
+
+You control two things per action: which shopper intent triggers it, and which fields Nobi has to collect before it fires.
+
+That last part matters: Nobi doesn't run your calendar, your quoting engine, or your ticket queue. It's not booking the appointment or generating the quote itself. It collects what the shopper wants and passes it to whichever system already owns that job, the same way a form on your site would, just without making the shopper leave chat to fill one out.
+
+## How do I wire a custom action with Nobi's JavaScript API?
+
+You register a custom action with a name, a description of when it should fire, the parameters Nobi should collect from the shopper, and a callback function that runs when those conditions are met. Nobi handles matching the shopper's language to the right action and gathering the fields; your callback takes it from there. Instead of your team routing the request, the code does it directly.
+
+The description is the part that matters most. "Book a fitting appointment" tells Nobi nothing about when to fire versus when to just answer a question. "Shopper wants to book a fitting appointment" gives Nobi a trigger to match against, so a question like "do you offer fittings?" still gets a plain answer while "I want to book a fitting for Saturday" fires the action.
+
+Next, declare what you need collected. A booking action might need a date and contact info. A quote request needs the item and quantity. A ticket needs an issue type. List each as a parameter, mark the ones you can't proceed without as required, and Nobi asks the shopper for anything missing before it calls your function.
+
+The callback is where your system takes over. It reads the collected fields, calls your booking, quoting, or ticketing endpoint with them attached, and returns a confirmation message. That message is what the shopper sees in chat, so write it in plain language, not a status code.
+
+```js
+window.NobiTools = {
+ submitContactForm: {
+ name: "submitContactForm",
+ description: "Submit a contact form with the user's information",
+ parameters: {
+ type: "object",
+ properties: {
+ name: { type: "string", description: "User's full name" },
+ email: { type: "string", description: "User's email address" },
+ message: { type: "string", description: "User's message" }
+ },
+ required: ["name", "email", "message"]
+ },
+ handler: async function(args) {
+ const response = await fetch('/api/contact', {
+ method: 'POST',
+ headers: { 'Content-Type': 'application/json' },
+ body: JSON.stringify(args)
+ });
+ if (!response.ok) throw new Error('Failed to submit form');
+ return { success: true, message: "Contact form submitted successfully" };
+ }
+ }
+};
+```
+
+Before you trust an action in production, test it against more than the exact phrasing you wrote first. Try "can I get a quote," then "I need pricing for 200 units," then a version with a typo or a different word order. If one fires the action and another gets a plain-text non-answer, the description needs sharper language, not the parameters.
+
+## What does Nobi do and doesn't do once a custom action fires?
+
+Once your action fires, Nobi's job is done: it collected an accurate request and handed it off, and everything after that belongs to your system. It doesn't own the calendar, generate the quote number, or send the confirmation email. That split matters. Your booking system still owns availability, your quoting tool still owns pricing logic, and your helpdesk still owns the ticket lifecycle.
+
+Take booking. If a shopper asks for Saturday at 2pm, Nobi passes "Saturday, 2pm" to your callback. It doesn't check whether that slot is actually open. That logic lives in whatever calendar or scheduling system your handler calls. If double-booking is a risk, the fix is in that system, not in the assistant. Nobi has no visibility into your calendar unless your own code gives it that visibility inside the callback.
+
+Quoting works the same way. Nobi collects the item, the quantity, the configuration details, whatever your action's parameters ask for. It doesn't price any of it. Your quoting tool or your rep queue does that work, and the number that comes back is whatever your callback returns, not a figure Nobi calculated or guessed at.
+
+That return value is also where the shopper's confirmation comes from. When your handler finishes, whatever message it sends back is what the shopper sees in chat. Nobi doesn't add a promise on top of it or soften a "pending" into a "confirmed." If your booking system returns "request received, we'll confirm within 24 hours," that's the message. If it returns a real time slot, that's the message instead.
+
+## Can a custom action call my own APIs or a third-party service?
+
+Yes. The callback is plain JavaScript, so it can call an internal endpoint you own or a third-party API you already use, like a scheduling tool, a quoting system, or a helpdesk such as Gorgias for ticket intake. Nobi doesn't restrict where the request goes; it just needs the callback to return a response the assistant can show the shopper.
+
+That covers both directions. If your booking calendar, order-management system, or quoting engine is something your team built and hosts, the callback calls it directly, the same way any server-side code would. If the system of record is a vendor you already pay for, the callback calls that vendor's API instead. Gorgias is a common one here: if your team already manages tickets and order context inside Gorgias, the callback can open a ticket there instead of somewhere custom-built, so the shopper's chat message becomes a real Gorgias ticket with the fields you collected attached.
+
+Auth and rate limits belong to whatever API you're calling, not to Nobi. If the scheduling tool needs an API key, your callback holds that key. If the quoting system throttles requests, your callback handles the retry. Nobi doesn't broker credentials or manage a connection on your behalf, it hands your function the collected fields and waits for a response, the same as if your own server called that API directly.
+
+## How do I keep chat-triggered actions fast and reliable for shoppers?
+
+A callback that hangs or fails without saying so is worse than no action at all. The shopper who just watched their booking or quote request go into your calendar tool or Gorgias ticket queue is now stuck restating the same request while the assistant loops, with no idea whether anything actually happened. Set a timeout on the call, return a clear message on failure instead of silence, and confirm back to the shopper what was captured before the exchange ends.
+
+Start with the timeout. If your booking calendar or quoting API is slow or down, the callback shouldn't leave the conversation hanging while it waits. Set a timeout on the fetch call, and if it fires, treat that as a failure case, not a black hole.
+
+That failure case needs its own honest message. "I couldn't reach our booking system, here's a direct link to schedule" tells the shopper exactly where they stand and gives them a way forward. A vague fallback that doesn't name the problem reads as a stuck loop.
+
+When the call succeeds, don't just let the handler's return value scroll by. Confirm what was captured: the date, the item and quantity, the issue described, whatever fields Nobi collected. A shopper who submits a quote request and gets a one-line "got it" is left wondering if the right details went through.
+
+Log every fired action on your end, success or failure. Treat it the same way you'd monitor any other automated trigger on your site: if requests stop reaching your booking or quoting system, you want to catch that from your logs before a shopper tells you their request vanished.
+
+## When is a dedicated ticketing or flow-builder tool a better fit than a custom action?
+
+A custom action is the right call when the job is capturing a request accurately and routing it. It's not a replacement for a system that needs to own the whole workflow. If your bottleneck is agent-side ticket routing and macros once a request lands, a helpdesk like Gorgias is built for that end-to-end: it owns the ticket lifecycle, applies routing rules, runs macros, and tracks SLAs after the ticket exists. A custom action gets the request into Gorgias cleanly. It doesn't manage what happens to it next.
+
+The same logic applies on the conversation side, not just the ticket side. If the job is a scripted, campaign-specific conversation path, like a Black Friday flow or a launch sequence with every branch mapped out in advance, Rep AI's Flow Studio gives marketing ops a visual builder for that without needing an engineer. Nobi's custom actions work differently: they fire when a shopper's language matches a grounded intent, not because someone laid out a conversation tree in a builder. A campaign team that wants to design every branch by hand, rather than let the assistant recognize intent from open conversation, will get more out of Flow Studio.
+
+The dividing line is simple. Pick a custom action when the job is capturing a request and handing it to your system. Pick a dedicated workflow tool when the job is managing everything that happens after the request arrives.
+
+
+<BlogEmailCapture hook="Turning chat into booked appointments and quote requests?" subtext="Drop your email and we'll show you how Nobi captures appointment, quote, and support requests from chat and routes them straight into your existing systems." />
+
+---
+
+Curious what this looks like with your own booking, quoting, or ticketing tools? Book a walkthrough with Nobi and see how custom actions turn chat requests into real workflow triggers.
+
+<div className="my-8 flex justify-center">
+ <a
+ href="https://dashboard.nobi.ai"
+ className="inline-flex items-center justify-center gap-2 rounded-2xl font-medium transition active:scale-[.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-black/10 dark:focus-visible:ring-white/20 bg-black text-white dark:bg-white dark:text-black hover:opacity-90 shadow-sm h-12 px-6 text-base no-underline"
+ >
+ <span>Start your free Nobi trial</span>
+ </a>
+</div>

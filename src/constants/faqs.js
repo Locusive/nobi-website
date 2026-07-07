@@ -17,6 +17,12 @@ const FAQ_ITEMS = [
     topics: ["search"],
   },
   {
+    q: "Why do you call it “modern” search?",
+    a: "We call it modern search because Nobi combines retrieval search with LLM reasoning. Instead of only matching keywords, Nobi searches across your products and site content using techniques like semantic search and RAG, which is better for finding more relevant information. We also use AI to let your customers filter with natural language, rather than clicking lots of different filters. On top of all that, Nobi can remember your customer preferences, previous searches, optimize for engagement, and provide natural language summaries (similar to Google's AI snippets).",
+    category: "Product",
+    topics: ["search"],
+  },
+  {
     q: "How does Nobi help with support?",
     a: "Nobi connects to your knowledge base, website content, documents, policies, and other approved sources. When visitors ask support questions, Nobi answers from those sources before the question becomes a helpdesk ticket.",
     category: "Product",

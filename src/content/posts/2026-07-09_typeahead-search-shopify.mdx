@@ -98,7 +98,7 @@ Behind the dropdown, Nobi's index refreshes against the live catalog twice a day
 
 Nobi's search component installs with code pasted into the Shopify theme editor, replacing or augmenting the default search bar without a developer sprint. Most Shopify stores are live with a working typeahead dropdown the same day they install it, and the twice-daily catalog refresh mentioned above starts working right after, with nothing to trigger by hand.
 
-Installation takes two pieces, both pasted into your theme editor:
+Installation is a quick theme drop-in, pasted directly into your theme editor:
 
 1. Add this near the top of your theme's layout file, swapping in the merchant ID from the Installation page of your Nobi dashboard:
 
@@ -118,7 +118,7 @@ Reload the storefront, type a few characters into the search bar, and confirm th
 
 There's no separate indexing pipeline to stand up first. Once the theme edit is live, Nobi reads your existing product catalog automatically, no manual re-entry, no export/import step, no waiting on a batch job to finish before typeahead starts working.
 
-Algolia takes a different path. It's a search API built for engineering teams: typeahead there means writing code against the API, then building and maintaining the ranking and rendering logic yourself. That buys granular control, but it means an engineering sprint before a shopper sees a single result, not a same-day theme edit.
+Algolia is a search API built for engineering teams: typeahead there means writing code against the API, then building and maintaining the ranking and rendering logic yourself. That buys granular control, but it's a different path than Nobi's - it means an engineering sprint before a shopper sees a single result, not a same-day theme edit.
 
 New products don't need a second install either. Add a product in Shopify and it shows up in the typeahead dropdown on the next catalog refresh, no code change, no redeploy, no ticket to a developer to re-index anything.
 
@@ -167,7 +167,7 @@ Where it does matter is a store whose search is already fast and relevant, and w
 
 ---
 
-[Install Nobi's typeahead search](https://dashboard.nobi.ai) on your Shopify store and watch the dropdown come to life in minutes. Plans start at $25/month.
+[Install Nobi's typeahead search](https://dashboard.nobi.ai) on your Shopify store and watch the dropdown come to life the same day. Plans start at $25/month.
 
 <div className="my-8 flex justify-center">
   <a

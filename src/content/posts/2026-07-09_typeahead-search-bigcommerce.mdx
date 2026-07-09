@@ -3,8 +3,8 @@ export const meta = {
  slug: "typeahead-search-bigcommerce",
  date: "2026-07-09",
  publishedAt: "2026-07-09",
- description: "Add typeahead search to your BigCommerce store with one line of code. See what surfaces in the dropdown, how it differs from semantic search, and how to measure the lift.",
- excerpt: "Add typeahead search to your BigCommerce store with one line of code. See what surfaces in the dropdown, how it differs from semantic search, and how to measure the lift.",
+ description: "Add typeahead search to your BigCommerce store with a quick embed. See what surfaces in the dropdown, how it differs from semantic search, and how to measure the lift.",
+ excerpt: "Add typeahead search to your BigCommerce store with a quick embed. See what surfaces in the dropdown, how it differs from semantic search, and how to measure the lift.",
  tags: ["how-to", "site search", "ecommerce", "ecommerce search"],
  author: "Shanif Dhanani",
  heroImage: "https://storage.googleapis.com/nobi-public/docs_and_marketing_websites/posts/typeahead-search-bigcommerce/hero.webp",
@@ -25,7 +25,7 @@ export const meta = {
  },
  {
  question: "How do I install Nobi's typeahead search on BigCommerce?",
- answer: "Nobi's search component installs with one line of embed code added to a BigCommerce Stencil theme, replacing or augmenting the default search box, with no engineering project required, and the instant-search index builds automatically from the existing product catalog. One option is a direct install: paste the script tag into the theme's header right before the closing `</head>` tag, swapping in the merchant ID from the Installation page of the Nobi dashboard. The other option is through Google Tag Manager: create a Custom HTML tag, paste in the initialization code with the account ID swapped in, set the trigger to All Pages, then save and publish."
+ answer: "Nobi's search component installs with a quick embed added to a BigCommerce Stencil theme, replacing or augmenting the default search box, with no engineering project required, and the instant-search index builds automatically from the existing product catalog. One option is a direct install: paste the script tag into the theme's header right before the closing `</head>` tag, swapping in the merchant ID from the Installation page of the Nobi dashboard. The other option is through Google Tag Manager: create a Custom HTML tag, paste in the initialization code with the account ID swapped in, set the trigger to All Pages, then save and publish."
  },
  {
  question: "What shows up in the typeahead dropdown as a shopper types?",
@@ -47,7 +47,7 @@ export const meta = {
   "@context": "https://schema.org",
   "@type": "Article",
   "headline": "How to Give BigCommerce Shoppers Instant Search Results as They Type",
-  "description": "Add typeahead search to your BigCommerce store with one line of code. See what surfaces in the dropdown, how it differs from semantic search, and how to measure the lift.",
+  "description": "Add typeahead search to your BigCommerce store with a quick embed. See what surfaces in the dropdown, how it differs from semantic search, and how to measure the lift.",
   "datePublished": "2026-07-09",
   "dateModified": "2026-07-09",
   "author": {
@@ -78,7 +78,7 @@ export const meta = {
 </script>
 ## How do I add typeahead search to my BigCommerce store?
 
-Type a product name into your BigCommerce search box and nothing happens until you hit enter - that's the default behavior. A shopper looking for canvas sneakers types the words, watches the box sit there blank, and assumes you don't carry what they want. They leave before the results page ever loads, and because the query was never submitted, that abandonment never shows up in your analytics as a search term you can investigate. Typeahead search closes that gap: an instant, as-you-type dropdown that shows matching products, collections, and content before the shopper even finishes a word. Nobi adds it to a BigCommerce storefront with one line of code, and on a comparable storefront it lifted conversion rate by 0.5 percentage points - here's how to get it running and measure the same lift on your own traffic.
+Type a product name into your BigCommerce search box and nothing happens until you hit enter - that's the default behavior. A shopper looking for canvas sneakers types the words, watches the box sit there blank, and assumes you don't carry what they want. They leave before the results page ever loads, and because the query was never submitted, that abandonment never shows up in your analytics as a search term you can investigate. Typeahead search closes that gap: an instant, as-you-type dropdown that shows matching products, collections, and content before the shopper even finishes a word. Nobi adds it to a BigCommerce storefront with a quick embed, and on a comparable storefront it lifted conversion rate by 0.5 percentage points - here's how to get it running and measure the same lift on your own traffic.
 
 ## Why do shoppers leave a BigCommerce search box before they finish typing?
 
@@ -110,7 +110,7 @@ The bigger shift is that typeahead, semantic search, and shopper Q&A all run thr
 
 ## How do I install Nobi's typeahead search on BigCommerce?
 
-Nobi's search component installs on a BigCommerce storefront with one line of embed code added to your Stencil theme, replacing or augmenting the default search box - no engineering project required. Once the script is live, the instant-search index builds from your existing product catalog automatically, so you're not re-entering products anywhere.
+Nobi's search component installs on a BigCommerce storefront with a quick embed added to your Stencil theme, replacing or augmenting the default search box - no engineering project required. Once the script is live, the instant-search index builds from your existing product catalog automatically, so you're not re-entering products anywhere.
 
 There are two ways to add it. The first is a direct install: paste this into your theme's header, right before the closing `</head>` tag, and swap in your merchant ID from the Installation page of your Nobi dashboard.
 
@@ -131,7 +131,7 @@ If your team manages tags through Google Tag Manager instead of editing theme fi
  return;
  }
  window.Nobi.initialize({
- merchantId: 'YOUR_ACCOUNT_ID',
+ accountId: 'YOUR_MERCHANT_ID',
  autoLaunch: ['floating-chat-bar']
  });
  }
@@ -191,9 +191,9 @@ Nobi's dashboard splits these two mechanisms out at the reporting level, showing
 
 A typeahead dropdown fixes the drop-off problem, but it won't solve every search decision your team faces. If your team wants engineering-level control over ranking logic, or needs a merchandiser-controlled rule engine that can point to a specific setting for every query pattern, a dedicated tool built for that exact job is the better fit.
 
-Algolia is the developer-first option. It's a search API, so ranking rules, synonyms, and merchandising configs all live in code your engineering team writes and maintains. That's the right call when you have a dedicated search engineer who wants to build custom ranking logic instead of relying on a default relevance model, and you're comfortable owning that code long-term.
+[Algolia](https://www.algolia.com) is the developer-first option. It's a search API, so ranking rules, synonyms, and merchandising configs all live in code your engineering team writes and maintains. That's the right call when you have a dedicated search engineer who wants to build custom ranking logic instead of relying on a default relevance model, and you're comfortable owning that code long-term.
 
-Searchspring runs the other direction. Every query pattern gets a rule a merchandiser sets by hand, and every result on that query traces back to the rule that produced it. Teams that want that level of manual, query-by-query control over what shows up in the dropdown, and are fine maintaining a growing rule library as the catalog changes, get exactly that with Searchspring.
+[Searchspring](https://searchspring.com) runs the other direction. Every query pattern gets a rule a merchandiser sets by hand, and every result on that query traces back to the rule that produced it. Teams that want that level of manual, query-by-query control over what shows up in the dropdown, and are fine maintaining a growing rule library as the catalog changes, get exactly that with Searchspring.
 
 Nobi covers typeahead, semantic search, and shopper Q&A together, but it isn't either of those tools. There's no code-level API for custom ranking, and there's no rule engine for pinning a specific product to a specific query. Personalization today is limited to placeholder text and starter messages tailored to the page a shopper's on, not results that reorder based on an individual shopper's click or purchase history. If personalization is the main reason you're evaluating search tools, that's worth knowing going in.
 

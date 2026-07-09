@@ -118,7 +118,7 @@ Reload the storefront, type a few characters into the search bar, and confirm th
 
 There's no separate indexing pipeline to stand up first. Once the theme edit is live, Nobi reads your existing product catalog automatically, no manual re-entry, no export/import step, no waiting on a batch job to finish before typeahead starts working.
 
-Algolia is a search API built for engineering teams: typeahead there means writing code against the API, then building and maintaining the ranking and rendering logic yourself. That buys granular control, but it's a different path than Nobi's - it means an engineering sprint before a shopper sees a single result, not a same-day theme edit.
+[Algolia](https://algolia.com) is a search API built for engineering teams: typeahead there means writing code against the API, then building and maintaining the ranking and rendering logic yourself. That buys granular control, but it's a different path than Nobi's - it means an engineering sprint before a shopper sees a single result, not a same-day theme edit.
 
 New products don't need a second install either. Add a product in Shopify and it shows up in the typeahead dropdown on the next catalog refresh, no code change, no redeploy, no ticket to a developer to re-index anything.
 
@@ -156,7 +156,7 @@ Query patterns shift with your catalog and with the season, so a one-time report
 
 ## What are the limits of Nobi's typeahead search on Shopify?
 
-Nobi's typeahead and search results live on the search bar and results page. It doesn't merchandise your category or collection pages the way a dedicated merchandising tool does, and personalization today is limited to placeholder text and starter messages rather than reordering results based on what a shopper has clicked or bought before. That second gap is worth naming plainly: Klevu's Expert tier and Constructor both offer behavioral reranking, where results shift for a returning shopper based on their own click and purchase history. Nobi doesn't do that yet.
+Nobi's typeahead and search results live on the search bar and results page. It doesn't merchandise your category or collection pages the way a dedicated merchandising tool does, and personalization today is limited to placeholder text and starter messages rather than reordering results based on what a shopper has clicked or bought before. That second gap is worth naming plainly: [Klevu](https://klevu.com)'s Expert tier and [Constructor](https://constructor.io) both offer behavioral reranking, where results shift for a returning shopper based on their own click and purchase history. Nobi doesn't do that yet.
 
 For most Shopify stores, that's not the bottleneck. The problem this guide has walked through, an abandoned search before the shopper even finishes typing, isn't a personalization problem or a category-page problem. It's a response-speed and match-quality problem, and typeahead plus semantic matching on submit closes that gap without needing a separate merchandising platform bolted on top.
 

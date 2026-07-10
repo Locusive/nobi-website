@@ -13,7 +13,7 @@ export const meta = {
  faqItems: [
  {
  question: "What is faceted search?",
- answer: "Faceted search is the filtering system on a category or search results page that lets a visitor narrow results by several product attributes at once, like size, color, price range, material, and availability, with the result count updating live as they check each box. It runs on structured metadata: every product is tagged with attribute values ahead of time, and facets are generated from that tag data instead of typed as free text. Facets are usually multi-select and combine with AND/OR logic, so a visitor can pick Blue AND Under $50 AND In stock at once and see results narrow immediately."
+ answer: "Faceted search is the filtering system on a category or search results page that lets a visitor narrow results by several product attributes at once, like size, color, price range, material, and availability. The result count updates live as they check each box. It runs on structured metadata: every product is tagged with attribute values ahead of time, and facets are generated from that tag data instead of typed as free text. Facets are usually multi-select and combine with AND/OR logic, so a visitor can pick Blue AND Under $50 AND In stock at once and see results narrow immediately."
  },
  {
  question: "Where did faceted search come from?",
@@ -29,7 +29,7 @@ export const meta = {
  },
  {
  question: "Why does faceted search matter for conversion?",
- answer: "Faceted search shortens the path from landing on a category page to finding a specific product, and that path length directly affects bounce rate and conversion. A visitor who lands on a large category page from a paid ad and can't narrow it quickly will bounce before ever seeing a product page, wasting the spend that brought them there. Facets cut the steps needed to narrow results, for example letting someone filter to waterproof, size 10, under $150 in three clicks instead of scrolling through hundreds of products, and each removed step keeps someone who would otherwise leave. Crawlable facet URLs also become their own indexable landing pages, turning the filtering tool into a source of long-tail organic traffic."
+ answer: "Faceted search shortens the path from landing on a category page to finding a specific product, and every extra step in that path is another chance for a visitor to give up and leave. A visitor who lands on a large category page from a paid ad and can't narrow it quickly will bounce before ever seeing a product page, wasting the spend that brought them there. Facets cut the steps needed to narrow results, for example letting someone filter to waterproof, size 10, under $150 in three clicks instead of scrolling through hundreds of products, and each removed step keeps someone who would otherwise leave. Crawlable facet URLs also become their own indexable landing pages, turning the filtering tool into a source of long-tail organic traffic."
  },
  {
  question: "What are the main types of faceted search tools?",
@@ -37,7 +37,7 @@ export const meta = {
  },
  {
  question: "What results can a marketing team expect from good faceted search?",
- answer: "Well-implemented faceted search shows up as a lower bounce rate on category and landing pages, a shorter path to a relevant product page, and a measurable lift in on-site search-to-purchase conversion compared to browsing alone. The effect concentrates by catalog size: categories under roughly 50 products are still browsable by scrolling, but past 50 to 100 products a visitor without a way to narrow results will bail before finding anything. Search-driven and facet-driven sessions convert at meaningfully higher rates than browse-only ones because filtering itself signals specific intent, and which attribute values visitors filter by most often can reveal demand a catalog structure doesn't already surface. Bounce rate on high-traffic category pages and how often a facet combination returns zero results are the two metrics worth watching as early warnings."
+ answer: "Well-implemented faceted search shows up as a lower bounce rate on category and landing pages, a shorter path to a relevant product page, and a measurable lift in on-site search-to-purchase conversion compared to browsing alone. The effect concentrates by catalog size: a small category is still browsable by scrolling, but once a category grows past a couple dozen products, a visitor without a way to narrow results will bail before finding anything. Search-driven and facet-driven sessions tend to convert better than browse-only ones because filtering itself signals specific intent, and which attribute values visitors filter by most often can reveal demand a catalog structure doesn't already show. Bounce rate on high-traffic category pages and how often a facet combination returns zero results are the two metrics worth watching as early warnings."
  },
  {
  question: "What are the risks and pitfalls of faceted search?",
@@ -86,7 +86,7 @@ export const meta = {
 </script>
 ## What is faceted search?
 
-Faceted search is the filtering system on a category or search results page that lets a visitor narrow results by several product attributes at once - size, color, price range, material, availability - with the result count updating live as they check each box. It's built on structured metadata: every product is tagged with attribute values ahead of time, and the facets are generated from that tag data rather than typed in as free text.
+Faceted search is the filtering system on a category or search results page that lets a visitor narrow results by several product attributes at once - size, color, price range, material, availability. The result count updates live as they check each box. It's built on structured metadata: every product is tagged with attribute values ahead of time, and the facets are generated from that tag data rather than typed in as free text.
 
 Each attribute, like "Color," is a facet. The values under it, Blue, Red, Green, are what the visitor actually selects. Facets are usually multi-select, and they combine with each other using AND/OR logic: a visitor can pick "Blue" AND "Under $50" AND "In stock" all at once, and the results narrow to match every condition together.
 
@@ -96,7 +96,7 @@ REI's hiking boots category shows this well. A visitor can stack Waterproof, Siz
 
 ## Where did faceted search come from?
 
-That REI example runs on tagging every product ahead of time, and that idea is older than the web. The concept spread online in the early 2000s as catalogs grew past what a single category tree could organize, and it became standard once large retailers like Amazon and Zappos showed visitors would use it to narrow big inventories on their own.
+That REI example runs on tagging every product ahead of time, and that idea is older than the web. The concept spread online in the early 2000s as catalogs grew past what a single category tree could organize. It became standard once large retailers like Amazon and Zappos showed visitors would use it to narrow big inventories on their own.
 
 The library science root goes back to the 1930s. S.R. Ranganathan, an Indian librarian, published his colon classification system as an alternative to fixed hierarchies like the Dewey Decimal system. Instead of forcing a book into one branch of one tree, Ranganathan described it by independent attributes: subject, place, time, form. That's the same logic behind a "Color" facet and a "Size" facet operating independently on a product page. Neither one has to fit inside the other.
 
@@ -122,7 +122,7 @@ Semantic search is a different approach altogether. Instead of requiring a visit
 
 These three aren't rivals competing for the same job. Most modern search stacks use facets to narrow a results set once a visitor has landed on it, and semantic matching to interpret the query that got them there in the first place, especially for long or descriptive searches. A pure facet system fails a visitor who doesn't know the right attribute name to click. A pure semantic system fails a visitor who wants precise, deterministic narrowing, someone who already knows they want size 10, waterproof, under $150. The strongest search setups combine both instead of picking one, which is the core case for [AI-powered search over keyword-only site search](https://nobi.ai/blog/ai-vs-traditional-site-search).
 
-Algolia's retrieval engine reflects this directly: facet tagging detects when part of a query maps to a facet value, so it can filter out non-matching records or boost matching ones, while a separate semantic layer handles the phrasing a facet can't catch. Nobi takes a similar two-path approach on instant and conversational search, routing short product queries to fast, ranked results and open-ended questions to a grounded conversational answer, so visitors get the right handling whether they click a facet or type a sentence.
+[Algolia](https://www.algolia.com)'s retrieval engine reflects this directly. Facet tagging detects when part of a query maps to a facet value, so it can filter out non-matching records or boost matching ones. A separate semantic layer handles the phrasing a facet can't catch. Nobi takes a similar two-path approach on instant and conversational search. It routes short product queries to fast, ranked results and open-ended questions to a grounded conversational answer, so visitors get the right handling whether they click a facet or type a sentence.
 
 ## Why does faceted search matter for conversion?
 
@@ -134,11 +134,11 @@ The mechanism is the same one that makes checkout forms convert better with fewe
 
 Facets also pay off outside the page itself. When facet combinations are crawlable as their own URLs, like `/boots/waterproof/size-10`, each one becomes a landing page a search engine can index and rank on its own. That turns a filtering tool into a source of long-tail organic traffic, on top of whatever it does for on-site conversion.
 
-Broken facets are a common and easy-to-miss cause of high bounce on category pages. A count that doesn't update after a selection, a facet that silently resets when a visitor hits the back button, or a filter combination that returns zero results without explanation all look like small bugs. To a visitor mid-search, any one of them looks like the site doesn't have what they want, and they leave without ever finding out otherwise.
+Broken facets are a common and easy-to-miss cause of high bounce on category pages. A count that doesn't update after a selection, a facet that resets when a visitor hits the back button, or a filter combination that returns zero results without explanation all look like small bugs. To a visitor mid-search, any one of them looks like the site doesn't have what they want, and they leave without ever finding out otherwise.
 
 ## What are the main types of faceted search tools?
 
-Faceted search tools fall into a few distinct categories. [Algolia](https://www.algolia.com) is a developer-first search API: facets, ranking, and merchandising rules all live in code. That gives engineering teams full control, but someone has to keep tuning it as the catalog changes. [Coveo](https://www.coveo.com) takes a different approach. It runs one machine-learning relevance engine, with faceted filtering built in, across both commerce and internal knowledge search. That's the pick for a large organization that wants one engine spanning multiple properties instead of separate tools for each.
+Faceted search tools fall into a few distinct categories. Algolia is a developer-first search API: facets, ranking, and merchandising rules all live in code. That gives engineering teams full control, but someone has to keep tuning it as the catalog changes. [Coveo](https://www.coveo.com) takes a different approach. It runs one machine-learning relevance engine, with faceted filtering built in, across both commerce and internal knowledge search. That's the pick for a large organization that wants one engine spanning multiple properties instead of separate tools for each.
 
 [Hawk Search](https://www.hawksearch.com) targets a narrower job: B2B catalogs and large multi-category inventories with hundreds of attributes per product. In catalogs that deep, visitors filter their way to a product more than they type a search query, and Hawk Search is built around that behavior.
 
@@ -154,13 +154,13 @@ Catalog size is where the effect concentrates. A small category is still browsab
 
 A visitor who uses search or facets tends to convert better than one who's just clicking through categories, because filtering is itself a signal of specific intent. Someone who checks "waterproof," "size 10," and "under $150" has already told you what they want to buy.
 
-Facet usage is also worth watching as a merchandising signal, separate from conversion. Which attribute values visitors filter by most often reveals demand your catalog structure doesn't already surface, sometimes pointing to a new category or filter worth adding outright.
+Facet usage is also worth watching as a merchandising signal, separate from conversion. Which attribute values visitors filter by most often reveals demand your catalog structure doesn't already show, sometimes pointing to a new category or filter worth adding outright.
 
 For a marketing manager who wants an early warning before conversion numbers move, two metrics matter most: bounce rate on high-traffic category pages, and how often a facet combination returns zero results. Both tend to shift before revenue does, which makes them the better place to look first.
 
 ## What are the risks and pitfalls of faceted search?
 
-Those two leading indicators, bounce rate and zero-result combinations, point straight at the most common faceted search failure: a dead end. A visitor stacks two or three facets, like "waterproof" and "size 10" and "under $50," and lands on an empty results page with no guidance. Instead of relaxing a filter, they leave. A well-built system should degrade gracefully here, suggesting the nearest broader match ("12 waterproof boots in your size, none under $50") rather than showing a blank grid.
+Those two leading indicators, bounce rate and zero-result combinations, point straight at the most common faceted search failure: a dead end. A visitor stacks two or three facets, like "waterproof" and "size 10" and "under $50," and lands on an empty results page with no guidance. Instead of relaxing a filter, they leave. A well-built system should suggest the nearest broader match ("12 waterproof boots in your size, none under $50") instead of showing a blank grid.
 
 Attribute drift is a quieter failure that builds up over time. Without governance on how new values get added, "Blue," "blue," and "Navy Blue" become three separate facet values instead of one. The count under each fragments, and a visitor who picks "Blue" misses products tagged "Navy Blue" even though they'd want both. This gets worse as a catalog grows and more people add products without a shared naming convention.
 
@@ -178,7 +178,7 @@ A deep, high-attribute catalog with a lot of categories, and engineering time to
 
 If you want full API control over ranking logic, and you have a search engineer on staff, Algolia fits. Facets, ranking, and merchandising rules all live in code, which gives you granular control at the cost of ongoing manual tuning as the catalog changes. If semantic matching rather than pure code-level control is the priority, it's worth comparing that shortlist directly, including [the best semantic search platforms for ecommerce](https://nobi.ai/blog/best-semantic-search-ecommerce).
 
-Unifying search across commerce and internal or support-facing content at enterprise scale is Coveo's job. It runs one relevance engine, with faceted filtering built in, across multiple properties instead of a separate tool per surface. That comes at enterprise cost and a longer sales cycle.
+Unifying search across commerce and internal or support-facing content at enterprise scale is Coveo's job. It runs one relevance engine, with faceted filtering built in, across multiple properties instead of a separate tool per channel. That comes at enterprise cost and a longer sales cycle.
 
 If the job is search plus answering visitor questions, facets and semantic matching and cited answers to something like "is this machine-washable?" in one system, without engineering setup time, that's where Nobi fits. It's $25 a month for 2,500 searches and 250 conversational messages, live in hours rather than months.
 

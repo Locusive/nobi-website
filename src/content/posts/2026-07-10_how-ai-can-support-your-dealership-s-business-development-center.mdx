@@ -82,7 +82,7 @@ export const meta = {
 </script>
 ## How can AI support a dealership's business development center?
 
-It's 8pm and a shopper is three clicks into your inventory, checking whether a specific truck is still on the lot before deciding whether to drive in tomorrow. Your BDC is closed, whoever handles phone ups went home hours ago, and the site is all that's still open. That's the moment most dealerships lose the lead: no answer comes, so the shopper closes the tab and moves on to the next dealer's site. An [AI assistant on the dealership website](https://nobi.ai/blog/best-ai-assistants-for-car-dealerships) changes that math. It can answer shopper questions and capture intent around the clock, so a BDC that's short-staffed after hours or buried in internet ups doesn't lose the lead by default. It's not there to close the phone-up or handle the trade-in negotiation - it catches the shopper who's on the site right now, answers what it can actually verify from your inventory and policy pages, and passes a qualified lead to a human for the parts of the sale that need a person.
+It's 8pm and a shopper is three clicks into your inventory, checking whether a specific truck is still on the lot before deciding whether to drive in tomorrow. Your BDC is closed, whoever handles phone ups went home hours ago, and the site is all that's still open. That's the moment most dealerships lose the lead: no answer comes, so the shopper closes the tab and moves on to the next dealer's site. An [AI assistant on the dealership website](https://nobi.ai/blog/best-ai-assistants-for-car-dealerships) changes that math. It can answer shopper questions and capture intent around the clock, so a BDC that's short-staffed after hours or buried in internet ups doesn't lose the lead by default. It's not there to close the phone-up or handle the trade-in negotiation. It catches the shopper who's on the site right now and answers what it can actually verify from your inventory and policy pages. Then it passes a qualified lead to a human for the parts of the sale that need a person.
 
 ## Why do dealership BDCs still lose leads even when fully staffed?
 
@@ -102,7 +102,7 @@ Nobi doesn't try to close the deal itself. When a shopper's question signals rea
 
 ## How does Nobi cover after-hours and overflow leads for a BDC?
 
-[Nobi stays on the website after the BDC has gone home, answering shopper questions](https://nobi.ai/blog/ai-assistant-dealership-website) and surfacing a lead-capture moment when the conversation shows buying intent. Configurable triggers decide when Nobi speaks up first instead of waiting for the shopper to type: exit intent on a VDP, idle time on the financing page, a returning visitor who's back for the third time this week. The dealership sets the rules; Nobi fires the prompt when the moment fits.
+[Nobi stays on the website after the BDC has gone home, answering shopper questions](https://nobi.ai/blog/ai-assistant-dealership-website) and surfacing a lead-capture moment when the conversation shows buying intent. Configurable triggers decide when Nobi speaks up first instead of waiting for the shopper to type: exit intent on a VDP, idle time on the financing page, returning-visitor status. The dealership sets the rules; Nobi fires the prompt when the moment fits.
 
 A shopper who doesn't know what to ask gets help there too. Contextual suggestion pills, scoped to the page the shopper is on, show a few tappable starting points, like "Is this still available?" or "What's the trade-in process?" on a VDP. Tapping one opens the assistant straight into an answer instead of leaving the shopper staring at a blank chat box wondering what's worth typing.
 
@@ -116,11 +116,13 @@ Not directly. That after-hours coverage picks up the shopper on your site right 
 
 Re-engaging aged and orphaned leads is a different job: outbound, multi-touch, and built to run against records already sitting in your CRM. A few tools are built specifically for it. DriveCentric puts AI directly into the CRM itself, so follow-up on a cold lead runs from the same record your rep already works, no separate system to check. Matador AI runs multi-channel outbound, phone, text, email, social, against your existing aged-lead stack, with a built-in TCPA compliance engine for SMS re-engagement, which matters given how much regulatory risk sits in cold-lead texting. Conversica is built around [persistent, multi-touch follow-up](https://nobi.ai/blog/conversica-alternatives-car-dealerships): it keeps working a lead across channels until the shopper engages or opts out, rather than sending one message and giving up.
 
-Any of these can turn what dealers call the acres of diamonds, the untapped value sitting in old CRM records, back into a live conversation, working leads no one else was still calling. When a campaign like that gets a cold lead to click back to your website, Nobi answers whatever question brought them back and captures the visit as a fresh lead for your BDC, aged zero hours again instead of orphaned twice.
+Any of these can turn what dealers call the acres of diamonds, the untapped value sitting in old CRM records, back into a live conversation, working leads no one else was still calling. When a campaign like that gets a cold lead to click back to your website, Nobi answers whatever question brought them back. It captures the visit as a fresh lead for your BDC, aged zero hours again instead of orphaned twice.
 
 ## How do you stop an AI assistant from quoting the wrong price or a sold vehicle?
 
-Nobi handles high-stakes questions like this one through query overrides, not the general answer engine. A GM writes the exact answer once, pins it to a specific question like current MSRP on a listed unit, and that verbatim response fires every time a shopper asks it, with no LLM paraphrasing and no room for the assistant to improvise a number. It's the same fear every GM brings up first, usually pointing to the Chevy Watsonville incident where an AI assistant agreed to sell a Tahoe for a dollar.
+Every GM who asks this question is picturing the same industry cautionary tale: the Chevy Watsonville incident, where an AI assistant agreed to sell a Tahoe for a dollar. That's a general risk with any ungrounded AI deployment, not something specific to one vendor.
+
+Nobi handles high-stakes questions like this one through query overrides, not the general answer engine. A GM writes the exact answer once and pins it to a specific question, like current MSRP on a listed unit. That verbatim response fires every time a shopper asks it, with no LLM paraphrasing and no room for the assistant to improvise a number.
 
 Everything outside those pinned overrides still routes through the standard grounded pipeline. The assistant answers from your connected VDPs, inventory feed, and policy pages, not from anything it invents, and cites the source it pulled from. Connected content refreshes twice a day, which narrows the window where a sold unit or a changed price could still show up in an answer.
 
@@ -140,7 +142,7 @@ Where CSI risk actually creeps in is scope creep: letting an assistant improvise
 
 ## When does a dealership need a dedicated BDC or CRM AI platform instead of a website assistant?
 
-Scope creep is the real risk here, not just CSI. If most of your lead conversion happens on the phone or over SMS rather than the website, or the real problem is a tired CRM rather than an unanswered VDP question, a dedicated BDC or CRM platform is the better fit than a website assistant.
+Scope creep is the real risk here, not just CSI. If most of your lead conversion happens on the phone or over SMS rather than the website, a dedicated BDC or CRM platform is the better fit than a website assistant. Same goes if the real problem is a tired CRM rather than an unanswered VDP question.
 
 Some rooftops want AI native to the CRM itself, not bolted on next to it. DriveCentric puts AI directly into every lead record, and the company reports more than 2,200 dealerships use it to replace the CRM outright rather than layer a tool on top of the one they have.
 

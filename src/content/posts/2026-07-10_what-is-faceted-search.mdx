@@ -92,7 +92,7 @@ Each attribute, like "Color," is a facet. The values under it, Blue, Red, Green,
 
 That's what separates faceted search from a single dropdown filter. A dropdown gives you one category at a time. Facets are plural and combinable, and the count next to each remaining option updates the instant a selection changes, so the visitor sees the impact before they click through.
 
-REI's hiking boots category shows this well. A visitor can stack Waterproof, Size 10, and Under $150, and watch the result count drop from 400 boots to 12 in real time, without ever leaving the page or reloading a new URL.
+REI's hiking boots category shows this well. A visitor can stack "Waterproof," "Size 10," and "Under $150," and watch the result count drop from 400 boots to 12 in real time, without ever leaving the page or reloading a new URL.
 
 ## Where did faceted search come from?
 
@@ -120,7 +120,7 @@ A basic filter is usually single-select and hard-coded per category. A "Sort by 
 
 Semantic search is a different approach altogether. Instead of requiring a visitor to click a pre-defined attribute value, it interprets what they mean in free text. A search for "gift for a runner" has no facet to click, no attribute tagged "gift" or "runner" in the product data. Semantic search reads intent from the phrase and matches products that fit, even when nothing in the catalog literally says those words.
 
-These three aren't rivals competing for the same job. Most modern search stacks use facets to narrow a results set once a visitor has landed on it, and semantic matching to interpret the query that got them there in the first place, especially for long or descriptive searches. A pure facet system fails a visitor who doesn't know the right attribute name to click. A pure semantic system fails a visitor who wants precise, deterministic narrowing, someone who already knows they want size 10, waterproof, under $150. The strongest search setups combine both instead of picking one, which is the core case for [AI-powered search over keyword-only site search](https://nobi.ai/blog/ai-vs-traditional-site-search).
+These three aren't rivals competing for the same job. Most modern search stacks use facets to narrow a results set once a visitor has landed on it, and semantic matching to interpret the query that got them there in the first place, especially for long or descriptive searches. A pure facet system fails a visitor who doesn't know the right attribute name to click. A pure semantic system fails a visitor who wants precise, deterministic narrowing, someone who already knows they want "size 10," "waterproof," and "under $150." The strongest search setups combine both instead of picking one, which is the core case for [AI-powered search over keyword-only site search](https://nobi.ai/blog/ai-vs-traditional-site-search).
 
 [Algolia](https://www.algolia.com)'s retrieval engine reflects this directly. Facet tagging detects when part of a query maps to a facet value, so it can filter out non-matching records or boost matching ones. A separate semantic layer handles the phrasing a facet can't catch. Nobi takes a similar two-path approach on instant and conversational search. It routes short product queries to fast, ranked results and open-ended questions to a grounded conversational answer, so visitors get the right handling whether they click a facet or type a sentence.
 
@@ -148,7 +148,7 @@ The newer direction pairs facets with AI, and it's worth seeing how the [leading
 
 ## What results can a marketing team expect from good faceted search?
 
-Well-implemented faceted search shows up as a lower bounce rate on category and landing pages, a shorter path to a relevant product page, and a measurable lift in on-site search-to-purchase conversion compared to browsing alone, consistent with [research on what shoppers actually expect from site search](https://nobi.ai/blog/what-shoppers-want-site-search). The exact lift depends on catalog size and traffic mix, but the direction holds: the more products in a category, the more a visitor depends on facets to avoid giving up and leaving.
+Well-implemented faceted search shows up in three ways. Bounce rate on category and landing pages drops, the path to a relevant product page gets shorter, and on-site search-to-purchase conversion lifts measurably against plain browsing. That pattern is consistent with [research on what shoppers actually expect from site search](https://nobi.ai/blog/what-shoppers-want-site-search). The exact lift depends on catalog size and traffic mix, but the direction holds: the more products in a category, the more a visitor depends on facets to avoid giving up and leaving.
 
 Catalog size is where the effect concentrates. A small category is still browsable by scrolling, so facets help but aren't load-bearing. Once a category grows past a couple dozen products, scrolling stops working as a way to shop, and a visitor without a way to narrow results will bail before finding anything. That's also where broken facets do the most damage, since there's no fallback browsing path once a catalog gets that big.
 

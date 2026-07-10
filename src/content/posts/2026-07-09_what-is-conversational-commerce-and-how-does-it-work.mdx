@@ -1,0 +1,207 @@
+export const meta = {
+ title: "What Is Conversational Commerce and How Does It Work",
+ slug: "what-is-conversational-commerce-and-how-does-it-work",
+ date: "2026-07-09",
+ publishedAt: "2026-07-09",
+ description: "Conversational commerce explained: what it is, why zero-result rates and support tickets make it matter, how it works, and how AI assistants like Nobi fit in.",
+ excerpt: "Conversational commerce explained: what it is, why zero-result rates and support tickets make it matter, how it works, and how AI assistants like Nobi fit in.",
+ tags: ["sales assistance", "ecommerce", "ecommerce search"],
+ author: "Shanif Dhanani",
+ heroImage: "https://storage.googleapis.com/nobi-public/docs_and_marketing_websites/posts/what-is-conversational-commerce-and-how-does-it-work/hero.webp",
+ featured: true,
+ draft: false,
+ faqItems: [
+ {
+ question: "What is conversational commerce?",
+ answer: "Conversational commerce is buying or getting help through a back-and-forth exchange instead of static browsing and search, where a shopper states what they want in their own words and gets a direct answer or recommendation. It spans live chat widgets, SMS and WhatsApp threads, voice assistants, and AI shopping assistants, not just the newest tactic. It's not a new idea either; live chat and SMS ordering have counted as conversational commerce for well over a decade, with AI as the newest addition rather than a replacement."
+ },
+ {
+ question: "Why does conversational commerce matter for ecommerce brands?",
+ answer: "A high zero-result rate and a mismatch between what shoppers type and how a catalog is tagged drive ready-to-buy shoppers off a site before they reach a product, a cost that rarely shows up as a line item in a dashboard. A shopper who searches for something like \"waterproof running shoes\" against a catalog tagged differently gets nothing back and leaves, with no error or complaint, just a closed tab. The stakes are higher than before too: many shoppers will abandon a brand after a single bad AI interaction, so a confusing answer or dead-end result can cost a customer permanently. Getting it right shows up directly in add-to-cart rate and revenue per visit, not just in fewer support tickets."
+ },
+ {
+ question: "How does conversational commerce actually work?",
+ answer: "A conversational commerce system has to do three things: understand what the shopper is asking, find the answer in something real like a live catalog or policy document rather than a static training snapshot, and decide when to hand off to a human. Rule-based flows use fixed decision trees that are predictable but break outside the script, while LLM-based systems handle open-ended natural language but risk generating a plausible-sounding guess instead of admitting they don't know. RAG-grounded systems fix this by retrieving the actual product page or policy document first and answering only from what they found, which prevents hallucinated inventory like falsely claiming an item is in stock. Escalation triggers are also needed to hand off to a person when the system can't answer."
+ },
+ {
+ question: "What are the main types of conversational commerce?",
+ answer: "Conversational commerce isn't a single tool - it's a handful of distinct approaches grouped by category, and most brands combine a few. Live chat with a human in the loop pairs an AI first touch with staffed handoff (Tidio, Gorgias). Messaging and SMS commerce meets shoppers who would rather text (Podium). Guided, structured flows walk a scripted path to a product (Octane AI, Rep AI). On-site AI shopping assistants answer a shopper's own open-ended questions from the brand's catalog and content, with a source citation on every answer (Nobi, Alby). And the newest, fastest-moving category is shopping on AI assistants and LLMs - shoppers asking ChatGPT, Perplexity, or Gemini for recommendations, and AI agents beginning to browse and buy on a shopper's behalf, which moves part of the conversation off the merchant's own site."
+ },
+ {
+ question: "Frequently asked questions about conversational commerce",
+ answer: "Conversational commerce is not the same as a scripted messaging bot; it's the umbrella term covering live chat, SMS, voice assistants, and AI shopping assistants like Nobi as separate tactics underneath it. It also doesn't require AI, since staffed live chat and SMS programs have run for over a decade without it, with AI helping the conversation understand more of what a shopper means. It differs from a plain search bar by answering open-ended questions or holding a back-and-forth exchange rather than just returning ranked results, and voice commerce counts as part of the category too, though it still trails chat and messaging in ecommerce adoption. The biggest risk to watch for is an ungrounded system that fabricates a feature, price, or policy, or claims stock that doesn't exist, instead of checking real, current content before answering."
+ }
+ ],
+};
+
+<script type="application/ld+json" data-nobi-schema>
+{`{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "What Is Conversational Commerce and How Does It Work",
+  "description": "Conversational commerce explained: what it is, why zero-result rates and support tickets make it matter, how it works, and how AI assistants like Nobi fit in.",
+  "datePublished": "2026-07-09",
+  "dateModified": "2026-07-09",
+  "author": {
+    "@type": "Person",
+    "name": "Shanif Dhanani",
+    "url": "https://www.linkedin.com/in/shanifdhanani/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Nobi",
+    "url": "https://nobi.ai"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://nobi.ai/blog/what-is-conversational-commerce-and-how-does-it-work"
+  },
+  "about": [
+    {
+      "@type": "Thing",
+      "name": "sales assistance"
+    },
+    {
+      "@type": "Thing",
+      "name": "ecommerce"
+    }
+  ]
+}`}
+</script>
+## What is conversational commerce?
+
+You've probably typed a question into a chat box on a store's site and gotten a straight answer back instead of a page of search results - that's conversational commerce, and it's been around longer than most people think. It means talking your way through a purchase instead of clicking through it. A shopper says what they want in plain language: "do you have this in a size 10 that runs narrow?" They get a direct answer or a recommendation, instead of guessing a search term or scrolling a product listing page. When that exchange breaks down, the shopper doesn't file a complaint. They just close the tab. Live chat, SMS, voice, and AI shopping assistants are all different ways of running that same exchange, and the rest of this piece walks through how each one works and where it fits.
+
+The category spans more channels than most people realize. Live chat widgets on a PDP, SMS and WhatsApp threads, voice assistants, and [AI shopping assistants embedded on-site](https://nobi.ai/blog/ai-shopping-assistant-ecommerce) all count as conversational commerce, not just whatever's newest.
+
+It's also not a new idea. Live chat and SMS ordering have counted as conversational commerce for well over a decade, long before AI entered the picture. AI-powered assistants are the newest tactic inside the category, not a replacement for it. What's changed is how well the conversation understands what a shopper means, not whether a conversation is happening at all. Older tools matched keywords; a modern assistant reads intent. That difference is why [natural-language search can surface products a keyword search misses](https://nobi.ai/blog/semantic-search-vs-keyword-search).
+
+## Where did conversational commerce come from?
+
+Conversational commerce is older than the term for it. The phrase was popularized by Chris Messina, the designer who coined the hashtag, in a 2015 essay about shopping that happens inside a messaging thread. The practice was already common by then. Live chat windows had sat on retail sites since the early 2000s, and brands had used SMS for order updates and click-to-call for years.
+
+The idea got its first big hype cycle in 2016, when Facebook opened Messenger to automated bots. Thousands of brands rushed to build one. Most were rigid and scripted. They followed a fixed decision tree, broke the moment a shopper went off-script, and taught a generation of buyers to distrust a chat window. Voice assistants like Alexa and Google Assistant added a spoken channel around the same time, though voice stayed a small slice of ecommerce.
+
+The recent shift is what made conversational commerce work as promised. Large language models let a system handle open-ended questions instead of a preset menu. Retrieval-augmented generation (RAG) let it answer from a brand's real catalog and policies instead of guessing. Together they closed the gap between what shoppers typed and what the old bots could handle. Now the frontier is moving again: shoppers ask general AI assistants like ChatGPT for recommendations, and early agentic tools are starting to browse and buy on a shopper's behalf. Each wave added a capability rather than replacing the last, which is why live chat, SMS, and AI assistants all still count today.
+
+## Why does conversational commerce matter for ecommerce brands?
+
+Two things drive ready-to-buy shoppers off your site before they ever reach a product: a high zero-result rate, and a mismatch between what they type and how your catalog is tagged. That cost rarely shows up as a line item in a dashboard. A marketing manager watching bounce rate stay high on paid landing pages, or watching [on-site email capture](https://nobi.ai/blog/capture-leads-from-chat) stay flat, is often watching this exact problem play out without a name for it. The understanding gap the last section pointed to isn't abstract. It shows up first as a null result: a shopper searches "waterproof running shoes" against a catalog tagged "trail runner, weatherproof," gets nothing back, and leaves.
+
+[Zero-result and null-result searches](https://nobi.ai/blog/fix-zero-result-searches) are one of the biggest silent leaks in on-site conversion, because the shopper never even sees a product. And getting the conversational layer wrong carries more risk than it used to: many shoppers will abandon a brand after a single bad AI interaction. That raises the stakes on doing this well, not just having something in place. A search bar or assistant that gives a confusing answer or a dead-end result can cost you a customer permanently, not just a session.
+
+The leak is easy to underrate, because searchers are your best traffic. Shoppers who use site search convert at a much higher rate than shoppers who only browse, so a failed search wastes the visitors closest to buying. We break the full math down in [the true cost of bad site search](https://nobi.ai/blog/cost-of-bad-site-search). The short version: every dead-end search is a paid-for visitor you handed to a competitor.
+
+The upside runs the same direction. Getting conversational commerce right shows up in add-to-cart rate and revenue per visit, the metrics a marketing manager already tracks, not just in fewer support tickets.
+
+## How does conversational commerce actually work?
+
+Under the hood, a conversational commerce system has to do three things. First, it has to understand what the shopper is asking, a step called intent detection. Second, it has to find the answer in something real, like a live catalog or a policy document, instead of a static training snapshot. Third, it has to decide when to hand off to a human. The gap between systems that get add-to-cart and revenue per visit moving and systems that don't comes down to that second step: grounding.
+
+Not every system works the same way. Rule-based flows use fixed decision trees: a shopper picks from a menu of preset options, and the system walks a scripted path. They're predictable but brittle, and they break the moment a shopper asks something outside the script. LLM-based systems flip that: a shopper can type anything in natural language, and the model generates an open-ended response. That solves the vocabulary mismatch problem, but it opens a new one. An LLM answering from general training data will fill gaps with a plausible-sounding guess instead of admitting it doesn't know, what Gorgias calls a "confident lie": a fabricated feature, a wrong price, a return policy that was never written.
+
+RAG-grounded systems are the fix, and they use the same retrieve-first approach behind modern [AI site search](https://nobi.ai/blog/how-ai-site-search-works). Instead of answering from memory, the model retrieves the actual product page or policy document first, then answers only from what it found. Grounding is also what prevents hallucinated inventory, the specific failure where a bot tells a shopper "yes, we have that in stock" or recommends something that's actually sold out, because it never checked a live feed before answering.
+
+Grounding is also what lets a good assistant handle a messy, specific request. Ask for "a waterproof jacket for a rainy hike that packs down small" and the system matches the meaning, then answers from products that actually exist. That is the hard part of [handling long, natural-language queries](https://nobi.ai/blog/handling-long-tail-queries), and it is where keyword search gives up.
+
+Grounding alone doesn't cover every case. Escalation triggers define when the system stops trying to answer and hands off to a person instead of guessing its way through. Without them, a shopper who asks something the system can't resolve gets a non-answer, restates the question, and gets the same non-answer back. It is a circular conversation that ends the way most bad AI interactions do, with the shopper gone.
+
+## Where does conversational commerce happen?
+
+Conversational commerce shows up on more than one surface, and the channel shapes what a shopper expects. It helps to separate the surfaces from the approaches. The main surfaces are the brand's own site, messaging apps, voice assistants, and, increasingly, third-party AI assistants.
+
+The brand's own site is where most of it happens for ecommerce. A shopper asks a question in a chat window or a search bar and gets an answer drawn from the catalog. This is the surface a brand controls most tightly, and the one where a grounded answer matters most, because the shopper is a click from buying.
+
+Messaging apps move the conversation off the site. SMS, WhatsApp, Facebook Messenger, and Instagram DMs let a brand reach a shopper where they already talk to friends. These channels work well for order updates, re-engagement, and quick questions, and they carry a higher open rate than email. WhatsApp in particular carries a large share of conversational commerce outside the US, where many shoppers treat it as the default way to reach a brand.
+
+Voice assistants like Alexa and Google Assistant handle spoken requests. Voice reorders and simple lookups fit the channel, but it stays a minor share of ecommerce revenue.
+
+The newest surface sits outside the brand entirely. Shoppers now ask ChatGPT, Perplexity, and Gemini for product recommendations, and those assistants answer from whatever they can find and cite. A brand can't run software inside someone else's assistant, so the job there is different: publish clear, current information the assistant can pull, and be citable when it answers. That is becoming its own discipline. [Getting your business found and answered by AI agents](https://nobi.ai/blog/how-to-get-your-business-found-by-ai-agents) is a channel to manage, not something that happens on its own. Most brands end up using several surfaces at once rather than picking one.
+
+## What are the main types of conversational commerce?
+
+Conversational commerce isn't a single tool - it's a handful of distinct approaches, and most brands combine a few rather than pick one. It's clearest to group them by category.
+
+**Live chat with a human in the loop.** The oldest branch: a chat widget where AI handles the first touch and hands off to a person. [Tidio](https://www.tidio.com) pairs a staffed widget with an AI responder called Lyro for after-hours questions and triage, and [Gorgias](https://www.gorgias.com) sits on the post-sale side, handling WISMO, returns, and exchanges with Shopify order context inside each ticket.
+
+**Messaging and SMS commerce.** For shoppers who would rather text than open a widget. [Podium](https://www.podium.com) stitches SMS, web chat, reviews, and payments into a single inbox.
+
+**Guided, structured flows.** These skip open-ended conversation for a scripted path. [Octane AI](https://www.octaneai.com) resolves a short quiz to a specific product, useful when a catalog is wide and a shopper doesn't know what they want yet. [Rep AI](https://www.hellorep.ai)'s Flow Studio lets marketing build deterministic flows - a promo, an abandoned-cart rescue - without engineering.
+
+**On-site AI shopping assistants.** Open-ended assistants that answer a shopper's own questions from the brand's catalog and content, in natural language. [Nobi](https://nobi.ai) answers pre-purchase product and policy questions from a brand's connected content, paired with a semantic search bar. Every answer carries an inline source citation, so a shopper - or an operator - can check it against the original page. [Alby](https://www.albyapp.com) answers inline on the product page itself, now part of Bluecore's stack.
+
+**Shopping on AI assistants and LLMs.** The newest shift, and the fastest-moving: shoppers increasingly ask ChatGPT, Perplexity, or Gemini for product recommendations, and AI agents are beginning to browse and buy on a shopper's behalf - "agentic commerce." This moves part of the conversation off the merchant's own site. That raises the stakes on two things: being citable when those assistants answer product questions, and having a genuinely good assistant for the shoppers who still land on your site.
+
+Most brands mix two or three of these categories rather than betting on one. If you're comparing specific tools, [the best AI shopping assistants for ecommerce](https://nobi.ai/blog/best-ai-shopping-assistants-for-ecommerce) goes deeper on the on-site category.
+
+## What results can brands expect from conversational commerce?
+
+Done well, conversational commerce moves the metrics an ecommerce team already tracks: add-to-cart rate, conversion rate, average order value, and support cost. The size of the lift depends on the starting point, so the honest framing is a direction, not a guaranteed number.
+
+The clearest gains come from recovering lost intent. A shopper who would have hit a zero-result search and left instead gets a real answer and a product. Nobi reports roughly a 30% lift in conversion rate in its own A/B tests, and other vendors publish similar directional numbers for their setups. Treat any single figure as a hypothesis to test on your own traffic, not a promise.
+
+The conversion lift is the best-documented outcome, and it's worth measuring against a baseline. We cover how [better search raises ecommerce conversion rate](https://nobi.ai/blog/increase-ecommerce-conversion-rate-search), and where a typical store sits against [published site-search benchmarks](https://nobi.ai/blog/site-search-conversion-rate-benchmarks).
+
+There's an average-order-value angle that's easy to miss. An assistant that understands "a gift for a hiker under $100" can surface a bundle or a higher-tier option a flat filter would never assemble. That is discovery, not just search, and it tends to lift order value, not only conversion.
+
+Support cost is the other side. When an assistant answers repeat questions, like shipping windows, return rules, and sizing, before they become tickets, the support team handles fewer of them. That shows up as deflected tickets and faster first responses.
+
+There is also a revenue-per-visit effect that is easy to miss. A shopper who gets a confident, correct answer is more likely to add to cart on that visit. A shopper who gets a dead end or a wrong answer may leave for good. Because the downside is a lost customer, the value of getting it right is larger than the ticket savings alone.
+
+The catch is measurement. Attribute carefully: run a real A/B test, compare against a holdout, and watch add-to-cart and revenue per visit rather than raw chat volume. A tool that reports how many messages it sent tells you nothing about whether it sold anything.
+
+## What are the risks of conversational commerce, and how do you avoid them?
+
+The biggest risk is a system that answers confidently and wrongly. A few failure modes come up again and again, and each has a known fix worth checking before you buy.
+
+The first is the confident lie. An assistant working from general training data will fill a gap with a plausible guess: a feature you don't offer, a wrong price, a return window that was never written. The fix is grounding. The system should retrieve your real catalog or policy page and answer only from it, and it should show the source so a shopper or an operator can check. This is what [RAG is built to do](https://nobi.ai/blog/rag-prevents-zero-results): retrieve the real page, then answer only from it. An assistant that can't cite where an answer came from is hard to trust.
+
+The second is stale information. An answer pulled from data that hasn't refreshed can promise stock you sold out of or a price you changed. The fix is a short refresh cycle, so the assistant sees your current catalog, not last week's.
+
+The third is over-automation. A system with no way to reach a human traps a shopper in a loop when it can't answer. The fix is an escalation trigger that hands off to a person at the right moment instead of guessing. A good tool also reports its escalation rate, so you can see how often it's punting instead of answering.
+
+The fourth is careless data handling. Conversations can include personal details, so a responsible setup collects only what it needs and stores it properly. Vague privacy terms are a warning sign. None of these are reasons to avoid conversational commerce. They are the checklist for picking a version that works.
+
+## How do you choose a conversational commerce platform?
+
+The right tool depends on the job you're solving and the channel where your shoppers are. A handful of questions separate a tool that will help from one that adds noise.
+
+Start with grounding. Does the tool answer from your real catalog and policies, or from general training? Can it cite the source of each answer? For anything a shopper acts on, like price, stock, or returns, a grounded and cited answer is the difference between help and liability.
+
+Then match the channel to your shoppers. If most questions arrive on your product pages, an on-site assistant and search bar matter most. If your audience lives in text, an SMS or messaging tool fits better. Many brands need both, so check what a tool covers before you assume it does.
+
+Look at escalation and integration. The tool should hand a shopper to a person when it can't help, and it should connect to the systems you already run, like your catalog, your helpdesk, and your Shopify data, without a long custom build.
+
+Watch the pricing model. Some tools charge for every conversation they resolve, or for each support seat, and that can climb as volume grows; we compare real [AI search pricing per month](https://nobi.ai/blog/ai-search-pricing-ecommerce-cost-per-month) across tools. A flat base is easier to predict. Nobi, for example, sits in the on-site category with grounded, cited answers, a semantic search bar, and a flat base plan. It is one honest fit when the job is answering pre-purchase questions on your own site, though a brand whose main need is SMS or staffed live chat should weigh a tool built for that. Match the tool to the job, not to the longest feature list.
+
+One decision sits underneath all of this: build or buy. A few large teams build their own assistant, but most find the grounding, the refresh pipeline, and the escalation logic are more work than they look. It's worth reading [build vs. buy for AI site search](https://nobi.ai/blog/build-vs-buy-ai-site-search) before you commit either way.
+
+## Frequently asked questions about conversational commerce
+
+**Is conversational commerce the same as a scripted messaging bot?** No. A scripted messaging bot is one implementation. Live chat with a staffed inbox, SMS and messaging threads, voice assistants, and AI shopping assistants all count as conversational commerce too, and most brands run more than one at once.
+
+**Does conversational commerce require AI?** No. Staffed live chat and SMS programs have run for well over a decade without any AI layer. AI is an accelerant that makes the conversation understand more of what a shopper means. It's not a requirement for the category to exist.
+
+**How is it different from a search bar?** A search bar returns ranked results for a typed query. Conversational commerce answers an open-ended question or holds a back-and-forth exchange, closer to how a shopper would ask a salesperson.
+
+**Is voice commerce part of conversational commerce?** Yes. A voice assistant that lets a shopper ask a question or place an order by speaking is a channel within the category, though adoption on ecommerce sites specifically still trails chat and messaging.
+
+**What's the biggest risk brands should watch for?** An ungrounded system: one that fabricates a feature, a price, or a policy, or claims stock that doesn't exist, instead of checking real, current content before it answers.
+
+**How do I get started with conversational commerce?** Start with the channel where questions already pile up, usually your own product pages, and pick a tool that answers from your real catalog with cited sources. Our guide to [adding a shopping assistant to an ecommerce site](https://nobi.ai/blog/adding-ai-chatbot-to-ecommerce-site) walks through the steps.
+
+
+<BlogEmailCapture hook="Comparing Tidio or Rep AI for conversational commerce?" subtext="Drop your email and we'll show you how Nobi answers shopper questions conversationally on your site so fewer visitors bounce without buying." />
+
+---
+
+Want to see it in action? Nobi grounds every shopper answer in your own catalog and content, with citations shoppers can verify. Start a free trial.
+
+<div className="my-8 flex justify-center">
+ <a
+ href="https://dashboard.nobi.ai"
+ className="inline-flex items-center justify-center gap-2 rounded-2xl font-medium transition active:scale-[.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-black/10 dark:focus-visible:ring-white/20 bg-black text-white dark:bg-white dark:text-black hover:opacity-90 shadow-sm h-12 px-6 text-base no-underline"
+ >
+ <span>Start your free Nobi trial</span>
+ </a>
+</div>

@@ -1,0 +1,227 @@
+export const meta = {
+ title: "What Is Artificial Intelligence Search?",
+ slug: "what-is-artificial-intelligence-search",
+ date: "2026-07-11",
+ publishedAt: "2026-07-11",
+ description: "AI search explained: semantic matching, embeddings, and natural-language queries, across web, ecommerce, docs, and support use cases.",
+ excerpt: "AI search explained: semantic matching, embeddings, and natural-language queries, across web, ecommerce, docs, and support use cases.",
+ tags: ["site search", "ecommerce", "ecommerce search"],
+ author: "Shanif Dhanani",
+ heroImage: "https://storage.googleapis.com/nobi-public/docs_and_marketing_websites/posts/what-is-artificial-intelligence-search/hero.webp",
+ featured: true,
+ draft: false,
+ faqItems: [
+ {
+ question: "Where did AI search come from?",
+ answer: "AI search grew out of keyword-matching engines like TF-IDF and BM25, which failed when a shopper's word didn't literally match the catalog's word. Word embeddings around 2013 let related words like \"couch\" and \"sofa\" sit close together without a hand-built synonym list, and transformer models from 2017 pushed this further by embedding the meaning of a whole query. Retrieval-augmented generation (RAG) arrived around 2020 to 2022, letting systems retrieve relevant content and then compose an answer from it, turning search from a ranking problem into an answering problem."
+ },
+ {
+ question: "Why does AI search matter for a business's revenue?",
+ answer: "AI search matters because vocabulary mismatches cause null results, and most shoppers who hit a dead end simply leave instead of rephrasing. That shows up first as lower add-to-cart and conversion rates, and later as quietly lower revenue per visit with no obvious cause. UNTUCKit's two-month A/B test showed the real cost of this: switching from keyword-only to semantic AI search lifted revenue per searcher 21.3%, from $32.30 to $39.17, and lifted conversion rate 17.1%, numbers strong enough that UNTUCKit rolled the new search out to all its traffic."
+ },
+ {
+ question: "How does AI search actually work?",
+ answer: "AI search works in two steps. First, every product and document is converted into an embedding (a list of numbers representing its meaning) and stored in a vector index; when a shopper types a query, that query is embedded the same way and a nearest-neighbor search finds the closest matches, which is why \"do these run small?\" can match a sizing FAQ with zero shared words. For straightforward product searches, those ranked matches become the results page instantly with no extra step. For questions, retrieval-augmented generation (RAG) pulls the closest source passages and hands them to an LLM, which drafts a grounded answer and ideally cites the document it came from, while fuzzy matching and synonym groups keep catching typos and known aliases alongside all this."
+ },
+ {
+ question: "Where does AI search show up?",
+ answer: "AI search shows up in four places that all use the same embedding-and-retrieval core tuned to different content: general web search, ecommerce product discovery, docs and knowledge bases, and customer support. On the web, engines like Google and Perplexity blend semantic ranking with cited AI summaries; on a storefront, it matches shopper phrasing to the right product and answers pre-purchase questions a listing page doesn't cover. In docs and knowledge bases it handles the fact that the same concept gets described with different words by different authors, and in customer support it answers repetitive questions like order status or return policy straight from connected help content instead of routing everything to a human."
+ },
+ {
+ question: "What are the main types of AI search tools?",
+ answer: "AI search tools fall into a few broad categories: developer-first search infrastructure, AI-native ecommerce search platforms, behavioral personalization engines, full commerce-experience suites, enterprise cross-property search engines, and combined search-plus-assistant products. Algolia is developer-first, giving engineering teams full control over ranking but requiring a separate integration for pre-purchase questions. Klevu focuses on no-code semantic matching for Shopify catalogs, Constructor reranks results based on individual shopper behavior and prices on revenue share, Bloomreach bundles search into a broader customer data platform and CMS, Coveo runs enterprise-scale relevance across docs and support portals, and combined products like Nobi pair a semantic search bar with a grounded conversational assistant in one system."
+ },
+ {
+ question: "What results can businesses expect from switching to AI search?",
+ answer: "Businesses moving from keyword to AI search typically see measurable lifts in conversion rate, revenue per visitor, and average order value, based on live A/B tests rather than lab benchmarks. UNTUCKit's two-month test showed conversion rate rise 17.1% and revenue per searcher rise 21.3%, plus a 3.3% lift in average order value, meaning AI search didn't just rescue sessions that would have bounced but nudged shoppers to buy more. Kilte saw a 21.7% conversion lift and rolled semantic search across its search bar, filters, and product discovery, while [Lucchese](/customers/lucchese) paired search with cart and PDP assistants and attributes more than $1M in incremental revenue in year one, a 39x return."
+ },
+ {
+ question: "What are the risks of AI search, and how do you avoid them?",
+ answer: "The main risk is a confidently wrong answer, what Gorgias calls a \"confident lie\": a system stating a feature, price, or stock status that isn't true because it's answering from general training knowledge instead of a merchant's actual content. The fix is architectural, restricting the model to answer only from retrieved source passages, paired with a real-time or twice-daily catalog sync so it doesn't claim sold-out items are in stock. A well-built implementation also hands off to a human after one or two failed turns to avoid circular non-answers, and shows source citations (sometimes with a second-pass fact-check) so a shopper can verify the answer themselves, which matters since 71% of consumers abandon a brand entirely after one bad AI interaction."
+ },
+ {
+ question: "What use cases are safe to hand to AI search today?",
+ answer: "The safest use cases are ones with a clear right answer already sitting in existing content: sizing guidance, order-status lookups, pre-purchase product questions, and policy questions. Sizing and fit guidance is the clearest example, since fit issues cause up to 70% of apparel returns and the answer already exists in a size chart. Order-status lookups (WISMO) are mechanical data lookups rather than judgment calls, and pre-purchase questions on materials or compatibility work the same way when a spec sheet or FAQ already covers them. Exchange-over-refund conversations can even be locked to exact approved policy wording via a query override, so high-stakes questions get precise answers instead of an AI paraphrase."
+ },
+ {
+ question: "How do you choose an AI search approach for your business?",
+ answer: "The right approach depends on which job matters most: full engineering control, no-code merchandising, behavioral personalization, enterprise consolidation, or a combined search-and-assistant product. Pick developer-first infrastructure like Algolia if an engineer wants to own ranking in code and build an answer layer separately, Klevu if vocabulary mismatch on a Shopify catalog is the specific problem, or Constructor if reranking based on individual shopper history is the priority (it prices on revenue share, so cost scales with GMV). Pick an enterprise suite like Bloomreach or Coveo if the goal is consolidating search with a broader data platform and a multi-quarter rollout is acceptable, or pick a combined product like Nobi if the goal is covering fast product search and grounded shopper Q&A from one implementation, with Nobi charging a transparent per-unit rate starting at $25 a month."
+ },
+ {
+ question: "Frequently asked questions about AI search",
+ answer: "AI search is not the same as an AI site search: search covers the ranking and retrieval that decides which products or passages match a query, while a conversational assistant is just one way of presenting the answer on top of that layer, so you can have smarter search results with no chat interface at all. It doesn't replace keyword search entirely either, since most systems still run fuzzy matching and synonym groups as a fast first pass alongside semantic matching. Implementation time ranges from a Shopify app going live in days to an enterprise rollout taking months to quarters, and it doesn't require rebuilding a catalog or knowledge base since it indexes content you already have and keeps the index current automatically."
+ }
+ ],
+};
+
+<script type="application/ld+json" data-nobi-schema>
+{`{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "What Is Artificial Intelligence Search?",
+  "description": "AI search explained: semantic matching, embeddings, and natural-language queries, across web, ecommerce, docs, and support use cases.",
+  "datePublished": "2026-07-11",
+  "dateModified": "2026-07-11",
+  "author": {
+    "@type": "Person",
+    "name": "Shanif Dhanani",
+    "url": "https://www.linkedin.com/in/shanifdhanani/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Nobi",
+    "url": "https://nobi.ai"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://nobi.ai/blog/what-is-artificial-intelligence-search"
+  },
+  "about": [
+    {
+      "@type": "Thing",
+      "name": "site search"
+    },
+    {
+      "@type": "Thing",
+      "name": "ecommerce"
+    }
+  ]
+}`}
+</script>
+## What is artificial intelligence search?
+
+You type a search into a store, a docs site, or an AI assistant, and expect it to understand what you mean, not just match your exact words. That's the promise of artificial intelligence search: a system that grasps intent instead of scanning for literal keyword overlap. Traditional keyword search fails here constantly - search "warm jacket for cold commutes" against a catalog that only says "insulated parka," and you get nothing, even though the two describe the same product. Get that mismatch wrong at scale and a business loses sales it never even sees, since dead-end searches usually don't come with an error message telling you why.
+
+## What is artificial intelligence search?
+
+AI search grew out of decades of keyword-matching search engines that struggled with synonyms and phrasing. Early engines like TF-IDF and BM25 matched literal words: a shopper searching "sofa" got nothing if your catalog said "couch," unless someone had built a synonym list for that exact pair. That started to change around 2013, when word embeddings (Word2Vec, GloVe) gave engines a way to place words as points in mathematical space, so "couch" and "sofa" sat close together without a hand-built rule connecting them. Transformer models, introduced in 2017, pushed that further: instead of embedding single words, they could embed the meaning of a whole query, which is what let search finally handle natural, conversational phrasing instead of just isolated keywords.
+
+The last piece arrived around 2020 to 2022 with retrieval-augmented generation, or RAG. Instead of just ranking documents and handing back a list, RAG systems retrieve the most relevant content first, then use a language model to compose an answer grounded in what was retrieved. That's the difference between a results page and a system that can actually answer a question: search stopped being just a ranking problem and became an answering problem, with the underlying retrieval step still doing the work of finding real, current material to answer from.
+
+## Why does AI search matter for a business's revenue?
+
+Null results are the clearest sign of vocabulary mismatch: a shopper types "wide-leg cropped trouser," your catalog says "cropped wide pant," and search returns nothing usable. Most shoppers don't rephrase. They leave. That single moment shows up first as a failed session: lower add-to-cart and lower conversion rate on search-originated visits, since a shopper who can't find the product can't buy it.
+
+The bigger cost is the one that never shows up in a dashboard. Some share of shoppers who hit a bad search experience just don't come back, and that doesn't register as a bounce-rate spike or a support ticket. It shows up months later as lower revenue per visit, with no obvious cause to point to.
+
+[UNTUCKit](/customers/untuckit) tested this directly. Over a two-month A/B test, moving from keyword-only search to semantic AI search lifted both revenue per searcher and conversion rate by double digits.
+
+## How does AI search actually work?
+
+[AI search works in two steps](https://nobi.ai/blog/how-ai-site-search-works). First, every product, article, and document in your catalog gets converted into an embedding, a list of numbers that represents its meaning, and stored in a vector index that refreshes as content changes. When a shopper types a query, that query gets embedded the same way, in real time. A nearest-neighbor search then finds the stored embeddings closest to the query's embedding in that vector space. That's what lets "do these run small?" match a sizing FAQ even though the two share zero literal words: the system is comparing meaning, not spelling.
+
+For a straightforward product search, those ranked matches are the results page. No extra step, no waiting on a language model. That's why semantic search can still feel instant: the vector lookup runs at typeahead speed.
+
+Questions work differently. Ask "is this machine washable?" and the system needs to do more than rank matches. This is where retrieval-augmented generation, or RAG, comes in: the closest source passages get pulled from the index and handed to an LLM, which drafts an answer grounded in that retrieved text. In a well-built system, the answer also cites which document it came from, so a shopper (or a store admin checking the assistant's work) can see exactly where the answer originated. That's the piece that separates a real answer from a plausible-sounding guess: the model isn't inventing the response from general training data, it's synthesizing from your own connected content.
+
+Fuzzy matching and synonym groups still do real work alongside all this. They catch typos and known aliases fast, before or in parallel with the semantic pass, so a misspelled brand name or a known abbreviation doesn't have to rely on embeddings alone to resolve. Nobi's search routes queries this way automatically. Short product searches take the fast ranked-results path, and questions get a grounded, cited answer. That routing decision happens behind the scenes; it isn't something you configure.
+
+## Where does AI search show up?
+
+AI search shows up in four places, and each one uses the same embedding-and-retrieval core, just tuned to different content and a different reader intent. General web search, ecommerce product discovery, docs and knowledge bases, and customer support all run some version of the pipeline covered above, matching a searcher's meaning instead of their literal words.
+
+On the web, engines like Google and Perplexity now blend semantic ranking with [AI-generated summaries, often called AI Overviews](https://nobi.ai/blog/how-to-get-your-business-found-by-ai-agents), that cite the sources they pulled from. That's the same retrieval-then-compose pattern, applied to the open web instead of one site's content.
+
+On a storefront, AI search covers two related jobs: [matching a shopper's phrasing to the right SKU on a PLP or PDP, and answering pre-purchase questions](https://nobi.ai/blog/ai-shopping-assistant-ecommerce) the product page doesn't spell out. A shopper typing "does this run small" is asking a question a listing page rarely answers directly, and that's exactly the gap semantic matching and grounded answers close.
+
+In docs and knowledge bases, developers and internal teams search API references, help articles, and wikis where the same concept gets described with different words by different authors. Literal keyword search breaks down here fast, since there's no single "correct" term to match against.
+
+In customer support, AI search answers repetitive questions like order status or return policy straight from connected help-center content, instead of routing every question to a human agent.
+
+## What are the main types of AI search tools?
+
+A specific kind of tool closes that gap between what a searcher types and what the content actually says. AI search products fall into a few broad categories: developer-first search infrastructure, AI-native ecommerce search platforms, behavioral personalization engines, full commerce-experience suites, enterprise cross-property search engines, and combined search-plus-assistant products. Each one trades off control, setup time, and how much of the buyer journey it actually covers.
+
+[Algolia](https://www.algolia.com) sits at the developer-first end. It gives engineering teams an API and full control over ranking, with semantic matching (Algolia calls it NeuralSearch) available on its top Elevate tier. The trade-off is that pre-purchase questions still need a separate integration layered on top, since Algolia's core product is a results page, not an assistant.
+
+[Klevu](https://klevu.com) focuses on closing vocabulary mismatch for Shopify catalogs. A no-code merchandising layer sits on top of its AI matching, built to go live in days rather than months.
+
+[Constructor](https://constructor.io) takes a different angle: personalization. It reranks search results, category pages, and recommendations in real time based on what an individual shopper clicks and buys, and it prices on revenue share.
+
+[Bloomreach](https://www.bloomreach.com) bundles search into something bigger: a customer data platform and content management system in one contract. It's the pick for brands consolidating their whole stack, not just search.
+
+[Coveo](https://www.coveo.com) runs at enterprise scale, applying one relevance engine across docs, support portals, and internal knowledge for large B2B organizations, a scope most stores don't need.
+
+Then there are combined products like Nobi, which [pair a fast semantic search bar with a grounded conversational assistant in one tool](https://nobi.ai/blog/best-ai-search-ecommerce-2026). A brand gets product discovery and shopper Q&A without stitching two systems together.
+
+That combination points at where AI search is headed. It's moving from a standalone results page toward one skill inside a broader assistant. The same embeddings that power search results also let an assistant answer a question, and increasingly the two get built as one system rather than search plus a bolted-on assistant.
+
+## What results can businesses expect from switching to AI search?
+
+That shift from a standalone results page to a combined system shows up in real numbers, not just architecture diagrams. Businesses that move from keyword to AI search typically see [measurable lifts in conversion rate, revenue per visitor, and average order value](https://nobi.ai/blog/ai-changing-online-shopping), because fewer sessions dead-end on a null-results page. The A/B tests behind these numbers ran on live traffic, not a lab benchmark.
+
+[UNTUCKit](/customers/untuckit) ran a two-month split test and saw conversion rate rise 17.1%, from 15.0% to 17.6%, and revenue per searcher rise 21.3%, from $32.30 to $39.17. Average order value moved too: $222 versus $215, a 3.3% lift. That last number matters because it shows AI search didn't just rescue sessions that would have bounced. It also nudged shoppers who were already going to buy toward buying more. UNTUCKit trusted the result enough to drop the split and move all of its traffic to the new search.
+
+Some of that lift shows up before a shopper ever asks a question. UNTUCKit's typeahead, the instant dropdown that appears as someone types, raised conversion rate 0.5 percentage points on its own, isolated from any conversational Q&A.
+
+The pattern holds outside apparel. [Kilte](/customers/kilte), a DTC fashion brand, saw a 21.7% conversion rate lift against Shopify's default search, then rolled the same semantic layer out to three surfaces: the search bar, collection filters, and product discovery, instead of leaving it in the search box alone.
+
+Lucchese went further, pairing search with a cart assistant and a PDP assistant. The brand attributes more than $1M in incremental revenue in year one, a 39x return, with $3.46M in cumulative revenue tied to the tool. These are the kinds of numbers that turn "better search" from an opinion into a line item worth putting in front of a CFO.
+
+## What are the risks of AI search, and how do you avoid them?
+
+The main risk is a confidently wrong answer: a system that states a product feature, a price, or a policy that doesn't exist, or tells a shopper an item is in stock when it isn't. Gorgias calls this a "confident lie," and it happens when a system answers from an LLM's general training knowledge instead of the merchant's actual, current content. The fix is architectural: retrieval-augmented generation restricts the model to answering only from retrieved source passages, never from memory alone.
+
+Hallucinated inventory is the sharpest version of this problem. A bot that says "yes, we have that in stock" when the item sold out yesterday isn't malicious, it's just disconnected from a live catalog. A real-time or twice-daily sync closes that gap far better than a static index built once and left alone.
+
+A related failure is the circular conversation: a shopper asks a question, gets a non-answer, restates it, and gets the same non-answer back. That loop usually means the system has no escalation trigger. A well-built implementation hands off to a human or a fallback path after one or two failed turns instead of repeating itself.
+
+The stakes are higher than one lost sale. 71% of consumers abandon a brand entirely after a single bad AI interaction, so a bad answer risks the whole customer relationship, not just that day's cart.
+
+Source citations are one of the more direct mitigations. Showing which document an answer came from, with a link the shopper can click, turns an unverifiable claim into one they can check themselves. Some implementations add a second-pass fact-check on top: a separate model re-reads the draft answer against the cited source before it sends. That catches errors the first pass missed, useful headroom for higher-stakes categories, though the added latency and cost mean it's not always switched on for lower-stakes ecommerce Q&A.
+
+## What use cases are safe to hand to AI search today?
+
+Those mitigations point toward a simple filter: the [safest, highest-value use cases for AI search](https://nobi.ai/blog/ecommerce-guide-to-ai) right now are the ones with a clear right answer already sitting in existing content. Sizing guidance, order-status lookups, pre-purchase product questions, and policy questions all fit that description. They're high-volume, low-ambiguity, and tied directly to fewer returns or fewer tickets, not just a nicer chat experience.
+
+Sizing and fit guidance is the clearest case. Fit issues cause up to 70% of apparel returns, so answering "does this run small?" before checkout is a returns-reduction play, not a service nicety. The answer lives in a size chart or fit note that already exists; AI search just surfaces it at the moment a shopper is deciding.
+
+WISMO, or "where is my order," is usually the single highest-volume ticket category in ecommerce support. It's also one of the most mechanical questions to answer, since the answer is a data lookup against order status rather than a judgment call.
+
+Pre-purchase questions on materials, dimensions, and compatibility work the same way. A PDP rarely spells out everything a shopper wants to know, but a connected spec sheet or FAQ usually does. So does cart-abandonment recovery messaging and promo code validation: both are narrow enough that a grounded answer stays accurate.
+
+Exchange-over-refund steering deserves a specific mention. A merchant can lock the exact policy language for that conversation with a query override, so the shopper gets the merchant's approved wording instead of an AI paraphrase. That matters most on high-stakes prompts like return and warranty questions, where the difference between "approximately right" and "exactly right" carries real cost.
+
+## How do you choose an AI search approach for your business?
+
+That same tradeoff, exact control versus a system that mostly gets things right without you touching it, is what decides which AI search approach fits your business. The right choice depends on which job matters most: full engineering control over ranking, no-code merchandising for a Shopify catalog, deep behavioral personalization, cross-property enterprise consolidation, or a combined search-and-assistant product for teams that don't want to stitch two systems together.
+
+Pick developer-first infrastructure like Algolia when a dedicated search engineer wants to [own ranking logic in code and has the time to build an answer layer separately](https://nobi.ai/blog/build-vs-buy-ai-site-search).
+
+Pick an AI-native ecommerce platform like Klevu when vocabulary mismatch is the specific problem on a Shopify catalog and a no-code merchandising dashboard fits how your team already works.
+
+Pick a behavioral personalization engine like Constructor when reranking results based on individual shopper history is the headline requirement and you have a data team to maintain it. Constructor prices on revenue share, so costs scale with GMV rather than usage.
+
+Pick an enterprise suite like Bloomreach or Coveo when the real goal is consolidating search with a broader customer data platform, content management system, or cross-property knowledge base, and a multi-quarter rollout is acceptable.
+
+Pick a combined product like Nobi when the goal is covering fast product search and grounded shopper Q&A from one implementation. Nobi charges $25 a month base, including 2,500 searches and 250 messages, then $0.01 per additional search and $0.10 per additional message, a transparent per-unit rate instead of a revenue-share cut or an enterprise contract. Brands that need deep behavioral reranking or merchandising beyond the search results page will find that outside Nobi's current scope.
+
+## Frequently asked questions about AI search
+
+**Is AI search the same as an AI site search?**
+No. AI search covers ranking and retrieval, the part that decides which products or passages match a query. A conversational assistant is one way of presenting the answer on top of that retrieval layer, but you can have [AI-powered search results with no chat interface at all, just a smarter results page](https://nobi.ai/blog/ai-vs-traditional-site-search).
+
+**Does AI search replace keyword search entirely?**
+Not entirely. Most systems still run fuzzy matching and synonym groups as a fast first pass, since that catches typos and known aliases without the extra step of embedding a query. Semantic matching runs alongside it, handling the cases keyword matching misses: different words, same meaning.
+
+**How long does AI search take to implement?**
+It ranges widely. A Shopify app install can go live in days. An enterprise platform rollout, the kind that ties into a broader customer data platform or spans multiple properties, typically runs months to quarters.
+
+**Does AI search require rebuilding a product catalog or knowledge base?**
+No. It indexes the content you already have, product pages, FAQs, help docs, and re-embeds that content as it changes. There's no manual re-entry: you connect the source, and the index stays current on its own.
+
+
+<BlogEmailCapture hook="Wondering how AI search actually works for your store?" subtext="Drop your email and we'll show you how Nobi's AI search understands shopper intent instead of just matching keywords." />
+
+---
+
+Want to see how this works on your own catalog and content? Try Nobi's grounded AI search and shopping assistant with a free trial.
+
+<div className="my-8 flex justify-center">
+ <a
+ href="https://dashboard.nobi.ai"
+ className="inline-flex items-center justify-center gap-2 rounded-2xl font-medium transition active:scale-[.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-black/10 dark:focus-visible:ring-white/20 bg-black text-white dark:bg-white dark:text-black hover:opacity-90 shadow-sm h-12 px-6 text-base no-underline"
+ >
+ <span>Start your free Nobi trial</span>
+ </a>
+</div>

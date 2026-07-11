@@ -3,9 +3,9 @@ export const meta = {
  slug: "what-is-ai-customer-service",
  date: "2026-07-11",
  publishedAt: "2026-07-11",
- description: "AI customer service explained: deflection bots, agent copilots, self-serve retrieval, and ticket triage - how each works, where it fits, and how to choose.",
- excerpt: "AI customer service explained: deflection bots, agent copilots, self-serve retrieval, and ticket triage - how each works, where it fits, and how to choose.",
- tags: ["support deflection", "generic", " search"],
+ description: "AI customer service explained: deflection bots, agent copilots, self-serve retrieval, and ticket routing - how each works, where it fits, and how to choose.",
+ excerpt: "AI customer service explained: deflection bots, agent copilots, self-serve retrieval, and ticket routing - how each works, where it fits, and how to choose.",
+ tags: ["customer service", "generic", " search"],
  author: "Shanif Dhanani",
  heroImage: "https://storage.googleapis.com/nobi-public/docs_and_marketing_websites/posts/what-is-ai-customer-service/hero.webp",
  featured: true,
@@ -55,7 +55,7 @@ export const meta = {
   "@context": "https://schema.org",
   "@type": "Article",
   "headline": "What Is AI Customer Service?",
-  "description": "AI customer service explained: deflection bots, agent copilots, self-serve retrieval, and ticket triage - how each works, where it fits, and how to choose.",
+  "description": "AI customer service explained: deflection bots, agent copilots, self-serve retrieval, and ticket routing - how each works, where it fits, and how to choose.",
   "datePublished": "2026-07-11",
   "dateModified": "2026-07-11",
   "author": {
@@ -75,7 +75,7 @@ export const meta = {
   "about": [
     {
       "@type": "Thing",
-      "name": "support deflection"
+      "name": "customer service"
     },
     {
       "@type": "Thing",
@@ -118,7 +118,7 @@ The same layer that answers a question can also capture a lead when a visitor is
 
 Most AI customer service tools follow the same basic pattern. They pull relevant content from a connected knowledge base, then have a language model write an answer grounded in that content. That's different from letting the model answer from whatever it learned during training alone. Where that pattern runs changes what the tool actually does. On a website, it answers a customer directly. Inside a helpdesk, it drafts a reply for a human agent to send. In the background, it can just sort an incoming message into the right queue.
 
-That first version, retrieving from a connected knowledge base, is what powers most website assistants. Nobi and eesel AI both work this way: help center articles, PDFs, and policy docs get connected as sources, and each answer is generated at the moment a customer asks, pulled from that content rather than a fixed script. Tools that support human agents use the same retrieval step but surface the result differently. [AI assistants that plug into an existing helpdesk](https://nobi.ai/blog/the-top-ai-assistants-that-plug-into-existing-help-desks) like Intercom's Fin and Forethought both read from connected sources and generate an answer, then either show it to a human agent as a suggestion inside the helpdesk, or send it automatically when the match is confident enough.
+That first version, retrieving from a connected knowledge base, is what powers most website assistants. Nobi and eesel AI both work this way: help center articles, PDFs, and policy docs get connected as sources, and each answer is generated at the moment a customer asks, pulled from that content rather than a fixed script. Tools that support human agents use the same retrieval step but surface the result differently. [AI assistants that plug into an existing helpdesk](https://nobi.ai/blog/the-top-ai-assistants-that-plug-into-existing-help-desks) like Intercom's Fin and Forethought both read from connected sources and generate an answer. From there they either show it to a human agent as a suggestion inside the helpdesk, or send it automatically when the match is confident enough.
 
 Sorting incoming messages is a different job entirely. Instead of generating an answer, a model reads the incoming message, classifies what it's about, and routes it, to a queue, a macro, or a person, without ever attempting a reply.
 
@@ -132,11 +132,11 @@ That website-versus-helpdesk split from the last section is about channels. AI c
 
 Some platforms span several channels from one setup. Ada runs across the website, an app, email, and messaging apps under a single account, so a customer can move from web chat to email and still get handled by the same system. Others are built for one channel only. An AI assistant made for web chat, like Intercom's Fin inside the Intercom Messenger, won't send or receive email on its own. A team whose main support channel is email needs a separate tool for that.
 
-Channel coverage should be one of the first questions in evaluating any AI customer service tool, not something you check after you've already picked a favorite - a tool that's excellent on one channel isn't automatically the right pick if most of your question volume is landing somewhere else.
+Channel coverage should be one of the first questions in evaluating any AI customer service tool, not something you check after you've already picked a favorite. A tool that's excellent on one channel isn't automatically the right pick if most of your question volume is landing somewhere else.
 
 ## What are the main types of AI customer service?
 
-Channel coverage is only one axis. The tools split into a few distinct categories, based on where they sit and what they do once a question arrives. [Standalone assistants](https://nobi.ai/blog/best-ai-chatbot-for-customer-support) answer questions directly from a business's own connected content, without needing a ticketing system underneath. Nobi builds its knowledge base from a site's existing product pages, FAQs, and policy docs. It refreshes that content twice a day. Every answer comes with inline citations a customer can check. eesel AI takes a related but different approach: it layers an AI agent on top of the helpdesk a team already runs, Zendesk, Intercom, Freshdesk, or Gorgias, and uses that connected knowledge to resolve tickets and chats automatically.
+Channel coverage is only one axis. The tools split into a few distinct categories, based on where they sit and what they do once a question arrives. [Standalone assistants](https://nobi.ai/blog/best-ai-chatbot-for-customer-support) answer questions directly from a business's own connected content, without needing a ticketing system underneath. Nobi builds its knowledge base from a site's existing product pages, FAQs, and policy docs. It refreshes that content twice a day. Every answer comes with inline citations a customer can check. eesel AI takes a related but different approach. It layers an AI agent on top of the helpdesk a team already runs, Zendesk, Intercom, Freshdesk, or Gorgias, and uses that connected knowledge to resolve tickets and chats automatically.
 
 A second category lives inside an existing helpdesk and speeds up human agents rather than replacing the ticket workflow. Intercom's Fin AI Agent runs inside Intercom's own messenger and helpdesk. Forethought integrates across more than 70 helpdesks, including Zendesk, Salesforce, Intercom, and Gorgias, to auto-resolve requests, route the rest, and help agents write replies, all without a team switching platforms.
 
@@ -150,7 +150,7 @@ Across all four, the direction is the same. AI doesn't just answer a question an
 
 Measuring whether it worked comes down to two numbers. Deflection rate is the share of questions answered without a human touching them. Cost per resolution varies by pricing model more than most teams expect. Deflection rate is the headline metric, but it's incomplete on its own. A tool that answers most questions but gets a lot of them wrong erodes trust faster than one that answers fewer questions but gets them right every time. Answer quality has to sit next to the deflection number, not behind it.
 
-Cost per resolution swings hard depending on how a vendor prices. Intercom's Fin AI Agent charges $0.99 per resolved conversation on top of a seat-based subscription. eesel AI prices by task instead: a resolved ticket or chat runs about $0.40, so 1,000 tickets a month lands around $400. Nobi's model works differently again. A flat $25/month base covers 2,500 searches and 250 conversational messages, then $0.01 per additional search and $0.10 per additional message beyond that. At the same volume, these three pricing models produce very different bills, and you can't compare them without knowing which category the tool actually competes in.
+Cost per resolution swings hard depending on how a vendor prices. Intercom's Fin AI Agent charges $0.99 per resolved conversation on top of a seat-based subscription. eesel AI prices by task instead. A resolved ticket or chat runs about $0.40, so 1,000 tickets a month lands around $400. Nobi's model works differently again. A flat $25/month base covers 2,500 searches and 250 conversational messages, then $0.01 per additional search and $0.10 per additional message beyond that. At the same volume, these three pricing models produce very different bills, and you can't compare them without knowing which category the tool actually competes in.
 
 Response time is the number a marketing team should watch closest, even though support teams don't always report on it. An email ticket queue can take hours or days to answer a question. On-site chat answers it in seconds, and that gap is what's most directly tied to whether a visitor sticks around or leaves.
 
@@ -193,7 +193,7 @@ Nobi fits the standalone, website-first case well. It answers customer questions
 **Does it work across every channel?** No single tool covers every channel equally well. Channel coverage is a real difference between vendors, not something every product handles the same way.
 
 
-<BlogEmailCapture hook="Never heard of AI customer service? Here's what it is." subtext="Drop your email and we'll show you how Nobi answers customer questions on your site with cited sources instead of a scripted chatbot." />
+<BlogEmailCapture hook="Never heard of AI customer service? Here's what it is." subtext="Drop your email and we'll show you how Nobi answers customer questions on your site with cited sources instead of a scripted bot." />
 
 ---
 

@@ -92,7 +92,7 @@ export const meta = {
 
 You type a search into a store, a docs site, or an AI assistant, and expect it to understand what you mean, not just match your exact words. That's the promise of artificial intelligence search: a system that grasps intent instead of scanning for literal keyword overlap. Traditional keyword search fails here constantly - search "warm jacket for cold commutes" against a catalog that only says "insulated parka," and you get nothing, even though the two describe the same product. Get that mismatch wrong at scale and a business loses sales it never even sees, since dead-end searches usually don't come with an error message telling you why.
 
-## What is artificial intelligence search?
+## Where did AI search come from?
 
 AI search grew out of decades of keyword-matching search engines that struggled with synonyms and phrasing. Early engines like TF-IDF and BM25 matched literal words: a shopper searching "sofa" got nothing if your catalog said "couch," unless someone had built a synonym list for that exact pair. That started to change around 2013, when word embeddings (Word2Vec, GloVe) gave engines a way to place words as points in mathematical space, so "couch" and "sofa" sat close together without a hand-built rule connecting them. Transformer models, introduced in 2017, pushed that further: instead of embedding single words, they could embed the meaning of a whole query, which is what let search finally handle natural, conversational phrasing instead of just isolated keywords.
 
@@ -174,7 +174,7 @@ Source citations are one of the more direct mitigations. Showing which document 
 
 Those mitigations point toward a simple filter: the [safest, highest-value use cases for AI search](https://nobi.ai/blog/ecommerce-guide-to-ai) right now are the ones with a clear right answer already sitting in existing content. Sizing guidance, order-status lookups, pre-purchase product questions, and policy questions all fit that description. They're high-volume, low-ambiguity, and tied directly to fewer returns or fewer tickets, not just a nicer chat experience.
 
-Sizing and fit guidance is the clearest case. Fit issues cause a large share of apparel returns, so answering "does this run small?" before checkout is a returns-reduction play, not a service nicety. The answer lives in a size chart or fit note that already exists; AI search just surfaces it at the moment a shopper is deciding.
+Sizing and fit guidance is the clearest case. Fit issues cause a large share of apparel returns, so answering "does this run small?" before checkout is a returns-reduction play, not a service nicety. The answer lives in a size chart or fit note that already exists; AI search just shows it at the moment a shopper is deciding.
 
 WISMO, or "where is my order," is usually the single highest-volume ticket category in ecommerce support. It's also one of the most mechanical questions to answer, since the answer is a data lookup against order status rather than a judgment call.
 

@@ -29,7 +29,7 @@ export const meta = {
  },
  {
  question: "Where does search merchandising happen?",
- answer: "Search merchandising happens anywhere a shopper looks for a product: the search bar, category and collection pages, product recommendation modules, and increasingly conversational assistants that answer product questions directly. The search bar is the most direct surface, where pins, boosts, and synonym rules act on the exact term typed. Category and collection pages work more like visual curation, such as a hero banner or a featured SKU pinned to the first row, while product pages merchandise through modules like \"customers also bought\" even without a query. Because each surface often has its own dashboard, a store can end up with different tools making different \"what shows first\" decisions that don't agree with each other."
+ answer: "Search merchandising happens anywhere a shopper looks for a product: the search bar, category and collection pages, product recommendation modules, and increasingly conversational assistants that answer product questions directly. The search bar is the most direct of these, where pins, boosts, and synonym rules act on the exact term typed. Category and collection pages work more like visual curation, such as a hero banner or a featured SKU pinned to the first row, while product pages merchandise through modules like \"customers also bought\" even without a query. Because each of these often has its own dashboard, a store can end up with different tools making different \"what shows first\" decisions that don't agree with each other."
  },
  {
  question: "What are the main types of search merchandising tools?",
@@ -41,7 +41,7 @@ export const meta = {
  },
  {
  question: "What are the risks of search merchandising, and how do you avoid them?",
- answer: "The biggest risks are stale rules that quietly stop making sense, over-automation that removes needed human control, and false confidence in AI-driven merchandising, like recommending an out-of-stock item or answering a policy question incorrectly. Rule rot happens when a pin or boost set for a past promo or discontinued SKU keeps firing, so rules need regular audits rather than a one-time setup. Hallucinated inventory, where an assistant confirms stock on a sold-out item, is fixed by grounding recommendations in a live, frequently refreshed catalog feed instead of static data. Confident lies about features, prices, or policies are closed by grounding answers in connected content with a checkable citation, and for high-stakes questions like return policies, adding a fact-check pass against the source before sending."
+ answer: "The biggest risks are stale rules that stop making sense, over-automation that removes needed human control, and false confidence in AI-driven merchandising, like recommending an out-of-stock item or answering a policy question incorrectly. Rule rot happens when a pin or boost set for a past promo or discontinued SKU keeps firing, so rules need regular audits rather than a one-time setup. Hallucinated inventory, where an assistant confirms stock on a sold-out item, is fixed by grounding recommendations in a live, frequently refreshed catalog feed instead of static data. Confident lies about features, prices, or policies are closed by grounding answers in connected content with a checkable citation, and for high-stakes questions like return policies, adding a fact-check pass against the source before sending."
  },
  {
  question: "How do you choose a search merchandising solution?",
@@ -96,9 +96,9 @@ Search merchandising is separate from SEO. SEO shapes how Google ranks your page
 
 ## Where did search merchandising come from?
 
-Search merchandising grew out of physical retail merchandising, the practice of deciding what goes at eye level, at the end of an aisle, or in a window display, translated to on-site search once ecommerce catalogs got too large to browse linearly. Early ecommerce search was pure keyword matching with no merchandising layer at all: a query returned results in whatever order the database happened to store them, with no way to say "show this SKU first."
+Search merchandising grew out of physical retail merchandising, the practice of deciding what goes at eye level, at the end of an aisle, or in a window display. That idea moved to on-site search once ecommerce catalogs got too large to browse linearly. Early ecommerce search was pure keyword matching with no merchandising layer at all: a query returned results in whatever order the database happened to store them, with no way to say "show this SKU first."
 
-That started changing in the mid-2000s. Merchandising dashboards emerged from platforms like [Searchspring](https://searchspring.com) and early Endeca, giving merchandisers a way to manually pin and boost specific SKUs for specific queries. For the first time, a merchant could decide "diamond earrings" should surface the new collection first without touching a database.
+That started changing in the mid-2000s. Merchandising dashboards emerged from platforms like [Searchspring](https://searchspring.com) and early Endeca, giving merchandisers a way to manually pin and boost specific SKUs for specific queries. For the first time, a merchant could decide "diamond earrings" should show the new collection first without touching a database.
 
 Through the 2010s, catalogs and query variety both scaled, and the rule libraries scaled with them. A merchandiser who once wrote a handful of pins for top queries ended up maintaining hundreds, then thousands, of narrow rules covering every phrasing, misspelling, and seasonal exception. The maintenance cost of manual tuning became its own problem: someone had to keep the rules current every time the catalog changed.
 
@@ -124,19 +124,19 @@ The manual controls break down into a few core moves. Pinning locks one SKU to o
 
 [Searchspring](https://searchspring.com) built its product around this manual layer: a merchandiser sets pins, boosts, and redirects by hand. [Klevu](https://klevu.com) leans further into automated relevance, using AI to rerank results by semantic similarity and, on more advanced setups, individual shopper behavior like clicks and past purchases. That cuts down how much a merchandiser has to configure directly.
 
-Most real deployments blend both. Automated relevance handles the default ranking, and manual overrides get reserved for genuine exceptions: a seasonal push, a legal or compliance-sensitive answer, a SKU that needs to disappear today. Nobi, an [AI-powered search and shopping assistant](https://nobi.ai/blog/ai-shopping-assistant-ecommerce) for ecommerce sites, applies the same principle to Q&A with query overrides: a merchant can lock an exact, approved answer to a specific question, like a return policy or warranty query, so it never varies no matter how the model would otherwise phrase it.
+Most real deployments blend both. Automated relevance handles the default ranking, and manual overrides get reserved for genuine exceptions: a seasonal push, a legal or compliance-sensitive answer, a SKU that needs to disappear today. Nobi, an [AI-powered search and shopping assistant](https://nobi.ai/blog/ai-shopping-assistant-ecommerce) for ecommerce sites, applies the same principle to Q&A with query overrides. A merchant can lock an exact, approved answer to a specific question, like a return policy or warranty query, so it never varies no matter how the model would otherwise phrase it.
 
 ## Where does search merchandising happen?
 
-Search merchandising happens anywhere a shopper looks for a product on your site: the search bar, category and collection pages (PLPs), product recommendation modules, and increasingly inside conversational assistants that answer product questions directly. Each surface has its own merchandising controls, and they don't always share one dashboard, which is part of what fragments the manual-tuning work described above.
+Search merchandising happens anywhere a shopper looks for a product on your site: the search bar, category and collection pages (PLPs), product recommendation modules, and increasingly inside conversational assistants that answer product questions directly. Each has its own merchandising controls, and they don't always share one dashboard, which is part of what fragments the manual-tuning work described above.
 
-The search bar is the most direct surface. It's where a query hits merchandising decisions first: pins, boosts, and synonym rules act on the exact term a shopper typed.
+The search bar is the most direct of these. It's where a query hits merchandising decisions first: pins, boosts, and synonym rules act on the exact term a shopper typed.
 
 Category and collection pages work differently. Merchandising here is closer to visual curation than query ranking: a hero banner at the top of a collection, a featured SKU pinned to the first row, a sort default that shows new arrivals before best sellers. [Fast Simon](https://fastsimon.com) built its business around this layer, pairing search with visual collection merchandising and upsell modules, plus advanced rules and A/B testing at its higher tiers.
 
-Product detail pages are a merchandising surface too, even without a query involved. A "customers also bought" module or a related-products block is still a decision about what to show first, made without a shopper typing anything.
+Product detail pages carry merchandising decisions too, even without a query involved. A "customers also bought" module or a related-products block is still a decision about what to show first, made without a shopper typing anything.
 
-Conversational surfaces are the newest addition. As [shoppers ask questions instead of typing keywords](https://nobi.ai/blog/ai-changing-online-shopping), merchandising extends to what a grounded assistant recommends or cites in its answer. Most legacy merchandising tools, built around a query-and-results model, weren't designed for this.
+Conversational assistants are the newest addition. As [shoppers ask questions instead of typing keywords](https://nobi.ai/blog/ai-changing-online-shopping), merchandising extends to what a grounded assistant recommends or cites in its answer. Most legacy merchandising tools, built around a query-and-results model, weren't designed for this.
 
 That split creates a real risk: a store running separate tools for search, PLP curation, and conversational answers can end up with three different "what shows first" decisions that don't agree with each other. A product boosted on the search bar might not be the one the PDP recommends or the assistant mentions. Nobi, an AI-powered search and shopping assistant for ecommerce sites, keeps search and conversational answers on one ranking logic, though it doesn't extend to category or collection page merchandising, which stays a separate job.
 
@@ -170,9 +170,9 @@ One caution on attribution: isolate the change. A merchandising fix that ships d
 
 ## What are the risks of search merchandising, and how do you avoid them?
 
-The biggest risks are stale rules that go wrong, over-automation that removes needed human control, and, specific to AI-driven merchandising and shopping assistants, false confidence: a system recommending an out-of-stock item or answering a policy question incorrectly. Each has a known fix.
+The biggest risks are stale rules that go wrong and over-automation that removes needed human control. AI-driven merchandising and shopping assistants add a third: false confidence, where a system recommends an out-of-stock item or answers a policy question incorrectly. Each has a known fix.
 
-Rule rot is the oldest risk on this list. A pin set for last month's promo, or a boost written for a SKU that's since been discontinued, keeps firing long after it stops making sense. Rules don't expire on their own. They need a regular audit, not just a setup pass when they're first written, or the rule library quietly drifts out of sync with the catalog it's supposed to serve.
+Rule rot is the oldest risk on this list. A pin set for last month's promo, or a boost written for a SKU that's since been discontinued, keeps firing long after it stops making sense. Rules don't expire on their own. They need a regular audit, not just a setup pass when they're first written, or the rule library drifts out of sync with the catalog it's supposed to serve.
 
 The newer risk is specific to AI: hallucinated inventory. A conversational assistant recommending or confirming stock on an item that's actually sold out does real damage, since it sends the shopper toward a purchase that can't happen. The fix is grounding, checking recommendations against a live, frequently refreshed catalog feed rather than static training data that goes stale the day it's built.
 
@@ -216,7 +216,7 @@ Boosting nudges a product's rank up without guaranteeing where it lands. Pinning
 Yes. As shoppers ask questions instead of typing keywords, what an assistant recommends or cites in its answer is a merchandising decision too, not something separate from it.
 
 
-<BlogEmailCapture hook="Still hand-tuning search rankings to fix zero-result rates?" subtext="Drop your email and we'll show you how Nobi's AI search surfaces the right products automatically, cutting zero-result searches without manual merchandising rules." />
+<BlogEmailCapture hook="Still hand-tuning search rankings to fix zero-result rates?" subtext="Drop your email and we'll show you how Nobi's AI search returns the right products automatically, cutting zero-result searches without manual merchandising rules." />
 
 ---
 

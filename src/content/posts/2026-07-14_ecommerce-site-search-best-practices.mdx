@@ -62,7 +62,7 @@ export const meta = {
   },
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https://nobi.ai/blog/ecommerce-site-search-best-practices"
+    "@id": "/blog/ecommerce-site-search-best-practices"
   },
   "about": [
     {
@@ -78,11 +78,11 @@ export const meta = {
 </script>
 ## What are the best practices for ecommerce site search?
 
-Most ecommerce sites have a search bar. Few have search that actually does its job. A shopper types "lightweight waterproof jacket for hiking" and lands on heavyweight rain gear - or nothing at all. You probably can't see all of it: dead-end results show up in your analytics, but the shoppers who left and didn't return don't. Three fixable patterns cause most of the leakage. The first: [too many zero-result pages](https://nobi.ai/blog/cost-of-bad-site-search). The second: a vocabulary gap between how shoppers describe products and how your catalog labels them. The third: a search bar that returns a product grid when a shopper asks a direct question. This guide covers how to diagnose each one, fix it, and measure whether the fix worked.
+Most ecommerce sites have a search bar. Few have search that actually does its job. A shopper types "lightweight waterproof jacket for hiking" and lands on heavyweight rain gear - or nothing at all. You probably can't see all of it: dead-end results show up in your analytics, but the shoppers who left and didn't return don't. Three fixable patterns cause most of the leakage. The first: [too many zero-result pages](/blog/cost-of-bad-site-search). The second: a vocabulary gap between how shoppers describe products and how your catalog labels them. The third: a search bar that returns a product grid when a shopper asks a direct question. This guide covers how to diagnose each one, fix it, and measure whether the fix worked.
 
 ## Why does site search have such a disproportionate impact on ecommerce CVR?
 
-Shoppers who use site search are already in buying mode. They have a specific product in mind and are trying to find it, which is why search users consistently [convert at two to three times the rate](https://nobi.ai/blog/site-search-conversion-rate-benchmarks) of visitors who only browse category pages.
+Shoppers who use site search are already in buying mode. They have a specific product in mind and are trying to find it, which is why search users consistently [convert at two to three times the rate](/blog/site-search-conversion-rate-benchmarks) of visitors who only browse category pages.
 
 The damage from bad search is mostly invisible. You can see a [dead-end search result](/blog/fix-zero-result-searches) in your analytics. You cannot see every shopper who left and didn't return.
 
@@ -96,7 +96,7 @@ The first is a high [zero-result rate](/blog/fix-zero-result-searches). Most sto
 
 The second is vocabulary mismatch that produces poor relevance rather than null results. A shopper searching for "breathable workout top for hot weather" is describing the product clearly. Your catalog lists it as "performance athletic tee." A keyword engine has no way to close that gap unless someone has manually built and maintained a synonym group for every variation. The right products exist - they just land on page three, where no one buys them.
 
-The third is [question-shaped queries](https://nobi.ai/blog/search-queries-that-break-ecommerce). Shoppers type "does this come in wide width," "is this machine-washable," or "what's your return policy" and get a product grid back. They wanted a direct answer with a source. Getting a grid for a policy question reads as a broken experience, and most shoppers don't try again.
+The third is [question-shaped queries](/blog/search-queries-that-break-ecommerce). Shoppers type "does this come in wide width," "is this machine-washable," or "what's your return policy" and get a product grid back. They wanted a direct answer with a source. Getting a grid for a policy question reads as a broken experience, and most shoppers don't try again.
 
 One more pattern worth knowing: relevance failures often hide in PDP bounce rate. The shopper clicked a result, landed on the wrong product, and bounced. Analytics logs that exit against the PDP, not against search - so the leak is invisible until you dig into search-click reports specifically.
 
@@ -108,13 +108,13 @@ Start by pulling the null-result query list from your search provider or analyti
 
 Synonym groups handle the most obvious vocabulary mismatches: map "sneakers" to "trainers," "couch" to "sofa." They're effective for known patterns but require ongoing maintenance as shopper language evolves. Fuzzy matching catches typos and near-character errors; most search apps include it as a toggle. Check that yours is active before adding more complex fixes on top.
 
-For queries that still return nothing, [zero-result redirects](https://nobi.ai/blog/reduce-zero-results) keep shoppers moving instead of dropping them on an empty screen. [Searchspring](https://www.searchspring.net)'s rule-based dashboard makes this configurable without engineering: route a dead-end query to a curated landing page or best-match category, and the shopper stays in the funnel.
+For queries that still return nothing, [zero-result redirects](/blog/reduce-zero-results) keep shoppers moving instead of dropping them on an empty screen. [Searchspring](https://www.searchspring.net)'s rule-based dashboard makes this configurable without engineering: route a dead-end query to a curated landing page or best-match category, and the shopper stays in the funnel.
 
 Synonym groups, fuzzy matching, and redirects all work - but they're maintenance-driven. Someone has to update them every time your catalog grows or shopper language shifts. Semantic matching breaks that cycle. Nobi pairs AI-powered site search with automated shopper Q&A. It matches the meaning of a query to your product descriptions, so "lightweight jacket for hiking" surfaces "ultralight trail shell" without a synonym entry. [Kilte](/customers/kilte) saw a +21.7% CVR lift making that switch from Shopify's default keyword search. [Klevu](https://www.klevu.com) takes a similar AI-matching approach with a no-code merchandising dashboard on top; it's a strong fit when you want AI relevance plus pinning controls in the same tool.
 
 ## What is semantic search and does my ecommerce store need it?
 
-Synonym groups and redirects reduce zero-result rates for vocabulary gaps you can predict. [Semantic search](https://nobi.ai/blog/semantic-search-vs-keyword-search) handles the ones you can't. It matches queries to products based on meaning rather than character overlap, so a shopper who types "warm base layer for skiing" finds "merino thermal mid-layer" even though none of those exact words appear in the product title. For stores where shoppers describe products in natural language - common in apparel, outdoor, beauty, home, and auto-parts categories - semantic matching directly reduces zero-result rates and lifts CVR without a maintained synonym list for every phrasing variation.
+Synonym groups and redirects reduce zero-result rates for vocabulary gaps you can predict. [Semantic search](/blog/what-is-artificial-intelligence-search) handles the ones you can't. It matches queries to products based on meaning rather than character overlap, so a shopper who types "warm base layer for skiing" finds "merino thermal mid-layer" even though none of those exact words appear in the product title. For stores where shoppers describe products in natural language - common in apparel, outdoor, beauty, home, and auto-parts categories - semantic matching directly reduces zero-result rates and lifts CVR without a maintained synonym list for every phrasing variation.
 
 Keyword engines match on character strings. "Blue running shoe" only finds results where those words appear in indexed fields; any alternate phrasing needs a manually entered synonym. Semantic engines encode queries and product descriptions as vector representations and match by closeness of meaning, so descriptive, long-tail queries resolve correctly without synonym entries.
 
@@ -126,11 +126,11 @@ If most shoppers search with short exact-match queries and your catalog titles m
 
 ## How should I set up faceted navigation to help shoppers narrow search results?
 
-Faceted filtering is how they narrow from there. A 200-result "jackets" search only converts when a shopper can reduce it to "waterproof, under $150, women's, size M" without hitting a dead end along the way. Done well, the right facets shorten that path and lift add-to-cart rates. Done poorly - wrong attributes surfaced, filter combinations that produce zero results, or the same facet set across every category - they create friction that looks identical to bad search in your analytics.
+[Faceted filtering](/blog/what-is-faceted-search) is how they narrow from there. A 200-result "jackets" search only converts when a shopper can reduce it to "waterproof, under $150, women's, size M" without hitting a dead end along the way. Done well, the right facets shorten that path and lift add-to-cart rates. Done poorly - wrong attributes surfaced, filter combinations that produce zero results, or the same facet set across every category - they create friction that looks identical to bad search in your analytics.
 
 **Show category-relevant facets, not a universal list.** "Fit" and "inseam" belong on bottoms, not electronics. "Compatibility" and "wattage" belong on electronics, not home decor. A one-size facet set buries the attributes that actually drive purchase decisions in each category and surfaces options that confuse shoppers browsing the wrong pages.
 
-**Order facets by [how shoppers actually decide](https://nobi.ai/blog/what-shoppers-want-site-search).** In apparel, size and color come before material and weight. In electronics, capacity and compatibility come before color. Facet order shapes how shoppers scan the page and how quickly they reach a decision.
+**Order facets by [how shoppers actually decide](/blog/what-shoppers-want-site-search).** In apparel, size and color come before material and weight. In electronics, capacity and compatibility come before color. Facet order shapes how shoppers scan the page and how quickly they reach a decision.
 
 **Prevent zero-result filter combinations.** Display result counts next to each filter value. Grey out or hide values that would produce null results when combined with currently active filters. An empty page ends the session - there is no recovery from it.
 
@@ -144,7 +144,7 @@ Most search dashboards surface query volume and click-through rate. The metrics 
 
 **Zero-result rate** is the share of all searches that return nothing. A low single-digit rate is a solid target; a persistently high one is a priority fix. Pull it from your search provider dashboard, or instrument it as a custom GA4 event on your null-results page.
 
-**[Search CVR](https://nobi.ai/blog/site-search-conversion-rate-benchmarks)** is the conversion rate for sessions that include at least one search event. Compare it against non-search session CVR to size the gap - that gap is the revenue at stake if search improves.
+**[Search CVR](/blog/site-search-conversion-rate-benchmarks)** is the conversion rate for sessions that include at least one search event. Compare it against non-search session CVR to size the gap - that gap is the revenue at stake if search improves.
 
 **Revenue per searcher** (total revenue from search sessions divided by unique searchers) captures both CVR and AOV in one number. [UNTUCKit](/customers/untuckit) saw a +3.3% AOV lift ($222 vs. $215) after switching to Nobi.
 
@@ -156,7 +156,7 @@ Build a standing review into your weekly marketing or merch meeting. UNTUCKit re
 
 ## Which site search tool fits my team's setup and goals?
 
-Once those metrics are in your weekly review, pick the [right tool](https://nobi.ai/blog/the-best-ecommerce-search-solutions-to-improve-conversion-rates) based on which problem is costing you the most. The five main ones: vocabulary mismatch, a high zero-result rate, pre-purchase questions returning a product grid, granular merchandising control, or site-wide behavioral personalization.
+Once those metrics are in your weekly review, pick the [right tool](/blog/the-best-ecommerce-search-solutions-to-improve-conversion-rates) based on which problem is costing you the most. The five main ones: vocabulary mismatch, a high zero-result rate, pre-purchase questions returning a product grid, granular merchandising control, or site-wide behavioral personalization.
 
 - **Nobi** - semantic typeahead and cited, grounded answers for shopper questions from your connected catalog and content. The knowledge base refreshes twice a day; no manual relevance tuning required. $25/month base (2,500 searches and 250 messages included); $0.01 per additional search, $0.10 per additional message. Pick it when vocabulary mismatch and pre-purchase Q&A are both leaking CVR. Skip it when you need full API ranking control or site-wide merchandising beyond the search results page.
 

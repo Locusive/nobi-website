@@ -13,15 +13,15 @@ export const meta = {
  faqItems: [
  {
  question: "Why does site search have such a disproportionate impact on ecommerce CVR?",
- answer: "Shoppers who use site search already have a specific product in mind, which is why they convert at two to three times the rate of visitors who only browse category pages. When search fails, the damage is mostly invisible - you can see a dead-end result in analytics, but not the shoppers who left and never returned. 71% of consumers abandon a brand after a single negative search interaction, so failures are costly in ways that standard CVR metrics undercount. Revenue per searcher is the more complete KPI: UNTUCKit measured a +21.3% lift ($39.17 vs. $32.30) when search worked as it should."
+ answer: "Shoppers who use site search already have a specific product in mind, which is why they convert at two to three times the rate of visitors who only browse category pages. When search fails, the damage is mostly invisible - you can see a dead-end result in analytics, but not the shoppers who left and never returned. Research consistently shows most shoppers don't return after a bad search interaction, so failures are costly in ways that standard CVR metrics undercount. Revenue per searcher is the more complete KPI: UNTUCKit measured a +21.3% lift ($39.17 vs. $32.30) when search worked as it should."
  },
  {
  question: "What are the most common reasons shoppers abandon site search?",
- answer: "Three patterns cause most site search abandonment. First, a high zero-result rate: most stores running default keyword search return null results on 10-30% of queries because the engine can't bridge the gap between how shoppers describe products and how the catalog titles them. Second, vocabulary mismatch that produces poor relevance rather than no results - a shopper searching 'breathable workout top for hot weather' gets back 'performance athletic tee' on page three, where no one buys. Third, question-shaped queries: shoppers asking about sizing, care instructions, or return policies get a product grid instead of a direct answer, which reads as a broken experience and most don't try again."
+ answer: "Three patterns cause most site search abandonment. First, a high zero-result rate: most stores running default keyword search return null results on a significant share of queries because the engine can't bridge the gap between how shoppers describe products and how the catalog titles them. Second, vocabulary mismatch that produces poor relevance rather than no results - a shopper searching 'breathable workout top for hot weather' gets back 'performance athletic tee' on page three, where no one buys. Third, question-shaped queries: shoppers asking about sizing, care instructions, or return policies get a product grid instead of a direct answer, which reads as a broken experience and most don't try again."
  },
  {
  question: "How do I reduce my store's zero-result rate?",
- answer: "Start by pulling your null-result query list and sorting by volume - the top 20 queries typically account for 60-80% of zero-result sessions. Synonym groups handle predictable vocabulary mismatches, and fuzzy matching catches typos; check that fuzzy matching is active before adding more complex fixes. For queries that still return nothing, zero-result redirects route shoppers to a relevant landing page or category instead of dropping them on an empty screen. Semantic matching breaks the ongoing maintenance cycle entirely: Nobi matched query meaning to product descriptions without synonym entries, and Kilte saw a +21.7% CVR lift switching away from Shopify's default keyword search."
+ answer: "Start by pulling your null-result query list and sorting by volume - in practice, a small set of high-volume queries tends to generate most of the zero-result sessions, so fixing those first gets the most impact per hour of work. Synonym groups handle predictable vocabulary mismatches, and fuzzy matching catches typos; check that fuzzy matching is active before adding more complex fixes. For queries that still return nothing, zero-result redirects route shoppers to a relevant landing page or category instead of dropping them on an empty screen. Semantic matching breaks the ongoing maintenance cycle entirely: Nobi matched query meaning to product descriptions without synonym entries, and Kilte saw a +21.7% CVR lift switching away from Shopify's default keyword search."
  },
  {
  question: "What is semantic search and does my ecommerce store need it?",
@@ -33,7 +33,7 @@ export const meta = {
  },
  {
  question: "Which site search metrics should I track to find where I'm losing sales?",
- answer: "The four metrics that map most directly to revenue are zero-result rate, search CVR, revenue per searcher, and high-impression zero-conversion queries. Zero-result rate should be under 5%; above 15% is a priority fix. Search CVR compared against non-search session CVR sizes the revenue gap that better search could close. Revenue per searcher - total revenue from search sessions divided by unique searchers - captures both conversion rate and order value in one number, and UNTUCKit measured a +21.3% lift alongside a +3.3% AOV gain after switching to Nobi. High-impression, zero-conversion queries are the most actionable: the demand already exists, and the fix targets relevance failures directly."
+ answer: "The four metrics that map most directly to revenue are zero-result rate, search CVR, revenue per searcher, and high-impression zero-conversion queries. Zero-result rate should be under 5%; above 15% is a priority fix. Search CVR compared against non-search session CVR sizes the revenue gap that better search could close. Revenue per searcher (total revenue from search sessions divided by unique searchers) captures both conversion rate and order value in one number, and UNTUCKit measured a +21.3% lift alongside a +3.3% AOV gain after switching to Nobi. High-impression, zero-conversion queries are the most actionable: the demand already exists, and the fix targets relevance failures directly."
  },
  {
  question: "Which site search tool fits my team's setup and goals?",
@@ -78,7 +78,7 @@ export const meta = {
 </script>
 ## What are the best practices for ecommerce site search?
 
-Most ecommerce sites have a search bar. Few have search that actually does its job. A shopper types "lightweight waterproof jacket for hiking" and lands on heavyweight rain gear - or nothing at all. You probably can't see all of it: dead-end results show up in your analytics, but the shoppers who left and didn't return don't. Three fixable patterns cause most of the leakage: [too many zero-result pages](https://nobi.ai/blog/cost-of-bad-site-search), a vocabulary gap between how shoppers describe products and how your catalog labels them, and search bars that return a product grid when someone asked a direct question. This guide covers how to diagnose each one, fix it, and measure whether the fix worked.
+Most ecommerce sites have a search bar. Few have search that actually does its job. A shopper types "lightweight waterproof jacket for hiking" and lands on heavyweight rain gear - or nothing at all. You probably can't see all of it: dead-end results show up in your analytics, but the shoppers who left and didn't return don't. Three fixable patterns cause most of the leakage. The first: [too many zero-result pages](https://nobi.ai/blog/cost-of-bad-site-search). The second: a vocabulary gap between how shoppers describe products and how your catalog labels them. The third: a search bar that returns a product grid when a shopper asks a direct question. This guide covers how to diagnose each one, fix it, and measure whether the fix worked.
 
 ## Why does site search have such a disproportionate impact on ecommerce CVR?
 
@@ -92,7 +92,7 @@ CVR alone understates the full picture. Revenue per searcher is the more complet
 
 Three patterns account for most of the cases where it doesn't.
 
-The first is a high [zero-result rate](/blog/fix-zero-result-searches). Most stores run 10-30% null results on default keyword search. The catalog has the product; the search engine can't bridge the gap between what the shopper typed and what the catalog title says. When semantic matching is active, that rate should fall below 5%.
+The first is a high [zero-result rate](/blog/fix-zero-result-searches). Most stores running default keyword search return null results on a meaningful share of queries. The catalog has the product; the search engine can't bridge the gap between what the shopper typed and what the catalog title says. Semantic matching dramatically reduces that rate.
 
 The second is vocabulary mismatch that produces poor relevance rather than null results. A shopper searching for "breathable workout top for hot weather" is describing the product clearly. Your catalog lists it as "performance athletic tee." A keyword engine has no way to close that gap unless someone has manually built and maintained a synonym group for every variation. The right products exist - they just land on page three, where no one buys them.
 
@@ -110,7 +110,7 @@ Synonym groups handle the most obvious vocabulary mismatches: map "sneakers" to 
 
 For queries that still return nothing, [zero-result redirects](https://nobi.ai/blog/reduce-zero-results) keep shoppers moving instead of dropping them on an empty screen. [Searchspring](https://www.searchspring.net)'s rule-based dashboard makes this configurable without engineering: route a dead-end query to a curated landing page or best-match category, and the shopper stays in the funnel.
 
-Synonym groups, fuzzy matching, and redirects all work - but they're maintenance-driven. Someone has to update them every time your catalog grows or shopper language shifts. Semantic matching breaks that cycle. Nobi - a conversational website assistant that pairs AI-powered site search with automated shopper Q&A - matches the meaning of a query to the meaning of your product descriptions, so "lightweight jacket for hiking" surfaces "ultralight trail shell" without a synonym entry. [Kilte](/customers/kilte) saw a +21.7% CVR lift making that switch from Shopify's default keyword search. [Klevu](https://www.klevu.com) takes a similar AI-matching approach with a no-code merchandising dashboard on top; it's a strong fit when you want AI relevance plus pinning controls in the same tool.
+Synonym groups, fuzzy matching, and redirects all work - but they're maintenance-driven. Someone has to update them every time your catalog grows or shopper language shifts. Semantic matching breaks that cycle. Nobi pairs AI-powered site search with automated shopper Q&A. It matches the meaning of a query to your product descriptions, so "lightweight jacket for hiking" surfaces "ultralight trail shell" without a synonym entry. [Kilte](/customers/kilte) saw a +21.7% CVR lift making that switch from Shopify's default keyword search. [Klevu](https://www.klevu.com) takes a similar AI-matching approach with a no-code merchandising dashboard on top; it's a strong fit when you want AI relevance plus pinning controls in the same tool.
 
 ## What is semantic search and does my ecommerce store need it?
 
@@ -140,13 +140,13 @@ Finally, look for dynamic facets when evaluating search tools - facets generated
 
 ## Which site search metrics should I track to find where I'm losing sales?
 
-Most search dashboards surface query volume and click-through rate, but the metrics that actually map to revenue are zero-result rate, search CVR, revenue per searcher, and the queries that drive search volume but zero add-to-cart events.
+Most search dashboards surface query volume and click-through rate, but the metrics that actually map to revenue are zero-result rate, search CVR, revenue per searcher, and queries that appear often in search but never lead to an add-to-cart.
 
 **Zero-result rate** is the share of all searches that return nothing. Under 5% is a solid target; above 15% is a priority fix. Pull it from your search provider dashboard, or instrument it as a custom GA4 event on your null-results page.
 
 **[Search CVR](https://nobi.ai/blog/site-search-conversion-rate-benchmarks)** is the conversion rate for sessions that include at least one search event. Compare it against non-search session CVR to size the gap - that gap is the revenue at stake if search improves.
 
-**Revenue per searcher** - total revenue from search sessions divided by unique searchers - captures both CVR and AOV in one number. [UNTUCKit](/customers/untuckit) saw a +3.3% AOV lift ($222 vs. $215) after switching to Nobi.
+**Revenue per searcher** (total revenue from search sessions divided by unique searchers) captures both CVR and AOV in one number. [UNTUCKit](/customers/untuckit) saw a +3.3% AOV lift ($222 vs. $215) after switching to Nobi.
 
 **High-impression, zero-conversion queries** are the most actionable item on the list. Shoppers are already searching, results are appearing, but nothing is going into the cart. That points directly at relevance failures in your current results - and the demand to fix them already exists.
 
@@ -156,7 +156,7 @@ Build a standing review into your weekly marketing or merch meeting. UNTUCKit re
 
 ## Which site search tool fits my team's setup and goals?
 
-Once those metrics are in your weekly review, the [right tool](https://nobi.ai/blog/the-best-ecommerce-search-solutions-to-improve-conversion-rates) depends on which problem is actually costing you the most: vocabulary mismatch, a high zero-result rate, shoppers whose pre-purchase questions return a product grid, rule-by-rule merchandising control, or site-wide behavioral personalization.
+Once those metrics are in your weekly review, pick the [right tool](https://nobi.ai/blog/the-best-ecommerce-search-solutions-to-improve-conversion-rates) based on which problem is costing you the most. The five main ones: vocabulary mismatch, a high zero-result rate, pre-purchase questions returning a product grid, granular merchandising control, or site-wide behavioral personalization.
 
 - **Nobi** - semantic typeahead and cited, grounded answers for shopper questions from your connected catalog and content. The knowledge base refreshes twice a day; no manual relevance tuning required. $25/month base (2,500 searches and 250 messages included); $0.01 per additional search, $0.10 per additional message. Pick it when vocabulary mismatch and pre-purchase Q&A are both leaking CVR. Skip it when you need full API ranking control or site-wide merchandising beyond the search results page.
 
@@ -182,6 +182,3 @@ Once those metrics are in your weekly review, the [right tool](https://nobi.ai/b
 
 <BlogEmailCapture hook="Closing the gap between searches and sales on your store?" subtext="Drop your email and we'll show you how Nobi's AI search surfaces the right products for the queries your store is currently missing." />
 
----
-
-If vocabulary mismatch and pre-purchase Q&A are both showing up in your zero-result and search CVR reports, [try Nobi free](https://dashboard.nobi.ai) and run it in an A/B test against your current tool. Nobi's semantic search and grounded Q&A target exactly these gaps - zero-result rates drop, revenue per searcher goes up, and setup starts at $25/month with no engineering sprint.

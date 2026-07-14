@@ -92,7 +92,7 @@ CVR alone understates the full picture. Revenue per searcher is the more complet
 
 Three patterns account for most of the cases where it doesn't.
 
-The first is a high [zero-result rate](/blog/fix-zero-result-searches). Most stores running default keyword search return null results on a meaningful share of queries. The catalog has the product; the search engine can't bridge the gap between what the shopper typed and what the catalog title says. Semantic matching dramatically reduces that rate.
+The first is a high [zero-result rate](/blog/fix-zero-result-searches). Most stores running default keyword search return nothing for many of the queries shoppers type. The catalog has the product; the search engine can't bridge the gap between what the shopper typed and what the catalog title says. Semantic matching dramatically reduces that rate.
 
 The second is vocabulary mismatch that produces poor relevance rather than null results. A shopper searching for "breathable workout top for hot weather" is describing the product clearly. Your catalog lists it as "performance athletic tee." A keyword engine has no way to close that gap unless someone has manually built and maintained a synonym group for every variation. The right products exist - they just land on page three, where no one buys them.
 
@@ -134,15 +134,15 @@ Faceted filtering is how they narrow from there. A 200-result "jackets" search o
 
 **Prevent zero-result filter combinations.** Display result counts next to each filter value. Grey out or hide values that would produce null results when combined with currently active filters. An empty page ends the session - there is no recovery from it.
 
-**Match price facets to your actual catalog distribution.** If 80% of your products fall between $25 and $150, a $0-$500 slider with no pre-set bands forces shoppers to drag rather than click. Build price ranges around where your inventory actually lives.
+**Match price facets to your actual catalog distribution.** If most of your products fall between $25 and $150, a $0-$500 slider with no pre-set bands forces shoppers to drag rather than click. Build price ranges around where your inventory actually lives.
 
 Finally, look for dynamic facets when evaluating search tools - facets generated from the active result set rather than a fixed configuration. They adjust as the catalog changes and remove the ongoing merchandiser work of keeping a static facet list current.
 
 ## Which site search metrics should I track to find where I'm losing sales?
 
-Most search dashboards surface query volume and click-through rate, but the metrics that actually map to revenue are zero-result rate, search CVR, revenue per searcher, and queries that appear often in search but never lead to an add-to-cart.
+Most search dashboards surface query volume and click-through rate. The metrics that actually map to revenue are different: zero-result rate, search CVR, revenue per searcher, and high-frequency queries that never lead to an add-to-cart.
 
-**Zero-result rate** is the share of all searches that return nothing. Under 5% is a solid target; above 15% is a priority fix. Pull it from your search provider dashboard, or instrument it as a custom GA4 event on your null-results page.
+**Zero-result rate** is the share of all searches that return nothing. A low single-digit rate is a solid target; a persistently high one is a priority fix. Pull it from your search provider dashboard, or instrument it as a custom GA4 event on your null-results page.
 
 **[Search CVR](https://nobi.ai/blog/site-search-conversion-rate-benchmarks)** is the conversion rate for sessions that include at least one search event. Compare it against non-search session CVR to size the gap - that gap is the revenue at stake if search improves.
 

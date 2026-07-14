@@ -17,11 +17,11 @@ export const meta = {
  },
  {
  question: "What specific capabilities does B2B site search need to handle?",
- answer: "Those signal problems go deeper than ranking. A B2B search layer needs to resolve part-number synonyms, handle special characters in SKUs, surface the right variant across a deep attribute hierarchy, and answer pre-purchase questions from connected spec sheets and policy docs - all without routing the buyer to a rep."
+ answer: "Those signal problems go deeper than ranking. A B2B search layer needs to resolve part-number synonyms, handle special characters in SKUs, and surface the right variant across a deep attribute hierarchy. It also needs to answer pre-purchase questions from connected spec sheets and policy docs — without routing the buyer to a rep."
  },
  {
  question: "What is Nobi, and how does it address B2B catalog search?",
- answer: "Nobi is a conversational website assistant that combines semantic product search, automated Q&A, and lead capture in one product. For B2B catalogs, that pairing covers both layers of the problem: search returns the right part, and when a buyer follows up with a question about lead time or minimum order quantity, the assistant answers from your connected spec sheets and policy docs rather than routing them to a sales rep."
+ answer: "Nobi is a conversational website assistant that combines semantic product search, automated Q&A, and lead capture in one product. For B2B catalogs, that pairing covers both layers. Search returns the right part. When a buyer follows up about lead time or minimum order quantity, the assistant answers from your connected spec sheets and policy docs — no sales rep required."
  },
  {
  question: "Which B2B search platforms are actually built for this?",
@@ -29,11 +29,7 @@ export const meta = {
  },
  {
  question: "How do you choose the right B2B search tool for your catalog and team?",
- answer: "The decision comes down to three variables: how much engineering capacity you have to own implementation and ongoing maintenance, whether your primary gap is faceted filtering or conversational Q&A, and whether search needs to work across multiple surfaces or just your site. Each tool above was built for a different answer to those questions."
- },
- {
- question: "Frequently asked questions about B2B search",
- answer: "B2B operators evaluating search tools ask similar questions about part-number matching, account-specific pricing, and implementation overhead. The tool you pick from the decision framework above shapes the answers - but these questions come up regardless of which direction you go."
+ answer: "The decision comes down to three variables: engineering capacity, catalog complexity, and surface breadth. Each tool above was built for a different answer to those questions."
  }
  ],
 };
@@ -74,7 +70,7 @@ export const meta = {
 </script>
 ## What does it actually take to get B2B search right?
 
-B2B procurement doesn't work like consumer shopping. When a buyer comes to your site, they usually already know what they want - a specific part number, a set of specs from their engineer, a SKU off a previous order. They're not browsing - they're procuring. Standard site search wasn't built for that job. It was designed to help people discover products, using popularity signals and keyword overlap to surface things they might like. A query like "M8 hex bolt 316 stainless 40mm DIN 933" either resolves to the right item or it doesn't - and when it doesn't, the buyer emails a sales rep or finds a distributor who can handle it.
+B2B procurement doesn't work like consumer shopping. When a buyer comes to your site, they usually already know what they want - a specific part number, a set of specs from their engineer, a SKU off a previous order. They're not browsing - they're procuring. Standard site search wasn't built for that job. It was designed to help people discover products, using popularity signals and keyword overlap to surface things they might like. A query like "M8 hex bolt 316 stainless 40mm DIN 933" either resolves to the right item or it doesn't. When it doesn't, the buyer emails a sales rep or finds a distributor who can handle it.
 
 ## What makes B2B search fundamentally different from B2C?
 
@@ -92,7 +88,7 @@ Finally, B2C ranking signals actively mislead here. A slow-moving specialty bolt
 
 ## What specific capabilities does B2B site search need to handle?
 
-Those signal problems go deeper than ranking. A B2B search layer needs to resolve part-number synonyms, handle special characters in SKUs, surface the right variant across a deep attribute hierarchy, and answer pre-purchase questions from connected spec sheets and policy docs - all without routing the buyer to a rep.
+Those signal problems go deeper than ranking. A B2B search layer needs to resolve part-number synonyms, handle special characters in SKUs, and surface the right variant across a deep attribute hierarchy. It also needs to answer pre-purchase questions from connected spec sheets and policy docs — without routing the buyer to a rep.
 
 Start with exact match. A buyer searching for "3/8-16" needs to find the same result as one typing "38-16" or "3816" or "38x16." These aren't typos - they're alternate delimiter conventions for the same part number. A search engine that treats them as different queries will miss the item every time.
 
@@ -108,9 +104,9 @@ Conversational Q&A handles the questions a results page can't. Lead times, bulk 
 
 ## What is Nobi, and how does it address B2B catalog search?
 
-[Nobi is a conversational website assistant](https://nobi.ai/blog/best-ai-answer-engines-for-ecommerce-search) that combines semantic product search, automated Q&A, and lead capture in one product. For B2B catalogs, that pairing covers both layers of the problem: search returns the right part, and when a buyer follows up with a question about lead time or minimum order quantity, the assistant answers from your connected spec sheets and policy docs rather than routing them to a sales rep.
+[Nobi is a conversational website assistant](https://nobi.ai/blog/best-ai-answer-engines-for-ecommerce-search) that combines semantic product search, automated Q&A, and lead capture in one product. For B2B catalogs, that pairing covers both layers. Search returns the right part. When a buyer follows up about lead time or minimum order quantity, the assistant answers from your connected spec sheets and policy docs — no sales rep required.
 
-On the search side, the matching is semantic - meaning over exact string. A query for "M10 flange nut grade 8.8 DIN 6923" returns the right result even when the catalog title uses different delimiter conventions or abbreviations. Format variation doesn't cause a miss.
+On the search side, the matching is semantic - meaning over exact string. A query for "M10 flange nut grade 8.8 DIN 6923" returns the right result even when the catalog title uses different delimiter conventions or abbreviations — the kind of format variation that trips up exact-match engines.
 
 The knowledge base builds from sources your team already has: product pages, spec sheets, PDFs, and policy docs. Connect a URL or upload a file and it becomes part of what the assistant can answer. No manual re-entry required. Every answer carries an inline citation showing exactly which document and excerpt it pulled from, so a buyer can verify a spec or policy claim without leaving the chat.
 
@@ -166,7 +162,7 @@ Both query types matter. Exact-match lookup dominates, but spec-based queries an
 
 **How long does implementation take?**
 
-Algolia and Hawk Search are engineering projects measured in weeks to months depending on catalog complexity. Nobi can index an existing catalog and start answering questions in hours from a product feed URL or uploaded spec sheets.
+Algolia and Hawk Search are engineering projects measured in weeks to months depending on catalog complexity. Nobi can index an existing catalog and start answering questions in hours from product page URLs or uploaded spec sheet PDFs.
 
 **What's the difference between B2B search and a product configurator?**
 

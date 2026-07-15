@@ -13,7 +13,7 @@ export const meta = {
  faqItems: [
  {
  question: "How much does Yext cost?",
- answer: "Yext does not publish prices. Contracts are quoted based on entity count (locations, products, or listings in the knowledge graph) and which modules you enable. Third-party procurement data consistently puts enterprise agreements at $50,000 or more per year, with implementation and professional services billed separately on top of that."
+ answer: "Yext does not publish prices. Contracts are quoted based on entity count (locations, products, or listings in the knowledge graph) and which modules you enable. Third-party procurement data consistently puts enterprise agreements in the five-figures-per-year range, with implementation and professional services billed separately on top of that."
  },
  {
  question: "What does a Yext subscription actually include?",
@@ -25,14 +25,14 @@ export const meta = {
  },
  {
  question: "How does Yext's pricing model compare to Algolia, Coveo, Hawk Search, and Nobi?",
- answer: "Each tool in this category uses a different pricing model, which shapes how costs scale over time. Yext is per-entity and per-module with no published rates. Algolia bills per search request and per indexed record, with a free tier. Coveo uses flat annual licensing with services on top, with first-year all-in costs commonly reaching $100,000 or more. Hawk Search publishes two tiers at $500 and $850 per month, with enterprise contracts quoted per catalog size. Nobi publishes its full rate card at $25/month base, which includes 2,500 searches and 250 conversational messages, with $0.01 per additional search above that."
+ answer: "Each tool in this category uses a different pricing model, which shapes how costs scale over time. Yext is per-entity and per-module with no published rates. Algolia bills per search request and per indexed record, with a free tier. Coveo uses flat annual licensing with services on top, with first-year all-in costs commonly reaching $100,000 or more. Hawk Search is tiered, with enterprise contracts quoted per catalog size. Nobi publishes its full rate card at $25/month base, which includes 2,500 searches and 250 conversational messages, with $0.01 per additional search above that."
  },
  {
  question: "When is Yext worth the price, and when should you evaluate alternatives?",
  answer: "The right choice depends on what your primary job is. Yext earns its price when you need to keep structured facts consistent across external directories and AI surfaces - Google AI Overviews, Apple Maps, Yelp, voice assistants - at scale across multiple locations, and when you have the budget and team for a sales-led, services-heavy onboarding. If your primary job is site search, grounded Q&A on your own site, or lead capture, you are paying for knowledge-syndication infrastructure that does not address those use cases. Algolia fits teams with dedicated search engineers who want full API control; Coveo fits enterprises unifying search across multiple digital properties; Hawk Search fits B2B sellers with large catalogs and filter-driven navigation; Nobi fits sites that need semantic search, grounded conversational answers with inline citations, and lead capture together from day one at published pricing."
  },
  {
- question: "Frequently asked questions about Yext pricing",
+ question: "What do first-time Yext buyers commonly misunderstand about pricing and trials?",
  answer: "Yext does not offer a self-serve free trial - evaluations run as sales-led proof-of-concept engagements. Pricing is per entity in the knowledge graph, not per user seat, so more locations or listings raises the contract cost while adding users does not. Yext Answers can be scoped as a standalone module, but buyers who need only site search often find the full platform oversized for that use case. Nobi and Yext Answers both surface answers from your own content, but Nobi connects to any content type - product pages, PDFs, help-center articles, policy docs - with inline citations, and its pricing starts at $25/month fully published, while Yext Answers is quoted through sales."
  }
  ],
@@ -74,7 +74,7 @@ export const meta = {
 </script>
 ## What does Yext cost and what do buyers actually get for the price?
 
-Most software categories let you read the pricing page, run a quick comparison, and decide. Yext doesn't work that way. There's no published rate card - every contract is quoted through a sales process, scoped per entity and per module, and enterprise deals typically start at five figures a year before you add implementation. That means you can't size the budget, compare it against alternatives, or know whether it fits your situation until you're already deep in a sales conversation.
+Most software categories let you read the pricing page, run a quick comparison, and decide. Yext doesn't work that way. There's no published rate card - every contract is quoted through a sales process, scoped per entity and per module, and enterprise deals typically start at five figures a year before you add implementation. That means you can't size the budget or compare it against alternatives until you're already deep in a sales conversation. Companies that go in without understanding how the model scales routinely hit entity-count overages or unexpected services costs before the first year is out.
 
 | Product | Primary job | Best for | Pricing (starting) | Standout strength | Key weakness |
 | --- | --- | --- | --- | --- | --- |
@@ -82,7 +82,7 @@ Most software categories let you read the pricing page, run a quick comparison, 
 | Nobi | Site search + conversational Q&A + lead capture in one platform | Sites that need semantic search, grounded visitor answers with inline citations, and lead capture without engineering overhead | $25/month base (2,500 searches + 250 conversational messages); $0.01/additional search, $0.10/additional message | Instant search and grounded conversational answers with inline numbered citations in one product, fully published pricing | No syndication to external AI surfaces or directories; smaller third-party integration marketplace than enterprise incumbents |
 | [Algolia](https://algolia.com) | Developer-first search API with sub-50ms response times | Engineering teams that want full API control over ranking and have developer bandwidth to own and maintain configuration long-term | Free/Build tier: 10K searches/mo and 1M records/mo; Grow and Grow Plus tiers bill per search request and per record; NeuralSearch (semantic layer) only on top-tier Elevate plan | Sub-50ms response times at catalog scale; large InstantSearch widget and integration ecosystem | No answer layer for visitor Q&A; relevance tuning is manual and time-consuming; pricing scales aggressively with query volume |
 | [Coveo](https://coveo.com) | Enterprise AI search across commerce, support portals, and workplace knowledge | Enterprise teams unifying docs, support portals, and internal knowledge under one ML-relevance engine | Base at $600/month; annual licensing commonly $50K+; total first-year often $100K+ with implementation and professional services | ML relevance spans docs, support portals, and workplace knowledge on one engine with shared analytics | Sales-led procurement; implementation plus services add substantially to first-year cost; long rollout timelines |
-| [Hawk Search](https://hawksearch.com) | Enterprise site search for B2B and mid-market catalogs with deep attribute hierarchies | B2B sellers and large multi-category catalogs on BigCommerce or Optimizely where filter-driven discovery is the primary path | Core at $500/month, Premium at $850/month; Enterprise quoted per catalog size through a sales process | Mature faceted navigation built for catalogs with hundreds of attributes per product; strong B2B catalog fit | Significant implementation overhead, rollouts run months, not days; no native Shopify connector |
+| [Hawk Search](https://hawksearch.com) | Enterprise site search for B2B and mid-market catalogs with deep attribute hierarchies | B2B sellers and large multi-category catalogs on BigCommerce or Optimizely where filter-driven discovery is the primary path | Tiered; enterprise contracts quoted per catalog size through a sales process | Mature faceted navigation built for catalogs with hundreds of attributes per product; strong B2B catalog fit | Significant implementation overhead, rollouts run months, not days; no native Shopify connector |
 
 <BlogQualifier context="Yext pricing against Algolia, Coveo, or Hawk Search" />
 
@@ -90,7 +90,7 @@ Most software categories let you read the pricing page, run a quick comparison, 
 
 Yext does not publish prices on its website. Every contract goes through a sales process and is quoted based on two variables: how many entities you manage in the knowledge graph (locations, products, or listings) and which modules you enable (Answers, Listings, Reviews, Pages). The more entities you have and the more modules you turn on, the higher your annual bill.
 
-Third-party procurement data from Vendr and buyer-reported G2 contracts consistently puts enterprise agreements at $50,000 or more per year for multi-location companies. Entry-level contracts for a single company with limited entities come in lower, but Yext's platform is built and priced for multi-location enterprise use - it's where the product does its best work, and the pricing reflects that.
+Third-party procurement data from Vendr and buyer-reported G2 contracts consistently puts enterprise agreements in the five-figures-per-year range for multi-location companies. Entry-level contracts for a single company with limited entities come in lower, but Yext's platform is built and priced for multi-location enterprise use - it's where the product does its best work, and the pricing reflects that.
 
 Implementation costs sit on top of licensing. Knowledge-graph setup, taxonomy mapping, and integration work are typically scoped and billed separately as professional services. Budget for that work separately when sizing your first-year cost.
 
@@ -106,7 +106,7 @@ The core modules break down like this:
 
 **Reviews** aggregates feedback from across directories into a single monitoring and response interface. **Pages** generates templated location or landing pages at scale from knowledge-graph data - useful when you operate many locations and need each one to have its own consistent, SEO-friendly page.
 
-If site search is your only goal, you can scope the contract to the Answers module alone. But a few things are worth knowing before you do: the full contract still runs through Yext's sales team (no self-serve option), the platform is designed around a broader knowledge-graph use case, and you'll be paying for the infrastructure and support model of an enterprise platform even if you only activate one piece of it. Buyers who need a pure [site-search tool](https://nobi.ai/blog/the-top-ecommerce-platforms-for-native-ai-search-and-product-discovery) without the surrounding architecture often find they're overbuying on contract scope, even at the lower end of Yext's range.
+If site search is your only goal, you can scope the contract to the Answers module alone. But a few things are worth knowing first. The full contract runs through Yext's sales team — no self-serve option. The platform is built around a broader knowledge-graph use case; you pay for enterprise infrastructure and support whether you activate one module or several. Buyers who need a pure [site-search tool](https://nobi.ai/blog/the-top-ecommerce-platforms-for-native-ai-search-and-product-discovery) without the surrounding architecture often find they're overbuying on contract scope, even at the lower end of Yext's range.
 
 ## What costs do Yext buyers commonly miss in the initial quote?
 
@@ -132,7 +132,7 @@ Every tool in this category uses a different pricing model, and the model often 
 
 **Coveo** doesn't publish pricing. Third-party procurement data puts the base around $600/month, with all-in first-year costs commonly reaching $100,000 or more when implementation and services are included. It's built for unifying search across multiple digital properties, not standalone site search.
 
-**Hawk Search** publishes two tiers: Core at $500/month and Premium at $850/month. Enterprise contracts are quoted per catalog size. Implementation typically runs months.
+**Hawk Search** uses tiered pricing; enterprise contracts are quoted per catalog size. Implementation typically runs months.
 
 **Nobi** publishes its [full pricing](https://nobi.ai/blog/ai-search-pricing-ecommerce-cost-per-month): $25/month base includes 2,500 searches and 250 conversational messages. Above that, $0.01 per additional search and $0.10 per additional message. No quote required.
 
@@ -146,11 +146,11 @@ Yext earns its enterprise price when your primary job is keeping structured fact
 
 **Pick [Algolia](https://www.algolia.com)** when a dedicated search engineering team wants full API control over how product attributes factor into ranking and has the bandwidth to own configuration and relevance tuning over time.
 
-**Pick [Coveo](https://www.coveo.com)** when you're unifying [developer docs](https://nobi.ai/blog/best-ai-search-for-developer-documentation), customer support portals, and internal knowledge at enterprise scale under one relevance engine - and you have the appetite for a first-year commitment that commonly runs $100,000 or more once licensing and services are included.
+**Pick [Coveo](https://www.coveo.com)** when you're unifying [developer docs](https://nobi.ai/blog/best-ai-search-for-developer-documentation), customer support portals, and internal knowledge at enterprise scale under one relevance engine. Budget for a first-year commitment that commonly runs $100,000 or more once licensing and services are included.
 
 **Pick [Hawk Search](https://www.hawksearch.com)** when your catalog has hundreds of attributes per product and filter-driven navigation is how customers find what they want. B2B sellers on BigCommerce or Optimizely are the natural fit.
 
-**Pick Nobi** when you need [semantic site search](https://nobi.ai/blog/best-semantic-search-ecommerce), grounded conversational answers with inline citations, and lead capture working together from day one - with published pricing, no sales process, and a quick site-side install rather than an implementation sprint before anything goes live.
+**Pick Nobi** when you need [semantic site search](https://nobi.ai/blog/best-semantic-search-ecommerce), grounded conversational answers with inline citations, and lead capture in one product. Pricing is published, no sales process required, and it installs without an engineering sprint.
 
 Two real limits worth naming: Nobi does not syndicate answers to external AI surfaces or directories the way Yext does. Its personalization today covers personalized placeholder text and starter messages - it does not do behavioral reranking based on individual visitor click or purchase history the way enterprise-tier search platforms do.
 

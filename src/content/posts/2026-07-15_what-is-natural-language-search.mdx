@@ -5,7 +5,7 @@ export const meta = {
  publishedAt: "2026-07-15",
  description: "Natural language search lets visitors query your site the way they talk. Learn how query parsing, semantic matching, and zero-result recovery work under the hood.",
  excerpt: "Natural language search lets visitors query your site the way they talk. Learn how query parsing, semantic matching, and zero-result recovery work under the hood.",
- tags: ["site search", "generic", " search"],
+ tags: ["site search", "generic", "natural language search"],
  author: "Shanif Dhanani",
  heroImage: "https://storage.googleapis.com/nobi-public/docs_and_marketing_websites/posts/what-is-natural-language-search/hero.webp",
  featured: true,
@@ -41,7 +41,7 @@ export const meta = {
  },
  {
  question: "How do you choose the right natural language search solution for your site?",
- answer: "Two questions narrow the field fast: what is the dominant query pattern on your site, and how much engineering bandwidth do you have. Before shortlisting, pull your search analytics and measure zero-result rate, click-through rate, and the split between exact-match and descriptive queries. A site where 80% of queries are SKU lookups has a different problem than one where many queries are question-shaped. Pricing model matters more than most buyers realize, because usage-based billing that scales with query volume can make a low-base-price tool expensive at mid-traffic volumes."
+ answer: "Two questions narrow the field fast: what is the dominant query pattern on your site, and how much engineering bandwidth do you have. Before shortlisting, pull your search analytics and measure zero-result rate, click-through rate, and the split between exact-match and descriptive queries. A site where most queries are SKU lookups has a different problem than one where many queries are question-shaped. Pricing model matters more than most buyers realize, because usage-based billing that scales with query volume can make a low-base-price tool expensive at mid-traffic volumes."
  },
  {
  question: "Frequently asked questions about natural language search",
@@ -70,7 +70,7 @@ export const meta = {
   },
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https://nobi.ai/blog/what-is-natural-language-search"
+    "@id": "/blog/what-is-natural-language-search"
   },
   "about": [
     {
@@ -86,7 +86,7 @@ export const meta = {
 </script>
 ## What is natural language search?
 
-Most site search bars were built for visitors who already know what they're looking for. Type the exact product name (maybe a model number) and results come back. Your visitors often don't work that way. They arrive knowing what they need, not what you call it, so they type ["waterproof hiking boots under $150 for wide feet"](https://nobi.ai/blog/handling-long-tail-queries) or ask "is this jacket machine washable?" A keyword engine returns nothing, or the wrong thing. They rephrase once, maybe twice, then leave. If they arrived from a paid ad, that click cost you real money. Natural language search is the technology that closes that gap.
+Most site search bars were built for visitors who already know what they're looking for. Type the exact product name (maybe a model number) and results come back. Your visitors often don't work that way. They arrive knowing what they need, not what you call it, so they type ["waterproof hiking boots under $150 for wide feet"](/blog/handling-long-tail-queries) or ask "is this jacket machine washable?" A keyword engine returns nothing, or the wrong thing. They rephrase once, maybe twice, then leave. If they arrived from a paid ad, that click cost you real money. Natural language search is the technology that closes that gap.
 
 ## Where did natural language search come from?
 
@@ -96,19 +96,19 @@ The 2010s brought query expansion and synonym dictionaries that closed some of t
 
 The real shift came in 2018, when BERT-class transformer models showed that word meaning depends on context. "Bank" near "river" and "bank" near "loan" finally meant different things to the model, not because of co-occurrence statistics, but because the model understood the surrounding words.
 
-By 2020-2022, vector search infrastructure like FAISS, Pinecone, and Weaviate made [semantic retrieval](https://nobi.ai/blog/how-ai-site-search-works) fast enough for sub-200ms responses at catalog scale.
+By 2020-2022, vector search infrastructure like FAISS, Pinecone, and Weaviate made [semantic retrieval](/blog/how-ai-site-search-works) fast enough for sub-200ms responses at catalog scale.
 
 The 2023-2025 wave layered LLM-grounded answers on top of that retrieval. Instead of a ranked list of results pages, a search bar could now answer a question directly and cite the source.
 
 ## Why does natural language search matter for sites?
 
-Research consistently shows that visitors who use [site search](https://nobi.ai/blog/what-shoppers-want-site-search) convert at a much higher rate than those who browse, but only when search surfaces results that match what they actually meant. The gap between those two outcomes shows up in zero-result rate: keyword-only search produces a high rate of [zero-result searches](/blog/fix-zero-result-searches) on typical catalogs, and most of those visitors leave rather than rephrase. Semantic systems produce far fewer.
+Research consistently shows that visitors who use [site search](/blog/what-shoppers-want-site-search) convert at a much higher rate than those who browse, but only when search surfaces results that match what they actually meant. The gap between those two outcomes shows up in zero-result rate: keyword-only search produces a high rate of [zero-result searches](/blog/fix-zero-result-searches) on typical catalogs, and most of those visitors leave rather than rephrase. Semantic systems produce far fewer.
 
 The queries that fail keyword matching tend to be the ones from buyers closest to purchasing. "Comfortable for standing eight hours" is a higher-intent ask than "shoes," but it fails on most keyword engines.
 
 Voice search and mobile typing patterns make this worse. A customer speaking into a phone asks "what's a good gift for a cyclist under $75?" rather than typing "cycling gifts."
 
-The cost on paid media is direct. Paid clicks are not cheap, and if [site search fails](https://nobi.ai/blog/site-search-losing-sales) the visitor after they land, that spend is gone.
+The cost on paid media is direct. Paid clicks are not cheap, and if [site search fails](/blog/site-search-losing-sales) the visitor after they land, that spend is gone.
 
 Question-shaped queries are growing too. Users increasingly treat a search bar like an assistant, not a database lookup. "Is this jacket machine washable?" is a search query now, and a ranked results page can't answer it regardless of how accurate the ranking is.
 
@@ -118,7 +118,7 @@ The gap between "is this jacket machine washable?" and a useful answer involves 
 
 **Stage 1 - Query understanding.** NLP parses the raw query before retrieval starts: it detects intent (navigational, informational, or transactional), extracts named entities (company names, product types, model numbers), and resolves constraints like price range, size, color, and material. "Waterproof trail runners under $150 in men's size 11" parses to category, attribute, price ceiling, gender, and size before a single result is fetched.
 
-**Stage 2 - Retrieval.** The parsed query runs against the index using keyword matching (BM25), [dense vector (semantic) search](https://nobi.ai/blog/what-is-artificial-intelligence-search), or a hybrid of both. Keyword matching is precise on navigational queries (exact product names or product codes) but weak on descriptive ones. Semantic search handles descriptive queries well. Hybrid retrieval combines both using Reciprocal Rank Fusion and generally outperforms either approach alone on real catalogs.
+**Stage 2 - Retrieval.** The parsed query runs against the index using keyword matching (BM25), [dense vector (semantic) search](/blog/what-is-artificial-intelligence-search), or a hybrid of both. Keyword matching is precise on navigational queries (exact product names or product codes) but weak on descriptive ones. Semantic search handles descriptive queries well. Hybrid retrieval combines both using Reciprocal Rank Fusion and generally outperforms either approach alone on real catalogs.
 
 Zero-result recovery sits between Stage 1 and Stage 2. If retrieval comes back empty, the system runs through a fallback sequence: spelling correction, relaxing the strictest constraint, synonym expansion, then a full semantic pass with constraints removed. [Eliminating zero-result pages](/blog/fix-zero-result-searches) is a baseline expectation on a well-built system, not an advanced feature.
 
@@ -128,7 +128,7 @@ Conversational search adds a fourth layer on top. The top results and any matche
 
 ## What is the difference between keyword search and semantic search?
 
-Keyword search matches the words in a query against the words in a document. [Semantic search](https://nobi.ai/blog/semantic-search-vs-keyword-search) converts both into numeric vectors that represent meaning, then matches in that space.
+Keyword search matches the words in a query against the words in a document. [Semantic search](/blog/semantic-search-vs-keyword-search) converts both into numeric vectors that represent meaning, then matches in that space.
 
 Keyword search scores documents using BM25: count how often query terms appear, weight by how rare those terms are across the full index, rank accordingly. That's fast and precise on exact matches, but it can only work with the words it sees. A query for "cozy winter sweater" scores zero against a product titled "thermal merino crewneck" even though the two mean the same thing.
 
@@ -142,7 +142,7 @@ Keyword search still wins on navigational queries: an exact company name or SKU 
 
 ## What tools and platforms handle natural language search today?
 
-NeuralSearch is Algolia's answer to the hybrid-retrieval challenge, but Algolia represents one of [five distinct categories in the natural language search market](https://nobi.ai/blog/best-ai-search-ecommerce-2026), each built around a different assumption about where intelligence should live.
+NeuralSearch is Algolia's answer to the hybrid-retrieval challenge, but Algolia represents one of [five distinct categories in the natural language search market](/blog/best-ai-search-ecommerce-2026), each built around a different assumption about where intelligence should live.
 
 **Developer-first search APIs.** Algolia gives engineering teams full API control over rules, ranking, synonyms, and merchandising. Response times stay under 50ms at catalog scale. The semantic layer (NeuralSearch) is available only on the top-tier Elevate plan, not on Build, Grow, or the mid-tier Premium plan. Pick it when your team has a dedicated search engineer and wants to own how content attributes factor into ranking.
 
@@ -158,7 +158,7 @@ NeuralSearch is Algolia's answer to the hybrid-retrieval challenge, but Algolia 
 
 The measurable impact concentrates in three metrics: zero-result rate (how often search fails completely), click-through rate on results (how relevant the top results look), and search-attributed conversion rate (how often visitors who search end up buying). The lift depends heavily on where you're starting: a site with many zero-result searches will see larger gains than one where most queries are exact company or SKU lookups.
 
-Zero-result rate is typically the fastest measurable win. [Semantic retrieval](https://nobi.ai/blog/ecommerce-site-search-best-practices) catches queries that fail keyword matching without requiring manual synonym rules. Sites with high zero-result baselines commonly see that number fall sharply after switching to a semantic-capable engine. Driving zero-result rate to a small fraction of searches is a realistic, measurable goal, not a stretch target reserved for large catalogs.
+Zero-result rate is typically the fastest measurable win. [Semantic retrieval](/blog/ecommerce-site-search-best-practices) catches queries that fail keyword matching without requiring manual synonym rules. Sites with high zero-result baselines commonly see that number fall sharply after switching to a semantic-capable engine. Driving zero-result rate to a small fraction of searches is a realistic, measurable goal, not a stretch target reserved for large catalogs.
 
 Click-through on results tends to improve because semantic ranking surfaces content that matches the intent of the query, not just the words.
 
@@ -170,13 +170,13 @@ Conversational search adds one more metric worth tracking: how often the assista
 
 ## What are the most common pitfalls with natural language search implementations?
 
-Most natural language search implementations fall short for one of three reasons: the catalog data is too thin for the model to work with, the index refresh lags too far behind catalog changes, or the team stops monitoring query logs after go-live. The technology is rarely the problem.
+Most natural language search implementations fall short for one of three reasons. The catalog data is too thin for the model to work with. The index refresh lags too far behind catalog changes. Or the team stops monitoring query logs after go-live. The technology is rarely the problem.
 
 The first problem is thin product data. Semantic matching is only as good as the content it searches. A catalog where product descriptions are two-sentence stubs with no attribute data produces weak embeddings. "Breathable mesh upper with medial post for mild overpronation" is searchable in ways that "running shoe" is not. This is a content problem, not a model problem. Enriching titles, descriptions, and structured attributes before indexing is the fix. Skipping it is the single most common reason a semantic search rollout disappoints.
 
 The second problem is a stale index. A semantic search index that refreshes once a day or less will surface results for discontinued products and miss newly launched ones. Look for platforms that refresh against live catalog and content data at least twice daily to keep results honest.
 
-The third problem is over-relying on the model without monitoring. Even a well-tuned semantic index produces surprising results on [edge cases](https://nobi.ai/blog/search-queries-that-break-ecommerce) and seasonal shifts in query vocabulary. Query log monitoring (what did visitors type, what did they click, where did they exit) is the feedback loop that catches regressions before they become revenue problems.
+The third problem is over-relying on the model without monitoring. Even a well-tuned semantic index produces surprising results on [edge cases](/blog/search-queries-that-break-ecommerce) and seasonal shifts in query vocabulary. Query log monitoring (what did visitors type, what did they click, where did they exit) is the feedback loop that catches regressions before they become revenue problems.
 
 The first is missing the answer layer for question-shaped queries. A search bar that returns a ranked results page for "is this jacket waterproof?" is failing the visitor even if the right jacket appears near the top. That query needs a direct answer, not a list of pages to click through and scan.
 
@@ -184,9 +184,11 @@ The second is misaligned personalization expectations. Natural language search i
 
 ## How do you choose the right natural language search solution for your site?
 
-Two questions narrow the field fast: what is the dominant query pattern on your site (navigational and exact-match vs. descriptive and conversational), and [how much engineering bandwidth do you have](https://nobi.ai/blog/build-vs-buy-ai-site-search)? A third factor matters more than most buyers realize: pricing model. Usage-based billing that scales with query volume can make a low-base-price tool expensive at mid-traffic volumes.
+Two questions narrow the field fast: what is the dominant query pattern on your site (navigational and exact-match vs. descriptive and conversational), and [how much engineering bandwidth do you have](/blog/build-vs-buy-ai-site-search)? A third factor matters more than most buyers realize: pricing model. Usage-based billing that scales with query volume can make a low-base-price tool expensive at mid-traffic volumes.
 
-Before shortlisting, pull your search analytics. Measure zero-result rate, click-through rate, and the split between exact-match and descriptive queries. A site where 80% of queries are company or SKU lookups has a different problem than one where many queries are multi-attribute or question-shaped. The right tool depends on that mix.
+Before shortlisting, pull your search analytics. Measure zero-result rate, click-through rate, and the split between exact-match and descriptive queries. A site where most queries are company or SKU lookups has a different problem than one where many queries are multi-attribute or question-shaped. The right tool depends on that mix.
+
+Once you've picked an approach, implementation is platform-specific. See the step-by-step walkthroughs for [WooCommerce](/blog/natural-language-search-woocommerce), [Salesforce Commerce Cloud](/blog/natural-language-search-salesforce-commerce-cloud), and [dealership inventory](/blog/dealership-inventory-nl-search).
 
 **[Algolia](https://www.algolia.com)** - pick it when you have a dedicated search engineer who wants to own ranking rules long-term. Note that NeuralSearch (the semantic layer) requires the Elevate plan; lower tiers use keyword retrieval only.
 

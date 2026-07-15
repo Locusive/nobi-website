@@ -36,8 +36,24 @@ export const meta = {
  answer: "Constructor fits when full-site behavioral personalization across search, category, browse, and collection pages is the headline requirement and you have an internal data team to maintain the ranker. Klevu fits Shopify stores where vocabulary mismatch is the primary search gap, though behavioral reranking is only available at the Expert tier. Bloomreach fits when consolidating search, CMS, and CDP under one enterprise contract is the goal, with typical six-figure annual spend and a multi-quarter rollout. Nobi fits when search relevance, shopper question answering, and proactive engagement are the gaps - Lucchese attributed $1M+ in incremental revenue in year one running Nobi for search, a cart assistant, and PDP Q&A."
  },
  {
- question: "Frequently asked questions about ecommerce product recommendation engines",
- answer: "Collaborative filtering needs dense purchase history and performs poorly on thin catalogs and new SKUs; content-based and semantic engines handle low-data environments better because they don't require purchase history to get started. To measure whether recommendations drive revenue, run an A/B test isolating the recommendation surface and compare CVR, AOV, and revenue per visitor - UNTUCKit's two-month test produced a 21.3% lift in revenue per searcher ($39.17 versus $32.30 for the control group). Search answers a query a shopper typed; a recommendation surfaces a product they didn't know to ask for; semantic search blurs the line because a query like \"gifts for runners\" returns ranked results that function as personalized recommendations for that intent. Behavioral reranking and AI recommendations are not the same thing - behavioral reranking reorders results using click and purchase history, while AI recommendations can operate without that data by reading semantic intent, and the behavioral layer is typically only available on higher pricing tiers."
+ question: "Do recommendations work for small catalogs?",
+ answer: "Collaborative filtering needs dense purchase history to produce useful signals - thin catalogs and low-traffic stores get weak results, especially on new SKUs. Content-based and semantic engines handle low-data environments better because they don't require purchase history to get started."
+ },
+ {
+ question: "How do I measure whether recommendations are actually driving revenue?",
+ answer: "Run an A/B test that isolates the recommendation surface and compare CVR, AOV, and revenue per visitor between treatment and control. Let both groups run until you reach statistical significance, then look at which metrics moved. CVR and revenue per searcher are the most direct signals; AOV tells you whether the engine is surfacing higher-value items."
+ },
+ {
+ question: "What's the difference between a search engine and a recommendation engine?",
+ answer: "Search answers a query a shopper typed. A recommendation surfaces a product they didn't know to ask for. Semantic search blurs the line - a query like \"gifts for runners\" returns ranked results that function as personalized recommendations for that intent."
+ },
+ {
+ question: "Is behavioral reranking the same as AI recommendations?",
+ answer: "No. Behavioral reranking uses click and purchase history to reorder results in real time. AI recommendations can operate without that data by reading semantic intent. Most modern platforms combine both, but the behavioral layer is typically available only on higher pricing tiers."
+ },
+ {
+ question: "Can Nobi replace a dedicated recommendation engine?",
+ answer: "Nobi handles search-driven discovery and grounded shopper Q&A across search, PDP, and cart. It doesn't offer site-wide category or browse-page reranking, and individual behavioral personalization isn't yet available. Brands whose primary need is full-site behavioral ranking will need a dedicated engine."
  }
  ],
 };

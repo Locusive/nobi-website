@@ -78,13 +78,13 @@ export const meta = {
 </script>
 ## Why does the engine underneath your recommendations matter?
 
-Most ecommerce stores have some version of recommendations running - "you may also like" on the PDP, "complete the look" in the cart, a homepage carousel. The assumption is that the engine underneath actually matches shoppers to the right products. When it doesn't, the damage goes beyond a missed cross-sell: a shopper follows a recommendation to an out-of-stock product, or an AI engine answers "is this machine-washable?" with a confident yes when the tag says dry-clean only. A wrong confident answer is a retention problem, not just a bad UX moment.
+Most ecommerce stores have some version of recommendations running - "you may also like" on the PDP, "complete the look" in the cart, a homepage carousel. The assumption is that the engine underneath actually matches shoppers to the right products. When it doesn't, the damage goes beyond a missed cross-sell. A shopper follows a recommendation to an out-of-stock product. Or an AI engine answers "is this machine-washable?" with a confident yes when the tag says dry-clean only. A wrong confident answer is a retention problem, not just a bad UX moment.
 
 ## What are ecommerce product recommendations, and why do they show up throughout the store?
 
-Product recommendations are algorithmically or manually surfaced suggestions that appear wherever a shopper might be ready to discover something else: the product detail page ("you may also like"), the cart ("complete the look"), the homepage carousel, post-checkout, and inline inside search results. They exist because most shoppers browse a fraction of a store's catalog before leaving. A well-placed recommendation [closes the gap](https://nobi.ai/blog/ecommerce-product-discovery-beyond-filters) between what a shopper came in looking for and what else might make them buy.
+Product recommendations are algorithmically or manually surfaced suggestions. They appear wherever a shopper might be ready to discover something else: the product detail page ("you may also like"), the cart ("complete the look"), the homepage carousel, post-checkout, and inline inside search results. They exist because most shoppers browse a fraction of a store's catalog before leaving. A well-placed recommendation [closes the gap](https://nobi.ai/blog/ecommerce-product-discovery-beyond-filters) between what a shopper came in looking for and what else might make them buy.
 
-What determines relevance is the engine running underneath. A recommendation engine that can handle a natural-language query, surface a new product without purchase history to learn from, and exclude out-of-stock items in real time will produce a different result than one that can't.
+What determines relevance is the engine running underneath. A capable engine handles natural-language queries, finds new products without requiring purchase history, and excludes out-of-stock items in real time. One that can't will produce a different result.
 
 ## What's the difference between collaborative filtering, content-based, and AI-driven recommendation engines?
 
@@ -108,7 +108,7 @@ One honest limit worth flagging: Nobi's personalization today covers personalize
 
 ## What are the biggest risks when a product recommendation engine gets it wrong?
 
-The most damaging recommendation failures aren't design problems - they're data problems: stale indexes that don't reflect live inventory, AI engines that describe product features confidently but incorrectly, and surfaces that recommend out-of-stock items because the training snapshot is days old. For AI-powered engines, the harder failure mode is fabrication: an engine that answers "is this machine-washable?" with a confident yes when the product page says dry-clean only. Most consumers abandon a brand after a single negative AI interaction - one wrong confident answer is enough to lose them.
+The most damaging recommendation failures aren't design problems — they're data problems. Stale indexes don't reflect live inventory. AI engines describe product features confidently but incorrectly. And some recommend out-of-stock items because the training snapshot is days old. For AI-powered engines, the harder failure mode is fabrication: an engine that answers "is this machine-washable?" with a confident yes when the product page says dry-clean only. Most consumers abandon a brand after a single negative AI interaction - one wrong confident answer is enough to lose them.
 
 The most visible version is hallucinated inventory. A shopper follows a recommendation, adds the item to cart, and hits an out-of-stock error. The engine made a confident suggestion from an index that hadn't refreshed since the product sold out. That's a broken experience with a clear cause.
 

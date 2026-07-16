@@ -1,0 +1,237 @@
+export const meta = {
+ title: "Search Synonyms: What They Are and Why They Prevent Lost Sales",
+ slug: "search-synonyms-what-they-are-and-why-they-prevent-lost-sales",
+ date: "2026-07-16",
+ publishedAt: "2026-07-16",
+ description: "What are search synonyms and why do they matter? Learn how synonym gaps cause zero-result pages, and when manual vs semantic matching is the right call.",
+ excerpt: "What are search synonyms and why do they matter? Learn how synonym gaps cause zero-result pages, and when manual vs semantic matching is the right call.",
+ tags: ["site search", "generic", " search"],
+ author: "Shanif Dhanani",
+ heroImage: "https://storage.googleapis.com/nobi-public/docs_and_marketing_websites/posts/search-synonyms-what-they-are-and-why-they-prevent-lost-sales/hero.webp",
+ featured: true,
+ draft: false,
+ faqItems: [
+ {
+ question: "Do I still need synonym rules if I'm using semantic search?",
+ answer: "Semantic search handles most vocabulary variation on its own, because the model learns word relationships from training data and doesn't need an explicit rule for every pair. But explicit synonym rules still add value in specific situations: competitor names that should map to a product category, newly coined campaign terms the model hasn't encountered yet, or any query where you need the same deterministic result every time. Think of explicit rules as a thin override layer sitting on top of a semantic foundation, not a replacement for one or the other."
+ },
+ {
+ question: "What's the difference between a synonym and a search redirect?",
+ answer: "A synonym expands the query so it returns more results from the index - \"couch\" also matches \"sofa\" records, and the visitor sees a fuller results page. A redirect sends the visitor to a specific URL when a particular query fires, bypassing the results layer entirely. Redirects are typically used for named category queries (\"men's jackets\") or promotional campaign terms where you want the visitor to land on a specific page, not a search results set."
+ },
+ {
+ question: "How many synonym rules does a typical catalog need?",
+ answer: "It depends on catalog size and audience geography. A focused single-category catalog at 1,000 SKUs might need 50-100 synonym pairs to cover the highest-frequency gaps. A multi-category catalog at 100,000+ SKUs, especially one spanning regional markets, can warrant thousands of rules - and at that scale, manual maintenance typically becomes operationally impractical. That's the point where semantic search becomes the more viable architecture for handling vocabulary variation."
+ },
+ {
+ question: "Do synonym rules affect SEO?",
+ answer: "Synonym rules operate on your internal search index, not on Google's. They don't create new crawlable URLs or change how product pages are indexed by external crawlers. The indirect effect is behavioral: visitors who find relevant results are less likely to leave empty-handed, and lower bounce rates from search sessions are a positive signal for Google. The SEO benefit is real, but it runs through user behavior, not through the index itself."
+ },
+ {
+ question: "Can poorly configured synonyms hurt search quality?",
+ answer: "Yes, and the failure can be harder to detect than a zero-result page. An over-broad synonym produces a page of results that don't match what the visitor actually wanted. They see products, but not the right ones - trust erodes, and because there's no blank page to trigger an alert, the failure stays invisible in session-level analytics. Testing new synonym rules against representative query sets before deploying to production is the standard way to catch this before it reaches visitors."
+ }
+ ],
+};
+
+<script type="application/ld+json" data-nobi-schema>
+{`{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Search Synonyms: What They Are and Why They Prevent Lost Sales",
+  "description": "What are search synonyms and why do they matter? Learn how synonym gaps cause zero-result pages, and when manual vs semantic matching is the right call.",
+  "datePublished": "2026-07-16",
+  "dateModified": "2026-07-16",
+  "author": {
+    "@type": "Person",
+    "name": "Shanif Dhanani",
+    "url": "https://www.linkedin.com/in/shanifdhanani/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Nobi",
+    "url": "https://nobi.ai"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://nobi.ai/blog/search-synonyms-what-they-are-and-why-they-prevent-lost-sales"
+  },
+  "about": [
+    {
+      "@type": "Thing",
+      "name": "site search"
+    },
+    {
+      "@type": "Thing",
+      "name": "generic"
+    }
+  ]
+}`}
+</script>
+## What are search synonyms?
+
+Someone searching your site types "couch." Your catalog says "sofa." The search engine returns nothing, and the visitor leaves. That vocabulary mismatch - visitor language versus catalog language - is the root cause behind most zero-result pages. Synonym mapping is the mechanism that closes it: configuration that tells the search engine to treat different words for the same thing as equivalent when matching queries to your index. Get that layer right and visitors find products. Let it go stale or skip it entirely, and you bleed conversions to [blank results pages](https://nobi.ai/blog/site-search-losing-sales) that most visitors never come back from.
+
+## What are search synonyms?
+
+Search synonyms are mappings that tell a search engine to treat two or more different words or phrases as equivalent when matching a query to indexed content. When a visitor types "couch" and your catalog uses "sofa," a synonym rule bridges that gap so the visitor sees results instead of a dead-end page. Without synonym coverage, most search engines perform [exact or near-exact keyword matching](https://nobi.ai/blog/semantic-search-vs-keyword-search) - any vocabulary gap between how someone describes something and how your content labels it produces a dead end.
+
+That gap is more common than it sounds. Visitors and catalog copywriters use different language for the same object all the time. Coverage also extends beyond obvious word pairs: abbreviations ("BB cream" vs. "tinted moisturizer"), generic vs. proprietary terms ("Band-Aid" vs. "adhesive bandage"), and regional variants ("trainers" vs. "sneakers") all create the same mismatch problem.
+
+Synonym rules can work in one direction or both. A one-directional rule expands "couch" to also match "sofa" records, but not the other way around. A bidirectional rule means either term returns results for both.
+
+Product titles don't change. The search engine expands the query before it hits the index, so the fix is invisible to visitors and requires no catalog edits. This is also distinct from spell correction, which handles typos, or redirects, which send a visitor to a specific URL - synonym rules expand the candidate set of matching documents.
+
+## Where did synonym dictionaries in site search come from?
+
+Those synonym rules are older than the web. The idea comes from library science and information retrieval, where controlled vocabularies grouped related terms long before digital catalogs existed. When product search engines emerged in the early 2000s, vendors adapted that idea into editable synonym dictionaries that teams could manage without touching code.
+
+The early technical foundation came from Apache Lucene, and later Elasticsearch, both of which included configurable synonym filters. These filters can fire at query time - expanding "couch" to also match "sofa" as the search runs - or at index time, where the expansion is baked into the index itself. Both patterns are still in use today.
+
+First-generation synonym management was entirely manual. Merchandisers kept flat text files of synonym pairs and triggered a re-index to activate changes. Any gap in that file stayed live until someone noticed it, fixed it, and ran the re-index again - a feedback loop that often measured in weeks.
+
+As catalogs scaled into the hundreds of thousands of SKUs, that model broke down. New product lines, seasonal campaigns, and shifting buyer language introduced vocabulary faster than any team could keep pace.
+
+The 2010s brought a partial fix: ML-assisted synonym suggestion. Clickstream data and zero-result logs fed recommendation engines that surfaced candidate pairs for human review. The discovery burden dropped, even though a person still had to approve every suggestion.
+
+By the early 2020s, [vector embedding models](https://nobi.ai/blog/how-ai-site-search-works) changed the picture more fundamentally. These models encode meaning numerically, so "couch" and "sofa" end up as close neighbors in the model's representation without any explicit rule. The search index handles vocabulary variation at that level.
+
+Today the field has split. Some platforms still center the synonym dictionary as a configuration object teams control directly. Others rely on semantic matching to absorb most vocabulary variation automatically, with explicit overrides for edge cases.
+
+## Why do synonym gaps cause abandoned searches and lost sales?
+
+That divergence in approach matters because the vocabulary gap isn't a bug someone can patch in an afternoon - it's structural. Product copy gets written for SEO and for a company's own voice. Visitors search in their own words. The two vocabularies drift apart by design. When a visitor's query doesn't match anything in the index, the result is a [zero-result page](/blog/fix-zero-result-searches) - one of the highest-abandonment experiences on any site. Most site searches that end in zero results drive visitors away without buying.
+
+Regional and generational differences compound the structural gap: "trainers" vs. "sneakers", "jumper" vs. "sweater", "duvet" vs. "comforter" all produce dead ends for visitors who use the term their catalog doesn't. Proprietary-name vs. generic mismatches are high-frequency: a visitor searching "Jacuzzi" when the catalog says "hot tub", or "Crocs" when the listing uses "foam clogs", gets nothing.
+
+Zero results aren't the only failure mode. Partial synonym matches can surface irrelevant products - the visitor sees results but doesn't find what they want. Trust erodes more quietly than a blank page, and the company never sees it happen.
+
+That invisibility is the second problem. Abandoned searches are largely hidden from teams relying on session-level analytics alone. Only search-specific instrumentation - tracking zero-result rate and no-click searches separately - surfaces the real scope of the problem.
+
+The conversion math is the reason this costs real money. Searchers are your [highest-intent visitors](https://nobi.ai/blog/what-shoppers-want-site-search) - they showed up and typed what they want. Synonym gaps suppress revenue from exactly that group, not from casual browsers.
+
+## How does synonym matching work inside a search engine?
+
+That vocabulary gap between catalog language and visitor language exists by design - and closing it starts inside the index. A search engine maps each word to the documents containing it, so by default a query for "couch" only reaches documents that say "couch." Synonym matching solves this by expanding the query before that lookup happens, or by indexing documents under additional terms at write time, so a single query can reach content built around a related word. Modern semantic search takes a different approach: it encodes meaning as numbers rather than matching words, so vocabulary equivalence comes from the model itself rather than a rule someone wrote.
+
+The two traditional approaches trade off speed against flexibility. With query-time expansion, a search for "couch" fires as "couch OR sofa" before hitting the index. No re-indexing required, and new synonym rules take effect immediately. The cost is slightly higher query latency, because the expanded query touches more index entries. With index-time expansion, a product titled "sofa" is also stored under "couch" when it's indexed, so either term finds the same document at full speed. The trade-off: every time synonym rules change, the entire catalog needs re-indexing. At scale, that's a significant operational cost.
+
+A one-way rule expands "BB cream" to match "tinted moisturizer" records, but not the reverse. A two-way rule treats both terms as interchangeable. One-way rules give more control over asymmetric intent - useful when two terms aren't genuinely substitutable in both directions. Some engines add weighting on top of this: a synonym-matched result can receive a relevance penalty relative to an exact match, so the exact-match product still ranks first even when both appear on the same page.
+
+[Semantic search](https://nobi.ai/blog/what-is-artificial-intelligence-search) changes the picture more fundamentally than any rule can. Both the query and each document are encoded into a high-dimensional vector space, where words with related meanings cluster near each other. "Couch" and "sofa" end up close together because the model learned their relationship from training data - no explicit rule required. At query time, nearest-neighbor retrieval finds sofa listings for a couch query, and it handles descriptive queries like "breathable summer shirt" that no keyword synonym list could anticipate.
+
+## What types of search synonyms matter most for?
+
+Not all synonym gaps carry equal weight. The highest-impact categories are those that appear most often in actual search traffic but are systematically absent from site copy - and these are also the cases where an explicit rule is worth writing, because the gap is common enough to model once and predictable enough that semantic matching alone won't always close it.
+
+Generic versus product-name mismatches are usually the highest-volume category. Visitors reach for everyday words - "lip balm," "bandage," "hot tub" - while site copy uses product names, or vice versa. These surface quickly: sort your zero-result report by query volume and they'll cluster near the top.
+
+Regional and dialect variants affect any site with a geographically mixed audience. UK/US English splits ("trainers"/"sneakers," "jumper"/"sweater," "nappy"/"diaper") appear on any international site; US regional variants ("sub"/"hoagie"/"grinder") matter mainly in food and grocery.
+
+Abbreviations create mismatches in both directions. Customers type "BB cream," "SPF 50+," or "AC adapter" while product titles spell out the full form - or sometimes the reverse. Whether you need a one-way or two-way rule depends on which direction dominates your own query logs.
+
+[Descriptive versus attribute-based queries](https://nobi.ai/blog/what-is-natural-language-search) mark where explicit synonym lists hit their ceiling. "Breathable summer shirt" doesn't keyword-match "Men's Linen Button-Down," and no synonym list can enumerate every way a user might describe a product characteristic. This is the structural advantage semantic search holds over explicit rules.
+
+Two more categories worth configuring separately: competitor name to product type, and misspellings. A user searching "Roomba" wants a robot vacuum - a one-way expansion serves them without implying they're buying the named product. Misspellings ("refridgerator," "leggigns") are a related problem but a different mechanism; most search platforms handle them through spell correction, which runs independently from synonym expansion and should be configured that way.
+
+## What's the difference between manual synonym lists and automatic semantic matching?
+
+That ceiling on explicit synonym rules - no dictionary can enumerate every way a visitor might describe what they want - is exactly where these two approaches split. Manual synonym lists require a person to find every vocabulary gap and write a rule for it; the search engine enforces whatever rules exist and ignores everything else. Automatic semantic matching uses vector embeddings trained on language to infer related terms without any explicit rule, because the model has already learned those relationships from training data.
+
+With manual synonym management, a merchandiser or search engineer builds and maintains a synonym dictionary through a dashboard or API. Finding which synonyms to add still requires ongoing work: analyzing zero-result reports, reviewing no-click queries, and writing a rule for every gap found.
+
+The search index is built from vector representations of your content. When a visitor searches, the query encodes as a vector and the engine retrieves nearest neighbors by meaning - the mechanism that matches "breathable summer shirt" to "Men's Linen Button-Down" without any explicit rule. Long-tail and descriptive queries that no keyword dictionary could cover get handled at the model layer.
+
+Most production search systems combine both. Keyword matching handles exact and near-exact queries fast; semantic reranking improves relevance on long-tail queries where keyword overlap is low. [Algolia](https://www.algolia.com)'s NeuralSearch runs both in parallel and blends the results.
+
+Manual rules still win in specific situations: a newly coined marketing term the model hasn't encountered yet, a competitor name that should map to a specific product category, or a query that must return the same deterministic answer every time. For most catalogs, [semantic-first with targeted explicit overrides](https://nobi.ai/blog/ai-vs-traditional-site-search) is the more practical default.
+
+## What tools and approaches handle search synonym coverage, and how do they differ?
+
+That explicit-vs-semantic split maps directly onto how the main tool categories work. [The four main approaches](https://nobi.ai/blog/best-site-search-software-large-ecommerce-catalogs) - developer-first APIs, enterprise ML suites, knowledge graph platforms, and AI-native search - each make a different trade-off between control, implementation effort, and how much vocabulary matching is automated.
+
+[Algolia](https://www.algolia.com) is designed for teams with a dedicated search engineer who wants auditable control. The synonym dictionary is a first-class configuration object managed through the dashboard or API. Algolia's semantic layer, NeuralSearch, handles vocabulary matching at the embedding level, but it's available only on the Elevate plan. Teams below that tier manage synonyms entirely through manually maintained keyword rules.
+
+[Coveo](https://www.coveo.com) and [Hawk Search](https://www.hawksearch.com) sit in the enterprise ML relevance tier. Coveo's relevance engine ingests behavioral data across commerce, support, and workplace properties - the platform is built for organizations consolidating search across multiple properties, with sales-led procurement and substantial services costs on top of licensing. Hawk Search targets B2B manufacturers and distributors with attribute-dense catalogs where faceted navigation is the dominant discovery path. Synonym coverage intersects with attribute-based filtering in ways that require merchandiser-level configuration, and implementations typically run in months.
+
+[Yext](https://www.yext.com) takes a different angle. Its synonym handling is more relevant to FAQ and help-center search than to product-catalog discovery. The platform's strength is keeping structured answers consistent across your owned site and AI surfaces like Google AI Overviews - not resolving vocabulary variation across a deep product index.
+
+Nobi, an AI-native conversational website assistant, routes each query automatically between a fast product search path and a conversational answer path. The product search layer uses semantic matching on meaning, so a query for "couch" reaches sofa listings without any synonym rule. Query overrides let teams pin exact verbatim answers to high-stakes queries, covering the deterministic-rule use case without a full synonym dictionary. The index refreshes twice daily, and pricing starts at $25/month including 2,500 searches and 250 conversational messages.
+
+## What results can merchandising teams expect from closing synonym gaps?
+
+Whether you're managing a synonym dictionary or relying on semantic matching, the results show up in the same metrics. The most direct is zero-result rate. Closing the highest-frequency synonym gaps typically drives measurable reductions within weeks, and the downstream effects - session depth, add-to-cart rate, conversion from search sessions - improve proportionally.
+
+Sites with healthy synonym coverage and semantic matching typically see far lower zero-result rates than sites running on keyword matching alone, which tend to see much higher rates on long-tail queries - a gap that compounds as the catalog grows.
+
+Visitors who use site search [convert at a substantially higher rate](https://nobi.ai/blog/increase-ecommerce-conversion-rate-search) than non-searchers. Synonym gaps suppress that whole channel. Zero-result pages function as exits: exit rates are close to 100% in most analytics setups, so each one is a lost session from someone who already showed intent by typing.
+
+Time to impact depends on your approach. Manual synonym rules take effect at query time immediately after you save them on most platforms. Semantic index changes take effect on the next refresh cycle - anywhere from minutes to hours. Either way, measurable improvement in zero-result rate typically appears within days or weeks.
+
+One measurement note: session-level bounce rate won't surface synonym problems. The metrics that matter are search-specific - zero-result rate, no-click search rate (searches where nothing was clicked, which often signals irrelevant results rather than missing ones), and refinement rate (searches followed by a query modification). These require search analytics instrumentation separate from general session tracking. Most platforms include it; it needs to be enabled and monitored deliberately.
+
+## What are the most common synonym management mistakes?
+
+Tracking [zero-result rate](https://nobi.ai/blog/reduce-zero-results) and no-click searches will surface the symptoms, but the underlying cause is often one of a small set of recurring mistakes. The most frequent is treating synonym management as a one-time setup task. Catalogs grow, buyer language shifts, and seasonal campaigns introduce new vocabulary. A synonym dictionary that was thorough at launch drifts out of coverage within 12 to 18 months if nobody schedules reviews alongside catalog changes.
+
+The second-most-common mistake is configuring two-way synonyms where a one-way rule is the right structure. A two-way synonym between "formal" and "dress" sounds reasonable in a clothing catalog until a search for "dress" starts returning suits and blazers. One-way rules - "formal" expands to "dress," but not the reverse - handle asymmetric intent more precisely.
+
+Missing the no-click signal is a subtler version of the same blind spot. Most teams watch zero-result rate but ignore searches that returned results and still produced no clicks. Those no-click searches indicate the wrong products matched - either a synonym is too broad or ranking is burying the right products below the fold. Both deserve a fix, but they require different ones.
+
+Synonym collisions across product categories are easy to overlook during setup. "Running" expanding to "jogging" works in footwear and breaks in electronics, where "running" describes software processes. Category-scoped rules - applying the expansion only within a specific product tree - solve this, but they add configuration complexity most teams don't budget for upfront.
+
+Finally, relying on keyword synonyms for descriptive intent is a structural mismatch. "Eco-friendly packaging" and "minimalist aesthetic" are intent signals that don't map cleanly to synonym pairs. No rule bridges an abstract descriptive query to a product attribute hierarchy. Those queries are the core case for semantic search, not rule-based expansion - and that's a configuration decision, not a synonym problem.
+
+## How do you choose between manual synonym management and automatic semantic search?
+
+The right choice depends on three variables: how large and how fast your catalog changes, how much engineering bandwidth you have to own ongoing search configuration, and how much of your search traffic comes from descriptive versus keyword queries.
+
+Manual synonym management makes sense when your catalog is stable and bounded, vocabulary gaps are knowable, and you need deterministic control over specific query-to-product mappings - campaign keywords, competitor names, or any query where a specific result must fire every time. [Algolia](https://www.algolia.com) gives teams API-level control over synonym rules, with NeuralSearch available on the Elevate plan for semantic matching on top of keyword rules. That's a capable combination, but it requires engineering resources to configure and maintain both layers. Below the Elevate plan, the semantic layer isn't available, so teams manage synonyms through manually maintained keyword rules alone.
+
+Semantic-first search is the better fit when your catalog changes frequently, grows across new product categories, or is large enough that manual synonym coverage becomes operationally impractical. It's also the right call when your visitors use natural-language and descriptive queries that don't map to keyword synonyms, or when you don't have engineering bandwidth to own ongoing search configuration.
+
+For most mid-to-large catalogs, the practical default is a hybrid: [semantic-first search with explicit override rules](https://nobi.ai/blog/ecommerce-site-search-best-practices) for high-stakes mappings. The semantic layer handles the long tail of vocabulary variation automatically. Explicit rules handle the edge cases where deterministic control matters - competitor redirects, newly coined campaign terms, any query where a specific answer must fire regardless of what the model returns.
+
+[Hawk Search](https://www.hawksearch.com) fits B2B catalogs where filter-driven discovery dominates and synonym management intersects heavily with attribute-based faceted navigation. It's purpose-built for that operational complexity, with implementation timelines to match.
+
+Nobi's semantic matching handles most vocabulary variation automatically at $25/month base, with no synonym dictionary to maintain. Query overrides cover the deterministic-rule edge cases without requiring a full manual dictionary. The trade-off is real: Nobi is not an API-first developer platform. Teams that want to build custom ranking logic or configure synonym weights at the attribute level will find Algolia's control model a better fit for that job.
+
+## Frequently asked questions about search synonyms
+
+Choosing between manual rules and semantic-first search is the decision most implementation teams end up wrestling with - and the questions below cover the details that come up most often once that decision is underway.
+
+**Do I still need synonym rules if I'm using semantic search?**
+
+Semantic search handles most vocabulary variation on its own, because the model learns word relationships from training data and doesn't need an explicit rule for every pair. But explicit synonym rules still add value in specific situations: competitor names that should map to a product category, newly coined campaign terms the model hasn't encountered yet, or any query where you need the same deterministic result every time. Think of explicit rules as a thin override layer sitting on top of a semantic foundation, not a replacement for one or the other.
+
+**What's the difference between a synonym and a search redirect?**
+
+A synonym expands the query so it returns more results from the index - "couch" also matches "sofa" records, and the visitor sees a fuller results page. A redirect sends the visitor to a specific URL when a particular query fires, bypassing the results layer entirely. Redirects are typically used for named category queries ("men's jackets") or promotional campaign terms where you want the visitor to land on a specific page, not a search results set.
+
+**How many synonym rules does a typical catalog need?**
+
+It depends on catalog size and audience geography. A focused single-category catalog at 1,000 SKUs might need 50-100 synonym pairs to cover the highest-frequency gaps. A multi-category catalog at 100,000+ SKUs, especially one spanning regional markets, can warrant thousands of rules - and at that scale, manual maintenance typically becomes operationally impractical. That's the point where [semantic search](https://nobi.ai/blog/best-semantic-search-ecommerce) becomes the more viable architecture for handling vocabulary variation.
+
+**Do synonym rules affect SEO?**
+
+Synonym rules operate on your internal search index, not on Google's. They don't create new crawlable URLs or change how product pages are indexed by external crawlers. The indirect effect is behavioral: visitors who find relevant results are less likely to leave empty-handed, and lower bounce rates from search sessions are a positive signal for Google. The SEO benefit is real, but it runs through user behavior, not through the index itself.
+
+**Can poorly configured synonyms hurt search quality?**
+
+Yes, and the failure can be harder to detect than a zero-result page. An over-broad synonym produces a page of results that don't match what the visitor actually wanted. They see products, but not the right ones - trust erodes, and because there's no blank page to trigger an alert, the failure stays invisible in session-level analytics. Testing new synonym rules against representative query sets before deploying to production is the standard way to catch this before it reaches visitors.
+
+
+<BlogEmailCapture hook="Zero-result pages from synonym gaps costing your store sales?" subtext="Drop your email and we'll show you how Nobi's AI search surfaces the right products even when shoppers phrase queries differently than your catalog." />
+
+---
+
+If maintaining that list manually sounds like a grind, Nobi's semantic search handles vocabulary gaps automatically. Request a demo at nobi.ai to see it in action.
+
+<div className="my-8 flex justify-center">
+ <a
+ href="https://dashboard.nobi.ai"
+ className="inline-flex items-center justify-center gap-2 rounded-2xl font-medium transition active:scale-[.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-black/10 dark:focus-visible:ring-white/20 bg-black text-white dark:bg-white dark:text-black hover:opacity-90 shadow-sm h-12 px-6 text-base no-underline"
+ >
+ <span>Start your free Nobi trial</span>
+ </a>
+</div>

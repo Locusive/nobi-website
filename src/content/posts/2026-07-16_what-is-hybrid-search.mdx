@@ -13,11 +13,11 @@ export const meta = {
  faqItems: [
  {
  question: "Is hybrid search the same as AI search?",
- answer: "Not exactly. \"AI search\" is a marketing term vendors apply to everything from basic synonym expansion to full neural retrieval. Hybrid search is a specific technical approach: BM25 and vector retrieval running in parallel, results merged by a fusion algorithm. Algolia's NeuralSearch is only available on the top Elevate plan - not on Build, Grow, Grow Plus, or Premium."
+ answer: "Not exactly. \"AI search\" is a marketing term vendors apply to everything from basic synonym expansion to full neural retrieval. Hybrid search is a specific technical approach: BM25 and vector retrieval running in parallel, results merged by a fusion algorithm. Algolia's NeuralSearch is only available on the top Elevate plan, not on Build, Grow, Grow Plus, or Premium."
  },
  {
  question: "Does hybrid search slow down search?",
- answer: "Not in a well-built system. Platforms pre-compute product embeddings at index time and only embed the short query string at runtime, keeping retrieval under 100ms - within the sub-150ms threshold instant typeahead requires."
+ answer: "Not in a well-built system. Platforms pre-compute product embeddings at index time and only embed the short query string at runtime, keeping retrieval under 100ms, within the sub-150ms threshold instant typeahead requires."
  },
  {
  question: "Do I need a developer to implement hybrid search?",
@@ -33,7 +33,7 @@ export const meta = {
  },
  {
  question: "What happens when a shopper asks a question instead of searching?",
- answer: "A keyword engine returns a results page for a question like \"do these run narrow?\" - usually the wrong products. A conversational engine with a RAG layer routes it to a grounded answer from the product's fit guide or size chart, with a source citation the shopper can verify. That distinction - ranked results versus grounded answers - determines whether your search investment reduces support ticket volume or only search abandonment."
+ answer: "A keyword engine returns a results page for a question like \"do these run narrow?\" (usually the wrong products). A conversational engine with a RAG layer routes it to a grounded answer from the product's fit guide or size chart, with a source citation the shopper can verify. That distinction (ranked results versus grounded answers) determines whether your search investment reduces support ticket volume or only search abandonment."
  }
  ],
 };
@@ -74,21 +74,21 @@ export const meta = {
 </script>
 ## What is hybrid search?
 
-Hybrid search runs a keyword scorer and a meaning-based vector model in parallel and merges what they find - closing the vocabulary gap between how shoppers describe products and how catalog titles name them. Search is the highest-intent channel on your store. Shoppers who use it [convert at two to three times the rate of shoppers who browse](https://nobi.ai/blog/increase-ecommerce-conversion-rate-search), per Wolfgang Digital's ecommerce KPI benchmarks - so every dead-end result page is real revenue walking. The most common cause of those dead ends is vocabulary mismatch: a shopper types "cozy winter layer" and your catalog knows it as "merino wool crewneck." Keyword search can't bridge that gap.
+Hybrid search runs a keyword scorer and a meaning-based vector model in parallel and merges what they find, closing the vocabulary gap between how shoppers describe products and how catalog titles name them. Search is the highest-intent channel on your store. Shoppers who use it [convert at two to three times the rate of shoppers who browse](https://nobi.ai/blog/increase-ecommerce-conversion-rate-search), per Wolfgang Digital's ecommerce KPI benchmarks. Every dead-end result page is real revenue walking. The most common cause of those dead ends is vocabulary mismatch: a shopper types "cozy winter layer" and your catalog knows it as "merino wool crewneck." Keyword search can't bridge that gap.
 
 ## Where did hybrid search come from?
 
-Ecommerce search ran on inverted-index keyword matching through most of the 2000s and 2010s. Fast and predictable on head queries, but brittle when shopper vocabulary diverged from catalog vocabulary - a search for "casual summer top" on a catalog full of "linen blouse" and "flutter sleeve shirt" could come back empty.
+Ecommerce search ran on inverted-index keyword matching through most of the 2000s and 2010s. Fast and predictable on head queries, but brittle when shopper vocabulary diverged from catalog vocabulary: a search for "casual summer top" on a catalog full of "linen blouse" and "flutter sleeve shirt" would come back empty.
 
-BERT, released by Google in 2018, made it practical to represent both queries and documents as dense vectors - numbers that capture meaning rather than matching terms. Early adopters were enterprise web search and internal knowledge bases, not ecommerce teams. The infrastructure cost was too high for most mid-market stores.
+BERT, released by Google in 2018, made it practical to represent both queries and documents as dense vectors (numbers that capture meaning rather than matching terms). Early adopters were enterprise web search and internal knowledge bases, not ecommerce teams. The infrastructure cost was too high for most mid-market stores.
 
-When vector-only engines reached production, a gap appeared: they missed exact model numbers and SKUs that keyword engines handled easily, while keyword engines missed descriptive natural-language queries that vector engines handled well. The fix was to run both pipelines and fuse the ranked results - reciprocal rank fusion and weighted score combination being the two most common methods. That combination is hybrid search.
+When vector-only engines reached production, a gap appeared: they missed exact model numbers and SKUs that keyword engines handled easily, while keyword engines missed descriptive natural-language queries that vector engines handled well. The fix was to run both pipelines and fuse the ranked results; reciprocal rank fusion and weighted score combination are the two most common methods. That combination is hybrid search.
 
-The term entered vendor marketing around 2021 - 2022, as Elasticsearch, Pinecone, and Weaviate added vector support alongside their existing keyword engines. Algolia followed with NeuralSearch on its Elevate tier. Once cloud embedding APIs from OpenAI, Cohere, and Google made vector indexing affordable, mid-market ecommerce platforms began shipping [semantic layers as standard features](https://nobi.ai/blog/what-is-artificial-intelligence-search) rather than bespoke engineering projects.
+The term entered vendor marketing around 2021–2022, as Elasticsearch, Pinecone, and Weaviate added vector support alongside their existing keyword engines. Algolia followed with NeuralSearch on its Elevate tier. Once cloud embedding APIs from OpenAI, Cohere, and Google made vector indexing affordable, mid-market ecommerce platforms began shipping [semantic layers as standard features](https://nobi.ai/blog/what-is-artificial-intelligence-search) rather than bespoke engineering projects.
 
 ## What is the difference between keyword search, semantic search, and hybrid search?
 
-Keyword search (BM25) scores results by counting how often query words appear in product titles and descriptions, weighted by how rare those words are across the whole catalog. Type an exact SKU or brand name and it's fast and accurate - every match traces back to a specific term, so relevance is easy to audit when something looks off. The weakness shows up when shopper vocabulary diverges from catalog vocabulary. A shopper who searches "navy wide-leg trouser" on a catalog where the same item is titled "dark blue cropped pant" gets nothing back. That's a vocabulary mismatch, and it's the main driver of [search abandonment on keyword-only engines](https://nobi.ai/blog/ai-vs-traditional-site-search).
+Keyword search (BM25) scores results by counting how often query words appear in product titles and descriptions, weighted by how rare those words are across the whole catalog. Type an exact SKU or brand name and it's fast and accurate: every match traces back to a specific term, so relevance is easy to audit when something looks off. The weakness shows up when shopper vocabulary diverges from catalog vocabulary. A shopper who searches "navy wide-leg trouser" on a catalog where the same item is titled "dark blue cropped pant" gets nothing back. That's a vocabulary mismatch, and it's the main driver of [search abandonment on keyword-only engines](https://nobi.ai/blog/ai-vs-traditional-site-search).
 
 Semantic search converts both the query and every product into numerical vectors (dense representations of meaning rather than individual words) and ranks results by how similar those meanings are. A query like "something warm for a ski trip that won't look bulky" can surface the right jacket even if no product title contains those words. The tradeoff: semantic search can score a conceptually related but factually wrong product above an exact model-number match, and it adds a small amount of latency because it requires an additional processing step on every query.
 
@@ -96,29 +96,29 @@ Hybrid search runs both pipelines in parallel and merges the two ranked lists us
 
 ## How does hybrid search work under the hood?
 
-That zero-result gap gets closed by running two retrieval pipelines in parallel and merging what they find. The first is a BM25 keyword scorer: every product is indexed by its terms, and BM25 scores each match by how frequently and specifically the query words appear in it, weighted by how rare those words are across the whole catalog. Exact terms win. Descriptive queries miss.
+That zero-result gap gets closed by running two retrieval pipelines in parallel and merging what they find. The first is a BM25 keyword scorer. It indexes every product by its terms, then scores matches by how frequently and specifically the query words appear, weighted by how rare those words are across the catalog. Exact terms win. Descriptive queries miss.
 
-The second pipeline converts the query into a vector using a transformer encoder - a fine-tuned BERT variant or a model like E5, Cohere Embed, or OpenAI text-embedding-3. A pre-built approximate nearest-neighbor index retrieves the k most similar product vectors in milliseconds. A query like "warm jacket that doesn't look bulky" surfaces the right product even if none of those words appear in the title.
+The second pipeline converts the query into a vector using a transformer encoder, typically a fine-tuned BERT variant or a model like E5, Cohere Embed, or OpenAI text-embedding-3. A pre-built approximate nearest-neighbor index retrieves the k most similar product vectors in milliseconds. A query like "warm jacket that doesn't look bulky" surfaces the right product even if none of those words appear in the title.
 
-The two ranked lists then merge using a fusion algorithm. Reciprocal rank fusion (RRF) is most common: each product scores 1/(k + rank) from each list, where k is a smoothing constant, typically 60. Products that rank well in both lists accumulate the highest combined scores; products in only one list still make it into the merged result, just lower down. A second approach - weighted score normalization - combines the lists at a configured ratio like 0.3 BM25 + 0.7 vector, giving teams a dial between exact-match fidelity and semantic depth. Fashion catalogs tend to lean semantic; electronics catalogs with model-number queries tend to lean keyword.
+The two ranked lists then merge using a fusion algorithm. Reciprocal rank fusion (RRF) is most common: each product scores 1/(k + rank) from each list, where k is a smoothing constant, typically 60. Products that rank well in both lists accumulate the highest combined scores; products in only one list still make it into the merged result, just lower down. A second approach, weighted score normalization, combines the lists at a configured ratio like 0.3 BM25 + 0.7 vector, giving teams a dial between exact-match fidelity and semantic depth. Fashion catalogs tend to lean semantic; electronics catalogs with model-number queries tend to lean keyword.
 
-Two operational points matter for a live catalog. First, index freshness is a correctness issue: both indexes have to stay current with what's actually in stock and on sale. Daily or twice-daily full re-indexing is the minimum; webhook-triggered incremental updates are better. Second, latency is less of a concern than teams expect. The ANN lookup is sub-millisecond against a pre-built index - the main variable is query-time embedding, which adds 10-50ms. Algolia reports sub-50ms response times at catalog scale on its NeuralSearch Elevate tier. Platforms pre-compute product embeddings at index time and only embed the short query string at runtime, keeping retrieval under 100ms - within the sub-150ms threshold [instant typeahead](https://nobi.ai/blog/typeahead-search) requires.
+Two operational points matter for a live catalog. First, index freshness is a correctness issue: both indexes have to stay current with what's actually in stock and on sale. Daily or twice-daily full re-indexing is the minimum; webhook-triggered incremental updates are better. Second, latency is less of a concern than teams expect. The ANN lookup is sub-millisecond against a pre-built index; the main variable is query-time embedding, which adds 10-50ms. Algolia reports sub-50ms response times at catalog scale on its NeuralSearch Elevate tier. Platforms pre-compute product embeddings at index time and only embed the short query string at runtime, keeping retrieval under 100ms, within the sub-150ms threshold [instant typeahead](https://nobi.ai/blog/typeahead-search) requires.
 
 ## Why does hybrid search matter for ecommerce conversion rates?
 
-That zero-result rate isn't just a search quality metric - it's a conversion signal. When search returns a dead end, that high-intent visitor typically bounces. Hybrid search reduces [zero-result pages](https://nobi.ai/blog/fix-zero-result-searches) by catching the descriptive, natural-language queries that keyword engines miss, turning otherwise-lost sessions into product views and purchases.
+That zero-result rate isn't just a search quality metric: it's a conversion signal. When search returns a dead end, that high-intent visitor typically bounces. Hybrid search reduces [zero-result pages](https://nobi.ai/blog/fix-zero-result-searches) by catching the descriptive, natural-language queries that keyword engines miss, turning otherwise-lost sessions into product views and purchases.
 
 A shopper who types "wide fit loafer for wide feet" and gets no results on a store that sells E-width shoes has hit a catalog naming problem, not a catalog gap. The right shoe exists; keyword search can't bridge the vocabulary gap to surface it.
 
 For apparel, footwear, and home brands, search typically drives a large share of PDP views. Fixing vocabulary mismatch at the search layer compounds across a large portion of high-intent traffic. AOV moves too. A searcher who finds exactly what they described adds it to cart at higher rates than a browser who scrolled past it. [UNTUCKit](/customers/untuckit) measured this directly in a two-month A/B test: +17.1% CVR (17.6% vs. 15.0%), +21.3% revenue per searcher ($39.17 vs. $32.30), and +3.3% AOV ($222 vs. $215). They moved Nobi to 100% of traffic after the test ended.
 
-There's also a problem that doesn't show up in standard zero-result dashboards: sessions where results appeared but were so irrelevant the shopper left without clicking. Semantic relevance scoring addresses both cases - and the bad-result case is harder to catch in analytics than the empty-result one.
+There's also a problem that doesn't show up in standard zero-result dashboards: sessions where results appeared but were so irrelevant the shopper left without clicking. Semantic relevance scoring addresses both cases, and the bad-result case is harder to catch in analytics than the empty-result one.
 
 ## Where does hybrid search apply inside an ecommerce store?
 
-Semantic relevance scoring closes both failure modes - empty results and irrelevant ones - but the conversion impact depends on where it applies. Hybrid retrieval powers three main surfaces on a modern store: the search bar, category and collection pages, and conversational Q&A on the product page. Each has different latency and grounding requirements.
+Semantic relevance scoring closes both failure modes (empty results and irrelevant ones), but the conversion impact depends on where it applies. Hybrid retrieval powers three main surfaces on a modern store: the search bar, category and collection pages, and conversational Q&A on the product page. Each has different latency and grounding requirements.
 
-The search bar is the highest-visibility surface. Shoppers expect instant typeahead results on every keystroke, so the engine has to respond before the query is even finished. Zero-result rate is the headline KPI. [UNTUCKit](/customers/untuckit) added Nobi's instant-search typeahead to their storefront and saw CVR rise 0.5 percentage points on an absolute basis - a gain from the typeahead experience alone.
+The search bar is the highest-visibility surface. Shoppers expect instant typeahead results on every keystroke, so the engine has to respond before the query is even finished. Zero-result rate is the headline KPI. [UNTUCKit](/customers/untuckit) added Nobi's instant-search typeahead to their storefront and saw CVR rise 0.5 percentage points on an absolute basis, a gain from the typeahead experience alone.
 
 Category and collection pages extend hybrid ranking onto the PLP itself. [Constructor](https://www.constructor.io) and [Bloomreach](https://www.bloomreach.com) both apply behavioral ranking across browse and category pages, sorting products by the visitor's inferred intent rather than static merchandising rules. Nobi curates the search results page; brands needing site-wide collection merchandising will still need a dedicated tool for that layer.
 
@@ -126,39 +126,40 @@ When a shopper asks "does this come in wide?" or "what's your return window?" on
 
 Faceted filtering adds a fourth layer. When a shopper types a descriptive query and then applies a size filter, the engine runs the semantic phase first and applies the hard filter as a post-retrieval constraint, so results stay relevant without forcing a re-query.
 
-[Kilte](/customers/kilte) runs Nobi across three of these surfaces simultaneously - the search bar, collection filters, and [product discovery](https://nobi.ai/blog/the-top-ecommerce-platforms-for-native-ai-search-and-product-discovery). Each contributes independently to CVR lift, and the same semantic layer applied consistently across surfaces produces compounding gains rather than a single isolated win.
+[Kilte](/customers/kilte) runs Nobi across three of these surfaces simultaneously: the search bar, collection filters, and [product discovery](https://nobi.ai/blog/the-top-ecommerce-platforms-for-native-ai-search-and-product-discovery). Each contributes independently to CVR lift, and the same semantic layer applied consistently across surfaces produces compounding gains rather than a single isolated win.
 
 ## What are the main approaches to hybrid search, and which tools use each one?
 
 That consistent semantic layer looks different depending on which category of tool supplies it. The [ecommerce search market](https://nobi.ai/blog/best-ai-search-ecommerce-2026) breaks into five categories, each making a different bet on where the hard problem actually lives.
 
-**Rule-based keyword engines** - [Boost Commerce](https://www.boostcommerce.net), [Searchanise](https://www.searchanise.com), [Doofinder](https://www.doofinder.com), [Findify](https://www.findify.io), and [Searchspring](https://www.searchspring.com) (a division of Athos Commerce, which also owns Klevu) - run BM25 matching plus merchandiser-controlled synonym lists, pins, and zero-result redirects. Relevance is auditable: every result traces back to a specific rule, which matters when a merchandiser needs to explain any result after a campaign. The trade-off is maintenance - the rule list grows with query patterns.
+**Rule-based keyword engines** ([Boost Commerce](https://www.boostcommerce.net), [Searchanise](https://www.searchanise.com), [Doofinder](https://www.doofinder.com), [Findify](https://www.findify.io), and [Searchspring](https://www.searchspring.com), a division of Athos Commerce that also owns Klevu) run BM25 matching plus merchandiser-controlled synonym lists, pins, and zero-result redirects. Relevance is auditable: every result traces back to a specific rule, which matters when a merchandiser needs to explain any result after a campaign. The trade-off is maintenance: the rule list grows with query patterns.
 
-**AI-augmented search platforms** - Klevu and Fast Simon - add a semantic layer on top of keyword retrieval, closing vocabulary-mismatch gaps without a manually maintained synonym list. Fast Simon pairs the semantic layer with visual merchandising tools for collection curation, so marketing teams can update seasonal campaign presentations without engineering tickets. These are the hybrid middle ground for teams that want AI relevance without developer ownership.
+**AI-augmented search platforms** (Klevu and Fast Simon) add a semantic layer on top of keyword retrieval, closing vocabulary-mismatch gaps without a manually maintained synonym list. Fast Simon pairs the semantic layer with visual merchandising tools for collection curation, so marketing teams can update seasonal campaign presentations without engineering tickets. These are the hybrid middle ground for teams that want AI relevance without developer ownership.
 
-**Developer-API infrastructure** - [Algolia](https://www.algolia.com) and [Coveo](https://www.coveo.com) - is built for teams with a dedicated search engineer. Algolia's NeuralSearch (Elevate plan only) adds vector embeddings tunable at the attribute level; Coveo runs ML relevance across commerce, support portals, and internal knowledge under one engine. Both configurations go stale without someone owning them long-term.
+**Developer-API infrastructure** ([Algolia](https://www.algolia.com) and [Coveo](https://www.coveo.com)) is built for teams with a dedicated search engineer. Algolia's NeuralSearch (Elevate plan only) adds vector embeddings tunable at the attribute level; Coveo runs ML relevance across commerce, support portals, and internal knowledge under one engine. Both configurations go stale without someone owning them long-term.
 
-**Enterprise full-stack platforms** - Bloomreach and Constructor - extend hybrid retrieval across search, category pages, recommendations, and email using unified behavioral signals. Constructor reranks in real time from each shopper's clicks and cart actions during a session; Bloomreach ties those signals to CDP profiles. Both carry enterprise pricing and timelines: Constructor's model is revenue-share tied to GMV; Bloomreach typically runs six-figure contracts with multi-quarter rollouts.
+**Enterprise full-stack platforms** (Bloomreach and Constructor) extend hybrid retrieval across search, category pages, recommendations, and email using unified behavioral signals. Constructor reranks in real time from each shopper's clicks and cart actions during a session; Bloomreach ties those signals to CDP profiles. Both carry enterprise pricing and timelines: Constructor's model is revenue-share tied to GMV; Bloomreach typically runs six-figure contracts with multi-quarter rollouts.
 
-**Conversational hybrid engines** - Nobi - route each query automatically. Short product queries get fast ranked results; questions about sizing, materials, returns, or compatibility get a grounded answer with inline source citations, not just a ranked list. Starting at $25/month, this category is accessible to stores that couldn't previously justify enterprise search investments.
+**Conversational hybrid engines** (Nobi) route each query automatically. Short product queries get fast ranked results; questions about sizing, materials, returns, or compatibility get a grounded answer with inline source citations, not just a ranked list. Starting at $25/month, this category is accessible to stores that couldn't previously justify enterprise search investments.
 
-The clearest movement is toward grounded conversational search on question-shaped queries. Stores that generate sourced, cited answers are better positioned to appear in AI-generated search summaries - Perplexity, AI Overviews - than stores that return only product tiles. Hybrid retrieval is the enabling layer underneath both.
+The clearest movement is toward grounded conversational search on question-shaped queries. Stores that generate sourced, cited answers are better positioned to appear in AI-generated search summaries (Perplexity, AI Overviews) than stores that return only product tiles. Hybrid retrieval is the enabling layer underneath both.
 
 ## What results can ecommerce brands expect from hybrid search?
 
-Brands that move from keyword-only to [hybrid or semantic search](https://nobi.ai/blog/best-semantic-search-ecommerce) consistently record lower zero-result rates, higher conversion on search sessions, and higher revenue per searcher. The gains are largest when vocabulary mismatch was the main bottleneck - apparel, footwear, and home furnishings brands with descriptive catalogs see the clearest lift, typically within the first two to four weeks of an A/B test.
+Brands that move from keyword-only to [hybrid or semantic search](https://nobi.ai/blog/best-semantic-search-ecommerce) consistently record lower zero-result rates, higher conversion on search sessions, and higher revenue per searcher. The gains are largest when vocabulary mismatch was the main bottleneck; apparel, footwear, and home furnishings brands with descriptive catalogs see the clearest lift, typically within the first two to four weeks of an A/B test.
+
 
 Zero-result rate is usually the first metric to move. Semantic retrieval catches the descriptive queries that keyword engines returned empty, so the shift shows up within days of launch. CVR and revenue per searcher take two to four weeks of traffic to reach statistical significance in a proper A/B test.
 
-[Lucchese](/customers/lucchese), a luxury Western boot brand on Shopify Plus, attributed $1M+ incremental revenue in year one with a 39x ROI - and $3.46M cumulative revenue - after deploying Nobi across search, a cart assistant, and a PDP assistant. The cart and PDP assistants drove incremental checkouts alongside search.
+[Lucchese](/customers/lucchese), a luxury Western boot brand on Shopify Plus, attributed $1M+ incremental revenue in year one with a 39x ROI ($3.46M cumulative revenue) after deploying Nobi across search, a cart assistant, and a PDP assistant. The cart and PDP assistants drove incremental checkouts alongside search.
 
-[Kilte](/customers/kilte), a DTC fashion brand, recorded a +21.7% CVR lift versus Shopify's default search. Kilte also runs hybrid retrieval across three placements at once - the search bar, collection filters, and product discovery - with each contributing independently to CVR. Deploying on just one of those three captures only part of the available lift.
+[Kilte](/customers/kilte), a DTC fashion brand, recorded a +21.7% CVR lift versus Shopify's default search. Kilte also runs hybrid retrieval across three placements at once (the search bar, collection filters, and product discovery), with each contributing independently to CVR. Deploying on just one of those three captures only part of the available lift.
 
 ## What are the risks of hybrid search, and how do you avoid them?
 
 Those gains are real, but hybrid search introduces failure modes that keyword engines don't have. The answer layer can fabricate product details when retrieval surfaces wrong content, stale indexes cause inventory errors, and teams without auditability controls lose the ability to explain results after a campaign.
 
-**Confident lies.** When retrieval pulls the wrong content chunk, the answer layer generates a plausible response built on bad evidence. A shopper asking about machine-washability gets a confident "yes" if the retrieved chunk belongs to a different product's care instructions. The fix is citation transparency - every answer should surface its source so shoppers can verify it. For return policies, allergen information, and warranty terms, a query override that locks the response to operator-approved text removes the LLM from the equation entirely.
+**Confident lies.** When retrieval pulls the wrong content chunk, the answer layer generates a plausible response built on bad evidence. A shopper asking about machine-washability gets a confident "yes" if the retrieved chunk belongs to a different product's care instructions. The fix is citation transparency: every answer should surface its source so shoppers can verify it. For return policies, allergen information, and warranty terms, a query override that locks the response to operator-approved text removes the LLM from the equation entirely.
 
 **Hallucinated inventory.** If the index isn't synchronized with live catalog data, the engine recommends out-of-stock items. Twice-daily re-indexing is the minimum; webhook-triggered incremental updates on inventory changes are better. Ask any platform you evaluate: how quickly do catalog changes appear in answers?
 
@@ -166,21 +167,21 @@ Those gains are real, but hybrid search introduces failure modes that keyword en
 
 **Tuning complexity.** Too much vector weight buries exact model-number queries under semantically related but wrong products; too much keyword weight and vocabulary mismatch returns. Set zero-result rate and CVR as governing metrics before you tune the blend.
 
-**The invisible churn problem.** A wrong answer on sizing, allergens, or return policy often ends the relationship - that shopper simply doesn't return, and the loss never shows up in your zero-result dashboard. A second AI review that checks each draft answer against the cited source before it sends is the most reliable safeguard for those query categories.
+**The invisible churn problem.** A wrong answer on sizing, allergens, or return policy often ends the relationship. That shopper simply doesn't return, and the loss never shows up in your zero-result dashboard. A second AI review that checks each draft answer against the cited source before it sends is the most reliable safeguard for those query categories.
 
-**Data freshness.** Every connected source needs a defined update process. A price change that reaches the product page but not the embedded policy doc creates an inconsistency shoppers notice immediately - and trust, once broken on a factual question, is hard to rebuild.
+**Data freshness.** Every connected source needs a defined update process. A price change that reaches the product page but not the embedded policy doc creates an inconsistency shoppers notice immediately; trust, once broken on a factual question, is hard to rebuild.
 
 ## How do you choose a hybrid search solution for your ecommerce store?
 
-The right platform depends on four variables: whether your team has engineering bandwidth to own the implementation, how much query-level control you need for merchandising accountability, whether you need a grounded answer layer alongside the results page, and what your pricing tolerance is as query volume scales.
+The right platform depends on four variables. First, whether your team has engineering bandwidth to own the implementation and how much query-level control you need for merchandising accountability. Second, whether you need a grounded answer layer alongside the results page, and what your pricing tolerance is as query volume scales.
 
-**Developer ownership vs. no-code.** Algolia (Elevate tier) and Coveo give engineering teams full API control over ranking - right when a dedicated search engineer owns the configuration long-term. Klevu, Fast Simon, and Nobi are built for ecommerce teams who need semantic search running without an engineering ticket; Shopify installs typically are up within days.
+**Developer ownership vs. no-code.** Algolia (Elevate tier) and Coveo give engineering teams full API control over ranking, when a dedicated search engineer owns the configuration long-term. Klevu, Fast Simon, and Nobi are built for ecommerce teams who need semantic search running without an engineering ticket; Shopify installs typically are up within days.
 
 **Control vs. AI automation.** Searchspring's rule-by-rule merchandising makes every result traceable but is maintenance-intensive as the catalog grows. AI-led engines handle vocabulary mismatch without a synonym list but require trust in relevance you can't inspect query-by-query. Most teams want both: AI defaults for the long tail, manual overrides available for high-stakes queries.
 
-**Results page vs. answer layer.** If the primary problem is search returning wrong or no products, any hybrid engine helps. If shoppers ask about sizing, materials, or return policies - and those questions currently generate support tickets - you need an answer grounded in your actual content, not just a better results page.
+**Results page vs. answer layer.** If the primary problem is search returning wrong or no products, any hybrid engine helps. If shoppers ask about sizing, materials, or return policies (and those questions currently generate support tickets), you need an answer grounded in your actual content, not just a better results page.
 
-**Pricing and timeline.** Constructor's revenue-share model scales with GMV and is hard to model before signing. Bloomreach and Coveo both run six-figure contracts with multi-quarter implementation timelines. Algolia bills per search request; costs can escalate quickly at high volumes. Klevu and Fast Simon are up and running on Shopify within days. Nobi starts at $25/month (2,500 searches and 250 conversational messages), with $0.01 per additional search and $0.10 per additional message - visible before you commit.
+**Pricing and timeline.** Constructor's revenue-share model scales with GMV and is hard to model before signing. Bloomreach and Coveo both run six-figure contracts with multi-quarter implementation timelines. Algolia bills per search request; costs can escalate quickly at high volumes. Klevu and Fast Simon are up and running on Shopify within days. Nobi starts at $25/month (2,500 searches and 250 conversational messages), with $0.01 per additional search and $0.10 per additional message, visible before you commit.
 
 If full API control is the requirement and a search engineer is on staff, Algolia Elevate is built for that job. If site-wide behavioral reranking across category pages and [recommendations](https://nobi.ai/blog/how-ecommerce-product-recommendations-work-and-what-powers-them) is the priority, Constructor covers it. If consolidating search, CMS, and customer data into one platform contract is the goal, Bloomreach is the one to evaluate. Nobi fits when the job is reducing zero-result rates, answering pre-purchase questions from connected content, and measuring CVR impact without a multi-month rollout first.
 
@@ -188,11 +189,11 @@ If full API control is the requirement and a search engineer is on staff, Algoli
 
 **Is hybrid search the same as AI search?**
 
-Not exactly. "AI search" is a marketing term vendors apply to everything from basic synonym expansion to full neural retrieval. Hybrid search is a specific technical approach: BM25 and vector retrieval running in parallel, results merged by a fusion algorithm. Algolia's NeuralSearch is only available on the top Elevate plan - not on Build, Grow, Grow Plus, or Premium.
+Not exactly. "AI search" is a marketing term vendors apply to everything from basic synonym expansion to full neural retrieval. Hybrid search is a specific technical approach: BM25 and vector retrieval running in parallel, results merged by a fusion algorithm. Algolia's NeuralSearch is only available on the top Elevate plan, not on Build, Grow, Grow Plus, or Premium.
 
 **Does hybrid search slow down search?**
 
-Not in a well-built system. Platforms pre-compute product embeddings at index time and only embed the short query string at runtime, keeping retrieval under 100ms - within the sub-150ms threshold instant typeahead requires.
+Not in a well-built system. Platforms pre-compute product embeddings at index time and only embed the short query string at runtime, keeping retrieval under 100ms, within the sub-150ms threshold instant typeahead requires.
 
 **Do I need a developer to implement hybrid search?**
 
@@ -208,7 +209,7 @@ Run an A/B test splitting search sessions between the new and old engine, then t
 
 **What happens when a shopper asks a question instead of searching?**
 
-A keyword engine returns a results page for a question like "do these run narrow?" - usually the wrong products. A conversational engine with a RAG layer routes it to a grounded answer from the product's fit guide or size chart, with a source citation the shopper can verify. That distinction - ranked results versus grounded answers - determines whether your search investment reduces support ticket volume or only search abandonment.
+A keyword engine returns a results page for a question like "do these run narrow?" (usually the wrong products). A conversational engine with a RAG layer routes it to a grounded answer from the product's fit guide or size chart, with a source citation the shopper can verify. That distinction (ranked results versus grounded answers) determines whether your search investment reduces support ticket volume or only search abandonment.
 
 
 <BlogEmailCapture hook="Weighing Klevu, Constructor, or Bloomreach for hybrid search?" subtext="Drop your email and we'll show you how Nobi's AI search combines semantic and keyword matching to surface the right products for the queries your store is currently missing." />

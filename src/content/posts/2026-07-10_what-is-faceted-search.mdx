@@ -57,7 +57,7 @@ export const meta = {
   "headline": "What Is Faceted Search?",
   "description": "Faceted search lets visitors filter by multiple product attributes at once. Learn how it works, how it differs from filters and semantic search, and how to choose a tool.",
   "datePublished": "2026-07-10",
-  "dateModified": "2026-07-10",
+  "dateModified": "2026-07-17",
   "author": {
     "@type": "Person",
     "name": "Shanif Dhanani",
@@ -118,7 +118,7 @@ Facet order and default sort are usually merchandiser-controlled. A team decides
 
 A basic filter is usually single-select and hard-coded per category. A "Sort by price" dropdown or one size selector, configured by hand on that category page. Faceted search is multi-select, combinable, and generated dynamically from attribute data, so it scales automatically as inventory changes. That's why the two so often get confused: facets look like filters, but they're built and maintained differently, and it's why [filters alone stop working once a catalog grows past a handful of categories](https://nobi.ai/blog/ecommerce-product-discovery-beyond-filters).
 
-Semantic search is a different approach altogether. Instead of requiring a visitor to click a pre-defined attribute value, it interprets what they mean in free text. A search for "gift for a runner" has no facet to click, no attribute tagged "gift" or "runner" in the product data. Semantic search reads intent from the phrase and matches products that fit, even when nothing in the catalog literally says those words.
+Semantic search is a different approach altogether. Instead of requiring a visitor to click a pre-defined attribute value, [natural language search](/blog/what-is-natural-language-search) interprets what they mean in free text. A search for "gift for a runner" has no facet to click, no attribute tagged "gift" or "runner" in the product data. Semantic search reads intent from the phrase and matches products that fit, even when nothing in the catalog literally says those words.
 
 These three aren't rivals competing for the same job. Most modern search stacks use facets to narrow a results set once a visitor has landed on it, and semantic matching to interpret the query that got them there in the first place, especially for long or descriptive searches. A pure facet system fails a visitor who doesn't know the right attribute name to click. A pure semantic system fails a visitor who wants precise, deterministic narrowing, someone who already knows they want "size 10," "waterproof," and "under $150." The strongest search setups combine both instead of picking one, which is the core case for [AI-powered search over keyword-only site search](https://nobi.ai/blog/ai-vs-traditional-site-search).
 
@@ -178,7 +178,7 @@ A deep, high-attribute catalog with a lot of categories, and engineering time to
 
 If you want full API control over ranking logic, and you have a search engineer on staff, Algolia fits. Facets, ranking, and merchandising rules all live in code, which gives you granular control at the cost of ongoing manual tuning as the catalog changes. If semantic matching rather than pure code-level control is the priority, it's worth comparing that shortlist directly, including [the best semantic search platforms for ecommerce](https://nobi.ai/blog/best-semantic-search-ecommerce).
 
-Unifying search across commerce and internal or support-facing content at enterprise scale is Coveo's job. It runs one relevance engine, with faceted filtering built in, across multiple properties instead of a separate tool per channel. That comes at enterprise cost and a longer sales cycle.
+Unifying search across commerce and internal or support-facing content at enterprise scale is [Coveo's job](/blog/coveo-alternatives-ecommerce). It runs one relevance engine, with faceted filtering built in, across multiple properties instead of a separate tool per channel. That comes at enterprise cost and a longer sales cycle.
 
 If the job is search plus answering visitor questions, facets and semantic matching and cited answers to something like "is this machine-washable?" in one system, without engineering setup time, that's where Nobi fits. It's $25 a month for 2,500 searches and 250 conversational messages, live in hours rather than months.
 

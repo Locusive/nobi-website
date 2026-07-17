@@ -45,7 +45,7 @@ export const meta = {
   "headline": "How To Retarget Shoppers Who Search But Don't Buy",
   "description": "When a shopper searches your store, Nobi sends the query to your Facebook Pixel and Google Tag Manager so you can retarget the high-intent shoppers who searched but didn't buy.",
   "datePublished": "2026-06-11",
-  "dateModified": "2026-06-11",
+  "dateModified": "2026-07-17",
   "author": {
     "@type": "Person",
     "name": "Shanif Dhanani",
@@ -84,11 +84,11 @@ This guide shows how to send those searches to your existing Facebook and Google
 
 A page view tells you a shopper found your site. A search tells you what they came for - the category, the product type, the price range, the exact thing they typed. Most ecommerce retargeting audiences are built on the page view, the weaker signal, while the stronger one goes unused. The shopper who searched "waterproof boots under $150" and then left is a far more qualified retargeting candidate than anyone who scrolled the boots category page.
 
-That's the whole idea behind search retargeting. Instead of chasing everyone who landed on a URL, you chase the people who told you, in their own words, what they were shopping for. There are fewer of them, and each one is worth more, because the intent is declared rather than guessed.
+That's the whole idea behind search retargeting. Instead of chasing everyone who landed on a URL, you chase [the people who told you, in their own words, what they were shopping for](/blog/capture-leads-from-chat). There are fewer of them, and each one is worth more, because the intent is declared rather than guessed.
 
 ## What is Nobi, and how does it send search intent to your pixels?
 
-Nobi is an AI-powered site search and shopping assistant for ecommerce brands. The piece that matters here is the search. When a shopper runs a search on your store, Nobi can pass that query straight to the ad pixels you already run.
+Nobi is an AI-powered site search and [shopping assistant](/blog/ai-shopping-assistant-ecommerce) for ecommerce brands. The piece that matters here is the search. When a shopper runs a search on your store, Nobi can pass that query straight to the ad pixels you already run.
 
 It works on two channels, each behind its own toggle. With Facebook turned on, Nobi fires a standard `Search` event to your Facebook Pixel, with the shopper's query in the `search_string` parameter. With Google turned on, Nobi pushes a `nobi_search` event to your site's dataLayer, with the query in a `nobi_search_query` field, where Google Tag Manager can pick it up. That is the signal: the search query, sent the moment a shopper searches.
 
@@ -119,7 +119,7 @@ Everything downstream is yours. For Google, your tag manager routes the event to
 
 A page-view audience scoops up everyone who landed on a URL: window-shoppers, accidental clicks, customers checking an order. A search-built audience only contains people who took an active step and told you what they wanted. It's smaller and higher-intent, and for retargeting that's the trade you want - intent density over reach.
 
-Smaller usually means cheaper to convert, too, because every impression lands on someone who declared an interest rather than someone who happened to scroll past. And because the query rides along in the `nobi_search_query` field, your creative has something to work with: a shopper who searched for waterproof boots can get a waterproofing-led ad instead of a generic banner.
+Smaller usually means [cheaper to convert](/blog/increase-ecommerce-conversion-rate-search), too, because every impression lands on someone who declared an interest rather than someone who happened to scroll past. And because the query rides along in the `nobi_search_query` field, your creative has something to work with: a shopper who searched for waterproof boots can get a waterproofing-led ad instead of a generic banner.
 
 [Lucchese](/customers/lucchese) attributed $3.46M in cumulative revenue to Nobi, with its cart and product-page assistants driving incremental checkouts across the site.
 

@@ -49,7 +49,7 @@ export const meta = {
   "headline": "How to Implement a Shopping Assistant for Ecommerce Success",
   "description": "A step-by-step guide for marketing managers: picking a shopping assistant platform, rolling it out on Shopify, measuring revenue, and knowing when to skip.",
   "datePublished": "2026-04-23",
-  "dateModified": "2026-05-10",
+  "dateModified": "2026-07-17",
   "author": {
     "@type": "Person",
     "name": "Shanif Dhanani",
@@ -91,7 +91,7 @@ Adding a shopping assistant to an ecommerce site comes down to four steps:
 
 A shopping assistant is an [AI-powered conversational interface](https://nobi.ai/blog/ai-shopping-assistant-ecommerce) that sits on an ecommerce site and helps visitors find products, answer pre-purchase questions grounded in your catalog and policy pages, and deflect common support questions. The modern versions are grounded in your actual product catalog and shopper data, so when a visitor asks "do you have this in a wide fit under $80?" the bot recommends real SKUs with real availability instead of hallucinating a product that doesn't exist.
 
-The concrete payoff looks like this: a shopper types "white running shoes size 10" into the search bar, gets a ranked list of in-stock SKUs plus a short AI answer summarising the options. If she follows up with "are these true to size?", the assistant pulls the answer from your product descriptions and returns policy without the shopper ever leaving the page. One session handles discovery, a fit question, and the decision - three steps that used to live in search, a PDP, and an email to support.
+The concrete payoff looks like this: a shopper types "white running shoes size 10" into the search bar, gets a ranked list of in-stock SKUs plus a short AI answer summarising the options. If she follows up with "are these true to size?", the assistant pulls the answer from your product descriptions and returns policy without the shopper ever leaving the page. One session handles discovery, a fit question, and the decision - three steps that used to live in search, a [PDP](/blog/the-best-ai-assistants-for-pdps), and an email to support.
 
 Worth naming up front where a shopping assistant isn't the right category - the label gets confused with helpdesk tools all the time. A shopping assistant is not a helpdesk. Helpdesks like [Gorgias](https://gorgias.com) or [Zendesk](https://zendesk.com) manage tickets agent-side - they're the interface your support team uses to handle cases, macros, and returns. A shopping assistant talks to the shopper directly, before a ticket would ever get filed.
 
@@ -155,7 +155,7 @@ Nobi handles search, conversational shopping, and automatic shopper Q&A on one w
 <BlogEmailCapture hook="Implementing a shopping assistant on your ecommerce store?" subtext="Drop your email and we'll show you how Nobi's AI shopping assistant answers product questions and guides shoppers to checkout on your site." />
 ## How do you plan a shopping assistant rollout before you pick a tool?
 
-Scoping means understanding and focusing on the primary job the assistant has to do on your site. Product discovery, shopper-question answering, post-purchase ticket deflection, or a specific campaign flow are all valid jobs, but the best tool for each is different. A platform that's great at conversational product discovery will do a mediocre job of ticket deflection, and a support-first bot will not move your AOV. Pick one primary job, rank the second and third as stretch goals, and shortlist against the primary. Teams that try to solve all four jobs at once end up with a tool that's adequate at each and great at none.
+Scoping means understanding and focusing on the primary job the assistant has to do on your site. [Product discovery](/blog/ecommerce-product-discovery-beyond-filters), shopper-question answering, post-purchase ticket deflection, or a specific campaign flow are all valid jobs, but the best tool for each is different. A platform that's great at conversational product discovery will do a mediocre job of ticket deflection, and a support-first bot will not move your AOV. Pick one primary job, rank the second and third as stretch goals, and shortlist against the primary. Teams that try to solve all four jobs at once end up with a tool that's adequate at each and great at none.
 
 Technical prep is the part most teams skip. Verify catalog feed quality first: missing attributes, wrong inventory counts, and broken image URLs will show up in the assistant's recommendations faster than they show up anywhere else on your site. Decide widget placement, trigger rules, and what the bot does when it can't answer before the vendor asks you in the implementation call. Holdout-based analytics instrumentation belongs here too - more on that in the measurement section below.
 
@@ -169,7 +169,7 @@ The step brands skip most often is analytics wiring. Without a holdout group and
 
 ## How do you measure whether your shopping assistant is actually working?
 
-Measure incremental revenue from assistant sessions against a holdout, not chat volume. The three numbers that tie to marketing KPIs: conversion rate on sessions that interacted with the assistant versus a matched holdout that didn't, average order value on assistant-assisted checkouts, and email or SMS captures attributable to the chat surface. Set the holdout up on day one. If you wait, you'll spend a quarter arguing about whether the assistant caused the lift or whether those shoppers would have converted anyway.
+Measure incremental revenue from assistant sessions against a holdout, not chat volume. The three numbers that tie to marketing KPIs: [conversion rate on sessions that interacted with the assistant](/blog/increase-ecommerce-conversion-rate-search) versus a matched holdout that didn't, average order value on assistant-assisted checkouts, and email or SMS captures attributable to the chat surface. Set the holdout up on day one. If you wait, you'll spend a quarter arguing about whether the assistant caused the lift or whether those shoppers would have converted anyway.
 
 Setting up the holdout is a one-time config: most platforms let you gate the assistant by a cookie flag or a percentage of traffic, so a random share of visitors sees the site without it. Keep the holdout at 10-20% for the first 4-6 weeks - long enough to accumulate enough converted sessions on each side for a real comparison at your volume. Don't touch the split mid-test; if you re-randomize, you lose the baseline. The comparison you care about at the end is CVR and AOV on the treated group minus the holdout, not the raw numbers on either side.
 

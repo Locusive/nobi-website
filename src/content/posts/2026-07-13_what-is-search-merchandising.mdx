@@ -57,7 +57,7 @@ export const meta = {
   "headline": "What Is Search Merchandising?",
   "description": "Search merchandising explained: manual boosting, rule-based pinning, and AI-automated relevance - what each does, where it fits, and how to pick one.",
   "datePublished": "2026-07-13",
-  "dateModified": "2026-07-13",
+  "dateModified": "2026-07-17",
   "author": {
     "@type": "Person",
     "name": "Shanif Dhanani",
@@ -110,7 +110,7 @@ What hasn't changed through any of this is the goal. Merchandising has always be
 
 Search merchandising directly moves [add-to-cart rate and revenue per visit](https://nobi.ai/blog/increase-ecommerce-conversion-rate-search) because it fixes the moment a high-intent visitor, someone who already typed what they want, hits a bad result. A marketing team can spend heavily on paid and email to drive traffic, but if on-site search returns the wrong products or a null-results page, that traffic converts at a fraction of its potential. Shoppers who use search convert at meaningfully higher rates than shoppers who just browse, which makes a bad search result one of the most expensive failures on the site: it wastes the visits you already paid to earn.
 
-[Zero-result rate](https://nobi.ai/blog/fix-zero-result-searches) is the clearest version of this tax. Every "no results found" page is a shopper who typed a real purchase intent and got nothing back. Most of that comes from vocabulary mismatch: the shopper searches "wide pant," the catalog calls it a "trouser," and a purely literal search engine treats those as unrelated strings. Merchandising fixes some of this with manual synonym rules; semantic matching fixes more of it by understanding what the shopper meant instead of only what they typed. Either way, a query that should have converted instead ends the session.
+[Zero-result rate](https://nobi.ai/blog/fix-zero-result-searches) is the clearest version of this tax. Every "no results found" page is a shopper who typed a real purchase intent and got nothing back. Most of that comes from vocabulary mismatch: the shopper searches "wide pant," the catalog calls it a "trouser," and a purely literal search engine treats those as unrelated strings. Merchandising fixes some of this with manual synonym rules; [semantic matching](/blog/best-semantic-search-ecommerce) fixes more of it by understanding what the shopper meant instead of only what they typed. Either way, a query that should have converted instead ends the session.
 
 Merchandising also protects margin, not just conversion. Boosting overstock, burying discontinued SKUs, and pinning high-margin items during a promotion all shape which products a marketing campaign actually sells once traffic lands. A well-timed sale drives nothing extra if search still ranks last season's inventory over the SKUs you're trying to move.
 
@@ -120,7 +120,7 @@ For a marketing manager, that combination makes search merchandising one of the 
 
 That lever sits on top of a specific mechanism: a layer of rules or models between a shopper's query and the raw catalog index, reordering, filtering, or redirecting results before they render. In rule-based systems, a merchandiser configures that layer by hand. In AI-native systems, a model infers relevance, and in some products shopper intent, automatically.
 
-The manual controls break down into a few core moves. Pinning locks one SKU to one position for one specific query, no matter what the underlying relevance score says. Boosting and burying nudge a product's rank up or down without fixing it in place, useful for a promo push or clearing overstock. Zero-result redirects catch a dead-end query and route it to a curated landing page or a fallback set of results instead of an empty page. Synonym groups and fuzzy matching map alternate shopper phrasing, say "sneakers" versus "trainers", to the same result set, cutting down the null results that come from vocabulary mismatch rather than an actual out-of-catalog request.
+The manual controls break down into a few core moves. Pinning locks one SKU to one position for one specific query, no matter what the underlying relevance score says. [Boosting and burying](/blog/merchandising-boost-bury) nudge a product's rank up or down without fixing it in place, useful for a promo push or clearing overstock. Zero-result redirects catch a dead-end query and route it to a curated landing page or a fallback set of results instead of an empty page. Synonym groups and fuzzy matching map alternate shopper phrasing, say "sneakers" versus "trainers", to the same result set, cutting down the null results that come from vocabulary mismatch rather than an actual out-of-catalog request.
 
 [Searchspring](https://searchspring.com) built its product around this manual layer: a merchandiser sets pins, boosts, and redirects by hand. [Klevu](https://klevu.com) leans further into automated relevance, using AI to rerank results by semantic similarity and, on more advanced setups, individual shopper behavior like clicks and past purchases. That cuts down how much a merchandiser has to configure directly.
 
@@ -142,7 +142,7 @@ That split creates a real risk: a store running separate tools for search, PLP c
 
 ## What are the main types of search merchandising tools?
 
-[Search merchandising tools](https://nobi.ai/blog/best-ecommerce-search-save-merchandising-time) fall into four broad categories, plus one newer one taking shape now. Rule-based dashboards put every pin, boost, and redirect in the merchandiser's hands. Visual merchandising tools focus on how collections and campaigns present on category pages. AI-native engines rerank automatically based on behavior or meaning. Full-stack enterprise platforms bundle merchandising with content and customer data. And a newer category, conversational merchandising, extends these controls into a shopping assistant's answers instead of just a results grid.
+[Search merchandising tools](https://nobi.ai/blog/best-ecommerce-search-save-merchandising-time) fall into four broad categories, plus one newer one taking shape now. [Rule-based dashboards](/blog/search-platforms-rule-based-boosting-pinning) put every pin, boost, and redirect in the merchandiser's hands. Visual merchandising tools focus on how collections and campaigns present on category pages. AI-native engines rerank automatically based on behavior or meaning. Full-stack enterprise platforms bundle merchandising with content and customer data. And a newer category, conversational merchandising, extends these controls into a shopping assistant's answers instead of just a results grid.
 
 [Searchspring](https://searchspring.com) is the clearest rule-based option: pins, boosts, and zero-result redirects live in one dashboard the merchandising team drives directly. That gives full visibility into every rule, but the rule list grows one-to-one with query patterns, and someone has to keep it current as the catalog changes.
 

@@ -49,7 +49,7 @@ export const meta = {
   "headline": "How to Let Shoppers Find Products in Their Own Words on Salesforce Commerce Cloud",
   "description": "Salesforce Commerce Cloud's keyword search misses descriptive queries. Add Nobi to resolve natural-language searches from your live catalog.",
   "datePublished": "2026-06-21",
-  "dateModified": "2026-06-22",
+  "dateModified": "2026-07-17",
   "author": {
     "@type": "Person",
     "name": "Shanif Dhanani",
@@ -84,7 +84,7 @@ Shoppers rarely search using the exact words in your product titles. They type "
 
 Salesforce Commerce Cloud's built-in search matches on keywords: the exact words a shopper typed against the words in your product titles, descriptions, and attributes. So when a shopper types "warm hiking jacket under $200" and your catalog says "men's insulated shell" or "mountain parka," the engine finds no overlap and returns a [zero-result page](/blog/fix-zero-result-searches). The shopper usually just moves on, and your analytics record a bounce rather than the vocabulary mismatch behind it.
 
-This shows up more as shoppers describe what they want in plain terms. Queries like "gift for a trail runner" or sizing questions like "does this run narrow" don't map to the keyword patterns the engine recognizes. SFCC does give you synonym groups and boosting rules to close some of those gaps, and they help, but every new phrasing variation needs its own manual entry, so the list grows along with your catalog.
+This shows up more as shoppers [describe what they want in plain terms](/blog/what-is-natural-language-search). Queries like "gift for a trail runner" or sizing questions like "does this run narrow" don't map to the keyword patterns the engine recognizes. SFCC does give you synonym groups and boosting rules to close some of those gaps, and they help, but every new phrasing variation needs its own manual entry, so the list grows along with your catalog.
 
 It's also easy to overlook, because there's no signal: shoppers who come up empty don't file a ticket, they just move on. And since many of them arrive from paid campaigns or email (often your highest-intent traffic), those empty results quietly work against the spend that brought them in.
 
@@ -92,7 +92,7 @@ It's also easy to overlook, because there's no signal: shoppers who come up empt
 
 Nobi closes those dead ends. It's a conversational website assistant that adds semantic product search and automated shopper Q&A to your SFCC storefront, with no platform migration and no native search widget to remove.
 
-For natural-language search, the key is how Nobi reads queries. It uses semantic embeddings to map what a shopper means to products in your connected catalog, not the exact words in a product title. A shopper who types "warm hiking jacket under $200" against a catalog full of "men's insulated shell" and "mountain parka" listings gets results instead of a dead-end page.
+For natural-language search, the key is how Nobi reads queries. It uses [semantic embeddings](/blog/semantic-search-vs-keyword-search) to map what a shopper means to products in your connected catalog, not the exact words in a product title. A shopper who types "warm hiking jacket under $200" against a catalog full of "men's insulated shell" and "mountain parka" listings gets results instead of a dead-end page.
 
 The knowledge base builds from your existing SFCC content (product pages, PDPs, policy docs, FAQ routes, help-center articles, PDFs) with no manual re-entry or data migration required. You point Nobi at the content you already have, and it reads it where it lives. Connected sources refresh twice a day, so a pricing change or availability update lands in shopper answers within hours of the catalog update.
 
@@ -144,7 +144,7 @@ Once the catalog is indexed, contextual suggestion pills appear automatically on
 
 That install puts a live semantic layer on your storefront, but the harder test isn't "warm hiking jacket." It's "does this jacket perform below 20°F?", "is the zipper YKK?", and "what's the return window on final-sale items?"
 
-Those are the queries where a wrong answer does real damage. A shopper who buys based on a fabricated spec doesn't just return the item; they file a chargeback and leave. Spec and compatibility questions are the highest-risk queries for any AI tool because a confident wrong answer is worse than no answer at all.
+Those are the queries where a wrong answer does real damage. A shopper who buys based on a fabricated spec doesn't just return the item; they file a chargeback and leave. [Spec and compatibility questions](/blog/pdp-product-questions-salesforce-commerce-cloud) are the highest-risk queries for any AI tool because a confident wrong answer is worse than no answer at all.
 
 Nobi handles these by pulling answers only from the sources you've connected: product pages, spec sheets, PDFs, policy docs. If the answer isn't in what you've connected, Nobi says so rather than guessing.
 

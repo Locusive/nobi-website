@@ -18,7 +18,7 @@ Unfortunately, it’s also where most ecommerce sites fail the hardest. Traditio
 1.  **The "Keyword Salad" Result:** The search engine grabs anything with the word "red" or "wedding" in the description. You end up showing the customer a red wool sweater (matches "red") and a silver picture frame (matches "wedding").
 2.  **The ["Zero Results"](/blog/rag-prevents-zero-results) Dead End:** Because no single product description contains that exact 7-word phrase, the search engine gives up entirely.
 
-At Nobi, we believe the assistant should understand **intent**, not just keywords. We've built a conversational site and search assistant designed to handle these "long-tail" natural language queries gracefully.
+At Nobi, we believe the assistant should understand **intent**, not just keywords. We've built a conversational site and search assistant designed to handle these "long-tail" [natural language queries](/blog/what-is-natural-language-search) gracefully.
 
 Here is how we turn a complex human sentence into a curated product shelf.
 
@@ -37,7 +37,7 @@ This step ensures precision. No matter how "summery" a pair of shorts might be, 
 
 ## 2. The Semantic Phase: Understanding the ask
 
-This is where the magic happens. A standard database doesn't have a column for "Summer Wedding." To solve this, Nobi utilizes a hybrid **vector search** plus keyword matching approach.
+This is where the magic happens. A standard database doesn't have a column for "Summer Wedding." To solve this, Nobi utilizes a hybrid **[vector search](/blog/semantic-search-vs-keyword-search)** plus keyword matching approach.
 
 Instead of matching text, we translate the shopper's request into a multi-dimensional numerical vector. We then look for products that are *conceptually close* to that vector. This allows Nobi to understand the *implications* of a phrase like "Summer Wedding" without manual tagging:
 
@@ -74,7 +74,7 @@ Why does handling long-tail queries matter? Because specificity signals **high i
 * A customer searching for "dress" is browsing.
 * A customer searching for *"Red dress for a summer wedding under $300"* is pulling out their credit card.
 
-If you fail to answer that specific query, you lose a sale that was practically handed to you. By combining the precision of hard filters with the intuition of AI, Nobi helps merchants capture this high-intent traffic, reducing bounce rates and increasing conversion on your most valuable searches.
+If you fail to answer that specific query, you lose a sale that was practically handed to you. By combining the precision of hard filters with the intuition of AI, Nobi helps merchants capture this high-intent traffic, reducing bounce rates and [increasing conversion](/blog/increase-ecommerce-conversion-rate-search) on your most valuable searches.
 
 <BlogEmailCapture hook="Losing long-tail searches like 'red dress for a summer wedding'?" subtext="Drop your email and we'll show you how Nobi's AI search understands natural language queries and surfaces the right products instead of zero results." />
 ---

@@ -22,7 +22,7 @@ export const meta = {
   "headline": "How to Stop WooCommerce Search Dead Ends When Shoppers Describe What They Want",
   "description": "WooCommerce keyword search misses descriptive queries. Connect semantic search to your live catalog so shoppers find products in their own words, no synonym lists.",
   "datePublished": "2026-06-21",
-  "dateModified": "2026-06-22",
+  "dateModified": "2026-07-17",
   "author": {
     "@type": "Person",
     "name": "Shanif Dhanani",
@@ -65,7 +65,7 @@ Synonym groups and fuzzy matching reduce the gap at the margins, but they requir
 
 Nobi is a conversational website assistant that combines semantic product search and automated shopper Q&A in one platform. That vocabulary gap the previous section named is exactly what Nobi's search layer is built to cross. Instead of matching words, it converts a query like "warm hiking jacket under $200" into a vector and maps it against catalog attributes: insulation type, activity tag, price range. The title doesn't need to say "warm hiking jacket" for the right product to surface.
 
-The underlying shift is from exact match to intent reading. A shopper who types "cozy layering piece for the office" gets products tagged with knitwear, business casual, and layering, even if none of those terms appear in the query itself. The semantic layer reads meaning, not string similarity.
+The underlying shift is from exact match to [intent reading](/blog/what-is-natural-language-search). A shopper who types "cozy layering piece for the office" gets products tagged with knitwear, business casual, and layering, even if none of those terms appear in the query itself. The semantic layer reads meaning, not string similarity.
 
 Two things make this practical on a live store. First, Nobi grounds every answer in the catalog and content you've connected - product pages, policy docs, FAQ copy - not static training data. Because those connected sources refresh twice a day, a pricing update or policy change shows up in shopper answers within hours rather than sitting in a stale training set. Second, there's no synonym list to maintain. A keyword index needs you to wire "jacket" to "coat" to "parka" by hand, then repeat the work every time a new category drops. Nobi's semantic layer learns from your catalog structure and the queries shoppers actually run, so the long tail handles itself.
 
@@ -93,11 +93,11 @@ Both options include a mode toggle so shoppers can switch between standard and A
 
 Connect your knowledge sources next: your WooCommerce product catalog URL, FAQ and policy pages, PDF spec sheets, and help-center articles. Nobi indexes everything you point it at and makes it searchable and answerable from one place.
 
-Across every page, Nobi generates contextual suggestion pills scoped to where the visitor is - homepage, product detail page, or collection. They give shoppers a starting point without requiring them to know what to type, which matters most for visitors arriving from broad paid campaigns or email flows where intent varies.
+Across every page, Nobi generates [contextual suggestion pills](/blog/suggestion-pills) scoped to where the visitor is - homepage, product detail page, or collection. They give shoppers a starting point without requiring them to know what to type, which matters most for visitors arriving from broad paid campaigns or email flows where intent varies.
 
 ## How does Nobi handle spec, compatibility, and use-case queries that standard search can't parse?
 
-Spec, compatibility, and use-case queries are where keyword engines fail hardest ("works with a 2019 MacBook Pro," "safe for sensitive skin," "holds 10 gallons") because the answers live in product descriptions and spec tables, not the title field. Those connected sources you indexed in the previous step are exactly what Nobi reads to answer these queries, grounding each response in your actual site content and citing the specific document and excerpt behind the answer.
+[Spec, compatibility, and use-case queries](/blog/handling-long-tail-queries) are where keyword engines fail hardest ("works with a 2019 MacBook Pro," "safe for sensitive skin," "holds 10 gallons") because the answers live in product descriptions and spec tables, not the title field. Those connected sources you indexed in the previous step are exactly what Nobi reads to answer these queries, grounding each response in your actual site content and citing the specific document and excerpt behind the answer.
 
 If compatibility details live on a PDP, Nobi finds them. If the answer is in a PDF spec sheet you've uploaded, Nobi pulls from that too; hovering the citation pill shows the document name and the relevant excerpt, so shoppers can verify without leaving the chat. For products with dense technical specs, that PDF support means you don't have to copy that information manually onto a product page.
 

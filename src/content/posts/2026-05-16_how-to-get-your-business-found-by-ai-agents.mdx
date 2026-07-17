@@ -41,7 +41,7 @@ export const meta = {
   "headline": "How to Get Your Business Found and Answered by AI Agents",
   "description": "When someone asks an AI agent a question, how does your business get found - and how does the agent get answers without the user having to browse? Here's how it works.",
   "datePublished": "2026-05-16",
-  "dateModified": "2026-06-22",
+  "dateModified": "2026-07-17",
   "author": {
     "@type": "Person",
     "name": "Shanif Dhanani",
@@ -101,7 +101,7 @@ The first is indexed content: your pages, your FAQ, your policies, your product 
 
 The second layer is active discoverability: a published endpoint that agents can find and call directly, rather than relying on indexed content alone. The emerging standard for this is the Model Context Protocol (MCP), which Claude, ChatGPT, and Perplexity all support. Businesses list their MCP endpoint in a file called llms.txt (the agent-era equivalent of robots.txt), and agents that encounter your site know exactly where to query for live, real-time information. This moves your business from "something an agent might have read about" to "something an agent can actively ask."
 
-The difference matters more than it sounds. A business that only shows up in training data or indexed content is a static presence. The agent knows what it knew when it last read your site. A business with a callable endpoint is a live presence. The agent can ask what's in stock right now, what your current pricing is, what your return policy says today. It's the difference between a listing in a directory and a conversation.
+The difference matters more than it sounds. A business that only shows up in training data or indexed content is a static presence. The agent knows what it knew when it last read your site. A business with a callable endpoint is a live presence. The agent can ask what's in stock right now, what your current pricing is, what your return policy says today. It's the difference between a listing in a directory and [a conversation](/blog/what-is-conversational-commerce-and-how-does-it-work).
 
 ## How the agent-to-agent interaction actually works
 
@@ -121,7 +121,7 @@ The practical path is a single deployment that handles both sides: answering que
 
 **Step 1: Connect your knowledge sources.** Your product or service pages, your policy documents, your help center, your PDFs. These become the ground truth your business agent draws from: what it's allowed to cite, what it will answer from. Anything an AI agent might quote on your behalf should be in here.
 
-**Step 2: Install the assistant on your site.** A small site-side install: a snippet and a placeholder where the assistant appears. Once it's live, visitors can ask questions and get grounded, cited answers. Each answered conversation starts building your FAQ.
+**Step 2: Install the assistant on your site.** A small site-side install: a snippet and a placeholder where the assistant appears. Once it's live, visitors can ask questions and [get grounded, cited answers](/blog/how-ai-site-search-works). Each answered conversation starts building your FAQ.
 
 **Step 3: Let conversations build your FAQ.** Every question a real visitor asks gets cleaned, sanitized, and added to structured FAQ content on your pages. You don't write it; it emerges from real interactions. Over time it covers your actual long tail: the specific product questions, the edge cases in your return policy, the compatibility questions your support team fields every week.
 
@@ -150,7 +150,7 @@ The practical path is a single deployment that handles both sides: answering que
 
 **What should my business expose through an agent endpoint?** Pricing, availability, policies, and the Q&A content your customers actually ask about. Anything an agent might quote on your behalf should live in connected, regularly refreshing sources, not a static document that gets stale.
 
-**How does FAQ content from real conversations compound over time?** Every answered question adds to your knowledge base. The more specific and rich that content gets, the more accurately an agent can surface your business when someone asks something relevant. The FAQ you have six months from now, built from thousands of real customer questions, is far more valuable than anything you could write manually at launch.
+**How does FAQ content from real conversations compound over time?** Every answered question adds to your [knowledge base](/blog/best-ai-search-saas-knowledge-base). The more specific and rich that content gets, the more accurately an agent can surface your business when someone asks something relevant. The FAQ you have six months from now, built from thousands of real customer questions, is far more valuable than anything you could write manually at launch.
 
 **How do I stop an agent from quoting wrong or outdated information about my business?** Ground your answers in live sources that refresh often. Nobi connects to your knowledge sources, refreshes them twice a day, and cites the exact document and excerpt behind every answer. Stale content gets corrected automatically; wrong answers leave an audit trail rather than a mystery.
 

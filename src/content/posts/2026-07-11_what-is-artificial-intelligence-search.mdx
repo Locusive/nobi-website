@@ -61,7 +61,7 @@ export const meta = {
   "headline": "What Is Artificial Intelligence Search?",
   "description": "AI search explained: semantic matching, embeddings, and natural-language queries, across web, ecommerce, docs, and support use cases.",
   "datePublished": "2026-07-11",
-  "dateModified": "2026-07-11",
+  "dateModified": "2026-07-17",
   "author": {
     "@type": "Person",
     "name": "Shanif Dhanani",
@@ -94,13 +94,13 @@ You type a search into a store, a docs site, or an AI assistant, and expect it t
 
 ## Where did AI search come from?
 
-AI search grew out of decades of keyword-matching search engines that struggled with synonyms and phrasing. Early engines like TF-IDF and BM25 matched literal words: a shopper searching "sofa" got nothing if your catalog said "couch," unless someone had built a synonym list for that exact pair. That started to change around 2013, when word embeddings (Word2Vec, GloVe) gave engines a way to place words as points in mathematical space, so "couch" and "sofa" sat close together without a hand-built rule connecting them. Transformer models, introduced in 2017, pushed that further: instead of embedding single words, they could embed the meaning of a whole query, which is what let search finally handle natural, conversational phrasing instead of just isolated keywords.
+AI search grew out of decades of keyword-matching search engines that struggled with synonyms and phrasing. Early engines like TF-IDF and BM25 matched literal words: a shopper searching "sofa" got nothing if your catalog said "couch," unless someone had built a synonym list for that exact pair. That started to change around 2013, when word embeddings (Word2Vec, GloVe) gave engines a way to place words as points in mathematical space, so "couch" and "sofa" sat close together without a hand-built rule connecting them. Transformer models, introduced in 2017, pushed that further: instead of embedding single words, they could embed the meaning of a whole query, which is what let search finally handle [natural, conversational phrasing](/blog/what-is-natural-language-search) instead of just isolated keywords.
 
-The last piece arrived around 2020 to 2022 with retrieval-augmented generation, or RAG. Instead of just ranking documents and handing back a list, RAG systems retrieve the most relevant content first, then use a language model to compose an answer grounded in what was retrieved. That's the difference between a results page and a system that can actually answer a question. Search stopped being just a ranking problem and became an answering problem. The underlying retrieval step still does the work of finding real, current material to answer from.
+The last piece arrived around 2020 to 2022 with [retrieval-augmented generation, or RAG](/blog/rag-prevents-zero-results). Instead of just ranking documents and handing back a list, RAG systems retrieve the most relevant content first, then use a language model to compose an answer grounded in what was retrieved. That's the difference between a results page and a system that can actually answer a question. Search stopped being just a ranking problem and became an answering problem. The underlying retrieval step still does the work of finding real, current material to answer from.
 
 ## Why does AI search matter for a business's revenue?
 
-Null results are the clearest sign of vocabulary mismatch: a shopper types "wide-leg cropped trouser," your catalog says "cropped wide pant," and search returns nothing usable. Most shoppers don't rephrase. They leave. That single moment shows up first as a failed session: lower add-to-cart and lower conversion rate on search-originated visits, since a shopper who can't find the product can't buy it.
+Null results are the clearest sign of [vocabulary mismatch](/blog/semantic-search-vs-keyword-search): a shopper types "wide-leg cropped trouser," your catalog says "cropped wide pant," and search returns nothing usable. Most shoppers don't rephrase. They leave. That single moment shows up first as a failed session: lower add-to-cart and lower conversion rate on search-originated visits, since a shopper who can't find the product can't buy it.
 
 The bigger cost is the one that never shows up in a dashboard. Some share of shoppers who hit a bad search experience just don't come back, and that doesn't register as a bounce-rate spike or a support ticket. It shows up months later as lower revenue per visit, with no obvious cause to point to.
 
@@ -148,7 +148,7 @@ That combination points at where AI search is headed. It's moving from a standal
 
 ## What results can businesses expect from switching to AI search?
 
-That shift from a standalone results page to a combined system shows up in real numbers, not just architecture diagrams. Businesses that move from keyword to AI search typically see [measurable lifts in conversion rate, revenue per visitor, and average order value](https://nobi.ai/blog/ai-changing-online-shopping), because fewer sessions dead-end on a null-results page. The A/B tests behind these numbers ran on live traffic, not a lab benchmark.
+That shift from a standalone results page to a combined system shows up in real numbers, not just architecture diagrams. Businesses that move from keyword to AI search typically see [measurable lifts in conversion rate, revenue per visitor, and average order value](https://nobi.ai/blog/ai-changing-online-shopping), because fewer sessions [dead-end on a null-results page](/blog/fix-zero-result-searches). The A/B tests behind these numbers ran on live traffic, not a lab benchmark.
 
 [UNTUCKit](/customers/untuckit) ran a two-month split test and saw conversion rate rise 17.1%, from 15.0% to 17.6%, and revenue per searcher rise 21.3%, from $32.30 to $39.17. Average order value moved too: $222 versus $215, a 3.3% lift. That last number matters because it shows AI search didn't just rescue sessions that would have bounced. It also nudged shoppers who were already going to buy toward buying more. UNTUCKit trusted the result enough to drop the split and move all of its traffic to the new search.
 

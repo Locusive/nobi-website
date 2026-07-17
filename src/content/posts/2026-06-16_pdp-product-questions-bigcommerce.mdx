@@ -49,7 +49,7 @@ export const meta = {
   "headline": "How to Turn BigCommerce Product-Page Questions Into Sales Instead of Support Tickets",
   "description": "BigCommerce merchants: answer SKU-specific shopper questions in real time on the PDP, build a crowd-sourced FAQ, and publish JSON-LD schema for SEO and AI search.",
   "datePublished": "2026-06-16",
-  "dateModified": "2026-06-22",
+  "dateModified": "2026-07-17",
   "author": {
     "@type": "Person",
     "name": "Shanif Dhanani",
@@ -78,7 +78,7 @@ export const meta = {
 </script>
 ## How do BigCommerce merchants answer shopper questions directly on the product page without losing the sale to a support ticket?
 
-On most BigCommerce product pages, a shopper with a real question has two options, and neither one ends in a sale: file a support ticket or leave. The usual culprit is a generic FAQ that shows the same eight questions on every product, so someone on a premium technical jacket asking about fill weight gets a return policy instead of a real answer - and rather than wait a day for an email reply, they just close the tab. This guide walks through installing Nobi's in-context assistant on your BigCommerce product pages so it answers from the exact product a shopper is viewing, then publishing those answered questions as structured data that search and AI engines can pick up. It takes a few hours, not weeks.
+On most BigCommerce product pages, a shopper with a real question has two options, and neither one ends in a sale: file a support ticket or leave. The usual culprit is a generic FAQ that shows the same eight questions on every product, so someone on a premium technical jacket asking about fill weight gets a return policy instead of a real answer - and rather than wait a day for an email reply, they just close the tab. This guide walks through installing Nobi's in-context assistant on your BigCommerce product pages (the same setup works [on Shopify](/blog/pdp-product-questions-shopify-plus)) so it answers from the exact product a shopper is viewing, then publishing those answered questions as structured data that search and AI engines can pick up. It takes a few hours, not weeks.
 
 ## Why do generic product FAQs fail to convert shoppers on the BigCommerce product detail page?
 
@@ -90,7 +90,7 @@ Sending someone to support doesn't fix it. A ticket takes 24 to 48 hours to reso
 
 ## What is Nobi, and how does it answer questions about the specific product a shopper is viewing?
 
-That SEO gap and the abandoned shopper are two sides of the same problem: a product page that can't answer what's in front of it. Nobi is a conversational website assistant. It connects to your product catalog, policy docs, and help content, then answers shopper questions scoped to the exact SKU the visitor is viewing. Unlike a generic chat widget trained on static help articles, Nobi reads the current product and grounds every answer in that product's data, so a question about a specific color variant's sizing gets an answer about that variant.
+That SEO gap and the abandoned shopper are two sides of the same problem: a product page that can't answer what's in front of it. Nobi is a [conversational website assistant](/blog/what-is-conversational-commerce-and-how-does-it-work). It connects to your product catalog, policy docs, and help content, then answers shopper questions scoped to the exact SKU the visitor is viewing. Unlike a generic chat widget trained on static help articles, Nobi reads the current product and grounds every answer in that product's data, so a question about a specific color variant's sizing gets an answer about that variant.
 
 The knowledge base builds automatically from sources you connect: your BigCommerce product pages, FAQ routes, policy docs, and PDFs. No manual re-entry. Point Nobi at the URLs or upload a file and it becomes part of what the assistant can answer.
 
@@ -122,7 +122,7 @@ To give visitors a way to open the assistant, place the search bar where you wan
 </nobi-search-bar>
 ```
 
-Once the snippet is live, connect your knowledge sources from the Nobi dashboard: paste a link to your product feed (CSV or JSON), point at your FAQ route, or upload policy PDFs. Nobi indexes the content and it becomes part of what the assistant can answer. On the PDP, contextual suggestion pills appear automatically: tappable prompts scoped to that product's category, like "Does this run true to size?" or "Is this waterproof?" Visitors tap a pill and the assistant opens with the answer; it gives shoppers who don't know what to type a starting point.
+Once the snippet is live, connect your knowledge sources from the Nobi dashboard: paste a link to your product feed (CSV or JSON), point at your FAQ route, or upload policy PDFs. Nobi indexes the content and it becomes part of what the assistant can answer. On the PDP, [contextual suggestion pills](/blog/suggestion-pills) appear automatically: tappable prompts scoped to that product's category, like "Does this run true to size?" or "Is this waterproof?" Visitors tap a pill and the assistant opens with the answer; it gives shoppers who don't know what to type a starting point.
 
 Widget position, exit-intent triggers, and branding are all adjustable from the dashboard without touching the storefront again.
 

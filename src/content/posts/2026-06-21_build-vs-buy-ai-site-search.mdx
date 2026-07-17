@@ -45,7 +45,7 @@ export const meta = {
   "headline": "Build vs. Buy: Should You Build Your Own AI Site Search?",
   "description": "Honest breakdown of building vs. buying AI site search for any website. Real costs, catalog grounding risks, and when each path makes sense.",
   "datePublished": "2026-06-21",
-  "dateModified": "2026-06-21",
+  "dateModified": "2026-07-17",
   "author": {
     "@type": "Person",
     "name": "Shanif Dhanani",
@@ -101,9 +101,9 @@ Owning the stack means assembling four layers: a retrieval layer (a vector store
 
 The catalog sync piece carries the most day-to-day risk. Prices, inventory counts, and variants change constantly. If your index lags, search surfaces products that have sold out or changed price, and the conversational layer answers from the same stale data - telling a visitor a size is available when it isn't, or quoting last week's price. Keeping the index current isn't a one-time setup; it's ongoing engineering work you own permanently.
 
-Retrieval quality is the next hard problem. Keyword search misses semantic meaning; pure vector search can surface irrelevant results. Getting a hybrid that handles short queries ("black boots") alongside long, descriptive ones takes real evaluation - and regular tuning as the catalog grows and visitor behavior shifts.
+[Retrieval quality](/blog/how-ai-site-search-works) is the next hard problem. Keyword search misses semantic meaning; pure vector search can surface irrelevant results. Getting a hybrid that handles short queries ("black boots") alongside long, descriptive ones takes real evaluation - and regular tuning as the catalog grows and visitor behavior shifts.
 
-Shoppers increasingly expect to both search and ask. They type a few words for quick results, then ask a follow-up in plain language, so a chat-style surface is fast becoming something they look for, not a bonus. The two have very different speed budgets, though, which in practice means two different systems. Instant search (typeahead, ranked results as someone types) has to come back in milliseconds, so it runs on a search index, not a model call per query. A conversational answer can afford the extra time an LLM needs to read the retrieved context and compose a grounded reply. The build challenge is running both paths and routing each query to the right one: you can't push every keystroke through a model and still feel instant, and you can't answer a real question with a results grid.
+Shoppers increasingly expect to both search and ask. They type a few words for quick results, then ask a follow-up in plain language, so a chat-style surface is fast becoming something they look for, not a bonus. The two have very different speed budgets, though, which in practice means two different systems. Instant search ([typeahead](/blog/typeahead-search), ranked results as someone types) has to come back in milliseconds, so it runs on a search index, not a model call per query. A conversational answer can afford the extra time an LLM needs to read the retrieved context and compose a grounded reply. The build challenge is running both paths and routing each query to the right one: you can't push every keystroke through a model and still feel instant, and you can't answer a real question with a results grid.
 
 Then there's everything else: a test suite that catches fabricated product specs before visitors do (and grows with the catalog), prompt injection resistance, PII handling in chat transcripts, data retention policies, and a plan for every upstream model deprecation or API change on a vendor's schedule.
 
@@ -117,7 +117,7 @@ The core problem is that any index built from a snapshot of your catalog starts 
 
 Hallucinated inventory is the highest-stakes version of this. A visitor who asks "do you have this in a size 10?" and gets a confident yes, when the real answer is no, doesn't just abandon the purchase. They lose trust in the brand permanently. You may never know it happened.
 
-Zero-result searches are the same failure from the other direction. A shopper searches in their own words, the index has no good match, and they assume you don't carry it - when you do. On the answer side it shows up as circular conversations: the assistant can't find something in the catalog, it hedges, the visitor rephrases, it hedges again, they give up. Zero-result rate and session drop-off are at least measurable - the shoppers who hit a bad result or a dead-end answer and quietly leave are not.
+[Zero-result searches](/blog/fix-zero-result-searches) are the same failure from the other direction. A shopper searches in their own words, the index has no good match, and they assume you don't carry it - when you do. On the answer side it shows up as circular conversations: the assistant can't find something in the catalog, it hedges, the visitor rephrases, it hedges again, they give up. Zero-result rate and session drop-off are at least measurable - the shoppers who hit a bad result or a dead-end answer and quietly leave are not.
 
 Two techniques reduce these failures. First, a second AI review: every draft answer gets checked against the raw source content by a separate model call before it sends - catching mismatches before the visitor sees them. Second, query overrides: lock an exact approved response to high-stakes questions like return policies or warranty terms, so no AI paraphrase introduces variation on the questions where precision matters most.
 
@@ -141,7 +141,7 @@ Grounded answers, built-in analytics, and a fast install cover most sites' needs
 
 A developer search API gives you full API control over how product attributes factor into ranking, plus a mature ecosystem of search widgets and client libraries. You get fast response times for typeahead and granular control over ranking signals without building a vector store from scratch.
 
-The key limitation: a search API doesn't include a grounded answer layer. A visitor who types "does this run narrow?" or "what's the return policy on sale items?" still gets a results page, not an answer. The conversational Q&A layer is yours to build and maintain on top.
+The key limitation: a search API doesn't include a grounded answer layer. A visitor who types "does this run narrow?" or "what's the return policy on sale items?" still gets a results page, not an answer. The conversational Q&A layer is yours to build and maintain on top - if you're eyeing a general-purpose model for it, we compare that route in [Nobi vs ChatGPT](/blog/nobi-vs-chatgpt-site-search).
 
 Build is not the right call if reducing engineering overhead is the goal, if the team that ships version one will be pulled to other priorities once it's live, or if you need to be running within weeks rather than quarters. A build that gets deployed and then deprioritized is the worst outcome: you own the maintenance with no headcount to do it, and accuracy degrades quietly as the catalog changes.
 

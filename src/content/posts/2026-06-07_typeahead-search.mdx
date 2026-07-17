@@ -49,7 +49,7 @@ export const meta = {
   "headline": "How to Add Typeahead Search to Your Ecommerce Store",
   "description": "Step-by-step guide to adding typeahead (instant search) to your ecommerce store with Nobi, setup, fuzzy matching, dropdown config, and measuring CVR lift.",
   "datePublished": "2026-06-07",
-  "dateModified": "2026-06-22",
+  "dateModified": "2026-07-17",
   "author": {
     "@type": "Person",
     "name": "Shanif Dhanani",
@@ -86,7 +86,7 @@ Typeahead search (also called instant or predictive search) returns matching res
 
 What typeahead fixes is responsiveness. A shopper who types and sees nothing until they commit to a full query assumes the store is slow or has nothing, and many abandon before they ever press Enter. Returning matches after the first few characters keeps them engaged: immediate proof the store has what they want, plus a one-tap path to it.
 
-Relevance is the other half, and it's a separate problem. When a shopper does submit a query, their wording often won't match your catalog titles ("cozy oversized pullover" versus whatever the product is actually called), and a keyword engine returns a null page. The bar to aim for is zero dead ends: a storefront should never serve a [zero-result page](/blog/fix-zero-result-searches). Closing that gap takes search that understands meaning, not just strings, which is the other thing Nobi does, covered below.
+Relevance is the other half, and it's a separate problem. When a shopper does submit a query, their wording often won't match your catalog titles ("cozy oversized pullover" versus whatever the product is actually called), and a keyword engine returns a null page. The bar to aim for is zero dead ends: a storefront should never serve a [zero-result page](/blog/fix-zero-result-searches). Closing that gap takes [search that understands meaning, not just strings](/blog/semantic-search-vs-keyword-search), which is the other thing Nobi does, covered below.
 
 There's also a measurement problem worth naming. Analytics can tell you how many sessions ended on a zero-result page. They can't tell you how many shoppers were quietly put off by a slow, unresponsive search experience and didn't come back. Fixing typeahead closes a leak your dashboards will always under-report.
 
@@ -142,7 +142,7 @@ The synonym layer works the same way. Nobi infers equivalences from your catalog
 
 ## What shows up in the Nobi search dropdown, products, collections, or content?
 
-The Nobi typeahead dropdown surfaces two things as the shopper types: matching products and suggested search queries that complete what they've started, plus a "View all" row to run the full search. Contextual suggestion pills appear as tappable starting points before the shopper types anything. They are scoped to the page the visitor is on, so the search bar gives shoppers a place to start even when they don't know what to type.
+The Nobi typeahead dropdown surfaces two things as the shopper types: matching products and suggested search queries that complete what they've started, plus a "View all" row to run the full search. Contextual [suggestion pills](/blog/suggestion-pills) appear as tappable starting points before the shopper types anything. They are scoped to the page the visitor is on, so the search bar gives shoppers a place to start even when they don't know what to type.
 
 Product results show the matched SKU with image, title, and price. For high-confidence matches, one tap takes the shopper to the PDP, with no full results page in between. Suggested query completions give the shopper a one-tap way to run a fuller search when the right product isn't already showing.
 

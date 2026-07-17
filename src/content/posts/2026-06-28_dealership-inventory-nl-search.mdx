@@ -49,7 +49,7 @@ export const meta = {
   "headline": "How to Let Car Shoppers Search Your Inventory in Plain English",
   "description": "Let shoppers type 'used F-150 under $40k with leather' and get matching vehicles from your live lot - no filter gymnastics, no sold-car dead ends.",
   "datePublished": "2026-06-28",
-  "dateModified": "2026-06-28",
+  "dateModified": "2026-07-17",
   "author": {
     "@type": "Person",
     "name": "Shanif Dhanani",
@@ -98,7 +98,7 @@ There's no search engineer required, no synonym lists to maintain, and no rankin
 
 ## How does Nobi translate a shopper's plain-English description into matching vehicles from your inventory?
 
-Nobi uses semantic matching to read the intent behind a query, not just the exact words. When a shopper types "family SUV with third row under 30k miles," Nobi maps "family SUV" to body-style and segment attributes in your VDP data, "third row" to a seating or feature field, and "under 30k miles" to the mileage attribute, then returns vehicles from your live inventory that satisfy all three conditions. The match runs against the structured VDP fields your DMS already tracks (make, model, trim, body style, price, mileage, feature packages, condition), so every result is grounded in data you control.
+Nobi uses [semantic matching to read the intent behind a query](/blog/what-is-natural-language-search), not just the exact words. When a shopper types "family SUV with third row under 30k miles," Nobi maps "family SUV" to body-style and segment attributes in your VDP data, "third row" to a seating or feature field, and "under 30k miles" to the mileage attribute, then returns vehicles from your live inventory that satisfy all three conditions. The match runs against the structured VDP fields your DMS already tracks (make, model, trim, body style, price, mileage, feature packages, condition), so every result is grounded in data you control.
 
 Synonym resolution is built in. "Third row," "three-row seating," and "seven-passenger SUV" all resolve to the same attribute in your feed. The shopper doesn't need to know your listing terminology to find the right vehicle.
 
@@ -138,7 +138,7 @@ Zero-result searches split into two categories, and the fix is different for eac
 
 The second category is a tagging gap, and it's the faster fix. If "blind spot monitoring" returns zero results because your DMS exports that feature as "BSM package," a synonym mapping or a field rename on the feed side resolves it without buying new inventory. The vehicle is sitting on your lot; the shopper just couldn't find it because the attribute field doesn't match the words they used.
 
-After-hours search behavior is especially useful here. Queries that come in at 10pm, when your BDC is closed, show you what shoppers wanted before they moved on.
+After-hours search behavior is especially useful here. Queries that come in at 10pm, [when your BDC is closed](/blog/how-ai-can-support-your-dealership-s-business-development-center), show you what shoppers wanted before they moved on.
 
 Nobi's analytics go beyond raw zero-result counts. You can see which searches produced VDP clicks and which searches converted. You're not just looking at what failed; you're looking at the full funnel from query to visit to action.
 

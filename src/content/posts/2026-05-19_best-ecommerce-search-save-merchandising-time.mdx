@@ -53,7 +53,7 @@ export const meta = {
   "headline": "The Best Ecommerce Search Tools to Save Merchandising Time",
   "description": "Compare ecommerce search platforms by how much merchandising time they actually give back - automation vs manual rules, with pricing and trade-offs.",
   "datePublished": "2026-05-19",
-  "dateModified": "2026-05-20",
+  "dateModified": "2026-07-17",
   "author": {
     "@type": "Person",
     "name": "Shanif Dhanani",
@@ -127,7 +127,7 @@ Running keyword search means someone on your team is writing rules: synonyms for
 
 ## What does 'saving merchandising time' actually mean in ecommerce search?
 
-Most merchandising hours on a search platform go into three jobs: writing synonym groups so "wide-leg trouser" returns the same SKUs as "wide pant", pinning specific products to specific queries, and adding [zero-result rules](https://nobi.ai/blog/ai-search-tools-zero-results-ecommerce) so dead-end searches route somewhere useful. On a rule-based engine the merch team owns every line of that work, and the list grows with the catalog. The underlying problem all those rules patch is vocabulary mismatch - shoppers describe products in their own words, product titles use the brand's words, and a keyword matcher can't bridge the gap on its own.
+Most [search merchandising](/blog/what-is-search-merchandising) hours on a search platform go into three jobs: writing synonym groups so "wide-leg trouser" returns the same SKUs as "wide pant", pinning specific products to specific queries, and adding [zero-result rules](https://nobi.ai/blog/ai-search-tools-zero-results-ecommerce) so dead-end searches route somewhere useful. On a rule-based engine the merch team owns every line of that work, and the list grows with the catalog. The underlying problem all those rules patch is vocabulary mismatch - shoppers describe products in their own words, product titles use the brand's words, and a keyword matcher can't bridge the gap on its own.
 
 The tool you pick decides whether merch spends hours a week feeding that backlog or whether the engine handles most of it without a ticket. Searchspring, Algolia, and (to a lesser extent) Klevu still expect explicit synonym dictionaries and pinning rules as the day-to-day workflow - powerful when you want literal control, expensive in hours when you don't. Constructor leans on shopper behavior to rerank automatically, which cuts manual tuning but assumes you have the traffic to learn from. Nobi pushes the matching into the model by default, so merchandisers only step in to override the queries that actually need a human call.
 
@@ -209,13 +209,13 @@ Nobi is AI-powered ecommerce search and a shopping assistant in one platform. Th
 - Implementation runs weeks to months and needs data-team hours to keep tuning the ranker after launch
 - Smaller brands without sufficient query volume generally lack the traffic and data-team bandwidth the ranker needs to keep improving after launch
 
-**Verdict:** Pick Constructor when behavioral personalization and full-site merchandising are the headline requirements and the data team is there to feed it; skip it when you want transparent per-unit pricing or just the search bar without the rest of the platform attached.
+**Verdict:** Pick Constructor when behavioral personalization and full-site merchandising are the headline requirements and the data team is there to feed it; skip it when you want transparent per-unit pricing or just the search bar without the rest of the platform attached - the [Constructor alternatives](/blog/constructor-alternatives-ecommerce) fit that lighter need.
 
 ## 4. Searchspring
 
-[Searchspring](https://searchspring.com) puts the merch team in charge of every query. Pins, boosts, zero-result redirects, and category rules all live in one merchandising dashboard, and the pitch is straightforward: the team, not an AI model, decides what each query returns. For a head of ecommerce whose merchandisers want to audit any result back to a specific rule, that exact control is the reason to look here. The trade-off is the rule list itself - it grows one-to-one with query patterns, so every unusual query that misses needs its own new rule. Searchspring is now a division of Athos Commerce, sold under the same parent as Klevu and Intelligent Reach but with its own contract and pricing.
+[Searchspring](https://searchspring.com) puts the merch team in charge of every query. [Pins, boosts](/blog/merchandising-boost-bury), zero-result redirects, and category rules all live in one merchandising dashboard, and the pitch is straightforward: the team, not an AI model, decides what each query returns. For a head of ecommerce whose merchandisers want to audit any result back to a specific rule, that exact control is the reason to look here. The trade-off is the rule list itself - it grows one-to-one with query patterns, so every unusual query that misses needs its own new rule. Searchspring is now a division of Athos Commerce, sold under the same parent as Klevu and Intelligent Reach but with its own contract and pricing.
 
-**Best for:** Merch teams that want exact, rule-by-rule control over what each query returns and have the bandwidth to maintain that rule list as the catalog grows.
+**Best for:** Merch teams that want exact, [rule-by-rule control](/blog/search-platforms-rule-based-boosting-pinning) over what each query returns and have the bandwidth to maintain that rule list as the catalog grows.
 
 **Pricing:** Not published on the Searchspring site. Third-party references put mid-market plans in the $1,500-$3,500/mo range; confirm directly with Searchspring before budgeting.
 

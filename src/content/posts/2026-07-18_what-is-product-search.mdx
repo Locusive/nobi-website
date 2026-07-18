@@ -1,0 +1,239 @@
+export const meta = {
+ title: "What Is Product Search? A Plain-Language Guide for Ecommerce Marketers",
+ slug: "what-is-product-search",
+ date: "2026-07-18",
+ publishedAt: "2026-07-18",
+ description: "Product search explained: what it is, how keyword, semantic, and AI approaches differ, and how to diagnose what your current search is missing.",
+ excerpt: "Product search explained: what it is, how keyword, semantic, and AI approaches differ, and how to diagnose what your current search is missing.",
+ tags: ["site search", "ecommerce", "ecommerce search"],
+ author: "Shanif Dhanani",
+ heroImage: "https://storage.googleapis.com/nobi-public/docs_and_marketing_websites/posts/what-is-product-search/hero.webp",
+ featured: true,
+ draft: false,
+ faqItems: [
+ {
+ question: "What is product search?",
+ answer: "Product search is the system that routes a shopper's typed query to matching items in an ecommerce catalog. At its simplest, it is the search bar on your storefront - but the logic behind it determines whether a shopper who types \"navy slim pant\" or \"something cozy for the couch\" finds the right product or leaves empty-handed."
+ },
+ {
+ question: "How did product search evolve from a keyword box to an AI assistant?",
+ answer: "Product search started as a string-match problem: find catalog entries that contain the words the shopper typed. That worked when shoppers typed exactly the words merchants used in product names, but it broke the moment real shoppers started typing the way they actually think."
+ },
+ {
+ question: "Why does product search matter for ecommerce conversion?",
+ answer: "That trust question connects directly to conversion numbers. Shoppers who use search convert at two to three times the rate of shoppers who only browse - which makes the search bar one of the highest-impact touchpoints on your storefront, and one of the most underfunded."
+ },
+ {
+ question: "How does product search actually work?",
+ answer: "Those invisible exits trace back to retrieval and ranking failing the query. Every product search system does two jobs: pull candidate products from the catalog and sort them by relevance."
+ },
+ {
+ question: "What are the main types of product search technology?",
+ answer: "Not every tool on the market ships with that answer layer. Product search technology breaks into four categories that differ in how they retrieve products, how much manual maintenance they require, and whether they can answer shopper questions or only return a results list."
+ },
+ {
+ question: "Where does product search break down, and what does it cost?",
+ answer: "Starting with the failure mode is the right instinct - the most expensive ones don't show up in your analytics. A shopper who gets a bad result closes the tab, and the event log records a bounce."
+ },
+ {
+ question: "What results can better product search deliver?",
+ answer: "The invisible churn problem has a visible flip side: when search actually works, the gains show up in the three metrics ecommerce marketers track - conversion rate, average order value, and revenue per searcher. The size of the lift depends on how wide the starting gap was."
+ },
+ {
+ question: "What are the risks of AI-powered product search, and how do you evaluate them?",
+ answer: "Those gains assume the assistant is telling the truth. AI search assistants introduce risks that keyword engines don't: a keyword engine returns no result or a wrong one, but an AI assistant can return a wrong answer with the same confidence it uses for correct ones - and the shopper has no way to tell."
+ },
+ {
+ question: "How do you choose the right product search solution for your store?",
+ answer: "That personalization question is one input into a broader diagnosis. The right tool depends on which failure mode is costing the most revenue, how much engineering bandwidth you have, and whether you need a better results list, a grounded Q&A layer, or both."
+ }
+ ],
+};
+
+<script type="application/ld+json" data-nobi-schema>
+{`{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "What Is Product Search? A Plain-Language Guide for Ecommerce Marketers",
+  "description": "Product search explained: what it is, how keyword, semantic, and AI approaches differ, and how to diagnose what your current search is missing.",
+  "datePublished": "2026-07-18",
+  "dateModified": "2026-07-18",
+  "author": {
+    "@type": "Person",
+    "name": "Shanif Dhanani",
+    "url": "https://www.linkedin.com/in/shanifdhanani/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Nobi",
+    "url": "https://nobi.ai"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://nobi.ai/blog/what-is-product-search"
+  },
+  "about": [
+    {
+      "@type": "Thing",
+      "name": "site search"
+    },
+    {
+      "@type": "Thing",
+      "name": "ecommerce"
+    }
+  ]
+}`}
+</script>
+## What is product search?
+
+Your search bar looks simple from the outside. A shopper types a query, results appear, and they either find what they want or they don't. What actually determines which outcome happens is the engine underneath - and most ecommerce sites are running engines built when shoppers typed differently than they do today. When that engine can't match natural language to catalog entries, shoppers hit dead ends and leave, and those exits rarely show up as failures in your analytics.
+
+## What does a product search system actually include?
+
+Product search is the system that routes a shopper's typed query to matching items in an ecommerce catalog. At its simplest, it is the search bar on your storefront - but the logic behind it determines whether a shopper who types "navy slim pant" or "something cozy for the couch" finds the right product or leaves empty-handed. The gap between a keyword engine and a [semantic or AI-powered](https://nobi.ai/blog/ai-changing-online-shopping) one can be several conversion points and thousands of dollars in monthly revenue on otherwise identical traffic.
+
+The system spans more than just the results page. It includes the typeahead dropdown that appears while someone is still typing, the zero-result page a dead-end query hits, the ranked list of products that comes back for a successful search, and the faceted filters that let shoppers narrow from there. Each of those moments is a place where a shopper can find what they came for - or give up.
+
+The engine behind the search bar can work in a few different ways. Keyword-based engines match the literal words in a query against product titles and tags. Semantic engines match on meaning, so descriptive or natural-language queries still surface relevant products even when the words don't align exactly. [AI-native systems](https://nobi.ai/blog/how-ai-site-search-works) go a step further, adding a conversational layer that can answer product questions, policy lookups, and sizing questions with answers drawn from your live catalog - not just a results page.
+
+## How did product search evolve from a keyword box to an AI assistant?
+
+Product search started as a string-match problem: find catalog entries that contain the words the shopper typed. That worked when shoppers typed exactly the words merchants used in product names, but it broke the moment real shoppers started typing the way they actually think. The history of product search is largely the history of closing the gap between how shoppers describe things and how merchants name them - and that gap has still not been fully closed by most ecommerce stores.
+
+The first generation was Boolean keyword matching. A query for "fleece pullover" returned matching SKUs; "something warm to layer under a ski jacket" returned nothing. [Zero-result pages](/blog/fix-zero-result-searches) were the symptom. Invisible abandonment was the deeper cost.
+
+The second generation added synonym groups and fuzzy matching - merchants mapped "pullover" to "sweater," set minimum-match thresholds, and handled misspellings. Zero-result rates dropped, but only for vocabulary pairs someone on the merch team had already anticipated.
+
+The third generation added faceted filters: size, color, material, price. Shoppers could narrow from a broad result set, but the initial recall still depended on keyword matching. Facets refined; they didn't fix the vocabulary mismatch underneath.
+
+Semantic search - the fourth generation - changed the underlying logic. Queries and products are encoded into vector representations; matching happens on meaning, not words. A shopper who types "wide-leg cropped trouser in navy" can match a product titled "cropped wide pant in midnight blue" because their vectors reflect the same fashion meaning.
+
+The fifth generation adds [a conversational layer](https://nobi.ai/blog/ai-shopping-assistant-ecommerce). Short queries return a ranked list; questions like "do these run narrow?" or "what is your exchange policy on final-sale items?" return grounded answers cited to your catalog and policy pages. Retrieval-augmented generation (RAG) grounds every answer in live content rather than training-data memory - that's what separated this generation from earlier AI deployments and introduced a new risk: grounding quality now determines whether shoppers trust what they read.
+
+## Why does product search matter for ecommerce conversion?
+
+That trust question connects directly to conversion numbers. Shoppers who use search [convert at two to three times the rate](https://nobi.ai/blog/ai-vs-traditional-site-search) of shoppers who only browse - which makes the search bar one of the highest-impact touchpoints on your storefront, and one of the most underfunded. A poor search experience doesn't just lose a sale; it erodes the trust that paid and email campaigns spent real acquisition budget to build.
+
+The most visible failure mode is the zero-result page. On average, 10-15% of ecommerce queries hit a zero-result page - and each one is a hard stop: no product shown means no sale is possible from that session.
+
+Search abandonment is the invisible version of the same problem. The engine returns results, but none match what the shopper actually wanted - the keyword overlap was incidental. The shopper scrolls, finds nothing useful, and leaves. Analytics logs a "search with results" session instead of a failure, so the damage stays hidden.
+
+[UNTUCKit](/customers/untuckit) measured what better search relevance is actually worth: a +21.3% lift in revenue per searcher ($39.17 vs. $32.30) in a two-month A/B test against their prior paid search tool. That lift reflects the compounded effect of better CVR and AOV at once - not from more traffic, but from the same shoppers finding what they came for.
+
+Paid and email campaigns raise the stakes further. A shopper who clicks through from a Google Shopping ad and then hits a dead-end search experience costs you twice - once in acquisition and once in the lost conversion. Every percentage-point improvement in search CVR improves the return on every upstream channel.
+
+## How does product search actually work?
+
+Those invisible exits trace back to retrieval and ranking failing the query. Every product search system does two jobs: pull candidate products from the catalog and sort them by relevance. The mechanics of those two steps determine whether "lightweight gift for a hiker" surfaces the right product or dead-ends on a zero-result page.
+
+Retrieval comes in two forms. A keyword engine builds an inverted index: a map from words in product titles, tags, and descriptions to the products containing them. It's fast, but limited to vocabulary overlap. "Insulated puffer vest" won't match "layering piece for cold weather" because none of those words appear in the title. A semantic engine encodes products and queries as vectors using a language model, then matches on meaning, so both phrases land near each other without a manually built synonym list.
+
+Ranking orders what retrieval returns. Traditional heuristics promote exact title matches and in-stock items. AI-native ranking adds behavioral signals, including clicks, add-to-carts, and purchases after similar queries. Popular outcomes rise over time as more shoppers use the engine.
+
+Typeahead surfaces results as the shopper types, from a pre-built index that responds between keystrokes. The conversion effect is real and isolatable: [UNTUCKit](/customers/untuckit) added Nobi (an AI-powered site search and shopping assistant for ecommerce) to their existing storefront, and the typeahead component alone produced a +0.5 percentage-point absolute CVR gain.
+
+[Faceted filtering](https://nobi.ai/blog/ecommerce-product-discovery-beyond-filters) lets shoppers narrow by attributes like size, color, and price range. Facets refine a relevant result set; they can't rescue one that retrieval got wrong. Catalog hygiene determines how useful they are: a missing size attribute means the size facet disappears for that product.
+
+The answer layer adds a synthesis step on top of retrieval. Rather than a ranked list, the engine retrieves relevant chunks from your catalog and policy content, then passes them to a language model that generates a cited answer. That's [retrieval-augmented generation (RAG)](https://nobi.ai/blog/what-is-artificial-intelligence-search): answers come from your connected content, not a training-data snapshot.
+
+## What are the main types of product search technology?
+
+Not every tool on the market ships with that answer layer. Product search technology breaks into four categories that differ in how they retrieve products, how much manual maintenance they require, and whether they can answer shopper questions or only return a results list. Knowing which category a tool belongs to tells you more about fit than any feature checklist - the right starting question is which category addresses your primary failure mode.
+
+**Keyword and rule-based engines** match words in a query against product titles, tags, and descriptions. Merchants extend them with synonym groups, boost rules, and zero-result redirects that route dead-end queries to a curated page rather than an empty state. The limit is the rule list: it grows one-to-one with every vocabulary gap shoppers expose. [Boost Commerce](https://boostcommerce.net) is Shopify-native and affordable but keyword-matching-first with limited semantic understanding. [Searchspring](https://searchspring.com), now a division of Athos Commerce, adds a full merchandising dashboard for teams that need explicit, auditable control over every campaign query - for teams that have to explain every result to a stakeholder after a launch, that traceability is the main reason to look there.
+
+**Semantic search** encodes queries and products as vectors and matches on meaning, not words. A shopper typing "wide-leg cropped trouser in navy" can match a product titled "cropped wide pant in midnight blue" because those phrases occupy similar positions in the vector space. [Klevu](https://klevu.com), also a division of Athos Commerce, is the Shopify-native reference in this category: a no-code merchandising dashboard for seasonal pinning, with AI handling vocabulary translation underneath. [Algolia](https://algolia.com) operates at the API layer - developer-configurable search infrastructure where engineering teams control ranking, attribute weighting, and synonym handling in code. Algolia's NeuralSearch semantic matching is only available on its top-tier Elevate plan; lower tiers stay keyword-based.
+
+**Enterprise discovery platforms** extend ranking across category pages, collection pages, browse, and [product recommendations](https://nobi.ai/blog/how-ecommerce-product-recommendations-work-and-what-powers-them) - not just the search bar. [Constructor](https://constructor.io) reranks results in real time based on what each shopper clicks, views, and adds to cart during their visit, making it a behavioral personalization engine as much as a search tool. [Bloomreach](https://bloomreach.com) pairs a Discovery module with a customer data platform in one contract, so in-session search signals sit next to email engagement data on unified customer profiles. [Fast Simon](https://fastsimon.com) occupies a mid-tier position: AI-assisted search plus collection curation in one Shopify dashboard, with tiered pricing starting at $39.99/month.
+
+**AI search assistants** treat the search bar as a two-mode interface. Short product queries return an instant ranked list. Questions - "does this come in a wide width?", "what is your exchange policy on sale items?" - get grounded answers cited back to the relevant catalog page or policy doc. Because the answer layer pulls from live catalog content rather than model training data, responses reflect current inventory and policy rather than a snapshot that went stale when the catalog changed. Nobi operates in this category: each incoming query routes automatically to instant search or the grounded answer layer based on intent, with numbered citation pills on every answer so shoppers can verify claims against your official content.
+
+## Where does product search break down - and what does it cost?
+
+Starting with the failure mode is the right instinct - the most expensive ones don't show up in your analytics. A shopper who gets a bad result closes the tab, and the event log records a bounce. Knowing where search breaks lets you diagnose whether your current tool is the source of the problem, or whether the fix requires a different kind of solution.
+
+The most measurable failure is the zero-result page. Industry benchmarks put the average ecommerce [zero-result rate](https://nobi.ai/blog/search-queries-that-break-ecommerce) at 10-15% of all queries. Each one is a hard stop: the shopper is looking for something, and the store has told them it doesn't exist, even when it does.
+
+Vocabulary mismatch with results is subtler. The engine returns products, but they don't match what the shopper wanted - the word overlap was incidental. Analytics logs a "search with results" session, not a failure event, which makes this one of the hardest failure modes to spot.
+
+Conversational assistants add two more. An assistant that answers from training data rather than live catalog content can confidently say a product is in stock when it sold out yesterday. Every answer must be grounded in live catalog content and cited to the source. Stale syncs make this worse - twice-daily refresh is the minimum for catalogs where inventory moves quickly.
+
+Circular conversations are a different dead end. An assistant that can't reach a grounded answer paraphrases the question back or repeats itself. Shoppers call it going in circles, and it's often a worse experience than no assistant at all.
+
+The hardest cost to quantify is invisible churn. A shopper who gets irrelevant results and closes the tab doesn't register as a failure event. The real cost shows up in repeat-purchase rates, long after that session ends.
+
+## What results can better product search deliver?
+
+The invisible churn problem has a visible flip side: when search actually works, the gains show up in the three metrics ecommerce marketers track - conversion rate, average order value, and revenue per searcher. The size of the lift depends on how wide the starting gap was. Brands moving from keyword-only search with high vocabulary mismatch see larger gains than brands where search was already functional.
+
+[UNTUCKit](/customers/untuckit) ran a two-month A/B test on a Shopify Plus storefront. Conversion rate came in at 17.6% versus 15.0% for their prior search tool - a +17.1% relative lift. Revenue per searcher moved from $32.30 to $39.17, a +21.3% improvement. AOV went from $215 to $222, a +3.3% gain. At the end of the test, UNTUCKit moved Nobi to 100% of their search traffic.
+
+[Kilte](/customers/kilte), a DTC fashion brand on Shopify, saw a +21.7% conversion rate lift comparing Nobi against the platform's default search. Their previous engine wasn't matching shopper vocabulary to catalog titles - a gap keyword matching can't close without a manually maintained synonym list. Kilte also ran Nobi across three surfaces at once - the search bar, collection filters, and a product discovery widget - so the same semantic layer touched more of the discovery journey.
+
+[Lucchese](/customers/lucchese) attributed $1M in incremental revenue in year one and $3.46M cumulatively to Nobi running across search, a cart assistant, and a PDP assistant - a 39x ROI that reflects both the search CVR lift and fewer pre-purchase questions reaching the support inbox.
+
+That second source of gain matters on its own. Sizing and fit questions, WISMO lookups, and policy queries answered in the search interface before a shopper reaches the contact form reduce support costs in parallel with the conversion lift. Fit issues drive a large share of apparel returns - an assistant that answers "do these run narrow?" from the product page reduces wrong-size purchases and the return costs that follow.
+
+## What are the risks of AI-powered product search, and how do you evaluate them?
+
+Those gains assume the assistant is telling the truth. [AI search assistants](https://nobi.ai/blog/best-ai-answer-engines-for-ecommerce-search) introduce risks that keyword engines don't: a keyword engine returns no result or a wrong one, but an AI assistant can return a wrong answer with the same confidence it uses for correct ones - and the shopper has no way to tell. Knowing what to ask during evaluation is more useful than reading feature pages.
+
+**Source grounding.** Ask every vendor directly: where does the answer come from? The only safe answer is "live catalog content and your connected documents, cited by source." An assistant drawing from training data can't verify that its answers match your current catalog or policy. Numbered citation pills that surface the source document, date, and exact excerpt give shoppers a way to verify claims - and give you an audit trail when something looks off.
+
+**Inventory sync frequency.** If the knowledge base isn't updated against live catalog data, the assistant will recommend out-of-stock items and confirm availability for products that have already sold. Twice-daily sync is a reasonable minimum for active DTC catalogs; anything less is a real accuracy risk in any category where inventory moves fast.
+
+**A second AI review.** Ask whether the tool checks each draft answer against the cited content before sending. That step catches errors the first pass produces, and it matters most for materials, sizing, compatibility, and care instructions.
+
+**Query overrides.** Return policies, warranty terms, and shipping cutoffs can't be safely paraphrased by an AI. Ask whether the tool lets you lock specific questions to an exact merchant-approved answer that bypasses the generative pipeline.
+
+**Fallback behavior.** What does the assistant say when it genuinely doesn't know? One that fabricates when it lacks grounded information is worse than one that says "I don't have that - here's how to reach us." Evaluate the failure case, not just the success case.
+
+**The personalization trade-off.** [Constructor](https://constructor.io) and [Bloomreach](https://bloomreach.com) rerank results in real time from what each shopper clicks and adds to cart during their visit. Nobi's current personalization is personalized placeholder text and starter messages - it doesn't reorder results based on individual shopper history. If behavioral reranking at the product-list level is a hard requirement, evaluate those platforms alongside any conversational search assistant, and be clear about which job each one is actually solving.
+
+## How do you choose the right product search solution for your store?
+
+That personalization question is one input into a broader diagnosis. The right tool depends on which failure mode is costing the most revenue, how much engineering bandwidth you have, and whether you need a better results list, a grounded Q&A layer, or both. Pull your search data first - the failure mode usually narrows the field before you read a feature page.
+
+**Start with your zero-result rate.** A high zero-result rate on a keyword engine points to vocabulary mismatch as the primary problem - any semantic engine closes most of that gap. Already low? The issue is ranking quality or a missing Q&A layer, and the fix is in a different direction.
+
+If vocabulary mismatch is the failure mode and you're on Shopify, Klevu closes the gap without an engineering project. Fast Simon covers the same ground and adds visual collection management for marketing teams that need to manage seasonal layouts from one dashboard without filing engineering tickets.
+
+If full developer control over ranking is the requirement, Algolia's API gives engineering teams that control. Budget the time honestly: implementation and tuning require dedicated bandwidth, and the NeuralSearch semantic layer is only available on the top-tier Elevate plan.
+
+If auditable, rule-by-rule control over every query result is the requirement, Searchspring's merchandising dashboard gives deterministic, traceable control. The trade-off is maintaining the rule list as the catalog and shopper vocabulary grow.
+
+If full-site behavioral personalization is the requirement, Constructor is the reference. Bloomreach adds a customer data platform for retailers consolidating search, marketing, and content under one contract. Both carry enterprise sales cycles and pricing to match.
+
+If the primary gap is pre-purchase Q&A alongside search relevance - sizing, materials, compatibility, policy - Nobi routes each query automatically: product searches take the fast semantic path, questions get a cited grounded answer from live catalog and policy content. Pricing starts at $25/month, with $0.01 per additional search and $0.10 per additional message. Nobi doesn't reorder results based on individual shopper history and isn't built for developer-owned custom ranking pipelines.
+
+The most common mis-purchase in this category is buying a full [enterprise discovery platform](https://nobi.ai/blog/the-top-ecommerce-platforms-for-native-ai-search-and-product-discovery) for a problem a semantic tool or grounded assistant would solve at a fraction of the cost. Match the tool to the failure mode, not the demo.
+
+## Frequently asked questions about product search
+
+**What is the difference between site search and product search?** Site search scans all content on a site - blog posts, help articles, policy pages, and product listings. Product search is scoped to catalog items. Modern AI assistants blur the line by routing product queries to a product index and content questions to a connected knowledge base, answering from whichever source fits the query.
+
+**What is a good zero-result rate?** Industry benchmarks put the average at 10-15%. Top-performing stores run well below that. On a keyword engine with a high [zero-result rate](https://nobi.ai/blog/ai-search-tools-zero-results-ecommerce), semantic search is typically the highest-ROI fix - it closes vocabulary gaps no rule list can cover.
+
+**Does semantic search replace synonym groups?** For most vocabulary gaps, yes. The engine matches "pullover" to "sweater" because their vectors sit close in the model's embedding space. Internal SKU codes and uncommon abbreviations may still need explicit handling, but the volume of manual maintenance drops substantially.
+
+**What is searchandising?** [Searchandising](https://nobi.ai/blog/what-is-search-merchandising) is curating what a query returns the way a visual merchandiser curates a store shelf: pinning products, boosting categories, redirecting dead-end queries to a curated page rather than an empty state. It sits on top of relevance ranking, not in place of it, and requires ongoing maintenance as the catalog and campaigns change.
+
+**How do I measure the impact of a search upgrade?** Run an A/B test splitting traffic between the old and new experience. Measure CVR, revenue per searcher, and AOV as primary outcomes. Track zero-result rate and search abandonment as leading indicators before conversion data accumulates. Give the test at least four to six weeks.
+
+**Can an AI search assistant go wrong?** Yes - and the failure mode is usually confident incorrectness. The assistant answers falsely with the same tone it uses for correct ones. Evaluate any conversational search tool on four questions: Is the answer grounded in live catalog content? Are sources cited so shoppers can verify? How often does the knowledge base sync against the live catalog? What does the assistant say when it doesn't know? The tools that answer those four questions well are the ones that earn shopper trust over time.
+
+
+<BlogEmailCapture hook="Evaluating Boost Commerce, Searchspring, or Klevu for your store?" subtext="Drop your email and we'll show you how Nobi's AI search surfaces the right products for the queries your current tool is returning zero results on." />
+
+---
+
+Nobi combines semantic product search with a grounded shopping assistant in one integration. Try it free, starting at $25/month.
+
+<div className="my-8 flex justify-center">
+ <a
+ href="https://dashboard.nobi.ai"
+ className="inline-flex items-center justify-center gap-2 rounded-2xl font-medium transition active:scale-[.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-black/10 dark:focus-visible:ring-white/20 bg-black text-white dark:bg-white dark:text-black hover:opacity-90 shadow-sm h-12 px-6 text-base no-underline"
+ >
+ <span>Start your free Nobi trial</span>
+ </a>
+</div>

@@ -16,6 +16,7 @@ import {
     ShoppingCart,
     Sparkles,
 } from "lucide-react";
+import { isWorkEmail } from "../utils/workEmail";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import FAQList from "../components/FAQList.jsx";
@@ -1914,8 +1915,12 @@ function RequestDemoModal({ open, onClose }) {
 
   async function submit(e) {
     e.preventDefault();
-    setSubmitting(true);
     setError("");
+    if (!isWorkEmail(form.email)) {
+      setError("Please use your work email address, not a personal one like Gmail or Yahoo.");
+      return;
+    }
+    setSubmitting(true);
     try {
       // Web3Forms endpoint
       const accessKey = "c7a3fd79-0e4f-47ce-aa30-c141616d21e3";

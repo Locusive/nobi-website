@@ -1,5 +1,6 @@
 import React from "react";
 import Button from "./Button";
+import { isWorkEmail } from "../utils/workEmail";
 
 export function RequestDemoModal({ open, onClose }) {
   const [form, setForm] = React.useState({
@@ -33,8 +34,12 @@ export function RequestDemoModal({ open, onClose }) {
 
   async function submit(e) {
     e.preventDefault();
-    setSubmitting(true);
     setError("");
+    if (!isWorkEmail(form.email)) {
+      setError("Please use your work email address, not a personal one like Gmail or Yahoo.");
+      return;
+    }
+    setSubmitting(true);
     try {
       // Web3Forms endpoint
       const accessKey = "c7a3fd79-0e4f-47ce-aa30-c141616d21e3";

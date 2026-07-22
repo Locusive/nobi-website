@@ -1,22 +1,18 @@
-import React, { useEffect } from "react";
+import React from "react";
+import { CheckCircle2, ChevronDown, Gift, Search, Smile, BarChart3 } from "lucide-react";
 import { useSEO } from "../hooks/useSEO";
-import PageLayout from "../components/PageLayout";
-import FAQList from "../components/FAQList.jsx";
-import PricingCalculator from "../components/PricingCalculator.jsx";
-import { Check, Search, Smile, BarChart3, MessageSquare, ArrowRight, Gift, Star } from "lucide-react";
-import Marquee from "react-fast-marquee";
-import { getSignupUrl } from "../utils/signupUrl";
 import { useDemoForm } from "../context/DemoFormContext";
+import { getSignupUrl } from "../utils/signupUrl";
+import "../components/home/homepage.css";
+import Nav from "../components/home/Nav";
+import FooterCTA from "../components/home/FooterCTA";
+import SiteFooter from "../components/home/SiteFooter";
+import PricingCalculator from "../components/PricingCalculator.jsx";
 
-const CUSTOMER_LOGOS = [
-  { alt: "UNTUCKit", src: "/media/logos/untuckit.svg" },
-  { alt: "Lucchese", src: "/media/logos/lucchese.svg" },
-  { alt: "TOOLUP", src: "/media/logos/toolup.svg" },
-  { alt: "Kilte", src: "/media/logos/kilte.webp" },
-  { alt: "Alps and Meters", src: "/media/logos/alps_meters.png" },
-];
-
-/** Nobi plan pricing constants. */
+// All figures below are ported verbatim from the real, live pricing page
+// (git history: src/pages/Pricing.jsx) — not from the design bundle, which
+// paraphrased some of this (and got the overage FAQ wrong: it says usage is
+// "simply billed," but customers can actually choose to pause instead).
 const PLAN_PRICE = 25;
 const PLAN_SEARCH_CAP = "2,500";
 const PLAN_MESSAGE_CAP = "250";
@@ -27,48 +23,40 @@ const MAX_PRODUCTS = "5,000";
 const MAX_KB_DOCS = "5,000";
 
 const PLAN_HIGHLIGHTS = [
-  `100 free messages every month to try in your dashboard — no credit card needed`,
-  `Up to ${MAX_PRODUCTS} products and ${MAX_KB_DOCS} knowledge base documents`,
+  `$0.10/message, $0.01/search after that`,
+  `Up to ${MAX_PRODUCTS} products`,
+  `${MAX_KB_DOCS} knowledge base documents`,
+  `Insights & analytics`,
 ];
 
 const ENTERPRISE_HIGHLIGHTS = [
   "Dedicated support",
-  "Custom integrations and onboarding",
+  "Custom integrations & onboarding",
   "Volume discounts on usage",
-  `Over ${MAX_PRODUCTS} products and knowledge base documents`,
-];
-
-const SHARED_FEATURES = [
-  "Search mode, suggestion pills, buttons, and all other components",
-  "Custom questions answered with your knowledge base",
-  "Insights and analytics on your customers",
-  "Merchandising rules and controls",
+  `${MAX_PRODUCTS}+ products & documents`,
 ];
 
 const VALUE_PROPS = [
   {
     icon: Search,
-    color: "from-blue-500 to-indigo-600",
-    bgColor: "bg-blue-50",
+    bg: "#efe8ff",
+    color: "#6d3bff",
     title: "Better, Faster Search",
-    description:
-      "Semantic search understands intent, outperforming traditional keyword matching.",
+    description: "Semantic search understands intent, outperforming traditional keyword matching.",
   },
   {
     icon: Smile,
-    color: "from-emerald-500 to-teal-600",
-    bgColor: "bg-emerald-50",
+    bg: "#e0f7ef",
+    color: "#0f8a54",
     title: "Improved Customer Experience",
-    description:
-      "Customers get accurate answers powered by data you trust and control.",
+    description: "Customers get accurate answers powered by data you trust and control.",
   },
   {
     icon: BarChart3,
-    color: "from-purple-500 to-violet-600",
-    bgColor: "bg-purple-50",
+    bg: "#ffe6f4",
+    color: "#d541b3",
     title: "Insights & Data",
-    description:
-      "Reporting and trends reveal what your customers are really looking for.",
+    description: "Reporting and trends reveal what your customers are really looking for.",
   },
 ];
 
@@ -99,6 +87,14 @@ const PRICING_FAQS = [
   },
 ];
 
+const LOGOS = [
+  { alt: "UNTUCKit", src: "/media/logos/untuckit.svg", height: 20 },
+  { alt: "Lucchese", src: "/media/logos/lucchese.svg", height: 26 },
+  { alt: "Kilte", src: "/media/logos/kilte.webp", height: 22 },
+  { alt: "TOOLUP", src: "/media/logos/toolup.svg", height: 22 },
+  { alt: "Alps and Meters", src: "/media/logos/alps_meters.png", height: 22 },
+];
+
 export default function Pricing() {
   const { onOpen: openDemoForm } = useDemoForm();
 
@@ -123,333 +119,186 @@ export default function Pricing() {
   });
 
   return (
-    <PageLayout>
-      <div className="bg-gradient-to-b from-white via-white to-slate-50 text-black min-h-screen overflow-x-hidden">
-        {/* Hero */}
-        <section className="relative">
+    <div style={{ fontFamily: "'Schibsted Grotesk','Helvetica Neue',Helvetica,Arial,sans-serif", background: "#ffffff" }}>
+      <Nav active="pricing" />
+
+      {/* Hero */}
+      <div style={{ position: "relative", overflow: "hidden", background: "linear-gradient(180deg,#6656ce,#5a3fc0)", color: "#fff", padding: "150px clamp(24px,5vw,80px) 84px", textAlign: "center" }}>
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            backgroundImage:
+              "radial-gradient(60% 55% at 15% 12%, rgba(255,150,110,0.28), rgba(255,150,110,0) 70%), radial-gradient(55% 55% at 90% 90%, rgba(213,65,179,0.32), rgba(213,65,179,0) 70%)",
+          }}
+        />
+        <div style={{ position: "relative", zIndex: 2, maxWidth: 720, margin: "0 auto" }}>
+          <span style={{ display: "inline-block", fontFamily: "'SF Mono',ui-monospace,Menlo,monospace", fontSize: 13, letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(255,255,255,0.72)", fontWeight: 600 }}>
+            Pricing
+          </span>
+          <h1 style={{ margin: "20px 0 0", fontSize: "clamp(40px,5.4vw,68px)", fontWeight: 700, letterSpacing: "-0.035em", lineHeight: 1.02 }}>
+            Simple, usage-based pricing
+          </h1>
+          <p style={{ margin: "20px auto 0", maxWidth: "44ch", fontSize: "clamp(16px,1.3vw,20px)", lineHeight: 1.55, color: "rgba(255,255,255,0.85)" }}>
+            Try the full Nobi experience free in your dashboard — no credit card needed. Ready to go live on your
+            site? Start a {TRIAL_DAYS}-day free trial.
+          </p>
+        </div>
+      </div>
+
+      {/* Tiers */}
+      <div style={{ background: "#f5f3fb", padding: "56px clamp(24px,5vw,80px) 20px" }}>
+        <div style={{ maxWidth: 940, margin: "0 auto" }}>
           <div
-            className="absolute -left-32 -top-24 w-80 h-80 bg-purple-200/50 blur-3xl pointer-events-none"
-            aria-hidden
-          />
-          <div
-            className="absolute right-[-120px] top-16 w-96 h-96 bg-blue-200/50 blur-3xl pointer-events-none"
-            aria-hidden
-          />
-
-          <div className="relative mx-auto max-w-6xl px-6 pt-16 pb-2 sm:pt-20 sm:pb-4 text-center">
-            <p className="text-sm font-semibold tracking-[0.2em] text-purple-600 uppercase mb-4">
-              Pricing
-            </p>
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-semibold tracking-tight text-slate-900 text-balance">
-              Simple, usage-based pricing
-            </h1>
-            <p className="mt-4 text-lg text-slate-600 max-w-2xl mx-auto leading-relaxed">
-              Try the full Nobi experience free in your dashboard — no credit card needed.
-              Ready to go live on your site? Start a {TRIAL_DAYS}-day free trial.
-            </p>
+            style={{
+              background: "#fff",
+              border: "1px solid rgba(20,16,40,0.08)",
+              borderRadius: 16,
+              boxShadow: "0 24px 60px -44px rgba(76,40,130,0.4)",
+              padding: "16px 22px",
+              display: "flex",
+              alignItems: "center",
+              gap: 14,
+              flexWrap: "wrap",
+              justifyContent: "center",
+              marginBottom: 22,
+            }}
+          >
+            <span style={{ display: "inline-flex", width: 34, height: 34, borderRadius: 10, background: "#f1ecff", alignItems: "center", justifyContent: "center", flex: "none" }}>
+              <Gift size={18} color="#6d3bff" />
+            </span>
+            <span style={{ fontSize: 15, color: "#3a3646" }}>
+              <strong style={{ color: "#1b1626", fontWeight: 700 }}>Start free, no credit card needed.</strong> 100
+              free messages every month to try the full experience in your dashboard.
+            </span>
           </div>
-        </section>
 
-        {/* Plan cards */}
-        <section className="relative py-6 sm:py-8">
-          <div className="mx-auto max-w-4xl px-6">
-            {/* Free preview + trial banner */}
-            <div className="rounded-xl border border-purple-200 bg-white px-6 py-4 mb-8">
-              <div className="flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-6">
-                <div className="flex items-center gap-3 flex-1">
-                  <div className="w-10 h-10 rounded-full bg-purple-50 flex items-center justify-center flex-shrink-0">
-                    <Gift className="h-5 w-5 text-purple-600" />
-                  </div>
-                  <div>
-                    <p className="font-semibold text-slate-900">Start free, no credit card needed</p>
-                    <p className="text-sm text-slate-500">
-                      100 free messages every month to try the full experience in your dashboard. Start a {TRIAL_DAYS}-day trial when you're ready to go live.
-                    </p>
-                  </div>
-                </div>
+          <div className="nb-tiers" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 22 }}>
+            {/* Standard */}
+            <div style={{ position: "relative", background: "#fff", border: "2px solid #6d3bff", borderRadius: 22, padding: "32px 30px", boxShadow: "0 34px 80px -40px rgba(76,40,130,0.6)", display: "flex", flexDirection: "column" }}>
+              <div style={{ fontSize: 18, fontWeight: 700, color: "#1b1626" }}>Standard</div>
+              <div style={{ marginTop: 6, fontSize: 14, color: "#6a6478", minHeight: 40 }}>
+                Everything you need to power search and conversations on your site.
               </div>
-            </div>
-
-            <div className="grid gap-6 md:grid-cols-2">
-              {/* Standard Plan Card */}
-              <div className="relative rounded-2xl border border-purple-200 bg-gradient-to-br from-purple-50/50 to-white p-6 sm:p-8 shadow-[0_18px_46px_-32px_rgba(15,23,42,0.35)] transition hover:-translate-y-1 ring-2 ring-purple-100">
-                <div className="space-y-4">
-                  <div>
-                    <h3 className="text-xl font-semibold text-slate-900">Standard</h3>
-                    <p className="text-sm text-slate-500 mt-1">
-                      Everything you need to power search and conversations on your site.
-                    </p>
-                  </div>
-
-                  <div className="flex items-baseline gap-1">
-                    <span className="text-4xl font-bold tracking-tight text-slate-900">
-                      ${PLAN_PRICE}
-                    </span>
-                    <span className="text-base text-slate-500">monthly base</span>
-                  </div>
-
-                  <p className="text-sm text-slate-500">
-                    {PLAN_SEARCH_CAP} searches and {PLAN_MESSAGE_CAP} messages included. {OVERAGE_RATE_MESSAGE}/message and {OVERAGE_RATE_SEARCH}/search after that.
-                  </p>
-
-                  <ul className="space-y-2">
-                    {PLAN_HIGHLIGHTS.map((highlight) => (
-                      <li
-                        key={highlight}
-                        className="flex items-start gap-2 text-sm text-slate-600"
-                      >
-                        <Check className="w-4 h-4 text-emerald-500 flex-shrink-0 mt-0.5" />
-                        {highlight}
-                      </li>
-                    ))}
-                  </ul>
-
-                  <a
-                    href={getSignupUrl()}
-                    className="block w-full rounded-xl py-3 text-sm font-semibold text-center transition active:scale-[.98] bg-black text-white hover:opacity-90 shadow-sm"
-                  >
-                    Start for Free
-                  </a>
-                </div>
+              <div style={{ marginTop: 18, display: "flex", alignItems: "baseline", gap: 6 }}>
+                <span style={{ fontSize: 46, fontWeight: 700, letterSpacing: "-0.03em", color: "#1b1626" }}>${PLAN_PRICE}</span>
+                <span style={{ fontSize: 15, color: "#6a6478" }}>/ month base</span>
               </div>
-
-              {/* Enterprise Card */}
-              <div className="relative rounded-2xl border border-slate-200 bg-white p-6 sm:p-8 shadow-[0_18px_46px_-32px_rgba(15,23,42,0.35)] transition hover:-translate-y-1">
-                <div className="space-y-4">
-                  <div>
-                    <h3 className="text-xl font-semibold text-slate-900">Enterprise</h3>
-                    <p className="text-sm text-slate-500 mt-1">
-                      Tailored plans for high-volume businesses with large catalogs.
-                    </p>
-                  </div>
-
-                  <div className="flex items-baseline gap-1">
-                    <span className="text-4xl font-bold tracking-tight text-slate-900">
-                      Custom
-                    </span>
-                    <span className="text-base text-slate-500">pricing</span>
-                  </div>
-
-                  <ul className="space-y-2">
-                    {ENTERPRISE_HIGHLIGHTS.map((highlight) => (
-                      <li
-                        key={highlight}
-                        className="flex items-start gap-2 text-sm text-slate-600"
-                      >
-                        <Check className="w-4 h-4 text-emerald-500 flex-shrink-0 mt-0.5" />
-                        {highlight}
-                      </li>
-                    ))}
-                  </ul>
-
-                  <button
-                    onClick={openDemoForm}
-                    className="block w-full rounded-xl py-3 text-sm font-semibold text-center transition active:scale-[.98] bg-white text-black border border-black hover:bg-black/5"
-                  >
-                    Get in Touch
-                  </button>
-                </div>
+              <div style={{ marginTop: 4, fontSize: 13.5, color: "#8a8498" }}>
+                {PLAN_SEARCH_CAP} searches + {PLAN_MESSAGE_CAP} messages included
               </div>
-            </div>
-
-            {/* Foundational Partner Program */}
-            <div className="mt-6 rounded-2xl border border-violet-200 bg-gradient-to-br from-violet-50/60 to-purple-50/20 p-6 sm:p-8 shadow-[0_18px_46px_-32px_rgba(109,40,217,0.2)] relative overflow-hidden">
-              <div className="absolute top-0 right-0 w-72 h-72 bg-purple-200/20 blur-3xl pointer-events-none" aria-hidden />
-              <div className="relative">
-
-                {/* Header row */}
-                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-6">
-                  <div>
-                    <div className="inline-flex items-center gap-1.5 rounded-full bg-violet-100 px-3 py-1 text-xs font-semibold text-violet-700 mb-2">
-                      <span className="w-1.5 h-1.5 rounded-full bg-violet-500 animate-pulse" />
-                      Limited availability
-                    </div>
-                    <h3 className="text-xl font-semibold text-slate-900">Partner Program</h3>
-                    <p className="text-sm text-slate-500 mt-1">
-                      Work closely with our team for your first year at $7/month.
-                    </p>
-                  </div>
-
-                  {/* Price + slots */}
-                  <div className="flex-shrink-0 flex sm:flex-col sm:items-end gap-4 sm:gap-1.5">
-                    <div className="flex items-baseline gap-1">
-                      <span className="text-4xl font-bold tracking-tight text-slate-900">$7</span>
-                      <span className="text-base text-slate-500">/month, first year</span>
-                    </div>
-                    <div className="flex flex-col items-end gap-1">
-                      <div className="flex gap-1">
-                        {[...Array(5)].map((_, i) => (
-                          <div key={i} className={`h-2 w-7 rounded-sm ${i < 1 ? "bg-violet-500" : "bg-slate-200"}`} />
-                        ))}
-                      </div>
-                      <p className="text-xs text-slate-500">
-                        <span className="font-semibold text-violet-600">1 of 5 spots</span> taken
-                      </p>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Two-column body */}
-                <div className="grid sm:grid-cols-2 gap-x-8 gap-y-4 mb-6">
-                  <div>
-                    <p className="text-xs font-semibold uppercase tracking-wide text-slate-400 mb-2">What you get</p>
-                    <ul className="space-y-1.5">
-                      {[
-                        "100,000 searches + 1,000 messages/month",
-                        "We'll customize Nobi to your standards",
-                        "Direct line to our founders",
-                        "Input on our roadmap + Slack support",
-                      ].map((item) => (
-                        <li key={item} className="flex items-start gap-2 text-sm text-slate-600">
-                          <Check className="w-4 h-4 text-violet-500 flex-shrink-0 mt-0.5" />
-                          {item}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                  <div>
-                    <p className="text-xs font-semibold uppercase tracking-wide text-slate-400 mb-2">What we ask</p>
-                    <ul className="space-y-1.5">
-                      {[
-                        "100–10,000 products in your catalog",
-                        "5-star review on G2 or Capterra by month 3",
-                        "One monthly meeting with our team",
-                        "Ongoing feedback + close collaboration",
-                      ].map((item) => (
-                        <li key={item} className="flex items-start gap-2 text-sm text-slate-600">
-                          <Star className="w-4 h-4 text-violet-400 flex-shrink-0 mt-0.5" />
-                          {item}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
-
-                <button
-                  onClick={openDemoForm}
-                  className="inline-flex items-center gap-2 rounded-xl py-3 px-6 text-sm font-semibold transition active:scale-[.98] bg-violet-600 text-white hover:bg-violet-700 shadow-sm"
-                >
-                  Apply to Partner Program
-                  <ArrowRight className="w-4 h-4" />
-                </button>
-              </div>
-            </div>
-
-          </div>
-        </section>
-
-        {/* Pricing calculator */}
-        <PricingCalculator />
-
-        {/* Value propositions */}
-        <section className="bg-gradient-to-b from-slate-50 via-white to-white py-16 border-t border-slate-200/70">
-          <div className="mx-auto max-w-6xl px-6">
-            <div className="text-center space-y-2 mb-12">
-              <p className="text-sm uppercase tracking-[0.2em] text-purple-600 font-semibold">
-                Why Nobi
-              </p>
-              <h2 className="text-3xl sm:text-4xl font-semibold text-slate-900">
-                Access everything you need
-              </h2>
-            </div>
-
-            <div className="grid gap-8 md:grid-cols-3">
-              {VALUE_PROPS.map((prop) => {
-                const Icon = prop.icon;
-                return (
-                  <div
-                    key={prop.title}
-                    className="text-center space-y-4 p-6 rounded-2xl border border-slate-200 bg-white shadow-[0_12px_36px_-24px_rgba(15,23,42,0.2)]"
-                  >
-                    <div
-                      className={`inline-flex items-center justify-center w-12 h-12 rounded-xl ${prop.bgColor}`}
-                    >
-                      <Icon className={`w-6 h-6 bg-gradient-to-br ${prop.color} bg-clip-text`} style={{ color: prop.color.includes('blue') ? '#3b82f6' : prop.color.includes('emerald') ? '#10b981' : '#8b5cf6' }} />
-                    </div>
-                    <h3 className="text-lg font-semibold text-slate-900">
-                      {prop.title}
-                    </h3>
-                    <p className="text-sm text-slate-600 leading-relaxed">
-                      {prop.description}
-                    </p>
-                  </div>
-                );
-              })}
-            </div>
-
-            <div className="mt-12 flex flex-wrap justify-center gap-x-6 gap-y-3">
-              {SHARED_FEATURES.map((feature) => (
-                <div
-                  key={feature}
-                  className="flex items-center gap-2 text-sm text-slate-700"
-                >
-                  <Check className="w-4 h-4 text-emerald-500 flex-shrink-0" />
-                  {feature}
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Social proof */}
-        <section className="border-t border-slate-200/70 bg-gradient-to-b from-white to-slate-50 py-16">
-          <div className="mx-auto max-w-6xl px-6 space-y-4">
-            <p className="text-center text-base text-black/60 tracking-[0.04em]">
-              Trusted by ecommerce teams who are serious about search &amp; discovery
-            </p>
-            <div className="bg-white rounded-xl border border-[#d6d6d6] shadow-[0_8px_22px_-18px_rgba(15,23,42,0.45)] overflow-hidden py-5 px-2">
-              <Marquee speed={36} gradient={false} pauseOnHover>
-                {[...CUSTOMER_LOGOS, ...CUSTOMER_LOGOS].map((logo, idx) => (
-                  <img
-                    key={`${logo.alt}-${idx}`}
-                    src={logo.src}
-                    alt={logo.alt}
-                    className="h-5 w-auto object-contain grayscale opacity-60 hover:opacity-100 transition mx-4"
-                    loading="lazy"
-                  />
-                ))}
-              </Marquee>
-            </div>
-          </div>
-        </section>
-
-        {/* Pricing FAQs */}
-        <section className="bg-gradient-to-b from-slate-50 via-white to-white py-16 border-t border-slate-200/70">
-          <div className="mx-auto max-w-6xl px-6">
-            <FAQList
-              id="pricing-faqs"
-              title="Pricing FAQs"
-              headingAlign="center"
-              sectionClassName="px-0"
-              padding="py-0"
-              columns={2}
-              items={PRICING_FAQS}
-            />
-          </div>
-        </section>
-
-        {/* Closing CTA */}
-        <section className="bg-gradient-to-b from-white via-slate-50 to-white py-16">
-          <div className="mx-auto max-w-5xl px-6 text-center space-y-5">
-            <div className="space-y-3">
-              <h2 className="text-3xl sm:text-4xl font-semibold text-slate-900">
-                Ready to grow your conversions?
-              </h2>
-              <p className="text-base text-slate-600">
-                Try free in your dashboard — no credit card needed. Start a {TRIAL_DAYS}-day trial when you're ready to go live.
-              </p>
-            </div>
-            <div className="flex justify-center">
               <a
                 href={getSignupUrl()}
-                className="h-12 rounded-full bg-black text-white hover:opacity-90 shadow-sm px-6 text-sm font-semibold transition active:scale-[.98] inline-flex items-center justify-center"
+                style={{ marginTop: 22, display: "block", textAlign: "center", background: "#6d3bff", color: "#fff", borderRadius: 12, padding: 13, fontSize: 15, fontWeight: 700, textDecoration: "none" }}
               >
                 Start for Free
               </a>
+              <div style={{ marginTop: 22, display: "flex", flexDirection: "column", gap: 11 }}>
+                {PLAN_HIGHLIGHTS.map((h) => (
+                  <div key={h} style={{ display: "flex", gap: 9, fontSize: 14, color: "#3a3646" }}>
+                    <CheckCircle2 size={18} color="#1fab6d" strokeWidth={2.4} style={{ flex: "none", marginTop: 1 }} />
+                    {h}
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Enterprise */}
+            <div style={{ background: "#100a24", border: "1px solid #100a24", borderRadius: 22, padding: "32px 30px", boxShadow: "0 24px 60px -40px rgba(76,40,130,0.5)", display: "flex", flexDirection: "column", color: "#fff" }}>
+              <div style={{ fontSize: 18, fontWeight: 700 }}>Enterprise</div>
+              <div style={{ marginTop: 6, fontSize: 14, color: "rgba(255,255,255,0.6)", minHeight: 40 }}>
+                Tailored plans for high-volume businesses with large catalogs.
+              </div>
+              <div style={{ marginTop: 18, display: "flex", alignItems: "baseline", gap: 6 }}>
+                <span style={{ fontSize: 42, fontWeight: 700, letterSpacing: "-0.03em" }}>Custom</span>
+              </div>
+              <div style={{ marginTop: 4, fontSize: 13.5, color: "rgba(255,255,255,0.55)" }}>Volume pricing</div>
+              <button
+                type="button"
+                onClick={openDemoForm}
+                style={{ marginTop: 22, display: "block", width: "100%", textAlign: "center", background: "#fff", color: "#100a24", border: "none", borderRadius: 12, padding: 13, fontSize: 15, fontWeight: 700, cursor: "pointer" }}
+              >
+                Get in Touch
+              </button>
+              <div style={{ marginTop: 22, display: "flex", flexDirection: "column", gap: 11 }}>
+                {ENTERPRISE_HIGHLIGHTS.map((h) => (
+                  <div key={h} style={{ display: "flex", gap: 9, fontSize: 14, color: "rgba(255,255,255,0.82)" }}>
+                    <CheckCircle2 size={18} color="#4fd1a0" strokeWidth={2.4} style={{ flex: "none", marginTop: 1 }} />
+                    {h}
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
-        </section>
+        </div>
       </div>
-    </PageLayout>
+
+      {/* Pricing calculator — real, working component (lead capture + tracking), used as-is */}
+      <div style={{ background: "#f5f3fb", paddingBottom: 24 }}>
+        <PricingCalculator />
+      </div>
+
+      {/* Value props */}
+      <div style={{ background: "#ffffff", padding: "clamp(56px,6vw,72px) clamp(24px,5vw,80px)" }}>
+        <div style={{ maxWidth: 1120, margin: "0 auto" }}>
+          <div style={{ textAlign: "center", maxWidth: "40ch", margin: "0 auto" }}>
+            <span style={{ fontFamily: "'SF Mono',ui-monospace,Menlo,monospace", fontSize: 12.5, letterSpacing: "0.2em", textTransform: "uppercase", color: "#6d3bff", fontWeight: 600 }}>
+              Why Nobi
+            </span>
+            <h2 style={{ margin: "14px 0 0", fontSize: "clamp(30px,3.6vw,46px)", fontWeight: 700, letterSpacing: "-0.03em", color: "#1b1626", lineHeight: 1.05 }}>
+              Access everything you need
+            </h2>
+          </div>
+          <div className="nb-grid3" style={{ marginTop: "clamp(40px,5vw,60px)", display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: "clamp(18px,2.5vw,28px)" }}>
+            {VALUE_PROPS.map(({ icon: Icon, bg, color, title, description }) => (
+              <div key={title} style={{ border: "1px solid rgba(20,16,40,0.09)", borderRadius: 20, padding: "28px 24px", background: "#faf9fc" }}>
+                <span style={{ display: "inline-flex", width: 46, height: 46, borderRadius: 12, alignItems: "center", justifyContent: "center", background: bg, color }}>
+                  <Icon size={24} strokeWidth={2.1} />
+                </span>
+                <h3 style={{ margin: "18px 0 0", fontSize: 19, fontWeight: 700, letterSpacing: "-0.02em", color: "#1b1626" }}>{title}</h3>
+                <p style={{ margin: "9px 0 0", fontSize: 14.5, lineHeight: 1.55, color: "#615b70" }}>{description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Logos */}
+      <div style={{ background: "#f5f3fb", padding: "56px clamp(24px,5vw,80px)" }}>
+        <div style={{ maxWidth: 1120, margin: "0 auto", textAlign: "center" }}>
+          <div style={{ fontSize: 13, color: "#8a8498", fontWeight: 500 }}>
+            Trusted by ecommerce teams serious about search &amp; discovery
+          </div>
+          <div style={{ marginTop: 26, display: "flex", alignItems: "center", justifyContent: "center", gap: "clamp(30px,6vw,64px)", flexWrap: "wrap", opacity: 0.62 }}>
+            {LOGOS.map((l) => (
+              <img key={l.alt} src={l.src} alt={l.alt} style={{ height: l.height, width: "auto" }} />
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* FAQ */}
+      <div style={{ background: "#ffffff", padding: "80px clamp(24px,5vw,80px)" }}>
+        <div style={{ maxWidth: 960, margin: "0 auto" }}>
+          <h2 style={{ margin: "0 0 34px", textAlign: "center", fontSize: "clamp(26px,3vw,40px)", fontWeight: 700, letterSpacing: "-0.03em", color: "#1b1626" }}>
+            Pricing FAQs
+          </h2>
+          <div className="nb-faqgrid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 14 }}>
+            {PRICING_FAQS.map((f) => (
+              <details key={f.q} className="nb-faq" style={{ background: "#f5f3fb", border: "1px solid rgba(20,16,40,0.08)", borderRadius: 14, padding: "2px 18px" }}>
+                <summary style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 12, padding: "18px 0", fontSize: 15.5, fontWeight: 600, color: "#1b1626" }}>
+                  {f.q}
+                  <ChevronDown className="nb-faq-chev" size={18} color="#8a8498" strokeWidth={2.2} style={{ flex: "none" }} />
+                </summary>
+                <div style={{ padding: "0 0 18px", fontSize: 14.5, lineHeight: 1.6, color: "#615b70" }}>{f.a}</div>
+              </details>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <FooterCTA />
+      <SiteFooter />
+    </div>
   );
 }

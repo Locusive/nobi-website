@@ -9,9 +9,16 @@ import logo from "../../assets/nobi-logo@2x.webp";
 // NOTE: mobile hamburger behavior (breakpoint, menu contents, styling) is
 // owned by the Claude Design bundle handoff — keep this isolated so it's a
 // clean swap if that design changes again.
-export default function Nav() {
+export default function Nav({ active }) {
   const { onOpen } = useDemoForm();
   const [mobileOpen, setMobileOpen] = useState(false);
+
+  const linkStyle = (key) => ({
+    color: active === key ? "#6d3bff" : "#3a3646",
+    fontWeight: active === key ? 600 : 500,
+    textDecoration: "none",
+    cursor: "pointer",
+  });
 
   const openDemo = () => {
     trackDemoFormOpened();
@@ -65,10 +72,10 @@ export default function Nav() {
             whiteSpace: "nowrap",
           }}
         >
-          <ScrollLink to="/product" style={{ color: "inherit", textDecoration: "none", cursor: "pointer" }}>
+          <ScrollLink to="/product" style={linkStyle("product")}>
             Product
           </ScrollLink>
-          <ScrollLink to="/pricing" style={{ color: "inherit", textDecoration: "none", cursor: "pointer" }}>
+          <ScrollLink to="/pricing" style={linkStyle("pricing")}>
             Pricing
           </ScrollLink>
         </div>
@@ -153,14 +160,14 @@ export default function Nav() {
             <ScrollLink
               to="/product"
               onClick={() => setMobileOpen(false)}
-              style={{ color: "#3a3646", textDecoration: "none", fontSize: 16, fontWeight: 500, padding: "15px 16px", borderRadius: 12 }}
+              style={{ ...linkStyle("product"), fontSize: 16, padding: "15px 16px", borderRadius: 12 }}
             >
               Product
             </ScrollLink>
             <ScrollLink
               to="/pricing"
               onClick={() => setMobileOpen(false)}
-              style={{ color: "#3a3646", textDecoration: "none", fontSize: 16, fontWeight: 500, padding: "15px 16px", borderRadius: 12 }}
+              style={{ ...linkStyle("pricing"), fontSize: 16, padding: "15px 16px", borderRadius: 12 }}
             >
               Pricing
             </ScrollLink>

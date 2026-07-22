@@ -56,4 +56,12 @@
   .nb-nav-links { display: none !important; }
   .nb-nav { width: 100%; justify-content: space-between; }
   .nb-nav-hamb { display: inline-flex !important; }
+  .nb-tiers { grid-template-columns: 1fr !important; }
+  .nb-faqgrid { grid-template-columns: 1fr !important; }
 }
+
+/* FAQ accordion (pricing page) */
+details.nb-faq > summary { list-style: none; cursor: pointer; }
+details.nb-faq > summary::-webkit-details-marker { display: none; }
+details.nb-faq > summary .nb-faq-chev { transition: transform .2s ease; }
+details.nb-faq[open] > summary .nb-faq-chev { transform: rotate(180deg); }

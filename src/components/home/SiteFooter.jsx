@@ -3,8 +3,10 @@ import ScrollLink from "./ScrollLink";
 import { ExternalLink } from "lucide-react";
 import logo from "../../assets/nobi-logo@2x.webp";
 
+// Product page is a placeholder while its real design is in progress —
+// hidden from the footer until that's ready. Add it back when it ships:
+// { to: "/product", label: "Product" },
 const LINKS = [
-  { to: "/product", label: "Product" },
   { to: "/pricing", label: "Pricing" },
   { to: "/faqs", label: "FAQs" },
   { to: "/blog", label: "Blog" },

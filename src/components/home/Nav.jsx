@@ -9,6 +9,11 @@ import logo from "../../assets/nobi-logo@2x.webp";
 // NOTE: mobile hamburger behavior (breakpoint, menu contents, styling) is
 // owned by the Claude Design bundle handoff — keep this isolated so it's a
 // clean swap if that design changes again.
+
+// Product page is a placeholder while its real design is in progress —
+// hidden from nav until that's ready. Flip back to true when it ships.
+const SHOW_PRODUCT_LINK = false;
+
 export default function Nav({ active }) {
   const { onOpen } = useDemoForm();
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -72,9 +77,11 @@ export default function Nav({ active }) {
             whiteSpace: "nowrap",
           }}
         >
-          <ScrollLink to="/product" style={linkStyle("product")}>
-            Product
-          </ScrollLink>
+          {SHOW_PRODUCT_LINK && (
+            <ScrollLink to="/product" style={linkStyle("product")}>
+              Product
+            </ScrollLink>
+          )}
           <ScrollLink to="/pricing" style={linkStyle("pricing")}>
             Pricing
           </ScrollLink>
@@ -157,13 +164,15 @@ export default function Nav({ active }) {
               zIndex: 5,
             }}
           >
-            <ScrollLink
-              to="/product"
-              onClick={() => setMobileOpen(false)}
-              style={{ ...linkStyle("product"), fontSize: 16, padding: "15px 16px", borderRadius: 12 }}
-            >
-              Product
-            </ScrollLink>
+            {SHOW_PRODUCT_LINK && (
+              <ScrollLink
+                to="/product"
+                onClick={() => setMobileOpen(false)}
+                style={{ ...linkStyle("product"), fontSize: 16, padding: "15px 16px", borderRadius: 12 }}
+              >
+                Product
+              </ScrollLink>
+            )}
             <ScrollLink
               to="/pricing"
               onClick={() => setMobileOpen(false)}

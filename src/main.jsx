@@ -23,6 +23,7 @@ const LuccheseCustomer   = lazy(() => import("./pages/customers/Lucchese.jsx"));
 const UNTUCKitCustomer   = lazy(() => import("./pages/customers/UNTUCKit.jsx"));
 const KilteCustomer      = lazy(() => import("./pages/customers/Kilte.jsx"));
 const Pricing            = lazy(() => import("./pages/Pricing.jsx"));
+const Product            = lazy(() => import("./pages/Product.jsx"));
 const SearchEngineLanding = lazy(() => import("./pages/landing/SearchEngineLanding.jsx"));
 const AIAssistantLanding  = lazy(() => import("./pages/landing/AIAssistantLanding.jsx"));
 const Webinar            = lazy(() => import("./pages/Webinar.jsx"));
@@ -70,6 +71,7 @@ function App() {
           <Route path="/terms" element={<Terms />} />
           <Route path="/privacy" element={<Privacy />} />
           <Route path="/pricing" element={<Pricing />} />
+          <Route path="/product" element={<Product />} />
           <Route path="/faqs" element={<FAQs />} />
           <Route path="/s/search" element={<SearchEngineLanding />} />
           <Route path="/s/ai-assistant" element={<AIAssistantLanding />} />

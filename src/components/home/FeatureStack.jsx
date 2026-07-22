@@ -98,7 +98,7 @@ function SearchPanel() {
   const [mode, setMode] = useState("with");
   return (
     <FeatPanel bg="#4a2fb8" radial="radial-gradient(70% 60% at 85% 15%, rgba(255,255,255,0.14), rgba(255,255,255,0) 70%), radial-gradient(60% 55% at 5% 95%, rgba(20,6,70,0.5), rgba(20,6,70,0) 70%)">
-      <div style={{ flex: "1 1 420px", minWidth: 300 }}>
+      <div className="nb-feat-col" style={{ flex: "1 1 420px", minWidth: 300 }}>
         <Kicker>Keyword search is dumb</Kicker>
         <FeatH2 maxCh={14}>More relevant search results</FeatH2>
         <FeatP color="rgba(255,247,255,0.82)">
@@ -106,7 +106,7 @@ function SearchPanel() {
           the right results, and no one hits a dead end.
         </FeatP>
       </div>
-      <div style={{ flex: "0 1 500px", minWidth: 300, display: "flex", justifyContent: "center" }}>
+      <div className="nb-feat-col" style={{ flex: "0 1 500px", minWidth: 300, display: "flex", justifyContent: "center" }}>
         <div style={{ width: "min(480px,100%)" }}>
           <div
             style={{
@@ -168,7 +168,7 @@ function SearchPanel() {
 function InstallPanel() {
   return (
     <FeatPanel bg="#b81e6a" radial="radial-gradient(70% 60% at 12% 18%, rgba(255,255,255,0.14), rgba(255,255,255,0) 70%), radial-gradient(60% 55% at 92% 92%, rgba(40,6,60,0.5), rgba(40,6,60,0) 70%)">
-      <div style={{ flex: "1 1 380px", minWidth: 300 }}>
+      <div className="nb-feat-col" style={{ flex: "1 1 380px", minWidth: 300 }}>
         <Kicker>Fast and easy setup</Kicker>
         <FeatH2 maxCh={13}>Install in just minutes</FeatH2>
         <FeatP color="rgba(255,247,255,0.84)">
@@ -176,7 +176,7 @@ function InstallPanel() {
           it looks like it was always part of your site.
         </FeatP>
       </div>
-      <div style={{ flex: "1 1 420px", minWidth: 300, display: "flex", justifyContent: "center" }}>
+      <div className="nb-feat-col" style={{ flex: "1 1 420px", minWidth: 300, display: "flex", justifyContent: "center" }}>
         <div style={{ position: "relative", width: "min(460px,100%)", display: "flex", flexDirection: "column", alignItems: "stretch" }}>
           <div style={{ background: "#14101f", borderRadius: 16, padding: "16px 18px", boxShadow: "0 30px 70px -40px rgba(20,6,60,0.8)", position: "relative", zIndex: 3 }}>
             <div style={{ display: "flex", alignItems: "center", gap: 7, marginBottom: 12 }}>
@@ -273,7 +273,7 @@ function InstallPanel() {
 function MerchandisingPanel() {
   return (
     <FeatPanel bg="#0c4f46" radial="radial-gradient(70% 60% at 88% 15%, rgba(120,255,220,0.22), rgba(120,255,220,0) 70%), radial-gradient(60% 55% at 6% 92%, rgba(6,40,34,0.55), rgba(6,40,34,0) 70%)">
-      <div style={{ flex: "1 1 420px", minWidth: 300 }}>
+      <div className="nb-feat-col" style={{ flex: "1 1 420px", minWidth: 300 }}>
         <Kicker>Control what's shown</Kicker>
         <FeatH2 maxCh={14}>Merchandising options up the wazoo</FeatH2>
         <FeatP color="rgba(240,255,250,0.84)">
@@ -281,7 +281,7 @@ function MerchandisingPanel() {
           control of what shows, where, and when.
         </FeatP>
       </div>
-      <div style={{ flex: "1 1 380px", minWidth: 300, display: "flex", justifyContent: "center" }}>
+      <div className="nb-feat-col" style={{ flex: "1 1 380px", minWidth: 300, display: "flex", justifyContent: "center" }}>
         <div style={{ width: "min(420px,100%)", background: "#ffffff", borderRadius: 22, boxShadow: "0 50px 100px -45px rgba(4,30,26,0.75)", overflow: "hidden" }}>
           <div style={{ padding: "15px 18px", borderBottom: "1px solid rgba(20,16,40,0.06)", display: "flex", alignItems: "center", gap: 9 }}>
             <CheckCircle2 size={17} color="#0f8a54" strokeWidth={2.2} />
@@ -355,7 +355,7 @@ function MerchandisingPanel() {
 function SiteAnswersPanel() {
   return (
     <FeatPanel bg="#152a5c" radial="radial-gradient(70% 60% at 12% 15%, rgba(150,190,255,0.22), rgba(150,190,255,0) 70%), radial-gradient(60% 55% at 92% 92%, rgba(8,16,44,0.55), rgba(8,16,44,0) 70%)">
-      <div style={{ flex: "1 1 420px", minWidth: 300 }}>
+      <div className="nb-feat-col" style={{ flex: "1 1 420px", minWidth: 300 }}>
         <Kicker>Search site pages</Kicker>
         <FeatH2 maxCh={14}>Google-style search results</FeatH2>
         <FeatP color="rgba(238,244,255,0.84)">
@@ -363,7 +363,7 @@ function SiteAnswersPanel() {
           shoppers get the whole story without leaving search.
         </FeatP>
       </div>
-      <div style={{ flex: "1 1 440px", minWidth: 300, display: "flex", justifyContent: "center" }}>
+      <div className="nb-feat-col" style={{ flex: "1 1 440px", minWidth: 300, display: "flex", justifyContent: "center" }}>
         <div style={{ width: "min(500px,100%)", background: "#ffffff", borderRadius: 24, boxShadow: "0 50px 100px -40px rgba(6,12,38,0.85)", overflow: "hidden" }}>
           <div style={{ padding: "18px 20px", borderBottom: "1px solid rgba(20,16,40,0.06)", display: "flex", alignItems: "center", gap: 11 }}>
             <Search size={18} color="#6d3bff" strokeWidth={2.3} />

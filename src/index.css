@@ -10,6 +10,12 @@ html { scroll-behavior: smooth; }
    (vs `hidden`) preserves the sticky header's scroll context. */
 html, body { overflow-x: clip; }
 
+/* Chrome's scroll anchoring tries to preserve visual position when content
+   shifts, but on route change (esp. lazy-loaded pages growing from ~0 height
+   to full content) it was overriding our own scrollTo(0,0) and dragging
+   visitors back to the bottom of whatever they'd been reading. */
+html, body { overflow-anchor: none; }
+
 :root {
   --hero-preview-ratio: 2.2;
 }

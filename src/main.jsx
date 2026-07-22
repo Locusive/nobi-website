@@ -1,6 +1,6 @@
 import React, { StrictMode, Suspense, lazy, useEffect, useState } from "react";
 import { createRoot } from "react-dom/client";
-import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useLocation, useNavigationType } from "react-router-dom";
 
 // HomePage is eagerly loaded — it's the first thing every visitor sees
 import HomePage from "./pages/HomePage.jsx";
@@ -34,8 +34,18 @@ import { RequestDemoModal } from "./components/DemoModals.jsx";
 import { DemoFormProvider } from "./context/DemoFormContext.jsx";
 import "./index.css";
 
+const SCROLL_KEY_PREFIX = "nobi-scroll:";
+
+// The browser's own automatic scroll restoration can fire asynchronously and
+// fight a router-driven scrollTo (it did — see the effects below). Take full
+// manual control instead: we decide scroll position on every navigation.
+if (typeof window !== "undefined" && "scrollRestoration" in window.history) {
+  window.history.scrollRestoration = "manual";
+}
+
 function App() {
   const location = useLocation();
+  const navigationType = useNavigationType();
 
   const [isFormOpen, setIsFormOpen] = useState(() => {
     const params = new URLSearchParams(location.search);
@@ -48,6 +58,37 @@ function App() {
       setIsFormOpen(true);
     }
   }, [location.search]);
+
+  // Forward navigation scrolls to top at click time (see ScrollLink) — that
+  // happens before the old, still-tall page unmounts, which is what actually
+  // works reliably. This effect only handles browser back/forward (POP):
+  // restore wherever the visitor actually was, from sessionStorage so it
+  // survives a full reload too (e.g. leaving to an external site like
+  // Start Free and hitting the back button).
+  useEffect(() => {
+    if (navigationType !== "POP") return;
+    const saved = sessionStorage.getItem(SCROLL_KEY_PREFIX + location.pathname);
+    window.scrollTo({ top: saved ? parseInt(saved, 10) : 0, left: 0, behavior: "instant" });
+  }, [location.pathname, navigationType]);
+
+  // Continuously remember scroll position per path so the restore above has
+  // something real to read.
+  useEffect(() => {
+    const key = SCROLL_KEY_PREFIX + location.pathname;
+    let raf = null;
+    const onScroll = () => {
+      if (raf) return;
+      raf = requestAnimationFrame(() => {
+        raf = null;
+        sessionStorage.setItem(key, String(window.scrollY));
+      });
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      if (raf) cancelAnimationFrame(raf);
+    };
+  }, [location.pathname]);
 
   return (
     <DemoFormProvider isOpen={isFormOpen} onOpen={() => setIsFormOpen(true)}>

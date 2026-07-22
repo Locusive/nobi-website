@@ -7,7 +7,7 @@
  * are appended to the signup link so the dashboard can capture them.
  */
 
-const DASHBOARD_SIGNUP_URL = "https://dashboard.nobi.ai/signup";
+const DASHBOARD_URL = "https://dashboard.nobi.ai";
 
 const FORWARDED_PARAMS = [
   "utm_source",
@@ -20,12 +20,15 @@ const FORWARDED_PARAMS = [
 ];
 
 /**
- * Returns the dashboard signup URL with any recognised UTM / click-ID
- * params from the current page URL appended.
+ * Returns a dashboard URL with any recognised UTM / click-ID params from the
+ * current page URL appended.
  *
- * @returns {string} The signup URL, with or without query params.
+ * @param {object} [opts]
+ * @param {string} [opts.path] Path appended to the dashboard base URL.
+ *   Defaults to "/signup"; pass "" for the bare dashboard URL.
+ * @returns {string} The dashboard URL, with or without query params.
  */
-export function getSignupUrl() {
+export function getSignupUrl({ path = "/signup" } = {}) {
   const currentParams = new URLSearchParams(window.location.search);
   const forwarded = new URLSearchParams();
 
@@ -36,6 +39,7 @@ export function getSignupUrl() {
     }
   }
 
+  const base = `${DASHBOARD_URL}${path}`;
   const qs = forwarded.toString();
-  return qs ? `${DASHBOARD_SIGNUP_URL}?${qs}` : DASHBOARD_SIGNUP_URL;
+  return qs ? `${base}?${qs}` : base;
 }

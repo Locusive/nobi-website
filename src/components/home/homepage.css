@@ -34,7 +34,11 @@
   .nb-cs-quote { grid-column: auto !important; }
   .nb-cs-stats { flex-direction: row !important; flex-wrap: wrap !important; gap: 18px 32px !important; }
   .nb-cs-more { grid-template-columns: 1fr !important; }
-  .nb-feat-row { flex-direction: column !important; align-items: stretch !important; }
+  .nb-feat-row { flex-direction: column !important; align-items: stretch !important; justify-content: flex-start !important; }
+  /* Desktop flex-basis values (420px, 500px, etc.) were sized for a horizontal
+     row and become minimum HEIGHTS once the row above stacks into a column —
+     reset each child back to its natural content size. */
+  .nb-feat-col { flex: none !important; width: 100% !important; min-width: 0 !important; }
   .nb-feat-demo { width: 100% !important; max-width: 100% !important; min-width: 0 !important; }
   .nb-code-wrap { font-size: 11px !important; }
   .nb-code-wrap > div { white-space: pre-wrap !important; word-break: break-all !important; padding-left: 0 !important; }

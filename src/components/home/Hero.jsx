@@ -202,7 +202,7 @@ export default function Hero() {
 
             <div style={{ display: "flex", gap: 13, justifyContent: "center", marginTop: 22 }}>
               <a
-                href={getSignupUrl()}
+                href={getSignupUrl({ path: "" })}
                 style={{
                   textDecoration: "none",
                   display: "inline-block",

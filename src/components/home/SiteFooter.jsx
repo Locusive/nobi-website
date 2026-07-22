@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import ScrollLink from "./ScrollLink";
 import { ExternalLink } from "lucide-react";
 import logo from "../../assets/nobi-logo@2x.webp";
 
@@ -15,14 +15,14 @@ export default function SiteFooter() {
   return (
     <footer style={{ background: "#100a24", color: "rgba(255,255,255,0.6)", padding: "clamp(48px,6vw,64px) clamp(24px,5vw,80px) 32px" }}>
       <div style={{ maxWidth: 1160, margin: "0 auto", display: "flex", alignItems: "center", gap: 24, flexWrap: "wrap", justifyContent: "space-between" }}>
-        <Link to="/" style={{ display: "block", flex: "none" }}>
+        <ScrollLink to="/" style={{ display: "block", flex: "none" }}>
           <img src={logo} alt="Nobi" style={{ height: 40, width: "auto", display: "block", filter: "brightness(0) invert(1)" }} />
-        </Link>
+        </ScrollLink>
         <div style={{ display: "flex", gap: "clamp(18px,3vw,30px)", flexWrap: "wrap", fontSize: 14 }}>
           {LINKS.map((l) => (
-            <Link key={l.to} to={l.to} style={{ color: "inherit", textDecoration: "none" }}>
+            <ScrollLink key={l.to} to={l.to} style={{ color: "inherit", textDecoration: "none" }}>
               {l.label}
-            </Link>
+            </ScrollLink>
           ))}
           <a href="https://docs.nobi.ai" style={{ display: "inline-flex", alignItems: "center", gap: 5, color: "inherit", textDecoration: "none" }}>
             Docs
@@ -53,8 +53,8 @@ export default function SiteFooter() {
       <div style={{ maxWidth: 1160, margin: "28px auto 0", paddingTop: 20, borderTop: "1px solid rgba(255,255,255,0.1)", display: "flex", justifyContent: "space-between", gap: 16, flexWrap: "wrap", fontSize: 13 }}>
         <span>&copy; 2026 Nobi. All rights reserved.</span>
         <div style={{ display: "flex", gap: 22 }}>
-          <Link to="/privacy" style={{ color: "inherit", textDecoration: "none" }}>Privacy</Link>
-          <Link to="/terms" style={{ color: "inherit", textDecoration: "none" }}>Terms</Link>
+          <ScrollLink to="/privacy" style={{ color: "inherit", textDecoration: "none" }}>Privacy</ScrollLink>
+          <ScrollLink to="/terms" style={{ color: "inherit", textDecoration: "none" }}>Terms</ScrollLink>
         </div>
       </div>
     </footer>

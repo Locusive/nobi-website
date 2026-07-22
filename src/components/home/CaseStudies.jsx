@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import ScrollLink from "./ScrollLink";
 
 const STUDIES = [
   { to: "/customers/lucchese", logo: "/media/logos/lucchese.svg", alt: "Lucchese", height: 21, stat: "39x", label: "return on investment" },
@@ -19,7 +19,7 @@ export default function CaseStudies() {
         </div>
         <div className="nb-cs-more" style={{ marginTop: "clamp(36px,5vw,56px)", display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: "clamp(16px,2vw,22px)" }}>
           {STUDIES.map((s) => (
-            <Link
+            <ScrollLink
               key={s.to}
               to={s.to}
               style={{ display: "block", textDecoration: "none", border: "1px solid rgba(20,16,40,0.1)", borderRadius: 18, padding: "26px 26px 24px", background: "#faf8ff" }}
@@ -28,7 +28,7 @@ export default function CaseStudies() {
               <div style={{ marginTop: 16, fontSize: "2rem", fontWeight: 700, letterSpacing: "-0.02em", color: "#1b1626" }}>{s.stat}</div>
               <div style={{ marginTop: 2, fontSize: "0.9rem", color: "#615b70" }}>{s.label}</div>
               <div style={{ marginTop: 18, fontSize: "0.85rem", fontWeight: 600, color: "#6d3bff" }}>Read the story &rarr;</div>
-            </Link>
+            </ScrollLink>
           ))}
         </div>
       </div>

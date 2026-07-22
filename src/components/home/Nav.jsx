@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import ScrollLink from "./ScrollLink";
 import { Menu, X } from "lucide-react";
 import { useDemoForm } from "../../context/DemoFormContext";
 import { trackDemoFormOpened } from "../../utils/eventTracker";
@@ -49,9 +49,9 @@ export default function Nav() {
           boxShadow: "0 10px 30px rgba(60,40,110,0.10)",
         }}
       >
-        <Link to="/" style={{ display: "flex", alignItems: "center", flex: "none" }}>
+        <ScrollLink to="/" style={{ display: "flex", alignItems: "center", flex: "none" }}>
           <img src={logo} alt="Nobi" style={{ height: 38, width: "auto", display: "block" }} />
-        </Link>
+        </ScrollLink>
 
         <div
           className="nb-nav-links"
@@ -65,12 +65,12 @@ export default function Nav() {
             whiteSpace: "nowrap",
           }}
         >
-          <Link to="/product" style={{ color: "inherit", textDecoration: "none", cursor: "pointer" }}>
+          <ScrollLink to="/product" style={{ color: "inherit", textDecoration: "none", cursor: "pointer" }}>
             Product
-          </Link>
-          <Link to="/pricing" style={{ color: "inherit", textDecoration: "none", cursor: "pointer" }}>
+          </ScrollLink>
+          <ScrollLink to="/pricing" style={{ color: "inherit", textDecoration: "none", cursor: "pointer" }}>
             Pricing
-          </Link>
+          </ScrollLink>
         </div>
 
         <span className="nb-nav-pipe" style={{ width: 1, height: 18, background: "rgba(20,16,40,0.16)", flex: "none" }} />
@@ -79,14 +79,14 @@ export default function Nav() {
           <span
             className="nb-nav-book"
             onClick={openDemo}
-            style={{ color: "#3a3646", fontSize: 14.5, fontWeight: 600, whiteSpace: "nowrap", cursor: "pointer" }}
+            style={{ color: "#3a3646", fontSize: 14.5, fontWeight: 500, whiteSpace: "nowrap", cursor: "pointer" }}
           >
             Book A Demo
           </span>
           <a
             href={getSignupUrl()}
             className="nb-nav-login"
-            style={{ color: "#3a3646", fontSize: 14.5, fontWeight: 600, whiteSpace: "nowrap", cursor: "pointer", textDecoration: "none" }}
+            style={{ color: "#3a3646", fontSize: 14.5, fontWeight: 500, whiteSpace: "nowrap", cursor: "pointer", textDecoration: "none" }}
           >
             Log in
           </a>
@@ -150,20 +150,20 @@ export default function Nav() {
               zIndex: 5,
             }}
           >
-            <Link
+            <ScrollLink
               to="/product"
               onClick={() => setMobileOpen(false)}
               style={{ color: "#3a3646", textDecoration: "none", fontSize: 16, fontWeight: 500, padding: "15px 16px", borderRadius: 12 }}
             >
               Product
-            </Link>
-            <Link
+            </ScrollLink>
+            <ScrollLink
               to="/pricing"
               onClick={() => setMobileOpen(false)}
               style={{ color: "#3a3646", textDecoration: "none", fontSize: 16, fontWeight: 500, padding: "15px 16px", borderRadius: 12 }}
             >
               Pricing
-            </Link>
+            </ScrollLink>
             <span
               onClick={() => {
                 setMobileOpen(false);

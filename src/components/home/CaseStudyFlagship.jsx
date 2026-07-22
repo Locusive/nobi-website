@@ -21,9 +21,11 @@ export default function CaseStudyFlagship() {
         </div>
         <div className="nb-cs-grid" style={{ marginTop: "1.75rem", display: "grid", gridTemplateColumns: "repeat(3,minmax(0,1fr))", gap: "2.5rem" }}>
           <div className="nb-cs-quote" style={{ gridColumn: "span 2 / span 2", minWidth: 0 }}>
-            <p style={{ margin: "1rem 0 0", fontSize: "clamp(1.375rem,2.2vw,1.625rem)", fontWeight: 500, lineHeight: 1.4, letterSpacing: "-0.02em", color: "#fff" }}>
-              &ldquo;We've seen great incremental results, where conversion rates have been significantly higher
-              through Nobi than on our binary search.&rdquo;
+            <p style={{ margin: "1rem 0 0", fontSize: "clamp(1.125rem,1.9vw,1.375rem)", fontWeight: 500, lineHeight: 1.45, letterSpacing: "-0.02em", color: "#fff" }}>
+              &ldquo;If you want to learn and be inspired, you should implement a tool like Nobi. We've seen great
+              incremental results, but the biggest reason a brand should implement this is that you have the
+              opportunity to apply more information towards optimizing campaigns and your broader brand and e-comm
+              goals.&rdquo;
             </p>
             <div style={{ marginTop: "1.5rem", display: "flex", alignItems: "center", gap: "0.75rem" }}>
               <img

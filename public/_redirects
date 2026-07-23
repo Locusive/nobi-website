@@ -1,0 +1,8 @@
+# The standalone capability pages were consolidated into one Product page.
+# 301s preserve any existing links/SEO equity instead of 404ing.
+/why-nobi/better-search      /product  301
+/why-nobi/automated-support  /product  301
+/why-nobi/ai-agents          /product  301
+/why-nobi/agent-endpoint     /product  301
+/lead-capture                /product  301
+/custom-actions              /product  301

@@ -1,6 +1,6 @@
 import React from "react";
-import Header from "./Header";
-import Footer from "./Footer";
+import Nav from "./home/Nav";
+import SiteFooter from "./home/SiteFooter";
 import { formatPostDate } from "../content/utils/mdxPostLoader";
 import authors from "../content/authors.json";
 
@@ -23,9 +23,9 @@ export default function ArticleLayout({ meta, children }) {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-white to-slate-50 dark:from-[#0a0a0a] dark:to-black text-black dark:text-white">
-      <Header />
+      <Nav />
 
-      <article className="mx-auto max-w-5xl px-6 pt-14 pb-12 sm:pt-16 sm:pb-16 prose prose-slate dark:prose-invert prose-lg">
+      <article className="mx-auto max-w-5xl px-6 pt-32 pb-12 sm:pt-36 sm:pb-16 prose prose-slate dark:prose-invert prose-lg">
         <header className="not-prose mb-8">
           <p className="text-sm font-semibold text-fuchsia-600">Blog</p>
           <h1 className="mt-2 text-4xl sm:text-5xl font-semibold tracking-tight">{title}</h1>
@@ -96,7 +96,7 @@ export default function ArticleLayout({ meta, children }) {
         </div>
       </article>
 
-      <Footer />
+      <SiteFooter />
     </div>
   );
 }

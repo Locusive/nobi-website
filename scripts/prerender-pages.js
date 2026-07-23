@@ -52,31 +52,16 @@ const PAGES = [
     }],
   },
   {
-    path: "/why-nobi/better-search", title: "AI Site Search That Understands Natural Language | Nobi",
-    description: "Replace keyword search with AI that understands intent. Nobi surfaces the right products even when shoppers don't use your exact product names.",
-    schema: [product("Nobi AI Search", "AI-powered site search that understands natural language. Surfaces the right results even when visitors don't use exact product names.", "/why-nobi/better-search")],
-  },
-  {
-    path: "/why-nobi/automated-support", title: "Automated Support That Cuts Repeat Tickets | Nobi",
-    description: "Nobi answers shipping, returns, billing, and policy questions on your site - with a citation to the source - so the same tickets stop landing in your queue.",
-    schema: [product("Nobi Automated Support", "Automated customer support that answers policy questions from your own content with cited sources, cutting repeat tickets.", "/why-nobi/automated-support")],
-  },
-  {
-    path: "/why-nobi/ai-agents", title: "Reach AI Agents - Your Business, Inside Every AI Your Customers Use | Nobi",
-    description: "Nobi makes your business findable and callable by AI agents. Structured content AI crawlers can index, plus a live endpoint they can call. Both automatic.",
-    schema: [product("Nobi AI Agent Endpoint", "Makes your business findable and callable by AI agents - structured content crawlers can index plus a live endpoint they can call.", "/why-nobi/ai-agents")],
-  },
-  {
-    path: "/custom-actions", title: "Custom Actions & Hooks for AI Search | Nobi",
-    description: "Inject custom badges, sorting, and business logic into Nobi without touching our code. Full control over how search results look and behave.",
-    schema: [product("Nobi Custom Actions", "Inject custom badges, sorting, and business logic into Nobi search results without touching platform code.", "/custom-actions")],
-  },
-  {
-    path: "/lead-capture", title: "Lead Capture for Website Visitors | Nobi",
-    description: "Identify high-intent shoppers before they bounce and capture their contact. Nobi turns browsers into leads.",
-    schema: [product("Nobi Lead Capture", "Identifies high-intent visitors before they bounce and captures their contact, turning browsers into leads.", "/lead-capture")],
+    path: "/product", title: "Product | Nobi",
+    description: "Everything Nobi does: AI-powered search and support, engagement triggered by visitor behavior, lead capture, merchandising and personalization, and an agent endpoint every AI can call.",
+    schema: [product("Nobi", "A single AI assistant for search, support, proactive engagement, lead capture, merchandising, and an MCP agent endpoint.", "/product")],
   },
 ];
+
+// The old standalone capability pages (better-search, automated-support,
+// ai-agents, custom-actions, lead-capture) were consolidated into /product
+// and now 301-redirect there — see public/_redirects. Don't re-add them
+// here; their prerendered meta would compete with /product's.
 
 function buildHead(page) {
   const url = page.path === "/" ? BASE : `${BASE}${page.path}`;

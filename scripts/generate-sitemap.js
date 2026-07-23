@@ -12,11 +12,7 @@ const BASE_URL   = "https://nobi.ai";
 // Static routes — priority and changefreq per page type
 const STATIC_PAGES = [
   { path: "/",                       priority: "1.0", changefreq: "weekly"  },
-  { path: "/why-nobi/better-search",     priority: "0.8", changefreq: "monthly" },
-  { path: "/why-nobi/automated-support", priority: "0.8", changefreq: "monthly" },
-  { path: "/why-nobi/ai-agents",          priority: "0.8", changefreq: "monthly" },
-  { path: "/lead-capture",               priority: "0.8", changefreq: "monthly" },
-  { path: "/custom-actions",             priority: "0.8", changefreq: "monthly" },
+  { path: "/product",                priority: "0.9", changefreq: "monthly" },
   { path: "/pricing",                priority: "0.8", changefreq: "monthly" },
   { path: "/faqs",                   priority: "0.8", changefreq: "monthly" },
   { path: "/customers",              priority: "0.8", changefreq: "monthly" },
@@ -25,8 +21,6 @@ const STATIC_PAGES = [
   { path: "/customers/kilte",        priority: "0.8", changefreq: "monthly" },
   { path: "/blog",                   priority: "0.7", changefreq: "daily"   },
   { path: "/glossary",               priority: "0.7", changefreq: "weekly"  },
-  { path: "/s/search",               priority: "0.6", changefreq: "monthly" },
-  { path: "/s/ai-assistant",         priority: "0.6", changefreq: "monthly" },
 ];
 
 function getGlossaryEntries() {

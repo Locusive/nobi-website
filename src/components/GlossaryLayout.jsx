@@ -1,6 +1,6 @@
 import React from "react";
-import Header from "./Header";
-import Footer from "./Footer";
+import Nav from "./home/Nav";
+import SiteFooter from "./home/SiteFooter";
 
 // Lightweight layout for a single glossary entry. Unlike ArticleLayout (blog),
 // there is no hero, author byline, or date - a glossary term is a structured
@@ -10,9 +10,9 @@ export default function GlossaryLayout({ meta, children }) {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-white to-slate-50 dark:from-[#0a0a0a] dark:to-black text-black dark:text-white">
-      <Header />
+      <Nav />
 
-      <article className="mx-auto max-w-3xl px-6 pt-14 pb-12 sm:pt-16 sm:pb-16 prose prose-slate dark:prose-invert prose-lg">
+      <article className="mx-auto max-w-3xl px-6 pt-32 pb-12 sm:pt-36 sm:pb-16 prose prose-slate dark:prose-invert prose-lg">
         <header className="not-prose mb-8">
           <a
             href="/glossary"
@@ -38,7 +38,7 @@ export default function GlossaryLayout({ meta, children }) {
         {children}
       </article>
 
-      <Footer />
+      <SiteFooter />
     </div>
   );
 }

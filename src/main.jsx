@@ -13,19 +13,12 @@ const Blog               = lazy(() => import("./pages/Blog.jsx"));
 const BlogPost           = lazy(() => import("./pages/BlogPost.jsx"));
 const Glossary           = lazy(() => import("./pages/Glossary.jsx"));
 const GlossaryTerm       = lazy(() => import("./pages/GlossaryTerm.jsx"));
-const BetterSearch       = lazy(() => import("./pages/BetterSearch.jsx"));
-const LeadCapture        = lazy(() => import("./pages/LeadCapture.jsx"));
-const CustomActions      = lazy(() => import("./pages/CustomActions.jsx"));
-const AutomatedSupport   = lazy(() => import("./pages/AutomatedSupport.jsx"));
-const AgentEndpoint      = lazy(() => import("./pages/AgentEndpoint.jsx"));
 const CustomersIndex     = lazy(() => import("./pages/customers/index.jsx"));
 const LuccheseCustomer   = lazy(() => import("./pages/customers/Lucchese.jsx"));
 const UNTUCKitCustomer   = lazy(() => import("./pages/customers/UNTUCKit.jsx"));
 const KilteCustomer      = lazy(() => import("./pages/customers/Kilte.jsx"));
 const Pricing            = lazy(() => import("./pages/Pricing.jsx"));
 const Product            = lazy(() => import("./pages/Product.jsx"));
-const SearchEngineLanding = lazy(() => import("./pages/landing/SearchEngineLanding.jsx"));
-const AIAssistantLanding  = lazy(() => import("./pages/landing/AIAssistantLanding.jsx"));
 const Webinar            = lazy(() => import("./pages/Webinar.jsx"));
 const WebinarIPullRank   = lazy(() => import("./pages/WebinarIPullRank.jsx"));
 const NotFound           = lazy(() => import("./pages/NotFound.jsx"));
@@ -99,12 +92,6 @@ function App() {
           <Route path="/blog/:slug" element={<BlogPost />} />
           <Route path="/glossary" element={<Glossary />} />
           <Route path="/glossary/:slug" element={<GlossaryTerm />} />
-          <Route path="/why-nobi/better-search" element={<BetterSearch />} />
-          <Route path="/why-nobi/automated-support" element={<AutomatedSupport />} />
-          <Route path="/why-nobi/ai-agents" element={<AgentEndpoint />} />
-          <Route path="/why-nobi/agent-endpoint" element={<AgentEndpoint />} />
-          <Route path="/lead-capture" element={<LeadCapture />} />
-          <Route path="/custom-actions" element={<CustomActions />} />
           <Route path="/customers" element={<CustomersIndex />} />
           <Route path="/customers/lucchese" element={<LuccheseCustomer />} />
           <Route path="/customers/untuckit" element={<UNTUCKitCustomer />} />
@@ -114,8 +101,6 @@ function App() {
           <Route path="/pricing" element={<Pricing />} />
           <Route path="/product" element={<Product />} />
           <Route path="/faqs" element={<FAQs />} />
-          <Route path="/s/search" element={<SearchEngineLanding />} />
-          <Route path="/s/ai-assistant" element={<AIAssistantLanding />} />
           <Route path="/webinar" element={<Webinar />} />
           <Route path="/webinar/ipullrank" element={<WebinarIPullRank />} />
           <Route path="*" element={<NotFound />} />

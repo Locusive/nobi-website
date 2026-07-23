@@ -12,7 +12,7 @@ import logo from "../../assets/nobi-logo@2x.webp";
 
 // Product page is a placeholder while its real design is in progress —
 // hidden from nav until that's ready. Flip back to true when it ships.
-const SHOW_PRODUCT_LINK = false;
+const SHOW_PRODUCT_LINK = true;
 
 export default function Nav({ active }) {
   const { onOpen } = useDemoForm();

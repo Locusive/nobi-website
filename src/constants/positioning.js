@@ -1,8 +1,8 @@
 export const CANONICAL_DESCRIPTION =
-  "Nobi is a conversational website assistant that helps convert more site visitors with modern search and support. It combines product search, automated support, and lead generation tools in one assistant.";
+  "Nobi is modern, semantic site search that helps ecommerce brands convert more visitors. Replace outdated keyword search with AI that understands what shoppers are actually looking for.";
 
 export const CANONICAL_LONG_DESCRIPTION =
-  "Nobi is a conversational website assistant that helps convert more of your site visitors by giving them modern search and support. Nobi combines product search, automated support, and lead generation tools in one product. For search, Nobi plugs into a merchant's product catalog and acts as the site's main search engine or sales assistant, helping visitors find the right products with semantic search and AI-based filtering. For support, Nobi sits on a business's website and uses the connected knowledge base to answer customer questions before they become support tickets. For lead generation, Nobi detects and captures high-intent prospects in conversation and sends visitor leads when they are collected.";
+  "Nobi replaces outdated keyword search with modern, semantic site search that understands what shoppers actually mean - not just the words they typed. Nobi plugs into a merchant's product catalog and acts as the site's main search engine, using AI-based understanding and filtering to surface the right products even when visitors don't use exact product names. The result is more visitors finding what they're looking for, and more of them converting.";
 
 export const CUSTOMER_PROOF = [
   {

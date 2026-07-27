@@ -32,7 +32,7 @@ const product = (name, description, path) => ({
 
 const PAGES = [
   {
-    path: "/", title: "Nobi: Conversational Website Assistant for Search and Support",
+    path: "/", title: "Nobi: Modern Site Search That Converts",
     description: CANONICAL_DESCRIPTION,
     schema: [ORG, SITE, {
       "@context": "https://schema.org", "@type": "SoftwareApplication", name: "Nobi",

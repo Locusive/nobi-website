@@ -15,7 +15,7 @@ import SiteFooter from "../components/home/SiteFooter";
 
 export default function HomePage() {
   useSEO({
-    title: "Nobi: Conversational Website Assistant for Search and Support",
+    title: "Nobi: Modern Site Search That Converts",
     description: CANONICAL_DESCRIPTION,
     path: "/",
     schema: [

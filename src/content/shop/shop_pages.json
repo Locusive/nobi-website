@@ -1,0 +1,38 @@
+[
+  {
+    "slug": "red-dresses",
+    "query": "red dresses",
+    "title": "Red dresses across our stores",
+    "description": "Shop red dresses from the independent stores powered by Nobi. One search compares styles, brands, and prices across every store's catalog."
+  },
+  {
+    "slug": "linen-shirts",
+    "query": "linen shirts",
+    "title": "Linen shirts across our stores",
+    "description": "Find linen shirts from the independent stores powered by Nobi. Compare cuts, colors, and prices across every store in one search."
+  },
+  {
+    "slug": "mens-leather-boots",
+    "query": "men's leather boots",
+    "title": "Men's leather boots across our stores",
+    "description": "Browse men's leather boots from the independent stores powered by Nobi. Compare styles, leathers, and prices across every store's catalog."
+  },
+  {
+    "slug": "denim-jackets",
+    "query": "denim jackets",
+    "title": "Denim jackets across our stores",
+    "description": "Shop denim jackets from the independent stores powered by Nobi. Compare washes, fits, and prices across every store in one search."
+  },
+  {
+    "slug": "white-sneakers",
+    "query": "white sneakers",
+    "title": "White sneakers across our stores",
+    "description": "Find white sneakers from the independent stores powered by Nobi. Compare brands, materials, and prices across every store's catalog."
+  },
+  {
+    "slug": "summer-maxi-dresses",
+    "query": "summer maxi dresses",
+    "title": "Summer maxi dresses across our stores",
+    "description": "Shop summer maxi dresses from the independent stores powered by Nobi. Compare fabrics, prints, and prices across every store in one search."
+  }
+]

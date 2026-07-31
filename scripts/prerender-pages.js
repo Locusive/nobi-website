@@ -56,6 +56,18 @@ const PAGES = [
     description: "Everything Nobi does: AI-powered search and support, engagement triggered by visitor behavior, lead capture, merchandising and personalization, and an agent endpoint every AI can call.",
     schema: [product("Nobi", "A single AI assistant for search, support, proactive engagement, lead capture, merchandising, and an MCP agent endpoint.", "/product")],
   },
+  {
+    // Keep in sync with src/pages/Shop.jsx. The /shop/s/<slug> landing pages
+    // are handled separately by prerender-shop.js (they need live products).
+    path: "/shop", title: "Shop across Nobi's stores | Nobi",
+    description: "Search products across the independent stores powered by Nobi. One search compares styles, brands, and prices across every store's catalog.",
+    schema: [{
+      "@context": "https://schema.org", "@type": "WebPage",
+      name: "Shop across Nobi's stores",
+      description: "Search products across the independent stores powered by Nobi. One search compares styles, brands, and prices across every store's catalog.",
+      url: `${BASE}/shop`,
+    }],
+  },
 ];
 
 // The old standalone capability pages (better-search, automated-support,

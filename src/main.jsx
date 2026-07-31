@@ -21,6 +21,7 @@ const Pricing            = lazy(() => import("./pages/Pricing.jsx"));
 const Product            = lazy(() => import("./pages/Product.jsx"));
 const Webinar            = lazy(() => import("./pages/Webinar.jsx"));
 const WebinarIPullRank   = lazy(() => import("./pages/WebinarIPullRank.jsx"));
+const Shop               = lazy(() => import("./pages/Shop.jsx"));
 const NotFound           = lazy(() => import("./pages/NotFound.jsx"));
 
 import { RequestDemoModal } from "./components/DemoModals.jsx";
@@ -103,6 +104,8 @@ function App() {
           <Route path="/faqs" element={<FAQs />} />
           <Route path="/webinar" element={<Webinar />} />
           <Route path="/webinar/ipullrank" element={<WebinarIPullRank />} />
+          <Route path="/shop" element={<Shop />} />
+          <Route path="/shop/s/:slug" element={<Shop />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Suspense>

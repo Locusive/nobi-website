@@ -1,5 +1,8 @@
 User-agent: *
 Allow: /
+# Live shop searches (/shop?q=...) are endless query permutations; the
+# curated /shop and /shop/s/* pages stay crawlable.
+Disallow: /shop?
 
 User-agent: GPTBot
 Allow: /

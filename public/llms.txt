@@ -35,6 +35,10 @@ Nobi has outperformed the default shopping experience in every A/B test run to d
 
 Trusted by brands including UNTUCKit, Lucchese, Kilte, TOOLUP, Faherty, and Alps & Meters.
 
+## Shop Nobi
+
+Nobi hosts a cross-store shopping experience at https://nobi.ai/shop. One search runs across the catalogs of the independent stores powered by Nobi, and curated landing pages at https://nobi.ai/shop/s/<topic> (for example /shop/s/red-dresses) list live products for popular queries. Every product links to the merchant's own store, and purchases always happen on the merchant's site.
+
 ## Pricing
 
 Starts at $25/month. Includes up to 2,500 AI search interactions and 250 assistant messages per month. 30-day free trial. No setup fees.

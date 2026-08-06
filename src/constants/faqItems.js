@@ -56,7 +56,7 @@ export const FAQ_ITEMS = [
     },
     {
         q: "Why isn't Nobi in the Shopify app store?",
-        a: "Nobi does not require a full Shopify app for most stores. It’s installed with a small JavaScript snippet and a web component that you place wherever you want Nobi to appear. Because Nobi can usually work with public Shopify product feeds, an app would add extra complexity without much benefit. Direct installation keeps Nobi lightweight and gives you full control over placement.",
+        a: "Nobi isn't in the app store because you can simply install it with a couple of lines of Javascript.",
         category: "Implementation"
     },
     {

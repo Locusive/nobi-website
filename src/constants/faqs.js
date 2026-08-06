@@ -92,7 +92,7 @@ const FAQ_ITEMS = [
   },
   {
     q: "How hard is it to integrate my product catalog?",
-    a: "If you're on Shopify, it's either automatic (for stores with fewer than 25K products), or 2 minutes to set up Nobi as a custom Shopify app. We'll handle the rest.",
+    a: "If you're on Shopify, it's either automatic (for stores with fewer than 25K products), or 2 minutes to set up Nobi with custom Shopify permissions. We'll handle the rest.",
     category: "Setup",
   },
   {

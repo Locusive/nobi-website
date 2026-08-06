@@ -101,6 +101,11 @@ const FAQ_ITEMS = [
     category: "Setup",
   },
   {
+    q: "Why isn't Nobi in the Shopify app store?",
+    a: "Nobi supports Shopify integrations without being in the Shopify app store. There's no Nobi Shopify app because you can simply install it with a couple of lines of Javascript in your theme and creating an app would add extra complexity.",
+    category: "Setup",
+  },
+  {
     q: "Can I try Nobi for free?",
     a: "Yes — every account gets 100 free messages every month to try the full Nobi experience in your dashboard, no credit card needed. When you're ready to go live on your site, start a 30-day free trial.",
     category: "Pricing",
@@ -114,6 +119,7 @@ const FAQ_ITEMS = [
   {
       q: "I have X sessions per month and Y percent of my customers use search. How much would Nobi cost for me?",
       a: "Our standard pricing tiers apply to customers with up to 10,000 messages per month. For customers with higher usage, we offer custom enterprise plans, usually with generous volume-based discounts. We can also provide significant discounts for search-mode only setups if you’re only looking to replace the search engine for your product catalog.",
+      category: "Product",
   },
   {
     q: "What kind of support do you offer?",
@@ -139,6 +145,11 @@ const FAQ_ITEMS = [
   {
     q: "Can I use Nobi on a headless storefront?",
     a: "Yes! Nobi is designed to work seamlessly with any website. All you have to do is drop in our JavaScript snippet and import your product catalog.",
+    category: "Product",
+  },
+  {
+    q: "Does Nobi work with my platform?",
+    a: "Nobi is designed to work on any site. For product search, you can point Nobi to your product feed, or if you're on Shopify, Nobi will pick up your feed automatically. For general Q&A or sales associate capabilities without a product catalog, Nobi will work with whatever information you have available to ensure your site's visitors get accurate information. You can also add custom actions and overrides to ensure Nobi works with your visitor's requests.",
     category: "Product",
   },
   {

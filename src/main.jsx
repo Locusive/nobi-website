@@ -21,6 +21,7 @@ const Pricing            = lazy(() => import("./pages/Pricing.jsx"));
 const Product            = lazy(() => import("./pages/Product.jsx"));
 const Webinar            = lazy(() => import("./pages/Webinar.jsx"));
 const WebinarIPullRank   = lazy(() => import("./pages/WebinarIPullRank.jsx"));
+const Shop               = lazy(() => import("./pages/Shop.jsx"));
 const NotFound           = lazy(() => import("./pages/NotFound.jsx"));
 
 import { RequestDemoModal } from "./components/DemoModals.jsx";
@@ -99,6 +100,8 @@ function App() {
           <Route path="/terms" element={<Terms />} />
           <Route path="/privacy" element={<Privacy />} />
           <Route path="/pricing" element={<Pricing />} />
+          {/* Shop Nobi. The path is fixed: the API only mints a session for /shop or below. */}
+          <Route path="/shop" element={<Shop />} />
           <Route path="/product" element={<Product />} />
           <Route path="/faqs" element={<FAQs />} />
           <Route path="/webinar" element={<Webinar />} />

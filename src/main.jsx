@@ -21,6 +21,7 @@ const Pricing            = lazy(() => import("./pages/Pricing.jsx"));
 const Product            = lazy(() => import("./pages/Product.jsx"));
 const Webinar            = lazy(() => import("./pages/Webinar.jsx"));
 const WebinarIPullRank   = lazy(() => import("./pages/WebinarIPullRank.jsx"));
+const ShopPage           = lazy(() => import("./pages/ShopPage.jsx"));
 const NotFound           = lazy(() => import("./pages/NotFound.jsx"));
 
 import { RequestDemoModal } from "./components/DemoModals.jsx";
@@ -103,6 +104,11 @@ function App() {
           <Route path="/faqs" element={<FAQs />} />
           <Route path="/webinar" element={<Webinar />} />
           <Route path="/webinar/ipullrank" element={<WebinarIPullRank />} />
+          {/* The assistant bundle fills these pages (see index.html); the
+              route only mounts the SEO shell. /shop/* covers the sub-paths
+              the Shop Nobi experience may navigate to. */}
+          <Route path="/shop" element={<ShopPage />} />
+          <Route path="/shop/*" element={<ShopPage />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Suspense>

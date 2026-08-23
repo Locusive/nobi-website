@@ -19,6 +19,7 @@ const STATIC_PAGES = [
   { path: "/customers/lucchese",     priority: "0.8", changefreq: "monthly" },
   { path: "/customers/untuckit",     priority: "0.8", changefreq: "monthly" },
   { path: "/customers/kilte",        priority: "0.8", changefreq: "monthly" },
+  { path: "/shop",                   priority: "0.9", changefreq: "weekly"  },
   { path: "/blog",                   priority: "0.7", changefreq: "daily"   },
   { path: "/glossary",               priority: "0.7", changefreq: "weekly"  },
 ];

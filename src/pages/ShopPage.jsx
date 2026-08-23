@@ -13,6 +13,18 @@ export default function ShopPage() {
     description:
       "One search across hundreds of independent stores. Shop Nobi finds the product; you buy it directly from the store.",
     path: "/shop",
+    // The same structured data prerender-pages.js bakes into the static head;
+    // passing it here keeps the schema after React mounts instead of wiping it.
+    schema: [
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        name: "Nobi",
+        url: "https://nobi.ai",
+        logo: "https://nobi.ai/og-image.png",
+      },
+      { "@context": "https://schema.org", "@type": "WebSite", name: "Shop Nobi", url: "https://nobi.ai/shop" },
+    ],
   });
   return (
     <div className="flex min-h-screen items-center justify-center bg-white text-black/60 dark:bg-[#0a0a0a] dark:text-white/60">

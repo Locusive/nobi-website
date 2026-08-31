@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route, useLocation, useNavigationType } from "re
 import HomePage from "./pages/HomePage.jsx";
 
 // Everything else is lazy-loaded — only downloaded when navigated to
+const Bot                = lazy(() => import("./pages/Bot.jsx"));
 const Terms              = lazy(() => import("./pages/Terms.jsx"));
 const Privacy            = lazy(() => import("./pages/Privacy.jsx"));
 const FAQs               = lazy(() => import("./pages/FAQs.jsx"));
@@ -96,6 +97,7 @@ function App() {
           <Route path="/customers/lucchese" element={<LuccheseCustomer />} />
           <Route path="/customers/untuckit" element={<UNTUCKitCustomer />} />
           <Route path="/customers/kilte" element={<KilteCustomer />} />
+          <Route path="/bot" element={<Bot />} />
           <Route path="/terms" element={<Terms />} />
           <Route path="/privacy" element={<Privacy />} />
           <Route path="/pricing" element={<Pricing />} />

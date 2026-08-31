@@ -7,7 +7,11 @@
          Supported tools: ask_question, book_demo
     -->
 
-    <script src="https://assistant-script.nobi.ai/nobi.bundle.js" async onload="window.Nobi.initialize({ accountId: '460cbe82-9195-424f-a616-b1cb3e3caca0', assistantConfiguration: { floatingChatBar: { buttonLabel: 'Ask Nobi' } } });"></script>
+    <!-- The bundle URL comes from VITE_ASSISTANT_BUNDLE_URL: .env holds the
+         production CDN URL, .env.local (gitignored) points at a local build.
+         On /shop the bundle boots as Shop Nobi, filling the whole page; on
+         every other page it stays the floating marketing-site assistant. -->
+    <script src="%VITE_ASSISTANT_BUNDLE_URL%" async onload="var isShopNobiPage = window.location.pathname === '/shop' || window.location.pathname.indexOf('/shop/') === 0; window.Nobi.initialize(isShopNobiPage ? { accountId: '9282b7cb-66ce-4d53-8c37-c291352ef03d', searchResultsPage: true, hideQuickAdd: true } : { accountId: '460cbe82-9195-424f-a616-b1cb3e3caca0', assistantConfiguration: { floatingChatBar: { buttonLabel: 'Ask Nobi' } } });"></script>
 
     <!-- Google Tag Manager -->
     <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':

@@ -165,3 +165,8 @@ public/sitemap.xml
 
 # local git worktrees
 .worktrees/
+
+# .env is committed on purpose: it holds only the production assistant bundle
+# URL (the ignore above came from a copied template). Machine-local overrides
+# go in .env.local, which stays ignored.
+!.env

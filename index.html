@@ -7,7 +7,26 @@
          Supported tools: ask_question, book_demo
     -->
 
-    <script src="https://assistant-script.nobi.ai/nobi.bundle.js" async onload="window.Nobi.initialize({ accountId: '460cbe82-9195-424f-a616-b1cb3e3caca0', assistantConfiguration: { floatingChatBar: { buttonLabel: 'Ask Nobi' } } });"></script>
+    <!-- Which assistant bundle this build loads. Vite substitutes it at build time, so
+         every prerendered page inherits it: prerender-pages.js reads dist/index.html after
+         the build. .env holds the production CDN, .env.local points at a local build. -->
+    <script>
+      // The company assistant rides along on every marketing page as a floating chat bar.
+      // /shop is not one of those pages: there Nobi IS the page, running as Shop Nobi, and
+      // the Shop route initializes it itself. Starting the company assistant here first
+      // would win the race and leave /shop showing the wrong merchant, because initialize
+      // skips a second render once the container has content.
+      window.__startNobi = function () {
+        if (window.location.pathname.replace(/\/+$/, '') === '/shop') {
+          return;
+        }
+        window.Nobi.initialize({
+          accountId: '460cbe82-9195-424f-a616-b1cb3e3caca0',
+          assistantConfiguration: { floatingChatBar: { buttonLabel: 'Ask Nobi' } }
+        });
+      };
+    </script>
+    <script src="%VITE_ASSISTANT_BUNDLE_URL%" async onload="window.__startNobi && window.__startNobi();"></script>
 
     <!-- Google Tag Manager -->
     <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':

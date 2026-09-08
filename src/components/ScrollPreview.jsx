@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { ChevronDown } from "lucide-react";
-import { trackScrollPreviewClicked } from "../utils/eventTracker";
+import { trackScrollPreviewClicked } from "../utils/usageSignals";
 
 export default function ScrollPreview({
   sections = [],

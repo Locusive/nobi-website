@@ -15,7 +15,7 @@ import {
 } from "lucide-react";
 import { useSEO } from "../hooks/useSEO";
 import { useDemoForm } from "../context/DemoFormContext";
-import { trackDemoFormOpened } from "../utils/eventTracker";
+import { trackDemoFormOpened } from "../utils/usageSignals";
 import "../components/home/homepage.css";
 import Nav from "../components/home/Nav";
 import FooterCTA from "../components/home/FooterCTA";

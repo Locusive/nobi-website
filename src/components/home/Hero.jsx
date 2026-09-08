@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { Search, Sparkles } from "lucide-react";
 import { startNobiField } from "./nobiField";
 import { useDemoForm } from "../../context/DemoFormContext";
-import { trackDemoFormOpened } from "../../utils/eventTracker";
+import { trackDemoFormOpened } from "../../utils/usageSignals";
 import { getSignupUrl } from "../../utils/signupUrl";
 
 const QUERIES = [

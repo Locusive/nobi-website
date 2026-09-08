@@ -1,6 +1,6 @@
 import React from "react";
 import { useDemoForm } from "../../context/DemoFormContext";
-import { trackDemoFormOpened } from "../../utils/eventTracker";
+import { trackDemoFormOpened } from "../../utils/usageSignals";
 import { getSignupUrl } from "../../utils/signupUrl";
 
 const PRODUCTS = [

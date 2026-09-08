@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import ScrollLink from "./ScrollLink";
 import { Menu, X } from "lucide-react";
 import { useDemoForm } from "../../context/DemoFormContext";
-import { trackDemoFormOpened } from "../../utils/eventTracker";
+import { trackDemoFormOpened } from "../../utils/usageSignals";
 import { getSignupUrl } from "../../utils/signupUrl";
 import logo from "../../assets/nobi-logo@2x.webp";
 

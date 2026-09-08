@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { Loader2 } from "lucide-react";
 import { EVENTS } from "../constants/events";
-import { trackEvent } from "../utils/eventTracker";
+import { trackEvent } from "../utils/usageSignals";
 
 const PLAN_BASE_PRICE = 25;
 const INCLUDED_SEARCHES = 2500;

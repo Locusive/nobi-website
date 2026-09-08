@@ -2,7 +2,7 @@ import React from "react";
 import Logo from "./Logo";
 import { ArrowRight, CheckCircle2, ExternalLink, Search, ShoppingBag, Sparkles } from "lucide-react";
 import { useDemoForm } from "../context/DemoFormContext";
-import { trackDemoFormOpened } from "../utils/eventTracker";
+import { trackDemoFormOpened } from "../utils/usageSignals";
 import { getSignupUrl } from "../utils/signupUrl";
 import { CUSTOMER_PROOF, LINKEDIN_URL } from "../constants/positioning";
 

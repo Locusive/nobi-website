@@ -1,36 +1,57 @@
 // src/pages/ShopPage.jsx
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
+import Header from "../components/Header";
 import { useSEO } from "../hooks/useSEO";
 
 // The container id the assistant bundle creates when it boots in full-page
-// search mode. The loading hint below stays up only until this appears.
+// search mode. This page adopts that container into its own layout.
 const AssistantContainerId = "nobi-app-container";
 
-// The Shop Nobi page. The assistant bundle loaded in index.html detects the
-// /shop path and boots in full-page search mode: it creates and fills its own
-// container in the page flow after this one. This component carries the page's
-// SEO tags and a brief loading hint, and it must remove that hint once the
-// bundle mounts: the hint fills the viewport, so leaving it up would push the
-// search page below the first screen. No marketing nav or footer: the search
-// experience is the whole page.
+// The Shop Nobi page: the site's own header, with the search experience under
+// it. The assistant bundle loaded in index.html detects the /shop path, boots
+// in full-page search mode, and appends its container to the body; this page
+// moves that container into its layout slot so the experience lives inside the
+// site's frame instead of floating outside it. On unmount the container goes
+// back to the body, so leaving the page does not destroy the running app.
 export default function ShopPage() {
-  const [assistantHasMounted, setAssistantHasMounted] = useState(
-    () => typeof document !== "undefined" && !!document.getElementById(AssistantContainerId)
-  );
+  const slotRef = useRef(null);
+  const [assistantHasMounted, setAssistantHasMounted] = useState(false);
 
   useEffect(() => {
-    if (assistantHasMounted) {
-      return undefined;
+    const slot = slotRef.current;
+
+    function adoptAssistantContainer() {
+      const appContainer = document.getElementById(AssistantContainerId);
+      if (appContainer && slot && appContainer.parentElement !== slot) {
+        slot.appendChild(appContainer);
+        setAssistantHasMounted(true);
+        return true;
+      }
+      return false;
+    }
+
+    if (adoptAssistantContainer()) {
+      return () => returnAssistantContainerToBody();
     }
     const observer = new MutationObserver(() => {
-      if (document.getElementById(AssistantContainerId)) {
-        setAssistantHasMounted(true);
+      if (adoptAssistantContainer()) {
         observer.disconnect();
       }
     });
     observer.observe(document.body, { childList: true });
-    return () => observer.disconnect();
-  }, [assistantHasMounted]);
+    return () => {
+      observer.disconnect();
+      returnAssistantContainerToBody();
+    };
+  }, []);
+
+  function returnAssistantContainerToBody() {
+    const appContainer = document.getElementById(AssistantContainerId);
+    if (appContainer && appContainer.parentElement !== document.body) {
+      document.body.appendChild(appContainer);
+    }
+  }
+
   useSEO({
     title: "Shop Nobi | Nobi",
     description:
@@ -49,12 +70,17 @@ export default function ShopPage() {
       { "@context": "https://schema.org", "@type": "WebSite", name: "Shop Nobi", url: "https://nobi.ai/shop" },
     ],
   });
-  if (assistantHasMounted) {
-    return null;
-  }
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-white text-black/60 dark:bg-[#0a0a0a] dark:text-white/60">
-      <p>Loading Shop Nobi…</p>
+    <div className="min-h-screen bg-white dark:bg-[#0a0a0a]">
+      <Header />
+      <div ref={slotRef}>
+        {!assistantHasMounted && (
+          <div className="flex min-h-[60vh] items-center justify-center text-black/60 dark:text-white/60">
+            <p>Loading Shop Nobi…</p>
+          </div>
+        )}
+      </div>
     </div>
   );
 }

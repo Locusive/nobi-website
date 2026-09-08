@@ -1,0 +1,9 @@
+{
+  "_comment": "The addresses NobiBot reads merchant sites from. See https://nobi.ai/bot",
+  "creationTime": "2026-08-31T00:00:00.000000",
+  "prefixes": [
+    {
+      "ipv4Prefix": "34.86.101.250/32"
+    }
+  ]
+}

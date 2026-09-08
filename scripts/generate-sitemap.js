@@ -22,6 +22,9 @@ const STATIC_PAGES = [
   { path: "/shop",                   priority: "0.9", changefreq: "weekly"  },
   { path: "/blog",                   priority: "0.7", changefreq: "daily"   },
   { path: "/glossary",               priority: "0.7", changefreq: "weekly"  },
+  { path: "/terms",                  priority: "0.3", changefreq: "yearly"  },
+  { path: "/privacy",                priority: "0.3", changefreq: "yearly"  },
+  { path: "/bot",                    priority: "0.3", changefreq: "yearly"  },
 ];
 
 function getGlossaryEntries() {

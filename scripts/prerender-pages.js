@@ -1,18 +1,11 @@
-// Prerender the static <head> (title, description, canonical, og/twitter, and
-// JSON-LD schema) for the client-rendered "money" pages - the same reliable
-// pure-Node way prerender-blog.js works. NO headless browser: Cloudflare Pages'
-// build container can't run Chromium, so we bake only the machine-readable head.
-// The page BODY still renders client-side via React; this exists so crawlers and
-// AI tools see correct per-page meta + structured data without executing JS.
-// The runtime useSEO hook (id="page-schema") overwrites the same element after
-// mount, so nothing duplicates.
-//
-// Keep each entry's title/description/schema in sync with that page's
-// useSEO({...}) call. These are stable product pages.
+// Render page metadata and the real React page bodies at build time without
+// Chromium. Client-side React still mounts normally to enable interactions.
+// Keep metadata entries aligned with each page's useSEO call.
 
 import { readFileSync, writeFileSync, mkdirSync, existsSync } from "fs";
 import { join, dirname } from "path";
-import { fileURLToPath } from "url";
+import { build } from "vite";
+import { pathToFileURL, fileURLToPath } from "url";
 import { stripHomepageMeta, htmlEscape } from "./prerender-blog.js";
 import { CANONICAL_DESCRIPTION, LINKEDIN_URL } from "../src/constants/positioning.js";
 
@@ -81,27 +74,50 @@ function buildHead(page) {
   return tags.join("\n    ");
 }
 
-function renderPage(page, shell) {
+/** Combine route metadata and rendered content with the built client shell. */
+function renderPage(page, shell, body) {
   let html = stripHomepageMeta(shell);
   html = html.replace("<!--__PRERENDER_TITLE__-->", `<title>${htmlEscape(page.title)}</title>`);
   html = html.replace(
     "<!--__PRERENDER_DESC__-->",
     `<meta name="description" content="${htmlEscape(page.description)}">\n    ${buildHead(page)}`
   );
-  return html;
+  if (!html.includes('<div id="root"></div>')) {
+    throw new Error("Expected an empty React root in the build shell.");
+  }
+  return html.replace('<div id="root"></div>', () => `<div id="root">${body}</div>`);
 }
 
-function main() {
+/** Compile the JSX renderer for Node using the same Vite asset transforms. */
+async function loadRenderer() {
+  const outDir = join(__dirname, "..", "node_modules", ".cache", "page-prerender");
+  await build({
+    configFile: false,
+    logLevel: "warn",
+    build: {
+      ssr: join(__dirname, "render-pages.jsx"),
+      outDir,
+      emptyOutDir: true,
+      rollupOptions: { output: { entryFileNames: "renderer.mjs" } },
+    },
+  });
+  return import(pathToFileURL(join(outDir, "renderer.mjs")).href);
+}
+
+/** Write both Cloudflare URL forms with complete page content. */
+async function main() {
   if (!existsSync(SHELL)) {
-    console.warn("prerender-pages: dist/index.html not found - run 'vite build' first. Skipping.");
-    return;
+    throw new Error("prerender-pages: dist/index.html not found; run vite build first.");
   }
   const shell = readFileSync(SHELL, "utf8");
+  const { renderPageBody } = await loadRenderer();
   let count = 0;
   for (const page of PAGES) {
-    const html = renderPage(page, shell);
+    const html = renderPage(page, shell, renderPageBody(page.path));
     if (page.path === "/") {
-      writeFileSync(SHELL, html); // homepage overwrites the shell itself
+      // Keep the SPA fallback empty so unrelated routes never inherit home content.
+      writeFileSync(join(DIST, "homepage.html"), html);
+      writeFileSync(SHELL, renderPage(page, shell, ""));
     } else {
       const rel = page.path.replace(/^\//, "");
       const dir = join(DIST, rel);
@@ -112,7 +128,7 @@ function main() {
     }
     count++;
   }
-  console.log(`prerender-pages: baked static head + schema for ${count} page(s)`);
+  console.log(`prerender-pages: rendered page content + metadata for ${count} page(s)`);
 }
 
-main();
+await main();

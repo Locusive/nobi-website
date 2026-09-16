@@ -1,3 +1,6 @@
+# Serve the rendered homepage without changing the fallback for other SPA routes.
+/ /homepage 200
+
 # The standalone capability pages were consolidated into one Product page.
 # 301s preserve any existing links/SEO equity instead of 404ing.
 /why-nobi/better-search      /product  301

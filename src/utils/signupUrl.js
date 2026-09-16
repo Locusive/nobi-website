@@ -29,7 +29,7 @@ const FORWARDED_PARAMS = [
  * @returns {string} The dashboard URL, with or without query params.
  */
 export function getSignupUrl({ path = "/signup" } = {}) {
-  const currentParams = new URLSearchParams(window.location.search);
+  const currentParams = new URLSearchParams(typeof window === "undefined" ? "" : window.location.search);
   const forwarded = new URLSearchParams();
 
   for (const key of FORWARDED_PARAMS) {

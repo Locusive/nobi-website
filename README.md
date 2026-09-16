@@ -18,3 +18,18 @@
 
 ## Static assets
 Put images/videos under `public/media` and reference them as `/media/filename.ext`.
+
+## Static page content
+
+`npm run build` renders the homepage, pricing, and product components into HTML
+using React's Node renderer. It does not require Chromium. Browser JavaScript
+still mounts the same components for the calculator, navigation, and forms.
+Blog and glossary pages retain their existing content prerendering.
+
+The homepage is served through an exact Cloudflare Pages rewrite so the empty
+`index.html` shell remains available for other client-side routes. This avoids
+serving homepage text as the content of unrelated pages.
+
+Run `npm test` to build the site and check page content, pricing facts, URL forms,
+asset references, and signup attribution. Register additional pages in both
+`scripts/prerender-pages.js` and `scripts/render-pages.jsx`.

@@ -49,7 +49,7 @@ export default function Pricing() {
               <div className="pricing-plan-price"><strong>${STANDARD_PLAN.monthlyCents / 100}</strong><span>/ month<br />+ usage beyond your allowances</span></div>
               <div className="pricing-allowance">
                 <Search size={22} aria-hidden="true" />
-                <div><h3>{STANDARD_PLAN.includedSearches.toLocaleString('en-US')} searches included</h3><p>Find relevant results, without a conversation.</p><strong>Then $0.01 per additional search</strong></div>
+                <div><h3>{STANDARD_PLAN.includedSearches.toLocaleString('en-US')} searches included</h3><p>Find matching items, without a conversation.</p><strong>Then $0.01 per additional search</strong></div>
               </div>
               <div className="pricing-allowance">
                 <MessagesSquare size={22} aria-hidden="true" />
@@ -74,15 +74,15 @@ export default function Pricing() {
               <h2 id="included-title">A complete toolkit.<br />One monthly base.</h2>
               <p>All three setups use the same Standard plan. Choose the experience that fits your site.</p>
               <ul className="pricing-feature-list">
-                {['Up to 5,000 searchable items', 'Up to 5,000 knowledge base documents', 'Insights & analytics', 'Search, answers & lead capture'].map(item => <li key={item}><Check size={18} aria-hidden="true" />{item}</li>)}
+                {['Up to 5,000 products', 'Up to 5,000 knowledge base documents', 'Insights & analytics', 'Search, answers & lead capture'].map(item => <li key={item}><Check size={18} aria-hidden="true" />{item}</li>)}
               </ul>
               <p className="pricing-trial-note"><strong>Start in your dashboard for free.</strong> Get 100 free messages every month, no credit card needed. Ready for your website? Start a {STANDARD_PLAN.trialDays}-day free trial.</p>
             </div>
             <aside className="pricing-enterprise">
               <span className="pricing-small-label">Enterprise</span>
               <h3>More volume?<br />Let’s find your fit.</h3>
-              <p>Custom pricing for larger sites, higher usage, and annual commitments.</p>
-              <ul><li>Volume discounts on usage</li><li>Custom integrations &amp; onboarding</li><li>Dedicated support</li><li>More than 5,000 searchable items or documents</li></ul>
+              <p>Custom pricing for larger catalogs, higher usage, and annual commitments.</p>
+              <ul><li>Volume discounts on usage</li><li>Custom integrations &amp; onboarding</li><li>Dedicated support</li><li>More than 5,000 products or documents</li></ul>
               <button className="pricing-button pricing-button-outline" type="button" onClick={openDemo}>Talk through your setup</button>
             </aside>
           </div>

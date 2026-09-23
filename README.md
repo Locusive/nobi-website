@@ -10,10 +10,10 @@
 From the checkout containing your pricing changes, use a separate port so other local sites can keep running:
 
 ```sh
-npm run preview:pricing
+npm run dev -- --host 127.0.0.1 --port 5174 --strictPort
 ```
 
-Open http://127.0.0.1:5174/pricing. This builds and serves the bundled site, so Chrome blockers cannot prevent the page from loading by blocking an unbundled source filename such as `eventTracker.js`. Restart the command after code changes. The setup chooser, calculator, FAQs, and traffic lookup run locally. Traffic lookup depends on third-party data and offers a manual fallback when unavailable. Submitting the tailored-estimate form sends a real request through the existing form service.
+Open http://127.0.0.1:5174/pricing. The setup chooser, calculator, FAQs, and traffic lookup run locally. Traffic lookup depends on third-party data and offers a manual fallback when unavailable. Submitting the tailored-estimate form sends a real request through the existing form service.
 
 Quick checks: switch among the three setups; enter 2,501 searches and 252 assistant messages to see $25.21; switch to traffic estimates and enter 100,000 visits to see $60 with the default rates. Run `npm test` for the production build and automated checks.
 

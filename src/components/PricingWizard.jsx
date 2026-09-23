@@ -60,8 +60,8 @@ function ActivitySlider({ id, label, value, onChange, onCommit, defaultMax, max 
 
 export default function PricingWizard() {
   const id = useId();
-  const [openPanels, setOpenPanels] = useState({ 1: true, 2: true });
-  const [mode, setMode] = useState("both");
+  const [openPanels, setOpenPanels] = useState({ 1: true, 2: false });
+  const [mode, setMode] = useState("");
   const [basis, setBasis] = useState("usage");
   const [visitors, setVisitors] = useState(String(DEFAULT_ACTIVITY.visitors));
   const [searches, setSearches] = useState(String(PRICING.includedSearches));
@@ -100,7 +100,7 @@ export default function PricingWizard() {
       id={`${id}-heading-${number}`} aria-expanded={openPanels[number]} aria-controls={`${id}-panel-${number}`}
       onClick={() => setOpenPanels(current => ({ ...current, [number]: !current[number] }))}>
       <span className="pw-step-number">{number}</span>
-      <span className="pw-step-title">{title}{!openPanels[number] && <span>{summary}</span>}</span>
+      <span className="pw-step-title">{title}{!openPanels[number] && summary && <span>{summary}</span>}</span>
       <span className="pw-toggle"><ChevronDown size={27} strokeWidth={3} className="pw-chevron" aria-hidden="true" /></span>
     </button></h3>
     <div id={`${id}-panel-${number}`} role="region" aria-labelledby={`${id}-heading-${number}`} hidden={!openPanels[number]} className="pw-panel">{content}</div>
@@ -110,7 +110,7 @@ export default function PricingWizard() {
     <div className="pw-wrap">
       <div className="pw-intro"><h2 id={`${id}-title`}>Find your price</h2><p>Choose how you’ll use Nobi, then adjust your monthly activity.</p></div>
       <div className="pw-interview">
-        {panel(1, "What would you like to use Nobi for?", selected.summary,
+        {panel(1, "What would you like to use Nobi for?", selected?.summary,
           <div>
             <p className="pw-choice-hint">Both capabilities are included. Choose what you’d like to estimate.</p>
             <div className="pw-choices" role="group" aria-label="How would you like to use Nobi?">
@@ -122,8 +122,8 @@ export default function PricingWizard() {
             </div>
           </div>
         )}
-        {panel(2, activityTitle, price ? `${usageSummary} · ${formatPrice(price.totalCents)} / month estimated` : "Adjust your monthly activity",
-          <div className="pw-estimator">
+        {panel(2, activityTitle, mode ? price ? `${usageSummary} · ${formatPrice(price.totalCents)} / month estimated` : "Adjust your monthly activity" : "",
+          mode ? <div className="pw-estimator">
             <div className="pw-activity">
               <div className="pw-sliders">
                 {basis === "usage" ? <>
@@ -160,7 +160,7 @@ export default function PricingWizard() {
               <a className="pw-primary" href={getSignupUrl()} onClick={commitEstimate}>Start for free</a>
               <span className="pw-trial">Free preview. No credit card.</span>
             </aside>
-          </div>
+          </div> : <p className="pw-choice-hint">Choose how you’ll use Nobi above to see your estimate.</p>
         )}
       </div>
       <div className="pw-after"><span>Your bill reflects actual usage.</span><button type="button" onClick={openDemoForm}>Prefer to talk it through?</button></div>

@@ -94,6 +94,8 @@ export default function Pricing() {
 
       <PricingHero />
 
+      <div className="pricing-proof"><ProofBar /></div>
+
       <PricingPlans />
 
       <PricingWizard />
@@ -122,8 +124,6 @@ export default function Pricing() {
           </div>
         </div>
       </div>
-
-      <div className="pricing-proof"><ProofBar /></div>
 
       {/* FAQ */}
       <div style={{ background: "#ffffff", padding: "80px clamp(24px,5vw,80px)" }}>

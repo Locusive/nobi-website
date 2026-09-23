@@ -60,7 +60,7 @@ function BillingIntro() {
         <div><dt><Search size={16} aria-hidden="true" />As a search engine</dt><dd>Most requests are searches. If a visitor asks a question or follows up conversationally, that counts as a message.</dd></div>
         <div><dt><MessageCircle size={16} aria-hidden="true" />As an AI assistant</dt><dd>You’ll have messages too: visitor questions and conversational follow-ups, including a question that starts a conversation.</dd></div>
       </dl>
-      <p>Nobi’s replies are included. Extra usage is billed after each monthly allowance.</p>
+      <p>Extra usage is billed after each monthly allowance.</p>
     </div>}
   </div>;
 }
@@ -74,13 +74,13 @@ export default function PricingPlans() {
         <div className="pp-heading">
           <h2>Standard</h2>
           <BillingIntro />
-          <div className="pp-base"><strong>{formatPrice(PRICING.baseCents)}</strong><span>/ month base</span></div>
+          <div className="pp-base"><strong>{formatPrice(PRICING.baseCents)}</strong><span>/ month base<br />+ extra usage</span></div>
         </div>
         <div className="pp-rates">
           <div className="pp-rate pp-rate-search">
             <div className="pp-capability-pill">
               <Search size={16} aria-hidden="true" />
-              <div className="pp-pill-copy"><h3>Search engine</h3><p>Mostly searches</p></div>
+              <div className="pp-pill-copy"><h3>Search engine:</h3> <p>Simple site searches</p></div>
             </div>
             <div className="pp-allowance">{PRICING.includedSearches.toLocaleString("en-US")} searches included / mo</div>
             <div className="pp-unit"><span>{formatPrice(PRICING.searchCents)}</span> / extra search</div>
@@ -88,13 +88,13 @@ export default function PricingPlans() {
           <div className="pp-rate pp-rate-assistant">
             <div className="pp-capability-pill">
               <MessageCircle size={16} aria-hidden="true" />
-              <div className="pp-pill-copy"><h3>AI assistant</h3><p>Messages too</p></div>
+              <div className="pp-pill-copy"><h3>AI assistant:</h3> <p>Conversational messages</p></div>
             </div>
             <div className="pp-allowance">{PRICING.includedMessages} messages included / mo</div>
             <div className="pp-unit"><span>{formatPrice(PRICING.messageCents)}</span> / extra message</div>
           </div>
         </div>
-        <p className="pp-billing-notes">Nobi’s replies are included. No conversation-start fee.</p>
+        <p className="pp-billing-notes">No conversation-start fee.</p>
         <a className="pp-start" href={getSignupUrl()}>Start for free</a>
         <p className="pp-trial">Free dashboard preview. No credit card.</p>
       </article>

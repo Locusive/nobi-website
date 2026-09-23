@@ -112,7 +112,7 @@ export default function PricingWizard() {
                   {mode !== "search" && <ActivitySlider key="messages" id={`${id}-messages`} label="Visitor messages / month" value={messages} onChange={setMessages} onCommit={commitEstimate} defaultMax={1000} caption="250 included · then 10¢ each" />}
                 </> : <ActivitySlider key="visitors" id={`${id}-visitors`} label="Monthly visitors" value={visitors} onChange={setVisitors} onCommit={commitEstimate} defaultMax={500000} max={10000000} caption="A rough visitor count is enough" />}
               </div>
-              {basis === "usage" && mode !== "search" && <p className="pw-small">Count visitor questions and follow-ups. Nobi’s replies are included.</p>}
+              {basis === "usage" && mode !== "search" && <p className="pw-small">Count visitor questions and follow-ups.</p>}
               <button type="button" className="pw-basis-link" onClick={() => setBasis(current => current === "usage" ? "traffic" : "usage")}>{basis === "usage" ? "Not sure? Estimate from site traffic" : directLabel}</button>
               {basis === "traffic" && <>
                 <details className="pw-assumptions"><summary>Adjust activity assumptions <ChevronDown size={15} aria-hidden="true" /></summary>

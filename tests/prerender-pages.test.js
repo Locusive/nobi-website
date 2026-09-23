@@ -52,7 +52,7 @@ test("pricing includes plan allowances, overages, trial terms, and FAQ answers",
   assert.ok(text.includes("A payment method is required to start the 30-day free trial"));
   assert.ok(text.includes("What would you like to use Nobi for?"));
   const beforeEstimate = text.split("Find your price")[0];
-  for (const fact of ["Standard", "/ month base", "$25", "2,500", "$0.01", "250", "$0.10", "Enterprise", "Nobi’s replies are included", "No conversation-start fee"])
+  for (const fact of ["Standard", "/ month base", "+ extra usage", "$25", "2,500", "$0.01", "250", "$0.10", "Enterprise", "Simple site searches", "Conversational messages", "No conversation-start fee"])
     assert.ok(beforeEstimate.includes(fact), `Pricing must be explained before the interview: ${fact}`);
 });
 

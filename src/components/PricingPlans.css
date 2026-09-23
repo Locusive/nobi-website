@@ -15,20 +15,20 @@
 .pp-billing-popover dt svg { flex-shrink: 0; }
 .pp-billing-popover dd { margin: 4px 0 0 23px; font-size: 12px; line-height: 1.55; }
 .pp-billing-popover > p { margin: 0; padding-top: 12px; border-top: 1px solid #eee8f6; font-size: 12px; line-height: 1.55; }
-.pp-base { display: flex; align-items: baseline; gap: 9px; flex-wrap: wrap; margin-top: 22px; }
+.pp-base { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-top: 22px; }
 .pp-base strong { font-size: 54px; line-height: 1; font-weight: 600; letter-spacing: -.05em; }
 .pp-base span { font-size: 14px; line-height: 1.5; color: #706779; }
-.pp-rates { display: grid; grid-template-columns: 1fr 1fr; margin: 24px 0 20px; gap: 24px; padding-top: 22px; border-top: 1px solid #eee8f6; }
-.pp-rate { display: flex; flex-direction: column; min-width: 0; }
+.pp-rates { display: grid; grid-template-columns: 1fr 1fr; margin: 24px 0 20px; gap: 12px; padding-top: 22px; border-top: 1px solid #eee8f6; }
+.pp-rate { display: flex; flex-direction: column; min-width: 0; container-type: inline-size; }
 .pp-rate-search { --pp-accent: #17675b; --pp-tint: #e8f4f0; }
 .pp-rate-assistant { --pp-accent: #6636ad; --pp-tint: #f0e9ff; }
-.pp-capability-pill { display: flex; align-items: center; gap: 7px; padding: 9px 11px; border-radius: 999px; background: var(--pp-tint); color: var(--pp-accent); }
+.pp-capability-pill { display: flex; align-items: center; gap: 6px; padding: 9px 8px; border-radius: 999px; background: var(--pp-tint); color: var(--pp-accent); }
 .pp-capability-pill > svg { flex-shrink: 0; }
-.pp-pill-copy { display: grid; grid-template-columns: 90px 1fr; align-items: baseline; gap: 6px; }
-.pp-capability-pill h3 { margin: 0; font-size: 13px; font-weight: 600; line-height: 1.5; }
-.pp-capability-pill p { margin: 0; font-size: 12px; font-weight: 400; line-height: 1.5; }
-.pp-allowance { padding-left: 34px; font-size: 12px; line-height: 1.5; font-weight: 400; color: #706779; margin-top: 12px; }
-.pp-unit { padding-left: 34px; font-size: 12px; line-height: 1.5; color: var(--pp-accent); margin-top: 3px; }
+.pp-pill-copy { font-size: 12px; line-height: 1.5; }
+.pp-capability-pill h3 { display: inline; margin: 0; font-size: inherit; font-weight: 600; }
+.pp-capability-pill p { display: inline; margin: 0; font-size: inherit; font-weight: 400; }
+.pp-allowance { font-size: 12px; line-height: 1.5; font-weight: 400; color: #706779; margin-top: 12px; }
+.pp-unit { font-size: 12px; line-height: 1.5; color: var(--pp-accent); margin-top: 3px; }
 .pp-unit span { font-size: 20px; font-weight: 500; font-variant-numeric: tabular-nums; }
 .pp-billing-notes { margin: 0 0 20px; font-size: 11px; line-height: 1.5; color: #706779; }
 .pp-start, .pp-enterprise button { display: flex; width: 100%; align-items: center; justify-content: center; border-radius: 9px; padding: 12px 16px; font-family: inherit; font-size: 14px; line-height: 1.5; font-weight: 500; text-decoration: none; cursor: pointer; }
@@ -47,6 +47,9 @@
 .pp-next a { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-width: 200px; background: #f0e9ff; border: 1px solid #d9caf6; border-radius: 9px; color: #592bd6; text-decoration: none; font-size: 14px; font-weight: 500; line-height: 1.5; padding: 11px 20px; }
 .pp-next a:hover { background: #e7dcff; border-color: #bba1eb; text-decoration: none; }
 .pp-section :is(a,button):focus-visible { outline: 3px solid #9e7bff; outline-offset: 4px; }
+@container (max-width: 250px) {
+  .pp-capability-pill h3, .pp-capability-pill p { display: block; }
+}
 @media (max-width: 800px) {
   .pp-grid { grid-template-columns: 1fr; }
 }
@@ -56,9 +59,4 @@
   .pp-base strong { font-size: 48px; }
   .pp-base span { font-size: 13px; }
   .pp-rates { grid-template-columns: 1fr; gap: 18px; margin: 22px 0; padding-top: 20px; }
-  .pp-rate { display: grid; grid-template-columns: 1fr auto; gap: 8px 12px; align-items: center; }
-  .pp-capability-pill { grid-column: 1 / -1; }
-  .pp-allowance, .pp-unit { padding-left: 0; font-size: 12px; }
-  .pp-allowance { margin-top: 0; }
-  .pp-unit { margin-top: 0; text-align: right; }
 }

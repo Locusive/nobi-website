@@ -12,25 +12,25 @@ export const PRICING_DESCRIPTION = 'Nobi starts at $25/month with 2,500 searches
 
 export const PRICING_MODES = [
   {
-    id: 'search', title: 'Search only', description: 'Help visitors find items in your catalog.',
+    id: 'search', title: 'Search only', description: 'Help visitors find content, information, or items.',
     hasSearch: true, hasMessages: false,
     exampleTitle: 'Find it. Browse it. Search again.',
     explanation: 'Visitors get search results without a conversational answer. Each new search counts as one search.',
     steps: [
-      { request: '“Waterproof walking shoes”', response: 'Nobi returns matching items.', type: 'search' },
-      { request: '“Lightweight rain jackets”', response: 'A new search returns a new set of results.', type: 'search' },
+      { request: '“Getting started guides”', response: 'Nobi returns matching results.', type: 'search' },
+      { request: '“Troubleshooting tips”', response: 'A new search returns a new set of results.', type: 'search' },
     ],
     summary: '2 searches', totalCents: 2,
   },
   {
-    id: 'both', title: 'Search + assistant', description: 'Find items, then help visitors narrow them down.',
+    id: 'both', title: 'Search + assistant', description: 'Find relevant results, then help visitors refine them.',
     hasSearch: true, hasMessages: true,
     exampleTitle: 'A search can become a conversation.',
     explanation: 'The initial search counts as a search. Each conversational follow-up counts as an assistant message.',
     steps: [
-      { request: '“Waterproof walking shoes”', response: 'Nobi returns matching items.', type: 'search' },
-      { request: '“Which are best for a long walk?”', response: 'The assistant helps compare the options.', type: 'message' },
-      { request: '“Only show me ones under $100”', response: 'The assistant narrows the results.', type: 'message' },
+      { request: '“Getting started guides”', response: 'Nobi returns matching results.', type: 'search' },
+      { request: '“Which one should I start with?”', response: 'The assistant recommends where to begin.', type: 'message' },
+      { request: '“Only show me the video guides”', response: 'The assistant narrows the results.', type: 'message' },
     ],
     summary: '1 search + 2 assistant messages', totalCents: 21,
   },
@@ -40,8 +40,8 @@ export const PRICING_MODES = [
     exampleTitle: 'Start with a question. Keep asking.',
     explanation: 'When a visitor starts with the assistant, their first request and every follow-up count as assistant messages.',
     steps: [
-      { request: '“How does your returns policy work?”', response: 'The assistant answers from your knowledge base.', type: 'message' },
-      { request: '“What if I bought it on sale?”', response: 'The assistant answers the follow-up.', type: 'message' },
+      { request: '“How do I create an account?”', response: 'The assistant answers from your knowledge base.', type: 'message' },
+      { request: '“Can I invite my team?”', response: 'The assistant answers the follow-up.', type: 'message' },
     ],
     summary: '2 assistant messages', totalCents: 20,
   },
@@ -73,11 +73,11 @@ export const PRICING_FAQS = [
     a: 'Yes. Every account gets 100 free messages every month to try Nobi in your dashboard, with no credit card needed. When you are ready to go live on your website, start a 30-day free trial.',
   },
   {
-    q: 'Is this only for ecommerce websites?',
-    a: 'No. Nobi can search other kinds of catalogs and searchable items, or answer questions from a knowledge base. The same distinction applies: simple searches count as searches; conversational requests count as assistant messages.',
+    q: 'What kinds of websites can use Nobi?',
+    a: 'Nobi works on websites with searchable content, information, or items, and sites that need answers from a knowledge base. The same distinction applies: simple searches count as searches; conversational requests count as assistant messages.',
   },
   {
     q: 'Do you offer volume or annual pricing?',
-    a: 'Yes. Contact us for custom pricing for high-volume usage, larger catalogs, or annual commitments. We can help choose the right setup for your site.',
+    a: 'Yes. Contact us for custom pricing for high-volume usage, larger sites, or annual commitments. We can help choose the right setup for your site.',
   },
 ];

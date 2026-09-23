@@ -113,7 +113,7 @@ export default function PricingCalculator() {
               </>
             ) : (
               <>
-                {mode.hasSearch && <NumberField label="Searches per month" value={searches} onChange={setSearches} hint="Count each simple search that returns matching items." />}
+                {mode.hasSearch && <NumberField label="Searches per month" value={searches} onChange={setSearches} hint="Count each simple search that returns matching results." />}
                 {mode.hasMessages && <NumberField label="Assistant messages per month" value={messages} onChange={setMessages} hint="Count visitor requests, including each conversational follow-up. Replies are included." />}
                 <p className="pricing-fine-print">Example volumes to get you started. Replace them with your expected usage.</p>
               </>

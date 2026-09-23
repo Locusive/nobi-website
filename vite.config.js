@@ -5,6 +5,24 @@ import mdx from '@mdx-js/rollup'
 import remarkFrontmatter from 'remark-frontmatter'
 import remarkGfm from 'remark-gfm'
 import rehypeSlug from 'rehype-slug'
+import { onRequestGet as lookupTraffic } from './functions/api/traffic-lookup.js'
+
+// Use the production handler in both local development and built previews.
+function configureTrafficLookup(server) {
+  server.middlewares.use('/api/traffic-lookup', async (req, res) => {
+    try {
+      const request = new Request(new URL(req.url, `http://${req.headers.host || 'localhost'}`))
+      const response = await lookupTraffic({ request })
+      res.statusCode = response.status
+      response.headers.forEach((value, name) => res.setHeader(name, value))
+      res.end(await response.text())
+    } catch {
+      res.statusCode = 500
+      res.setHeader('content-type', 'application/json')
+      res.end(JSON.stringify({ error: 'lookup failed' }))
+    }
+  })
+}
 
 export default defineConfig({
   // macOS FSEvents can miss file-save events silently (especially when
@@ -53,58 +71,10 @@ export default defineConfig({
         })
       },
     },
-    // Mirror the production /api/traffic-lookup Cloudflare Pages Function
-    // for local dev so the pricing calculator's URL lookup works against
-    // the real SimilarWeb endpoint without CORS issues.
     {
-      name: 'traffic-lookup-dev',
-      configureServer(server) {
-        server.middlewares.use('/api/traffic-lookup', async (req, res) => {
-          try {
-            const url = new URL(req.url, `http://${req.headers.host || 'localhost'}`)
-            const raw = (url.searchParams.get('domain') || '').trim().toLowerCase()
-            const domain = raw
-              .replace(/^https?:\/\//, '')
-              .replace(/^www\./, '')
-              .split('/')[0]
-              .split('?')[0]
-            if (!domain || !domain.includes('.')) {
-              res.statusCode = 400
-              res.setHeader('content-type', 'application/json')
-              return res.end(JSON.stringify({ error: 'invalid domain' }))
-            }
-            const upstream = await fetch(
-              `https://data.similarweb.com/api/v1/data?domain=${encodeURIComponent(domain)}`,
-              {
-                headers: {
-                  'User-Agent':
-                    'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36',
-                  Accept: 'application/json',
-                },
-              }
-            )
-            if (!upstream.ok) {
-              res.statusCode = 502
-              res.setHeader('content-type', 'application/json')
-              return res.end(JSON.stringify({ error: 'lookup failed', status: upstream.status }))
-            }
-            const data = await upstream.json()
-            const visits = data?.Engagments?.Visits ? Number(data.Engagments.Visits) : null
-            res.setHeader('content-type', 'application/json')
-            res.end(
-              JSON.stringify({
-                domain,
-                monthlyVisits: Number.isFinite(visits) ? visits : null,
-                siteName: data?.SiteName || domain,
-              })
-            )
-          } catch (e) {
-            res.statusCode = 500
-            res.setHeader('content-type', 'application/json')
-            res.end(JSON.stringify({ error: e?.message || 'unknown' }))
-          }
-        })
-      },
+      name: 'traffic-lookup-local',
+      configureServer: configureTrafficLookup,
+      configurePreviewServer: configureTrafficLookup,
     },
   ],
 })

@@ -3,10 +3,12 @@ import { ChevronDown, Search, Smile, BarChart3 } from "lucide-react";
 import { useSEO } from "../hooks/useSEO";
 import "../components/home/homepage.css";
 import Nav from "../components/home/Nav";
+import ProofBar from "../components/home/ProofBar";
 import FooterCTA from "../components/home/FooterCTA";
 import SiteFooter from "../components/home/SiteFooter";
 import PricingWizard from "../components/PricingWizard.jsx";
 import PricingPlans from "../components/PricingPlans.jsx";
+import "./Pricing.css";
 
 const PLAN_PRICE = 25;
 const PLAN_SEARCH_CAP = "2,500";
@@ -65,14 +67,6 @@ const PRICING_FAQS = [
   },
 ];
 
-const LOGOS = [
-  { alt: "UNTUCKit", src: "/media/logos/untuckit.svg", height: 20 },
-  { alt: "Lucchese", src: "/media/logos/lucchese.svg", height: 26 },
-  { alt: "Kilte", src: "/media/logos/kilte.webp", height: 22 },
-  { alt: "TOOLUP", src: "/media/logos/toolup.svg", height: 22 },
-  { alt: "Alps and Meters", src: "/media/logos/alps_meters.png", height: 22 },
-];
-
 export default function Pricing() {
   useSEO({
     title: "Pricing | Nobi",
@@ -129,7 +123,7 @@ export default function Pricing() {
         </div>
       </div>
 
-      <PricingLogos />
+      <div className="pricing-proof"><ProofBar /></div>
 
       {/* FAQ */}
       <div style={{ background: "#ffffff", padding: "80px clamp(24px,5vw,80px)" }}>
@@ -157,9 +151,9 @@ export default function Pricing() {
   );
 }
 
-export function PricingHero() {
+function PricingHero() {
   return (
-      <div style={{ position: "relative", overflow: "hidden", background: "linear-gradient(180deg,#6656ce,#5a3fc0)", color: "#fff", padding: "130px clamp(24px,5vw,80px) 54px", textAlign: "center" }}>
+      <div style={{ position: "relative", overflow: "hidden", background: "linear-gradient(180deg,#6656ce,#5a3fc0)", color: "#fff", padding: "150px clamp(24px,5vw,80px) 84px", textAlign: "center" }}>
         <div
           style={{
             position: "absolute",
@@ -176,25 +170,9 @@ export function PricingHero() {
             Simple, usage-based pricing
           </h1>
           <p style={{ margin: "20px auto 0", maxWidth: "44ch", fontSize: "clamp(16px,1.3vw,20px)", lineHeight: 1.55, color: "rgba(255,255,255,0.85)" }}>
-            Search, answer questions, or do both. Start with a {TRIAL_DAYS}-day free trial.
+            Try the full Nobi experience free in your dashboard — no credit card needed. Ready to go live on your
+            site? Start a {TRIAL_DAYS}-day free trial.
           </p>
-        </div>
-      </div>
-  );
-}
-
-export function PricingLogos({ label = "Trusted by modern teams" }) {
-  return (
-      <div style={{ background: "#f5f3fb", padding: "56px clamp(24px,5vw,80px)" }}>
-        <div style={{ maxWidth: 1120, margin: "0 auto", textAlign: "center" }}>
-          <div style={{ fontSize: 13, color: "#8a8498", fontWeight: 500 }}>
-            {label}
-          </div>
-          <div style={{ marginTop: 26, display: "flex", alignItems: "center", justifyContent: "center", gap: "clamp(30px,6vw,64px)", flexWrap: "wrap", opacity: 0.62 }}>
-            {LOGOS.map((l) => (
-              <img key={l.alt} src={l.src} alt={l.alt} style={{ height: l.height, width: "auto" }} />
-            ))}
-          </div>
         </div>
       </div>
   );

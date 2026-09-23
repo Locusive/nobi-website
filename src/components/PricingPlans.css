@@ -3,8 +3,8 @@
 .pp-standard { background: #fff; border: 1px solid #c9b6f5; border-radius: 18px; padding: 28px; }
 .pp-section h2 { margin: 0; font-size: 18px; font-weight: 600; line-height: 1.4; }
 .pp-intro { position: relative; margin-top: 7px; }
-.pp-intro > p { margin: 0; font-size: 13px; line-height: 1.6; color: #706779; }
-.pp-info-trigger { display: inline-flex; align-items: center; justify-content: center; width: 28px; height: 28px; margin-left: 3px; padding: 0; vertical-align: middle; border: 0; border-radius: 50%; background: transparent; color: #806c9f; cursor: pointer; }
+.pp-intro > p { display: flex; align-items: flex-start; gap: 4px; margin: 0; font-size: 13px; line-height: 24px; color: #706779; }
+.pp-info-trigger { display: inline-flex; flex: 0 0 24px; align-items: center; justify-content: center; width: 24px; height: 24px; padding: 0; border: 0; border-radius: 50%; background: transparent; color: #806c9f; cursor: pointer; }
 .pp-info-trigger:hover, .pp-info-trigger[aria-expanded="true"] { color: #592bd6; background: #f0e9ff; }
 .pp-billing-popover { position: absolute; top: calc(100% + 8px); left: 0; z-index: 30; width: min(360px, 100%); padding: 17px; border: 1px solid #ded4ed; border-radius: 12px; background: #fff; box-shadow: 0 12px 32px #27144224; color: #61566f; }
 .pp-popover-heading { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
@@ -24,14 +24,13 @@
 .pp-rate-assistant { --pp-accent: #6636ad; --pp-tint: #f0e9ff; }
 .pp-capability-pill { display: flex; align-items: center; gap: 7px; padding: 9px 11px; border-radius: 999px; background: var(--pp-tint); color: var(--pp-accent); }
 .pp-capability-pill > svg { flex-shrink: 0; }
+.pp-pill-copy { display: grid; grid-template-columns: 90px 1fr; align-items: baseline; gap: 6px; }
 .pp-capability-pill h3 { margin: 0; font-size: 13px; font-weight: 600; line-height: 1.5; }
 .pp-capability-pill p { margin: 0; font-size: 12px; font-weight: 400; line-height: 1.5; }
-.pp-allowance { font-size: 12px; line-height: 1.5; font-weight: 400; color: #706779; margin-top: 12px; }
-.pp-unit { font-size: 12px; line-height: 1.5; color: var(--pp-accent); margin-top: 3px; }
+.pp-allowance { padding-left: 34px; font-size: 12px; line-height: 1.5; font-weight: 400; color: #706779; margin-top: 12px; }
+.pp-unit { padding-left: 34px; font-size: 12px; line-height: 1.5; color: var(--pp-accent); margin-top: 3px; }
 .pp-unit span { font-size: 20px; font-weight: 500; font-variant-numeric: tabular-nums; }
-.pp-billing-notes { display: flex; flex-wrap: wrap; gap: 6px 20px; padding: 0; margin: 0 0 20px; list-style: none; font-size: 11px; line-height: 1.5; color: #706779; }
-.pp-billing-notes li { display: flex; align-items: center; gap: 5px; }
-.pp-billing-notes svg { flex-shrink: 0; color: #806c9f; }
+.pp-billing-notes { margin: 0 0 20px; font-size: 11px; line-height: 1.5; color: #706779; }
 .pp-start, .pp-enterprise button { display: flex; width: 100%; align-items: center; justify-content: center; border-radius: 9px; padding: 12px 16px; font-family: inherit; font-size: 14px; line-height: 1.5; font-weight: 500; text-decoration: none; cursor: pointer; }
 .pp-start { background: #6d3bff; color: white; }
 .pp-start:hover { background: #592bd6; text-decoration: none; }
@@ -59,7 +58,7 @@
   .pp-rates { grid-template-columns: 1fr; gap: 18px; margin: 22px 0; padding-top: 20px; }
   .pp-rate { display: grid; grid-template-columns: 1fr auto; gap: 8px 12px; align-items: center; }
   .pp-capability-pill { grid-column: 1 / -1; }
-  .pp-allowance, .pp-unit { font-size: 12px; }
+  .pp-allowance, .pp-unit { padding-left: 0; font-size: 12px; }
   .pp-allowance { margin-top: 0; }
   .pp-unit { margin-top: 0; text-align: right; }
 }

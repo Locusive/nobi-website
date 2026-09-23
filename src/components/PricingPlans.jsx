@@ -40,7 +40,7 @@ function BillingIntro() {
   }, [open]);
 
   return <div className="pp-intro" ref={containerRef}>
-    <p>Use Nobi for search, as an assistant, or both.<button
+    <p><span>Use Nobi for search, with messages for answers and follow-ups.</span><button
       ref={triggerRef}
       type="button"
       className="pp-info-trigger"
@@ -50,7 +50,7 @@ function BillingIntro() {
       aria-controls={open ? id : undefined}
       onClick={() => setOpen(!open)}
       title="How billing works"
-    ><Info size={16} aria-hidden="true" /></button></p>
+    ><Info size={14} aria-hidden="true" /></button></p>
     {open && <div id={id} className="pp-billing-popover" role="dialog" aria-labelledby={`${id}-title`}>
       <div className="pp-popover-heading">
         <h3 id={`${id}-title`}>How billing works</h3>
@@ -80,8 +80,7 @@ export default function PricingPlans() {
           <div className="pp-rate pp-rate-search">
             <div className="pp-capability-pill">
               <Search size={16} aria-hidden="true" />
-              <h3>Search engine</h3>
-              <p>Mostly searches</p>
+              <div className="pp-pill-copy"><h3>Search engine</h3><p>Mostly searches</p></div>
             </div>
             <div className="pp-allowance">{PRICING.includedSearches.toLocaleString("en-US")} searches included / mo</div>
             <div className="pp-unit"><span>{formatPrice(PRICING.searchCents)}</span> / extra search</div>
@@ -89,17 +88,13 @@ export default function PricingPlans() {
           <div className="pp-rate pp-rate-assistant">
             <div className="pp-capability-pill">
               <MessageCircle size={16} aria-hidden="true" />
-              <h3>AI assistant</h3>
-              <p>Messages too</p>
+              <div className="pp-pill-copy"><h3>AI assistant</h3><p>Messages too</p></div>
             </div>
             <div className="pp-allowance">{PRICING.includedMessages} messages included / mo</div>
             <div className="pp-unit"><span>{formatPrice(PRICING.messageCents)}</span> / extra message</div>
           </div>
         </div>
-        <ul className="pp-billing-notes">
-          <li><Check size={14} aria-hidden="true" />Nobi’s replies are included</li>
-          <li><Check size={14} aria-hidden="true" />No conversation-start fee</li>
-        </ul>
+        <p className="pp-billing-notes">Nobi’s replies are included. No conversation-start fee.</p>
         <a className="pp-start" href={getSignupUrl()}>Start for free</a>
         <p className="pp-trial">Free dashboard preview. No credit card.</p>
       </article>

@@ -1,5 +1,5 @@
 import React from "react";
-import { ArrowDown, Check, ChevronDown } from "lucide-react";
+import { ArrowDown, Check } from "lucide-react";
 import { useDemoForm } from "../context/DemoFormContext";
 import { getSignupUrl } from "../utils/signupUrl";
 import { PRICING, formatPrice } from "../utils/pricingEstimate";
@@ -17,14 +17,18 @@ export default function PricingPlans() {
         </div>
         <div className="pp-rates">
           <div className="pp-rate pp-rate-search">
-            <h3>Search</h3>
-            <p className="pp-description">Find relevant results</p>
+            <div className="pp-capability-pill">
+              <h3>Search request</h3>
+              <p>Find relevant results</p>
+            </div>
             <div className="pp-allowance">{PRICING.includedSearches.toLocaleString("en-US")} included / month</div>
             <div className="pp-unit"><span>{formatPrice(PRICING.searchCents)}</span> / extra search</div>
           </div>
           <div className="pp-rate pp-rate-assistant">
-            <h3>Assistant</h3>
-            <p className="pp-description">Answers &amp; follow-ups</p>
+            <div className="pp-capability-pill">
+              <h3>Chat message</h3>
+              <p>Questions &amp; <span>follow-ups</span></p>
+            </div>
             <div className="pp-allowance">{PRICING.includedMessages} included / month</div>
             <div className="pp-unit"><span>{formatPrice(PRICING.messageCents)}</span> / extra message</div>
           </div>
@@ -35,14 +39,6 @@ export default function PricingPlans() {
         </ul>
         <a className="pp-start" href={getSignupUrl()}>Start for free</a>
         <p className="pp-trial">Free dashboard preview. No credit card.</p>
-        <details className="pp-features">
-          <summary>More plan details <ChevronDown size={23} strokeWidth={2.5} aria-hidden="true" /></summary>
-          <div className="pp-details-body">
-            <p>Each visitor question or conversational follow-up counts as a message, including questions that start a conversation.</p>
-            <p>Both allowances renew monthly and are tracked separately. Extra usage is billed automatically at the rates above.</p>
-            <p>Also included: 5,000 searchable items, 5,000 knowledge base documents, and insights & analytics.</p>
-          </div>
-        </details>
       </article>
       <article className="pp-enterprise">
         <h2>Enterprise</h2><strong>Custom pricing</strong>

@@ -45,7 +45,7 @@ const PRICING_FAQS = [
   },
   {
     q: "How does pricing work?",
-    a: `Nobi is $${PLAN_PRICE}/month base and includes ${PLAN_SEARCH_CAP} searches and ${PLAN_MESSAGE_CAP} conversational messages. Additional usage is billed at ${OVERAGE_RATE_SEARCH}/search and ${OVERAGE_RATE_MESSAGE}/message. Nobi's replies are included.`,
+    a: `Nobi starts at $${PLAN_PRICE}/month and includes ${PLAN_SEARCH_CAP} searches and ${PLAN_MESSAGE_CAP} conversational messages each month. Additional usage is billed at ${OVERAGE_RATE_SEARCH}/search and ${OVERAGE_RATE_MESSAGE}/message. Nobi's replies are included. Your plan also includes 5,000 searchable items, 5,000 knowledge base documents, and analytics.`,
   },
   {
     q: "What happens if I go over my limit?",

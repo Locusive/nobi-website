@@ -1,5 +1,5 @@
 import React from "react";
-import { ArrowDown, Check, ChevronDown, MessageCircle, Search } from "lucide-react";
+import { ArrowDown, Camera, Check, ChevronDown, MessageCircle, Paintbrush, Search, Sparkles } from "lucide-react";
 import { useDemoForm } from "../context/DemoFormContext";
 import { getSignupUrl } from "../utils/signupUrl";
 import { PRICING, formatPrice } from "../utils/pricingEstimate";
@@ -13,29 +13,41 @@ export default function PricingPlans() {
       <article className="pp-standard">
         <div className="pp-heading">
           <h2>Standard</h2>
-          <div className="pp-base"><span>Starts at</span><strong>{formatPrice(PRICING.baseCents)}</strong><span>/ month</span></div>
-          <p className="pp-price-note">Plus extra usage at the rates below.</p>
+          <div className="pp-base"><span>Starts at</span><strong>{formatPrice(PRICING.baseCents)}</strong><span>/ month<br />+ extra usage</span></div>
         </div>
         <div className="pp-rates">
           <div className="pp-rate">
             <h3><Search size={21} aria-hidden="true" /> Search engine</h3>
-            <p className="pp-description">Find matching items, pages, and resources.</p>
-            <div className="pp-allowance">{PRICING.includedSearches.toLocaleString("en-US")} searches / month included</div>
-            <div className="pp-unit">Then <span>{formatPrice(PRICING.searchCents)}</span> / search</div>
+            <div className="pp-preview pp-search-preview" role="img" aria-label="Search example: Beginner courses returns Photography and Pottery.">
+              <div className="pp-preview-query" aria-hidden="true"><Search size={14} /><span>Beginner courses</span></div>
+              <div className="pp-preview-results" aria-hidden="true">
+                <div><Camera size={16} /><span>Photography</span></div>
+                <div><Paintbrush size={16} /><span>Pottery</span></div>
+              </div>
+            </div>
+            <div className="pp-allowance">{PRICING.includedSearches.toLocaleString("en-US")} searches included / mo</div>
+            <div className="pp-unit"><span>{formatPrice(PRICING.searchCents)}</span> / extra search</div>
           </div>
           <div className="pp-rate">
             <h3><MessageCircle size={21} aria-hidden="true" /> AI assistant</h3>
-            <p className="pp-description">Answer questions and refine search results.</p>
-            <div className="pp-allowance">{PRICING.includedMessages} messages / month included</div>
-            <div className="pp-unit">Then <span>{formatPrice(PRICING.messageCents)}</span> / message</div>
+            <div className="pp-preview pp-chat-preview" role="img" aria-label="Assistant example: a visitor asks Any evening classes? Nobi replies Photography, 6 pm. Only the visitor's message counts.">
+              <div className="pp-preview-question" aria-hidden="true">Any evening classes?</div>
+              <div className="pp-preview-answer" aria-hidden="true"><Sparkles size={14} /><span>Photography, 6 pm.</span></div>
+            </div>
+            <div className="pp-allowance">{PRICING.includedMessages} messages included / mo</div>
+            <div className="pp-unit"><span>{formatPrice(PRICING.messageCents)}</span> / extra message</div>
           </div>
         </div>
-        <p className="pp-explanation">Each visitor question or conversational follow-up counts as a message. Nobi’s replies are included. No conversation-start fee.</p>
+        <ul className="pp-billing-notes">
+          <li><Check size={14} aria-hidden="true" />Nobi’s replies are included</li>
+          <li><Check size={14} aria-hidden="true" />No conversation-start fee</li>
+        </ul>
         <a className="pp-start" href={getSignupUrl()}>Start for free</a>
         <p className="pp-trial">Free dashboard preview. No credit card.</p>
         <details className="pp-features">
           <summary>More plan details <ChevronDown size={23} strokeWidth={2.5} aria-hidden="true" /></summary>
           <div className="pp-details-body">
+            <p>Each visitor question or conversational follow-up counts as a message, including questions that start a conversation.</p>
             <p>Both allowances renew monthly and are tracked separately. Extra usage is billed automatically at the rates above.</p>
             <p>Also included: 5,000 searchable items, 5,000 knowledge base documents, and insights & analytics.</p>
           </div>

@@ -3,19 +3,28 @@
 .pp-standard { background: #fff; border: 1px solid #c9b6f5; border-radius: 18px; padding: 28px; }
 .pp-heading { display: flex; flex-direction: column; align-items: flex-start; gap: 12px; }
 .pp-section h2 { margin: 0; font-size: 16px; font-weight: 500; line-height: 1.4; }
-.pp-base { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+.pp-base { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
 .pp-base strong { font-size: 54px; line-height: 1; font-weight: 600; letter-spacing: -.05em; }
 .pp-base span { font-size: 13px; line-height: 1.5; color: #706779; }
-.pp-price-note { margin: -4px 0 0; font-size: 12px; line-height: 1.5; color: #706779; }
-.pp-rates { display: grid; grid-template-columns: 1fr 1fr; margin: 24px 0; gap: 24px; padding-top: 22px; border-top: 1px solid #eee8f6; }
-.pp-rate { display: flex; flex-direction: column; }
+.pp-rates { display: grid; grid-template-columns: 1fr 1fr; margin: 24px 0 20px; gap: 24px; padding-top: 22px; border-top: 1px solid #eee8f6; }
+.pp-rate { display: flex; flex-direction: column; min-width: 0; }
 .pp-rate h3 { display: flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 500; line-height: 1.5; margin: 0; }
 .pp-rate h3 svg { width: 18px; height: 18px; color: #806c9f; flex-shrink: 0; }
-.pp-description { margin: 8px 0 4px; flex: 1; font-size: 13px; line-height: 1.55; color: #706779; }
-.pp-allowance { font-size: 13px; line-height: 1.5; font-weight: 400; color: #706779; margin-top: 9px; }
-.pp-unit { font-size: 14px; line-height: 1.5; color: #3c324b; margin-top: 3px; }
-.pp-unit span { font-weight: 500; font-variant-numeric: tabular-nums; }
-.pp-explanation { margin: 0 0 20px; font-size: 12px; line-height: 1.65; color: #706779; }
+.pp-preview { height: 116px; margin-top: 12px; padding: 12px; border-radius: 8px; font-size: 12px; line-height: 1.45; }
+.pp-search-preview { background: #f6f5f8; }
+.pp-preview-query { display: flex; align-items: center; gap: 7px; padding: 7px 8px; border: 1px solid #e4deed; border-radius: 5px; background: #fff; color: #453a54; }
+.pp-preview svg { flex-shrink: 0; color: #806c9f; }
+.pp-preview-results { display: grid; gap: 7px; margin: 10px 5px 0; color: #706779; }
+.pp-preview-results > div { display: flex; align-items: center; gap: 8px; }
+.pp-chat-preview { display: flex; flex-direction: column; justify-content: center; gap: 10px; background: #f7f3ff; }
+.pp-preview-question { align-self: flex-end; padding: 7px 9px; border-radius: 9px 9px 2px 9px; background: #e9ddff; color: #54377c; }
+.pp-preview-answer { display: flex; align-items: center; align-self: flex-start; gap: 7px; padding: 7px 9px; border-radius: 9px 9px 9px 2px; background: #fff; color: #61536f; }
+.pp-allowance { font-size: 12px; line-height: 1.5; font-weight: 400; color: #706779; margin-top: 12px; }
+.pp-unit { font-size: 12px; line-height: 1.5; color: #706779; margin-top: 3px; }
+.pp-unit span { font-size: 20px; font-weight: 500; color: #3c324b; font-variant-numeric: tabular-nums; }
+.pp-billing-notes { display: flex; flex-wrap: wrap; gap: 6px 20px; padding: 0; margin: 0 0 20px; list-style: none; font-size: 11px; line-height: 1.5; color: #706779; }
+.pp-billing-notes li { display: flex; align-items: center; gap: 5px; }
+.pp-billing-notes svg { flex-shrink: 0; color: #806c9f; }
 .pp-start, .pp-enterprise button { display: flex; width: 100%; align-items: center; justify-content: center; border-radius: 9px; padding: 12px 16px; font-family: inherit; font-size: 14px; line-height: 1.5; font-weight: 500; text-decoration: none; cursor: pointer; }
 .pp-start { background: #6d3bff; color: white; }
 .pp-start:hover { background: #592bd6; text-decoration: none; }
@@ -50,4 +59,11 @@
   .pp-rates { gap: 18px; margin: 22px 0; padding-top: 20px; }
   .pp-rate h3 { flex-direction: column; align-items: flex-start; gap: 7px; font-size: 13px; }
   .pp-allowance, .pp-unit { font-size: 12px; }
+  .pp-preview { padding: 8px; height: 128px; font-size: 11px; }
+  .pp-preview-query { gap: 5px; padding: 6px; }
+  .pp-preview-results { margin-left: 2px; margin-right: 0; }
+  .pp-preview-results > div { gap: 5px; }
+  .pp-preview-question, .pp-preview-answer { padding: 6px; }
+  .pp-preview-answer { gap: 5px; }
+  .pp-unit span { display: block; }
 }

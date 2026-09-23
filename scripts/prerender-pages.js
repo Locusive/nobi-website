@@ -8,7 +8,6 @@ import { build } from "vite";
 import { pathToFileURL, fileURLToPath } from "url";
 import { stripHomepageMeta, htmlEscape } from "./prerender-blog.js";
 import { CANONICAL_DESCRIPTION, LINKEDIN_URL } from "../src/constants/positioning.js";
-import { PRICING_DESCRIPTION } from "../src/constants/pricing.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const DIST = join(__dirname, "..", "dist");
@@ -37,10 +36,10 @@ const PAGES = [
   },
   {
     path: "/pricing", title: "Pricing | Nobi",
-    description: PRICING_DESCRIPTION,
+    description: "Simple pricing starting at $25/month. Try free in your dashboard with 100 free messages every month - no credit card needed. AI search, knowledge base, and lead capture for any website.",
     schema: [{
       "@context": "https://schema.org", "@type": "Product", name: "Nobi",
-      description: PRICING_DESCRIPTION,
+      description: "AI site search and shopping assistant for ecommerce stores.",
       brand: { "@type": "Brand", name: "Nobi" },
       offers: { "@type": "Offer", price: "25", priceCurrency: "USD", availability: "https://schema.org/InStock", url: `${BASE}/pricing` },
     }],

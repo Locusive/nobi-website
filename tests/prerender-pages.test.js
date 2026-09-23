@@ -22,7 +22,7 @@ function bodyText(html) {
 
 for (const [path, heading] of [
   ["homepage.html", "Modern site search"],
-  ["pricing.html", "Great search. Helpful answers. Clear pricing."],
+  ["pricing.html", "Simple, usage-based pricing"],
   ["product.html", "One assistant. Every job your website needs done."],
 ]) {
   test(`${path} serves real content, metadata, and valid bundled assets without JavaScript`, () => {
@@ -44,9 +44,9 @@ for (const [path, heading] of [
 test("pricing includes plan allowances, overages, trial terms, and FAQ answers", () => {
   const text = bodyText(readPage("pricing.html"));
   for (const fact of [
-    "2,500", "250", "$0.10 per additional assistant message", "$0.01 per additional search", "30-day free trial",
-    "100 free messages", "additional usage is billed automatically", "5,000",
-    "They are separate allowances, not a shared credit balance.", "Nobi’s reply is included", "including the first request",
+    "2,500", "250", "$0.10/message", "$0.01/search", "30-day free trial",
+    "100 free messages", "pause until the next billing cycle", "5,000",
+    "Both are tracked separately with their own limits.",
   ]) assert.ok(text.includes(fact), `Missing pricing fact: ${fact}`);
 });
 

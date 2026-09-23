@@ -118,7 +118,7 @@ const FAQ_ITEMS = [
   },
   {
       q: "I have X sessions per month and Y percent of my customers use search. How much would Nobi cost for me?",
-      a: "Standard is $25/month and includes 2,500 simple searches and 250 assistant messages. Additional searches cost $0.01 each; additional assistant messages cost $0.10 each. Each conversational follow-up is another assistant message, and Nobi’s reply is included. Visit our pricing page to choose your setup and estimate your monthly bill. For high-volume usage, contact us about enterprise pricing.",
+      a: "Our standard pricing tiers apply to customers with up to 10,000 messages per month. For customers with higher usage, we offer custom enterprise plans, usually with generous volume-based discounts. We can also provide significant discounts for search-mode only setups if you’re only looking to replace the search engine for your product catalog.",
       category: "Product",
   },
   {

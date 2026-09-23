@@ -9,9 +9,9 @@ import PricingEstimateForm from "./PricingEstimateForm";
 import "./PricingWizard.css";
 
 const USES = [
-  { id: "search", title: "Search your site", summary: "Search", icon: Search, description: "Show matching items, pages, and resources.", context: "Visitors get search results without starting a conversation." },
-  { id: "assistant", title: "Answer questions", summary: "Assistant", icon: MessageCircle, description: "Give answers and help visitors narrow things down.", context: "Each visitor question or follow-up counts as a message. Nobi's replies are included." },
-  { id: "both", title: "Do both", summary: "Search + assistant", icon: Sparkles, description: "Let visitors search, then keep talking.", context: "The search counts as a search. Each question or follow-up counts as an assistant message." },
+  { id: "search", title: "Search your site", summary: "Search", icon: Search, description: "Show matching items, pages, and resources." },
+  { id: "assistant", title: "Answer questions", summary: "Assistant", icon: MessageCircle, description: "Give answers and help visitors narrow things down." },
+  { id: "both", title: "Do both", summary: "Search + assistant", icon: Sparkles, description: "Let visitors search, then keep talking." },
 ];
 const count = value => Number(value).toLocaleString("en-US");
 
@@ -86,7 +86,7 @@ export default function PricingWizard() {
     >
       <span className={`pw-step-number ${complete ? "pw-step-number--done" : ""}`}>{complete ? <Check size={17} aria-label="Complete" /> : number}</span>
       <span className="pw-step-title">{title}{summary && openStep !== number && <span>{summary}</span>}</span>
-      {enabled && <><span className="pw-edit">{openStep === number ? "" : complete ? "Edit" : "Open"}</span><ChevronDown size={18} className="pw-chevron" aria-hidden="true" /></>}
+      {enabled && <><span className="pw-edit">{openStep === number ? "" : complete ? number === 3 ? "View" : "Edit" : "Open"}</span><span className="pw-toggle"><ChevronDown size={27} strokeWidth={3} className="pw-chevron" aria-hidden="true" /></span></>}
     </button></h3>
     <div id={`${id}-panel-${number}`} role="region" aria-labelledby={`${id}-heading-${number}`} hidden={openStep !== number} className="pw-panel">{content}</div>
   </section>;
@@ -96,17 +96,16 @@ export default function PricingWizard() {
       <div className="pw-intro"><h2 id={`${id}-title`}>Find your price</h2><p>Two quick questions. An estimate for your site.</p></div>
       <div className="pw-interview" ref={interview}>
         {step(1, "What would you like to use Nobi for?", useConfirmed ? selected?.summary : "", true, useConfirmed,
-          <form onSubmit={event => { event.preventDefault(); if (mode) { setUseConfirmed(true); goTo(2); } }}>
-            <fieldset className="pw-choices"><legend className="pw-sr-only">How would you like to use Nobi?</legend>
-              {USES.map(({ id: value, title, description, icon: Icon }) => <label className="pw-choice" key={value}>
-                <input type="radio" name={`${id}-use`} value={value} checked={mode === value} onChange={() => { setMode(value); setUseConfirmed(false); setActivityConfirmed(false); }} required />
+          <div>
+            <p className="pw-choice-hint">Choose one to continue.</p>
+            <div className="pw-choices" role="group" aria-label="How would you like to use Nobi?">
+              {USES.map(({ id: value, title, description, icon: Icon }) => <button className="pw-choice" type="button" key={value} aria-pressed={mode === value}
+                onClick={() => { setMode(value); setUseConfirmed(true); setActivityConfirmed(false); setError(""); goTo(2); }}>
                 <span className="pw-choice-content"><Icon size={25} strokeWidth={1.7} aria-hidden="true" /><strong>{title}</strong><span>{description}</span></span>
                 <span className="pw-radio" aria-hidden="true">{mode === value && <Check size={12} />}</span>
-              </label>)}
-            </fieldset>
-            {selected && <p className="pw-context">{selected.context}</p>}
-            <div className="pw-actions"><button className="pw-primary" disabled={!mode}>Continue <ArrowRight size={16} aria-hidden="true" /></button></div>
-          </form>
+              </button>)}
+            </div>
+          </div>
         )}
         {step(2, "How much activity do you expect?", activityConfirmed ? basis === "traffic" ? `${count(visitors)} visitors / month` : `${usageSummary} / month` : "", useConfirmed, activityConfirmed,
           <>
@@ -168,7 +167,6 @@ export default function PricingWizard() {
         )}
       </div>
       <div className="pw-after"><span>Start free. No credit card needed.</span><button type="button" onClick={openDemoForm}>Prefer to talk it through?</button></div>
-      <details className="pw-benefits"><summary>What's included with Standard? <ChevronDown size={16} aria-hidden="true" /></summary><p>2,500 searches and 250 assistant messages every month. Up to 5,000 searchable items, 5,000 knowledge base documents, and insights & analytics. After the included usage: $0.01/search and $0.10/message.</p></details>
     </div>
   </section>;
 }

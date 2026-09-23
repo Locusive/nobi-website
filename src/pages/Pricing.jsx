@@ -6,6 +6,7 @@ import Nav from "../components/home/Nav";
 import FooterCTA from "../components/home/FooterCTA";
 import SiteFooter from "../components/home/SiteFooter";
 import PricingWizard from "../components/PricingWizard.jsx";
+import PricingPlans from "../components/PricingPlans.jsx";
 
 const PLAN_PRICE = 25;
 const PLAN_SEARCH_CAP = "2,500";
@@ -99,6 +100,8 @@ export default function Pricing() {
 
       <PricingHero />
 
+      <PricingPlans />
+
       <PricingWizard />
 
       {/* Value props */}
@@ -156,7 +159,7 @@ export default function Pricing() {
 
 export function PricingHero() {
   return (
-      <div style={{ position: "relative", overflow: "hidden", background: "linear-gradient(180deg,#6656ce,#5a3fc0)", color: "#fff", padding: "150px clamp(24px,5vw,80px) 84px", textAlign: "center" }}>
+      <div style={{ position: "relative", overflow: "hidden", background: "linear-gradient(180deg,#6656ce,#5a3fc0)", color: "#fff", padding: "130px clamp(24px,5vw,80px) 54px", textAlign: "center" }}>
         <div
           style={{
             position: "absolute",
@@ -173,8 +176,7 @@ export function PricingHero() {
             Simple, usage-based pricing
           </h1>
           <p style={{ margin: "20px auto 0", maxWidth: "44ch", fontSize: "clamp(16px,1.3vw,20px)", lineHeight: 1.55, color: "rgba(255,255,255,0.85)" }}>
-            Try the full Nobi experience free in your dashboard — no credit card needed. Ready to go live on your
-            site? Start a {TRIAL_DAYS}-day free trial.
+            Search, answer questions, or do both. Start with a {TRIAL_DAYS}-day free trial.
           </p>
         </div>
       </div>

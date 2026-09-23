@@ -37,8 +37,9 @@ asset references, and signup attribution. Register additional pages in both
 ## Local pricing wizard
 
 Run `npm run preview:pricing` with Node 18+ and open
-http://127.0.0.1:5174/pricing. The inline interview asks how visitors will use
-Nobi, then their expected activity, and shows a monthly estimate. Completed
+http://127.0.0.1:5174/pricing. The plan overview shows the base price, included
+usage, and search/message rates before the inline interview. Choosing a use
+opens the activity question automatically, then shows a monthly estimate. Completed
 answers can be reopened and edited. The previous `/pricing/ideas` preview URL
 redirects to the pricing page on loopback hosts.
 

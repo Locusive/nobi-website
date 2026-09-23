@@ -1,41 +1,45 @@
-.pw-section { padding: 44px clamp(20px,5vw,80px) 36px; background: #f5f3fb; color: #1b1626; }
+.pw-section { padding: 54px clamp(20px,5vw,80px) 36px; background: #f5f3fb; color: #1b1626; scroll-margin-top: 95px; }
 .pw-wrap { max-width: 940px; margin: 0 auto; }
 .pw-intro { margin-bottom: 20px; }
 .pw-intro h2 { font-size: clamp(24px,3vw,30px); font-weight: 700; letter-spacing: -.03em; margin: 0; }
 .pw-intro p { font-size: 14px; color: #6a6478; margin: 5px 0 0; }
-.pw-interview { background: white; border: 1px solid #ded7ee; border-radius: 22px; box-shadow: 0 24px 60px -44px rgba(76,40,130,.4); scroll-margin-top: 100px; }
+.pw-interview { display: grid; gap: 12px; scroll-margin-top: 100px; }
 /* Keep the floating assistant clear of the interview while someone is using it. */
 body:has(.pw-section:focus-within) #nobi-floating-chat-bar-container { display: none !important; }
-.pw-step + .pw-step { border-top: 1px solid #ebe6f2; }
+.pw-step { background: #fff; border: 2px solid #d8cde9; border-radius: 17px; }
+.pw-step[data-open="true"] { border-color: #6d3bff; box-shadow: 0 10px 28px -22px #6d3bff; }
 .pw-step-heading { margin: 0; font: inherit; }
-.pw-step-heading > button { width: 100%; display: flex; align-items: center; gap: 14px; border: none; background: none; text-align: left; padding: 22px 26px; color: #1b1626; cursor: pointer; scroll-margin-top: 100px; border-radius: 12px; }
+.pw-step-heading > button { width: 100%; display: flex; align-items: center; gap: 15px; border: none; background: none; text-align: left; padding: 22px 24px; color: #1b1626; cursor: pointer; scroll-margin-top: 100px; border-radius: 15px; }
+.pw-step[data-open="true"] .pw-step-heading > button { background: #f4efff; border-radius: 15px 15px 0 0; margin-bottom: 22px; }
+.pw-step-heading > button:hover:not(:disabled) { background: #f4efff; }
 .pw-step-heading > button:disabled { cursor: default; color: #82798f; }
-.pw-step-number { flex: none; display: flex; align-items: center; justify-content: center; width: 30px; height: 30px; border: 1px solid #ddd5ea; border-radius: 50%; color: #776987; font-size: 13px; font-weight: 600; }
+.pw-step-number { flex: none; display: flex; align-items: center; justify-content: center; width: 36px; height: 36px; border: 1px solid #d4c6e8; border-radius: 50%; color: #6d5588; font-size: 15px; font-weight: 700; }
 .pw-step[data-open="true"] .pw-step-number { background: #6d3bff; color: #fff; border-color: #6d3bff; }
 .pw-step-number--done { background: #efe9ff; border-color: #efe9ff; color: #6d3bff; }
-.pw-step-title { font-size: 16px; line-height: 1.4; font-weight: 600; flex: 1; }
+.pw-step-title { font-size: 19px; line-height: 1.4; font-weight: 700; flex: 1; }
 .pw-step-title > span { display: block; color: #766d83; font-size: 13px; font-weight: 400; margin-top: 4px; }
 .pw-edit { font-size: 12px; color: #765f9d; }
-.pw-chevron { flex-shrink: 0; color: #94899f; }
+.pw-toggle { display: flex; align-items: center; justify-content: center; flex: none; width: 42px; height: 42px; border-radius: 10px; background: #eee6ff; color: #5b2ad0; }
+.pw-step[data-open="true"] .pw-toggle { background: #6d3bff; color: white; }
+.pw-chevron { flex-shrink: 0; transition: transform 180ms ease; }
 .pw-step[data-open="true"] .pw-chevron { transform: rotate(180deg); }
-.pw-panel { padding: 0 26px 25px 70px; }
+.pw-panel { padding: 0 24px 25px 75px; }
 .pw-panel[hidden] { display: none; }
 .pw-section :is(button,a,input,summary):focus-visible { outline: 3px solid #9e7bff; outline-offset: 4px; }
 .pw-section button, .pw-section input { font-family: inherit; }
 .pw-section fieldset { border: 0; margin: 0; padding: 0; min-width: 0; }
 .pw-choices { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 12px; }
-.pw-choice { position: relative; display: flex; min-width: 0; cursor: pointer; }
-.pw-choice > input, .pw-basis input, .pw-sr-only { position: absolute; height: 1px; width: 1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; }
+.pw-choice { position: relative; display: flex; min-width: 0; cursor: pointer; padding: 0; background: none; border: 0; text-align: left; border-radius: 12px; color: inherit; }
+.pw-choice-hint { font-size: 13px; color: #6a6478; margin: 0 0 14px; }
+.pw-basis input, .pw-sr-only { position: absolute; height: 1px; width: 1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; }
 .pw-choice-content { width: 100%; display: flex; flex-direction: column; gap: 8px; padding: 18px; border: 1px solid #e4ddee; border-radius: 12px; background: #fff; }
 .pw-choice-content > svg { color: #6d3bff; margin-bottom: 5px; }
 .pw-choice-content > strong { font-size: 15px; font-weight: 600; }
 .pw-choice-content > span { font-size: 12.5px; line-height: 1.55; color: #6a6478; max-width: 26ch; }
-.pw-choice > input:checked + .pw-choice-content { background: #f7f3ff; border-color: #6d3bff; box-shadow: inset 0 0 0 1px #6d3bff; }
-.pw-choice > input:focus-visible + .pw-choice-content { outline: 3px solid #b697ff; outline-offset: 3px; }
+.pw-choice[aria-pressed="true"] .pw-choice-content { background: #f7f3ff; border-color: #6d3bff; box-shadow: inset 0 0 0 1px #6d3bff; }
 .pw-choice:hover .pw-choice-content { border-color: #a990db; }
 .pw-radio { position: absolute; top: 17px; right: 17px; border: 1px solid #d9d0e6; border-radius: 50%; height: 16px; width: 16px; display: flex; align-items: center; justify-content: center; }
-.pw-choice > input:checked ~ .pw-radio { background: #6d3bff; border-color: #6d3bff; color: #fff; }
-.pw-context { font-size: 13px; color: #61546f; line-height: 1.55; margin: 15px 0 0; }
+.pw-choice[aria-pressed="true"] .pw-radio { background: #6d3bff; border-color: #6d3bff; color: #fff; }
 .pw-actions { display: flex; align-items: center; gap: 22px; justify-content: flex-end; margin-top: 22px; }
 .pw-primary { display: inline-flex; align-items: center; justify-content: center; gap: 12px; border: none; background: #6d3bff; color: #fff; padding: 12px 22px; border-radius: 10px; font-size: 14px; line-height: 1.5; font-weight: 600; cursor: pointer; text-decoration: none; }
 .pw-primary:hover { background: #592bd6; }
@@ -96,8 +100,6 @@ body:has(.pw-section:focus-within) #nobi-floating-chat-bar-container { display: 
 .pw-enterprise > button { margin-top: auto; border: 0; background: #fff; color: #100a24; padding: 12px 16px; border-radius: 9px; font-size: 14px; font-weight: 500; cursor: pointer; }
 .pw-after { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; font-size: 12px; color: #70647e; padding: 17px 4px; }
 .pw-after button { padding: 0; border: 0; background: none; font-size: inherit; color: #6c489a; text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
-.pw-benefits { padding: 16px 4px 0; border-top: 1px solid #e4dced; color: #6a6478; font-size: 13px; }
-.pw-benefits > p { line-height: 1.7; font-size: 13px; max-width: 80ch; margin: 14px 0 0; }
 @media (max-width: 740px) {
   .pw-panel { padding: 0 22px 23px; }
   .pw-step-heading > button { padding: 19px 22px; gap: 11px; }
@@ -115,9 +117,10 @@ body:has(.pw-section:focus-within) #nobi-floating-chat-bar-container { display: 
   .pw-choice-content > span { grid-column: 2; max-width: none; font-size: 12px; }
   .pw-radio { right: 13px; top: 20px; }
   .pw-step-heading > button { padding: 18px 17px; gap: 10px; }
-  .pw-step-title { font-size: 14px; }
+  .pw-step-title { font-size: 16px; }
   .pw-step-title > span { font-size: 12px; }
-  .pw-step-number { height: 26px; width: 26px; font-size: 12px; }
+  .pw-step-number { height: 28px; width: 28px; font-size: 13px; }
+  .pw-toggle { width: 34px; height: 34px; border-radius: 8px; }
   .pw-panel { padding: 0 17px 22px; }
   .pw-edit { display: none; }
   .pw-basis { display: grid; grid-template-columns: 1fr; }
@@ -130,6 +133,7 @@ body:has(.pw-section:focus-within) #nobi-floating-chat-bar-container { display: 
   .pw-actions .pw-primary { flex: 1; }
   .pw-standard, .pw-enterprise { padding: 20px; }
 }
+@media (prefers-reduced-motion: reduce) { .pw-chevron { transition: none; } }
 @media (max-width: 390px) {
   .nobi-pricing-page .nb-nav { max-width: 100% !important; padding: 8px 12px !important; gap: 8px !important; }
   .nobi-pricing-page .nb-nav > a img { height: 30px !important; }

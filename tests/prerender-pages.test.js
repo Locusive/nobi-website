@@ -50,6 +50,9 @@ test("pricing includes plan allowances, overages, trial terms, and FAQ answers",
   ]) assert.ok(text.includes(fact), `Missing pricing fact: ${fact}`);
   assert.ok(!text.includes("pause until the next billing cycle"));
   assert.ok(text.includes("What would you like to use Nobi for?"));
+  const beforeEstimate = text.split("Find your price")[0];
+  for (const fact of ["Standard", "$25", "2,500", "$0.01", "250", "$0.10", "Enterprise", "Nobi’s replies are included"])
+    assert.ok(beforeEstimate.includes(fact), `Pricing must be explained before the interview: ${fact}`);
 });
 
 test("blog and glossary output retain their own content without the homepage", () => {

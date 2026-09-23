@@ -19,6 +19,7 @@ const LuccheseCustomer   = lazy(() => import("./pages/customers/Lucchese.jsx"));
 const UNTUCKitCustomer   = lazy(() => import("./pages/customers/UNTUCKit.jsx"));
 const KilteCustomer      = lazy(() => import("./pages/customers/Kilte.jsx"));
 const Pricing            = lazy(() => import("./pages/Pricing.jsx"));
+const PricingConcepts    = lazy(() => import("./pages/PricingConcepts.jsx"));
 const Product            = lazy(() => import("./pages/Product.jsx"));
 const Webinar            = lazy(() => import("./pages/Webinar.jsx"));
 const WebinarIPullRank   = lazy(() => import("./pages/WebinarIPullRank.jsx"));
@@ -101,6 +102,9 @@ function App() {
           <Route path="/terms" element={<Terms />} />
           <Route path="/privacy" element={<Privacy />} />
           <Route path="/pricing" element={<Pricing />} />
+          {["localhost", "127.0.0.1", "[::1]"].includes(window.location.hostname) && (
+            <Route path="/pricing/ideas" element={<PricingConcepts />} />
+          )}
           <Route path="/product" element={<Product />} />
           <Route path="/faqs" element={<FAQs />} />
           <Route path="/webinar" element={<Webinar />} />

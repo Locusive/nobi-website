@@ -122,29 +122,7 @@ export default function Pricing() {
     <div style={{ fontFamily: "'Schibsted Grotesk','Helvetica Neue',Helvetica,Arial,sans-serif", background: "#ffffff" }}>
       <Nav active="pricing" />
 
-      {/* Hero */}
-      <div style={{ position: "relative", overflow: "hidden", background: "linear-gradient(180deg,#6656ce,#5a3fc0)", color: "#fff", padding: "150px clamp(24px,5vw,80px) 84px", textAlign: "center" }}>
-        <div
-          style={{
-            position: "absolute",
-            inset: 0,
-            backgroundImage:
-              "radial-gradient(60% 55% at 15% 12%, rgba(255,150,110,0.28), rgba(255,150,110,0) 70%), radial-gradient(55% 55% at 90% 90%, rgba(213,65,179,0.32), rgba(213,65,179,0) 70%)",
-          }}
-        />
-        <div style={{ position: "relative", zIndex: 2, maxWidth: 720, margin: "0 auto" }}>
-          <span style={{ display: "inline-block", fontFamily: "'SF Mono',ui-monospace,Menlo,monospace", fontSize: 13, letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(255,255,255,0.72)", fontWeight: 600 }}>
-            Pricing
-          </span>
-          <h1 style={{ margin: "20px 0 0", fontSize: "clamp(40px,5.4vw,68px)", fontWeight: 700, letterSpacing: "-0.035em", lineHeight: 1.02 }}>
-            Simple, usage-based pricing
-          </h1>
-          <p style={{ margin: "20px auto 0", maxWidth: "44ch", fontSize: "clamp(16px,1.3vw,20px)", lineHeight: 1.55, color: "rgba(255,255,255,0.85)" }}>
-            Try the full Nobi experience free in your dashboard — no credit card needed. Ready to go live on your
-            site? Start a {TRIAL_DAYS}-day free trial.
-          </p>
-        </div>
-      </div>
+      <PricingHero />
 
       {/* Tiers */}
       <div style={{ background: "#f5f3fb", padding: "56px clamp(24px,5vw,80px) 20px" }}>
@@ -263,19 +241,7 @@ export default function Pricing() {
         </div>
       </div>
 
-      {/* Logos */}
-      <div style={{ background: "#f5f3fb", padding: "56px clamp(24px,5vw,80px)" }}>
-        <div style={{ maxWidth: 1120, margin: "0 auto", textAlign: "center" }}>
-          <div style={{ fontSize: 13, color: "#8a8498", fontWeight: 500 }}>
-            Trusted by ecommerce teams serious about search &amp; discovery
-          </div>
-          <div style={{ marginTop: 26, display: "flex", alignItems: "center", justifyContent: "center", gap: "clamp(30px,6vw,64px)", flexWrap: "wrap", opacity: 0.62 }}>
-            {LOGOS.map((l) => (
-              <img key={l.alt} src={l.src} alt={l.alt} style={{ height: l.height, width: "auto" }} />
-            ))}
-          </div>
-        </div>
-      </div>
+      <PricingLogos />
 
       {/* FAQ */}
       <div style={{ background: "#ffffff", padding: "80px clamp(24px,5vw,80px)" }}>
@@ -300,5 +266,49 @@ export default function Pricing() {
       <FooterCTA />
       <SiteFooter />
     </div>
+  );
+}
+
+export function PricingHero() {
+  return (
+      <div style={{ position: "relative", overflow: "hidden", background: "linear-gradient(180deg,#6656ce,#5a3fc0)", color: "#fff", padding: "150px clamp(24px,5vw,80px) 84px", textAlign: "center" }}>
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            backgroundImage:
+              "radial-gradient(60% 55% at 15% 12%, rgba(255,150,110,0.28), rgba(255,150,110,0) 70%), radial-gradient(55% 55% at 90% 90%, rgba(213,65,179,0.32), rgba(213,65,179,0) 70%)",
+          }}
+        />
+        <div style={{ position: "relative", zIndex: 2, maxWidth: 720, margin: "0 auto" }}>
+          <span style={{ display: "inline-block", fontFamily: "'SF Mono',ui-monospace,Menlo,monospace", fontSize: 13, letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(255,255,255,0.72)", fontWeight: 600 }}>
+            Pricing
+          </span>
+          <h1 style={{ margin: "20px 0 0", fontSize: "clamp(40px,5.4vw,68px)", fontWeight: 700, letterSpacing: "-0.035em", lineHeight: 1.02 }}>
+            Simple, usage-based pricing
+          </h1>
+          <p style={{ margin: "20px auto 0", maxWidth: "44ch", fontSize: "clamp(16px,1.3vw,20px)", lineHeight: 1.55, color: "rgba(255,255,255,0.85)" }}>
+            Try the full Nobi experience free in your dashboard — no credit card needed. Ready to go live on your
+            site? Start a {TRIAL_DAYS}-day free trial.
+          </p>
+        </div>
+      </div>
+  );
+}
+
+export function PricingLogos({ label = "Trusted by ecommerce teams serious about search & discovery" }) {
+  return (
+      <div style={{ background: "#f5f3fb", padding: "56px clamp(24px,5vw,80px)" }}>
+        <div style={{ maxWidth: 1120, margin: "0 auto", textAlign: "center" }}>
+          <div style={{ fontSize: 13, color: "#8a8498", fontWeight: 500 }}>
+            {label}
+          </div>
+          <div style={{ marginTop: 26, display: "flex", alignItems: "center", justifyContent: "center", gap: "clamp(30px,6vw,64px)", flexWrap: "wrap", opacity: 0.62 }}>
+            {LOGOS.map((l) => (
+              <img key={l.alt} src={l.src} alt={l.alt} style={{ height: l.height, width: "auto" }} />
+            ))}
+          </div>
+        </div>
+      </div>
   );
 }

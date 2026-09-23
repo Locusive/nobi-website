@@ -39,7 +39,7 @@ const PAGES = [
     description: "Simple pricing starting at $25/month. Try free in your dashboard with 100 free messages every month - no credit card needed. AI search, knowledge base, and lead capture for any website.",
     schema: [{
       "@context": "https://schema.org", "@type": "Product", name: "Nobi",
-      description: "AI site search and shopping assistant for ecommerce stores.",
+      description: "Site search and an AI assistant for any website.",
       brand: { "@type": "Brand", name: "Nobi" },
       offers: { "@type": "Offer", price: "25", priceCurrency: "USD", availability: "https://schema.org/InStock", url: `${BASE}/pricing` },
     }],

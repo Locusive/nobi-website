@@ -45,9 +45,11 @@ test("pricing includes plan allowances, overages, trial terms, and FAQ answers",
   const text = bodyText(readPage("pricing.html"));
   for (const fact of [
     "2,500", "250", "$0.10/message", "$0.01/search", "30-day free trial",
-    "100 free messages", "pause until the next billing cycle", "5,000",
+    "100 free messages", "Additional usage is billed", "5,000",
     "Both are tracked separately with their own limits.",
   ]) assert.ok(text.includes(fact), `Missing pricing fact: ${fact}`);
+  assert.ok(!text.includes("pause until the next billing cycle"));
+  assert.ok(text.includes("What would you like to use Nobi for?"));
 });
 
 test("blog and glossary output retain their own content without the homepage", () => {

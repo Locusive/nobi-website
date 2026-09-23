@@ -34,15 +34,17 @@ Run `npm test` to build the site and check page content, pricing facts, URL form
 asset references, and signup attribution. Register additional pages in both
 `scripts/prerender-pages.js` and `scripts/render-pages.jsx`.
 
-## Local pricing concepts
+## Local pricing wizard
 
-On branch `feat/pricing-explanation-concepts`, run `npm run preview:pricing`
-with Node 18+ and open http://127.0.0.1:5174/pricing/ideas.
-Use the comparison buttons to switch between the guided choice, animated example,
-and side-by-side explanation. Direct links use `?view=guided`, `?view=example`,
-and `?view=compare`. The original `/pricing` page stays available unchanged.
+Run `npm run preview:pricing` with Node 18+ and open
+http://127.0.0.1:5174/pricing. The inline interview asks how visitors will use
+Nobi, then their expected activity, and shows a monthly estimate. Completed
+answers can be reopened and edited. The previous `/pricing/ideas` preview URL
+redirects to the pricing page on loopback hosts.
 
-The concepts route is available only on loopback hosts, and is not prerendered
-or included in the sitemap. Use the bundled preview for Chrome so ad blockers
-do not block the development-only `eventTracker` module path. The traffic lookup
-works in this preview as well as the dev server. Rebuild to see code edits.
+Use the bundled preview for Chrome so ad blockers do not block the
+development-only `eventTracker` module path. The existing traffic lookup and
+contact form remain available under the activity question. Rebuild to see edits.
+
+`npm test` builds the prerendered pages and checks the pricing arithmetic,
+allowances, usage modes, input validation, and existing page regressions.

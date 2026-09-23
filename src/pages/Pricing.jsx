@@ -1,41 +1,18 @@
 import React from "react";
-import { CheckCircle2, ChevronDown, Gift, Search, Smile, BarChart3 } from "lucide-react";
+import { ChevronDown, Search, Smile, BarChart3 } from "lucide-react";
 import { useSEO } from "../hooks/useSEO";
-import { useDemoForm } from "../context/DemoFormContext";
-import { getSignupUrl } from "../utils/signupUrl";
 import "../components/home/homepage.css";
 import Nav from "../components/home/Nav";
 import FooterCTA from "../components/home/FooterCTA";
 import SiteFooter from "../components/home/SiteFooter";
-import PricingCalculator from "../components/PricingCalculator.jsx";
+import PricingWizard from "../components/PricingWizard.jsx";
 
-// All figures below are ported verbatim from the real, live pricing page
-// (git history: src/pages/Pricing.jsx) — not from the design bundle, which
-// paraphrased some of this (and got the overage FAQ wrong: it says usage is
-// "simply billed," but customers can actually choose to pause instead).
 const PLAN_PRICE = 25;
 const PLAN_SEARCH_CAP = "2,500";
 const PLAN_MESSAGE_CAP = "250";
 const OVERAGE_RATE_MESSAGE = "$0.10";
 const OVERAGE_RATE_SEARCH = "$0.01";
 const TRIAL_DAYS = 30;
-const MAX_PRODUCTS = "5,000";
-const MAX_KB_DOCS = "5,000";
-
-const PLAN_HIGHLIGHTS = [
-  `$0.10/message, $0.01/search after that`,
-  `Up to ${MAX_PRODUCTS} products`,
-  `${MAX_KB_DOCS} knowledge base documents`,
-  `Insights & analytics`,
-];
-
-const ENTERPRISE_HIGHLIGHTS = [
-  "Dedicated support",
-  "Custom integrations & onboarding",
-  "Volume discounts on usage",
-  `${MAX_PRODUCTS}+ products & documents`,
-];
-
 const VALUE_PROPS = [
   {
     icon: Search,
@@ -67,15 +44,15 @@ const PRICING_FAQS = [
   },
   {
     q: "How does pricing work?",
-    a: `Nobi is $${PLAN_PRICE}/month base and includes ${PLAN_SEARCH_CAP} searches and ${PLAN_MESSAGE_CAP} conversational messages. If you go over, you can choose to either pause until the next billing cycle or pay ${OVERAGE_RATE_MESSAGE}/message and ${OVERAGE_RATE_SEARCH}/search.`,
+    a: `Nobi is $${PLAN_PRICE}/month base and includes ${PLAN_SEARCH_CAP} searches and ${PLAN_MESSAGE_CAP} conversational messages. Additional usage is billed at ${OVERAGE_RATE_SEARCH}/search and ${OVERAGE_RATE_MESSAGE}/message. Nobi's replies are included.`,
   },
   {
     q: "What happens if I go over my limit?",
-    a: `You choose: either Nobi pauses until the next billing cycle, or you pay ${OVERAGE_RATE_MESSAGE} per additional message and ${OVERAGE_RATE_SEARCH} per additional search. You can change this setting at any time from your dashboard.`,
+    a: `Additional usage is billed at ${OVERAGE_RATE_SEARCH} per search and ${OVERAGE_RATE_MESSAGE} per visitor message. Search and message allowances are separate; unused searches do not cover additional messages.`,
   },
   {
     q: "What counts as a search vs. a message?",
-    a: "A search is when a visitor uses Nobi to find products or information on your site. A message is a back-and-forth conversational exchange. Both are tracked separately with their own limits.",
+    a: "A search returns matching items, pages, or resources. A message is a visitor question or follow-up that needs a conversational response, even if it starts the conversation. Nobi's replies are included. Both are tracked separately with their own limits.",
   },
   {
     q: "What kind of support do you offer?",
@@ -83,7 +60,7 @@ const PRICING_FAQS = [
   },
   {
     q: "Do you offer annual or enterprise pricing?",
-    a: "Yes, we offer custom pricing for high-volume businesses, large catalogs, and annual commitments. Contact us to learn more.",
+    a: "Yes, we offer custom pricing for high-volume websites, custom needs, and annual commitments. Contact us to learn more.",
   },
 ];
 
@@ -96,8 +73,6 @@ const LOGOS = [
 ];
 
 export default function Pricing() {
-  const { onOpen: openDemoForm } = useDemoForm();
-
   useSEO({
     title: "Pricing | Nobi",
     description: "Simple pricing starting at $25/month. Try free in your dashboard with 100 free messages every month — no credit card needed. AI search, knowledge base, and lead capture for any website.",
@@ -106,7 +81,7 @@ export default function Pricing() {
       "@context": "https://schema.org",
       "@type": "Product",
       "name": "Nobi",
-      "description": "AI site search and shopping assistant for ecommerce stores.",
+      "description": "Site search and an AI assistant for any website.",
       "brand": { "@type": "Brand", "name": "Nobi" },
       "offers": {
         "@type": "Offer",
@@ -119,102 +94,12 @@ export default function Pricing() {
   });
 
   return (
-    <div style={{ fontFamily: "'Schibsted Grotesk','Helvetica Neue',Helvetica,Arial,sans-serif", background: "#ffffff" }}>
+    <div className="nobi-pricing-page" style={{ fontFamily: "'Schibsted Grotesk','Helvetica Neue',Helvetica,Arial,sans-serif", background: "#ffffff" }}>
       <Nav active="pricing" />
 
       <PricingHero />
 
-      {/* Tiers */}
-      <div style={{ background: "#f5f3fb", padding: "56px clamp(24px,5vw,80px) 20px" }}>
-        <div style={{ maxWidth: 940, margin: "0 auto" }}>
-          <div
-            style={{
-              background: "#fff",
-              border: "1px solid rgba(20,16,40,0.08)",
-              borderRadius: 16,
-              boxShadow: "0 24px 60px -44px rgba(76,40,130,0.4)",
-              padding: "16px 22px",
-              display: "flex",
-              alignItems: "center",
-              gap: 14,
-              flexWrap: "wrap",
-              justifyContent: "center",
-              marginBottom: 22,
-            }}
-          >
-            <span style={{ display: "inline-flex", width: 34, height: 34, borderRadius: 10, background: "#f1ecff", alignItems: "center", justifyContent: "center", flex: "none" }}>
-              <Gift size={18} color="#6d3bff" />
-            </span>
-            <span style={{ fontSize: 15, color: "#3a3646" }}>
-              <strong style={{ color: "#1b1626", fontWeight: 700 }}>Start free, no credit card needed.</strong> 100
-              free messages every month to try the full experience in your dashboard.
-            </span>
-          </div>
-
-          <div className="nb-tiers" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 22 }}>
-            {/* Standard */}
-            <div style={{ position: "relative", background: "#fff", border: "2px solid #6d3bff", borderRadius: 22, padding: "32px 30px", boxShadow: "0 34px 80px -40px rgba(76,40,130,0.6)", display: "flex", flexDirection: "column" }}>
-              <div style={{ fontSize: 18, fontWeight: 700, color: "#1b1626" }}>Standard</div>
-              <div style={{ marginTop: 6, fontSize: 14, color: "#6a6478", minHeight: 40 }}>
-                Everything you need to power search and conversations on your site.
-              </div>
-              <div style={{ marginTop: 18, display: "flex", alignItems: "baseline", gap: 6 }}>
-                <span style={{ fontSize: 46, fontWeight: 700, letterSpacing: "-0.03em", color: "#1b1626" }}>${PLAN_PRICE}</span>
-                <span style={{ fontSize: 15, color: "#6a6478" }}>/ month base</span>
-              </div>
-              <div style={{ marginTop: 4, fontSize: 13.5, color: "#8a8498" }}>
-                {PLAN_SEARCH_CAP} searches + {PLAN_MESSAGE_CAP} messages included
-              </div>
-              <a
-                href={getSignupUrl()}
-                style={{ marginTop: 22, display: "block", textAlign: "center", background: "#6d3bff", color: "#fff", borderRadius: 12, padding: 13, fontSize: 15, fontWeight: 700, textDecoration: "none" }}
-              >
-                Start for Free
-              </a>
-              <div style={{ marginTop: 22, display: "flex", flexDirection: "column", gap: 11 }}>
-                {PLAN_HIGHLIGHTS.map((h) => (
-                  <div key={h} style={{ display: "flex", gap: 9, fontSize: 14, color: "#3a3646" }}>
-                    <CheckCircle2 size={18} color="#1fab6d" strokeWidth={2.4} style={{ flex: "none", marginTop: 1 }} />
-                    {h}
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Enterprise */}
-            <div style={{ background: "#100a24", border: "1px solid #100a24", borderRadius: 22, padding: "32px 30px", boxShadow: "0 24px 60px -40px rgba(76,40,130,0.5)", display: "flex", flexDirection: "column", color: "#fff" }}>
-              <div style={{ fontSize: 18, fontWeight: 700 }}>Enterprise</div>
-              <div style={{ marginTop: 6, fontSize: 14, color: "rgba(255,255,255,0.6)", minHeight: 40 }}>
-                Tailored plans for high-volume businesses with large catalogs.
-              </div>
-              <div style={{ marginTop: 18, display: "flex", alignItems: "baseline", gap: 6 }}>
-                <span style={{ fontSize: 42, fontWeight: 700, letterSpacing: "-0.03em" }}>Custom</span>
-              </div>
-              <div style={{ marginTop: 4, fontSize: 13.5, color: "rgba(255,255,255,0.55)" }}>Volume pricing</div>
-              <button
-                type="button"
-                onClick={openDemoForm}
-                style={{ marginTop: 22, display: "block", width: "100%", textAlign: "center", background: "#fff", color: "#100a24", border: "none", borderRadius: 12, padding: 13, fontSize: 15, fontWeight: 700, cursor: "pointer" }}
-              >
-                Get in Touch
-              </button>
-              <div style={{ marginTop: 22, display: "flex", flexDirection: "column", gap: 11 }}>
-                {ENTERPRISE_HIGHLIGHTS.map((h) => (
-                  <div key={h} style={{ display: "flex", gap: 9, fontSize: 14, color: "rgba(255,255,255,0.82)" }}>
-                    <CheckCircle2 size={18} color="#4fd1a0" strokeWidth={2.4} style={{ flex: "none", marginTop: 1 }} />
-                    {h}
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Pricing calculator — real, working component (lead capture + tracking), used as-is */}
-      <div style={{ background: "#f5f3fb", paddingBottom: 24 }}>
-        <PricingCalculator />
-      </div>
+      <PricingWizard />
 
       {/* Value props */}
       <div style={{ background: "#ffffff", padding: "clamp(56px,6vw,72px) clamp(24px,5vw,80px)" }}>
@@ -296,7 +181,7 @@ export function PricingHero() {
   );
 }
 
-export function PricingLogos({ label = "Trusted by ecommerce teams serious about search & discovery" }) {
+export function PricingLogos({ label = "Trusted by modern teams" }) {
   return (
       <div style={{ background: "#f5f3fb", padding: "56px clamp(24px,5vw,80px)" }}>
         <div style={{ maxWidth: 1120, margin: "0 auto", textAlign: "center" }}>

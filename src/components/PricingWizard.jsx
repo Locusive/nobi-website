@@ -14,21 +14,40 @@ const USES = [
   { id: "both", title: "Do both", summary: "Search + assistant", icon: Sparkles, description: "Let visitors search, then keep talking." },
 ];
 const count = value => Number(value).toLocaleString("en-US");
+const countInput = value => /^\d+$/.test(value) ? count(value) : value;
 
 function ActivitySlider({ id, label, value, onChange, onCommit, defaultMax, max = MAX_USAGE, caption, tone = "assistant" }) {
   const [sliderMax, setSliderMax] = useState(defaultMax);
   const amount = Number(value);
-  const valid = value !== "" && Number.isInteger(amount) && amount >= 0 && amount <= max;
+  const valid = value.trim() !== "" && Number.isInteger(amount) && amount >= 0 && amount <= max;
   // Keep the slider's scale stable while dragging; expand it for larger typed counts.
   useEffect(() => {
     if (valid && amount > sliderMax) setSliderMax(Math.min(max, Math.ceil(amount / defaultMax) * defaultMax));
   }, [amount, valid, sliderMax, defaultMax, max]);
 
+  const editCount = event => {
+    const input = event.target;
+    const raw = input.value.replaceAll(",", "");
+    const charactersBeforeCaret = input.value.slice(0, input.selectionStart).replaceAll(",", "").length;
+    const formatted = countInput(raw);
+    let caret = 0;
+    let characters = 0;
+    while (caret < formatted.length && characters < charactersBeforeCaret) {
+      if (formatted[caret] !== ",") characters++;
+      caret++;
+    }
+    onChange(raw);
+    // Preserve the editing position when grouping separators appear or disappear.
+    requestAnimationFrame(() => {
+      if (document.activeElement === input) input.setSelectionRange(caret, caret);
+    });
+  };
+
   return <div className={`pw-slider pw-slider--${tone}`}>
     <div className="pw-slider-heading">
       <label htmlFor={id}>{label}</label>
-      <input id={id} type="number" inputMode="numeric" min="0" max={max} step="1" value={value}
-        aria-invalid={!valid} aria-describedby={`${id}-caption`} onChange={event => onChange(event.target.value)} onBlur={onCommit} />
+      <input id={id} type="text" inputMode="numeric" value={countInput(value)}
+        aria-invalid={!valid} aria-describedby={`${id}-caption`} onChange={editCount} onBlur={onCommit} />
     </div>
     <input type="range" min="0" max={sliderMax} step="1" value={valid ? Math.min(amount, sliderMax) : 0}
       aria-label={`${label} slider`} aria-valuetext={valid ? count(amount) : "0"}
@@ -108,8 +127,8 @@ export default function PricingWizard() {
             <div className="pw-activity">
               <div className="pw-sliders">
                 {basis === "usage" ? <>
-                  {mode !== "assistant" && <ActivitySlider key="searches" id={`${id}-searches`} label="Search requests / month" value={searches} onChange={setSearches} onCommit={commitEstimate} defaultMax={10000} caption="2,500 included · then 1¢ each" tone="search" />}
-                  {mode !== "search" && <ActivitySlider key="messages" id={`${id}-messages`} label="Visitor messages / month" value={messages} onChange={setMessages} onCommit={commitEstimate} defaultMax={1000} caption="250 included · then 10¢ each" />}
+                  {mode !== "assistant" && <ActivitySlider key="searches" id={`${id}-searches`} label="Search requests / month" value={searches} onChange={setSearches} onCommit={commitEstimate} defaultMax={100000} caption="2,500 included · then 1¢ each" tone="search" />}
+                  {mode !== "search" && <ActivitySlider key="messages" id={`${id}-messages`} label="Visitor messages / month" value={messages} onChange={setMessages} onCommit={commitEstimate} defaultMax={10000} caption="250 included · then 10¢ each" />}
                 </> : <ActivitySlider key="visitors" id={`${id}-visitors`} label="Monthly visitors" value={visitors} onChange={setVisitors} onCommit={commitEstimate} defaultMax={500000} max={10000000} caption="A rough visitor count is enough" />}
               </div>
               {basis === "usage" && mode !== "search" && <p className="pw-small">Count visitor questions and follow-ups.</p>}

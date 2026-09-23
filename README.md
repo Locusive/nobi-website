@@ -38,9 +38,11 @@ asset references, and signup attribution. Register additional pages in both
 
 Run `npm run preview:pricing` with Node 18+ and open
 http://127.0.0.1:5174/pricing. The plan overview shows the base price, included
-usage, and search/message rates before the inline interview. Choosing a use
-opens the activity question automatically, then shows a monthly estimate. Completed
-answers can be reopened and edited. The previous `/pricing/ideas` preview URL
+usage, and search/message rates before the inline interview. Both panels can be
+opened independently. Usage sliders show a live monthly estimate, with site traffic
+available as a secondary option. Counts use comma separators, and the sliders
+start with limits of 100,000 searches and 10,000 messages; entering larger counts
+expands those limits. The previous `/pricing/ideas` preview URL
 redirects to the pricing page on loopback hosts.
 
 Use the bundled preview for Chrome so ad blockers do not block the

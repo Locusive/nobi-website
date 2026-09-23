@@ -13,21 +13,21 @@ export default function PricingPlans() {
       <article className="pp-standard">
         <div className="pp-heading">
           <h2>Standard</h2>
-          <div className="pp-base"><strong>{formatPrice(PRICING.baseCents)}</strong><span>/ month<br />+ extra usage</span></div>
+          <div className="pp-base"><strong>{formatPrice(PRICING.baseCents)}</strong><span>/ month + extra usage</span></div>
         </div>
         <div className="pp-rates">
           <div className="pp-rate">
             <h3><Search size={21} aria-hidden="true" /> Searches</h3>
             <div className="pp-allowance">{PRICING.includedSearches.toLocaleString("en-US")} included</div>
-            <div className="pp-unit">Then <strong>{formatPrice(PRICING.searchCents)}</strong> each</div>
+            <div className="pp-unit">Then <span>{formatPrice(PRICING.searchCents)}</span> each</div>
           </div>
           <div className="pp-rate">
             <h3><MessageCircle size={21} aria-hidden="true" /> Questions &amp; follow-ups</h3>
             <div className="pp-allowance">{PRICING.includedMessages} included</div>
-            <div className="pp-unit">Then <strong>{formatPrice(PRICING.messageCents)}</strong> each</div>
+            <div className="pp-unit">Then <span>{formatPrice(PRICING.messageCents)}</span> each</div>
           </div>
         </div>
-        <div className="pp-actions"><a className="pp-start" href={getSignupUrl()}>Start for free</a><a className="pp-estimate" href="#pricing-calculator">Estimate my bill <ArrowDown size={17} aria-hidden="true" /></a></div>
+        <a className="pp-start" href={getSignupUrl()}>Start for free</a>
         <p className="pp-trial">30 days free · No credit card</p>
         <details className="pp-features">
           <summary>How billing works <ChevronDown size={23} strokeWidth={2.5} aria-hidden="true" /></summary>
@@ -48,5 +48,6 @@ export default function PricingPlans() {
         <button type="button" onClick={openDemoForm}>Get in touch</button>
       </article>
     </div>
+    <div className="pp-next"><a href="#pricing-calculator">Estimate my bill <ArrowDown size={17} aria-hidden="true" /></a></div>
   </section>;
 }

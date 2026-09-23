@@ -97,7 +97,7 @@ export default function PricingWizard() {
       <div className="pw-interview" ref={interview}>
         {step(1, "What would you like to use Nobi for?", useConfirmed ? selected?.summary : "", true, useConfirmed,
           <div>
-            <p className="pw-choice-hint">Choose one to continue.</p>
+            <p className="pw-choice-hint">Choose what to estimate. Both capabilities are included in the same plan.</p>
             <div className="pw-choices" role="group" aria-label="How would you like to use Nobi?">
               {USES.map(({ id: value, title, description, icon: Icon }) => <button className="pw-choice" type="button" key={value} aria-pressed={mode === value}
                 onClick={() => { setMode(value); setUseConfirmed(true); setActivityConfirmed(false); setError(""); goTo(2); }}>
@@ -160,13 +160,13 @@ export default function PricingWizard() {
                 </dl>
               </details>
               <a className="pw-primary" href={getSignupUrl()}>Start for free</a>
-              <span className="pw-trial">No credit card needed.</span>
+              <span className="pw-trial">Free dashboard preview. No credit card.</span>
             </div>
             <div className="pw-enterprise"><h4>Enterprise</h4><strong>Let's talk</strong><p>For higher usage and custom needs.</p><ul><li><Check size={16} /> Volume discounts</li><li><Check size={16} /> Custom integrations & onboarding</li><li><Check size={16} /> Dedicated support</li></ul><button type="button" onClick={openDemoForm}>Get in touch</button></div>
           </div>
         )}
       </div>
-      <div className="pw-after"><span>Start free. No credit card needed.</span><button type="button" onClick={openDemoForm}>Prefer to talk it through?</button></div>
+      <div className="pw-after"><span>Your bill reflects actual usage.</span><button type="button" onClick={openDemoForm}>Prefer to talk it through?</button></div>
     </div>
   </section>;
 }

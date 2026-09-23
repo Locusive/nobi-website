@@ -4,8 +4,8 @@
 .pw-intro h2 { font-size: clamp(24px,3vw,30px); font-weight: 700; letter-spacing: -.03em; margin: 0; }
 .pw-intro p { font-size: 14px; color: #6a6478; margin: 5px 0 0; }
 .pw-interview { display: grid; gap: 12px; scroll-margin-top: 100px; }
-/* Keep the floating assistant clear of the interview while someone is using it. */
-body:has(.pw-section:focus-within) #nobi-floating-chat-bar-container { display: none !important; }
+/* Keep the pricing controls clear of the floating assistant. */
+body:has(.nobi-pricing-page) #nobi-floating-chat-bar-container { display: none !important; }
 .pw-step { background: #fff; border: 2px solid #d8cde9; border-radius: 17px; }
 .pw-step[data-open="true"] { border-color: #6d3bff; box-shadow: 0 10px 28px -22px #6d3bff; }
 .pw-step-heading { margin: 0; font: inherit; }

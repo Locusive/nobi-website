@@ -41,7 +41,7 @@ const VALUE_PROPS = [
 const PRICING_FAQS = [
   {
     q: "Can I try Nobi for free?",
-    a: `Yes — every account gets 100 free messages every month to try the full Nobi experience in your dashboard, no credit card needed. When you're ready to go live on your site, start a ${TRIAL_DAYS}-day free trial.`,
+    a: `Yes. Every account gets 100 free messages each month to preview Nobi in your dashboard, no credit card needed. A payment method is required to start the ${TRIAL_DAYS}-day free trial on your live site.`,
   },
   {
     q: "How does pricing work?",

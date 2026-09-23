@@ -16,7 +16,7 @@ for (const mode of ['development', 'preview']) {
       assert.equal(page.status, 200);
       const html = await page.text();
       if (mode === 'preview') {
-        assert.ok(html.includes('Helpful answers.'));
+        assert.ok(html.includes('Simple, usage-based pricing'));
         assert.match(html, /src="\/assets\//);
         assert.ok(!html.includes('src="/src/'));
       }

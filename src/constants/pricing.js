@@ -12,72 +12,54 @@ export const PRICING_DESCRIPTION = 'Nobi starts at $25/month with 2,500 searches
 
 export const PRICING_MODES = [
   {
-    id: 'search', title: 'Search only', description: 'Help visitors find content, information, or items.',
-    hasSearch: true, hasMessages: false,
-    exampleTitle: 'Find it. Browse it. Search again.',
-    explanation: 'Visitors get search results without a conversational answer. Each new search counts as one search.',
+    id: 'search', title: 'Search only', hasSearch: true, hasMessages: false,
+    explanation: 'Each search returns results without a conversation.',
     steps: [
-      { request: '“Getting started guides”', response: 'Nobi returns matching results.', type: 'search' },
-      { request: '“Troubleshooting tips”', response: 'A new search returns a new set of results.', type: 'search' },
+      { request: 'Getting started guides', type: 'search' },
+      { request: 'Troubleshooting tips', type: 'search' },
     ],
-    summary: '2 searches', totalCents: 2,
   },
   {
-    id: 'both', title: 'Search + assistant', description: 'Find relevant results, then help visitors refine them.',
-    hasSearch: true, hasMessages: true,
-    exampleTitle: 'A search can become a conversation.',
-    explanation: 'The initial search counts as a search. Each conversational follow-up counts as an assistant message.',
+    id: 'both', title: 'Search + assistant', hasSearch: true, hasMessages: true,
+    explanation: 'A simple search counts as a search. Each conversational follow-up counts as a message.',
     steps: [
-      { request: '“Getting started guides”', response: 'Nobi returns matching results.', type: 'search' },
-      { request: '“Which one should I start with?”', response: 'The assistant recommends where to begin.', type: 'message' },
-      { request: '“Only show me the video guides”', response: 'The assistant narrows the results.', type: 'message' },
+      { request: 'Getting started guides', type: 'search' },
+      { request: 'Only show me the videos', type: 'message' },
     ],
-    summary: '1 search + 2 assistant messages', totalCents: 21,
   },
   {
-    id: 'assistant', title: 'Assistant only', description: 'Answer questions using your knowledge base.',
-    hasSearch: false, hasMessages: true,
-    exampleTitle: 'Start with a question. Keep asking.',
-    explanation: 'When a visitor starts with the assistant, their first request and every follow-up count as assistant messages.',
+    id: 'assistant', title: 'Assistant only', hasSearch: false, hasMessages: true,
+    explanation: 'Each visitor request counts as a message, including the first. Nobi’s reply is included.',
     steps: [
-      { request: '“How do I create an account?”', response: 'The assistant answers from your knowledge base.', type: 'message' },
-      { request: '“Can I invite my team?”', response: 'The assistant answers the follow-up.', type: 'message' },
+      { request: 'How do I create an account?', type: 'message' },
+      { request: 'Can I invite my team?', type: 'message' },
     ],
-    summary: '2 assistant messages', totalCents: 20,
   },
 ];
 
 export const PRICING_FAQS = [
   {
-    q: 'Is it $0.10 to start a conversation, then $0.01 for each follow-up?',
-    a: 'No. The rate depends on the type of request, not its position in a conversation. A simple search counts as one search. A conversational request counts as one assistant message, including the first request if it starts with the assistant. After your monthly allowances, searches are $0.01 each and assistant messages are $0.10 each.',
+    q: 'What counts as a search or a message?',
+    a: 'A search returns matching results without a conversation. An assistant message is one visitor request for an answer or conversational refinement. Each follow-up is another message; Nobi’s reply is included.',
   },
   {
-    q: 'What exactly counts as an assistant message?',
-    a: 'One visitor request that asks the assistant to respond, answer a question, or conversationally refine results. Each follow-up is another assistant message. Nobi’s reply is included; you do not pay separately for the reply. A conversation can contain several billable messages.',
+    q: 'Is the first request always a 1¢ search?',
+    a: 'No. The rate depends on the request, including the first request: a simple search is $0.01; a question to the assistant is $0.10. Conversational follow-ups are $0.10 each. These rates apply after the relevant monthly allowance.',
+  },
+  {
+    q: 'What does the $25 base include?',
+    a: 'Both 2,500 searches and 250 assistant messages per month. They are separate allowances, not a shared credit balance. For example, 3,000 searches and 100 messages cost $30: $25 base plus 500 extra searches at $0.01.',
   },
   {
     q: 'Can I use Nobi just for search?',
-    a: 'Yes. You can use Nobi for search without conversational assistance. Standard still starts at $25/month and includes 2,500 searches. Additional searches cost $0.01 each. The included assistant-message allowance does not convert into extra searches.',
+    a: 'Yes. Standard is still $25/month with 2,500 searches included, then $0.01 per additional search. Unused messages do not convert into searches.',
   },
   {
-    q: 'How do the included allowances work?',
-    a: 'The $25 monthly base includes both 2,500 searches and 250 assistant messages. They are separate allowances, not a shared credit balance. Overage is calculated separately for each: 3,000 searches and 100 assistant messages would cost $30 for the month ($25 base + 500 additional searches at $0.01).',
+    q: 'What happens if I go over?',
+    a: 'On paid Standard, additional usage is billed automatically: $0.01 per additional search and $0.10 per additional assistant message. During a free trial, usage is limited to the trial allowances.',
   },
   {
-    q: 'What happens if I go over my limit?',
-    a: 'On the paid Standard plan, additional usage is billed automatically at $0.01 per search and $0.10 per assistant message. Each allowance is calculated separately. During a free trial, usage is limited to the trial allowances.',
-  },
-  {
-    q: 'Can I try Nobi for free?',
-    a: 'Yes. Every account gets 100 free messages every month to try Nobi in your dashboard, with no credit card needed. When you are ready to go live on your website, start a 30-day free trial.',
-  },
-  {
-    q: 'What kinds of websites can use Nobi?',
-    a: 'Nobi works on websites with searchable content, information, or items, and sites that need answers from a knowledge base. The same distinction applies: simple searches count as searches; conversational requests count as assistant messages.',
-  },
-  {
-    q: 'Do you offer volume or annual pricing?',
-    a: 'Yes. Contact us for custom pricing for high-volume usage, larger sites, or annual commitments. We can help choose the right setup for your site.',
+    q: 'Can I try it for free?',
+    a: 'Yes. Get 100 free messages every month in your dashboard, with no credit card needed. When you’re ready to go live on your website, start a 30-day free trial.',
   },
 ];

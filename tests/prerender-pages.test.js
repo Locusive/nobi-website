@@ -22,7 +22,7 @@ function bodyText(html) {
 
 for (const [path, heading] of [
   ["homepage.html", "Modern site search"],
-  ["pricing.html", "Great search. Helpful answers. Clear pricing."],
+  ["pricing.html", "Simple, usage-based pricing"],
   ["product.html", "One assistant. Every job your website needs done."],
 ]) {
   test(`${path} serves real content, metadata, and valid bundled assets without JavaScript`, () => {

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Loader2 } from 'lucide-react';
+import { Loader2, ChevronDown } from 'lucide-react';
 import { EVENTS } from '../constants/events';
 import { trackEvent } from '../utils/eventTracker';
 import { sendPricingEstimate } from '../utils/pricingLead.js';
@@ -7,7 +7,6 @@ import { sendPricingEstimate } from '../utils/pricingLead.js';
 /** Keep the existing website lookup and lead destination, with explicit, acknowledged submission. */
 export default function PricingEstimateForm({ estimate, onTrafficLookup }) {
   const [website, setWebsite] = useState('');
-  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [lookupBusy, setLookupBusy] = useState(false);
   const [lookupNote, setLookupNote] = useState('');
@@ -24,10 +23,10 @@ export default function PricingEstimateForm({ estimate, onTrafficLookup }) {
       const visits = Number(data?.monthlyVisits);
       if (!Number.isFinite(visits) || visits <= 0) throw new Error('No estimate');
       onTrafficLookup(Math.round(visits));
-      setLookupNote(`Updated the calculator with approximately ${Math.round(visits).toLocaleString('en-US')} monthly visits. This third-party traffic estimate may differ from your analytics; the usage rates are still illustrative.`);
+      setLookupNote(`Updated the calculator with approximately ${Math.round(visits).toLocaleString('en-US')} monthly visits. Traffic is estimated; adjust the usage rates above.`);
       trackEvent(EVENTS.PRICING_CALCULATOR_ESTIMATE_INTERACTION, { interaction_type: 'url_lookup_estimated', monthly_visitors: Math.round(visits) });
     } catch {
-      setLookupNote('Traffic data is unavailable for this site. Enter your own usage above, or request a tailored estimate below.');
+      setLookupNote('Traffic data is unavailable. Enter usage above, or send us your site for an estimate.');
     } finally {
       setLookupBusy(false);
     }
@@ -39,7 +38,7 @@ export default function PricingEstimateForm({ estimate, onTrafficLookup }) {
     setSubmitState('submitting');
     setError('');
     try {
-      await sendPricingEstimate({ website, name, email, estimate });
+      await sendPricingEstimate({ website, name: '', email, estimate });
     } catch {
       setSubmitState('idle');
       setError('Your request could not be sent. Please try again, or email hello@nobi.ai.');
@@ -50,22 +49,20 @@ export default function PricingEstimateForm({ estimate, onTrafficLookup }) {
   }
 
   return (
-    <div className="pricing-lead" id="pricing-estimate-request">
-      <div><h3>Want an estimate for your site?</h3><p>Look up your traffic, or send us your setup and we’ll help you work out the right fit.</p><p className="pricing-fine-print">Your selected setup and estimate are included with your request.</p></div>
-      {submitState === 'done' ? <div className="pricing-form-success" role="status"><strong>Your request is in.</strong><p>We’ll review your site and email you about your estimate.</p></div> : (
+    <details className="pricing-lead" id="pricing-estimate-request">
+      <summary>Want an estimate for your site?<ChevronDown size={16} aria-hidden="true" /></summary>
+      {submitState === 'done' ? <p className="pricing-form-success" role="status">Request received. We’ll email you about your estimate.</p> : (
         <form className="pricing-lead-form" onSubmit={submitLead}>
-          <label className="pricing-form-field"><span>Website</span><input name="website" autoComplete="url" placeholder="yoursite.com" value={website} disabled={lookupBusy || submitState === 'submitting'} required onChange={event => { setWebsite(event.target.value); setLookupNote(''); }} /></label>
-          <button className="pricing-text-button pricing-lookup-button" type="button" onClick={lookupTraffic} disabled={lookupBusy || submitState === 'submitting'}>{lookupBusy && <Loader2 size={16} className="pricing-spinner" aria-hidden="true" />}{lookupBusy ? 'Looking up traffic…' : 'Estimate traffic for this site'}</button>
-          {lookupNote && <p className="pricing-lookup-note" role="status">{lookupNote}</p>}
           <div className="pricing-contact-fields">
-            <label className="pricing-form-field"><span>Name <small>(optional)</small></span><input name="name" autoComplete="name" value={name} disabled={submitState === 'submitting'} onChange={event => setName(event.target.value)} /></label>
-            <label className="pricing-form-field"><span>Work email</span><input name="email" type="email" autoComplete="email" value={email} disabled={submitState === 'submitting'} required onChange={event => setEmail(event.target.value)} /></label>
+            <label className="pricing-form-field"><span>Website</span><input name="website" autoComplete="url" placeholder="yoursite.com" value={website} disabled={lookupBusy || submitState === 'submitting'} required onChange={event => { setWebsite(event.target.value); setLookupNote(''); }} /></label>
+            <label className="pricing-form-field"><span>Work email</span><input name="email" type="email" autoComplete="email" placeholder="you@company.com" value={email} disabled={submitState === 'submitting'} required onChange={event => setEmail(event.target.value)} /></label>
+            <button className="pricing-button pricing-button-primary" type="submit" disabled={submitState === 'submitting' || lookupBusy}>{submitState === 'submitting' ? 'Sending…' : 'Get an estimate'}</button>
           </div>
-          <button className="pricing-button pricing-button-primary" type="submit" disabled={submitState === 'submitting' || lookupBusy}>{submitState === 'submitting' ? 'Sending your request…' : 'Get a tailored estimate'}</button>
-          <p className="pricing-fine-print">We’ll email you about your estimate. No account needed.</p>
+          <button className="pricing-text-button pricing-lookup-button" type="button" onClick={lookupTraffic} disabled={lookupBusy || submitState === 'submitting'}>{lookupBusy && <Loader2 size={14} className="pricing-spinner" aria-hidden="true" />}{lookupBusy ? 'Looking up traffic…' : 'Just look up my traffic'}</button>
+          {lookupNote && <p className="pricing-lookup-note" role="status">{lookupNote}</p>}
           {error && <p className="pricing-form-error" role="alert">{error}</p>}
         </form>
       )}
-    </div>
+    </details>
   );
 }

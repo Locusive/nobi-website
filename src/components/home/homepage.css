@@ -65,3 +65,9 @@ details.nb-faq > summary { list-style: none; cursor: pointer; }
 details.nb-faq > summary::-webkit-details-marker { display: none; }
 details.nb-faq > summary .nb-faq-chev { transition: transform .2s ease; }
 details.nb-faq[open] > summary .nb-faq-chev { transform: rotate(180deg); }
+
+/* Keep the shared customer logos in balanced pairs on narrow screens. */
+@media (max-width: 620px) {
+  .nb-customer-logos { display: grid !important; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px !important; justify-items: center; }
+  .nb-customer-logos img { max-width: 100%; object-fit: contain; }
+}

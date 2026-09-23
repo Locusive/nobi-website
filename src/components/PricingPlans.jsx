@@ -40,7 +40,7 @@ function BillingIntro() {
   }, [open]);
 
   return <div className="pp-intro" ref={containerRef}>
-    <p>Searches and chat messages have different usage rates.<button
+    <p>Use Nobi for search, as an assistant, or both.<button
       ref={triggerRef}
       type="button"
       className="pp-info-trigger"
@@ -57,8 +57,8 @@ function BillingIntro() {
         <button ref={closeRef} type="button" onClick={closeAndFocus} aria-label="Close billing details"><X size={16} aria-hidden="true" /></button>
       </div>
       <dl>
-        <div><dt><Search size={16} aria-hidden="true" />Search request</dt><dd>A query that returns matching results from your site.</dd></div>
-        <div><dt><MessageCircle size={16} aria-hidden="true" />Chat message</dt><dd>Each visitor question or conversational follow-up, even a question that starts the conversation.</dd></div>
+        <div><dt><Search size={16} aria-hidden="true" />As a search engine</dt><dd>Most requests are searches. If a visitor asks a question or follows up conversationally, that counts as a message.</dd></div>
+        <div><dt><MessageCircle size={16} aria-hidden="true" />As an AI assistant</dt><dd>You’ll have messages too: visitor questions and conversational follow-ups, including a question that starts a conversation.</dd></div>
       </dl>
       <p>Nobi’s replies are included. Extra usage is billed after each monthly allowance.</p>
     </div>}
@@ -80,19 +80,19 @@ export default function PricingPlans() {
           <div className="pp-rate pp-rate-search">
             <div className="pp-capability-pill">
               <Search size={16} aria-hidden="true" />
-              <h3>Search request</h3>
-              <p>Find results</p>
+              <h3>Search engine</h3>
+              <p>Mostly searches</p>
             </div>
-            <div className="pp-allowance">{PRICING.includedSearches.toLocaleString("en-US")} included / month</div>
+            <div className="pp-allowance">{PRICING.includedSearches.toLocaleString("en-US")} searches included / mo</div>
             <div className="pp-unit"><span>{formatPrice(PRICING.searchCents)}</span> / extra search</div>
           </div>
           <div className="pp-rate pp-rate-assistant">
             <div className="pp-capability-pill">
               <MessageCircle size={16} aria-hidden="true" />
-              <h3>Chat message</h3>
-              <p>Ask &amp; refine</p>
+              <h3>AI assistant</h3>
+              <p>Messages too</p>
             </div>
-            <div className="pp-allowance">{PRICING.includedMessages} included / month</div>
+            <div className="pp-allowance">{PRICING.includedMessages} messages included / mo</div>
             <div className="pp-unit"><span>{formatPrice(PRICING.messageCents)}</span> / extra message</div>
           </div>
         </div>

@@ -1,5 +1,5 @@
 import React from "react";
-import { ArrowDown, Camera, Check, ChevronDown, MessageCircle, Paintbrush, Search, Sparkles } from "lucide-react";
+import { ArrowDown, Check, ChevronDown } from "lucide-react";
 import { useDemoForm } from "../context/DemoFormContext";
 import { getSignupUrl } from "../utils/signupUrl";
 import { PRICING, formatPrice } from "../utils/pricingEstimate";
@@ -16,25 +16,16 @@ export default function PricingPlans() {
           <div className="pp-base"><span>Starts at</span><strong>{formatPrice(PRICING.baseCents)}</strong><span>/ month<br />+ extra usage</span></div>
         </div>
         <div className="pp-rates">
-          <div className="pp-rate">
-            <h3><Search size={21} aria-hidden="true" /> Search engine</h3>
-            <div className="pp-preview pp-search-preview" role="img" aria-label="Search example: Beginner courses returns Photography and Pottery.">
-              <div className="pp-preview-query" aria-hidden="true"><Search size={14} /><span>Beginner courses</span></div>
-              <div className="pp-preview-results" aria-hidden="true">
-                <div><Camera size={16} /><span>Photography</span></div>
-                <div><Paintbrush size={16} /><span>Pottery</span></div>
-              </div>
-            </div>
-            <div className="pp-allowance">{PRICING.includedSearches.toLocaleString("en-US")} searches included / mo</div>
+          <div className="pp-rate pp-rate-search">
+            <h3>Search</h3>
+            <p className="pp-description">Find relevant results</p>
+            <div className="pp-allowance">{PRICING.includedSearches.toLocaleString("en-US")} included / month</div>
             <div className="pp-unit"><span>{formatPrice(PRICING.searchCents)}</span> / extra search</div>
           </div>
-          <div className="pp-rate">
-            <h3><MessageCircle size={21} aria-hidden="true" /> AI assistant</h3>
-            <div className="pp-preview pp-chat-preview" role="img" aria-label="Assistant example: a visitor asks Any evening classes? Nobi replies Photography, 6 pm. Only the visitor's message counts.">
-              <div className="pp-preview-question" aria-hidden="true">Any evening classes?</div>
-              <div className="pp-preview-answer" aria-hidden="true"><Sparkles size={14} /><span>Photography, 6 pm.</span></div>
-            </div>
-            <div className="pp-allowance">{PRICING.includedMessages} messages included / mo</div>
+          <div className="pp-rate pp-rate-assistant">
+            <h3>Assistant</h3>
+            <p className="pp-description">Answers &amp; follow-ups</p>
+            <div className="pp-allowance">{PRICING.includedMessages} included / month</div>
             <div className="pp-unit"><span>{formatPrice(PRICING.messageCents)}</span> / extra message</div>
           </div>
         </div>

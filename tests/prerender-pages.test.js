@@ -88,7 +88,7 @@ test("the Shop Nobi page serves its own metadata, the site nav, and the producti
   assert.ok(html.includes("<title>Shop Nobi | Nobi</title>"));
   assert.ok(html.includes('rel="canonical" href="https://nobi.ai/shop"'));
   assert.equal((html.match(/id="page-schema"/g) || []).length, 1);
-  assert.ok(text.includes("Book A Demo"), "The page should carry the same nav as the rest of the site");
+  assert.ok(html.includes("<header") && text.includes("Sign Up Free"), "The page carries its own header");
   assert.ok(text.includes("Loading Shop Nobi"));
   assert.ok(!text.includes("Modern site search"));
   assert.ok(html.includes('src="https://assistant-script.nobi.ai/nobi.bundle.js"'));

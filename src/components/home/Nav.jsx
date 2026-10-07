@@ -14,6 +14,9 @@ import logo from "../../assets/nobi-logo@2x.webp";
 // hidden from nav until that's ready. Flip back to true when it ships.
 const SHOW_PRODUCT_LINK = true;
 
+// Shop Nobi is a plain link, not an in-app one, so the page loads fresh and the assistant starts as Shop Nobi.
+const ShopNobiPath = "/shop";
+
 export default function Nav({ active }) {
   const { onOpen } = useDemoForm();
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -85,6 +88,9 @@ export default function Nav({ active }) {
           <ScrollLink to="/pricing" style={linkStyle("pricing")}>
             Pricing
           </ScrollLink>
+          <a href={ShopNobiPath} style={linkStyle("shop")}>
+            Shop Nobi
+          </a>
         </div>
 
         <span className="nb-nav-pipe" style={{ width: 1, height: 18, background: "rgba(20,16,40,0.16)", flex: "none" }} />
@@ -180,6 +186,12 @@ export default function Nav({ active }) {
             >
               Pricing
             </ScrollLink>
+            <a
+              href={ShopNobiPath}
+              style={{ ...linkStyle("shop"), fontSize: 16, padding: "15px 16px", borderRadius: 12 }}
+            >
+              Shop Nobi
+            </a>
             <span
               onClick={() => {
                 setMobileOpen(false);

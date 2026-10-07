@@ -1,0 +1,8 @@
+/* Keep the shared proof section within the pricing page's mobile viewport. */
+@media (max-width: 540px) {
+  .pricing-proof > div > div { width: 100%; }
+  .pricing-proof > div > div > div:first-of-type { display: grid !important; grid-template-columns: 1fr 1fr; gap: 28px !important; justify-items: center; }
+  .pricing-proof img { max-width: 100%; object-fit: contain; }
+  .pricing-proof > div > div > div:last-child { max-width: 100%; white-space: normal !important; }
+  .pricing-proof > div > div > div:last-child > svg { flex-shrink: 0; }
+}

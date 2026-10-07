@@ -53,7 +53,10 @@ export default function SiteFooter() {
         </div>
       </div>
       <div style={{ maxWidth: 1160, margin: "28px auto 0", paddingTop: 20, borderTop: "1px solid rgba(255,255,255,0.1)", display: "flex", justifyContent: "space-between", gap: 16, flexWrap: "wrap", fontSize: 13 }}>
-        <span>&copy; 2026 Nobi. All rights reserved.</span>
+        <span>
+          Nobi is made with ❤️ by the friendly folks at{" "}
+          <a href="https://locusive.com/" style={{ color: "inherit", textDecoration: "underline", textUnderlineOffset: 3 }}>Locusive</a>
+        </span>
         <div style={{ display: "flex", gap: 22 }}>
           <ScrollLink to="/privacy" style={{ color: "inherit", textDecoration: "none" }}>Privacy</ScrollLink>
           <ScrollLink to="/terms" style={{ color: "inherit", textDecoration: "none" }}>Terms</ScrollLink>

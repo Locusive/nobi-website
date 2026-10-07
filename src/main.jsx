@@ -1,6 +1,6 @@
 import React, { StrictMode, Suspense, lazy, useEffect, useState } from "react";
 import { createRoot } from "react-dom/client";
-import { BrowserRouter, Routes, Route, useLocation, useNavigationType } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate, useLocation, useNavigationType } from "react-router-dom";
 
 // HomePage is eagerly loaded — it's the first thing every visitor sees
 import HomePage from "./pages/HomePage.jsx";
@@ -102,6 +102,9 @@ function App() {
           <Route path="/terms" element={<Terms />} />
           <Route path="/privacy" element={<Privacy />} />
           <Route path="/pricing" element={<Pricing />} />
+          {["localhost", "127.0.0.1", "[::1]"].includes(window.location.hostname) && (
+            <Route path="/pricing/ideas" element={<Navigate to="/pricing" replace />} />
+          )}
           <Route path="/product" element={<Product />} />
           <Route path="/faqs" element={<FAQs />} />
           <Route path="/webinar" element={<Webinar />} />

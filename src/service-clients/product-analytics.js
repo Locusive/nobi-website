@@ -1,7 +1,7 @@
 import mixpanel from 'mixpanel-browser';
 
 const MIXPANEL_TOKEN = 'd7b429a44a7a4864684036c75553530c';
-const isProduction = process.env.NODE_ENV === 'production';
+const isProduction = typeof window !== 'undefined' && process.env.NODE_ENV === 'production';
 const isDevelopment = process.env.NODE_ENV === 'development';
 
 // Initialize Mixpanel only in production

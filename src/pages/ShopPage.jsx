@@ -45,7 +45,8 @@ export default function ShopPage() {
           </div>
         )}
       </div>
-      <footer className="mx-auto max-w-3xl px-6 py-8 text-center text-xs text-black/60 dark:text-white/60">
+      {/* The bottom padding keeps the notice above the results view's chat box, which covers the bottom 159px. */}
+      <footer className="mx-auto max-w-3xl px-6 pt-8 pb-44 text-center text-xs text-black/60 dark:text-white/60">
         <p>{SearchEngineNotice}</p>
       </footer>
     </div>

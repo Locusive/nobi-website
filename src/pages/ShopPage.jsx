@@ -9,7 +9,7 @@ import { useSEO } from "../hooks/useSEO";
 const ShopPageSeo = {
   title: "Shop Nobi | Nobi",
   description:
-    "One search across hundreds of independent stores. Shop Nobi finds the product; you buy it directly from the store.",
+    "The best products from the best stores online, in one search. Shop Nobi is a search engine: you buy directly from the store.",
   path: "/shop",
   schema: [
     {
@@ -22,6 +22,10 @@ const ShopPageSeo = {
     { "@context": "https://schema.org", "@type": "WebSite", name: "Shop Nobi", url: "https://nobi.ai/shop" },
   ],
 };
+
+// Shop Nobi only finds products, so the page says plainly who sells them.
+const SearchEngineNotice =
+  "Shop Nobi is a search engine, not a store. We don't sell products or fulfill orders. You buy directly from each store, and that store handles payment, shipping, returns and refunds.";
 
 // The Shop Nobi page: its own header, with the search experience the
 // assistant bundle boots on /shop moved into the slot under it.
@@ -41,6 +45,9 @@ export default function ShopPage() {
           </div>
         )}
       </div>
+      <footer className="mx-auto max-w-3xl px-6 py-8 text-center text-xs text-black/60 dark:text-white/60">
+        <p>{SearchEngineNotice}</p>
+      </footer>
     </div>
   );
 }

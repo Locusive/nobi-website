@@ -23,10 +23,6 @@ const ShopPageSeo = {
   ],
 };
 
-// Shop Nobi only finds products, so the page says plainly who sells them.
-const SearchEngineNotice =
-  "Shop Nobi is a search engine, not a store. We don't sell products or fulfill orders. You buy directly from each store, and that store handles payment, shipping, returns and refunds.";
-
 // The Shop Nobi page: its own header, with the search experience the
 // assistant bundle boots on /shop moved into the slot under it.
 export default function ShopPage() {
@@ -45,10 +41,6 @@ export default function ShopPage() {
           </div>
         )}
       </div>
-      {/* The bottom padding keeps the notice above the results view's chat box, which covers the bottom 159px. */}
-      <footer className="mx-auto max-w-3xl px-6 pt-8 pb-44 text-center text-xs text-black/60 dark:text-white/60">
-        <p>{SearchEngineNotice}</p>
-      </footer>
     </div>
   );
 }

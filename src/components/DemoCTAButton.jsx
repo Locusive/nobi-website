@@ -1,7 +1,7 @@
 import React from "react";
 import Button from "./Button";
 import { useDemoForm } from "../context/DemoFormContext";
-import { trackDemoFormOpened } from "../utils/eventTracker";
+import { trackDemoFormOpened } from "../utils/usageSignals";
 
 export default function DemoCTAButton({ children = "Try Nobi on your site", className = "", ...props }) {
   const { onOpen } = useDemoForm();

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import ScrollLink from "./ScrollLink";
 import { Menu, X } from "lucide-react";
 import { useDemoForm } from "../../context/DemoFormContext";
-import { trackDemoFormOpened } from "../../utils/eventTracker";
+import { trackDemoFormOpened } from "../../utils/usageSignals";
 import { getSignupUrl } from "../../utils/signupUrl";
 import logo from "../../assets/nobi-logo@2x.webp";
 
@@ -13,6 +13,9 @@ import logo from "../../assets/nobi-logo@2x.webp";
 // Product page is a placeholder while its real design is in progress —
 // hidden from nav until that's ready. Flip back to true when it ships.
 const SHOW_PRODUCT_LINK = true;
+
+// Shop Nobi is a plain link, not an in-app one, so the page loads fresh and the assistant starts as Shop Nobi.
+const ShopNobiPath = "/shop";
 
 export default function Nav({ active }) {
   const { onOpen } = useDemoForm();
@@ -85,6 +88,9 @@ export default function Nav({ active }) {
           <ScrollLink to="/pricing" style={linkStyle("pricing")}>
             Pricing
           </ScrollLink>
+          <a href={ShopNobiPath} style={linkStyle("shop")}>
+            Shop Nobi
+          </a>
         </div>
 
         <span className="nb-nav-pipe" style={{ width: 1, height: 18, background: "rgba(20,16,40,0.16)", flex: "none" }} />
@@ -180,6 +186,12 @@ export default function Nav({ active }) {
             >
               Pricing
             </ScrollLink>
+            <a
+              href={ShopNobiPath}
+              style={{ ...linkStyle("shop"), fontSize: 16, padding: "15px 16px", borderRadius: 12 }}
+            >
+              Shop Nobi
+            </a>
             <span
               onClick={() => {
                 setMobileOpen(false);

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { ChevronDown, LifeBuoy, Menu, Search as SearchIcon, UserPlus, X, ExternalLink, FileText, Zap, BarChart2, Bot } from "lucide-react";
 import { useDemoForm } from "../context/DemoFormContext";
-import { trackDemoFormOpened, trackEvent } from "../utils/eventTracker";
+import { trackDemoFormOpened, trackEvent } from "../utils/usageSignals";
 import { getSignupUrl } from "../utils/signupUrl";
 import { summarizeCurrentPageWithNobi } from "../utils/pageSummaryPrompt";
 import { EVENTS } from "../constants/events";

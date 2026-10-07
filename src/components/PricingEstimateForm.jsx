@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Loader2 } from "lucide-react";
 import { EVENTS } from "../constants/events";
-import { trackEvent } from "../utils/eventTracker";
+import { trackEvent } from "../utils/usageSignals";
 
 const WEB3FORMS_ACCESS_KEY = "c7a3fd79-0e4f-47ce-aa30-c141616d21e3";
 const URL_FORM_TIMEOUT_MS = 120000;

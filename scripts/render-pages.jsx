@@ -4,8 +4,9 @@ import { StaticRouter } from "react-router-dom";
 import HomePage from "../src/pages/HomePage.jsx";
 import Pricing from "../src/pages/Pricing.jsx";
 import Product from "../src/pages/Product.jsx";
+import ShopPage from "../src/pages/ShopPage.jsx";
 
-const Pages = { "/": HomePage, "/pricing": Pricing, "/product": Product };
+const Pages = { "/": HomePage, "/pricing": Pricing, "/product": Product, "/shop": ShopPage };
 
 /** Render the same components visitors see, without browser APIs or effects. */
 export function renderPageBody(path) {

@@ -1,4 +1,4 @@
-import MixpanelClient from '../service-clients/mixpanel-client';
+import MixpanelClient from '../service-clients/product-analytics';
 import { EVENTS } from '../constants/events';
 
 function toGaEventName(eventName) {

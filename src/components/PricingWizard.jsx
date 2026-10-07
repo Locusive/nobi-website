@@ -2,7 +2,7 @@ import React, { useEffect, useId, useRef, useState } from "react";
 import { Check, ChevronDown, MessageCircle, Search, Sparkles } from "lucide-react";
 import { useDemoForm } from "../context/DemoFormContext";
 import { getSignupUrl } from "../utils/signupUrl";
-import { trackEvent } from "../utils/eventTracker";
+import { trackEvent } from "../utils/usageSignals";
 import { EVENTS } from "../constants/events";
 import { DEFAULT_ACTIVITY, MAX_USAGE, PRICING, estimateUsage, formatPrice, priceUsage } from "../utils/pricingEstimate";
 import PricingEstimateForm from "./PricingEstimateForm";

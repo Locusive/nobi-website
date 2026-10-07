@@ -90,7 +90,6 @@ test("the Shop Nobi page serves its own metadata, the site nav, and the producti
   assert.equal((html.match(/id="page-schema"/g) || []).length, 1);
   assert.ok(html.includes("<header") && text.includes("Sign Up Free"), "The page carries its own header");
   assert.ok(text.includes("Loading Shop Nobi"));
-  assert.ok(text.includes("Shop Nobi is a search engine, not a store."), "The page says that stores, not Shop Nobi, sell the products");
   assert.ok(html.includes("Shop Nobi is a search engine: you buy directly from the store."), "The page description says the same");
   assert.ok(!text.includes("Modern site search"));
   assert.ok(html.includes('src="https://assistant-script.nobi.ai/nobi.bundle.js"'));

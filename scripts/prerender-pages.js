@@ -51,7 +51,7 @@ const PAGES = [
   },
   {
     path: "/shop", title: "Shop Nobi | Nobi",
-    description: "One search across hundreds of independent stores. Shop Nobi finds the product; you buy it directly from the store.",
+    description: "The best products from the best stores online, in one search. Shop Nobi is a search engine: you buy directly from the store.",
     schema: [ORG, { "@context": "https://schema.org", "@type": "WebSite", name: "Shop Nobi", url: `${BASE}/shop` }],
   },
 ];

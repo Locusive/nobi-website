@@ -27,6 +27,7 @@ const NotFound           = lazy(() => import("./pages/NotFound.jsx"));
 
 import { RequestDemoModal } from "./components/DemoModals.jsx";
 import { DemoFormProvider } from "./context/DemoFormContext.jsx";
+import { useAssistantModeReload } from "./hooks/useAssistantModeReload.js";
 import "./index.css";
 
 const SCROLL_KEY_PREFIX = "nobi-scroll:";
@@ -41,6 +42,7 @@ if (typeof window !== "undefined" && "scrollRestoration" in window.history) {
 function App() {
   const location = useLocation();
   const navigationType = useNavigationType();
+  useAssistantModeReload();
 
   const [isFormOpen, setIsFormOpen] = useState(() => {
     const params = new URLSearchParams(location.search);

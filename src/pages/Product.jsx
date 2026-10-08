@@ -92,13 +92,13 @@ function SectionRow({ text, visual }) {
   );
 }
 
-// A real, stylized mockup of the product doing the specific thing the
-// section describes — not an abstract icon. Full-width and generously
-// sized so the visual carries the section, the way the pre-refactor
-// capability pages' mockups did.
-function DemoCard({ children }) {
+// A full-width mockup of the product doing what the section describes. It is marked as a
+// labeled picture, so its sample text is not read as real page content.
+function DemoCard({ label, children }) {
   return (
     <div
+      role="img"
+      aria-label={label}
       style={{
         width: "100%",
         background: "#ffffff",
@@ -216,7 +216,7 @@ export default function Product() {
             </>
           }
           visual={
-            <DemoCard>
+            <DemoCard label="Example of Nobi answering a shopper's question on a sample store's site">
               <div style={{ display: "flex", alignItems: "center", gap: 14, padding: "22px 26px", borderBottom: "1px solid rgba(20,16,40,0.07)" }}>
                 <Search size={22} color="#8a8498" strokeWidth={2.2} style={{ flex: "none" }} />
                 <span style={{ flex: 1, fontSize: 19, color: "#1b1626" }}>does this run true to size?</span>
@@ -263,7 +263,7 @@ export default function Product() {
             </>
           }
           visual={
-            <DemoCard>
+            <DemoCard label="Example of Nobi reaching out to a shopper who is about to leave a sample store's site">
               <div style={{ padding: "26px 26px 8px" }}>
                 <div style={{ fontSize: 13, fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase", color: "#a49dba" }}>
                   Trigger: Exit intent
@@ -303,7 +303,7 @@ export default function Product() {
             </>
           }
           visual={
-            <DemoCard>
+            <DemoCard label="Example of Nobi capturing a lead in a conversation and sending it to a CRM">
               <div style={{ display: "flex", alignItems: "center", gap: 14, padding: "22px 26px", borderBottom: "1px solid rgba(20,16,40,0.07)" }}>
                 <UserPlus size={21} color="#6d3bff" strokeWidth={2.1} style={{ flex: "none" }} />
                 <span style={{ fontSize: 16, fontWeight: 600, color: "#1b1626" }}>New lead captured</span>
@@ -338,7 +338,7 @@ export default function Product() {
             </>
           }
           visual={
-            <DemoCard>
+            <DemoCard label="Example of an AI agent asking Nobi a question about a store">
               <div style={{ display: "flex", alignItems: "center", gap: 14, padding: "22px 26px", borderBottom: "1px solid rgba(20,16,40,0.07)" }}>
                 <Bot size={21} color="#6d3bff" strokeWidth={2.1} style={{ flex: "none" }} />
                 <span style={{ fontSize: 16, fontWeight: 600, color: "#1b1626" }}>MCP: ask_question</span>
@@ -368,7 +368,7 @@ export default function Product() {
             </>
           }
           visual={
-            <DemoCard>
+            <DemoCard label="Example of the results ordering settings in Nobi, with one product pinned">
               <div style={{ display: "flex", alignItems: "center", gap: 11, padding: "22px 26px", borderBottom: "1px solid rgba(20,16,40,0.07)" }}>
                 <SlidersHorizontal size={19} color="#0f8a54" strokeWidth={2.1} />
                 <span style={{ fontSize: 16, fontWeight: 600, color: "#1b1626" }}>Results ordering</span>

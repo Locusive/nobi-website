@@ -14,6 +14,7 @@ const DIST = join(__dirname, "..", "dist");
 const SHELL = join(DIST, "index.html");
 const BASE = "https://nobi.ai";
 const OG_IMAGE = `${BASE}/og-image.png`;
+const SHOP_NOBI_OG_IMAGE = `${BASE}/shop-nobi-og-image.png`;
 
 const ORG = { "@context": "https://schema.org", "@type": "Organization", name: "Nobi", url: BASE, logo: OG_IMAGE, sameAs: [LINKEDIN_URL] };
 const SITE = { "@context": "https://schema.org", "@type": "WebSite", name: "Nobi", url: BASE };
@@ -51,7 +52,7 @@ const PAGES = [
   },
   {
     // Crawlers may index Shop Nobi, but following its product links would count as visits to the stores.
-    path: "/shop", title: "Shop Nobi | Nobi", robots: "index, nofollow",
+    path: "/shop", title: "Shop Nobi | Nobi", robots: "index, nofollow", image: SHOP_NOBI_OG_IMAGE,
     description: "The best products from the best stores online, in one search. Shop Nobi is a search engine: you buy directly from the store.",
     schema: [ORG, { "@context": "https://schema.org", "@type": "WebSite", name: "Shop Nobi", url: `${BASE}/shop` }],
   },
@@ -64,17 +65,19 @@ const PAGES = [
 
 function buildHead(page) {
   const url = page.path === "/" ? BASE : `${BASE}${page.path}`;
+  // A page can bring its own link preview picture; the rest use the Nobi one.
+  const image = page.image || OG_IMAGE;
   const tags = [
     `<link rel="canonical" href="${htmlEscape(url)}">`,
     `<meta property="og:type" content="website">`,
     `<meta property="og:url" content="${htmlEscape(url)}">`,
     `<meta property="og:title" content="${htmlEscape(page.title)}">`,
     `<meta property="og:description" content="${htmlEscape(page.description)}">`,
-    `<meta property="og:image" content="${htmlEscape(OG_IMAGE)}">`,
+    `<meta property="og:image" content="${htmlEscape(image)}">`,
     `<meta name="twitter:card" content="summary_large_image">`,
     `<meta name="twitter:title" content="${htmlEscape(page.title)}">`,
     `<meta name="twitter:description" content="${htmlEscape(page.description)}">`,
-    `<meta name="twitter:image" content="${htmlEscape(OG_IMAGE)}">`,
+    `<meta name="twitter:image" content="${htmlEscape(image)}">`,
     `<script type="application/ld+json" id="page-schema">${JSON.stringify(page.schema)}</script>`,
   ];
   if (page.robots) {

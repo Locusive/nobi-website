@@ -83,6 +83,14 @@ for (const [path, label, sampleTexts] of [
   });
 }
 
+test("the Shop Nobi page shares its own link preview picture, and the other pages keep Nobi's", () => {
+  const shopHtml = readPage("shop.html");
+  assert.ok(shopHtml.includes('<meta property="og:image" content="https://nobi.ai/shop-nobi-og-image.png">'));
+  assert.ok(shopHtml.includes('<meta name="twitter:image" content="https://nobi.ai/shop-nobi-og-image.png">'));
+  assert.ok(existsSync(new URL("shop-nobi-og-image.png", Dist)), "The picture must be published with the site");
+  assert.ok(readPage("homepage.html").includes('<meta property="og:image" content="https://nobi.ai/og-image.png">'));
+});
+
 test("pricing includes plan allowances, overages, trial terms, and FAQ answers", () => {
   const text = bodyText(readPage("pricing.html"));
   for (const fact of [

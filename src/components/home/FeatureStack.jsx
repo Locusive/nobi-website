@@ -149,8 +149,8 @@ function SearchPanel() {
           <div
             role="img"
             aria-label={mode === "with"
-              ? "Example of Nobi search results for red dress under $200 on a clothing store"
-              : "Example of a keyword search finding no results for red dress under $200"}
+              ? "Example of Nobi search results on a sample clothing store"
+              : "Example of a keyword search finding no results on a sample clothing store"}
             style={{ position: "relative" }}
           >
             <AnimatePresence mode="wait">
@@ -235,7 +235,7 @@ function InstallPanel() {
               <ArrowRight size={22} color="#fff" strokeWidth={2.6} style={{ transform: "rotate(90deg)" }} />
             </span>
           </div>
-          <div role="img" aria-label="Example of the Nobi search bar live on a store's site, with a theme picker" style={{ background: "#ffffff", borderRadius: 18, padding: 16, boxShadow: "0 40px 90px -45px rgba(20,6,60,0.75)", position: "relative", zIndex: 3 }}>
+          <div role="img" aria-label="Example of the Nobi search bar live on a sample store's site, with a theme picker" style={{ background: "#ffffff", borderRadius: 18, padding: 16, boxShadow: "0 40px 90px -45px rgba(20,6,60,0.75)", position: "relative", zIndex: 3 }}>
             <div style={{ display: "flex", alignItems: "center", gap: 10, background: "#faf8ff", border: "1px solid rgba(20,16,40,0.08)", borderRadius: 12, padding: "11px 13px" }}>
               <Search size={17} color="#6d3bff" strokeWidth={2.3} style={{ flex: "none" }} />
               <span style={{ flex: 1, fontSize: 13.5, color: "#8a8498" }}>Search anything on your site</span>
@@ -370,7 +370,7 @@ function SiteAnswersPanel() {
         </FeatP>
       </div>
       <div className="nb-feat-col" style={{ flex: "1 1 440px", minWidth: 300, display: "flex", justifyContent: "center" }}>
-        <div role="img" aria-label="Example of Nobi answering a return policy question on a store's site, with a cited answer" style={{ width: "min(500px,100%)", background: "#ffffff", borderRadius: 24, boxShadow: "0 50px 100px -40px rgba(6,12,38,0.85)", overflow: "hidden" }}>
+        <div role="img" aria-label="Example of Nobi answering a question on a sample store's site, with a cited answer" style={{ width: "min(500px,100%)", background: "#ffffff", borderRadius: 24, boxShadow: "0 50px 100px -40px rgba(6,12,38,0.85)", overflow: "hidden" }}>
           <div style={{ padding: "18px 20px", borderBottom: "1px solid rgba(20,16,40,0.06)", display: "flex", alignItems: "center", gap: 11 }}>
             <Search size={18} color="#6d3bff" strokeWidth={2.3} />
             <span style={{ flex: 1, fontSize: 15.5, color: "#3a3646" }}>What is your return window?</span>

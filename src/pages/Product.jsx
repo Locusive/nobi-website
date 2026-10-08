@@ -216,7 +216,7 @@ export default function Product() {
             </>
           }
           visual={
-            <DemoCard label="Example of Nobi answering a shopper's sizing question on a store's site">
+            <DemoCard label="Example of Nobi answering a shopper's question on a sample store's site">
               <div style={{ display: "flex", alignItems: "center", gap: 14, padding: "22px 26px", borderBottom: "1px solid rgba(20,16,40,0.07)" }}>
                 <Search size={22} color="#8a8498" strokeWidth={2.2} style={{ flex: "none" }} />
                 <span style={{ flex: 1, fontSize: 19, color: "#1b1626" }}>does this run true to size?</span>
@@ -263,7 +263,7 @@ export default function Product() {
             </>
           }
           visual={
-            <DemoCard label="Example of Nobi reaching out to a shopper who is about to leave a store's site">
+            <DemoCard label="Example of Nobi reaching out to a shopper who is about to leave a sample store's site">
               <div style={{ padding: "26px 26px 8px" }}>
                 <div style={{ fontSize: 13, fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase", color: "#a49dba" }}>
                   Trigger: Exit intent

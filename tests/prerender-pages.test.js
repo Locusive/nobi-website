@@ -66,8 +66,8 @@ function readPicturesAsLabels(html) {
 }
 
 for (const [path, label, sampleTexts] of [
-  ["homepage.html", "Example of Nobi search results for red dress under $200", [
-    "Understood red", "Search anything on your site", "Results ordering", "What is your return window?",
+  ["homepage.html", "Example of Nobi search results on a sample clothing store", [
+    "red dress under $200", "Understood red", "Search anything on your site", "Results ordering", "What is your return window?",
     "crochet dress for a beach vacation",
   ]],
   ["product.html", "Example of Nobi capturing a lead", ["does this run true to size?", "New lead captured", "Results ordering"]],

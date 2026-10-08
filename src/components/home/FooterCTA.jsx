@@ -53,7 +53,7 @@ export default function FooterCTA() {
             <div style={{ marginTop: 18, fontSize: 13.5, color: "#94a3b8" }}>100 free messages monthly &middot; No credit card</div>
           </div>
           <div className="nb-feat-demo" style={{ flex: "0 1 460px", minWidth: 300 }}>
-            <div role="img" aria-label="Example of Nobi search results for a beach vacation dress on a clothing store" style={{ borderRadius: 24, border: "1px solid #efe2f7", background: "#fff", boxShadow: "0 34px 80px -46px rgba(76,40,130,0.5)", overflow: "hidden" }}>
+            <div role="img" aria-label="Example of Nobi search results on a sample clothing store" style={{ borderRadius: 24, border: "1px solid #efe2f7", background: "#fff", boxShadow: "0 34px 80px -46px rgba(76,40,130,0.5)", overflow: "hidden" }}>
               <div style={{ display: "flex", alignItems: "center", gap: 11, padding: "16px 18px", borderBottom: "1px solid #f1eaf7" }}>
                 <span style={{ fontSize: 14.5, color: "#1b1626" }}>crochet dress for a beach vacation</span>
                 <span

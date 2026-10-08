@@ -41,6 +41,48 @@ for (const [path, heading] of [
   });
 }
 
+/** Replace each block marked as a picture with its label, the way the Nobi assistant reads a page. */
+function readPicturesAsLabels(html) {
+  const pictureStart = /<div role="img" aria-label="/;
+  let result = html;
+  let start = result.search(pictureStart);
+  while (start !== -1) {
+    const label = result.slice(start).match(/aria-label="([^"]*)"/)[1];
+    const divTag = /<\/?div\b[^>]*>/g;
+    divTag.lastIndex = start;
+    let depth = 0;
+    let end = start;
+    for (let match = divTag.exec(result); match; match = divTag.exec(result)) {
+      depth += match[0].startsWith("</") ? -1 : 1;
+      if (depth === 0) {
+        end = divTag.lastIndex;
+        break;
+      }
+    }
+    result = result.slice(0, start) + label + result.slice(end);
+    start = result.search(pictureStart);
+  }
+  return result;
+}
+
+for (const [path, label, sampleTexts] of [
+  ["homepage.html", "Example of Nobi search results for red dress under $200", [
+    "Understood red", "Search anything on your site", "Results ordering", "What is your return window?",
+    "crochet dress for a beach vacation",
+  ]],
+  ["product.html", "Example of Nobi capturing a lead", ["does this run true to size?", "New lead captured", "Results ordering"]],
+]) {
+  test(`${path} marks its product demos as labeled pictures, so their sample text is not read as page content`, () => {
+    const html = readPage(path);
+    const text = bodyText(readPicturesAsLabels(html));
+    assert.ok(text.includes(label), `Missing picture label: ${label}`);
+    for (const sampleText of sampleTexts) {
+      assert.ok(bodyText(html).includes(sampleText), `Demo text should still be on the page: ${sampleText}`);
+      assert.ok(!text.includes(sampleText), `Demo text outside a picture: ${sampleText}`);
+    }
+  });
+}
+
 test("pricing includes plan allowances, overages, trial terms, and FAQ answers", () => {
   const text = bodyText(readPage("pricing.html"));
   for (const fact of [

@@ -162,7 +162,7 @@ export default function Hero() {
               }}
             >
               <Search size={21} color="#6d3bff" strokeWidth={2.2} style={{ flex: "none" }} />
-              <div style={{ flex: 1, display: "flex", alignItems: "center", minWidth: 0 }}>
+              <div role="img" aria-label="Example searches typed into Nobi" style={{ flex: 1, display: "flex", alignItems: "center", minWidth: 0 }}>
                 <span style={{ color: "#1b1626", fontSize: 18, whiteSpace: "nowrap", overflow: "hidden" }}>{typed}</span>
                 <span
                   style={{

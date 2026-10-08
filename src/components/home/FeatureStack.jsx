@@ -146,7 +146,13 @@ function SearchPanel() {
               </button>
             ))}
           </div>
-          <div style={{ position: "relative" }}>
+          <div
+            role="img"
+            aria-label={mode === "with"
+              ? "Example of Nobi search results for red dress under $200 on a clothing store"
+              : "Example of a keyword search finding no results for red dress under $200"}
+            style={{ position: "relative" }}
+          >
             <AnimatePresence mode="wait">
               <motion.div
                 key={mode}
@@ -229,7 +235,7 @@ function InstallPanel() {
               <ArrowRight size={22} color="#fff" strokeWidth={2.6} style={{ transform: "rotate(90deg)" }} />
             </span>
           </div>
-          <div style={{ background: "#ffffff", borderRadius: 18, padding: 16, boxShadow: "0 40px 90px -45px rgba(20,6,60,0.75)", position: "relative", zIndex: 3 }}>
+          <div role="img" aria-label="Example of the Nobi search bar live on a store's site, with a theme picker" style={{ background: "#ffffff", borderRadius: 18, padding: 16, boxShadow: "0 40px 90px -45px rgba(20,6,60,0.75)", position: "relative", zIndex: 3 }}>
             <div style={{ display: "flex", alignItems: "center", gap: 10, background: "#faf8ff", border: "1px solid rgba(20,16,40,0.08)", borderRadius: 12, padding: "11px 13px" }}>
               <Search size={17} color="#6d3bff" strokeWidth={2.3} style={{ flex: "none" }} />
               <span style={{ flex: 1, fontSize: 13.5, color: "#8a8498" }}>Search anything on your site</span>
@@ -282,7 +288,7 @@ function MerchandisingPanel() {
         </FeatP>
       </div>
       <div className="nb-feat-col" style={{ flex: "1 1 380px", minWidth: 300, display: "flex", justifyContent: "center" }}>
-        <div style={{ width: "min(420px,100%)", background: "#ffffff", borderRadius: 22, boxShadow: "0 50px 100px -45px rgba(4,30,26,0.75)", overflow: "hidden" }}>
+        <div role="img" aria-label="Example of the results ordering settings in Nobi, with one product pinned and one hidden" style={{ width: "min(420px,100%)", background: "#ffffff", borderRadius: 22, boxShadow: "0 50px 100px -45px rgba(4,30,26,0.75)", overflow: "hidden" }}>
           <div style={{ padding: "15px 18px", borderBottom: "1px solid rgba(20,16,40,0.06)", display: "flex", alignItems: "center", gap: 9 }}>
             <CheckCircle2 size={17} color="#0f8a54" strokeWidth={2.2} />
             <span style={{ fontSize: 13.5, fontWeight: 600, color: "#1b1626" }}>Results ordering</span>
@@ -364,7 +370,7 @@ function SiteAnswersPanel() {
         </FeatP>
       </div>
       <div className="nb-feat-col" style={{ flex: "1 1 440px", minWidth: 300, display: "flex", justifyContent: "center" }}>
-        <div style={{ width: "min(500px,100%)", background: "#ffffff", borderRadius: 24, boxShadow: "0 50px 100px -40px rgba(6,12,38,0.85)", overflow: "hidden" }}>
+        <div role="img" aria-label="Example of Nobi answering a return policy question on a store's site, with a cited answer" style={{ width: "min(500px,100%)", background: "#ffffff", borderRadius: 24, boxShadow: "0 50px 100px -40px rgba(6,12,38,0.85)", overflow: "hidden" }}>
           <div style={{ padding: "18px 20px", borderBottom: "1px solid rgba(20,16,40,0.06)", display: "flex", alignItems: "center", gap: 11 }}>
             <Search size={18} color="#6d3bff" strokeWidth={2.3} />
             <span style={{ flex: 1, fontSize: 15.5, color: "#3a3646" }}>What is your return window?</span>

@@ -11,6 +11,8 @@ const ShopPageSeo = {
   description:
     "The best products from the best stores online, in one search. Shop Nobi is a search engine: you buy directly from the store.",
   path: "/shop",
+  // Crawlers may index this page but must not follow product links, which would count as visits to the stores.
+  nofollow: true,
   schema: [
     {
       "@context": "https://schema.org",

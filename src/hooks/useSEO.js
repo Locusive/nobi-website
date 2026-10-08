@@ -48,8 +48,9 @@ function upsertSchema(id, data) {
  * @param {string}  [opts.type]      og:type (default "website")
  * @param {object}  [opts.schema]    JSON-LD schema object; null removes any existing schema
  * @param {boolean} [opts.noindex]   Set true to keep a stub/placeholder page out of search results
+ * @param {boolean} [opts.nofollow]  Set true to let crawlers index the page but not follow its links
  */
-export function useSEO({ title, description, path, image, type = "website", schema, noindex = false } = {}) {
+export function useSEO({ title, description, path, image, type = "website", schema, noindex = false, nofollow = false } = {}) {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     const canonical = path ? `${BASE_URL}${path}` : null;
@@ -60,6 +61,8 @@ export function useSEO({ title, description, path, image, type = "website", sche
     upsertLink("canonical", canonical);
     if (noindex) {
       upsertMeta('meta[name="robots"]', "noindex, nofollow");
+    } else if (nofollow) {
+      upsertMeta('meta[name="robots"]', "index, nofollow");
     } else {
       // Client-side nav can leave a stale robots tag from a prior noindex page — clear it.
       document.querySelector('meta[name="robots"]')?.remove();

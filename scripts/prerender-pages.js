@@ -50,7 +50,8 @@ const PAGES = [
     schema: [product("Nobi", "A single AI assistant for search, support, proactive engagement, lead capture, merchandising, and an MCP agent endpoint.", "/product")],
   },
   {
-    path: "/shop", title: "Shop Nobi | Nobi",
+    // Crawlers may index Shop Nobi, but following its product links would count as visits to the stores.
+    path: "/shop", title: "Shop Nobi | Nobi", robots: "index, nofollow",
     description: "The best products from the best stores online, in one search. Shop Nobi is a search engine: you buy directly from the store.",
     schema: [ORG, { "@context": "https://schema.org", "@type": "WebSite", name: "Shop Nobi", url: `${BASE}/shop` }],
   },
@@ -76,6 +77,9 @@ function buildHead(page) {
     `<meta name="twitter:image" content="${htmlEscape(OG_IMAGE)}">`,
     `<script type="application/ld+json" id="page-schema">${JSON.stringify(page.schema)}</script>`,
   ];
+  if (page.robots) {
+    tags.push(`<meta name="robots" content="${htmlEscape(page.robots)}">`);
+  }
   return tags.join("\n    ");
 }
 

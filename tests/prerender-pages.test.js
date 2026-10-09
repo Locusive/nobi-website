@@ -138,7 +138,17 @@ test("the Shop Nobi page serves its own metadata, the site nav, and the producti
   assert.ok(html.includes("<title>Shop Nobi | Nobi</title>"));
   assert.ok(html.includes('rel="canonical" href="https://nobi.ai/shop"'));
   assert.equal((html.match(/id="page-schema"/g) || []).length, 1);
-  assert.ok(html.includes("<header") && text.includes("Sign Up Free"), "The page carries its own header");
+  const navStart = html.indexOf('class="nb-nav"');
+  assert.ok(html.includes("<header") && navStart > 0, "The page carries the site's header");
+  const headerWrapperStyle = html.slice(Math.max(0, navStart - 400), navStart);
+  assert.ok(headerWrapperStyle.includes("position:static") && !headerWrapperStyle.includes("position:fixed"), "The header scrolls away with the page");
+  for (const link of ["Product", "Pricing", "Shop Nobi", "Book A Demo", "Log in", "Start Free"]) {
+    assert.ok(text.includes(link), `Missing header link: ${link}`);
+  }
+  assert.ok(!text.includes("Summarize With Nobi"), "The old Shop Nobi header is gone");
+  const homeHtml = readPage("homepage.html");
+  const homeNavStart = homeHtml.indexOf('class="nb-nav"');
+  assert.ok(homeHtml.slice(Math.max(0, homeNavStart - 400), homeNavStart).includes("position:fixed"), "The home page keeps its pinned header");
   assert.ok(text.includes("Loading Shop Nobi"));
   assert.ok(html.includes("Shop Nobi is a search engine: you buy directly from the store."), "The page description says Shop Nobi is a search engine");
   assert.ok(html.includes('<meta name="robots" content="index, nofollow">'), "Crawlers may index the page but not follow its product links");

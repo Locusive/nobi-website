@@ -17,7 +17,8 @@ const SHOW_PRODUCT_LINK = true;
 // Shop Nobi is a plain link, not an in-app one, so the page loads fresh and the assistant starts as Shop Nobi.
 const ShopNobiPath = "/shop";
 
-export default function Nav({ active }) {
+// The header stays pinned to the top of the window on every page except Shop Nobi, which lets it scroll away.
+export default function Nav({ active, pinned = true }) {
   const { onOpen } = useDemoForm();
   const [mobileOpen, setMobileOpen] = useState(false);
 
@@ -36,7 +37,7 @@ export default function Nav({ active }) {
   return (
     <div
       style={{
-        position: "fixed",
+        position: pinned ? "fixed" : "static",
         top: 0,
         left: 0,
         right: 0,

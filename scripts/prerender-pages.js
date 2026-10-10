@@ -2,11 +2,11 @@
 // Chromium. Client-side React still mounts normally to enable interactions.
 // Keep metadata entries aligned with each page's useSEO call.
 
-import { readFileSync, writeFileSync, mkdirSync, existsSync } from "fs";
+import { readFileSync, writeFileSync, existsSync } from "fs";
 import { join, dirname } from "path";
-import { build } from "vite";
-import { pathToFileURL, fileURLToPath } from "url";
-import { stripHomepageMeta, htmlEscape } from "./prerender-blog.js";
+import { fileURLToPath } from "url";
+import { renderPage, writePageFiles } from "./page-html.js";
+import { loadPageRenderer } from "./page-renderer.js";
 import { CANONICAL_DESCRIPTION, LINKEDIN_URL } from "../src/constants/positioning.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -63,66 +63,13 @@ const PAGES = [
 // and now 301-redirect there — see public/_redirects. Don't re-add them
 // here; their prerendered meta would compete with /product's.
 
-function buildHead(page) {
-  const url = page.path === "/" ? BASE : `${BASE}${page.path}`;
-  // A page can bring its own link preview picture; the rest use the Nobi one.
-  const image = page.image || OG_IMAGE;
-  const tags = [
-    `<link rel="canonical" href="${htmlEscape(url)}">`,
-    `<meta property="og:type" content="website">`,
-    `<meta property="og:url" content="${htmlEscape(url)}">`,
-    `<meta property="og:title" content="${htmlEscape(page.title)}">`,
-    `<meta property="og:description" content="${htmlEscape(page.description)}">`,
-    `<meta property="og:image" content="${htmlEscape(image)}">`,
-    `<meta name="twitter:card" content="summary_large_image">`,
-    `<meta name="twitter:title" content="${htmlEscape(page.title)}">`,
-    `<meta name="twitter:description" content="${htmlEscape(page.description)}">`,
-    `<meta name="twitter:image" content="${htmlEscape(image)}">`,
-    `<script type="application/ld+json" id="page-schema">${JSON.stringify(page.schema)}</script>`,
-  ];
-  if (page.robots) {
-    tags.push(`<meta name="robots" content="${htmlEscape(page.robots)}">`);
-  }
-  return tags.join("\n    ");
-}
-
-/** Combine route metadata and rendered content with the built client shell. */
-function renderPage(page, shell, body) {
-  let html = stripHomepageMeta(shell);
-  html = html.replace("<!--__PRERENDER_TITLE__-->", `<title>${htmlEscape(page.title)}</title>`);
-  html = html.replace(
-    "<!--__PRERENDER_DESC__-->",
-    `<meta name="description" content="${htmlEscape(page.description)}">\n    ${buildHead(page)}`
-  );
-  if (!html.includes('<div id="root"></div>')) {
-    throw new Error("Expected an empty React root in the build shell.");
-  }
-  return html.replace('<div id="root"></div>', () => `<div id="root">${body}</div>`);
-}
-
-/** Compile the JSX renderer for Node using the same Vite asset transforms. */
-async function loadRenderer() {
-  const outDir = join(__dirname, "..", "node_modules", ".cache", "page-prerender");
-  await build({
-    configFile: false,
-    logLevel: "warn",
-    build: {
-      ssr: join(__dirname, "render-pages.jsx"),
-      outDir,
-      emptyOutDir: true,
-      rollupOptions: { output: { entryFileNames: "renderer.mjs" } },
-    },
-  });
-  return import(pathToFileURL(join(outDir, "renderer.mjs")).href);
-}
-
 /** Write both Cloudflare URL forms with complete page content. */
 async function main() {
   if (!existsSync(SHELL)) {
     throw new Error("prerender-pages: dist/index.html not found; run vite build first.");
   }
   const shell = readFileSync(SHELL, "utf8");
-  const { renderPageBody } = await loadRenderer();
+  const { renderPageBody } = await loadPageRenderer();
   let count = 0;
   for (const page of PAGES) {
     const html = renderPage(page, shell, renderPageBody(page.path));
@@ -131,12 +78,7 @@ async function main() {
       writeFileSync(join(DIST, "homepage.html"), html);
       writeFileSync(SHELL, renderPage(page, shell, ""));
     } else {
-      const rel = page.path.replace(/^\//, "");
-      const dir = join(DIST, rel);
-      mkdirSync(dir, { recursive: true });
-      writeFileSync(join(dir, "index.html"), html);       // /path/ (trailing slash)
-      mkdirSync(dirname(join(DIST, `${rel}.html`)), { recursive: true });
-      writeFileSync(join(DIST, `${rel}.html`), html);     // /path (Cloudflare slugless)
+      writePageFiles(DIST, page.path, html);
     }
     count++;
   }

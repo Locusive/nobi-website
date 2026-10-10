@@ -409,6 +409,13 @@ export function stripHomepageMeta(shell) {
     ""
   );
 
+  // prerender-pages.js writes the homepage's canonical, robots and
+  // structured data into dist/index.html. Later scripts read that shell,
+  // so drop those tags too.
+  out = out.replace(/\s*<link\s+rel="canonical"\s+href="[^"]*"\s*\/?>/g, "");
+  out = out.replace(/\s*<meta\s+name="robots"\s+content="[^"]*"\s*\/?>/g, "");
+  out = out.replace(/\s*<script type="application\/ld\+json" id="page-schema">[\s\S]*?<\/script>/g, "");
+
   return out;
 }
 

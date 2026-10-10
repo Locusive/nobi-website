@@ -51,3 +51,15 @@ contact form remain available under the activity question. Rebuild to see edits.
 
 `npm test` builds the prerendered pages and checks the pricing arithmetic,
 allowances, usage modes, input validation, and existing page regressions.
+
+## Shop Nobi search pages
+
+`scripts/prerender-shop.js` builds one page per Shop Nobi search at
+`/shop/s/<slug>`, with the products in the HTML. It downloads the page data
+from a public JSON file the API rebuilds every night. `SHOP_PAGES_DATA_URL`
+points the build at another copy of that file. If the download fails, the
+build fails, so Cloudflare keeps the last good deploy live.
+
+To build without the network, serve the test data:
+`node tests/shop-nobi-pages-server.js 4789`, then
+`SHOP_PAGES_DATA_URL=http://127.0.0.1:4789/pages.json npm test`.

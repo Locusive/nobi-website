@@ -1,9 +1,12 @@
 // src/pages/ShopPage.jsx
-import React, { useRef } from "react";
+import React, { useMemo, useRef } from "react";
+import { useLocation } from "react-router-dom";
 import Nav from "../components/home/Nav";
+import ShopNobiSearchPageContent from "../components/shopNobi/ShopNobiSearchPageContent";
 import "../components/home/homepage.css";
 import { useAdoptedAssistantContainer } from "../hooks/useAdoptedAssistantContainer";
 import { useSEO } from "../hooks/useSEO";
+import { buildSearchPageSeo, readEmbeddedSearchPage } from "../utils/shopNobiSearchPage";
 
 // The same metadata and structured data prerender-pages.js bakes into the
 // static head, so React keeps them after it mounts instead of wiping them.
@@ -27,13 +30,21 @@ const ShopPageSeo = {
   ],
 };
 
-// The Shop Nobi page: the site's header, scrolling away with the page instead of pinned to the top, with the
-// search experience the assistant bundle boots on /shop moved into the slot under it.
-export default function ShopPage() {
+/**
+ * The Shop Nobi page: the site's header, scrolling away with the page instead of pinned to the top, with the
+ * search experience the assistant bundle boots on /shop moved into the slot under it. On a prebuilt search page
+ * (/shop/s/<slug>) the slot shows that page's products until the live search arrives.
+ *
+ * @param {{searchPage?: object}} props The build passes the search page data; in the browser it comes from the HTML.
+ */
+export default function ShopPage({ searchPage: builtSearchPage = null }) {
   const slotRef = useRef(null);
   const assistantHasMounted = useAdoptedAssistantContainer(slotRef);
+  const { pathname } = useLocation();
+  const embeddedSearchPage = useMemo(() => readEmbeddedSearchPage(pathname), [pathname]);
+  const searchPage = builtSearchPage || embeddedSearchPage;
 
-  useSEO(ShopPageSeo);
+  useSEO(searchPage ? buildSearchPageSeo(searchPage) : ShopPageSeo);
 
   return (
     <div className="min-h-screen bg-white dark:bg-[#0a0a0a]">
@@ -41,12 +52,17 @@ export default function ShopPage() {
         <Nav active="shop" pinned={false} />
       </header>
       <div ref={slotRef}>
-        {!assistantHasMounted && (
-          <div className="flex min-h-[60vh] items-center justify-center text-black/60 dark:text-white/60">
-            <p>Loading Shop Nobi…</p>
-          </div>
-        )}
+        {!assistantHasMounted && (searchPage ? <ShopNobiSearchPageContent page={searchPage} /> : <LoadingMessage />)}
       </div>
+    </div>
+  );
+}
+
+/** Shown on /shop until the live search arrives. */
+function LoadingMessage() {
+  return (
+    <div className="flex min-h-[60vh] items-center justify-center text-black/60 dark:text-white/60">
+      <p>Loading Shop Nobi…</p>
     </div>
   );
 }

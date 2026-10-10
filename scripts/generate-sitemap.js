@@ -1,4 +1,6 @@
-// Generates public/sitemap.xml at build time.
+// Generates the sitemaps at build time: public/sitemap-pages.xml lists the
+// site's own pages, and public/sitemap.xml is the index that points to it
+// and to sitemap-shop.xml, which scripts/prerender-shop.js writes.
 // Run via: node scripts/generate-sitemap.js
 import { readFileSync, writeFileSync, readdirSync } from "fs";
 import { join, dirname } from "path";
@@ -8,6 +10,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT       = join(__dirname, "..");
 const today      = new Date().toISOString().slice(0, 10);
 const BASE_URL   = "https://nobi.ai";
+const SITEMAP_FILES = ["sitemap-pages.xml", "sitemap-shop.xml"];
 
 // Static routes — priority and changefreq per page type
 const STATIC_PAGES = [
@@ -100,8 +103,22 @@ function generateSitemap() {
     `</urlset>`,
   ].join("\n") + "\n";
 
-  writeFileSync(join(ROOT, "public/sitemap.xml"), xml);
-  console.log(`✓ sitemap.xml — ${STATIC_PAGES.length} static + ${blogEntries.length} blog + ${glossaryEntries.length} glossary (${urls.length} total)`);
+  writeFileSync(join(ROOT, "public/sitemap-pages.xml"), xml);
+  writeFileSync(join(ROOT, "public/sitemap.xml"), buildSitemapIndex());
+  console.log(`✓ sitemap-pages.xml: ${STATIC_PAGES.length} static + ${blogEntries.length} blog + ${glossaryEntries.length} glossary (${urls.length} total)`);
+}
+
+/** Builds the sitemap index that points crawlers to each sitemap file. */
+function buildSitemapIndex() {
+  const entries = SITEMAP_FILES.map(
+    (file) => `  <sitemap>\n    <loc>${BASE_URL}/${file}</loc>\n    <lastmod>${today}</lastmod>\n  </sitemap>`
+  );
+  return [
+    `<?xml version="1.0" encoding="UTF-8"?>`,
+    `<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">`,
+    ...entries,
+    `</sitemapindex>`,
+  ].join("\n") + "\n";
 }
 
 generateSitemap();

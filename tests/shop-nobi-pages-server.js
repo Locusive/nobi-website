@@ -1,5 +1,5 @@
 // A local server with test Shop Nobi page data, so tests and local builds need no network.
-// Local build: `node tests/shop-nobi-pages-server.js 4789`, then set SHOP_PAGES_DATA_URL (see README).
+// Local build: `node tests/shop-nobi-pages-server.js 4789`, then set SHOP_PAGES_API_URL (see README).
 
 import { createServer } from "node:http";
 import { readFileSync } from "node:fs";
@@ -15,23 +15,23 @@ export function readFixturePageData() {
 }
 
 /**
- * Starts a server that answers requests for /pages.json with the given status and body, gzip-encoded the way
- * the public file may be served.
+ * Starts a server that answers requests for /v1/shop/pages with the given status and body, gzip-encoded the way
+ * the API may send it.
  *
  * @param {{status?: number, body?: unknown}} response What the server sends back.
  * @param {number} [port] The port, or 0 for any free port.
- * @returns {Promise<{url: string, close: () => Promise<void>}>} The data address and a way to stop the server.
+ * @returns {Promise<{url: string, close: () => Promise<void>}>} The API base address and a way to stop the server.
  */
 export async function startPageDataServer({ status = HttpOk, body = readFixturePageData() } = {}, port = 0) {
   const server = createServer((request, response) => {
-    const isDataFile = request.url.startsWith("/pages.json");
-    response.writeHead(isDataFile ? status : HttpNotFound, { "content-type": "application/json", "content-encoding": "gzip" });
-    response.end(gzipSync(JSON.stringify(isDataFile ? body : {})));
+    const isPagesRoute = request.url.startsWith("/v1/shop/pages");
+    response.writeHead(isPagesRoute ? status : HttpNotFound, { "content-type": "application/json", "content-encoding": "gzip" });
+    response.end(gzipSync(JSON.stringify(isPagesRoute ? body : {})));
   });
   await new Promise((resolve) => server.listen(port, "127.0.0.1", resolve));
 
   return {
-    url: `http://127.0.0.1:${server.address().port}/pages.json`,
+    url: `http://127.0.0.1:${server.address().port}`,
     close: () => new Promise((resolve) => server.close(resolve)),
   };
 }

@@ -1,4 +1,4 @@
-// Turns the downloaded page data into the page data the HTML is built from, keeping only safe
+// Turns the fetched page data into the page data the HTML is built from, keeping only safe
 // values: slugs that are safe in file names, http or https links, and links without tracking tags.
 
 const SlugPattern = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
@@ -16,16 +16,16 @@ export function isSafeSlug(slug) {
 }
 
 /**
- * Builds the page data for the first downloaded pages with a safe slug and a title, up to the limit. The first
+ * Builds the page data for the first fetched pages with a safe slug and a title, up to the limit. The first
  * page wins a repeated slug. Links go only to pages within the limit; the rest show as plain text.
  *
- * @param {object[]} downloadedPages The downloaded page objects, most searched first.
+ * @param {object[]} fetchedPages The fetched page objects, most searched first.
  * @param {number} pageLimit The most pages to build.
  * @returns {{pages: object[], leftOutCount: number}} The page data, and how many usable pages were left out.
  */
-export function buildSearchPages(downloadedPages, pageLimit) {
+export function buildSearchPages(fetchedPages, pageLimit) {
   const pageBySlug = new Map();
-  for (const page of downloadedPages.filter(isUsablePage)) {
+  for (const page of fetchedPages.filter(isUsablePage)) {
     if (!pageBySlug.has(page.slug)) {
       pageBySlug.set(page.slug, page);
     }
@@ -43,7 +43,7 @@ export function buildSearchPages(downloadedPages, pageLimit) {
   };
 }
 
-/** Returns whether a downloaded page can be built, and warns when it cannot. */
+/** Returns whether a fetched page can be built, and warns when it cannot. */
 function isUsablePage(page) {
   if (isSafeSlug(page?.slug) && isText(page.title)) {
     return true;

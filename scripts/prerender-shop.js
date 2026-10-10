@@ -1,12 +1,12 @@
 // Builds the Shop Nobi search pages (/shop/s/<slug>) with their products in the HTML, plus their sitemap,
-// redirects and llms.txt section. A failed data download fails the build, so the last good deploy stays live.
+// redirects and llms.txt section. A failed fetch from the API fails the build, so the last good deploy stays live.
 
 import { readFileSync, writeFileSync, existsSync, mkdirSync, readdirSync } from "fs";
 import { join, dirname } from "path";
 import { fileURLToPath } from "url";
 import { renderPage, toScriptJson } from "./page-html.js";
 import { loadPageRenderer } from "./page-renderer.js";
-import { downloadSearchPagesData, readSearchPagesDataUrl } from "./shop-nobi-search-pages-data.js";
+import { fetchSearchPagesData, readApiBaseUrl } from "./shop-nobi-search-pages-api.js";
 import { buildSearchPages } from "./shop-nobi-search-page-view.js";
 import { appendLlmsTxtSection, appendRedirects, buildRetiredRedirects, buildShopNobiSitemap } from "./shop-nobi-search-page-listings.js";
 import { buildSearchPageSeo, SearchPageDataElementId } from "../src/utils/shopNobiSearchPage.js";
@@ -23,17 +23,17 @@ const ShopNobiSitemapFile = "sitemap-shop.xml";
  * Downloads the page data and writes the search pages and listing files into the build output, keeping the
  * output within the file and redirect limits.
  *
- * @param {{dataUrl: string, distDir: string, fileLimit?: number, redirectRuleLimit?: number}} options The settings.
+ * @param {{apiBaseUrl: string, distDir: string, fileLimit?: number, redirectRuleLimit?: number}} options The settings.
  * @returns {Promise<number>} How many pages were written.
  */
 export async function prerenderShopNobiSearchPages({
-  dataUrl,
+  apiBaseUrl,
   distDir,
   fileLimit = DistFileLimit,
   redirectRuleLimit = RedirectRuleLimit,
 }) {
-  const { pages: downloadedPages, retired } = await downloadSearchPagesData(dataUrl);
-  const { pages, leftOutCount } = buildSearchPages(downloadedPages, countPageRoom(distDir, fileLimit));
+  const { pages: fetchedPages, retired } = await fetchSearchPagesData(apiBaseUrl);
+  const { pages, leftOutCount } = buildSearchPages(fetchedPages, countPageRoom(distDir, fileLimit));
   if (leftOutCount > 0) {
     console.warn(`prerender-shop: left out ${leftOutCount} page(s) to stay within ${fileLimit} files.`);
   }
@@ -101,10 +101,10 @@ function updateFile(path, change) {
 
 /** Runs the build step and fails the build on any error. */
 async function main() {
-  const dataUrl = readSearchPagesDataUrl(process.env);
+  const apiBaseUrl = readApiBaseUrl(process.env);
   try {
-    const count = await prerenderShopNobiSearchPages({ dataUrl, distDir: Dist });
-    console.log(`prerender-shop: wrote ${count} Shop Nobi search page(s) from ${dataUrl}`);
+    const count = await prerenderShopNobiSearchPages({ apiBaseUrl, distDir: Dist });
+    console.log(`prerender-shop: wrote ${count} Shop Nobi search page(s) from ${apiBaseUrl}`);
   } catch (error) {
     console.error(`prerender-shop: failed, so the build stops: ${error.message}`);
     process.exitCode = 1;

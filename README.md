@@ -55,11 +55,15 @@ allowances, usage modes, input validation, and existing page regressions.
 ## Shop Nobi search pages
 
 `scripts/prerender-shop.js` builds one page per Shop Nobi search at
-`/shop/s/<slug>`, with the products in the HTML. It downloads the page data
-from a public JSON file the API rebuilds every night. `SHOP_PAGES_DATA_URL`
-points the build at another copy of that file. If the download fails, the
-build fails, so Cloudflare keeps the last good deploy live.
+`/shop/s/<slug>`, with the products in the HTML. It fetches the page data from
+`https://api.nobi.ai/v1/shop/pages`. `SHOP_PAGES_API_URL` points the build at
+another API base address. If the fetch fails, the build fails, so Cloudflare
+keeps the last good deploy live.
+
+The GitHub workflow `nightly-shop-nobi-rebuild.yml` rebuilds the site every
+day at 10:00 UTC, after the API's overnight refresh, by calling the Cloudflare
+Pages deploy hook in the `CLOUDFLARE_DEPLOY_HOOK_URL` secret.
 
 To build without the network, serve the test data:
 `node tests/shop-nobi-pages-server.js 4789`, then
-`SHOP_PAGES_DATA_URL=http://127.0.0.1:4789/pages.json npm test`.
+`SHOP_PAGES_API_URL=http://127.0.0.1:4789 npm test`.

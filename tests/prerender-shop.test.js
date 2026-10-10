@@ -37,7 +37,7 @@ function readOriginal(file) {
 async function prerenderWith(response, folder, limits = {}) {
   const server = await startPageDataServer(response);
   try {
-    return await prerenderShopNobiSearchPages({ dataUrl: server.url, distDir: folder, ...limits });
+    return await prerenderShopNobiSearchPages({ apiBaseUrl: server.url, distDir: folder, ...limits });
   } finally {
     await server.close();
   }
@@ -241,7 +241,7 @@ test("an empty page list builds, with an empty Shop Nobi sitemap and the other f
   }
 });
 
-test("a failed download fails without writing anything, whether the server errors or cannot be reached", async () => {
+test("a failed fetch fails without writing anything, whether the server errors or cannot be reached", async () => {
   const folder = makeDistCopy();
   try {
     await assert.rejects(prerenderWith({ status: HttpServerError }, folder), /status 500/);
@@ -249,7 +249,7 @@ test("a failed download fails without writing anything, whether the server error
 
     const closedServer = await startPageDataServer();
     await closedServer.close();
-    await assert.rejects(prerenderShopNobiSearchPages({ dataUrl: closedServer.url, distDir: folder }));
+    await assert.rejects(prerenderShopNobiSearchPages({ apiBaseUrl: closedServer.url, distDir: folder }));
 
     assert.ok(!existsSync(join(folder, "sitemap-shop.xml")));
   } finally {
@@ -257,10 +257,10 @@ test("a failed download fails without writing anything, whether the server error
   }
 });
 
-test("the build step exits with an error when the data file is missing, so the build fails", async () => {
+test("the build step exits with an error when the API route is missing, so the build fails", async () => {
   const server = await startPageDataServer({ status: HttpNotFound });
   try {
-    const run = runNode(process.execPath, [PrerenderShopScript], { env: { ...process.env, SHOP_PAGES_DATA_URL: server.url } });
+    const run = runNode(process.execPath, [PrerenderShopScript], { env: { ...process.env, SHOP_PAGES_API_URL: server.url } });
     await assert.rejects(run, (error) => error.code === 1 && error.stderr.includes("status 404"));
   } finally {
     await server.close();

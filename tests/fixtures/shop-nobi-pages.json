@@ -62,6 +62,7 @@
   ],
   "retired": [
     { "slug": "neon-boots", "redirectTo": "/shop/s/black-leather-boots" },
+    { "slug": "old-boots", "redirectTo": "/shop" },
     { "slug": "chelsea-boots", "redirectTo": "/shop" },
     { "slug": "bad-target", "redirectTo": "https://evil.example/ 200\n/ /evil" }
   ]

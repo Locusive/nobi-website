@@ -7,29 +7,37 @@ import { after, before, test } from "node:test";
 import { fileURLToPath } from "node:url";
 import { promisify } from "node:util";
 import { prerenderShopNobiSearchPages } from "../scripts/prerender-shop.js";
+import { countRedirectRules } from "../scripts/shop-nobi-search-page-listings.js";
 import { startPageDataServer } from "./shop-nobi-pages-server.js";
 
 const BuiltDist = fileURLToPath(new URL("../dist/", import.meta.url));
+// The build's own run adds to _redirects and llms.txt, so the copies start from the originals in public/.
+const OriginalPublic = fileURLToPath(new URL("../public/", import.meta.url));
 const PrerenderShopScript = fileURLToPath(new URL("../scripts/prerender-shop.js", import.meta.url));
-const ShellFiles = ["index.html", "_redirects", "llms.txt"];
+const ListingFiles = ["_redirects", "llms.txt"];
 const HttpNotFound = 404;
 const HttpServerError = 500;
 const runNode = promisify(execFile);
 
 let distDir;
 
-/** Copies the built shell and listing files into a new folder, so each run starts from the plain build. */
+/** Copies the built shell and the original listing files into a new folder, so each run starts clean. */
 function makeDistCopy() {
   const folder = mkdtempSync(join(tmpdir(), "shop-nobi-dist-"));
-  ShellFiles.forEach((file) => copyFileSync(join(BuiltDist, file), join(folder, file)));
+  copyFileSync(join(BuiltDist, "index.html"), join(folder, "index.html"));
+  ListingFiles.forEach((file) => copyFileSync(join(OriginalPublic, file), join(folder, file)));
   return folder;
 }
 
+function readOriginal(file) {
+  return readFileSync(join(OriginalPublic, file), "utf8");
+}
+
 /** Runs the build step against a local server that sends the given response. */
-async function prerenderWith(response, folder) {
+async function prerenderWith(response, folder, limits = {}) {
   const server = await startPageDataServer(response);
   try {
-    return await prerenderShopNobiSearchPages({ dataUrl: server.url, distDir: folder });
+    return await prerenderShopNobiSearchPages({ dataUrl: server.url, distDir: folder, ...limits });
   } finally {
     await server.close();
   }
@@ -59,9 +67,10 @@ before(async () => {
 
 after(() => rmSync(distDir, { recursive: true, force: true }));
 
-test("each page is written to both files Cloudflare serves, and a page with an unsafe slug is skipped", () => {
+test("each page is written once, as <slug>.html, and a page with an unsafe slug is skipped", () => {
   for (const slug of ["black-leather-boots", "chelsea-boots", "boots"]) {
-    assert.equal(readOutput(`shop/s/${slug}.html`), readOutput(`shop/s/${slug}/index.html`));
+    assert.ok(readOutput(`shop/s/${slug}.html`).includes("<!doctype html>"), slug);
+    assert.ok(!existsSync(join(distDir, `shop/s/${slug}`)), `No second copy for ${slug}`);
   }
   assert.ok(!existsSync(join(distDir, "shop/escape.html")));
   assert.ok(!existsSync(join(distDir, "shop/s/escape.html")));
@@ -152,8 +161,9 @@ test("a hostile product name is escaped everywhere and its embedded data reads b
 
 test("retired pages redirect permanently, except ones that are live again or have unsafe targets", () => {
   const redirects = readOutput("_redirects");
-  assert.ok(redirects.startsWith(readFileSync(join(BuiltDist, "_redirects"), "utf8").trimEnd()));
+  assert.ok(redirects.startsWith(readOriginal("_redirects").trimEnd()));
   assert.match(redirects, /^\/shop\/s\/neon-boots \/shop\/s\/black-leather-boots 301$/m);
+  assert.match(redirects, /^\/shop\/s\/old-boots \/shop 301$/m);
   assert.ok(!redirects.includes("/shop/s/chelsea-boots /shop"));
   assert.ok(!redirects.includes("bad-target") && !redirects.includes("evil"));
 });
@@ -175,9 +185,45 @@ test("the sitemap index points to the site's pages and to the Shop Nobi sitemap,
 
 test("llms.txt keeps its own text and gains a Shop Nobi section with links to the pages", () => {
   const llmsText = readOutput("llms.txt");
-  assert.ok(llmsText.startsWith(readFileSync(join(BuiltDist, "llms.txt"), "utf8").trimEnd()));
+  assert.ok(llmsText.startsWith(readOriginal("llms.txt").trimEnd()));
   assert.ok(llmsText.includes("## Shop Nobi"));
   assert.ok(llmsText.includes("- [Black Leather Boots](https://nobi.ai/shop/s/black-leather-boots)"));
+});
+
+test("when the file limit is reached, only the first pages are built, and the rest stay out of every listing", async () => {
+  const folder = makeDistCopy();
+  const sitemapAndOnePage = 2;
+  try {
+    const copiedFileCount = 1 + ListingFiles.length;
+    const count = await prerenderWith({}, folder, { fileLimit: copiedFileCount + sitemapAndOnePage });
+    assert.equal(count, 1);
+    assert.ok(existsSync(join(folder, "shop/s/black-leather-boots.html")));
+    assert.ok(!existsSync(join(folder, "shop/s/chelsea-boots.html")) && !existsSync(join(folder, "shop/s/boots.html")));
+
+    const sitemap = readFileSync(join(folder, "sitemap-shop.xml"), "utf8");
+    const llmsText = readFileSync(join(folder, "llms.txt"), "utf8");
+    assert.equal(sitemap.split("<url>").length - 1, 1);
+    assert.ok(!llmsText.includes("chelsea-boots") && !llmsText.includes("/shop/s/boots)"));
+
+    const body = readBody(readFileSync(join(folder, "shop/s/black-leather-boots.html"), "utf8"));
+    assert.ok(!body.includes('href="/shop/s/'), "No links to pages that were left out");
+    assert.ok(body.includes(">Boots</li>") && body.includes("Chelsea Boots</li>"), "They show as plain text");
+  } finally {
+    rmSync(folder, { recursive: true, force: true });
+  }
+});
+
+test("redirects for retired pages stop at the rule limit, keeping the first ones in the file", async () => {
+  const folder = makeDistCopy();
+  const existingRules = countRedirectRules(readOriginal("_redirects"));
+  try {
+    await prerenderWith({}, folder, { redirectRuleLimit: existingRules + 1 });
+    const redirects = readFileSync(join(folder, "_redirects"), "utf8");
+    assert.equal(countRedirectRules(redirects), existingRules + 1);
+    assert.ok(redirects.includes("/shop/s/neon-boots ") && !redirects.includes("old-boots"));
+  } finally {
+    rmSync(folder, { recursive: true, force: true });
+  }
 });
 
 test("an empty page list builds, with an empty Shop Nobi sitemap and the other files unchanged", async () => {
@@ -187,8 +233,8 @@ test("an empty page list builds, with an empty Shop Nobi sitemap and the other f
     assert.equal(count, 0);
     assert.ok(!existsSync(join(folder, "shop")));
     assert.ok(!readFileSync(join(folder, "sitemap-shop.xml"), "utf8").includes("<url>"));
-    for (const file of ["_redirects", "llms.txt"]) {
-      assert.equal(readFileSync(join(folder, file), "utf8"), readFileSync(join(BuiltDist, file), "utf8"));
+    for (const file of ListingFiles) {
+      assert.equal(readFileSync(join(folder, file), "utf8"), readOriginal(file));
     }
   } finally {
     rmSync(folder, { recursive: true, force: true });

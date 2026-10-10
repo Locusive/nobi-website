@@ -16,12 +16,15 @@ export function isSafeSlug(slug) {
 }
 
 /**
- * Builds the page data for every downloaded page with a safe slug and a title. The first page wins a repeated slug.
+ * Builds the page data for the first downloaded pages with a safe slug and a title, up to the limit. The first
+ * page wins a repeated slug. Links go only to pages within the limit; the rest show as plain text.
  *
- * @param {object[]} downloadedPages The downloaded page objects.
- * @returns {object[]} The cleaned page data, in the downloaded order.
+ * @param {object[]} downloadedPages The downloaded page objects, most searched first.
+ * @param {number} pageLimit The most pages to build.
+ * @returns {{pages: object[], leftOutCount: number}} The page data in the downloaded order, and how many usable
+ *     pages were over the limit.
  */
-export function buildSearchPages(downloadedPages) {
+export function buildSearchPages(downloadedPages, pageLimit) {
   const pageBySlug = new Map();
   for (const page of downloadedPages.filter(isUsablePage)) {
     if (!pageBySlug.has(page.slug)) {
@@ -29,8 +32,16 @@ export function buildSearchPages(downloadedPages) {
     }
   }
 
-  const titleBySlug = new Map([...pageBySlug.values()].map((page) => [page.slug, page.title]));
-  return [...pageBySlug.values()].map((page) => buildSearchPage(page, titleBySlug));
+  const usablePages = [...pageBySlug.values()];
+  const builtPages = usablePages.slice(0, Math.max(0, pageLimit));
+  const links = {
+    titleBySlug: new Map(usablePages.map((page) => [page.slug, page.title])),
+    builtSlugs: new Set(builtPages.map((page) => page.slug)),
+  };
+  return {
+    pages: builtPages.map((page) => buildSearchPage(page, links)),
+    leftOutCount: usablePages.length - builtPages.length,
+  };
 }
 
 /** Returns whether a downloaded page can be built, and warns when it cannot. */
@@ -43,35 +54,35 @@ function isUsablePage(page) {
 }
 
 /** Builds the page data for one page. */
-function buildSearchPage(page, titleBySlug) {
+function buildSearchPage(page, links) {
   return {
     slug: page.slug,
     query: isText(page.query) ? page.query : page.title,
     title: page.title,
     refreshedAt: isText(page.refreshedAt) ? page.refreshedAt : null,
-    breadcrumbs: buildBreadcrumbs(page, titleBySlug),
-    related: buildRelatedPages(page, titleBySlug),
+    breadcrumbs: buildBreadcrumbs(page, links.builtSlugs),
+    related: buildRelatedPages(page, links),
     products: (Array.isArray(page.products) ? page.products : []).map(buildProduct).filter(Boolean),
   };
 }
 
-/** Keeps each category crumb, linking it only when it has a live page other than this one. */
-function buildBreadcrumbs(page, titleBySlug) {
+/** Keeps each category crumb, linking it only when it has a built page other than this one. */
+function buildBreadcrumbs(page, builtSlugs) {
   const crumbs = Array.isArray(page.breadcrumbs) ? page.breadcrumbs : [];
   return crumbs
     .filter((crumb) => isText(crumb?.name))
     .map((crumb) => ({
       name: crumb.name,
-      slug: crumb.slug !== page.slug && titleBySlug.has(crumb.slug) ? crumb.slug : null,
+      slug: crumb.slug !== page.slug && builtSlugs.has(crumb.slug) ? crumb.slug : null,
     }));
 }
 
-/** Keeps the related pages that are live, with their titles for the link text. */
-function buildRelatedPages(page, titleBySlug) {
+/** Keeps the related pages that are live, linking only the built ones. */
+function buildRelatedPages(page, links) {
   const relatedSlugs = Array.isArray(page.relatedSlugs) ? page.relatedSlugs : [];
   return [...new Set(relatedSlugs)]
-    .filter((slug) => slug !== page.slug && titleBySlug.has(slug))
-    .map((slug) => ({ slug, title: titleBySlug.get(slug) }));
+    .filter((slug) => slug !== page.slug && links.titleBySlug.has(slug))
+    .map((slug) => ({ slug: links.builtSlugs.has(slug) ? slug : null, title: links.titleBySlug.get(slug) }));
 }
 
 /** Builds one product, or returns null when it has no name or no safe link. */

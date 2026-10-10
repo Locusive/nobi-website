@@ -58,7 +58,7 @@ function ProductCard({ product }) {
   );
 }
 
-/** Links to other search pages about similar products. */
+/** Links to other search pages about similar products. A search that was not built shows as plain text. */
 function RelatedSearches({ related }) {
   if (related.length === 0) {
     return null;
@@ -68,11 +68,9 @@ function RelatedSearches({ related }) {
     <section className="mt-10">
       <h2 className="text-lg font-semibold">Related searches</h2>
       <ul className="mt-3 flex flex-wrap gap-3">
-        {related.map((page) => (
-          <li key={page.slug}>
-            <a href={searchPagePath(page.slug)} className="rounded-full border border-black/10 px-3 py-1 text-sm hover:underline dark:border-white/20">
-              {page.title}
-            </a>
+        {related.map((page, index) => (
+          <li key={index} className="rounded-full border border-black/10 px-3 py-1 text-sm dark:border-white/20">
+            {page.slug ? <a href={searchPagePath(page.slug)} className="hover:underline">{page.title}</a> : page.title}
           </li>
         ))}
       </ul>

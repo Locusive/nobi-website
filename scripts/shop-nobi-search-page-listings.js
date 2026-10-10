@@ -5,8 +5,6 @@ import { htmlEscape } from "./prerender-blog.js";
 import { searchPagePath, searchPageUrl } from "../src/utils/shopNobiSearchPage.js";
 import { isSafeSlug } from "./shop-nobi-search-page-view.js";
 
-// Cloudflare Pages reads at most this many lines from _redirects.
-const CloudflareRedirectLimit = 2000;
 const LlmsTxtPageLimit = 100;
 const RedirectTargetPattern = /^\/[A-Za-z0-9\-._~/]*$/;
 
@@ -46,23 +44,34 @@ export function buildRetiredRedirects(retired, pages) {
 }
 
 /**
- * Adds the retired page redirects to the existing _redirects text.
+ * Adds the first retired page redirects to the existing _redirects text, keeping the whole file within the rule
+ * limit, and logs how many were dropped.
  *
  * @param {string} redirectsText The current _redirects file.
- * @param {string[]} redirectLines The retired page lines.
+ * @param {string[]} redirectLines The retired page lines, newest first.
+ * @param {number} ruleLimit The most rules the whole file may hold.
  * @returns {string} The new _redirects file.
  */
-export function appendRedirects(redirectsText, redirectLines) {
-  if (redirectLines.length === 0) {
+export function appendRedirects(redirectsText, redirectLines, ruleLimit) {
+  const room = Math.max(0, ruleLimit - countRedirectRules(redirectsText));
+  const keptLines = redirectLines.slice(0, room);
+  if (keptLines.length < redirectLines.length) {
+    console.warn(`prerender-shop: dropped ${redirectLines.length - keptLines.length} retired page redirect(s) to stay within ${ruleLimit} rules.`);
+  }
+  if (keptLines.length === 0) {
     return redirectsText;
   }
+  return `${redirectsText.trimEnd()}\n\n# Retired Shop Nobi search pages.\n${keptLines.join("\n")}\n`;
+}
 
-  const text = `${redirectsText.trimEnd()}\n\n# Retired Shop Nobi search pages.\n${redirectLines.join("\n")}\n`;
-  const ruleCount = text.split("\n").filter((line) => line.trim() && !line.startsWith("#")).length;
-  if (ruleCount > CloudflareRedirectLimit) {
-    console.warn(`prerender-shop: _redirects has ${ruleCount} rules; Cloudflare reads only ${CloudflareRedirectLimit}.`);
-  }
-  return text;
+/**
+ * Counts the rules in a _redirects file: every line that is not blank or a comment.
+ *
+ * @param {string} redirectsText The _redirects file.
+ * @returns {number} The number of rules.
+ */
+export function countRedirectRules(redirectsText) {
+  return redirectsText.split("\n").filter((line) => line.trim() && !line.trim().startsWith("#")).length;
 }
 
 /**

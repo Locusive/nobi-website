@@ -1,10 +1,10 @@
 // Builds the Shop Nobi search pages (/shop/s/<slug>) with their products in the HTML, plus their sitemap,
 // redirects and llms.txt section. A failed data download fails the build, so the last good deploy stays live.
 
-import { readFileSync, writeFileSync, existsSync } from "fs";
+import { readFileSync, writeFileSync, existsSync, mkdirSync, readdirSync } from "fs";
 import { join, dirname } from "path";
 import { fileURLToPath } from "url";
-import { renderPage, toScriptJson, writePageFiles } from "./page-html.js";
+import { renderPage, toScriptJson } from "./page-html.js";
 import { loadPageRenderer } from "./page-renderer.js";
 import { downloadSearchPagesData, readSearchPagesDataUrl } from "./shop-nobi-search-pages-data.js";
 import { buildSearchPages } from "./shop-nobi-search-page-view.js";
@@ -14,26 +14,57 @@ import { buildSearchPageSeo, SearchPageDataElementId } from "../src/utils/shopNo
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const Dist = join(__dirname, "..", "dist");
 const SearchPageRobots = "index, follow";
+// Cloudflare's Free plan allows 20,000 files per Pages site and 2,000 static redirects; these leave room.
+const DistFileLimit = 19000;
+const RedirectRuleLimit = 1900;
+const ShopNobiSitemapFile = "sitemap-shop.xml";
 
 /**
- * Downloads the page data and writes every search page and listing file into the build output.
+ * Downloads the page data and writes the search pages and listing files into the build output, keeping the
+ * output within the file and redirect limits.
  *
- * @param {{dataUrl: string, distDir: string}} options Where the data comes from and where the build output is.
+ * @param {{dataUrl: string, distDir: string, fileLimit?: number, redirectRuleLimit?: number}} options Where the
+ *     data comes from, where the build output is, and the most files and redirect rules the output may hold.
  * @returns {Promise<number>} How many pages were written.
  */
-export async function prerenderShopNobiSearchPages({ dataUrl, distDir }) {
+export async function prerenderShopNobiSearchPages({
+  dataUrl,
+  distDir,
+  fileLimit = DistFileLimit,
+  redirectRuleLimit = RedirectRuleLimit,
+}) {
   const { pages: downloadedPages, retired } = await downloadSearchPagesData(dataUrl);
-  const pages = buildSearchPages(downloadedPages);
+  const { pages, leftOutCount } = buildSearchPages(downloadedPages, countPageRoom(distDir, fileLimit));
+  if (leftOutCount > 0) {
+    console.warn(`prerender-shop: left out ${leftOutCount} page(s) to stay within ${fileLimit} files.`);
+  }
 
   await writeSearchPages(pages, distDir);
 
-  writeFileSync(join(distDir, "sitemap-shop.xml"), buildShopNobiSitemap(pages));
-  updateFile(join(distDir, "_redirects"), (text) => appendRedirects(text, buildRetiredRedirects(retired, pages)));
+  const redirectLines = buildRetiredRedirects(retired, pages);
+  writeFileSync(join(distDir, ShopNobiSitemapFile), buildShopNobiSitemap(pages));
+  updateFile(join(distDir, "_redirects"), (text) => appendRedirects(text, redirectLines, redirectRuleLimit));
   updateFile(join(distDir, "llms.txt"), (text) => appendLlmsTxtSection(text, pages));
   return pages.length;
 }
 
-/** Writes both file forms of every search page. */
+/** Returns how many pages fit: one file each, after the files already built and the Shop Nobi sitemap. */
+function countPageRoom(distDir, fileLimit) {
+  const sitemapFileCount = existsSync(join(distDir, ShopNobiSitemapFile)) ? 0 : 1;
+  return fileLimit - countFiles(distDir) - sitemapFileCount;
+}
+
+/** Counts every file in a folder and the folders inside it. */
+function countFiles(folder) {
+  return readdirSync(folder, { withFileTypes: true })
+    .map((entry) => (entry.isDirectory() ? countFiles(join(folder, entry.name)) : 1))
+    .reduce((total, count) => total + count, 0);
+}
+
+/**
+ * Writes each search page to <slug>.html only. Cloudflare serves /shop/s/<slug> from that file and redirects
+ * /shop/s/<slug>/ to it, so a second copy would only use up the file limit.
+ */
 async function writeSearchPages(pages, distDir) {
   if (pages.length === 0) {
     return;
@@ -46,9 +77,10 @@ async function writeSearchPages(pages, distDir) {
 
   const shell = readFileSync(shellPath, "utf8");
   const { renderSearchPageBody } = await loadPageRenderer();
+  mkdirSync(join(distDir, "shop", "s"), { recursive: true });
   for (const page of pages) {
     const html = renderSearchPage(page, shell, renderSearchPageBody(page));
-    writePageFiles(distDir, buildSearchPageSeo(page).path, html);
+    writeFileSync(join(distDir, `${buildSearchPageSeo(page).path}.html`), html);
   }
 }
 

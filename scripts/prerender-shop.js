@@ -23,8 +23,7 @@ const ShopNobiSitemapFile = "sitemap-shop.xml";
  * Downloads the page data and writes the search pages and listing files into the build output, keeping the
  * output within the file and redirect limits.
  *
- * @param {{dataUrl: string, distDir: string, fileLimit?: number, redirectRuleLimit?: number}} options Where the
- *     data comes from, where the build output is, and the most files and redirect rules the output may hold.
+ * @param {{dataUrl: string, distDir: string, fileLimit?: number, redirectRuleLimit?: number}} options The settings.
  * @returns {Promise<number>} How many pages were written.
  */
 export async function prerenderShopNobiSearchPages({

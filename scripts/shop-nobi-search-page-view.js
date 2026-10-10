@@ -21,8 +21,7 @@ export function isSafeSlug(slug) {
  *
  * @param {object[]} downloadedPages The downloaded page objects, most searched first.
  * @param {number} pageLimit The most pages to build.
- * @returns {{pages: object[], leftOutCount: number}} The page data in the downloaded order, and how many usable
- *     pages were over the limit.
+ * @returns {{pages: object[], leftOutCount: number}} The page data, and how many usable pages were left out.
  */
 export function buildSearchPages(downloadedPages, pageLimit) {
   const pageBySlug = new Map();

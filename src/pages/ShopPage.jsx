@@ -31,9 +31,8 @@ const ShopPageSeo = {
 };
 
 /**
- * The Shop Nobi page: the site's header, scrolling away with the page instead of pinned to the top, with the
- * search experience the assistant bundle boots on /shop moved into the slot under it. On a prebuilt search page
- * (/shop/s/<slug>) the slot shows that page's products until the live search arrives.
+ * The Shop Nobi page: the site's header, then the live search from the assistant bundle in the slot under it.
+ * On a prebuilt search page (/shop/s/<slug>) the slot shows that page's products until the live search arrives.
  *
  * @param {{searchPage?: object}} props The build passes the search page data; in the browser it comes from the HTML.
  */

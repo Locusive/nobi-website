@@ -1,6 +1,5 @@
-// Turns the downloaded page data into the page data the HTML is built from.
-// It keeps only safe values: slugs that are safe in file names, links that
-// start with http or https, and product links without tracking tags.
+// Turns the downloaded page data into the page data the HTML is built from, keeping only safe
+// values: slugs that are safe in file names, http or https links, and links without tracking tags.
 
 const SlugPattern = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 const CurrencyPattern = /^[A-Z]{3}$/;

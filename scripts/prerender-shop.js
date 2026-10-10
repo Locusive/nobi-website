@@ -1,11 +1,5 @@
-// Builds the Shop Nobi search pages (nobi.ai/shop/s/<slug>) after
-// prerender-pages.js. Each page carries its products in the HTML, so
-// crawlers that do not run JavaScript still see them. It also writes
-// sitemap-shop.xml, redirects for retired pages and a llms.txt section.
-//
-// The page data comes from one public JSON file (see
-// shop-nobi-search-pages-data.js). If the download fails, the build fails, so
-// Cloudflare keeps the last good deploy live.
+// Builds the Shop Nobi search pages (/shop/s/<slug>) with their products in the HTML, plus their sitemap,
+// redirects and llms.txt section. A failed data download fails the build, so the last good deploy stays live.
 
 import { readFileSync, writeFileSync, existsSync } from "fs";
 import { join, dirname } from "path";

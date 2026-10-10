@@ -1,6 +1,5 @@
-// A Shop Nobi search page is a prebuilt page for one search, served at
-// /shop/s/<slug>. The build writes its products into the HTML and embeds the
-// same page data, so the browser shows and describes it the same way.
+// A Shop Nobi search page is a prebuilt page for one search at /shop/s/<slug>. The build and the
+// browser both use these helpers, so the page looks and is described the same way in each.
 
 const BaseUrl = "https://nobi.ai";
 const ShopNobiPath = "/shop";

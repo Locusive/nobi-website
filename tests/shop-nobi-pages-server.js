@@ -1,9 +1,5 @@
-// A small local HTTP server that serves Shop Nobi page data for the tests
-// and for local builds, so neither needs the network.
-//
-// Run on its own to serve the test data for a local build:
-//   node tests/shop-nobi-pages-server.js 4789
-//   SHOP_PAGES_DATA_URL=http://127.0.0.1:4789/pages.json npm test
+// A local server with test Shop Nobi page data, so tests and local builds need no network.
+// Local build: `node tests/shop-nobi-pages-server.js 4789`, then set SHOP_PAGES_DATA_URL (see README).
 
 import { createServer } from "node:http";
 import { readFileSync } from "node:fs";

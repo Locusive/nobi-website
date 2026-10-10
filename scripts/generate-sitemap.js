@@ -1,7 +1,5 @@
-// Generates the sitemaps at build time: public/sitemap-pages.xml lists the
-// site's own pages, and public/sitemap.xml is the index that points to it
-// and to sitemap-shop.xml, which scripts/prerender-shop.js writes.
-// Run via: node scripts/generate-sitemap.js
+// Writes public/sitemap-pages.xml (the site's own pages) and public/sitemap.xml,
+// the index that points to it and to sitemap-shop.xml from prerender-shop.js.
 import { readFileSync, writeFileSync, readdirSync } from "fs";
 import { join, dirname } from "path";
 import { fileURLToPath } from "url";

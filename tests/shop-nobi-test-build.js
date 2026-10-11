@@ -8,6 +8,7 @@ import { fileURLToPath } from "node:url";
 import { prerenderShopNobiSearchPages } from "../scripts/prerender-shop.js";
 import { listPinFeedFiles } from "../scripts/shop-nobi-pin-feed.js";
 import { startPageDataServer } from "./shop-nobi-pages-server.js";
+import { PortraitPosterSize } from "../src/utils/previewImage.js";
 
 export const BuiltDist = fileURLToPath(new URL("../dist/", import.meta.url));
 // The build's own run adds to _redirects and llms.txt, so the copies start from the originals in public/.
@@ -29,11 +30,16 @@ export function readOriginal(file) {
   return readFileSync(join(OriginalPublic, file), "utf8");
 }
 
+/** Gives every picture the full poster size, so builds in tests never download pictures. */
+export async function readFullPosterSize() {
+  return PortraitPosterSize;
+}
+
 /** Runs the build step against a local server that sends the given response. */
 export async function prerenderWith(response, folder, limits = {}) {
   const server = await startPageDataServer(response);
   try {
-    return await prerenderShopNobiSearchPages({ apiBaseUrl: server.url, distDir: folder, ...limits });
+    return await prerenderShopNobiSearchPages({ apiBaseUrl: server.url, distDir: folder, fetchImageSize: readFullPosterSize, ...limits });
   } finally {
     await server.close();
   }

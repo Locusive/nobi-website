@@ -23,6 +23,7 @@ export default function ShopNobiSearchPageContent({ page }) {
         ))}
       </ul>
       <Questions faq={page.faq} />
+      <WebStoryLink storyPath={page.storyPath} />
       <RelatedSearches related={page.related} />
     </main>
   );
@@ -90,6 +91,19 @@ function Questions({ faq }) {
         </div>
       ))}
     </section>
+  );
+}
+
+/** Links to this page's Google Web Story, when the build made one. */
+function WebStoryLink({ storyPath }) {
+  if (!storyPath) {
+    return null;
+  }
+
+  return (
+    <p className="mt-10 text-sm">
+      <a href={storyPath} className="underline hover:no-underline">See this guide as a Web Story</a>
+    </p>
   );
 }
 

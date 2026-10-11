@@ -1,5 +1,5 @@
-// Picks a search page's preview picture. Google Discover shows large previews only for pictures at least 1,200
-// pixels wide, so pictures on Shopify's image servers are asked for at that width.
+// Picks a page's preview picture. Shopify pictures are asked for at the 1,200 pixel width Google Discover needs
+// for large previews, or cut to the 3:4 portrait Google asks for in a Web Story poster.
 
 /** The width Google Discover needs for a large preview. */
 export const LargePreviewWidth = 1200;
@@ -7,9 +7,15 @@ export const LargePreviewWidth = 1200;
 /** The robots tag for pages search engines may index, which also lets them show large picture previews. */
 export const IndexableRobots = "index, follow, max-image-preview:large";
 
+/** Google's smallest Web Story poster. Shopify never enlarges a picture, so a small one gives a smaller cut. */
+export const PortraitPosterSize = Object.freeze({ width: 640, height: 853 });
+
 const ShopifyImageHost = "cdn.shopify.com";
 const ShopifyStoreImagePathPrefix = "/cdn/shop/";
 const WidthParameter = "width";
+const HeightParameter = "height";
+const CropParameter = "crop";
+const CenterCrop = "center";
 
 /**
  * Returns the first https picture among a page's products, at 1,200 pixels wide when Shopify serves it.
@@ -32,19 +38,44 @@ export function findLargePreviewImage(products) {
  * @param {string} imageUrl The picture's address.
  * @returns {string} The widened address, or the original one.
  */
-function widenShopifyImage(imageUrl) {
-  let address;
-  try {
-    address = new URL(imageUrl);
-  } catch {
-    return imageUrl;
-  }
-
-  const isShopifyImage = address.hostname === ShopifyImageHost || address.pathname.startsWith(ShopifyStoreImagePathPrefix);
-  if (!isShopifyImage) {
+export function widenShopifyImage(imageUrl) {
+  const address = readShopifyImageAddress(imageUrl);
+  if (!address) {
     return imageUrl;
   }
 
   address.searchParams.set(WidthParameter, String(LargePreviewWidth));
   return address.toString();
+}
+
+/**
+ * Asks Shopify's image servers for a 640 by 853 pixel portrait cut from the middle of the picture, the size
+ * Google asks for in a Web Story poster.
+ *
+ * @param {string} imageUrl The picture's address.
+ * @returns {string | null} The portrait's address, or null when Shopify does not serve the picture.
+ */
+export function cropShopifyImageToPortrait(imageUrl) {
+  const address = readShopifyImageAddress(imageUrl);
+  if (!address) {
+    return null;
+  }
+
+  address.searchParams.set(WidthParameter, String(PortraitPosterSize.width));
+  address.searchParams.set(HeightParameter, String(PortraitPosterSize.height));
+  address.searchParams.set(CropParameter, CenterCrop);
+  return address.toString();
+}
+
+/** Returns the picture's address when Shopify's image servers serve it, else null. */
+function readShopifyImageAddress(imageUrl) {
+  let address;
+  try {
+    address = new URL(imageUrl);
+  } catch {
+    return null;
+  }
+
+  const isShopifyImage = address.hostname === ShopifyImageHost || address.pathname.startsWith(ShopifyStoreImagePathPrefix);
+  return isShopifyImage ? address : null;
 }

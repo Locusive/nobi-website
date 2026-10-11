@@ -1,6 +1,8 @@
 // Fetches the Shop Nobi search page data from the API, shaped as
 // {generatedAt, pages: [...], retired: [...]}.
 
+import { BannedTopLevel, readTopLevel } from "../src/utils/shopNobiPinBoard.js";
+
 const DefaultApiBaseUrl = "https://api.nobi.ai";
 const SearchPagesRoute = "/v1/shop/pages";
 const FetchTimeoutMs = 60000;
@@ -32,5 +34,15 @@ export async function fetchSearchPagesData(apiBaseUrl) {
   if (!Array.isArray(data?.pages) || !Array.isArray(data?.retired)) {
     throw new Error(`${routeUrl} has no "pages" and "retired" lists.`);
   }
-  return { pages: data.pages, retired: data.retired };
+  return { pages: keepAllowedPages(data.pages), retired: data.retired };
+}
+
+/**
+ * Drops pages in the banned top-level category, so no page, sitemap or feed ever shows them.
+ *
+ * @param {object[]} pages The pages from the API.
+ * @returns {object[]} The pages outside the banned category, in their original order.
+ */
+export function keepAllowedPages(pages) {
+  return pages.filter((page) => readTopLevel(page.categoryPath) !== BannedTopLevel);
 }

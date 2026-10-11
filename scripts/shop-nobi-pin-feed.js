@@ -47,15 +47,14 @@ function buildPinItem(page) {
     return null;
   }
 
+  // No pubDate: a nightly refresh does not mean the page changed, so its refresh time is not a publish date.
   const link = searchPageUrl(page.slug);
-  const refreshedTime = Date.parse(page.refreshedAt ?? "");
-  const publishedLine = refreshedTime ? `\n      <pubDate>${new Date(refreshedTime).toUTCString()}</pubDate>` : "";
   return [
     `    <item>`,
     `      <title>${htmlEscape(page.title)}</title>`,
     `      <link>${htmlEscape(link)}</link>`,
     `      <description>${htmlEscape(buildSearchPageSeo(page).description)}</description>`,
-    `      <guid isPermaLink="true">${htmlEscape(link)}</guid>${publishedLine}`,
+    `      <guid isPermaLink="true">${htmlEscape(link)}</guid>`,
     `      <media:content url="${htmlEscape(imageUrl)}" medium="image"/>`,
     `    </item>`,
   ].join("\n");

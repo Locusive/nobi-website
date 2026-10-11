@@ -36,6 +36,7 @@ test("the head carries the page's own title, description, canonical, robots and 
     `<meta property="og:description" content="${description}">`,
     `<meta name="twitter:description" content="${description}">`,
     '<meta property="og:title" content="Black Leather Boots | Shop Nobi">',
+    '<link rel="alternate" type="application/rss+xml" title="Shop Nobi searches" href="https://nobi.ai/shop/pins.xml">',
     '<link rel="canonical" href="https://nobi.ai/shop/s/black-leather-boots">',
     '<meta name="robots" content="index, follow">',
     '<meta property="og:url" content="https://nobi.ai/shop/s/black-leather-boots">',
@@ -194,10 +195,9 @@ test("retired pages redirect permanently, except ones that are live again or hav
 
 test("the Shop Nobi sitemap lists each built category and search page", () => {
   const shopSitemap = readOutput("sitemap-shop.xml");
-  assert.ok(shopSitemap.includes(
-    "<loc>https://nobi.ai/shop/s/black-leather-boots</loc>\n    <lastmod>2026-10-11T08:02:11Z</lastmod>"
-  ));
-  assert.ok(shopSitemap.includes("<loc>https://nobi.ai/shop/c/shoes</loc>\n    <lastmod>2026-10-11T08:02:11Z</lastmod>"));
+  for (const path of ["shop/s/black-leather-boots", "shop/c/shoes"]) {
+    assert.ok(shopSitemap.includes(`<loc>https://nobi.ai/${path}</loc>\n    <lastmod>2026-10-11T08:02:11Z</lastmod>`), path);
+  }
   assert.equal(shopSitemap.split("<url>").length - 1, 4, "One category page and three search pages");
   assert.ok(!shopSitemap.includes("neon-boots"));
 });
@@ -211,7 +211,6 @@ test("the pin feed has one item per search page with an https picture, newest fi
     "<title>Black Leather Boots</title>",
     "<description>Black leather boots for work &amp; weekends, from &quot;classic&quot; ropers to &lt;lace-ups&gt;.</description>",
     '<guid isPermaLink="true">https://nobi.ai/shop/s/black-leather-boots</guid>',
-    "<pubDate>Sun, 11 Oct 2026 08:02:11 GMT</pubDate>",
     '<media:content url="https://cdn.example.com/roper.jpg" medium="image"/>',
   ]) {
     assert.ok(items[0].includes(line), `Missing: ${line}`);
@@ -260,6 +259,7 @@ test("each top category gets one page listing its search pages, with its own hea
     '<link rel="canonical" href="https://nobi.ai/shop/c/shoes">',
     '<meta name="robots" content="index, follow">',
     '<meta property="og:title" content="Shoes | Shop Nobi">',
+    '<link rel="alternate" type="application/rss+xml" title="Shop Nobi searches" href="https://nobi.ai/shop/pins.xml">',
   ]) {
     assert.ok(html.includes(tag), `Missing tag: ${tag}`);
   }

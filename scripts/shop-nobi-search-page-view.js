@@ -1,7 +1,7 @@
 // Turns the fetched page data into the page data the HTML is built from, keeping only safe
 // values: slugs that are safe in file names, http or https links, and links without tracking tags.
 
-import { removeTrackingTags } from "../src/utils/shopNobiSearchPage.js";
+import { removeTrackingTags } from "../src/utils/shopNobiPage.js";
 
 const SlugPattern = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 const CurrencyPattern = /^[A-Z]{3}$/;

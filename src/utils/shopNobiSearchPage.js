@@ -1,14 +1,13 @@
 // A Shop Nobi search page is a prebuilt page for one search at /shop/s/<slug>. The build and the
 // browser both use these helpers, so the page looks and is described the same way in each.
 
-import { BaseUrl, ShopNobiImage, ShopNobiLinkTags } from "./shopNobiPage.js";
+import { BaseUrl, ShopNobiImage, ShopNobiLinkTags, removeTrackingTags } from "./shopNobiPage.js";
 import { categoryPagePath } from "./shopNobiCategoryPage.js";
 import { buildBreadcrumbSchema, buildFaqSchema, buildProductListSchema } from "./shopNobiStructuredData.js";
 import { findLargePreviewImage } from "./previewImage.js";
 
 const SearchPagePathPrefix = "/shop/s/";
 const ShopNobiTags = { utm_source: "shop_nobi", ...ShopNobiLinkTags };
-const TrackingTagPrefix = "utm_";
 
 /**
  * Returns the path of a search page.
@@ -101,19 +100,6 @@ export function formatPrice(price, currency) {
   } catch {
     return `${price.toFixed(2)} ${currency}`;
   }
-}
-
-/**
- * Removes every utm_ tag from a link, keeping its other parts.
- *
- * @param {string} storeUrl The store link.
- * @returns {string} The link without utm_ tags.
- */
-export function removeTrackingTags(storeUrl) {
-  const address = new URL(storeUrl);
-  const trackingTags = [...address.searchParams.keys()].filter((key) => key.startsWith(TrackingTagPrefix));
-  trackingTags.forEach((key) => address.searchParams.delete(key));
-  return address.toString();
 }
 
 /**

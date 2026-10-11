@@ -17,8 +17,8 @@ test("a click on a product link swaps its utm_ tags for Shop Nobi's, keeping the
   assert.equal(link.href, taggedHref, "A second click adds nothing more");
 });
 
-test("a Shop Nobi page link placed on a channel names that channel and replaces any utm tags it had", () => {
-  const pageUrl = "https://nobi.ai/shop/s/linen-dress?stores=a&utm_source=old&utm_medium=old";
+test("a Shop Nobi page link placed on a channel names that channel and drops every utm tag it had", () => {
+  const pageUrl = "https://nobi.ai/shop/s/linen-dress?stores=a&utm_source=old&utm_medium=old&utm_term=old";
 
   const taggedLink = tagShopNobiPageLink(pageUrl, "google_web_stories");
 

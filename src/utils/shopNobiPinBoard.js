@@ -27,7 +27,7 @@ export const PinBoardNameByTopLevel = Object.freeze({
   religious_ceremonial: "Religious & Ceremonial",
 });
 
-/** The top level kept out of every feed, because Pinterest bans weapons. */
+/** The top level kept off the website and out of every feed: weapons and adult products. */
 export const BannedTopLevel = "mature";
 
 const PinBoardFeedPathPrefix = "/shop/pins/";

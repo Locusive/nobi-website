@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import { test } from "node:test";
 import { isShopNobiPath, ShopNobiImage } from "../src/utils/shopNobiPage.js";
 import { buildSearchPageSeo } from "../src/utils/shopNobiSearchPage.js";
+import { keepAllowedPages } from "../scripts/shop-nobi-search-pages-api.js";
 
 test("the Shop Nobi page is /shop and every path under it", () => {
   for (const path of ["/shop", "/shop/", "/shop/anything"]) {
@@ -24,4 +25,14 @@ test("a search page previews its first https product picture, 1,200 pixels wide 
     "https://cdn.shopify.com/s/files/1/x.jpg?v=2&width=1200");
   assert.equal(buildSearchPageSeo(makePage(["https://cdn.example.com/roper.jpg"])).image, "https://cdn.example.com/roper.jpg");
   assert.equal(buildSearchPageSeo(makePage([null])).image, ShopNobiImage);
+});
+
+test("pages in the mature category never reach the build, whatever the API sends", () => {
+  const pages = [
+    { slug: "combat-knives", categoryPath: "mature.weapons.combat_knives" },
+    { slug: "boots", categoryPath: "apparel_accessories.footwear.boots" },
+    { slug: "no-category", categoryPath: null },
+    null,
+  ];
+  assert.deepEqual(keepAllowedPages(pages).map((page) => page?.slug ?? null), ["boots", "no-category", null], "A malformed entry is left for the later checks");
 });

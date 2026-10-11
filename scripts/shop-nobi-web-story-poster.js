@@ -11,12 +11,10 @@ const PosterAttemptLimit = 3;
  * Gives the first planned stories, up to the limit, a poster of full size, checking a batch of pages at a time.
  * Stories without one are dropped.
  *
- * @param {{page: object, plan: {posterCandidates: string[], pages: object[]}}[]} plannedStories The planned
- *     stories, in page order.
+ * @param {{page: object, plan: object}[]} plannedStories The planned stories, in page order.
  * @param {number} storyLimit The most stories to keep.
  * @param {(imageUrl: string) => Promise<{width: number, height: number} | null>} fetchImageSize Reads a picture's size.
- * @returns {Promise<{stories: {page: object, plan: {posterUrl: string, pages: object[]}}[], checkedCount: number}>}
- *     The stories with their posters, and how many planned stories were checked.
+ * @returns {Promise<{stories: object[], checkedCount: number}>} The stories with posters, and how many were checked.
  */
 export async function choosePosters(plannedStories, storyLimit, fetchImageSize) {
   const stories = [];

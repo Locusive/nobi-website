@@ -33,9 +33,7 @@ export const StoryPageKind = Object.freeze({
  * @param {object[]} searchPages The built search pages, in sitemap order.
  * @param {number} storyLimit The most stories to build.
  * @param {(imageUrl: string) => Promise<{width: number, height: number} | null>} fetchImageSize Reads a picture's size.
- * @returns {Promise<{stories: {page: object, plan: {posterUrl: string, pages: object[]}}[], leftOutCount: number,
- *     smallPosterCount: number}>} The stories, how many pages were not checked because of the limit, and how
- *     many had no poster of full size.
+ * @returns {Promise<{stories: object[], leftOutCount: number, smallPosterCount: number}>} The stories, the pages left out by the limit, and the pages without a full-size poster.
  */
 export async function planWebStories(searchPages, storyLimit, fetchImageSize) {
   const plannedStories = keepAllowedPages(searchPages)
@@ -62,8 +60,7 @@ export function linkWebStories(searchPages, stories) {
  * text or enough product pictures to make a real story.
  *
  * @param {object} page The built search page.
- * @returns {{posterCandidates: string[], pages: object[]} | null} The possible poster addresses, best first, and
- *     the story pages, in order.
+ * @returns {{posterCandidates: string[], pages: object[]} | null} The possible posters, best first, and the story pages.
  */
 export function planWebStory(page) {
   const posterCandidates = listPortraitPosters(page.products);

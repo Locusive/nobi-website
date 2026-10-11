@@ -27,8 +27,7 @@ const ShopNobiSitemapFile = "sitemap-shop.xml";
  * Fetches the page data and writes the prebuilt pages and listing files into the build output, keeping the
  * output within the file and redirect limits.
  *
- * @param {{apiBaseUrl: string, distDir: string, fileLimit?: number, redirectRuleLimit?: number,
- *     fetchImageSize?: function}} options The settings. fetchImageSize reads a poster's size; tests pass their own.
+ * @param {{apiBaseUrl: string, distDir: string, fileLimit?: number, redirectRuleLimit?: number, fetchImageSize?: Function}} options The settings.
  * @returns {Promise<number>} How many search pages were written.
  */
 export async function prerenderShopNobiSearchPages({

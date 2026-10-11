@@ -2,6 +2,7 @@
 // its questions, and a last page that links back to the search page. Thin pages and mature pages get no story.
 
 import { keepAllowedPages } from "./shop-nobi-search-pages-api.js";
+import { choosePosters } from "./shop-nobi-web-story-poster.js";
 import { cropShopifyImageToPortrait, widenShopifyImage } from "../src/utils/previewImage.js";
 import { webStoryPath } from "../src/utils/shopNobiWebStory.js";
 
@@ -26,19 +27,22 @@ export const StoryPageKind = Object.freeze({
 });
 
 /**
- * Plans a story for each search page that has enough to show, in page order, up to the limit.
+ * Plans a story for each search page that has enough to show and a poster of full size, in page order, up to
+ * the limit.
  *
  * @param {object[]} searchPages The built search pages, in sitemap order.
  * @param {number} storyLimit The most stories to build.
- * @returns {{stories: {page: object, plan: object}[], leftOutCount: number}} The planned stories, and how many
- *     pages that could have had one were left out by the limit.
+ * @param {(imageUrl: string) => Promise<{width: number, height: number} | null>} fetchImageSize Reads a picture's size.
+ * @returns {Promise<{stories: {page: object, plan: {posterUrl: string, pages: object[]}}[], leftOutCount: number,
+ *     smallPosterCount: number}>} The stories, how many pages were not checked because of the limit, and how
+ *     many had no poster of full size.
  */
-export function planWebStories(searchPages, storyLimit) {
+export async function planWebStories(searchPages, storyLimit, fetchImageSize) {
   const plannedStories = keepAllowedPages(searchPages)
     .map((page) => ({ page, plan: planWebStory(page) }))
     .filter((story) => story.plan);
-  const stories = plannedStories.slice(0, Math.max(0, storyLimit));
-  return { stories, leftOutCount: plannedStories.length - stories.length };
+  const { stories, checkedCount } = await choosePosters(plannedStories, Math.max(0, storyLimit), fetchImageSize);
+  return { stories, leftOutCount: plannedStories.length - checkedCount, smallPosterCount: checkedCount - stories.length };
 }
 
 /**
@@ -58,13 +62,14 @@ export function linkWebStories(searchPages, stories) {
  * text or enough product pictures to make a real story.
  *
  * @param {object} page The built search page.
- * @returns {{posterUrl: string, pages: object[]} | null} The poster address and the story pages, in order.
+ * @returns {{posterCandidates: string[], pages: object[]} | null} The possible poster addresses, best first, and
+ *     the story pages, in order.
  */
 export function planWebStory(page) {
-  const posterUrl = findPortraitPoster(page.products);
+  const posterCandidates = listPortraitPosters(page.products);
   const guideTexts = page.guide.flatMap(splitParagraph).slice(0, GuidePageLimit);
   const pictureProducts = page.products.filter(hasHttpsPicture).slice(0, ProductPageLimit);
-  if (!posterUrl || guideTexts.length < MinGuidePages || pictureProducts.length < MinProductPages) {
+  if (posterCandidates.length === 0 || guideTexts.length < MinGuidePages || pictureProducts.length < MinProductPages) {
     return null;
   }
 
@@ -77,15 +82,16 @@ export function planWebStory(page) {
     ...questions.map((entry) => ({ kind: StoryPageKind.Question, question: entry.question, answer: entry.answer })),
     { kind: StoryPageKind.End },
   ];
-  return { posterUrl, pages };
+  return { posterCandidates, pages };
 }
 
-/** Returns the portrait cut of the first https product picture Shopify serves, or null when there is none. */
-function findPortraitPoster(products) {
-  return products
+/** Lists the portrait cuts of the https product pictures Shopify serves, in product order, without repeats. */
+function listPortraitPosters(products) {
+  const posterUrls = products
     .filter(hasHttpsPicture)
     .map((product) => cropShopifyImageToPortrait(product.imageUrl))
-    .find(Boolean) ?? null;
+    .filter(Boolean);
+  return [...new Set(posterUrls)];
 }
 
 /**

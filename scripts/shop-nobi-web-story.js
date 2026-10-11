@@ -6,13 +6,11 @@ import { StoryPageKind } from "./shop-nobi-web-story-plan.js";
 import { BaseUrl } from "../src/utils/shopNobiPage.js";
 import { describeSearchPage, formatPrice, searchPageUrl } from "../src/utils/shopNobiSearchPage.js";
 import { webStoryUrl } from "../src/utils/shopNobiWebStory.js";
-import { IndexableRobots } from "../src/utils/previewImage.js";
+import { IndexableRobots, PortraitPosterSize } from "../src/utils/previewImage.js";
 
 const Publisher = "Nobi";
 // A square copy of the Nobi icon on white, since Google asks for a logo without a see-through background.
 const PublisherLogoUrl = `${BaseUrl}/shop-nobi-story-logo.png`;
-const PosterWidth = 640;
-const PosterHeight = 853;
 const StoryTags = { utm_source: "google_web_stories", utm_medium: "referral", utm_campaign: "shop_nobi" };
 const CoverLabel = "Shop Nobi guide";
 const EndText = "The full page has every pick, the whole guide and more questions.";
@@ -109,7 +107,7 @@ function renderLayers(storyPage, page, plan) {
 function renderCover(page, posterUrl) {
   const title = htmlEscape(page.title);
   const updated = page.updatedDate ? `<p class="detail">Updated ${htmlEscape(page.updatedDate)}</p>` : "";
-  const picture = `<amp-img src="${htmlEscape(posterUrl)}" width="${PosterWidth}" height="${PosterHeight}" layout="responsive" alt="${title}"></amp-img>`;
+  const picture = `<amp-img src="${htmlEscape(posterUrl)}" width="${PortraitPosterSize.width}" height="${PortraitPosterSize.height}" layout="responsive" alt="${title}"></amp-img>`;
   return [
     `<amp-story-grid-layer template="fill">${picture}</amp-story-grid-layer>`,
     `<amp-story-grid-layer template="vertical" class="cover-text"><p class="label">${CoverLabel}</p><h1>${title}</h1>${updated}</amp-story-grid-layer>`,

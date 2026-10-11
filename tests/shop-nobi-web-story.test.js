@@ -2,10 +2,22 @@ import assert from "node:assert/strict";
 import { test } from "node:test";
 import { linkWebStories, planWebStories, planWebStory } from "../scripts/shop-nobi-web-story-plan.js";
 import { renderWebStory } from "../scripts/shop-nobi-web-story.js";
+import { PortraitPosterSize } from "../src/utils/previewImage.js";
 
 const ShopifyPicture = "https://cdn.shopify.com/s/files/1/0001/boot.jpg?v=1";
 const PortraitPoster = "https://cdn.shopify.com/s/files/1/0001/boot.jpg?v=1&width=640&height=853&crop=center";
 const WidePicture = "https://cdn.shopify.com/s/files/1/0001/boot.jpg?v=1&width=1200";
+
+/** Gives every picture the full poster size. */
+async function readFullSize() {
+  return PortraitPosterSize;
+}
+
+/** Plans and renders a page's story, with every poster at full size. */
+async function renderStory(page) {
+  const { stories } = await planWebStories([page], 1, readFullSize);
+  return renderWebStory(page, stories[0].plan);
+}
 
 /** Builds a search page with enough guide text, pictures and questions for a story, with the given changes. */
 function makePage(changes = {}) {
@@ -41,7 +53,7 @@ test("a story has a cover, the guide, up to three products, questions that fit, 
   const plan = planWebStory(makePage());
 
   assert.deepEqual(plan.pages.map((page) => page.kind), ["cover", "guide", "guide", "product", "product", "product", "question", "end"]);
-  assert.equal(plan.posterUrl, PortraitPoster, "The poster is a 3:4 portrait cut");
+  assert.deepEqual(plan.posterCandidates, [PortraitPoster], "The poster is a 3:4 portrait cut, listed once");
   assert.equal(plan.pages[3].product.imageUrl, WidePicture, "Product pictures are asked for at 1,200 pixels wide");
 });
 
@@ -69,7 +81,7 @@ test("a page without enough guide text, product pictures or a Shopify poster get
   assert.ok(planWebStory(makePage({ faq: [] })), "Questions are not required");
 });
 
-test("mature pages get no story, and stories stop at the limit in page order", () => {
+test("mature pages get no story, and stories stop at the limit in page order", async () => {
   const pages = [
     makePage({ slug: "knives", categoryPath: "mature.weapons" }),
     makePage({ slug: "rifles", categoryPath: " Mature.weapons.guns" }),
@@ -78,7 +90,7 @@ test("mature pages get no story, and stories stop at the limit in page order", (
     makePage({ slug: "second" }),
     makePage({ slug: "third" }),
   ];
-  const { stories, leftOutCount } = planWebStories(pages, 2);
+  const { stories, leftOutCount } = await planWebStories(pages, 2, readFullSize);
 
   assert.deepEqual(stories.map((story) => story.page.slug), ["first", "second"]);
   assert.equal(leftOutCount, 1, "Only pages that could have had a story count as left out");
@@ -86,9 +98,22 @@ test("mature pages get no story, and stories stop at the limit in page order", (
   assert.deepEqual(linkedPages.map((page) => page.storyPath), [null, null, null, "/shop/stories/first", "/shop/stories/second", null]);
 });
 
-test("the story is an AMP story with the metadata Google requires and a canonical address of its own", () => {
-  const page = makePage();
-  const html = renderWebStory(page, planWebStory(page));
+test("a picture too small for a full poster is skipped for the next one, and a page with none gets no story", async () => {
+  const smallPicture = "https://cdn.shopify.com/small.jpg";
+  const products = makePage().products.map((product, index) => ({ ...product, imageUrl: index === 0 ? smallPicture : ShopifyPicture }));
+  const sizeByUrl = { [PortraitPoster]: PortraitPosterSize, [`${smallPicture}?width=640&height=853&crop=center`]: { width: 600, height: 600 } };
+  const readSize = async (imageUrl) => sizeByUrl[imageUrl] ?? null;
+  const pages = [makePage({ slug: "small-first", products }), makePage({ slug: "all-small", products: [products[0], products[0]] })];
+
+  const { stories, smallPosterCount } = await planWebStories(pages, 5, readSize);
+  assert.deepEqual(stories.map((story) => [story.page.slug, story.plan.posterUrl]), [["small-first", PortraitPoster]]);
+  assert.equal(smallPosterCount, 1);
+  const unreadable = await planWebStories([makePage()], 1, async () => null);
+  assert.equal(unreadable.stories.length, 0, "A picture whose size cannot be read is never a poster");
+});
+
+test("the story is an AMP story with the metadata Google requires and a canonical address of its own", async () => {
+  const html = await renderStory(makePage());
 
   assert.ok(html.startsWith('<!doctype html>\n<html amp lang="en">'));
   assert.ok(html.includes('<link rel="canonical" href="https://nobi.ai/shop/stories/boots">'));
@@ -102,9 +127,8 @@ test("the story is an AMP story with the metadata Google requires and a canonica
   assert.equal(html.split("<amp-story-page ").length - 1, 8);
 });
 
-test("store links are nofollow and untagged, and the last page links back to the search page with the story's tags", () => {
-  const page = makePage();
-  const html = renderWebStory(page, planWebStory(page));
+test("store links are nofollow and untagged, and the last page links back to the search page with the story's tags", async () => {
+  const html = await renderStory(makePage());
   const links = [...html.matchAll(/<a\b([^>]*)>/g)].map(([, attributes]) => attributes);
   const storeLinks = links.filter((attributes) => attributes.includes("store.example"));
   const backLinks = links.filter((attributes) => attributes.includes("nobi.ai"));
@@ -116,10 +140,9 @@ test("store links are nofollow and untagged, and the last page links back to the
   assert.match(html, /<amp-story-page-outlink layout="nodisplay"><a href="[^"]+">[^<]+<\/a><\/amp-story-page-outlink>\n<\/amp-story-page>\n<\/amp-story>/);
 });
 
-test("page text is escaped everywhere it appears", () => {
+test("page text is escaped everywhere it appears", async () => {
   const hostile = '<script>alert("boot")</script> & Boots';
-  const page = makePage({ title: hostile, guide: [hostile, "Second paragraph."] });
-  const html = renderWebStory(page, planWebStory(page));
+  const html = await renderStory(makePage({ title: hostile, guide: [hostile, "Second paragraph."] }));
 
   assert.ok(!html.includes("<script>alert"));
   assert.ok(html.includes("<title>&lt;script&gt;alert(&quot;boot&quot;)&lt;/script&gt; &amp; Boots</title>"));

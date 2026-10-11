@@ -12,6 +12,7 @@ import { writeFlatPageFile } from "./page-html.js";
 import { linkWebStories, planWebStories } from "./shop-nobi-web-story-plan.js";
 import { renderWebStory } from "./shop-nobi-web-story.js";
 import { webStoryPath } from "../src/utils/shopNobiWebStory.js";
+import { fetchImageSize as fetchImageSizeOnline } from "./image-size.js";
 import { buildPinFeedFiles, listPinFeedFiles } from "./shop-nobi-pin-feed.js";
 import { appendLlmsTxtSection, appendRedirects, buildRetiredRedirects, buildShopNobiSitemap } from "./shop-nobi-search-page-listings.js";
 
@@ -26,7 +27,8 @@ const ShopNobiSitemapFile = "sitemap-shop.xml";
  * Fetches the page data and writes the prebuilt pages and listing files into the build output, keeping the
  * output within the file and redirect limits.
  *
- * @param {{apiBaseUrl: string, distDir: string, fileLimit?: number, redirectRuleLimit?: number}} options The settings.
+ * @param {{apiBaseUrl: string, distDir: string, fileLimit?: number, redirectRuleLimit?: number,
+ *     fetchImageSize?: function}} options The settings. fetchImageSize reads a poster's size; tests pass their own.
  * @returns {Promise<number>} How many search pages were written.
  */
 export async function prerenderShopNobiSearchPages({
@@ -34,14 +36,18 @@ export async function prerenderShopNobiSearchPages({
   distDir,
   fileLimit = DistFileLimit,
   redirectRuleLimit = RedirectRuleLimit,
+  fetchImageSize = fetchImageSizeOnline,
 }) {
   const { pages: fetchedPages, retired } = await fetchSearchPagesData(apiBaseUrl);
-  const plan = planPages(fetchedPages, countFileRoom(distDir, fileLimit));
+  const plan = await planPages(fetchedPages, countFileRoom(distDir, fileLimit), fetchImageSize);
   if (plan.leftOutCount > 0) {
     console.warn(`prerender-shop: left out ${plan.leftOutCount} page(s) to stay within ${fileLimit} files.`);
   }
   if (plan.leftOutStoryCount > 0) {
     console.warn(`prerender-shop: left out ${plan.leftOutStoryCount} web story(ies) to stay within ${fileLimit} files.`);
+  }
+  if (plan.smallPosterCount > 0) {
+    console.warn(`prerender-shop: skipped ${plan.smallPosterCount} web story(ies) whose pictures are too small for a poster.`);
   }
 
   await writePrebuiltPages(plan, distDir);
@@ -60,18 +66,19 @@ export async function prerenderShopNobiSearchPages({
  * Decides which pages to build: category pages take the file room first, then search pages in data order, then
  * web stories for the first search pages with enough to show.
  */
-function planPages(fetchedPages, fileRoom) {
+async function planPages(fetchedPages, fileRoom, fetchImageSize) {
   const usablePages = selectUsablePages(fetchedPages);
   const categoryLimit = Math.min(countCategories(usablePages), Math.max(0, fileRoom));
   const { pages: unlinkedPages, leftOutCount } = buildSearchPages(usablePages, fileRoom - categoryLimit);
   const categoryPages = buildCategoryPages(unlinkedPages, categoryLimit);
 
   const storyRoom = fileRoom - categoryPages.length - unlinkedPages.length;
-  const { stories, leftOutCount: leftOutStoryCount } = planWebStories(unlinkedPages, storyRoom);
+  const storyPlan = await planWebStories(unlinkedPages, storyRoom, fetchImageSize);
+  const { stories, leftOutCount: leftOutStoryCount, smallPosterCount } = storyPlan;
   const categoryLinkedPages = linkCategoryPages(unlinkedPages, categoryPages);
   const searchPages = linkWebStories(categoryLinkedPages, stories);
   const popularSearches = buildPopularSearches(searchPages, categoryPages);
-  return { searchPages, categoryPages, popularSearches, stories, leftOutCount, leftOutStoryCount };
+  return { searchPages, categoryPages, popularSearches, stories, leftOutCount, leftOutStoryCount, smallPosterCount };
 }
 
 /** Returns how many page files fit after the files already built, the Shop Nobi sitemap and the pin feeds. */

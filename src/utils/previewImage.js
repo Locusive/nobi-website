@@ -7,15 +7,15 @@ export const LargePreviewWidth = 1200;
 /** The robots tag for pages search engines may index, which also lets them show large picture previews. */
 export const IndexableRobots = "index, follow, max-image-preview:large";
 
+/** Google's smallest Web Story poster. Shopify never enlarges a picture, so a small one gives a smaller cut. */
+export const PortraitPosterSize = Object.freeze({ width: 640, height: 853 });
+
 const ShopifyImageHost = "cdn.shopify.com";
 const ShopifyStoreImagePathPrefix = "/cdn/shop/";
 const WidthParameter = "width";
 const HeightParameter = "height";
 const CropParameter = "crop";
 const CenterCrop = "center";
-// Google's smallest Web Story poster. Shopify never enlarges a picture, so asking for more fails on small ones.
-const PortraitPosterWidth = 640;
-const PortraitPosterHeight = 853;
 
 /**
  * Returns the first https picture among a page's products, at 1,200 pixels wide when Shopify serves it.
@@ -61,8 +61,8 @@ export function cropShopifyImageToPortrait(imageUrl) {
     return null;
   }
 
-  address.searchParams.set(WidthParameter, String(PortraitPosterWidth));
-  address.searchParams.set(HeightParameter, String(PortraitPosterHeight));
+  address.searchParams.set(WidthParameter, String(PortraitPosterSize.width));
+  address.searchParams.set(HeightParameter, String(PortraitPosterSize.height));
   address.searchParams.set(CropParameter, CenterCrop);
   return address.toString();
 }

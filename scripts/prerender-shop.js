@@ -1,13 +1,14 @@
-// Builds the prebuilt Shop Nobi pages (search pages, category pages and /shop's links) from the API's page data,
-// plus their sitemap, redirects and llms.txt section. A failed fetch fails the build, so the last good deploy stays.
+// Builds the prebuilt Shop Nobi pages and their sitemap, Pinterest feed, redirects and llms.txt section from the
+// API's page data. A failed fetch fails the build, so the last good deploy stays live.
 
-import { readFileSync, writeFileSync, existsSync, readdirSync } from "fs";
+import { readFileSync, writeFileSync, existsSync, mkdirSync, readdirSync } from "fs";
 import { join, dirname } from "path";
 import { fileURLToPath } from "url";
 import { fetchSearchPagesData, readApiBaseUrl } from "./shop-nobi-search-pages-api.js";
 import { buildSearchPages, selectUsablePages } from "./shop-nobi-search-page-view.js";
 import { buildCategoryPages, buildPopularSearches, countCategories, linkCategoryPages } from "./shop-nobi-category-page-view.js";
 import { writePrebuiltPages } from "./shop-nobi-page-files.js";
+import { buildPinFeed } from "./shop-nobi-pin-feed.js";
 import { appendLlmsTxtSection, appendRedirects, buildRetiredRedirects, buildShopNobiSitemap } from "./shop-nobi-search-page-listings.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -16,6 +17,7 @@ const Dist = join(__dirname, "..", "dist");
 const DistFileLimit = 19000;
 const RedirectRuleLimit = 1900;
 const ShopNobiSitemapFile = "sitemap-shop.xml";
+const PinFeedFile = join("shop", "pins.xml");
 
 /**
  * Fetches the page data and writes the prebuilt pages and listing files into the build output, keeping the
@@ -41,6 +43,7 @@ export async function prerenderShopNobiSearchPages({
   const redirectLines = buildRetiredRedirects(retired, plan.searchPages);
   const sitemap = buildShopNobiSitemap(plan.categoryPages, plan.searchPages);
   writeFileSync(join(distDir, ShopNobiSitemapFile), sitemap);
+  writePinFeed(distDir, plan.searchPages);
   updateFile(join(distDir, "_redirects"), (text) => appendRedirects(text, redirectLines, redirectRuleLimit));
   updateFile(join(distDir, "llms.txt"), (text) => appendLlmsTxtSection(text, plan.searchPages));
   return plan.searchPages.length;
@@ -57,10 +60,18 @@ function planPages(fetchedPages, fileRoom) {
   return { searchPages, categoryPages, popularSearches, leftOutCount };
 }
 
-/** Returns how many page files fit after the files already built and the Shop Nobi sitemap. */
+/** Returns how many page files fit after the files already built, the Shop Nobi sitemap and the pin feed. */
 function countFileRoom(distDir, fileLimit) {
-  const sitemapFileCount = existsSync(join(distDir, ShopNobiSitemapFile)) ? 0 : 1;
-  return fileLimit - countFiles(distDir) - sitemapFileCount;
+  const newListingFiles = [ShopNobiSitemapFile, PinFeedFile].filter((file) => !existsSync(join(distDir, file)));
+  return fileLimit - countFiles(distDir) - newListingFiles.length;
+}
+
+/** Writes the Pinterest feed of search pages. */
+function writePinFeed(distDir, searchPages) {
+  const feedPath = join(distDir, PinFeedFile);
+  const feed = buildPinFeed(searchPages);
+  mkdirSync(dirname(feedPath), { recursive: true });
+  writeFileSync(feedPath, feed);
 }
 
 /** Counts every file in a folder and the folders inside it. */

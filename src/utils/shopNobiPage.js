@@ -22,8 +22,11 @@ export const ShopNobiPageSeo = {
   ],
 };
 
+/** The RSS feed of search pages that Pinterest reads to publish one pin per page. */
+export const ShopNobiPinFeed = { title: "Shop Nobi searches", url: `${BaseUrl}/shop/pins.xml` };
+
 /** The /shop head values in the form the build writes. Crawlers follow its links; store links carry rel="nofollow". */
-export const ShopNobiPageHead = { ...ShopNobiPageSeo, robots: "index, follow" };
+export const ShopNobiPageHead = { ...ShopNobiPageSeo, robots: "index, follow", feed: ShopNobiPinFeed };
 
 /**
  * Returns whether a path belongs to the Shop Nobi page.

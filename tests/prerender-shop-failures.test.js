@@ -17,13 +17,14 @@ const HttpNotFound = 404;
 const HttpServerError = 500;
 const runNode = promisify(execFile);
 
-test("an empty page list builds, with an empty Shop Nobi sitemap and the other files unchanged", async () => {
+test("an empty page list builds, with an empty Shop Nobi sitemap and pin feed, and the other files unchanged", async () => {
   const folder = makeDistCopy();
   try {
     const count = await prerenderWith({ body: { generatedAt: "2026-10-11T08:10:00Z", pages: [], retired: [] } }, folder);
     assert.equal(count, 0);
-    assert.ok(!existsSync(join(folder, "shop")));
+    assert.ok(!existsSync(join(folder, "shop/s")) && !existsSync(join(folder, "shop.html")));
     assert.ok(!readFileSync(join(folder, "sitemap-shop.xml"), "utf8").includes("<url>"));
+    assert.ok(!readFileSync(join(folder, "shop/pins.xml"), "utf8").includes("<item>"));
     for (const file of ListingFiles) {
       assert.equal(readFileSync(join(folder, file), "utf8"), readOriginal(file));
     }

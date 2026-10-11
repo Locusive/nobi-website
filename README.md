@@ -56,7 +56,9 @@ allowances, usage modes, input validation, and existing page regressions.
 
 `scripts/prerender-shop.js` builds one page per Shop Nobi search at
 `/shop/s/<slug>`, with the products in the HTML, one page per top category at
-`/shop/c/<slug>`, and a list of popular searches on `/shop`. It fetches the page data from
+`/shop/c/<slug>`, and a list of popular searches on `/shop`. It also writes
+`/shop/pins.xml`, an RSS feed with one item per search page, which Pinterest
+reads to publish a pin for each page. It fetches the page data from
 `https://api.nobi.ai/v1/shop/pages`. `SHOP_PAGES_API_URL` points the build at
 another API base address. If the fetch fails, the build fails, so Cloudflare
 keeps the last good deploy live.

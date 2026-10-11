@@ -6,9 +6,14 @@ import vm from "node:vm";
 const Dist = new URL("../dist/", import.meta.url);
 const BuiltPages = ["index.html", "homepage.html", "pricing.html", "shop.html"];
 
+/** Reads a built page. */
+function readBuiltPage(page) {
+  return readFileSync(new URL(page, Dist), "utf8");
+}
+
 /** Reads the inline script that loads Google Tag Manager from a built page. */
 function readTagManagerLoader(page) {
-  const html = readFileSync(new URL(page, Dist), "utf8");
+  const html = readBuiltPage(page);
   const loader = [...html.matchAll(/<script>([\s\S]*?)<\/script>/g)].map(([, code]) => code).find((code) => code.includes("gtm.js"));
   assert.ok(loader, `${page} has no Google Tag Manager loader`);
   return loader;
@@ -28,5 +33,11 @@ test("Google Tag Manager loads normally and stays off when the browser sends Glo
     const loader = readTagManagerLoader(page);
     assert.deepEqual(runLoader(loader, undefined), ["https://www.googletagmanager.com/gtm.js?id=GTM-PMGNQGLR"], page);
     assert.deepEqual(runLoader(loader, true), [], page);
+  }
+});
+
+test("no Google Tag Manager iframe loads without JavaScript, where Global Privacy Control cannot be read", () => {
+  for (const page of BuiltPages) {
+    assert.ok(!/<iframe[^>]*googletagmanager/.test(readBuiltPage(page)), page);
   }
 });

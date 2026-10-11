@@ -35,3 +35,13 @@ test("the feed uses the first https picture, skips pages without one, and stops 
   assert.deepEqual(readItemLinks(feed), ["http-then-https", "second"]);
   assert.ok(feed.includes('<media:content url="https://cdn.example/secure.jpg" medium="image"/>'));
 });
+
+test("a Shopify picture is asked for at 1,200 pixels wide, keeping its other settings", () => {
+  const pages = [
+    makePage("shopify-cdn", "2026-10-11T00:00:00Z", ["https://cdn.shopify.com/s/files/1/boot.jpg?v=7&width=300"]),
+    makePage("shopify-store", "2026-10-10T00:00:00Z", ["https://store.example/cdn/shop/files/boot.jpg?v=8"]),
+  ];
+  const feed = buildPinFeed(pages);
+  assert.ok(feed.includes('url="https://cdn.shopify.com/s/files/1/boot.jpg?v=7&amp;width=1200"'));
+  assert.ok(feed.includes('url="https://store.example/cdn/shop/files/boot.jpg?v=8&amp;width=1200"'));
+});

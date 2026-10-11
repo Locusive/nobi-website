@@ -9,8 +9,7 @@ import { ShopNobiPageHead, ShopNobiPinFeed } from "../src/utils/shopNobiPage.js"
 import { searchPagePath } from "../src/utils/shopNobiSearchPage.js";
 import { categoryPagePath } from "../src/utils/shopNobiCategoryPage.js";
 import { buildPrebuiltContentSeo, PrebuiltContentElementId, PrebuiltContentKind } from "../src/utils/shopNobiPrebuiltContent.js";
-
-const IndexAndFollow = "index, follow";
+import { IndexableRobots } from "../src/utils/previewImage.js";
 
 /**
  * Writes every prebuilt page in the plan. Nothing is written when there are no search pages.
@@ -62,7 +61,7 @@ function readShell(distDir) {
 function renderPrebuiltPage(content, shell, body) {
   const head = content.kind === PrebuiltContentKind.PopularSearches
     ? ShopNobiPageHead
-    : { ...buildPrebuiltContentSeo(content), robots: IndexAndFollow, feed: ShopNobiPinFeed };
+    : { ...buildPrebuiltContentSeo(content), robots: IndexableRobots, feed: ShopNobiPinFeed };
   const html = renderPage(head, shell, body);
   const contentElement = `<script type="application/json" id="${PrebuiltContentElementId}">${toScriptJson(content)}</script>`;
   return html.replace("<head>", () => `<head>\n    ${contentElement}`);

@@ -4,6 +4,7 @@
 import { BaseUrl, ShopNobiImage } from "./shopNobiPage.js";
 import { categoryPagePath } from "./shopNobiCategoryPage.js";
 import { buildBreadcrumbSchema, buildFaqSchema, buildProductListSchema } from "./shopNobiStructuredData.js";
+import { findLargePreviewImage } from "./previewImage.js";
 
 const SearchPagePathPrefix = "/shop/s/";
 const ShopNobiTags = { utm_source: "shop_nobi", utm_medium: "referral", utm_campaign: "shop_nobi" };
@@ -60,7 +61,7 @@ export function buildSearchPageSeo(page) {
     title: `${page.title} | Shop Nobi`,
     description: page.description || describeSearchPage(page.title),
     path: searchPagePath(page.slug),
-    image: ShopNobiImage,
+    image: findLargePreviewImage(page.products) ?? ShopNobiImage,
     schema,
   };
 }

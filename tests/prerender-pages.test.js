@@ -150,7 +150,7 @@ test("the Shop Nobi page serves its own metadata, the site nav, and the producti
   const homeNavStart = homeHtml.indexOf('class="nb-nav"');
   assert.ok(homeHtml.slice(Math.max(0, homeNavStart - 400), homeNavStart).includes("position:fixed"), "The home page keeps its pinned header");
   assert.ok(html.includes("Shop Nobi is a search engine: you buy directly from the store."), "The page description says Shop Nobi is a search engine");
-  assert.ok(html.includes('<meta name="robots" content="index, follow">'), "Crawlers may index the page and follow its links to our own pages");
+  assert.ok(html.includes('<meta name="robots" content="index, follow, max-image-preview:large">'), "Crawlers may index the page and follow its links to our own pages");
   assert.ok(html.includes('<link rel="alternate" type="application/rss+xml" title="Shop Nobi searches" href="https://nobi.ai/shop/pins.xml">'));
   assert.ok(!text.includes("Modern site search"));
   assert.ok(html.includes('src="https://assistant-script.nobi.ai/nobi.bundle.js"'));

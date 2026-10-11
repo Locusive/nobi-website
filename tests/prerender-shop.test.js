@@ -97,6 +97,19 @@ test("the head carries the page's own title, description, canonical, robots and 
   }
 });
 
+test("the page's own description shows, escaped, under the heading, and is left out when blank", () => {
+  const body = readBody(readOutput("shop/s/black-leather-boots.html"));
+  const heading = '<h1 class="mt-4 text-3xl font-semibold">Black Leather Boots</h1>';
+  const paragraph = '<p class="mt-2 max-w-3xl text-black/70 dark:text-white/70">'
+    + "Black leather boots for work &amp; weekends, from &quot;classic&quot; ropers to &lt;lace-ups&gt;.</p>";
+  assert.ok(body.includes(heading + paragraph));
+
+  for (const slug of ["chelsea-boots", "boots"]) {
+    const otherBody = readBody(readOutput(`shop/s/${slug}.html`));
+    assert.ok(!otherBody.includes("max-w-3xl"), `${slug} has no description paragraph`);
+  }
+});
+
 test("a page with a blank or missing description falls back to the standard one", () => {
   for (const [slug, title] of [["chelsea-boots", "Chelsea Boots"], ["boots", "Boots"]]) {
     const html = readOutput(`shop/s/${slug}.html`);

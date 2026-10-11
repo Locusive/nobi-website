@@ -12,6 +12,7 @@ export default function ShopNobiSearchPageContent({ page }) {
     <main className="mx-auto max-w-6xl px-4 py-8 text-black dark:text-white">
       <Breadcrumbs page={page} />
       <h1 className="mt-4 text-3xl font-semibold">{page.title}</h1>
+      {page.description && <p className="mt-2 max-w-3xl text-black/70 dark:text-white/70">{page.description}</p>}
       <ul className="mt-6 grid grid-cols-2 gap-6 sm:grid-cols-3 lg:grid-cols-4">
         {page.products.map((product, index) => (
           <ProductCard key={index} product={product} />

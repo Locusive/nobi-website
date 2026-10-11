@@ -150,9 +150,22 @@ test("the Shop Nobi page serves its own metadata, the site nav, and the producti
   const homeNavStart = homeHtml.indexOf('class="nb-nav"');
   assert.ok(homeHtml.slice(Math.max(0, homeNavStart - 400), homeNavStart).includes("position:fixed"), "The home page keeps its pinned header");
   assert.ok(html.includes("Shop Nobi is a search engine: you buy directly from the store."), "The page description says Shop Nobi is a search engine");
-  assert.ok(html.includes('<meta name="robots" content="index, nofollow">'), "Crawlers may index the page but not follow its product links");
+  assert.ok(html.includes('<meta name="robots" content="index, follow">'), "Crawlers may index the page and follow its links to our own pages");
   assert.ok(!text.includes("Modern site search"));
   assert.ok(html.includes('src="https://assistant-script.nobi.ai/nobi.bundle.js"'));
   assert.ok(!html.includes("localhost"));
   assert.equal(html, readPage("shop/index.html"));
+});
+
+test("the sitemap index points to the site's own pages and to the Shop Nobi sitemap", () => {
+  const sitemapIndex = readPage("sitemap.xml");
+  assert.ok(sitemapIndex.includes("<sitemapindex"));
+  assert.ok(sitemapIndex.includes("<loc>https://nobi.ai/sitemap-pages.xml</loc>"));
+  assert.ok(sitemapIndex.includes("<loc>https://nobi.ai/sitemap-shop.xml</loc>"));
+  assert.ok(readPage("sitemap-pages.xml").includes("<loc>https://nobi.ai/pricing</loc>"));
+});
+
+test("the site footer links to Shop Nobi", () => {
+  const footer = readPage("homepage.html").split("<footer")[1];
+  assert.match(footer, /<a href="\/shop"[^>]*>Shop Nobi searches<\/a>/);
 });

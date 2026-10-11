@@ -6,7 +6,7 @@ import { join, dirname } from "path";
 import { fileURLToPath } from "url";
 import { fetchSearchPagesData, readApiBaseUrl } from "./shop-nobi-search-pages-api.js";
 import { buildSearchPages, selectUsablePages } from "./shop-nobi-search-page-view.js";
-import { buildCategoryPages, buildPopularSearches, countCategories } from "./shop-nobi-category-page-view.js";
+import { buildCategoryPages, buildPopularSearches, countCategories, linkCategoryPages } from "./shop-nobi-category-page-view.js";
 import { writePrebuiltPages } from "./shop-nobi-page-files.js";
 import { appendLlmsTxtSection, appendRedirects, buildRetiredRedirects, buildShopNobiSitemap } from "./shop-nobi-search-page-listings.js";
 
@@ -50,8 +50,9 @@ export async function prerenderShopNobiSearchPages({
 function planPages(fetchedPages, fileRoom) {
   const usablePages = selectUsablePages(fetchedPages);
   const categoryLimit = Math.min(countCategories(usablePages), Math.max(0, fileRoom));
-  const { pages: searchPages, leftOutCount } = buildSearchPages(usablePages, fileRoom - categoryLimit);
-  const categoryPages = buildCategoryPages(searchPages, categoryLimit);
+  const { pages: unlinkedPages, leftOutCount } = buildSearchPages(usablePages, fileRoom - categoryLimit);
+  const categoryPages = buildCategoryPages(unlinkedPages, categoryLimit);
+  const searchPages = linkCategoryPages(unlinkedPages, categoryPages);
   const popularSearches = buildPopularSearches(searchPages, categoryPages);
   return { searchPages, categoryPages, popularSearches, leftOutCount };
 }

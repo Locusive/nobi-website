@@ -2,6 +2,7 @@
 // browser both use these helpers, so the page looks and is described the same way in each.
 
 import { BaseUrl, ShopNobiImage } from "./shopNobiPage.js";
+import { categoryPagePath } from "./shopNobiCategoryPage.js";
 import { buildBreadcrumbSchema, buildFaqSchema, buildProductListSchema } from "./shopNobiStructuredData.js";
 
 const SearchPagePathPrefix = "/shop/s/";
@@ -47,8 +48,9 @@ export function describeSearchPage(title) {
 export function buildSearchPageSeo(page) {
   const pageUrl = searchPageUrl(page.slug);
   const categoryCrumbs = page.breadcrumbs
-    .filter((crumb) => crumb.slug)
-    .map((crumb) => ({ name: crumb.name, url: searchPageUrl(crumb.slug) }));
+    .map((crumb, index) => ({ name: crumb.name, path: readCrumbPath(page, crumb, index) }))
+    .filter((crumb) => crumb.path)
+    .map((crumb) => ({ name: crumb.name, url: `${BaseUrl}${crumb.path}` }));
   const schema = [buildProductListSchema(page, pageUrl), buildBreadcrumbSchema([...categoryCrumbs, { name: page.title, url: pageUrl }])];
   if (page.faq.length > 0) {
     schema.push(buildFaqSchema(page.faq));
@@ -61,6 +63,21 @@ export function buildSearchPageSeo(page) {
     image: ShopNobiImage,
     schema,
   };
+}
+
+/**
+ * Returns where a breadcrumb links: the first one to the category page when it was built, any one to its search page.
+ *
+ * @param {object} page The search page data.
+ * @param {{name: string, slug: string | null}} crumb The breadcrumb.
+ * @param {number} index The breadcrumb's position, starting at 0.
+ * @returns {string | null} The path, or null when the crumb has no page.
+ */
+export function readCrumbPath(page, crumb, index) {
+  if (index === 0 && page.categoryPageSlug) {
+    return categoryPagePath(page.categoryPageSlug);
+  }
+  return crumb.slug ? searchPagePath(crumb.slug) : null;
 }
 
 /**

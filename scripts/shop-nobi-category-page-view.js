@@ -68,6 +68,21 @@ export function buildPopularSearches(searchPages, categoryPages) {
   };
 }
 
+/**
+ * Gives each search page the slug of its category page when that page was built, so its first breadcrumb can link there.
+ *
+ * @param {object[]} searchPages The built search pages.
+ * @param {object[]} categoryPages The built category pages.
+ * @returns {object[]} The search pages, each with categoryPageSlug set or null.
+ */
+export function linkCategoryPages(searchPages, categoryPages) {
+  const builtCategorySlugs = new Set(categoryPages.map((category) => category.slug));
+  return searchPages.map((page) => {
+    const categorySlug = readCategory(page)?.slug;
+    return { ...page, categoryPageSlug: builtCategorySlugs.has(categorySlug) ? categorySlug : null };
+  });
+}
+
 /** Adds a search page to its category, creating the category on first use and keeping its latest refresh time. */
 function addToCategory(categoryBySlug, category, page) {
   if (!categoryBySlug.has(category.slug)) {

@@ -1,5 +1,5 @@
 import React from "react";
-import { formatPrice, searchPagePath, tagProductLinkOnClick } from "../../utils/shopNobiSearchPage";
+import { formatPrice, readCrumbPath, searchPagePath, tagProductLinkOnClick } from "../../utils/shopNobiSearchPage";
 
 /**
  * The products of a prebuilt Shop Nobi search page. The build writes this into the HTML for crawlers, and
@@ -28,18 +28,21 @@ export default function ShopNobiSearchPageContent({ page }) {
   );
 }
 
-/** Links back to Shop Nobi and to each category that has its own page. */
+/** Links back to Shop Nobi, to the category page, and to each category that has its own search page. */
 function Breadcrumbs({ page }) {
   return (
     <nav aria-label="Breadcrumb" className="text-sm text-black/60 dark:text-white/60">
       <ol className="flex flex-wrap gap-2">
         <li><a href="/shop" className="hover:underline">Shop Nobi</a></li>
-        {page.breadcrumbs.map((crumb, index) => (
-          <li key={index}>
-            <span aria-hidden="true">› </span>
-            {crumb.slug ? <a href={searchPagePath(crumb.slug)} className="hover:underline">{crumb.name}</a> : crumb.name}
-          </li>
-        ))}
+        {page.breadcrumbs.map((crumb, index) => {
+          const crumbPath = readCrumbPath(page, crumb, index);
+          return (
+            <li key={index}>
+              <span aria-hidden="true">› </span>
+              {crumbPath ? <a href={crumbPath} className="hover:underline">{crumb.name}</a> : crumb.name}
+            </li>
+          );
+        })}
         <li aria-current="page"><span aria-hidden="true">› </span>{page.title}</li>
       </ol>
     </nav>

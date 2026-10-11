@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
 import { addShopNobiTags, tagProductLinkOnClick } from "../src/utils/shopNobiSearchPage.js";
-import { buildPopularSearches } from "../scripts/shop-nobi-category-page-view.js";
+import { buildPopularSearches, linkCategoryPages } from "../scripts/shop-nobi-category-page-view.js";
 
 const ShopNobiTags = "utm_source=shop_nobi&utm_medium=referral&utm_campaign=shop_nobi";
 
@@ -36,4 +36,17 @@ test("/shop shows every category, the first 50 pages, and the remaining pages wi
   assert.equal(popularSearches.pages.length, 50);
   assert.deepEqual(popularSearches.pages[0], { slug: "boots-0", title: "Boots 0" });
   assert.deepEqual(popularSearches.moreSearches, [{ slug: "gift-ideas", title: "Gift Ideas" }]);
+});
+
+test("a search page links to its category page only when that page was built", () => {
+  const searchPages = [
+    { slug: "boots", title: "Boots", breadcrumbs: [{ name: "Shoes", slug: null }] },
+    { slug: "rings", title: "Rings", breadcrumbs: [{ name: "Jewelry", slug: null }] },
+    { slug: "gift-ideas", title: "Gift Ideas", breadcrumbs: [] },
+  ];
+  const builtCategoryPages = [{ slug: "shoes", name: "Shoes", refreshedAt: null, pages: [] }];
+
+  const linkedPages = linkCategoryPages(searchPages, builtCategoryPages);
+
+  assert.deepEqual(linkedPages.map((page) => page.categoryPageSlug), ["shoes", null, null]);
 });

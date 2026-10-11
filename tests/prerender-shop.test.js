@@ -3,7 +3,7 @@ import { existsSync, readFileSync, rmSync } from "node:fs";
 import { join } from "node:path";
 import { after, before, test } from "node:test";
 import { countRedirectRules } from "../scripts/shop-nobi-search-page-listings.js";
-import { BuiltDist, ListingFiles, makeDistCopy, prerenderWith, readBody, readOriginal, readScriptJson } from "./shop-nobi-test-build.js";
+import { ListingFiles, makeDistCopy, prerenderWith, readBody, readOriginal, readScriptJson } from "./shop-nobi-test-build.js";
 
 let distDir;
 
@@ -132,8 +132,9 @@ test("the structured data lists each product with its offer, and the breadcrumbs
     breadcrumbs.itemListElement.map((crumb) => [crumb.position, crumb.name, crumb.item]),
     [
       [1, "Shop Nobi", "https://nobi.ai/shop"],
-      [2, "Boots", "https://nobi.ai/shop/s/boots"],
-      [3, "Black Leather Boots", "https://nobi.ai/shop/s/black-leather-boots"],
+      [2, "Shoes", "https://nobi.ai/shop/c/shoes"],
+      [3, "Boots", "https://nobi.ai/shop/s/boots"],
+      [4, "Black Leather Boots", "https://nobi.ai/shop/s/black-leather-boots"],
     ]
   );
 });
@@ -154,11 +155,25 @@ test("the visible page shows the products with links crawlers do not follow and 
   assert.ok(!body.includes("Loading Shop Nobi"));
 });
 
-test("breadcrumb and related links point only to live pages", () => {
+test("the first breadcrumb links to its category page, and other breadcrumb and related links only to built pages", () => {
   const body = readBody(readOutput("shop/s/black-leather-boots.html"));
   const pageLinks = [...body.matchAll(/href="(\/shop[^"]*)"/g)].map(([, href]) => href);
-  assert.deepEqual(pageLinks, ["/shop", "/shop", "/shop/s/boots", "/shop/s/chelsea-boots"]);
-  assert.ok(body.includes("Shoes"), "A category without a live page still shows as text");
+  assert.deepEqual(pageLinks, ["/shop", "/shop", "/shop/c/shoes", "/shop/s/boots", "/shop/s/chelsea-boots"]);
+
+  const bootsBody = readBody(readOutput("shop/s/boots.html"));
+  assert.ok(bootsBody.includes('<a href="/shop/c/shoes" class="hover:underline">Shoes</a>'), "Even when the crumb has no search page");
+  assert.ok(!readBody(readOutput("shop/s/chelsea-boots.html")).includes('href="/shop/c/'), "No breadcrumbs, no category link");
+});
+
+test("every link to a store in the prebuilt pages carries rel=nofollow", () => {
+  const pages = ["shop/s/black-leather-boots.html", "shop/s/chelsea-boots.html", "shop/s/boots.html", "shop/c/shoes.html", "shop.html"];
+  for (const page of pages) {
+    const links = [...readBody(readOutput(page)).matchAll(/<a\b([^>]*)>/g)].map(([, attributes]) => attributes);
+    const storeLinks = links.filter((attributes) => /href="https?:/.test(attributes) && !/href="https:\/\/[a-z.]*nobi\.ai/.test(attributes));
+    for (const attributes of storeLinks) {
+      assert.match(attributes, /rel="[^"]*nofollow/, `${page}: ${attributes}`);
+    }
+  }
 });
 
 test("a hostile product name is escaped everywhere and its embedded data reads back unchanged", () => {
@@ -186,13 +201,7 @@ test("retired pages redirect permanently, except ones that are live again or hav
   assert.ok(!redirects.includes("bad-target") && !redirects.includes("evil"));
 });
 
-test("the sitemap index points to the site's pages and to the Shop Nobi sitemap, which lists each built page", () => {
-  const sitemapIndex = readFileSync(join(BuiltDist, "sitemap.xml"), "utf8");
-  assert.ok(sitemapIndex.includes("<sitemapindex"));
-  assert.ok(sitemapIndex.includes("<loc>https://nobi.ai/sitemap-pages.xml</loc>"));
-  assert.ok(sitemapIndex.includes("<loc>https://nobi.ai/sitemap-shop.xml</loc>"));
-  assert.ok(readFileSync(join(BuiltDist, "sitemap-pages.xml"), "utf8").includes("<loc>https://nobi.ai/pricing</loc>"));
-
+test("the Shop Nobi sitemap lists each built category and search page", () => {
   const shopSitemap = readOutput("sitemap-shop.xml");
   assert.ok(shopSitemap.includes(
     "<loc>https://nobi.ai/shop/s/black-leather-boots</loc>\n    <lastmod>2026-10-11T08:02:11Z</lastmod>"
@@ -228,6 +237,7 @@ test("when the file limit is reached, category pages come first, then the first 
 
     const body = readBody(readFileSync(join(folder, "shop/s/black-leather-boots.html"), "utf8"));
     assert.ok(!body.includes('href="/shop/s/'), "No links to pages that were left out");
+    assert.ok(body.includes('<a href="/shop/c/shoes" class="hover:underline">Shoes</a>'), "The built category page is linked");
     assert.ok(body.includes(">Boots</li>") && body.includes("Chelsea Boots</li>"), "They show as plain text");
   } finally {
     rmSync(folder, { recursive: true, force: true });
@@ -263,7 +273,7 @@ test("/shop lists the category pages and the most searched pages until the live 
   assert.equal(html, readOutput("shop/index.html"));
   assert.ok(html.includes("<title>Shop Nobi | Nobi</title>"));
   assert.ok(html.includes('<link rel="canonical" href="https://nobi.ai/shop">'));
-  assert.ok(html.includes('<meta name="robots" content="index, nofollow">'));
+  assert.ok(html.includes('<meta name="robots" content="index, follow">'));
   assert.equal(html.split('id="page-schema"').length - 1, 1);
 
   const body = readBody(html);
@@ -274,11 +284,6 @@ test("/shop lists the category pages and the most searched pages until the live 
   }
   assert.ok(!body.includes("Loading Shop Nobi"));
   assert.equal(readScriptJson(html, "shop-nobi-prebuilt-content").kind, "popular-searches");
-});
-
-test("the site footer links to Shop Nobi", () => {
-  const footer = readFileSync(join(BuiltDist, "homepage.html"), "utf8").split("<footer")[1];
-  assert.match(footer, /<a href="\/shop"[^>]*>Shop Nobi searches<\/a>/);
 });
 
 test("redirects for retired pages stop at the rule limit, keeping the first ones in the file", async () => {

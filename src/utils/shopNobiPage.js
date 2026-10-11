@@ -16,16 +16,14 @@ export const ShopNobiPageSeo = {
     "The best products from the best stores online, in one search. Shop Nobi is a search engine: you buy directly from the store.",
   path: "/shop",
   image: ShopNobiImage,
-  // Crawlers may index this page but must not follow product links, which would count as visits to the stores.
-  nofollow: true,
   schema: [
     { "@context": "https://schema.org", "@type": "Organization", name: "Nobi", url: BaseUrl, logo: `${BaseUrl}/og-image.png`, sameAs: [LINKEDIN_URL] },
     { "@context": "https://schema.org", "@type": "WebSite", name: "Shop Nobi", url: `${BaseUrl}/shop` },
   ],
 };
 
-/** The /shop head values in the form the build writes, with the robots tag spelled out. */
-export const ShopNobiPageHead = { ...ShopNobiPageSeo, robots: "index, nofollow" };
+/** The /shop head values in the form the build writes. Crawlers follow its links; store links carry rel="nofollow". */
+export const ShopNobiPageHead = { ...ShopNobiPageSeo, robots: "index, follow" };
 
 /**
  * Returns whether a path belongs to the Shop Nobi page.

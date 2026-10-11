@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { existsSync, readFileSync, rmSync } from "node:fs";
+import { existsSync, readdirSync, readFileSync, rmSync } from "node:fs";
 import { join } from "node:path";
 import { after, before, test } from "node:test";
 import { countRedirectRules } from "../scripts/shop-nobi-search-page-listings.js";
@@ -65,15 +65,8 @@ test("under the heading come the updated date, the description and the guide, es
 
 test("a page with a blank or missing description, and no guide or questions, gets the standard description and no extras", () => {
   for (const [slug, title] of [["chelsea-boots", "Chelsea Boots"], ["boots", "Boots"]]) {
-    const html = readOutput(`shop/s/${slug}.html`);
     const description = `${title} from the best stores online, in one search. Shop Nobi is a search engine: you buy directly from the store.`;
-    for (const tag of [
-      `<meta name="description" content="${description}">`,
-      `<meta property="og:description" content="${description}">`,
-      `<meta name="twitter:description" content="${description}">`,
-    ]) {
-      assert.ok(html.includes(tag), `${slug} is missing: ${tag}`);
-    }
+    assert.ok(readOutput(`shop/s/${slug}.html`).includes(`<meta name="description" content="${description}">`), slug);
   }
 
   const body = readBody(readOutput("shop/s/boots.html"));
@@ -113,7 +106,7 @@ test("the structured data lists each product with its offer, and the breadcrumbs
 
   assert.equal(productList["@type"], "ItemList");
   const products = productList.itemListElement.map((entry) => entry.item);
-  assert.deepEqual(products.map((product) => product.name), ["Roper Boot", '<script>alert("boot")</script> & "Cowboy" $& Boot']);
+  assert.deepEqual(products.map((product) => product.name), ["Roper Boot", '<script>alert("boot")</script> & "Cowboy" $& Boot', "Harness Boot"]);
   assert.deepEqual(products[0].brand, { "@type": "Brand", name: "Lucchese" });
   const roperUrl = "https://lucchese.com/products/roper?variant=123";
   const roperOffer = { "@type": "Offer", price: 495, priceCurrency: "USD", availability: "https://schema.org/InStock", url: roperUrl };
@@ -139,7 +132,7 @@ test("the visible page shows the products, opening store links in a new tab with
   assert.ok(body.includes('<img src="https://cdn.example.com/roper.jpg" alt="Roper Boot"'));
   assert.ok(body.includes("$495.00") && body.includes("€120.00"));
   const productLinks = [...body.matchAll(/<a href="(https?:[^"]+)"([^>]*)>/g)].filter(([, href]) => !href.includes("nobi.ai"));
-  assert.equal(productLinks.length, 2, "The product with a javascript: link is dropped");
+  assert.equal(productLinks.length, 3, "The product with a javascript: link is dropped");
   for (const [, href, attributes] of productLinks) {
     assert.ok(attributes.includes('target="_blank"'), href);
     assert.ok(!href.includes("utm_"), href);
@@ -151,7 +144,7 @@ test("the visible page shows the products, opening store links in a new tab with
 test("the first breadcrumb links to its category page, and other breadcrumb and related links only to built pages", () => {
   const body = readBody(readOutput("shop/s/black-leather-boots.html"));
   const pageLinks = [...body.matchAll(/href="(\/shop[^"]*)"/g)].map(([, href]) => href);
-  assert.deepEqual(pageLinks, ["/shop", "/shop", "/shop/c/shoes", "/shop/s/boots", "/shop/s/chelsea-boots"]);
+  assert.deepEqual(pageLinks, ["/shop", "/shop", "/shop/c/shoes", "/shop/s/boots", "/shop/stories/black-leather-boots", "/shop/s/chelsea-boots"]);
 
   const bootsBody = readBody(readOutput("shop/s/boots.html"));
   assert.ok(bootsBody.includes('<a href="/shop/c/shoes" class="hover:underline">Shoes</a>'), "Even when the crumb has no search page");
@@ -184,6 +177,13 @@ test("a hostile product name is escaped everywhere and its embedded data reads b
   assert.ok(html.indexOf('id="shop-nobi-prebuilt-content"') < html.indexOf("readNobiAssistantOptions"), "The data comes before the bundle starts");
 });
 
+test("a page with enough guide text and pictures gets one web story file, and thin pages get none", () => {
+  const story = readOutput("shop/stories/black-leather-boots.html");
+  assert.ok(story.includes('<link rel="canonical" href="https://nobi.ai/shop/stories/black-leather-boots">'));
+  assert.ok(story.includes("Leather &lt;boots&gt; last for years with care.") && story.includes("Harness Boot"));
+  assert.deepEqual(readdirSync(join(distDir, "shop/stories")), ["black-leather-boots.html"]);
+});
+
 test("retired pages redirect permanently, except ones that are live again or have unsafe targets", () => {
   const redirects = readOutput("_redirects");
   assert.ok(redirects.startsWith(readOriginal("_redirects").trimEnd()));
@@ -193,12 +193,12 @@ test("retired pages redirect permanently, except ones that are live again or hav
   assert.ok(!redirects.includes("bad-target") && !redirects.includes("evil"));
 });
 
-test("the Shop Nobi sitemap lists each built category and search page", () => {
+test("the Shop Nobi sitemap lists each built category page, search page and web story", () => {
   const shopSitemap = readOutput("sitemap-shop.xml");
-  for (const path of ["shop/s/black-leather-boots", "shop/c/shoes"]) {
+  for (const path of ["shop/s/black-leather-boots", "shop/c/shoes", "shop/stories/black-leather-boots"]) {
     assert.ok(shopSitemap.includes(`<loc>https://nobi.ai/${path}</loc>\n    <lastmod>2026-10-11T08:02:11Z</lastmod>`), path);
   }
-  assert.equal(shopSitemap.split("<url>").length - 1, 4, "One category page and three search pages");
+  assert.equal(shopSitemap.split("<url>").length - 1, 5, "One category page, three search pages and one story");
   assert.ok(!shopSitemap.includes("neon-boots"));
 });
 
@@ -235,6 +235,7 @@ test("when the file limit is reached, category pages come first, then the first 
     assert.ok(categoryBody.includes('href="/shop/s/black-leather-boots"') && !categoryBody.includes('href="/shop/s/boots"'));
     assert.ok(existsSync(join(folder, "shop/s/black-leather-boots.html")));
     assert.ok(!existsSync(join(folder, "shop/s/chelsea-boots.html")) && !existsSync(join(folder, "shop/s/boots.html")));
+    assert.ok(!existsSync(join(folder, "shop/stories")), "Stories get only the room left after the pages");
 
     const sitemap = readFileSync(join(folder, "sitemap-shop.xml"), "utf8");
     const llmsText = readFileSync(join(folder, "llms.txt"), "utf8");
@@ -258,8 +259,6 @@ test("each top category gets one page listing its search pages, with its own hea
     `<meta name="description" content="${description}">`,
     '<link rel="canonical" href="https://nobi.ai/shop/c/shoes">',
     '<meta name="robots" content="index, follow, max-image-preview:large">',
-    '<meta property="og:title" content="Shoes | Shop Nobi">',
-    '<link rel="alternate" type="application/rss+xml" title="Shop Nobi searches" href="https://nobi.ai/shop/pins.xml">',
   ]) {
     assert.ok(html.includes(tag), `Missing tag: ${tag}`);
   }

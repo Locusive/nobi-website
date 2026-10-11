@@ -68,6 +68,16 @@ of every feed. The outside accounts behind this
 another API base address. If the fetch fails, the build fails, so Cloudflare
 keeps the last good deploy live.
 
+Each search page with at least two short guide pages and two product pictures,
+one of them on Shopify's image servers for the 3:4 poster, also gets a Google Web Story at `/shop/stories/<slug>`, an AMP story built by
+`scripts/shop-nobi-web-story-plan.js` and `scripts/shop-nobi-web-story.js`. It
+shows a cover, the guide in pages of at most 180 characters, up to three
+products with nofollow store links, questions that fit, and a last page that
+links back to the search page with `utm_source=google_web_stories`. The search
+page links to its story, and `sitemap-shop.xml` lists the stories. Stories get
+only the file room left after the pages. Mature pages get no story. To check
+one, run `npx amphtml-validator dist/shop/stories/<slug>.html`.
+
 The GitHub workflow `nightly-shop-nobi-rebuild.yml` rebuilds the site every
 day at 10:00 UTC, after the API's overnight refresh, by calling the Cloudflare
 Pages deploy hook in the `CLOUDFLARE_DEPLOY_HOOK_URL` secret.

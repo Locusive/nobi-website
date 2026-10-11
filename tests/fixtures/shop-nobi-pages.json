@@ -31,6 +31,12 @@
         {
           "name": "Script Link Boot", "brand": "X", "storeName": "X",
           "url": "javascript:alert(1)", "imageUrl": null, "price": 10, "currency": "USD", "isInStock": true
+        },
+        {
+          "name": "Harness Boot", "brand": "Frye", "storeName": "Frye",
+          "url": "https://frye.example/products/harness",
+          "imageUrl": "https://cdn.shopify.com/s/files/1/0001/harness.jpg?v=1",
+          "price": 398, "currency": "USD", "isInStock": true
         }
       ]
     },

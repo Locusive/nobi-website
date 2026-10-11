@@ -1,5 +1,5 @@
-// Builds the prebuilt Shop Nobi pages and their sitemap, Pinterest feeds, redirects and llms.txt section from the
-// API's page data. A failed fetch fails the build, so the last good deploy stays live.
+// Builds the prebuilt Shop Nobi pages, their web stories, and their sitemap, Pinterest feeds, redirects and
+// llms.txt section from the API's page data. A failed fetch fails the build, so the last good deploy stays live.
 
 import { readFileSync, writeFileSync, existsSync, mkdirSync, readdirSync } from "fs";
 import { join, dirname } from "path";
@@ -8,6 +8,10 @@ import { fetchSearchPagesData, readApiBaseUrl } from "./shop-nobi-search-pages-a
 import { buildSearchPages, selectUsablePages } from "./shop-nobi-search-page-view.js";
 import { buildCategoryPages, buildPopularSearches, countCategories, linkCategoryPages } from "./shop-nobi-category-page-view.js";
 import { writePrebuiltPages } from "./shop-nobi-page-files.js";
+import { writeFlatPageFile } from "./page-html.js";
+import { linkWebStories, planWebStories } from "./shop-nobi-web-story-plan.js";
+import { renderWebStory } from "./shop-nobi-web-story.js";
+import { webStoryPath } from "../src/utils/shopNobiWebStory.js";
 import { buildPinFeedFiles, listPinFeedFiles } from "./shop-nobi-pin-feed.js";
 import { appendLlmsTxtSection, appendRedirects, buildRetiredRedirects, buildShopNobiSitemap } from "./shop-nobi-search-page-listings.js";
 
@@ -36,11 +40,15 @@ export async function prerenderShopNobiSearchPages({
   if (plan.leftOutCount > 0) {
     console.warn(`prerender-shop: left out ${plan.leftOutCount} page(s) to stay within ${fileLimit} files.`);
   }
+  if (plan.leftOutStoryCount > 0) {
+    console.warn(`prerender-shop: left out ${plan.leftOutStoryCount} web story(ies) to stay within ${fileLimit} files.`);
+  }
 
   await writePrebuiltPages(plan, distDir);
+  writeWebStories(distDir, plan.stories);
 
   const redirectLines = buildRetiredRedirects(retired, plan.searchPages);
-  const sitemap = buildShopNobiSitemap(plan.categoryPages, plan.searchPages);
+  const sitemap = buildShopNobiSitemap(plan.categoryPages, plan.searchPages, plan.stories);
   writeFileSync(join(distDir, ShopNobiSitemapFile), sitemap);
   writePinFeeds(distDir, plan.searchPages);
   updateFile(join(distDir, "_redirects"), (text) => appendRedirects(text, redirectLines, redirectRuleLimit));
@@ -48,15 +56,22 @@ export async function prerenderShopNobiSearchPages({
   return plan.searchPages.length;
 }
 
-/** Decides which pages to build: category pages take the file room first, then search pages in data order. */
+/**
+ * Decides which pages to build: category pages take the file room first, then search pages in data order, then
+ * web stories for the first search pages with enough to show.
+ */
 function planPages(fetchedPages, fileRoom) {
   const usablePages = selectUsablePages(fetchedPages);
   const categoryLimit = Math.min(countCategories(usablePages), Math.max(0, fileRoom));
   const { pages: unlinkedPages, leftOutCount } = buildSearchPages(usablePages, fileRoom - categoryLimit);
   const categoryPages = buildCategoryPages(unlinkedPages, categoryLimit);
-  const searchPages = linkCategoryPages(unlinkedPages, categoryPages);
+
+  const storyRoom = fileRoom - categoryPages.length - unlinkedPages.length;
+  const { stories, leftOutCount: leftOutStoryCount } = planWebStories(unlinkedPages, storyRoom);
+  const categoryLinkedPages = linkCategoryPages(unlinkedPages, categoryPages);
+  const searchPages = linkWebStories(categoryLinkedPages, stories);
   const popularSearches = buildPopularSearches(searchPages, categoryPages);
-  return { searchPages, categoryPages, popularSearches, leftOutCount };
+  return { searchPages, categoryPages, popularSearches, stories, leftOutCount, leftOutStoryCount };
 }
 
 /** Returns how many page files fit after the files already built, the Shop Nobi sitemap and the pin feeds. */
@@ -64,6 +79,14 @@ function countFileRoom(distDir, fileLimit) {
   const listingFiles = [ShopNobiSitemapFile, ...listPinFeedFiles()];
   const newListingFiles = listingFiles.filter((file) => !existsSync(join(distDir, file)));
   return fileLimit - countFiles(distDir) - newListingFiles.length;
+}
+
+/** Writes each web story as one file at its path. */
+function writeWebStories(distDir, stories) {
+  for (const { page, plan } of stories) {
+    writeFlatPageFile(distDir, webStoryPath(page.slug), renderWebStory(page, plan));
+  }
+  console.log(`prerender-shop: wrote ${stories.length} web story(ies).`);
 }
 
 /** Writes the Pinterest feeds of search pages and their list. */

@@ -2,6 +2,7 @@
 // the same check inline to decide how the assistant bundle starts.
 
 import { LINKEDIN_URL } from "../constants/positioning.js";
+import { IndexableRobots } from "./previewImage.js";
 
 /** The site address every Shop Nobi page address starts with. */
 export const BaseUrl = "https://nobi.ai";
@@ -26,7 +27,7 @@ export const ShopNobiPageSeo = {
 export const ShopNobiPinFeed = { title: "Shop Nobi searches", url: `${BaseUrl}/shop/pins.xml` };
 
 /** The /shop head values in the form the build writes. Crawlers follow its links; store links carry rel="nofollow". */
-export const ShopNobiPageHead = { ...ShopNobiPageSeo, robots: "index, follow", feed: ShopNobiPinFeed };
+export const ShopNobiPageHead = { ...ShopNobiPageSeo, robots: IndexableRobots, feed: ShopNobiPinFeed };
 
 /**
  * Returns whether a path belongs to the Shop Nobi page.

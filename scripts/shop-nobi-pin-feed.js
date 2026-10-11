@@ -4,6 +4,7 @@
 import { htmlEscape } from "./prerender-blog.js";
 import { BaseUrl, ShopNobiPageSeo, ShopNobiPinFeed } from "../src/utils/shopNobiPage.js";
 import { buildSearchPageSeo, searchPageUrl } from "../src/utils/shopNobiSearchPage.js";
+import { findLargePreviewImage } from "../src/utils/previewImage.js";
 
 const PinLimit = 1000;
 
@@ -42,7 +43,7 @@ function sortNewestFirst(searchPages) {
 
 /** Builds one feed item, or returns null when the page has no https product picture. */
 function buildPinItem(page) {
-  const imageUrl = page.products.map((product) => product.imageUrl).find((url) => url?.startsWith("https://"));
+  const imageUrl = findLargePreviewImage(page.products);
   if (!imageUrl) {
     return null;
   }

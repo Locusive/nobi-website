@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { IndexableRobots } from "../utils/previewImage.js";
 
 const BASE_URL = "https://nobi.ai";
 const DEFAULT_IMAGE = `${BASE_URL}/og-image.png`;
@@ -64,8 +65,8 @@ export function useSEO({ title, description, path, image, type = "website", sche
     } else if (nofollow) {
       upsertMeta('meta[name="robots"]', "index, nofollow");
     } else {
-      // Client-side nav can leave a stale robots tag from a prior noindex page — clear it.
-      document.querySelector('meta[name="robots"]')?.remove();
+      // Replaces a stale tag from a prior noindex page, and lets search engines show large picture previews.
+      upsertMeta('meta[name="robots"]', IndexableRobots);
     }
 
     upsertMeta('meta[property="og:type"]',        type);

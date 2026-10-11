@@ -38,7 +38,7 @@ test("the head carries the page's own title, description, canonical, robots and 
     '<meta property="og:title" content="Black Leather Boots | Shop Nobi">',
     '<link rel="alternate" type="application/rss+xml" title="Shop Nobi searches" href="https://nobi.ai/shop/pins.xml">',
     '<link rel="canonical" href="https://nobi.ai/shop/s/black-leather-boots">',
-    '<meta name="robots" content="index, follow">',
+    '<meta name="robots" content="index, follow, max-image-preview:large">',
     '<meta property="og:url" content="https://nobi.ai/shop/s/black-leather-boots">',
     '<meta name="twitter:title" content="Black Leather Boots | Shop Nobi">',
   ]) {
@@ -257,7 +257,7 @@ test("each top category gets one page listing its search pages, with its own hea
     "<title>Shoes | Shop Nobi</title>",
     `<meta name="description" content="${description}">`,
     '<link rel="canonical" href="https://nobi.ai/shop/c/shoes">',
-    '<meta name="robots" content="index, follow">',
+    '<meta name="robots" content="index, follow, max-image-preview:large">',
     '<meta property="og:title" content="Shoes | Shop Nobi">',
     '<link rel="alternate" type="application/rss+xml" title="Shop Nobi searches" href="https://nobi.ai/shop/pins.xml">',
   ]) {

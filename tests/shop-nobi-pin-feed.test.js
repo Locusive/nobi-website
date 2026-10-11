@@ -13,7 +13,7 @@ function readItemLinks(feed) {
   return [...feed.matchAll(/<item>\s*<title>[^<]*<\/title>\s*<link>([^<]+)<\/link>/g)].map(([, link]) => link.split("/").pop());
 }
 
-test("the feed puts the most recently refreshed pages first, whatever the data order", () => {
+test("the feed puts the most recently refreshed pages first, whatever the data order, and dates no item", () => {
   const pages = [
     makePage("oldest", "2026-10-01T00:00:00Z", ["https://cdn.example/a.jpg"]),
     makePage("no-date", null, ["https://cdn.example/b.jpg"]),
@@ -21,7 +21,7 @@ test("the feed puts the most recently refreshed pages first, whatever the data o
   ];
   const feed = buildPinFeed(pages);
   assert.deepEqual(readItemLinks(feed), ["newest", "oldest", "no-date"]);
-  assert.ok(!feed.split("<item>")[3].includes("<pubDate>"), "A page without a refresh time has no pubDate");
+  assert.ok(!feed.includes("<pubDate>"), "A nightly refresh is not a publish date");
 });
 
 test("the feed uses the first https picture, skips pages without one, and stops at the limit", () => {

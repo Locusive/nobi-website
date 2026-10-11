@@ -5,7 +5,7 @@ import { readFileSync, existsSync } from "fs";
 import { join } from "path";
 import { renderPage, toScriptJson, writeFlatPageFile, writePageFiles } from "./page-html.js";
 import { loadPageRenderer } from "./page-renderer.js";
-import { ShopNobiPageHead } from "../src/utils/shopNobiPage.js";
+import { ShopNobiPageHead, ShopNobiPinFeed } from "../src/utils/shopNobiPage.js";
 import { searchPagePath } from "../src/utils/shopNobiSearchPage.js";
 import { categoryPagePath } from "../src/utils/shopNobiCategoryPage.js";
 import { buildPrebuiltContentSeo, PrebuiltContentElementId, PrebuiltContentKind } from "../src/utils/shopNobiPrebuiltContent.js";
@@ -62,7 +62,7 @@ function readShell(distDir) {
 function renderPrebuiltPage(content, shell, body) {
   const head = content.kind === PrebuiltContentKind.PopularSearches
     ? ShopNobiPageHead
-    : { ...buildPrebuiltContentSeo(content), robots: IndexAndFollow };
+    : { ...buildPrebuiltContentSeo(content), robots: IndexAndFollow, feed: ShopNobiPinFeed };
   const html = renderPage(head, shell, body);
   const contentElement = `<script type="application/json" id="${PrebuiltContentElementId}">${toScriptJson(content)}</script>`;
   return html.replace("<head>", () => `<head>\n    ${contentElement}`);

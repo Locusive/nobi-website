@@ -58,6 +58,7 @@ function buildSearchPage(page, links) {
     slug: page.slug,
     query: isText(page.query) ? page.query : page.title,
     title: page.title,
+    description: isText(page.description) ? page.description.trim() : null,
     refreshedAt: isText(page.refreshedAt) ? page.refreshedAt : null,
     breadcrumbs: buildBreadcrumbs(page, links.builtSlugs),
     related: buildRelatedPages(page, links),

@@ -76,12 +76,15 @@ test("each page is written once, as <slug>.html, and a page with an unsafe slug 
   assert.ok(!existsSync(join(distDir, "shop/s/escape.html")));
 });
 
-test("the head carries the page's own title, description, canonical, robots and link previews", () => {
+test("the head carries the page's own title, description, canonical, robots and link previews, escaped", () => {
   const html = readOutput("shop/s/black-leather-boots.html");
-  const description = "Black Leather Boots from the best stores online, in one search. Shop Nobi is a search engine: you buy directly from the store.";
+  const description = "Black leather boots for work &amp; weekends, from &quot;classic&quot; ropers to &lt;lace-ups&gt;.";
   for (const tag of [
     "<title>Black Leather Boots | Shop Nobi</title>",
     `<meta name="description" content="${description}">`,
+    `<meta property="og:description" content="${description}">`,
+    `<meta name="twitter:description" content="${description}">`,
+    '<meta property="og:title" content="Black Leather Boots | Shop Nobi">',
     '<link rel="canonical" href="https://nobi.ai/shop/s/black-leather-boots">',
     '<meta name="robots" content="index, follow">',
     '<meta property="og:url" content="https://nobi.ai/shop/s/black-leather-boots">',
@@ -91,6 +94,20 @@ test("the head carries the page's own title, description, canonical, robots and 
   }
   for (const repeatable of ['rel="canonical"', 'name="robots"', 'id="page-schema"', "<title>", 'name="description"']) {
     assert.equal(html.split(repeatable).length - 1, 1, `Expected one ${repeatable}`);
+  }
+});
+
+test("a page with a blank or missing description falls back to the standard one", () => {
+  for (const [slug, title] of [["chelsea-boots", "Chelsea Boots"], ["boots", "Boots"]]) {
+    const html = readOutput(`shop/s/${slug}.html`);
+    const description = `${title} from the best stores online, in one search. Shop Nobi is a search engine: you buy directly from the store.`;
+    for (const tag of [
+      `<meta name="description" content="${description}">`,
+      `<meta property="og:description" content="${description}">`,
+      `<meta name="twitter:description" content="${description}">`,
+    ]) {
+      assert.ok(html.includes(tag), `${slug} is missing: ${tag}`);
+    }
   }
 });
 

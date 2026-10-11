@@ -32,7 +32,7 @@ export function searchPageUrl(slug) {
 }
 
 /**
- * Returns the page description. It never mentions how many stores we cover, paid stores or ranking.
+ * Returns the description used when a page has none of its own. It never mentions store counts, paid stores or ranking.
  *
  * @param {string} title The page title, such as "Black Leather Boots".
  * @returns {string} The meta description.
@@ -50,7 +50,7 @@ export function describeSearchPage(title) {
 export function buildSearchPageSeo(page) {
   return {
     title: `${page.title} | Shop Nobi`,
-    description: describeSearchPage(page.title),
+    description: page.description || describeSearchPage(page.title),
     path: searchPagePath(page.slug),
     image: ShopNobiImage,
     schema: [buildProductListSchema(page), buildBreadcrumbSchema(page)],

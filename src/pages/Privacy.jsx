@@ -221,10 +221,12 @@ const Privacy = () => {
           the pages you view and details about your device.
         </li>
         <li>
-          <strong>Stores:</strong> we share nothing with a store unless you
-          follow a link to it. When you do, the store sees your visit as it sees
-          any other visit, along with tags that show the visit came from Shop
-          Nobi.
+          <strong>Stores:</strong> product pictures load from the stores or the
+          services that host their images, so those servers see your IP address
+          and browser details when you view results. We share nothing else with
+          a store unless you follow a link to it. When you do, the store sees
+          your visit as it sees any other visit, along with tags that show the
+          visit came from Shop Nobi.
         </li>
       </ul>
       <p className="mb-4">We do not sell personal information.</p>

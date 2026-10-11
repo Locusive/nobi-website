@@ -79,6 +79,7 @@ function buildSearchPage(page, links) {
     query: isText(page.query) ? page.query : page.title,
     title: page.title,
     description: isText(page.description) ? page.description.trim() : null,
+    categoryPath: isText(page.categoryPath) ? page.categoryPath.trim() : null,
     refreshedAt: isText(page.refreshedAt) ? page.refreshedAt : null,
     updatedDate: formatUpdatedDate(page.refreshedAt),
     guide: (Array.isArray(page.guide) ? page.guide : []).filter(isText),

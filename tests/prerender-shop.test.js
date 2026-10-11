@@ -3,7 +3,7 @@ import { existsSync, readFileSync, rmSync } from "node:fs";
 import { join } from "node:path";
 import { after, before, test } from "node:test";
 import { countRedirectRules } from "../scripts/shop-nobi-search-page-listings.js";
-import { ListingFiles, makeDistCopy, prerenderWith, readBody, readOriginal, readScriptJson } from "./shop-nobi-test-build.js";
+import { FileCountBeforePages, makeDistCopy, prerenderWith, readBody, readOriginal, readScriptJson } from "./shop-nobi-test-build.js";
 
 let distDir;
 
@@ -202,7 +202,7 @@ test("the Shop Nobi sitemap lists each built category and search page", () => {
   assert.ok(!shopSitemap.includes("neon-boots"));
 });
 
-test("the pin feed has one item per search page with an https picture, newest first", () => {
+test("the pin feed and its category feed have one item per search page with an https picture, newest first", () => {
   const feed = readOutput("shop/pins.xml");
   const items = feed.split("<item>").slice(1);
   const links = items.map((item) => item.match(/<link>https:\/\/nobi\.ai\/shop\/s\/([^<]+)<\/link>/)[1]);
@@ -215,6 +215,7 @@ test("the pin feed has one item per search page with an https picture, newest fi
   ]) {
     assert.ok(items[0].includes(line), `Missing: ${line}`);
   }
+  assert.deepEqual(readOutput("shop/pins/apparel-accessories.xml").split("<item>").slice(1), items, "All are apparel pages");
 });
 
 test("llms.txt keeps its own text and gains a Shop Nobi section with links to the pages", () => {
@@ -226,10 +227,9 @@ test("llms.txt keeps its own text and gains a Shop Nobi section with links to th
 
 test("when the file limit is reached, category pages come first, then the first search pages, and the rest stay out of every listing", async () => {
   const folder = makeDistCopy();
-  const sitemapPinFeedCategoryAndOnePage = 4;
+  const categoryAndOnePage = 2;
   try {
-    const copiedFileCount = 1 + ListingFiles.length;
-    const count = await prerenderWith({}, folder, { fileLimit: copiedFileCount + sitemapPinFeedCategoryAndOnePage });
+    const count = await prerenderWith({}, folder, { fileLimit: FileCountBeforePages + categoryAndOnePage });
     assert.equal(count, 1);
     const categoryBody = readBody(readFileSync(join(folder, "shop/c/shoes.html"), "utf8"));
     assert.ok(categoryBody.includes('href="/shop/s/black-leather-boots"') && !categoryBody.includes('href="/shop/s/boots"'));

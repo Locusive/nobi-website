@@ -58,7 +58,10 @@ allowances, usage modes, input validation, and existing page regressions.
 `/shop/s/<slug>`, with the products in the HTML, one page per top category at
 `/shop/c/<slug>`, and a list of popular searches on `/shop`. It also writes
 `/shop/pins.xml`, an RSS feed with one item per search page, which Pinterest
-reads to publish a pin for each page. The outside accounts behind this
+reads to publish a pin for each page. It also writes one feed per top-level
+category at `/shop/pins/<slug>.xml`, one for each Pinterest board, and lists
+them with their item counts in `/shop/pins/index.json`. Mature pages stay out
+of every feed. The outside accounts behind this
 (Search Console, Bing, IndexNow, Pinterest) are recorded in nobi-marketing's
 [search engines and discovery sites doc](https://github.com/Locusive/nobi-marketing/blob/main/docs/search_engines_and_discovery_sites.md). It fetches the page data from
 `https://api.nobi.ai/v1/shop/pages`. `SHOP_PAGES_API_URL` points the build at

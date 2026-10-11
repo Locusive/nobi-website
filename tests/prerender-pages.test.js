@@ -170,3 +170,12 @@ test("the site footer links to Shop Nobi", () => {
   const footer = readPage("homepage.html").split("<footer")[1];
   assert.match(footer, /<a href="\/shop"[^>]*>Shop Nobi searches<\/a>/);
 });
+
+test("the privacy policy and terms carry their full text in the HTML, for readers that run no JavaScript", () => {
+  const privacy = readPage("privacy.html");
+  const terms = readPage("terms.html");
+  assert.ok(privacy.includes("<title>Privacy Policy | Nobi</title>"));
+  assert.ok(privacy.includes("We do not sell personal information."), "The policy text is in the page");
+  assert.ok(terms.includes("<title>Terms of Service | Nobi</title>"));
+  assert.ok(terms.includes("Shop Nobi"), "The terms text is in the page");
+});

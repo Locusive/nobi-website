@@ -51,6 +51,17 @@ const PAGES = [
     schema: [product("Nobi", "A single AI assistant for search, support, proactive engagement, lead capture, merchandising, and an MCP agent endpoint.", "/product")],
   },
   ShopNobiPageHead,
+  // Legal pages carry their full text in the HTML, so app directories and crawlers that run no JavaScript can read them.
+  {
+    path: "/privacy", title: "Privacy Policy | Nobi",
+    description: "How Nobi collects, uses, and protects your data. Read our privacy policy for full details.",
+    schema: [ORG],
+  },
+  {
+    path: "/terms", title: "Terms of Service | Nobi",
+    description: "Nobi's terms of service governing use of our AI assistant products and Shop Nobi.",
+    schema: [ORG],
+  },
 ];
 
 // The old standalone capability pages (better-search, automated-support,

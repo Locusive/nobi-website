@@ -14,7 +14,7 @@ const Privacy = () => {
     {/* Page Heading and Intro */}
     <h1 className="text-3xl font-bold mb-4">Privacy Policy</h1>
     <p className="text-sm text-gray-500 mb-8">
-      Effective May&nbsp;11,&nbsp;2026. This Privacy Policy explains how Nobi
+      Effective October&nbsp;11,&nbsp;2026. This Privacy Policy explains how Nobi
       collects, uses, and shares information.  If you have questions, email{" "}
       <a href="mailto:privacy@nobi.ai" className="text-blue-600 underline">
         privacy@nobi.ai
@@ -28,6 +28,10 @@ const Privacy = () => {
         Locusive, Inc. d/b/a Nobi (“Nobi”, “we”, “us”, or “our”) provides
         conversational product‑search and related services for commerce brands
         (the “Service”).
+      </p>
+      <p className="mb-4">
+        We also run Shop Nobi, a free shopping search at nobi.ai/shop. The
+        “Shop Nobi” section below explains how we handle shoppers’ information.
       </p>
     </section>
 
@@ -154,6 +158,131 @@ const Privacy = () => {
           acquisition or asset sale.
         </li>
       </ul>
+    </section>
+
+    {/* Shop Nobi */}
+    <section className="mb-10" id="shop-nobi">
+      <h2 className="text-2xl font-semibold mb-2">Shop Nobi</h2>
+      <p className="mb-4">
+        Shop Nobi, at nobi.ai/shop, is a free shopping search. You do not need
+        an account to use it. This section explains what we collect when you use
+        Shop Nobi and how we use it. The rest of this policy also applies.
+      </p>
+
+      <h3 className="text-xl font-semibold mb-2">What we collect</h3>
+      <ul className="list-disc list-inside space-y-2 mb-4">
+        <li>
+          <strong>Searches and messages:</strong> the searches you type and the
+          messages you send in chat.
+        </li>
+        <li>
+          <strong>Products shown and clicked:</strong> the products we show you
+          and the ones you click, including which store a click went to.
+        </li>
+        <li>
+          <strong>A random shopper ID:</strong> a random ID kept in your
+          browser’s local storage, so we can tell visits apart without knowing
+          who you are.
+        </li>
+        <li>
+          <strong>Device and connection information:</strong> your device and
+          browser type, your IP address and similar technical details.
+        </li>
+        <li>
+          <strong>Usage events:</strong> how you use Shop Nobi, such as the
+          pages you view and the links you click.
+        </li>
+      </ul>
+
+      <h3 className="text-xl font-semibold mb-2">Why we use it</h3>
+      <ul className="list-disc list-inside space-y-2 mb-4">
+        <li>To show you search results and answer your messages.</li>
+        <li>To improve our search and the order of results.</li>
+        <li>To count clicks for stores, so they know how many visits came from Shop Nobi.</li>
+        <li>To prevent abuse, such as bots and automated scraping.</li>
+      </ul>
+
+      <h3 className="text-xl font-semibold mb-2">Who we share it with</h3>
+      <ul className="list-disc list-inside space-y-2 mb-4">
+        <li>
+          <strong>AI model providers:</strong> Groq, OpenAI, SambaNova and
+          Google process your searches and messages to produce results and
+          answers.
+        </li>
+        <li>
+          <strong>Cloudflare:</strong> hosts our site and runs Turnstile, our
+          robot check, which processes signals from your device and browser to
+          tell people from bots.
+        </li>
+        <li>
+          <strong>Analytics providers:</strong> our site loads Google Tag
+          Manager, which loads Google Analytics and a Google Ads measurement
+          tag, and Mixpanel. They receive information about your visit, such as
+          the pages you view and details about your device.
+        </li>
+        <li>
+          <strong>Stores:</strong> we share nothing with a store unless you
+          follow a link to it. When you do, the store sees your visit as it sees
+          any other visit, along with tags that show the visit came from Shop
+          Nobi.
+        </li>
+      </ul>
+      <p className="mb-4">We do not sell personal information.</p>
+
+      <h3 className="text-xl font-semibold mb-2">How long we keep it</h3>
+      <p className="mb-4">
+        We keep Shop Nobi data for as long as we need it for the purposes in
+        this section, or for as long as the law requires.
+      </p>
+
+      <h3 className="text-xl font-semibold mb-2">Your choices and rights</h3>
+      <ul className="list-disc list-inside space-y-2 mb-4">
+        <li>
+          You can ask us for a copy of the data we hold about your use of Shop
+          Nobi, or ask us to delete it, by emailing{" "}
+          <a href="mailto:privacy@nobi.ai" className="text-blue-600 underline">
+            privacy@nobi.ai
+          </a>. Because Shop Nobi has no accounts, tell us roughly when you
+          searched and from which device, so we can find your data.
+        </li>
+        <li>
+          You can remove your shopper ID at any time by clearing your browser’s
+          site data for nobi.ai.
+        </li>
+        <li>
+          <strong>California residents:</strong> under the California Consumer
+          Privacy Act, as amended by the California Privacy Rights Act, you have
+          the right to know what personal information we collect, use and
+          disclose; to ask us to delete or correct it; to opt out of the sale or
+          sharing of your personal information; and to not be treated
+          differently for using these rights. Send requests to{" "}
+          <a href="mailto:privacy@nobi.ai" className="text-blue-600 underline">
+            privacy@nobi.ai
+          </a>.
+        </li>
+        <li>
+          <strong>Do not sell or share my personal information:</strong> we do
+          not sell personal information. Our site’s Google Ads tag may count as
+          “sharing” for advertising under California law. To opt out of that
+          sharing, email{" "}
+          <a href="mailto:privacy@nobi.ai" className="text-blue-600 underline">
+            privacy@nobi.ai
+          </a>{" "}
+          with the subject “Do not sell or share my personal information.” You
+          can also block these tags in your browser’s privacy settings.
+        </li>
+      </ul>
+
+      <h3 className="text-xl font-semibold mb-2">Children</h3>
+      <p className="mb-4">
+        Shop Nobi is not directed at children under 13, and we do not knowingly
+        collect personal information from children under 13. If you believe a
+        child has given us personal information, email{" "}
+        <a href="mailto:privacy@nobi.ai" className="text-blue-600 underline">
+          privacy@nobi.ai
+        </a>{" "}
+        and we will delete it.
+      </p>
     </section>
 
     <p className="mt-8">

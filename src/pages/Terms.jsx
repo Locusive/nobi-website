@@ -5,13 +5,13 @@ import PageLayout from "../components/PageLayout";
 
 const LEGAL_NAME = "Locusive, Inc. d/b/a Nobi";
 const SHORT_NAME = "Nobi";
-const EFFECTIVE = "May 11, 2026";
+const EFFECTIVE = "October 11, 2026";
 const CONTACT = "legal@nobi.ai";
 
 export default function Terms() {
   useSEO({
     title: "Terms of Service | Nobi",
-    description: "Nobi's terms of service governing use of our AI assistant products.",
+    description: "Nobi's terms of service governing use of our AI assistant products and Shop Nobi.",
     path: "/terms",
   });
   return (
@@ -47,6 +47,7 @@ export default function Terms() {
             <li><a href="#governing" className="underline">Governing Law; Disputes</a></li>
             <li><a href="#changes" className="underline">Changes to the Service or Terms</a></li>
             <li><a href="#misc" className="underline">Miscellaneous</a></li>
+            <li><a href="#shop-nobi" className="underline">Shop Nobi</a></li>
           </ol>
         </nav>
 
@@ -62,6 +63,10 @@ export default function Terms() {
           <p>
             The Service is provided by {LEGAL_NAME} (“<strong>{SHORT_NAME}</strong>,” “we,” “us,” or “our”). The
             Privacy Policy describes how we handle personal data and is incorporated into these Terms.
+          </p>
+          <p>
+            The Service includes Shop Nobi, our free shopping search. Section 17 explains the terms
+            that apply to Shop Nobi.
           </p>
 
           <h2 id="eligibility">2) Eligibility & Accounts</h2>
@@ -208,6 +213,61 @@ export default function Terms() {
             is unenforceable, it will be modified to enforceable scope; the remainder stays in effect.
             These Terms (and any Order) are the entire agreement between the parties regarding the
             Service and supersede any prior or contemporaneous agreements.
+          </p>
+
+          <h2 id="shop-nobi">17) Shop Nobi</h2>
+          <p>
+            Shop Nobi, at nobi.ai/shop, is a free search engine that helps shoppers find products from
+            independent online stores. You do not need an account to use Shop Nobi.
+          </p>
+          <p>
+            Shop Nobi may be used by people who are at least 13 years old. The age requirement in
+            Section 2 applies to accounts for {SHORT_NAME}’s business products.
+          </p>
+          <h3>Purchases happen at the store</h3>
+          <p>
+            {SHORT_NAME} does not sell, ship or deliver products, and does not handle payments, returns,
+            refunds or customer service for them. When you follow a link to a store, you leave our site.
+            Any purchase you make is between you and that store, under the store’s own terms and privacy
+            policy. {SHORT_NAME} is not responsible for the stores, their products or your purchases from
+            them.
+          </p>
+          <h3>Product information</h3>
+          <p>
+            Product names, prices, availability, pictures and other details come from the stores. They
+            may be wrong or out of date. The store’s own page is the final word on what it sells and at
+            what price.
+          </p>
+          <h3>Content written with AI</h3>
+          <p>
+            Shop Nobi uses AI to write answers, page text, guides, and questions and answers. This content
+            may contain mistakes. It is general information, not professional advice of any kind. Check
+            important details with the store or a qualified professional before you rely on them.
+          </p>
+          <h3>How results are chosen</h3>
+          <p>
+            Some stores have business relationships with {SHORT_NAME}, such as using {SHORT_NAME}’s paid
+            products, and those relationships can affect which products appear and in what order.
+            {` `}{SHORT_NAME} may also earn a commission when a shopper buys after following a link.
+          </p>
+          <h3>Links to stores</h3>
+          <p>
+            Links from Shop Nobi to a store carry tags that tell the store the visit came from Shop Nobi.
+          </p>
+          <h3>Acceptable use</h3>
+          <p>You may use Shop Nobi for your own shopping. You agree not to:</p>
+          <ul>
+            <li>Scrape or copy Shop Nobi’s results or pages, whether by hand at scale or with automated tools;</li>
+            <li>Send automated queries, or use bots, scripts or similar tools to use Shop Nobi;</li>
+            <li>Bypass or interfere with our robot check or any other security feature;</li>
+            <li>Resell, republish or make commercial use of Shop Nobi’s results.</li>
+          </ul>
+          <h3>Disclaimers and limits</h3>
+          <p>
+            Section 11 (Disclaimers) and Section 12 (Limitation of Liability) apply to Shop Nobi in the
+            same way they apply to the rest of the Service. Shop Nobi is provided “as is” and “as
+            available.” For Shop Nobi, our total liability to you will not exceed one hundred US
+            dollars (US$100).
           </p>
 
           <hr />

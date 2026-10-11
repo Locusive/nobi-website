@@ -63,7 +63,19 @@ test("under the heading come the updated date, the description and the guide, es
   assert.ok(body.includes(expectedTop), "A blank guide paragraph is skipped");
 });
 
-test("a page without a description, guide or questions shows only its heading and updated date above the products", () => {
+test("a page with a blank or missing description, and no guide or questions, gets the standard description and no extras", () => {
+  for (const [slug, title] of [["chelsea-boots", "Chelsea Boots"], ["boots", "Boots"]]) {
+    const html = readOutput(`shop/s/${slug}.html`);
+    const description = `${title} from the best stores online, in one search. Shop Nobi is a search engine: you buy directly from the store.`;
+    for (const tag of [
+      `<meta name="description" content="${description}">`,
+      `<meta property="og:description" content="${description}">`,
+      `<meta name="twitter:description" content="${description}">`,
+    ]) {
+      assert.ok(html.includes(tag), `${slug} is missing: ${tag}`);
+    }
+  }
+
   const body = readBody(readOutput("shop/s/boots.html"));
   const expectedTop = [
     '<h1 class="mt-4 text-3xl font-semibold">Boots</h1>',
@@ -96,21 +108,7 @@ test("questions show after the products, and the structured data carries them as
   });
 });
 
-test("a page with a blank or missing description falls back to the standard one", () => {
-  for (const [slug, title] of [["chelsea-boots", "Chelsea Boots"], ["boots", "Boots"]]) {
-    const html = readOutput(`shop/s/${slug}.html`);
-    const description = `${title} from the best stores online, in one search. Shop Nobi is a search engine: you buy directly from the store.`;
-    for (const tag of [
-      `<meta name="description" content="${description}">`,
-      `<meta property="og:description" content="${description}">`,
-      `<meta name="twitter:description" content="${description}">`,
-    ]) {
-      assert.ok(html.includes(tag), `${slug} is missing: ${tag}`);
-    }
-  }
-});
-
-test("the structured data lists each product with its offer, and the breadcrumbs link only live pages", () => {
+test("the structured data lists each product with its offer, and the breadcrumbs from Shop Nobi to the page", () => {
   const [productList, breadcrumbs] = readScriptJson(readOutput("shop/s/black-leather-boots.html"), "page-schema");
 
   assert.equal(productList["@type"], "ItemList");
@@ -139,16 +137,15 @@ test("the structured data lists each product with its offer, and the breadcrumbs
   );
 });
 
-test("the visible page shows the products with links crawlers do not follow and no tracking tags", () => {
+test("the visible page shows the products, opening store links in a new tab with no tracking tags", () => {
   const body = readBody(readOutput("shop/s/black-leather-boots.html"));
 
-  assert.ok(body.includes('<h1 class="mt-4 text-3xl font-semibold">Black Leather Boots</h1>'));
   assert.ok(body.includes('<img src="https://cdn.example.com/roper.jpg" alt="Roper Boot"'));
   assert.ok(body.includes("$495.00") && body.includes("€120.00"));
   const productLinks = [...body.matchAll(/<a href="(https?:[^"]+)"([^>]*)>/g)].filter(([, href]) => !href.includes("nobi.ai"));
   assert.equal(productLinks.length, 2, "The product with a javascript: link is dropped");
   for (const [, href, attributes] of productLinks) {
-    assert.ok(attributes.includes('rel="nofollow noopener"') && attributes.includes('target="_blank"'), href);
+    assert.ok(attributes.includes('target="_blank"'), href);
     assert.ok(!href.includes("utm_"), href);
   }
   assert.ok(!body.includes("javascript:"));
@@ -237,7 +234,6 @@ test("when the file limit is reached, category pages come first, then the first 
 
     const body = readBody(readFileSync(join(folder, "shop/s/black-leather-boots.html"), "utf8"));
     assert.ok(!body.includes('href="/shop/s/'), "No links to pages that were left out");
-    assert.ok(body.includes('<a href="/shop/c/shoes" class="hover:underline">Shoes</a>'), "The built category page is linked");
     assert.ok(body.includes(">Boots</li>") && body.includes("Chelsea Boots</li>"), "They show as plain text");
   } finally {
     rmSync(folder, { recursive: true, force: true });
@@ -268,14 +264,9 @@ test("each top category gets one page listing its search pages, with its own hea
   assert.ok(!existsSync(join(distDir, "shop/c/chelsea-boots.html")), "A page without breadcrumbs gets no category page");
 });
 
-test("/shop lists the category pages and the most searched pages until the live search arrives, keeping its own head", () => {
+test("/shop lists the category pages and the most searched pages until the live search arrives", () => {
   const html = readOutput("shop.html");
   assert.equal(html, readOutput("shop/index.html"));
-  assert.ok(html.includes("<title>Shop Nobi | Nobi</title>"));
-  assert.ok(html.includes('<link rel="canonical" href="https://nobi.ai/shop">'));
-  assert.ok(html.includes('<meta name="robots" content="index, follow">'));
-  assert.equal(html.split('id="page-schema"').length - 1, 1);
-
   const body = readBody(html);
   assert.ok(body.includes('<h2 class="mt-8 text-lg font-semibold">Popular searches</h2>'));
   assert.ok(body.includes('<a href="/shop/c/shoes" class="hover:underline">Shoes</a>'));

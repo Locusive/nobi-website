@@ -1,24 +1,19 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
-import { addShopNobiTags, tagProductLinkOnClick } from "../src/utils/shopNobiSearchPage.js";
+import { tagProductLinkOnClick } from "../src/utils/shopNobiSearchPage.js";
 import { buildPopularSearches, linkCategoryPages } from "../scripts/shop-nobi-category-page-view.js";
 
 const ShopNobiTags = "utm_source=shop_nobi&utm_medium=referral&utm_campaign=shop_nobi";
 
-test("Shop Nobi's tags replace a store link's utm_ tags and keep its other parts", () => {
-  assert.equal(
-    addShopNobiTags("https://store.example/p/boot?variant=7&utm_source=other&utm_term=x#reviews"),
-    `https://store.example/p/boot?variant=7&${ShopNobiTags}#reviews`
-  );
-});
-
-test("a click on a product link tags the link before the browser follows it", () => {
-  const link = { href: "https://store.example/p/boot?variant=7" };
-  tagProductLinkOnClick({ currentTarget: link });
-  assert.equal(link.href, `https://store.example/p/boot?variant=7&${ShopNobiTags}`);
+test("a click on a product link swaps its utm_ tags for Shop Nobi's, keeping the rest of the link", () => {
+  const link = { href: "https://store.example/p/boot?variant=7&utm_source=other&utm_term=x#reviews" };
+  const taggedHref = `https://store.example/p/boot?variant=7&${ShopNobiTags}#reviews`;
 
   tagProductLinkOnClick({ currentTarget: link });
-  assert.equal(link.href, `https://store.example/p/boot?variant=7&${ShopNobiTags}`, "A second click adds nothing more");
+  assert.equal(link.href, taggedHref);
+
+  tagProductLinkOnClick({ currentTarget: link });
+  assert.equal(link.href, taggedHref, "A second click adds nothing more");
 });
 
 test("/shop shows every category, the first 50 pages, and the remaining pages without a category", () => {

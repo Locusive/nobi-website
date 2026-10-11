@@ -24,6 +24,7 @@ export const PinBoardNameByTopLevel = Object.freeze({
   vehicles_parts: "Vehicles & Parts",
   software: "Software",
   business_industrial: "Business & Industrial",
+  religious_ceremonial: "Religious & Ceremonial",
 });
 
 /** The top level kept out of every feed, because Pinterest bans weapons. */

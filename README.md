@@ -60,7 +60,7 @@ allowances, usage modes, input validation, and existing page regressions.
 `/shop/pins.xml`, an RSS feed with one item per search page, which Pinterest
 reads to publish a pin for each page. The outside accounts behind this
 (Search Console, Bing, IndexNow, Pinterest) are recorded in nobi-marketing's
-`docs/search_engines_and_discovery_sites.md`. It fetches the page data from
+[search engines and discovery sites doc](https://github.com/Locusive/nobi-marketing/blob/main/docs/search_engines_and_discovery_sites.md). It fetches the page data from
 `https://api.nobi.ai/v1/shop/pages`. `SHOP_PAGES_API_URL` points the build at
 another API base address. If the fetch fails, the build fails, so Cloudflare
 keeps the last good deploy live.

@@ -32,6 +32,7 @@ test("pages in the mature category never reach the build, whatever the API sends
     { slug: "combat-knives", categoryPath: "mature.weapons.combat_knives" },
     { slug: "boots", categoryPath: "apparel_accessories.footwear.boots" },
     { slug: "no-category", categoryPath: null },
+    null,
   ];
-  assert.deepEqual(keepAllowedPages(pages).map((page) => page.slug), ["boots", "no-category"]);
+  assert.deepEqual(keepAllowedPages(pages).map((page) => page?.slug ?? null), ["boots", "no-category", null], "A malformed entry is left for the later checks");
 });

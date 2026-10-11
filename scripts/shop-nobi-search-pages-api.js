@@ -44,5 +44,5 @@ export async function fetchSearchPagesData(apiBaseUrl) {
  * @returns {object[]} The pages outside the banned category, in their original order.
  */
 export function keepAllowedPages(pages) {
-  return pages.filter((page) => readTopLevel(page.categoryPath) !== BannedTopLevel);
+  return pages.filter((page) => readTopLevel(page?.categoryPath) !== BannedTopLevel);
 }

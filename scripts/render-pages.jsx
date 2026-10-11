@@ -5,7 +5,6 @@ import HomePage from "../src/pages/HomePage.jsx";
 import Pricing from "../src/pages/Pricing.jsx";
 import Product from "../src/pages/Product.jsx";
 import ShopPage from "../src/pages/ShopPage.jsx";
-import { searchPagePath } from "../src/utils/shopNobiSearchPage.js";
 
 const Pages = { "/": HomePage, "/pricing": Pricing, "/product": Product, "/shop": ShopPage };
 
@@ -20,11 +19,11 @@ export function renderPageBody(path) {
   );
 }
 
-/** Render a prebuilt Shop Nobi search page the way ShopPage shows it before the live search loads. */
-export function renderSearchPageBody(page) {
+/** Render a prebuilt Shop Nobi page the way ShopPage shows it before the live search loads. */
+export function renderPrebuiltPageBody(content) {
   return renderToStaticMarkup(
-    <StaticRouter location={searchPagePath(page.slug)}>
-      <ShopPage searchPage={page} />
+    <StaticRouter location={content.path}>
+      <ShopPage prebuiltContent={content} />
     </StaticRouter>
   );
 }

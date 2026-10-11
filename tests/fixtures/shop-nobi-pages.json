@@ -6,6 +6,11 @@
       "query": "black leather boots",
       "title": "Black Leather Boots",
       "description": "Black leather boots for work & weekends, from \"classic\" ropers to <lace-ups>.",
+      "guide": ["Leather <boots> last for years with care.", "  ", "Pick a pair that fits your work & weekends."],
+      "faq": [
+        { "question": "Are leather boots <waterproof>?", "answer": "Most need a coat of wax & care." },
+        { "question": "No answer here", "answer": "" }
+      ],
       "categoryPath": "apparel_accessories.shoes.boots",
       "breadcrumbs": [{ "name": "Shoes", "slug": "shoes" }, { "name": "Boots", "slug": "boots" }],
       "relatedSlugs": ["chelsea-boots", "not-a-live-page"],

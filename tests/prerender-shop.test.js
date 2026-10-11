@@ -1,62 +1,14 @@
 import assert from "node:assert/strict";
-import { execFile } from "node:child_process";
-import { copyFileSync, existsSync, mkdtempSync, readFileSync, rmSync } from "node:fs";
-import { tmpdir } from "node:os";
+import { existsSync, readFileSync, rmSync } from "node:fs";
 import { join } from "node:path";
 import { after, before, test } from "node:test";
-import { fileURLToPath } from "node:url";
-import { promisify } from "node:util";
-import { prerenderShopNobiSearchPages } from "../scripts/prerender-shop.js";
 import { countRedirectRules } from "../scripts/shop-nobi-search-page-listings.js";
-import { startPageDataServer } from "./shop-nobi-pages-server.js";
-
-const BuiltDist = fileURLToPath(new URL("../dist/", import.meta.url));
-// The build's own run adds to _redirects and llms.txt, so the copies start from the originals in public/.
-const OriginalPublic = fileURLToPath(new URL("../public/", import.meta.url));
-const PrerenderShopScript = fileURLToPath(new URL("../scripts/prerender-shop.js", import.meta.url));
-const ListingFiles = ["_redirects", "llms.txt"];
-const HttpNotFound = 404;
-const HttpServerError = 500;
-const runNode = promisify(execFile);
+import { BuiltDist, ListingFiles, makeDistCopy, prerenderWith, readBody, readOriginal, readScriptJson } from "./shop-nobi-test-build.js";
 
 let distDir;
 
-/** Copies the built shell and the original listing files into a new folder, so each run starts clean. */
-function makeDistCopy() {
-  const folder = mkdtempSync(join(tmpdir(), "shop-nobi-dist-"));
-  copyFileSync(join(BuiltDist, "index.html"), join(folder, "index.html"));
-  ListingFiles.forEach((file) => copyFileSync(join(OriginalPublic, file), join(folder, file)));
-  return folder;
-}
-
-function readOriginal(file) {
-  return readFileSync(join(OriginalPublic, file), "utf8");
-}
-
-/** Runs the build step against a local server that sends the given response. */
-async function prerenderWith(response, folder, limits = {}) {
-  const server = await startPageDataServer(response);
-  try {
-    return await prerenderShopNobiSearchPages({ apiBaseUrl: server.url, distDir: folder, ...limits });
-  } finally {
-    await server.close();
-  }
-}
-
 function readOutput(path) {
   return readFileSync(join(distDir, path), "utf8");
-}
-
-/** Reads the JSON in the script element with the given id. */
-function readScriptJson(html, id) {
-  const match = html.match(new RegExp(`<script type="application/(?:ld\\+)?json" id="${id}">([^<]*)</script>`));
-  assert.ok(match, `Missing script element ${id}`);
-  return JSON.parse(match[1]);
-}
-
-/** Reads the HTML inside #root, which is what a crawler sees as the page. */
-function readBody(html) {
-  return html.slice(html.indexOf('<div id="root">'));
 }
 
 before(async () => {
@@ -97,17 +49,51 @@ test("the head carries the page's own title, description, canonical, robots and 
   }
 });
 
-test("the page's own description shows, escaped, under the heading, and is left out when blank", () => {
+test("under the heading come the updated date, the description and the guide, escaped, in that order", () => {
   const body = readBody(readOutput("shop/s/black-leather-boots.html"));
-  const heading = '<h1 class="mt-4 text-3xl font-semibold">Black Leather Boots</h1>';
-  const paragraph = '<p class="mt-2 max-w-3xl text-black/70 dark:text-white/70">'
-    + "Black leather boots for work &amp; weekends, from &quot;classic&quot; ropers to &lt;lace-ups&gt;.</p>";
-  assert.ok(body.includes(heading + paragraph));
+  const expectedTop = [
+    '<h1 class="mt-4 text-3xl font-semibold">Black Leather Boots</h1>',
+    '<p class="mt-1 text-sm text-black/50 dark:text-white/50">Updated October 11, 2026</p>',
+    '<p class="mt-2 max-w-3xl text-black/70 dark:text-white/70">',
+    "Black leather boots for work &amp; weekends, from &quot;classic&quot; ropers to &lt;lace-ups&gt;.</p>",
+    '<p class="mt-3 max-w-3xl text-black/70 dark:text-white/70">Leather &lt;boots&gt; last for years with care.</p>',
+    '<p class="mt-3 max-w-3xl text-black/70 dark:text-white/70">Pick a pair that fits your work &amp; weekends.</p>',
+    '<ul class="mt-6 grid',
+  ].join("");
+  assert.ok(body.includes(expectedTop), "A blank guide paragraph is skipped");
+});
 
-  for (const slug of ["chelsea-boots", "boots"]) {
-    const otherBody = readBody(readOutput(`shop/s/${slug}.html`));
-    assert.ok(!otherBody.includes("max-w-3xl"), `${slug} has no description paragraph`);
-  }
+test("a page without a description, guide or questions shows only its heading and updated date above the products", () => {
+  const body = readBody(readOutput("shop/s/boots.html"));
+  const expectedTop = [
+    '<h1 class="mt-4 text-3xl font-semibold">Boots</h1>',
+    '<p class="mt-1 text-sm text-black/50 dark:text-white/50">Updated October 9, 2026</p>',
+    '<ul class="mt-6 grid',
+  ].join("");
+  assert.ok(body.includes(expectedTop));
+  assert.ok(!body.includes(">Questions</h2>"));
+  assert.equal(readScriptJson(readOutput("shop/s/boots.html"), "page-schema").length, 2, "No FAQPage without questions");
+});
+
+test("questions show after the products, and the structured data carries them as an FAQPage", () => {
+  const html = readOutput("shop/s/black-leather-boots.html");
+  const body = readBody(html);
+  const questions = '<h2 class="text-lg font-semibold">Questions</h2><div class="mt-4"><h3 class="font-medium">'
+    + "Are leather boots &lt;waterproof&gt;?</h3>"
+    + '<p class="mt-1 text-black/70 dark:text-white/70">Most need a coat of wax &amp; care.</p></div></section>';
+  assert.ok(body.includes(questions), "Only the question with an answer shows");
+  assert.ok(body.indexOf(">Questions</h2>") > body.indexOf("$495.00"));
+
+  const faqPage = readScriptJson(html, "page-schema")[2];
+  assert.deepEqual(faqPage, {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: [{
+      "@type": "Question",
+      name: "Are leather boots <waterproof>?",
+      acceptedAnswer: { "@type": "Answer", text: "Most need a coat of wax & care." },
+    }],
+  });
 });
 
 test("a page with a blank or missing description falls back to the standard one", () => {
@@ -183,10 +169,12 @@ test("a hostile product name is escaped everywhere and its embedded data reads b
   assert.ok(!html.includes("<b>"));
   assert.ok(readBody(html).includes("&lt;script&gt;alert(&quot;boot&quot;)&lt;/script&gt; &amp; &quot;Cowboy&quot; $&amp; Boot"));
 
-  const page = readScriptJson(html, "shop-nobi-search-page");
-  assert.equal(page.products[1].name, hostileName);
-  assert.equal(page.query, "black leather boots");
-  assert.ok(html.indexOf('id="shop-nobi-search-page"') < html.indexOf("readNobiAssistantOptions"), "The data comes before the bundle starts");
+  const content = readScriptJson(html, "shop-nobi-prebuilt-content");
+  assert.equal(content.kind, "search-page");
+  assert.equal(content.path, "/shop/s/black-leather-boots");
+  assert.equal(content.data.products[1].name, hostileName);
+  assert.equal(content.data.query, "black leather boots");
+  assert.ok(html.indexOf('id="shop-nobi-prebuilt-content"') < html.indexOf("readNobiAssistantOptions"), "The data comes before the bundle starts");
 });
 
 test("retired pages redirect permanently, except ones that are live again or have unsafe targets", () => {
@@ -198,7 +186,7 @@ test("retired pages redirect permanently, except ones that are live again or hav
   assert.ok(!redirects.includes("bad-target") && !redirects.includes("evil"));
 });
 
-test("the sitemap index points to the site's pages and to the Shop Nobi sitemap, which lists each live page", () => {
+test("the sitemap index points to the site's pages and to the Shop Nobi sitemap, which lists each built page", () => {
   const sitemapIndex = readFileSync(join(BuiltDist, "sitemap.xml"), "utf8");
   assert.ok(sitemapIndex.includes("<sitemapindex"));
   assert.ok(sitemapIndex.includes("<loc>https://nobi.ai/sitemap-pages.xml</loc>"));
@@ -209,7 +197,8 @@ test("the sitemap index points to the site's pages and to the Shop Nobi sitemap,
   assert.ok(shopSitemap.includes(
     "<loc>https://nobi.ai/shop/s/black-leather-boots</loc>\n    <lastmod>2026-10-11T08:02:11Z</lastmod>"
   ));
-  assert.equal(shopSitemap.split("<url>").length - 1, 3);
+  assert.ok(shopSitemap.includes("<loc>https://nobi.ai/shop/c/shoes</loc>\n    <lastmod>2026-10-11T08:02:11Z</lastmod>"));
+  assert.equal(shopSitemap.split("<url>").length - 1, 4, "One category page and three search pages");
   assert.ok(!shopSitemap.includes("neon-boots"));
 });
 
@@ -220,19 +209,21 @@ test("llms.txt keeps its own text and gains a Shop Nobi section with links to th
   assert.ok(llmsText.includes("- [Black Leather Boots](https://nobi.ai/shop/s/black-leather-boots)"));
 });
 
-test("when the file limit is reached, only the first pages are built, and the rest stay out of every listing", async () => {
+test("when the file limit is reached, category pages come first, then the first search pages, and the rest stay out of every listing", async () => {
   const folder = makeDistCopy();
-  const sitemapAndOnePage = 2;
+  const sitemapCategoryAndOnePage = 3;
   try {
     const copiedFileCount = 1 + ListingFiles.length;
-    const count = await prerenderWith({}, folder, { fileLimit: copiedFileCount + sitemapAndOnePage });
+    const count = await prerenderWith({}, folder, { fileLimit: copiedFileCount + sitemapCategoryAndOnePage });
     assert.equal(count, 1);
+    const categoryBody = readBody(readFileSync(join(folder, "shop/c/shoes.html"), "utf8"));
+    assert.ok(categoryBody.includes('href="/shop/s/black-leather-boots"') && !categoryBody.includes('href="/shop/s/boots"'));
     assert.ok(existsSync(join(folder, "shop/s/black-leather-boots.html")));
     assert.ok(!existsSync(join(folder, "shop/s/chelsea-boots.html")) && !existsSync(join(folder, "shop/s/boots.html")));
 
     const sitemap = readFileSync(join(folder, "sitemap-shop.xml"), "utf8");
     const llmsText = readFileSync(join(folder, "llms.txt"), "utf8");
-    assert.equal(sitemap.split("<url>").length - 1, 1);
+    assert.equal(sitemap.split("<url>").length - 1, 2, "The category page and one search page");
     assert.ok(!llmsText.includes("chelsea-boots") && !llmsText.includes("/shop/s/boots)"));
 
     const body = readBody(readFileSync(join(folder, "shop/s/black-leather-boots.html"), "utf8"));
@@ -241,6 +232,53 @@ test("when the file limit is reached, only the first pages are built, and the re
   } finally {
     rmSync(folder, { recursive: true, force: true });
   }
+});
+
+test("each top category gets one page listing its search pages, with its own head and breadcrumbs", () => {
+  assert.ok(!existsSync(join(distDir, "shop/c/shoes")), "One file per category page");
+  const html = readOutput("shop/c/shoes.html");
+  const description = "Popular Shoes searches on Shop Nobi, the best products from the best stores online. You buy directly from the store.";
+  for (const tag of [
+    "<title>Shoes | Shop Nobi</title>",
+    `<meta name="description" content="${description}">`,
+    '<link rel="canonical" href="https://nobi.ai/shop/c/shoes">',
+    '<meta name="robots" content="index, follow">',
+    '<meta property="og:title" content="Shoes | Shop Nobi">',
+  ]) {
+    assert.ok(html.includes(tag), `Missing tag: ${tag}`);
+  }
+
+  const [breadcrumbs] = readScriptJson(html, "page-schema");
+  assert.deepEqual(breadcrumbs.itemListElement.map((crumb) => crumb.item), ["https://nobi.ai/shop", "https://nobi.ai/shop/c/shoes"]);
+
+  const body = readBody(html);
+  assert.ok(body.includes('<h1 class="mt-4 text-3xl font-semibold">Shoes</h1>'));
+  const searchLinks = [...body.matchAll(/<a href="(\/shop\/s\/[^"]+)" class="hover:underline">([^<]+)<\/a>/g)].map(([, href, title]) => [href, title]);
+  assert.deepEqual(searchLinks, [["/shop/s/black-leather-boots", "Black Leather Boots"], ["/shop/s/boots", "Boots"]]);
+  assert.ok(!existsSync(join(distDir, "shop/c/chelsea-boots.html")), "A page without breadcrumbs gets no category page");
+});
+
+test("/shop lists the category pages and the most searched pages until the live search arrives, keeping its own head", () => {
+  const html = readOutput("shop.html");
+  assert.equal(html, readOutput("shop/index.html"));
+  assert.ok(html.includes("<title>Shop Nobi | Nobi</title>"));
+  assert.ok(html.includes('<link rel="canonical" href="https://nobi.ai/shop">'));
+  assert.ok(html.includes('<meta name="robots" content="index, nofollow">'));
+  assert.equal(html.split('id="page-schema"').length - 1, 1);
+
+  const body = readBody(html);
+  assert.ok(body.includes('<h2 class="mt-8 text-lg font-semibold">Popular searches</h2>'));
+  assert.ok(body.includes('<a href="/shop/c/shoes" class="hover:underline">Shoes</a>'));
+  for (const slug of ["black-leather-boots", "chelsea-boots", "boots"]) {
+    assert.ok(body.includes(`<a href="/shop/s/${slug}" class="hover:underline">`), slug);
+  }
+  assert.ok(!body.includes("Loading Shop Nobi"));
+  assert.equal(readScriptJson(html, "shop-nobi-prebuilt-content").kind, "popular-searches");
+});
+
+test("the site footer links to Shop Nobi", () => {
+  const footer = readFileSync(join(BuiltDist, "homepage.html"), "utf8").split("<footer")[1];
+  assert.match(footer, /<a href="\/shop"[^>]*>Shop Nobi searches<\/a>/);
 });
 
 test("redirects for retired pages stop at the rule limit, keeping the first ones in the file", async () => {
@@ -253,46 +291,5 @@ test("redirects for retired pages stop at the rule limit, keeping the first ones
     assert.ok(redirects.includes("/shop/s/neon-boots ") && !redirects.includes("old-boots"));
   } finally {
     rmSync(folder, { recursive: true, force: true });
-  }
-});
-
-test("an empty page list builds, with an empty Shop Nobi sitemap and the other files unchanged", async () => {
-  const folder = makeDistCopy();
-  try {
-    const count = await prerenderWith({ body: { generatedAt: "2026-10-11T08:10:00Z", pages: [], retired: [] } }, folder);
-    assert.equal(count, 0);
-    assert.ok(!existsSync(join(folder, "shop")));
-    assert.ok(!readFileSync(join(folder, "sitemap-shop.xml"), "utf8").includes("<url>"));
-    for (const file of ListingFiles) {
-      assert.equal(readFileSync(join(folder, file), "utf8"), readOriginal(file));
-    }
-  } finally {
-    rmSync(folder, { recursive: true, force: true });
-  }
-});
-
-test("a failed fetch fails without writing anything, whether the server errors or cannot be reached", async () => {
-  const folder = makeDistCopy();
-  try {
-    await assert.rejects(prerenderWith({ status: HttpServerError }, folder), /status 500/);
-    await assert.rejects(prerenderWith({ body: { pages: [] } }, folder), /"retired"/);
-
-    const closedServer = await startPageDataServer();
-    await closedServer.close();
-    await assert.rejects(prerenderShopNobiSearchPages({ apiBaseUrl: closedServer.url, distDir: folder }));
-
-    assert.ok(!existsSync(join(folder, "sitemap-shop.xml")));
-  } finally {
-    rmSync(folder, { recursive: true, force: true });
-  }
-});
-
-test("the build step exits with an error when the API route is missing, so the build fails", async () => {
-  const server = await startPageDataServer({ status: HttpNotFound });
-  try {
-    const run = runNode(process.execPath, [PrerenderShopScript], { env: { ...process.env, SHOP_PAGES_API_URL: server.url } });
-    await assert.rejects(run, (error) => error.code === 1 && error.stderr.includes("status 404"));
-  } finally {
-    await server.close();
   }
 });

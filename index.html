@@ -13,7 +13,7 @@
          every other page it stays the floating marketing-site assistant.
          The path check matches isShopNobiPath in src/utils/shopNobiPage.js.
          A prebuilt search page (/shop/s/<slug>) opens with its own search,
-         read from the page data scripts/prerender-shop.js puts in the head. -->
+         read from the content scripts/prerender-shop.js puts in the head. -->
     <script>
       function readNobiAssistantOptions() {
         var path = window.location.pathname;
@@ -22,9 +22,10 @@
           return { accountId: '460cbe82-9195-424f-a616-b1cb3e3caca0', assistantConfiguration: { floatingChatBar: { buttonLabel: 'Ask Nobi' } } };
         }
         var options = { accountId: '9282b7cb-66ce-4d53-8c37-c291352ef03d', searchResultsPage: true, hideQuickAdd: true };
-        var searchPageData = document.getElementById('shop-nobi-search-page');
-        if (searchPageData && path.indexOf('/shop/s/') === 0) {
-          options.openingQuery = JSON.parse(searchPageData.textContent).query;
+        var prebuiltContent = document.getElementById('shop-nobi-prebuilt-content');
+        var content = prebuiltContent && JSON.parse(prebuiltContent.textContent);
+        if (content && content.kind === 'search-page' && content.path === path.replace(/\/+$/, '')) {
+          options.openingQuery = content.data.query;
         }
         return options;
       }

@@ -84,3 +84,17 @@ export function writePageFiles(distDir, path, html) {
   mkdirSync(dirname(flatFile), { recursive: true });
   writeFileSync(flatFile, html);
 }
+
+/**
+ * Writes a page to <path>.html only. Cloudflare serves the address without a trailing slash from that file and
+ * redirects the trailing-slash form to it, so this saves a file where the file limit matters.
+ *
+ * @param {string} distDir The build output folder.
+ * @param {string} path The page path, such as "/shop/s/boots".
+ * @param {string} html The page's HTML.
+ */
+export function writeFlatPageFile(distDir, path, html) {
+  const flatFile = join(distDir, `${path.replace(/^\//, "")}.html`);
+  mkdirSync(dirname(flatFile), { recursive: true });
+  writeFileSync(flatFile, html);
+}

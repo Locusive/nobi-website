@@ -1,9 +1,11 @@
 // Turns the fetched page data into the page data the HTML is built from, keeping only safe
 // values: slugs that are safe in file names, http or https links, and links without tracking tags.
 
+import { removeTrackingTags } from "../src/utils/shopNobiSearchPage.js";
+
 const SlugPattern = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 const CurrencyPattern = /^[A-Z]{3}$/;
-const TrackingTagPrefix = "utm_";
+const UpdatedDateFormat = { month: "long", day: "numeric", year: "numeric", timeZone: "UTC" };
 
 /**
  * Returns whether a slug is safe to use in a file name and an address.
@@ -16,22 +18,40 @@ export function isSafeSlug(slug) {
 }
 
 /**
- * Builds the page data for the first fetched pages with a safe slug and a title, up to the limit. The first
- * page wins a repeated slug. Links go only to pages within the limit; the rest show as plain text.
+ * Returns whether a value is a string with visible text.
+ *
+ * @param {unknown} value The value to check.
+ * @returns {boolean} True for a string that is not blank.
+ */
+export function isText(value) {
+  return typeof value === "string" && value.trim().length > 0;
+}
+
+/**
+ * Keeps the fetched pages with a safe slug and a title, in order. The first page wins a repeated slug.
  *
  * @param {object[]} fetchedPages The fetched page objects, most searched first.
- * @param {number} pageLimit The most pages to build.
- * @returns {{pages: object[], leftOutCount: number}} The page data, and how many usable pages were left out.
+ * @returns {object[]} The usable pages.
  */
-export function buildSearchPages(fetchedPages, pageLimit) {
+export function selectUsablePages(fetchedPages) {
   const pageBySlug = new Map();
   for (const page of fetchedPages.filter(isUsablePage)) {
     if (!pageBySlug.has(page.slug)) {
       pageBySlug.set(page.slug, page);
     }
   }
+  return [...pageBySlug.values()];
+}
 
-  const usablePages = [...pageBySlug.values()];
+/**
+ * Builds the page data for the first usable pages, up to the limit. Links go only to pages within the limit;
+ * the rest show as plain text.
+ *
+ * @param {object[]} usablePages The usable pages, most searched first.
+ * @param {number} pageLimit The most pages to build.
+ * @returns {{pages: object[], leftOutCount: number}} The page data, and how many usable pages were left out.
+ */
+export function buildSearchPages(usablePages, pageLimit) {
   const builtPages = usablePages.slice(0, Math.max(0, pageLimit));
   const links = {
     titleBySlug: new Map(usablePages.map((page) => [page.slug, page.title])),
@@ -60,6 +80,9 @@ function buildSearchPage(page, links) {
     title: page.title,
     description: isText(page.description) ? page.description.trim() : null,
     refreshedAt: isText(page.refreshedAt) ? page.refreshedAt : null,
+    updatedDate: formatUpdatedDate(page.refreshedAt),
+    guide: (Array.isArray(page.guide) ? page.guide : []).filter(isText),
+    faq: buildFaq(page),
     breadcrumbs: buildBreadcrumbs(page, links.builtSlugs),
     related: buildRelatedPages(page, links),
     products: (Array.isArray(page.products) ? page.products : []).map(buildProduct).filter(Boolean),
@@ -118,14 +141,16 @@ function readWebAddress(value) {
   }
 }
 
-/** Removes utm_ tags so a store never sees our links as a campaign. */
-function removeTrackingTags(address) {
-  const trackingTags = [...address.searchParams.keys()].filter((key) => key.startsWith(TrackingTagPrefix));
-  trackingTags.forEach((key) => address.searchParams.delete(key));
-  return address.toString();
+/** Keeps the questions that have both a question and an answer. */
+function buildFaq(page) {
+  const entries = Array.isArray(page.faq) ? page.faq : [];
+  return entries
+    .filter((entry) => isText(entry?.question) && isText(entry.answer))
+    .map((entry) => ({ question: entry.question, answer: entry.answer }));
 }
 
-/** Returns whether a value is a string with visible text. */
-function isText(value) {
-  return typeof value === "string" && value.trim().length > 0;
+/** Formats when the page was refreshed, such as "October 11, 2026", or returns null when it is not a date. */
+function formatUpdatedDate(refreshedAt) {
+  const refreshed = new Date(refreshedAt);
+  return isText(refreshedAt) && !Number.isNaN(refreshed.getTime()) ? refreshed.toLocaleDateString("en-US", UpdatedDateFormat) : null;
 }

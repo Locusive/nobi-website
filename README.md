@@ -55,7 +55,8 @@ allowances, usage modes, input validation, and existing page regressions.
 ## Shop Nobi search pages
 
 `scripts/prerender-shop.js` builds one page per Shop Nobi search at
-`/shop/s/<slug>`, with the products in the HTML. It fetches the page data from
+`/shop/s/<slug>`, with the products in the HTML, one page per top category at
+`/shop/c/<slug>`, and a list of popular searches on `/shop`. It fetches the page data from
 `https://api.nobi.ai/v1/shop/pages`. `SHOP_PAGES_API_URL` points the build at
 another API base address. If the fetch fails, the build fails, so Cloudflare
 keeps the last good deploy live.

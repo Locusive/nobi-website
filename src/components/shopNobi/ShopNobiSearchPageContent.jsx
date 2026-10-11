@@ -1,5 +1,5 @@
 import React from "react";
-import { formatPrice, searchPagePath } from "../../utils/shopNobiSearchPage";
+import { formatPrice, searchPagePath, tagProductLinkOnClick } from "../../utils/shopNobiSearchPage";
 
 /**
  * The products of a prebuilt Shop Nobi search page. The build writes this into the HTML for crawlers, and
@@ -12,12 +12,17 @@ export default function ShopNobiSearchPageContent({ page }) {
     <main className="mx-auto max-w-6xl px-4 py-8 text-black dark:text-white">
       <Breadcrumbs page={page} />
       <h1 className="mt-4 text-3xl font-semibold">{page.title}</h1>
+      {page.updatedDate && <p className="mt-1 text-sm text-black/50 dark:text-white/50">Updated {page.updatedDate}</p>}
       {page.description && <p className="mt-2 max-w-3xl text-black/70 dark:text-white/70">{page.description}</p>}
+      {page.guide.map((paragraph, index) => (
+        <p key={index} className="mt-3 max-w-3xl text-black/70 dark:text-white/70">{paragraph}</p>
+      ))}
       <ul className="mt-6 grid grid-cols-2 gap-6 sm:grid-cols-3 lg:grid-cols-4">
         {page.products.map((product, index) => (
           <ProductCard key={index} product={product} />
         ))}
       </ul>
+      <Questions faq={page.faq} />
       <RelatedSearches related={page.related} />
     </main>
   );
@@ -41,13 +46,20 @@ function Breadcrumbs({ page }) {
   );
 }
 
-/** One product: its picture, name, store and price, linking to the store's page in a new tab. */
+/** One product: its picture, name, store and price, linking to the store's page in a new tab. A click tags the link. */
 function ProductCard({ product }) {
   const price = formatPrice(product.price, product.currency);
 
   return (
     <li>
-      <a href={product.url} rel="nofollow noopener" target="_blank" className="group block">
+      <a
+        href={product.url}
+        rel="nofollow noopener"
+        target="_blank"
+        onClick={tagProductLinkOnClick}
+        onAuxClick={tagProductLinkOnClick}
+        className="group block"
+      >
         {product.imageUrl && (
           <img src={product.imageUrl} alt={product.name} loading="lazy" className="aspect-square w-full rounded-lg bg-black/5 object-cover" />
         )}
@@ -56,6 +68,25 @@ function ProductCard({ product }) {
       {product.storeName && <p className="text-sm text-black/60 dark:text-white/60">{product.storeName}</p>}
       {price && <p className="text-sm font-semibold">{price}</p>}
     </li>
+  );
+}
+
+/** Common questions about these products, with their answers. */
+function Questions({ faq }) {
+  if (faq.length === 0) {
+    return null;
+  }
+
+  return (
+    <section className="mt-10 max-w-3xl">
+      <h2 className="text-lg font-semibold">Questions</h2>
+      {faq.map((entry, index) => (
+        <div key={index} className="mt-4">
+          <h3 className="font-medium">{entry.question}</h3>
+          <p className="mt-1 text-black/70 dark:text-white/70">{entry.answer}</p>
+        </div>
+      ))}
+    </section>
   );
 }
 

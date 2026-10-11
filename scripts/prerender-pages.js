@@ -8,13 +8,13 @@ import { fileURLToPath } from "url";
 import { renderPage, writePageFiles } from "./page-html.js";
 import { loadPageRenderer } from "./page-renderer.js";
 import { CANONICAL_DESCRIPTION, LINKEDIN_URL } from "../src/constants/positioning.js";
+import { ShopNobiPageHead } from "../src/utils/shopNobiPage.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const DIST = join(__dirname, "..", "dist");
 const SHELL = join(DIST, "index.html");
 const BASE = "https://nobi.ai";
 const OG_IMAGE = `${BASE}/og-image.png`;
-const SHOP_NOBI_OG_IMAGE = `${BASE}/shop-nobi-og-image.png`;
 
 const ORG = { "@context": "https://schema.org", "@type": "Organization", name: "Nobi", url: BASE, logo: OG_IMAGE, sameAs: [LINKEDIN_URL] };
 const SITE = { "@context": "https://schema.org", "@type": "WebSite", name: "Nobi", url: BASE };
@@ -50,12 +50,7 @@ const PAGES = [
     description: "Everything Nobi does: AI-powered search and support, engagement triggered by visitor behavior, lead capture, merchandising and personalization, and an agent endpoint every AI can call.",
     schema: [product("Nobi", "A single AI assistant for search, support, proactive engagement, lead capture, merchandising, and an MCP agent endpoint.", "/product")],
   },
-  {
-    // Crawlers may index Shop Nobi, but following its product links would count as visits to the stores.
-    path: "/shop", title: "Shop Nobi | Nobi", robots: "index, nofollow", image: SHOP_NOBI_OG_IMAGE,
-    description: "The best products from the best stores online, in one search. Shop Nobi is a search engine: you buy directly from the store.",
-    schema: [ORG, { "@context": "https://schema.org", "@type": "WebSite", name: "Shop Nobi", url: `${BASE}/shop` }],
-  },
+  ShopNobiPageHead,
 ];
 
 // The old standalone capability pages (better-search, automated-support,

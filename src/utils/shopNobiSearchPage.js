@@ -1,15 +1,12 @@
 // A Shop Nobi search page is a prebuilt page for one search at /shop/s/<slug>. The build and the
 // browser both use these helpers, so the page looks and is described the same way in each.
 
-const BaseUrl = "https://nobi.ai";
-const ShopNobiPath = "/shop";
-const SearchPagePathPrefix = "/shop/s/";
-const ShopNobiImage = `${BaseUrl}/shop-nobi-og-image.png`;
-const InStock = "https://schema.org/InStock";
-const OutOfStock = "https://schema.org/OutOfStock";
+import { BaseUrl, ShopNobiImage } from "./shopNobiPage.js";
+import { buildBreadcrumbSchema, buildFaqSchema, buildProductListSchema } from "./shopNobiStructuredData.js";
 
-/** The id of the script element that holds the embedded page data. */
-export const SearchPageDataElementId = "shop-nobi-search-page";
+const SearchPagePathPrefix = "/shop/s/";
+const ShopNobiTags = { utm_source: "shop_nobi", utm_medium: "referral", utm_campaign: "shop_nobi" };
+const TrackingTagPrefix = "utm_";
 
 /**
  * Returns the path of a search page.
@@ -48,34 +45,22 @@ export function describeSearchPage(title) {
  * @returns {{title: string, description: string, path: string, image: string, schema: object[]}} The head values.
  */
 export function buildSearchPageSeo(page) {
+  const pageUrl = searchPageUrl(page.slug);
+  const categoryCrumbs = page.breadcrumbs
+    .filter((crumb) => crumb.slug)
+    .map((crumb) => ({ name: crumb.name, url: searchPageUrl(crumb.slug) }));
+  const schema = [buildProductListSchema(page, pageUrl), buildBreadcrumbSchema([...categoryCrumbs, { name: page.title, url: pageUrl }])];
+  if (page.faq.length > 0) {
+    schema.push(buildFaqSchema(page.faq));
+  }
+
   return {
     title: `${page.title} | Shop Nobi`,
     description: page.description || describeSearchPage(page.title),
     path: searchPagePath(page.slug),
     image: ShopNobiImage,
-    schema: [buildProductListSchema(page), buildBreadcrumbSchema(page)],
+    schema,
   };
-}
-
-/**
- * Reads the page data the build embedded, when the browser is on that page.
- *
- * @param {string} pathname The current path.
- * @returns {object | null} The page data, or null on any other page.
- */
-export function readEmbeddedSearchPage(pathname) {
-  if (typeof document === "undefined" || !pathname.startsWith(SearchPagePathPrefix)) {
-    return null;
-  }
-
-  const element = document.getElementById(SearchPageDataElementId);
-  if (!element) {
-    return null;
-  }
-
-  const page = JSON.parse(element.textContent);
-  const currentPath = pathname.replace(/\/+$/, "");
-  return searchPagePath(page.slug) === currentPath ? page : null;
 }
 
 /**
@@ -100,58 +85,37 @@ export function formatPrice(price, currency) {
   }
 }
 
-/** Builds the ItemList of Product structured data for the page's products. */
-function buildProductListSchema(page) {
-  return {
-    "@context": "https://schema.org",
-    "@type": "ItemList",
-    name: page.title,
-    url: searchPageUrl(page.slug),
-    itemListElement: page.products.map((product, index) => ({
-      "@type": "ListItem",
-      position: index + 1,
-      item: buildProductSchema(product),
-    })),
-  };
+/**
+ * Removes every utm_ tag from a link, keeping its other parts.
+ *
+ * @param {string} storeUrl The store link.
+ * @returns {string} The link without utm_ tags.
+ */
+export function removeTrackingTags(storeUrl) {
+  const address = new URL(storeUrl);
+  const trackingTags = [...address.searchParams.keys()].filter((key) => key.startsWith(TrackingTagPrefix));
+  trackingTags.forEach((key) => address.searchParams.delete(key));
+  return address.toString();
 }
 
-/** Builds the Product structured data for one product, leaving out fields it does not have. */
-function buildProductSchema(product) {
-  const schema = { "@type": "Product", name: product.name, url: product.url };
-  if (product.imageUrl) {
-    schema.image = product.imageUrl;
-  }
-  if (product.brand) {
-    schema.brand = { "@type": "Brand", name: product.brand };
-  }
-  if (typeof product.price === "number" && product.currency) {
-    schema.offers = {
-      "@type": "Offer",
-      price: product.price,
-      priceCurrency: product.currency,
-      availability: product.isInStock ? InStock : OutOfStock,
-      url: product.url,
-    };
-  }
-  return schema;
+/**
+ * Adds Shop Nobi's utm_ tags to a store link, replacing any utm_ tags it had and keeping its other parts.
+ *
+ * @param {string} storeUrl The store link.
+ * @returns {string} The link with Shop Nobi's tags.
+ */
+export function addShopNobiTags(storeUrl) {
+  const address = new URL(removeTrackingTags(storeUrl));
+  Object.entries(ShopNobiTags).forEach(([key, value]) => address.searchParams.set(key, value));
+  return address.toString();
 }
 
-/** Builds the BreadcrumbList structured data: Shop Nobi, each linked category, then this page. */
-function buildBreadcrumbSchema(page) {
-  const crumbs = [
-    { name: "Shop Nobi", url: `${BaseUrl}${ShopNobiPath}` },
-    ...page.breadcrumbs.filter((crumb) => crumb.slug).map((crumb) => ({ name: crumb.name, url: searchPageUrl(crumb.slug) })),
-    { name: page.title, url: searchPageUrl(page.slug) },
-  ];
-
-  return {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    itemListElement: crumbs.map((crumb, index) => ({
-      "@type": "ListItem",
-      position: index + 1,
-      name: crumb.name,
-      item: crumb.url,
-    })),
-  };
+/**
+ * Click handler for a product link: tags the link just before the browser follows it, so the store credits
+ * Shop Nobi while the HTML crawlers read keeps the plain link.
+ *
+ * @param {{currentTarget: {href: string}}} event The click event.
+ */
+export function tagProductLinkOnClick(event) {
+  event.currentTarget.href = addShopNobiTags(event.currentTarget.href);
 }

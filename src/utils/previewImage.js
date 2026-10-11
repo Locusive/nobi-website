@@ -1,6 +1,5 @@
-// Picks a search page's preview picture. Google Discover shows large previews only for pictures at least 1,200
-// pixels wide, so pictures on Shopify's image servers are asked for at that width. Web Story posters are cut to
-// the 3:4 portrait size Google asks for.
+// Picks a page's preview picture. Shopify pictures are asked for at the 1,200 pixel width Google Discover needs
+// for large previews, or cut to the 3:4 portrait Google asks for in a Web Story poster.
 
 /** The width Google Discover needs for a large preview. */
 export const LargePreviewWidth = 1200;

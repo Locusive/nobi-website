@@ -220,6 +220,10 @@ export default function Terms() {
             Shop Nobi, at nobi.ai/shop, is a free search engine that helps shoppers find products from
             independent online stores. You do not need an account to use Shop Nobi.
           </p>
+          <p>
+            Shop Nobi may be used by people who are at least 13 years old. The age requirement in
+            Section 2 applies to accounts for {SHORT_NAME}’s business products.
+          </p>
           <h3>Purchases happen at the store</h3>
           <p>
             {SHORT_NAME} does not sell, ship or deliver products, and does not handle payments, returns,
@@ -262,7 +266,8 @@ export default function Terms() {
           <p>
             Section 11 (Disclaimers) and Section 12 (Limitation of Liability) apply to Shop Nobi in the
             same way they apply to the rest of the Service. Shop Nobi is provided “as is” and “as
-            available.”
+            available.” For Shop Nobi, our total liability to you will not exceed one hundred US
+            dollars (US$100).
           </p>
 
           <hr />

@@ -268,8 +268,11 @@ const Privacy = () => {
           <a href="mailto:privacy@nobi.ai" className="text-blue-600 underline">
             privacy@nobi.ai
           </a>{" "}
-          with the subject “Do not sell or share my personal information.” You
-          can also block these tags in your browser’s privacy settings.
+          with the subject “Do not sell or share my personal information.” We
+          also honor Global Privacy Control as an opt-out of sharing: when your
+          browser sends it, our site does not load Google Tag Manager, so the
+          Google Analytics and Google Ads tags do not run. You can also block
+          these tags in your browser’s privacy settings.
         </li>
       </ul>
 

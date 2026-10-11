@@ -32,12 +32,13 @@
     </script>
     <script src="%VITE_ASSISTANT_BUNDLE_URL%" async onload="window.Nobi.initialize(readNobiAssistantOptions());"></script>
 
-    <!-- Google Tag Manager -->
-    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    <!-- Google Tag Manager, which loads Google Analytics and a Google Ads tag. It stays off when the
+         browser sends Global Privacy Control, which the Privacy Policy honors as an opt-out of sharing. -->
+    <script>if (navigator.globalPrivacyControl !== true) {(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
             new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
         j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-PMGNQGLR');</script>
+    })(window,document,'script','dataLayer','GTM-PMGNQGLR');}</script>
     <!-- End Google Tag Manager  -->
 
     <meta charset="UTF-8" />

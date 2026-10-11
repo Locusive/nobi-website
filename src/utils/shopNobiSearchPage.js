@@ -1,13 +1,13 @@
 // A Shop Nobi search page is a prebuilt page for one search at /shop/s/<slug>. The build and the
 // browser both use these helpers, so the page looks and is described the same way in each.
 
-import { BaseUrl, ShopNobiImage } from "./shopNobiPage.js";
+import { BaseUrl, ShopNobiImage, ShopNobiLinkTags } from "./shopNobiPage.js";
 import { categoryPagePath } from "./shopNobiCategoryPage.js";
 import { buildBreadcrumbSchema, buildFaqSchema, buildProductListSchema } from "./shopNobiStructuredData.js";
 import { findLargePreviewImage } from "./previewImage.js";
 
 const SearchPagePathPrefix = "/shop/s/";
-const ShopNobiTags = { utm_source: "shop_nobi", utm_medium: "referral", utm_campaign: "shop_nobi" };
+const ShopNobiTags = { utm_source: "shop_nobi", ...ShopNobiLinkTags };
 const TrackingTagPrefix = "utm_";
 
 /**

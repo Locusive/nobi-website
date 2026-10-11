@@ -24,8 +24,7 @@ test("each page is written once, as <slug>.html, and a page with an unsafe slug 
     assert.ok(readOutput(`shop/s/${slug}.html`).includes("<!doctype html>"), slug);
     assert.ok(!existsSync(join(distDir, `shop/s/${slug}`)), `No second copy for ${slug}`);
   }
-  assert.ok(!existsSync(join(distDir, "shop/escape.html")));
-  assert.ok(!existsSync(join(distDir, "shop/s/escape.html")));
+  assert.ok(!existsSync(join(distDir, "shop/escape.html")) && !existsSync(join(distDir, "shop/s/escape.html")));
 });
 
 test("the head carries the page's own title, description, canonical, robots and link previews, escaped", () => {
@@ -115,13 +114,9 @@ test("the structured data lists each product with its offer, and the breadcrumbs
   const products = productList.itemListElement.map((entry) => entry.item);
   assert.deepEqual(products.map((product) => product.name), ["Roper Boot", '<script>alert("boot")</script> & "Cowboy" $& Boot']);
   assert.deepEqual(products[0].brand, { "@type": "Brand", name: "Lucchese" });
-  assert.deepEqual(products[0].offers, {
-    "@type": "Offer",
-    price: 495,
-    priceCurrency: "USD",
-    availability: "https://schema.org/InStock",
-    url: "https://lucchese.com/products/roper?variant=123",
-  });
+  const roperUrl = "https://lucchese.com/products/roper?variant=123";
+  const roperOffer = { "@type": "Offer", price: 495, priceCurrency: "USD", availability: "https://schema.org/InStock", url: roperUrl };
+  assert.deepEqual(products[0].offers, roperOffer);
   assert.equal(products[1].offers.availability, "https://schema.org/OutOfStock");
   assert.equal(products[1].image, undefined, "A javascript: picture address is dropped");
 
@@ -182,8 +177,7 @@ test("a hostile product name is escaped everywhere and its embedded data reads b
   assert.ok(readBody(html).includes("&lt;script&gt;alert(&quot;boot&quot;)&lt;/script&gt; &amp; &quot;Cowboy&quot; $&amp; Boot"));
 
   const content = readScriptJson(html, "shop-nobi-prebuilt-content");
-  assert.equal(content.kind, "search-page");
-  assert.equal(content.path, "/shop/s/black-leather-boots");
+  assert.deepEqual([content.kind, content.path], ["search-page", "/shop/s/black-leather-boots"]);
   assert.equal(content.data.products[1].name, hostileName);
   assert.equal(content.data.query, "black leather boots");
   assert.ok(html.indexOf('id="shop-nobi-prebuilt-content"') < html.indexOf("readNobiAssistantOptions"), "The data comes before the bundle starts");
@@ -208,6 +202,22 @@ test("the Shop Nobi sitemap lists each built category and search page", () => {
   assert.ok(!shopSitemap.includes("neon-boots"));
 });
 
+test("the pin feed has one item per search page with an https picture, newest first", () => {
+  const feed = readOutput("shop/pins.xml");
+  const items = feed.split("<item>").slice(1);
+  const links = items.map((item) => item.match(/<link>https:\/\/nobi\.ai\/shop\/s\/([^<]+)<\/link>/)[1]);
+  assert.deepEqual(links, ["black-leather-boots", "chelsea-boots"], "The boots page has no products, so no picture and no item");
+  for (const line of [
+    "<title>Black Leather Boots</title>",
+    "<description>Black leather boots for work &amp; weekends, from &quot;classic&quot; ropers to &lt;lace-ups&gt;.</description>",
+    '<guid isPermaLink="true">https://nobi.ai/shop/s/black-leather-boots</guid>',
+    "<pubDate>Sun, 11 Oct 2026 08:02:11 GMT</pubDate>",
+    '<media:content url="https://cdn.example.com/roper.jpg" medium="image"/>',
+  ]) {
+    assert.ok(items[0].includes(line), `Missing: ${line}`);
+  }
+});
+
 test("llms.txt keeps its own text and gains a Shop Nobi section with links to the pages", () => {
   const llmsText = readOutput("llms.txt");
   assert.ok(llmsText.startsWith(readOriginal("llms.txt").trimEnd()));
@@ -217,10 +227,10 @@ test("llms.txt keeps its own text and gains a Shop Nobi section with links to th
 
 test("when the file limit is reached, category pages come first, then the first search pages, and the rest stay out of every listing", async () => {
   const folder = makeDistCopy();
-  const sitemapCategoryAndOnePage = 3;
+  const sitemapPinFeedCategoryAndOnePage = 4;
   try {
     const copiedFileCount = 1 + ListingFiles.length;
-    const count = await prerenderWith({}, folder, { fileLimit: copiedFileCount + sitemapCategoryAndOnePage });
+    const count = await prerenderWith({}, folder, { fileLimit: copiedFileCount + sitemapPinFeedCategoryAndOnePage });
     assert.equal(count, 1);
     const categoryBody = readBody(readFileSync(join(folder, "shop/c/shoes.html"), "utf8"));
     assert.ok(categoryBody.includes('href="/shop/s/black-leather-boots"') && !categoryBody.includes('href="/shop/s/boots"'));
@@ -270,9 +280,8 @@ test("/shop lists the category pages and the most searched pages until the live 
   const body = readBody(html);
   assert.ok(body.includes('<h2 class="mt-8 text-lg font-semibold">Popular searches</h2>'));
   assert.ok(body.includes('<a href="/shop/c/shoes" class="hover:underline">Shoes</a>'));
-  for (const slug of ["black-leather-boots", "chelsea-boots", "boots"]) {
-    assert.ok(body.includes(`<a href="/shop/s/${slug}" class="hover:underline">`), slug);
-  }
+  const slugs = ["black-leather-boots", "chelsea-boots", "boots"];
+  assert.ok(slugs.every((slug) => body.includes(`<a href="/shop/s/${slug}" class="hover:underline">`)));
   assert.ok(!body.includes("Loading Shop Nobi"));
   assert.equal(readScriptJson(html, "shop-nobi-prebuilt-content").kind, "popular-searches");
 });

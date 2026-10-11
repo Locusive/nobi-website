@@ -40,13 +40,16 @@ function buildHead(page) {
   if (page.robots) {
     tags.push(`<meta name="robots" content="${htmlEscape(page.robots)}">`);
   }
+  if (page.feed) {
+    tags.push(`<link rel="alternate" type="application/rss+xml" title="${htmlEscape(page.feed.title)}" href="${htmlEscape(page.feed.url)}">`);
+  }
   return tags.join("\n    ");
 }
 
 /**
  * Combines a page's head values and rendered body with the built client shell.
  *
- * @param {{path: string, title: string, description: string, image?: string, robots?: string, schema: object[]}} page
+ * @param {{path: string, title: string, description: string, image?: string, robots?: string, feed?: object, schema: object[]}} page
  *     The page's head values.
  * @param {string} shell The built index.html.
  * @param {string} body The rendered HTML that goes inside #root.

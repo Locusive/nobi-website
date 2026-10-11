@@ -1,0 +1,22 @@
+# Rebuilds nobi.ai every morning so the Shop Nobi search pages carry the API's overnight refresh.
+name: Nightly Shop Nobi rebuild
+
+on:
+  schedule:
+    # 10:00 UTC is 6 am Eastern in summer and 5 am in winter, after the API's overnight refresh.
+    - cron: "0 10 * * *"
+  workflow_dispatch:
+
+jobs:
+  trigger-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Call the Cloudflare Pages deploy hook
+        env:
+          CLOUDFLARE_DEPLOY_HOOK_URL: ${{ secrets.CLOUDFLARE_DEPLOY_HOOK_URL }}
+        run: |
+          if [ -z "$CLOUDFLARE_DEPLOY_HOOK_URL" ]; then
+            echo "The CLOUDFLARE_DEPLOY_HOOK_URL secret is not set."
+            exit 1
+          fi
+          curl -fsS -X POST "$CLOUDFLARE_DEPLOY_HOOK_URL"

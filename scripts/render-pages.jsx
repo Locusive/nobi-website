@@ -18,3 +18,12 @@ export function renderPageBody(path) {
     </StaticRouter>
   );
 }
+
+/** Render a prebuilt Shop Nobi page the way ShopPage shows it before the live search loads. */
+export function renderPrebuiltPageBody(content) {
+  return renderToStaticMarkup(
+    <StaticRouter location={content.path}>
+      <ShopPage prebuiltContent={content} />
+    </StaticRouter>
+  );
+}

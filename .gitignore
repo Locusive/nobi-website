@@ -162,6 +162,7 @@ dist/
 ## END REACT EXCLUSIONS ##
 # Generated at build time by scripts/generate-sitemap.js — Cloudflare regenerates on every deploy
 public/sitemap.xml
+public/sitemap-pages.xml
 
 # local git worktrees
 .worktrees/

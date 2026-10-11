@@ -1,0 +1,76 @@
+{
+  "generatedAt": "2026-10-11T08:10:00Z",
+  "pages": [
+    {
+      "slug": "black-leather-boots",
+      "query": "black leather boots",
+      "title": "Black Leather Boots",
+      "description": "Black leather boots for work & weekends, from \"classic\" ropers to <lace-ups>.",
+      "guide": ["Leather <boots> last for years with care.", "  ", "Pick a pair that fits your work & weekends."],
+      "faq": [
+        { "question": "Are leather boots <waterproof>?", "answer": "Most need a coat of wax & care." },
+        { "question": "No answer here", "answer": "" }
+      ],
+      "categoryPath": "apparel_accessories.shoes.boots",
+      "breadcrumbs": [{ "name": "Shoes", "slug": "shoes" }, { "name": "Boots", "slug": "boots" }],
+      "relatedSlugs": ["chelsea-boots", "not-a-live-page"],
+      "refreshedAt": "2026-10-11T08:02:11Z",
+      "products": [
+        {
+          "name": "Roper Boot", "brand": "Lucchese", "storeName": "Lucchese",
+          "url": "https://lucchese.com/products/roper?variant=123&utm_source=nobi&utm_medium=shop",
+          "imageUrl": "https://cdn.example.com/roper.jpg",
+          "price": 495.0, "currency": "USD", "isInStock": true
+        },
+        {
+          "name": "<script>alert(\"boot\")</script> & \"Cowboy\" $& Boot", "brand": "Bad & Co", "storeName": "Store <b>",
+          "url": "https://example.com/products/cowboy",
+          "imageUrl": "javascript:alert(1)",
+          "price": 120, "currency": "EUR", "isInStock": false
+        },
+        {
+          "name": "Script Link Boot", "brand": "X", "storeName": "X",
+          "url": "javascript:alert(1)", "imageUrl": null, "price": 10, "currency": "USD", "isInStock": true
+        }
+      ]
+    },
+    {
+      "slug": "chelsea-boots",
+      "query": "chelsea boots",
+      "title": "Chelsea Boots",
+      "description": "   ",
+      "categoryPath": "apparel_accessories.shoes.boots",
+      "breadcrumbs": [],
+      "relatedSlugs": ["black-leather-boots"],
+      "refreshedAt": "2026-10-10T08:02:11Z",
+      "products": [
+        {
+          "name": "Chelsea Boot", "brand": "Blundstone", "storeName": "Blundstone",
+          "url": "https://blundstone.example/products/chelsea",
+          "imageUrl": "https://cdn.example.com/chelsea.jpg",
+          "price": 230, "currency": "USD", "isInStock": true
+        }
+      ]
+    },
+    {
+      "slug": "boots",
+      "query": "boots",
+      "title": "Boots",
+      "categoryPath": "apparel_accessories.shoes.boots",
+      "breadcrumbs": [{ "name": "Shoes", "slug": null }, { "name": "Boots", "slug": "boots" }],
+      "relatedSlugs": [],
+      "refreshedAt": "2026-10-09T08:02:11Z",
+      "products": []
+    },
+    {
+      "slug": "../escape",
+      "query": "escape", "title": "Escape", "breadcrumbs": [], "relatedSlugs": [], "products": []
+    }
+  ],
+  "retired": [
+    { "slug": "neon-boots", "redirectTo": "/shop/s/black-leather-boots" },
+    { "slug": "old-boots", "redirectTo": "/shop" },
+    { "slug": "chelsea-boots", "redirectTo": "/shop" },
+    { "slug": "bad-target", "redirectTo": "https://evil.example/ 200\n/ /evil" }
+  ]
+}

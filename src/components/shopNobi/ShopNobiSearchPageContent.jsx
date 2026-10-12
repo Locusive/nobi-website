@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useRef } from "react";
 import { formatPrice, readCrumbPath, searchPagePath, replaceProductLinkOnClick } from "../../utils/shopNobiSearchPage";
 import { CommissionNotice, readStoreLinkRel } from "../../utils/shopNobiPage";
+import { buildClickId, createVisitId } from "../../utils/shopNobiClickId";
 
 /**
  * The products of a prebuilt Shop Nobi search page. The build writes this into the HTML for crawlers, and
@@ -9,6 +10,13 @@ import { CommissionNotice, readStoreLinkRel } from "../../utils/shopNobiPage";
  * @param {{page: object}} props The search page data.
  */
 export default function ShopNobiSearchPageContent({ page }) {
+  const visitId = useRef(null);
+  // The visit id is made at the first click, so the build never makes one, and kept for the rest of the page view.
+  const readClickId = () => {
+    visitId.current ??= createVisitId();
+    return buildClickId(page.slug, visitId.current);
+  };
+
   return (
     <main className="mx-auto max-w-6xl px-4 py-8 text-black dark:text-white">
       <Breadcrumbs page={page} />
@@ -20,7 +28,7 @@ export default function ShopNobiSearchPageContent({ page }) {
       ))}
       <ul className="mt-6 grid grid-cols-2 gap-6 sm:grid-cols-3 lg:grid-cols-4">
         {page.products.map((product, index) => (
-          <ProductCard key={index} product={product} />
+          <ProductCard key={index} product={product} readClickId={readClickId} />
         ))}
       </ul>
       <Questions faq={page.faq} />
@@ -55,9 +63,9 @@ function Breadcrumbs({ page }) {
  * One product: its picture, name, store and price, linking to the store's page in a new tab. A click swaps in the
  * link to open. A link that earns a commission has a small notice under it.
  */
-function ProductCard({ product }) {
+function ProductCard({ product, readClickId }) {
   const price = formatPrice(product.price, product.currency);
-  const followStoreLink = (event) => replaceProductLinkOnClick(event, product);
+  const followStoreLink = (event) => replaceProductLinkOnClick(event, product, readClickId());
 
   return (
     <li>

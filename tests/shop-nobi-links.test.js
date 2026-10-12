@@ -3,6 +3,7 @@ import { test } from "node:test";
 import { replaceProductLinkOnClick } from "../src/utils/shopNobiSearchPage.js";
 import { tagShopNobiPageLink } from "../src/utils/shopNobiPage.js";
 import { encodePaidLink } from "../src/utils/shopNobiPaidLink.js";
+import { buildClickId, createVisitId } from "../src/utils/shopNobiClickId.js";
 import { buildPopularSearches, linkCategoryPages } from "../scripts/shop-nobi-category-page-view.js";
 
 const ShopNobiTags = "utm_source=shop_nobi&utm_medium=referral&utm_campaign=shop_nobi";
@@ -10,34 +11,55 @@ const ShopNobiTags = "utm_source=shop_nobi&utm_medium=referral&utm_campaign=shop
 const Person = { userAgent: "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 Chrome/141.0 Safari/537.36" };
 const Crawler = { userAgent: "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)" };
 const AutomatedBrowser = { ...Person, webdriver: true };
+const ClickId = "black-leather-boots.k3x9a0qz";
 
 test("a click on a product link without a paid store link swaps its utm_ tags for Shop Nobi's, keeping the rest", () => {
   const product = { url: "https://store.example/p/boot?variant=7&utm_source=other&utm_term=x#reviews" };
   const link = { href: product.url };
   const taggedHref = `https://store.example/p/boot?variant=7&${ShopNobiTags}#reviews`;
 
-  replaceProductLinkOnClick({ currentTarget: link }, product, Person);
+  replaceProductLinkOnClick({ currentTarget: link }, product, ClickId, Person);
   assert.equal(link.href, taggedHref);
 
-  replaceProductLinkOnClick({ currentTarget: link }, product, Person);
+  replaceProductLinkOnClick({ currentTarget: link }, product, ClickId, Person);
   assert.equal(link.href, taggedHref, "A second click adds nothing more");
 });
 
-test("a person's click opens the paid store link as the API sent it, and a crawler's opens the plain tagged link", () => {
-  const storeLink = "https://sovrn.co?key=web&u=https%3A%2F%2Fstore.example%2Fp%2Fboot%3Futm_source%3Dshop_nobi&name=café";
+test("a person's click opens the paid store link as sent, with the click id in its sub-ID slot, and a crawler's opens the plain link", () => {
+  const innerLink = "https%3A%2F%2Fstore.example%2Fp%2Fboot%3Futm_source%3Dshop_nobi%26utm_campaign%3Dshop_nobi";
+  const storeLink = `https://www.awin1.com/cread.php?awinmid=1&clickref=shop_nobi&ued=${innerLink}&name=café#top`;
   const product = { url: "https://store.example/p/boot", encodedStoreLink: encodePaidLink(storeLink) };
-  const plainTaggedLink = `https://store.example/p/boot?${ShopNobiTags}`;
 
   const link = { href: product.url };
-  replaceProductLinkOnClick({ currentTarget: link }, product, Person);
-  replaceProductLinkOnClick({ currentTarget: link }, product, Person);
-  assert.equal(link.href, storeLink, "A second click changes nothing");
+  replaceProductLinkOnClick({ currentTarget: link }, product, ClickId, Person);
+  replaceProductLinkOnClick({ currentTarget: link }, product, ClickId, Person);
+  assert.equal(link.href, `https://www.awin1.com/cread.php?awinmid=1&clickref=${ClickId}&ued=${innerLink}&name=café#top`, "Only the sub-ID changes");
 
   for (const visitor of [Crawler, AutomatedBrowser]) {
     const crawledLink = { href: product.url };
-    replaceProductLinkOnClick({ currentTarget: crawledLink }, product, visitor);
-    assert.equal(crawledLink.href, plainTaggedLink);
+    replaceProductLinkOnClick({ currentTarget: crawledLink }, product, ClickId, visitor);
+    assert.equal(crawledLink.href, `https://store.example/p/boot?${ShopNobiTags}`);
   }
+});
+
+test("tracking tags and links without a sub-ID slot are never changed", () => {
+  const unencodedLink = "https://store.example/ref?id=7&url=https://store.example/p/boot?utm_source=shop_nobi&utm_campaign=shop_nobi";
+  for (const storeLink of [unencodedLink, "https://sovrn.co?key=web&u=https%3A%2F%2Fstore.example"]) {
+    const link = { href: "https://store.example/p/boot" };
+    replaceProductLinkOnClick({ currentTarget: link }, { url: link.href, encodedStoreLink: encodePaidLink(storeLink) }, ClickId, Person);
+    assert.equal(link.href, storeLink);
+  }
+});
+
+test("a click id is the slug and a visit id, at most 50 letters, digits, dots and dashes", () => {
+  const visitId = createVisitId(Uint8Array.from([0, 10, 35, 36, 71, 255, 1, 2]));
+  assert.equal(visitId, "0az0z312");
+  assert.match(createVisitId(), /^[a-z0-9]{8}$/);
+
+  assert.equal(buildClickId("black-leather-boots", visitId), "black-leather-boots.0az0z312");
+  const longClickId = buildClickId("a-".repeat(40), visitId);
+  assert.equal(longClickId.length, 50);
+  assert.match(longClickId, /^[A-Za-z0-9.-]+\.0az0z312$/);
 });
 
 test("a Shop Nobi page link placed on a channel names that channel and drops every utm tag it had", () => {

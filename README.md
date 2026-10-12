@@ -89,7 +89,10 @@ Stories) and `paidLink` (true when the link earns a commission). The website
 never builds or tags these links itself, and uses them only for paid products.
 A search page keeps the plain store link in its HTML and holds the paid link only
 in base64, so crawlers never see it; a person's click opens the paid link, and a
-crawler's click opens the plain link with Shop Nobi's tags. A story links a paid
+crawler's click opens the plain link with Shop Nobi's tags. On a person's click,
+the paid link's sub-ID parameter (the one whose value is `shop_nobi`) becomes
+`<slug>.<visit id>`, at most 50 characters, so commissions can be traced to the
+page and the visit (`src/utils/shopNobiClickId.js`). A story links a paid
 product straight to its `storyStoreLink`. A paid link gets `rel="sponsored"` and
 a small "We may earn a commission" notice under it (`CommissionNotice` in
 `src/utils/shopNobiPage.js`).

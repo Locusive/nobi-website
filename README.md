@@ -76,7 +76,10 @@ Story at `/shop/stories/<slug>`, an AMP story built by
 shows a cover, the guide in pages of at most 180 characters, up to three
 products with nofollow store links, questions that fit, and a last page that
 links back to the search page with `utm_source=google_web_stories`. The search
-page links to its story, and `sitemap-shop.xml` lists the stories. Stories get
+page links to its story, and `sitemap-shop.xml` lists the stories. When a
+shopper taps through a store link, `amp-analytics` sends a beacon to
+`https://api.nobi.ai/v1/shop/story-click` with the store link and the story's
+slug; the link itself still goes straight to the store. Stories get
 only the file room left after the pages. Mature pages get no story. To check
 one, run `npx amphtml-validator dist/shop/stories/<slug>.html`.
 

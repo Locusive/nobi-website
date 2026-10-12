@@ -135,9 +135,22 @@ test("store links are nofollow and untagged, and the last page links back to the
 
   assert.equal(storeLinks.length, 3);
   assert.ok(storeLinks.every((attributes) => attributes.includes('rel="nofollow noopener"') && !attributes.includes("utm_")));
+  assert.ok(storeLinks[0].includes(' data-vars-store-url="https://store.example/products/roper?variant=1"'), "The link carries its address for the click beacon");
   const backLink = "https://nobi.ai/shop/s/boots?utm_source=google_web_stories&amp;utm_medium=referral&amp;utm_campaign=shop_nobi";
   assert.deepEqual(backLinks, [` href="${backLink}"`]);
-  assert.match(html, /<amp-story-page-outlink layout="nodisplay"><a href="[^"]+">[^<]+<\/a><\/amp-story-page-outlink>\n<\/amp-story-page>\n<\/amp-story>/);
+  assert.match(html, /<amp-story-page-outlink layout="nodisplay"><a href="[^"]+">[^<]+<\/a><\/amp-story-page-outlink>\n<\/amp-story-page>\n<amp-analytics>/);
+});
+
+test("a tap through a store link sends a beacon with the store link and the story's slug", async () => {
+  const html = await renderStory(makePage());
+  const config = JSON.parse(html.match(/<amp-analytics><script type="application\/json">(.*?)<\/script><\/amp-analytics>/)[1]);
+
+  assert.ok(html.includes('<script async custom-element="amp-analytics" src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>'));
+  assert.deepEqual(config, {
+    requests: { storyClick: "https://api.nobi.ai/v1/shop/story-click?url=${storeUrl}&page=boots" },
+    triggers: { storeLinkTap: { on: "story-click-through", tagName: "a", request: "storyClick" } },
+    transport: { beacon: true, xhrpost: true, image: false },
+  });
 });
 
 test("page text is escaped everywhere it appears", async () => {

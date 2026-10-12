@@ -1,6 +1,5 @@
 // Renders a planned Shop Nobi web story as an AMP story, the format of Google Web Stories. Store links are a small
-// line on each product page and carry rel="nofollow"; the last page links back to the full search page. A tap
-// through a store link sends a background beacon to the API, so the click counts and the link stays direct.
+// line on each product page and carry rel="nofollow"; the last page links back to the full search page.
 
 import { htmlEscape } from "./prerender-blog.js";
 import { StoryPageKind } from "./shop-nobi-web-story-plan.js";

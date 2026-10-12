@@ -24,6 +24,9 @@ const ShopperIdKey = "nobi-shopper-id";
 const TrafficTags = ["utm_source", "utm_medium", "utm_campaign", "utm_term", "utm_content"];
 /** Where index.html keeps the page view's conversation, which the bundle's opening search runs under too. */
 const PageConversationIdKey = "shopNobiPageConversationId";
+/** The internal smoke-test marker the bundle adds to its API requests, so the API drops a smoke test's events. */
+const SmokeTestQueryParameter = "nobi_smoke_test";
+const SmokeTestSessionStorageKey = "nobi_smoke_test_token";
 
 /**
  * Click handler for a prebuilt product link. It tags the link with the page's conversation, then sends the click event
@@ -105,14 +108,36 @@ function readShopperId(browser) {
   }
 }
 
+/** Returns the address events go to, with the bundle's smoke-test marker when a smoke test runs in this tab. */
+function buildEventsUrl(browser) {
+  const smokeTestToken = readSmokeTestToken(browser);
+  if (!smokeTestToken) {
+    return EventsUrl;
+  }
+
+  const eventsUrl = new URL(EventsUrl);
+  eventsUrl.searchParams.set(SmokeTestQueryParameter, smokeTestToken);
+  return eventsUrl.toString();
+}
+
+/** Reads the token a smoke test runner saves in the tab's session storage, or returns null when there is none. */
+function readSmokeTestToken(browser) {
+  try {
+    return browser.sessionStorage?.getItem(SmokeTestSessionStorageKey) || null;
+  } catch {
+    return null;
+  }
+}
+
 /** Sends the event as a beacon, which survives the page closing, or with a fetch that does when the beacon is refused. */
 function sendEvent(clickEvent, browser) {
+  const eventsUrl = buildEventsUrl(browser);
   const body = JSON.stringify(clickEvent);
-  if (browser.navigator.sendBeacon?.(EventsUrl, body)) {
+  if (browser.navigator.sendBeacon?.(eventsUrl, body)) {
     return;
   }
 
   const request = { method: "POST", headers: { "Content-Type": "application/json" }, body, keepalive: true };
   // A lost click event must never get in the way of the link, so a failed send is dropped.
-  browser.fetch(EventsUrl, request).catch(() => {});
+  browser.fetch(eventsUrl, request).catch(() => {});
 }

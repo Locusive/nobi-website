@@ -14,12 +14,21 @@ const GooglebotAgent = "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.goog
 const MouseButton = { Main: 0, Middle: 1, Right: 2 };
 
 /** A stand-in window that records every beacon and fetch, with a saved shopper id and the page's conversation. */
-function makeBrowser({ pageUrl = PageUrl, userAgent = ChromeAgent, webdriver = false, acceptsBeacons = true, readStorage, pageConversationId = PageConversationId } = {}) {
+function makeBrowser({
+  pageUrl = PageUrl,
+  userAgent = ChromeAgent,
+  webdriver = false,
+  acceptsBeacons = true,
+  readStorage,
+  pageConversationId = PageConversationId,
+  smokeTestToken = null,
+} = {}) {
   const address = new URL(pageUrl);
   const browser = { beacons: [], fetches: [], shopNobiPageConversationId: pageConversationId };
   browser.location = { href: address.href, hostname: address.hostname };
   browser.document = { referrer: "https://www.google.com/" };
   browser.localStorage = { getItem: readStorage ?? (() => JSON.stringify({ "nobi-shopper-id": "shopper-1" })) };
+  browser.sessionStorage = { getItem: (key) => (key === "nobi_smoke_test_token" ? smokeTestToken : null) };
   browser.navigator = {
     userAgent,
     webdriver,
@@ -99,6 +108,16 @@ test("crawlers, automated browsers and local copies of the site send no click ev
     assert.equal(link.href, expectedLink);
     assert.equal(browser.beacons.length + browser.fetches.length, 0, browser.navigator.userAgent + browser.location.href);
   }
+});
+
+test("a click in a smoke test's tab carries the bundle's smoke-test marker, so the API drops it", () => {
+  const smokeTestBrowser = makeBrowser({ smokeTestToken: "smoke-test-token" });
+  clickProduct(smokeTestBrowser);
+  assert.equal(smokeTestBrowser.beacons[0].url, `${EventsUrl}?nobi_smoke_test=smoke-test-token`);
+
+  const refusedBeaconBrowser = makeBrowser({ smokeTestToken: "smoke-test-token", acceptsBeacons: false });
+  clickProduct(refusedBeaconBrowser);
+  assert.equal(refusedBeaconBrowser.fetches[0].url, `${EventsUrl}?nobi_smoke_test=smoke-test-token`);
 });
 
 test("a page view with no conversation still counts the click and tags the link, without a conversation", () => {

@@ -79,9 +79,19 @@ links back to the search page with `utm_source=google_web_stories`. The search
 page links to its story, and `sitemap-shop.xml` lists the stories. When a
 shopper taps through a store link, `amp-analytics` sends a beacon to
 `https://api.nobi.ai/v1/shop/story-click` with the store link and the story's
-slug; the link itself still goes straight to the store. Stories get
+slug; the beacon always carries the plain store link. Stories get
 only the file room left after the pages. Mature pages get no story. To check
 one, run `npx amphtml-validator dist/shop/stories/<slug>.html`.
+
+Store links can earn a commission. For each product the API may send `storeLink`
+(the finished link for search pages), `storyStoreLink` (the finished link for Web
+Stories) and `paidLink` (true when the link earns a commission). The website
+never builds or tags these links itself. A search page keeps the plain store link
+in its HTML for crawlers; a person's click opens `storeLink`, and a crawler's
+click opens the plain link with Shop Nobi's tags. A story links straight to
+`storyStoreLink`. A paid link gets `rel="sponsored"` and a small "Paid link"
+label (`PaidLinkLabel` in `src/utils/shopNobiPage.js`). Without these fields,
+store links work as before.
 
 The GitHub workflow `nightly-shop-nobi-rebuild.yml` rebuilds the site every
 day at 10:00 UTC, after the API's overnight refresh, by calling the Cloudflare

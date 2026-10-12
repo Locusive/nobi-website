@@ -1,5 +1,6 @@
 import React from "react";
-import { formatPrice, readCrumbPath, searchPagePath, tagProductLinkOnClick } from "../../utils/shopNobiSearchPage";
+import { formatPrice, readCrumbPath, searchPagePath, replaceProductLinkOnClick } from "../../utils/shopNobiSearchPage";
+import { PaidLinkLabel, readStoreLinkRel } from "../../utils/shopNobiPage";
 
 /**
  * The products of a prebuilt Shop Nobi search page. The build writes this into the HTML for crawlers, and
@@ -50,18 +51,22 @@ function Breadcrumbs({ page }) {
   );
 }
 
-/** One product: its picture, name, store and price, linking to the store's page in a new tab. A click tags the link. */
+/**
+ * One product: its picture, name, store and price, linking to the store's page in a new tab. A click swaps in the
+ * link to open. A link that earns a commission says so in small text.
+ */
 function ProductCard({ product }) {
   const price = formatPrice(product.price, product.currency);
+  const followStoreLink = (event) => replaceProductLinkOnClick(event, product);
 
   return (
     <li>
       <a
         href={product.url}
-        rel="nofollow noopener"
+        rel={readStoreLinkRel(product.paidLink)}
         target="_blank"
-        onClick={tagProductLinkOnClick}
-        onAuxClick={tagProductLinkOnClick}
+        onClick={followStoreLink}
+        onAuxClick={followStoreLink}
         className="group block"
       >
         {product.imageUrl && (
@@ -70,6 +75,7 @@ function ProductCard({ product }) {
         <p className="mt-2 text-sm font-medium group-hover:underline">{product.name}</p>
       </a>
       {product.storeName && <p className="text-sm text-black/60 dark:text-white/60">{product.storeName}</p>}
+      {product.paidLink && <p className="text-xs text-black/40 dark:text-white/40">{PaidLinkLabel}</p>}
       {price && <p className="text-sm font-semibold">{price}</p>}
     </li>
   );

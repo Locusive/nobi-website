@@ -19,12 +19,16 @@
         {
           "name": "Roper Boot", "brand": "Lucchese", "storeName": "Lucchese",
           "url": "https://lucchese.com/products/roper?variant=123&utm_source=nobi&utm_medium=shop",
+          "storeLink": "https://sovrn.co?key=web&u=https%3A%2F%2Flucchese.com%2Fproducts%2Froper%3Fvariant%3D123%26utm_source%3Dshop_nobi",
+          "storyStoreLink": "https://sovrn.co?key=web&u=https%3A%2F%2Flucchese.com%2Fproducts%2Froper%3Fvariant%3D123%26utm_source%3Dgoogle_web_stories",
+          "paidLink": true,
           "imageUrl": "https://cdn.example.com/roper.jpg",
           "price": 495.0, "currency": "USD", "isInStock": true
         },
         {
           "name": "<script>alert(\"boot\")</script> & \"Cowboy\" $& Boot", "brand": "Bad & Co", "storeName": "Store <b>",
           "url": "https://example.com/products/cowboy",
+          "storeLink": "javascript:alert(1)", "storyStoreLink": "https://example.com/products/cowboy?utm_source=google_web_stories", "paidLink": true,
           "imageUrl": "javascript:alert(1)",
           "price": 120, "currency": "EUR", "isInStock": false
         },
@@ -53,6 +57,7 @@
         {
           "name": "Chelsea Boot", "brand": "Blundstone", "storeName": "Blundstone",
           "url": "https://blundstone.example/products/chelsea",
+          "storeLink": "https://blundstone.example/products/chelsea?utm_source=shop_nobi", "paidLink": false,
           "imageUrl": "https://cdn.example.com/chelsea.jpg",
           "price": 230, "currency": "USD", "isInStock": true
         }

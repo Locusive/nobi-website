@@ -141,6 +141,19 @@ test("store links are nofollow and untagged, and the last page links back to the
   assert.match(html, /<amp-story-page-outlink layout="nodisplay"><a href="[^"]+">[^<]+<\/a><\/amp-story-page-outlink>\n<\/amp-story-page>\n<amp-analytics>/);
 });
 
+test("a paid store link goes to the finished story link, is sponsored and labeled, and its beacon keeps the plain link", async () => {
+  const storyStoreLink = "https://sovrn.co?key=web&u=https%3A%2F%2Fstore.example%2Fproducts%2Froper%3Futm_source%3Dgoogle_web_stories";
+  const page = makePage();
+  page.products[0] = { ...page.products[0], storyStoreLink, paidLink: true };
+  const html = await renderStory(page);
+  const storeLinks = [...html.matchAll(/<a class="store-link"[^>]*>[^<]*<\/a>(<span[^>]*>[^<]*<\/span>)?/g)].map(([link]) => link);
+
+  assert.equal(storeLinks[0], `<a class="store-link" href="${storyStoreLink.replaceAll("&", "&amp;")}" `
+    + 'data-vars-store-url="https://store.example/products/roper?variant=1" rel="sponsored nofollow noopener" target="_blank">'
+    + 'See it at the store</a><span class="paid-link">Paid link</span>');
+  assert.ok(storeLinks.slice(1).every((link) => link.includes('rel="nofollow noopener"') && !link.includes("Paid link")));
+});
+
 test("a tap through a store link sends a beacon with the store link and the story's slug", async () => {
   const html = await renderStory(makePage());
   const config = JSON.parse(html.match(/<amp-analytics><script type="application\/json">(.*?)<\/script><\/amp-analytics>/)[1]);

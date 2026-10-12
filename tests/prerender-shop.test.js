@@ -162,6 +162,25 @@ test("every link to a store in the prebuilt pages carries rel=nofollow", () => {
   }
 });
 
+test("a paid product keeps its plain link for crawlers, with rel=sponsored and a Paid link label beside it", () => {
+  const html = readOutput("shop/s/black-leather-boots.html");
+  const body = readBody(html);
+  const productLinks = [...body.matchAll(/<a href="(https?:[^"]+)" rel="([^"]+)"/g)].map(([, href, rel]) => [href, rel]);
+
+  assert.deepEqual(productLinks, [
+    ["https://lucchese.com/products/roper?variant=123", "sponsored nofollow noopener"],
+    ["https://example.com/products/cowboy", "nofollow noopener"],
+    ["https://frye.example/products/harness", "nofollow noopener"],
+  ]);
+  assert.equal(body.split(">Paid link</p>").length - 1, 1, "Only the paid product is labeled");
+  assert.ok(body.indexOf(">Paid link</p>") < body.indexOf("$495.00"), "The label sits with the paid product");
+  assert.ok(!readBody(readOutput("shop/s/chelsea-boots.html")).includes("Paid link"), "An unpaid finished link gets no label");
+
+  const products = readScriptJson(html, "shop-nobi-prebuilt-content").data.products;
+  assert.ok(products[0].storeLink.startsWith("https://sovrn.co?key=web&u=https%3A%2F%2Flucchese.com"), "The click opens the finished link as sent");
+  assert.deepEqual([products[1].storeLink, products[1].paidLink], [null, false], "An unsafe finished link is dropped and never called paid");
+});
+
 test("a hostile product name is escaped everywhere and its embedded data reads back unchanged", () => {
   const html = readOutput("shop/s/black-leather-boots.html");
   const hostileName = '<script>alert("boot")</script> & "Cowboy" $& Boot';

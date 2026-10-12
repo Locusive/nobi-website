@@ -1,20 +1,42 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
-import { tagProductLinkOnClick } from "../src/utils/shopNobiSearchPage.js";
+import { replaceProductLinkOnClick } from "../src/utils/shopNobiSearchPage.js";
 import { tagShopNobiPageLink } from "../src/utils/shopNobiPage.js";
 import { buildPopularSearches, linkCategoryPages } from "../scripts/shop-nobi-category-page-view.js";
 
 const ShopNobiTags = "utm_source=shop_nobi&utm_medium=referral&utm_campaign=shop_nobi";
 
-test("a click on a product link swaps its utm_ tags for Shop Nobi's, keeping the rest of the link", () => {
-  const link = { href: "https://store.example/p/boot?variant=7&utm_source=other&utm_term=x#reviews" };
+const Person = { userAgent: "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 Chrome/141.0 Safari/537.36" };
+const Crawler = { userAgent: "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)" };
+const AutomatedBrowser = { ...Person, webdriver: true };
+
+test("a click on a product link without a finished store link swaps its utm_ tags for Shop Nobi's, keeping the rest", () => {
+  const product = { url: "https://store.example/p/boot?variant=7&utm_source=other&utm_term=x#reviews", storeLink: null };
+  const link = { href: product.url };
   const taggedHref = `https://store.example/p/boot?variant=7&${ShopNobiTags}#reviews`;
 
-  tagProductLinkOnClick({ currentTarget: link });
+  replaceProductLinkOnClick({ currentTarget: link }, product, Person);
   assert.equal(link.href, taggedHref);
 
-  tagProductLinkOnClick({ currentTarget: link });
+  replaceProductLinkOnClick({ currentTarget: link }, product, Person);
   assert.equal(link.href, taggedHref, "A second click adds nothing more");
+});
+
+test("a person's click opens the API's finished store link as sent, and a crawler's opens the plain tagged link", () => {
+  const storeLink = "https://sovrn.co?key=web&u=https%3A%2F%2Fstore.example%2Fp%2Fboot%3Futm_source%3Dshop_nobi";
+  const product = { url: "https://store.example/p/boot", storeLink };
+  const plainTaggedLink = `https://store.example/p/boot?${ShopNobiTags}`;
+
+  const link = { href: product.url };
+  replaceProductLinkOnClick({ currentTarget: link }, product, Person);
+  replaceProductLinkOnClick({ currentTarget: link }, product, Person);
+  assert.equal(link.href, storeLink, "A second click changes nothing");
+
+  for (const visitor of [Crawler, AutomatedBrowser]) {
+    const crawledLink = { href: product.url };
+    replaceProductLinkOnClick({ currentTarget: crawledLink }, product, visitor);
+    assert.equal(crawledLink.href, plainTaggedLink);
+  }
 });
 
 test("a Shop Nobi page link placed on a channel names that channel and drops every utm tag it had", () => {

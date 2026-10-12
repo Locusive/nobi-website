@@ -3,7 +3,7 @@
 
 import { htmlEscape } from "./prerender-blog.js";
 import { StoryPageKind } from "./shop-nobi-web-story-plan.js";
-import { BaseUrl } from "../src/utils/shopNobiPage.js";
+import { BaseUrl, PaidLinkLabel, readStoreLinkRel } from "../src/utils/shopNobiPage.js";
 import { describeSearchPage, formatPrice, searchPageUrl } from "../src/utils/shopNobiSearchPage.js";
 import { webStoryUrl } from "../src/utils/shopNobiWebStory.js";
 import { IndexableRobots, PortraitPosterSize } from "../src/utils/previewImage.js";
@@ -35,6 +35,7 @@ const StoryStyle = [
   ".text{margin:0;font-size:22px;line-height:1.45}",
   ".detail{margin:4px 0 0;font-size:16px;opacity:.75}",
   ".store-link{display:inline-block;margin-top:12px;font-size:14px;color:inherit;opacity:.6}",
+  ".paid-link{margin-left:8px;font-size:12px;opacity:.45}",
 ].join("");
 
 /**
@@ -147,15 +148,21 @@ function renderProduct(product) {
     `<h2>${name}</h2>`,
     product.storeName ? `<p class="detail">${htmlEscape(product.storeName)}</p>` : "",
     price ? `<p class="detail">${htmlEscape(price)}</p>` : "",
-    renderStoreLink(product.url),
+    renderStoreLink(product),
   ];
   return `<amp-story-grid-layer template="vertical" class="product-page">${details.join("")}</amp-story-grid-layer>`;
 }
 
-/** Renders the small nofollow store link, which carries its address for the click beacon. */
-function renderStoreLink(storeUrl) {
-  const address = htmlEscape(storeUrl);
-  return `<a class="store-link" href="${address}" data-vars-store-url="${address}" rel="nofollow noopener" target="_blank">${StoreLinkText}</a>`;
+/**
+ * Renders the small nofollow store link to the API's finished story link, or to the plain link when there is none.
+ * The beacon gets the plain link, which the API matches to the store by domain. A paid link says so next to it.
+ */
+function renderStoreLink(product) {
+  const address = htmlEscape(product.storyStoreLink ?? product.url);
+  const plainAddress = htmlEscape(product.url);
+  const rel = readStoreLinkRel(product.paidLink);
+  const link = `<a class="store-link" href="${address}" data-vars-store-url="${plainAddress}" rel="${rel}" target="_blank">${StoreLinkText}</a>`;
+  return product.paidLink ? `${link}<span class="paid-link">${PaidLinkLabel}</span>` : link;
 }
 
 /** Renders the last page, whose swipe-up link opens the full search page. */

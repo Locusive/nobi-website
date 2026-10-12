@@ -5,6 +5,7 @@ import { BaseUrl, ShopNobiImage, ShopNobiLinkTags, removeTrackingTags } from "./
 import { categoryPagePath } from "./shopNobiCategoryPage.js";
 import { buildBreadcrumbSchema, buildFaqSchema, buildProductListSchema } from "./shopNobiStructuredData.js";
 import { findLargePreviewImage } from "./previewImage.js";
+import { isAutomatedVisitor } from "./automatedVisitor.js";
 
 const SearchPagePathPrefix = "/shop/s/";
 const ShopNobiTags = { utm_source: "shop_nobi", ...ShopNobiLinkTags };
@@ -115,11 +116,28 @@ export function addShopNobiTags(storeUrl) {
 }
 
 /**
- * Click handler for a product link: tags the link just before the browser follows it, so the store credits
- * Shop Nobi while the HTML crawlers read keeps the plain link.
+ * Returns the link a click on a product opens. A person gets the API's finished store link, which may earn a
+ * commission; a crawler, or a product without one, gets the plain link with Shop Nobi's tags.
+ *
+ * @param {{url: string, storeLink?: string | null}} product The product.
+ * @param {{userAgent?: string, webdriver?: boolean}} [browserNavigator] The browser; the page's own by default.
+ * @returns {string} The link to open.
+ */
+export function chooseClickedStoreLink(product, browserNavigator) {
+  if (product.storeLink && !isAutomatedVisitor(browserNavigator)) {
+    return product.storeLink;
+  }
+  return addShopNobiTags(product.url);
+}
+
+/**
+ * Click handler for a product link: swaps in the link to open just before the browser follows it, so the HTML
+ * crawlers read keeps the plain link.
  *
  * @param {{currentTarget: {href: string}}} event The click event.
+ * @param {{url: string, storeLink?: string | null}} product The product the link belongs to.
+ * @param {{userAgent?: string, webdriver?: boolean}} [browserNavigator] The browser; the page's own by default.
  */
-export function tagProductLinkOnClick(event) {
-  event.currentTarget.href = addShopNobiTags(event.currentTarget.href);
+export function replaceProductLinkOnClick(event, product, browserNavigator) {
+  event.currentTarget.href = chooseClickedStoreLink(product, browserNavigator);
 }

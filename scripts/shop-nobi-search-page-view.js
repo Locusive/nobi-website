@@ -1,5 +1,5 @@
-// Turns the fetched page data into the page data the HTML is built from, keeping only safe
-// values: slugs that are safe in file names, http or https links, and links without tracking tags.
+// Turns the fetched page data into the page data the HTML is built from, keeping only safe values: safe slugs,
+// http or https links, and plain links without tracking tags. The API's finished store links keep theirs.
 
 import { removeTrackingTags } from "../src/utils/shopNobiPage.js";
 
@@ -116,6 +116,8 @@ function buildProduct(product) {
     return null;
   }
 
+  const storeLink = readFinishedLink(product.storeLink);
+  const storyStoreLink = readFinishedLink(product.storyStoreLink);
   return {
     name: product.name,
     brand: isText(product.brand) ? product.brand : null,
@@ -125,7 +127,16 @@ function buildProduct(product) {
     price: Number.isFinite(product.price) ? product.price : null,
     currency: CurrencyPattern.test(product.currency ?? "") ? product.currency : null,
     isInStock: product.isInStock === true,
+    storeLink,
+    storyStoreLink,
+    // A link is only called paid when both finished links are kept, so the label never sits on a plain link.
+    paidLink: product.paidLink === true && storeLink !== null && storyStoreLink !== null,
   };
+}
+
+/** Returns a finished store link from the API exactly as sent when it is a safe address, else null. */
+function readFinishedLink(value) {
+  return readWebAddress(value) ? value : null;
 }
 
 /** Returns the address when it is a valid http or https address, else null. */

@@ -5,6 +5,7 @@
 const ClickIdLimit = 50;
 const VisitIdLength = 8;
 const VisitIdBase = 36;
+const ByteValueCount = 256;
 const UnsafeClickIdCharacters = /[^A-Za-z0-9.-]/g;
 /** Tracking tags never hold the sub-ID, even when the API puts the store link in a link without encoding it. */
 const TrackingTagPrefix = "utm_";
@@ -15,8 +16,13 @@ const TrackingTagPrefix = "utm_";
  * @param {Uint8Array} [randomBytes] The random bytes to use; new ones by default.
  * @returns {string} The visit id, such as "k3x9a0qz".
  */
-export function createVisitId(randomBytes = crypto.getRandomValues(new Uint8Array(VisitIdLength))) {
+export function createVisitId(randomBytes = makeRandomBytes()) {
   return Array.from(randomBytes, (byte) => (byte % VisitIdBase).toString(VisitIdBase)).join("");
+}
+
+/** Makes random bytes for a visit id. It is not a secret, so Math.random serves in every browser and Node version. */
+function makeRandomBytes() {
+  return Uint8Array.from({ length: VisitIdLength }, () => Math.floor(Math.random() * ByteValueCount));
 }
 
 /**

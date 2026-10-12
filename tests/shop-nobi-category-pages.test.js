@@ -39,9 +39,9 @@ test("a category with enough search pages gets its own page, and a thinner one g
   assert.equal(categoryPages[1].name, "Furniture");
 });
 
-test("a category still too thin on its top category's page gets no page, no sitemap entry, and stays on /shop", () => {
+test("a category still too thin, or with an unknown top category, gets no page, no sitemap entry, and stays on /shop", () => {
   const signs = buildPages(FewestSearchPagesPerCategory - 1, "Signage", "business_industrial.signage", "sign");
-  const neon = buildPages(1, "Neon Signs", "unknown_top_level.neon", "neon");
+  const neon = buildPages(1, "Neon Signs", "constructor.neon", "neon");
   const chairs = buildPages(FewestSearchPagesPerCategory, "Chairs", "furniture.chairs", "chair");
   const searchPages = [...chairs, ...signs, ...neon];
 

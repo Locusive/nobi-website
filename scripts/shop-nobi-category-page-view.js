@@ -106,10 +106,12 @@ export function linkCategoryPages(searchPages, categoryPages) {
  * @returns {{name: string, slug: string} | null} The category, or null when its top level has no Shop Nobi name.
  */
 function readTopCategory(page) {
-  const name = PinBoardNameByTopLevel[readTopLevel(page.categoryPath)];
-  if (!name) {
+  const topLevel = readTopLevel(page.categoryPath);
+  if (!Object.hasOwn(PinBoardNameByTopLevel, topLevel)) {
     return null;
   }
+
+  const name = PinBoardNameByTopLevel[topLevel];
 
   const slug = makeSlug(name);
   return isSafeSlug(slug) ? { name, slug } : null;

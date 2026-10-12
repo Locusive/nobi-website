@@ -8,6 +8,8 @@ import { findLargePreviewImage } from "./previewImage.js";
 
 const SearchPagePathPrefix = "/shop/s/";
 const ShopNobiTags = { utm_source: "shop_nobi", ...ShopNobiLinkTags };
+/** The parameter a store's Nobi assistant reads the conversation from, the same one the assistant bundle's store links carry. */
+const ConversationIdParameter = "nobi-conversation-id";
 
 /**
  * Returns the path of a search page.
@@ -115,11 +117,16 @@ export function addShopNobiTags(storeUrl) {
 }
 
 /**
- * Click handler for a product link: tags the link just before the browser follows it, so the store credits
- * Shop Nobi while the HTML crawlers read keeps the plain link.
+ * Tags a clicked product link just before the browser follows it, so the store credits Shop Nobi and can tie an order
+ * to the page's conversation, while the HTML crawlers read keeps the plain link.
  *
  * @param {{currentTarget: {href: string}}} event The click event.
+ * @param {string | null} [conversationId] The page's conversation, or null to add none.
  */
-export function tagProductLinkOnClick(event) {
-  event.currentTarget.href = addShopNobiTags(event.currentTarget.href);
+export function tagProductLinkOnClick(event, conversationId = null) {
+  const address = new URL(addShopNobiTags(event.currentTarget.href));
+  if (conversationId) {
+    address.searchParams.set(ConversationIdParameter, conversationId);
+  }
+  event.currentTarget.href = address.toString();
 }

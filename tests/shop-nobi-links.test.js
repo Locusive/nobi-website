@@ -17,6 +17,15 @@ test("a click on a product link swaps its utm_ tags for Shop Nobi's, keeping the
   assert.equal(link.href, taggedHref, "A second click adds nothing more");
 });
 
+test("a click on a product link with the page's conversation carries it once, so the store can tie an order back", () => {
+  const link = { href: "https://store.example/p/boot?variant=7&nobi-conversation-id=old" };
+
+  tagProductLinkOnClick({ currentTarget: link }, "conversation-1");
+  tagProductLinkOnClick({ currentTarget: link }, "conversation-1");
+
+  assert.equal(link.href, `https://store.example/p/boot?variant=7&nobi-conversation-id=conversation-1&${ShopNobiTags}`);
+});
+
 test("a Shop Nobi page link placed on a channel names that channel and drops every utm tag it had", () => {
   const pageUrl = "https://nobi.ai/shop/s/linen-dress?stores=a&utm_source=old&utm_medium=old&utm_term=old";
 

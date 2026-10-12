@@ -131,26 +131,23 @@ test("store links are nofollow and untagged, and the last page links back to the
   const html = await renderStory(makePage());
   const links = [...html.matchAll(/<a\b([^>]*)>/g)].map(([, attributes]) => attributes);
   const storeLinks = links.filter((attributes) => attributes.includes("store.example"));
-  const backLinks = links.filter((attributes) => attributes.includes("nobi.ai"));
+  const backLinks = links.filter((attributes) => attributes.includes("nobi.ai/shop"));
 
   assert.equal(storeLinks.length, 3);
   assert.ok(storeLinks.every((attributes) => attributes.includes('rel="nofollow noopener"') && !attributes.includes("utm_")));
-  assert.ok(storeLinks[0].includes(' data-vars-store-url="https://store.example/products/roper?variant=1"'), "The link carries its address for the click beacon");
   const backLink = "https://nobi.ai/shop/s/boots?utm_source=google_web_stories&amp;utm_medium=referral&amp;utm_campaign=shop_nobi";
   assert.deepEqual(backLinks, [` href="${backLink}"`]);
-  assert.match(html, /<amp-story-page-outlink layout="nodisplay"><a href="[^"]+">[^<]+<\/a><\/amp-story-page-outlink>\n<\/amp-story-page>\n<amp-analytics>/);
+  assert.match(html, /<amp-story-page-outlink layout="nodisplay"><a href="[^"]+">[^<]+<\/a><\/amp-story-page-outlink>\n<\/amp-story-page>\n<\/amp-story>/);
 });
 
-test("a tap through a store link sends a beacon with the store link and the story's slug", async () => {
+test("a store link goes through the API, which counts the tap and adds its conversation, and its tooltip names the store", async () => {
   const html = await renderStory(makePage());
-  const config = JSON.parse(html.match(/<amp-analytics><script type="application\/json">(.*?)<\/script><\/amp-analytics>/)[1]);
+  const firstStoreLink = [...html.matchAll(/<a class="store-link"([^>]*)>/g)][0][1];
 
-  assert.ok(html.includes('<script async custom-element="amp-analytics" src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>'));
-  assert.deepEqual(config, {
-    requests: { storyClick: "https://api.nobi.ai/v1/shop/story-click?url=${storeUrl}&page=boots" },
-    triggers: { storeLinkTap: { on: "story-click-through", tagName: "a", request: "storyClick" } },
-    transport: { beacon: true, xhrpost: true, image: false },
-  });
+  const linkThroughApi = "https://api.nobi.ai/v1/shop/story-go?url=https%3A%2F%2Fstore.example%2Fproducts%2Froper%3Fvariant%3D1&amp;page=boots";
+  assert.ok(firstStoreLink.includes(` href="${linkThroughApi}"`), firstStoreLink);
+  assert.ok(firstStoreLink.includes(' data-tooltip-text="store.example"'), firstStoreLink);
+  assert.ok(!html.includes("amp-analytics"), "The API counts the tap, so no beacon counts it twice");
 });
 
 test("page text is escaped everywhere it appears", async () => {

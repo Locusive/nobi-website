@@ -3,8 +3,8 @@ import ShopNobiSearchLinks from "./ShopNobiSearchLinks";
 import { describeCategoryPage } from "../../utils/shopNobiCategoryPage";
 
 /**
- * A prebuilt Shop Nobi category page: its name and links to its search pages. Visitors see it until the live
- * search takes its place.
+ * A prebuilt Shop Nobi category page: its name and links to its search pages. It stays under the search box
+ * until the shopper's own search draws live products.
  *
  * @param {{category: {name: string, pages: object[]}}} props The category page data.
  */

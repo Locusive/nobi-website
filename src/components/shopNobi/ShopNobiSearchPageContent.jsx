@@ -1,9 +1,10 @@
 import React from "react";
-import { formatPrice, readCrumbPath, searchPagePath, tagProductLinkOnClick } from "../../utils/shopNobiSearchPage";
+import { handleProductLinkClick } from "../../utils/shopNobiProductClick";
+import { formatPrice, readCrumbPath, searchPagePath } from "../../utils/shopNobiSearchPage";
 
 /**
  * The products of a prebuilt Shop Nobi search page. The build writes this into the HTML for crawlers, and
- * visitors see it until the live search takes its place.
+ * visitors see it until live products take its place. A refused or failed live search leaves it in place.
  *
  * @param {{page: object}} props The search page data.
  */
@@ -19,7 +20,7 @@ export default function ShopNobiSearchPageContent({ page }) {
       ))}
       <ul className="mt-6 grid grid-cols-2 gap-6 sm:grid-cols-3 lg:grid-cols-4">
         {page.products.map((product, index) => (
-          <ProductCard key={index} product={product} />
+          <ProductCard key={index} product={product} position={index + 1} query={page.query} />
         ))}
       </ul>
       <Questions faq={page.faq} />
@@ -50,9 +51,10 @@ function Breadcrumbs({ page }) {
   );
 }
 
-/** One product: its picture, name, store and price, linking to the store's page in a new tab. A click tags the link. */
-function ProductCard({ product }) {
+/** One product: its picture, name, store and price, linking to the store's page in a new tab. A click tags the link and is counted. */
+function ProductCard({ product, position, query }) {
   const price = formatPrice(product.price, product.currency);
+  const handleClick = (event) => handleProductLinkClick(event, { product, position, query });
 
   return (
     <li>
@@ -60,8 +62,8 @@ function ProductCard({ product }) {
         href={product.url}
         rel="nofollow noopener"
         target="_blank"
-        onClick={tagProductLinkOnClick}
-        onAuxClick={tagProductLinkOnClick}
+        onClick={handleClick}
+        onAuxClick={handleClick}
         className="group block"
       >
         {product.imageUrl && (

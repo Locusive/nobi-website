@@ -115,8 +115,8 @@ export function addShopNobiTags(storeUrl) {
 }
 
 /**
- * Click handler for a product link: tags the link just before the browser follows it, so the store credits
- * Shop Nobi while the HTML crawlers read keeps the plain link.
+ * Tags a clicked product link just before the browser follows it, so the store credits Shop Nobi while the
+ * HTML crawlers read keeps the plain link.
  *
  * @param {{currentTarget: {href: string}}} event The click event.
  */

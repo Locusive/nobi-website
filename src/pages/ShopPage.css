@@ -1,0 +1,11 @@
+/* On a category page the category's own heading and searches sit under the search box, so the assistant's
+   empty page drops its general headline, its suggestions and its full-window height. */
+.shop-nobi-category-search [data-testid="search-results-page"][data-empty="true"] {
+  min-height: 0;
+  padding-bottom: 0;
+}
+
+.shop-nobi-category-search [data-testid="search-results-page"][data-empty="true"] > header,
+.shop-nobi-category-search [data-testid="search-suggestions"] {
+  display: none;
+}

@@ -109,10 +109,11 @@ function buildRelatedPages(page, links) {
     .map((slug) => ({ slug: links.builtSlugs.has(slug) ? slug : null, title: links.titleBySlug.get(slug) }));
 }
 
-/** Builds one product, or returns null when it has no name or no safe link. */
+/** Builds one product, or returns null when it has no name, no safe link or no safe picture, so no card is blank. */
 function buildProduct(product) {
   const url = readWebAddress(product?.url);
-  if (!isText(product?.name) || !url) {
+  const imageAddress = readWebAddress(product?.imageUrl);
+  if (!isText(product?.name) || !url || !imageAddress) {
     return null;
   }
 
@@ -121,7 +122,7 @@ function buildProduct(product) {
     brand: isText(product.brand) ? product.brand : null,
     storeName: isText(product.storeName) ? product.storeName : null,
     url: removeTrackingTags(url),
-    imageUrl: readWebAddress(product.imageUrl)?.toString() ?? null,
+    imageUrl: imageAddress.toString(),
     price: Number.isFinite(product.price) ? product.price : null,
     currency: CurrencyPattern.test(product.currency ?? "") ? product.currency : null,
     isInStock: product.isInStock === true,

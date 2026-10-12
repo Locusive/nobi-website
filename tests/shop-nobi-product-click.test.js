@@ -58,7 +58,7 @@ test("a click on a prebuilt product sends one click event with the product, page
       source: "assistant",
       shopperId: "shopper-1",
       details: {
-        entryPoint: "Shop Nobi Page",
+        entryPoint: "AI Search Bar",
         conversationId: PageConversationId,
         query: "black leather boots",
         productName: "Roper Boot",

@@ -72,8 +72,8 @@ In the browser, a search page keeps its prebuilt products above the live search,
 and a category page keeps its searches under the search box, until the assistant
 bundle draws live products. A refused or failed live search therefore leaves the
 prebuilt content in place. A click on a prebuilt product sends the API the same
-"Click On Search Result" event as a live product, with the entry point
-"Shop Nobi Page". Crawlers, automated browsers and local copies send none.
+"Click On Search Result" event as a live product, with the same entry point,
+"AI Search Bar". Crawlers, automated browsers and local copies send none.
 
 Each search page with at least two short guide pages and two product pictures,
 one of them a Shopify picture whose 3:4 cut is at least 640 by 853 pixels (the

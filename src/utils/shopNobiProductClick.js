@@ -9,8 +9,8 @@ const EventsUrl = `https://api.nobi.ai/v1/merchants/${ShopNobiMerchantId}/events
 const ClickEventName = "Click On Search Result";
 /** The source the bundle's events carry. The reports count only events with it. */
 const AssistantSource = "assistant";
-/** The entry point that names a click on a prebuilt Shop Nobi page. */
-const PrebuiltPageEntryPoint = "Shop Nobi Page";
+/** The entry point the bundle sends for a click on a live Shop Nobi result. A prebuilt card's click sends it too. */
+const SearchBarEntryPoint = "AI Search Bar";
 /** Clicks on a copy of the site served from these hosts are not counted. */
 const LocalHosts = ["localhost", "127.0.0.1"];
 /** Crawler and automated browser names, the same pattern the bundle uses to skip their clicks. */
@@ -66,7 +66,7 @@ function isAutomatedVisitor(browserNavigator) {
 /** Builds the event with the field names the bundle uses for its live product clicks. */
 function buildClickEvent({ product, position, query, conversationId }, linkUrl, browser) {
   const details = {
-    entryPoint: PrebuiltPageEntryPoint,
+    entryPoint: SearchBarEntryPoint,
     ...(conversationId ? { conversationId } : {}),
     query,
     productName: product.name,

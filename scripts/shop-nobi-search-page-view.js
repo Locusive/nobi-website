@@ -1,7 +1,8 @@
 // Turns the fetched page data into the page data the HTML is built from, keeping only safe values: safe slugs,
-// http or https links, and plain links without tracking tags. The API's finished store links keep theirs.
+// http or https links, and plain links without tracking tags. Paid store links are kept only in base64.
 
 import { removeTrackingTags } from "../src/utils/shopNobiPage.js";
+import { encodePaidLink } from "../src/utils/shopNobiPaidLink.js";
 
 const SlugPattern = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 const CurrencyPattern = /^[A-Z]{3}$/;
@@ -125,27 +126,25 @@ function buildProduct(product) {
     price: Number.isFinite(product.price) ? product.price : null,
     currency: CurrencyPattern.test(product.currency ?? "") ? product.currency : null,
     isInStock: product.isInStock === true,
-    ...readFinishedLinks(product),
+    ...readPaidLinks(product),
   };
 }
 
 /**
- * Keeps the API's finished store links that are safe. A paid product that loses either link loses both, so a paid
- * link never shows without its label and rel="sponsored".
+ * Keeps the API's finished store links only for a paid product with both links safe, in base64 so crawlers do not
+ * follow them. Any other product carries no extra link and keeps today's plain links.
  */
-function readFinishedLinks(product) {
-  const storeLink = readFinishedLink(product.storeLink);
-  const storyStoreLink = readFinishedLink(product.storyStoreLink);
-  const paidLink = product.paidLink === true;
-  if (paidLink && (storeLink === null || storyStoreLink === null)) {
-    return { storeLink: null, storyStoreLink: null, paidLink: false };
+function readPaidLinks(product) {
+  const hasSafeLinks = readWebAddress(product.storeLink) !== null && readWebAddress(product.storyStoreLink) !== null;
+  if (product.paidLink !== true || !hasSafeLinks) {
+    return { paidLink: false };
   }
-  return { storeLink, storyStoreLink, paidLink };
-}
 
-/** Returns a finished store link from the API exactly as sent when it is a safe address, else null. */
-function readFinishedLink(value) {
-  return readWebAddress(value) ? value : null;
+  return {
+    paidLink: true,
+    encodedStoreLink: encodePaidLink(product.storeLink),
+    encodedStoryStoreLink: encodePaidLink(product.storyStoreLink),
+  };
 }
 
 /** Returns the address when it is a valid http or https address, else null. */

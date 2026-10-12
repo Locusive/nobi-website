@@ -86,12 +86,13 @@ one, run `npx amphtml-validator dist/shop/stories/<slug>.html`.
 Store links can earn a commission. For each product the API may send `storeLink`
 (the finished link for search pages), `storyStoreLink` (the finished link for Web
 Stories) and `paidLink` (true when the link earns a commission). The website
-never builds or tags these links itself. A search page keeps the plain store link
-in its HTML for crawlers; a person's click opens `storeLink`, and a crawler's
-click opens the plain link with Shop Nobi's tags. A story links straight to
-`storyStoreLink`. A paid link gets `rel="sponsored"` and a small "Paid link"
-label (`PaidLinkLabel` in `src/utils/shopNobiPage.js`). Without these fields,
-store links work as before.
+never builds or tags these links itself, and uses them only for paid products.
+A search page keeps the plain store link in its HTML and holds the paid link only
+in base64, so crawlers never see it; a person's click opens the paid link, and a
+crawler's click opens the plain link with Shop Nobi's tags. A story links a paid
+product straight to its `storyStoreLink`. A paid link gets `rel="sponsored"` and
+a small "Paid link" label (`PaidLinkLabel` in `src/utils/shopNobiPage.js`).
+Unpaid products keep the same links as before.
 
 The GitHub workflow `nightly-shop-nobi-rebuild.yml` rebuilds the site every
 day at 10:00 UTC, after the API's overnight refresh, by calling the Cloudflare

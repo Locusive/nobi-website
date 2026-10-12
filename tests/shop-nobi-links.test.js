@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import { test } from "node:test";
 import { replaceProductLinkOnClick } from "../src/utils/shopNobiSearchPage.js";
 import { tagShopNobiPageLink } from "../src/utils/shopNobiPage.js";
+import { encodePaidLink } from "../src/utils/shopNobiPaidLink.js";
 import { buildPopularSearches, linkCategoryPages } from "../scripts/shop-nobi-category-page-view.js";
 
 const ShopNobiTags = "utm_source=shop_nobi&utm_medium=referral&utm_campaign=shop_nobi";
@@ -10,8 +11,8 @@ const Person = { userAgent: "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) App
 const Crawler = { userAgent: "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)" };
 const AutomatedBrowser = { ...Person, webdriver: true };
 
-test("a click on a product link without a finished store link swaps its utm_ tags for Shop Nobi's, keeping the rest", () => {
-  const product = { url: "https://store.example/p/boot?variant=7&utm_source=other&utm_term=x#reviews", storeLink: null };
+test("a click on a product link without a paid store link swaps its utm_ tags for Shop Nobi's, keeping the rest", () => {
+  const product = { url: "https://store.example/p/boot?variant=7&utm_source=other&utm_term=x#reviews" };
   const link = { href: product.url };
   const taggedHref = `https://store.example/p/boot?variant=7&${ShopNobiTags}#reviews`;
 
@@ -22,9 +23,9 @@ test("a click on a product link without a finished store link swaps its utm_ tag
   assert.equal(link.href, taggedHref, "A second click adds nothing more");
 });
 
-test("a person's click opens the API's finished store link as sent, and a crawler's opens the plain tagged link", () => {
-  const storeLink = "https://sovrn.co?key=web&u=https%3A%2F%2Fstore.example%2Fp%2Fboot%3Futm_source%3Dshop_nobi";
-  const product = { url: "https://store.example/p/boot", storeLink };
+test("a person's click opens the paid store link as the API sent it, and a crawler's opens the plain tagged link", () => {
+  const storeLink = "https://sovrn.co?key=web&u=https%3A%2F%2Fstore.example%2Fp%2Fboot%3Futm_source%3Dshop_nobi&name=café";
+  const product = { url: "https://store.example/p/boot", encodedStoreLink: encodePaidLink(storeLink) };
   const plainTaggedLink = `https://store.example/p/boot?${ShopNobiTags}`;
 
   const link = { href: product.url };

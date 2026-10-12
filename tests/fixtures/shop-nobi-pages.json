@@ -39,6 +39,8 @@
         {
           "name": "Harness Boot", "brand": "Frye", "storeName": "Frye",
           "url": "https://frye.example/products/harness",
+          "storeLink": "https://frye.example/products/harness?utm_source=shop_nobi",
+          "storyStoreLink": "https://frye.example/products/harness?utm_source=google_web_stories", "paidLink": false,
           "imageUrl": "https://cdn.shopify.com/s/files/1/0001/harness.jpg?v=1",
           "price": 398, "currency": "USD", "isInStock": true
         }
@@ -57,7 +59,8 @@
         {
           "name": "Chelsea Boot", "brand": "Blundstone", "storeName": "Blundstone",
           "url": "https://blundstone.example/products/chelsea",
-          "storeLink": "https://blundstone.example/products/chelsea?utm_source=shop_nobi", "paidLink": false,
+          "storeLink": "https://blundstone.example/products/chelsea?utm_source=shop_nobi",
+          "storyStoreLink": "https://blundstone.example/products/chelsea?utm_source=google_web_stories", "paidLink": false,
           "imageUrl": "https://cdn.example.com/chelsea.jpg",
           "price": 230, "currency": "USD", "isInStock": true
         }

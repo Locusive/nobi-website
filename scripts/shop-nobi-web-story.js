@@ -6,6 +6,7 @@ import { StoryPageKind } from "./shop-nobi-web-story-plan.js";
 import { BaseUrl, PaidLinkLabel, readStoreLinkRel } from "../src/utils/shopNobiPage.js";
 import { describeSearchPage, formatPrice, searchPageUrl } from "../src/utils/shopNobiSearchPage.js";
 import { webStoryUrl } from "../src/utils/shopNobiWebStory.js";
+import { decodePaidLink } from "../src/utils/shopNobiPaidLink.js";
 import { IndexableRobots, PortraitPosterSize } from "../src/utils/previewImage.js";
 
 const Publisher = "Nobi";
@@ -154,15 +155,17 @@ function renderProduct(product) {
 }
 
 /**
- * Renders the small nofollow store link to the API's finished story link, or to the plain link when there is none.
- * The beacon gets the plain link, which the API matches to the store by domain. A paid link says so next to it.
+ * Renders the small nofollow store link: the paid story link when the product has one, else the plain link. The
+ * beacon always gets the plain link, which the API matches to the store by domain. A paid link says so next to it.
  */
 function renderStoreLink(product) {
-  const address = htmlEscape(product.storyStoreLink ?? product.url);
+  const paidAddress = product.paidLink ? decodePaidLink(product.encodedStoryStoreLink) : null;
+  const isPaid = paidAddress !== null;
+  const address = htmlEscape(paidAddress ?? product.url);
   const plainAddress = htmlEscape(product.url);
-  const rel = readStoreLinkRel(product.paidLink);
+  const rel = readStoreLinkRel(isPaid);
   const link = `<a class="store-link" href="${address}" data-vars-store-url="${plainAddress}" rel="${rel}" target="_blank">${StoreLinkText}</a>`;
-  return product.paidLink ? `${link}<span class="paid-link">${PaidLinkLabel}</span>` : link;
+  return isPaid ? `${link}<span class="paid-link">${PaidLinkLabel}</span>` : link;
 }
 
 /** Renders the last page, whose swipe-up link opens the full search page. */

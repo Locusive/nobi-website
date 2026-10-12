@@ -4,6 +4,8 @@ import { join } from "node:path";
 import { after, before, test } from "node:test";
 import { countRedirectRules } from "../scripts/shop-nobi-search-page-listings.js";
 import { FileCountBeforePages, makeDistCopy, prerenderWith, readBody, readOriginal, readScriptJson } from "./shop-nobi-test-build.js";
+import { readFixturePageData } from "./shop-nobi-pages-server.js";
+import { decodePaidLink } from "../src/utils/shopNobiPaidLink.js";
 
 let distDir;
 
@@ -163,8 +165,7 @@ test("every link to a store in the prebuilt pages carries rel=nofollow", () => {
 });
 
 test("a paid product keeps its plain link for crawlers, with rel=sponsored and a Paid link label beside it", () => {
-  const html = readOutput("shop/s/black-leather-boots.html");
-  const body = readBody(html);
+  const body = readBody(readOutput("shop/s/black-leather-boots.html"));
   const productLinks = [...body.matchAll(/<a href="(https?:[^"]+)" rel="([^"]+)"/g)].map(([, href, rel]) => [href, rel]);
 
   assert.deepEqual(productLinks, [
@@ -174,12 +175,34 @@ test("a paid product keeps its plain link for crawlers, with rel=sponsored and a
   ]);
   assert.equal(body.split(">Paid link</p>").length - 1, 1, "Only the paid product is labeled");
   assert.ok(body.indexOf(">Paid link</p>") < body.indexOf("$495.00"), "The label sits with the paid product");
-  assert.ok(!readBody(readOutput("shop/s/chelsea-boots.html")).includes("Paid link"), "An unpaid finished link gets no label");
+  assert.ok(!readBody(readOutput("shop/s/chelsea-boots.html")).includes("Paid link"), "An unpaid product gets no label");
+});
 
-  const products = readScriptJson(html, "shop-nobi-prebuilt-content").data.products;
-  assert.ok(products[0].storeLink.startsWith("https://sovrn.co?key=web&u=https%3A%2F%2Flucchese.com"), "The click opens the finished link as sent");
-  const unsafeProduct = [products[1].storeLink, products[1].storyStoreLink, products[1].paidLink];
-  assert.deepEqual(unsafeProduct, [null, null, false], "A paid product with an unsafe finished link falls back to plain links");
+test("a page's HTML holds no finished store link as text, and only paid products carry one, in base64", () => {
+  const fixtureProducts = readFixturePageData().pages.flatMap((page) => page.products);
+  const finishedLinks = fixtureProducts.flatMap((product) => [product.storeLink, product.storyStoreLink]).filter(Boolean);
+  for (const page of ["shop/s/black-leather-boots.html", "shop/s/chelsea-boots.html"]) {
+    const html = readOutput(page);
+    assert.ok(finishedLinks.every((link) => !html.includes(link) && !html.includes(link.replaceAll("&", "&amp;"))), page);
+    assert.ok(!html.includes("sovrn.co"), page);
+  }
+
+  const products = readScriptJson(readOutput("shop/s/black-leather-boots.html"), "shop-nobi-prebuilt-content").data.products;
+  assert.equal(decodePaidLink(products[0].encodedStoreLink), fixtureProducts[0].storeLink, "The click opens the paid link as sent");
+  for (const product of products.slice(1)) {
+    assert.deepEqual([product.paidLink, product.encodedStoreLink, product.encodedStoryStoreLink], [false, undefined, undefined]);
+  }
+});
+
+test("a story links a paid product to its paid story link, sponsored and labeled, and every other product to its plain link", () => {
+  const story = readOutput("shop/stories/black-leather-boots.html");
+  const storeLinks = [...story.matchAll(/<a class="store-link" href="([^"]+)" data-vars-store-url="([^"]+)" rel="([^"]+)"[^>]*>[^<]*<\/a>(<span class="paid-link">Paid link<\/span>)?/g)];
+  const paidStoryLink = readFixturePageData().pages[0].products[0].storyStoreLink.replaceAll("&", "&amp;");
+
+  assert.deepEqual(storeLinks.map(([, href, beaconUrl, rel, label]) => [href, beaconUrl, rel, Boolean(label)]), [
+    [paidStoryLink, "https://lucchese.com/products/roper?variant=123", "sponsored nofollow noopener", true],
+    ["https://frye.example/products/harness", "https://frye.example/products/harness", "nofollow noopener", false],
+  ]);
 });
 
 test("a hostile product name is escaped everywhere and its embedded data reads back unchanged", () => {

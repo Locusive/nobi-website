@@ -6,6 +6,7 @@ import { categoryPagePath } from "./shopNobiCategoryPage.js";
 import { buildBreadcrumbSchema, buildFaqSchema, buildProductListSchema } from "./shopNobiStructuredData.js";
 import { findLargePreviewImage } from "./previewImage.js";
 import { isAutomatedVisitor } from "./automatedVisitor.js";
+import { decodePaidLink } from "./shopNobiPaidLink.js";
 
 const SearchPagePathPrefix = "/shop/s/";
 const ShopNobiTags = { utm_source: "shop_nobi", ...ShopNobiLinkTags };
@@ -116,18 +117,16 @@ export function addShopNobiTags(storeUrl) {
 }
 
 /**
- * Returns the link a click on a product opens. A person gets the API's finished store link, which may earn a
- * commission; a crawler, or a product without one, gets the plain link with Shop Nobi's tags.
+ * Returns the link a click on a product opens. A person gets the paid store link when the product has one; a
+ * crawler, or a product without one, gets the plain link with Shop Nobi's tags.
  *
- * @param {{url: string, storeLink?: string | null}} product The product.
+ * @param {{url: string, encodedStoreLink?: string}} product The product.
  * @param {{userAgent?: string, webdriver?: boolean}} [browserNavigator] The browser; the page's own by default.
  * @returns {string} The link to open.
  */
 export function chooseClickedStoreLink(product, browserNavigator) {
-  if (product.storeLink && !isAutomatedVisitor(browserNavigator)) {
-    return product.storeLink;
-  }
-  return addShopNobiTags(product.url);
+  const paidStoreLink = isAutomatedVisitor(browserNavigator) ? null : decodePaidLink(product.encodedStoreLink);
+  return paidStoreLink ?? addShopNobiTags(product.url);
 }
 
 /**
@@ -135,7 +134,7 @@ export function chooseClickedStoreLink(product, browserNavigator) {
  * crawlers read keeps the plain link.
  *
  * @param {{currentTarget: {href: string}}} event The click event.
- * @param {{url: string, storeLink?: string | null}} product The product the link belongs to.
+ * @param {{url: string, encodedStoreLink?: string}} product The product the link belongs to.
  * @param {{userAgent?: string, webdriver?: boolean}} [browserNavigator] The browser; the page's own by default.
  */
 export function replaceProductLinkOnClick(event, product, browserNavigator) {

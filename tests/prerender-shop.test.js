@@ -164,7 +164,7 @@ test("every link to a store in the prebuilt pages carries rel=nofollow", () => {
   }
 });
 
-test("a paid product keeps its plain link for crawlers, with rel=sponsored and a Paid link label beside it", () => {
+test("a paid product keeps its plain link for crawlers, with rel=sponsored and a commission notice at the end of its card", () => {
   const body = readBody(readOutput("shop/s/black-leather-boots.html"));
   const productLinks = [...body.matchAll(/<a href="(https?:[^"]+)" rel="([^"]+)"/g)].map(([, href, rel]) => [href, rel]);
 
@@ -173,9 +173,10 @@ test("a paid product keeps its plain link for crawlers, with rel=sponsored and a
     ["https://example.com/products/cowboy", "nofollow noopener"],
     ["https://frye.example/products/harness", "nofollow noopener"],
   ]);
-  assert.equal(body.split(">Paid link</p>").length - 1, 1, "Only the paid product is labeled");
-  assert.ok(body.indexOf(">Paid link</p>") < body.indexOf("$495.00"), "The label sits with the paid product");
-  assert.ok(!readBody(readOutput("shop/s/chelsea-boots.html")).includes("Paid link"), "An unpaid product gets no label");
+  const notice = '<p class="mt-1 text-xs text-black/40 dark:text-white/40">We may earn a commission</p>';
+  assert.equal(body.split(notice).length - 1, 1, "Only the paid product has the notice");
+  assert.ok(body.includes(`$495.00</p>${notice}</li>`), "The notice ends the paid product's card");
+  assert.ok(!readBody(readOutput("shop/s/chelsea-boots.html")).includes("commission"), "An unpaid product gets no notice");
 });
 
 test("a page's HTML holds no finished store link as text, and only paid products carry one, in base64", () => {
@@ -194,12 +195,12 @@ test("a page's HTML holds no finished store link as text, and only paid products
   }
 });
 
-test("a story links a paid product to its paid story link, sponsored and labeled, and every other product to its plain link", () => {
+test("a story links a paid product to its paid story link, sponsored with the notice under it, and others to their plain link", () => {
   const story = readOutput("shop/stories/black-leather-boots.html");
-  const storeLinks = [...story.matchAll(/<a class="store-link" href="([^"]+)" data-vars-store-url="([^"]+)" rel="([^"]+)"[^>]*>[^<]*<\/a>(<span class="paid-link">Paid link<\/span>)?/g)];
+  const storeLinks = [...story.matchAll(/<a class="store-link" href="([^"]+)" data-vars-store-url="([^"]+)" rel="([^"]+)"[^>]*>[^<]*<\/a>(<p class="commission-notice">We may earn a commission<\/p>)?/g)];
   const paidStoryLink = readFixturePageData().pages[0].products[0].storyStoreLink.replaceAll("&", "&amp;");
 
-  assert.deepEqual(storeLinks.map(([, href, beaconUrl, rel, label]) => [href, beaconUrl, rel, Boolean(label)]), [
+  assert.deepEqual(storeLinks.map(([, href, beaconUrl, rel, notice]) => [href, beaconUrl, rel, Boolean(notice)]), [
     [paidStoryLink, "https://lucchese.com/products/roper?variant=123", "sponsored nofollow noopener", true],
     ["https://frye.example/products/harness", "https://frye.example/products/harness", "nofollow noopener", false],
   ]);

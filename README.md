@@ -91,7 +91,8 @@ A search page keeps the plain store link in its HTML and holds the paid link onl
 in base64, so crawlers never see it; a person's click opens the paid link, and a
 crawler's click opens the plain link with Shop Nobi's tags. A story links a paid
 product straight to its `storyStoreLink`. A paid link gets `rel="sponsored"` and
-a small "Paid link" label (`PaidLinkLabel` in `src/utils/shopNobiPage.js`).
+a small "We may earn a commission" notice under it (`CommissionNotice` in
+`src/utils/shopNobiPage.js`).
 Unpaid products keep the same links as before.
 
 The GitHub workflow `nightly-shop-nobi-rebuild.yml` rebuilds the site every

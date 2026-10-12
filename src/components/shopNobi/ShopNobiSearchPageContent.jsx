@@ -1,6 +1,6 @@
 import React from "react";
 import { formatPrice, readCrumbPath, searchPagePath, replaceProductLinkOnClick } from "../../utils/shopNobiSearchPage";
-import { PaidLinkLabel, readStoreLinkRel } from "../../utils/shopNobiPage";
+import { CommissionNotice, readStoreLinkRel } from "../../utils/shopNobiPage";
 
 /**
  * The products of a prebuilt Shop Nobi search page. The build writes this into the HTML for crawlers, and
@@ -53,7 +53,7 @@ function Breadcrumbs({ page }) {
 
 /**
  * One product: its picture, name, store and price, linking to the store's page in a new tab. A click swaps in the
- * link to open. A link that earns a commission says so in small text.
+ * link to open. A link that earns a commission has a small notice under it.
  */
 function ProductCard({ product }) {
   const price = formatPrice(product.price, product.currency);
@@ -75,8 +75,8 @@ function ProductCard({ product }) {
         <p className="mt-2 text-sm font-medium group-hover:underline">{product.name}</p>
       </a>
       {product.storeName && <p className="text-sm text-black/60 dark:text-white/60">{product.storeName}</p>}
-      {product.paidLink && <p className="text-xs text-black/40 dark:text-white/40">{PaidLinkLabel}</p>}
       {price && <p className="text-sm font-semibold">{price}</p>}
+      {product.paidLink && <p className="mt-1 text-xs text-black/40 dark:text-white/40">{CommissionNotice}</p>}
     </li>
   );
 }

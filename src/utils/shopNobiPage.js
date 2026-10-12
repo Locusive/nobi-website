@@ -29,8 +29,8 @@ const TrackingTagPrefix = "utm_";
 /** The utm_medium and utm_campaign tags on every link Shop Nobi places. The utm_source tag names the channel. */
 export const ShopNobiLinkTags = { utm_medium: "referral", utm_campaign: "shop_nobi" };
 
-/** The words shown next to a store link that earns Shop Nobi a commission. */
-export const PaidLinkLabel = "Paid link";
+/** The notice shown under a store link that earns Shop Nobi a commission. */
+export const CommissionNotice = "We may earn a commission";
 
 /** The rel of a store link. Google asks for "sponsored" on links that earn a commission. */
 const StoreLinkRel = "nofollow noopener";

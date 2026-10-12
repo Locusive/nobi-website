@@ -297,3 +297,32 @@ test("redirects for retired pages stop at the rule limit, keeping the first ones
     rmSync(folder, { recursive: true, force: true });
   }
 });
+
+/** Builds search pages under one furniture category, which the build can render. */
+function buildFurniturePages(count, categoryName, slugPrefix) {
+  return Array.from({ length: count }, (_, index) => ({
+    slug: `${slugPrefix}-${index}`,
+    title: `${categoryName} ${index}`,
+    categoryPath: `furniture.${slugPrefix}`,
+    breadcrumbs: [{ name: categoryName, slug: null }],
+    products: [],
+  }));
+}
+
+test("a top category's page shows its category pages under Browse by category, then its own search pages", async () => {
+  const chairs = buildFurniturePages(3, "Chairs", "chair");
+  const benches = buildFurniturePages(2, "Benches", "bench");
+  const ottomans = buildFurniturePages(1, "Ottomans", "ottoman");
+  const folder = makeDistCopy();
+  try {
+    await prerenderWith({ body: { pages: [...chairs, ...benches, ...ottomans], retired: [] } }, folder);
+
+    const body = readBody(readFileSync(join(folder, "shop/c/furniture.html"), "utf8"));
+    const links = [...body.matchAll(/href="(\/shop\/[cs]\/[^"]+)"/g)].map(([, href]) => href);
+    assert.ok(body.includes("Browse by category"));
+    assert.deepEqual(links, ["/shop/c/chairs", "/shop/s/bench-0", "/shop/s/bench-1", "/shop/s/ottoman-0"]);
+    assert.ok(!readBody(readFileSync(join(folder, "shop/c/chairs.html"), "utf8")).includes("Browse by category"));
+  } finally {
+    rmSync(folder, { recursive: true, force: true });
+  }
+});

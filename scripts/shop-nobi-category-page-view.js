@@ -39,11 +39,12 @@ export function countCategories(pages) {
 }
 
 /**
- * Builds the category pages of the built search pages, in order of first appearance.
+ * Builds the category pages of the built search pages, in order of first appearance. A top category's page also
+ * links the built category pages under it.
  *
  * @param {object[]} searchPages The built search pages.
  * @param {number} categoryLimit The most category pages to build.
- * @returns {{slug: string, name: string, refreshedAt: string | null, pages: object[]}[]} The category pages.
+ * @returns {object[]} The category pages, each {slug, name, refreshedAt, subcategories, pages}.
  */
 export function buildCategoryPages(searchPages, categoryLimit) {
   const categoryByPageSlug = chooseCategories(searchPages);
@@ -54,7 +55,11 @@ export function buildCategoryPages(searchPages, categoryLimit) {
       addToCategory(categoryBySlug, category, page);
     }
   }
-  return [...categoryBySlug.values()].slice(0, Math.max(0, categoryLimit));
+  const categoryPages = [...categoryBySlug.values()].slice(0, Math.max(0, categoryLimit));
+  return categoryPages.map(({ topLevel, isTopCategory, ...categoryPage }) => ({
+    ...categoryPage,
+    subcategories: isTopCategory ? listSubcategories(topLevel, categoryPages) : [],
+  }));
 }
 
 /**
@@ -114,7 +119,14 @@ function readTopCategory(page) {
   const name = PinBoardNameByTopLevel[topLevel];
 
   const slug = makeSlug(name);
-  return isSafeSlug(slug) ? { name, slug } : null;
+  return isSafeSlug(slug) ? { name, slug, isTopCategory: true } : null;
+}
+
+/** Lists the slug and name of each built category page under a top category, other than the top category's own. */
+function listSubcategories(topLevel, categoryPages) {
+  return categoryPages
+    .filter((categoryPage) => !categoryPage.isTopCategory && categoryPage.topLevel === topLevel)
+    .map((categoryPage) => ({ slug: categoryPage.slug, name: categoryPage.name }));
 }
 
 /**
@@ -161,7 +173,9 @@ function countPagesByCategory(categories) {
 /** Adds a search page to its category, creating the category on first use and keeping its latest refresh time. */
 function addToCategory(categoryBySlug, category, page) {
   if (!categoryBySlug.has(category.slug)) {
-    categoryBySlug.set(category.slug, { ...category, refreshedAt: null, pages: [] });
+    const topLevel = readTopLevel(page.categoryPath);
+    const isTopCategory = category.isTopCategory === true;
+    categoryBySlug.set(category.slug, { slug: category.slug, name: category.name, topLevel, isTopCategory, refreshedAt: null, pages: [] });
   }
 
   const categoryPage = categoryBySlug.get(category.slug);

@@ -37,6 +37,8 @@ test("a category with enough search pages gets its own page, and a thinner one g
     ["furniture", ["ottoman-0", "ottoman-1", "bench-0"]],
   ]);
   assert.equal(categoryPages[1].name, "Furniture");
+  assert.deepEqual(categoryPages[1].subcategories, [{ slug: "chairs", name: "Chairs" }], "The top category links the pages under it");
+  assert.deepEqual(categoryPages[0].subcategories, []);
 });
 
 test("a category still too thin, or with an unknown top category, gets no page, no sitemap entry, and stays on /shop", () => {

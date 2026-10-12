@@ -19,6 +19,14 @@
       // (src/utils/shopNobiProductClick.js) both use it, so a click ties back to the page's own search.
       window.shopNobiPageConversationId = isShopNobiPage(window.location.pathname) ? createPageConversationId() : null;
 
+      // The bundle can draw live products before ShopPage, a lazy route, listens, so this flag keeps the first draw.
+      // src/utils/shopNobiPrebuiltContent.js reads it.
+      if (isShopNobiPage(window.location.pathname)) {
+        window.addEventListener('nobi-displayed-product-collection', function () {
+          window.shopNobiLiveResultsHaveDrawn = true;
+        }, { once: true });
+      }
+
       function isShopNobiPage(path) {
         return path === '/shop' || path.indexOf('/shop/') === 0;
       }

@@ -22,8 +22,11 @@ export const PrebuiltContentPlace = {
   Hidden: "hidden",
 };
 
-/** The window event the assistant bundle fires each time it draws a group of live products. */
+/** The window event the assistant bundle fires each time it draws a group of live products. index.html listens too. */
 export const LiveResultsDrawnEvent = "nobi-displayed-product-collection";
+
+/** The window flag index.html sets on the first draw, which can come before ShopPage, a lazy route, listens. */
+export const LiveResultsDrawnFlag = "shopNobiLiveResultsHaveDrawn";
 
 /**
  * Reads the embedded content when it belongs to the current path.
@@ -67,13 +70,29 @@ export function choosePrebuiltContentPlace(kind, { assistantHasMounted, liveResu
 }
 
 /**
- * Calls onDrawn the first time the assistant bundle draws live products. A refused or failed search draws none.
+ * Says whether the assistant bundle has drawn live products, as index.html's flag records from the first draw.
+ *
+ * @param {object} target The window.
+ * @returns {boolean} True once live products have been drawn.
+ */
+export function haveLiveResultsDrawn(target) {
+  return target[LiveResultsDrawnFlag] === true;
+}
+
+/**
+ * Calls onDrawn once the assistant bundle draws live products, at once when it already has. A refused or failed search
+ * draws none.
  *
  * @param {EventTarget} target The window, where the bundle fires its events.
  * @param {() => void} onDrawn Called once.
  * @returns {() => void} Stops watching.
  */
 export function watchForLiveResults(target, onDrawn) {
+  if (haveLiveResultsDrawn(target)) {
+    onDrawn();
+    return () => {};
+  }
+
   target.addEventListener(LiveResultsDrawnEvent, onDrawn, { once: true });
   return () => target.removeEventListener(LiveResultsDrawnEvent, onDrawn);
 }

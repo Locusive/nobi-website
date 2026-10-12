@@ -22,23 +22,34 @@ const BundleStorageKey = "Nobi";
 const ShopperIdKey = "nobi-shopper-id";
 /** The traffic tags the bundle copies from the page address onto its events. */
 const TrafficTags = ["utm_source", "utm_medium", "utm_campaign", "utm_term", "utm_content"];
+/** Where index.html keeps the page view's conversation, which the bundle's opening search runs under too. */
+const PageConversationIdKey = "shopNobiPageConversationId";
 
 /**
- * Click handler for a prebuilt product link. It tags the link, then sends the click event when the click opens the
- * store page. The browser still follows the link as usual.
+ * Click handler for a prebuilt product link. It tags the link with the page's conversation, then sends the click event
+ * under that conversation when the click opens the store page. The browser still follows the link as usual.
  *
  * @param {{button: number, currentTarget: {href: string}}} event The click, or a middle or right click.
  * @param {{product: object, position: number, query: string}} click The product, its place on the page from 1, and the page's search.
  * @param {object} [browser] The window. Tests pass a stand-in.
  */
 export function handleProductLinkClick(event, click, browser = globalThis) {
-  tagProductLinkOnClick(event);
+  const conversationId = readPageConversationId(browser);
+  tagProductLinkOnClick(event, conversationId);
   if (!LinkOpeningButtons.includes(event.button) || !shouldCountClicks(browser)) {
     return;
   }
 
-  const clickEvent = buildClickEvent(click, event.currentTarget.href, browser);
+  const clickEvent = buildClickEvent({ ...click, conversationId }, event.currentTarget.href, browser);
   sendEvent(clickEvent, browser);
+}
+
+/** Reads the page view's conversation for a person; a crawler or automated browser gets none, as in the bundle. */
+function readPageConversationId(browser) {
+  if (isAutomatedVisitor(browser.navigator)) {
+    return null;
+  }
+  return browser[PageConversationIdKey] || null;
 }
 
 /** Returns whether this visit's clicks count: not a local copy of the site, and not a crawler or automated browser. */
@@ -53,9 +64,10 @@ function isAutomatedVisitor(browserNavigator) {
 }
 
 /** Builds the event with the field names the bundle uses for its live product clicks. */
-function buildClickEvent({ product, position, query }, linkUrl, browser) {
+function buildClickEvent({ product, position, query, conversationId }, linkUrl, browser) {
   const details = {
     entryPoint: PrebuiltPageEntryPoint,
+    ...(conversationId ? { conversationId } : {}),
     query,
     productName: product.name,
     storeName: product.storeName,

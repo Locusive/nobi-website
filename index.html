@@ -15,10 +15,33 @@
          A prebuilt search page (/shop/s/<slug>) opens with its own search,
          read from the content scripts/prerender-shop.js puts in the head. -->
     <script>
+      // One conversation per Shop Nobi page view: the bundle's opening search and the prebuilt product cards
+      // (src/utils/shopNobiProductClick.js) both use it, so a click ties back to the page's own search.
+      window.shopNobiPageConversationId = isShopNobiPage(window.location.pathname) ? createPageConversationId() : null;
+
+      function isShopNobiPage(path) {
+        return path === '/shop' || path.indexOf('/shop/') === 0;
+      }
+
+      function createPageConversationId() {
+        var browserCrypto = window.crypto;
+        if (!browserCrypto) {
+          return null;
+        }
+        if (browserCrypto.randomUUID) {
+          return browserCrypto.randomUUID();
+        }
+        // Older browsers: a version 4 id from random bytes, the same shape randomUUID gives.
+        var bytes = browserCrypto.getRandomValues(new Uint8Array(16));
+        bytes[6] = (bytes[6] & 15) | 64;
+        bytes[8] = (bytes[8] & 63) | 128;
+        var hex = Array.prototype.map.call(bytes, function (value) { return (value + 256).toString(16).slice(1); }).join('');
+        return [hex.slice(0, 8), hex.slice(8, 12), hex.slice(12, 16), hex.slice(16, 20), hex.slice(20)].join('-');
+      }
+
       function readNobiAssistantOptions() {
         var path = window.location.pathname;
-        var isShopNobiPage = path === '/shop' || path.indexOf('/shop/') === 0;
-        if (!isShopNobiPage) {
+        if (!isShopNobiPage(path)) {
           return { accountId: '460cbe82-9195-424f-a616-b1cb3e3caca0', assistantConfiguration: { floatingChatBar: { buttonLabel: 'Ask Nobi' } } };
         }
         var options = { accountId: '9282b7cb-66ce-4d53-8c37-c291352ef03d', searchResultsPage: true, hideQuickAdd: true };
@@ -26,6 +49,7 @@
         var content = prebuiltContent && JSON.parse(prebuiltContent.textContent);
         if (content && content.kind === 'search-page' && content.path === path.replace(/\/+$/, '')) {
           options.openingQuery = content.data.query;
+          options.openingConversationId = window.shopNobiPageConversationId;
         }
         return options;
       }

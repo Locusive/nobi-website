@@ -76,7 +76,7 @@ function ProductCard({ product }) {
       </a>
       {product.storeName && <p className="text-sm text-black/60 dark:text-white/60">{product.storeName}</p>}
       {price && <p className="text-sm font-semibold">{price}</p>}
-      {product.paidLink && <p className="mt-1 text-xs text-black/40 dark:text-white/40">{CommissionNotice}</p>}
+      {product.paidLink && <p className="mt-1 text-[10px] leading-tight text-black/40 dark:text-white/40">{CommissionNotice}</p>}
     </li>
   );
 }

@@ -173,7 +173,7 @@ test("a paid product keeps its plain link for crawlers, with rel=sponsored and a
     ["https://example.com/products/cowboy", "nofollow noopener"],
     ["https://frye.example/products/harness", "nofollow noopener"],
   ]);
-  const notice = '<p class="mt-1 text-xs text-black/40 dark:text-white/40">We may earn a commission</p>';
+  const notice = '<p class="mt-1 text-[10px] leading-tight text-black/40 dark:text-white/40">We may earn a commission</p>';
   assert.equal(body.split(notice).length - 1, 1, "Only the paid product has the notice");
   assert.ok(body.includes(`$495.00</p>${notice}</li>`), "The notice ends the paid product's card");
   assert.ok(!readBody(readOutput("shop/s/chelsea-boots.html")).includes("commission"), "An unpaid product gets no notice");

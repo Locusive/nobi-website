@@ -116,8 +116,6 @@ function buildProduct(product) {
     return null;
   }
 
-  const storeLink = readFinishedLink(product.storeLink);
-  const storyStoreLink = readFinishedLink(product.storyStoreLink);
   return {
     name: product.name,
     brand: isText(product.brand) ? product.brand : null,
@@ -127,11 +125,22 @@ function buildProduct(product) {
     price: Number.isFinite(product.price) ? product.price : null,
     currency: CurrencyPattern.test(product.currency ?? "") ? product.currency : null,
     isInStock: product.isInStock === true,
-    storeLink,
-    storyStoreLink,
-    // A link is only called paid when both finished links are kept, so the label never sits on a plain link.
-    paidLink: product.paidLink === true && storeLink !== null && storyStoreLink !== null,
+    ...readFinishedLinks(product),
   };
+}
+
+/**
+ * Keeps the API's finished store links that are safe. A paid product that loses either link loses both, so a paid
+ * link never shows without its label and rel="sponsored".
+ */
+function readFinishedLinks(product) {
+  const storeLink = readFinishedLink(product.storeLink);
+  const storyStoreLink = readFinishedLink(product.storyStoreLink);
+  const paidLink = product.paidLink === true;
+  if (paidLink && (storeLink === null || storyStoreLink === null)) {
+    return { storeLink: null, storyStoreLink: null, paidLink: false };
+  }
+  return { storeLink, storyStoreLink, paidLink };
 }
 
 /** Returns a finished store link from the API exactly as sent when it is a safe address, else null. */

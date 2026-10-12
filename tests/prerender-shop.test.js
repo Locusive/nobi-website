@@ -178,7 +178,8 @@ test("a paid product keeps its plain link for crawlers, with rel=sponsored and a
 
   const products = readScriptJson(html, "shop-nobi-prebuilt-content").data.products;
   assert.ok(products[0].storeLink.startsWith("https://sovrn.co?key=web&u=https%3A%2F%2Flucchese.com"), "The click opens the finished link as sent");
-  assert.deepEqual([products[1].storeLink, products[1].paidLink], [null, false], "An unsafe finished link is dropped and never called paid");
+  const unsafeProduct = [products[1].storeLink, products[1].storyStoreLink, products[1].paidLink];
+  assert.deepEqual(unsafeProduct, [null, null, false], "A paid product with an unsafe finished link falls back to plain links");
 });
 
 test("a hostile product name is escaped everywhere and its embedded data reads back unchanged", () => {

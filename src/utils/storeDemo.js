@@ -7,7 +7,7 @@ export const FreshnessDays = 7;
 /** The local API the dev setup runs; every other host uses production. */
 const LocalApiBaseUrl = "http://localhost:7080";
 const ProductionApiBaseUrl = "https://api.nobi.ai";
-const LocalHosts = ["localhost", "127.0.0.1"];
+const LocalHosts = ["localhost", "127.0.0.1", "[::1]"];
 
 /**
  * Returns the address of the list of stores to demo.
@@ -58,23 +58,44 @@ export function findDemoStores(stores, words) {
  * @param {object} [browser] The window. Tests pass a stand-in.
  */
 export function prepareStoreDemo(storeId, browser = globalThis) {
-  browser.Nobi?.prepareStoreDemo?.({ storeId });
+  callAssistant(browser, "prepareStoreDemo", { type: "prepareStoreDemo", options: { storeId } });
 }
 
 /**
- * Opens Nobi's modal with a search on the picked store.
+ * Opens Nobi's modal with a search on the picked store. Before the assistant has loaded, the call waits in its queue.
  *
  * @param {string} message The visitor's words or a tapped example.
  * @param {string} storeId The picked store.
  * @param {object} [browser] The window. Tests pass a stand-in.
- * @returns {boolean} Whether the assistant was there to open it.
+ * @returns {boolean} Whether there was a search to open.
  */
 export function openStoreDemo(message, storeId, browser = globalThis) {
-  if (!message.trim() || !browser.Nobi?.openChat) {
+  if (!message.trim()) {
     return false;
   }
-  browser.Nobi.openChat({ message: message.trim(), storeId, entryPoint: DemoEntryPoint });
+
+  const options = { message: message.trim(), storeId, entryPoint: DemoEntryPoint };
+  callAssistant(browser, "openChat", { type: "open", options });
   return true;
+}
+
+/**
+ * Calls the assistant, or queues the call in window.Nobi.pendingApiCalls, which the assistant runs once it loads.
+ *
+ * @param {object} browser The window.
+ * @param {string} methodName The assistant method, such as "openChat".
+ * @param {{type: string, options: object}} queuedCall The same call in the assistant's queue format.
+ */
+function callAssistant(browser, methodName, queuedCall) {
+  const assistant = browser.Nobi;
+  if (typeof assistant?.[methodName] === "function") {
+    assistant[methodName](queuedCall.options);
+    return;
+  }
+
+  browser.Nobi = assistant || {};
+  browser.Nobi.pendingApiCalls = Array.isArray(browser.Nobi.pendingApiCalls) ? browser.Nobi.pendingApiCalls : [];
+  browser.Nobi.pendingApiCalls.push(queuedCall);
 }
 
 /** Returns whether a value is text with something in it. */

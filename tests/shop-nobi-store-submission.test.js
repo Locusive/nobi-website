@@ -4,7 +4,6 @@ import { join } from "node:path";
 import { before, test } from "node:test";
 import { fileURLToPath, pathToFileURL } from "node:url";
 import { build } from "vite";
-import { loadPageRenderer } from "../scripts/page-renderer.js";
 import { isWorkEmail } from "../src/utils/workEmail.js";
 import {
   checkStoreSubmission,
@@ -16,31 +15,31 @@ import {
   ThankYouMessage,
 } from "../src/utils/storeSubmission.js";
 
-const FormRendererEntry = fileURLToPath(new URL("./fixtures/render-add-your-store-form.jsx", import.meta.url));
-const FormRendererFolder = fileURLToPath(new URL("../node_modules/.cache/add-your-store-form-test/", import.meta.url));
+const RendererEntry = fileURLToPath(new URL("./fixtures/render-add-your-store.jsx", import.meta.url));
+const RendererFolder = fileURLToPath(new URL("../node_modules/.cache/add-your-store-test/", import.meta.url));
 const HttpAccepted = 202;
 const HttpBadRequest = 400;
 const HttpServerError = 500;
-const Fields = { storeUrl: " www.acme.com ", storeName: " Acme Outfitters ", email: " jo@acme.com " };
+const Fields = { storeUrl: " www.acme.com ", name: " Jo Rivera ", email: " jo@acme.com " };
 
-let renderPageBody;
+let renderShopPage;
 let renderAddYourStoreForm;
 
 before(async () => {
-  ({ renderPageBody } = await loadPageRenderer());
   await build({
     configFile: false,
     logLevel: "warn",
     // Button.jsx leaves out the React import, so JSX compiles to the automatic runtime, as in the site's own build.
+    // The build has its own folder, since test files run at once and the page prerender folder is emptied per build.
     esbuild: { jsx: "automatic" },
     build: {
-      ssr: FormRendererEntry,
-      outDir: FormRendererFolder,
+      ssr: RendererEntry,
+      outDir: RendererFolder,
       emptyOutDir: true,
       rollupOptions: { output: { entryFileNames: "renderer.mjs" } },
     },
   });
-  ({ renderAddYourStoreForm } = await import(pathToFileURL(join(FormRendererFolder, "renderer.mjs")).href));
+  ({ renderAddYourStoreForm, renderShopPage } = await import(pathToFileURL(join(RendererFolder, "renderer.mjs")).href));
 });
 
 /** Starts a server that records each request and answers with the given status and body. */
@@ -64,21 +63,23 @@ async function startApiServer(status, body) {
 }
 
 test("the Shop Nobi page shows store owners the link to add their store", () => {
-  const html = renderPageBody("/shop");
+  const html = renderShopPage();
 
   assert.ok(html.includes("Run an online store?"));
   assert.ok(html.includes("Add it to Shop Nobi"));
 });
 
-test("the form asks for the store's address, its name and a work email", () => {
+test("the form asks for the store's address, the owner's name and a work email, and no store name", () => {
   const html = renderAddYourStoreForm();
 
   assert.ok(html.includes("Add your store to Shop Nobi"));
-  for (const [label, name] of [["Store address", "storeUrl"], ["Store name", "storeName"], ["Work email", "email"]]) {
+  for (const [label, name] of [["Store address", "storeUrl"], ["Your name", "name"], ["Work email", "email"]]) {
     assert.ok(html.includes(`>${label}</span>`), label);
     assert.ok(html.includes(`name="${name}"`), name);
   }
   assert.ok(html.includes('type="email"'));
+  assert.ok(!html.includes("Store name"));
+  assert.ok(html.includes('maxLength="100"'));
   assert.ok(html.includes('type="submit"'));
 });
 
@@ -93,7 +94,7 @@ test("the work email rule refuses free email providers and addresses without a d
 
 test("the form is checked before it is sent: every field is needed and the email must be a work email", () => {
   assert.equal(checkStoreSubmission(Fields), "");
-  assert.equal(checkStoreSubmission({ ...Fields, storeName: "  " }), MissingFieldsMessage);
+  assert.equal(checkStoreSubmission({ ...Fields, name: "  " }), MissingFieldsMessage);
   assert.equal(checkStoreSubmission({ ...Fields, storeUrl: "" }), MissingFieldsMessage);
   assert.equal(checkStoreSubmission({ ...Fields, email: "jo@gmail.com" }), PersonalEmailMessage);
 });
@@ -107,7 +108,7 @@ test("the form posts the trimmed fields and the human check's token, and every a
     assert.deepEqual(api.requests, [{
       method: "POST",
       url: StoreSubmissionPath,
-      body: { storeUrl: "www.acme.com", storeName: "Acme Outfitters", email: "jo@acme.com", turnstileToken: "turnstile-token" },
+      body: { storeUrl: "www.acme.com", name: "Jo Rivera", email: "jo@acme.com", turnstileToken: "turnstile-token" },
     }]);
   } finally {
     await api.close();

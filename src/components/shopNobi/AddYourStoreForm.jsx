@@ -4,10 +4,12 @@ import { useTurnstileToken } from "../../hooks/useTurnstileToken";
 import { checkStoreSubmission, HumanCheckPendingMessage, submitStore } from "../../utils/storeSubmission";
 
 const InputClassName = "w-full rounded-xl border border-black/10 dark:border-white/10 bg-transparent px-3 py-2 outline-none";
-const EmptyFields = { storeUrl: "", storeName: "", email: "" };
+/** The longest name the API accepts. */
+const MaxNameLength = 100;
+const EmptyFields = { storeUrl: "", name: "", email: "" };
 
 /**
- * The "Add your store" form, in a dialog over the Shop Nobi page: the store's address and name and a work email.
+ * The "Add your store" form, in a dialog over the Shop Nobi page: the store's address, your name and a work email.
  * Every accepted request shows the same thank-you.
  *
  * @param {{onClose: () => void}} props Closes the dialog.
@@ -30,7 +32,7 @@ export default function AddYourStoreForm({ onClose }) {
         ) : (
           <form onSubmit={submit} className="mt-4 space-y-4" noValidate>
             <FormField label="Store address" name="storeUrl" value={fields.storeUrl} onChange={updateField} placeholder="www.yourstore.com" />
-            <FormField label="Store name" name="storeName" value={fields.storeName} onChange={updateField} />
+            <FormField label="Your name" name="name" value={fields.name} onChange={updateField} maxLength={MaxNameLength} />
             <FormField label="Work email" name="email" type="email" value={fields.email} onChange={updateField} />
             <div ref={humanCheckRef} />
             {errorMessage && <p className="text-sm text-red-600 dark:text-rose-400" role="alert">{errorMessage}</p>}
@@ -83,11 +85,11 @@ function useStoreSubmission(humanCheckRef) {
 }
 
 /** One labelled text field. */
-function FormField({ label, name, type = "text", value, onChange, placeholder }) {
+function FormField({ label, name, type = "text", value, onChange, placeholder, maxLength }) {
   return (
     <label className="block">
       <span className="mb-1 block text-sm">{label}</span>
-      <input name={name} type={type} value={value} onChange={onChange} placeholder={placeholder} required className={InputClassName} />
+      <input name={name} type={type} value={value} onChange={onChange} placeholder={placeholder} maxLength={maxLength} required className={InputClassName} />
     </label>
   );
 }

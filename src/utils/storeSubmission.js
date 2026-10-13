@@ -20,7 +20,7 @@ const TestTurnstileSiteKey = "1x00000000000000000000BB";
 /** The thank-you every accepted request gets, whatever the store, so the form never shows which stores we carry. */
 export const ThankYouMessage = "Thanks! We got your store and will take a look.";
 
-export const MissingFieldsMessage = "Please fill in your store's address, its name and your work email.";
+export const MissingFieldsMessage = "Please fill in your store's address, your name and your work email.";
 export const PersonalEmailMessage = "Please use your work email address, not a personal one like Gmail or Yahoo.";
 export const HumanCheckPendingMessage = "One moment, we are still checking that you are a person. Please try again.";
 export const FailedRequestMessage = "Something went wrong. Please try again.";
@@ -28,11 +28,11 @@ export const FailedRequestMessage = "Something went wrong. Please try again.";
 /**
  * Checks the form before it is sent, with the same work email rule as the demo form.
  *
- * @param {{storeUrl: string, storeName: string, email: string}} fields The form's fields.
+ * @param {{storeUrl: string, name: string, email: string}} fields The form's fields.
  * @returns {string} The message to show, or an empty string when the form can be sent.
  */
-export function checkStoreSubmission({ storeUrl, storeName, email }) {
-  if (!storeUrl.trim() || !storeName.trim() || !email.trim()) {
+export function checkStoreSubmission({ storeUrl, name, email }) {
+  if (!storeUrl.trim() || !name.trim() || !email.trim()) {
     return MissingFieldsMessage;
   }
   if (!isWorkEmail(email)) {
@@ -44,18 +44,18 @@ export function checkStoreSubmission({ storeUrl, storeName, email }) {
 /**
  * Builds the JSON body the API reads.
  *
- * @param {{storeUrl: string, storeName: string, email: string}} fields The form's fields.
+ * @param {{storeUrl: string, name: string, email: string}} fields The form's fields.
  * @param {string} turnstileToken The token from the form's Turnstile check.
- * @returns {{storeUrl: string, storeName: string, email: string, turnstileToken: string}} The body.
+ * @returns {{storeUrl: string, name: string, email: string, turnstileToken: string}} The body.
  */
-export function buildStoreSubmissionBody({ storeUrl, storeName, email }, turnstileToken) {
-  return { storeUrl: storeUrl.trim(), storeName: storeName.trim(), email: email.trim(), turnstileToken };
+export function buildStoreSubmissionBody({ storeUrl, name, email }, turnstileToken) {
+  return { storeUrl: storeUrl.trim(), name: name.trim(), email: email.trim(), turnstileToken };
 }
 
 /**
  * Sends the form to the API.
  *
- * @param {{storeUrl: string, storeName: string, email: string}} fields The form's fields.
+ * @param {{storeUrl: string, name: string, email: string}} fields The form's fields.
  * @param {string} turnstileToken The token from the form's Turnstile check.
  * @param {{apiBaseUrl?: string, fetchImplementation?: typeof fetch}} [options] Tests pass a local server and fetch.
  * @returns {Promise<{accepted: boolean, message: string}>} The thank-you, or the message to show.

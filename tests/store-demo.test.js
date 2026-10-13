@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
-import { buildDemoStoresUrl, DemoEntryPoint, findDemoStores, openStoreDemo, prepareStoreDemo, readDemoStores } from "../src/utils/storeDemo.js";
+import { buildDemoStoresUrl, DefaultStore, DemoEntryPoint, findDemoStores, openStoreDemo, prepareStoreDemo, readDemoStores, readStoreSearches } from "../src/utils/storeDemo.js";
 
 const LuccheseId = "b4e64f15-4a40-4546-a204-e1c088e104e0";
 
@@ -74,4 +74,10 @@ test("before the assistant has loaded, the demo's calls wait in the assistant's 
     { type: "prepareStoreDemo", options: { storeId: LuccheseId } },
     { type: "open", options: { message: "boots", storeId: LuccheseId, entryPoint: DemoEntryPoint } },
   ]);
+});
+
+test("the demo starts on Lucchese with hand-picked searches, and other stores show their own", () => {
+  assert.equal(DefaultStore.id, LuccheseId);
+  assert.equal(readStoreSearches(DefaultStore).length, 3);
+  assert.deepEqual(readStoreSearches({ id: "other", exampleSearches: ["Wool scarf"] }), ["Wool scarf"]);
 });

@@ -182,12 +182,15 @@ test("the privacy policy and terms carry their full text in the HTML, for reader
 
 test("the homepage lets a visitor try Shop Nobi between the customer logos and the features, with a search that works without JavaScript", () => {
   const html = readPage("homepage.html");
-  const text = bodyText(html);
   const sectionStart = html.indexOf('id="try-shop-nobi"');
   assert.ok(sectionStart > html.indexOf("Trusted by modern teams"), "The section comes after the customer logos");
-  assert.ok(text.includes("See Nobi search on real stores"));
+  assert.ok(bodyText(html).includes("Search a real store with Nobi"));
   const section = html.slice(sectionStart);
   assert.match(section, /<form action="\/shop" method="get" role="search"/);
-  assert.match(section, /<label for="try-shop-nobi-search"[^>]*>Search Shop Nobi<\/label>/);
-  assert.match(section, /<input id="try-shop-nobi-search" name="q" type="search"/);
+  assert.match(section, /<textarea id="try-shop-nobi-search" name="q"/);
+  assert.match(section, /<select name="stores">/);
+  for (const storeName of ["All brands", "Lucchese", "UNTUCKit", "Kilte Collection", "Rowing Blazers"]) {
+    assert.ok(section.includes(`>${storeName}</option>`), `Missing store: ${storeName}`);
+  }
+  assert.ok(section.includes(">Warm jacket for winter</button>"), "The all-brands examples show before a store is picked");
 });

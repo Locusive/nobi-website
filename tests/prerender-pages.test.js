@@ -180,17 +180,13 @@ test("the privacy policy and terms carry their full text in the HTML, for reader
   assert.ok(terms.includes("Shop Nobi"), "The terms text is in the page");
 });
 
-test("the homepage lets a visitor try Shop Nobi between the customer logos and the features, with a search that works without JavaScript", () => {
+test("the homepage store demo sits between the customer logos and the features and asks for a store before any search", () => {
   const html = readPage("homepage.html");
-  const sectionStart = html.indexOf('id="try-shop-nobi"');
-  assert.ok(sectionStart > html.indexOf("Trusted by modern teams"), "The section comes after the customer logos");
-  assert.ok(bodyText(html).includes("Search a real store with Nobi"));
-  const section = html.slice(sectionStart);
-  assert.match(section, /<form action="\/shop" method="get" role="search"/);
-  assert.match(section, /<textarea id="try-shop-nobi-search" name="q"/);
-  assert.match(section, /<select name="stores">/);
-  for (const storeName of ["All brands", "Lucchese", "UNTUCKit", "Kilte Collection", "Rowing Blazers"]) {
-    assert.ok(section.includes(`>${storeName}</option>`), `Missing store: ${storeName}`);
-  }
-  assert.ok(section.includes(">Warm jacket for winter</button>"), "The all-brands examples show before a store is picked");
+  const sectionStart = html.indexOf('id="store-demo"');
+  assert.ok(sectionStart > html.indexOf("Trusted by modern teams"), "The demo comes after the customer logos");
+  assert.ok(bodyText(html).includes("See Nobi on a real store"));
+  const section = html.slice(sectionStart, html.indexOf("</section>", sectionStart));
+  assert.ok(section.includes("Which store should Nobi search?"));
+  assert.ok(section.includes('placeholder="Find a store"'));
+  assert.ok(!section.includes("<textarea"), "The search box waits for a store");
 });

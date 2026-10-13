@@ -6,7 +6,7 @@ import "../components/home/homepage.css";
 import Nav from "../components/home/Nav";
 import Hero from "../components/home/Hero";
 import ProofBar from "../components/home/ProofBar";
-import TryShopNobi from "../components/home/TryShopNobi";
+import StoreDemo from "../components/home/StoreDemo";
 import FeatureStack from "../components/home/FeatureStack";
 import MoreFeatures from "../components/home/MoreFeatures";
 import CaseStudyFlagship from "../components/home/CaseStudyFlagship";
@@ -53,7 +53,7 @@ export default function HomePage() {
       <Hero />
       <div style={{ position: "relative", zIndex: 6, background: "#ffffff", boxShadow: "0 -20px 46px -26px rgba(76,40,130,0.3)" }}>
         <ProofBar />
-        <TryShopNobi />
+        <StoreDemo />
         <FeatureStack />
         <MoreFeatures />
         <CaseStudyFlagship />

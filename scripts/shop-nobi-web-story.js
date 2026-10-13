@@ -1,12 +1,11 @@
 // Renders a planned Shop Nobi web story as an AMP story, the format of Google Web Stories. Store links are a small
-// line on each product page and carry rel="nofollow"; the last page links back to the full search page.
+// nofollow line on each product page that goes through the API; the last page links back to the full search page.
 
 import { htmlEscape } from "./prerender-blog.js";
 import { StoryPageKind } from "./shop-nobi-web-story-plan.js";
 import { BaseUrl, CommissionNotice, readStoreLinkRel } from "../src/utils/shopNobiPage.js";
 import { describeSearchPage, formatPrice, searchPageUrl } from "../src/utils/shopNobiSearchPage.js";
 import { webStoryUrl } from "../src/utils/shopNobiWebStory.js";
-import { decodePaidLink } from "../src/utils/shopNobiPaidLink.js";
 import { IndexableRobots, PortraitPosterSize } from "../src/utils/previewImage.js";
 
 const Publisher = "Nobi";
@@ -17,11 +16,8 @@ const CoverLabel = "Shop Nobi guide";
 const EndText = "The full page has every pick, the whole guide and more questions.";
 const BackLinkText = "See every pick";
 const StoreLinkText = "See it at the store";
-const StoryClickRoute = "https://api.nobi.ai/v1/shop/story-click";
-// AMP fills ${storeUrl} from each store link's data-vars-store-url attribute.
-const StoreUrlVariable = "${storeUrl}";
-// Beacons only, so the tap never waits on the API.
-const BeaconTransport = { beacon: true, xhrpost: true, image: false };
+// The API counts the tap under a new conversation and forwards to the store link with it, since AMP cannot add one.
+const StoreLinkRoute = "https://api.nobi.ai/v1/shop/story-go";
 // AMP requires this exact style block, which hides the page until the AMP script starts.
 const AmpBoilerplate = "<style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>";
 const StoryStyle = [
@@ -57,7 +53,6 @@ export function renderWebStory(page, plan) {
     '<meta charset="utf-8">',
     '<script async src="https://cdn.ampproject.org/v0.js"></script>',
     '<script async custom-element="amp-story" src="https://cdn.ampproject.org/v0/amp-story-1.0.js"></script>',
-    '<script async custom-element="amp-analytics" src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>',
     `<title>${title}</title>`,
     '<meta name="viewport" content="width=device-width">',
     `<meta name="description" content="${description}">`,
@@ -69,7 +64,6 @@ export function renderWebStory(page, plan) {
     "<body>",
     `<amp-story standalone title="${title}" publisher="${Publisher}" publisher-logo-src="${PublisherLogoUrl}" poster-portrait-src="${htmlEscape(plan.posterUrl)}">`,
     ...storyPages,
-    renderClickTracking(page.slug),
     "</amp-story>",
     "</body>",
     "</html>",
@@ -88,23 +82,6 @@ export function taggedSearchPageUrl(slug) {
   return address.toString();
 }
 
-/**
- * Renders the analytics config that counts a tap through a store link. Store links open a tooltip first, and
- * amp-story fires story-click-through when the shopper taps that tooltip to go to the store.
- *
- * @param {string} slug The story's slug, sent as the page.
- * @returns {string} The amp-analytics element.
- */
-function renderClickTracking(slug) {
-  const storyClickUrl = `${StoryClickRoute}?url=${StoreUrlVariable}&page=${encodeURIComponent(slug)}`;
-  const config = {
-    requests: { storyClick: storyClickUrl },
-    triggers: { storeLinkTap: { on: "story-click-through", tagName: "a", request: "storyClick" } },
-    transport: BeaconTransport,
-  };
-  return `<amp-analytics><script type="application/json">${JSON.stringify(config)}</script></amp-analytics>`;
-}
-
 /** Renders one story page with an id made of its kind and position. */
 function renderStoryPage(storyPage, index, page, plan) {
   const id = `${storyPage.kind}-${index + 1}`;
@@ -121,7 +98,7 @@ function renderLayers(storyPage, page, plan) {
     case StoryPageKind.Guide:
       return textLayer(`<p class="label">${title}</p><p class="text">${htmlEscape(storyPage.text)}</p>`);
     case StoryPageKind.Product:
-      return renderProduct(storyPage.product);
+      return renderProduct(storyPage.product, page.slug);
     case StoryPageKind.Question:
       return textLayer(`<h2>${htmlEscape(storyPage.question)}</h2><p class="text">${htmlEscape(storyPage.answer)}</p>`);
     default:
@@ -141,7 +118,7 @@ function renderCover(page, posterUrl) {
 }
 
 /** Renders a product: its picture, name, store and price, and a small nofollow link to the store. */
-function renderProduct(product) {
+function renderProduct(product, slug) {
   const name = htmlEscape(product.name);
   const price = formatPrice(product.price, product.currency);
   const details = [
@@ -149,23 +126,34 @@ function renderProduct(product) {
     `<h2>${name}</h2>`,
     product.storeName ? `<p class="detail">${htmlEscape(product.storeName)}</p>` : "",
     price ? `<p class="detail">${htmlEscape(price)}</p>` : "",
-    renderStoreLink(product),
+    renderStoreLink(product, slug),
   ];
   return `<amp-story-grid-layer template="vertical" class="product-page">${details.join("")}</amp-story-grid-layer>`;
 }
 
 /**
- * Renders the small nofollow store link: the paid story link when the product has one, else the plain link. The
- * beacon always gets the plain link, which the API matches to the store by domain. A paid link has a notice under it.
+ * Renders the small nofollow store link. It goes through the API, which sends a person's tap through the affiliate link
+ * when one pays us; its tooltip names the store's site. A paid link is sponsored and has a notice under it.
+ *
+ * @param {{url: string, paidLink: boolean}} product The product.
+ * @param {string} slug The story's slug, sent as the page.
+ * @returns {string} The link, and the notice when the link is paid.
  */
-function renderStoreLink(product) {
-  const paidAddress = product.paidLink ? decodePaidLink(product.encodedStoryStoreLink) : null;
-  const isPaid = paidAddress !== null;
-  const address = htmlEscape(paidAddress ?? product.url);
-  const plainAddress = htmlEscape(product.url);
-  const rel = readStoreLinkRel(isPaid);
-  const link = `<a class="store-link" href="${address}" data-vars-store-url="${plainAddress}" rel="${rel}" target="_blank">${StoreLinkText}</a>`;
-  return isPaid ? `${link}<p class="commission-notice">${CommissionNotice}</p>` : link;
+function renderStoreLink(product, slug) {
+  const linkThroughApi = `${StoreLinkRoute}?url=${encodeURIComponent(product.url)}&page=${encodeURIComponent(slug)}`;
+  const tooltip = `data-tooltip-text="${htmlEscape(readStoreSite(product.url))}"`;
+  const rel = readStoreLinkRel(product.paidLink);
+  const link = `<a class="store-link" href="${htmlEscape(linkThroughApi)}" ${tooltip} rel="${rel}" target="_blank">${StoreLinkText}</a>`;
+  return product.paidLink ? `${link}<p class="commission-notice">${CommissionNotice}</p>` : link;
+}
+
+/** Reads the store's site name from its link, such as "lucchese.com", or the link itself when it cannot be read. */
+function readStoreSite(storeUrl) {
+  try {
+    return new URL(storeUrl).hostname.replace(/^www\./, "");
+  } catch {
+    return storeUrl;
+  }
 }
 
 /** Renders the last page, whose swipe-up link opens the full search page. */

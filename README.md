@@ -68,6 +68,15 @@ of every feed. The outside accounts behind this
 another API base address. If the fetch fails, the build fails, so Cloudflare
 keeps the last good deploy live.
 
+In the browser, a search page keeps its prebuilt products above the live search,
+and a category page keeps its searches under the search box, until the assistant
+bundle draws live products. A refused or failed live search therefore leaves the
+prebuilt content in place. A click on a prebuilt product sends the API the same
+"Click On Search Result" event as a live product, with the same entry point,
+"AI Search Bar". Crawlers, automated browsers and local copies send none. In a
+smoke test's tab, the click carries the bundle's `nobi_smoke_test` marker, so
+the API drops it as it drops the bundle's own smoke-test events.
+
 Each search page with at least two short guide pages and two product pictures,
 one of them a Shopify picture whose 3:4 cut is at least 640 by 853 pixels (the
 build downloads the start of each poster to check), also gets a Google Web
@@ -76,27 +85,25 @@ Story at `/shop/stories/<slug>`, an AMP story built by
 shows a cover, the guide in pages of at most 180 characters, up to three
 products with nofollow store links, questions that fit, and a last page that
 links back to the search page with `utm_source=google_web_stories`. The search
-page links to its story, and `sitemap-shop.xml` lists the stories. When a
-shopper taps through a store link, `amp-analytics` sends a beacon to
-`https://api.nobi.ai/v1/shop/story-click` with the store link and the story's
-slug; the beacon always carries the plain store link. Stories get
+page links to its story, and `sitemap-shop.xml` lists the stories. Each store
+link goes through `https://api.nobi.ai/v1/shop/story-go` with the plain store
+link and the story's slug; the API counts the tap and forwards to the store,
+through the store's affiliate link when one pays us. Stories get
 only the file room left after the pages. Mature pages get no story. To check
 one, run `npx amphtml-validator dist/shop/stories/<slug>.html`.
 
 Store links can earn a commission. For each product the API may send `storeLink`
-(the finished link for search pages), `storyStoreLink` (the finished link for Web
-Stories) and `paidLink` (true when the link earns a commission). The website
-never builds or tags these links itself, and uses them only for paid products.
-A search page keeps the plain store link in its HTML and holds the paid link only
-in base64, so crawlers never see it; a person's click opens the paid link, and a
-crawler's click opens the plain link with Shop Nobi's tags. On a person's click,
-the paid link's sub-ID parameter (the one whose value is `shop_nobi`) becomes
-`<slug>.<visit id>`, at most 50 characters, so commissions can be traced to the
-page and the visit (`src/utils/shopNobiClickId.js`). A story links a paid
-product straight to its `storyStoreLink`. A paid link gets `rel="sponsored"` and
-a small "We may earn a commission" notice under it (`CommissionNotice` in
-`src/utils/shopNobiPage.js`).
-Unpaid products keep the same links as before.
+(the finished link for search pages) and `paidLink` (true when the link earns a
+commission). The website never builds or tags a paid link itself, and keeps one
+only for paid products. A search page keeps the plain store link in its HTML and
+holds the paid link only in base64, so crawlers never see it. A person's click
+opens the paid link, with its sub-ID parameter (the one whose value is
+`shop_nobi`) set to the page's conversation, or to `<slug>.<visit id>` when there
+is none, at most 50 characters (`src/utils/shopNobiClickId.js`). A crawler's
+click opens the plain link with Shop Nobi's tags. A paid link, on search pages
+and in stories, gets `rel="sponsored"` and a small "We may earn a commission"
+notice under it (`CommissionNotice` in `src/utils/shopNobiPage.js`). Unpaid
+products keep the same links as before.
 
 The GitHub workflow `nightly-shop-nobi-rebuild.yml` rebuilds the site every
 day at 10:00 UTC, after the API's overnight refresh, by calling the Cloudflare

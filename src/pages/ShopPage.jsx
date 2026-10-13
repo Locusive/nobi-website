@@ -6,23 +6,36 @@ import ShopNobiCategoryPageContent from "../components/shopNobi/ShopNobiCategory
 import ShopNobiPopularSearches from "../components/shopNobi/ShopNobiPopularSearches";
 import ShopNobiSearchPageContent from "../components/shopNobi/ShopNobiSearchPageContent";
 import "../components/home/homepage.css";
+import "./ShopPage.css";
 import { useAdoptedAssistantContainer } from "../hooks/useAdoptedAssistantContainer";
+import { useLiveResultsHaveDrawn } from "../hooks/useLiveResultsHaveDrawn";
 import { useSEO } from "../hooks/useSEO";
 import { ShopNobiPageSeo } from "../utils/shopNobiPage";
-import { buildPrebuiltContentSeo, PrebuiltContentKind, readEmbeddedPrebuiltContent } from "../utils/shopNobiPrebuiltContent";
+import {
+  buildPrebuiltContentSeo,
+  choosePrebuiltContentPlace,
+  PrebuiltContentKind,
+  PrebuiltContentPlace,
+  readEmbeddedPrebuiltContent,
+} from "../utils/shopNobiPrebuiltContent";
+
+/** Marks the live search slot when the category's own content sits under it. ShopPage.css then hides the general headline. */
+const CategorySearchClass = "shop-nobi-category-search";
 
 /**
  * The Shop Nobi page: the site's header, then the live search from the assistant bundle in the slot under it.
- * Until the live search arrives, the slot shows the prebuilt content the build wrote for this path, if any.
+ * The prebuilt content the build wrote for this path shows beside the slot until live products are drawn.
  *
  * @param {{prebuiltContent?: object}} props The build passes the prebuilt content; in the browser it comes from the HTML.
  */
 export default function ShopPage({ prebuiltContent: builtContent = null }) {
   const slotRef = useRef(null);
   const assistantHasMounted = useAdoptedAssistantContainer(slotRef);
+  const liveResultsHaveDrawn = useLiveResultsHaveDrawn();
   const { pathname } = useLocation();
   const embeddedContent = useMemo(() => readEmbeddedPrebuiltContent(pathname), [pathname]);
   const prebuiltContent = builtContent || embeddedContent;
+  const place = choosePrebuiltContentPlace(prebuiltContent?.kind, { assistantHasMounted, liveResultsHaveDrawn });
 
   useSEO(prebuiltContent ? buildPrebuiltContentSeo(prebuiltContent) : ShopNobiPageSeo);
 
@@ -31,15 +44,18 @@ export default function ShopPage({ prebuiltContent: builtContent = null }) {
       <header>
         <Nav active="shop" pinned={false} />
       </header>
-      <div ref={slotRef}>
-        {!assistantHasMounted && (prebuiltContent ? <PrebuiltContent content={prebuiltContent} /> : <LoadingMessage />)}
-      </div>
+      {place === PrebuiltContentPlace.AboveSearch && <PrebuiltContent content={prebuiltContent} />}
+      <div ref={slotRef} className={place === PrebuiltContentPlace.BelowSearch ? CategorySearchClass : undefined} />
+      {place === PrebuiltContentPlace.BelowSearch && <PrebuiltContent content={prebuiltContent} />}
     </div>
   );
 }
 
-/** Shows the prebuilt content for its kind. */
+/** Shows the prebuilt content for its kind, or a loading message when the page has none. */
 function PrebuiltContent({ content }) {
+  if (!content) {
+    return <LoadingMessage />;
+  }
   if (content.kind === PrebuiltContentKind.SearchPage) {
     return <ShopNobiSearchPageContent page={content.data} />;
   }

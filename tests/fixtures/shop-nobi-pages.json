@@ -29,7 +29,7 @@
           "name": "<script>alert(\"boot\")</script> & \"Cowboy\" $& Boot", "brand": "Bad & Co", "storeName": "Store <b>",
           "url": "https://example.com/products/cowboy",
           "storeLink": "javascript:alert(1)", "storyStoreLink": "https://example.com/products/cowboy?utm_source=google_web_stories", "paidLink": true,
-          "imageUrl": "javascript:alert(1)",
+          "imageUrl": "https://cdn.example.com/cowboy.jpg",
           "price": 120, "currency": "EUR", "isInStock": false
         },
         {
@@ -43,6 +43,12 @@
           "storyStoreLink": "https://frye.example/products/harness?utm_source=google_web_stories", "paidLink": false,
           "imageUrl": "https://cdn.shopify.com/s/files/1/0001/harness.jpg?v=1",
           "price": 398, "currency": "USD", "isInStock": true
+        },
+        {
+          "name": "Pictureless Boot", "brand": "Frye", "storeName": "Frye",
+          "url": "https://frye.example/products/pictureless",
+          "imageUrl": "javascript:alert(2)",
+          "price": 250, "currency": "USD", "isInStock": true
         }
       ]
     },
@@ -52,7 +58,7 @@
       "title": "Chelsea Boots",
       "description": "   ",
       "categoryPath": "apparel_accessories.shoes.boots",
-      "breadcrumbs": [],
+      "breadcrumbs": [{ "name": "Shoes", "slug": null }, { "name": "Boots", "slug": "boots" }],
       "relatedSlugs": ["black-leather-boots"],
       "refreshedAt": "2026-10-10T08:02:11Z",
       "products": [

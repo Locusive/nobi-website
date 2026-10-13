@@ -1,12 +1,12 @@
 import React from "react";
 import ShopNobiSearchLinks from "./ShopNobiSearchLinks";
-import { describeCategoryPage } from "../../utils/shopNobiCategoryPage";
+import { categoryPagePath, describeCategoryPage } from "../../utils/shopNobiCategoryPage";
 
 /**
- * A prebuilt Shop Nobi category page: its name and links to its search pages. Visitors see it until the live
- * search takes its place.
+ * A prebuilt Shop Nobi category page: its name, links to the category pages under it, and links to its search
+ * pages. It stays under the search box until the shopper's own search draws live products.
  *
- * @param {{category: {name: string, pages: object[]}}} props The category page data.
+ * @param {{category: {name: string, subcategories?: object[], pages: object[]}}} props The category page data.
  */
 export default function ShopNobiCategoryPageContent({ category }) {
   return (
@@ -19,7 +19,28 @@ export default function ShopNobiCategoryPageContent({ category }) {
       </nav>
       <h1 className="mt-4 text-3xl font-semibold">{category.name}</h1>
       <p className="mt-2 max-w-3xl text-black/70 dark:text-white/70">{describeCategoryPage(category.name)}</p>
+      <Subcategories subcategories={category.subcategories ?? []} />
       <ShopNobiSearchLinks pages={category.pages} />
     </main>
+  );
+}
+
+/** Links to the category pages under a top category's page, when it has any. */
+function Subcategories({ subcategories }) {
+  if (subcategories.length === 0) {
+    return null;
+  }
+
+  return (
+    <section className="mt-6">
+      <h2 className="text-lg font-semibold">Browse by category</h2>
+      <ul className="mt-3 flex flex-wrap gap-3">
+        {subcategories.map((subcategory) => (
+          <li key={subcategory.slug} className="rounded-full border border-black/10 px-3 py-1 text-sm dark:border-white/20">
+            <a href={categoryPagePath(subcategory.slug)} className="hover:underline">{subcategory.name}</a>
+          </li>
+        ))}
+      </ul>
+    </section>
   );
 }

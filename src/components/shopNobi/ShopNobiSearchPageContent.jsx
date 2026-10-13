@@ -1,22 +1,15 @@
-import React, { useRef } from "react";
-import { formatPrice, readCrumbPath, searchPagePath, replaceProductLinkOnClick } from "../../utils/shopNobiSearchPage";
+import React from "react";
+import { handleProductLinkClick } from "../../utils/shopNobiProductClick";
+import { formatPrice, readCrumbPath, searchPagePath } from "../../utils/shopNobiSearchPage";
 import { CommissionNotice, readStoreLinkRel } from "../../utils/shopNobiPage";
-import { buildClickId, createVisitId } from "../../utils/shopNobiClickId";
 
 /**
  * The products of a prebuilt Shop Nobi search page. The build writes this into the HTML for crawlers, and
- * visitors see it until the live search takes its place.
+ * visitors see it until live products take its place. A refused or failed live search leaves it in place.
  *
  * @param {{page: object}} props The search page data.
  */
 export default function ShopNobiSearchPageContent({ page }) {
-  const visitId = useRef(null);
-  // The visit id is made at the first click, so the build never makes one, and kept for the rest of the page view.
-  const readClickId = () => {
-    visitId.current ??= createVisitId();
-    return buildClickId(page.slug, visitId.current);
-  };
-
   return (
     <main className="mx-auto max-w-6xl px-4 py-8 text-black dark:text-white">
       <Breadcrumbs page={page} />
@@ -28,7 +21,7 @@ export default function ShopNobiSearchPageContent({ page }) {
       ))}
       <ul className="mt-6 grid grid-cols-2 gap-6 sm:grid-cols-3 lg:grid-cols-4">
         {page.products.map((product, index) => (
-          <ProductCard key={index} product={product} readClickId={readClickId} />
+          <ProductCard key={index} product={product} position={index + 1} query={page.query} slug={page.slug} />
         ))}
       </ul>
       <Questions faq={page.faq} />
@@ -60,12 +53,12 @@ function Breadcrumbs({ page }) {
 }
 
 /**
- * One product: its picture, name, store and price, linking to the store's page in a new tab. A click swaps in the
- * link to open. A link that earns a commission has a small notice under it.
+ * One product: its picture, name, store and price, linking to the store's page in a new tab. A click sets the link to
+ * open and is counted. A link that earns a commission has a small notice under it.
  */
-function ProductCard({ product, readClickId }) {
+function ProductCard({ product, position, query, slug }) {
   const price = formatPrice(product.price, product.currency);
-  const followStoreLink = (event) => replaceProductLinkOnClick(event, product, readClickId());
+  const handleClick = (event) => handleProductLinkClick(event, { product, position, query, slug });
 
   return (
     <li>
@@ -73,8 +66,8 @@ function ProductCard({ product, readClickId }) {
         href={product.url}
         rel={readStoreLinkRel(product.paidLink)}
         target="_blank"
-        onClick={followStoreLink}
-        onAuxClick={followStoreLink}
+        onClick={handleClick}
+        onAuxClick={handleClick}
         className="group block"
       >
         {product.imageUrl && (

@@ -1,53 +1,51 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
-import { replaceProductLinkOnClick } from "../src/utils/shopNobiSearchPage.js";
+import { tagProductLinkOnClick } from "../src/utils/shopNobiSearchPage.js";
 import { tagShopNobiPageLink } from "../src/utils/shopNobiPage.js";
 import { encodePaidLink } from "../src/utils/shopNobiPaidLink.js";
 import { buildClickId, createVisitId } from "../src/utils/shopNobiClickId.js";
-import { buildPopularSearches, linkCategoryPages } from "../scripts/shop-nobi-category-page-view.js";
 
 const ShopNobiTags = "utm_source=shop_nobi&utm_medium=referral&utm_campaign=shop_nobi";
-
-const Person = { userAgent: "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 Chrome/141.0 Safari/537.36" };
-const Crawler = { userAgent: "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)" };
-const AutomatedBrowser = { ...Person, webdriver: true };
 const ClickId = "black-leather-boots.k3x9a0qz";
+const Person = { isPerson: true, conversationId: null, clickId: ClickId };
+const Crawler = { isPerson: false, conversationId: null, clickId: null };
 
-test("a click on a product link without a paid store link swaps its utm_ tags for Shop Nobi's, keeping the rest", () => {
-  const product = { url: "https://store.example/p/boot?variant=7&utm_source=other&utm_term=x#reviews" };
+/** Clicks a product link twice and returns where it points, which shows a second click changes nothing. */
+function clickTwice(product, visit) {
   const link = { href: product.url };
-  const taggedHref = `https://store.example/p/boot?variant=7&${ShopNobiTags}#reviews`;
+  tagProductLinkOnClick({ currentTarget: link }, product, visit);
+  tagProductLinkOnClick({ currentTarget: link }, product, visit);
+  return link.href;
+}
 
-  replaceProductLinkOnClick({ currentTarget: link }, product, ClickId, Person);
-  assert.equal(link.href, taggedHref);
+test("a click on a product link without a paid link swaps its utm_ tags for Shop Nobi's, keeping the rest", () => {
+  const product = { url: "https://store.example/p/boot?variant=7&utm_source=other&utm_term=x#reviews" };
 
-  replaceProductLinkOnClick({ currentTarget: link }, product, ClickId, Person);
-  assert.equal(link.href, taggedHref, "A second click adds nothing more");
+  assert.equal(clickTwice(product, Person), `https://store.example/p/boot?variant=7&${ShopNobiTags}#reviews`);
 });
 
-test("a person's click opens the paid store link as sent, with the click id in its sub-ID slot, and a crawler's opens the plain link", () => {
+test("a plain product link carries the page's conversation once, so the store can tie an order back", () => {
+  const product = { url: "https://store.example/p/boot?variant=7&nobi-conversation-id=old" };
+  const visit = { ...Person, conversationId: "conversation-1", clickId: "conversation-1" };
+
+  assert.equal(clickTwice(product, visit), `https://store.example/p/boot?variant=7&nobi-conversation-id=conversation-1&${ShopNobiTags}`);
+});
+
+test("a person's click opens the paid link as sent with the click id as its sub-ID, and a crawler's opens the plain link", () => {
   const innerLink = "https%3A%2F%2Fstore.example%2Fp%2Fboot%3Futm_source%3Dshop_nobi%26utm_campaign%3Dshop_nobi";
   const storeLink = `https://www.awin1.com/cread.php?awinmid=1&clickref=shop_nobi&ued=${innerLink}&name=café#top`;
   const product = { url: "https://store.example/p/boot", encodedStoreLink: encodePaidLink(storeLink) };
 
-  const link = { href: product.url };
-  replaceProductLinkOnClick({ currentTarget: link }, product, ClickId, Person);
-  replaceProductLinkOnClick({ currentTarget: link }, product, ClickId, Person);
-  assert.equal(link.href, `https://www.awin1.com/cread.php?awinmid=1&clickref=${ClickId}&ued=${innerLink}&name=café#top`, "Only the sub-ID changes");
-
-  for (const visitor of [Crawler, AutomatedBrowser]) {
-    const crawledLink = { href: product.url };
-    replaceProductLinkOnClick({ currentTarget: crawledLink }, product, ClickId, visitor);
-    assert.equal(crawledLink.href, `https://store.example/p/boot?${ShopNobiTags}`);
-  }
+  const paidLink = `https://www.awin1.com/cread.php?awinmid=1&clickref=${ClickId}&ued=${innerLink}&name=café#top`;
+  assert.equal(clickTwice(product, Person), paidLink, "Only the sub-ID changes");
+  assert.equal(clickTwice(product, Crawler), `https://store.example/p/boot?${ShopNobiTags}`);
 });
 
 test("tracking tags and links without a sub-ID slot are never changed", () => {
   const unencodedLink = "https://store.example/ref?id=7&url=https://store.example/p/boot?utm_source=shop_nobi&utm_campaign=shop_nobi";
   for (const storeLink of [unencodedLink, "https://sovrn.co?key=web&u=https%3A%2F%2Fstore.example"]) {
-    const link = { href: "https://store.example/p/boot" };
-    replaceProductLinkOnClick({ currentTarget: link }, { url: link.href, encodedStoreLink: encodePaidLink(storeLink) }, ClickId, Person);
-    assert.equal(link.href, storeLink);
+    const product = { url: "https://store.example/p/boot", encodedStoreLink: encodePaidLink(storeLink) };
+    assert.equal(clickTwice(product, Person), storeLink);
   }
 });
 
@@ -71,34 +69,4 @@ test("a Shop Nobi page link placed on a channel names that channel and drops eve
     taggedLink,
     "https://nobi.ai/shop/s/linen-dress?stores=a&utm_source=google_web_stories&utm_medium=referral&utm_campaign=shop_nobi",
   );
-});
-
-test("/shop shows every category, the first 50 pages, and the remaining pages without a category", () => {
-  const categorized = Array.from({ length: 51 }, (_, index) => ({
-    slug: `boots-${index}`,
-    title: `Boots ${index}`,
-    breadcrumbs: [{ name: "Shoes", slug: null }],
-  }));
-  const uncategorized = { slug: "gift-ideas", title: "Gift Ideas", breadcrumbs: [] };
-  const categoryPages = [{ slug: "shoes", name: "Shoes", refreshedAt: null, pages: [] }];
-
-  const popularSearches = buildPopularSearches([...categorized, uncategorized], categoryPages);
-
-  assert.deepEqual(popularSearches.categories, [{ slug: "shoes", name: "Shoes" }]);
-  assert.equal(popularSearches.pages.length, 50);
-  assert.deepEqual(popularSearches.pages[0], { slug: "boots-0", title: "Boots 0" });
-  assert.deepEqual(popularSearches.moreSearches, [{ slug: "gift-ideas", title: "Gift Ideas" }]);
-});
-
-test("a search page links to its category page only when that page was built", () => {
-  const searchPages = [
-    { slug: "boots", title: "Boots", breadcrumbs: [{ name: "Shoes", slug: null }] },
-    { slug: "rings", title: "Rings", breadcrumbs: [{ name: "Jewelry", slug: null }] },
-    { slug: "gift-ideas", title: "Gift Ideas", breadcrumbs: [] },
-  ];
-  const builtCategoryPages = [{ slug: "shoes", name: "Shoes", refreshedAt: null, pages: [] }];
-
-  const linkedPages = linkCategoryPages(searchPages, builtCategoryPages);
-
-  assert.deepEqual(linkedPages.map((page) => page.categoryPageSlug), ["shoes", null, null]);
 });

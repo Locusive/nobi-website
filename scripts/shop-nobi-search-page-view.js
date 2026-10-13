@@ -110,10 +110,11 @@ function buildRelatedPages(page, links) {
     .map((slug) => ({ slug: links.builtSlugs.has(slug) ? slug : null, title: links.titleBySlug.get(slug) }));
 }
 
-/** Builds one product, or returns null when it has no name or no safe link. */
+/** Builds one product, or returns null when it has no name, no safe link or no safe picture, so no card is blank. */
 function buildProduct(product) {
   const url = readWebAddress(product?.url);
-  if (!isText(product?.name) || !url) {
+  const imageAddress = readWebAddress(product?.imageUrl);
+  if (!isText(product?.name) || !url || !imageAddress) {
     return null;
   }
 
@@ -122,7 +123,7 @@ function buildProduct(product) {
     brand: isText(product.brand) ? product.brand : null,
     storeName: isText(product.storeName) ? product.storeName : null,
     url: removeTrackingTags(url),
-    imageUrl: readWebAddress(product.imageUrl)?.toString() ?? null,
+    imageUrl: imageAddress.toString(),
     price: Number.isFinite(product.price) ? product.price : null,
     currency: CurrencyPattern.test(product.currency ?? "") ? product.currency : null,
     isInStock: product.isInStock === true,
@@ -131,20 +132,14 @@ function buildProduct(product) {
 }
 
 /**
- * Keeps the API's finished store links only for a paid product with both links safe, in base64 so crawlers do not
- * follow them. Any other product carries no extra link and keeps today's plain links.
+ * Keeps the API's finished store link only for a paid product with a safe link, in base64 so crawlers do not follow
+ * it. Any other product carries no extra link. Web Stories need none: their link route adds the paid link itself.
  */
 function readPaidLinks(product) {
-  const hasSafeLinks = readWebAddress(product.storeLink) !== null && readWebAddress(product.storyStoreLink) !== null;
-  if (product.paidLink !== true || !hasSafeLinks) {
+  if (product.paidLink !== true || readWebAddress(product.storeLink) === null) {
     return { paidLink: false };
   }
-
-  return {
-    paidLink: true,
-    encodedStoreLink: encodePaidLink(product.storeLink),
-    encodedStoryStoreLink: encodePaidLink(product.storyStoreLink),
-  };
+  return { paidLink: true, encodedStoreLink: encodePaidLink(product.storeLink) };
 }
 
 /** Returns the address when it is a valid http or https address, else null. */

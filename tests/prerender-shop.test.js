@@ -108,13 +108,13 @@ test("the structured data lists each product with its offer, and the breadcrumbs
 
   assert.equal(productList["@type"], "ItemList");
   const products = productList.itemListElement.map((entry) => entry.item);
-  assert.deepEqual(products.map((product) => product.name), ["Roper Boot", '<script>alert("boot")</script> & "Cowboy" $& Boot', "Harness Boot"]);
+  const productNames = ["Roper Boot", '<script>alert("boot")</script> & "Cowboy" $& Boot', "Harness Boot"];
+  assert.deepEqual(products.map((product) => product.name), productNames, "No unsafe link and no javascript: picture");
   assert.deepEqual(products[0].brand, { "@type": "Brand", name: "Lucchese" });
   const roperUrl = "https://lucchese.com/products/roper?variant=123";
   const roperOffer = { "@type": "Offer", price: 495, priceCurrency: "USD", availability: "https://schema.org/InStock", url: roperUrl };
   assert.deepEqual(products[0].offers, roperOffer);
   assert.equal(products[1].offers.availability, "https://schema.org/OutOfStock");
-  assert.equal(products[1].image, undefined, "A javascript: picture address is dropped");
 
   assert.equal(breadcrumbs["@type"], "BreadcrumbList");
   assert.deepEqual(
@@ -134,7 +134,8 @@ test("the visible page shows the products, opening store links in a new tab with
   assert.ok(body.includes('<img src="https://cdn.example.com/roper.jpg" alt="Roper Boot"'));
   assert.ok(body.includes("$495.00") && body.includes("€120.00"));
   const productLinks = [...body.matchAll(/<a href="(https?:[^"]+)"([^>]*)>/g)].filter(([, href]) => !href.includes("nobi.ai"));
-  assert.equal(productLinks.length, 3, "The product with a javascript: link is dropped");
+  assert.equal(productLinks.length, 3, "The products with a javascript: link or picture are dropped");
+  assert.ok(!body.includes("Pictureless Boot"), "A product without a safe picture gets no card");
   for (const [, href, attributes] of productLinks) {
     assert.ok(attributes.includes('target="_blank"'), href);
     assert.ok(!href.includes("utm_"), href);
@@ -150,7 +151,6 @@ test("the first breadcrumb links to its category page, and other breadcrumb and 
 
   const bootsBody = readBody(readOutput("shop/s/boots.html"));
   assert.ok(bootsBody.includes('<a href="/shop/c/shoes" class="hover:underline">Shoes</a>'), "Even when the crumb has no search page");
-  assert.ok(!readBody(readOutput("shop/s/chelsea-boots.html")).includes('href="/shop/c/'), "No breadcrumbs, no category link");
 });
 
 test("every link to a store in the prebuilt pages carries rel=nofollow", () => {
@@ -191,19 +191,22 @@ test("a page's HTML holds no finished store link as text, and only paid products
   const products = readScriptJson(readOutput("shop/s/black-leather-boots.html"), "shop-nobi-prebuilt-content").data.products;
   assert.equal(decodePaidLink(products[0].encodedStoreLink), fixtureProducts[0].storeLink, "The click opens the paid link as sent");
   for (const product of products.slice(1)) {
-    assert.deepEqual([product.paidLink, product.encodedStoreLink, product.encodedStoryStoreLink], [false, undefined, undefined]);
+    assert.deepEqual([product.paidLink, product.encodedStoreLink], [false, undefined]);
   }
 });
 
-test("a story links a paid product to its paid story link, sponsored with the notice under it, and others to their plain link", () => {
+test("a story's paid product goes through the link route like every product, sponsored and with the notice under it", () => {
   const story = readOutput("shop/stories/black-leather-boots.html");
-  const storeLinks = [...story.matchAll(/<a class="store-link" href="([^"]+)" data-vars-store-url="([^"]+)" rel="([^"]+)"[^>]*>[^<]*<\/a>(<p class="commission-notice">We may earn a commission<\/p>)?/g)];
-  const paidStoryLink = readFixturePageData().pages[0].products[0].storyStoreLink.replaceAll("&", "&amp;");
+  const storeLinks = [...story.matchAll(/<a class="store-link" href="([^"]+)" [^>]*rel="([^"]+)"[^>]*>[^<]*<\/a>(<p class="commission-notice">We may earn a commission<\/p>)?/g)];
+  const linkRoute = (storeUrl) => `https://api.nobi.ai/v1/shop/story-go?url=${encodeURIComponent(storeUrl)}&amp;page=black-leather-boots`;
 
-  assert.deepEqual(storeLinks.map(([, href, beaconUrl, rel, notice]) => [href, beaconUrl, rel, Boolean(notice)]), [
-    [paidStoryLink, "https://lucchese.com/products/roper?variant=123", "sponsored nofollow noopener", true],
-    ["https://frye.example/products/harness", "https://frye.example/products/harness", "nofollow noopener", false],
+  assert.deepEqual(storeLinks.map(([, href, rel, notice]) => [href, rel, Boolean(notice)]), [
+    [linkRoute("https://lucchese.com/products/roper?variant=123"), "sponsored nofollow noopener", true],
+    [linkRoute("https://example.com/products/cowboy"), "nofollow noopener", false],
+    [linkRoute("https://frye.example/products/harness"), "nofollow noopener", false],
   ]);
+  const storyLinks = readFixturePageData().pages[0].products.map((product) => product.storyStoreLink).filter(Boolean);
+  assert.ok(storyLinks.every((link) => !story.includes(encodeURIComponent(link)) && !story.includes(link.replaceAll("&", "&amp;"))));
 });
 
 test("a hostile product name is escaped everywhere and its embedded data reads back unchanged", () => {
@@ -269,21 +272,21 @@ test("llms.txt keeps its own text and gains a Shop Nobi section with links to th
   assert.ok(llmsText.includes("- [Black Leather Boots](https://nobi.ai/shop/s/black-leather-boots)"));
 });
 
-test("when the file limit is reached, category pages come first, then the first search pages, and the rest stay out of every listing", async () => {
+test("when the file limit is reached, category room comes first, then the first search pages, and the rest stay out of every listing", async () => {
   const folder = makeDistCopy();
   const categoryAndOnePage = 2;
   try {
     const count = await prerenderWith({}, folder, { fileLimit: FileCountBeforePages + categoryAndOnePage });
     assert.equal(count, 1);
-    const categoryBody = readBody(readFileSync(join(folder, "shop/c/shoes.html"), "utf8"));
-    assert.ok(categoryBody.includes('href="/shop/s/black-leather-boots"') && !categoryBody.includes('href="/shop/s/boots"'));
+    assert.ok(!existsSync(join(folder, "shop/c/shoes.html")), "One built search page is too few for a category page");
     assert.ok(existsSync(join(folder, "shop/s/black-leather-boots.html")));
     assert.ok(!existsSync(join(folder, "shop/s/chelsea-boots.html")) && !existsSync(join(folder, "shop/s/boots.html")));
-    assert.ok(!existsSync(join(folder, "shop/stories")), "Stories get only the room left after the pages");
+    const storyFiles = readdirSync(join(folder, "shop/stories"));
+    assert.deepEqual(storyFiles, ["black-leather-boots.html"], "The story gets the room the category page did not need");
 
     const sitemap = readFileSync(join(folder, "sitemap-shop.xml"), "utf8");
     const llmsText = readFileSync(join(folder, "llms.txt"), "utf8");
-    assert.equal(sitemap.split("<url>").length - 1, 2, "The category page and one search page");
+    assert.equal(sitemap.split("<url>").length - 1, 2, "One search page and its story");
     assert.ok(!llmsText.includes("chelsea-boots") && !llmsText.includes("/shop/s/boots)"));
 
     const body = readBody(readFileSync(join(folder, "shop/s/black-leather-boots.html"), "utf8"));
@@ -294,7 +297,7 @@ test("when the file limit is reached, category pages come first, then the first 
   }
 });
 
-test("each top category gets one page listing its search pages, with its own head and breadcrumbs", () => {
+test("each category with enough search pages gets one page listing them, with its own head and breadcrumbs", () => {
   assert.ok(!existsSync(join(distDir, "shop/c/shoes")), "One file per category page");
   const html = readOutput("shop/c/shoes.html");
   const description = "Popular Shoes searches on Shop Nobi, the best products from the best stores online. You buy directly from the store.";
@@ -313,8 +316,8 @@ test("each top category gets one page listing its search pages, with its own hea
   const body = readBody(html);
   assert.ok(body.includes('<h1 class="mt-4 text-3xl font-semibold">Shoes</h1>'));
   const searchLinks = [...body.matchAll(/<a href="(\/shop\/s\/[^"]+)" class="hover:underline">([^<]+)<\/a>/g)].map(([, href, title]) => [href, title]);
-  assert.deepEqual(searchLinks, [["/shop/s/black-leather-boots", "Black Leather Boots"], ["/shop/s/boots", "Boots"]]);
-  assert.ok(!existsSync(join(distDir, "shop/c/chelsea-boots.html")), "A page without breadcrumbs gets no category page");
+  const expectedLinks = [["/shop/s/black-leather-boots", "Black Leather Boots"], ["/shop/s/chelsea-boots", "Chelsea Boots"], ["/shop/s/boots", "Boots"]];
+  assert.deepEqual(searchLinks, expectedLinks);
 });
 
 test("/shop lists the category pages and the most searched pages until the live search arrives", () => {
@@ -337,6 +340,35 @@ test("redirects for retired pages stop at the rule limit, keeping the first ones
     const redirects = readFileSync(join(folder, "_redirects"), "utf8");
     assert.equal(countRedirectRules(redirects), existingRules + 1);
     assert.ok(redirects.includes("/shop/s/neon-boots ") && !redirects.includes("old-boots"));
+  } finally {
+    rmSync(folder, { recursive: true, force: true });
+  }
+});
+
+/** Builds search pages under one furniture category, which the build can render. */
+function buildFurniturePages(count, categoryName, slugPrefix) {
+  return Array.from({ length: count }, (_, index) => ({
+    slug: `${slugPrefix}-${index}`,
+    title: `${categoryName} ${index}`,
+    categoryPath: `furniture.${slugPrefix}`,
+    breadcrumbs: [{ name: categoryName, slug: null }],
+    products: [],
+  }));
+}
+
+test("a top category's page shows its category pages under Browse by category, then its own search pages", async () => {
+  const chairs = buildFurniturePages(3, "Chairs", "chair");
+  const benches = buildFurniturePages(2, "Benches", "bench");
+  const ottomans = buildFurniturePages(1, "Ottomans", "ottoman");
+  const folder = makeDistCopy();
+  try {
+    await prerenderWith({ body: { pages: [...chairs, ...benches, ...ottomans], retired: [] } }, folder);
+
+    const body = readBody(readFileSync(join(folder, "shop/c/furniture.html"), "utf8"));
+    const links = [...body.matchAll(/href="(\/shop\/[cs]\/[^"]+)"/g)].map(([, href]) => href);
+    assert.ok(body.includes("Browse by category"));
+    assert.deepEqual(links, ["/shop/c/chairs", "/shop/s/bench-0", "/shop/s/bench-1", "/shop/s/ottoman-0"]);
+    assert.ok(!readBody(readFileSync(join(folder, "shop/c/chairs.html"), "utf8")).includes("Browse by category"));
   } finally {
     rmSync(folder, { recursive: true, force: true });
   }

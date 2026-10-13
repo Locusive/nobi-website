@@ -179,3 +179,15 @@ test("the privacy policy and terms carry their full text in the HTML, for reader
   assert.ok(terms.includes("<title>Terms of Service | Nobi</title>"));
   assert.ok(terms.includes("Shop Nobi"), "The terms text is in the page");
 });
+
+test("the homepage lets a visitor try Shop Nobi between the customer logos and the features, with a search that works without JavaScript", () => {
+  const html = readPage("homepage.html");
+  const text = bodyText(html);
+  const sectionStart = html.indexOf('id="try-shop-nobi"');
+  assert.ok(sectionStart > html.indexOf("Trusted by modern teams"), "The section comes after the customer logos");
+  assert.ok(text.includes("See Nobi search on real stores"));
+  const section = html.slice(sectionStart);
+  assert.match(section, /<form action="\/shop" method="get" role="search"/);
+  assert.match(section, /<label for="try-shop-nobi-search"[^>]*>Search Shop Nobi<\/label>/);
+  assert.match(section, /<input id="try-shop-nobi-search" name="q" type="search"/);
+});

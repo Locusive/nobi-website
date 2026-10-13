@@ -1,5 +1,5 @@
-// Builds the prebuilt Shop Nobi pages, their web stories, and their sitemap, Pinterest feeds, redirects and
-// llms.txt section from the API's page data. A failed fetch fails the build, so the last good deploy stays live.
+// Builds the prebuilt Shop Nobi pages, their web stories, their listing files and the homepage's example results
+// from the API's page data. A failed fetch fails the build, so the last good deploy stays live.
 
 import { readFileSync, writeFileSync, existsSync, mkdirSync, readdirSync } from "fs";
 import { join, dirname } from "path";
@@ -15,6 +15,7 @@ import { webStoryPath } from "../src/utils/shopNobiWebStory.js";
 import { fetchImageSize as fetchImageSizeOnline } from "./image-size.js";
 import { buildPinFeedFiles, listPinFeedFiles } from "./shop-nobi-pin-feed.js";
 import { appendLlmsTxtSection, appendRedirects, buildRetiredRedirects, buildShopNobiSitemap } from "./shop-nobi-search-page-listings.js";
+import { buildTryExamples, TryExamplesFile } from "../src/utils/shopNobiTryExamples.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const Dist = join(__dirname, "..", "dist");
@@ -56,6 +57,7 @@ export async function prerenderShopNobiSearchPages({
   const sitemap = buildShopNobiSitemap(plan.categoryPages, plan.searchPages, plan.stories);
   writeFileSync(join(distDir, ShopNobiSitemapFile), sitemap);
   writePinFeeds(distDir, plan.searchPages);
+  writeFileSync(join(distDir, TryExamplesFile), JSON.stringify(buildTryExamples(plan.searchPages)));
   updateFile(join(distDir, "_redirects"), (text) => appendRedirects(text, redirectLines, redirectRuleLimit));
   updateFile(join(distDir, "llms.txt"), (text) => appendLlmsTxtSection(text, plan.searchPages));
   return plan.searchPages.length;
@@ -82,7 +84,7 @@ async function planPages(fetchedPages, fileRoom, fetchImageSize) {
 
 /** Returns how many page files fit after the files already built, the Shop Nobi sitemap and the pin feeds. */
 function countFileRoom(distDir, fileLimit) {
-  const listingFiles = [ShopNobiSitemapFile, ...listPinFeedFiles()];
+  const listingFiles = [ShopNobiSitemapFile, TryExamplesFile, ...listPinFeedFiles()];
   const newListingFiles = listingFiles.filter((file) => !existsSync(join(distDir, file)));
   return fileLimit - countFiles(distDir) - newListingFiles.length;
 }

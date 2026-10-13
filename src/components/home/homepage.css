@@ -65,3 +65,25 @@ details.nb-faq > summary { list-style: none; cursor: pointer; }
 details.nb-faq > summary::-webkit-details-marker { display: none; }
 details.nb-faq > summary .nb-faq-chev { transition: transform .2s ease; }
 details.nb-faq[open] > summary .nb-faq-chev { transform: rotate(180deg); }
+
+/* Try Shop Nobi: the search box, example pills and the results grid. */
+.nb-visually-hidden { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+.nb-try-form { margin-top: 30px; width: 100%; max-width: 680px; display: flex; align-items: center; gap: 11px; padding: 8px 8px 8px 18px; background: #ffffff; border: 1px solid rgba(109,59,255,0.22); border-radius: 999px; box-shadow: 0 18px 44px -20px rgba(76,40,130,0.45); }
+.nb-try-form:focus-within { border-color: #6d3bff; box-shadow: 0 0 0 4px rgba(109,59,255,0.14), 0 18px 44px -20px rgba(76,40,130,0.45); }
+.nb-try-input { flex: 1; min-width: 0; border: 0; outline: none; background: transparent; font: inherit; font-size: 16px; color: #1b1626; }
+.nb-try-input::placeholder { color: #a49dba; }
+.nb-try-submit { flex: none; border: 0; border-radius: 999px; padding: 11px 22px; color: #ffffff; font: inherit; font-size: 15px; font-weight: 600; cursor: pointer; }
+.nb-try-submit:focus-visible, .nb-try-pill:focus-visible, .nb-try-more:focus-visible, .nb-try-results:focus-visible { outline: 3px solid #6d3bff; outline-offset: 3px; }
+.nb-try-pill { border: 1px solid rgba(109,59,255,0.2); background: #ffffff; color: #57536a; border-radius: 999px; padding: 7px 14px; font: inherit; font-size: 13.5px; font-weight: 500; cursor: pointer; transition: border-color .15s ease, color .15s ease, background .15s ease; }
+.nb-try-pill:hover { border-color: #6d3bff; color: #1b1626; }
+.nb-try-pill-on { background: #f3edff; border-color: #6d3bff; color: #4a2fb8; font-weight: 600; }
+.nb-try-results { display: block; color: inherit; text-decoration: none; border-radius: 22px; }
+.nb-try-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 22px 18px; }
+.nb-try-results:hover .nb-try-name { text-decoration: underline; }
+.nb-try-name { margin-top: 9px; font-size: 13.5px; font-weight: 600; color: #1b1626; line-height: 1.3; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.nb-try-more { display: inline-flex; align-items: center; gap: 7px; color: #6d3bff; font-size: 15px; font-weight: 600; text-decoration: none; }
+.nb-try-more:hover { text-decoration: underline; }
+@media (max-width: 720px) {
+  .nb-try-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px 14px; }
+  .nb-try-submit { padding: 10px 16px; }
+}

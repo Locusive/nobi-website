@@ -35,8 +35,7 @@ const SmokeTestSessionStorageKey = "nobi_smoke_test_token";
  * conversation when the click opens the store page. The browser still follows the link as usual.
  *
  * @param {{button: number, currentTarget: {href: string}}} event The click, or a middle or right click.
- * @param {{product: object, position: number, query: string, slug: string}} click The product, its place on the page
- *     from 1, the page's search and the page's slug.
+ * @param {{product: object, position: number, query: string, slug: string}} click The product, its place, the search, the slug.
  * @param {object} [browser] The window. Tests pass a stand-in.
  */
 export function handleProductLinkClick(event, click, browser = globalThis) {

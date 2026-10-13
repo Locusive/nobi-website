@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
 import { handleProductLinkClick } from "../src/utils/shopNobiProductClick.js";
+import { encodePaidLink } from "../src/utils/shopNobiPaidLink.js";
 
 const EventsUrl = "https://api.nobi.ai/v1/merchants/9282b7cb-66ce-4d53-8c37-c291352ef03d/events";
 const PageUrl = "https://nobi.ai/shop/s/black-leather-boots?utm_source=pinterest";
@@ -12,6 +13,8 @@ const LinkWithConversation = `${TaggedProductUrl}&nobi-conversation-id=${PageCon
 const ChromeAgent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36";
 const GooglebotAgent = "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)";
 const MouseButton = { Main: 0, Middle: 1, Right: 2 };
+const PaidLinkStart = "https://sovrn.co?key=web&u=https%3A%2F%2Flucchese.com%2Fproducts%2Froper";
+const PaidProduct = { ...Product, paidLink: true, encodedStoreLink: encodePaidLink(`${PaidLinkStart}&cuid=shop_nobi`) };
 
 /** A stand-in window that records every beacon and fetch, with a saved shopper id and the page's conversation. */
 function makeBrowser({
@@ -45,10 +48,10 @@ function makeBrowser({
 }
 
 /** Clicks the second product link on a page with the given mouse button. */
-function clickProduct(browser, button = MouseButton.Main) {
-  const link = { href: Product.url };
+function clickProduct(browser, button = MouseButton.Main, product = Product) {
+  const link = { href: product.url };
   const click = { button, currentTarget: link, defaultPrevented: false, preventDefault: () => { click.defaultPrevented = true; } };
-  handleProductLinkClick(click, { product: Product, position: 2, query: "black leather boots" }, browser);
+  handleProductLinkClick(click, { product, position: 2, query: "black leather boots", slug: "black-leather-boots" }, browser);
   return { link, defaultPrevented: click.defaultPrevented };
 }
 
@@ -155,4 +158,25 @@ test("a visitor with no saved shopper id, or with storage blocked, still sends t
     assert.equal(event.details.shopperId, undefined);
     assert.equal(event.details.productName, "Roper Boot");
   }
+});
+
+test("a person's click on a paid product opens the paid link with the conversation as its sub-ID, and counts that link", () => {
+  const browser = makeBrowser();
+
+  const { link } = clickProduct(browser, MouseButton.Main, PaidProduct);
+
+  assert.equal(link.href, `${PaidLinkStart}&cuid=${PageConversationId}`);
+  assert.equal(browser.beacons[0].event.details.linkUrl, link.href);
+});
+
+test("without a conversation, a paid link's sub-ID is the slug and one visit id for the page view; a crawler gets the plain link", () => {
+  const browser = makeBrowser({ pageConversationId: null });
+
+  const firstLink = clickProduct(browser, MouseButton.Main, PaidProduct).link.href;
+  const secondLink = clickProduct(browser, MouseButton.Main, PaidProduct).link.href;
+
+  assert.match(firstLink, /&cuid=black-leather-boots\.[a-z0-9]{8}$/);
+  assert.equal(secondLink, firstLink, "Every click in the page view carries the same visit id");
+  const crawlerLink = clickProduct(makeBrowser({ userAgent: GooglebotAgent }), MouseButton.Main, PaidProduct).link.href;
+  assert.equal(crawlerLink, TaggedProductUrl);
 });

@@ -4,6 +4,8 @@ import { join } from "node:path";
 import { after, before, test } from "node:test";
 import { countRedirectRules } from "../scripts/shop-nobi-search-page-listings.js";
 import { FileCountBeforePages, makeDistCopy, prerenderWith, readBody, readOriginal, readScriptJson } from "./shop-nobi-test-build.js";
+import { readFixturePageData } from "./shop-nobi-pages-server.js";
+import { decodePaidLink } from "../src/utils/shopNobiPaidLink.js";
 
 let distDir;
 
@@ -160,6 +162,51 @@ test("every link to a store in the prebuilt pages carries rel=nofollow", () => {
       assert.match(attributes, /rel="[^"]*nofollow/, `${page}: ${attributes}`);
     }
   }
+});
+
+test("a paid product keeps its plain link for crawlers, with rel=sponsored and a commission notice at the end of its card", () => {
+  const body = readBody(readOutput("shop/s/black-leather-boots.html"));
+  const productLinks = [...body.matchAll(/<a href="(https?:[^"]+)" rel="([^"]+)"/g)].map(([, href, rel]) => [href, rel]);
+
+  assert.deepEqual(productLinks, [
+    ["https://lucchese.com/products/roper?variant=123", "sponsored nofollow noopener"],
+    ["https://example.com/products/cowboy", "nofollow noopener"],
+    ["https://frye.example/products/harness", "nofollow noopener"],
+  ]);
+  const notice = '<p class="mt-1 text-[10px] leading-tight text-black/40 dark:text-white/40">We may earn a commission</p>';
+  assert.equal(body.split(notice).length - 1, 1, "Only the paid product has the notice");
+  assert.ok(body.includes(`$495.00</p>${notice}</li>`), "The notice ends the paid product's card");
+  assert.ok(!readBody(readOutput("shop/s/chelsea-boots.html")).includes("commission"), "An unpaid product gets no notice");
+});
+
+test("a page's HTML holds no finished store link as text, and only paid products carry one, in base64", () => {
+  const fixtureProducts = readFixturePageData().pages.flatMap((page) => page.products);
+  const finishedLinks = fixtureProducts.flatMap((product) => [product.storeLink, product.storyStoreLink]).filter(Boolean);
+  for (const page of ["shop/s/black-leather-boots.html", "shop/s/chelsea-boots.html"]) {
+    const html = readOutput(page);
+    assert.ok(finishedLinks.every((link) => !html.includes(link) && !html.includes(link.replaceAll("&", "&amp;"))), page);
+    assert.ok(!html.includes("sovrn.co"), page);
+  }
+
+  const products = readScriptJson(readOutput("shop/s/black-leather-boots.html"), "shop-nobi-prebuilt-content").data.products;
+  assert.equal(decodePaidLink(products[0].encodedStoreLink), fixtureProducts[0].storeLink, "The click opens the paid link as sent");
+  for (const product of products.slice(1)) {
+    assert.deepEqual([product.paidLink, product.encodedStoreLink], [false, undefined]);
+  }
+});
+
+test("a story's paid product goes through the link route like every product, sponsored and with the notice under it", () => {
+  const story = readOutput("shop/stories/black-leather-boots.html");
+  const storeLinks = [...story.matchAll(/<a class="store-link" href="([^"]+)" [^>]*rel="([^"]+)"[^>]*>[^<]*<\/a>(<p class="commission-notice">We may earn a commission<\/p>)?/g)];
+  const linkRoute = (storeUrl) => `https://api.nobi.ai/v1/shop/story-go?url=${encodeURIComponent(storeUrl)}&amp;page=black-leather-boots`;
+
+  assert.deepEqual(storeLinks.map(([, href, rel, notice]) => [href, rel, Boolean(notice)]), [
+    [linkRoute("https://lucchese.com/products/roper?variant=123"), "sponsored nofollow noopener", true],
+    [linkRoute("https://example.com/products/cowboy"), "nofollow noopener", false],
+    [linkRoute("https://frye.example/products/harness"), "nofollow noopener", false],
+  ]);
+  const storyLinks = readFixturePageData().pages[0].products.map((product) => product.storyStoreLink).filter(Boolean);
+  assert.ok(storyLinks.every((link) => !story.includes(encodeURIComponent(link)) && !story.includes(link.replaceAll("&", "&amp;"))));
 });
 
 test("a hostile product name is escaped everywhere and its embedded data reads back unchanged", () => {

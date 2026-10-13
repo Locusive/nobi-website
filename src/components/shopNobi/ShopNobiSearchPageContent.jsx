@@ -1,6 +1,7 @@
 import React from "react";
 import { handleProductLinkClick } from "../../utils/shopNobiProductClick";
 import { formatPrice, readCrumbPath, searchPagePath } from "../../utils/shopNobiSearchPage";
+import { CommissionNotice, readStoreLinkRel } from "../../utils/shopNobiPage";
 
 /**
  * The products of a prebuilt Shop Nobi search page. The build writes this into the HTML for crawlers, and
@@ -20,7 +21,7 @@ export default function ShopNobiSearchPageContent({ page }) {
       ))}
       <ul className="mt-6 grid grid-cols-2 gap-6 sm:grid-cols-3 lg:grid-cols-4">
         {page.products.map((product, index) => (
-          <ProductCard key={index} product={product} position={index + 1} query={page.query} />
+          <ProductCard key={index} product={product} position={index + 1} query={page.query} slug={page.slug} />
         ))}
       </ul>
       <Questions faq={page.faq} />
@@ -51,16 +52,19 @@ function Breadcrumbs({ page }) {
   );
 }
 
-/** One product: its picture, name, store and price, linking to the store's page in a new tab. A click tags the link and is counted. */
-function ProductCard({ product, position, query }) {
+/**
+ * One product: its picture, name, store and price, linking to the store's page in a new tab. A click sets the link to
+ * open and is counted. A link that earns a commission has a small notice under it.
+ */
+function ProductCard({ product, position, query, slug }) {
   const price = formatPrice(product.price, product.currency);
-  const handleClick = (event) => handleProductLinkClick(event, { product, position, query });
+  const handleClick = (event) => handleProductLinkClick(event, { product, position, query, slug });
 
   return (
     <li>
       <a
         href={product.url}
-        rel="nofollow noopener"
+        rel={readStoreLinkRel(product.paidLink)}
         target="_blank"
         onClick={handleClick}
         onAuxClick={handleClick}
@@ -73,6 +77,7 @@ function ProductCard({ product, position, query }) {
       </a>
       {product.storeName && <p className="text-sm text-black/60 dark:text-white/60">{product.storeName}</p>}
       {price && <p className="text-sm font-semibold">{price}</p>}
+      {product.paidLink && <p className="mt-1 text-[10px] leading-tight text-black/40 dark:text-white/40">{CommissionNotice}</p>}
     </li>
   );
 }

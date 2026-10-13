@@ -85,12 +85,25 @@ Story at `/shop/stories/<slug>`, an AMP story built by
 shows a cover, the guide in pages of at most 180 characters, up to three
 products with nofollow store links, questions that fit, and a last page that
 links back to the search page with `utm_source=google_web_stories`. The search
-page links to its story, and `sitemap-shop.xml` lists the stories. When a
-shopper taps through a store link, `amp-analytics` sends a beacon to
-`https://api.nobi.ai/v1/shop/story-click` with the store link and the story's
-slug; the link itself still goes straight to the store. Stories get
+page links to its story, and `sitemap-shop.xml` lists the stories. Each store
+link goes through `https://api.nobi.ai/v1/shop/story-go` with the plain store
+link and the story's slug; the API counts the tap and forwards to the store,
+through the store's affiliate link when one pays us. Stories get
 only the file room left after the pages. Mature pages get no story. To check
 one, run `npx amphtml-validator dist/shop/stories/<slug>.html`.
+
+Store links can earn a commission. For each product the API may send `storeLink`
+(the finished link for search pages) and `paidLink` (true when the link earns a
+commission). The website never builds or tags a paid link itself, and keeps one
+only for paid products. A search page keeps the plain store link in its HTML and
+holds the paid link only in base64, so crawlers never see it. A person's click
+opens the paid link, with its sub-ID parameter (the one whose value is
+`shop_nobi`) set to the page's conversation, or to `<slug>.<visit id>` when there
+is none, at most 50 characters (`src/utils/shopNobiClickId.js`). A crawler's
+click opens the plain link with Shop Nobi's tags. A paid link, on search pages
+and in stories, gets `rel="sponsored"` and a small "We may earn a commission"
+notice under it (`CommissionNotice` in `src/utils/shopNobiPage.js`). Unpaid
+products keep the same links as before.
 
 The GitHub workflow `nightly-shop-nobi-rebuild.yml` rebuilds the site every
 day at 10:00 UTC, after the API's overnight refresh, by calling the Cloudflare

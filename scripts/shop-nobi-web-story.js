@@ -3,7 +3,7 @@
 
 import { htmlEscape } from "./prerender-blog.js";
 import { StoryPageKind } from "./shop-nobi-web-story-plan.js";
-import { BaseUrl } from "../src/utils/shopNobiPage.js";
+import { BaseUrl, CommissionNotice, readStoreLinkRel } from "../src/utils/shopNobiPage.js";
 import { describeSearchPage, formatPrice, searchPageUrl } from "../src/utils/shopNobiSearchPage.js";
 import { webStoryUrl } from "../src/utils/shopNobiWebStory.js";
 import { IndexableRobots, PortraitPosterSize } from "../src/utils/previewImage.js";
@@ -32,6 +32,7 @@ const StoryStyle = [
   ".text{margin:0;font-size:22px;line-height:1.45}",
   ".detail{margin:4px 0 0;font-size:16px;opacity:.75}",
   ".store-link{display:inline-block;margin-top:12px;font-size:14px;color:inherit;opacity:.6}",
+  ".commission-notice{margin:6px 0 0;font-size:12px;opacity:.5}",
 ].join("");
 
 /**
@@ -125,22 +126,25 @@ function renderProduct(product, slug) {
     `<h2>${name}</h2>`,
     product.storeName ? `<p class="detail">${htmlEscape(product.storeName)}</p>` : "",
     price ? `<p class="detail">${htmlEscape(price)}</p>` : "",
-    renderStoreLink(product.url, slug),
+    renderStoreLink(product, slug),
   ];
   return `<amp-story-grid-layer template="vertical" class="product-page">${details.join("")}</amp-story-grid-layer>`;
 }
 
 /**
- * Renders the small nofollow store link. It goes through the API, and its tooltip names the store's site, not the API's.
+ * Renders the small nofollow store link. It goes through the API, which sends a person's tap through the affiliate link
+ * when one pays us; its tooltip names the store's site. A paid link is sponsored and has a notice under it.
  *
- * @param {string} storeUrl The store's product link.
+ * @param {{url: string, paidLink: boolean}} product The product.
  * @param {string} slug The story's slug, sent as the page.
- * @returns {string} The link.
+ * @returns {string} The link, and the notice when the link is paid.
  */
-function renderStoreLink(storeUrl, slug) {
-  const linkThroughApi = `${StoreLinkRoute}?url=${encodeURIComponent(storeUrl)}&page=${encodeURIComponent(slug)}`;
-  const tooltip = `data-tooltip-text="${htmlEscape(readStoreSite(storeUrl))}"`;
-  return `<a class="store-link" href="${htmlEscape(linkThroughApi)}" ${tooltip} rel="nofollow noopener" target="_blank">${StoreLinkText}</a>`;
+function renderStoreLink(product, slug) {
+  const linkThroughApi = `${StoreLinkRoute}?url=${encodeURIComponent(product.url)}&page=${encodeURIComponent(slug)}`;
+  const tooltip = `data-tooltip-text="${htmlEscape(readStoreSite(product.url))}"`;
+  const rel = readStoreLinkRel(product.paidLink);
+  const link = `<a class="store-link" href="${htmlEscape(linkThroughApi)}" ${tooltip} rel="${rel}" target="_blank">${StoreLinkText}</a>`;
+  return product.paidLink ? `${link}<p class="commission-notice">${CommissionNotice}</p>` : link;
 }
 
 /** Reads the store's site name from its link, such as "lucchese.com", or the link itself when it cannot be read. */

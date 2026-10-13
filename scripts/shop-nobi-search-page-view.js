@@ -1,7 +1,8 @@
-// Turns the fetched page data into the page data the HTML is built from, keeping only safe
-// values: slugs that are safe in file names, http or https links, and links without tracking tags.
+// Turns the fetched page data into the page data the HTML is built from, keeping only safe values: safe slugs,
+// http or https links, and plain links without tracking tags. Paid store links are kept only in base64.
 
 import { removeTrackingTags } from "../src/utils/shopNobiPage.js";
+import { encodePaidLink } from "../src/utils/shopNobiPaidLink.js";
 
 const SlugPattern = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 const CurrencyPattern = /^[A-Z]{3}$/;
@@ -126,7 +127,19 @@ function buildProduct(product) {
     price: Number.isFinite(product.price) ? product.price : null,
     currency: CurrencyPattern.test(product.currency ?? "") ? product.currency : null,
     isInStock: product.isInStock === true,
+    ...readPaidLinks(product),
   };
+}
+
+/**
+ * Keeps the API's finished store link only for a paid product with a safe link, in base64 so crawlers do not follow
+ * it. Any other product carries no extra link. Web Stories need none: their link route adds the paid link itself.
+ */
+function readPaidLinks(product) {
+  if (product.paidLink !== true || readWebAddress(product.storeLink) === null) {
+    return { paidLink: false };
+  }
+  return { paidLink: true, encodedStoreLink: encodePaidLink(product.storeLink) };
 }
 
 /** Returns the address when it is a valid http or https address, else null. */

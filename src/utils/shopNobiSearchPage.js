@@ -5,9 +5,13 @@ import { BaseUrl, ShopNobiImage, ShopNobiLinkTags, removeTrackingTags } from "./
 import { categoryPagePath } from "./shopNobiCategoryPage.js";
 import { buildBreadcrumbSchema, buildFaqSchema, buildProductListSchema } from "./shopNobiStructuredData.js";
 import { findLargePreviewImage } from "./previewImage.js";
+import { decodePaidLink } from "./shopNobiPaidLink.js";
+import { fillClickId } from "./shopNobiClickId.js";
 
 const SearchPagePathPrefix = "/shop/s/";
-const ShopNobiTags = { utm_source: "shop_nobi", ...ShopNobiLinkTags };
+/** The channel name of search pages: the utm_source tag, and what the API puts in a paid link's sub-ID slot. */
+const SearchPageChannel = "shop_nobi";
+const ShopNobiTags = { utm_source: SearchPageChannel, ...ShopNobiLinkTags };
 /** The parameter a store's Nobi assistant reads the conversation from, the same one the assistant bundle's store links carry. */
 const ConversationIdParameter = "nobi-conversation-id";
 
@@ -117,16 +121,28 @@ export function addShopNobiTags(storeUrl) {
 }
 
 /**
- * Tags a clicked product link just before the browser follows it, so the store credits Shop Nobi and can tie an order
- * to the page's conversation, while the HTML crawlers read keeps the plain link.
+ * Sets a clicked product link just before the browser follows it. A person gets the paid link, with the click id as its
+ * sub-ID, when there is one; anyone else gets the plain link with Shop Nobi's tags and the page's conversation.
  *
  * @param {{currentTarget: {href: string}}} event The click event.
- * @param {string | null} [conversationId] The page's conversation, or null to add none.
+ * @param {{url: string, encodedStoreLink?: string}} product The product the link belongs to.
+ * @param {{isPerson: boolean, conversationId: string | null, clickId: string | null}} visit Who clicked, from readVisit.
  */
-export function tagProductLinkOnClick(event, conversationId = null) {
-  const address = new URL(addShopNobiTags(event.currentTarget.href));
+export function tagProductLinkOnClick(event, product, visit) {
+  const paidStoreLink = visit.isPerson ? decodePaidLink(product.encodedStoreLink) : null;
+  if (paidStoreLink === null) {
+    event.currentTarget.href = tagPlainStoreLink(product.url, visit.conversationId);
+    return;
+  }
+
+  event.currentTarget.href = fillClickId(paidStoreLink, SearchPageChannel, visit.clickId);
+}
+
+/** Adds Shop Nobi's tags and, when there is one, the page's conversation to the plain store link. */
+function tagPlainStoreLink(storeUrl, conversationId) {
+  const address = new URL(addShopNobiTags(storeUrl));
   if (conversationId) {
     address.searchParams.set(ConversationIdParameter, conversationId);
   }
-  event.currentTarget.href = address.toString();
+  return address.toString();
 }

@@ -2,6 +2,7 @@
 import React, { useMemo, useRef } from "react";
 import { useLocation } from "react-router-dom";
 import Nav from "../components/home/Nav";
+import AddYourStoreLink from "../components/shopNobi/AddYourStoreLink";
 import ShopNobiCategoryPageContent from "../components/shopNobi/ShopNobiCategoryPageContent";
 import ShopNobiPopularSearches from "../components/shopNobi/ShopNobiPopularSearches";
 import ShopNobiSearchPageContent from "../components/shopNobi/ShopNobiSearchPageContent";
@@ -24,7 +25,7 @@ const CategorySearchClass = "shop-nobi-category-search";
 
 /**
  * The Shop Nobi page: the site's header, then the live search from the assistant bundle in the slot under it.
- * The prebuilt content the build wrote for this path shows beside the slot until live products are drawn.
+ * The prebuilt content and the store owners' link, right under the slot, show until live products are drawn.
  *
  * @param {{prebuiltContent?: object}} props The build passes the prebuilt content; in the browser it comes from the HTML.
  */
@@ -46,6 +47,7 @@ export default function ShopPage({ prebuiltContent: builtContent = null }) {
       </header>
       {place === PrebuiltContentPlace.AboveSearch && <PrebuiltContent content={prebuiltContent} />}
       <div ref={slotRef} className={place === PrebuiltContentPlace.BelowSearch ? CategorySearchClass : undefined} />
+      <AddYourStoreLink isLinkHidden={liveResultsHaveDrawn} />
       {place === PrebuiltContentPlace.BelowSearch && <PrebuiltContent content={prebuiltContent} />}
     </div>
   );

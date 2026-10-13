@@ -25,7 +25,7 @@ const CategorySearchClass = "shop-nobi-category-search";
 
 /**
  * The Shop Nobi page: the site's header, then the live search from the assistant bundle in the slot under it.
- * The prebuilt content and the store owners' link show beside the slot until live products are drawn.
+ * The prebuilt content and the store owners' link, right under the slot, show until live products are drawn.
  *
  * @param {{prebuiltContent?: object}} props The build passes the prebuilt content; in the browser it comes from the HTML.
  */
@@ -47,8 +47,8 @@ export default function ShopPage({ prebuiltContent: builtContent = null }) {
       </header>
       {place === PrebuiltContentPlace.AboveSearch && <PrebuiltContent content={prebuiltContent} />}
       <div ref={slotRef} className={place === PrebuiltContentPlace.BelowSearch ? CategorySearchClass : undefined} />
-      {place === PrebuiltContentPlace.BelowSearch && <PrebuiltContent content={prebuiltContent} />}
       <AddYourStoreLink isLinkHidden={liveResultsHaveDrawn} />
+      {place === PrebuiltContentPlace.BelowSearch && <PrebuiltContent content={prebuiltContent} />}
     </div>
   );
 }

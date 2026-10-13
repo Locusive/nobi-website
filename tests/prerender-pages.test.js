@@ -179,3 +179,14 @@ test("the privacy policy and terms carry their full text in the HTML, for reader
   assert.ok(terms.includes("<title>Terms of Service | Nobi</title>"));
   assert.ok(terms.includes("Shop Nobi"), "The terms text is in the page");
 });
+
+test("the homepage store demo sits between the customer logos and the features and asks for a store before any search", () => {
+  const html = readPage("homepage.html");
+  const sectionStart = html.indexOf('id="store-demo"');
+  assert.ok(sectionStart > html.indexOf("Trusted by modern teams"), "The demo comes after the customer logos");
+  assert.ok(bodyText(html).includes("See Nobi on a real store"));
+  const section = html.slice(sectionStart, html.indexOf("</section>", sectionStart));
+  assert.ok(section.includes("Which store should Nobi search?"));
+  assert.ok(section.includes('placeholder="Find a store"'));
+  assert.ok(!section.includes("<textarea"), "The search box waits for a store");
+});

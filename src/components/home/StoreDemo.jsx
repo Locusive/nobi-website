@@ -1,21 +1,49 @@
-import React, { useEffect, useState } from "react";
-import { ArrowUp, Search } from "lucide-react";
-import { buildDemoStoresUrl, findDemoStores, openStoreDemo, prepareStoreDemo, readDemoStores } from "../../utils/storeDemo";
+import React, { useEffect, useRef, useState } from "react";
+import { ArrowUp, ChevronDown, Search } from "lucide-react";
+import {
+  buildDemoStoresUrl,
+  DefaultStore,
+  findDemoStores,
+  openStoreDemo,
+  prepareStoreDemo,
+  readDemoStores,
+  readStoreSearches,
+} from "../../utils/storeDemo";
 
 const StoreListState = { Loading: "loading", Ready: "ready", Failed: "failed" };
 
 /**
- * Lets a visitor see Nobi on a real store: they pick a recently refreshed store, then search it, and Nobi's normal
- * modal opens with that store's results, the way it would on their own site.
+ * Lets a visitor see Nobi on a real store: it starts on Lucchese, any recently refreshed store can be picked instead,
+ * and a search opens Nobi's normal modal with that store's results, the way it would on their own site.
  */
 export default function StoreDemo() {
   const { stores, listState } = useDemoStores();
-  const [pickedStore, setPickedStore] = useState(null);
+  const [pickedStore, setPickedStore] = useState(DefaultStore);
+  const [query, setQuery] = useState("");
+  const hasPrepared = useRef(false);
+  const shownStore = stores.find((store) => store.id === pickedStore.id) || pickedStore;
 
+  const prepareOnce = () => {
+    if (!hasPrepared.current) {
+      hasPrepared.current = true;
+      prepareStoreDemo(shownStore.id);
+    }
+  };
   const pickStore = (store) => {
     setPickedStore(store);
     prepareStoreDemo(store.id);
   };
+  const search = (words) => openStoreDemo(words, shownStore.id);
+  const submitForm = (event) => {
+    event.preventDefault();
+    search(query);
+  };
+  const submitOnEnter = (event) => {
+    if (event.key === "Enter" && !event.shiftKey) {
+      submitForm(event);
+    }
+  };
+  const storeSearches = readStoreSearches(shownStore);
 
   return (
     <section id="store-demo" style={{ padding: "16px clamp(24px,5vw,80px) 96px", background: "#ffffff" }}>
@@ -27,11 +55,35 @@ export default function StoreDemo() {
           See Nobi on a real store
         </h2>
         <p style={{ margin: "12px 0 0", maxWidth: 560, fontSize: 16.5, lineHeight: 1.55, color: "#57536a", textAlign: "center" }}>
-          Pick a store, then search it the way its shoppers would. Results open in Nobi, just like on your site.
+          Search a store the way its shoppers would. Results open in Nobi, just like on your site.
         </p>
-        {pickedStore
-          ? <StoreSearch store={pickedStore} onChangeStore={() => setPickedStore(null)} />
-          : <StorePicker stores={stores} listState={listState} onPick={pickStore} />}
+        <form role="search" onSubmit={submitForm} onFocus={prepareOnce} className="nb-demo-box">
+          <label htmlFor="store-demo-search" className="nb-visually-hidden">Search {shownStore.name}</label>
+          <textarea
+            id="store-demo-search"
+            rows={2}
+            value={query}
+            onChange={(event) => setQuery(event.target.value)}
+            onKeyDown={submitOnEnter}
+            placeholder={`Search ${shownStore.name} the way its shoppers would`}
+            className="nb-demo-input"
+          />
+          <div className="nb-demo-bar">
+            <StoreSwitcher store={shownStore} stores={stores} listState={listState} onPick={pickStore} />
+            <button type="submit" className="nb-demo-send" disabled={!query.trim()} aria-label="Search">
+              <ArrowUp size={18} strokeWidth={2.4} aria-hidden="true" />
+            </button>
+          </div>
+        </form>
+        {storeSearches.length > 0 && (
+          <div className="nb-demo-pills">
+            {storeSearches.map((example) => (
+              <button key={example} type="button" className="nb-demo-pill" onClick={() => search(example)}>
+                {example}
+              </button>
+            ))}
+          </div>
+        )}
       </div>
     </section>
   );
@@ -61,14 +113,70 @@ function useDemoStores() {
   return { stores, listState };
 }
 
-/** The first step: a store field and the list of stores to pick from. */
+/** The picked store as a button in the search box; it opens the list of stores, with a pulsing hint until first used. */
+function StoreSwitcher({ store, stores, listState, onPick }) {
+  const [isOpen, setIsOpen] = useState(false);
+  const [hasOpened, setHasOpened] = useState(false);
+  const switcherRef = useRef(null);
+  useCloseOnOutsideClick(isOpen, switcherRef, () => setIsOpen(false));
+
+  const toggle = () => {
+    setIsOpen((open) => !open);
+    setHasOpened(true);
+  };
+  const pick = (picked) => {
+    onPick(picked);
+    setIsOpen(false);
+  };
+
+  return (
+    <div className="nb-demo-switcher" ref={switcherRef}>
+      <button type="button" className="nb-demo-store-button" onClick={toggle} aria-expanded={isOpen} aria-label={`Store: ${store.name}. Change store`}>
+        <StoreMark store={store} />
+        <span>{store.name}</span>
+        <ChevronDown size={15} strokeWidth={2} aria-hidden="true" />
+      </button>
+      {!hasOpened && (
+        <span className="nb-demo-hint" aria-hidden="true">
+          <span className="nb-demo-pulse" />
+          Try another store
+        </span>
+      )}
+      {isOpen && <StorePicker stores={stores} listState={listState} onPick={pick} />}
+    </div>
+  );
+}
+
+/** Closes the store list on a click outside it or on Escape, while it is open. */
+function useCloseOnOutsideClick(isOpen, containerRef, close) {
+  useEffect(() => {
+    if (!isOpen) {
+      return undefined;
+    }
+
+    const closeOnOutsideClick = (event) => {
+      if (!containerRef.current?.contains(event.target)) {
+        close();
+      }
+    };
+    const closeOnEscape = (event) => event.key === "Escape" && close();
+    document.addEventListener("mousedown", closeOnOutsideClick);
+    document.addEventListener("keydown", closeOnEscape);
+    return () => {
+      document.removeEventListener("mousedown", closeOnOutsideClick);
+      document.removeEventListener("keydown", closeOnEscape);
+    };
+  }, [isOpen, containerRef, close]);
+}
+
+/** The store field and the list of stores to pick from. */
 function StorePicker({ stores, listState, onPick }) {
   const [words, setWords] = useState("");
   const shownStores = findDemoStores(stores, words);
 
   return (
-    <div className="nb-demo-box">
-      <label htmlFor="store-demo-store" className="nb-demo-question">Which store should Nobi search?</label>
+    <div className="nb-demo-popover">
+      <label htmlFor="store-demo-store" className="nb-visually-hidden">Find a store</label>
       <div className="nb-demo-find">
         <Search size={17} color="#8a8498" strokeWidth={2.2} aria-hidden="true" />
         <input
@@ -78,6 +186,7 @@ function StorePicker({ stores, listState, onPick }) {
           onChange={(event) => setWords(event.target.value)}
           placeholder="Find a store"
           autoComplete="off"
+          autoFocus
         />
       </div>
       <StoreList stores={shownStores} listState={listState} onPick={onPick} />
@@ -117,55 +226,4 @@ function StoreMark({ store }) {
     return <img src={store.logoUrl} alt="" loading="lazy" className="nb-demo-mark" />;
   }
   return <span className="nb-demo-mark nb-demo-initial" aria-hidden="true">{store.name.charAt(0).toUpperCase()}</span>;
-}
-
-/** The second step: search the picked store; a search or an example opens Nobi's modal on that store. */
-function StoreSearch({ store, onChangeStore }) {
-  const [query, setQuery] = useState("");
-  const search = (words) => openStoreDemo(words, store.id);
-  const submitForm = (event) => {
-    event.preventDefault();
-    search(query);
-  };
-  const submitOnEnter = (event) => {
-    if (event.key === "Enter" && !event.shiftKey) {
-      submitForm(event);
-    }
-  };
-
-  return (
-    <>
-      <form role="search" onSubmit={submitForm} className="nb-demo-box">
-        <div className="nb-demo-picked">
-          <StoreMark store={store} />
-          <span className="nb-demo-picked-name">{store.name}</span>
-          <button type="button" className="nb-demo-change" onClick={onChangeStore}>Change store</button>
-        </div>
-        <label htmlFor="store-demo-search" className="nb-visually-hidden">Search {store.name}</label>
-        <textarea
-          id="store-demo-search"
-          rows={2}
-          value={query}
-          onChange={(event) => setQuery(event.target.value)}
-          onKeyDown={submitOnEnter}
-          placeholder={`Search ${store.name} the way its shoppers would`}
-          className="nb-demo-input"
-        />
-        <div className="nb-demo-bar">
-          <button type="submit" className="nb-demo-send" disabled={!query.trim()} aria-label="Search">
-            <ArrowUp size={18} strokeWidth={2.4} aria-hidden="true" />
-          </button>
-        </div>
-      </form>
-      {store.exampleSearches.length > 0 && (
-        <div className="nb-demo-pills">
-          {store.exampleSearches.map((example) => (
-            <button key={example} type="button" className="nb-demo-pill" onClick={() => search(example)}>
-              {example}
-            </button>
-          ))}
-        </div>
-      )}
-    </>
-  );
 }

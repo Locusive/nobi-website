@@ -8,6 +8,14 @@ export const FreshnessDays = 7;
 const LocalApiBaseUrl = "http://localhost:7080";
 const ProductionApiBaseUrl = "https://api.nobi.ai";
 const LocalHosts = ["localhost", "127.0.0.1", "[::1]"];
+/** The store the demo starts on, so a visitor can search right away. */
+export const DefaultStore = { id: "b4e64f15-4a40-4546-a204-e1c088e104e0", name: "Lucchese", logoUrl: null, exampleSearches: [] };
+/** Hand-picked searches for Nobi's paying customers on Shop Nobi, named from products each one really sells. */
+const HandPickedSearches = {
+  "b4e64f15-4a40-4546-a204-e1c088e104e0": ["Black leather boots for men", "Women's cowboy boots", "Leather belt"],
+  "2743be59-9aee-44a5-b080-78b396ff78b5": ["Wrinkle-free dress shirt", "Performance polo", "Women's button-down shirt"],
+  "35019f05-f0cd-4ee3-ba16-c1fe938888d1": ["Cozy cardigan", "Colorful top for spring", "Quarter-zip sweater"],
+};
 
 /**
  * Returns the address of the list of stores to demo.
@@ -37,6 +45,16 @@ export function readDemoStores(data) {
       exampleSearches: (Array.isArray(store.exampleSearches) ? store.exampleSearches : []).filter(isText).slice(0, 3),
     }))
     .sort((first, second) => first.name.localeCompare(second.name));
+}
+
+/**
+ * Returns the example searches to show for a store: hand-picked ones for Nobi's customers, else the store's own.
+ *
+ * @param {{id: string, exampleSearches: string[]}} store The picked store.
+ * @returns {string[]} Up to three searches.
+ */
+export function readStoreSearches(store) {
+  return HandPickedSearches[store.id] || store.exampleSearches;
 }
 
 /**

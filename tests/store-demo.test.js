@@ -19,6 +19,7 @@ function buildBrowser() {
 test("the store list comes from the local API on a local copy of the site and from production everywhere else", () => {
   assert.equal(buildDemoStoresUrl("nobi.ai"), "https://api.nobi.ai/v1/shop/stores?refreshedWithinDays=7");
   assert.equal(buildDemoStoresUrl("localhost"), "http://localhost:7080/v1/shop/stores?refreshedWithinDays=7");
+  assert.equal(buildDemoStoresUrl("[::1]"), "http://localhost:7080/v1/shop/stores?refreshedWithinDays=7");
 });
 
 test("the demo keeps named stores, sorted by name, with at most three example searches", () => {
@@ -54,12 +55,23 @@ test("a search opens Nobi's modal on the picked store as a demo, and an empty se
   assert.deepEqual(browser.calls, [["openChat", { message: "black boots for a wedding", storeId: LuccheseId, entryPoint: DemoEntryPoint }]]);
 });
 
-test("picking a store gets the assistant ready, and nothing breaks before the assistant has loaded", () => {
+test("picking a store gets the assistant ready", () => {
   const browser = buildBrowser();
 
   prepareStoreDemo(LuccheseId, browser);
 
   assert.deepEqual(browser.calls, [["prepareStoreDemo", { storeId: LuccheseId }]]);
-  assert.equal(openStoreDemo("boots", LuccheseId, {}), false);
-  assert.doesNotThrow(() => prepareStoreDemo(LuccheseId, {}));
+});
+
+test("before the assistant has loaded, the demo's calls wait in the assistant's queue in its own format", () => {
+  const browser = {};
+
+  prepareStoreDemo(LuccheseId, browser);
+  const opened = openStoreDemo("boots", LuccheseId, browser);
+
+  assert.equal(opened, true);
+  assert.deepEqual(browser.Nobi.pendingApiCalls, [
+    { type: "prepareStoreDemo", options: { storeId: LuccheseId } },
+    { type: "open", options: { message: "boots", storeId: LuccheseId, entryPoint: DemoEntryPoint } },
+  ]);
 });

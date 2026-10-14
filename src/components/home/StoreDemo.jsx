@@ -16,9 +16,8 @@ const StoreListState = { Loading: "loading", Ready: "ready", Failed: "failed" };
 const OwnStoreNotice = "Some items may be out of date. Once you sign up, your catalog stays current.";
 
 /**
- * Lets a visitor see Nobi on a real store: it starts on Lucchese, any recently refreshed store can be picked instead,
- * and a search opens Nobi's normal modal with that store's results, the way it would on their own site. A store owner
- * can also try their own store, and a ?demoStore=<id> link opens the demo on that store.
+ * Lets a visitor search a real store in Nobi's modal: it starts on Lucchese, and any recently refreshed store,
+ * the visitor's own store, or the store a ?demoStore=<id> link names can be shown instead.
  */
 export default function StoreDemo() {
   const { stores, listState } = useDemoStores();

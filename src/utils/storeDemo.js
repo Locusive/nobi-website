@@ -12,8 +12,10 @@ const LocalHosts = ["localhost", "127.0.0.1", "[::1]"];
 const DemoLookupPath = "/v1/shop/demo-stores/lookup";
 /** The link parameter that opens the demo on one store, such as nobi.ai/?demoStore=<id>. */
 export const DemoStoreParameter = "demoStore";
-/** What the own-store lookup found: a store to demo now, a store we cannot demo yet, or no answer. */
-export const DemoLookupStatus = { Ready: "ready", NotReady: "not_ready", Failed: "failed" };
+/** The status the API answers an address it cannot read with. */
+const BadRequestStatus = 400;
+/** What the own-store lookup found: a store to demo now, one we cannot demo yet, an address it cannot read, or no answer. */
+export const DemoLookupStatus = { Ready: "ready", NotReady: "not_ready", InvalidAddress: "invalid_address", Failed: "failed" };
 /** The store the demo starts on, so a visitor can search right away. */
 export const DefaultStore = { id: "b4e64f15-4a40-4546-a204-e1c088e104e0", name: "Lucchese", logoUrl: null, exampleSearches: [] };
 /** Hand-picked searches for Nobi's paying customers on Shop Nobi, named from products each one really sells. */
@@ -49,6 +51,10 @@ export async function lookUpDemoStore(storeUrl, options = {}) {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ storeUrl: storeUrl.trim() }),
     });
+    if (response.status === BadRequestStatus) {
+      return { status: DemoLookupStatus.InvalidAddress };
+    }
+
     const data = response.ok ? await response.json() : null;
     return readLookupAnswer(data);
   } catch (error) {

@@ -101,7 +101,7 @@ function buildFetch(status, body, requests = []) {
     if (body instanceof Error) {
       throw body;
     }
-    return { ok: status >= 200 && status < 300, json: async () => body };
+    return { ok: status >= 200 && status < 300, status, json: async () => body };
   };
 }
 
@@ -116,11 +116,12 @@ test("a store we can demo now comes back ready, in the same shape as the store l
   assert.deepEqual(requests, [{ url: "https://api.nobi.ai/v1/shop/demo-stores/lookup", body: { storeUrl: "www.acme.com" } }]);
 });
 
-test("a store we cannot demo yet comes back not ready, and errors or broken answers come back failed", async () => {
+test("a store we cannot demo yet comes back not ready, an unreadable address is named, and other errors fail", async () => {
   const lookUp = (status, body) => lookUpDemoStore("acme.com", { hostname: "localhost", fetchImplementation: buildFetch(status, body) });
 
   assert.deepEqual(await lookUp(200, { status: "not_ready" }), { status: DemoLookupStatus.NotReady });
   assert.deepEqual(await lookUp(200, { status: "ready", store: { name: "No id" } }), { status: DemoLookupStatus.Failed });
+  assert.deepEqual(await lookUp(400, { error: "invalid_store_url" }), { status: DemoLookupStatus.InvalidAddress });
   assert.deepEqual(await lookUp(429, { error: "rate_limited" }), { status: DemoLookupStatus.Failed });
   assert.deepEqual(await lookUp(200, new Error("offline")), { status: DemoLookupStatus.Failed });
 });

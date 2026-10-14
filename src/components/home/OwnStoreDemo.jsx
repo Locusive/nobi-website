@@ -8,6 +8,7 @@ const DemoRequestPurpose = "homepage_demo";
 const NotReadyMessage = "We need a moment to load your store. Leave your name and work email, and we'll email you a link to your demo.";
 const DemoRequestedMessage = "Thanks! We'll email you a link to your demo soon.";
 const MissingAddressMessage = "Please enter your store's address.";
+const InvalidAddressMessage = "Please enter your store's web address, like www.yourstore.com.";
 const FailedLookupMessage = "Something went wrong. Please try again.";
 const OwnStoreStep = { Closed: "closed", Address: "address", Contact: "contact", Done: "done" };
 
@@ -65,7 +66,7 @@ function StoreAddressForm({ storeUrl, onChange, onReady, onNotReady }) {
       onNotReady();
       return;
     }
-    setErrorMessage(FailedLookupMessage);
+    setErrorMessage(answer.status === DemoLookupStatus.InvalidAddress ? InvalidAddressMessage : FailedLookupMessage);
   }
 
   return (

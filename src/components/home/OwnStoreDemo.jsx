@@ -79,6 +79,7 @@ function StoreAddressForm({ storeUrl, onChange, onReady, onNotReady }) {
           inputMode="url"
           value={storeUrl}
           onChange={(event) => onChange(event.target.value)}
+          readOnly={isLooking}
           placeholder="www.yourstore.com"
           autoComplete="url"
           autoFocus

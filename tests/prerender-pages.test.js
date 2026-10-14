@@ -189,4 +189,5 @@ test("the homepage store demo sits between the customer logos and the features, 
   assert.ok(section.includes('placeholder="Search Lucchese the way its shoppers would"'));
   assert.ok(section.includes("Try another store"));
   assert.ok(section.includes(">Black leather boots for men</button>"), "Lucchese's hand-picked searches show before anything is picked");
+  assert.ok(section.includes(">Try it on your own store</button>"), "store owners can try the demo on their own store");
 });

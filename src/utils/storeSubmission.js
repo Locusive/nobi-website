@@ -44,12 +44,14 @@ export function checkStoreSubmission({ storeUrl, name, email }) {
 /**
  * Builds the JSON body the API reads.
  *
- * @param {{storeUrl: string, name: string, email: string}} fields The form's fields.
+ * @param {{storeUrl: string, name: string, email: string, purpose?: string}} fields The form's fields. A purpose
+ *   such as "homepage_demo" tells Nobi's inbox why the owner wrote; without one it is a request to join Shop Nobi.
  * @param {string} turnstileToken The token from the form's Turnstile check.
- * @returns {{storeUrl: string, name: string, email: string, turnstileToken: string}} The body.
+ * @returns {object} The body.
  */
-export function buildStoreSubmissionBody({ storeUrl, name, email }, turnstileToken) {
-  return { storeUrl: storeUrl.trim(), name: name.trim(), email: email.trim(), turnstileToken };
+export function buildStoreSubmissionBody({ storeUrl, name, email, purpose }, turnstileToken) {
+  const body = { storeUrl: storeUrl.trim(), name: name.trim(), email: email.trim(), turnstileToken };
+  return purpose ? { ...body, purpose } : body;
 }
 
 /**

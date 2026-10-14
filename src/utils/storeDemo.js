@@ -8,6 +8,12 @@ export const FreshnessDays = 7;
 const LocalApiBaseUrl = "http://localhost:7080";
 const ProductionApiBaseUrl = "https://api.nobi.ai";
 const LocalHosts = ["localhost", "127.0.0.1", "[::1]"];
+/** The route that says whether a visitor's own store can be demoed now. */
+const DemoLookupPath = "/v1/shop/demo-stores/lookup";
+/** The link parameter that opens the demo on one store, such as nobi.ai/?demoStore=<id>. */
+export const DemoStoreParameter = "demoStore";
+/** What the own-store lookup found: a store to demo now, a store we cannot demo yet, or no answer. */
+export const DemoLookupStatus = { Ready: "ready", NotReady: "not_ready", Failed: "failed" };
 /** The store the demo starts on, so a visitor can search right away. */
 export const DefaultStore = { id: "b4e64f15-4a40-4546-a204-e1c088e104e0", name: "Lucchese", logoUrl: null, exampleSearches: [] };
 /** Hand-picked searches for Nobi's paying customers on Shop Nobi, named from products each one really sells. */
@@ -24,8 +30,41 @@ const HandPickedSearches = {
  * @returns {string} The address, on the local API when the page runs locally.
  */
 export function buildDemoStoresUrl(hostname) {
-  const apiBaseUrl = LocalHosts.includes(hostname) ? LocalApiBaseUrl : ProductionApiBaseUrl;
-  return `${apiBaseUrl}/v1/shop/stores?refreshedWithinDays=${FreshnessDays}`;
+  return `${readApiBaseUrl(hostname)}/v1/shop/stores?refreshedWithinDays=${FreshnessDays}`;
+}
+
+/**
+ * Asks the API whether a visitor's own store can be demoed now. The API answers the same way for a store we do not
+ * carry and for one whose catalog is too old, so the answer never shows which stores we carry.
+ *
+ * @param {string} storeUrl The address the visitor typed, such as "www.mystore.com".
+ * @param {{hostname?: string, fetchImplementation?: typeof fetch}} [options] Tests pass a host and a fetch.
+ * @returns {Promise<{status: string, store?: object}>} The status, and the store when it is ready.
+ */
+export async function lookUpDemoStore(storeUrl, options = {}) {
+  const { hostname = globalThis.location?.hostname, fetchImplementation = globalThis.fetch } = options;
+  try {
+    const response = await fetchImplementation(`${readApiBaseUrl(hostname)}${DemoLookupPath}`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ storeUrl: storeUrl.trim() }),
+    });
+    const data = response.ok ? await response.json() : null;
+    return readLookupAnswer(data);
+  } catch (error) {
+    return { status: DemoLookupStatus.Failed };
+  }
+}
+
+/**
+ * Reads the store id from a demo link, such as "?demoStore=<id>".
+ *
+ * @param {string} search The page's query string.
+ * @returns {string} The store id, or an empty string when the link has none.
+ */
+export function readDemoStoreId(search) {
+  const storeId = new URLSearchParams(search).get(DemoStoreParameter);
+  return storeId ? storeId.trim() : "";
 }
 
 /**
@@ -114,6 +153,21 @@ function callAssistant(browser, methodName, queuedCall) {
   browser.Nobi = assistant || {};
   browser.Nobi.pendingApiCalls = Array.isArray(browser.Nobi.pendingApiCalls) ? browser.Nobi.pendingApiCalls : [];
   browser.Nobi.pendingApiCalls.push(queuedCall);
+}
+
+/** Returns the API base address: the local API when the page runs locally, else production. */
+function readApiBaseUrl(hostname) {
+  return LocalHosts.includes(hostname) ? LocalApiBaseUrl : ProductionApiBaseUrl;
+}
+
+/** Turns the lookup's response body into a status, keeping the store only when it is a valid demo store. */
+function readLookupAnswer(data) {
+  if (data?.status === DemoLookupStatus.NotReady) {
+    return { status: DemoLookupStatus.NotReady };
+  }
+
+  const [store] = data?.status === DemoLookupStatus.Ready ? readDemoStores({ stores: [data.store] }) : [];
+  return store ? { status: DemoLookupStatus.Ready, store } : { status: DemoLookupStatus.Failed };
 }
 
 /** Returns whether a value is text with something in it. */

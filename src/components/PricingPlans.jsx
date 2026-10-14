@@ -2,8 +2,9 @@ import React from "react";
 import { ArrowDown, Check } from "lucide-react";
 import { useDemoForm } from "../context/DemoFormContext";
 import { getSignupUrl } from "../utils/signupUrl";
-import { LARGEST_BUNDLE, MESSAGE_BUNDLES, SMALLEST_BUNDLE } from "../constants/pricing";
+import { LARGEST_BUNDLE, MESSAGE_BUNDLES } from "../constants/pricing";
 import { formatCount, formatPrice, formatPricePerMessage } from "../utils/pricingEstimate";
+import BundleSlider from "./BundleSlider.jsx";
 import PricingMessageRules from "./PricingMessageRules.jsx";
 import "./PricingPlans.css";
 
@@ -23,7 +24,7 @@ function BundleTable() {
   </table>;
 }
 
-/** The pricing overview: the bundle table, the enterprise card, and what counts as a message. */
+/** The pricing overview: the bundle slider, the enterprise card, and what counts as a message. */
 export default function PricingPlans() {
   const { onOpen: openDemoForm } = useDemoForm();
 
@@ -33,9 +34,12 @@ export default function PricingPlans() {
         <div className="pp-heading">
           <h2>Message bundles</h2>
           <p className="pp-intro">Pick a monthly bundle. Every search and every chat question counts as one message.</p>
-          <div className="pp-base"><strong>{formatPrice(SMALLEST_BUNDLE.priceCents)}</strong><span>/ month for<br />{formatCount(SMALLEST_BUNDLE.messages)} messages</span></div>
         </div>
-        <BundleTable />
+        <BundleSlider />
+        <details className="pp-all-bundles">
+          <summary>See all bundles</summary>
+          <BundleTable />
+        </details>
         <a className="pp-start" href={getSignupUrl()}>Start for free</a>
         <p className="pp-trial">Free dashboard preview. No credit card.</p>
       </article>

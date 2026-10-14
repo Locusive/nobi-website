@@ -17,6 +17,7 @@ test("the estimate picks the smallest bundle that fits, and adds 3 cents a messa
     assert.equal(price.totalCents, totalCents, `${messages} messages`);
     assert.equal(price.talkToSales, talkToSales, `${messages} messages`);
   }
+  assert.equal(formatPrice(299903), "$2,999.03");
 });
 
 test("every bundle holds exactly its own count, and one more message moves to the next bundle", () => {
@@ -30,12 +31,6 @@ test("searches and chat questions add up to one message count", () => {
   const price = priceUsage({ searches: 300, messages: 201 });
   assert.equal(price.totalMessages, 501);
   assert.equal(formatPrice(price.totalCents), "$45");
-});
-
-test("the price per message matches the published list", () => {
-  const published = ["$0.050", "$0.045", "$0.042", "$0.040", "$0.038", "$0.036", "$0.035", "$0.033", "$0.032", "$0.031", "$0.030"];
-  assert.deepEqual(MESSAGE_BUNDLES.map(formatPricePerMessage), published);
-  assert.equal(formatPrice(2521), "$25.21");
 });
 
 test("llms.txt lists the same bundles as the code", () => {

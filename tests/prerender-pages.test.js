@@ -103,7 +103,7 @@ test("pricing shows the bundle table, message rules, trial terms, and FAQ answer
   assert.ok(text.includes("A payment method is required to start the 30-day free trial"));
   assert.ok(text.includes("What would you like to use Nobi for?"));
   const beforeEstimate = text.split("Find your price")[0];
-  for (const fact of ["Message bundles", "$25", "/ month for", "Price per message", "Enterprise", "If you go over your bundle"])
+  for (const fact of ["Message bundles", "500 messages a month", "$25", "$0.050 per message", "See all bundles", "Price per message", "Enterprise", "If you go over your bundle"])
     assert.ok(beforeEstimate.includes(fact), `Pricing must be explained before the interview: ${fact}`);
 });
 

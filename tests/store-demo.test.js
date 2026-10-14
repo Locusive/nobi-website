@@ -11,6 +11,7 @@ import {
   prepareStoreDemo,
   readDemoStoreId,
   readDemoStores,
+  readStoreHost,
   readStoreSearches,
 } from "../src/utils/storeDemo.js";
 
@@ -130,4 +131,10 @@ test("a demo link names the store to open, and a page without one names none", (
   assert.equal(readDemoStoreId("?demoStore=b4e64f15&utm_source=email"), "b4e64f15");
   assert.equal(readDemoStoreId("?utm_source=email"), "");
   assert.equal(readDemoStoreId(""), "");
+});
+
+test("a demo request sends only the store's host, whatever page the visitor typed", () => {
+  assert.equal(readStoreHost(" https://www.mystore.com/collections/boots?x=1 "), "www.mystore.com");
+  assert.equal(readStoreHost("mystore.com/products/belt"), "mystore.com");
+  assert.equal(readStoreHost("mystore.com"), "mystore.com");
 });

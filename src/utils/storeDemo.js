@@ -63,6 +63,22 @@ export async function lookUpDemoStore(storeUrl, options = {}) {
 }
 
 /**
+ * Keeps only the store's host from what the visitor typed, since the demo request takes a root address, not a page.
+ *
+ * @param {string} storeUrl The address the visitor typed, such as "mystore.com/collections/boots".
+ * @returns {string} The host, such as "mystore.com", or the trimmed text when it is not an address.
+ */
+export function readStoreHost(storeUrl) {
+  const trimmedUrl = storeUrl.trim();
+  const fullUrl = /^https?:\/\//i.test(trimmedUrl) ? trimmedUrl : `https://${trimmedUrl}`;
+  try {
+    return new URL(fullUrl).host || trimmedUrl;
+  } catch (error) {
+    return trimmedUrl;
+  }
+}
+
+/**
  * Reads the store id from a demo link, such as "?demoStore=<id>".
  *
  * @param {string} search The page's query string.

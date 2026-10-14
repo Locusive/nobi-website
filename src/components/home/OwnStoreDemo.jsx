@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 import { useTurnstileToken } from "../../hooks/useTurnstileToken";
-import { DemoLookupStatus, lookUpDemoStore } from "../../utils/storeDemo";
+import { DemoLookupStatus, lookUpDemoStore, readStoreHost } from "../../utils/storeDemo";
 import { checkStoreSubmission, HumanCheckPendingMessage, submitStore } from "../../utils/storeSubmission";
 
 /** Tells Nobi's inbox that the owner asked for a demo on their own store, not to join Shop Nobi. */
@@ -102,7 +102,7 @@ function DemoRequestForm({ storeUrl, onSent }) {
 
   async function send(event) {
     event.preventDefault();
-    const fields = { storeUrl, ...contact, purpose: DemoRequestPurpose };
+    const fields = { storeUrl: readStoreHost(storeUrl), ...contact, purpose: DemoRequestPurpose };
     const formProblem = checkStoreSubmission(fields);
     if (formProblem || !token) {
       setErrorMessage(formProblem || HumanCheckPendingMessage);

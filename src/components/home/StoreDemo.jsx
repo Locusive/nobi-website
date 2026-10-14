@@ -6,21 +6,26 @@ import {
   findDemoStores,
   openStoreDemo,
   prepareStoreDemo,
+  readDemoStoreId,
   readDemoStores,
   readStoreSearches,
 } from "../../utils/storeDemo";
+import OwnStoreDemo from "./OwnStoreDemo";
 
 const StoreListState = { Loading: "loading", Ready: "ready", Failed: "failed" };
+const OwnStoreNotice = "Some items may be out of date. Once you sign up, your catalog stays current.";
 
 /**
- * Lets a visitor see Nobi on a real store: it starts on Lucchese, any recently refreshed store can be picked instead,
- * and a search opens Nobi's normal modal with that store's results, the way it would on their own site.
+ * Lets a visitor search a real store in Nobi's modal: it starts on Lucchese, and any recently refreshed store,
+ * the visitor's own store, or the store a ?demoStore=<id> link names can be shown instead.
  */
 export default function StoreDemo() {
   const { stores, listState } = useDemoStores();
   const [pickedStore, setPickedStore] = useState(DefaultStore);
+  const [isOwnStore, setIsOwnStore] = useState(false);
   const [query, setQuery] = useState("");
   const hasPrepared = useRef(false);
+  const sectionRef = useRef(null);
   const shownStore = stores.find((store) => store.id === pickedStore.id) || pickedStore;
 
   const prepareOnce = () => {
@@ -31,8 +36,14 @@ export default function StoreDemo() {
   };
   const pickStore = (store) => {
     setPickedStore(store);
+    setIsOwnStore(false);
     prepareStoreDemo(store.id);
   };
+  const showOwnStore = (store) => {
+    pickStore(store);
+    setIsOwnStore(true);
+  };
+  useLinkedStore(stores, sectionRef, pickStore);
   const search = (words) => openStoreDemo(words, shownStore.id);
   const submitForm = (event) => {
     event.preventDefault();
@@ -46,7 +57,7 @@ export default function StoreDemo() {
   const storeSearches = readStoreSearches(shownStore);
 
   return (
-    <section id="store-demo" style={{ padding: "16px clamp(24px,5vw,80px) 96px", background: "#ffffff" }}>
+    <section id="store-demo" ref={sectionRef} style={{ padding: "16px clamp(24px,5vw,80px) 96px", background: "#ffffff" }}>
       <div style={{ maxWidth: 720, margin: "0 auto", display: "flex", flexDirection: "column", alignItems: "center" }}>
         <span style={{ fontSize: 11.5, fontWeight: 700, letterSpacing: "0.2em", textTransform: "uppercase", color: "#a49dba" }}>
           Try it yourself
@@ -75,6 +86,7 @@ export default function StoreDemo() {
             </button>
           </div>
         </form>
+        {isOwnStore && <p className="nb-demo-own-notice" role="status">{OwnStoreNotice}</p>}
         {storeSearches.length > 0 && (
           <div className="nb-demo-pills">
             {storeSearches.map((example) => (
@@ -84,6 +96,7 @@ export default function StoreDemo() {
             ))}
           </div>
         )}
+        <OwnStoreDemo onStoreFound={showOwnStore} />
       </div>
     </section>
   );
@@ -111,6 +124,26 @@ function useDemoStores() {
   }, []);
 
   return { stores, listState };
+}
+
+/**
+ * Opens the demo on the store a ?demoStore=<id> link names, once the store list has it, and scrolls the demo into
+ * view. Stores missing from the list (not refreshed recently) are ignored, so the demo stays on its default store.
+ */
+function useLinkedStore(stores, sectionRef, pickStore) {
+  const hasApplied = useRef(false);
+
+  useEffect(() => {
+    const linkedStoreId = readDemoStoreId(window.location.search);
+    const linkedStore = stores.find((store) => store.id === linkedStoreId);
+    if (hasApplied.current || !linkedStore) {
+      return;
+    }
+
+    hasApplied.current = true;
+    pickStore(linkedStore);
+    sectionRef.current?.scrollIntoView({ block: "center" });
+  }, [stores, sectionRef, pickStore]);
 }
 
 /** The picked store as a button in the search box; it opens the list of stores, with a pulsing hint until first used. */

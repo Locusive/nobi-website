@@ -1,6 +1,19 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
-import { buildDemoStoresUrl, DefaultStore, DemoEntryPoint, findDemoStores, openStoreDemo, prepareStoreDemo, readDemoStores, readStoreSearches } from "../src/utils/storeDemo.js";
+import {
+  buildDemoStoresUrl,
+  DefaultStore,
+  DemoEntryPoint,
+  DemoLookupStatus,
+  findDemoStores,
+  lookUpDemoStore,
+  openStoreDemo,
+  prepareStoreDemo,
+  readDemoStoreId,
+  readDemoStores,
+  readStoreHost,
+  readStoreSearches,
+} from "../src/utils/storeDemo.js";
 
 const LuccheseId = "b4e64f15-4a40-4546-a204-e1c088e104e0";
 
@@ -80,4 +93,48 @@ test("the demo starts on Lucchese with hand-picked searches, and other stores sh
   assert.equal(DefaultStore.id, LuccheseId);
   assert.equal(readStoreSearches(DefaultStore).length, 3);
   assert.deepEqual(readStoreSearches({ id: "other", exampleSearches: ["Wool scarf"] }), ["Wool scarf"]);
+});
+
+/** A stand-in fetch that records the request and answers with the given status and body. */
+function buildFetch(status, body, requests = []) {
+  return async (url, init) => {
+    requests.push({ url, body: JSON.parse(init.body) });
+    if (body instanceof Error) {
+      throw body;
+    }
+    return { ok: status >= 200 && status < 300, status, json: async () => body };
+  };
+}
+
+test("a store we can demo now comes back ready, in the same shape as the store list", async () => {
+  const requests = [];
+  const store = { id: "s1", name: " Acme ", url: "https://acme.com", exampleSearches: ["Red mug"] };
+  const fetchImplementation = buildFetch(200, { status: "ready", store }, requests);
+
+  const answer = await lookUpDemoStore(" www.acme.com ", { hostname: "nobi.ai", fetchImplementation });
+
+  assert.deepEqual(answer, { status: DemoLookupStatus.Ready, store: { id: "s1", name: "Acme", logoUrl: null, exampleSearches: ["Red mug"] } });
+  assert.deepEqual(requests, [{ url: "https://api.nobi.ai/v1/shop/demo-stores/lookup", body: { storeUrl: "www.acme.com" } }]);
+});
+
+test("a store we cannot demo yet comes back not ready, an unreadable address is named, and other errors fail", async () => {
+  const lookUp = (status, body) => lookUpDemoStore("acme.com", { hostname: "localhost", fetchImplementation: buildFetch(status, body) });
+
+  assert.deepEqual(await lookUp(200, { status: "not_ready" }), { status: DemoLookupStatus.NotReady });
+  assert.deepEqual(await lookUp(200, { status: "ready", store: { name: "No id" } }), { status: DemoLookupStatus.Failed });
+  assert.deepEqual(await lookUp(400, { error: "invalid_store_url" }), { status: DemoLookupStatus.InvalidAddress });
+  assert.deepEqual(await lookUp(429, { error: "rate_limited" }), { status: DemoLookupStatus.Failed });
+  assert.deepEqual(await lookUp(200, new Error("offline")), { status: DemoLookupStatus.Failed });
+});
+
+test("a demo link names the store to open, and a page without one names none", () => {
+  assert.equal(readDemoStoreId("?demoStore=b4e64f15&utm_source=email"), "b4e64f15");
+  assert.equal(readDemoStoreId("?utm_source=email"), "");
+  assert.equal(readDemoStoreId(""), "");
+});
+
+test("a demo request sends only the store's host, whatever page the visitor typed", () => {
+  assert.equal(readStoreHost(" https://www.mystore.com/collections/boots?x=1 "), "www.mystore.com");
+  assert.equal(readStoreHost("mystore.com/products/belt"), "mystore.com");
+  assert.equal(readStoreHost("mystore.com"), "mystore.com");
 });

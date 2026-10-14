@@ -115,6 +115,17 @@ test("the form posts the trimmed fields and the human check's token, and every a
   }
 });
 
+test("a demo request from the homepage tells Nobi's inbox its purpose", async () => {
+  const api = await startApiServer(HttpAccepted, { status: "received" });
+  try {
+    await submitStore({ ...Fields, purpose: "homepage_demo" }, "turnstile-token", { apiBaseUrl: api.apiBaseUrl });
+
+    assert.equal(api.requests[0].body.purpose, "homepage_demo");
+  } finally {
+    await api.close();
+  }
+});
+
 test("a refused form shows the API's message, and any other failure shows a general one", async () => {
   const refusingApi = await startApiServer(HttpBadRequest, { error: "Please use your work email address." });
   const failingApi = await startApiServer(HttpServerError, { error: "internal_error" });

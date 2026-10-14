@@ -1,12 +1,7 @@
-export const PRICING = Object.freeze({
-  baseCents: 2500,
-  includedSearches: 2500,
-  includedMessages: 250,
-  searchCents: 1,
-  messageCents: 10,
-});
+import { EXTRA_MESSAGE_CENTS, LARGEST_BUNDLE, MESSAGE_BUNDLES } from "../constants/pricing.js";
 
 export const DEFAULT_ACTIVITY = Object.freeze({ visitors: 50000, searchesPerHundred: 3.5, messagesPerHundred: 0.5 });
+export const DEFAULT_USAGE = Object.freeze({ searches: 400, messages: 100 });
 export const MAX_USAGE = 100_000_000;
 
 function numberInRange(value, max, integer = true) {
@@ -15,6 +10,7 @@ function numberInRange(value, max, integer = true) {
   return Number.isFinite(number) && number >= 0 && number <= max && (!integer || Number.isInteger(number)) ? number : null;
 }
 
+/** Turns calculator input into monthly search and chat counts, or null when the input is not valid. */
 export function estimateUsage({ mode, basis, visitors, searches, messages, searchesPerHundred, messagesPerHundred }) {
   if (!["search", "assistant", "both"].includes(mode) || !["traffic", "usage"].includes(basis)) return null;
   const useSearch = mode !== "assistant";
@@ -31,15 +27,38 @@ export function estimateUsage({ mode, basis, visitors, searches, messages, searc
   return { searches: Math.round(visits * searchRate / 100), messages: Math.round(visits * messageRate / 100) };
 }
 
-export function priceUsage({ searches, messages }) {
-  if (numberInRange(searches, MAX_USAGE) === null || numberInRange(messages, MAX_USAGE) === null) throw new RangeError("Usage must be a nonnegative whole count.");
-  const additionalSearches = Math.max(0, searches - PRICING.includedSearches);
-  const additionalMessages = Math.max(0, messages - PRICING.includedMessages);
-  const searchCostCents = additionalSearches * PRICING.searchCents;
-  const messageCostCents = additionalMessages * PRICING.messageCents;
-  return { additionalSearches, additionalMessages, searchCostCents, messageCostCents, totalCents: PRICING.baseCents + searchCostCents + messageCostCents };
+/** Returns the smallest bundle that holds this many messages, or null when it is above the largest bundle. */
+export function smallestBundleFor(messageCount) {
+  return MESSAGE_BUNDLES.find(bundle => messageCount <= bundle.messages) ?? null;
 }
 
+/**
+ * Prices a month of use. Searches and chat questions are both messages, so they add up.
+ * Above the largest bundle, the price is that bundle plus a fee for each extra message.
+ */
+export function priceUsage({ searches, messages }) {
+  if (numberInRange(searches, MAX_USAGE) === null || numberInRange(messages, MAX_USAGE) === null) throw new RangeError("Usage must be a nonnegative whole count.");
+  const totalMessages = searches + messages;
+  const bundle = smallestBundleFor(totalMessages);
+  if (bundle) return { totalMessages, bundle, extraMessages: 0, extraCostCents: 0, totalCents: bundle.priceCents, talkToSales: false };
+
+  const extraMessages = totalMessages - LARGEST_BUNDLE.messages;
+  const extraCostCents = extraMessages * EXTRA_MESSAGE_CENTS;
+  return { totalMessages, bundle: LARGEST_BUNDLE, extraMessages, extraCostCents, totalCents: LARGEST_BUNDLE.priceCents + extraCostCents, talkToSales: true };
+}
+
+/** Formats cents as dollars, such as "$25" or "$25.21". */
 export function formatPrice(cents) {
   return new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", minimumFractionDigits: cents % 100 ? 2 : 0, maximumFractionDigits: 2 }).format(cents / 100);
+}
+
+/** Formats a bundle's price per message in dollars with three decimals, such as "$0.035". */
+export function formatPricePerMessage({ messages, priceCents }) {
+  const tenthsOfACent = Math.round(priceCents * 10 / messages);
+  return `$${(tenthsOfACent / 1000).toFixed(3)}`;
+}
+
+/** Formats a count with commas, such as "10,000". */
+export function formatCount(count) {
+  return Number(count).toLocaleString("en-US");
 }

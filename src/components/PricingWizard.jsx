@@ -4,7 +4,8 @@ import { useDemoForm } from "../context/DemoFormContext";
 import { getSignupUrl } from "../utils/signupUrl";
 import { trackEvent } from "../utils/usageSignals";
 import { EVENTS } from "../constants/events";
-import { DEFAULT_ACTIVITY, MAX_USAGE, PRICING, estimateUsage, formatPrice, priceUsage } from "../utils/pricingEstimate";
+import { EXTRA_MESSAGE_CENTS, LARGEST_BUNDLE } from "../constants/pricing";
+import { DEFAULT_ACTIVITY, DEFAULT_USAGE, MAX_USAGE, estimateUsage, formatCount as count, formatPrice, priceUsage } from "../utils/pricingEstimate";
 import PricingEstimateForm from "./PricingEstimateForm";
 import "./PricingWizard.css";
 
@@ -13,7 +14,6 @@ const USES = [
   { id: "assistant", title: "Answer questions", summary: "Assistant", icon: MessageCircle, description: "Give answers and help visitors narrow things down." },
   { id: "both", title: "Do both", summary: "Search + assistant", icon: Sparkles, description: "Let visitors search, then keep talking." },
 ];
-const count = value => Number(value).toLocaleString("en-US");
 const countInput = value => /^\d+$/.test(value) ? count(value) : value;
 
 function ActivitySlider({ id, label, value, onChange, onCommit, defaultMax, max = MAX_USAGE, caption, tone = "assistant" }) {
@@ -64,8 +64,8 @@ export default function PricingWizard() {
   const [mode, setMode] = useState("");
   const [basis, setBasis] = useState("usage");
   const [visitors, setVisitors] = useState(String(DEFAULT_ACTIVITY.visitors));
-  const [searches, setSearches] = useState(String(PRICING.includedSearches));
-  const [messages, setMessages] = useState(String(PRICING.includedMessages));
+  const [searches, setSearches] = useState(String(DEFAULT_USAGE.searches));
+  const [messages, setMessages] = useState(String(DEFAULT_USAGE.messages));
   const [searchRate, setSearchRate] = useState(String(DEFAULT_ACTIVITY.searchesPerHundred));
   const [messageRate, setMessageRate] = useState(String(DEFAULT_ACTIVITY.messagesPerHundred));
   const tracked = useRef(false);
@@ -73,9 +73,9 @@ export default function PricingWizard() {
   const selected = USES.find(use => use.id === mode);
   const usage = estimateUsage({ mode, basis, visitors, searches, messages, searchesPerHundred: searchRate, messagesPerHundred: messageRate });
   const price = usage ? priceUsage(usage) : null;
-  const usageSummary = usage ? [mode !== "assistant" && `${count(usage.searches)} searches`, mode !== "search" && `${count(usage.messages)} messages`].filter(Boolean).join(" + ") : "";
-  const activityTitle = mode === "search" ? "How many searches do you expect?" : mode === "assistant" ? "How many messages do you expect?" : "How much activity do you expect?";
-  const directLabel = mode === "search" ? "Enter search counts instead" : mode === "assistant" ? "Enter message counts instead" : "Enter usage counts instead";
+  const usageSummary = usage ? [mode !== "assistant" && `${count(usage.searches)} searches`, mode !== "search" && `${count(usage.messages)} chat questions`].filter(Boolean).join(" + ") : "";
+  const activityTitle = mode === "search" ? "How many searches do you expect?" : mode === "assistant" ? "How many chat questions do you expect?" : "How much activity do you expect?";
+  const directLabel = mode === "search" ? "Enter search counts instead" : mode === "assistant" ? "Enter question counts instead" : "Enter usage counts instead";
 
   const trackEstimate = (interactionType, actualUsage = usage) => {
     if (tracked.current || !actualUsage) return;
@@ -122,13 +122,13 @@ export default function PricingWizard() {
             </div>
           </div>
         )}
-        {panel(2, activityTitle, mode ? price ? `${usageSummary} · ${formatPrice(price.totalCents)} / month estimated` : "Adjust your monthly activity" : "",
+        {panel(2, activityTitle, mode ? price ? `${count(price.totalMessages)} messages · ${formatPrice(price.totalCents)} / month estimated` : "Adjust your monthly activity" : "",
           mode ? <div className="pw-estimator">
             <div className="pw-activity">
               <div className="pw-sliders">
                 {basis === "usage" ? <>
-                  {mode !== "assistant" && <ActivitySlider key="searches" id={`${id}-searches`} label="Search requests / month" value={searches} onChange={setSearches} onCommit={commitEstimate} defaultMax={100000} caption="2,500 included · then 1¢ each" tone="search" />}
-                  {mode !== "search" && <ActivitySlider key="messages" id={`${id}-messages`} label="Visitor messages / month" value={messages} onChange={setMessages} onCommit={commitEstimate} defaultMax={10000} caption="250 included · then 10¢ each" />}
+                  {mode !== "assistant" && <ActivitySlider key="searches" id={`${id}-searches`} label="Search requests / month" value={searches} onChange={setSearches} onCommit={commitEstimate} defaultMax={100000} caption="Each search counts as one message" tone="search" />}
+                  {mode !== "search" && <ActivitySlider key="messages" id={`${id}-messages`} label="Chat questions / month" value={messages} onChange={setMessages} onCommit={commitEstimate} defaultMax={10000} caption="Each question counts as one message" />}
                 </> : <ActivitySlider key="visitors" id={`${id}-visitors`} label="Monthly visitors" value={visitors} onChange={setVisitors} onCommit={commitEstimate} defaultMax={500000} max={10000000} caption="A rough visitor count is enough" />}
               </div>
               {basis === "usage" && mode !== "search" && <p className="pw-small">Count visitor questions and follow-ups.</p>}
@@ -137,7 +137,7 @@ export default function PricingWizard() {
                 <details className="pw-assumptions"><summary>Adjust activity assumptions <ChevronDown size={15} aria-hidden="true" /></summary>
                   <div className="pw-fields">
                     {mode !== "assistant" && <label>Searches per 100 visitors<input type="number" min="0" max="1000" step="0.1" value={searchRate} onChange={event => setSearchRate(event.target.value)} onBlur={commitEstimate} /></label>}
-                    {mode !== "search" && <label>Visitor messages per 100 visitors<input type="number" min="0" max="1000" step="0.1" value={messageRate} onChange={event => setMessageRate(event.target.value)} onBlur={commitEstimate} /></label>}
+                    {mode !== "search" && <label>Chat questions per 100 visitors<input type="number" min="0" max="1000" step="0.1" value={messageRate} onChange={event => setMessageRate(event.target.value)} onBlur={commitEstimate} /></label>}
                   </div>
                 </details>
                 <details className="pw-lookup"><summary>Look up my site traffic <ChevronDown size={15} aria-hidden="true" /></summary><PricingEstimateForm
@@ -151,10 +151,10 @@ export default function PricingWizard() {
               <div className="pw-price"><output aria-live="polite" aria-atomic="true">{price ? formatPrice(price.totalCents) : "—"}</output><span>/ month</span></div>
               {price ? <>
                 <dl className="pw-costs">
-                  <div><dt>Monthly base</dt><dd>{formatPrice(PRICING.baseCents)}</dd></div>
-                  {mode !== "assistant" && <div><dt>Extra searches<small>{count(price.additionalSearches)} × 1¢</small></dt><dd>{formatPrice(price.searchCostCents)}</dd></div>}
-                  {mode !== "search" && <div><dt>Extra messages<small>{count(price.additionalMessages)} × 10¢</small></dt><dd>{formatPrice(price.messageCostCents)}</dd></div>}
+                  <div><dt>Bundle<small>{count(price.bundle.messages)} messages</small></dt><dd>{formatPrice(price.bundle.priceCents)}</dd></div>
+                  {price.talkToSales && <div><dt>Extra messages<small>{count(price.extraMessages)} × {EXTRA_MESSAGE_CENTS}¢</small></dt><dd>{formatPrice(price.extraCostCents)}</dd></div>}
                 </dl>
+                {price.talkToSales && <p className="pw-traffic-note">Over {count(LARGEST_BUNDLE.messages)} messages a month? <button type="button" className="pw-sales-link" onClick={openDemoForm}>Talk to sales</button> for custom pricing.</p>}
                 {basis === "traffic" && <p className="pw-traffic-note">Assumes {usageSummary} / month. Adjust the assumptions to suit your site.</p>}
               </> : <p className="pw-error">Enter valid counts to see your estimate.</p>}
               <a className="pw-primary" href={getSignupUrl()} onClick={commitEstimate}>Start for free</a>
@@ -163,7 +163,7 @@ export default function PricingWizard() {
           </div> : <p className="pw-choice-hint">Choose how you’ll use Nobi above to see your estimate.</p>
         )}
       </div>
-      <div className="pw-after"><span>Your bill reflects actual usage.</span><button type="button" onClick={openDemoForm}>Prefer to talk it through?</button></div>
+      <div className="pw-after"><span>Every search and every chat question counts as one message.</span><button type="button" onClick={openDemoForm}>Prefer to talk it through?</button></div>
     </div>
   </section>;
 }

@@ -37,7 +37,26 @@ Trusted by brands including UNTUCKit, Lucchese, Kilte, TOOLUP, Faherty, and Alps
 
 ## Pricing
 
-Starts at $25/month. Includes up to 2,500 AI search interactions and 250 assistant messages per month. 30-day free trial. No setup fees.
+Nobi is sold in monthly message bundles. Everything a shopper types into Nobi counts as one message: a search, a chat question, a click on a suggestion, a question on a product page, or a question in the filter panel. There is no separate search allowance. Showing more results for the same search is free.
+
+| Messages a month | Price a month | Price per message |
+| --- | --- | --- |
+| 500 | $25 | $0.050 |
+| 1,000 | $45 | $0.045 |
+| 2,500 | $105 | $0.042 |
+| 5,000 | $199 | $0.040 |
+| 10,000 | $379 | $0.038 |
+| 15,000 | $539 | $0.036 |
+| 20,000 | $699 | $0.035 |
+| 30,000 | $999 | $0.033 |
+| 50,000 | $1,599 | $0.032 |
+| 75,000 | $2,325 | $0.031 |
+| 100,000 | $2,999 | $0.030 |
+| Over 100,000 | Custom pricing, talk to sales | |
+
+Going over a bundle: each store picks one of two settings. Keep going: Nobi keeps running and that month is billed at the bundle that fits the usage. Stop and hide Nobi: Nobi stops at the limit and hides from the store until next month. Above 100,000 messages on Keep going, the price is $2,999 plus 3 cents for each extra message.
+
+100 free messages every month to preview Nobi in the dashboard. 30-day free trial. No setup fees.
 
 ## MCP Server
 

@@ -1,5 +1,5 @@
 import { LARGEST_BUNDLE, MESSAGE_BUNDLES } from "../constants/pricing.js";
-import { formatCount, formatPrice, formatPricePerMessage } from "./pricingEstimate.js";
+import { formatCount, formatPrice, formatPricePerMessage } from "./priceFormat.js";
 
 /** Describes one bundle as a stop on the pricing page slider. */
 function describeBundle(bundle) {

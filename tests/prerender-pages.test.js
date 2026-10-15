@@ -91,20 +91,21 @@ test("the Shop Nobi page shares its own link preview picture, and the other page
   assert.ok(readPage("homepage.html").includes('<meta property="og:image" content="https://nobi.ai/og-image.png">'));
 });
 
-test("pricing shows the bundle table, message rules, trial terms, and FAQ answers", () => {
+test("pricing shows the bundle slider, bundle table, message rules, trial terms, and FAQ answers, with no calculator", () => {
   const text = bodyText(readPage("pricing.html"));
   for (const fact of [
-    "500", "$25", "$0.050", "100,000", "$2,999", "$0.030", "Custom pricing",
+    "Message bundles", "500 messages a month", "$0.050 per message", "See all bundles", "Price per message",
+    "100,000", "$2,999", "$0.030", "Custom pricing", "Enterprise",
     "What counts as a message", "There is no separate search allowance.", "Showing more results for the same search is free.",
-    "Keep going", "Stop and hide Nobi", "plus 3 cents for each extra message",
-    "30-day free trial", "100 free messages", "5,000",
+    "If you go over your bundle", "Keep going", "Stop and hide Nobi", "plus 3 cents for each extra message",
+    "A payment method is required to start the 30-day free trial", "100 free messages", "5,000",
   ]) assert.ok(text.includes(fact), `Missing pricing fact: ${fact}`);
-  for (const oldFact of ["2,500 searches", "$0.10", "$0.01", "extra search", "pause until the next billing cycle"]) assert.ok(!text.includes(oldFact), `Old pricing still shown: ${oldFact}`);
-  assert.ok(text.includes("A payment method is required to start the 30-day free trial"));
-  assert.ok(text.includes("What would you like to use Nobi for?"));
-  const beforeEstimate = text.split("Find your price")[0];
-  for (const fact of ["Message bundles", "500 messages a month", "$25", "$0.050 per message", "See all bundles", "Price per message", "Enterprise", "If you go over your bundle"])
-    assert.ok(beforeEstimate.includes(fact), `Pricing must be explained before the interview: ${fact}`);
+  const trialLimit = "During your 30-day free trial, Nobi stops at your bundle's limit.";
+  assert.equal(text.replaceAll("&#x27;", "'").split(trialLimit).length - 1, 2, "The going-over card and its FAQ answer both state the trial limit");
+  for (const oldFact of [
+    "2,500 searches", "$0.10", "$0.01", "extra search", "pause until the next billing cycle",
+    "Find your price", "Estimate my bill", "What would you like to use Nobi for?",
+  ]) assert.ok(!text.includes(oldFact), `Old pricing or calculator still shown: ${oldFact}`);
 });
 
 test("pricing metadata offers every bundle", () => {

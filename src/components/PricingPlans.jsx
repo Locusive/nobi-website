@@ -1,9 +1,9 @@
 import React from "react";
-import { ArrowDown, Check } from "lucide-react";
+import { Check } from "lucide-react";
 import { useDemoForm } from "../context/DemoFormContext";
 import { getSignupUrl } from "../utils/signupUrl";
 import { LARGEST_BUNDLE, MESSAGE_BUNDLES } from "../constants/pricing";
-import { formatCount, formatPrice, formatPricePerMessage } from "../utils/pricingEstimate";
+import { formatCount, formatPrice, formatPricePerMessage } from "../utils/priceFormat";
 import BundleSlider from "./BundleSlider.jsx";
 import PricingMessageRules from "./PricingMessageRules.jsx";
 import "./PricingPlans.css";
@@ -51,6 +51,5 @@ export default function PricingPlans() {
       </article>
     </div>
     <PricingMessageRules />
-    <div className="pp-next"><a href="#pricing-calculator">Estimate my bill <ArrowDown size={17} aria-hidden="true" /></a></div>
   </section>;
 }

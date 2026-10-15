@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import { before, test } from "node:test";
 import { fileURLToPath, pathToFileURL } from "node:url";
@@ -72,4 +73,12 @@ test("the full bundle table sits behind a closed See all bundles toggle", () => 
   assert.ok(toggle[1].includes("<summary>See all bundles</summary>"));
   const rows = [...toggle[1].matchAll(/<tr><th scope="row">([^<]+)<\/th><td>([^<]+)<\/td><td>([^<]+)<\/td><\/tr>/g)].map(row => row.slice(1));
   assert.deepEqual(rows, PublishedBundles);
+});
+
+test("llms.txt lists the same bundles as the pricing page", () => {
+  const llmsText = readFileSync(new URL("../public/llms.txt", import.meta.url), "utf8");
+  for (const [messages, price, pricePerMessage] of PublishedBundles) {
+    const row = `| ${messages} | ${price} | ${pricePerMessage} |`;
+    assert.ok(llmsText.includes(row), `Missing llms.txt row: ${row}`);
+  }
 });

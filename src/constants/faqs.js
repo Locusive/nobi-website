@@ -117,7 +117,7 @@ const FAQ_ITEMS = [
   },
   {
     q: "What happens if I go over my bundle?",
-    a: "You choose one of two settings for your store. Keep going: Nobi keeps running, and that month is billed at the bundle that fits your usage. Stop and hide Nobi: Nobi stops at your limit and hides from your store until next month.",
+    a: "You choose one of two settings for your store. Keep going: Nobi keeps running, and that month is billed at the bundle that fits your usage. Stop and hide Nobi: Nobi stops at your limit and hides from your store until next month. During your 30-day free trial, Nobi stops at your bundle's limit.",
     category: "Pricing",
   },
   {
@@ -128,7 +128,7 @@ const FAQ_ITEMS = [
   },
   {
       q: "I have X sessions per month and Y percent of my customers use search. How much would Nobi cost for me?",
-      a: "Every search and every chat question counts as one message. Add up your monthly searches and chat questions, then pick the smallest bundle that holds them. Bundles go from $25 for 500 messages to $2,999 for 100,000 messages. The calculator on our pricing page does this math for you. Above 100,000 messages a month, talk to sales for custom pricing.",
+      a: "Every search and every chat question counts as one message. Add up your monthly searches and chat questions, then pick the smallest bundle that holds them. Bundles go from $25 for 500 messages to $2,999 for 100,000 messages. Above 100,000 messages a month, talk to sales for custom pricing.",
       category: "Product",
   },
   {

@@ -1,4 +1,4 @@
-.pp-section { padding: 40px clamp(20px,5vw,80px) 0; background: #f5f3fb; color: #1b1626; }
+.pp-section { padding: 40px clamp(20px,5vw,80px) 48px; background: #f5f3fb; color: #1b1626; }
 .pp-grid { max-width: 940px; margin: 0 auto; display: grid; grid-template-columns: 1.65fr 1fr; gap: 20px; align-items: stretch; }
 .pp-standard { background: #fff; border: 1px solid #c9b6f5; border-radius: 18px; padding: 28px; }
 .pp-section h2 { margin: 0; font-size: 18px; font-weight: 600; line-height: 1.4; }
@@ -47,15 +47,12 @@
 .pp-enterprise li { display: flex; align-items: flex-start; gap: 10px; font-size: 13px; color: #d5cede; }
 .pp-enterprise li svg { width: 16px; height: 16px; color: #81ac9f; flex-shrink: 0; }
 .pp-enterprise button { background: #fff; color: #100a24; border: 0; margin-top: auto; }
-.pp-next { max-width: 940px; margin: 28px auto 0; text-align: center; }
-.pp-next a { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-width: 200px; background: #f0e9ff; border: 1px solid #d9caf6; border-radius: 9px; color: #592bd6; text-decoration: none; font-size: 14px; font-weight: 500; line-height: 1.5; padding: 11px 20px; }
-.pp-next a:hover { background: #e7dcff; border-color: #bba1eb; text-decoration: none; }
 .pp-section :is(a,button):focus-visible { outline: 3px solid #9e7bff; outline-offset: 4px; }
 @media (max-width: 800px) {
   .pp-grid, .pp-rules { grid-template-columns: 1fr; }
 }
 @media (max-width: 540px) {
-  .pp-section { padding: 26px 16px 0; }
+  .pp-section { padding: 26px 16px 36px; }
   .pp-standard, .pp-enterprise, .pp-rule { padding: 22px; }
   .pp-bundles th, .pp-bundles td { padding: 7px 4px; }
   .pp-base strong { font-size: 48px; }

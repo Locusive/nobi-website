@@ -1,6 +1,6 @@
 import React from "react";
-import { EXTRA_MESSAGE_CENTS, LARGEST_BUNDLE } from "../constants/pricing";
-import { formatCount, formatPrice } from "../utils/pricingEstimate";
+import { EXTRA_MESSAGE_CENTS, LARGEST_BUNDLE, TRIAL_DAYS } from "../constants/pricing";
+import { formatCount, formatPrice } from "../utils/priceFormat";
 
 const COUNTED_ACTIONS = [
   "A search",
@@ -26,6 +26,7 @@ export default function PricingMessageRules() {
         <div><dt>Keep going</dt><dd>Nobi keeps running. That month is billed at the bundle that fits your usage.</dd></div>
         <div><dt>Stop and hide Nobi</dt><dd>Nobi stops at your limit and hides from your store until next month.</dd></div>
       </dl>
+      <p>During your {TRIAL_DAYS}-day free trial, Nobi stops at your bundle's limit.</p>
       <p>Above {formatCount(LARGEST_BUNDLE.messages)} messages on Keep going, you pay {formatPrice(LARGEST_BUNDLE.priceCents)} plus {EXTRA_MESSAGE_CENTS} cents for each extra message.</p>
     </section>
   </div>;

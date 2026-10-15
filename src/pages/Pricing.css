@@ -1,3 +1,14 @@
+/* Keep the floating assistant clear of the pricing cards. */
+body:has(.nobi-pricing-page) #nobi-floating-chat-bar-container { display: none !important; }
+
+/* Fit the nav on the narrowest phones. */
+@media (max-width: 390px) {
+  .nobi-pricing-page .nb-nav { max-width: 100% !important; padding: 8px 12px !important; gap: 8px !important; }
+  .nobi-pricing-page .nb-nav > a img { height: 30px !important; }
+  .nobi-pricing-page .nb-nav-pipe { display: none; }
+  .nobi-pricing-page .nb-nav-aux { gap: 8px !important; }
+}
+
 /* Keep the shared proof section within the pricing page's mobile viewport. */
 @media (max-width: 540px) {
   .pricing-proof > div > div { width: 100%; }

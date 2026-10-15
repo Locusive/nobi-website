@@ -23,7 +23,7 @@ Put images/videos under `public/media` and reference them as `/media/filename.ex
 
 `npm run build` renders the homepage, pricing, and product components into HTML
 using React's Node renderer. It does not require Chromium. Browser JavaScript
-still mounts the same components for the calculator, navigation, and forms.
+still mounts the same components for the bundle slider, navigation, and forms.
 Blog and glossary pages retain their existing content prerendering.
 
 The homepage is served through an exact Cloudflare Pages rewrite so the empty
@@ -34,25 +34,17 @@ Run `npm test` to build the site and check page content, pricing facts, URL form
 asset references, and signup attribution. Register additional pages in both
 `scripts/prerender-pages.js` and `scripts/render-pages.jsx`.
 
-## Local pricing wizard
+## Local pricing page
 
 Run `npm run preview:pricing` with Node 18+ and open
-http://127.0.0.1:5174/pricing. The plan overview shows the message bundle table,
-what counts as a message, and the going-over settings before the inline interview.
-The bundle list lives in `src/constants/pricing.js`; the calculator picks the
-smallest bundle that holds the searches and chat questions combined. Both panels can be
-opened independently. Usage sliders show a live monthly estimate, with site traffic
-available as a secondary option. Counts use comma separators, and the sliders
-start with limits of 100,000 searches and 10,000 chat questions; entering larger counts
-expands those limits. The previous `/pricing/ideas` preview URL
-redirects to the pricing page on loopback hosts.
+http://127.0.0.1:5174/pricing. The page shows a bundle slider, the full bundle
+table behind "See all bundles", what counts as a message, and the going-over
+settings. The bundle list lives in `src/constants/pricing.js`. The previous
+`/pricing/ideas` preview URL redirects to the pricing page on loopback hosts.
+Rebuild to see edits.
 
-Use the bundled preview for Chrome so ad blockers do not block the
-development-only `eventTracker` module path. The existing traffic lookup and
-contact form remain available under the activity question. Rebuild to see edits.
-
-`npm test` builds the prerendered pages and checks the pricing arithmetic,
-allowances, usage modes, input validation, and existing page regressions.
+`npm test` builds the prerendered pages and checks the bundle slider, the bundle
+table, the pricing facts, and existing page regressions.
 
 ## Shop Nobi search pages
 

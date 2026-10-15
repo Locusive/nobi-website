@@ -6,11 +6,10 @@ import Nav from "../components/home/Nav";
 import ProofBar from "../components/home/ProofBar";
 import FooterCTA from "../components/home/FooterCTA";
 import SiteFooter from "../components/home/SiteFooter";
-import PricingWizard from "../components/PricingWizard.jsx";
 import PricingPlans from "../components/PricingPlans.jsx";
 import "./Pricing.css";
 import { EXTRA_MESSAGE_CENTS, FREE_PREVIEW_MESSAGES, LARGEST_BUNDLE, PRICING_OFFER, PRICING_SEO_DESCRIPTION, SMALLEST_BUNDLE, TRIAL_DAYS } from "../constants/pricing";
-import { formatCount, formatPrice } from "../utils/pricingEstimate";
+import { formatCount, formatPrice } from "../utils/priceFormat";
 
 const SMALLEST_PRICE = formatPrice(SMALLEST_BUNDLE.priceCents);
 const SMALLEST_MESSAGES = formatCount(SMALLEST_BUNDLE.messages);
@@ -56,7 +55,7 @@ const PRICING_FAQS = [
   },
   {
     q: "What happens if I go over my bundle?",
-    a: "You choose one of two settings for your store. Keep going: Nobi keeps running, and that month is billed at the bundle that fits your usage. Stop and hide Nobi: Nobi stops at your limit and hides from your store until next month.",
+    a: `You choose one of two settings for your store. Keep going: Nobi keeps running, and that month is billed at the bundle that fits your usage. Stop and hide Nobi: Nobi stops at your limit and hides from your store until next month. During your ${TRIAL_DAYS}-day free trial, Nobi stops at your bundle's limit.`,
   },
   {
     q: `What if I need more than ${LARGEST_MESSAGES} messages?`,
@@ -96,8 +95,6 @@ export default function Pricing() {
       <div className="pricing-proof"><ProofBar /></div>
 
       <PricingPlans />
-
-      <PricingWizard />
 
       {/* Value props */}
       <div style={{ background: "#ffffff", padding: "clamp(56px,6vw,72px) clamp(24px,5vw,80px)" }}>

@@ -2,6 +2,9 @@ import React from "react";
 import Button from "./Button";
 import { isWorkEmail } from "../utils/workEmail";
 
+// Keep the lead form above the embedded assistant and its floating chat bar.
+const DemoModalLayer = 2147483647;
+
 export function RequestDemoModal({ open, onClose }) {
   const [form, setForm] = React.useState({
     name: "",
@@ -74,9 +77,9 @@ export function RequestDemoModal({ open, onClose }) {
   }
 
   return (
-    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4" role="dialog" aria-modal="true">
+    <div className="fixed inset-0 flex items-center justify-center p-4" style={{ zIndex: DemoModalLayer }} role="dialog" aria-modal="true">
       <button className="absolute inset-0 bg-black/60 backdrop-blur-sm" aria-label="Close form" onClick={onClose} />
-      <div className="relative w-full max-w-xl rounded-2xl bg-white dark:bg-zinc-900 p-6 shadow-2xl">
+      <div className="relative max-h-[calc(100dvh-2rem)] w-full max-w-xl overflow-y-auto rounded-2xl bg-white dark:bg-zinc-900 p-6 shadow-2xl">
         <div className="flex items-center justify-between">
           <h2 className="text-xl font-semibold">Try it on your site</h2>
           <button

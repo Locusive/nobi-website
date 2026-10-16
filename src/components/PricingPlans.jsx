@@ -1,5 +1,4 @@
 import React from "react";
-import { Check } from "lucide-react";
 import { useDemoForm } from "../context/DemoFormContext";
 import { getSignupUrl } from "../utils/signupUrl";
 import { LARGEST_BUNDLE, MESSAGE_BUNDLES } from "../constants/pricing";
@@ -24,7 +23,7 @@ function BundleTable() {
   </table>;
 }
 
-/** The pricing overview: the bundle slider, the enterprise card, and what counts as a message. */
+/** The pricing overview: the bundle slider, a short custom-plan note, and what counts as a message. */
 export default function PricingPlans() {
   const { onOpen: openDemoForm } = useDemoForm();
 
@@ -43,12 +42,10 @@ export default function PricingPlans() {
         <a className="pp-start" href={getSignupUrl()}>Start for free</a>
         <p className="pp-trial">Free dashboard preview. No credit card.</p>
       </article>
-      <article className="pp-enterprise">
-        <h2>Enterprise</h2><strong>Custom pricing</strong>
-        <p className="pp-enterprise-description">For more than {formatCount(LARGEST_BUNDLE.messages)} messages a month, or custom needs.</p>
-        <ul><li><Check size={18} aria-hidden="true" /> Volume discounts</li><li><Check size={18} aria-hidden="true" /> Custom setup</li><li><Check size={18} aria-hidden="true" /> Dedicated support</li></ul>
+      <p className="pp-custom-plan">
+        Have more than 5,000 products, or need dedicated support? We'll set up a custom plan.{" "}
         <button type="button" onClick={openDemoForm}>Talk to sales</button>
-      </article>
+      </p>
     </div>
     <PricingMessageRules />
   </section>;

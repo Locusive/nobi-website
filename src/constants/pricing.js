@@ -23,6 +23,16 @@ export const EXTRA_MESSAGE_CENTS = 3;
 export const FREE_PREVIEW_MESSAGES = 100;
 export const TRIAL_DAYS = 30;
 
+// The trial gives every store this many free messages, whatever bundle it picked.
+export const TRIAL_MESSAGES = 100_000;
+const TRIAL_MESSAGES_TEXT = TRIAL_MESSAGES.toLocaleString("en-US");
+
+// The short trial line. Every place that mentions the trial states it.
+export const TRIAL_SUMMARY = `${TRIAL_MESSAGES_TEXT} free messages during your ${TRIAL_DAYS}-day trial.`;
+
+// How the trial limit works, for the going-over rules and the pricing FAQ.
+export const TRIAL_LIMIT_RULE = `During your ${TRIAL_DAYS}-day free trial, you get ${TRIAL_MESSAGES_TEXT} free messages, whatever bundle you picked. Nobi stops at ${TRIAL_MESSAGES_TEXT} during the trial. After the trial, the bundle you picked applies.`;
+
 /** The schema.org offer for the pricing page: one offer per bundle. */
 export const PRICING_OFFER = Object.freeze({
   "@type": "AggregateOffer",

@@ -1,3 +1,5 @@
+import { TRIAL_LIMIT_RULE, TRIAL_SUMMARY } from "./pricing.js";
+
 const FAQ_ITEMS = [
   {
     q: "What can I do with Nobi?",
@@ -107,7 +109,7 @@ const FAQ_ITEMS = [
   },
   {
     q: "Can I try Nobi for free?",
-    a: "Yes. Every account gets 100 free messages every month to try the full Nobi experience in your dashboard, no credit card needed. When you're ready to go live on your site, start a 30-day free trial.",
+    a: `Yes. Every account gets 100 free messages every month to try the full Nobi experience in your dashboard, no credit card needed. When you're ready to go live on your site, start a 30-day free trial. You get ${TRIAL_SUMMARY}`,
     category: "Pricing",
   },
   {
@@ -117,7 +119,7 @@ const FAQ_ITEMS = [
   },
   {
     q: "What happens if I go over my bundle?",
-    a: "You choose one of two settings for your store. Keep going: Nobi keeps running, and that month is billed at the bundle that fits your usage. Stop and hide Nobi: Nobi stops at your limit and hides from your store until next month. During your 30-day free trial, Nobi stops at your bundle's limit.",
+    a: `You choose one of two settings for your store. Keep going: Nobi keeps running, and that month is billed at the bundle that fits your usage. Stop and hide Nobi: Nobi stops at your limit and hides from your store until next month. ${TRIAL_LIMIT_RULE}`,
     category: "Pricing",
   },
   {

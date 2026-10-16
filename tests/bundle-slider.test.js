@@ -75,10 +75,12 @@ test("the full bundle table sits behind a closed See all bundles toggle", () => 
   assert.deepEqual(rows, PublishedBundles);
 });
 
-test("llms.txt lists the same bundles as the pricing page", () => {
+test("llms.txt lists the same bundles and trial messages as the pricing page", () => {
   const llmsText = readFileSync(new URL("../public/llms.txt", import.meta.url), "utf8");
   for (const [messages, price, pricePerMessage] of PublishedBundles) {
     const row = `| ${messages} | ${price} | ${pricePerMessage} |`;
     assert.ok(llmsText.includes(row), `Missing llms.txt row: ${row}`);
   }
+  assert.ok(llmsText.includes("100,000 free messages during the 30-day trial."));
+  assert.ok(llmsText.includes("Nobi stops at 100,000 during the trial."));
 });

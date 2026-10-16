@@ -1,5 +1,5 @@
 .pp-section { padding: 40px clamp(20px,5vw,80px) 48px; background: #f5f3fb; color: #1b1626; }
-.pp-grid { max-width: 940px; margin: 0 auto; display: grid; grid-template-columns: 1.65fr 1fr; gap: 20px; align-items: stretch; }
+.pp-grid { max-width: 940px; margin: 0 auto; display: grid; gap: 14px; }
 .pp-standard { background: #fff; border: 1px solid #c9b6f5; border-radius: 18px; padding: 28px; }
 .pp-section h2 { margin: 0; font-size: 18px; font-weight: 600; line-height: 1.4; }
 .pp-intro { margin: 7px 0 0; font-size: 13px; line-height: 1.5; color: #706779; }
@@ -35,25 +35,19 @@
 .pp-all-bundles summary:focus-visible { outline: 3px solid #9e7bff; outline-offset: 4px; border-radius: 4px; }
 .pp-base strong { font-size: 54px; line-height: 1; font-weight: 600; letter-spacing: -.05em; }
 .pp-base span { font-size: 14px; line-height: 1.5; color: #706779; }
-.pp-start, .pp-enterprise button { display: flex; width: 100%; align-items: center; justify-content: center; border-radius: 9px; padding: 12px 16px; font-family: inherit; font-size: 14px; line-height: 1.5; font-weight: 500; text-decoration: none; cursor: pointer; }
+.pp-start { display: flex; width: 100%; align-items: center; justify-content: center; border-radius: 9px; padding: 12px 16px; font-family: inherit; font-size: 14px; line-height: 1.5; font-weight: 500; text-decoration: none; cursor: pointer; }
 .pp-start { background: #6d3bff; color: white; }
 .pp-start:hover { background: #592bd6; text-decoration: none; }
 .pp-trial { font-size: 12px; color: #706779; margin: 9px 0 0; text-align: left; }
-.pp-enterprise { padding: 28px; border-radius: 18px; background: #100a24; color: white; display: flex; flex-direction: column; }
-.pp-enterprise h2 { color: #d5cede; }
-.pp-enterprise > strong { margin-top: 16px; font-size: 30px; font-weight: 500; line-height: 1.2; letter-spacing: -.035em; }
-.pp-enterprise-description { margin: 12px 0 0; font-size: 13px; line-height: 1.55; color: #d5cede; }
-.pp-enterprise ul { list-style: none; padding: 0; margin: 29px 0; display: grid; gap: 13px; }
-.pp-enterprise li { display: flex; align-items: flex-start; gap: 10px; font-size: 13px; color: #d5cede; }
-.pp-enterprise li svg { width: 16px; height: 16px; color: #81ac9f; flex-shrink: 0; }
-.pp-enterprise button { background: #fff; color: #100a24; border: 0; margin-top: auto; }
+.pp-custom-plan { margin: 0; font-size: 14px; line-height: 1.55; color: #61566f; text-align: center; }
+.pp-custom-plan button { border: 0; padding: 0; background: none; color: #592bd6; font: inherit; font-weight: 500; text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
 .pp-section :is(a,button):focus-visible { outline: 3px solid #9e7bff; outline-offset: 4px; }
 @media (max-width: 800px) {
-  .pp-grid, .pp-rules { grid-template-columns: 1fr; }
+  .pp-rules { grid-template-columns: 1fr; }
 }
 @media (max-width: 540px) {
   .pp-section { padding: 26px 16px 36px; }
-  .pp-standard, .pp-enterprise, .pp-rule { padding: 22px; }
+  .pp-standard, .pp-rule { padding: 22px; }
   .pp-bundles th, .pp-bundles td { padding: 7px 4px; }
   .pp-base strong { font-size: 48px; }
   .pp-base-custom strong { font-size: 34px; }

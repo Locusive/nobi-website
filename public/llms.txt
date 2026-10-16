@@ -54,9 +54,11 @@ Nobi is sold in monthly message bundles. Everything a shopper types into Nobi co
 | 100,000 | $2,999 | $0.030 |
 | Over 100,000 | Custom pricing, talk to sales | |
 
-Going over a bundle: each store picks one of two settings. Keep going: Nobi keeps running and that month is billed at the bundle that fits the usage. Stop and hide Nobi: Nobi stops at the limit and hides from the store until next month. Above 100,000 messages on Keep going, the price is $2,999 plus 3 cents for each extra message. During the 30-day free trial, Nobi stops at the bundle's limit.
+Going over a bundle: each store picks one of two settings. Keep going: Nobi keeps running and that month is billed at the bundle that fits the usage. Stop and hide Nobi: Nobi stops at the limit and hides from the store until next month. Above 100,000 messages on Keep going, the price is $2,999 plus 3 cents for each extra message. During the 30-day free trial, every store gets 100,000 free messages, whatever bundle it picked. Nobi stops at 100,000 during the trial. After the trial, the bundle the store picked applies.
 
-100 free messages every month to preview Nobi in the dashboard. 30-day free trial. No setup fees.
+100 free messages every month to preview Nobi in the dashboard. 100,000 free messages during the 30-day trial. No setup fees.
+
+Have more than 5,000 products, or need dedicated support? Nobi will set up a custom plan.
 
 ## MCP Server
 

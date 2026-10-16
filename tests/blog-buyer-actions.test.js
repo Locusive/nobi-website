@@ -37,7 +37,7 @@ test("comparison readers can reach signup, article-specific demos, and pricing w
     assert.ok(html.includes(`href="/blog/${slug}?contact-us=1"`));
     assert.ok(html.includes('href="/pricing"'));
     assert.ok(html.includes("100 free messages each month"));
-    assert.ok(html.includes("A live-site trial requires a payment method."));
+    assert.ok(html.includes("A live-site trial requires a payment method. It includes 100,000 free messages during your 30-day trial."));
   }
 });
 

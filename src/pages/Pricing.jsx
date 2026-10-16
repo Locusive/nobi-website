@@ -8,7 +8,7 @@ import FooterCTA from "../components/home/FooterCTA";
 import SiteFooter from "../components/home/SiteFooter";
 import PricingPlans from "../components/PricingPlans.jsx";
 import "./Pricing.css";
-import { EXTRA_MESSAGE_CENTS, FREE_PREVIEW_MESSAGES, LARGEST_BUNDLE, PRICING_OFFER, PRICING_SEO_DESCRIPTION, SMALLEST_BUNDLE, TRIAL_DAYS } from "../constants/pricing";
+import { EXTRA_MESSAGE_CENTS, FREE_PREVIEW_MESSAGES, LARGEST_BUNDLE, PRICING_OFFER, PRICING_SEO_DESCRIPTION, SMALLEST_BUNDLE, TRIAL_DAYS, TRIAL_LIMIT_RULE, TRIAL_SUMMARY } from "../constants/pricing";
 import { formatCount, formatPrice } from "../utils/priceFormat";
 
 const SMALLEST_PRICE = formatPrice(SMALLEST_BUNDLE.priceCents);
@@ -43,7 +43,7 @@ const VALUE_PROPS = [
 const PRICING_FAQS = [
   {
     q: "Can I try Nobi for free?",
-    a: `Yes. Every account gets ${FREE_PREVIEW_MESSAGES} free messages each month to preview Nobi in your dashboard, no credit card needed. A payment method is required to start the ${TRIAL_DAYS}-day free trial on your live site.`,
+    a: `Yes. Every account gets ${FREE_PREVIEW_MESSAGES} free messages each month to preview Nobi in your dashboard, no credit card needed. A payment method is required to start the ${TRIAL_DAYS}-day free trial on your live site. You get ${TRIAL_SUMMARY}`,
   },
   {
     q: "How does pricing work?",
@@ -55,7 +55,7 @@ const PRICING_FAQS = [
   },
   {
     q: "What happens if I go over my bundle?",
-    a: `You choose one of two settings for your store. Keep going: Nobi keeps running, and that month is billed at the bundle that fits your usage. Stop and hide Nobi: Nobi stops at your limit and hides from your store until next month. During your ${TRIAL_DAYS}-day free trial, Nobi stops at your bundle's limit.`,
+    a: `You choose one of two settings for your store. Keep going: Nobi keeps running, and that month is billed at the bundle that fits your usage. Stop and hide Nobi: Nobi stops at your limit and hides from your store until next month. ${TRIAL_LIMIT_RULE}`,
   },
   {
     q: `What if I need more than ${LARGEST_MESSAGES} messages?`,
@@ -167,7 +167,7 @@ function PricingHero() {
           </h1>
           <p style={{ margin: "20px auto 0", maxWidth: "44ch", fontSize: "clamp(16px,1.3vw,20px)", lineHeight: 1.55, color: "rgba(255,255,255,0.85)" }}>
             Try the full Nobi experience free in your dashboard. No credit card needed. Ready to go live on your
-            site? Start a {TRIAL_DAYS}-day free trial.
+            site? Get {TRIAL_SUMMARY}
           </p>
         </div>
       </div>

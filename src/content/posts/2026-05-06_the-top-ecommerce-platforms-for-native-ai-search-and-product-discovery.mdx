@@ -1,309 +1,162 @@
 export const meta = {
- title: "Best Ecommerce Search & Product Discovery Platforms 2026",
- slug: "the-top-ecommerce-platforms-for-native-ai-search-and-product-discovery",
- date: "2026-05-06",
- lastUpdated: "2026-07-17",
- publishedAt: "2026-05-06",
- description: "Compare ecommerce search and product discovery platforms, including merchandising tools and pricing, to find the right fit for your site.",
- excerpt: "Compare ecommerce search and product discovery platforms, including merchandising tools and pricing, to find the right fit for your site.",
- tags: ["best tools", "site search", "ecommerce", "ecommerce search"],
- author: "Shanif Dhanani",
- heroImage: "https://storage.googleapis.com/nobi-public/docs_and_marketing_websites/posts/the-top-ecommerce-platforms-for-native-ai-search-and-product-discovery/hero.webp",
- featured: true,
- draft: false,
- faqItems: [
- {
- question: "What is native AI search and product discovery on an ecommerce site?",
- answer: "Native AI search and product discovery is a layer on an ecommerce site that uses machine learning, usually semantic embeddings and behavioral signals, to match shoppers to products without merchandisers hand-pinning every query. It understands long conversational searches that don't word-for-word match product titles, ranks on what the catalog actually contains, and adapts as shoppers click and buy. Done well, it replaces the stack of synonyms, redirects, and pinning rules a merch team maintains by hand, and often extends into autocomplete, filters, and a chat assistant that cites product pages and policies."
- },
- {
- question: "How did we evaluate these AI search and product discovery platforms?",
- answer: "We picked five platforms a head of ecommerce realistically shortlists when the brief is to replace search and add an AI assistant: Nobi, Algolia, Klevu, Constructor, and Bloomreach. We compared them on six dimensions: semantic search depth, pricing transparency, implementation time, integration breadth, ease of use for non-engineers, and proof in the form of conversion or revenue lift. We built Nobi, and we tried to be honest about what it is and isn't good for compared with the others."
- },
- {
- question: "1. Nobi",
- answer: "Nobi is built for a head of ecommerce who wants AI site search with a cited shopping assistant live in days. The same retrieval layer powers search results and a shopping assistant on PDPs and the homepage, with inline numbered citations back to product pages and policy docs. Pricing is published, starting at $25/month for 500 messages, where a search or a chat question each count as one message, and install is a small theme tweak. The honest weakness: Nobi curates the search results page, not site-wide merchandising across category and collection pages, so brands needing collection-level merchandising will want a separate tool. Proof comes from A/B tests at UNTUCKit (17.6% vs 15.0%) and Kilte (21.7% lift over Shopify default)."
- },
- {
- question: "2. Algolia",
- answer: "Algolia scored highest on integration breadth and developer ecosystem in our comparison. It scored lowest on ease of use for non-engineers, since tuning relevance after launch is an engineering job rather than a merchandiser one. It fits teams with engineering capacity who want a deep developer ecosystem."
- },
- {
- question: "3. Klevu",
- answer: "Klevu is ecom-native and merchandiser-friendly, which makes it a fit for teams that want a tool built around merchandiser workflows. Pricing is quote-only, which made the transparency dimension hard to score in our comparison. Teams that need a published price before a sales call will find that a friction point."
- },
- {
- question: "4. Constructor",
- answer: "Constructor's behavioral ML is well-regarded by enterprise teams. Pricing is quote-only and implementation runs in weeks rather than days, so it suits larger teams with the runway for a longer rollout. It is not the right pick if speed to launch or upfront pricing transparency matters most."
- },
- {
- question: "5. Bloomreach",
- answer: "Bloomreach scored highest on platform breadth, covering search, content, and CDP in one stack. It scored lowest on speed and price-to-entry, so it is an enterprise commitment rather than a quick swap. It fits teams consolidating multiple discovery and personalization tools, not teams looking for a fast replacement of search alone."
- },
- {
- question: "How should a head of ecommerce pick between these AI search and product discovery platforms?",
- answer: "Match the platform to the brief. If the goal is AI site search with a cited shopping assistant live in days with published pricing, Nobi fits, with the caveat that collection-level merchandising needs a separate tool. Algolia suits engineering-led teams that want breadth and depth of developer tooling, Klevu suits merchandiser-led ecom teams that can tolerate quote-only pricing, Constructor suits enterprise teams that want behavioral ML and can absorb a multi-week rollout, and Bloomreach suits teams consolidating search, content, and CDP into one enterprise stack."
- }
- ],
+  title: "Best Ecommerce Search & Product Discovery Platforms 2026",
+  slug: "the-top-ecommerce-platforms-for-native-ai-search-and-product-discovery",
+  date: "2026-05-06",
+  lastUpdated: "2026-10-15",
+  publishedAt: "2026-05-06",
+  description: "Compare Nobi, Algolia, Klevu, Constructor, and Bloomreach for ecommerce search. Review pricing, merchandising, integrations, and tests to run on your catalog.",
+  excerpt: "Compare ecommerce search platforms by catalog relevance, merchandising needs, implementation, and total cost. Includes a practical evaluation for your store.",
+  tags: [
+    "best tools",
+    "site search",
+    "ecommerce",
+    "ecommerce search"
+  ],
+  author: "Shanif Dhanani",
+  heroImage: "https://storage.googleapis.com/nobi-public/docs_and_marketing_websites/posts/the-top-ecommerce-platforms-for-native-ai-search-and-product-discovery/hero.webp",
+  featured: true,
+  trackBuyerActions: true,
+  draft: false,
+  faqItems: [
+    {
+      question: "Do I need to change ecommerce platforms to add AI search?",
+      answer: "Usually the buying decision is which search layer to add to your existing storefront, rather than which commerce platform to migrate to. Confirm catalog synchronization, variant availability, storefront integration, and purchase tracking for your current platform before choosing a vendor."
+    },
+    {
+      question: "1. Nobi",
+      answer: "Nobi combines semantic site search and a shopping assistant grounded in your catalog and approved content. Nobi is sold in monthly message bundles, from $25 for 500 messages up to $2,999 for 100,000 messages. A search or a chat question each count as one message. Start with a free dashboard preview; a live-site trial is a separate step, with 100,000 free messages during the 30-day trial."
+    },
+    {
+      question: "2. Algolia",
+      answer: "Algolia offers search APIs, storefront integrations, and merchandising tools. Compare the features included in each plan and account for search requests, indexed records, and implementation work."
+    },
+    {
+      question: "3. Klevu",
+      answer: "Klevu is now part of Athos Commerce. Confirm the current search, merchandising, and personalization package and obtain a proposal for your store."
+    },
+    {
+      question: "4. Constructor",
+      answer: "Constructor offers search, browse, recommendations, and merchandising controls. Evaluate it when the project spans multiple discovery experiences and confirm the catalog, event data, implementation, and commercial requirements."
+    },
+    {
+      question: "5. Bloomreach",
+      answer: "Bloomreach offers ecommerce search and personalization alongside other commerce and marketing products. Specify the products and integrations you need when requesting pricing."
+    },
+    {
+      question: "What does Nobi cost at 10,000 searches and chat questions per month?",
+      answer: "Each search and each chat question counts as one message, so that is 10,000 messages. It fits the 10,000-message bundle at $379 per month. Message counts reset monthly."
+    },
+    {
+      question: "How should we measure whether a search replacement works?",
+      answer: "Start with failed searches from your own logs and verify relevant, purchasable results. For a live comparison, randomly assign eligible shoppers to the existing and new experience, use the same measurement window, and compare conversion and revenue per eligible shopper. Include latency, relevance, and merchandising needs in the decision."
+    }
+  ]
 };
 
-<script type="application/ld+json" data-nobi-schema>
-{`{
-  "@context": "https://schema.org",
-  "@type": "Article",
-  "headline": "The Top Ecommerce Platforms For Native AI Search And Product Discovery",
-  "description": "Compare AI search and product discovery platforms for ecommerce on pricing, semantic depth, ease of integration, and real conversion impact.",
-  "datePublished": "2026-05-06",
-  "dateModified": "2026-07-17",
-  "author": {
-    "@type": "Person",
-    "name": "Shanif Dhanani",
-    "url": "https://www.linkedin.com/in/shanifdhanani/"
-  },
-  "publisher": {
-    "@type": "Organization",
-    "name": "Nobi",
-    "url": "https://nobi.ai"
-  },
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": "https://nobi.ai/blog/the-top-ecommerce-platforms-for-native-ai-search-and-product-discovery"
-  },
-  "about": [
-    {
-      "@type": "Thing",
-      "name": "site search"
-    },
-    {
-      "@type": "Thing",
-      "name": "ecommerce"
-    }
-  ],
-  "mentions": [
-    {
-      "@type": "Thing",
-      "name": "Nobi"
-    },
-    {
-      "@type": "Thing",
-      "name": "[Algolia](https://algolia.com)"
-    },
-    {
-      "@type": "Thing",
-      "name": "[Klevu](https://klevu.com)"
-    },
-    {
-      "@type": "Thing",
-      "name": "[Constructor](https://constructor.io)"
-    },
-    {
-      "@type": "Thing",
-      "name": "[Bloomreach](https://bloomreach.com)"
-    }
-  ],
-  "articleSection": "best of article"
-}`}
-</script>
-## What are the top ecommerce platforms for native AI search and product discovery?
+## Which ecommerce search and product discovery platform should you shortlist?
 
-The top platforms for native AI search and product discovery in ecommerce are Nobi, Algolia, Klevu, Constructor, and Bloomreach. Each one wins a different buyer brief - here's how they break down:
+Nobi, Algolia, Klevu, Constructor, and Bloomreach are options for improving search on an existing ecommerce store. The right shortlist depends on your catalog, the pages you need to control, and who will maintain the experience after launch. You do not need to treat better search as a reason to migrate your whole storefront.
 
-- **Nobi** - AI site search for ecommerce with a cited shopping assistant grounded in your catalog and policies, from $25/month for 500 messages (a search or a chat question each count as one message). Pick it when on-site search relevance is the bottleneck and you want a shopping assistant in the same contract without engineering work.
-- **[Algolia](https://algolia.com)** - developer-first search API with sub-50ms response times and NeuralSearch on the top-tier Elevate plan, usage-based pricing that scales with query volume. Pick it when you have a search engineer who wants full API control over ranking and frontend.
-- **[Klevu](https://klevu.com)** - AI-native search on Shopify with merchandiser-managed fallbacks; tiered pricing with enterprise tiers quoted per store size. Pick it when long, conversational queries are missing your catalog on a Shopify storefront.
-- **[Constructor](https://constructor.io)** - AI-first product discovery with session-signal personalization across search, browse, and category, revenue-share pricing that scales with GMV. Pick it when merchandising has to move across the full site, not just the search bar, and you have a data team to feed it.
-- **[Bloomreach](https://www.bloomreach.com)** - enterprise discovery plus CDP and content in one stack, six-figure annual contracts common. Pick it when you're consolidating search, CMS, and customer data into a single multi-quarter rollout.
+Use this comparison if you are replacing your current search, adding natural-language product discovery, or deciding whether search and a shopping assistant belong in the same purchase.
 
-| Product | Primary job | Best for | Pricing (starting) | Standout strength | Key weakness |
-| --- | --- | --- | --- | --- | --- |
-| Nobi | AI site search + cited shopping assistant grounded in your catalog | Ecommerce teams who want AI site search with a cited shopping assistant live in days without engineering or revenue-share contracts | From $25/mo for 500 messages (a search or a chat question each count as one message) | Out-of-the-box semantic ranking plus inline citation pills on every shopping-assistant answer - shoppers can verify any claim against the source doc | Curates the search results page, not full site-wide category and collection merchandising |
-| [Algolia](https://algolia.com) | Developer-first search infrastructure | Engineering teams that want full API control over ranking and frontend rendering | Usage-based; pay-as-you-go rates scale with query volume; NeuralSearch requires the top-tier Elevate enterprise plan | Sub-50ms response times, deep widget ecosystem, NeuralSearch on the Elevate plan | Relevance is only as good as the engineering hours you spend tuning it; usage-based bills spike during traffic peaks |
-| [Klevu](https://klevu.com) | AI search and merchandising for Shopify | Shopify brands whose biggest miss is long, conversational queries against the catalog | Tiered pricing; enterprise tiers quoted per store size | AI matching catches conversational queries before they hit zero results; merchandiser-managed fallbacks and 'did you mean' built in | Personalization features are included in the Expert tier only; not available on Essential or Advanced plans; now a division of Athos Commerce alongside Searchspring and Intelligent Reach |
-| [Constructor](https://constructor.io) | AI-first product discovery across the full site | High-volume retailers with a data team that needs ranking and merchandising across search, browse, and category pages together | Revenue-share with no published list price; costs scale with GMV | Semantic search plus real-time session-signal personalization across search, browse, and category pages, with strong A/B testing infrastructure | Revenue-share pricing scales unpredictably as GMV grows; weeks-to-months implementation requires internal data resources |
-| [Bloomreach](https://bloomreach.com) | Enterprise discovery + content + CDP in one platform | Omnichannel retailers consolidating search, CMS, and customer data into a single contract | Quote-only; six-figure annual contracts common | Unified customer profiles drive personalization across the entire experience layer, not just the search bar | Quote-only enterprise contracts and multi-month implementation; overkill for teams that just want better search |
+| Platform | When to evaluate it | Pricing approach | What to confirm before buying |
+| --- | --- | --- | --- |
+| Nobi | Semantic site search and product Q&A using your catalog | Monthly message bundles from $25 for 500 messages; going over bills the month at the bundle that fits | Catalog coverage, desired storefront placements, and monthly search/message volume |
+| [Algolia](https://www.algolia.com/pricing) | A team that wants search APIs and control over its implementation | Published usage plans and custom enterprise pricing | Included AI features, request and record counts, and implementation ownership |
+| [Klevu / Athos Commerce](https://www.klevu.com/) | Search, merchandising, and personalization in one evaluation | Request current package pricing | Current Athos product scope, integration, and any migration needs |
+| [Constructor](https://docs.constructor.com/docs/products-ai-powered-product-discovery) | Search, category browsing, and recommendations in the same project | Request a proposal for your scope | Data requirements and control over each discovery experience |
+| [Bloomreach](https://www.bloomreach.com/en/products/ecommerce-search) | Ecommerce search and personalization within a broader platform evaluation | [Request pricing](https://www.bloomreach.com/en/pricing) | Which products, integrations, and services the proposal includes |
 
-*Full disclosure: Nobi is our product, and it's included in this list alongside the four competitors head-of-ecommerce buyers most often weigh against it. We've aimed to be honest about Nobi's own limits and explicit about when another tool on this list is the better pick.*
+*Disclosure: We build Nobi. This shortlist uses published vendor information and our customer case studies, reviewed October 15, 2026. We have not run every vendor against the same catalog or produced an independent performance ranking. The fit recommendations are our editorial assessment.*
 
-<BlogQualifier context="Algolia, Klevu, Constructor, and Bloomreach for ecommerce search" />
+<BlogBuyerActions articleSlug="the-top-ecommerce-platforms-for-native-ai-search-and-product-discovery" placement="comparison" />
 
+## What does native AI search mean for an ecommerce store?
 
+For this comparison, AI search means helping shoppers find products through the search experience on your own site. A query such as "lightweight waterproof jacket under $150" asks the engine to understand the product type, attributes, and price constraint together. A useful result must match those requirements and be available to buy.
 
-## What is native AI search and product discovery on an ecommerce site?
-
-Native AI search and product discovery is a layer that sits on your ecommerce site and uses machine learning - usually semantic embeddings, behavioral signals, or both - to match shoppers to products without merchandisers hand-pinning every query. It understands [long, conversational searches](/blog/handling-long-tail-queries) that don't word-for-word match product titles. It ranks on what the catalog actually contains, not just tag matches. And it adapts as shoppers click and buy.
-
-Done well, it replaces the stack of synonyms, redirects, and pinning rules your merch team currently maintains by hand. A search for "wide-leg cropped trouser" finds the product even when the title says "cropped wide pant." Personalization runs from session and shopper signals out of the box. Coverage spans the search bar, autocomplete, collection filters, and sometimes a [chat assistant that can answer catalog questions](https://nobi.ai/blog/best-ai-shopping-assistants-for-ecommerce) with citations back to your product pages and policies.
-
-A handful of tools fit this definition for ecommerce teams today: Nobi, [Algolia](https://www.algolia.com) (with NeuralSearch), [Klevu](https://www.klevu.com), [Constructor](https://constructor.io), and [Bloomreach](https://www.bloomreach.com).
-
-
-## How did we evaluate these AI search and product discovery platforms?
-
-We picked five platforms a head of ecommerce realistically shortlists when the brief is "replace our search and add an AI assistant." We compared them on six dimensions: semantic search depth, pricing transparency, implementation time, integration breadth, ease of use for non-engineers, and proof in the form of conversion or revenue lift. Nobi is one of the platforms in this list. We built it, and we've tried to be honest about what it is and isn't good for compared with the others.
-
-Nobi scored well on semantic search depth, pricing transparency, and implementation time. Pricing is published: Nobi starts at $25 a month for 500 messages, where a search or a chat question each count as one message. Bigger bundles cost less per message, up to 100,000 messages for $2,999 a month. Install is a small theme tweak that runs in hours, not weeks. The honest weakness on this rubric: Nobi curates the search results page, not site-wide merchandising across category and collection pages, so brands needing collection-level merchandising will still want a separate tool. Proof comes from A/B tests. [UNTUCKit](/customers/untuckit) ran a two-month split and saw a 17.6% conversion rate against 15.0% on their prior search before moving Nobi to 100% of traffic. [Kilte](/customers/kilte) saw a 21.7% lift over Shopify default search.
-
-Algolia scored highest on integration breadth and developer ecosystem. It scored lowest on ease of use for non-engineers, because tuning relevance after launch is an engineering job, not a merchandiser one.
-
-Klevu is ecom-native and merchandiser-friendly. But pricing is quote-only, which made the transparency dimension hard to score.
-
-Constructor's behavioral ML is well-regarded by enterprise teams. Pricing is also quote-only, and implementation runs in weeks, not days.
-
-Bloomreach scored highest on platform breadth (search, content, CDP) and lowest on speed and price-to-entry. It's an enterprise commitment, not a quick swap.
+Product discovery can also include autocomplete, filters, category browsing, recommendations, and a shopping assistant. Vendors package these differently. List the experiences you actually want to replace before comparing contracts. A search installation does not automatically include every category-page workflow or an assistant.
 
 ## 1. Nobi
 
-Nobi is built for a head of ecommerce who wants AI site search with a cited shopping assistant live on the storefront in days. The same retrieval layer that ranks the search results page powers a shopping assistant on PDPs and the homepage. A shopper asking "is this machine washable" or "what's your return window on sale items" gets an answer with inline numbered citation pills linking back to the product page or policy doc the answer came from. There's no manual synonym list to maintain, no per-query pinning, and no revenue-share contract waiting at signature. Install is a small theme tweak: drop in the Nobi snippet, point it at the page slot where the search bar or assistant should appear, and you're live in hours.
+**Evaluate Nobi when:** You want semantic site search and a shopping assistant that answers from your product catalog and approved content, with a self-service preview before changing the live storefront.
 
-**Best for:** Ecommerce teams who want AI site search with a cited shopping assistant live in days, without an engineering project or a revenue-share contract.
+Nobi can serve as the main search experience and help shoppers refine results through filters or conversation. It also offers merchandising controls to boost, bury, slot, or filter products. For a project covering existing category and collection pages, confirm the exact placements and controls you need. [Kilte's implementation](/customers/kilte), for example, includes search, collection filters, and product discovery.
 
-**Pricing:** Starts at $25 a month for 500 messages, where a search or a chat question each count as one message. Bigger bundles cost less per message, up to 100,000 messages for $2,999 a month. No revenue-share, no quote-only enterprise tier.
+**Pricing:** Nobi is sold in [monthly message bundles](/pricing), from $25 for 500 messages up to $2,999 for 100,000 messages. A search or a chat question each count as one message. Above 100,000 messages a month, pricing is custom.
 
-**Pros:**
-- Semantic ranking and personalization out of the box - merchandisers don't hand-pin products to queries each week
-- Every shopping-assistant answer carries inline numbered citation pills back to the source product page or policy, with a sources sidebar shoppers can verify against
-- Flexible knowledge base pulls from product pages, FAQ routes, policy docs, PDFs, and help-center articles from your existing content - no manual re-entry required
-- Hours-to-days install on Shopify, Shopify Plus, BigCommerce, Magento, and WooCommerce - the same semantic layer extends to collection filters and product discovery, not just the search bar
+For 10,000 searches and chat questions in one month, the 10,000-message bundle costs **$379**. Use your real monthly counts with the [bundle slider](/pricing), and count both searches and chat questions if you plan to turn on both.
 
-**Cons:**
-- Curates the search results page, not site-wide merchandising across every category and collection page - brands that need rule-by-rule control across the full site will still want a dedicated merchandising tool
-- Smaller third-party integration marketplace than Algolia or Bloomreach, and less brand recognition than the enterprise incumbents
-- Not an API-first developer platform - teams that want to write their own ranking logic in code will prefer Algolia
+**Evidence:** In its two-month A/B test, [UNTUCKit](/customers/untuckit) reported conversion rates of 17.6% with Nobi and 15.0% with its prior tool, plus 21.3% more revenue per searcher. [Kilte](/customers/kilte) reported a 21.7% conversion-rate lift over Shopify default search. These are results from those implementations; your catalog and traffic need their own evaluation.
 
-**Verdict:** Pick Nobi when [on-site discovery](https://nobi.ai/blog/ecommerce-product-discovery-beyond-filters) and shopper Q&A are the conversion bottleneck and you want both shipped without a six-month rollout or revenue-share contract. Skip it if your priority is full-site merchandising rule control or developer-owned custom ranking logic.
-
-<div className="my-8 flex justify-center">
- <a
- href="https://dashboard.nobi.ai"
- className="inline-flex items-center justify-center gap-2 rounded-2xl font-medium transition active:scale-[.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-black/10 dark:focus-visible:ring-white/20 bg-black text-white dark:bg-white dark:text-black hover:opacity-90 shadow-sm h-12 px-6 text-base no-underline"
- >
- <span>Get started with Nobi free</span>
- </a>
-</div>
+**Before committing:** Test your difficult queries, required merchandising rules, mobile experience, and catalog updates. The free dashboard preview needs no credit card. A live-site trial is a separate step after previewing and configuring your store.
 
 ## 2. Algolia
 
-[Algolia](https://algolia.com) is the developer-first search API for ecommerce teams that want to own the search experience in code. Engineering teams get sub-50ms response times at catalog scale, plus a deep library of frontend widgets and InstantSearch components across every major commerce stack. NeuralSearch adds semantic matching on higher tiers, catching queries like "wide-leg cropped trouser" or "lightweight rain shell for commuting" that keyword relevance alone misses. The trade-off is labor. The contract gives you the platform, not the relevance work. Custom ranking, NeuralSearch tuning, and bespoke frontend rendering all need engineering hours. That's a feature for a team with a dedicated search engineer, and a bottleneck for one without.
+[Algolia](https://www.algolia.com/pricing) offers search APIs, integrations, and merchandising tools. Its pricing page separates keyword search, additional AI capabilities, and NeuralSearch across plans; search requests and indexed records affect cost.
 
-**Best for:** Engineering teams that want full API control over the search experience and have the developer hours to keep relevance tuned.
-
-**Pricing:** Usage-based, with pay-as-you-go rates scaling with query volume. NeuralSearch requires the top-tier Elevate enterprise plan.
-
-**Pros:**
-- Sub-50ms response times and fast indexing at ecommerce-catalog scale
-- Massive ecosystem of libraries, InstantSearch widgets, and integrations across every major frontend stack
-- NeuralSearch adds semantic matching on top of keyword relevance on higher tiers
-- Granular API-level control over ranking, indexing, and frontend rendering for teams that want to own the UX end to end
-
-**Cons:**
-- Requires developers to implement and maintain - custom ranking and bespoke UX scale with engineering hours, not contract size
-- Usage-based pricing produces surprise bills during traffic spikes like a launch or flash sale
-- Configuration complexity is real, and NeuralSearch is gated to higher tiers - non-technical teams cannot drive relevance work alone
-
-**Verdict:** Pick Algolia when you have a dedicated search engineering team and want full API control over ranking, indexing, and the frontend. Skip it if non-technical teams need to drive relevance without writing code.
+**Evaluate it when:** Your team wants to control the search implementation. Ask the people who will maintain it to demonstrate routine relevance and merchandising changes. Include their time, required features, and usage in the comparison, rather than comparing the lowest advertised request rate alone.
 
 ## 3. Klevu
 
-[Klevu](https://klevu.com) is AI-native search built around ecommerce, with the strongest footprint on Shopify. Its AI matching layer reads your catalog data to map long, conversational queries to real products, so a shopper typing "wide-leg cropped trouser" still lands on the right SKU when the title says "cropped wide pant." Merchandisers run the rest from a Smart Merchandising dashboard: category-page fallbacks, redirects, and "did you mean" handling for typos, all without an engineering ticket. Klevu is now a division of [Athos Commerce](/blog/athos-commerce-alternatives-ecommerce), alongside Searchspring and Intelligent Reach. That's worth knowing before you shortlist it: a Klevu + Searchspring evaluation is really shopping inside the same parent company.
+[Klevu is now Athos Commerce](https://www.klevu.com/), alongside Searchspring and Intelligent Reach. Its current site describes search, merchandising, and personalization capabilities under that company.
 
-**Best for:** Shopify brands whose main miss is long, conversational queries that a basic search engine can't handle.
-
-**Pricing:** Tiered, with enterprise tiers quoted custom by store size.
-
-**Pros:**
-- AI matching catches long, conversational queries and synonyms before they resolve to empty
-- Category-page and recommendation fallbacks set up in the dashboard, not via an engineering ticket
-- "Did you mean" suggestions handle most typos and misspellings
-- Packaged Shopify install gets the team live quickly
-
-**Cons:**
-- Personalization features are included in the Expert tier only; Essential and Advanced plans do not include them
-- Klevu, Searchspring, and Intelligent Reach are all divisions of Athos Commerce, so a Klevu + Searchspring shortlist is really shopping inside one parent company
-- AI matching is only as good as the catalog data feeding it; sparse product info weakens the layer that's supposed to keep results relevant
-
-**Verdict:** Pick Klevu if your main search problem is conversational-query mismatch on Shopify and you want a packaged install. Skip it if your discovery problem extends beyond the search bar into full-site merchandising, where the Athos overlap with Searchspring starts to matter.
+**Evaluate it when:** You are comparing those capabilities together, or already use Klevu. Request the current package details and pricing for your store. Confirm which features and integration are included, who owns implementation, and whether your existing setup would need to change. Older Klevu plan names are not a reliable substitute for a current proposal.
 
 ## 4. Constructor
 
-[Constructor](https://constructor.io) pairs semantic search with personalized session-signal ranking. Its merchandising layer runs across category pages, collection pages, browse, and recommendations, not just the search results page. That breadth matters most for a head of ecommerce at a high-volume retailer with a data team and merchandisers who curate the full site. Personalization runs in real time on what each shopper has clicked, viewed, and added during the session. The same platform unifies quizzes, browse, and recommendations under one roof. Pricing is revenue-share with no published list price. The most common post-signing complaint is that bills scale in surprising ways as GMV grows.
+[Constructor's documentation](https://docs.constructor.com/docs/products-ai-powered-product-discovery) covers search, autocomplete, browse, recommendations, and collections. Its [merchandising controls](https://docs.constructor.com/docs/using-the-constructor-dashboard-searchandising) let teams influence results across multiple discovery experiences.
 
-**Best for:** High-volume retailers with an internal data team where merchandising has to move across category, collection, browse, and search together.
-
-**Pricing:** Revenue-share with no published list price; costs scale with GMV.
-
-**Pros:**
-- Semantic search plus personalized session-signal ranking - real-time product reordering based on in-session behavior
-- Merchandising across the full site - category, collection, browse, recommendations - not just the search results page
-- Strong A/B testing infrastructure and behavioral analytics
-- Quizzes, browse, and recommendations unified under one platform
-
-**Cons:**
-- Revenue-share pricing scales with GMV and has no published rate - you can't model costs without a sales call
-- Implementation takes weeks to months and requires internal data science or analytics resources to get full value
-- Retailers without significant query volume and a data team to match may not see full return on the investment
-
-**Verdict:** Pick Constructor when you need behavioral personalization and merchandising across the full site and have the data team and budget to match. Skip it if you want transparent per-unit pricing or just the search bar without a full merchandising platform attached.
+**Evaluate it when:** The project extends beyond the search bar into category browsing and recommendations. Ask for a demonstration using your catalog and promotion rules. Confirm required event tracking, integration work, launch scope, and the pricing formula in your proposal; do not assume a particular revenue-share arrangement.
 
 ## 5. Bloomreach
 
-[Bloomreach](https://www.bloomreach.com) brings search, merchandising, content, and customer data into one commerce experience platform. The Discovery module handles search and product recommendations. Everything plugs into unified customer profiles that drive personalization across the site. That scope matters most for an omnichannel retailer ready to consolidate search, CMS, and CDP into a single contract. If you just want better search on the storefront, it's a platform-scale purchase with a platform-scale rollout attached.
+[Bloomreach's ecommerce search offering](https://www.bloomreach.com/en/products/ecommerce-search) includes personalization and sits alongside category, recommendation, and other commerce and marketing products. Its [pricing page](https://www.bloomreach.com/en/pricing) invites a pricing request.
 
-**Best for:** Omnichannel retailers who want search, CMS, and CDP in one platform and have the appetite for a multi-quarter rollout.
+**Evaluate it when:** Search is part of a broader commerce or personalization project. Ask for an itemized scope identifying what is included and what is a separate product or service. A wider product catalog is useful only when the capabilities match work you need to do.
 
-**Pricing:** Quote-only; six-figure annual contracts common, priced on catalog size, customers served, and events. Multi-month implementation standard.
+## How to evaluate a search replacement on your own catalog
 
-**Pros:**
-- True full-stack: search, content, marketing, and data in one place
-- Strong semantic search with product-specific AI
-- Personalization driven by unified customer profiles across the entire experience layer
-- Mature analytics and reporting for enterprise governance
+### Bring the searches that fail today
 
-**Cons:**
-- Quote-only pricing and a heavy sales process out of reach for most brands
-- Heavy implementation requirements - multi-quarter rollouts are standard
-- Overkill if you just need better search
+Take a sample from your search logs that includes popular queries, searches with no results, and searches that get results but few product clicks. Include exact product names alongside natural-language requests. For each, decide what a correct answer looks like before the demo.
 
-**Verdict:** Pick Bloomreach when you're ready to consolidate your entire commerce stack into one contract. Skip it if search is a standalone problem and a multi-quarter rollout is off the table.
+| Test | Example | What a useful result must do |
+| --- | --- | --- |
+| Meaning and attributes | "waterproof jacket under $150" | Respect both the product requirements and price |
+| Catalog vocabulary | "cream sweater" when your color is named "Ivory" | Find the relevant product without requiring the shopper to know your terminology |
+| Availability | A requested size is sold out | Avoid presenting an unavailable variant as a match |
+| Merchandising | A seasonal promotion or excluded product | Apply the intended rule without making other results irrelevant |
+| Product questions | "Is this machine washable?" | Use the product's actual care information and acknowledge missing information |
 
-## Questions to ask every vendor before you commit
+### Compare implementation and total cost
 
-A good demo is convincing by design. These questions cut through the pitch and help you figure out whether a platform actually fits your situation.
+Ask each vendor how products, variants, inventory, and price changes reach search. Test your own theme or headless frontend, including mobile filters and add-to-cart behavior. Confirm who maintains the integration and how you restore the previous experience if necessary.
 
-**How does pricing scale as your store grows?**
+Use the same traffic and catalog assumptions for every proposal. Include request counting, indexed records or products, conversational usage, optional modules, setup work, and support. For Nobi, model searches and messages separately on the [pricing page](/pricing).
 
-Per-query, per-seat, and revenue-share contracts hit the same store very differently as traffic and revenue climb. Ask your vendor to model your bill at your current query volume, then again at double. Usage-based contracts (like Algolia's) spike during a launch or flash sale. Revenue-share contracts (like Constructor's) get more expensive every year your store performs better. Neither structure is wrong - but you should understand the math before you sign, not after.
+### Prove the commercial result
 
-**Who owns relevance tuning after launch - your team or the platform?**
+A better demo is a reason to run a pilot, not proof of increased revenue. Randomly assign eligible shoppers to the existing and new experience and compare conversion and revenue per eligible shopper over the same period. Track search interactions and latency as supporting diagnostics. Comparing shoppers who use search with those who do not is not a substitute for that test.
 
-This is the question that determines your maintenance burden. Some platforms hand you the controls and expect your team to maintain them. Algolia is the clearest case: your engineers write ranking rules, configure synonyms, and keep relevance in code. Other platforms rank from catalog and behavioral signals by default, so results improve without manual intervention. Ask your vendor directly: "If a query resolves to zero results today, who fixes it - your team or mine?"
+## Frequently asked questions
 
-**How fast does the index update when your catalog changes?**
+### Do I need to change ecommerce platforms to add AI search?
 
-New products need to appear in search quickly or they miss demand. Discontinued products that linger in results damage shopper trust. Ask for the indexing SLA - the contractual one, not a marketing claim from the demo.
+Usually the buying decision is which search layer to add to your existing storefront, rather than which commerce platform to migrate to. Confirm catalog synchronization, variant availability, storefront integration, and purchase tracking for your current platform before choosing a vendor.
 
-**What's the contract length and what does exit look like?**
+### What does Nobi cost at 10,000 searches and chat questions per month?
 
-Enterprise platforms tend toward annual or multi-year commitments. Monthly plans exist on some tools. Know what you're committing to before the demo becomes a negotiation. Also ask what data portability looks like if you switch - getting your behavioral signals and synonym lists out of one system and into another is rarely straightforward.
+Each search and each chat question counts as one message, so that is 10,000 messages. It fits the 10,000-message bundle at $379 per month. Message counts reset monthly.
 
-**What does support look like when something breaks at midnight?**
+### How should we measure whether a search replacement works?
 
-A search outage on Black Friday evening is a different emergency from a relevance question on a Tuesday afternoon. Ask for the exact response SLA, who you call, and whether that support tier costs extra. The answer tells you a lot about how the vendor thinks about your operational reality.
+Start with failed searches from your own logs and verify relevant, purchasable results. For a live comparison, randomly assign eligible shoppers to the existing and new experience, use the same measurement window, and compare conversion and revenue per eligible shopper. Include latency, relevance, and merchandising needs in the decision.
 
-## How should a head of ecommerce pick between these AI search and product discovery platforms?
+## Compare Nobi with your current search
 
-Map the choice to the actual bottleneck on your store. [Search relevance](https://nobi.ai/blog/best-ai-search-ecommerce-2026), developer-owned ranking, conversational queries, full-site merchandising, or platform consolidation - each tool here wins a different one.
+Bring a few failed queries, your storefront URL, and your monthly search volume. That is enough to start checking whether Nobi fits the problem you are trying to solve.
 
-Pick Nobi when on-site search relevance and a cited shopping assistant for shopper Q&A are the conversion problem. You want both live in days, with [published bundle pricing](/blog/ai-search-pricing-ecommerce-cost-per-month). [UNTUCKit](/customers/untuckit)'s two-month A/B test produced 21.3% more revenue per searcher. [Kilte](/customers/kilte) moved off Shopify default search after the trial concluded. Skip Nobi if you need ranking logic owned in code. If direct, cited answers to shopper questions are the priority over ranking, see our [comparison of the best AI answer engines for ecommerce](/blog/best-ai-answer-engines-for-ecommerce-search).
+You can [preview Nobi free in the dashboard](https://dashboard.nobi.ai/signup), [estimate your monthly cost](/pricing), or [request a demo for your store](/blog/the-top-ecommerce-platforms-for-native-ai-search-and-product-discovery?contact-us=1).
 
-Pick Algolia if you have a dedicated search engineer who wants full API control over indexing, ranking, and the frontend. The platform gives you the primitives. The relevance work scales with engineering hours - a feature for that team, a cost for any other.
-
-Pick Klevu on Shopify when conversational query mismatch is the main miss and you want a packaged install that merchandisers can manage without engineering tickets.
-
-Pick Constructor at $50M+ GMV with a data team when merchandising has to span category, collection, browse, and search together with session-level behavioral personalization. The revenue-share contract and weeks-to-months rollout are the cost of the breadth.
-
-Pick Bloomreach when you're consolidating search, CMS, and CDP into one enterprise contract and a multi-quarter rollout is acceptable. If search alone is the problem, it's overkill.
-
-<BlogEmailCapture hook="Picking between Algolia, Klevu, Constructor, and Bloomreach for AI search?" subtext="Drop your email and we'll run Nobi's AI search on your catalog so you have a real data point alongside Algolia, Klevu, and Constructor." />
----
-
-If search relevance and cited shopper Q&A are the conversion bottleneck on your store, [start a free Nobi trial](https://dashboard.nobi.ai). The same retrieval layer handles both - search and the shopping assistant run on one install, with no revenue-share contract.
+<BlogBuyerActions articleSlug="the-top-ecommerce-platforms-for-native-ai-search-and-product-discovery" placement="conclusion" />

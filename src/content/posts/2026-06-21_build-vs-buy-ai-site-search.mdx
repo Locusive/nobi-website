@@ -33,7 +33,7 @@ export const meta = {
  },
  {
  question: "What do website teams most often ask when comparing a DIY build to a purpose-built AI search product?",
- answer: "Most teams estimate 2 to 6 months to ship a working DIY first version, while a purpose-built product typically goes live in hours - a gap that widens once you factor in post-launch time spent catching grounding failures. Nobi costs $25/month base, including 2,500 searches and 250 conversational messages, with additional searches at $0.01 each and messages at $0.10 each, and no revenue share or GMV-tied billing. Switching from a DIY build to a purpose-built product later is feasible - your catalog data stays in place, and the main cost is retiring the custom retrieval and answer layers. Nobi doesn't offer behavioral reranking today; brands where personalization is the headline requirement should evaluate a platform built specifically around behavioral reranking instead."
+ answer: "Most teams estimate 2 to 6 months to ship a working DIY first version, while a purpose-built product typically goes live in hours - a gap that widens once you factor in post-launch time spent catching grounding failures. Nobi starts at $25/month for 500 messages, where a search or a chat question each count as one message, with bigger bundles up to 100,000 messages for $2,999 a month and no revenue share or GMV-tied billing. Switching from a DIY build to a purpose-built product later is feasible - your catalog data stays in place, and the main cost is retiring the custom retrieval and answer layers. Nobi doesn't offer behavioral reranking today; brands where personalization is the headline requirement should evaluate a platform built specifically around behavioral reranking instead."
  }
  ],
 };
@@ -78,7 +78,7 @@ Your engineering team can absolutely build AI site search. LLM APIs and vector d
 
 | Option | Primary job | Best for | Pricing (starting) | Standout strength | Key weakness |
 | --- | --- | --- | --- | --- | --- |
-| Nobi | AI site search + conversational shopping assistant grounded to your catalog | Website teams that need catalog-accurate answers live fast, without ongoing engineering ownership | $25/mo (2,500 searches + 250 messages included; $0.01/additional search, $0.10/additional message) | Catalog-grounded answers with inline source citations; quick theme drop-in, live in hours; built-in CVR and zero-result analytics | No behavioral reranking today; not an API-first platform for teams that want to own bespoke ranking logic |
+| Nobi | AI site search + conversational shopping assistant grounded to your catalog | Website teams that need catalog-accurate answers live fast, without ongoing engineering ownership | From $25/mo for 500 messages (a search or a chat question each count as one message) | Catalog-grounded answers with inline source citations; quick theme drop-in, live in hours; built-in CVR and zero-result analytics | No behavioral reranking today; not an API-first platform for teams that want to own bespoke ranking logic |
 | Build your own | Custom AI search assembled from LLMs, a vector store, retrieval pipeline, and UI, or a search API with the answer layer built on top | Engineering teams that want full ownership of ranking logic, model choice, and UI, with roadmap space to maintain all of it | LLM API + vector DB + hosting fees scale with usage; no fixed product fee, but engineering time is the dominant cost | Full control over every layer: model, retrieval strategy, ranking weights, and interface | You own every maintenance burden: catalog freshness, grounding accuracy, eval, latency, security, and model deprecations |
 
 <BlogQualifier context="building vs buying AI site search" />
@@ -151,7 +151,7 @@ Teams that reach that maintenance question most often land on three concrete one
 
 **How long does a DIY build take?** Most teams estimate 2 to 6 months to ship a working first version - longer if the eval suite and catalog sync are built from scratch. A purpose-built product typically goes live in hours. The gap widens once you factor in time spent catching grounding failures post-launch.
 
-**What does Nobi cost?** $25/month base, including 2,500 searches and 250 conversational messages. Additional searches are $0.01 each; additional messages are $0.10 each. No revenue share, no usage-based billing tied to GMV.
+**What does Nobi cost?** Nobi starts at $25 a month for 500 messages, where a search or a chat question each count as one message. Bigger bundles cost less per message, up to 100,000 messages for $2,999 a month. No revenue share, no usage-based billing tied to GMV.
 
 **Can we switch from a DIY build to a purpose-built product later?** Yes. Most purpose-built products integrate at the search widget layer. Your catalog data stays in place; the main cost is retiring the custom retrieval and answer layers your team built.
 

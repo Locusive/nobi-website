@@ -18,7 +18,7 @@ export const meta = {
  },
  {
  question: "How do Nobi and Algolia compare on pricing?",
- answer: "Nobi starts at $25 per month, including 2,500 searches and 250 conversational messages, with overages at $0.01 per additional search and $0.10 per additional message on one usage-based line. Algolia has four tiers: Build (free dev plan, up to 10K searches and 1M records), Grow ($0.50 per additional 1K search requests plus $0.40 per additional 1K records), Grow Plus (same per-request pricing with AI Synonyms, AI Ranking, and Advanced Personalization added), and Elevate (annual enterprise contract, the only tier that includes NeuralSearch, Algolia's AI vector relevance layer). Algolia rewards low-volume stores; Nobi keeps the bill to one usage-based metric regardless of whether AI features are turned on."
+ answer: "Nobi starts at $25 per month for 500 messages, where a search or a chat question each count as one message, on one usage-based line. Bigger bundles cost less per message, up to 100,000 messages for $2,999 a month. Algolia has four tiers: Build (free dev plan, up to 10K searches and 1M records), Grow ($0.50 per additional 1K search requests plus $0.40 per additional 1K records), Grow Plus (same per-request pricing with AI Synonyms, AI Ranking, and Advanced Personalization added), and Elevate (annual enterprise contract, the only tier that includes NeuralSearch, Algolia's AI vector relevance layer). Algolia rewards low-volume stores; Nobi keeps the bill to one usage-based metric regardless of whether AI features are turned on."
  },
  {
  question: "Which delivers better AI relevance out of the box?",
@@ -42,7 +42,7 @@ export const meta = {
  },
  {
  question: "When is Nobi the better choice over Algolia?",
- answer: "Nobi is the right pick when search relevance and conversational discovery are the bottleneck and you'd rather not staff an InstantSearch project. Semantic ranking is on by default rather than a separate tier, and the bill is one usage-based line covering searches and messages with no per-record indexing fee or AI-relevance upcharge. Pick Nobi when you want predictable per-query pricing and a finished search and shopping assistant product rather than an API-first platform."
+ answer: "Nobi is the right pick when search relevance and conversational discovery are the bottleneck and you'd rather not staff an InstantSearch project. Semantic ranking is on by default rather than a separate tier, and the bill is one usage-based line covering searches and messages with no per-record indexing fee or AI-relevance upcharge. Pick Nobi when you want predictable published bundle pricing and a finished search and shopping assistant product rather than an API-first platform."
  },
  {
  question: "Frequently asked questions",
@@ -100,12 +100,12 @@ export const meta = {
 
 Nobi and Algolia are built for different buyers. Nobi is a no-code AI site search with a built-in conversational shopping assistant, purpose-built for ecommerce - semantic relevance on by default, fast response times, and site installs measured in hours. Algolia is a developer-first search API with sub-50ms latency, a massive ecosystem of InstantSearch UI libraries, and deep control over ranking, indexing, and the storefront frontend. It's built for engineering teams who want to own the search experience end-to-end:
 
-- **Nobi** - AI site search plus a shopping assistant and automatic answers for shopper questions in one platform, $25/mo base for 2,500 searches, with conversational filtering and $0.01 per extra search. Pick it when you want relevance that works without weekly rule-tuning, and you need to be live in hours.
+- **Nobi** - AI site search plus a shopping assistant and automatic answers for shopper questions in one platform, from $25/mo for 500 messages (a search or a chat question each count as one message), with conversational filtering. Pick it when you want relevance that works without weekly rule-tuning, and you need to be live in hours.
 - **Algolia** - developer-first search infrastructure with deep APIs, SDKs, and InstantSearch UI libraries; pricing starts free (Build) and scales with queries, records, and AI-tier add-ons. Pick it when you need custom ranking rules, a bespoke storefront frontend, or AI vector search your engineering team wires in and owns.
 
 | Product | Primary job | Best for | Pricing (starting) | Standout strength | Key weakness |
 | --- | --- | --- | --- | --- | --- |
-| Nobi | AI site search + shopping assistant for ecommerce | Teams who want relevance and conversational discovery without engineering build-out | $25/mo (2,500 searches, 250 messages) | Highly relevant product search and ecommerce-first UX out of the box; AI answers using your knowledge base | Smaller integration marketplace than Algolia; not an API-first developer platform |
+| Nobi | AI site search + shopping assistant for ecommerce | Teams who want relevance and conversational discovery without engineering build-out | From $25/mo for 500 messages (a search or a chat question each count as one message) | Highly relevant product search and ecommerce-first UX out of the box; AI answers using your knowledge base | Smaller integration marketplace than Algolia; not an API-first developer platform |
 | [Algolia](https://algolia.com) | Search and discovery API infrastructure | Engineering teams building a custom search UI with full control over ranking | Free Build (dev) plan; Grow from $0.50 per 1K searches + $0.40 per 1K records; NeuralSearch (AI relevance) is Elevate-tier only | Deep APIs, SDKs, and InstantSearch libraries; sub-50ms hosted infra; strong typo tolerance, faceting, and filtering on the keyword engine | Implementation and ongoing relevance tuning need engineering time; query + record + AI-tier pricing compounds at volume |
 
 <BlogQualifier context="Nobi and Algolia for ecommerce site search" />
@@ -121,7 +121,7 @@ Algolia is the right pick when you have engineering capacity and a specific rank
 
 ## How do Nobi and Algolia compare on pricing?
 
-Nobi starts at $25 per month, which includes 2,500 searches and 250 conversational messages. Overages run $0.01 per additional search and $0.10 per additional message - one usage-based line item. Algolia has four tiers that each unlock different capability sets:
+Nobi starts at $25 a month for 500 messages, where a search or a chat question each count as one message. Bigger bundles cost less per message, up to 100,000 messages for $2,999 a month. One usage-based line item. Algolia has four tiers that each unlock different capability sets:
 
 - **Build** (free, dev-focused) - up to 10K searches and 1M records per month, full feature access for building and testing. It's a dev plan - not intended for production traffic.
 - **Grow** - production keyword search at $0.50 per additional 1K search requests and $0.40 per additional 1K records beyond the included bands.
@@ -130,7 +130,7 @@ Nobi starts at $25 per month, which includes 2,500 searches and 250 conversation
 
 Algolia's pricing rewards low-volume stores: under 10K searches a month on the Build tier with no NeuralSearch, it's effectively free. It gets expensive when volume, record count, and AI relevance all scale together, because each is metered separately. A catalog with 500K records and 500K monthly searches on Grow pays $245 for the search overage above 10K (490 × $0.50) plus $160 for the record overage above 100K (400 × $0.40), so roughly $410 a month - and that's still keyword-only. Turning on AI vector relevance means stepping up to Elevate and negotiating an annual enterprise contract with Algolia's sales team.
 
-Nobi's bill is one usage-based line: a $25/month base, then $0.01 per search and $0.10 per conversational message above the included allotment. No per-record indexing fee, no AI-relevance upcharge, no revenue-share. The trade-off is breadth: Nobi is a finished search and conversational discovery product, not an API-first platform for teams that want to build their own ranking stack.
+Nobi's bill is one usage-based line: a message bundle from $25/month for 500 messages, where a search or a chat question each count as one message. A busier month is billed at the bundle that fits. No per-record indexing fee, no AI-relevance upcharge, no revenue-share. The trade-off is breadth: Nobi is a finished search and conversational discovery product, not an API-first platform for teams that want to build their own ranking stack.
 
 ## Which delivers better AI relevance out of the box?
 
@@ -188,7 +188,7 @@ Nobi is the wrong tool for that job and we'll say so plainly. Nobi is not an API
 
 Nobi is the right call when on-site discovery is the bottleneck and the team buying the tool sits on the ecommerce or merchandising side, not engineering. Brands that need semantic relevance, a [conversational shopping assistant](https://nobi.ai/blog/ai-shopping-assistant-ecommerce), and automatic support answers can get all three with Nobi. There's no quarterly rule-tuning cycle and no separate AI add-on bill. [UNTUCKit](/customers/untuckit) moved its full search traffic to Nobi after a two-month A/B test showed a 17.1% conversion rate lift (17.6% vs. 15.0%) and 21.3% more revenue per searcher ($39.17 vs. $32.30).
 
-Nobi fits ecommerce teams whose primary friction is search relevance and who don't have dedicated engineering capacity to maintain a search stack. The product ships AI relevance, personalization, and a conversational assistant in one platform. Pricing is usage-based: $25/month includes 2,500 searches and 250 conversational messages, then $0.01 per additional search and $0.10 per additional message. No revenue-share, no per-seat fees, no separate invoice when you want the AI features turned on. Implementation is days on Shopify, and merchandisers don't spend their week hand-pinning products to queries just to keep results relevant. One honest limit: Nobi curates the search results page, not category or collection pages. Brands that need merchandising across the full site will still pair it with a dedicated tool.
+Nobi fits ecommerce teams whose primary friction is search relevance and who don't have dedicated engineering capacity to maintain a search stack. The product ships AI relevance, personalization, and a conversational assistant in one platform. Pricing is usage-based: Nobi starts at $25 a month for 500 messages, where a search or a chat question each count as one message. Bigger bundles cost less per message, up to 100,000 messages for $2,999 a month. No revenue-share, no per-seat fees, no separate invoice when you want the AI features turned on. Implementation is days on Shopify, and merchandisers don't spend their week hand-pinning products to queries just to keep results relevant. One honest limit: Nobi curates the search results page, not category or collection pages. Brands that need merchandising across the full site will still pair it with a dedicated tool.
 
 ## How should a head of ecommerce choose between Nobi and Algolia?
 
@@ -196,7 +196,7 @@ The decision usually comes down to three variables: who's doing the implementati
 
 **Engineering capacity.** If your team has dedicated search engineers who want to own ranking rules, tune the engine against query logs, and build a custom search UI from InstantSearch components, Algolia is the right pick. It's built for exactly that kind of work. If the team buying the tool sits on ecommerce or merchandising, and the goal is getting AI search and a shopping assistant live in hours without filing an engineering ticket, Nobi is the faster path.
 
-**How the bill scales.** Algolia's bill has three dimensions (searches, records, and AI-tier contract) that compound at volume. A 500K-record catalog doing 500K monthly searches on Grow pays $245 for the search overage above 10K (490 × $0.50) plus $160 for the record overage above 100K (400 × $0.40), so roughly $410 a month - and that's still keyword-only. Turning on AI vector relevance means stepping up to Elevate and negotiating an annual enterprise contract with Algolia's sales team. Nobi's bill is one usage-based metric: you get 2,500 searches and 250 messages for $25 a month, then it's $0.01 per additional search and $0.10 per additional message.
+**How the bill scales.** Algolia's bill has three dimensions (searches, records, and AI-tier contract) that compound at volume. A 500K-record catalog doing 500K monthly searches on Grow pays $245 for the search overage above 10K (490 × $0.50) plus $160 for the record overage above 100K (400 × $0.40), so roughly $410 a month - and that's still keyword-only. Turning on AI vector relevance means stepping up to Elevate and negotiating an annual enterprise contract with Algolia's sales team. Nobi's bill is one usage-based metric: messages, where a search or a chat question each count as one message. Bundles run from 500 messages for $25 a month up to 100,000 messages for $2,999 a month, and a busier month is billed at the bundle that fits.
 
 **AI relevance on day one.** Algolia's semantic search (NeuralSearch) is an Elevate-only enterprise-contract feature, so AI relevance is a plan upgrade rather than a default behavior. Nobi ships semantic relevance on every tier by default. That matters most for brands with creative product naming, where keyword search would fail without a large synonym list.
 

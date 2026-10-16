@@ -25,7 +25,7 @@ export const meta = {
  },
  {
  question: "How does pricing compare between Nobi and Toma?",
- answer: "Nobi publishes its pricing: $25/month base, which includes 2,500 searches and 250 conversational messages, with overages at $0.01 per additional search and $0.10 per additional message. Toma does not publish pricing. As an orchestration layer priced against your existing DMS and CRM stack, the cost depends on your specific configuration and scale, so dealers should expect a custom quote. For high-volume dealerships, the per-message overage at $0.10 is the key number to run against your expected conversation volume before finalizing anything."
+ answer: "Nobi publishes its pricing: it starts at $25/month for 500 messages, where a search or a chat question each count as one message. Bigger bundles cost less per message, up to 100,000 messages for $2,999 a month. Toma does not publish pricing. As an orchestration layer priced against your existing DMS and CRM stack, the cost depends on your specific configuration and scale, so dealers should expect a custom quote. For high-volume dealerships, the bundle that fits your expected monthly messages is the key number to check before finalizing anything."
  },
  {
  question: "When is Toma the better choice over Nobi?",
@@ -96,7 +96,7 @@ You've got shoppers leaving VDPs without answers. They close the tab and the sal
 
 | Product | Primary job | Best for | Pricing (starting) | Standout strength | Key weakness |
 | --- | --- | --- | --- | --- | --- |
-| Nobi | Inventory-aware site search + conversational Q&A with cited answers on VDPs and SRPs | Dealerships where shoppers leave VDPs without getting their questions answered or finding the right vehicle | $25/month (2,500 searches + 250 messages included; $0.01/additional search, $0.10/additional message) | Query overrides and inline source citations prevent the AI from quoting a sold car or a price the dealership can't honor | Website chat only; no phone or SMS follow-up channel; does not book directly into the DMS scheduler |
+| Nobi | Inventory-aware site search + conversational Q&A with cited answers on VDPs and SRPs | Dealerships where shoppers leave VDPs without getting their questions answered or finding the right vehicle | From $25/mo for 500 messages (a search or a chat question each count as one message) | Query overrides and inline source citations prevent the AI from quoting a sold car or a price the dealership can't honor | Website chat only; no phone or SMS follow-up channel; does not book directly into the DMS scheduler |
 | [Toma](https://toma.com) | AI orchestration for inbound lead qualification and DMS-connected appointment booking | Dealerships where the gap is routing and qualifying inbound requests against live service schedulers without a BDC rep in the loop | Quote-only; orchestration layer priced per deployment against the dealer's existing DMS and CRM stack | Books directly against the dealership's live service scheduler without a separate middleware step or manual BDC intervention | Newer entrant with a smaller install base than established platforms; depends on the dealership's existing CRM/DMS for fulfillment; not a standalone tool |
 
 *Full disclosure: Nobi is our product, and it's included in this list alongside the one competitor that dealership buyers most often weigh against it. We've aimed to be honest about Nobi's own limits and explicit about when another tool on this list is the better pick.*
@@ -131,9 +131,9 @@ Toma is built around DMS-connected booking. When a customer calls or texts to sc
 
 ## How does pricing compare between Nobi and Toma?
 
-Nobi publishes its pricing: $25/month base, which includes 2,500 searches and 250 conversational messages, with overages at $0.01 per additional search and $0.10 per additional message. Toma does not publish pricing. As an orchestration layer priced against your existing DMS and CRM stack, the cost depends on your specific configuration and scale, so dealers should expect a custom quote.
+Nobi publishes its pricing: it starts at $25/month for 500 messages, where a search or a chat question each count as one message. Bigger bundles cost less per message, up to 100,000 messages for $2,999 a month. Toma does not publish pricing. As an orchestration layer priced against your existing DMS and CRM stack, the cost depends on your specific configuration and scale, so dealers should expect a custom quote.
 
-Nobi's pricing model is usage-based on two dimensions: searches and conversational messages. There's no revenue-share, no per-seat fee, no plan tiers that lock AI features behind a higher price. For high-volume dealerships fielding thousands of monthly conversations, the per-message overage at $0.10 is the number to run against your expected volume. Ask for that projection before finalizing anything.
+Nobi's pricing model is usage-based on one measure: messages, where a search or a chat question each count as one. There's no revenue-share, no per-seat fee, no plan tiers that lock AI features behind a higher price. For high-volume dealerships fielding thousands of monthly conversations, the bundle that fits your expected volume is the number to check. If a dealership goes over its bundle, it can keep going and pay for the bundle that fits that month, or have Nobi stop and hide until next month. Ask for that projection before finalizing anything.
 
 It integrates directly into your DMS, CRM, and service scheduler to handle inbound phone calls, SMS, email, and appointment booking at scale. That depth of integration is what makes its pricing configuration-dependent: a dealer group running Toma across multiple rooftops against a proprietary DMS is a different deployment than a single-point dealership. The trade-off is that without a quote conversation, upfront budget planning is harder.
 

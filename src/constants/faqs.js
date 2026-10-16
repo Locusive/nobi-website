@@ -1,3 +1,5 @@
+import { TRIAL_LIMIT_RULE, TRIAL_SUMMARY } from "./pricing.js";
+
 const FAQ_ITEMS = [
   {
     q: "What can I do with Nobi?",
@@ -107,7 +109,17 @@ const FAQ_ITEMS = [
   },
   {
     q: "Can I try Nobi for free?",
-    a: "Yes — every account gets 100 free messages every month to try the full Nobi experience in your dashboard, no credit card needed. When you're ready to go live on your site, start a 30-day free trial.",
+    a: `Yes. Every account gets 100 free messages every month to try the full Nobi experience in your dashboard, no credit card needed. When you're ready to go live on your site, start a 30-day free trial. You get ${TRIAL_SUMMARY}`,
+    category: "Pricing",
+  },
+  {
+    q: "What counts as a message?",
+    a: "Everything a shopper types into Nobi counts as one message: a search, a chat question, a click on a suggestion, a question on a product page, or a question in the filter panel. There is no separate search allowance. Showing more results for the same search is free.",
+    category: "Pricing",
+  },
+  {
+    q: "What happens if I go over my bundle?",
+    a: `You choose one of two settings for your store. Keep going: Nobi keeps running, and that month is billed at the bundle that fits your usage. Stop and hide Nobi: Nobi stops at your limit and hides from your store until next month. ${TRIAL_LIMIT_RULE}`,
     category: "Pricing",
   },
   {
@@ -118,7 +130,7 @@ const FAQ_ITEMS = [
   },
   {
       q: "I have X sessions per month and Y percent of my customers use search. How much would Nobi cost for me?",
-      a: "Our standard pricing tiers apply to customers with up to 10,000 messages per month. For customers with higher usage, we offer custom enterprise plans, usually with generous volume-based discounts. We can also provide significant discounts for search-mode only setups if you’re only looking to replace the search engine for your product catalog.",
+      a: "Every search and every chat question counts as one message. Add up your monthly searches and chat questions, then pick the smallest bundle that holds them. Bundles go from $25 for 500 messages to $2,999 for 100,000 messages. Above 100,000 messages a month, talk to sales for custom pricing.",
       category: "Product",
   },
   {

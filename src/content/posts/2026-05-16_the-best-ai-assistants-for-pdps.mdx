@@ -21,7 +21,7 @@ export const meta = {
  },
  {
  question: "1. Nobi",
- answer: "Nobi sits on the product detail page and answers the specific question a shopper has about the product they're looking at, grounded in your catalog, policy pages, and any other sources you connect. Every answer carries inline numbered citation pills - hover one and you see the source document, the date, and the exact excerpt the answer pulled from - plus a sources sidebar listing every reference with direct links. Merchants can lock verbatim answers to specific questions so compliance-sensitive topics get the approved language instead of an LLM paraphrase. Pricing starts at a $25 base with $0.01 per extra search and $0.10 per extra message."
+ answer: "Nobi sits on the product detail page and answers the specific question a shopper has about the product they're looking at, grounded in your catalog, policy pages, and any other sources you connect. Every answer carries inline numbered citation pills - hover one and you see the source document, the date, and the exact excerpt the answer pulled from - plus a sources sidebar listing every reference with direct links. Merchants can lock verbatim answers to specific questions so compliance-sensitive topics get the approved language instead of an LLM paraphrase. Pricing starts at $25 a month for 500 messages, where a search or a chat question each count as one message."
  },
  {
  question: "2. Alby",
@@ -41,7 +41,7 @@ export const meta = {
  },
  {
  question: "Which AI assistant should a head of ecommerce pick for their PDPs?",
- answer: "Pick Nobi when the PDP job is grounded product Q&A with inline citations, verifiable sourcing, and query overrides for compliance-sensitive answers, and you want to budget against a $25/month base plus per-message overage. Pick Alby if you want a purpose-built PDP Q&A tool and are comfortable engaging their sales team post-acquisition for pricing and roadmap. Pick Gorgias when you want one ecommerce-native helpdesk covering all support channels including the PDP, and the AI auto-response layer on top of ticket-based pricing suits your volume. Pick Re:amaze when you want an ecommerce-aware platform handling email, chat, social, and PDP support in the same inbox with agents in the loop. Pick Tidio when you want affordable ecommerce chat with an AI layer for FAQ-style questions and don't need deep live catalog grounding."
+ answer: "Pick Nobi when the PDP job is grounded product Q&A with inline citations, verifiable sourcing, and query overrides for compliance-sensitive answers, and you want to budget against published bundles that start at $25/month for 500 messages. Pick Alby if you want a purpose-built PDP Q&A tool and are comfortable engaging their sales team post-acquisition for pricing and roadmap. Pick Gorgias when you want one ecommerce-native helpdesk covering all support channels including the PDP, and the AI auto-response layer on top of ticket-based pricing suits your volume. Pick Re:amaze when you want an ecommerce-aware platform handling email, chat, social, and PDP support in the same inbox with agents in the loop. Pick Tidio when you want affordable ecommerce chat with an AI layer for FAQ-style questions and don't need deep live catalog grounding."
  }
  ],
 };
@@ -107,7 +107,7 @@ export const meta = {
 
 A shopper who lands on a product page with a question (does this run true to size, is it compatible with X, what's the return window) will either get an answer that brings them closer to checking out, or they'll bounce. Most PDPs still make them hunt through a FAQ accordion or email support. The five tools on this shortlist put an AI assistant directly on the page: Nobi, Alby, Gorgias, Re:amaze, and Tidio. All five are built for ecommerce. They differ in how closely they're tuned to the PDP itself, how fresh their product knowledge stays, and how much human involvement they assume:
 
-- **Nobi** - PDP-scoped assistant with inline citation pills on every answer, contextual suggestion pills tuned to the page a shopper is on, and query overrides that let merchants lock verbatim answers to specific questions. $25/mo base (2,500 searches + 250 messages). Pick when the job is grounded product Q&A on the PDP that doubles as crawlable FAQ content.
+- **Nobi** - PDP-scoped assistant with inline citation pills on every answer, contextual suggestion pills tuned to the page a shopper is on, and query overrides that let merchants lock verbatim answers to specific questions. From $25/mo for 500 messages (a search or a chat question each count as one message). Pick when the job is grounded product Q&A on the PDP that doubles as crawlable FAQ content.
 - **Alby** - Purpose-built PDP Q&A assistant, acquired by Bluecore in 2024. Their strength was inline product Q&A grounded in catalog and spec data. Pricing and roadmap are less clear post-acquisition - contact them directly. Pick when you want a purpose-built PDP tool and are comfortable going through their sales process.
 - **Gorgias** - Ecommerce-native helpdesk that embeds on PDPs, with AI auto-response on all plans and deep Shopify integration. Starter $10/mo (50 tickets) up to Advanced $900/mo (5,000 tickets). Pick when you want one tool handling all support channels including the PDP.
 - **Re:amaze** - Ecommerce support platform with a PDP chat widget, AI-assisted replies, and macros tied to order data. $29/$49/$69 per agent/mo. Pick when you want one ecommerce-aware inbox for email, chat, social, and PDP questions with agents in the loop.
@@ -115,7 +115,7 @@ A shopper who lands on a product page with a question (does this run true to siz
 
 | Product | PDP assistant approach | Grounded to live catalog and policy | Pricing (starting) | Known limitation on PDPs |
 | --- | --- | --- | --- | --- |
-| Nobi | Embedded shopping assistant on the PDP with contextual suggestion pills scoped to the product page and inline numbered citation pills on every answer | Yes - inline citation pills on every answer show source doc, date, and exact excerpt; an optional second AI review checks each answer against cited sources before it goes out; query overrides lock verbatim answers to specific questions | $25/mo base, 2,500 searches + 250 messages included; $0.01/extra search, $0.10/extra message | Personalization on the PDP is limited to personalized placeholder text and starter messages, not behavioral reranking |
+| Nobi | Embedded shopping assistant on the PDP with contextual suggestion pills scoped to the product page and inline numbered citation pills on every answer | Yes - inline citation pills on every answer show source doc, date, and exact excerpt; an optional second AI review checks each answer against cited sources before it goes out; query overrides lock verbatim answers to specific questions | From $25/mo for 500 messages (a search or a chat question each count as one message) | Personalization on the PDP is limited to personalized placeholder text and starter messages, not behavioral reranking |
 | Alby | Purpose-built inline PDP Q&A assistant grounded in catalog and spec data; acquired by Bluecore in 2024 | Yes - built specifically for live catalog grounding on the PDP | Contact for pricing post-acquisition | Roadmap and pricing less transparent after Bluecore acquisition; contact sales for current terms |
 | [Gorgias](https://www.gorgias.com) | Ecommerce-native helpdesk embeddable on PDPs with AI auto-response to common questions; more helpdesk-on-the-page than purpose-built PDP assistant | Partial - AI draws from help center articles and macros; live catalog sync depends on integrations set up | Starter $10/mo (50 tickets); Basic $60/mo (300 tickets); Pro $360/mo (2,000 tickets); Advanced $900/mo (5,000 tickets) | PDP experience is a helpdesk widget rather than a dedicated product Q&A layer; catalog grounding depends on how well the help center is maintained |
 | [Re:amaze](https://reamaze.com) | Chat widget on the PDP wired into an ecommerce-native helpdesk with AI-assisted reply suggestions and macros | Manual - knowledge base and macros are curated by the team, not synced live from the catalog | From $29/agent/mo Basic, $49 Pro, $69 Plus | The PDP experience leans on agent reply suggestions and pre-written FAQ rather than an autonomous LLM-grounded assistant answering shoppers directly |
@@ -141,7 +141,7 @@ Grounding and refresh was the second. The assistant should pull from your live c
 
 Citations were the third. An inline source pill, with the document name and excerpt visible, is how a shopper checks a fit or returns claim without leaving the page.
 
-Pricing was the fourth, and we compared the per-PDP conversation cost across flat usage plans (Nobi's $25 base with $0.01 per extra search and $0.10 per extra message), per-ticket pricing (Gorgias), and per-agent helpdesk subscriptions (Re:amaze, Tidio). Implementation time was the fifth: hours for a site-side install versus a more involved setup.
+Pricing was the fourth, and we compared the per-PDP conversation cost across usage bundles (Nobi starts at $25/mo for 500 messages), per-ticket pricing (Gorgias), and per-agent helpdesk subscriptions (Re:amaze, Tidio). Implementation time was the fifth: hours for a site-side install versus a more involved setup.
 
 ## 1. Nobi
 
@@ -151,7 +151,7 @@ Visitor conversations also build a persistent FAQ on the page itself. Questions 
 
 **Best for:** Ecommerce teams who want a PDP assistant that answers product and policy questions with grounded, cited answers and turns those Q&As into crawlable FAQ content for SEO and AEO.
 
-**Pricing:** $25/month base (includes 2,500 searches and 250 conversational messages). $0.01 per additional search, $0.10 per additional message.
+**Pricing:** Nobi starts at $25 a month for 500 messages, where a search or a chat question each count as one message. Bigger bundles cost less per message, up to 100,000 messages for $2,999 a month.
 
 **Pros:**
 - Suggestion pills on the PDP are LLM-generated and scoped to the product on the page, so shoppers who don't know what to type see tappable starter prompts for that product (compatibility, sizing, materials, shipping) instead of an empty input box.
@@ -260,7 +260,7 @@ The main distinction from purpose-built PDP tools is that Lyro answers from that
 
 ## Which AI assistant should a head of ecommerce pick for their PDPs?
 
-Pick Nobi when the PDP job is grounded product Q&A with inline citations and verifiable sources, and you want to budget against a $25/month base plus per-message overage rather than a per-ticket or per-seat license. Pick Alby if you want a purpose-built PDP Q&A tool and are comfortable going through a sales conversation to understand what the product looks like post-Bluecore acquisition. Pick Gorgias when you want one ecommerce-native helpdesk covering all support channels including the PDP and the ticket-based pricing fits your volume - AI auto-response is included on all plans, even the $10 Starter tier. Pick Re:amaze when you want one ecommerce-aware platform handling email, chat, social, and PDP support in the same inbox with agents in the loop on replies. Pick Tidio when you want affordable ecommerce chat with an AI layer for FAQ-style questions and a fast Shopify install, and your PDP questions skew toward returns and shipping rather than catalog-specific product details.
+Pick Nobi when the PDP job is grounded product Q&A with inline citations and verifiable sources, and you want to budget against published bundles that start at $25/month for 500 messages rather than a per-ticket or per-seat license. Pick Alby if you want a purpose-built PDP Q&A tool and are comfortable going through a sales conversation to understand what the product looks like post-Bluecore acquisition. Pick Gorgias when you want one ecommerce-native helpdesk covering all support channels including the PDP and the ticket-based pricing fits your volume - AI auto-response is included on all plans, even the $10 Starter tier. Pick Re:amaze when you want one ecommerce-aware platform handling email, chat, social, and PDP support in the same inbox with agents in the loop on replies. Pick Tidio when you want affordable ecommerce chat with an AI layer for FAQ-style questions and a fast Shopify install, and your PDP questions skew toward returns and shipping rather than catalog-specific product details.
 
 Across all five, ask the same three questions: how often does the assistant's knowledge refresh, does it cite sources inline on the answer, and what happens when the answer it would give is not in the catalog. Those three answers are what separate a credible PDP assistant from a confident-lie machine.
 
@@ -269,7 +269,7 @@ Across all five, ask the same three questions: how often does the assistant's kn
 
 ---
 
-Want to see Nobi handle PDP questions on your own catalog? Start on the $25/mo base plan, or book a walkthrough.
+Want to see Nobi handle PDP questions on your own catalog? Start on the $25/mo plan for 500 messages, or book a walkthrough.
 
 <div className="my-8 flex justify-center">
  <a

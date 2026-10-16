@@ -107,7 +107,7 @@ export const meta = {
 
 Most of the tools in this article still show empty results pages when a search has no matches. They use features like typo correction, smarter retries, merchandiser rules, and personalized recommendations to reduce or work around the empty page - but it still happens. Nobi takes a different approach: its AI-based semantic search always finds something relevant for any query, so the empty page never shows up. The trade-off: when nothing in your catalog truly matches, Nobi may show some products that aren't quite what the shopper had in mind.
 
-- **Nobi** - AI-based semantic search returns relevant results for any query - even misspelled, vague, or unusual ones - so the empty results page never shows up. There's also a conversational assistant on the same screen for follow-up questions. From $25/mo base.
+- **Nobi** - AI-based semantic search returns relevant results for any query - even misspelled, vague, or unusual ones - so the empty results page never shows up. There's also a conversational assistant on the same screen for follow-up questions. From $25/mo for 500 messages.
 - [**Algolia**](https://algolia.com) - Default keyword search shows an empty page when nothing matches. On higher tiers, NeuralSearch retries the search with smarter (AI-based) matching, and Query Suggestions / Recommend can fill the empty page - but your engineers have to wire it all together. $500-$5,000/mo on mid-sized stores.
 - [**Klevu**](https://klevu.com) (now part of Athos Commerce alongside Searchspring) - AI matching plus a 'did you mean' feature reduces empty pages. Queries that still don't match show an empty page unless a merchandiser has set up a redirect to a category page or recommendation slot. From $249/mo on the Shopify App Store.
 - [**Constructor**](https://constructor.io) - Rewrites the query first (fixing typos, rephrasing) to try to find matches. When that still doesn't work, the page fills with products picked from what the shopper clicked or viewed earlier in their session - so the page isn't blank, but the products shown aren't matches to what they actually searched for. No public list price; revenue-share, with mid-market deals typically starting $50K-$80K/year and scaling with sales volume.
@@ -117,7 +117,7 @@ Pick the tool based on what you want to happen when a search has no matches: sto
 
 | Product | What the shopper sees when nothing matches their search | How it works / what's configurable | Configurable without engineering? | Plan/tier required | Known limitation |
 | --- | --- | --- | --- | --- | --- |
-| Nobi | Relevant products | AI search always returns ranked matches, even for misspelled, vague, or unusual queries. There's also a conversational assistant on the same screen for follow-up questions. | N/A | All plans from $25/mo base | Works on the search results page only - not your category or collection pages |
+| Nobi | Relevant products | AI search always returns ranked matches, even for misspelled, vague, or unusual queries. There's also a conversational assistant on the same screen for follow-up questions. | N/A | All plans from $25/mo | Works on the search results page only - not your category or collection pages |
 | [Algolia](https://algolia.com) | An empty "no results" page by default | Engineers can wire up NeuralSearch (smarter retry), Query Suggestions, or the Recommend widget to fill the page instead. | Partly - the fallback usually needs developers | NeuralSearch only on higher tiers | Quality depends entirely on how much engineering time you spend wiring it up |
 | [Klevu](https://klevu.com) | An empty "no results" page (unless a redirect is set up) | After AI matching and 'did you mean' fail, merchandisers can set up an auto-redirect to a category page or recommendation slot for that query from the dashboard. | Yes, in the merchandising dashboard | Smart Search and above | Quality depends on how complete your catalog data is; personalization is sold as a separate add-on |
 | [Constructor](https://constructor.io) | A page of recommended products picked from what the shopper clicked or viewed earlier (not matches to the search) | After rewriting the query, if it still doesn't match, the page fills with products from the shopper's session activity. | Yes, in the merchandising dashboard | All plans | Recommendations aren't matches to the search; revenue-share pricing |
@@ -165,7 +165,7 @@ Nobi keeps the zero-result page from happening in the first place. Its [semantic
 
 **Best for:** Ecommerce teams that want to stop showing empty results pages without maintaining a synonym list or merchandiser rules - and that want shoppers to be able to ask questions on the same search screen.
 
-**Pricing:** $25/month base (includes 2,500 searches and 250 conversational messages). $0.01 per additional search, $0.10 per additional message.
+**Pricing:** From $25/month for 500 messages, where a search or a chat question each count as one message. Bigger bundles cost less per message, up to 100,000 messages for $2,999 a month.
 
 **Pros:**
 - Search returns relevant matches for any query, so empty pages don't happen. [Kilte](/customers/kilte) saw a 21.7% conversion-rate lift against Shopify's default search after switching to Nobi.

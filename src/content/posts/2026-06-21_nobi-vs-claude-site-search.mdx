@@ -29,7 +29,7 @@ export const meta = {
  },
  {
  question: "Frequently asked questions about building vs buying a website AI assistant",
- answer: "Claude is capable enough for on-site Q&A - the gap is not model quality but the engineering work you add on top: live catalog grounding, answer monitoring, and search UI. Nobi costs $25/month base (2,500 searches and 250 conversational messages included), with additional searches at $0.01 each and additional messages at $0.10 each, and no revenue-share or per-seat fees. A Nobi integration goes live in hours as a theme drop-in; a custom Claude build realistically takes weeks to months depending on catalog size. The biggest risk of building yourself is catalog drift - if the vector index falls behind live inventory, pricing, and policy changes, the assistant gives confidently wrong answers, which is exactly the failure mode that drives visitors away."
+ answer: "Claude is capable enough for on-site Q&A - the gap is not model quality but the engineering work you add on top: live catalog grounding, answer monitoring, and search UI. Nobi starts at $25/month for 500 messages, where a search or a chat question each count as one message, with bigger bundles up to 100,000 messages for $2,999 a month and no revenue-share or per-seat fees. A Nobi integration goes live in hours as a theme drop-in; a custom Claude build realistically takes weeks to months depending on catalog size. The biggest risk of building yourself is catalog drift - if the vector index falls behind live inventory, pricing, and policy changes, the assistant gives confidently wrong answers, which is exactly the failure mode that drives visitors away."
  }
  ],
 };
@@ -72,14 +72,14 @@ export const meta = {
 
 You're looking at Claude - capable model, reasonable API pricing, and your dev team is pretty sure they can wire it to your product catalog. The question isn't whether Claude can do Q&A. It can. The real question is what you're committing to build on top of it: catalog grounding, live-data refresh, answer monitoring, and search UI - all of it ongoing. Get any of that wrong and visitors get confidently wrong answers about prices and stock, which is exactly the kind of interaction that loses customers for good. Here's what each path actually requires:
 
-- **Nobi** - purpose-built, catalog-grounded search and conversational assistant at $25/month base (2,500 searches + 250 messages included). Quick theme drop-in, live-catalog grounding, built-in analytics, maintenance handled. Right when on-site discovery and converting existing traffic is the bottleneck and you'd rather not own the plumbing.
+- **Nobi** - purpose-built, catalog-grounded search and conversational assistant from $25/month for 500 messages (a search or a chat question each count as one message). Quick theme drop-in, live-catalog grounding, built-in analytics, maintenance handled. Right when on-site discovery and converting existing traffic is the bottleneck and you'd rather not own the plumbing.
 - **Build with Claude** - you own everything: catalog grounding (RAG), retrieval, search UI, latency management, hallucination monitoring, security, and ongoing maintenance as your catalog and the model evolve. Right for engineering teams that want full control or have requirements a packaged tool can't satisfy.
 
 For most website marketing teams, the productized path gets a grounded assistant live in front of visitors faster.
 
 | Option | Primary job | Best for | Pricing (starting) | Standout strength | Key weakness |
 | --- | --- | --- | --- | --- | --- |
-| Nobi | Catalog-grounded product search + conversational shopping assistant + capturing high-intent visitors in one product | Website teams whose bottleneck is on-site discovery and CVR, who want live-catalog-grounded answers without building and maintaining the retrieval pipeline themselves | $25/mo base, 2,500 searches + 250 messages; $0.01/additional search, $0.10/additional message | Inline numbered citations on every answer, twice-daily catalog refresh, and query overrides that lock exact merchant-approved responses to high-stakes questions | No behavioral reranking today; website chat only, no email channel, no in-chat post-purchase transaction execution |
+| Nobi | Catalog-grounded product search + conversational shopping assistant + capturing high-intent visitors in one product | Website teams whose bottleneck is on-site discovery and CVR, who want live-catalog-grounded answers without building and maintaining the retrieval pipeline themselves | From $25/mo for 500 messages (a search or a chat question each count as one message) | Inline numbered citations on every answer, twice-daily catalog refresh, and query overrides that lock exact merchant-approved responses to high-stakes questions | No behavioral reranking today; website chat only, no email channel, no in-chat post-purchase transaction execution |
 | Build with Claude | General-purpose LLM for reasoning, writing, and coding, adaptable to custom assistant and search flows | Engineering teams with dedicated capacity who need custom ranking logic, bespoke UX, or non-standard catalog integration that a packaged widget won't satisfy | Anthropic API token-based pricing; no flat per-feature rate, research current API costs before modeling | Full control over ranking logic, UX, conversation design, and integration surface | Catalog grounding, retrieval, search UI, latency tuning, hallucination monitoring, security review, and ongoing maintenance are all yours to build and sustain |
 
 <BlogQualifier context="building with Claude versus buying a ready-made website assistant" />
@@ -154,7 +154,7 @@ Yes. Claude is a strong general-purpose model for reasoning and Q&A. The gap isn
 
 **How much does Nobi cost?**
 
-$25/month base, which includes 2,500 searches and 250 conversational messages. Additional searches are $0.01 each; additional messages are $0.10 each. No revenue-share, no per-seat fees, and no usage-based surprises beyond those per-unit rates.
+Nobi starts at $25 a month for 500 messages, where a search or a chat question each count as one message. Bigger bundles cost less per message, up to 100,000 messages for $2,999 a month. No revenue-share and no per-seat fees. Nobi publishes its bundle prices, and a busier month is billed at the bundle that fits.
 
 **How long does a custom Claude build take versus a Nobi integration?**
 

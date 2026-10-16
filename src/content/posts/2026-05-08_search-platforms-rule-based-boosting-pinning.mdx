@@ -17,7 +17,7 @@ export const meta = {
  },
  {
  question: "How did we evaluate these search platforms?",
- answer: "We weighed four things a head of ecommerce has to defend at a QBR: depth of pinning and boosting controls, how much engineering or merch maintenance each rule requires, how long implementation takes, and whether pricing is published or quoted by sales. Depth covers pin, boost, bury, redirect, and zero-result handling. Maintenance load is where lists diverge most, with AI-led platforms treating rules as overrides and Searchspring treating them as the daily job. Pricing transparency is the last filter, with Nobi posting $25/month base and Algolia publishing self-serve tiers."
+ answer: "We weighed four things a head of ecommerce has to defend at a QBR: depth of pinning and boosting controls, how much engineering or merch maintenance each rule requires, how long implementation takes, and whether pricing is published or quoted by sales. Depth covers pin, boost, bury, redirect, and zero-result handling. Maintenance load is where lists diverge most, with AI-led platforms treating rules as overrides and Searchspring treating them as the daily job. Pricing transparency is the last filter, with Nobi posting bundle prices from $25/month and Algolia publishing self-serve tiers."
  },
  {
  question: "1. Nobi",
@@ -115,10 +115,10 @@ These five platforms all support rule-based boosting and pinning. The right pick
 
 | Product | Primary job | Best for | Pricing (starting) | Standout strength | Key weakness |
 | --- | --- | --- | --- | --- | --- |
-| Nobi | AI site search and shopping assistant, with pinning when you need it | Heads of ecommerce who want pinning available without a rule-maintenance treadmill | $25/mo base (2,500 searches, 250 messages); $0.01/search, $0.10/message overage | AI ranking handles the long tail; rules are exceptions, not the daily job | Less granular rule-by-rule control than Searchspring; no site-wide merchandising beyond the search results page |
+| Nobi | AI site search and shopping assistant, with pinning when you need it | Heads of ecommerce who want pinning available without a rule-maintenance treadmill | From $25/mo for 500 messages (a search or a chat question each count as one message) | AI ranking handles the long tail; rules are exceptions, not the daily job | Less granular rule-by-rule control than Searchspring; no site-wide merchandising beyond the search results page |
 | [Searchspring](https://searchspring.com) | Rule-by-rule merchandising and pinning across every query pattern | Merch teams that want exact control over what each query returns and the bandwidth to maintain it | Not published; quoted by store size | Total rule-level control with audit trail back to a specific rule for every result | Rule list grows one-to-one with query patterns; conversational queries remain a weak spot |
 | [Algolia](https://algolia.com) | Developer-first search API with full rule and ranking control in code | Engineering teams that want to own the rule engine and rendering layer themselves | Usage-based; pay-as-you-go rates scale with query volume; NeuralSearch requires the Elevate enterprise plan | Granular API control over rules, ranking, synonyms, and rendering | Rule and relevance work scale with engineering hours; usage pricing produces traffic-spike bills |
-| [Klevu](https://klevu.com) | AI matching with rule overrides on Shopify | Shopify brands whose main miss is conversational queries, with pinning as a secondary need | Not published; mid-market tiers typically exceed Nobi's $25/mo base | AI matching catches conversational queries before they hit zero results, with rule overrides on top | Personalization features are included in the Expert tier only, not on Essential or Advanced plans; part of Athos Commerce (same parent as Searchspring) |
+| [Klevu](https://klevu.com) | AI matching with rule overrides on Shopify | Shopify brands whose main miss is conversational queries, with pinning as a secondary need | Not published; mid-market tiers typically exceed Nobi's $25/mo starting price | AI matching catches conversational queries before they hit zero results, with rule overrides on top | Personalization features are included in the Expert tier only, not on Essential or Advanced plans; part of Athos Commerce (same parent as Searchspring) |
 | [Fast Simon](https://fastsimon.com) | Visual merchandising and curation on Shopify | Shopify brands whose CVR bottleneck is collection curation, not semantic matching | Shopify App Store tiered pricing | Quick App Store install with merchandiser-friendly visual curation tools | Lighter on natural-language understanding; long, conversational queries still leak |
 
 *Full disclosure: Nobi is our product, and it's included in this list alongside the four competitors head-of-ecommerce buyers most often weigh against it. We've aimed to be honest about Nobi's own limits and explicit about when another tool on this list is the better pick.*
@@ -146,7 +146,7 @@ Some platforms use AI to rank results by default, so a merchandiser writes a rul
 
 Speed to live is another real variable. A Shopify App Store install can be up in a day. A custom Algolia build takes weeks or months depending on how much relevance engineering is involved.
 
-On pricing: Nobi publishes its rates ($25/month base, $0.01 per search, $0.10 per message). Klevu, Searchspring, and Fast Simon all quote on request. Algolia publishes its self-serve tiers but not what you pay at scale.
+On pricing: Nobi publishes its bundle prices (from $25/month for 500 messages, up to 100,000 messages for $2,999/month). Klevu, Searchspring, and Fast Simon all quote on request. Algolia publishes its self-serve tiers but not what you pay at scale.
 
 ## 1. Nobi
 
@@ -154,12 +154,12 @@ On pricing: Nobi publishes its rates ($25/month base, $0.01 per search, $0.10 pe
 
 **Best for:** Ecommerce teams who want pinning and boosting available when they need it, without a rule-maintenance treadmill or an engineering ticket to install.
 
-**Pricing:** $25/month base (2,500 searches and 250 conversational messages included), $0.01 per additional search, $0.10 per additional message.
+**Pricing:** Starts at $25 a month for 500 messages, where a search or a chat question each count as one message. Bigger bundles cost less per message, up to 100,000 messages for $2,999 a month.
 
 **Pros:**
 - You write rules for campaigns and real exceptions, not for every query the AI already handles well
 - Pinning, boosting, and burying sit on top of the AI ranking as overrides. The rule list stays short because most results are already good
-- Live in hours, not months. Pricing is published: $25/month base, $0.01 per search, $0.10 per message - no revenue share, no sales cycle
+- Live in hours, not months. Pricing is published: from $25/month for 500 messages, where a search or a chat question each count as one message - no revenue share, no sales cycle
 - The shopping assistant answers customer questions automatically from the same catalog, so you're not running two separate tools
 
 **Cons:**
@@ -214,7 +214,7 @@ On pricing: Nobi publishes its rates ($25/month base, $0.01 per search, $0.10 pe
 
 **Best for:** Shopify brands whose biggest CVR leak is conversational query mismatch, with pinning and boosting as a secondary requirement.
 
-**Pricing:** Not published on the Klevu site. Mid-market tiers typically exceed Nobi's $25/month base. Confirm current rates with Klevu before budgeting.
+**Pricing:** Not published on the Klevu site. Mid-market tiers typically exceed Nobi's $25/month starting price. Confirm current rates with Klevu before budgeting.
 
 **Pros:**
 - AI matching catches long, conversational queries and synonyms before they resolve to empty
@@ -264,4 +264,4 @@ If you want the AI to handle day-to-day ranking so [your merch team only writes 
 <BlogEmailCapture hook="Comparing Searchspring, Algolia, and Klevu for merchandising control?" subtext="Drop your email and we'll run Nobi's AI search on your catalog so you can see how it handles boosting and pinning alongside Searchspring and Algolia." />
 ---
 
-Want to see how Nobi's AI ranker pairs with pinning controls on your own catalog? <a href="https://dashboard.nobi.ai">Start a free Nobi trial</a> on the $25/month base plan.
+Want to see how Nobi's AI ranker pairs with pinning controls on your own catalog? <a href="https://dashboard.nobi.ai">Start a free Nobi trial</a> and pay from $25/month for 500 messages.

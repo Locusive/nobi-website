@@ -9,6 +9,7 @@ import { renderPage, writePageFiles } from "./page-html.js";
 import { loadPageRenderer } from "./page-renderer.js";
 import { CANONICAL_DESCRIPTION, LINKEDIN_URL } from "../src/constants/positioning.js";
 import { ShopNobiPageHead } from "../src/utils/shopNobiPage.js";
+import { PRICING_OFFER, PRICING_SEO_DESCRIPTION } from "../src/constants/pricing.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const DIST = join(__dirname, "..", "dist");
@@ -37,12 +38,12 @@ const PAGES = [
   },
   {
     path: "/pricing", title: "Pricing | Nobi",
-    description: "Simple pricing starting at $25/month. Try free in your dashboard with 100 free messages every month - no credit card needed. AI search, knowledge base, and lead capture for any website.",
+    description: PRICING_SEO_DESCRIPTION,
     schema: [{
       "@context": "https://schema.org", "@type": "Product", name: "Nobi",
       description: "Site search and an AI assistant for any website.",
       brand: { "@type": "Brand", name: "Nobi" },
-      offers: { "@type": "Offer", price: "25", priceCurrency: "USD", availability: "https://schema.org/InStock", url: `${BASE}/pricing` },
+      offers: PRICING_OFFER,
     }],
   },
   {

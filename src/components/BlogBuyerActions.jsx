@@ -1,4 +1,5 @@
 import React from "react";
+import { TRIAL_SUMMARY } from "../constants/pricing";
 import { useDemoForm } from "../context/DemoFormContext";
 import { getSignupUrl } from "../utils/signupUrl";
 import { trackEvent, trackDemoFormOpened } from "../utils/usageSignals";
@@ -31,7 +32,7 @@ export default function BlogBuyerActions({ articleSlug, placement }) {
         </BlogBuyerLink>
       </div>
       <p className="mb-0 mt-3 text-sm leading-relaxed text-black/60 dark:text-white/60">
-        The dashboard preview includes 100 free messages each month, with no credit card. A live-site trial requires a payment method.
+        The dashboard preview includes 100 free messages each month, with no credit card. A live-site trial requires a payment method. It includes {TRIAL_SUMMARY}
       </p>
     </aside>
   );

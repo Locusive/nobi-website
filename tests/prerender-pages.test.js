@@ -91,19 +91,32 @@ test("the Shop Nobi page shares its own link preview picture, and the other page
   assert.ok(readPage("homepage.html").includes('<meta property="og:image" content="https://nobi.ai/og-image.png">'));
 });
 
-test("pricing includes plan allowances, overages, trial terms, and FAQ answers", () => {
-  const text = bodyText(readPage("pricing.html"));
+test("pricing shows the bundle slider, bundle table, message rules, trial terms, and FAQ answers, with no calculator", () => {
+  const text = bodyText(readPage("pricing.html")).replaceAll("&#x27;", "'");
   for (const fact of [
-    "2,500", "250", "$0.10/message", "$0.01/search", "30-day free trial",
-    "100 free messages", "Additional usage is billed", "5,000",
-    "Both are tracked separately with their own limits.",
+    "Message bundles", "500 messages a month", "$0.050 per message", "See all bundles", "Price per message",
+    "100,000", "$2,999", "$0.030", "Custom pricing",
+    "Have more than 5,000 products, or need dedicated support? We'll set up a custom plan.",
+    "What counts as a message", "There is no separate search allowance.", "Showing more results for the same search is free.",
+    "If you go over your bundle", "Keep going", "Stop and hide Nobi", "plus 3 cents for each extra message",
+    "A payment method is required to start the 30-day free trial", "100 free messages",
   ]) assert.ok(text.includes(fact), `Missing pricing fact: ${fact}`);
-  assert.ok(!text.includes("pause until the next billing cycle"));
-  assert.ok(text.includes("A payment method is required to start the 30-day free trial"));
-  assert.ok(text.includes("What would you like to use Nobi for?"));
-  const beforeEstimate = text.split("Find your price")[0];
-  for (const fact of ["Standard", "/ month base", "+ extra usage", "$25", "2,500", "$0.01", "250", "$0.10", "Enterprise", "Simple site searches", "Conversational messages", "No conversation-start fee"])
-    assert.ok(beforeEstimate.includes(fact), `Pricing must be explained before the interview: ${fact}`);
+  const trialSummary = "100,000 free messages during your 30-day trial.";
+  assert.equal(text.split(trialSummary).length - 1, 2, "The hero and the free-trial FAQ answer both state the trial messages");
+  const trialLimit = "During your 30-day free trial, you get 100,000 free messages, whatever bundle you picked. Nobi stops at 100,000 during the trial. After the trial, the bundle you picked applies.";
+  assert.equal(text.split(trialLimit).length - 1, 2, "The going-over card and its FAQ answer both state the trial limit");
+  for (const oldFact of [
+    "2,500 searches", "$0.10", "$0.01", "extra search", "pause until the next billing cycle",
+    "Find your price", "Estimate my bill", "What would you like to use Nobi for?",
+    "Nobi stops at your bundle's limit", "Volume discounts",
+  ]) assert.ok(!text.includes(oldFact), `Old pricing, calculator, or enterprise card still shown: ${oldFact}`);
+});
+
+test("pricing metadata offers every bundle", () => {
+  const html = readPage("pricing.html");
+  assert.ok(html.includes("Monthly message bundles from $25 for 500 messages."));
+  for (const offer of ['"lowPrice":"25"', '"highPrice":"2999"', '"offerCount":11', '"name":"100,000 messages a month"'])
+    assert.ok(html.includes(offer), `Missing offer data: ${offer}`);
 });
 
 test("blog and glossary output retain their own content without the homepage", () => {

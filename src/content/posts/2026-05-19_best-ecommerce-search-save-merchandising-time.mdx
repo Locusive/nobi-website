@@ -107,7 +107,7 @@ export const meta = {
 
 Running keyword search means someone on your team is writing rules: synonyms for every alternate phrase, pins for queries the algorithm gets wrong, workarounds for dead-end searches. That list gets longer every time you add SKUs. These five tools reduce most of it:
 
-- **Nobi** - AI-native semantic search that learns from the catalog instead of hand-tuned synonym lists, $25/mo base ($0.01 per extra search, $0.10 per extra message). Pick when the merch team is drowning in zero-result and synonym rules.
+- **Nobi** - AI-native semantic search that learns from the catalog instead of hand-tuned synonym lists, from $25/mo for 500 messages (a search or a chat question each count as one message). Pick when the merch team is drowning in zero-result and synonym rules.
 - **[Klevu](https://klevu.com)** - AI matching plus a no-code Smart Merchandising dashboard on Shopify. Quote-only. Pick when conversational query mismatch is the main leak and occasional pinning is the secondary need.
 - **[Constructor](https://constructor.io)** - AI-first session-signal ranking across search, browse, category, and recommendations. Revenue-share, no published list. Pick when merch work has to move across the full site and you have a data team.
 - **[Searchspring](https://searchspring.com)** - Rule-by-rule control from a merchandising dashboard. Quote-only; third-party references put mid-market plans at $1,500-$3,500/mo. Pick when the merch team wants explicit, auditable control over every query - and has the bandwidth to maintain that rule list.
@@ -115,7 +115,7 @@ Running keyword search means someone on your team is writing rules: synonyms for
 
 | Product | Primary job | Best for | Pricing (starting) | Standout strength | Key weakness |
 | --- | --- | --- | --- | --- | --- |
-| Nobi | AI search + shopping assistant with minimal manual tuning | Merch teams who want the engine to absorb synonym and zero-result work | $25/mo base (2,500 searches, 250 messages); $0.01/extra search, $0.10/extra message | Semantic matching out of the box - no synonym lists or manual relevance tuning required | Limited behavioral personalization today (placeholder text and starter messages, not in-session reranking) |
+| Nobi | AI search + shopping assistant with minimal manual tuning | Merch teams who want the engine to absorb synonym and zero-result work | From $25/mo for 500 messages (a search or a chat question each count as one message) | Semantic matching out of the box - no synonym lists or manual relevance tuning required | Limited behavioral personalization today (placeholder text and starter messages, not in-session reranking) |
 | [Klevu](https://klevu.com) | AI search for Shopify with no-code merchandising dashboard | Shopify brands whose biggest leak is conversational query mismatch | Quote-only; three tiers (Essential, Advanced, Expert) priced by domain count, sessions, and SKU volume | AI matching handles synonyms and 'did you mean' so merch doesn't write them by hand | Personalization features are available in the Expert tier only; lower tiers do not include them |
 | [Constructor](https://constructor.io) | Enterprise AI search + product discovery across the full site | large-volume retailers with a data team unifying search, browse, and recommendations | Revenue-share, no published list; costs scale with GMV | Session-signal personalization reorders results in real time across search, browse, category, and recommendations | Revenue-share contracts get more expensive as GMV grows; weeks-to-months implementation |
 | [Searchspring](https://searchspring.com) | Mid-market rule-by-rule merchandising and search | Merch teams who want explicit, auditable control over every query pattern | Quote-only; third-party references put mid-market plans at $1,500-$3,500/mo | Every pin, boost, and zero-result redirect is configured from one merch dashboard with full auditability | Rule list grows one-to-one with query patterns; maintenance load compounds with catalog size |
@@ -139,7 +139,7 @@ The first criterion does the heaviest lifting. Automatic matching is what decide
 
 Rule maintenance load is the second criterion and it tracks catalog size. A 500-SKU shop on Searchspring is manageable; a 50,000-SKU shop on the same engine eats a merchandiser's week. Merch UI is the third. The team that lives in the tool every day cares whether pinning a product takes two clicks or eight, and whether zero-result rules are surfaced or buried.
 
-Pricing transparency and implementation time round out the list. Public per-unit pricing lets a head of ecommerce model the bill before signing; quote-only pricing forces a sales cycle. Implementation in hours versus months decides whether you ship this quarter or next.
+Pricing transparency and implementation time round out the list. Published pricing lets a head of ecommerce model the bill before signing; quote-only pricing forces a sales cycle. Implementation in hours versus months decides whether you ship this quarter or next.
 
 ## 1. Nobi
 
@@ -147,13 +147,13 @@ Nobi is AI-powered ecommerce search and a shopping assistant in one platform. Th
 
 **Best for:** Merch teams whose weekly hours go into writing synonym groups, patching zero-result queries, and pinning the products the default search keeps missing.
 
-**Pricing:** $25/month base, including 2,500 searches and 250 conversational messages. $0.01 per additional search, $0.10 per additional message. No revenue-share, no quote-only sales motion.
+**Pricing:** Nobi starts at $25 a month for 500 messages, where a search or a chat question each count as one message. Bigger bundles cost less per message, up to 100,000 messages for $2,999 a month. No revenue-share, no quote-only sales motion.
 
 **Pros:**
 - Semantic matching is on by default. The engine resolves the vocabulary mismatch between shopper phrasing and catalog titles without a synonym list behind it.
 - Connected knowledge sources refresh twice a day. A policy edit or pricing change lands in answers within hours, not at the next weekly sync.
 - Search insights surface zero-result queries and shopper intent in one view. UNTUCKit reviews this output in their standing weekly meeting, which is how a search tool becomes input to catalog decisions instead of just another configuration job.
-- Implementation runs in hours, not months, with transparent per-unit pricing and no revenue-share bills that grow with GMV.
+- Implementation runs in hours, not months, with published bundle pricing and no revenue-share bills that grow with GMV.
 
 **Cons:**
 - Behavioral personalization is on the roadmap but not shipped. Reranking results based on each shopper's click and purchase history is something Constructor and Klevu's personalization module do today and Nobi doesn't.
@@ -188,7 +188,7 @@ Nobi is AI-powered ecommerce search and a shopping assistant in one platform. Th
 - Behavioral personalization is a available in the Expert tier only; Essential and Advanced tiers do not include it
 - Klevu is now a division of Athos Commerce
 
-**Verdict:** Pick Klevu when conversational query mismatch is your main miss reason on Shopify and you need pinning occasionally on top. Skip it if your team wants per-unit transparent pricing or explicit rule-by-rule auditability for every query.
+**Verdict:** Pick Klevu when conversational query mismatch is your main miss reason on Shopify and you need pinning occasionally on top. Skip it if your team wants transparent published pricing or explicit rule-by-rule auditability for every query.
 
 ## 3. Constructor
 
@@ -209,7 +209,7 @@ Nobi is AI-powered ecommerce search and a shopping assistant in one platform. Th
 - Implementation runs weeks to months and needs data-team hours to keep tuning the ranker after launch
 - Smaller brands without sufficient query volume generally lack the traffic and data-team bandwidth the ranker needs to keep improving after launch
 
-**Verdict:** Pick Constructor when behavioral personalization and full-site merchandising are the headline requirements and the data team is there to feed it; skip it when you want transparent per-unit pricing or just the search bar without the rest of the platform attached - the [Constructor alternatives](/blog/constructor-alternatives-ecommerce) fit that lighter need.
+**Verdict:** Pick Constructor when behavioral personalization and full-site merchandising are the headline requirements and the data team is there to feed it; skip it when you want transparent published pricing or just the search bar without the rest of the platform attached - the [Constructor alternatives](/blog/constructor-alternatives-ecommerce) fit that lighter need.
 
 ## 4. Searchspring
 
@@ -253,7 +253,7 @@ Nobi is AI-powered ecommerce search and a shopping assistant in one platform. Th
 
 ## How should a head of ecommerce pick between these tools?
 
-The choice maps to one question: who do you want doing the relevance work? If the answer is the engine, Nobi or Klevu are the right shortlist. Nobi fits when you want per-unit transparent pricing and search plus a shopping assistant on the same bill - the merch team reviews zero-result queries weekly and overrides when they want to, but the default ranker absorbs the synonym load. Klevu fits when conversational query mismatch is the specific leak on Shopify and you can run a quote-only sales cycle to get there.
+The choice maps to one question: who do you want doing the relevance work? If the answer is the engine, Nobi or Klevu are the right shortlist. Nobi fits when you want published bundle pricing and search plus a shopping assistant on the same bill - the merch team reviews zero-result queries weekly and overrides when they want to, but the default ranker absorbs the synonym load. Klevu fits when conversational query mismatch is the specific leak on Shopify and you can run a quote-only sales cycle to get there.
 
 If merchandising has to move across category, collection, and browse - not just search - and there's a data team to feed the ranker, Constructor is the platform built for that. The revenue-share contract is the cost of admission. If the merch team genuinely wants explicit, auditable control over every query and has the bandwidth for the rule list as the catalog grows, Searchspring is still the option - just budget the maintenance hours honestly. If a search engineer owns ranking in code and you want full API control over the rendering layer, Algolia is the right pick.
 

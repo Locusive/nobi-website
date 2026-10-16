@@ -21,7 +21,7 @@ export const meta = {
  },
  {
  question: "1. Nobi",
- answer: "Nobi is AI customer support that lives on your website and answers customer questions in real time from the policies, product data, and help content you connect. Every answer ships with inline citation pills plus a sources sidebar so shoppers can see the exact document, date, and excerpt behind each response. Merchants can lock verbatim answers to specific questions using query overrides, so return policy, warranty, and compliance-sensitive questions get approved word-for-word responses. An optional second-LLM fact-check pass re-reads each draft answer against the cited content and is on by default for support, healthcare, insurance, and financial services. Pricing starts at $25/month for 2,500 searches and 250 conversational messages, with $0.01 per additional search and $0.10 per additional message."
+ answer: "Nobi is AI customer support that lives on your website and answers customer questions in real time from the policies, product data, and help content you connect. Every answer ships with inline citation pills plus a sources sidebar so shoppers can see the exact document, date, and excerpt behind each response. Merchants can lock verbatim answers to specific questions using query overrides, so return policy, warranty, and compliance-sensitive questions get approved word-for-word responses. An optional second-LLM fact-check pass re-reads each draft answer against the cited content and is on by default for support, healthcare, insurance, and financial services. Pricing starts at $25/month for 500 messages, where a search or a chat question each count as one message. Bigger bundles cost less per message, up to 100,000 messages for $2,999 a month."
  },
  {
  question: "2. Intercom",
@@ -99,14 +99,14 @@ export const meta = {
 
 An AI support bot - also called a support chatbot or AI support agent - answers customer questions on your website so your team fields fewer repetitive tickets. Four tools do this well, each suited to a different team:
 
-- **Nobi** - AI customer-Q&A assistant with inline source citations and a built-in second-LLM fact-check pass that is on by default for support use cases. $25/month base (2,500 searches and 250 messages included). Pick when you want customer questions answered on your website before they become tickets, with verifiable answers.
+- **Nobi** - AI customer-Q&A assistant with inline source citations and a built-in second-LLM fact-check pass that is on by default for support use cases. From $25/month for 500 messages (a search or a chat question each count as one message). Pick when you want customer questions answered on your website before they become tickets, with verifiable answers.
 - **[Intercom (Fin AI Agent)](https://intercom.com)** - AI agent that runs inside the Intercom Messenger and helpdesk. $29/seat/mo annual ($39 monthly) Essential up to $132/$139 Expert, plus $0.99 per Fin resolution. Pick when you already run Intercom and want the AI layer to live in the same inbox your team works in.
 - **[Zendesk (AI Agents)](https://zendesk.com)** - AI agent capability layered on the Zendesk Suite. Suite + Copilot bundle from $155/agent/mo annual (Professional) up to $209 (Enterprise); Advanced AI agents are quote-only. Pick when Zendesk is already the system of record for tickets and you need AI tightly bound to that workflow.
 - **[Ada](https://ada.cx)** - Autonomous AI agent platform that resolves requests across web, app, email, and messaging. Quote-only (Ada explicitly fits 300K+ annual conversations). Pick when one AI agent persona needs to run across web, app, email, SMS, and messaging without rebuilding flows per channel.
 
 | Product | Primary job | Best for | Pricing (starting) | Standout strength | Key weakness |
 | --- | --- | --- | --- | --- | --- |
-| Nobi | AI customer Q&A and search on your website | Support teams answering product, policy, and order questions before they become tickets | $25/month base (2,500 searches + 250 messages) | Inline source-cited answers with an optional second-LLM fact-check pass on by default for support | Web chat only - no SMS, WhatsApp, or voice channel; not a ticket workflow platform |
+| Nobi | AI customer Q&A and search on your website | Support teams answering product, policy, and order questions before they become tickets | From $25/mo for 500 messages (a search or a chat question each count as one message) | Inline source-cited answers with an optional second-LLM fact-check pass on by default for support | Web chat only - no SMS, WhatsApp, or voice channel; not a ticket workflow platform |
 | [Intercom (Fin AI Agent)](https://intercom.com) | AI agent inside the Intercom Messenger and helpdesk | Teams already running Intercom as their primary support inbox | $29/seat/mo annual ($39 monthly) Essential up to $132/$139 Expert, plus $0.99 per Fin resolution | Native to the Intercom inbox - Fin, agents, tickets, and reporting all live in one platform | External knowledge syncs (Notion, Confluence, Guru, Zendesk, public URLs) refresh weekly, not in real time |
 | [Zendesk (AI Agents)](https://zendesk.com) | AI agent and copilot layered on Zendesk Suite | Enterprises whose system of record is already Zendesk | Suite + Copilot bundle from $155/agent/mo annual (Professional) up to $209 (Enterprise); Advanced AI agents quote-only | Tightest integration with Zendesk's ticket, macro, and workflow tooling | Suite + AI add-ons are a real line item; configuration overhead is significant |
 | [Ada](https://ada.cx) | Autonomous AI agent across web, app, email, and messaging | Teams needing one AI agent to resolve requests across many channels at scale | Quote-only; Ada targets 300K+ annual conversations | One AI agent persona that runs across web, app, email, SMS, and messaging without rebuilding flows per channel | Implementation is enterprise-heavy; rollout is typically a multi-quarter project rather than a quick start |
@@ -134,13 +134,13 @@ Nobi is AI customer support that lives on your website and answers customer ques
 
 **Best for:** Support teams that want to answer product, policy, and order questions on the website before they become tickets.
 
-**Pricing:** $25/month base (includes 2,500 searches and 250 conversational messages). $0.01 per additional search, $0.10 per additional message.
+**Pricing:** From $25/month for 500 messages, where a search or a chat question each count as one message. Bigger bundles cost less per message, up to 100,000 messages for $2,999 a month.
 
 **Pros:**
 - Inline numbered citation pills on every answer; hovering shows the source document name, date, and the exact excerpt, with a sources sidebar listing every reference and link
 - Optional second-LLM fact-check pass that re-reads the cited sources and blocks any draft answer it can't verify - on by default for customer support, healthcare, insurance, and financial services
 - Connected knowledge sources refresh twice a day, so a policy or pricing change lands in answers within hours instead of waiting on a weekly external sync
-- Transparent base + per-message pricing instead of seat-based or per-resolution contracts that scale unpredictably with volume
+- Transparent message-bundle pricing instead of seat-based or per-resolution contracts that scale unpredictably with volume
 
 **Cons:**
 - Web chat surface only - no SMS, WhatsApp, or voice channels yet, so multi-channel teams need additional tooling for those surfaces
@@ -238,7 +238,7 @@ Ada is the right call when you need one autonomous agent across web, app, email,
 
 **How are hallucinations handled?** Through retrieval grounding, source citations, and in some cases a second-pass check. Nobi runs an optional second-LLM fact-check that re-reads each draft against the cited content, on by default for customer support.
 
-**What does pricing look like at real volume?** Nobi is $25/month base with $0.01 per additional search and $0.10 per additional message. Intercom layers per-resolution pricing on seat costs; Zendesk is per-agent plus an AI add-on; Ada is custom-quoted.
+**What does pricing look like at real volume?** Nobi starts at $25 a month for 500 messages, where a search or a chat question each count as one message. Bigger bundles cost less per message, up to 100,000 messages for $2,999 a month. Intercom layers per-resolution pricing on seat costs; Zendesk is per-agent plus an AI add-on; Ada is custom-quoted.
 
 **How long is implementation?** Hours for Nobi (it's a small website install), weeks to months for Zendesk and Ada.
 

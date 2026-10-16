@@ -6,16 +6,16 @@ import Nav from "../components/home/Nav";
 import ProofBar from "../components/home/ProofBar";
 import FooterCTA from "../components/home/FooterCTA";
 import SiteFooter from "../components/home/SiteFooter";
-import PricingWizard from "../components/PricingWizard.jsx";
 import PricingPlans from "../components/PricingPlans.jsx";
 import "./Pricing.css";
+import { EXTRA_MESSAGE_CENTS, FREE_PREVIEW_MESSAGES, LARGEST_BUNDLE, PRICING_OFFER, PRICING_SEO_DESCRIPTION, SMALLEST_BUNDLE, TRIAL_DAYS, TRIAL_LIMIT_RULE, TRIAL_SUMMARY } from "../constants/pricing";
+import { formatCount, formatPrice } from "../utils/priceFormat";
 
-const PLAN_PRICE = 25;
-const PLAN_SEARCH_CAP = "2,500";
-const PLAN_MESSAGE_CAP = "250";
-const OVERAGE_RATE_MESSAGE = "$0.10";
-const OVERAGE_RATE_SEARCH = "$0.01";
-const TRIAL_DAYS = 30;
+const SMALLEST_PRICE = formatPrice(SMALLEST_BUNDLE.priceCents);
+const SMALLEST_MESSAGES = formatCount(SMALLEST_BUNDLE.messages);
+const LARGEST_PRICE = formatPrice(LARGEST_BUNDLE.priceCents);
+const LARGEST_MESSAGES = formatCount(LARGEST_BUNDLE.messages);
+
 const VALUE_PROPS = [
   {
     icon: Search,
@@ -43,19 +43,23 @@ const VALUE_PROPS = [
 const PRICING_FAQS = [
   {
     q: "Can I try Nobi for free?",
-    a: `Yes. Every account gets 100 free messages each month to preview Nobi in your dashboard, no credit card needed. A payment method is required to start the ${TRIAL_DAYS}-day free trial on your live site.`,
+    a: `Yes. Every account gets ${FREE_PREVIEW_MESSAGES} free messages each month to preview Nobi in your dashboard, no credit card needed. A payment method is required to start the ${TRIAL_DAYS}-day free trial on your live site. You get ${TRIAL_SUMMARY}`,
   },
   {
     q: "How does pricing work?",
-    a: `Nobi starts at $${PLAN_PRICE}/month and includes ${PLAN_SEARCH_CAP} searches and ${PLAN_MESSAGE_CAP} conversational messages each month. Additional usage is billed at ${OVERAGE_RATE_SEARCH}/search and ${OVERAGE_RATE_MESSAGE}/message. Nobi's replies are included. Your plan also includes 5,000 searchable items, 5,000 knowledge base documents, and analytics.`,
+    a: `You pick a monthly bundle of messages. Bundles start at ${SMALLEST_PRICE} for ${SMALLEST_MESSAGES} messages and go up to ${LARGEST_PRICE} for ${LARGEST_MESSAGES} messages. Bigger bundles cost less per message. Nobi's replies are included. Your plan also includes 5,000 searchable items, 5,000 knowledge base documents, and analytics.`,
   },
   {
-    q: "What happens if I go over my limit?",
-    a: `Additional usage is billed at ${OVERAGE_RATE_SEARCH} per search and ${OVERAGE_RATE_MESSAGE} per visitor message. Search and message allowances are separate; unused searches do not cover additional messages.`,
+    q: "What counts as a message?",
+    a: "Everything a shopper types into Nobi counts as one message: a search, a chat question, a click on a suggestion, a question on a product page, or a question in the filter panel. There is no separate search allowance. Showing more results for the same search is free.",
   },
   {
-    q: "What counts as a search vs. a message?",
-    a: "A search returns matching items, pages, or resources. A message is a visitor question or follow-up that needs a conversational response, even if it starts the conversation. Nobi's replies are included. Both are tracked separately with their own limits.",
+    q: "What happens if I go over my bundle?",
+    a: `You choose one of two settings for your store. Keep going: Nobi keeps running, and that month is billed at the bundle that fits your usage. Stop and hide Nobi: Nobi stops at your limit and hides from your store until next month. ${TRIAL_LIMIT_RULE}`,
+  },
+  {
+    q: `What if I need more than ${LARGEST_MESSAGES} messages?`,
+    a: `Talk to sales for custom pricing. If you stay on Keep going above ${LARGEST_MESSAGES} messages, you pay ${LARGEST_PRICE} plus ${EXTRA_MESSAGE_CENTS} cents for each extra message.`,
   },
   {
     q: "What kind of support do you offer?",
@@ -70,7 +74,7 @@ const PRICING_FAQS = [
 export default function Pricing() {
   useSEO({
     title: "Pricing | Nobi",
-    description: "Simple pricing starting at $25/month. Try free in your dashboard with 100 free messages every month — no credit card needed. AI search, knowledge base, and lead capture for any website.",
+    description: PRICING_SEO_DESCRIPTION,
     path: "/pricing",
     schema: {
       "@context": "https://schema.org",
@@ -78,13 +82,7 @@ export default function Pricing() {
       "name": "Nobi",
       "description": "Site search and an AI assistant for any website.",
       "brand": { "@type": "Brand", "name": "Nobi" },
-      "offers": {
-        "@type": "Offer",
-        "price": "25",
-        "priceCurrency": "USD",
-        "availability": "https://schema.org/InStock",
-        "url": "https://nobi.ai/pricing",
-      },
+      "offers": PRICING_OFFER,
     },
   });
 
@@ -97,8 +95,6 @@ export default function Pricing() {
       <div className="pricing-proof"><ProofBar /></div>
 
       <PricingPlans />
-
-      <PricingWizard />
 
       {/* Value props */}
       <div style={{ background: "#ffffff", padding: "clamp(56px,6vw,72px) clamp(24px,5vw,80px)" }}>
@@ -170,8 +166,8 @@ function PricingHero() {
             Simple, usage-based pricing
           </h1>
           <p style={{ margin: "20px auto 0", maxWidth: "44ch", fontSize: "clamp(16px,1.3vw,20px)", lineHeight: 1.55, color: "rgba(255,255,255,0.85)" }}>
-            Try the full Nobi experience free in your dashboard — no credit card needed. Ready to go live on your
-            site? Start a {TRIAL_DAYS}-day free trial.
+            Try the full Nobi experience free in your dashboard. No credit card needed. Ready to go live on your
+            site? Get {TRIAL_SUMMARY}
           </p>
         </div>
       </div>

@@ -1,8 +1,7 @@
 import { handleShopNobiOutboundClick } from "./shopNobiOutboundClick.js";
 
 /**
- * Preserve the existing standalone product click contract, including optional real variant enrichment.
- * The product's store is named when the page knows it, as the bundle's Shop Nobi clicks name it.
+ * Preserve the existing standalone product click contract, with the real variant and store when the page knows them.
  * Shared delivery mechanics also support non-product offers under a separate event name.
  */
 export function handleProductLinkClick(event, { product, position, query, slug, entryPoint = "AI Search Bar" }, browser = globalThis) {

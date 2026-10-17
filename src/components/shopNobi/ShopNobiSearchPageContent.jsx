@@ -5,9 +5,8 @@ import { formatPrice, readCrumbPath, searchPagePath } from "../../utils/shopNobi
 import { CommissionNotice, readStoreLinkRel } from "../../utils/shopNobiPage";
 
 /**
- * The products of a prebuilt Shop Nobi search page. The build writes this into the HTML for crawlers, and
- * visitors see it until live products take its place. A refused or failed live search leaves it in place. Each page
- * view records which products it showed; the build renders no effects, so it records nothing.
+ * The products of a prebuilt Shop Nobi search page, which visitors see until live products replace them, and which a
+ * page view records as shown. The build writes it into the HTML for crawlers and runs no effects, so it records nothing.
  *
  * @param {{page: object}} props The search page data.
  */

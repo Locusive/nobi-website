@@ -8,10 +8,8 @@ const SearchPageEntryPoint = "AI Search Bar";
 const PrebuiltCollectionName = "Prebuilt search page";
 
 /**
- * Records which products a prebuilt search page shows, in order, once per page view: the product, the store that sells
- * it, its place on the page and whether its link pays us. The place is the positionInGrid its click sends, so a click
- * joins the list by page view, product and place. Products from before the API sent their ids are left out of the
- * list. A crawler, an automated browser or a local copy of the site sends nothing.
+ * Records which products a prebuilt search page shows, in order, once per page view; each place is its click's
+ * positionInGrid. Products without ids are left out, and crawlers, bots and local copies send nothing.
  *
  * @param {{slug: string, query: string, products: object[]}} page The built search page.
  * @param {object} browser The window.

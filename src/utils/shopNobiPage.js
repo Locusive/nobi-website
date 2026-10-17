@@ -1,5 +1,5 @@
-// The Shop Nobi page lives at /shop and every path under it. index.html runs
-// the same check inline to decide how the assistant bundle starts.
+// Shopping pages live at /shop and below it, except the MCP setup document.
+// index.html runs the same check inline to decide how the assistant starts.
 
 import { LINKEDIN_URL } from "../constants/positioning.js";
 import { IndexableRobots } from "./previewImage.js";
@@ -84,8 +84,9 @@ export function tagShopNobiPageLink(pageUrl, channel) {
  * Returns whether a path belongs to the Shop Nobi page.
  *
  * @param {string} pathname The path part of a page address, such as "/shop".
- * @returns {boolean} True for /shop and every path under it.
+ * @returns {boolean} True for shopping paths, excluding the MCP setup document.
  */
 export function isShopNobiPath(pathname) {
-  return pathname === "/shop" || pathname.startsWith("/shop/");
+  const path = pathname.replace(/\/$/, "");
+  return path !== "/shop/mcp" && (path === "/shop" || path.startsWith("/shop/"));
 }

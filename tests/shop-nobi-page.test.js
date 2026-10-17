@@ -4,14 +4,14 @@ import { isShopNobiPath, ShopNobiImage } from "../src/utils/shopNobiPage.js";
 import { buildSearchPageSeo } from "../src/utils/shopNobiSearchPage.js";
 import { keepAllowedPages } from "../scripts/shop-nobi-search-pages-api.js";
 
-test("the Shop Nobi page is /shop and every path under it", () => {
+test("shopping pages include /shop and its search paths", () => {
   for (const path of ["/shop", "/shop/", "/shop/anything"]) {
     assert.equal(isShopNobiPath(path), true, path);
   }
 });
 
 test("other pages, including ones that only start with the same letters, are not the Shop Nobi page", () => {
-  for (const path of ["/", "/pricing", "/shopping", "/shops", "/blog/shop"]) {
+  for (const path of ["/", "/pricing", "/shopping", "/shops", "/blog/shop", "/shop/mcp", "/shop/mcp/"]) {
     assert.equal(isShopNobiPath(path), false, path);
   }
 });

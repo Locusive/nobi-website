@@ -19,6 +19,7 @@ import { BaseusScreenSeo } from "../src/content/baseusScreens.js";
 
 import { MindTheColorSeo } from "../src/content/mindTheColor.js";
 import { ElectionNightSeo } from "../src/content/electionNight.js";
+import { ShopNobiMcpSeo } from "../src/content/shopNobiMcp.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const DIST = join(__dirname, "..", "dist");
@@ -61,6 +62,7 @@ const PAGES = [
     schema: [product("Nobi", "A single AI assistant for search, support, proactive engagement, lead capture, merchandising, and an MCP agent endpoint.", "/product")],
   },
   ShopNobiPageHead,
+  ShopNobiMcpSeo,
   CoveCubbySeo,
   MarleySpoonSeo,
   BaseusScreenSeo,

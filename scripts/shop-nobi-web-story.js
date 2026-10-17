@@ -18,6 +18,11 @@ const BackLinkText = "See every pick";
 const StoreLinkText = "See it at the store";
 // The API counts the tap under a new conversation and forwards to the store link with it, since AMP cannot add one.
 const StoreLinkRoute = "https://api.nobi.ai/v1/shop/story-go";
+// The API records which product a product page showed, read from the id of the page in view, which AMP fills in.
+const StoryViewRoute = "https://api.nobi.ai/v1/shop/story-view";
+const StoryPageIdVariable = "${storyPageId}";
+// Beacons only, so the story never waits on the API.
+const BeaconTransport = { beacon: true, xhrpost: true, image: false };
 // AMP requires this exact style block, which hides the page until the AMP script starts.
 const AmpBoilerplate = "<style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>";
 const StoryStyle = [
@@ -53,6 +58,7 @@ export function renderWebStory(page, plan) {
     '<meta charset="utf-8">',
     '<script async src="https://cdn.ampproject.org/v0.js"></script>',
     '<script async custom-element="amp-story" src="https://cdn.ampproject.org/v0/amp-story-1.0.js"></script>',
+    '<script async custom-element="amp-analytics" src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>',
     `<title>${title}</title>`,
     '<meta name="viewport" content="width=device-width">',
     `<meta name="description" content="${description}">`,
@@ -63,6 +69,7 @@ export function renderWebStory(page, plan) {
     "</head>",
     "<body>",
     `<amp-story standalone title="${title}" publisher="${Publisher}" publisher-logo-src="${PublisherLogoUrl}" poster-portrait-src="${htmlEscape(plan.posterUrl)}">`,
+    renderViewTracking(page.slug),
     ...storyPages,
     "</amp-story>",
     "</body>",
@@ -82,11 +89,46 @@ export function taggedSearchPageUrl(slug) {
   return address.toString();
 }
 
-/** Renders one story page with an id made of its kind and position. */
+/**
+ * Renders the analytics config that sends the id of each page a shopper sees. The API records the product of a product
+ * page and ignores every other page. Bots are left out by the API, as their taps are.
+ *
+ * @param {string} slug The story's slug, sent as the page.
+ * @returns {string} The amp-analytics element.
+ */
+function renderViewTracking(slug) {
+  const storyViewUrl = `${StoryViewRoute}?page=${encodeURIComponent(slug)}&storyPage=${StoryPageIdVariable}`;
+  const config = {
+    requests: { storyView: storyViewUrl },
+    triggers: { pageInView: { on: "story-page-visible", request: "storyView" } },
+    transport: BeaconTransport,
+  };
+  return `<amp-analytics><script type="application/json">${JSON.stringify(config)}</script></amp-analytics>`;
+}
+
+/**
+ * Renders one story page with an id made of its kind and position. A product page's id also names its place among the
+ * story's products, its product variant and its store, which is how the API learns which product a shopper saw.
+ */
 function renderStoryPage(storyPage, index, page, plan) {
-  const id = `${storyPage.kind}-${index + 1}`;
+  const id = buildStoryPageId(storyPage, index, plan);
   const layers = renderLayers(storyPage, page, plan);
   return `<amp-story-page id="${id}">\n${layers}\n</amp-story-page>`;
+}
+
+/**
+ * Builds a story page's id: "product-{place}-{product variant id}-{store id}" for a product with both ids, or its kind
+ * and position for any other page.
+ */
+function buildStoryPageId(storyPage, index, plan) {
+  const product = storyPage.product;
+  if (storyPage.kind !== StoryPageKind.Product || !product.productVariantId || !product.owningMerchantId) {
+    return `${storyPage.kind}-${index + 1}`;
+  }
+
+  const productPages = plan.pages.filter((planned) => planned.kind === StoryPageKind.Product);
+  const place = productPages.indexOf(storyPage) + 1;
+  return `${StoryPageKind.Product}-${place}-${product.productVariantId}-${product.owningMerchantId}`;
 }
 
 /** Renders the layers of one story page for its kind. */

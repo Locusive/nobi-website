@@ -147,7 +147,31 @@ test("a store link goes through the API, which counts the tap and adds its conve
   const linkThroughApi = "https://api.nobi.ai/v1/shop/story-go?url=https%3A%2F%2Fstore.example%2Fproducts%2Froper%3Fvariant%3D1&amp;page=boots";
   assert.ok(firstStoreLink.includes(` href="${linkThroughApi}"`), firstStoreLink);
   assert.ok(firstStoreLink.includes(' data-tooltip-text="store.example"'), firstStoreLink);
-  assert.ok(!html.includes("amp-analytics"), "The API counts the tap, so no beacon counts it twice");
+  assert.ok(!html.includes("story-click-through"), "The API counts the tap, so no beacon counts it twice");
+});
+
+test("each page in view goes to the API, and a product page's id names its place, product and store", async () => {
+  const productIds = [
+    { productVariantId: "8e4a3b21-1d55-4c2b-9b86-3a7f2a6e0003", owningMerchantId: "35019f05-f0cd-4ee3-ba16-c1fe938888d1" },
+    {},
+    { productVariantId: "f9e26080-b6a4-4af2-b32c-b6e751e976c6", owningMerchantId: "35019f05-f0cd-4ee3-ba16-c1fe938888d1" },
+  ];
+  const page = makePage();
+  const html = await renderStory({ ...page, products: page.products.map((product, index) => ({ ...product, ...productIds[index] })) });
+
+  const config = JSON.parse(html.match(/<amp-analytics><script type="application\/json">(.*?)<\/script><\/amp-analytics>/)[1]);
+  assert.deepEqual(config, {
+    requests: { storyView: "https://api.nobi.ai/v1/shop/story-view?page=boots&storyPage=${storyPageId}" },
+    triggers: { pageInView: { on: "story-page-visible", request: "storyView" } },
+    transport: { beacon: true, xhrpost: true, image: false },
+  });
+  assert.ok(html.includes('custom-element="amp-analytics"'));
+  const pageIds = [...html.matchAll(/<amp-story-page id="([^"]+)">/g)].map(([, id]) => id);
+  assert.deepEqual(pageIds.filter((id) => id.startsWith("product")), [
+    "product-1-8e4a3b21-1d55-4c2b-9b86-3a7f2a6e0003-35019f05-f0cd-4ee3-ba16-c1fe938888d1",
+    "product-5",
+    "product-3-f9e26080-b6a4-4af2-b32c-b6e751e976c6-35019f05-f0cd-4ee3-ba16-c1fe938888d1",
+  ], "A product the API sent no ids for keeps its plain id, which the API ignores");
 });
 
 test("page text is escaped everywhere it appears", async () => {

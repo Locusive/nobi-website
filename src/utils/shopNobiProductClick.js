@@ -1,7 +1,7 @@
 import { handleShopNobiOutboundClick } from "./shopNobiOutboundClick.js";
 
 /**
- * Preserve the existing standalone product click contract, including optional real variant enrichment.
+ * Preserve the existing standalone product click contract, with the real variant and store when the page knows them.
  * Shared delivery mechanics also support non-product offers under a separate event name.
  */
 export function handleProductLinkClick(event, { product, position, query, slug, entryPoint = "AI Search Bar" }, browser = globalThis) {
@@ -11,6 +11,9 @@ export function handleProductLinkClick(event, { product, position, query, slug, 
   };
   if (product.productVariantId) {
     details.productVariantId = product.productVariantId;
+  }
+  if (product.owningMerchantId) {
+    details.owningMerchantId = product.owningMerchantId;
   }
   handleShopNobiOutboundClick(event, { link: product, slug, eventName: "Click On Search Result", details }, browser);
 }

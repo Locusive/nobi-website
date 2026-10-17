@@ -195,6 +195,18 @@ test("a page's HTML holds no finished store link as text, and only paid products
   }
 });
 
+test("a product keeps its variant and store ids when both are real ids, so the page can record what it showed", () => {
+  const products = readScriptJson(readOutput("shop/s/black-leather-boots.html"), "shop-nobi-prebuilt-content").data.products;
+
+  assert.deepEqual([products[0].productVariantId, products[0].owningMerchantId], [
+    "8e4a3b21-1d55-4c2b-9b86-3a7f2a6e0003",
+    "35019f05-f0cd-4ee3-ba16-c1fe938888d1",
+  ]);
+  for (const product of products.slice(1)) {
+    assert.deepEqual([product.productVariantId, product.owningMerchantId], [undefined, undefined], product.name);
+  }
+});
+
 test("a story's paid product goes through the link route like every product, sponsored and with the notice under it", () => {
   const story = readOutput("shop/stories/black-leather-boots.html");
   const storeLinks = [...story.matchAll(/<a class="store-link" href="([^"]+)" [^>]*rel="([^"]+)"[^>]*>[^<]*<\/a>(<p class="commission-notice">We may earn a commission<\/p>)?/g)];

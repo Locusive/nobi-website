@@ -78,6 +78,15 @@ Crawlers, automated browsers and local copies send none. In a
 smoke test's tab, the click carries the bundle's `nobi_smoke_test` marker, so
 the API drops it as it drops the bundle's own smoke-test events.
 
+Each page view of a search page also sends one "Displayed Product Collection"
+event, the event the bundle sends for the products it shows. Its `shownProducts`
+list names each prebuilt product with an id, in order: `productVariantId`,
+`owningMerchantId`, `position` (the `positionInGrid` its click sends) and
+`isPaidLink`. It carries `pageSlug` and the collection name `Prebuilt search page`,
+so a report can tell it from the live search. The build keeps a product's
+`productVariantId` and `owningMerchantId` only when the API sent both as real ids,
+and prebuilt clicks then carry both too. The same people-only rules apply.
+
 Each search page with at least two short guide pages and two product pictures,
 one of them a Shopify picture whose 3:4 cut is at least 640 by 853 pixels (the
 build downloads the start of each poster to check), also gets a Google Web
@@ -89,7 +98,11 @@ links back to the search page with `utm_source=google_web_stories`. The search
 page links to its story, and `sitemap-shop.xml` lists the stories. Each store
 link goes through `https://api.nobi.ai/v1/shop/story-go` with the plain store
 link and the story's slug; the API counts the tap and forwards to the store,
-through the store's affiliate link when one pays us. Stories get
+through the store's affiliate link when one pays us. The story's amp-analytics
+sends `https://api.nobi.ai/v1/shop/story-view` the slug and the id of each page
+in view. A product page's id is `product-<place>-<variant id>-<store id>` when the
+API sent both ids, and the API records that product as shown; it ignores every
+other page and every bot. Stories get
 only the file room left after the pages. Mature pages get no story. To check
 one, run `npx amphtml-validator dist/shop/stories/<slug>.html`.
 

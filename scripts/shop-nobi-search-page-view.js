@@ -6,6 +6,7 @@ import { encodePaidLink } from "../src/utils/shopNobiPaidLink.js";
 
 const SlugPattern = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 const CurrencyPattern = /^[A-Z]{3}$/;
+const IdPattern = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 const UpdatedDateFormat = { month: "long", day: "numeric", year: "numeric", timeZone: "UTC" };
 
 /**
@@ -128,7 +129,19 @@ function buildProduct(product) {
     currency: CurrencyPattern.test(product.currency ?? "") ? product.currency : null,
     isInStock: product.isInStock === true,
     ...readPaidLinks(product),
+    ...readProductIds(product),
   };
+}
+
+/**
+ * Keeps the product's variant id and its store's id when the API sent both, so the page can record which products it
+ * showed and its clicks can name the product and store. Pages built before the API sent them carry neither.
+ */
+function readProductIds(product) {
+  if (!IdPattern.test(product.productVariantId ?? "") || !IdPattern.test(product.owningMerchantId ?? "")) {
+    return {};
+  }
+  return { productVariantId: product.productVariantId, owningMerchantId: product.owningMerchantId };
 }
 
 /**

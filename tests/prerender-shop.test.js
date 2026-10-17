@@ -382,13 +382,27 @@ test("a top category's page shows its category pages under Browse by category, t
   }
 });
 
-test("each sale page with a real markdown is written once, and repeated, banned and markdown-free pages are not", () => {
+test("each sale page with a real markdown is written once, and repeated, banned, hub-named and markdown-free pages are not", () => {
   for (const path of ["shop/sale/dresses.html", "shop/sale/shirts-tops.html", "shop/sale.html", "shop/sale/index.html"]) {
     assert.ok(readSaleOutput(path).includes("<!doctype html>"), path);
   }
   assert.deepEqual(readdirSync(join(saleDistDir, "shop/sale")).sort(), ["dresses.html", "index.html", "shirts-tops.html"]);
+  assert.equal(readScriptJson(readSaleOutput("shop/sale/index.html"), "shop-nobi-prebuilt-content").kind, "sale-hub");
   assert.ok(!readSaleOutput("shop/sale/dresses.html").includes("Repeated Page Dress"), "The first page with a slug wins");
   assert.ok(!existsSync(join(distDir, "shop/sale.html")), "No sale pages, no hub");
+});
+
+test("when the file limit is reached, the sale hub and the first sale pages take the room before any search page", async () => {
+  const folder = makeDistCopy();
+  const hubAndOneSalePage = 3;
+  try {
+    const count = await prerenderWith({ saleBody: readFixtureSalePageData() }, folder, { fileLimit: FileCountBeforePages + hubAndOneSalePage });
+    assert.equal(count, 0, "No room is left for search pages");
+    assert.deepEqual(readdirSync(join(folder, "shop/sale")).sort(), ["dresses.html", "index.html"]);
+    assert.ok(!readFileSync(join(folder, "sitemap-shop.xml"), "utf8").includes("shirts-tops"), "A page left out is in no listing");
+  } finally {
+    rmSync(folder, { recursive: true, force: true });
+  }
 });
 
 test("a sale page's head and heading name its category, and each card shows the store's earlier price before its price now", () => {

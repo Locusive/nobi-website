@@ -40,8 +40,10 @@ export async function prerenderShopNobiSearchPages({
   fetchImageSize = fetchImageSizeOnline,
 }) {
   const { pages: fetchedPages, retired } = await fetchSearchPagesData(apiBaseUrl);
-  const salePlan = planSalePages(await fetchSalePagesData(apiBaseUrl));
-  const fileRoom = countFileRoom(distDir, fileLimit) - countSaleFiles(salePlan);
+  const saleData = await fetchSalePagesData(apiBaseUrl);
+  const totalFileRoom = countFileRoom(distDir, fileLimit);
+  const salePlan = planSalePages(saleData, totalFileRoom);
+  const fileRoom = totalFileRoom - countSaleFiles(salePlan);
   const plan = { ...(await planPages(fetchedPages, fileRoom, fetchImageSize)), ...salePlan };
   if (plan.leftOutCount > 0) {
     console.warn(`prerender-shop: left out ${plan.leftOutCount} page(s) to stay within ${fileLimit} files.`);
@@ -84,9 +86,14 @@ async function planPages(fetchedPages, fileRoom, fetchImageSize) {
   return { searchPages, categoryPages, popularSearches, stories, leftOutCount, leftOutStoryCount, smallPosterCount };
 }
 
-/** Builds the sale pages and their hub, which take their few files before any search page. */
-function planSalePages(saleData) {
-  const salePages = buildSalePages(saleData);
+/** Builds the sale pages that fit in the file room, with their hub. They take their room before any search page. */
+function planSalePages(saleData, fileRoom) {
+  const saleRoom = Math.max(0, fileRoom - SaleHubFileCount);
+  const allSalePages = buildSalePages(saleData);
+  const salePages = allSalePages.slice(0, saleRoom);
+  if (salePages.length < allSalePages.length) {
+    console.warn(`prerender-shop: left out ${allSalePages.length - salePages.length} sale page(s) to stay within the file limit.`);
+  }
   console.log(`prerender-shop: planned ${salePages.length} sale page(s).`);
   return { salePages, saleHub: buildSaleHub(salePages) };
 }

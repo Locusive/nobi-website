@@ -53,6 +53,18 @@
       ]
     },
     {
+      "categoryPath": "office_supplies.filing.index_cards",
+      "categoryName": "Index",
+      "products": [
+        {
+          "name": "Index Card Box", "brand": "Cedar", "storeName": "Cedar",
+          "url": "https://cedar.example.com/products/index-card-box?variant=34",
+          "imageUrl": "https://cdn.example.com/index-box.jpg",
+          "price": 5, "wasPrice": 8, "currency": "USD", "isInStock": true, "paidLink": false
+        }
+      ]
+    },
+    {
       "categoryPath": "home_garden.decor.rugs",
       "categoryName": "Rugs",
       "products": [

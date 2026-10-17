@@ -8,6 +8,9 @@ import { buildSalePageTitle, describeSalePage, SaleHubDescription, SaleHubTitle 
 /** Ends a sale page's search, which its clicks carry, such as "Dresses on sale". */
 const SaleQueryEnding = " on sale";
 
+/** The hub is written to shop/sale/index.html, so no sale page may take that name. */
+const ReservedSaleSlug = "index";
+
 /**
  * Builds the sale pages, in data order. A page with no category name, an unsafe slug, a repeated slug or no product
  * with a real markdown is left out.
@@ -56,7 +59,7 @@ function buildSalePage(fetchedPage, generatedAt) {
   const name = fetchedPage.categoryName.trim();
   const slug = makeSlug(name);
   const products = (Array.isArray(fetchedPage.products) ? fetchedPage.products : []).map(buildSaleProduct).filter(Boolean);
-  if (!isSafeSlug(slug) || products.length === 0) {
+  if (!isSafeSlug(slug) || slug === ReservedSaleSlug || products.length === 0) {
     console.warn(`prerender-shop: skipped a sale page with an unsafe name or no marked-down products: ${JSON.stringify(name)}`);
     return null;
   }

@@ -37,12 +37,12 @@ export function sendSearchPageShownProducts(page, browser = globalThis) {
  * and its paid link. A product built before the API sent ids keeps its place with a null id.
  */
 function buildShownProduct(product) {
-  const namesOtherStore = Boolean(product.productVariantId)
-    && Boolean(product.owningMerchantId)
-    && product.owningMerchantId !== ShopNobiMerchantId;
+  const otherStoreId = product.productVariantId && product.owningMerchantId !== ShopNobiMerchantId
+    ? product.owningMerchantId
+    : null;
   return {
     productVariantId: product.productVariantId ?? null,
-    ...(namesOtherStore ? { owningMerchantId: product.owningMerchantId } : {}),
+    ...(otherStoreId ? { owningMerchantId: otherStoreId } : {}),
     isPaidLink: product.paidLink === true,
   };
 }

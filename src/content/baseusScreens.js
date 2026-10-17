@@ -24,14 +24,31 @@ export const BaseusScreenSources = Object.freeze({
   apple: { label: "Apple: check your Mac's exact external-display limits", url: "https://support.apple.com/en-ca/122212" },
 });
 
+/** Independent anchors from the reviewed catalog ledger; builder artifacts must retain these exact identities. */
+const ReviewedBaseusMerchantId = "b9131d78-57d2-471a-a1b6-ea53bac35575";
+const ReviewedCatalogIdentityByModel = Object.freeze({
+  "nu1-air-mac": {
+    productId: "70af7de2-1e24-43e1-8b7a-5078134dac0b", productVariantId: "781f8333-bcea-4def-b9ed-cf325950f47a",
+    productVariantInternalId: "42284962283597",
+    sourceUrl: "https://www.baseus.com/products/nomos-nu1-air-mac-12-in-1-docking-station?variant=42284962283597",
+  },
+  "rd1-pro": {
+    productId: "d8b411b9-71e2-4b67-9b12-36a3c129a6da", productVariantId: "4ba9ef25-133d-4360-86b5-2a2dc2b6c194",
+    productVariantInternalId: "42798222934093",
+    sourceUrl: "https://www.baseus.com/products/spacemate-rd1-pro-15-in-1-win-docking-station?variant=42798222934093",
+  },
+});
+
 /** Fail the build if an authored record loses its real catalog identity or complete builder destination. */
 export function validateBaseusScreenLink(record) {
-  const uuid = /^[a-f0-9]{8}(?:-[a-f0-9]{4}){3}-[a-f0-9]{12}$/i;
+  const reviewedIdentity = ReviewedCatalogIdentityByModel[record.id];
   const source = new URL(record.sourceUrl);
   const plain = new URL(record.plain);
   const paid = new URL(record.paid);
-  if (!ProductFacts[record.id] || [source.protocol, plain.protocol, paid.protocol].some(protocol => protocol !== "https:")
-    || ![record.productId, record.productVariantId, record.owningMerchantId].every(value => uuid.test(value))
+  if (!Object.hasOwn(ProductFacts, record.id) || !Object.hasOwn(ReviewedCatalogIdentityByModel, record.id)
+    || [source.protocol, plain.protocol, paid.protocol].some(protocol => protocol !== "https:")
+    || record.owningMerchantId !== ReviewedBaseusMerchantId
+    || Object.entries(reviewedIdentity).some(([fieldName, reviewedValue]) => record[fieldName] !== reviewedValue)
     || source.hostname !== "www.baseus.com" || plain.hostname !== source.hostname || source.pathname !== plain.pathname
     || !source.searchParams.get("variant") || source.searchParams.get("variant") !== plain.searchParams.get("variant")
     || paid.hostname !== "www.awin1.com" || paid.pathname !== "/cread.php"

@@ -55,7 +55,15 @@ test("page registration provides both static URL forms, one canonical, navigatio
 test("publication rejects incomplete or substituted authored link records", () => {
   for (const record of BaseusScreenLinkArtifact.products) {
     assert.equal(validateBaseusScreenLink(record), record);
-    for (const changes of [{ productVariantId: "" }, { owningMerchantId: null }, { paidLink: false }, { id: "invented-model" },
+    const reviewedPeer = BaseusScreenLinkArtifact.products.find(product => product.id !== record.id);
+    for (const changes of [{ productId: reviewedPeer.productId }, { productVariantId: reviewedPeer.productVariantId },
+      { owningMerchantId: reviewedPeer.productId }, { id: reviewedPeer.id },
+      { productVariantInternalId: reviewedPeer.productVariantInternalId },
+      { sourceUrl: reviewedPeer.sourceUrl, plain: reviewedPeer.plain, paid: reviewedPeer.paid }]) {
+      assert.throws(() => validateBaseusScreenLink({ ...record, ...changes }), "A valid-shaped different identity must not be accepted");
+    }
+
+    for (const changes of [{ productVariantId: "" }, { owningMerchantId: null }, { paidLink: false }, { id: "invented-model" }, { id: "__proto__" }, { id: "toString" },
       { plain: record.plain.replace("https:", "http:") }, { paid: record.paid.replace("awinmid=38962", "awinmid=1") },
       { paid: record.paid.replace("ued=", "missing=") }, { sourceUrl: record.sourceUrl.replace("variant=", "not-variant=") }]) {
       assert.throws(() => validateBaseusScreenLink({ ...record, ...changes }));

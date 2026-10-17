@@ -59,3 +59,13 @@ Rechecked October17: manufacturer-authored manual URLs remain in BaseusScreenSou
 
 
 Host correction verification: new behavior baseline12pass/1fail; final13decision groups and full168-case offline build/suite pass, zero failures/skips. The additional retained no-PD/undecided assertion passes in the final focused run. Logs: ignored build/baseus_release/host-baseline.log, host-final.log and host-full-offline.log. Normal Chrome verified no-charging host as displayunknown/powernot-requested, requested charging as powerfail and switching back to undecided as powerunknown. Desktop1280x900/mobile390x844 screenshots saved as host-desktop.jpg and host-mobile.jpg;375px content fits the390px viewport. Owned tab1150543689 closed and absence verified, temporary viewport reset, local preview session stopped/exited0. No merchant exit clicked.
+
+
+# 8. Numeric budget and reviewed-identity boundaries
+
+- [x] Reproduce valid peripheral demands above160W becoming missing/unknown. Parse finite nonnegative decimal demand independently of a device budget; fail known peripheral-only shared-budget excess even when laptop watts are unknown. Keep malformed, blank, zero-required and nonfinite input semantics explicit.
+- [x] Reproduce syntactically valid substituted catalog UUIDs passing validation. Bind each authored model's product/variant/merchant/source identity to the already verified ledger and Java output; do not construct new affiliate templates or infer current account eligibility.
+- [x] Run focused failing-before/passing-after behavior and identity checks, then full offline suite; answer exact current review threads and request final-head review. Preserve frozen Java source and production hold.
+
+
+Budget/identity evidence: original focused batch16pass/2fail. Final18focused groups and169full offline build/suite cases pass, zero failures/skips. Real numeric demand remains numeric above budgets, peripherals-alone excess fails with unknown laptop watts, and unknown laptop watts never confirm the full shared total. Verified per-model UUID/source anchors reject swapped valid-shaped identities, source destinations and source variant IDs. A separate own-property regression reproduced prototype-name acceptance before the guard and passes afterward. Actual generated builder artifacts are unchanged. Logs: ignored build/baseus_release/boundaries-baseline.log, identity-prototype-baseline.log, boundaries-final.log and boundaries-full-offline-final.log. No UI layout or source fact change; final whitespace-only condition wrapping does not change behavior.

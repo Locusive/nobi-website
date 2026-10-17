@@ -116,9 +116,9 @@ function displayResult(id, input) {
 }
 
 /** Converts only nonnegative, explicitly supplied power values; blank/NaN never mean zero. */
-function watts(value, maximum) {
+function watts(value) {
   const text = typeof value === "string" || typeof value === "number" ? String(value).trim() : "";
-  return /^(?:\d+(?:\.\d*)?|\.\d+)$/.test(text) && Number.isFinite(Number(text)) && Number(text) <= maximum ? Number(text) : null;
+  return /^(?:\d+(?:\.\d*)?|\.\d+)$/.test(text) && Number.isFinite(Number(text)) ? Number(text) : null;
 }
 
 /** Models manufacturer allocation ceilings; it never promises negotiated or measured laptop charging. */
@@ -126,7 +126,7 @@ function powerResult(id, input) {
   if (input.charging === "no") return { status: "not-requested", checks: [fit("Laptop charging was not requested. This is not a charging compatibility claim.")] };
   if (input.charging !== "yes") return outcome([unknown("Decide whether this dock must charge your laptop.")]);
   const checks = [];
-  const required = watts(input.watts, 300);
+  const required = watts(input.watts);
   checks.push(required !== null && required > 0 ? fit(`Your stated laptop requirement is ${required}W.`) : unknown("Enter the laptop manufacturer's required charging watts."));
   checks.push(input.host === "video-only" ? fail("The selected host cannot receive laptop charging through this port.", id === "nu1-air-mac" ? "nu1Manual" : "rd1Manual")
     : confirmation(input.pdPath, "You confirmed the host's USB-C PD support and required cable/port ratings.",
@@ -141,11 +141,12 @@ function powerResult(id, input) {
         : fit(`Baseus allocates up to ${budget}W to the laptop in this stated USB-load case, not 100W.`, "nu1Power"));
   } else {
     checks.push(confirmation(input.rd1Supply, "You confirmed use of RD1's included 180W supply.", "This plan lacks RD1's documented 180W supply.", "Confirm the included RD1 180W supply is used.", "rd1"));
-    const peripherals = watts(input.peripheralWatts, 160);
+    const peripherals = watts(input.peripheralWatts);
     if (required !== null && required > 100) checks.push(fail("RD1's laptop output is up to 100W, not its 160W shared total.", "rd1"));
     checks.push(peripherals === null ? unknown("Add the simultaneous other-device power demand; 160W is a shared total.", "rd1")
-      : required !== null && required + peripherals > 160 ? fail("Laptop plus other-device demand exceeds the stated 160W shared total.", "rd1")
-        : fit("The stated total is within 160W; each port's allocation still needs confirmation.", "rd1"));
+      : peripherals > 160 || (required !== null && required + peripherals > 160) ? fail("Laptop plus other-device demand exceeds the stated 160W shared total.", "rd1")
+        : required === null ? unknown("Add the laptop charging demand before checking the 160W shared total.", "rd1")
+          : fit("The stated total is within 160W; each port's allocation still needs confirmation.", "rd1"));
     checks.push(confirmation(input.peripheralPorts, "You checked the simultaneous port allocations for the other devices.",
       "A confirmed simultaneous port allocation cannot meet your other-device demand.", "Verify individual simultaneous port allocations; the shared total alone is insufficient.", "rd1Manual"));
   }

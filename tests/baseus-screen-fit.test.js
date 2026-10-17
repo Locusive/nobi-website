@@ -114,7 +114,7 @@ test("RD1's shared160W and up-to100W host limits require the actual supply and i
 
 test("blank, malformed and nonfinite power values never become zero or a positive charging claim", () => {
   const powered = { ...ConfirmedOffice, charging: "yes", pdPath: "yes", nu1Adapter: "100", nu1Usb: "one" };
-  for (const watts of ["", " ", "NaN", "Infinity", "-1", "0", "301", "0x41", true, false, null]) assert.equal(evaluate("nu1-air-mac", { watts }, powered).power.status, "unknown", watts);
+  for (const watts of ["", " ", "NaN", "Infinity", "-1", "0", "0x41", true, false, null]) assert.equal(evaluate("nu1-air-mac", { watts }, powered).power.status, "unknown", watts);
   assert.equal(evaluate("nu1-air-mac", { charging: "unknown", watts: "65" }, powered).power.status, "unknown");
 });
 
@@ -159,5 +159,24 @@ test("a video-only host stays uncertain for displays and fails only a requested 
     assert.equal(undecided.status, "unknown");
     assert.equal(evaluate(id, { host: "no", charging: "no" }, initial).display.status, "fail", "Missing data or video remains incompatible");
     assert.equal(evaluate(id, { host: "yes", charging: "no" }, initial).display.status, "conditional");
+  }
+});
+
+test("known numeric power demands above a documented budget fail instead of becoming missing", () => {
+  const rd1Power = { charging: "yes", pdPath: "yes", rd1Supply: "yes", peripheralPorts: "yes" };
+  for (const peripheralWatts of ["160.01", "161", "301", "1000"]) {
+    for (const watts of ["65", ""]) {
+      const result = evaluate("rd1-pro", { ...rd1Power, watts, peripheralWatts }, Windows4k);
+      assert.equal(result.power.status, "fail", `Known ${peripheralWatts}W peripheral demand exceeds the shared total`);
+      assert.match(result.power.checks[0].message, /160W shared total/);
+    }
+  }
+  assert.equal(evaluate("rd1-pro", { ...rd1Power, watts: "301", peripheralWatts: "0" }, Windows4k).power.status, "fail");
+  const unknownLaptop = evaluate("rd1-pro", { ...rd1Power, watts: "", peripheralWatts: "160" }, Windows4k);
+  assert.equal(unknownLaptop.power.status, "unknown");
+  assert.ok(!unknownLaptop.power.checks.some(check => /stated total is within/.test(check.message)), "Unknown laptop watts cannot confirm the full shared total");
+  assert.equal(evaluate("nu1-air-mac", { charging: "yes", watts: "301", pdPath: "yes", nu1Adapter: "100", nu1Usb: "one" }).power.status, "fail");
+  for (const peripheralWatts of ["", " ", "NaN", "Infinity", "-1", "0x41", null]) {
+    assert.equal(evaluate("rd1-pro", { ...rd1Power, watts: "65", peripheralWatts }, Windows4k).power.status, "unknown");
   }
 });

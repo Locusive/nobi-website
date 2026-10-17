@@ -125,3 +125,24 @@ Pages deploy hook in the `CLOUDFLARE_DEPLOY_HOOK_URL` secret.
 To build without the network, serve the test data:
 `node tests/shop-nobi-pages-server.js 4789`, then
 `SHOP_PAGES_API_URL=http://127.0.0.1:4789 npm test`.
+
+## Cove/Cubby comparison utility
+
+`/tools/cove-vs-cubby` renders the comparison facts in HTML and runs its
+floor-space calculator locally in the browser. It keeps the site's existing
+floating assistant behavior outside `/shop`; the calculator sends no query.
+Manufacturer facts, checked date, exact catalog variant IDs and reviewed
+server-built store links are authored in `src/content/coveCubbyComparison.js`.
+Recheck these inputs before changing the dated price claims. Do not construct
+a second affiliate URL template in the website.
+
+Purchase clicks reuse the standalone visit handler with the actual
+`Shop Nobi Utility` surface, page URL, acquisition tags and variant ID.
+Unfiltered click reporting retains the surface; the current backend report
+validator does not yet accept it as an exact entry-point filter.
+Standalone utility clicks have no conversation-derived search text; the current
+report's `/shop/s` extractor also leaves their page slug empty. Page URL,
+`details.query`, traffic tags and the final affiliate reference remain available
+for acquisition joins. Do not create a synthetic search or conversation.
+Run the footprint tests with `node --test tests/cat-footprint-fit.test.js`;
+the full offline website suite also checks the built comparison HTML.

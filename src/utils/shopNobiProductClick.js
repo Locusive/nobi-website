@@ -33,7 +33,8 @@ const SmokeTestSessionStorageKey = "nobi_smoke_test_token";
  * the click opens the store page. The browser still follows the link as usual.
  *
  * @param {{button: number, currentTarget: {href: string}}} event The click, or a middle or right click.
- * @param {{product: object, position: number, query: string, slug: string}} click The product, its place, the search, the slug.
+ * @param {{product: object, position: number, query: string, slug: string, entryPoint?: string}} click The product, its
+ *     place, topic, slug and optional actual surface. Existing search pages keep their current entry point.
  * @param {object} [browser] The window. Tests pass a stand-in.
  */
 export function handleProductLinkClick(event, click, browser = globalThis) {
@@ -72,9 +73,9 @@ function shouldCountClicks(browser) {
 }
 
 /** Builds the event with the field names the bundle uses for its live product clicks. */
-function buildClickEvent({ product, position, query }, linkUrl, browser) {
+function buildClickEvent({ product, position, query, entryPoint = SearchBarEntryPoint }, linkUrl, browser) {
   const details = {
-    entryPoint: SearchBarEntryPoint,
+    entryPoint,
     query,
     productName: product.name,
     storeName: product.storeName,
@@ -84,6 +85,10 @@ function buildClickEvent({ product, position, query }, linkUrl, browser) {
     pageUrl: browser.location.href,
     ...readTrafficTags(browser.location.href),
   };
+  // Authored comparisons can supply a verified catalog variant so the API resolves the product and owning store.
+  if (product.productVariantId) {
+    details.productVariantId = product.productVariantId;
+  }
   if (browser.document.referrer) {
     details.referrer = browser.document.referrer;
   }

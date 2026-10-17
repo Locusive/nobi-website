@@ -7,8 +7,11 @@ import Product from "../src/pages/Product.jsx";
 import ShopPage from "../src/pages/ShopPage.jsx";
 import Privacy from "../src/pages/Privacy.jsx";
 import Terms from "../src/pages/Terms.jsx";
+import CoveCubbyComparison from "../src/pages/CoveCubbyComparison.jsx";
+import { CoveCubbyPath } from "../src/content/coveCubbyComparison.js";
 
 const Pages = { "/": HomePage, "/pricing": Pricing, "/product": Product, "/shop": ShopPage, "/privacy": Privacy, "/terms": Terms };
+Pages[CoveCubbyPath] = CoveCubbyComparison;
 
 /** Render the same components visitors see, without browser APIs or effects. */
 export function renderPageBody(path) {

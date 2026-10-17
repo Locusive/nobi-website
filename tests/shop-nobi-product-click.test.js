@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import { test } from "node:test";
 import { handleProductLinkClick } from "../src/utils/shopNobiProductClick.js";
 import { encodePaidLink } from "../src/utils/shopNobiPaidLink.js";
+import { CoveCubbyEntryPoint, CoveCubbyProducts, CoveCubbySlug } from "../src/content/coveCubbyComparison.js";
 
 const EventsUrl = "https://api.nobi.ai/v1/merchants/9282b7cb-66ce-4d53-8c37-c291352ef03d/events";
 const PageUrl = "https://nobi.ai/shop/s/black-leather-boots?utm_source=pinterest";
@@ -183,4 +184,47 @@ test("paid prebuilt clicks use one visit reference per page, preserve the destin
     assert.equal(clickProduct(crawler, MouseButton.Main, product).link.href, TaggedProductUrl);
     assert.equal(crawler.beacons.length + crawler.fetches.length, 0);
   }
+});
+
+test("comparison exits retain their actual surface, exact catalog variant and acquisition with a shared standalone visit", () => {
+  const pageUrl = "https://nobi.ai/tools/cove-vs-cubby?utm_source=Pinterest&utm_medium=organic&utm_campaign=cat_footprint&utm_content=exterior_comparison";
+  const browser = makeBrowser({ pageUrl });
+  const references = [];
+
+  for (const [index, product] of CoveCubbyProducts.entries()) {
+    const link = { href: product.url };
+    handleProductLinkClick({ button: index, currentTarget: link }, {
+      product, position: index + 1, query: "Cove vs Cubby", slug: CoveCubbySlug, entryPoint: CoveCubbyEntryPoint,
+    }, browser);
+
+    const event = browser.beacons.at(-1).event;
+    assert.equal(event.details.entryPoint, "Shop Nobi Utility");
+    assert.equal(event.details.productVariantId, product.productVariantId);
+    assert.equal(event.details.query, "Cove vs Cubby");
+    assert.equal(event.details.positionInGrid, index + 1);
+    assert.equal(event.details.conversationId, undefined);
+    assert.equal(event.details.linkUrl, link.href);
+    assert.equal(event.details.pageUrl, pageUrl);
+    assert.equal(event.details.utm_source, "Pinterest");
+    assert.equal(event.details.utm_medium, "organic");
+    assert.equal(event.details.utm_campaign, "cat_footprint");
+    assert.equal(event.details.utm_content, "exterior_comparison");
+    assert.equal(event.details.referrer, "https://www.google.com/");
+    assert.equal(product.paidLink, true, "The reviewed builder marked both outputs paid");
+    const paidUrl = new URL(link.href);
+    const destination = new URL(paidUrl.searchParams.get("ued"));
+    assert.equal(paidUrl.hostname, "www.awin1.com");
+    assert.equal(paidUrl.searchParams.get("awinmid"), "59149");
+    assert.equal(paidUrl.searchParams.get("awinaffid"), "3122300");
+    assert.equal(destination.href, product.url, "The complete server-built destination remains unchanged");
+    assert.equal(destination.searchParams.get("variant"), new URL(product.sourceUrl).searchParams.get("variant"));
+    references.push(paidUrl.searchParams.get("clickref"));
+  }
+
+  assert.equal(browser.beacons.length, 2, "Main and middle clicks each send one event");
+  assert.deepEqual(CoveCubbyProducts.map(product => product.productVariantId), [
+    "8d53bb35-6fbb-42d8-9f32-ac5c3b7e9ce7", "be8c0769-3522-4530-8031-c96da3275a57",
+  ]);
+  assert.match(references[0], /^cove-vs-cubby\.[a-z0-9]{8}$/);
+  assert.equal(references[0], references[1], "Both exits from one comparison use the same visit reference");
 });

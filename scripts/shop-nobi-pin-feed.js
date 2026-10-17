@@ -2,7 +2,7 @@
 // board, and their list. Each item needs a picture, so pages without an https product picture are left out.
 
 import { htmlEscape } from "./prerender-blog.js";
-import { BaseUrl, ShopNobiPageSeo, ShopNobiPinFeed } from "../src/utils/shopNobiPage.js";
+import { BaseUrl, CommissionNotice, ShopNobiPageSeo, ShopNobiPinFeed } from "../src/utils/shopNobiPage.js";
 import { BannedTopLevel, listPinBoards, readTopLevel } from "../src/utils/shopNobiPinBoard.js";
 import { buildSearchPageSeo, searchPageUrl } from "../src/utils/shopNobiSearchPage.js";
 import { findLargePreviewImage } from "../src/utils/previewImage.js";
@@ -106,11 +106,15 @@ function buildPinItem(page) {
 
   // No pubDate: a nightly refresh does not mean the page changed, so its refresh time is not a publish date.
   const link = searchPageUrl(page.slug);
+  const description = buildSearchPageSeo(page).description;
+  const pinDescription = page.products.some((product) => product.paidLink === true)
+    ? `${CommissionNotice} from some links on this page. ${description}`
+    : description;
   return [
     `    <item>`,
     `      <title>${htmlEscape(page.title)}</title>`,
     `      <link>${htmlEscape(link)}</link>`,
-    `      <description>${htmlEscape(buildSearchPageSeo(page).description)}</description>`,
+    `      <description>${htmlEscape(pinDescription)}</description>`,
     `      <guid isPermaLink="true">${htmlEscape(link)}</guid>`,
     `      <media:content url="${htmlEscape(imageUrl)}" medium="image"/>`,
     `    </item>`,

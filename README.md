@@ -55,7 +55,10 @@ table, the pricing facts, and existing page regressions.
 reads to publish a pin for each page. It also writes one feed per top-level
 category at `/shop/pins/<slug>.xml`, one for each Pinterest board, and lists
 them with their item counts in `/shop/pins/index.json`. Mature pages stay out
-of every feed. The outside accounts behind this
+of every feed. A feed item whose page contains an explicitly paid product
+starts its description with a commission notice about some page links; unpaid
+page descriptions remain unchanged. This does not change item identity or imply
+that Pinterest updates an existing Pin. The outside accounts behind this
 (Search Console, Bing, IndexNow, Pinterest) are recorded in nobi-marketing's
 [search engines and discovery sites doc](https://github.com/Locusive/nobi-marketing/blob/main/docs/search_engines_and_discovery_sites.md). It fetches the page data from
 `https://api.nobi.ai/v1/shop/pages`. `SHOP_PAGES_API_URL` points the build at

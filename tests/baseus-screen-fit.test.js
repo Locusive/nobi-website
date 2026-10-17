@@ -69,7 +69,12 @@ test("data-only sockets, unsupported counts and known cable/host failures rule o
     assert.equal(evaluate("nu1-air-mac", changes).status, "fail", JSON.stringify(changes));
     assert.equal(evaluate("rd1-pro", changes, Windows4k).status, "fail", JSON.stringify(changes));
   }
-  assert.equal(evaluate("rd1-pro", { path: "dp" }, Windows4k).status, "unknown");
+  for (const path of ["dp", "mixed"]) {
+    const result = evaluate("rd1-pro", { path }, Windows4k);
+    assert.equal(result.display.status, "fail", "RD1 has no direct DisplayPort connector");
+    assert.match(result.display.checks[0].message, /HDMI/);
+  }
+  assert.equal(evaluate("rd1-pro", { path: "adapter" }, Windows4k).status, "unknown");
   for (const path of ["dp", "mixed"]) assert.equal(evaluate("nu1-air-mac", { path }).status, "conditional");
   assert.equal(evaluate("nu1-air-mac", { path: "adapter" }).status, "unknown");
 });
@@ -111,4 +116,25 @@ test("blank, malformed and nonfinite power values never become zero or a positiv
   const powered = { ...ConfirmedOffice, charging: "yes", pdPath: "yes", nu1Adapter: "100", nu1Usb: "one" };
   for (const watts of ["", " ", "NaN", "Infinity", "-1", "0", "301", "0x41", true, false, null]) assert.equal(evaluate("nu1-air-mac", { watts }, powered).power.status, "unknown", watts);
   assert.equal(evaluate("nu1-air-mac", { charging: "unknown", watts: "65" }, powered).power.status, "unknown");
+});
+
+test("undecided charging ignores retained hidden answers while explicit charging still evaluates them", () => {
+  const stalePlans = [
+    ["nu1-air-mac", ConfirmedOffice, { watts: "100", pdPath: "no", nu1Adapter: "none", nu1Usb: "all" }],
+    ["rd1-pro", Windows4k, { watts: "160", pdPath: "no", rd1Supply: "no", peripheralWatts: "100", peripheralPorts: "no" }],
+  ];
+  for (const [id, initial, hiddenAnswers] of stalePlans) {
+    assert.equal(evaluate(id, { charging: "yes", ...hiddenAnswers }, initial).power.status, "fail");
+    for (const charging of ["unknown", "", null]) {
+      const result = evaluate(id, { charging, ...hiddenAnswers }, initial);
+      assert.equal(result.display.status, "conditional");
+      assert.equal(result.power.status, "unknown");
+      assert.equal(result.status, "unknown");
+      assert.deepEqual(result.power.checks.map(check => check.status), ["unknown"]);
+      assert.match(result.power.checks[0].message, /Decide whether/);
+    }
+    const notRequested = evaluate(id, { charging: "no", ...hiddenAnswers }, initial);
+    assert.equal(notRequested.power.status, "not-requested");
+    assert.equal(notRequested.status, "conditional");
+  }
 });

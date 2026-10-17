@@ -37,3 +37,13 @@
 - [x] Four unpublished creative specifications saved in agents/creative_specs/baseus_screen_pins.md. Original 1200×800 SVG parses and PNG renders successfully.
 - [x] Temporary viewport reset; both owned tabs closed and closure verified. Owned local preview stopped. A browser extension emits Cannot redefine property: StacksProvider from its own inpage script; no utility stack is involved and no extension/security setting changed.
 - [ ] Current-head hosted review and PR checks; root retains merge, production deployment and Pin publication. No stranger visit or earning proof is inferred.
+
+
+# 6. Current-head review corrections
+
+- [x] Reproduce RD1 direct DisplayPort and mixed direct-cable plans being classified unknown despite HDMI-only outputs. Fail those exact direct paths; retain adapter-path uncertainty and NU1 direct-path support.
+- [x] Reproduce retained hidden charging answers making an undecided charging requirement fail. Return one undecided charging check before evaluating dependent fields; retain explicit yes/no behavior and known charging failures.
+- [ ] Run the decision tests before and after, then the full offline website suite. Verify draft PR435 current-head review/check state and update the exact head; root owns release and publication.
+
+
+Review correction evidence: before the two decision fixes, the focused suite had10 passing and two failing groups. Afterward all12 focused groups and the full167-case offline build/suite pass, zero failures/skips. Logs: ignored build/baseus_release/review-baseline.log, review-final.log and review-full-offline.log. Adapter-path uncertainty, NU1 direct outputs, explicit charging failures and charging-not-required controls remain covered. No UI layout, authored facts or outbound behavior changed.

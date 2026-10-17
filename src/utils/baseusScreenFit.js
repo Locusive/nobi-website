@@ -102,7 +102,7 @@ function displayResult(id, input) {
     checks.push(nu1Mode(input));
   } else {
     if (String(input.os).startsWith("mac") && String(input.count) === "2") checks.push(fail("On macOS, RD1's two outputs mirror. DisplayLink software cannot add a chipset to this dock.", "rd1"));
-    if (["dp", "mixed"].includes(input.path)) checks.push(unknown("RD1 has HDMI video outputs; this DP path requires an unverified adapter.", "rd1"));
+    if (["dp", "mixed"].includes(input.path)) checks.push(fail("RD1 has HDMI-only video outputs, so the selected direct DisplayPort cable cannot connect.", "rd1"));
     if (!mac || String(input.count) === "1") checks.push(rd1Mode(input));
   }
   return outcome(checks);
@@ -117,8 +117,8 @@ function watts(value, maximum) {
 /** Models manufacturer allocation ceilings; it never promises negotiated or measured laptop charging. */
 function powerResult(id, input) {
   if (input.charging === "no") return { status: "not-requested", checks: [fit("Laptop charging was not requested. This is not a charging compatibility claim.")] };
+  if (input.charging !== "yes") return outcome([unknown("Decide whether this dock must charge your laptop.")]);
   const checks = [];
-  if (input.charging !== "yes") checks.push(unknown("Decide whether this dock must charge your laptop."));
   const required = watts(input.watts, 300);
   checks.push(required !== null && required > 0 ? fit(`Your stated laptop requirement is ${required}W.`) : unknown("Enter the laptop manufacturer's required charging watts."));
   checks.push(confirmation(input.pdPath, "You confirmed the host's USB-C PD support and required cable/port ratings.",

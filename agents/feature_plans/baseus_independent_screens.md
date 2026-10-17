@@ -79,3 +79,14 @@ Budget/identity evidence: original focused batch16pass/2fail. Final18focused gro
 
 
 Click-reference evidence: the original authored-link/actual-visit selection had4pass/1fail; after the raw-placeholder guard all five cases pass, and the full169-case offline build/suite passes with zero failures/skips. Missing, stale, percent-encoded and duplicate clickrefs are rejected for both actual models. The unchanged actual standalone click test proves each correct builder link receives the same per-visit reference recorded in the emitted final linkUrl. Logs: ignored build/baseus_release/clickref-baseline.log, clickref-final.log and clickref-full-offline.log. No shared link-helper, builder artifact, UI layout or Java changes.
+
+
+# 10. Complete reviewed destination binding
+
+- [x] Compare both authored records with the actual offline Java output receipt and its recorded SHA256. Copy the already reviewed complete plain/paid strings into independent per-model validation anchors; do not construct an affiliate template or derive runtime expectations from mutable input.
+- [x] Replace partial URL validation with exact operative-field comparison. Keep exact catalog identities, own-model membership, merchant and paidLink checks. Reject removed/changed plain attribution even when the paid destination changes to match; retain existing raw-reference and identity controls.
+- [x] Preserve unknown for unlisted NU1 USB loads. The official diagram documents90W with one USB port and75W with all ports, plus fixed/USB draws; it does not establish a universal90W ceiling for unlisted/zero/mixed loads. Known enumerated load excess still fails. The separate manufacturer100W maximum INPUT is a necessary bound: required laptop power above100W fails before USB-load branching, without promising100W output or inventing a90W global output maximum. Reply with the exact source and explicit controls, without inventing a hardware maximum.
+- [x] Run authored-link/decision controls and full offline suite, answer the two exact review threads, then freeze for final review. Java source remains untouched.
+
+
+Complete-output verification: the current Java receipt products matched both module records and the recorded SHA256 before copying the full strings. The complete-plain-URL regression failed before the guard (17 pass/1 fail). A separate input-bound regression failed before the documented100W INPUT check. Final19 focused authored-link/decision/visit cases and all169 offline build/suite cases pass, zero failures/skips. Known one/all USB allocations retain their90W/75W checks; unlisted/mixed100W remains unknown, while101W/301W exceeds the actual input bound and fails. Logs: ignored build/baseus_release/complete-url-baseline.log, input-bound-baseline.log, complete-url-final.log and complete-url-full-offline-final.log. Complete paid/plain strings are independent validation anchors copied from the actual receipt, not a client-built affiliate template.

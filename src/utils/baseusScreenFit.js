@@ -9,6 +9,8 @@ export const BaseusScreenDefaults = Object.freeze({
 
 const KnownMacOs = ["mac14", "mac15", "mac26", "mac27"];
 const KnownWindowsOs = ["win10", "win11"];
+/** An input ceiling cannot promise that much laptop output. */
+const Nu1MaximumInputWatts = 100;
 const check = (status, message, source) => ({ status, message, source });
 const unknown = (message, source) => check("unknown", message, source);
 const fail = (message, source) => check("fail", message, source);
@@ -132,6 +134,7 @@ function powerResult(id, input) {
     : confirmation(input.pdPath, "You confirmed the host's USB-C PD support and required cable/port ratings.",
       "The confirmed PD/cable path cannot supply the requested laptop charging.", "Check host PD support and the required cable/port ratings.", "manuals"));
   if (id === "nu1-air-mac") {
+    if (required !== null && required > Nu1MaximumInputWatts) checks.push(fail("Your laptop demand exceeds NU1's documented 100W maximum input, before dock or peripheral power.", "nu1Manual"));
     checks.push(input.nu1Adapter === "100" ? fit("A suitable separate 100W PD adapter is part of your plan.", "nu1Power")
       : input.nu1Adapter === "none" ? fail("NU1 excludes the charger; this plan has no PD input adapter.", "nu1Manual")
         : unknown("The 90W/75W allocations require the documented 100W adapter; another input is not modeled.", "nu1Power"));

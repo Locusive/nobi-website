@@ -60,6 +60,17 @@ test("publication rejects incomplete or substituted authored link records", () =
       record.paid.replace("clickref=shop_nobi", "clickref=%73hop_nobi"), `${record.paid}&clickref=stale`]) {
       assert.throws(() => validateBaseusScreenLink({ ...record, paid }), "The raw replaceable visit-reference slot must be exact and unambiguous");
     }
+    for (const trafficTag of ["utm_source", "utm_medium", "utm_campaign", "utm_term"]) {
+      for (const replacement of [null, "changed"]) {
+        const plainUrl = new URL(record.plain);
+        if (replacement === null) plainUrl.searchParams.delete(trafficTag);
+        else plainUrl.searchParams.set(trafficTag, replacement);
+        const paidUrl = new URL(record.paid);
+        paidUrl.searchParams.set("ued", plainUrl.href);
+        assert.throws(() => validateBaseusScreenLink({ ...record, plain: plainUrl.href, paid: paidUrl.href }),
+          "The complete plain destination must retain its reviewed attribution even when the paid destination agrees");
+      }
+    }
     const reviewedPeer = BaseusScreenLinkArtifact.products.find(product => product.id !== record.id);
     for (const changes of [{ productId: reviewedPeer.productId }, { productVariantId: reviewedPeer.productVariantId },
       { owningMerchantId: reviewedPeer.productId }, { id: reviewedPeer.id },

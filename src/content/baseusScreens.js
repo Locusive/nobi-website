@@ -31,32 +31,26 @@ const ReviewedCatalogIdentityByModel = Object.freeze({
     productId: "70af7de2-1e24-43e1-8b7a-5078134dac0b", productVariantId: "781f8333-bcea-4def-b9ed-cf325950f47a",
     productVariantInternalId: "42284962283597",
     sourceUrl: "https://www.baseus.com/products/nomos-nu1-air-mac-12-in-1-docking-station?variant=42284962283597",
+    plain: "https://www.baseus.com/products/nomos-nu1-air-mac-12-in-1-docking-station?variant=42284962283597&utm_source=shop_nobi&utm_medium=referral&utm_campaign=shop_nobi&utm_term=Baseus+two+independent+screens",
+    paid: "https://www.awin1.com/cread.php?awinmid=38962&awinaffid=3122300&clickref=shop_nobi&ued=https%3A%2F%2Fwww.baseus.com%2Fproducts%2Fnomos-nu1-air-mac-12-in-1-docking-station%3Fvariant%3D42284962283597%26utm_source%3Dshop_nobi%26utm_medium%3Dreferral%26utm_campaign%3Dshop_nobi%26utm_term%3DBaseus%2Btwo%2Bindependent%2Bscreens",
   },
   "rd1-pro": {
     productId: "d8b411b9-71e2-4b67-9b12-36a3c129a6da", productVariantId: "4ba9ef25-133d-4360-86b5-2a2dc2b6c194",
     productVariantInternalId: "42798222934093",
     sourceUrl: "https://www.baseus.com/products/spacemate-rd1-pro-15-in-1-win-docking-station?variant=42798222934093",
+    plain: "https://www.baseus.com/products/spacemate-rd1-pro-15-in-1-win-docking-station?variant=42798222934093&utm_source=shop_nobi&utm_medium=referral&utm_campaign=shop_nobi&utm_term=Baseus+two+independent+screens",
+    paid: "https://www.awin1.com/cread.php?awinmid=38962&awinaffid=3122300&clickref=shop_nobi&ued=https%3A%2F%2Fwww.baseus.com%2Fproducts%2Fspacemate-rd1-pro-15-in-1-win-docking-station%3Fvariant%3D42798222934093%26utm_source%3Dshop_nobi%26utm_medium%3Dreferral%26utm_campaign%3Dshop_nobi%26utm_term%3DBaseus%2Btwo%2Bindependent%2Bscreens",
   },
 });
 
-/** Fail the build if an authored record loses its real catalog identity or complete builder destination. */
+/** Rejects any operative identity or destination that differs from the reviewed catalog/Java receipt. */
 export function validateBaseusScreenLink(record) {
   const reviewedIdentity = ReviewedCatalogIdentityByModel[record.id];
-  const source = new URL(record.sourceUrl);
-  const plain = new URL(record.plain);
-  const paid = new URL(record.paid);
   if (!Object.hasOwn(ProductFacts, record.id) || !Object.hasOwn(ReviewedCatalogIdentityByModel, record.id)
-    || [source.protocol, plain.protocol, paid.protocol].some(protocol => protocol !== "https:")
-    || record.owningMerchantId !== ReviewedBaseusMerchantId
-    || Object.entries(reviewedIdentity).some(([fieldName, reviewedValue]) => record[fieldName] !== reviewedValue)
-    || source.hostname !== "www.baseus.com" || plain.hostname !== source.hostname || source.pathname !== plain.pathname
-    || !source.searchParams.get("variant") || source.searchParams.get("variant") !== plain.searchParams.get("variant")
-    || paid.hostname !== "www.awin1.com" || paid.pathname !== "/cread.php"
-    || paid.searchParams.get("awinmid") !== "38962" || paid.searchParams.get("awinaffid") !== "3122300"
-    || paid.searchParams.getAll("clickref").length !== 1
-    || !paid.search.slice(1).split("&").includes("clickref=shop_nobi")
-    || paid.searchParams.get("ued") !== record.plain
-    || record.paidLink !== true) throw new Error("Incomplete reviewed Baseus product link");
+    || record.owningMerchantId !== ReviewedBaseusMerchantId || record.paidLink !== true
+    || Object.entries(reviewedIdentity).some(([fieldName, reviewedValue]) => record[fieldName] !== reviewedValue)) {
+    throw new Error("Incomplete reviewed Baseus product link");
+  }
   return record;
 }
 

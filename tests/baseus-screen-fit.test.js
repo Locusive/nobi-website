@@ -96,7 +96,15 @@ test("NU1 power is separate: 100W input supplies the documented90W or75W laptop 
   assert.equal(result.status, "fail");
   assert.equal(evaluate("nu1-air-mac", { nu1Usb: "all", watts: "75" }, powered).status, "conditional");
   assert.equal(evaluate("nu1-air-mac", { watts: "100" }, powered).power.status, "fail");
-  assert.equal(evaluate("nu1-air-mac", { nu1Usb: "mixed" }, powered).power.status, "unknown");
+  for (const nu1Usb of ["mixed", "unknown"]) {
+    assert.equal(evaluate("nu1-air-mac", { nu1Usb, watts: "100" }, powered).power.status, "unknown",
+      "The highest enumerated allocation is not a documented maximum for an unlisted USB-load scenario");
+    for (const watts of ["101", "301"]) {
+      const excessInput = evaluate("nu1-air-mac", { nu1Usb, watts }, powered);
+      assert.equal(excessInput.power.status, "fail", "Laptop demand cannot exceed the documented maximum input");
+      assert.match(excessInput.power.checks[0].message, /100W maximum input/);
+    }
+  }
   assert.equal(evaluate("nu1-air-mac", { nu1Adapter: "other" }, powered).power.status, "unknown");
   assert.equal(evaluate("nu1-air-mac", { nu1Adapter: "none" }, powered).power.status, "fail");
 });

@@ -7,6 +7,8 @@ export const IndexNowKey = "b20309cb84825b184afe0ffcf36630a7";
 export const IndexNowBatchSize = 10000;
 
 const SiteHost = "nobi.ai";
+const SiteOrigin = `https://${SiteHost}`;
+const UtilityUrlPrefix = `${SiteOrigin}/tools/`;
 const ProductionBranch = "main";
 const SitemapEntryPattern = /<url>\s*<loc>([^<]+)<\/loc>(?:\s*<lastmod>([^<]+)<\/lastmod>)?/g;
 const XmlEntities = { "&amp;": "&", "&lt;": "<", "&gt;": ">", "&quot;": '"', "&#39;": "'" };
@@ -23,6 +25,21 @@ export function readSitemapEntries(sitemapXml) {
     entries.set(decodeXml(location.trim()), lastModified ? lastModified.trim() : null);
   }
   return entries;
+}
+
+/** Returns whether an address is a canonical HTTPS destination on our own site. */
+export function isCanonicalSiteUrl(address) {
+  try {
+    const url = new URL(address);
+    return url.origin === SiteOrigin && url.href === address && address === `${url.origin}${url.pathname}`;
+  } catch {
+    return false;
+  }
+}
+
+/** Returns whether an authored sitemap address identifies a canonical shopper utility. */
+export function isUtilityUrl(address) {
+  return isCanonicalSiteUrl(address) && address.startsWith(UtilityUrlPrefix) && address.length > UtilityUrlPrefix.length;
 }
 
 /**

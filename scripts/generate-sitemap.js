@@ -4,6 +4,7 @@ import { readFileSync, writeFileSync, readdirSync } from "fs";
 import { join, dirname } from "path";
 import { fileURLToPath } from "url";
 import { CoveCubbyPath } from "../src/content/coveCubbyComparison.js";
+import { MarleySpoonPath } from "../src/content/marleySpoonCost.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT       = join(__dirname, "..");
@@ -23,6 +24,7 @@ const STATIC_PAGES = [
   { path: "/customers/kilte",        priority: "0.8", changefreq: "monthly" },
   { path: "/shop",                   priority: "0.9", changefreq: "weekly"  },
   { path: CoveCubbyPath,             priority: "0.6", changefreq: "monthly" },
+  { path: MarleySpoonPath,           priority: "0.6", changefreq: "monthly" },
   { path: "/blog",                   priority: "0.7", changefreq: "daily"   },
   { path: "/glossary",               priority: "0.7", changefreq: "weekly"  },
   { path: "/terms",                  priority: "0.3", changefreq: "yearly"  },

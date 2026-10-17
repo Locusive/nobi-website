@@ -24,6 +24,7 @@ const Webinar            = lazy(() => import("./pages/Webinar.jsx"));
 const WebinarIPullRank   = lazy(() => import("./pages/WebinarIPullRank.jsx"));
 const ShopPage           = lazy(() => import("./pages/ShopPage.jsx"));
 const CoveCubbyComparison = lazy(() => import("./pages/CoveCubbyComparison.jsx"));
+const MarleySpoonCost = lazy(() => import("./pages/MarleySpoonCost.jsx"));
 const NotFound           = lazy(() => import("./pages/NotFound.jsx"));
 
 import { RequestDemoModal } from "./components/DemoModals.jsx";
@@ -113,6 +114,7 @@ function App() {
           <Route path="/webinar" element={<Webinar />} />
           <Route path="/webinar/ipullrank" element={<WebinarIPullRank />} />
           <Route path="/tools/cove-vs-cubby" element={<CoveCubbyComparison />} />
+          <Route path="/tools/marley-spoon-cost" element={<MarleySpoonCost />} />
           {/* The assistant bundle fills these pages (see index.html); the
               route only mounts the SEO shell. /shop/* covers the sub-paths
               the Shop Nobi experience may navigate to. */}

@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+<title id="title">A simple Election Night checklist</title><desc id="desc">Original phone and cable, plate and cup diagrams: charge your devices, plan dinner and choose a screen break. Nobi may earn a commission from optional shopping links.</desc>
+<rect width="1200" height="630" rx="30" fill="#f5f1e8"/>
+<g font-family="Avenir Next,Avenir,Arial,sans-serif" fill="#173d3d">
+<text x="70" y="87" font-size="43" font-weight="750">Start with what you own.</text>
+<rect x="60" y="135" width="335" height="345" rx="24" fill="#d9eab9"/><rect x="432" y="135" width="335" height="345" rx="24" fill="#ecdbbd"/><rect x="804" y="135" width="335" height="345" rx="24" fill="#d6e2f1"/>
+<g fill="none" stroke="#173d3d" stroke-width="8" stroke-linecap="round" stroke-linejoin="round">
+<rect x="140" y="198" width="112" height="163" rx="20"/><path d="M181 220h31M185 339h22M254 280h36q25 0 25-25v-26"/><rect x="300" y="205" width="30" height="27" rx="11"/>
+<circle cx="603" cy="280" r="72"/><circle cx="603" cy="280" r="47"/><path d="M504 210v49q0 16 14 16v87M504 235h29M519 210v49M533 210v49M706 210v151M706 210q-27 18-23 65h23"/>
+<path d="M895 239h115v104q-58 40-115 0zM1012 250h20q40 30 0 63h-20M918 210v-20M952 210v-20M987 210v-20M877 371h151"/>
+</g>
+<text x="227" y="437" text-anchor="middle" font-size="34" font-weight="700">Charge</text><text x="599" y="437" text-anchor="middle" font-size="34" font-weight="700">Plan dinner</text><text x="971" y="437" text-anchor="middle" font-size="34" font-weight="700">Take a break</text>
+<text x="70" y="553" font-size="30" font-weight="700">Shop Nobi</text><text x="70" y="598" font-size="24">#ad Nobi may earn a commission. Optional shopping links.</text>
+</g></svg>

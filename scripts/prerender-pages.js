@@ -18,6 +18,7 @@ import { buildUtilityRevision, UtilityRevisionFile } from "./utility-content-rev
 import { BaseusScreenSeo } from "../src/content/baseusScreens.js";
 
 import { MindTheColorSeo } from "../src/content/mindTheColor.js";
+import { ElectionNightSeo } from "../src/content/electionNight.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const DIST = join(__dirname, "..", "dist");
@@ -64,6 +65,7 @@ const PAGES = [
   MarleySpoonSeo,
   BaseusScreenSeo,
   MindTheColorSeo,
+  ElectionNightSeo,
   // Legal pages carry their full text in the HTML, so app directories and crawlers that run no JavaScript can read them.
   {
     path: "/privacy", title: "Privacy Policy | Nobi",

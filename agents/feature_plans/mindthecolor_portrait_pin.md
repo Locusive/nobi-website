@@ -18,3 +18,5 @@ The old1200 × 800 image rendered at240 × 160 in the actual Pinterest Save prev
 ## Verified before PR
 
 The full fixture-backed offline build and all 197 tests pass, with no failures or skips. Separate-process renders and the built asset have identical PNG bytes. The 240 px and 370 px review images are readable; actual Chrome at 240 × 600 renders the complete artwork at 240 × 360, and 390 × 844 renders it at 390 × 585 with no horizontal overflow. The viewport was reset, the owned tab closed, and both local fixture/asset servers stopped. No production API, model, merchant exit or IndexNow request was made.
+
+Hosted review identified the omitted current-client condition in the standalone Creative Cloud panel. The short panel line and accessible description now explicitly require an up-to-date client. The regenerated PNG remains readable at240px and390px; all197 offline cases pass again, with zero failures/skips, and built/source PNG bytes match.

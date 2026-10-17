@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1000" height="1500" viewBox="0 0 1000 1500" role="img" aria-labelledby="title description">
   <title id="title">MindTheColor 3: four checks before buying</title>
-  <desc id="description">Source-based requirements: a separately licensed desktop Photoshop 26 or later, Creative Cloud Desktop with .ccx installation permission, Internet at plug-in launch, and one person using the same Adobe account. Shop Nobi may earn a commission. Checked October 17, 2026; not software-tested.</desc>
+  <desc id="description">Source-based requirements: a separately licensed desktop Photoshop 26 or later, up-to-date Creative Cloud Desktop with .ccx installation permission, Internet at plug-in launch, and one person using the same Adobe account. Shop Nobi may earn a commission. Checked October 17, 2026; not software-tested.</desc>
   <rect width="1000" height="1500" fill="#eef4ff"/>
   <g font-family="Avenir Next,Avenir,Arial,sans-serif" fill="#202b4a">
     <text x="64" y="82" font-size="44" font-weight="800" fill="#3c4fe0">SHOP NOBI</text>
@@ -14,7 +14,7 @@
     <text x="94" y="344" font-size="50" font-weight="750">1  Licensed Photoshop 26+</text>
     <text x="94" y="408" font-size="46">Desktop; Adobe is separate.</text>
     <text x="94" y="538" font-size="50" font-weight="750">2  Creative Cloud Desktop</text>
-    <text x="94" y="602" font-size="46">Permission to install .ccx.</text>
+    <text x="94" y="602" font-size="46">Up to date; .ccx permission.</text>
     <text x="94" y="732" font-size="50" font-weight="750">3  Internet at launch</text>
     <text x="94" y="796" font-size="46">Offline only within the</text>
     <text x="94" y="848" font-size="46">verified Photoshop session.</text>

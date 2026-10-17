@@ -29,6 +29,9 @@ test("the MCP install route serves its own readable content, canonical and sitem
   assert.ok(html.indexOf("#ad:") < html.indexOf("<h1"), "The commission disclosure comes before the page heading");
   for (const text of ["read-only", "cannot place orders or take payments", "merchant", "privacy policy", "search_products", "find_shop_nobi_page"])
     assert.ok(html.includes(text), `Missing useful setup or disclosure text: ${text}`);
+  assert.doesNotMatch(html, /\bindependent (?:online )?stores\b/i);
+  assert.ok(html.includes("Search products across online stores."));
+  assert.ok(readCode(html).includes("Catalog prices and availability may lag behind the merchant's website."), "The setup explains catalog freshness limits before a shopper relies on results");
 });
 
 test("copyable Claude Code instructions configure the actual remote HTTP endpoint without credentials", () => {

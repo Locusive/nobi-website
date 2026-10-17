@@ -1,11 +1,11 @@
-// Builds the RSS feeds Pinterest reads to pin each search page: shop/pins.xml with every page, one feed per category
-// board, and their list. Each item needs a picture, so pages without an https product picture are left out.
+// Builds the RSS feeds Pinterest reads: shop/pins.xml with selected search-page heroes, one feed per category
+// board, and their list. The Pinterest-only selection keeps available product heroes and avoids repeated photos.
 
 import { htmlEscape } from "./prerender-blog.js";
-import { BaseUrl, CommissionNotice, ShopNobiPageSeo, ShopNobiPinFeed } from "../src/utils/shopNobiPage.js";
-import { BannedTopLevel, listPinBoards, readTopLevel } from "../src/utils/shopNobiPinBoard.js";
-import { buildSearchPageSeo, searchPageUrl } from "../src/utils/shopNobiSearchPage.js";
-import { findLargePreviewImage } from "../src/utils/previewImage.js";
+import { BaseUrl, ShopNobiPageSeo, ShopNobiPinFeed } from "../src/utils/shopNobiPage.js";
+import { listPinBoards, readTopLevel } from "../src/utils/shopNobiPinBoard.js";
+import { searchPageUrl } from "../src/utils/shopNobiSearchPage.js";
+import { selectPinItems } from "./shop-nobi-pin-selection.js";
 
 const PinLimit = 1000;
 const PinFeedFile = "shop/pins.xml";
@@ -22,7 +22,7 @@ export function listPinFeedFiles() {
 }
 
 /**
- * Builds every feed file: the feed of all pages, one feed per board, and the list of board feeds. A board feed is
+ * Builds every feed file: the combined feed, one feed per board, and the list of board feeds. A board feed is
  * built even when it has no items, so its address never goes away.
  *
  * @param {object[]} searchPages The built search pages.
@@ -30,8 +30,9 @@ export function listPinFeedFiles() {
  * @returns {{path: string, content: string}[]} The files, with paths relative to the build output folder.
  */
 export function buildPinFeedFiles(searchPages, pinLimit = PinLimit) {
-  const allPinItems = buildPinItems(searchPages, pinLimit);
-  const boardFeeds = listPinBoards().map((board) => buildBoardFeed(board, searchPages, pinLimit));
+  const selectedItems = selectPinItems(searchPages);
+  const allPinItems = buildPinItems(selectedItems, pinLimit);
+  const boardFeeds = listPinBoards().map((board) => buildBoardFeed(board, selectedItems, pinLimit));
   return [
     { path: PinFeedFile, content: renderFeed(ShopNobiPinFeed, allPinItems) },
     ...boardFeeds.map(({ board, items }) => ({ path: boardFeedFile(board), content: renderFeed(boardChannel(board), items) })),
@@ -40,9 +41,9 @@ export function buildPinFeedFiles(searchPages, pinLimit = PinLimit) {
 }
 
 /** Builds one board's items from the pages under its top level. */
-function buildBoardFeed(board, searchPages, pinLimit) {
-  const boardPages = searchPages.filter((page) => readTopLevel(page.categoryPath) === board.topLevel);
-  return { board, items: buildPinItems(boardPages, pinLimit) };
+function buildBoardFeed(board, selectedItems, pinLimit) {
+  const boardItems = selectedItems.filter(({ page }) => readTopLevel(page.categoryPath) === board.topLevel);
+  return { board, items: buildPinItems(boardItems, pinLimit) };
 }
 
 /** Returns a board feed's path in the build output. */
@@ -67,12 +68,8 @@ function renderBoardIndex(boardFeeds) {
 }
 
 /** Builds the items: the newest refreshed pages first, at most the limit, never a page Pinterest bans. */
-function buildPinItems(searchPages, pinLimit) {
-  const allowedPages = searchPages.filter((page) => readTopLevel(page.categoryPath) !== BannedTopLevel);
-  return sortNewestFirst(allowedPages)
-    .map(buildPinItem)
-    .filter(Boolean)
-    .slice(0, pinLimit);
+function buildPinItems(selectedItems, pinLimit) {
+  return sortNewestFirst(selectedItems).slice(0, Math.max(0, pinLimit)).map(buildPinItem);
 }
 
 /** Wraps the items in an RSS channel with the given title and self address. */
@@ -92,29 +89,20 @@ function renderFeed(channel, items) {
 }
 
 /** Sorts pages by refresh time, newest first. Pages without one go last, in their original order. */
-function sortNewestFirst(searchPages) {
-  const readTime = (page) => Date.parse(page.refreshedAt ?? "") || 0;
-  return [...searchPages].sort((first, second) => readTime(second) - readTime(first));
+function sortNewestFirst(selectedItems) {
+  const readTime = ({ page }) => Date.parse(page.refreshedAt ?? "") || 0;
+  return [...selectedItems].sort((first, second) => readTime(second) - readTime(first) || first.page.slug.localeCompare(second.page.slug, "en"));
 }
 
-/** Builds one feed item, or returns null when the page has no https product picture. */
-function buildPinItem(page) {
-  const imageUrl = findLargePreviewImage(page.products);
-  if (!imageUrl) {
-    return null;
-  }
-
+/** Renders one reviewed candidate without changing the landing page's canonical publication identity. */
+function buildPinItem({ page, imageUrl, title, description }) {
   // No pubDate: a nightly refresh does not mean the page changed, so its refresh time is not a publish date.
   const link = searchPageUrl(page.slug);
-  const description = buildSearchPageSeo(page).description;
-  const pinDescription = page.products.some((product) => product.paidLink === true)
-    ? `${CommissionNotice} from some links on this page. ${description}`
-    : description;
   return [
     `    <item>`,
-    `      <title>${htmlEscape(page.title)}</title>`,
+    `      <title>${htmlEscape(title)}</title>`,
     `      <link>${htmlEscape(link)}</link>`,
-    `      <description>${htmlEscape(pinDescription)}</description>`,
+    `      <description>${htmlEscape(description)}</description>`,
     `      <guid isPermaLink="true">${htmlEscape(link)}</guid>`,
     `      <media:content url="${htmlEscape(imageUrl)}" medium="image"/>`,
     `    </item>`,

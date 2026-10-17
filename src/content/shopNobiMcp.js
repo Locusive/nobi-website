@@ -25,6 +25,6 @@ export const ShopNobiMcpCommand = `claude mcp add --transport http shop-nobi ${S
 
 /** These are the two tools advertised by the public hosted service. */
 export const ShopNobiMcpTools = [
-  { name: "search_products", description: "Search products across independent online stores." },
+  { name: "search_products", description: "Search products across online stores." },
   { name: "find_shop_nobi_page", description: "Find an existing Shop Nobi shopping page for an exact topic." },
 ];

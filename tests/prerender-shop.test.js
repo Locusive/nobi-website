@@ -264,12 +264,13 @@ test("the pin feed and its category feed have one item per search page with an h
   assert.deepEqual(links, ["black-leather-boots", "chelsea-boots"], "The boots page has no products, so no picture and no item");
   for (const line of [
     "<title>Black Leather Boots</title>",
-    "<description>Black leather boots for work &amp; weekends, from &quot;classic&quot; ropers to &lt;lace-ups&gt;.</description>",
+    "<description>We may earn a commission from some links on this page. Black leather boots for work &amp; weekends, from &quot;classic&quot; ropers to &lt;lace-ups&gt;.</description>",
     '<guid isPermaLink="true">https://nobi.ai/shop/s/black-leather-boots</guid>',
     '<media:content url="https://cdn.example.com/roper.jpg" medium="image"/>',
   ]) {
     assert.ok(items[0].includes(line), `Missing: ${line}`);
   }
+  assert.ok(items[1].includes("<description>Chelsea Boots from the best stores online, in one search. Shop Nobi is a search engine: you buy directly from the store.</description>"), "An unpaid page retains its original description");
   assert.deepEqual(readOutput("shop/pins/apparel-accessories.xml").split("<item>").slice(1), items, "All are apparel pages");
 });
 

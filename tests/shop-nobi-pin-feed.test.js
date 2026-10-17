@@ -111,3 +111,41 @@ test("the index lists every board feed with its address and item count, and each
   assert.ok(index.slice(1).every((entry) => entry.itemCount === 0));
   assert.deepEqual(files.map((file) => file.path), listPinFeedFiles(), "The build counts exactly the files it writes");
 });
+
+/** Reads only the item descriptions, excluding the channel description. */
+function readItemDescriptions(feed) {
+  return [...feed.matchAll(/<item>[\s\S]*?<description>([\s\S]*?)<\/description>[\s\S]*?<\/item>/g)].map(([, description]) => description);
+}
+
+test("a mixed Cat Beds page discloses commission in both feeds without changing its identity or leading image", () => {
+  const page = makeCategoryPage("cat-beds", "animals_pet_supplies.pet_supplies.cat_supplies.cat_beds");
+  page.title = "Cat Beds & Cushions";
+  page.description = "Compare cat beds & cushions <before buying>.";
+  page.products.push({ name: "Kip Cat Bed", url: "https://tuftandpaw.com/products/kip-cushion", paidLink: true });
+  const files = buildPinFeedFiles([page]);
+
+  for (const path of ["shop/pins.xml", "shop/pins/animals-pet-supplies.xml"]) {
+    const feed = readFeedFile(files, path);
+    assert.deepEqual(readItemDescriptions(feed), [
+      "We may earn a commission from some links on this page. Compare cat beds &amp; cushions &lt;before buying&gt;.",
+    ]);
+    assert.ok(feed.includes("<title>Cat Beds &amp; Cushions</title>"));
+    assert.ok(feed.includes("<link>https://nobi.ai/shop/s/cat-beds</link>"));
+    assert.ok(feed.includes('<guid isPermaLink="true">https://nobi.ai/shop/s/cat-beds</guid>'));
+    assert.ok(feed.includes('<media:content url="https://cdn.example/cat-beds.jpg" medium="image"/>'));
+    assert.ok(!feed.includes("<pubDate>"), "Commission disclosure must not invent publication dates");
+  }
+});
+
+test("unpaid and unconfirmed product flags preserve the original escaped item descriptions", () => {
+  const pages = [false, undefined, "true", "false"].map((paidLink, index) => {
+    const page = makePage(`unpaid-${index}`, null, ["https://cdn.example/plain.jpg"]);
+    page.description = "Compare beds & cushions <without a commission claim>.";
+    page.products[0].paidLink = paidLink;
+    return page;
+  });
+  const feed = readFeedFile(buildPinFeedFiles(pages), "shop/pins.xml");
+
+  assert.deepEqual(readItemDescriptions(feed), pages.map(() => "Compare beds &amp; cushions &lt;without a commission claim&gt;."));
+  assert.ok(!feed.includes("We may earn a commission"));
+});

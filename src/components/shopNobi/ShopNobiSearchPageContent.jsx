@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { handleProductLinkClick } from "../../utils/shopNobiProductClick";
-import { sendSearchPageShownProducts } from "../../utils/shopNobiShownProducts";
+import { FirstProductPosition, sendSearchPageShownProducts } from "../../utils/shopNobiShownProducts";
 import { formatPrice, readCrumbPath, searchPagePath } from "../../utils/shopNobiSearchPage";
 import { CommissionNotice, readStoreLinkRel } from "../../utils/shopNobiPage";
 
@@ -25,7 +25,7 @@ export default function ShopNobiSearchPageContent({ page }) {
       ))}
       <ul className="mt-6 grid grid-cols-2 gap-6 sm:grid-cols-3 lg:grid-cols-4">
         {page.products.map((product, index) => (
-          <ProductCard key={index} product={product} position={index + 1} query={page.query} slug={page.slug} />
+          <ProductCard key={index} product={product} position={index + FirstProductPosition} query={page.query} slug={page.slug} />
         ))}
       </ul>
       <Questions faq={page.faq} />

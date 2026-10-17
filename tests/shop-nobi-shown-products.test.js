@@ -11,8 +11,10 @@ const RoperVariantId = "8e4a3b21-1d55-4c2b-9b86-3a7f2a6e0003";
 const HarnessVariantId = "f9e26080-b6a4-4af2-b32c-b6e751e976c6";
 const LuccheseId = "35019f05-f0cd-4ee3-ba16-c1fe938888d1";
 const FryeId = "1b3c6e2a-7d4f-4a8b-9c0d-2e5f7a9b1c3d";
+const GiftCardVariantId = "5d0c9a7e-2b1f-4e3a-8c6d-9f0e1a2b3c4d";
+const ShopNobiId = "9282b7cb-66ce-4d53-8c37-c291352ef03d";
 
-/** A built search page: a paid product, one from before the API sent ids, and an unpaid one. */
+/** A built search page: a paid product, one from before the API sent ids, an unpaid one, and one Shop Nobi sells. */
 const Page = {
   slug: "black-leather-boots",
   query: "black leather boots",
@@ -20,10 +22,11 @@ const Page = {
     { name: "Roper Boot", url: "https://lucchese.com/products/roper", paidLink: true, productVariantId: RoperVariantId, owningMerchantId: LuccheseId },
     { name: "Cowboy Boot", url: "https://example.com/products/cowboy", paidLink: false },
     { name: "Harness Boot", url: "https://frye.example/products/harness", paidLink: false, productVariantId: HarnessVariantId, owningMerchantId: FryeId },
+    { name: "Gift Card", url: "https://nobi.ai/gift-card", paidLink: false, productVariantId: GiftCardVariantId, owningMerchantId: ShopNobiId },
   ],
 };
 
-test("a person's page view records the products shown in order, and a click on one joins it by product and place", () => {
+test("a page view lists every product in order, and start position + list index is a click's positionInGrid", () => {
   const browser = makeBrowser();
 
   sendSearchPageShownProducts(Page, browser);
@@ -44,10 +47,13 @@ test("a person's page view records the products shown in order, and a click on o
       query: "black leather boots",
       pageSlug: "black-leather-boots",
       collectionName: "Prebuilt search page",
-      collectionSize: 3,
+      collectionSize: 4,
+      shownProductsStartPosition: 1,
       shownProducts: [
-        { productVariantId: RoperVariantId, owningMerchantId: LuccheseId, position: 1, isPaidLink: true },
-        { productVariantId: HarnessVariantId, owningMerchantId: FryeId, position: 3, isPaidLink: false },
+        { productVariantId: RoperVariantId, owningMerchantId: LuccheseId, isPaidLink: true },
+        { productVariantId: null, isPaidLink: false },
+        { productVariantId: HarnessVariantId, owningMerchantId: FryeId, isPaidLink: false },
+        { productVariantId: GiftCardVariantId, isPaidLink: false },
       ],
       pageUrl: PageUrl,
       utm_source: "pinterest",
@@ -55,9 +61,10 @@ test("a person's page view records the products shown in order, and a click on o
       shopperId: "shopper-1",
     },
   });
-  assert.deepEqual(
-    [click.event.details.productVariantId, click.event.details.owningMerchantId, click.event.details.positionInGrid],
-    [HarnessVariantId, FryeId, 3]);
+  const { productVariantId, owningMerchantId, positionInGrid } = click.event.details;
+  const listIndex = shown.event.details.shownProducts.findIndex((shownProduct) => shownProduct.productVariantId === productVariantId);
+  assert.equal(owningMerchantId, FryeId);
+  assert.equal(shown.event.details.shownProductsStartPosition + listIndex, positionInGrid);
 });
 
 test("crawlers, automated browsers, local copies and pages without product ids record nothing", () => {

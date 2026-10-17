@@ -5,7 +5,7 @@ import { isAutomatedVisitor } from "./automatedVisitor.js";
 import { buildClickId, createVisitId } from "./shopNobiClickId.js";
 
 /** The Shop Nobi merchant, which every Shop Nobi event is posted under. index.html starts the bundle with it too. */
-const ShopNobiMerchantId = "9282b7cb-66ce-4d53-8c37-c291352ef03d";
+export const ShopNobiMerchantId = "9282b7cb-66ce-4d53-8c37-c291352ef03d";
 const EventsUrl = `https://api.nobi.ai/v1/merchants/${ShopNobiMerchantId}/events`;
 /** The source the bundle's events carry. The reports count only events with it. */
 const AssistantSource = "assistant";

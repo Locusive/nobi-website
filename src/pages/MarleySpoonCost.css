@@ -1,0 +1,101 @@
+.delivery-cost-page {
+  --delivery-ink: #202b4a;
+  --delivery-muted: #53617e;
+  --delivery-blue: #3c4fe0;
+  --delivery-line: #d7deee;
+  --delivery-selected: #eef4ff;
+  color: var(--delivery-ink);
+  background: #fff;
+  font: 17px/1.55 "Avenir Next", Avenir, Arial, sans-serif;
+  min-height: 100vh;
+}
+.delivery-cost-page * { box-sizing: border-box; }
+.delivery-cost-page a { color: var(--delivery-blue); text-underline-offset: 4px; }
+.delivery-cost-page :focus-visible { outline: 3px solid var(--delivery-blue); outline-offset: 4px; }
+.delivery-cost-header, .delivery-cost-main, .delivery-cost-footer { max-width: 1180px; margin: auto; padding: 26px 38px; }
+.delivery-cost-header, .delivery-cost-footer { display: flex; justify-content: space-between; align-items: center; gap: 24px; }
+.delivery-cost-header { border-bottom: 1px solid var(--delivery-line); }
+.delivery-cost-header .delivery-cost-brand { color: var(--delivery-ink); font-size: 25px; font-weight: 750; text-decoration: none; }
+.delivery-cost-header > a:last-child { font-size: 14px; }
+.delivery-cost-intro { padding: 35px 0 30px; }
+.delivery-cost-page h1 { max-width: 23ch; margin: 0 0 23px; font-size: clamp(36px, 4.2vw, 53px); font-weight: 750; line-height: 1.1; letter-spacing: -1.5px; }
+.delivery-cost-lead { max-width: 61ch; font-size: 21px; margin: 0 0 17px; }
+.delivery-cost-checked, .delivery-cost-note { font-size: 13px; color: var(--delivery-muted); }
+.delivery-cost-page h2 { font-size: 27px; line-height: 1.25; font-weight: 700; letter-spacing: -.5px; margin: 0 0 12px; }
+.delivery-cost-plan { display: grid; grid-template-columns: 1fr 1fr; gap: 38px; padding: 26px 0; border-block: 1px solid var(--delivery-line); }
+.delivery-cost-plan p { margin: 0; max-width: 50ch; font-size: 15px; }
+.delivery-cost-recurring { border-left: 4px solid var(--delivery-blue); padding-left: 22px; }
+.delivery-cost-recurring > strong { display: block; font-size: 30px; margin: 7px 0; font-variant-numeric: tabular-nums; }
+.delivery-cost-recurring > strong span { font-size: 17px; font-weight: 500; }
+.delivery-cost-planner { padding: 32px 0; }
+.delivery-cost-planner-heading > p { color: var(--delivery-muted); max-width: 76ch; margin: 0 0 28px; }
+.delivery-cost-workspace { display: grid; grid-template-columns: 260px minmax(0, 1fr); gap: 38px; align-items: start; }
+.delivery-cost-controls { padding: 21px; background: var(--delivery-selected); border-radius: 9px; }
+.delivery-cost-controls label { display: block; font-size: 14px; font-weight: 650; margin: 0 0 8px; }
+.delivery-cost-controls select { width: 100%; min-height: 46px; padding: 9px; border: 1px solid #a6b3d0; border-radius: 4px; background: #fff; color: var(--delivery-ink); font: inherit; font-size: 15px; }
+.delivery-cost-total { margin-top: 25px; font-variant-numeric: tabular-nums; }
+.delivery-cost-total > p { margin: 0 0 6px; font-size: 15px; }
+.delivery-cost-total > strong { font-size: 42px; font-weight: 750; line-height: 1.2; }
+.delivery-cost-total > p:last-child { margin: 15px 0 19px; }
+.delivery-cost-controls .delivery-cost-note { margin-bottom: 0; }
+.delivery-cost-ledger { min-width: 0; }
+.delivery-cost-ledger table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; font-size: 15px; }
+.delivery-cost-ledger caption { text-align: left; color: var(--delivery-muted); font-size: 13px; padding-bottom: 14px; }
+.delivery-cost-ledger th, .delivery-cost-ledger td { text-align: right; padding: 14px 12px; border-bottom: 1px solid var(--delivery-line); }
+.delivery-cost-ledger thead th { font-size: 13px; font-weight: 600; padding-top: 0; }
+.delivery-cost-ledger th:first-child { text-align: left; }
+.delivery-cost-ledger tbody th { font-weight: 650; max-width: 21ch; }
+.delivery-cost-ledger tbody th span { display: block; font-size: 12px; font-weight: 400; margin-top: 3px; }
+.delivery-cost-ledger td:last-child { font-weight: 700; }
+.delivery-cost-included { background: var(--delivery-selected); }
+.delivery-cost-ledger .delivery-cost-full-price { border-top: 3px solid var(--delivery-ink); }
+.delivery-cost-summary { font-size: 14px; margin: 19px 0 0; max-width: 70ch; }
+.delivery-cost-conditions { display: grid; grid-template-columns: 1.2fr 1fr; gap: 48px; border-top: 1px solid var(--delivery-line); padding: 32px 0; }
+.delivery-cost-conditions ul, .delivery-cost-sources ul { padding-left: 21px; list-style: disc; }
+.delivery-cost-conditions li { font-size: 15px; margin: 10px 0; max-width: 60ch; }
+.delivery-cost-exit { align-self: start; padding-top: 3px; }
+.delivery-cost-exit > p:first-child { font-size: 14px; margin: 0 0 17px; overflow-wrap: anywhere; }
+.delivery-cost-disclosure { font-size: 14px; margin: 0 0 16px; max-width: 47ch; }
+.delivery-cost-exit .delivery-cost-store-link { display: inline-block; background: var(--delivery-blue); color: white; border-radius: 6px; padding: 13px 18px; text-decoration: none; font-size: 15px; font-weight: 650; }
+.delivery-cost-store-link:hover { background: #2d3db4; }
+.delivery-cost-exit .delivery-cost-note { max-width: 45ch; margin-top: 13px; }
+.delivery-cost-sources { border-top: 1px solid var(--delivery-line); padding: 28px 0 8px; color: var(--delivery-muted); font-size: 14px; }
+.delivery-cost-sources h2 { color: var(--delivery-ink); font-size: 23px; }
+.delivery-cost-sources p { max-width: 78ch; margin: 12px 0; }
+.delivery-cost-sources li { margin: 6px 0; }
+.delivery-cost-footer { border-top: 1px solid var(--delivery-line); font-size: 13px; }
+.delivery-cost-footer > div { display: flex; gap: 22px; }
+@media (max-width: 850px) {
+  .delivery-cost-header, .delivery-cost-main, .delivery-cost-footer { padding-inline: 22px; }
+  .delivery-cost-workspace { grid-template-columns: 220px minmax(0, 1fr); gap: 22px; }
+  .delivery-cost-ledger th, .delivery-cost-ledger td { padding-inline: 8px; }
+  .delivery-cost-conditions { gap: 28px; }
+}
+@media (max-width: 700px) {
+  .delivery-cost-intro { padding-top: 24px; }
+  .delivery-cost-page h1 { font-size: 39px; }
+  .delivery-cost-lead { font-size: 19px; }
+  .delivery-cost-plan, .delivery-cost-conditions { grid-template-columns: 1fr; gap: 23px; }
+  .delivery-cost-workspace { grid-template-columns: 1fr; gap: 26px; }
+  .delivery-cost-controls { display: grid; grid-template-columns: 1fr 1fr; gap: 0 24px; }
+  .delivery-cost-controls label, .delivery-cost-controls select { grid-column: 1; }
+  .delivery-cost-total { grid-column: 2; grid-row: 1 / 4; margin-top: 0; }
+  .delivery-cost-controls > .delivery-cost-note, .delivery-cost-controls noscript { grid-column: 1 / -1; }
+  .delivery-cost-total > strong { font-size: 36px; }
+}
+@media (max-width: 440px) {
+  .delivery-cost-header, .delivery-cost-main, .delivery-cost-footer { padding-inline: 18px; }
+  .delivery-cost-header .delivery-cost-brand { font-size: 23px; }
+  .delivery-cost-header > a:last-child { font-size: 13px; max-width: 110px; text-align: right; }
+  .delivery-cost-page h1 { font-size: 36px; }
+  .delivery-cost-page h2 { font-size: 25px; }
+  .delivery-cost-controls { display: block; }
+  .delivery-cost-total { margin-top: 20px; }
+  .delivery-cost-ledger thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+  .delivery-cost-ledger tr { display: grid; grid-template-columns: repeat(3, 1fr); padding: 13px 10px; border-bottom: 1px solid var(--delivery-line); }
+  .delivery-cost-ledger tbody th { grid-column: 1 / -1; max-width: none; display: flex; justify-content: space-between; align-items: baseline; gap: 14px; padding: 0 0 11px; }
+  .delivery-cost-ledger tbody th span { text-align: right; margin-top: 0; }
+  .delivery-cost-ledger td { padding: 0; border: 0; text-align: left; }
+  .delivery-cost-ledger td::before { content: attr(data-label); display: block; font-size: 11px; font-weight: 400; color: var(--delivery-muted); margin-bottom: 3px; }
+  .delivery-cost-ledger td:last-child { text-align: right; }
+}

@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import { test } from "node:test";
 import { handleProductLinkClick } from "../src/utils/shopNobiProductClick.js";
 import { encodePaidLink } from "../src/utils/shopNobiPaidLink.js";
+import { makeBrowser } from "./fixtures/shop-nobi-click-browser.js";
 import { CoveCubbyEntryPoint, CoveCubbyProducts, CoveCubbySlug } from "../src/content/coveCubbyComparison.js";
 
 const EventsUrl = "https://api.nobi.ai/v1/merchants/9282b7cb-66ce-4d53-8c37-c291352ef03d/events";
@@ -10,44 +11,12 @@ const Product = { name: "Roper Boot", storeName: "Lucchese", url: "https://lucch
 const TaggedProductUrl = `${Product.url}&utm_source=shop_nobi&utm_medium=referral&utm_campaign=shop_nobi`;
 /** The live assistant's conversation ID must not be reused by prebuilt cards. */
 const PageConversationId = "6f1c2a4e-8b3d-4c5e-9f70-1a2b3c4d5e6f";
-const ChromeAgent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36";
 const GooglebotAgent = "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)";
 const MouseButton = { Main: 0, Middle: 1, Right: 2 };
 const PaidLinks = [
   { url: "https://sovrn.co?key=web&u=https%3A%2F%2Flucchese.com%2Fproducts%2Froper&cuid=shop_nobi", reference: "cuid" },
   { url: "https://www.awin1.com/cread.php?awinmid=1&clickref=shop_nobi&ued=https%3A%2F%2Flucchese.com%2Fproducts%2Froper", reference: "clickref" },
 ];
-
-/** A stand-in window that records every beacon and fetch, with a saved shopper id and the page's conversation. */
-function makeBrowser({
-  pageUrl = PageUrl,
-  userAgent = ChromeAgent,
-  webdriver = false,
-  acceptsBeacons = true,
-  readStorage,
-  pageConversationId = PageConversationId,
-  smokeTestToken = null,
-} = {}) {
-  const address = new URL(pageUrl);
-  const browser = { beacons: [], fetches: [], shopNobiPageConversationId: pageConversationId };
-  browser.location = { href: address.href, hostname: address.hostname };
-  browser.document = { referrer: "https://www.google.com/" };
-  browser.localStorage = { getItem: readStorage ?? (() => JSON.stringify({ "nobi-shopper-id": "shopper-1" })) };
-  browser.sessionStorage = { getItem: (key) => (key === "nobi_smoke_test_token" ? smokeTestToken : null) };
-  browser.navigator = {
-    userAgent,
-    webdriver,
-    sendBeacon: (url, body) => {
-      browser.beacons.push({ url, event: JSON.parse(body) });
-      return acceptsBeacons;
-    },
-  };
-  browser.fetch = (url, request) => {
-    browser.fetches.push({ url, request, event: JSON.parse(request.body) });
-    return Promise.resolve();
-  };
-  return browser;
-}
 
 /** Clicks the second product link on a page with the given mouse button. */
 function clickProduct(browser, button = MouseButton.Main, product = Product) {

@@ -146,3 +146,31 @@ report's `/shop/s` extractor also leaves their page slug empty. Page URL,
 for acquisition joins. Do not create a synthetic search or conversation.
 Run the footprint tests with `node --test tests/cat-footprint-fit.test.js`;
 the full offline website suite also checks the built comparison HTML.
+
+## Marley Spoon subscription cost utility
+
+`/tools/marley-spoon-cost` is one authored SUBSCRIPTION/PER_DELIVERY offering,
+not a physical product catalog entry or generic MCP/service search. It models
+only the dated two-person/three-meal plan and food-discount schedule in
+`src/content/marleySpoonCost.js`. Food rounds once in integer cents before
+shipping is added. Delivered-box totals never promise future checkout prices.
+
+`src/content/marleySpoonLink.js` contains actual Java store-link-builder output
+from the independently verified non-catalog owner. Validation runs on import
+and fails the build for missing/invalid reviewed link configuration. Do not
+construct a second affiliate redirect or create a fake product to represent an
+offer. New prices, codes or ownership changes need source review and fresh
+builder output before publication.
+
+The merchant exit shares person/visit/smoke/local and beacon/fetch behavior
+with product exits, but sends a distinct `Click On Offer` generic event with
+the offering kind, price basis, authored owner, final link and acquisition
+context. It includes no product/variant or conversation IDs and sends no
+calculator selections. Owner metadata is authored, not server-resolved.
+Current counted physical-click SQL selects only `Click On Search Result`,
+so offer adoption needs a separate raw-event-to-affiliate-reference ledger.
+The current exact entry-point report filter also omits Shop Nobi Utility.
+
+Run `node --test tests/delivery-cost.test.js tests/shop-nobi-offer-click.test.js`
+for calculator, configuration and click behavior, then the full offline
+website suite for static content and existing product regressions.

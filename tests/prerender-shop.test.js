@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import { existsSync, readdirSync, readFileSync, rmSync } from "node:fs";
 import { join } from "node:path";
 import { after, before, test } from "node:test";
-import { countRedirectRules } from "../scripts/shop-nobi-search-page-listings.js";
+import { buildShopNobiSitemap, countRedirectRules } from "../scripts/shop-nobi-search-page-listings.js";
 import { FileCountBeforePages, makeDistCopy, prerenderWith, readBody, readOriginal, readScriptJson } from "./shop-nobi-test-build.js";
 import { readFixturePageData } from "./shop-nobi-pages-server.js";
 import { decodePaidLink } from "../src/utils/shopNobiPaidLink.js";
@@ -246,7 +246,15 @@ test("the Shop Nobi sitemap lists each built category page, search page and web 
     assert.ok(shopSitemap.includes(`<loc>https://nobi.ai/${path}</loc>\n    <lastmod>2026-10-11T08:02:11Z</lastmod>`), path);
   }
   assert.equal(shopSitemap.split("<url>").length - 1, 5, "One category page, three search pages and one story");
+  assert.equal(shopSitemap.split("<lastmod>").length - 1, 5, "Every entry has a lastmod");
   assert.ok(!shopSitemap.includes("neon-boots"));
+});
+
+test("a sitemap entry without a valid refresh time gets the fallback time as its lastmod", () => {
+  const pages = [null, "", "October 11", "2026-10-11T08:02:11Z"].map((refreshedAt, index) => ({ slug: `page-${index}`, refreshedAt }));
+  const sitemap = buildShopNobiSitemap([], pages, [], "2026-10-12T08:10:00Z");
+  const lastModifiedTimes = [...sitemap.matchAll(/<lastmod>([^<]+)<\/lastmod>/g)].map(([, time]) => time);
+  assert.deepEqual(lastModifiedTimes, ["2026-10-12T08:10:00Z", "2026-10-12T08:10:00Z", "2026-10-12T08:10:00Z", "2026-10-11T08:02:11Z"]);
 });
 
 test("the pin feed and its category feed have one item per search page with an https picture, newest first", () => {

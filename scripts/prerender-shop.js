@@ -14,7 +14,7 @@ import { renderWebStory } from "./shop-nobi-web-story.js";
 import { webStoryPath } from "../src/utils/shopNobiWebStory.js";
 import { fetchImageSize as fetchImageSizeOnline } from "./image-size.js";
 import { buildPinFeedFiles, listPinFeedFiles } from "./shop-nobi-pin-feed.js";
-import { appendLlmsTxtSection, appendRedirects, buildRetiredRedirects, buildShopNobiSitemap } from "./shop-nobi-search-page-listings.js";
+import { appendLlmsTxtSection, appendRedirects, buildRetiredRedirects, buildShopNobiSitemap, readValidTime } from "./shop-nobi-search-page-listings.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const Dist = join(__dirname, "..", "dist");
@@ -37,7 +37,7 @@ export async function prerenderShopNobiSearchPages({
   redirectRuleLimit = RedirectRuleLimit,
   fetchImageSize = fetchImageSizeOnline,
 }) {
-  const { pages: fetchedPages, retired } = await fetchSearchPagesData(apiBaseUrl);
+  const { generatedAt, pages: fetchedPages, retired } = await fetchSearchPagesData(apiBaseUrl);
   const plan = await planPages(fetchedPages, countFileRoom(distDir, fileLimit), fetchImageSize);
   if (plan.leftOutCount > 0) {
     console.warn(`prerender-shop: left out ${plan.leftOutCount} page(s) to stay within ${fileLimit} files.`);
@@ -53,7 +53,9 @@ export async function prerenderShopNobiSearchPages({
   writeWebStories(distDir, plan.stories);
 
   const redirectLines = buildRetiredRedirects(retired, plan.searchPages);
-  const sitemap = buildShopNobiSitemap(plan.categoryPages, plan.searchPages, plan.stories);
+  // The data's own time keeps a fallback lastmod the same across rebuilds of the same data.
+  const fallbackLastModified = readValidTime(generatedAt) ?? new Date().toISOString();
+  const sitemap = buildShopNobiSitemap(plan.categoryPages, plan.searchPages, plan.stories, fallbackLastModified);
   writeFileSync(join(distDir, ShopNobiSitemapFile), sitemap);
   writePinFeeds(distDir, plan.searchPages);
   updateFile(join(distDir, "_redirects"), (text) => appendRedirects(text, redirectLines, redirectRuleLimit));

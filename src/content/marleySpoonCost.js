@@ -80,6 +80,7 @@ export const MarleySpoonOffer = Object.freeze({
 /** Shared canonical metadata; a subscription calculator is not a one-time physical Product offer. */
 export const MarleySpoonSeo = {
   path: MarleySpoonPath,
+  image: "https://nobi.ai/media/marley-cost-01-intro-to-full.png",
   title: "Marley Spoon Cost Calculator: First Five Deliveries & Full Price | Shop Nobi",
   description: "See food, shipping and the next full-price delivery for Marley Spoon’s two-person, three-meal plan. Calculate a dated introductory offer in delivered boxes.",
   schema: [

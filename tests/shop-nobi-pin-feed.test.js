@@ -5,7 +5,7 @@ import { PinBoardNameByTopLevel } from "../src/utils/shopNobiPinBoard.js";
 
 /** Builds a search page with one product per picture address. */
 function makePage(slug, refreshedAt, imageUrls, categoryPath = null) {
-  const products = imageUrls.map((imageUrl) => ({ name: "Boot", url: "https://store.example/boot", imageUrl }));
+  const products = imageUrls.map((imageUrl, index) => ({ name: "Boot", url: `https://store.example/${slug}/${index}`, imageUrl, price: 120, currency: "USD", isInStock: true }));
   return { slug, title: slug, description: null, categoryPath, refreshedAt, breadcrumbs: [], faq: [], products };
 }
 
@@ -37,7 +37,7 @@ test("the feed puts the most recently refreshed pages first, whatever the data o
   assert.ok(!feed.includes("<pubDate>"), "A nightly refresh is not a publish date");
 });
 
-test("the feed uses the first https picture, skips pages without one, and stops at the limit", () => {
+test("the feed chooses an eligible HTTPS picture, skips unusable pages, and stops at the limit", () => {
   const pages = [
     makePage("http-then-https", "2026-10-11T00:00:00Z", ["http://cdn.example/plain.jpg", "https://cdn.example/secure.jpg"]),
     makePage("http-only", "2026-10-10T00:00:00Z", ["http://cdn.example/plain.jpg"]),
@@ -77,7 +77,7 @@ test("a page lands only in its top level's feed, and pages with no or an unknown
 
   const boardFeeds = files.filter((file) => file.path.endsWith(".xml") && file.path !== "shop/pins.xml");
   assert.ok(boardFeeds.every((file) => !file.content.includes("no-category") && !file.content.includes("unknown-category")));
-  assert.deepEqual(readItemLinks(readFeedFile(files, "shop/pins.xml")), ["boots", "sofas", "no-category", "unknown-category"]);
+  assert.deepEqual(readItemLinks(readFeedFile(files, "shop/pins.xml")), ["boots", "no-category", "sofas", "unknown-category"]);
 });
 
 test("mature pages land in no feed, the feed of all pages included, and no mature feed exists", () => {
@@ -117,35 +117,37 @@ function readItemDescriptions(feed) {
   return [...feed.matchAll(/<item>[\s\S]*?<description>([\s\S]*?)<\/description>[\s\S]*?<\/item>/g)].map(([, description]) => description);
 }
 
-test("a mixed Cat Beds page discloses commission in both feeds without changing its identity or leading image", () => {
+test("a mixed Cat Beds page uses the eligible earning hero and discloses it without changing canonical identity", () => {
   const page = makeCategoryPage("cat-beds", "animals_pet_supplies.pet_supplies.cat_supplies.cat_beds");
   page.title = "Cat Beds & Cushions";
   page.description = "Compare cat beds & cushions <before buying>.";
-  page.products.push({ name: "Kip Cat Bed", url: "https://tuftandpaw.com/products/kip-cushion", paidLink: true });
+  page.products.push({ name: "Kip Cat Bed", storeName: "Tuft & Paw", url: "https://tuftandpaw.com/products/kip-cushion", imageUrl: "https://cdn.example/kip.jpg", price: 99, currency: "USD", isInStock: true, paidLink: true });
   const files = buildPinFeedFiles([page]);
 
   for (const path of ["shop/pins.xml", "shop/pins/animals-pet-supplies.xml"]) {
     const feed = readFeedFile(files, path);
     assert.deepEqual(readItemDescriptions(feed), [
-      "We may earn a commission from some links on this page. Compare cat beds &amp; cushions &lt;before buying&gt;.",
+      "#ad We may earn a commission from some links on this page. Explore Cat Beds &amp; Cushions. Pictured: Kip Cat Bed from Tuft &amp; Paw. Compare listed options on Shop Nobi and buy directly from the store.",
     ]);
-    assert.ok(feed.includes("<title>Cat Beds &amp; Cushions</title>"));
+    assert.ok(feed.includes("<title>Kip Cat Bed | Cat Beds &amp; Cushions</title>"));
     assert.ok(feed.includes("<link>https://nobi.ai/shop/s/cat-beds</link>"));
     assert.ok(feed.includes('<guid isPermaLink="true">https://nobi.ai/shop/s/cat-beds</guid>'));
-    assert.ok(feed.includes('<media:content url="https://cdn.example/cat-beds.jpg" medium="image"/>'));
+    assert.ok(feed.includes('<media:content url="https://cdn.example/kip.jpg" medium="image"/>'));
     assert.ok(!feed.includes("<pubDate>"), "Commission disclosure must not invent publication dates");
   }
 });
 
-test("unpaid and unconfirmed product flags preserve the original escaped item descriptions", () => {
+test("unpaid and unconfirmed flags never invent a commission claim and product text is escaped", () => {
   const pages = [false, undefined, "true", "false"].map((paidLink, index) => {
-    const page = makePage(`unpaid-${index}`, null, ["https://cdn.example/plain.jpg"]);
+    const page = makePage(`unpaid-${index}`, null, [`https://cdn.example/plain-${index}.jpg`]);
+    page.title = "Beds & cushions <for cats>";
+    page.products[0].name = "Bed & cushion <large>";
     page.description = "Compare beds & cushions <without a commission claim>.";
     page.products[0].paidLink = paidLink;
     return page;
   });
   const feed = readFeedFile(buildPinFeedFiles(pages), "shop/pins.xml");
 
-  assert.deepEqual(readItemDescriptions(feed), pages.map(() => "Compare beds &amp; cushions &lt;without a commission claim&gt;."));
+  assert.deepEqual(readItemDescriptions(feed), pages.map(() => "Explore Beds &amp; cushions &lt;for cats&gt;. Pictured: Bed &amp; cushion &lt;large&gt;. Compare listed options on Shop Nobi and buy directly from the store."));
   assert.ok(!feed.includes("We may earn a commission"));
 });

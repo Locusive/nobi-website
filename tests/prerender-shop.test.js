@@ -269,20 +269,20 @@ test("a sitemap entry without a valid refresh time gets the fallback time as its
   assert.deepEqual(lastModifiedTimes, ["2026-10-12T08:10:00Z", "2026-10-12T08:10:00Z", "2026-10-12T08:10:00Z", "2026-10-11T08:02:11Z"]);
 });
 
-test("the pin feed and its category feed have one item per search page with an https picture, newest first", () => {
+test("the pin feed uses specific eligible product copy and leaves the canonical pages and board routes intact", () => {
   const feed = readOutput("shop/pins.xml");
   const items = feed.split("<item>").slice(1);
   const links = items.map((item) => item.match(/<link>https:\/\/nobi\.ai\/shop\/s\/([^<]+)<\/link>/)[1]);
   assert.deepEqual(links, ["black-leather-boots", "chelsea-boots"], "The boots page has no products, so no picture and no item");
   for (const line of [
-    "<title>Black Leather Boots</title>",
-    "<description>We may earn a commission from some links on this page. Black leather boots for work &amp; weekends, from &quot;classic&quot; ropers to &lt;lace-ups&gt;.</description>",
+    "<title>Roper Boot | black leather boots</title>",
+    "<description>#ad We may earn a commission from some links on this page. Explore black leather boots. Pictured: Roper Boot from Lucchese. Compare listed options on Shop Nobi and buy directly from the store.</description>",
     '<guid isPermaLink="true">https://nobi.ai/shop/s/black-leather-boots</guid>',
     '<media:content url="https://cdn.example.com/roper.jpg" medium="image"/>',
   ]) {
     assert.ok(items[0].includes(line), `Missing: ${line}`);
   }
-  assert.ok(items[1].includes("<description>Chelsea Boots from the best stores online, in one search. Shop Nobi is a search engine: you buy directly from the store.</description>"), "An unpaid page retains its original description");
+  assert.ok(items[1].includes("<description>Explore chelsea boots. Pictured: Chelsea Boot from Blundstone. Compare listed options on Shop Nobi and buy directly from the store.</description>"), "The non-affiliate item remains eligible without a commission claim");
   assert.deepEqual(readOutput("shop/pins/apparel-accessories.xml").split("<item>").slice(1), items, "All are apparel pages");
 });
 

@@ -52,13 +52,30 @@ table, the pricing facts, and existing page regressions.
 `/shop/s/<slug>`, with the products in the HTML, one page per top category at
 `/shop/c/<slug>`, and a list of popular searches on `/shop`. It also writes
 `/shop/pins.xml`, an RSS feed with one item per search page, which Pinterest
-reads to publish a pin for each page. It also writes one feed per top-level
+reads to publish selected product Pins linking to existing search pages. It also writes one feed per top-level
 category at `/shop/pins/<slug>.xml`, one for each Pinterest board, and lists
-them with their item counts in `/shop/pins/index.json`. Mature pages stay out
-of every feed. A feed item whose page contains an explicitly paid product
-starts its description with a commission notice about some page links; unpaid
-page descriptions remain unchanged. This does not change item identity or imply
-that Pinterest updates an existing Pin. The outside accounts behind this
+them with their item counts in `/shop/pins/index.json`. Pinterest has its own
+selection in `scripts/shop-nobi-pin-selection.js`: explicitly available, priced
+USD products with safe native photos; a relevant earning product is preferred
+within the page's existing results. Product/photo identities are deduplicated
+across board feeds, with alternate eligible products keeping distinct pages
+represented. The pictured product supplies factual Pin copy, and mixed earning
+pages start with `#ad` and the commission disclosure. Canonical GUIDs stay the
+same; refresh times do not become publication dates. This does not change search
+ranking, website cards, SEO previews or Web Stories.
+
+`scripts/shop-nobi-pin-editorial.js` records reviewed page/product/photo pairs,
+with the reason and observed Pin. A reviewed page is omitted from Pinterest if
+its chosen product or photo changes or becomes unavailable, until another hero
+is reviewed. This does not ban its merchant or country of manufacture. URL
+checks do not certify resolution or composition;
+new native heroes still need visual review, including recognition at a 236px
+card width. Source media stays intact. Existing published Pins are not promised
+to update when RSS changes, and no feed reconnect or artificial GUID is used to
+force a repost. Non-affiliate pages also receive pictured-product copy, without
+a commission claim. Availability comes from the saved page snapshot; it is not
+rechecked when Pinterest imports the item. Mature pages stay out of every feed.
+The outside accounts behind this
 (Search Console, Bing, IndexNow, Pinterest) are recorded in nobi-marketing's
 [search engines and discovery sites doc](https://github.com/Locusive/nobi-marketing/blob/main/docs/search_engines_and_discovery_sites.md). It fetches the page data from
 `https://api.nobi.ai/v1/shop/pages`. `SHOP_PAGES_API_URL` points the build at

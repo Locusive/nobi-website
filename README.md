@@ -104,6 +104,20 @@ any stale `nobi-conversation-id`. A paid link, on search pages
 and in stories, gets `rel="sponsored"` and a small "We may earn a commission"
 notice under it (`CommissionNotice` in `src/utils/shopNobiPage.js`).
 
+Every entry in `sitemap-shop.xml` has a lastmod: the page's refresh time, or the
+time the API built the data when a page has none.
+
+The last build step, `scripts/submit-indexnow.js`, tells IndexNow (Bing, Yandex
+and the other engines that share it) about the Shop Nobi pages that are new or
+have a new lastmod since the `sitemap-shop.xml` the live site serves, in batches
+of up to 10,000. The key file is `public/b20309cb84825b184afe0ffcf36630a7.txt`;
+the key is public by design. Only a Cloudflare Pages build of `main` from the
+real page data submits. Local builds, preview builds and builds with
+`SHOP_PAGES_API_URL` skip it, and so does a build that cannot read the live
+sitemap. The step never fails the build and logs counts only. It runs before
+Cloudflare publishes the build, so an engine that fetches a new page in the
+first minutes can still see the last deploy.
+
 The GitHub workflow `nightly-shop-nobi-rebuild.yml` rebuilds the site every
 day at 10:00 UTC, after the API's overnight refresh, by calling the Cloudflare
 Pages deploy hook in the `CLOUDFLARE_DEPLOY_HOOK_URL` secret.

@@ -21,7 +21,8 @@ export function readApiBaseUrl(env) {
  * Fetches and checks the page data. Any failure throws, so the build fails and the last good deploy stays live.
  *
  * @param {string} apiBaseUrl The API base address.
- * @returns {Promise<{pages: object[], retired: object[]}>} The live pages and the retired slugs.
+ * @returns {Promise<{generatedAt: unknown, pages: object[], retired: object[]}>} When the API built the data, the live
+ *     pages and the retired slugs.
  */
 export async function fetchSearchPagesData(apiBaseUrl) {
   const routeUrl = `${apiBaseUrl.replace(/\/+$/, "")}${SearchPagesRoute}`;
@@ -34,7 +35,7 @@ export async function fetchSearchPagesData(apiBaseUrl) {
   if (!Array.isArray(data?.pages) || !Array.isArray(data?.retired)) {
     throw new Error(`${routeUrl} has no "pages" and "retired" lists.`);
   }
-  return { pages: keepAllowedPages(data.pages), retired: data.retired };
+  return { generatedAt: data.generatedAt, pages: keepAllowedPages(data.pages), retired: data.retired };
 }
 
 /**

@@ -5,6 +5,7 @@ import { join, dirname } from "path";
 import { fileURLToPath } from "url";
 import { CoveCubbyPath } from "../src/content/coveCubbyComparison.js";
 import { MarleySpoonPath } from "../src/content/marleySpoonCost.js";
+import { isUtilityUrl } from "./shop-nobi-indexnow.js";
 
 import { BaseusScreenPath } from "../src/content/baseusScreens.js";
 
@@ -82,7 +83,8 @@ function getBlogEntries() {
 }
 
 function urlEntry({ loc, lastmod, changefreq, priority }) {
-  return `  <url>\n    <loc>${loc}</loc>\n    <lastmod>${lastmod}</lastmod>\n    <changefreq>${changefreq}</changefreq>\n    <priority>${priority}</priority>\n  </url>`;
+  const modification = lastmod ? `\n    <lastmod>${lastmod}</lastmod>` : "";
+  return `  <url>\n    <loc>${loc}</loc>${modification}\n    <changefreq>${changefreq}</changefreq>\n    <priority>${priority}</priority>\n  </url>`;
 }
 
 function generateSitemap() {
@@ -91,7 +93,7 @@ function generateSitemap() {
 
   const urls = [
     ...STATIC_PAGES.map(({ path, priority, changefreq }) =>
-      urlEntry({ loc: `${BASE_URL}${path}`, lastmod: today, changefreq, priority })
+      urlEntry({ loc: `${BASE_URL}${path}`, lastmod: isUtilityUrl(`${BASE_URL}${path}`) ? null : today, changefreq, priority })
     ),
     ...blogEntries.map(({ slug, date }) =>
       urlEntry({ loc: `${BASE_URL}/blog/${slug}`, lastmod: date, changefreq: "monthly", priority: "0.6" })

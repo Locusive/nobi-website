@@ -108,15 +108,33 @@ Every entry in `sitemap-shop.xml` has a lastmod: the page's refresh time, or the
 time the API built the data when a page has none.
 
 The last build step, `scripts/submit-indexnow.js`, tells IndexNow (Bing, Yandex
-and the other engines that share it) about the Shop Nobi pages that are new or
-have a new lastmod since the `sitemap-shop.xml` the live site serves, in batches
-of up to 10,000. The key file is `public/b20309cb84825b184afe0ffcf36630a7.txt`;
+and the other engines that share it) about new or changed Shop Nobi pages from
+`sitemap-shop.xml` and canonical `/tools/` pages from `sitemap-pages.xml`.
+Shop pages are compared with the live sitemap by address and lastmod. Utilities
+are selected from the authored sitemap and compared with the live
+`utility-revisions.json`, which prerendering writes from each delivered HTML
+page and its referenced local image bytes. This covers rendered facts,
+metadata, disclosures, links and shared JS/CSS bundle fingerprints. A shared
+bundle change can conservatively notify all utilities, but unchanged builds
+and same-day content changes are distinguished without a build clock or git.
+Utility sitemap entries omit lastmod rather than invent a modification date.
+Unchanged pages and other authored marketing pages are not submitted. Only
+canonical HTTPS destinations on nobi.ai are accepted. Duplicate addresses are
+removed before batching up to 10,000 URLs. The key file is `public/b20309cb84825b184afe0ffcf36630a7.txt`;
 the key is public by design. Only a Cloudflare Pages build of `main` from the
 real page data submits. Local builds, preview builds and builds with
-`SHOP_PAGES_API_URL` skip it, and so does a build that cannot read the live
-sitemap. The step never fails the build and logs counts only. It runs before
+`SHOP_PAGES_API_URL` skip it. An unreadable live Shop sitemap skips submission;
+unknown or invalid live authored-sitemap/revision metadata visibly skips only
+utility notifications, preserving Shop notifications. A missing built file,
+incomplete revision artifact or failed submission remains visible in the build
+log. A missing referenced local image stops prerendering. The IndexNow step
+never fails the build and logs counts only. It runs before
 Cloudflare publishes the build, so an engine that fetches a new page in the
-first minutes can still see the last deploy.
+first minutes can still see the last deploy. Acceptance acknowledges the
+notification; it does not prove indexing, search traffic or commission.
+The first revision-manifest deployment cannot compare against a nonexistent
+live manifest. A separate bounded initial notification is an operator action;
+the build never treats unknown live metadata as unchanged or force-replays it.
 
 The GitHub workflow `nightly-shop-nobi-rebuild.yml` rebuilds the site every
 day at 10:00 UTC, after the API's overnight refresh, by calling the Cloudflare

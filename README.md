@@ -214,3 +214,28 @@ ingestion and reporting-filter registration are separate backend responsibilitie
 decision boundaries, emitted exit attribution and both built HTML URL forms, sources and
 disclosures. The original diagram is under `public/media/baseus-independent-screens.svg`;
 Pin creative specifications are in `agents/creative_specs/baseus_screen_pins.md`.
+
+## MindTheColor digital-license checklist
+
+`/tools/mindthecolor-fit` checks declared Photoshop, platform, installation,
+connectivity and single-user license prerequisites. Missing answers stay unknown;
+known mismatches take priority. It does not inspect hardware or guarantee
+compatibility. Changing an answer clears a previous result. Answers remain local.
+The source price is €179 plus VAT, checked October 17, 2026. Adobe Photoshop is
+separate. The original dependency diagram uses no merchant images or software UI.
+
+This is one authored DIGITAL_SOFTWARE/PER_LICENSE offer, separate from physical
+search and MCP catalogs. `src/content/mindTheColorLink.js` contains actual offline
+Java builder output from the independently verified excluded Gumroad marketplace
+owner and its parameter configuration. Import validation rejects altered identity,
+source tags, duplicate/missing publisher parameters or incomplete provenance.
+Regenerate through the real builder after source/configuration changes; never
+construct a second affiliate URL in the website.
+
+Exits reuse `Click On Offer` and preserve Gumroad's publisher parameter. Gumroad's
+checked link has no verified per-visit sub-ID, so our acquisition event does not
+establish an exact order-to-visit join. Marketplace access and the generated link
+do not prove retained commission or payout; account payout onboarding remains
+unfinished. This page does not change it. Run `node --test
+tests/mindthecolor-fit.test.js tests/mindthecolor-offer-click.test.js`, then the
+full offline suite for the built page, discovery metadata and existing regressions.

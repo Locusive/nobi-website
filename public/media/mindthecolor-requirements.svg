@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800" role="img" aria-labelledby="title desc">
+  <title id="title">MindTheColor 3 purchase requirements</title>
+  <desc id="desc">A plugin depends on licensed desktop Photoshop 26 or later, Creative Cloud Desktop installation, online launch verification and one user’s Adobe account.</desc>
+  <rect width="1200" height="800" fill="#eef4ff" rx="24"/>
+  <g font-family="Avenir Next,Arial,sans-serif" fill="#202b4a">
+    <text x="75" y="100" font-size="42" font-weight="700">A plugin has dependencies.</text>
+    <path d="M600 236V280M600 408V452M600 580V624" stroke="#3c4fe0" stroke-width="6" fill="none"/>
+    <g fill="#fff" stroke="#c5d4ed" stroke-width="2"><rect x="75" y="145" width="1050" height="110" rx="10"/><rect x="75" y="290" width="1050" height="110" rx="10"/><rect x="75" y="435" width="1050" height="110" rx="10"/></g>
+    <text x="110" y="189" font-size="29" font-weight="700">Desktop Photoshop 26+</text>
+    <text x="110" y="229" font-size="25">Licensed Windows or macOS host; Adobe is separate.</text>
+    <text x="110" y="334" font-size="29" font-weight="700">Creative Cloud Desktop</text>
+    <text x="110" y="374" font-size="25">Up to date, with permission to install a .ccx plugin.</text>
+    <text x="110" y="479" font-size="29" font-weight="700">Internet when MindTheColor opens</text>
+    <text x="110" y="519" font-size="25">Manual: offline within the verified Photoshop session.</text>
+    <rect x="75" y="600" width="1050" height="115" fill="#3c4fe0" rx="10"/>
+    <g fill="#fff"><text x="110" y="646" font-size="30" font-weight="700">MindTheColor 3 personal license</text><text x="110" y="687" font-size="25">One user, same Adobe account across their computers.</text></g>
+    <text x="75" y="763" font-size="21" fill="#52627b">Shop Nobi · Source-based checklist, October 17, 2026 · Not physical testing</text>
+  </g>
+</svg>

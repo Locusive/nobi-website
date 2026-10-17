@@ -15,10 +15,14 @@ import { CoveCubbyPath } from "../src/content/coveCubbyComparison.js";
 import BaseusTwoScreens from "../src/pages/BaseusTwoScreens.jsx";
 import { BaseusScreenPath } from "../src/content/baseusScreens.js";
 
+import MindTheColorFit from "../src/pages/MindTheColorFit.jsx";
+import { MindTheColorPath } from "../src/content/mindTheColor.js";
+
 const Pages = { "/": HomePage, "/pricing": Pricing, "/product": Product, "/shop": ShopPage, "/privacy": Privacy, "/terms": Terms };
 Pages[CoveCubbyPath] = CoveCubbyComparison;
 Pages[MarleySpoonPath] = MarleySpoonCost;
 Pages[BaseusScreenPath] = BaseusTwoScreens;
+Pages[MindTheColorPath] = MindTheColorFit;
 
 /** Render the same components visitors see, without browser APIs or effects. */
 export function renderPageBody(path) {

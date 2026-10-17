@@ -26,6 +26,7 @@ const ShopPage           = lazy(() => import("./pages/ShopPage.jsx"));
 const CoveCubbyComparison = lazy(() => import("./pages/CoveCubbyComparison.jsx"));
 const BaseusTwoScreens = lazy(() => import("./pages/BaseusTwoScreens.jsx"));
 const MarleySpoonCost = lazy(() => import("./pages/MarleySpoonCost.jsx"));
+const MindTheColorFit = lazy(() => import("./pages/MindTheColorFit.jsx"));
 const NotFound           = lazy(() => import("./pages/NotFound.jsx"));
 
 import { RequestDemoModal } from "./components/DemoModals.jsx";
@@ -117,6 +118,7 @@ function App() {
           <Route path="/tools/cove-vs-cubby" element={<CoveCubbyComparison />} />
           <Route path="/tools/marley-spoon-cost" element={<MarleySpoonCost />} />
           <Route path="/tools/baseus-two-screens" element={<BaseusTwoScreens />} />
+          <Route path="/tools/mindthecolor-fit" element={<MindTheColorFit />} />
           {/* The assistant bundle fills these pages (see index.html); the
               route only mounts the SEO shell. /shop/* covers the sub-paths
               the Shop Nobi experience may navigate to. */}

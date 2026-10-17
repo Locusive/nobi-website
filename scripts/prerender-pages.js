@@ -12,6 +12,8 @@ import { ShopNobiPageHead } from "../src/utils/shopNobiPage.js";
 import { PRICING_OFFER, PRICING_SEO_DESCRIPTION } from "../src/constants/pricing.js";
 import { CoveCubbySeo } from "../src/content/coveCubbyComparison.js";
 import { MarleySpoonSeo } from "../src/content/marleySpoonCost.js";
+import { isUtilityUrl } from "./shop-nobi-indexnow.js";
+import { buildUtilityRevision, UtilityRevisionFile } from "./utility-content-revision.js";
 
 import { BaseusScreenSeo } from "../src/content/baseusScreens.js";
 
@@ -84,9 +86,11 @@ async function main() {
   }
   const shell = readFileSync(SHELL, "utf8");
   const { renderPageBody } = await loadPageRenderer();
+  const utilityRevisions = {};
   let count = 0;
   for (const page of PAGES) {
     const html = renderPage(page, shell, renderPageBody(page.path));
+    if (isUtilityUrl(`${BASE}${page.path}`)) utilityRevisions[`${BASE}${page.path}`] = buildUtilityRevision(html, DIST);
     if (page.path === "/") {
       // Keep the SPA fallback empty so unrelated routes never inherit home content.
       writeFileSync(join(DIST, "homepage.html"), html);
@@ -96,6 +100,7 @@ async function main() {
     }
     count++;
   }
+  writeFileSync(join(DIST, UtilityRevisionFile), `${JSON.stringify({ version: 1, revisions: utilityRevisions }, null, 2)}\n`);
   console.log(`prerender-pages: rendered page content + metadata for ${count} page(s)`);
 }
 

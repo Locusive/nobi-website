@@ -20,3 +20,11 @@ No new analytics, credentials, permissions, accounts, paid resources, model call
 
 ## Local result
 The omission regression failed4of19 cases before source changes, then all19passed. Empty query/fragment canonical cases independently failed before their correction. Final fixture-backed build and177tests pass,0failures/skips, Node22.23.1arm64. The first full-build attempt stopped before tests because npm dependencies installed under Node20x64 lacked arm64Rollup; reinstalling under the actual Node22arm64 runtime fixed the environment without lockfile/source changes. No external submission/model call. Root owns one bounded initial3URLnotification separately from normal changed-only builds.
+
+## 4. Review correction: stable utility content revisions
+- [x] Reproduce same-day content changes being missed and unchanged next-day builds being re-notified.
+- [x] Generate a public utility-only revision manifest from exact prerendered HTML plus referenced local media bytes. HTML includes head/schema/rendered facts and client JS/CSS fingerprints, covering shared delivered sources; a shared bundle change conservatively revisits only utility pages. No git dependency.
+- [x] Compare canonical sitemap utility candidates by revision; keep Shop lastmod comparison. Missing/invalid live revision data visibly skips utility notifications, never treats unknown as unchanged or replays all. Missing built files/media remain explicit errors.
+- [x] Omit fabricated build-day lastmod on utility sitemap entries. Prove two unchanged full builds have identical manifests, content/media edits change revisions and same-day changes are notified. Run full fixture suite and exact-head review.
+
+Verified correction:3/23cases failed before the revision fix; final full offline build+187tests pass,0failures/skips (26IndexNowcases and4revisiongroups). A second unchanged full build produced the identical manifest. Missing live manifest remains visibly unknown; root owns initial3URLnotification. Current-head hosted review follows this correction commit.

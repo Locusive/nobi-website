@@ -12,11 +12,11 @@
          On /shop the bundle boots as Shop Nobi, filling the whole page; on
          every other page it stays the floating marketing-site assistant.
          The path check matches isShopNobiPath in src/utils/shopNobiPage.js.
-         A prebuilt search page (/shop/s/<slug>) opens with its own search,
+         A prebuilt search page (/shop/s/<slug>) passes its query to the bundle,
          read from the content scripts/prerender-shop.js puts in the head. -->
     <script>
-      // One conversation per Shop Nobi page view: the bundle's opening search and the prebuilt product cards
-      // (src/utils/shopNobiProductClick.js) both use it, so a click ties back to the page's own search.
+      // Reserve a conversation ID for the live assistant when the shopper searches. Prebuilt product cards
+      // (src/utils/shopNobiProductClick.js) use a separate visit reference and do not require a saved conversation.
       window.shopNobiPageConversationId = isShopNobiPage(window.location.pathname) ? createPageConversationId() : null;
 
       // The bundle can draw live products before ShopPage, a lazy route, listens, so this flag keeps the first draw.

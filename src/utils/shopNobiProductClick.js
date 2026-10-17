@@ -22,17 +22,15 @@ const BundleStorageKey = "Nobi";
 const ShopperIdKey = "nobi-shopper-id";
 /** The traffic tags the bundle copies from the page address onto its events. */
 const TrafficTags = ["utm_source", "utm_medium", "utm_campaign", "utm_term", "utm_content"];
-/** Where index.html keeps the page view's conversation, which the bundle's opening search runs under too. */
-const PageConversationIdKey = "shopNobiPageConversationId";
-/** Where the page view's visit id is kept once a click makes it. It stands in for a missing conversation. */
+/** Where prebuilt cards keep their page view's visit id once a click makes it. */
 const PageVisitIdKey = "shopNobiPageVisitId";
 /** The internal smoke-test marker the bundle adds to its API requests, so the API drops a smoke test's events. */
 const SmokeTestQueryParameter = "nobi_smoke_test";
 const SmokeTestSessionStorageKey = "nobi_smoke_test_token";
 
 /**
- * Click handler for a prebuilt product link. It sets the link to open, then sends the click event under the page's
- * conversation when the click opens the store page. The browser still follows the link as usual.
+ * Click handler for a prebuilt product link. It sets the link to open, then sends a standalone click event when
+ * the click opens the store page. The browser still follows the link as usual.
  *
  * @param {{button: number, currentTarget: {href: string}}} event The click, or a middle or right click.
  * @param {{product: object, position: number, query: string, slug: string}} click The product, its place, the search, the slug.
@@ -45,21 +43,20 @@ export function handleProductLinkClick(event, click, browser = globalThis) {
     return;
   }
 
-  const clickEvent = buildClickEvent({ ...click, conversationId: visit.conversationId }, event.currentTarget.href, browser);
+  const clickEvent = buildClickEvent(click, event.currentTarget.href, browser);
   sendEvent(clickEvent, browser);
 }
 
 /**
- * Reads who is clicking. A crawler or automated browser gets no conversation and no click id, as in the bundle. A
- * person's click id is the page's conversation, or "<slug>.<visit id>" when the page view has none.
+ * Reads who is clicking. A person's prebuilt click uses "<slug>.<visit id>" independently of the live assistant's
+ * conversation, which may never be saved. A crawler or automated browser gets no click id.
  */
 function readVisit(slug, browser) {
   if (isAutomatedVisitor(browser.navigator)) {
     return { isPerson: false, conversationId: null, clickId: null };
   }
 
-  const conversationId = browser[PageConversationIdKey] || null;
-  return { isPerson: true, conversationId, clickId: conversationId ?? buildClickId(slug, readVisitId(browser)) };
+  return { isPerson: true, conversationId: null, clickId: buildClickId(slug, readVisitId(browser)) };
 }
 
 /** Reads the page view's visit id, making it at the first click so the build never makes one. */
@@ -75,10 +72,9 @@ function shouldCountClicks(browser) {
 }
 
 /** Builds the event with the field names the bundle uses for its live product clicks. */
-function buildClickEvent({ product, position, query, conversationId }, linkUrl, browser) {
+function buildClickEvent({ product, position, query }, linkUrl, browser) {
   const details = {
     entryPoint: SearchBarEntryPoint,
-    ...(conversationId ? { conversationId } : {}),
     query,
     productName: product.name,
     storeName: product.storeName,

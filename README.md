@@ -147,6 +147,24 @@ To build without the network, serve the test data:
 `node tests/shop-nobi-pages-server.js 4789`, then
 `SHOP_PAGES_API_URL=http://127.0.0.1:4789 npm test`.
 
+## Election Night checklist
+
+`/election-night-survival-kit` is a static, nonpartisan November 3, 2026
+checklist with a disclosure above optional shopping links. It reuses the
+standalone product-exit handler and an actual offline Java builder record for
+the exact Baseus CR11 variant in `src/content/electionNightLink.js`. It does not
+construct an affiliate template or promise stock, arrival, runtime or a purchase.
+The Marley link opens the existing cost calculator and carries only incoming
+UTM tags so its existing offer-exit event retains acquisition context. No
+calculator or model call was added. Original diagrams, three Pins and the silent
+15-second video are under `public/media/election-night-*`; the video loads only
+when requested. The page CSS is loaded with the main stylesheet so the static
+HTML stays styled without JavaScript. After November 4, review the dated
+seasonal copy before promoting it again.
+
+`tests/election-night-page.test.js` checks static content, disclosure order,
+media/metadata/sitemap, the exact product exit and calculator attribution tags.
+
 ## Cove/Cubby comparison utility
 
 `/tools/cove-vs-cubby` renders the comparison facts in HTML and runs its

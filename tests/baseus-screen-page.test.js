@@ -14,6 +14,9 @@ test("the built utility gives its source limits, unknown path and disclosures wi
     assert.ok(html.includes(fact), `Missing ${fact}`);
   }
   assert.ok(html.includes("Neither is a fit?"));
+  assert.ok(html.includes('value="video-only"'));
+  assert.ok(html.includes("Data and DP Alt Mode, but no laptop charging"));
+  assert.ok(html.includes("No data or no DP Alt Mode"));
   assert.ok(html.includes("This link does not mean the dock fits your answers."));
   assert.ok(html.includes("We may earn a commission from qualifying purchases through these links."));
   assert.ok(html.includes("its PDF CDN could not be read"));

@@ -138,3 +138,26 @@ test("undecided charging ignores retained hidden answers while explicit charging
     assert.equal(notRequested.status, "conditional");
   }
 });
+
+test("a video-only host stays uncertain for displays and fails only a requested laptop-charging plan", () => {
+  const modelPlans = [
+    ["nu1-air-mac", ConfirmedOffice, { watts: "65", pdPath: "yes", nu1Adapter: "100", nu1Usb: "one" }],
+    ["rd1-pro", Windows4k, { watts: "65", pdPath: "yes", rd1Supply: "yes", peripheralWatts: "0", peripheralPorts: "yes" }],
+  ];
+  for (const [id, initial, powerAnswers] of modelPlans) {
+    const displayOnly = evaluate(id, { host: "video-only", charging: "no" }, initial);
+    assert.equal(displayOnly.display.status, "unknown", "No manufacturer proof means uncertainty, not a hard display exclusion");
+    assert.equal(displayOnly.power.status, "not-requested");
+    assert.equal(displayOnly.status, "unknown");
+    assert.match(displayOnly.display.checks[0].message, /full-featured.*charging/);
+    assert.match(displayOnly.display.checks[0].message, /Baseus/);
+    const chargingPlan = evaluate(id, { host: "video-only", charging: "yes", ...powerAnswers }, initial);
+    assert.equal(chargingPlan.display.status, "unknown");
+    assert.equal(chargingPlan.power.status, "fail", "The known no-charging port cannot satisfy a requested charging plan");
+    const undecided = evaluate(id, { host: "video-only", charging: "unknown", ...powerAnswers, pdPath: "no" }, initial);
+    assert.equal(undecided.power.status, "unknown", "A retained no-PD answer must not decide an undecided charging requirement");
+    assert.equal(undecided.status, "unknown");
+    assert.equal(evaluate(id, { host: "no", charging: "no" }, initial).display.status, "fail", "Missing data or video remains incompatible");
+    assert.equal(evaluate(id, { host: "yes", charging: "no" }, initial).display.status, "conditional");
+  }
+});

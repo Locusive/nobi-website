@@ -47,3 +47,15 @@
 
 
 Review correction evidence: before the two decision fixes, the focused suite had10 passing and two failing groups. Afterward all12 focused groups and the full167-case offline build/suite pass, zero failures/skips. Logs: ignored build/baseus_release/review-baseline.log, review-final.log and review-full-offline.log. Adapter-path uncertainty, NU1 direct outputs, explicit charging failures and charging-not-required controls remain covered. No UI layout, authored facts or outbound behavior changed.
+
+
+# 7. Host capability review correction
+
+- [x] Distinguish a host missing data/video from a host with data and DP Alt Mode but no laptop charging. The latter must not become a known display failure solely from the bundled answer.
+- [x] Preserve source uncertainty: NU1 manufacturer manual English FAQ p4 and RD1 Attention/FAQ p9 require full-featured data/video/charging hosts. Keep video-only hosts unknown pending exact Baseus confirmation, not a new positive compatibility claim. Keep required charging failures separate.
+- [x] Add explicit source-backed host options, meaningful behavior and built-HTML tests; run before/after focused controls and full offline suite. Preserve exact route, source links, attribution, unknown paths and layout.
+
+Rechecked October17: manufacturer-authored manual URLs remain in BaseusScreenSources. The RD1 manual also describes data/video/PD for a one-cable connection; neither manual unambiguously verifies the no-charging host combination. This resolves the false hard exclusion without treating generic USB-C intuition as product-specific evidence.
+
+
+Host correction verification: new behavior baseline12pass/1fail; final13decision groups and full168-case offline build/suite pass, zero failures/skips. The additional retained no-PD/undecided assertion passes in the final focused run. Logs: ignored build/baseus_release/host-baseline.log, host-final.log and host-full-offline.log. Normal Chrome verified no-charging host as displayunknown/powernot-requested, requested charging as powerfail and switching back to undecided as powerunknown. Desktop1280x900/mobile390x844 screenshots saved as host-desktop.jpg and host-mobile.jpg;375px content fits the390px viewport. Owned tab1150543689 closed and absence verified, temporary viewport reset, local preview session stopped/exited0. No merchant exit clicked.

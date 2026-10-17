@@ -27,17 +27,24 @@ function confirmation(value, yes, no, missing, source) {
   return value === "yes" ? fit(yes, source) : value === "no" ? fail(no, source) : unknown(missing, source);
 }
 
+/** Keeps missing video capability distinct from an unverified no-charging host combination. */
+function hostDisplayCheck(id, input) {
+  const source = id === "nu1-air-mac" ? "nu1Manual" : "rd1Manual";
+  if (input.host === "video-only") return unknown("Baseus requires a full-featured host, including charging. A data/DP host without laptop charging is unverified; confirm this exact combination with Baseus.", source);
+  return confirmation(input.host, "You confirmed a full-featured host with data, DP Alt Mode and charging capability.",
+    "The selected host port lacks data or DP Alt Mode required by this display path.",
+    "Check the selected host port's data, DP Alt Mode and full-featured compatibility.", source);
+}
+
 /** Checks requirements common to both docks without guessing capabilities from a laptop name. */
-function commonDisplayChecks(input) {
+function commonDisplayChecks(id, input) {
   const checks = [];
   let sourceUrl;
   try { sourceUrl = new URL(input.laptopSource); } catch { /* Missing evidence remains unknown. */ }
   checks.push(input.laptop.trim() && sourceUrl?.protocol === "https:"
     ? fit("You supplied an exact laptop and manufacturer specification link.")
     : unknown("Add your exact laptop model and its manufacturer specification link."));
-  checks.push(confirmation(input.host, "You confirmed this host port has data, charging and DP Alt Mode.",
-    "This selected host port does not meet the full-featured USB-C requirement.",
-    "Check the selected host port for data, charging and DP Alt Mode.", "manuals"));
+  checks.push(hostDisplayCheck(id, input));
   if (!["1", "2"].includes(String(input.count))) checks.push(fail("Only one or two independent external displays are modeled by these docks.", "manuals"));
   checks.push(confirmation(input.modePath, "You confirmed the exact host, monitor and cable path supports the requested mode.",
     "Your host, monitor or cable path cannot carry the requested mode.",
@@ -87,7 +94,7 @@ function rd1Mode(input) {
 
 /** Keeps display compatibility independent from software permission and the dock's actual video architecture. */
 function displayResult(id, input) {
-  const checks = commonDisplayChecks(input);
+  const checks = commonDisplayChecks(id, input);
   const mac = KnownMacOs.includes(input.os);
   const windows = KnownWindowsOs.includes(input.os);
   checks.push(mac || windows ? fit("The selected OS is within the source's stated support scope.", id === "nu1-air-mac" ? (mac ? "macSoftware" : "windowsSoftware") : "rd1")
@@ -121,8 +128,9 @@ function powerResult(id, input) {
   const checks = [];
   const required = watts(input.watts, 300);
   checks.push(required !== null && required > 0 ? fit(`Your stated laptop requirement is ${required}W.`) : unknown("Enter the laptop manufacturer's required charging watts."));
-  checks.push(confirmation(input.pdPath, "You confirmed the host's USB-C PD support and required cable/port ratings.",
-    "The confirmed PD/cable path cannot supply the requested laptop charging.", "Check host PD support and the required cable/port ratings.", "manuals"));
+  checks.push(input.host === "video-only" ? fail("The selected host cannot receive laptop charging through this port.", id === "nu1-air-mac" ? "nu1Manual" : "rd1Manual")
+    : confirmation(input.pdPath, "You confirmed the host's USB-C PD support and required cable/port ratings.",
+      "The confirmed PD/cable path cannot supply the requested laptop charging.", "Check host PD support and the required cable/port ratings.", "manuals"));
   if (id === "nu1-air-mac") {
     checks.push(input.nu1Adapter === "100" ? fit("A suitable separate 100W PD adapter is part of your plan.", "nu1Power")
       : input.nu1Adapter === "none" ? fail("NU1 excludes the charger; this plan has no PD input adapter.", "nu1Manual")

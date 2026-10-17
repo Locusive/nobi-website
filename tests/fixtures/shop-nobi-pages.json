@@ -23,14 +23,16 @@
           "storyStoreLink": "https://sovrn.co?key=web&u=https%3A%2F%2Flucchese.com%2Fproducts%2Froper%3Fvariant%3D123%26utm_source%3Dgoogle_web_stories",
           "paidLink": true,
           "imageUrl": "https://cdn.example.com/roper.jpg",
-          "price": 495.0, "currency": "USD", "isInStock": true
+          "price": 495.0, "currency": "USD", "isInStock": true,
+          "productVariantId": "8e4a3b21-1d55-4c2b-9b86-3a7f2a6e0003", "owningMerchantId": "35019f05-f0cd-4ee3-ba16-c1fe938888d1"
         },
         {
           "name": "<script>alert(\"boot\")</script> & \"Cowboy\" $& Boot", "brand": "Bad & Co", "storeName": "Store <b>",
           "url": "https://example.com/products/cowboy",
           "storeLink": "javascript:alert(1)", "storyStoreLink": "https://example.com/products/cowboy?utm_source=google_web_stories", "paidLink": true,
           "imageUrl": "https://cdn.example.com/cowboy.jpg",
-          "price": 120, "currency": "EUR", "isInStock": false
+          "price": 120, "currency": "EUR", "isInStock": false,
+          "productVariantId": "<not-a-product-id>", "owningMerchantId": "35019f05-f0cd-4ee3-ba16-c1fe938888d1"
         },
         {
           "name": "Script Link Boot", "brand": "X", "storeName": "X",

@@ -28,10 +28,25 @@ const SmokeTestSessionStorageKey = "nobi_smoke_test_token";
 export function handleShopNobiOutboundClick(event, { link, slug, eventName, details }, browser = globalThis) {
   const visit = readVisit(slug, browser);
   tagProductLinkOnClick(event, link, visit);
-  if (!LinkOpeningButtons.includes(event.button) || !shouldCountClicks(browser)) {
+  if (!LinkOpeningButtons.includes(event.button)) {
     return;
   }
-  sendEvent(buildClickEvent(eventName, details, event.currentTarget.href, browser), browser);
+  sendShopNobiEvent(eventName, { ...details, linkUrl: event.currentTarget.href }, browser);
+}
+
+/**
+ * Sends a Shop Nobi event under the Shop Nobi merchant, with the page, its traffic tags, the referrer and the shopper.
+ * A crawler, an automated browser or a local copy of the site sends nothing.
+ *
+ * @param {string} eventName The event's name, such as "Click On Search Result".
+ * @param {object} details The event's own details.
+ * @param {object} browser The window.
+ */
+export function sendShopNobiEvent(eventName, details, browser = globalThis) {
+  if (!shouldCountVisit(browser)) {
+    return;
+  }
+  sendEvent(buildEvent(eventName, details, browser), browser);
 }
 
 /**
@@ -52,17 +67,16 @@ function readVisitId(browser) {
   return browser[PageVisitIdKey];
 }
 
-/** Returns whether this visit's clicks count: not a local copy of the site, and not a crawler or automated browser. */
-function shouldCountClicks(browser) {
+/** Returns whether this visit's events count: not a local copy of the site, and not a crawler or automated browser. */
+function shouldCountVisit(browser) {
   const isLocalCopy = LocalHosts.includes(browser.location.hostname);
   return !isLocalCopy && !isAutomatedVisitor(browser.navigator);
 }
 
-/** Add acquisition, final URL and shopper fields without treating every exit as a physical product click. */
-function buildClickEvent(eventName, authoredDetails, linkUrl, browser) {
+/** Adds the page, acquisition and shopper fields to an event's own details. */
+function buildEvent(eventName, authoredDetails, browser) {
   const details = {
     ...authoredDetails,
-    linkUrl,
     pageUrl: browser.location.href,
     ...readTrafficTags(browser.location.href),
   };
@@ -115,14 +129,14 @@ function readSmokeTestToken(browser) {
 }
 
 /** Sends the event as a beacon, which survives the page closing, or with a fetch that does when the beacon is refused. */
-function sendEvent(clickEvent, browser) {
+function sendEvent(shopNobiEvent, browser) {
   const eventsUrl = buildEventsUrl(browser);
-  const body = JSON.stringify(clickEvent);
+  const body = JSON.stringify(shopNobiEvent);
   if (browser.navigator.sendBeacon?.(eventsUrl, body)) {
     return;
   }
 
   const request = { method: "POST", headers: { "Content-Type": "application/json" }, body, keepalive: true };
-  // A lost click event must never get in the way of the link, so a failed send is dropped.
+  // A lost event must never get in the way of the page or its links, so a failed send is dropped.
   browser.fetch(eventsUrl, request).catch(() => {});
 }

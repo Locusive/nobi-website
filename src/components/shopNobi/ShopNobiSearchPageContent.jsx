@@ -1,15 +1,20 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { handleProductLinkClick } from "../../utils/shopNobiProductClick";
+import { sendSearchPageShownProducts } from "../../utils/shopNobiShownProducts";
 import { formatPrice, readCrumbPath, searchPagePath } from "../../utils/shopNobiSearchPage";
 import { CommissionNotice, readStoreLinkRel } from "../../utils/shopNobiPage";
 
 /**
  * The products of a prebuilt Shop Nobi search page. The build writes this into the HTML for crawlers, and
- * visitors see it until live products take its place. A refused or failed live search leaves it in place.
+ * visitors see it until live products take its place. A refused or failed live search leaves it in place. Each page
+ * view records which products it showed; the build renders no effects, so it records nothing.
  *
  * @param {{page: object}} props The search page data.
  */
 export default function ShopNobiSearchPageContent({ page }) {
+  // Keyed on the slug, so the page records its products once however often it renders.
+  useEffect(() => sendSearchPageShownProducts(page), [page.slug]);
+
   return (
     <main className="mx-auto max-w-6xl px-4 py-8 text-black dark:text-white">
       <Breadcrumbs page={page} />

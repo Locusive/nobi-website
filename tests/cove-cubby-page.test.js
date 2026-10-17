@@ -42,8 +42,15 @@ test("the comparison has its canonical, source-derived preview, site navigation 
   assert.equal((html.match(/rel="canonical"/g) || []).length, 1);
   assert.ok(html.includes('href="https://nobi.ai/tools/cove-vs-cubby"'));
   assert.ok(html.includes(`<title>${CoveCubbySeo.title.replaceAll("&", "&amp;")}</title>`));
-  assert.ok(html.includes('content="https://nobi.ai/media/cove-cubby-footprints.png"'));
+  assert.ok(html.includes('property="og:image" content="https://nobi.ai/media/cove-cubby-01-common-scale.png"'));
+  assert.ok(html.includes('name="twitter:image" content="https://nobi.ai/media/cove-cubby-01-common-scale.png"'));
   for (const path of ["/shop", "/privacy", "/terms"]) assert.ok(html.includes(`href="${path}"`));
   for (const asset of ["media/cove-cubby-footprints.svg", "media/cove-cubby-footprints.png"]) assert.ok(existsSync(new URL(asset, Dist)));
+  for (const name of ["01-common-scale", "02-20-by-24-example", "03-exterior-vs-litter-area"]) {
+    const png = readFileSync(new URL(`media/cove-cubby-${name}.png`, Dist));
+    assert.equal(png.subarray(0, 8).toString("hex"), "89504e470d0a1a0a");
+    assert.equal(png.readUInt32BE(16), 1000);
+    assert.equal(png.readUInt32BE(20), 1500);
+  }
   assert.ok(readFileSync(new URL("sitemap-pages.xml", Dist), "utf8").includes("<loc>https://nobi.ai/tools/cove-vs-cubby</loc>"));
 });

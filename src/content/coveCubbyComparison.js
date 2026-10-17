@@ -55,7 +55,7 @@ export const CoveCubbySeo = {
   path: CoveCubbyPath,
   title: "Cove vs Cubby: Dimensions & Floor-Space Calculator | Shop Nobi",
   description: "Compare Cove and Cubby litter-box dimensions and dated prices. Measure your floor space with an interactive exterior-footprint calculator.",
-  image: "https://nobi.ai/media/cove-cubby-footprints.png",
+  image: "https://nobi.ai/media/cove-cubby-01-common-scale.png",
   schema: [
     {
       "@context": "https://schema.org",

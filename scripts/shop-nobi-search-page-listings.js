@@ -6,24 +6,26 @@ import { searchPagePath, searchPageUrl } from "../src/utils/shopNobiSearchPage.j
 import { categoryPageUrl } from "../src/utils/shopNobiCategoryPage.js";
 import { isSafeSlug } from "./shop-nobi-search-page-view.js";
 import { webStoryUrl } from "../src/utils/shopNobiWebStory.js";
+import { saleHubUrl, salePageUrl } from "../src/utils/shopNobiSalePage.js";
 
 const LlmsTxtPageLimit = 100;
 const RedirectTargetPattern = /^\/[A-Za-z0-9\-._~/]*$/;
 
 /**
- * Builds sitemap-shop.xml, listing every category page, search page and web story with the time it was last
- * refreshed.
+ * Builds sitemap-shop.xml, listing every category page, search page, web story, sale page and the sale hub with the
+ * time it was last refreshed.
  *
- * @param {object[]} categoryPages The built category pages.
- * @param {object[]} searchPages The built search pages.
- * @param {{page: object}[]} stories The built web stories.
+ * @param {{categoryPages: object[], searchPages: object[], stories: {page: object}[], salePages: object[]}} plan The built pages.
  * @returns {string} The sitemap XML.
  */
-export function buildShopNobiSitemap(categoryPages, searchPages, stories) {
+export function buildShopNobiSitemap({ categoryPages, searchPages, stories, salePages }) {
+  const saleHubEntries = salePages.length > 0 ? [{ url: saleHubUrl(), refreshedAt: salePages[0].refreshedAt }] : [];
   const pageEntries = [
     ...categoryPages.map((category) => ({ url: categoryPageUrl(category.slug), refreshedAt: category.refreshedAt })),
     ...searchPages.map((page) => ({ url: searchPageUrl(page.slug), refreshedAt: page.refreshedAt })),
     ...stories.map(({ page }) => ({ url: webStoryUrl(page.slug), refreshedAt: page.refreshedAt })),
+    ...saleHubEntries,
+    ...salePages.map((page) => ({ url: salePageUrl(page.slug), refreshedAt: page.refreshedAt })),
   ];
   const entries = pageEntries.map((entry) => {
     const lastModified = entry.refreshedAt ? `\n    <lastmod>${htmlEscape(entry.refreshedAt)}</lastmod>` : "";

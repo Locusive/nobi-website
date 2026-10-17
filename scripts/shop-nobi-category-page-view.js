@@ -190,8 +190,13 @@ function toLink(page) {
   return { slug: page.slug, title: page.title };
 }
 
-/** Makes a slug from a name: accents dropped, lowercase, other characters turned into single dashes. */
-function makeSlug(name) {
+/**
+ * Makes a slug from a name: accents dropped, lowercase, other characters turned into single dashes.
+ *
+ * @param {string} name The name, such as "Shirts & Tops".
+ * @returns {string} The slug, such as "shirts-tops".
+ */
+export function makeSlug(name) {
   return name
     .normalize("NFKD")
     .replace(/[̀-ͯ]/g, "")

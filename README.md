@@ -62,6 +62,18 @@ of every feed. The outside accounts behind this
 another API base address. If the fetch fails, the build fails, so Cloudflare
 keeps the last good deploy live.
 
+It also builds one sale page per category at `/shop/sale/<slug>`, titled "On sale
+now at independent stores: <category>", and `/shop/sale`, which lists them, from
+`https://api.nobi.ai/v1/shop/sale-pages`. The API sends only in-stock products of
+stores refreshed in the last 48 hours whose own compare at price is above their
+price, paying stores first in each round of stores. Each card shows the store's
+earlier price struck through and its price now; the build drops any product
+whose earlier price is not above its price now. Sale pages sit under the search
+box like category pages, and go into `sitemap-shop.xml`, `shop/pins.xml` and
+their top category's board feed. Their clicks carry `sale-<slug>` as the click
+id's slug. A failed sale fetch fails the build, like the pages fetch, so the
+API route must be live before this website change deploys.
+
 In the browser, a search page keeps its prebuilt products above the live search,
 and a category page keeps its searches under the search box, until the assistant
 bundle draws live products. A refused or failed live search therefore leaves the

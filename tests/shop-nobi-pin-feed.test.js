@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
-import { buildPinFeedFiles, listPinFeedFiles } from "../scripts/shop-nobi-pin-feed.js";
+import { buildPinFeedFiles, listPinFeedFiles, toSearchPinPage } from "../scripts/shop-nobi-pin-feed.js";
 import { PinBoardNameByTopLevel } from "../src/utils/shopNobiPinBoard.js";
 
 /** Builds a search page with one product per picture address. */
@@ -32,7 +32,7 @@ test("the feed puts the most recently refreshed pages first, whatever the data o
     makePage("no-date", null, ["https://cdn.example/b.jpg"]),
     makePage("newest", "2026-10-11T00:00:00Z", ["https://cdn.example/c.jpg"]),
   ];
-  const feed = readFeedFile(buildPinFeedFiles(pages), "shop/pins.xml");
+  const feed = readFeedFile(buildPinFeedFiles(pages.map(toSearchPinPage)), "shop/pins.xml");
   assert.deepEqual(readItemLinks(feed), ["newest", "oldest", "no-date"]);
   assert.ok(!feed.includes("<pubDate>"), "A nightly refresh is not a publish date");
 });
@@ -44,7 +44,7 @@ test("the feed uses the first https picture, skips pages without one, and stops 
     makePage("second", "2026-10-09T00:00:00Z", ["https://cdn.example/d.jpg"]),
     makePage("third", "2026-10-08T00:00:00Z", ["https://cdn.example/e.jpg"]),
   ];
-  const feed = readFeedFile(buildPinFeedFiles(pages, 2), "shop/pins.xml");
+  const feed = readFeedFile(buildPinFeedFiles(pages.map(toSearchPinPage), 2), "shop/pins.xml");
   assert.deepEqual(readItemLinks(feed), ["http-then-https", "second"]);
   assert.ok(feed.includes('<media:content url="https://cdn.example/secure.jpg" medium="image"/>'));
 });
@@ -54,7 +54,7 @@ test("a Shopify picture is asked for at 1,200 pixels wide, keeping its other set
     makePage("shopify-cdn", "2026-10-11T00:00:00Z", ["https://cdn.shopify.com/s/files/1/boot.jpg?v=7&width=300"]),
     makePage("shopify-store", "2026-10-10T00:00:00Z", ["https://store.example/cdn/shop/files/boot.jpg?v=8"]),
   ];
-  const feed = readFeedFile(buildPinFeedFiles(pages), "shop/pins.xml");
+  const feed = readFeedFile(buildPinFeedFiles(pages.map(toSearchPinPage)), "shop/pins.xml");
   assert.ok(feed.includes('url="https://cdn.shopify.com/s/files/1/boot.jpg?v=7&amp;width=1200"'));
   assert.ok(feed.includes('url="https://store.example/cdn/shop/files/boot.jpg?v=8&amp;width=1200"'));
 });
@@ -66,7 +66,7 @@ test("a page lands only in its top level's feed, and pages with no or an unknown
     makeCategoryPage("no-category", null),
     makeCategoryPage("unknown-category", "made_up.things"),
   ];
-  const files = buildPinFeedFiles(pages);
+  const files = buildPinFeedFiles(pages.map(toSearchPinPage));
   const apparelFeed = readFeedFile(files, "shop/pins/apparel-accessories.xml");
 
   assert.deepEqual(readItemLinks(apparelFeed), ["boots"]);
@@ -86,7 +86,7 @@ test("mature pages land in no feed, the feed of all pages included, and no matur
     makeCategoryPage("rifles", " Mature.weapons.guns"),
     makeCategoryPage("boots", "apparel_accessories.shoes.boots"),
   ];
-  const files = buildPinFeedFiles(pages);
+  const files = buildPinFeedFiles(pages.map(toSearchPinPage));
 
   assert.deepEqual(readItemLinks(readFeedFile(files, "shop/pins.xml")), ["boots"]);
   assert.ok(files.every((file) => !file.path.includes("mature")));
@@ -98,7 +98,7 @@ test("the index lists every board feed with its address and item count, and each
     makeCategoryPage("boots", "apparel_accessories.shoes.boots"),
     makeCategoryPage("handbags", "apparel_accessories.handbags_wallets_cases.handbags"),
   ];
-  const files = buildPinFeedFiles(pages, 1);
+  const files = buildPinFeedFiles(pages.map(toSearchPinPage), 1);
   const index = JSON.parse(readFeedFile(files, "shop/pins/index.json"));
 
   assert.equal(index.length, Object.keys(PinBoardNameByTopLevel).length);

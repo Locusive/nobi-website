@@ -1,5 +1,5 @@
-// Renders the prebuilt Shop Nobi pages and writes them into the build output: each search page and category
-// page as one file, and /shop again with its popular searches.
+// Renders the prebuilt Shop Nobi pages and writes them into the build output: each search, category and sale page
+// as one file, the sale hub, and /shop again with its popular searches.
 
 import { readFileSync, existsSync } from "fs";
 import { join } from "path";
@@ -8,17 +8,18 @@ import { loadPageRenderer } from "./page-renderer.js";
 import { ShopNobiPageHead, ShopNobiPinFeed } from "../src/utils/shopNobiPage.js";
 import { searchPagePath } from "../src/utils/shopNobiSearchPage.js";
 import { categoryPagePath } from "../src/utils/shopNobiCategoryPage.js";
+import { salePagePath, SaleHubPath } from "../src/utils/shopNobiSalePage.js";
 import { buildPrebuiltContentSeo, PrebuiltContentElementId, PrebuiltContentKind } from "../src/utils/shopNobiPrebuiltContent.js";
 import { IndexableRobots } from "../src/utils/previewImage.js";
 
 /**
- * Writes every prebuilt page in the plan. Nothing is written when there are no search pages.
+ * Writes every prebuilt page in the plan. Nothing is written when there are no search pages and no sale pages.
  *
- * @param {{searchPages: object[], categoryPages: object[], popularSearches: object}} plan What to build.
+ * @param {{searchPages: object[], categoryPages: object[], popularSearches: object, salePages: object[], saleHub: object | null}} plan What to build.
  * @param {string} distDir The build output folder.
  */
 export async function writePrebuiltPages(plan, distDir) {
-  if (plan.searchPages.length === 0) {
+  if (plan.searchPages.length === 0 && plan.salePages.length === 0) {
     return;
   }
 
@@ -39,10 +40,23 @@ export async function writePrebuiltPages(plan, distDir) {
     const html = renderContent(content);
     writeFlatPageFile(distDir, content.path, html);
   }
+  writeSalePages(plan, distDir, renderContent);
 
   const shopNobiContent = { kind: PrebuiltContentKind.PopularSearches, path: ShopNobiPageHead.path, data: plan.popularSearches };
   const shopNobiHtml = renderContent(shopNobiContent);
   writePageFiles(distDir, shopNobiContent.path, shopNobiHtml);
+}
+
+/** Writes each sale page as one file, and the sale hub, like /shop, as two files beside the folder of sale pages. */
+function writeSalePages(plan, distDir, renderContent) {
+  for (const page of plan.salePages) {
+    const content = { kind: PrebuiltContentKind.SalePage, path: salePagePath(page.slug), data: page };
+    writeFlatPageFile(distDir, content.path, renderContent(content));
+  }
+  if (plan.saleHub) {
+    const content = { kind: PrebuiltContentKind.SaleHub, path: SaleHubPath, data: plan.saleHub };
+    writePageFiles(distDir, content.path, renderContent(content));
+  }
 }
 
 /** Reads the built client shell. */

@@ -49,7 +49,7 @@ test("a category still too thin, or with an unknown top category, gets no page, 
 
   const categoryPages = buildCategoryPages(searchPages, NoLimit);
   const popularSearches = buildPopularSearches(searchPages, categoryPages);
-  const sitemap = buildShopNobiSitemap(categoryPages, [], []);
+  const sitemap = buildShopNobiSitemap({ categoryPages, searchPages: [], stories: [], salePages: [] });
 
   assert.deepEqual(listCategorySlugs(categoryPages), [["chairs", ["chair-0", "chair-1", "chair-2"]]]);
   assert.ok(!sitemap.includes("/shop/c/signage") && !sitemap.includes("/shop/c/business-industrial"));

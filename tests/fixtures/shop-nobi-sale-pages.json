@@ -1,0 +1,92 @@
+{
+  "generatedAt": "2026-11-20T10:00:00Z",
+  "pages": [
+    {
+      "categoryPath": "apparel_accessories.clothing.dresses",
+      "categoryName": "Dresses",
+      "products": [
+        {
+          "name": "Linen Wrap Dress", "brand": "Alder", "storeName": "Alder",
+          "url": "https://alder.example.com/products/linen-wrap-dress?variant=11",
+          "imageUrl": "https://cdn.shopify.com/s/files/1/0001/linen-wrap.jpg?v=1",
+          "price": 60.0, "wasPrice": 100.0, "currency": "USD", "isInStock": true,
+          "storeLink": "https://affiliate.example.com/track?id=7&sub=shop_nobi&url=https%3A%2F%2Falder.example.com%2Fproducts%2Flinen-wrap-dress",
+          "storyStoreLink": "https://affiliate.example.com/track?id=7&sub=google_web_stories", "paidLink": true
+        },
+        {
+          "name": "Silk Slip Dress", "brand": "Birch", "storeName": "Birch",
+          "url": "https://birch.example.com/products/silk-slip-dress?variant=21",
+          "imageUrl": "https://cdn.example.com/silk-slip.jpg",
+          "price": 45, "wasPrice": 90, "currency": "USD", "isInStock": true,
+          "storeLink": "https://birch.example.com/products/silk-slip-dress?variant=21&utm_source=shop_nobi", "paidLink": false
+        },
+        {
+          "name": "Same Price Dress", "brand": "Birch", "storeName": "Birch",
+          "url": "https://birch.example.com/products/same-price-dress?variant=22",
+          "imageUrl": "https://cdn.example.com/same-price.jpg",
+          "price": 80, "wasPrice": 80, "currency": "USD", "isInStock": true, "paidLink": false
+        },
+        {
+          "name": "No Earlier Price Dress", "brand": "Birch", "storeName": "Birch",
+          "url": "https://birch.example.com/products/no-earlier-price?variant=23",
+          "imageUrl": "https://cdn.example.com/no-earlier.jpg",
+          "price": 50, "wasPrice": null, "currency": "USD", "isInStock": true, "paidLink": false
+        },
+        {
+          "name": "Sold Out Dress", "brand": "Cedar", "storeName": "Cedar",
+          "url": "https://cedar.example.com/products/sold-out-dress?variant=31",
+          "imageUrl": "https://cdn.example.com/sold-out.jpg",
+          "price": 20, "wasPrice": 100, "currency": "USD", "isInStock": false, "paidLink": false
+        }
+      ]
+    },
+    {
+      "categoryPath": "apparel_accessories.clothing.shirts_tops",
+      "categoryName": "Shirts & Tops",
+      "products": [
+        {
+          "name": "Oxford Shirt", "brand": "Cedar", "storeName": "Cedar",
+          "url": "https://cedar.example.com/products/oxford-shirt?variant=32",
+          "imageUrl": "https://cdn.example.com/oxford.jpg",
+          "price": 39.5, "wasPrice": 79, "currency": "USD", "isInStock": true, "paidLink": false
+        }
+      ]
+    },
+    {
+      "categoryPath": "home_garden.decor.rugs",
+      "categoryName": "Rugs",
+      "products": [
+        {
+          "name": "Full Price Rug", "brand": "Birch", "storeName": "Birch",
+          "url": "https://birch.example.com/products/full-price-rug?variant=24",
+          "imageUrl": "https://cdn.example.com/rug.jpg",
+          "price": 200, "wasPrice": 150, "currency": "USD", "isInStock": true, "paidLink": false
+        }
+      ]
+    },
+    {
+      "categoryPath": "apparel_accessories.clothing.dresses",
+      "categoryName": "Dresses",
+      "products": [
+        {
+          "name": "Repeated Page Dress", "brand": "Cedar", "storeName": "Cedar",
+          "url": "https://cedar.example.com/products/repeated?variant=33",
+          "imageUrl": "https://cdn.example.com/repeated.jpg",
+          "price": 10, "wasPrice": 20, "currency": "USD", "isInStock": true, "paidLink": false
+        }
+      ]
+    },
+    {
+      "categoryPath": "mature.weapons.knives",
+      "categoryName": "Knives",
+      "products": [
+        {
+          "name": "Banned Knife", "brand": "X", "storeName": "X",
+          "url": "https://x.example.com/products/knife?variant=1",
+          "imageUrl": "https://cdn.example.com/knife.jpg",
+          "price": 10, "wasPrice": 20, "currency": "USD", "isInStock": true, "paidLink": false
+        }
+      ]
+    }
+  ]
+}

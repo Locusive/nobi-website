@@ -1,10 +1,11 @@
-// Fetches the Shop Nobi search page data from the API, shaped as
-// {generatedAt, pages: [...], retired: [...]}.
+// Fetches the Shop Nobi page data from the API: the search pages, shaped as {generatedAt, pages: [...], retired: [...]},
+// and the sale pages, shaped as {generatedAt, pages: [...]}.
 
 import { BannedTopLevel, readTopLevel } from "../src/utils/shopNobiPinBoard.js";
 
 const DefaultApiBaseUrl = "https://api.nobi.ai";
 const SearchPagesRoute = "/v1/shop/pages";
+const SalePagesRoute = "/v1/shop/sale-pages";
 const FetchTimeoutMs = 60000;
 
 /**
@@ -24,17 +25,26 @@ export function readApiBaseUrl(env) {
  * @returns {Promise<{pages: object[], retired: object[]}>} The live pages and the retired slugs.
  */
 export async function fetchSearchPagesData(apiBaseUrl) {
-  const routeUrl = `${apiBaseUrl.replace(/\/+$/, "")}${SearchPagesRoute}`;
-  const response = await fetch(routeUrl, { signal: AbortSignal.timeout(FetchTimeoutMs) });
-  if (response.status < 200 || response.status >= 300) {
-    throw new Error(`Fetching ${routeUrl} returned status ${response.status}.`);
-  }
-
-  const data = await response.json();
+  const { routeUrl, data } = await fetchRoute(apiBaseUrl, SearchPagesRoute);
   if (!Array.isArray(data?.pages) || !Array.isArray(data?.retired)) {
     throw new Error(`${routeUrl} has no "pages" and "retired" lists.`);
   }
   return { pages: keepAllowedPages(data.pages), retired: data.retired };
+}
+
+/**
+ * Fetches and checks the sale pages. Any failure throws, like the search pages, so the last good deploy stays live.
+ *
+ * @param {string} apiBaseUrl The API base address.
+ * @returns {Promise<{generatedAt: string | null, pages: object[]}>} When the API built them, and the sale pages.
+ */
+export async function fetchSalePagesData(apiBaseUrl) {
+  const { routeUrl, data } = await fetchRoute(apiBaseUrl, SalePagesRoute);
+  if (!Array.isArray(data?.pages)) {
+    throw new Error(`${routeUrl} has no "pages" list.`);
+  }
+  const generatedAt = typeof data.generatedAt === "string" ? data.generatedAt : null;
+  return { generatedAt, pages: keepAllowedPages(data.pages) };
 }
 
 /**
@@ -45,4 +55,14 @@ export async function fetchSearchPagesData(apiBaseUrl) {
  */
 export function keepAllowedPages(pages) {
   return pages.filter((page) => readTopLevel(page?.categoryPath) !== BannedTopLevel);
+}
+
+/** Fetches one route's JSON, throwing on a status outside 200 to 299. */
+async function fetchRoute(apiBaseUrl, route) {
+  const routeUrl = `${apiBaseUrl.replace(/\/+$/, "")}${route}`;
+  const response = await fetch(routeUrl, { signal: AbortSignal.timeout(FetchTimeoutMs) });
+  if (response.status < 200 || response.status >= 300) {
+    throw new Error(`Fetching ${routeUrl} returned status ${response.status}.`);
+  }
+  return { routeUrl, data: await response.json() };
 }

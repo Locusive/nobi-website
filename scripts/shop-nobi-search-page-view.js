@@ -110,8 +110,13 @@ function buildRelatedPages(page, links) {
     .map((slug) => ({ slug: links.builtSlugs.has(slug) ? slug : null, title: links.titleBySlug.get(slug) }));
 }
 
-/** Builds one product, or returns null when it has no name, no safe link or no safe picture, so no card is blank. */
-function buildProduct(product) {
+/**
+ * Builds one product, or returns null when it has no name, no safe link or no safe picture, so no card is blank.
+ *
+ * @param {object} product A fetched product.
+ * @returns {object | null} The product the page shows, or null.
+ */
+export function buildProduct(product) {
   const url = readWebAddress(product?.url);
   const imageAddress = readWebAddress(product?.imageUrl);
   if (!isText(product?.name) || !url || !imageAddress) {
@@ -164,8 +169,13 @@ function buildFaq(page) {
     .map((entry) => ({ question: entry.question, answer: entry.answer }));
 }
 
-/** Formats when the page was refreshed, such as "October 11, 2026", or returns null when it is not a date. */
-function formatUpdatedDate(refreshedAt) {
+/**
+ * Formats when the page was refreshed, such as "October 11, 2026", or returns null when it is not a date.
+ *
+ * @param {unknown} refreshedAt The refresh time, such as "2026-10-11T08:02:11Z".
+ * @returns {string | null} The date, or null.
+ */
+export function formatUpdatedDate(refreshedAt) {
   const refreshed = new Date(refreshedAt);
   return isText(refreshedAt) && !Number.isNaN(refreshed.getTime()) ? refreshed.toLocaleDateString("en-US", UpdatedDateFormat) : null;
 }

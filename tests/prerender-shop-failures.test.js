@@ -33,11 +33,13 @@ test("an empty page list builds, with an empty Shop Nobi sitemap and pin feed, a
   }
 });
 
-test("a failed fetch fails without writing anything, whether the server errors or cannot be reached", async () => {
+test("a failed fetch of the search or sale pages fails without writing anything, whether the server errors or cannot be reached", async () => {
   const folder = makeDistCopy();
   try {
     await assert.rejects(prerenderWith({ status: HttpServerError }, folder), /status 500/);
     await assert.rejects(prerenderWith({ body: { pages: [] } }, folder), /"retired"/);
+    await assert.rejects(prerenderWith({ saleStatus: HttpServerError }, folder), /sale-pages returned status 500/);
+    await assert.rejects(prerenderWith({ saleBody: {} }, folder), /sale-pages has no "pages" list/);
 
     const closedServer = await startPageDataServer();
     await closedServer.close();

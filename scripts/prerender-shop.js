@@ -1,10 +1,11 @@
-// Builds the prebuilt Shop Nobi pages, their web stories, and their sitemap, Pinterest feeds, redirects and
-// llms.txt section from the API's page data. A failed fetch fails the build, so the last good deploy stays live.
+// Builds the prebuilt Shop Nobi search and sale pages, web stories, sitemap, Pinterest feeds, redirects and llms.txt
+// section from the API's page data. A failed fetch fails the build, so the last good deploy stays live.
 
 import { readFileSync, writeFileSync, existsSync, mkdirSync, readdirSync } from "fs";
 import { join, dirname } from "path";
 import { fileURLToPath } from "url";
-import { fetchSearchPagesData, readApiBaseUrl } from "./shop-nobi-search-pages-api.js";
+import { fetchSalePagesData, fetchSearchPagesData, readApiBaseUrl } from "./shop-nobi-search-pages-api.js";
+import { buildSaleHub, buildSalePages } from "./shop-nobi-sale-page-view.js";
 import { buildSearchPages, selectUsablePages } from "./shop-nobi-search-page-view.js";
 import { buildCategoryPages, buildPopularSearches, countCategories, linkCategoryPages } from "./shop-nobi-category-page-view.js";
 import { writePrebuiltPages } from "./shop-nobi-page-files.js";
@@ -13,7 +14,7 @@ import { linkWebStories, planWebStories } from "./shop-nobi-web-story-plan.js";
 import { renderWebStory } from "./shop-nobi-web-story.js";
 import { webStoryPath } from "../src/utils/shopNobiWebStory.js";
 import { fetchImageSize as fetchImageSizeOnline } from "./image-size.js";
-import { buildPinFeedFiles, listPinFeedFiles } from "./shop-nobi-pin-feed.js";
+import { buildPinFeedFiles, listPinFeedFiles, toSalePinPage, toSearchPinPage } from "./shop-nobi-pin-feed.js";
 import { appendLlmsTxtSection, appendRedirects, buildRetiredRedirects, buildShopNobiSitemap } from "./shop-nobi-search-page-listings.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -22,6 +23,7 @@ const Dist = join(__dirname, "..", "dist");
 const DistFileLimit = 19000;
 const RedirectRuleLimit = 1900;
 const ShopNobiSitemapFile = "sitemap-shop.xml";
+const SaleHubFileCount = 2;
 
 /**
  * Fetches the page data and writes the prebuilt pages and listing files into the build output, keeping the
@@ -38,7 +40,9 @@ export async function prerenderShopNobiSearchPages({
   fetchImageSize = fetchImageSizeOnline,
 }) {
   const { pages: fetchedPages, retired } = await fetchSearchPagesData(apiBaseUrl);
-  const plan = await planPages(fetchedPages, countFileRoom(distDir, fileLimit), fetchImageSize);
+  const salePlan = planSalePages(await fetchSalePagesData(apiBaseUrl));
+  const fileRoom = countFileRoom(distDir, fileLimit) - countSaleFiles(salePlan);
+  const plan = { ...(await planPages(fetchedPages, fileRoom, fetchImageSize)), ...salePlan };
   if (plan.leftOutCount > 0) {
     console.warn(`prerender-shop: left out ${plan.leftOutCount} page(s) to stay within ${fileLimit} files.`);
   }
@@ -53,9 +57,9 @@ export async function prerenderShopNobiSearchPages({
   writeWebStories(distDir, plan.stories);
 
   const redirectLines = buildRetiredRedirects(retired, plan.searchPages);
-  const sitemap = buildShopNobiSitemap(plan.categoryPages, plan.searchPages, plan.stories);
+  const sitemap = buildShopNobiSitemap(plan);
   writeFileSync(join(distDir, ShopNobiSitemapFile), sitemap);
-  writePinFeeds(distDir, plan.searchPages);
+  writePinFeeds(distDir, [...plan.searchPages.map(toSearchPinPage), ...plan.salePages.map(toSalePinPage)]);
   updateFile(join(distDir, "_redirects"), (text) => appendRedirects(text, redirectLines, redirectRuleLimit));
   updateFile(join(distDir, "llms.txt"), (text) => appendLlmsTxtSection(text, plan.searchPages));
   return plan.searchPages.length;
@@ -80,6 +84,18 @@ async function planPages(fetchedPages, fileRoom, fetchImageSize) {
   return { searchPages, categoryPages, popularSearches, stories, leftOutCount, leftOutStoryCount, smallPosterCount };
 }
 
+/** Builds the sale pages and their hub, which take their few files before any search page. */
+function planSalePages(saleData) {
+  const salePages = buildSalePages(saleData);
+  console.log(`prerender-shop: planned ${salePages.length} sale page(s).`);
+  return { salePages, saleHub: buildSaleHub(salePages) };
+}
+
+/** Counts the files the sale pages need: one each, and two for the hub, which is written like /shop. */
+function countSaleFiles({ salePages, saleHub }) {
+  return salePages.length + (saleHub ? SaleHubFileCount : 0);
+}
+
 /** Returns how many page files fit after the files already built, the Shop Nobi sitemap and the pin feeds. */
 function countFileRoom(distDir, fileLimit) {
   const listingFiles = [ShopNobiSitemapFile, ...listPinFeedFiles()];
@@ -95,9 +111,9 @@ function writeWebStories(distDir, stories) {
   console.log(`prerender-shop: wrote ${stories.length} web story(ies).`);
 }
 
-/** Writes the Pinterest feeds of search pages and their list. */
-function writePinFeeds(distDir, searchPages) {
-  for (const file of buildPinFeedFiles(searchPages)) {
+/** Writes the Pinterest feeds of search and sale pages and their list. */
+function writePinFeeds(distDir, pinPages) {
+  for (const file of buildPinFeedFiles(pinPages)) {
     const filePath = join(distDir, file.path);
     mkdirSync(dirname(filePath), { recursive: true });
     writeFileSync(filePath, file.content);

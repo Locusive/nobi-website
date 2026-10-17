@@ -4,22 +4,30 @@ import { join } from "node:path";
 import { after, before, test } from "node:test";
 import { countRedirectRules } from "../scripts/shop-nobi-search-page-listings.js";
 import { FileCountBeforePages, makeDistCopy, prerenderWith, readBody, readOriginal, readScriptJson } from "./shop-nobi-test-build.js";
-import { readFixturePageData } from "./shop-nobi-pages-server.js";
+import { readFixturePageData, readFixtureSalePageData } from "./shop-nobi-pages-server.js";
 import { decodePaidLink } from "../src/utils/shopNobiPaidLink.js";
 
 let distDir;
+let saleDistDir;
 
 function readOutput(path) {
   return readFileSync(join(distDir, path), "utf8");
 }
 
+function readSaleOutput(path) {
+  return readFileSync(join(saleDistDir, path), "utf8");
+}
+
+// Both builds run here, one after the other, because two test files building the page renderer at once would clash.
 before(async () => {
   distDir = makeDistCopy();
   const count = await prerenderWith({}, distDir);
   assert.equal(count, 3);
+  saleDistDir = makeDistCopy();
+  await prerenderWith({ saleBody: readFixtureSalePageData() }, saleDistDir);
 });
 
-after(() => rmSync(distDir, { recursive: true, force: true }));
+after(() => [distDir, saleDistDir].forEach((folder) => rmSync(folder, { recursive: true, force: true })));
 
 test("each page is written once, as <slug>.html, and a page with an unsafe slug is skipped", () => {
   for (const slug of ["black-leather-boots", "chelsea-boots", "boots"]) {
@@ -372,4 +380,79 @@ test("a top category's page shows its category pages under Browse by category, t
   } finally {
     rmSync(folder, { recursive: true, force: true });
   }
+});
+
+test("each sale page with a real markdown is written once, and repeated, banned and markdown-free pages are not", () => {
+  for (const path of ["shop/sale/dresses.html", "shop/sale/shirts-tops.html", "shop/sale.html", "shop/sale/index.html"]) {
+    assert.ok(readSaleOutput(path).includes("<!doctype html>"), path);
+  }
+  assert.deepEqual(readdirSync(join(saleDistDir, "shop/sale")).sort(), ["dresses.html", "index.html", "shirts-tops.html"]);
+  assert.ok(!readSaleOutput("shop/sale/dresses.html").includes("Repeated Page Dress"), "The first page with a slug wins");
+  assert.ok(!existsSync(join(distDir, "shop/sale.html")), "No sale pages, no hub");
+});
+
+test("a sale page's head and heading name its category, and each card shows the store's earlier price before its price now", () => {
+  const html = readSaleOutput("shop/sale/dresses.html");
+  for (const tag of [
+    "<title>On sale now at independent stores: Dresses | Shop Nobi</title>",
+    '<link rel="canonical" href="https://nobi.ai/shop/sale/dresses">',
+    '<meta name="robots" content="index, follow, max-image-preview:large">',
+  ]) {
+    assert.ok(html.includes(tag), `Missing tag: ${tag}`);
+  }
+  assert.equal(readScriptJson(html, "shop-nobi-prebuilt-content").kind, "sale-page");
+
+  const body = readBody(html);
+  assert.ok(body.includes('<h1 class="mt-4 text-3xl font-semibold">On sale now at independent stores: Dresses</h1>'));
+  assert.ok(body.includes("Updated November 20, 2026"));
+  const linenPrice = '<span class="sr-only">Was </span><s class="text-black/50 dark:text-white/50">$100.00</s> '
+    + '<span class="sr-only">now </span><span class="font-semibold">$60.00</span>';
+  assert.ok(body.includes(linenPrice), "The store's own prices, exactly as sent");
+  assert.ok(body.includes('<a href="/shop/sale" class="hover:underline">On sale now at independent stores</a>'));
+});
+
+test("a sale page shows only in-stock products marked down below their earlier price, and never claims the lowest price", () => {
+  const body = readBody(readSaleOutput("shop/sale/dresses.html"));
+  assert.ok(body.includes("Linen Wrap Dress") && body.includes("Silk Slip Dress"));
+  for (const leftOut of ["Same Price Dress", "No Earlier Price Dress", "Sold Out Dress"]) {
+    assert.ok(!body.includes(leftOut), leftOut);
+  }
+  for (const page of ["shop/sale/dresses.html", "shop/sale/shirts-tops.html", "shop/sale.html"]) {
+    assert.doesNotMatch(readSaleOutput(page), /lowest price|best deal|best price/i, page);
+  }
+});
+
+test("a paid sale product is sponsored with the commission notice, and its finished link is only in base64", () => {
+  const html = readSaleOutput("shop/sale/dresses.html");
+  const productLinks = [...readBody(html).matchAll(/<a href="(https?:[^"]+)" rel="([^"]+)"/g)].map(([, href, rel]) => [href, rel]);
+  assert.deepEqual(productLinks, [
+    ["https://alder.example.com/products/linen-wrap-dress?variant=11", "sponsored nofollow noopener"],
+    ["https://birch.example.com/products/silk-slip-dress?variant=21", "nofollow noopener"],
+  ]);
+  assert.equal(readBody(html).split("We may earn a commission").length - 1, 1, "Only the paid product has the notice");
+  assert.ok(!html.includes("affiliate.example.com"));
+
+  const products = readScriptJson(html, "shop-nobi-prebuilt-content").data.products;
+  const paidLink = readFixtureSalePageData().pages[0].products[0].storeLink;
+  assert.equal(decodePaidLink(products[0].encodedStoreLink), paidLink);
+});
+
+test("the sale hub links each sale page with its product count", () => {
+  const body = readBody(readSaleOutput("shop/sale.html"));
+  assert.ok(body.includes('<h1 class="mt-4 text-3xl font-semibold">On sale now at independent stores</h1>'));
+  const links = [...body.matchAll(/<a href="(\/shop\/sale\/[^"]+)" class="hover:underline">([^<]+)<\/a>/g)].map(([, href, name]) => [href, name]);
+  assert.deepEqual(links, [["/shop/sale/dresses", "Dresses"], ["/shop/sale/shirts-tops", "Shirts &amp; Tops"]]);
+  assert.match(body, /Dresses<\/a><span class="text-black\/50 dark:text-white\/50"> \((<!-- -->)?2(<!-- -->)?\)<\/span>/);
+});
+
+test("the sitemap lists the sale hub and each sale page, and the pin feeds carry each sale page", () => {
+  const sitemap = readSaleOutput("sitemap-shop.xml");
+  for (const path of ["shop/sale", "shop/sale/dresses", "shop/sale/shirts-tops"]) {
+    assert.ok(sitemap.includes(`<loc>https://nobi.ai/${path}</loc>\n    <lastmod>2026-11-20T10:00:00Z</lastmod>`), path);
+  }
+
+  const saleItem = "<link>https://nobi.ai/shop/sale/dresses</link>";
+  assert.ok(readSaleOutput("shop/pins.xml").includes(saleItem));
+  assert.ok(readSaleOutput("shop/pins/apparel-accessories.xml").includes(saleItem), "The board of its top category pins it too");
+  assert.ok(readSaleOutput("shop/pins.xml").includes("<title>On sale now at independent stores: Dresses</title>"));
 });

@@ -55,15 +55,17 @@ test("a search page keeps its products above the live search until live products
   assert.equal(page.place(), PrebuiltContentPlace.Hidden);
 });
 
-test("a category page keeps its heading and searches under the search box until the shopper's search draws products", () => {
-  const page = followPage(PrebuiltContentKind.CategoryPage);
-  assert.equal(page.place(), PrebuiltContentPlace.BelowSearch);
+test("category and sale pages stay under the search box until the shopper's search draws products", () => {
+  for (const kind of [PrebuiltContentKind.CategoryPage, PrebuiltContentKind.SalePage, PrebuiltContentKind.SaleHub]) {
+    const page = followPage(kind);
+    assert.equal(page.place(), PrebuiltContentPlace.BelowSearch, kind);
 
-  page.mountAssistant();
-  assert.equal(page.place(), PrebuiltContentPlace.BelowSearch);
+    page.mountAssistant();
+    assert.equal(page.place(), PrebuiltContentPlace.BelowSearch, kind);
 
-  page.fire(LiveProductsDrawn);
-  assert.equal(page.place(), PrebuiltContentPlace.Hidden);
+    page.fire(LiveProductsDrawn);
+    assert.equal(page.place(), PrebuiltContentPlace.Hidden, kind);
+  }
 });
 
 test("/shop's popular searches, and the loading message of a page with no prebuilt content, leave when the assistant arrives", () => {

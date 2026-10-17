@@ -4,6 +4,7 @@
 import { ShopNobiPageSeo } from "./shopNobiPage.js";
 import { buildSearchPageSeo } from "./shopNobiSearchPage.js";
 import { buildCategoryPageSeo } from "./shopNobiCategoryPage.js";
+import { buildSaleHubSeo, buildSalePageSeo } from "./shopNobiSalePage.js";
 
 /** The id of the script element that holds the embedded data. index.html reads it too. */
 export const PrebuiltContentElementId = "shop-nobi-prebuilt-content";
@@ -12,6 +13,8 @@ export const PrebuiltContentElementId = "shop-nobi-prebuilt-content";
 export const PrebuiltContentKind = {
   SearchPage: "search-page",
   CategoryPage: "category-page",
+  SalePage: "sale-page",
+  SaleHub: "sale-hub",
   PopularSearches: "popular-searches",
 };
 
@@ -49,9 +52,12 @@ export function readEmbeddedPrebuiltContent(pathname) {
   return content.path === currentPath ? content : null;
 }
 
+/** The kinds that sit under the search box, so the live search runs only when the shopper searches. */
+const BelowSearchKinds = [PrebuiltContentKind.CategoryPage, PrebuiltContentKind.SalePage, PrebuiltContentKind.SaleHub];
+
 /**
- * Chooses where the prebuilt content shows. Search pages keep it above the live search and category pages below the
- * search box until live products are drawn. Other content leaves when the assistant arrives.
+ * Chooses where the prebuilt content shows. Search pages keep it above the live search, and category and sale pages
+ * below the search box, until live products are drawn. Other content leaves when the assistant arrives.
  *
  * @param {string | undefined} kind The prebuilt content's kind, or undefined when the page has none.
  * @param {{assistantHasMounted: boolean, liveResultsHaveDrawn: boolean}} progress How far the live search has got.
@@ -61,7 +67,7 @@ export function choosePrebuiltContentPlace(kind, { assistantHasMounted, liveResu
   if (liveResultsHaveDrawn) {
     return PrebuiltContentPlace.Hidden;
   }
-  if (kind === PrebuiltContentKind.CategoryPage) {
+  if (BelowSearchKinds.includes(kind)) {
     return PrebuiltContentPlace.BelowSearch;
   }
 
@@ -109,6 +115,12 @@ export function buildPrebuiltContentSeo(content) {
   }
   if (content.kind === PrebuiltContentKind.CategoryPage) {
     return buildCategoryPageSeo(content.data);
+  }
+  if (content.kind === PrebuiltContentKind.SalePage) {
+    return buildSalePageSeo(content.data);
+  }
+  if (content.kind === PrebuiltContentKind.SaleHub) {
+    return buildSaleHubSeo();
   }
   return ShopNobiPageSeo;
 }

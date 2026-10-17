@@ -69,3 +69,13 @@ Host correction verification: new behavior baseline12pass/1fail; final13decision
 
 
 Budget/identity evidence: original focused batch16pass/2fail. Final18focused groups and169full offline build/suite cases pass, zero failures/skips. Real numeric demand remains numeric above budgets, peripherals-alone excess fails with unknown laptop watts, and unknown laptop watts never confirm the full shared total. Verified per-model UUID/source anchors reject swapped valid-shaped identities, source destinations and source variant IDs. A separate own-property regression reproduced prototype-name acceptance before the guard and passes afterward. Actual generated builder artifacts are unchanged. Logs: ignored build/baseus_release/boundaries-baseline.log, identity-prototype-baseline.log, boundaries-final.log and boundaries-full-offline-final.log. No UI layout or source fact change; final whitespace-only condition wrapping does not change behavior.
+
+
+# 9. Authored click-reference contract
+
+- [x] Reproduce missing/stale/raw-encoded/duplicate outer Awin click references passing validation. The existing fillClickId compares raw channel values, so a decoded equivalent alone is insufficient.
+- [x] Require exactly one literal outer clickref=shop_nobi from the actual Java builder output; preserve the existing visit substitution and emitted final-URL join. No affiliate template or shared outbound helper change.
+- [x] Run the existing authored-link and actual standalone-visit tests before/after plus the full offline suite; answer current review and freeze the final head.
+
+
+Click-reference evidence: the original authored-link/actual-visit selection had4pass/1fail; after the raw-placeholder guard all five cases pass, and the full169-case offline build/suite passes with zero failures/skips. Missing, stale, percent-encoded and duplicate clickrefs are rejected for both actual models. The unchanged actual standalone click test proves each correct builder link receives the same per-visit reference recorded in the emitted final linkUrl. Logs: ignored build/baseus_release/clickref-baseline.log, clickref-final.log and clickref-full-offline.log. No shared link-helper, builder artifact, UI layout or Java changes.

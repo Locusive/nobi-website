@@ -55,6 +55,11 @@ test("page registration provides both static URL forms, one canonical, navigatio
 test("publication rejects incomplete or substituted authored link records", () => {
   for (const record of BaseusScreenLinkArtifact.products) {
     assert.equal(validateBaseusScreenLink(record), record);
+    for (const paid of [record.paid.replace("clickref=shop_nobi&", ""),
+      record.paid.replace("clickref=shop_nobi", "clickref=stale"),
+      record.paid.replace("clickref=shop_nobi", "clickref=%73hop_nobi"), `${record.paid}&clickref=stale`]) {
+      assert.throws(() => validateBaseusScreenLink({ ...record, paid }), "The raw replaceable visit-reference slot must be exact and unambiguous");
+    }
     const reviewedPeer = BaseusScreenLinkArtifact.products.find(product => product.id !== record.id);
     for (const changes of [{ productId: reviewedPeer.productId }, { productVariantId: reviewedPeer.productVariantId },
       { owningMerchantId: reviewedPeer.productId }, { id: reviewedPeer.id },

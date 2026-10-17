@@ -53,6 +53,8 @@ export function validateBaseusScreenLink(record) {
     || !source.searchParams.get("variant") || source.searchParams.get("variant") !== plain.searchParams.get("variant")
     || paid.hostname !== "www.awin1.com" || paid.pathname !== "/cread.php"
     || paid.searchParams.get("awinmid") !== "38962" || paid.searchParams.get("awinaffid") !== "3122300"
+    || paid.searchParams.getAll("clickref").length !== 1
+    || !paid.search.slice(1).split("&").includes("clickref=shop_nobi")
     || paid.searchParams.get("ued") !== record.plain
     || record.paidLink !== true) throw new Error("Incomplete reviewed Baseus product link");
   return record;

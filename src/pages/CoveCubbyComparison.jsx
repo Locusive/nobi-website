@@ -26,6 +26,7 @@ export default function CoveCubbyComparison() {
         <a href="/shop">Explore Shop Nobi</a>
       </header>
       <main className="cat-fit-main">
+        <p className="cat-fit-top-disclosure"><strong>#ad</strong> Nobi may earn a commission from qualifying purchases through links on this page.</p>
         <section className="cat-fit-intro" aria-labelledby="cat-fit-title">
           <div>
             <h1 id="cat-fit-title">Cove vs Cubby.<br />Which fits your space?</h1>

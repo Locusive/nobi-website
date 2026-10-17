@@ -23,6 +23,7 @@ const Product            = lazy(() => import("./pages/Product.jsx"));
 const Webinar            = lazy(() => import("./pages/Webinar.jsx"));
 const WebinarIPullRank   = lazy(() => import("./pages/WebinarIPullRank.jsx"));
 const ShopPage           = lazy(() => import("./pages/ShopPage.jsx"));
+const ShopNobiMcp        = lazy(() => import("./pages/ShopNobiMcp.jsx"));
 const CoveCubbyComparison = lazy(() => import("./pages/CoveCubbyComparison.jsx"));
 const BaseusTwoScreens = lazy(() => import("./pages/BaseusTwoScreens.jsx"));
 const MarleySpoonCost = lazy(() => import("./pages/MarleySpoonCost.jsx"));
@@ -126,6 +127,7 @@ function App() {
           {/* The assistant bundle fills these pages (see index.html); the
               route only mounts the SEO shell. /shop/* covers the sub-paths
               the Shop Nobi experience may navigate to. */}
+          <Route path="/shop/mcp" element={<ShopNobiMcp />} />
           <Route path="/shop" element={<ShopPage />} />
           <Route path="/shop/*" element={<ShopPage />} />
           <Route path="*" element={<NotFound />} />

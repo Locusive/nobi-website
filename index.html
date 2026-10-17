@@ -28,7 +28,8 @@
       }
 
       function isShopNobiPage(path) {
-        return path === '/shop' || path.indexOf('/shop/') === 0;
+        const normalized = path.replace(/\/$/, '');
+        return normalized !== '/shop/mcp' && (normalized === '/shop' || normalized.indexOf('/shop/') === 0);
       }
 
       function createPageConversationId() {

@@ -12,7 +12,7 @@ const SearchPagePathPrefix = "/shop/s/";
 /** The channel name of search pages: the utm_source tag, and what the API puts in a paid link's sub-ID slot. */
 const SearchPageChannel = "shop_nobi";
 const ShopNobiTags = { utm_source: SearchPageChannel, ...ShopNobiLinkTags };
-/** The parameter a store's Nobi assistant reads the conversation from, the same one the assistant bundle's store links carry. */
+/** A prebuilt card must not carry a stale live-assistant conversation to a store. */
 const ConversationIdParameter = "nobi-conversation-id";
 
 /**
@@ -122,27 +122,25 @@ export function addShopNobiTags(storeUrl) {
 
 /**
  * Sets a clicked product link just before the browser follows it. A person gets the paid link, with the click id as its
- * sub-ID, when there is one; anyone else gets the plain link with Shop Nobi's tags and the page's conversation.
+ * sub-ID, when there is one; anyone else gets the plain link with Shop Nobi's tags and no conversation.
  *
  * @param {{currentTarget: {href: string}}} event The click event.
  * @param {{url: string, encodedStoreLink?: string}} product The product the link belongs to.
- * @param {{isPerson: boolean, conversationId: string | null, clickId: string | null}} visit Who clicked, from readVisit.
+ * @param {{isPerson: boolean, clickId: string | null}} visit Who clicked, from readVisit.
  */
 export function tagProductLinkOnClick(event, product, visit) {
   const paidStoreLink = visit.isPerson ? decodePaidLink(product.encodedStoreLink) : null;
   if (paidStoreLink === null) {
-    event.currentTarget.href = tagPlainStoreLink(product.url, visit.conversationId);
+    event.currentTarget.href = tagPlainStoreLink(product.url);
     return;
   }
 
   event.currentTarget.href = fillClickId(paidStoreLink, SearchPageChannel, visit.clickId);
 }
 
-/** Adds Shop Nobi's tags and, when there is one, the page's conversation to the plain store link. */
-function tagPlainStoreLink(storeUrl, conversationId) {
+/** Adds Shop Nobi's tags and removes any stale conversation from a plain prebuilt store link. */
+function tagPlainStoreLink(storeUrl) {
   const address = new URL(addShopNobiTags(storeUrl));
-  if (conversationId) {
-    address.searchParams.set(ConversationIdParameter, conversationId);
-  }
+  address.searchParams.delete(ConversationIdParameter);
   return address.toString();
 }

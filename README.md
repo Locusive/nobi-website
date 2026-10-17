@@ -67,7 +67,11 @@ and a category page keeps its searches under the search box, until the assistant
 bundle draws live products. A refused or failed live search therefore leaves the
 prebuilt content in place. A click on a prebuilt product sends the API the same
 "Click On Search Result" event as a live product, with the same entry point,
-"AI Search Bar". Crawlers, automated browsers and local copies send none. In a
+"AI Search Bar". Prebuilt clicks omit the conversation ID so the API records them
+without waiting for a live conversation to be saved. This also means a prebuilt
+card gives no cross-merchant AI conversation credit after a shopper uses the
+assistant. Live assistant results keep their own conversation attribution.
+Crawlers, automated browsers and local copies send none. In a
 smoke test's tab, the click carries the bundle's `nobi_smoke_test` marker, so
 the API drops it as it drops the bundle's own smoke-test events.
 
@@ -92,12 +96,13 @@ commission). The website never builds or tags a paid link itself, and keeps one
 only for paid products. A search page keeps the plain store link in its HTML and
 holds the paid link only in base64, so crawlers never see it. A person's click
 opens the paid link, with its sub-ID parameter (the one whose value is
-`shop_nobi`) set to the page's conversation, or to `<slug>.<visit id>` when there
-is none, at most 50 characters (`src/utils/shopNobiClickId.js`). A crawler's
-click opens the plain link with Shop Nobi's tags. A paid link, on search pages
+`shop_nobi`) set to `<slug>.<visit id>`, at most 50 characters and stable within
+the page view (`src/utils/shopNobiClickId.js`). The click event records that
+finished link along with incoming traffic tags and referrer. A crawler's
+click opens the plain link with Shop Nobi's tags. Plain prebuilt links remove
+any stale `nobi-conversation-id`. A paid link, on search pages
 and in stories, gets `rel="sponsored"` and a small "We may earn a commission"
-notice under it (`CommissionNotice` in `src/utils/shopNobiPage.js`). Unpaid
-products keep the same links as before.
+notice under it (`CommissionNotice` in `src/utils/shopNobiPage.js`).
 
 The GitHub workflow `nightly-shop-nobi-rebuild.yml` rebuilds the site every
 day at 10:00 UTC, after the API's overnight refresh, by calling the Cloudflare

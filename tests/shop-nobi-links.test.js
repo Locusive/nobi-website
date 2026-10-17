@@ -24,11 +24,13 @@ test("a click on a product link without a paid link swaps its utm_ tags for Shop
   assert.equal(clickTwice(product, Person), `https://store.example/p/boot?variant=7&${ShopNobiTags}#reviews`);
 });
 
-test("a plain product link carries the page's conversation once, so the store can tie an order back", () => {
-  const product = { url: "https://store.example/p/boot?variant=7&nobi-conversation-id=old" };
-  const visit = { ...Person, conversationId: "conversation-1", clickId: "conversation-1" };
-
-  assert.equal(clickTwice(product, visit), `https://store.example/p/boot?variant=7&nobi-conversation-id=conversation-1&${ShopNobiTags}`);
+test("plain prebuilt links remove stale conversation IDs, including crawler and unreadable paid-link fallbacks", () => {
+  const url = "https://store.example/p/boot?variant=7&nobi-conversation-id=old&utm_source=other#reviews";
+  for (const visit of [Person, Crawler, { ...Person, conversationId: "conversation-1" }]) {
+    for (const encodedStoreLink of [undefined, "not base64!"]) {
+      assert.equal(clickTwice({ url, encodedStoreLink }, visit), `https://store.example/p/boot?variant=7&${ShopNobiTags}#reviews`);
+    }
+  }
 });
 
 test("a person's click opens the paid link as sent with the click id as its sub-ID, and a crawler's opens the plain link", () => {

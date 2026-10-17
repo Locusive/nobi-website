@@ -90,3 +90,16 @@ Click-reference evidence: the original authored-link/actual-visit selection had4
 
 
 Complete-output verification: the current Java receipt products matched both module records and the recorded SHA256 before copying the full strings. The complete-plain-URL regression failed before the guard (17 pass/1 fail). A separate input-bound regression failed before the documented100W INPUT check. Final19 focused authored-link/decision/visit cases and all169 offline build/suite cases pass, zero failures/skips. Known one/all USB allocations retain their90W/75W checks; unlisted/mixed100W remains unknown, while101W/301W exceeds the actual input bound and fails. Logs: ignored build/baseus_release/complete-url-baseline.log, input-bound-baseline.log, complete-url-final.log and complete-url-full-offline-final.log. Complete paid/plain strings are independent validation anchors copied from the actual receipt, not a client-built affiliate template.
+
+
+# 11. Windows DP1.2 single-display source correction
+
+- [x] Reproduce the actual official RD1 resolution guide's WindowsDP1.2 single-screen discrepancy. Its HDMI1 and HDMI2 cells each list4K30, while the current selector accepts4K60/HDMI2-4K120. Cover both ports and Windows10/11, including the positive4K30 row and rejected higher targets.
+- [x] Apply that documented row only to the WindowsDP1.2 branch. Unknown WindowsDP stays unknown; preserve the guide's distinct Mac single-output rows, unlisted/mixed uncertainty and NU1 behavior. Add the explicit Windows single-screen qualification to the consumer source summary.
+- [ ] Run meaningful before/after decision controls and the full offline build/suite. Verify the built source qualification, current-head preview and actual interactions without merchant exits/events.
+- [ ] Commit/push only the scoped website correction, request current-head hosted review and preserve root's merge/deploy/publication ownership. Keep all owned browser tabs closed after checks.
+
+The mixed4K120 review was resolved without inventing a hard limit: the guide does not enumerate mixed modes or explicitly prohibit that combination, and both input orderings already return unknown. Source-backed reply: https://github.com/Locusive/nobi-website/pull/435#discussion_r4302052413. The WindowsDP1.2 single-output cells are a separate explicit source contradiction and require this correction.
+
+
+DP1.2 evidence: both new decision groups failed before the source correction (14 passing/two failing). Afterward all16 decision groups and the full171-case offline build/suite pass, zero failures/skips. Both HDMI ports and Windows10/11 preserve the documented single4K30 row and reject known higher4K60/4K120 requests. Unknown WindowsDP, unlisted mixed modes and the separate Mac single-output rows retain their distinct results. The built page includes the explicit WindowsDP1.2 source qualification. Logs: build/baseus_release/dp12-single-baseline.log, dp12-single-final.log and dp12-single-full-offline.log. Source/authored affiliate artifacts, NU1 behavior and shared helpers are unchanged.

@@ -10,7 +10,7 @@ const readPage = () => readFileSync(new URL("tools/baseus-two-screens.html", Dis
 test("the built utility gives its source limits, unknown path and disclosures without running JavaScript", () => {
   const html = readPage();
   assert.equal((html.match(/<h1\b/g) || []).length, 1);
-  for (const fact of ["Two monitors.", "Two different screens?", "Compare these docks", "October 17, 2026", "DisplayLink", "DP1.4", "DSC", "1440p60", "90W", "75W", "160W", "Needs checking", "not hands-on testing", "not physically tested", "built-in", "Enable JavaScript"]) {
+  for (const fact of ["Two monitors.", "Two different screens?", "Compare these docks", "October 17, 2026", "DisplayLink", "DP1.4", "DP1.2 single-screen row lists 4K30 on both HDMI outputs", "DSC", "1440p60", "90W", "75W", "160W", "Needs checking", "not hands-on testing", "not physically tested", "built-in", "Enable JavaScript"]) {
     assert.ok(html.includes(fact), `Missing ${fact}`);
   }
   assert.ok(html.includes("Neither is a fit?"));

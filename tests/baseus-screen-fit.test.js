@@ -64,6 +64,35 @@ test("single HDMI2 high refresh never carries over to HDMI1 or two outputs", () 
   assert.equal(evaluate("rd1-pro", { firstMode: "4k60", rd1Port: "unknown" }, single).status, "conditional");
 });
 
+test("Windows DP1.2 documents single 4K30 on both HDMI outputs", () => {
+  for (const os of ["win10", "win11"]) for (const rd1Port of ["hdmi1", "hdmi2"]) {
+    const result = evaluate("rd1-pro", { os, dp: "dp12", count: "1", firstMode: "4k30", rd1Port }, Windows4k);
+    assert.equal(result.display.status, "conditional", `${os} ${rd1Port} must retain the actual 4K30 source row`);
+    assert.match(result.display.checks.find(check => check.source === "rd1Modes").message, /DP1\.2.*4K30/);
+  }
+});
+
+test("Windows single-output limits preserve unknown host versions and distinct Mac/mixed rows", () => {
+  for (const os of ["win10", "win11"]) for (const rd1Port of ["hdmi1", "hdmi2"]) {
+    for (const firstMode of ["4k60", "4k120"]) {
+      const result = evaluate("rd1-pro", { os, dp: "dp12", count: "1", firstMode, rd1Port }, Windows4k);
+      assert.equal(result.display.status, "fail", `${os} ${rd1Port} ${firstMode} exceeds the documented DP1.2 single row`);
+      assert.match(result.display.checks[0].message, /DP1\.2.*4K30/);
+    }
+    for (const firstMode of ["4k30", "4k60", "4k120"]) {
+      assert.equal(evaluate("rd1-pro", { os, dp: "unknown", count: "1", firstMode, rd1Port }, Windows4k).display.status, "unknown");
+    }
+  }
+  for (const firstMode of ["4k60", "4k120"]) {
+    assert.equal(evaluate("rd1-pro", { count: "1", firstMode, dp: "dp12", rd1Port: "hdmi2" }).display.status, "conditional",
+      "The Windows path selector must not override the separate Mac single-output guide");
+  }
+  for (const [firstMode, secondMode] of [["4k120", "4k60"], ["4k60", "4k120"]]) {
+    assert.equal(evaluate("rd1-pro", { dp: "dp12", firstMode, secondMode }, Windows4k).display.status, "unknown",
+      "Unlisted mixed modes do not become a fabricated documented prohibition");
+  }
+});
+
 test("data-only sockets, unsupported counts and known cable/host failures rule out a plan", () => {
   for (const changes of [{ path: "usb-c" }, { count: "3" }, { host: "no" }, { modePath: "no" }, { builtInConfirmed: "no" }]) {
     assert.equal(evaluate("nu1-air-mac", changes).status, "fail", JSON.stringify(changes));

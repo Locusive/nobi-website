@@ -76,6 +76,13 @@ function nu1Mode(input) {
 /** Matches RD1's documented Windows modes; it does not extrapolate mixed-monitor combinations. */
 function rd1Mode(input) {
   if (String(input.count) === "1") {
+    if (KnownWindowsOs.includes(input.os)) {
+      if (!["dp14dsc", "dp14", "dp12"].includes(input.dp)) return unknown("Check the Windows host's DP version for the requested single-screen mode.", "rd1Modes");
+      if (input.dp === "dp12") {
+        if (input.firstMode === "4k30") return fit("The Windows DP1.2 guide lists single 4K30 on either HDMI output.", "rd1Modes");
+        if (["4k60", "4k120"].includes(input.firstMode)) return fail("The Windows DP1.2 single-screen row lists 4K30 on both HDMI outputs, below this target.", "rd1Modes");
+      }
+    }
     if (input.firstMode === "4k60") return fit("The RD1 guide documents one 4K60 screen on either HDMI output.", "rd1Modes");
     if (input.firstMode === "4k120") return input.rd1Port === "hdmi2" ? fit("Single 4K120 is a manufacturer claim for HDMI2 with a capable host/path.", "rd1Modes")
       : input.rd1Port === "hdmi1" ? fail("HDMI1 is limited to single 4K60; the 4K120 claim belongs to HDMI2.", "rd1Modes")

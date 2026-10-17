@@ -15,6 +15,9 @@ test("the comparison serves facts, controls and source links in its initial HTML
   assert.equal((html.match(/<h1\b/g) || []).length, 1);
   assert.ok(html.includes("Which fits your space?"));
   assert.ok(html.includes("October 16, 2026"));
+  const beforeHeading = html.match(/<main\b[^>]*>([\s\S]*?)<h1\b/)[1];
+  assert.match(beforeHeading, /#ad/);
+  assert.ok(beforeHeading.includes("Nobi may earn a commission from qualifying purchases through links on this page."), "The commission disclosure is visible before the heading and calculator");
   for (const product of CoveCubbyProducts) {
     assert.ok(html.includes(product.url.replaceAll("&", "&amp;")), `Missing exact ${product.name} purchase variant`);
     assert.ok(html.includes(`Check ${product.name} at Tuft &amp; Paw`));
@@ -42,8 +45,12 @@ test("the comparison has its canonical, source-derived preview, site navigation 
   assert.equal((html.match(/rel="canonical"/g) || []).length, 1);
   assert.ok(html.includes('href="https://nobi.ai/tools/cove-vs-cubby"'));
   assert.ok(html.includes(`<title>${CoveCubbySeo.title.replaceAll("&", "&amp;")}</title>`));
-  assert.ok(html.includes('property="og:image" content="https://nobi.ai/media/cove-cubby-01-common-scale.png"'));
-  assert.ok(html.includes('name="twitter:image" content="https://nobi.ai/media/cove-cubby-01-common-scale.png"'));
+  assert.ok(html.includes('property="og:image" content="https://nobi.ai/media/cove-cubby-social-preview.png"'));
+  assert.ok(html.includes('name="twitter:image" content="https://nobi.ai/media/cove-cubby-social-preview.png"'));
+  const preview = readFileSync(new URL("media/cove-cubby-social-preview.png", Dist));
+  assert.equal(preview.subarray(0, 8).toString("hex"), "89504e470d0a1a0a");
+  assert.equal(preview.readUInt32BE(16), 1200, "The linked social preview is a landscape card");
+  assert.equal(preview.readUInt32BE(20), 630);
   for (const path of ["/shop", "/privacy", "/terms"]) assert.ok(html.includes(`href="${path}"`));
   for (const asset of ["media/cove-cubby-footprints.svg", "media/cove-cubby-footprints.png"]) assert.ok(existsSync(new URL(asset, Dist)));
   for (const name of ["01-common-scale", "02-20-by-24-example", "03-exterior-vs-litter-area"]) {

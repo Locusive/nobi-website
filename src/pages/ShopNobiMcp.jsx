@@ -18,7 +18,7 @@ export default function ShopNobiMcp() {
       <article className="prose prose-slate mx-auto max-w-3xl px-5 py-10">
         <p className="text-sm"><strong>#ad:</strong> Some product links may earn Nobi a commission from qualifying purchases.</p>
         <h1>Connect to Shop Nobi with MCP</h1>
-        <p>Use your MCP client to search independent stores. The hosted server is read-only: it cannot place orders or take payments. You buy on the merchant's website.</p>
+        <p>Use your MCP client to search online stores. The hosted server is read-only: it cannot place orders or take payments. You buy on the merchant's website.</p>
 
         <h2>Server address</h2>
         <p>Choose a remote Streamable HTTP connection and enter:</p>
@@ -39,7 +39,7 @@ export default function ShopNobiMcp() {
         <ul>
           {ShopNobiMcpTools.map(tool => <li key={tool.name}><code>{tool.name}</code>: {tool.description}</li>)}
         </ul>
-        <p>Try a request such as “Find a USB-C power bank.” Follow the returned store links to check current prices, compatibility, stock and delivery estimates. Keep any commission notice next to the relevant link.</p>
+        <p>Try a request such as “Find a USB-C power bank.” Catalog prices and availability may lag behind the merchant's website. Follow the returned store links to check current prices, compatibility, stock and delivery estimates. Keep any commission notice next to the relevant link.</p>
         <p>Prefer a browser? <a href="/shop">Search Shop Nobi</a>. Claude Code plugin users can also follow the <a href="https://github.com/Locusive/shop-nobi-claude-plugin">existing plugin installation instructions</a>.</p>
       </article>
     </PageLayout>

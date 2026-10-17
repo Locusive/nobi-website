@@ -34,6 +34,14 @@ test("the utility has one canonical, complete URL forms, source metadata, site l
   assert.equal((html.match(/rel="canonical"/g) || []).length, 1);
   assert.ok(html.includes('href="https://nobi.ai/tools/marley-spoon-cost"'));
   assert.ok(html.includes(`<title>${MarleySpoonSeo.title.replaceAll("&", "&amp;")}</title>`));
+  assert.ok(html.includes('property="og:image" content="https://nobi.ai/media/marley-cost-01-intro-to-full.png"'));
+  assert.ok(html.includes('name="twitter:image" content="https://nobi.ai/media/marley-cost-01-intro-to-full.png"'));
+  for (const name of ["01-intro-to-full", "02-five-deliveries", "03-food-and-shipping"]) {
+    const png = readFileSync(new URL(`media/marley-cost-${name}.png`, Dist));
+    assert.equal(png.subarray(0, 8).toString("hex"), "89504e470d0a1a0a");
+    assert.equal(png.readUInt32BE(16), 1000);
+    assert.equal(png.readUInt32BE(20), 1500);
+  }
   for (const path of ["/shop", "/privacy", "/terms"]) assert.ok(html.includes(`href="${path}"`));
   assert.ok(readFileSync(new URL("sitemap-pages.xml", Dist), "utf8").includes("<loc>https://nobi.ai/tools/marley-spoon-cost</loc>"));
 });

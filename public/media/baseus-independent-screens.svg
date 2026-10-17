@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800" role="img" aria-labelledby="title desc">
+<title id="title">Two outputs can show different desktops or the same desktop</title><desc id="desc">Independent screens show A on the laptop, B on one external monitor and C on the other. Mirrored external screens show A, B and B. This is a layout illustration, not a laptop compatibility claim.</desc>
+<rect width="1200" height="800" rx="28" fill="#eaf0ff"/>
+<g font-family="Avenir Next,Avenir,Arial,sans-serif" fill="#202b4a">
+<text x="55" y="70" font-size="54" font-weight="700">INDEPENDENT DESKTOPS</text>
+<g stroke="#202b4a" stroke-width="7" fill="#a3decf"><rect x="440" y="112" width="285" height="166" rx="9"/><path d="M582 278v32m-48 0h96"/><rect x="810" y="112" width="285" height="166" rx="9"/><path d="M952 278v32m-48 0h96"/></g>
+<g fill="#fff" stroke="#202b4a" stroke-width="7"><rect x="65" y="152" width="235" height="139" rx="8"/><path d="M42 296h280l-15 18H57z"/></g>
+<g font-size="77" font-weight="700" text-anchor="middle"><text x="183" y="250">A</text><text x="582" y="226">B</text><text x="952" y="226">C</text></g>
+<text x="55" y="375" font-size="54">Different content on each screen.</text>
+<path d="M55 412h1090" stroke="#bdc9e2" stroke-width="2"/>
+<text x="55" y="474" font-size="54" font-weight="700">MIRRORED EXTERNAL SCREENS</text>
+<g stroke="#202b4a" stroke-width="7" fill="#c9d0fc"><rect x="440" y="516" width="285" height="166" rx="9"/><path d="M582 682v32m-48 0h96"/><rect x="810" y="516" width="285" height="166" rx="9"/><path d="M952 682v32m-48 0h96"/></g>
+<g fill="#fff" stroke="#202b4a" stroke-width="7"><rect x="65" y="556" width="235" height="139" rx="8"/><path d="M42 700h280l-15 18H57z"/></g>
+<g font-size="77" font-weight="700" text-anchor="middle"><text x="183" y="654">A</text><text x="582" y="630">B</text><text x="952" y="630">B</text></g>
+<text x="55" y="775" font-size="54">Same content on both external screens.</text>
+</g></svg>

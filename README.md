@@ -174,3 +174,22 @@ The current exact entry-point report filter also omits Shop Nobi Utility.
 Run `node --test tests/delivery-cost.test.js tests/shop-nobi-offer-click.test.js`
 for calculator, configuration and click behavior, then the full offline
 website suite for static content and existing product regressions.
+
+
+## Baseus independent-screen selector
+
+`/tools/baseus-two-screens` compares only the US NU1 Air Mac B0114400 and RD1 Pro WIN B0114600.
+The local pure selector separates documented conditional display fit, known incompatibility and
+missing evidence, then evaluates laptop charging independently. It does not infer hardware
+capabilities from a laptop name, run a search, install software or claim physical testing.
+Manufacturer diagrams and software/manual sources are dated October 17, 2026. The NU1 dual-4K
+marketing conflict and the mirrored manual's unverified hardware revision remain explicit.
+
+The exact catalog IDs and actual offline Java builder outputs are authored in
+`src/content/baseusScreenLinks.js`. Missing product identity or invalid destinations fail the
+build. Exits use the existing standalone product handler with `Shop Nobi Utility`, a real
+variant and the fixed topic; selector answers are not added to click events. Generic event
+ingestion and reporting-filter registration are separate backend responsibilities. Tests cover
+decision boundaries, emitted exit attribution and both built HTML URL forms, sources and
+disclosures. The original diagram is under `public/media/baseus-independent-screens.svg`;
+Pin creative specifications are in `agents/creative_specs/baseus_screen_pins.md`.

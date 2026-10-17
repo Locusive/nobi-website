@@ -12,9 +12,13 @@ import MarleySpoonCost from "../src/pages/MarleySpoonCost.jsx";
 import { MarleySpoonPath } from "../src/content/marleySpoonCost.js";
 import { CoveCubbyPath } from "../src/content/coveCubbyComparison.js";
 
+import BaseusTwoScreens from "../src/pages/BaseusTwoScreens.jsx";
+import { BaseusScreenPath } from "../src/content/baseusScreens.js";
+
 const Pages = { "/": HomePage, "/pricing": Pricing, "/product": Product, "/shop": ShopPage, "/privacy": Privacy, "/terms": Terms };
 Pages[CoveCubbyPath] = CoveCubbyComparison;
 Pages[MarleySpoonPath] = MarleySpoonCost;
+Pages[BaseusScreenPath] = BaseusTwoScreens;
 
 /** Render the same components visitors see, without browser APIs or effects. */
 export function renderPageBody(path) {

@@ -6,6 +6,8 @@ import { fileURLToPath } from "url";
 import { CoveCubbyPath } from "../src/content/coveCubbyComparison.js";
 import { MarleySpoonPath } from "../src/content/marleySpoonCost.js";
 
+import { BaseusScreenPath } from "../src/content/baseusScreens.js";
+
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT       = join(__dirname, "..");
 const today      = new Date().toISOString().slice(0, 10);
@@ -25,6 +27,7 @@ const STATIC_PAGES = [
   { path: "/shop",                   priority: "0.9", changefreq: "weekly"  },
   { path: CoveCubbyPath,             priority: "0.6", changefreq: "monthly" },
   { path: MarleySpoonPath,           priority: "0.6", changefreq: "monthly" },
+  { path: BaseusScreenPath,           priority: "0.6", changefreq: "monthly" },
   { path: "/blog",                   priority: "0.7", changefreq: "daily"   },
   { path: "/glossary",               priority: "0.7", changefreq: "weekly"  },
   { path: "/terms",                  priority: "0.3", changefreq: "yearly"  },

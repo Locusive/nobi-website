@@ -13,6 +13,8 @@ import { PRICING_OFFER, PRICING_SEO_DESCRIPTION } from "../src/constants/pricing
 import { CoveCubbySeo } from "../src/content/coveCubbyComparison.js";
 import { MarleySpoonSeo } from "../src/content/marleySpoonCost.js";
 
+import { BaseusScreenSeo } from "../src/content/baseusScreens.js";
+
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const DIST = join(__dirname, "..", "dist");
 const SHELL = join(DIST, "index.html");
@@ -56,6 +58,7 @@ const PAGES = [
   ShopNobiPageHead,
   CoveCubbySeo,
   MarleySpoonSeo,
+  BaseusScreenSeo,
   // Legal pages carry their full text in the HTML, so app directories and crawlers that run no JavaScript can read them.
   {
     path: "/privacy", title: "Privacy Policy | Nobi",

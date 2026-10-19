@@ -8,6 +8,9 @@ const SlugPattern = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 const CurrencyPattern = /^[A-Z]{3}$/;
 const IdPattern = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 const UpdatedDateFormat = { month: "long", day: "numeric", year: "numeric", timeZone: "UTC" };
+// Current CUCKOO terms allow only Awin-provided imagery; no matching blender creative was available.
+const CuckooMerchantId = "962fb5d1-9238-4ecf-bc36-0ddc304be721";
+const CuckooCommissionNotice = "Disclosure: Compensated Affiliate.";
 
 /**
  * Returns whether a slug is safe to use in a file name and an address.
@@ -111,11 +114,13 @@ function buildRelatedPages(page, links) {
     .map((slug) => ({ slug: links.builtSlugs.has(slug) ? slug : null, title: links.titleBySlug.get(slug) }));
 }
 
-/** Builds one product, or returns null when it has no name, no safe link or no safe picture, so no card is blank. */
+/** Builds a safe card; CUCKOO keeps its text and link without publishing an unproven promotional picture. */
 function buildProduct(product) {
   const url = readWebAddress(product?.url);
   const imageAddress = readWebAddress(product?.imageUrl);
-  if (!isText(product?.name) || !url || !imageAddress) {
+  const isCuckoo = typeof product?.owningMerchantId === "string"
+    && product.owningMerchantId.toLowerCase() === CuckooMerchantId;
+  if (!isText(product?.name) || !url || (!isCuckoo && !imageAddress)) {
     return null;
   }
 
@@ -124,7 +129,8 @@ function buildProduct(product) {
     brand: isText(product.brand) ? product.brand : null,
     storeName: isText(product.storeName) ? product.storeName : null,
     url: removeTrackingTags(url),
-    imageUrl: imageAddress.toString(),
+    imageUrl: isCuckoo ? null : imageAddress.toString(),
+    ...(isCuckoo ? { commissionNotice: CuckooCommissionNotice } : {}),
     price: Number.isFinite(product.price) ? product.price : null,
     currency: CurrencyPattern.test(product.currency ?? "") ? product.currency : null,
     isInStock: product.isInStock === true,

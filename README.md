@@ -25,6 +25,10 @@ Put images/videos under `public/media` and reference them as `/media/filename.ex
 using React's Node renderer. It does not require Chromium. Browser JavaScript
 still mounts the same components for the bundle slider, navigation, and forms.
 Blog and glossary pages retain their existing content prerendering.
+The blog's static Markdown renderer preserves explicitly authored literal
+HTTPS links with `rel="sponsored nofollow"`, matching their runtime MDX links.
+It keeps other HTML escaped. A direct affiliate anchor records a network
+referral; it does not invoke the Shop Nobi product-click handler or prove an order.
 
 The homepage is served through an exact Cloudflare Pages rewrite so the empty
 `index.html` shell remains available for other client-side routes. This avoids

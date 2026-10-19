@@ -13,6 +13,8 @@ import { MarleySpoonPath } from "../src/content/marleySpoonCost.js";
 import { CoveCubbyPath } from "../src/content/coveCubbyComparison.js";
 
 import BaseusTwoScreens from "../src/pages/BaseusTwoScreens.jsx";
+import GiftChooser from "../src/pages/GiftChooser.jsx";
+import { GiftChooserSeo } from "../src/content/giftChooserProducts.js";
 import { BaseusScreenPath } from "../src/content/baseusScreens.js";
 
 import MindTheColorFit from "../src/pages/MindTheColorFit.jsx";
@@ -26,6 +28,7 @@ const Pages = { "/": HomePage, "/pricing": Pricing, "/product": Product, "/shop"
 Pages[CoveCubbyPath] = CoveCubbyComparison;
 Pages[MarleySpoonPath] = MarleySpoonCost;
 Pages[BaseusScreenPath] = BaseusTwoScreens;
+Pages[GiftChooserSeo.path] = GiftChooser;
 Pages[MindTheColorPath] = MindTheColorFit;
 Pages[ElectionNightPath] = ElectionNight;
 Pages[ShopNobiMcpPath] = ShopNobiMcp;

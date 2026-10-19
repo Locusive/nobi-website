@@ -16,6 +16,7 @@ import { isUtilityUrl } from "./shop-nobi-indexnow.js";
 import { buildUtilityRevision, UtilityRevisionFile } from "./utility-content-revision.js";
 
 import { BaseusScreenSeo } from "../src/content/baseusScreens.js";
+import { GiftChooserSeo } from "../src/content/giftChooserProducts.js";
 
 import { MindTheColorSeo } from "../src/content/mindTheColor.js";
 import { ElectionNightSeo } from "../src/content/electionNight.js";
@@ -66,6 +67,7 @@ const PAGES = [
   CoveCubbySeo,
   MarleySpoonSeo,
   BaseusScreenSeo,
+  GiftChooserSeo,
   MindTheColorSeo,
   ElectionNightSeo,
   // Legal pages carry their full text in the HTML, so app directories and crawlers that run no JavaScript can read them.

@@ -182,6 +182,28 @@ To build without the network, serve the test data:
 `node tests/shop-nobi-pages-server.js 4789`, then
 `SHOP_PAGES_API_URL=http://127.0.0.1:4789 npm test`.
 
+## Gift chooser prototype
+
+`/tools/gift-chooser` uses twelve source-dated product examples for coffee,
+painting and charging. A visitor explicitly chooses an interest, per-item USD
+budget and applicable preferences. The local filter returns up to three
+explained options, including fewer or no options when constraints cannot be
+met. It does not run a model, backend search or automatic query.
+
+The main shopping link opens the actual existing Nobi collection, without
+pretending the answers are carried over as filters. Native retailer URLs are
+secondary source/details links; no affiliate template is constructed from
+saved objects. An optional editable request can be copied into the supported
+manual search at `https://nobi.ai/shop`. These absolute canonical handoffs also
+keep a local preview from presenting fixture Shop results as real inventory.
+
+`src/content/giftChooserProducts.js` holds the reviewed records and explanations;
+`src/utils/giftChoice.js` handles native form data and selection. Prices and
+availability are dated snapshots, not live quotes. Tests use actual product
+records, native FormData and the actual React result component through Vite
+SSR, plus the normal built page and utility-revision checks. They are not a
+browser interaction test or verified purchase/commission evidence.
+
 ## Election Night checklist
 
 `/election-night-survival-kit` is a static, nonpartisan November 3, 2026

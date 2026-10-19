@@ -90,6 +90,18 @@ This is a prebuilt-page rule, not certification of live assistant results,
 every SKU's commission or other channels. Feed connections and canonical GUIDs
 are unchanged; existing published Pins are not edited or deleted by this rule.
 
+Prebuilt ESR product records are omitted while permission for the retained
+product materials and published prices is unresolved. This happens before cards,
+hydration, product schema, previews, Stories and Pin selection, so those surfaces
+cannot retain a partial product promotion. Source catalog tuples, inclusion and
+assigned links are untouched; this is not a store rejection or a live-search
+filter. Generic guide text is not rewritten. Mixed pages retain the other cards;
+an ESR-only page retains its editorial content without product records or
+image-dependent Story/Pin items. No supplied homepage creative is presented as a
+product link. Feed/board mappings and canonical GUID rules remain unchanged,
+although eligible hero, frame and item sets can change. Existing Pins are not
+removed or edited by this build rule.
+
 The outside accounts behind this
 (Search Console, Bing, IndexNow, Pinterest) are recorded in nobi-marketing's
 [search engines and discovery sites doc](https://github.com/Locusive/nobi-marketing/blob/main/docs/search_engines_and_discovery_sites.md). It fetches the page data from

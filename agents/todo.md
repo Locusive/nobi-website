@@ -25,3 +25,10 @@ See `agents/feature_plans/holiday_headphone_gifts.md`. No catalog, source-query,
 > - [ ] Complete root review, normal release and independent public acceptance.
 
 See `agents/feature_plans/cuckoo_text_only_prebuilt.md`. No catalog data, live assistant, RSS connection or company social changes.
+
+> # ESR prebuilt material and price permission gate
+> - [x] Omit exact ESR merchant product records from prebuilt publication while preserving original source data and other merchants.
+> - [x] Pass seven focused cases and all 253 full local tests, including concurrent rendering.
+> - [ ] Complete distinct root review, normal release and actual public acceptance.
+
+See `agents/feature_plans/esr_prebuilt_permission_gate.md`. No catalog, membership, live assistant, affiliate template, RSS connection or social action.

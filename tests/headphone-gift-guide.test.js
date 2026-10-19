@@ -61,6 +61,7 @@ test("publish the disclosed exact assigned QCY card and real internal discovery 
   const html = readArticle();
   checkAssignedCardLink(html);
   assert.ok(!html.includes("&lt;a href="), "The shopping link must not be escaped crawler text.");
+  assert.ok(!html.includes('href="https://www.qcy.com/products/'), "Keep one qualified product CTA instead of a competing untracked PDP exit.");
   for (const href of ["/tools/gift-chooser", "/blog/gifts-for-someone-who-wants-nothing", "/shop/s/audio-components", "https://www.qcy.com/pages/shipping-policy"]) {
     assert.ok(html.includes(`href="${href}"`), href);
   }

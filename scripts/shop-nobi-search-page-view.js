@@ -11,6 +11,8 @@ const UpdatedDateFormat = { month: "long", day: "numeric", year: "numeric", time
 // Current CUCKOO terms allow only Awin-provided imagery; no matching blender creative was available.
 const CuckooMerchantId = "962fb5d1-9238-4ecf-bc36-0ddc304be721";
 const CuckooCommissionNotice = "Disclosure: Compensated Affiliate.";
+// ESR product material and price authority is unresolved; hold its records only in prebuilt publication.
+const EsrMerchantId = "e43e55da-830c-4dc3-82f5-c8995273b2b2";
 
 /**
  * Returns whether a slug is safe to use in a file name and an address.
@@ -114,12 +116,15 @@ function buildRelatedPages(page, links) {
     .map((slug) => ({ slug: links.builtSlugs.has(slug) ? slug : null, title: links.titleBySlug.get(slug) }));
 }
 
-/** Builds a safe card; CUCKOO keeps its text and link without publishing an unproven promotional picture. */
+/** Builds a safe prebuilt card, holding ESR and keeping CUCKOO text-only. */
 function buildProduct(product) {
+  const merchantId = typeof product?.owningMerchantId === "string" ? product.owningMerchantId.toLowerCase() : null;
+  if (merchantId === EsrMerchantId) {
+    return null;
+  }
   const url = readWebAddress(product?.url);
   const imageAddress = readWebAddress(product?.imageUrl);
-  const isCuckoo = typeof product?.owningMerchantId === "string"
-    && product.owningMerchantId.toLowerCase() === CuckooMerchantId;
+  const isCuckoo = merchantId === CuckooMerchantId;
   if (!isText(product?.name) || !url || (!isCuckoo && !imageAddress)) {
     return null;
   }

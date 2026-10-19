@@ -20,7 +20,7 @@ const runNode = promisify(execFile);
 test("an empty page list builds, with an empty Shop Nobi sitemap and pin feed, and the other files unchanged", async () => {
   const folder = makeDistCopy();
   try {
-    const count = await prerenderWith({ body: { generatedAt: "2026-10-11T08:10:00Z", pages: [], retired: [] } }, folder);
+    const count = await prerenderWith({ body: { generatedAt: new Date().toISOString(), pages: [], retired: [] } }, folder);
     assert.equal(count, 0);
     assert.ok(!existsSync(join(folder, "shop/s")) && !existsSync(join(folder, "shop.html")));
     assert.ok(!readFileSync(join(folder, "sitemap-shop.xml"), "utf8").includes("<url>"));

@@ -82,6 +82,14 @@ The outside accounts behind this
 another API base address. If the fetch fails, the build fails, so Cloudflare
 keeps the last good deploy live.
 
+The API may initially serve its previous answer while rebuilding the cached
+listing. The build accepts listings up to 15 minutes old, accommodating the
+API's ten-minute cache and a rebuild allowance. Older valid listings receive
+at most four reads of the same route, two seconds apart, under one shared
+60-second budget. Persistently old data, invalid generation times, HTTP errors
+or malformed responses stop the build before any Shop pages or feeds are
+written. No cache-bypass query or source mutation is used.
+
 In the browser, a search page keeps its prebuilt products above the live search,
 and a category page keeps its searches under the search box, until the assistant
 bundle draws live products. A refused or failed live search therefore leaves the

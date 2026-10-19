@@ -26,6 +26,7 @@ const ShopPage           = lazy(() => import("./pages/ShopPage.jsx"));
 const ShopNobiMcp        = lazy(() => import("./pages/ShopNobiMcp.jsx"));
 const CoveCubbyComparison = lazy(() => import("./pages/CoveCubbyComparison.jsx"));
 const BaseusTwoScreens = lazy(() => import("./pages/BaseusTwoScreens.jsx"));
+const GiftChooser = lazy(() => import("./pages/GiftChooser.jsx"));
 const MarleySpoonCost = lazy(() => import("./pages/MarleySpoonCost.jsx"));
 const MindTheColorFit = lazy(() => import("./pages/MindTheColorFit.jsx"));
 const ElectionNight = lazy(() => import("./pages/ElectionNight.jsx"));
@@ -37,6 +38,7 @@ import { useAssistantModeReload } from "./hooks/useAssistantModeReload.js";
 import "./index.css";
 // Keep the static checklist styled before its lazy route loads, including without JavaScript.
 import "./pages/ElectionNight.css";
+import "./pages/GiftChooser.css";
 
 const SCROLL_KEY_PREFIX = "nobi-scroll:";
 
@@ -122,6 +124,7 @@ function App() {
           <Route path="/tools/cove-vs-cubby" element={<CoveCubbyComparison />} />
           <Route path="/tools/marley-spoon-cost" element={<MarleySpoonCost />} />
           <Route path="/tools/baseus-two-screens" element={<BaseusTwoScreens />} />
+          <Route path="/tools/gift-chooser" element={<GiftChooser />} />
           <Route path="/tools/mindthecolor-fit" element={<MindTheColorFit />} />
           <Route path="/election-night-survival-kit" element={<ElectionNight />} />
           {/* The assistant bundle fills these pages (see index.html); the

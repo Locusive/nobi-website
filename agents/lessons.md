@@ -5,3 +5,8 @@
 - Show actual same-page before/after at card size. Different appealing products can explain a visual standard but cannot substitute for proving the actual selector's behavior.
 - Treat animal/person context versus an isolated product as an editorial choice, not proof of superior aesthetics or click-through. Never infer quality from country of manufacture or restore a luxury-only gate.
 - Read the entire affected README section after adding a new explanation so an older adjacent paragraph cannot contradict the resulting behavior.
+
+## Holiday gift source identity
+
+- Before naming a specific product or opening its URL, match the exact product name, SKU, variant and literal URL in the saved source. Similar set names are not interchangeable. The initial holiday draft's SK-8110S reference was wrong; the actual saved Silver Brush row and native arrival identify SK-8113S. Preserve the initial source mistake as dated history and correct the actual public draft before release.
+- Separate a manufacturer specification citation from a verified earning journey. A successful arrival for a different product from the same merchant does not prove the selected product's route. Put the shopper-facing continuation through the actual Shop Nobi collection and leave product-specific journey proof qualified.

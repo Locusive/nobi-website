@@ -6,3 +6,9 @@
 > - [ ] Complete normal release and independent public verification.
 
 See `agents/feature_plans/gift_chooser_prototype.md`. The first three leaves are local outcomes, not a claim that the whole task is Done.
+
+> # Shopping-page build freshness
+> - [x] Fix and locally verify bounded stale-export handling.
+> - [ ] Complete independent review, normal release and actual public page/Story acceptance.
+
+See `agents/feature_plans/shop_page_build_freshness.md`. The stored rows remain correct; no new product or page-data write is planned.

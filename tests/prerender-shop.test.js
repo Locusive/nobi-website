@@ -383,7 +383,7 @@ test("a top category's page shows its category pages under Browse by category, t
   const ottomans = buildFurniturePages(1, "Ottomans", "ottoman");
   const folder = makeDistCopy();
   try {
-    await prerenderWith({ body: { pages: [...chairs, ...benches, ...ottomans], retired: [] } }, folder);
+    await prerenderWith({ body: { generatedAt: new Date().toISOString(), pages: [...chairs, ...benches, ...ottomans], retired: [] } }, folder);
 
     const body = readBody(readFileSync(join(folder, "shop/c/furniture.html"), "utf8"));
     const links = [...body.matchAll(/href="(\/shop\/[cs]\/[^"]+)"/g)].map(([, href]) => href);

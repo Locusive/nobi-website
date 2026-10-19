@@ -11,7 +11,8 @@ const HttpNotFound = 404;
 
 /** Reads the test page data. */
 export function readFixturePageData() {
-  return JSON.parse(readFileSync(FixturePath, "utf8"));
+  const data = JSON.parse(readFileSync(FixturePath, "utf8"));
+  return { ...data, generatedAt: new Date().toISOString() };
 }
 
 /**

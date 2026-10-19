@@ -1,0 +1,32 @@
+{
+  "source": {
+    "publicationInputsSha256": "d9cd524a1f2377d9f8796d2299e3b6ba62f67b46686cbf1b6dcd6239d3566fc9",
+    "linkSourceSha256": "6725b25b681ce1d6158fa9268f4504a905c0a78275879a5079cc02975f42fa5f",
+    "date": "2026-10-19",
+    "scope": "Exact provided feed input and actual Java-generated assigned organic link; no runtime request/stock/commission guarantee."
+  },
+  "product": {
+    "title": "The Party Mix I Trivia Card Game",
+    "priceText": "US$25",
+    "priceDate": "19 October 2026",
+    "priceQualification": "Product price only; shipping and any applicable tax are additional. Confirm the current retailer total.",
+    "facts": [
+      "Ages 10+",
+      "2+ players",
+      "10\u201345 minutes",
+      "Multiple-choice and true/false questions",
+      "Topics include death, animals, space and numbers"
+    ],
+    "merchantId": "845dbe9a-c01f-4171-aca2-b8f1b1d27e6e",
+    "productId": "08067cd8-7b0e-4072-ad75-7a235be80ee9",
+    "variantId": "740ac7c7-20ce-403a-a00d-4d7ec83014a2",
+    "merchantVariantId": "44995184558326",
+    "plain": "https://funfactco.com/products/fun-fact-trivia-deck-game?variant=44995184558326&utm_source=shop_nobi&utm_medium=referral&utm_campaign=shop_nobi&utm_term=trivia+card+game+gift",
+    "paid": "https://www.awin1.com/cread.php?awinmid=114020&awinaffid=3122300&clickref=shop_nobi&ued=https%3A%2F%2Ffunfactco.com%2Fproducts%2Ffun-fact-trivia-deck-game%3Fvariant%3D44995184558326%26utm_source%3Dshop_nobi%26utm_medium%3Dreferral%26utm_campaign%3Dshop_nobi%26utm_term%3Dtrivia%2Bcard%2Bgame%2Bgift",
+    "paidLink": true,
+    "image": null,
+    "disclosure": "We may earn a commission if you buy through this link.",
+    "cta": "View The Party Mix I at Fun Fact Co.",
+    "rel": "sponsored nofollow"
+  }
+}

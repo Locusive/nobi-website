@@ -62,6 +62,7 @@ function Breadcrumbs({ page }) {
  */
 function ProductCard({ product, position, query, slug }) {
   const price = formatPrice(product.price, product.currency);
+  const commissionNotice = product.commissionNotice || (product.paidLink ? CommissionNotice : null);
   const handleClick = (event) => handleProductLinkClick(event, { product, position, query, slug });
 
   return (
@@ -81,7 +82,13 @@ function ProductCard({ product, position, query, slug }) {
       </a>
       {product.storeName && <p className="text-sm text-black/60 dark:text-white/60">{product.storeName}</p>}
       {price && <p className="text-sm font-semibold">{price}</p>}
-      {product.paidLink && <p className="mt-1 text-[10px] leading-tight text-black/40 dark:text-white/40">{CommissionNotice}</p>}
+      {commissionNotice && (
+        <p className={product.commissionNotice
+          ? "mt-1 text-xs leading-snug text-black/70 dark:text-white/70"
+          : "mt-1 text-[10px] leading-tight text-black/40 dark:text-white/40"}>
+          {commissionNotice}
+        </p>
+      )}
     </li>
   );
 }

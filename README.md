@@ -79,6 +79,17 @@ to update when RSS changes, and no feed reconnect or artificial GUID is used to
 force a repost. Non-affiliate pages also receive pictured-product copy, without
 a commission claim. Availability comes from the saved page snapshot; it is not
 rechecked when Pinterest imports the item. Mature pages stay out of every feed.
+
+Prebuilt CUCKOO cards use text, price and the existing product link, with the
+programme's exact `Disclosure: Compensated Affiliate.` notice. Its current terms
+require Awin-provided imagery, and no matching blender creative was found. The
+normalized view omits CUCKOO pictures from HTML, embedded hydration data,
+structured data and image-dependent previews, Stories and Pins. Stored catalogue
+images remain intact, and other merchants keep their existing presentation.
+This is a prebuilt-page rule, not certification of live assistant results,
+every SKU's commission or other channels. Feed connections and canonical GUIDs
+are unchanged; existing published Pins are not edited or deleted by this rule.
+
 The outside accounts behind this
 (Search Console, Bing, IndexNow, Pinterest) are recorded in nobi-marketing's
 [search engines and discovery sites doc](https://github.com/Locusive/nobi-marketing/blob/main/docs/search_engines_and_discovery_sites.md). It fetches the page data from

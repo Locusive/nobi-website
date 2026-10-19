@@ -18,3 +18,10 @@ See `agents/feature_plans/shop_page_build_freshness.md`. The stored rows remain 
 > - [ ] Complete normal review/release and root's independent public journey check.
 
 See `agents/feature_plans/holiday_headphone_gifts.md`. No catalog, source-query, RSS mapping or social changes.
+
+> # CUCKOO text-only prebuilt cards
+> - [x] Preserve the two actual CUCKOO product choices while omitting unproven promotional imagery and using the exact programme disclosure.
+> - [x] Pass the six regression cases and the full 246-test local suite.
+> - [ ] Complete root review, normal release and independent public acceptance.
+
+See `agents/feature_plans/cuckoo_text_only_prebuilt.md`. No catalog data, live assistant, RSS connection or company social changes.

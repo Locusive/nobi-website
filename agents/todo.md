@@ -32,3 +32,9 @@ See `agents/feature_plans/cuckoo_text_only_prebuilt.md`. No catalog data, live a
 > - [ ] Complete distinct root review, normal release and actual public acceptance.
 
 See `agents/feature_plans/esr_prebuilt_permission_gate.md`. No catalog, membership, live assistant, affiliate template, RSS connection or social action.
+
+> # Trivia card game gift decision guide
+> - [x] Author and locally verify one useful page with the exact supplied Fun Fact Co. product and generated paid link (256 tests passed).
+> - [ ] Complete root source review, normal release and actual independent public/card verification.
+
+See `agents/feature_plans/funfact_trivia_gift_guide.md`. No catalogue, source-query, model, social or agreement action.

@@ -12,3 +12,9 @@ See `agents/feature_plans/gift_chooser_prototype.md`. The first three leaves are
 > - [ ] Complete independent review, normal release and actual public page/Story acceptance.
 
 See `agents/feature_plans/shop_page_build_freshness.md`. The stored rows remain correct; no new product or page-data write is planned.
+
+> # Holiday headphone guide and QCY card
+> - [x] Build and locally verify one useful source-backed guide and exact disclosed assigned product link.
+> - [ ] Complete normal review/release and root's independent public journey check.
+
+See `agents/feature_plans/holiday_headphone_gifts.md`. No catalog, source-query, RSS mapping or social changes.

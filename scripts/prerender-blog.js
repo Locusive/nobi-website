@@ -195,7 +195,25 @@ function mdInline(s) {
   e = e.replace(/\[([^\]]+)\]\(([^)]+)\)/g, (mt, t, u) => `<a href="${u}">${t}</a>`);
   e = e.replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>");
   e = e.replace(/(^|[^*])\*([^*]+)\*(?!\*)/g, "$1<em>$2</em>");
-  return e;
+  return restoreSponsoredAnchors(e);
+}
+
+// Keep explicitly authored paid links usable in crawler HTML, with the same disclosure attributes as MDX.
+// This is a narrow literal-anchor subset, not general HTML or JSX execution.
+function restoreSponsoredAnchors(text) {
+  return text.replace(
+    /&lt;a href=&quot;(https:\/\/[^\s]*?)&quot; rel=&quot;sponsored nofollow&quot;&gt;([^<>]*?)&lt;\/a&gt;/g,
+    (markup, href, label) => {
+      if (!label.trim()) return markup;
+      try {
+        const url = new URL(href.replace(/&amp;/g, "&"));
+        if (url.username || url.password || label.includes("&lt;") || label.includes("&gt;")) return markup;
+      } catch {
+        return markup;
+      }
+      return `<a href="${href}" rel="sponsored nofollow">${label}</a>`;
+    },
+  );
 }
 
 function renderTable(rows) {

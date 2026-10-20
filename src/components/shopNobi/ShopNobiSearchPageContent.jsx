@@ -144,3 +144,4 @@ function RelatedSearches({ related }) {
     </section>
   );
 }
+

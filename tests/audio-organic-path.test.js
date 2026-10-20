@@ -1,13 +1,14 @@
 import assert from "node:assert/strict";
 import { after, before, test } from "node:test";
 import React from "react";
+import { MemoryRouter as Router } from "react-router-dom";
 import { renderToStaticMarkup } from "react-dom/server";
 import { createServer } from "vite";
 let server, Content;
-before(async () => { server = await createServer({ server: { middlewareMode: true, hmr: false }, appType: "custom" }); Content = (await server.ssrLoadModule("/src/components/shopNobi/ShopNobiSearchPageContent.jsx")).default; });
+before(async () => { server = await createServer({ server: { middlewareMode: true, hmr: false }, appType: "custom" }); Content = (await server.ssrLoadModule("/src/pages/ShopPage.jsx")).default; });
 after(async () => { await server?.close(); });
 const Page = { slug: "audio-components", title: "Audio components", query: "audio components", breadcrumbs: [], guide: [], products: [{ name: "Existing amplifier", url: "https://example.org/amplifier", imageUrl: "https://example.org/image.jpg", price: 100, currency: "USD", paidLink: true }], faq: [], related: [] };
-const render = page => renderToStaticMarkup(React.createElement(Content, { page }));
+const render = page => renderToStaticMarkup(React.createElement(Router, { location: `/shop/s/${page.slug}` }, React.createElement(Content, { prebuiltContent: { kind: "search-page", path: `/shop/s/${page.slug}`, data: page } })));
 test("audio landing provides one crawlable, conditional guide path while retaining the original card", () => {
  const html = render(Page);
  assert.equal((html.match(/href="\/blog\/headphones-as-a-gift"/g) || []).length, 1);

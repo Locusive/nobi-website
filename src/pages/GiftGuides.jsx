@@ -30,6 +30,7 @@ export default function GiftGuidesPage() {
             <h2 id="gift-examples-heading" className="text-xl font-semibold">Prefer a few concrete starting points?</h2>
             <p className="mt-2 text-black/70 dark:text-white/70">The <a href="/tools/gift-chooser" className="underline underline-offset-4 focus-visible:outline focus-visible:outline-2 focus-visible:outline-purple-600">gift chooser</a> has a small set of reviewed coffee, painting and charging examples you can narrow by budget and preferences.</p>
           </section>
+          <p className="mt-6">Include the extras: <a href="/tools/gift-budget" className="underline underline-offset-4">calculate your gift budget after estimated fees</a>.</p>
           <p className="mt-8 max-w-3xl text-sm text-black/60 dark:text-white/70">These guides use source information checked October 19, 2026. Confirm current product details, total cost, delivery and returns with the retailer. Some guides include affiliate links; we may earn a commission from qualifying purchases.</p>
         </div>
       </div>

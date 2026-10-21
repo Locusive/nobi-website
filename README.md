@@ -117,6 +117,11 @@ at most four reads of the same route, two seconds apart, under one shared
 or malformed responses stop the build before any Shop pages or feeds are
 written. No cache-bypass query or source mutation is used.
 
+Related searches keep their existing prebuilt page links. If a known related
+search falls outside the build's file limit, its link opens `/shop?q=...` with
+the original query instead of becoming plain text or pointing to an unbuilt
+page. Older embedded data falls back to the related search's title.
+
 In the browser, a search page keeps its prebuilt products above the live search,
 and a category page keeps its searches under the search box, until the assistant
 bundle draws live products. A refused or failed live search therefore leaves the

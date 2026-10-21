@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
 import { isShopNobiPath, ShopNobiImage } from "../src/utils/shopNobiPage.js";
-import { buildSearchPageSeo } from "../src/utils/shopNobiSearchPage.js";
+import { buildSearchPageSeo, readRelatedSearchPath } from "../src/utils/shopNobiSearchPage.js";
 import { keepAllowedPages } from "../scripts/shop-nobi-search-pages-api.js";
 
 test("shopping pages include /shop and its search paths", () => {
@@ -13,6 +13,15 @@ test("shopping pages include /shop and its search paths", () => {
 test("other pages, including ones that only start with the same letters, are not the Shop Nobi page", () => {
   for (const path of ["/", "/pricing", "/shopping", "/shops", "/blog/shop", "/shop/mcp", "/shop/mcp/"]) {
     assert.equal(isShopNobiPath(path), false, path);
+  }
+});
+
+test("older related searches can still open their title, while missing labels create no empty link", () => {
+  const url = new URL(readRelatedSearchPath({ title: "  Camera bags  " }), "https://nobi.ai");
+  assert.equal(url.pathname, "/shop");
+  assert.equal(url.searchParams.get("q"), "Camera bags");
+  for (const related of [null, {}, { title: "  " }, { title: null, query: "camera bags" }]) {
+    assert.equal(readRelatedSearchPath(related), null);
   }
 });
 

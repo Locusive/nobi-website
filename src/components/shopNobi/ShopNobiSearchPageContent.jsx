@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { handleProductLinkClick } from "../../utils/shopNobiProductClick";
 import { FirstProductPosition, sendSearchPageShownProducts } from "../../utils/shopNobiShownProducts";
-import { formatPrice, readCrumbPath, searchPagePath } from "../../utils/shopNobiSearchPage";
+import { formatPrice, readCrumbPath, readRelatedSearchPath } from "../../utils/shopNobiSearchPage";
 import { CommissionNotice, readStoreLinkRel } from "../../utils/shopNobiPage";
 
 /**
@@ -125,7 +125,7 @@ function WebStoryLink({ storyPath }) {
   );
 }
 
-/** Links to other search pages about similar products. A search that was not built shows as plain text. */
+/** Links to related built pages, or opens the related query when it has no prebuilt page. */
 function RelatedSearches({ related }) {
   if (related.length === 0) {
     return null;
@@ -135,11 +135,14 @@ function RelatedSearches({ related }) {
     <section className="mt-10">
       <h2 className="text-lg font-semibold">Related searches</h2>
       <ul className="mt-3 flex flex-wrap gap-3">
-        {related.map((page, index) => (
-          <li key={index} className="rounded-full border border-black/10 px-3 py-1 text-sm dark:border-white/20">
-            {page.slug ? <a href={searchPagePath(page.slug)} className="hover:underline">{page.title}</a> : page.title}
-          </li>
-        ))}
+        {related.map((page, index) => {
+          const path = readRelatedSearchPath(page);
+          return (
+            <li key={index} className="rounded-full border border-black/10 px-3 py-1 text-sm dark:border-white/20">
+              {path ? <a href={path} className="hover:underline">{page.title}</a> : page.title}
+            </li>
+          );
+        })}
       </ul>
     </section>
   );

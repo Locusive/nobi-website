@@ -144,13 +144,39 @@ test("the visible page shows the products, opening store links in a new tab with
   assert.ok(!body.includes("Loading Shop Nobi"));
 });
 
-test("the first breadcrumb links to its category page, and other breadcrumb and related links only to built pages", () => {
+test("breadcrumbs and built related searches keep their existing page links", () => {
   const body = readBody(readOutput("shop/s/black-leather-boots.html"));
   const pageLinks = [...body.matchAll(/href="(\/shop[^"]*)"/g)].map(([, href]) => href);
   assert.deepEqual(pageLinks, ["/shop", "/shop", "/shop/c/shoes", "/shop/s/boots", "/shop/stories/black-leather-boots", "/shop/s/chelsea-boots"]);
 
   const bootsBody = readBody(readOutput("shop/s/boots.html"));
   assert.ok(bootsBody.includes('<a href="/shop/c/shoes" class="hover:underline">Shoes</a>'), "Even when the crumb has no search page");
+});
+
+test("related searches outside the build limit launch the original query instead of a missing page", async () => {
+  const data = readFixturePageData();
+  const query = '  boots & bags / "weekend" + <travel>  ';
+  data.pages[0].relatedSlugs = ["chelsea-boots", "boots", "chelsea-boots", "not-a-live-page"];
+  data.pages[1].query = query;
+  data.pages[2].query = "  ";
+  const folder = makeDistCopy();
+  try {
+    const categoryAndOnePage = 2;
+    const count = await prerenderWith({ body: data }, folder, { fileLimit: FileCountBeforePages + categoryAndOnePage });
+    assert.equal(count, 1, "Only the source search page is built");
+    const body = readBody(readFileSync(join(folder, "shop/s/black-leather-boots.html"), "utf8"));
+    const related = body.slice(body.indexOf(">Related searches</h2>"));
+    const links = [...related.matchAll(/<a href="([^"]+)"[^>]*>([^<]+)<\/a>/g)];
+    assert.deepEqual(links.map(([, , title]) => title), ["Chelsea Boots", "Boots"], "Unknown and duplicate suggestions are omitted");
+    const addresses = links.map(([, href]) => new URL(href, "https://nobi.ai"));
+    assert.deepEqual(addresses.map((url) => url.pathname), ["/shop", "/shop"]);
+    assert.deepEqual(addresses.map((url) => [...url.searchParams.keys()]), [["q"], ["q"]]);
+    assert.deepEqual(addresses.map((url) => url.searchParams.get("q")), [query.trim(), "Boots"], "Use the original query, falling back to the title for a blank query");
+    assert.ok(!related.includes('href="/shop/s/chelsea-boots"'), "Do not link to an unbuilt page");
+    assert.ok(!related.includes("<travel>"), "Query markup stays encoded in the address");
+  } finally {
+    rmSync(folder, { recursive: true, force: true });
+  }
 });
 
 test("every link to a store in the prebuilt pages carries rel=nofollow", () => {
@@ -293,7 +319,7 @@ test("llms.txt keeps its own text and gains a Shop Nobi section with links to th
   assert.ok(llmsText.includes("- [Black Leather Boots](https://nobi.ai/shop/s/black-leather-boots)"));
 });
 
-test("when the file limit is reached, category room comes first, then the first search pages, and the rest stay out of every listing", async () => {
+test("when the file limit is reached, category room comes first and unbuilt pages stay out of static listings", async () => {
   const folder = makeDistCopy();
   const categoryAndOnePage = 2;
   try {
@@ -312,7 +338,7 @@ test("when the file limit is reached, category room comes first, then the first 
 
     const body = readBody(readFileSync(join(folder, "shop/s/black-leather-boots.html"), "utf8"));
     assert.ok(!body.includes('href="/shop/s/'), "No links to pages that were left out");
-    assert.ok(body.includes(">Boots</li>") && body.includes("Chelsea Boots</li>"), "They show as plain text");
+    assert.ok(body.includes(">Boots</li>"), "An unbuilt breadcrumb stays as plain text");
   } finally {
     rmSync(folder, { recursive: true, force: true });
   }

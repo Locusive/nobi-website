@@ -20,6 +20,7 @@ const SITEMAP_FILES = ["sitemap-pages.xml", "sitemap-shop.xml"];
 
 // Static routes — priority and changefreq per page type
 const STATIC_PAGES = [
+  { path: "/gift-guides", priority: "0.7", changefreq: "monthly" },
   { path: "/tools/gift-chooser",       priority: "0.6", changefreq: "monthly" },
   { path: "/",                       priority: "1.0", changefreq: "weekly"  },
   { path: "/product",                priority: "0.9", changefreq: "monthly" },

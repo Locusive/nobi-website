@@ -36,6 +36,24 @@ export function searchPageUrl(slug) {
 }
 
 /**
+ * Opens a built related page, or searches its original query when the build did not include that page.
+ * Older embedded page data has only a title, which remains a usable search fallback.
+ *
+ * @param {{slug?: string | null, title?: string, query?: string}} page The related search.
+ * @returns {string | null} The internal destination, or null when there is no visible search label.
+ */
+export function readRelatedSearchPath(page) {
+  if (typeof page?.title !== "string" || !page.title.trim()) {
+    return null;
+  }
+  if (typeof page.slug === "string" && page.slug.trim()) {
+    return searchPagePath(page.slug);
+  }
+  const query = typeof page.query === "string" && page.query.trim() ? page.query.trim() : page.title.trim();
+  return `/shop?${new URLSearchParams({ q: query })}`;
+}
+
+/**
  * Returns the description used when a page has none of its own. It never mentions store counts, paid stores or ranking.
  *
  * @param {string} title The page title, such as "Black Leather Boots".

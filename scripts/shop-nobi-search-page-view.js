@@ -51,8 +51,8 @@ export function selectUsablePages(fetchedPages) {
 }
 
 /**
- * Builds the page data for the first usable pages, up to the limit. Links go only to pages within the limit;
- * the rest show as plain text.
+ * Builds the page data for the first usable pages, up to the limit. Related searches outside the limit
+ * retain their query so the browser can open a search without linking to an unbuilt page.
  *
  * @param {object[]} usablePages The usable pages, most searched first.
  * @param {number} pageLimit The most pages to build.
@@ -61,7 +61,7 @@ export function selectUsablePages(fetchedPages) {
 export function buildSearchPages(usablePages, pageLimit) {
   const builtPages = usablePages.slice(0, Math.max(0, pageLimit));
   const links = {
-    titleBySlug: new Map(usablePages.map((page) => [page.slug, page.title])),
+    pageBySlug: new Map(usablePages.map((page) => [page.slug, page])),
     builtSlugs: new Set(builtPages.map((page) => page.slug)),
   };
   return {
@@ -108,12 +108,19 @@ function buildBreadcrumbs(page, builtSlugs) {
     }));
 }
 
-/** Keeps the related pages that are live, linking only the built ones. */
+/** Keeps known related searches, preserving their query and linking only to existing built pages. */
 function buildRelatedPages(page, links) {
   const relatedSlugs = Array.isArray(page.relatedSlugs) ? page.relatedSlugs : [];
   return [...new Set(relatedSlugs)]
-    .filter((slug) => slug !== page.slug && links.titleBySlug.has(slug))
-    .map((slug) => ({ slug: links.builtSlugs.has(slug) ? slug : null, title: links.titleBySlug.get(slug) }));
+    .filter((slug) => slug !== page.slug && links.pageBySlug.has(slug))
+    .map((slug) => {
+      const related = links.pageBySlug.get(slug);
+      return {
+        slug: links.builtSlugs.has(slug) ? slug : null,
+        title: related.title,
+        query: isText(related.query) ? related.query.trim() : related.title.trim(),
+      };
+    });
 }
 
 /** Builds a safe prebuilt card, holding ESR and keeping CUCKOO text-only. */

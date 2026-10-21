@@ -45,7 +45,7 @@ async function startSearchEngineServer({ sitemapStatus = 200, pageSitemapStatus 
         response.end(JSON.stringify({ version: 1, revisions: liveUtilityRevisions }));
         return;
       }
-      response.statusCode = request.method === "POST" ? indexNowStatus : isAuthoredSitemap ? pageSitemapStatus : sitemapStatus;
+      response.statusCode = request.method === "POST" ? (Array.isArray(indexNowStatus) ? indexNowStatus[received.bodies.length - 1] : indexNowStatus) : isAuthoredSitemap ? pageSitemapStatus : sitemapStatus;
       response.end(request.method === "POST" ? "" : isAuthoredSitemap ? makeUrlSitemap(liveAuthoredPages) : makeSitemap(LivePages));
     });
   });
@@ -64,12 +64,19 @@ async function submitWith(env, serverOptions, endpointUrl = null, { builtAuthore
   try {
     const options = { env, distDir, liveSitemapUrl: `${server.url}/sitemap-shop.xml`, livePageSitemapUrl: `${server.url}/sitemap-pages.xml`, liveUtilityRevisionUrl: `${server.url}/utility-revisions.json`, endpointUrl: endpointUrl ?? `${server.url}/indexnow`, batchSize: 1 };
     const result = await submitChangedShopNobiPages(options);
+    const receipt = JSON.parse(readFileSync(join(distDir, "indexnow-submission-receipt.json"), "utf8"));
+    assert.deepEqual(receipt.batches, result.batches);
+    assert.equal(receipt.skipReason, result.skipReason);
+    assert.equal(receipt.indexingConfirmed, false);
     return { result, received: server.received };
   } finally {
     await server.close();
     rmSync(distDir, { recursive: true, force: true });
   }
 }
+
+/** Keeps legacy count checks alongside independent detailed receipt assertions. */
+function countSummary({ batches, ...counts }) { return counts; }
 
 test("only addresses that are new or have a new lastmod are picked, in sitemap order, with escapes undone", () => {
   const changed = selectChangedUrls(readSitemapEntries(makeSitemap(LivePages)), readSitemapEntries(makeSitemap(BuiltPages)));
@@ -111,7 +118,7 @@ test("the key file at the site root holds the key, in the form IndexNow accepts"
 
 test("a production build submits the new and changed addresses, one batch each here", async () => {
   const { result, received } = await submitWith(ProductionEnv);
-  assert.deepEqual(result, { skipReason: null, changedCount: 2, batchCount: 2, failedBatchCount: 0 });
+  assert.deepEqual(countSummary(result), { skipReason: null, changedCount: 2, batchCount: 2, failedBatchCount: 0 });
   assert.deepEqual(received.bodies.map((body) => body.urlList), [["https://nobi.ai/shop/s/hats"], ["https://nobi.ai/shop/s/socks&ties"]]);
 });
 
@@ -124,7 +131,7 @@ test("new and changed authored utilities join Shop Nobi pages, while unchanged u
     "https://nobi.ai/shop/s/hats", "https://nobi.ai/shop/s/socks&ties",
     "https://nobi.ai/tools/marley-spoon-cost", "https://nobi.ai/tools/baseus-two-screens",
   ]);
-  assert.deepEqual(result, { skipReason: null, changedCount: 4, batchCount: 4, failedBatchCount: 0 });
+  assert.deepEqual(countSummary(result), { skipReason: null, changedCount: 4, batchCount: 4, failedBatchCount: 0 });
 });
 
 test("same-day utility content changes notify even when sitemap dates are identical", async () => {
@@ -143,19 +150,19 @@ test("unchanged utility revisions do not notify when build-day sitemap dates adv
 
 test("an authored sitemap without tools leaves normal Shop Nobi notifications intact", async () => {
   const { result, received } = await submitWith(ProductionEnv, {}, null, {
-    builtAuthoredPages: [["https://nobi.ai/pricing", "2026-10-17"]],
+    builtAuthoredPages: [["https://nobi.ai/", "2026-10-17"]],
   });
   assert.equal(result.changedCount, 2);
   assert.deepEqual(received.bodies.flatMap((body) => body.urlList), ["https://nobi.ai/shop/s/hats", "https://nobi.ai/shop/s/socks&ties"]);
 });
 
-test("only canonical own-site tools are selected from authored pages and foreign Shop addresses are rejected", async () => {
+test("only canonical own-site destinations are selected from authored pages and foreign Shop addresses are rejected", async () => {
   const invalid = [
     "https://elsewhere.example/tools/foreign", "http://nobi.ai/tools/insecure",
     "https://nobi.ai/tools/query?campaign=1", "https://nobi.ai/tools/fragment#part",
     "https://nobi.ai/tools/query?", "https://nobi.ai/tools/fragment#",
     "https://person@nobi.ai/tools/credentials", "https://nobi.ai:8443/tools/port",
-    "https://nobi.ai/product", "https://nobi.ai/tools/", "not-a-url",
+    "not-a-url",
   ].map((url) => [url, "2026-10-17"]);
   const { received } = await submitWith(ProductionEnv, {}, null, {
     builtAuthoredPages: [...AuthoredPages, ...invalid],
@@ -169,7 +176,7 @@ test("a utility found in both sitemaps is submitted once with the same-origin ba
   const { result, received } = await submitWith(ProductionEnv, { liveAuthoredPages: [["https://nobi.ai/", "2026-10-17"]], liveUtilityRevisions: {} }, null, {
     builtAuthoredPages: [AuthoredPages[0], duplicate, duplicate], builtShopXml: makeUrlSitemap([duplicate]),
   });
-  assert.deepEqual(result, { skipReason: null, changedCount: 1, batchCount: 1, failedBatchCount: 0 });
+  assert.deepEqual(countSummary(result), { skipReason: null, changedCount: 1, batchCount: 1, failedBatchCount: 0 });
   assert.deepEqual(received.bodies[0].urlList, [duplicate[0]]);
 });
 
@@ -203,7 +210,7 @@ test("a skipped build asks nothing of the live site or IndexNow", async () => {
 
 test("an unreadable live sitemap submits nothing, so a missing sitemap never sends every page", async () => {
   const { result, received } = await submitWith(ProductionEnv, { sitemapStatus: 404 });
-  assert.equal(result.skipReason, "the live sitemap could not be read");
+  assert.equal(result.shopSkipReason, "the live Shop sitemap could not be read");
   assert.deepEqual(received.bodies, []);
 });
 
@@ -214,6 +221,57 @@ for (const [name, serverOptions, endpointUrl] of [
 ]) {
   test(`when IndexNow ${name}, the step still finishes and counts the failed batches`, async () => {
     const { result } = await submitWith(ProductionEnv, serverOptions, endpointUrl);
-    assert.deepEqual(result, { skipReason: null, changedCount: 2, batchCount: 2, failedBatchCount: 2 });
+    assert.deepEqual(countSummary(result), { skipReason: null, changedCount: 2, batchCount: 2, failedBatchCount: 2 });
   });
 }
+
+
+test("new hub and blog notify once while date-only existing authored changes stay out", async () => {
+  const hub = "https://nobi.ai/gift-guides";
+  const article = "https://nobi.ai/blog/trivia-card-game-gift";
+  const { result, received } = await submitWith(ProductionEnv, {}, null, {
+    builtAuthoredPages: [...AuthoredPages.map(([url]) => [url, "2026-10-21"]), [hub, null], [article, null], [article, null]],
+  });
+  assert.deepEqual(received.bodies.flatMap((body) => body.urlList), ["https://nobi.ai/shop/s/hats", "https://nobi.ai/shop/s/socks&ties", hub, article]);
+  assert.ok(result.batches.every((batch) => batch.status === "accepted" && batch.httpStatus === 200));
+});
+
+test("unknown utility revisions do not suppress known new nonutility pages", async () => {
+  const { received } = await submitWith(ProductionEnv, { revisionStatus: 404 }, null, {
+    builtAuthoredPages: [...AuthoredPages, ["https://nobi.ai/gift-guides", null]],
+  });
+  assert.ok(received.bodies.flatMap((body) => body.urlList).includes("https://nobi.ai/gift-guides"));
+});
+
+test("fixture builds make no requests and persist a skip receipt", async () => {
+  const { result, received } = await submitWith({ ...ProductionEnv, SHOP_PAGES_API_URL: "http://127.0.0.1:4789" });
+  assert.equal(result.skipReason, "built from other page data");
+  assert.deepEqual(result.batches, []);
+  assert.deepEqual(received.paths, []);
+});
+
+test("partial HTTP failure records exact accepted and failed URLs without request keys", async () => {
+  const { result } = await submitWith(ProductionEnv, { indexNowStatus: [202, 429] });
+  assert.equal(result.failedBatchCount, 1);
+  assert.deepEqual(result.batches, [
+    { urls: ["https://nobi.ai/shop/s/hats"], status: "accepted", httpStatus: 202, reason: null },
+    { urls: ["https://nobi.ai/shop/s/socks&ties"], status: "failed", httpStatus: 429, reason: "HTTP_ERROR" },
+  ]);
+  assert.equal(JSON.stringify(result).includes(IndexNowKey), false);
+});
+
+
+test("Shop 403 does not suppress a known new authored hub", async () => {
+  const { result, received } = await submitWith(ProductionEnv, { sitemapStatus: 403 }, null, {
+    builtAuthoredPages: [...AuthoredPages, ["https://nobi.ai/gift-guides", null]],
+  });
+  assert.equal(result.shopSkipReason, "the live Shop sitemap could not be read");
+  assert.equal(result.skipReason, null);
+  assert.deepEqual(received.bodies.flatMap((body) => body.urlList), ["https://nobi.ai/gift-guides"]);
+});
+
+test("undocumented 204 responses are not reported as accepted notifications", async () => {
+  const { result } = await submitWith(ProductionEnv, { indexNowStatus: 204 });
+  assert.equal(result.failedBatchCount, 2);
+  assert.ok(result.batches.every((batch) => batch.status === "failed" && batch.httpStatus === 204));
+});

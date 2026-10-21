@@ -187,7 +187,7 @@ time the API built the data when a page has none.
 
 The last build step, `scripts/submit-indexnow.js`, tells IndexNow (Bing, Yandex
 and the other engines that share it) about new or changed Shop Nobi pages from
-`sitemap-shop.xml` and canonical `/tools/` pages from `sitemap-pages.xml`.
+`sitemap-shop.xml` and NEW canonical authored pages from `sitemap-pages.xml`, including hubs and blog articles.
 Shop pages are compared with the live sitemap by address and lastmod. Utilities
 are selected from the authored sitemap and compared with the live
 `utility-revisions.json`, which prerendering writes from each delivered HTML
@@ -196,17 +196,16 @@ metadata, disclosures, links and shared JS/CSS bundle fingerprints. A shared
 bundle change can conservatively notify all utilities, but unchanged builds
 and same-day content changes are distinguished without a build clock or git.
 Utility sitemap entries omit lastmod rather than invent a modification date.
-Unchanged pages and other authored marketing pages are not submitted. Only
+Existing nonutility authored pages are not replayed for date-only changes. Only
 canonical HTTPS destinations on nobi.ai are accepted. Duplicate addresses are
 removed before batching up to 10,000 URLs. The key file is `public/b20309cb84825b184afe0ffcf36630a7.txt`;
 the key is public by design. Only a Cloudflare Pages build of `main` from the
 real page data submits. Local builds, preview builds and builds with
-`SHOP_PAGES_API_URL` skip it. An unreadable live Shop sitemap skips submission;
-unknown or invalid live authored-sitemap/revision metadata visibly skips only
-utility notifications, preserving Shop notifications. A missing built file,
+`SHOP_PAGES_API_URL` skip it. An unreadable live Shop sitemap skips only Shop notifications;
+unknown live authored sitemap metadata skips authored notifications, while unknown utility revisions skip only utilities, preserving new nonutility and Shop notifications. A missing built file,
 incomplete revision artifact or failed submission remains visible in the build
 log. A missing referenced local image stops prerendering. The IndexNow step
-never fails the build and logs counts only. It runs before
+never fails the build and saves `dist/indexnow-submission-receipt.json` with exact public URLs, batch HTTP acceptance/failure and explicit skip reasons. No keys or response bodies are saved. Google sitemap submission is a separate authorized release operation; IndexNow does not notify Google or prove indexing. It runs before
 Cloudflare publishes the build, so an engine that fetches a new page in the
 first minutes can still see the last deploy. Acceptance acknowledges the
 notification; it does not prove indexing, search traffic or commission.

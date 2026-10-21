@@ -1,7 +1,7 @@
 // Runs last in the build: tells IndexNow about the Shop Nobi pages that are new or changed since the sitemap
-// the live site serves. It never fails the build and logs counts only.
+// the live site serves. It never fails the build and saves a public URL/status receipt.
 
-import { readFileSync } from "fs";
+import { readFileSync, writeFileSync } from "fs";
 import { join, dirname } from "path";
 import { fileURLToPath } from "url";
 import { buildIndexNowBodies, IndexNowBatchSize, isCanonicalSiteUrl, isUtilityUrl, readSitemapEntries, readSkipReason, selectChangedUrls } from "./shop-nobi-indexnow.js";
@@ -18,13 +18,33 @@ const IndexNowEndpoint = "https://api.indexnow.org/indexnow";
 const RequestTimeoutMs = 15000;
 
 /**
- * Submits new or changed Shop Nobi and authored utility addresses to IndexNow, in batches. The live site serves the last
+ * Submits new authored addresses and new or changed Shop Nobi and utility addresses to IndexNow, in batches. The live site serves the last
  * deploy while this build runs, so its sitemap is the one to compare against.
  *
  * @param {{env: object, distDir: string, liveSitemapUrl?: string, livePageSitemapUrl?: string, liveUtilityRevisionUrl?: string, endpointUrl?: string, batchSize?: number}} options The settings.
- * @returns {Promise<{skipReason: string | null, utilitySkipReason?: string, changedCount: number, batchCount: number, failedBatchCount: number}>} What happened.
+ * @returns {Promise<object>} Counts, stream skips and actual per-batch URL/status outcomes.
  */
-export async function submitChangedShopNobiPages({
+export async function submitChangedShopNobiPages(options) {
+  try {
+    const result = await selectAndSubmitPages(options);
+    saveReceipt(options.distDir, result);
+    return result;
+  } catch (error) {
+    saveReceipt(options.distDir, { ...skippedResult("build input or submission step error"), errorCode: error.code ?? "INVALID_BUILD_INPUT" });
+    throw error;
+  }
+}
+
+/** Saves outcomes without response bodies, request keys or authentication values. */
+function saveReceipt(distDir, result) {
+  writeFileSync(join(distDir, "indexnow-submission-receipt.json"), JSON.stringify({
+    engine: "IndexNow", recordedAt: new Date().toISOString(), ...result,
+    indexingConfirmed: false,
+  }, null, 2) + "\n");
+}
+
+/** Selects each independent notification stream before submitting deduplicated batches. */
+async function selectAndSubmitPages({
   env,
   distDir,
   liveSitemapUrl = LiveSitemapUrl,
@@ -38,30 +58,33 @@ export async function submitChangedShopNobiPages({
     return skippedResult(skipReason);
   }
   const previousEntries = await readLiveSitemapEntries(liveSitemapUrl);
-  if (previousEntries.size === 0) {
-    return skippedResult("the live sitemap could not be read");
-  }
+  const shopSkipReason = previousEntries.size ? null : "the live Shop sitemap could not be read";
   const currentEntries = readBuiltSitemapEntries(distDir, ShopNobiSitemapFile, isCanonicalSiteUrl);
-  const currentPageEntries = readBuiltSitemapEntries(distDir, PageSitemapFile, isUtilityUrl);
-  const utilityChanges = await selectUtilityChanges(distDir, currentPageEntries, livePageSitemapUrl, liveUtilityRevisionUrl);
+  const currentPageEntries = readBuiltSitemapEntries(distDir, PageSitemapFile, isCanonicalSiteUrl);
+  const previousPages = await readLiveSitemapEntries(livePageSitemapUrl);
+  const authoredSkipReason = previousPages.size ? null : "the live authored-page sitemap could not be read";
+  const newAuthoredUrls = authoredSkipReason ? [] : [...currentPageEntries.keys()].filter((url) => !isUtilityUrl(url) && !previousPages.has(url));
+  const utilities = new Map([...currentPageEntries].filter(([url]) => isUtilityUrl(url)));
+  const utilityChanges = await selectUtilityChanges(distDir, utilities, previousPages, liveUtilityRevisionUrl);
   const changedUrls = [...new Set([
-    ...selectChangedUrls(previousEntries, currentEntries),
+    ...(shopSkipReason ? [] : selectChangedUrls(previousEntries, currentEntries)),
+    ...newAuthoredUrls,
     ...utilityChanges.urls,
   ])];
   const bodies = buildIndexNowBodies(changedUrls, batchSize);
-  let failedBatchCount = 0;
+  const batches = [];
   for (const body of bodies) {
-    failedBatchCount += (await postBatch(endpointUrl, body)) ? 0 : 1;
+    batches.push({ urls: body.urlList, ...await postBatch(endpointUrl, body) });
   }
-  return { skipReason: null, changedCount: changedUrls.length, batchCount: bodies.length, failedBatchCount,
+  return { skipReason: shopSkipReason && authoredSkipReason ? "the live sitemaps could not be read" : null, ...(shopSkipReason ? { shopSkipReason } : {}), changedCount: changedUrls.length, batchCount: bodies.length, failedBatchCount: batches.filter((batch) => batch.status === "failed").length, batches,
+    ...(authoredSkipReason ? { authoredSkipReason } : {}),
     ...(utilityChanges.skipReason ? { utilitySkipReason: utilityChanges.skipReason } : {}) };
 }
 
 /** Compares actual delivered utility revisions; unknown live metadata skips this stream without replaying it. */
-async function selectUtilityChanges(distDir, currentPages, livePageSitemapUrl, liveUtilityRevisionUrl) {
+async function selectUtilityChanges(distDir, currentPages, previousPages, liveUtilityRevisionUrl) {
   const currentRevisions = readUtilityRevisions(readFileSync(join(distDir, UtilityRevisionFile), "utf8"));
   if ([...currentPages.keys()].some((url) => !currentRevisions.has(url))) throw new Error("Built utility revision metadata is incomplete.");
-  const previousPages = await readLiveSitemapEntries(livePageSitemapUrl);
   if (previousPages.size === 0) return { urls: [], skipReason: "the live authored-page sitemap could not be read" };
   try {
     const response = await fetch(liveUtilityRevisionUrl, { signal: AbortSignal.timeout(RequestTimeoutMs) });
@@ -95,7 +118,7 @@ async function readLiveSitemapEntries(liveSitemapUrl) {
   }
 }
 
-/** Sends one batch and returns whether IndexNow took it. 202 means it took it and checks the key later. */
+/** Sends one batch and records whether IndexNow took it. 202 means it took it and checks the key later. */
 async function postBatch(endpointUrl, body) {
   try {
     const response = await fetch(endpointUrl, {
@@ -104,20 +127,20 @@ async function postBatch(endpointUrl, body) {
       body: JSON.stringify(body),
       signal: AbortSignal.timeout(RequestTimeoutMs),
     });
-    if (response.status < 200 || response.status >= 300) {
+    if (![200, 202].includes(response.status)) {
       console.warn(`indexnow: a batch of ${body.urlList.length} URL(s) returned status ${response.status}.`);
-      return false;
+      return { status: "failed", httpStatus: response.status, reason: "HTTP_ERROR" };
     }
-    return true;
+    return { status: "accepted", httpStatus: response.status, reason: null };
   } catch (error) {
     console.warn(`indexnow: a batch of ${body.urlList.length} URL(s) failed: ${error.cause?.code ?? error.name}.`);
-    return false;
+    return { status: "failed", httpStatus: null, reason: "REQUEST_FAILED" };
   }
 }
 
 /** Builds the result for a build that submits nothing. */
 function skippedResult(skipReason) {
-  return { skipReason, changedCount: 0, batchCount: 0, failedBatchCount: 0 };
+  return { skipReason, changedCount: 0, batchCount: 0, failedBatchCount: 0, batches: [] };
 }
 
 /** Writes one line that says what the step did. */
@@ -126,9 +149,11 @@ function logResult(result) {
     console.log(`indexnow: skipped, ${result.skipReason}.`);
     return;
   }
+  if (result.shopSkipReason) console.warn(`indexnow: Shop notifications skipped, ${result.shopSkipReason}.`);
+  if (result.authoredSkipReason) console.warn(`indexnow: authored notifications skipped, ${result.authoredSkipReason}.`);
   if (result.utilitySkipReason) console.warn(`indexnow: utility notifications skipped, ${result.utilitySkipReason}.`);
   const sentCount = result.batchCount - result.failedBatchCount;
-  console.log(`indexnow: ${result.changedCount} new or changed Shop Nobi or utility URL(s); ${sentCount} of ${result.batchCount} batch(es) accepted.`);
+  console.log(`indexnow: ${result.changedCount} new or changed Shop Nobi or authored URL(s); ${sentCount} of ${result.batchCount} batch(es) accepted.`);
 }
 
 /** Runs the step. Any error is logged and the build goes on. */

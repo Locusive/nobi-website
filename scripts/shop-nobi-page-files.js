@@ -10,6 +10,7 @@ import { searchPagePath } from "../src/utils/shopNobiSearchPage.js";
 import { categoryPagePath } from "../src/utils/shopNobiCategoryPage.js";
 import { buildPrebuiltContentSeo, PrebuiltContentElementId, PrebuiltContentKind } from "../src/utils/shopNobiPrebuiltContent.js";
 import { IndexableRobots } from "../src/utils/previewImage.js";
+import { withAuthoredSearchPageCopy } from "./shop-nobi-editorial-copy.js";
 
 /**
  * Writes every prebuilt page in the plan. Nothing is written when there are no search pages.
@@ -30,7 +31,11 @@ export async function writePrebuiltPages(plan, distDir) {
   };
 
   for (const page of plan.searchPages) {
-    const content = { kind: PrebuiltContentKind.SearchPage, path: searchPagePath(page.slug), data: page };
+    const content = {
+      kind: PrebuiltContentKind.SearchPage,
+      path: searchPagePath(page.slug),
+      data: withAuthoredSearchPageCopy(page),
+    };
     const html = renderContent(content);
     writeFlatPageFile(distDir, content.path, html);
   }

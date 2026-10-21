@@ -68,6 +68,13 @@ pages start with `#ad` and the commission disclosure. Canonical GUIDs stay the
 same; refresh times do not become publication dates. This does not change search
 ranking, website cards, SEO previews or Web Stories.
 
+`scripts/shop-nobi-editorial-copy.js` supplies original buying guidance for the
+existing `sterling-silver-rings` page. The page writer applies its title,
+description, guide and FAQs together to rendered HTML, metadata, structured data
+and embedded browser content. Product facts, shopping links and snapshot dates
+stay intact. The shared source plan, Pinterest feeds and Web Stories retain
+their existing copy; the replacement applies only to this search page.
+
 `scripts/shop-nobi-pin-editorial.js` records reviewed page/product/photo pairs,
 with the reason and observed Pin. A reviewed page is omitted from Pinterest if
 its chosen product or photo changes or becomes unavailable, until another hero

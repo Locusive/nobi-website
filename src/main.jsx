@@ -26,6 +26,7 @@ const ShopPage           = lazy(() => import("./pages/ShopPage.jsx"));
 const ShopNobiMcp        = lazy(() => import("./pages/ShopNobiMcp.jsx"));
 const CoveCubbyComparison = lazy(() => import("./pages/CoveCubbyComparison.jsx"));
 const BaseusTwoScreens = lazy(() => import("./pages/BaseusTwoScreens.jsx"));
+const GiftGuides = lazy(() => import("./pages/GiftGuides.jsx"));
 const GiftChooser = lazy(() => import("./pages/GiftChooser.jsx"));
 const MarleySpoonCost = lazy(() => import("./pages/MarleySpoonCost.jsx"));
 const MindTheColorFit = lazy(() => import("./pages/MindTheColorFit.jsx"));
@@ -124,6 +125,7 @@ function App() {
           <Route path="/tools/cove-vs-cubby" element={<CoveCubbyComparison />} />
           <Route path="/tools/marley-spoon-cost" element={<MarleySpoonCost />} />
           <Route path="/tools/baseus-two-screens" element={<BaseusTwoScreens />} />
+          <Route path="/gift-guides" element={<GiftGuides />} />
           <Route path="/tools/gift-chooser" element={<GiftChooser />} />
           <Route path="/tools/mindthecolor-fit" element={<MindTheColorFit />} />
           <Route path="/election-night-survival-kit" element={<ElectionNight />} />

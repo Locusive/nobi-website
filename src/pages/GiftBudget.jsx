@@ -44,7 +44,7 @@ export default function GiftBudget() {
         <p className="mt-6 text-sm text-black/60 dark:text-white/70">This uses only the dollar estimates you enter. Actual retailer totals, taxes and delivery costs can differ. No tax rate, quote or delivery promise is supplied.</p>
       </section>
     </div>
-    <section className="mt-10"><h2 className="text-xl font-semibold">Ready to narrow the choices?</h2><p className="mt-3">Explore our <a href="/gift-guides" className="underline underline-offset-4">gift guides</a> or use the <a href="/tools/gift-chooser" className="underline underline-offset-4">gift chooser’s reviewed examples</a> with your item budget.</p></section>
+    <section className="mt-10"><h2 className="text-xl font-semibold">Ready to narrow the choices?</h2><p className="mt-3">For equal shares, uneven budgets and worked examples, read <a href="/blog/how-to-split-a-gift-budget" className="underline underline-offset-4">how to split a gift budget</a>.</p><p className="mt-3">Explore our <a href="/gift-guides" className="underline underline-offset-4">gift guides</a> or use the <a href="/tools/gift-chooser" className="underline underline-offset-4">gift chooser’s reviewed examples</a> with your item budget.</p></section>
   </div></PageLayout>;
 }
 

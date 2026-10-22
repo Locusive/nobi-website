@@ -10,6 +10,7 @@ import { loadPageRenderer } from "./page-renderer.js";
 import { CANONICAL_DESCRIPTION, LINKEDIN_URL } from "../src/constants/positioning.js";
 import { ShopNobiPageHead } from "../src/utils/shopNobiPage.js";
 import { AboutSeo } from "../src/content/about.js";
+import { ProductSchemaSummary, ProductSeo } from "../src/content/product.js";
 import { PRICING_OFFER, PRICING_SEO_DESCRIPTION } from "../src/constants/pricing.js";
 import { CoveCubbySeo } from "../src/content/coveCubbyComparison.js";
 import { MarleySpoonSeo } from "../src/content/marleySpoonCost.js";
@@ -63,11 +64,7 @@ const PAGES = [
       offers: PRICING_OFFER,
     }],
   },
-  {
-    path: "/product", title: "Product | Nobi",
-    description: "Everything Nobi does: AI-powered search and support, engagement triggered by visitor behavior, lead capture, merchandising and personalization, and an agent endpoint every AI can call.",
-    schema: [product("Nobi", "A single AI assistant for search, support, proactive engagement, lead capture, merchandising, and an MCP agent endpoint.", "/product")],
-  },
+  { ...ProductSeo, schema: [product("Nobi", ProductSchemaSummary, "/product")] },
   ShopNobiPageHead,
   ShopNobiMcpSeo,
   CoveCubbySeo,

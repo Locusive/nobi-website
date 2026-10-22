@@ -3,6 +3,7 @@ import { existsSync, readFileSync, readdirSync } from "node:fs";
 import { join } from "node:path";
 import { test } from "node:test";
 import { getSignupUrl } from "../src/utils/signupUrl.js";
+import { PRODUCT_SECTIONS } from "../src/constants/productSections.js";
 
 const Dist = new URL("../dist/", import.meta.url);
 
@@ -23,7 +24,7 @@ function bodyText(html) {
 for (const [path, heading] of [
   ["homepage.html", "Modern site search"],
   ["pricing.html", "Simple, usage-based pricing"],
-  ["product.html", "One assistant. Every job your website needs done."],
+  ["product.html", "Everything Nobi does"],
 ]) {
   test(`${path} serves real content, metadata, and valid bundled assets without JavaScript`, () => {
     const html = readPage(path);
@@ -70,7 +71,7 @@ for (const [path, label, sampleTexts] of [
     "red dress under $200", "Understood red", "Search anything on your site", "Results ordering", "What is your return window?",
     "crochet dress for a beach vacation",
   ]],
-  ["product.html", "Example of Nobi capturing a lead", ["does this run true to size?", "New lead captured", "Results ordering"]],
+  ["product.html", "Example of Nobi capturing a sales lead", ["red maxi dress for a wedding", "New leads", "Trending searches", "Search rules"]],
 ]) {
   test(`${path} marks its product demos as labeled pictures, so their sample text is not read as page content`, () => {
     const html = readPage(path);
@@ -82,6 +83,13 @@ for (const [path, label, sampleTexts] of [
     }
   });
 }
+
+test("every Product page section can be linked to by its anchor", () => {
+  const html = readPage("product.html");
+  for (const section of PRODUCT_SECTIONS) {
+    assert.equal((html.match(new RegExp(`<section id="${section.id}"`, "g")) || []).length, 1, `Missing section: ${section.id}`);
+  }
+});
 
 test("the Shop Nobi page shares its own link preview picture, and the other pages keep Nobi's", () => {
   const shopHtml = readPage("shop.html");

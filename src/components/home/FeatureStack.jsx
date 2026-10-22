@@ -2,9 +2,7 @@ import React, { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Search, Sparkles, CheckCircle2, EyeOff, ArrowRight, Search as SearchIcon } from "lucide-react";
 import { initFeatureScroll } from "./featureScroll";
-
-const NOISE_BG =
-  "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\")";
+import { FeatH2, FeatP, Kicker, NOISE_BG } from "./featurePanelParts";
 
 function AskAIPill() {
   return (
@@ -427,43 +425,6 @@ function SiteAnswersPanel() {
   );
 }
 
-function Kicker({ children }) {
-  return (
-    <span
-      style={{
-        display: "inline-block",
-        fontFamily: "'SF Mono',ui-monospace,Menlo,monospace",
-        fontSize: 13,
-        letterSpacing: "0.2em",
-        textTransform: "uppercase",
-        color: "rgba(255,255,255,0.7)",
-        fontWeight: 600,
-      }}
-    >
-      {children}
-    </span>
-  );
-}
-function FeatH2({ children, maxCh }) {
-  return (
-    <h2
-      style={{
-        margin: "16px 0 0",
-        fontSize: "clamp(40px,5vw,74px)",
-        fontWeight: 700,
-        letterSpacing: "-0.035em",
-        color: "#fff",
-        lineHeight: 1.0,
-        maxWidth: `${maxCh}ch`,
-      }}
-    >
-      {children}
-    </h2>
-  );
-}
-function FeatP({ children, color }) {
-  return <p style={{ margin: "22px 0 0", maxWidth: "42ch", fontSize: "clamp(17px,1.4vw,22px)", lineHeight: 1.5, color }}>{children}</p>;
-}
 function FeatPanel({ bg, radial, children }) {
   return (
     <div className="nb-snap nb-feat" style={{ boxSizing: "border-box", alignItems: "center", padding: 0, overflow: "hidden", background: bg }}>

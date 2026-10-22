@@ -3,7 +3,7 @@ import { ChevronRight, Gift } from "lucide-react";
 
 /**
  * A small centered badge at the top of /shop that leads shoppers to the gift guides, styled like the homepage's
- * conversion badge so it reads as part of the page.
+ * conversion badge. Its gradient ends are darkened in light mode and lightened in dark mode so the text keeps a 4.5:1 contrast.
  */
 export default function GiftGuidesLink() {
   return (
@@ -15,7 +15,7 @@ export default function GiftGuidesLink() {
         <Gift size={15} color="#6d3bff" strokeWidth={2.3} aria-hidden="true" />
         <span>
           Looking for a gift?{" "}
-          <span className="bg-gradient-to-r from-[#6d3bff] to-[#d541b3] bg-clip-text font-semibold text-transparent">Explore our gift guides</span>
+          <span className="bg-gradient-to-r from-[#6d3bff] to-[#b0308f] bg-clip-text font-semibold text-transparent dark:from-[#b9a2ff] dark:to-[#f08ad6]">Explore our gift guides</span>
         </span>
         <ChevronRight size={15} className="text-[#a49dba]" strokeWidth={2.3} aria-hidden="true" />
       </a>

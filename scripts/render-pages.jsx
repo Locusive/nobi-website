@@ -6,6 +6,7 @@ import Pricing from "../src/pages/Pricing.jsx";
 import Product from "../src/pages/Product.jsx";
 import ShopPage from "../src/pages/ShopPage.jsx";
 import Privacy from "../src/pages/Privacy.jsx";
+import About from "../src/pages/About.jsx";
 import Terms from "../src/pages/Terms.jsx";
 import CoveCubbyComparison from "../src/pages/CoveCubbyComparison.jsx";
 import MarleySpoonCost from "../src/pages/MarleySpoonCost.jsx";
@@ -27,6 +28,7 @@ import ShopNobiMcp from "../src/pages/ShopNobiMcp.jsx";
 import { ShopNobiMcpPath } from "../src/content/shopNobiMcp.js";
 
 const Pages = { "/": HomePage, "/pricing": Pricing, "/product": Product, "/shop": ShopPage, "/privacy": Privacy, "/terms": Terms };
+Pages["/about"] = About;
 Pages[CoveCubbyPath] = CoveCubbyComparison;
 Pages[MarleySpoonPath] = MarleySpoonCost;
 Pages[BaseusScreenPath] = BaseusTwoScreens;

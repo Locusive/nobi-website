@@ -9,6 +9,7 @@ import { renderPage, writePageFiles } from "./page-html.js";
 import { loadPageRenderer } from "./page-renderer.js";
 import { CANONICAL_DESCRIPTION, LINKEDIN_URL } from "../src/constants/positioning.js";
 import { ShopNobiPageHead } from "../src/utils/shopNobiPage.js";
+import { AboutSeo } from "../src/content/about.js";
 import { PRICING_OFFER, PRICING_SEO_DESCRIPTION } from "../src/constants/pricing.js";
 import { CoveCubbySeo } from "../src/content/coveCubbyComparison.js";
 import { MarleySpoonSeo } from "../src/content/marleySpoonCost.js";
@@ -39,6 +40,7 @@ const product = (name, description, path) => ({
 });
 
 const PAGES = [
+  AboutSeo,
   GiftBudgetSeo,
   GiftGuidesSeo,
   {

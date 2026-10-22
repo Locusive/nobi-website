@@ -165,7 +165,8 @@ test("related searches outside the build limit launch the original query instead
     const count = await prerenderWith({ body: data }, folder, { fileLimit: FileCountBeforePages + categoryAndOnePage });
     assert.equal(count, 1, "Only the source search page is built");
     const body = readBody(readFileSync(join(folder, "shop/s/black-leather-boots.html"), "utf8"));
-    const related = body.slice(body.indexOf(">Related searches</h2>"));
+    const relatedStart = body.indexOf(">Related searches</h2>");
+    const related = body.slice(relatedStart, body.indexOf("</section>", relatedStart));
     const links = [...related.matchAll(/<a href="([^"]+)"[^>]*>([^<]+)<\/a>/g)];
     assert.deepEqual(links.map(([, , title]) => title), ["Chelsea Boots", "Boots"], "Unknown and duplicate suggestions are omitted");
     const addresses = links.map(([, href]) => new URL(href, "https://nobi.ai"));

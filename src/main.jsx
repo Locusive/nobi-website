@@ -9,6 +9,7 @@ import HomePage from "./pages/HomePage.jsx";
 const Bot                = lazy(() => import("./pages/Bot.jsx"));
 const Terms              = lazy(() => import("./pages/Terms.jsx"));
 const Privacy            = lazy(() => import("./pages/Privacy.jsx"));
+const About              = lazy(() => import("./pages/About.jsx"));
 const FAQs               = lazy(() => import("./pages/FAQs.jsx"));
 const Blog               = lazy(() => import("./pages/Blog.jsx"));
 const BlogPost           = lazy(() => import("./pages/BlogPost.jsx"));
@@ -115,6 +116,7 @@ function App() {
           <Route path="/bot" element={<Bot />} />
           <Route path="/terms" element={<Terms />} />
           <Route path="/privacy" element={<Privacy />} />
+          <Route path="/about" element={<About />} />
           <Route path="/pricing" element={<Pricing />} />
           {["localhost", "127.0.0.1", "[::1]"].includes(window.location.hostname) && (
             <Route path="/pricing/ideas" element={<Navigate to="/pricing" replace />} />

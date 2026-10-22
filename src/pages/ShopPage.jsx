@@ -4,6 +4,7 @@ import { useLocation } from "react-router-dom";
 import AudioBuyingGuide from "../components/shopNobi/AudioBuyingGuide";
 import Nav from "../components/home/Nav";
 import AddYourStoreLink from "../components/shopNobi/AddYourStoreLink";
+import GiftGuidesLink from "../components/shopNobi/GiftGuidesLink";
 import ShopNobiCategoryPageContent from "../components/shopNobi/ShopNobiCategoryPageContent";
 import ShopNobiPopularSearches from "../components/shopNobi/ShopNobiPopularSearches";
 import ShopNobiSearchPageContent from "../components/shopNobi/ShopNobiSearchPageContent";
@@ -46,7 +47,7 @@ export default function ShopPage({ prebuiltContent: builtContent = null }) {
       <header>
         <Nav active="shop" pinned={false} />
       </header>
-      <nav aria-label="Shopping guides" className="mx-auto max-w-6xl px-4 pt-4 text-sm"><a href="/gift-guides" className="text-purple-700 underline underline-offset-4 focus-visible:outline focus-visible:outline-2 focus-visible:outline-purple-600 dark:text-purple-300">Looking for a gift? Explore our gift guides</a></nav>
+      <GiftGuidesLink />
       {place === PrebuiltContentPlace.AboveSearch && <PrebuiltContent content={prebuiltContent} />}
       <div ref={slotRef} className={place === PrebuiltContentPlace.BelowSearch ? CategorySearchClass : undefined} />
       {prebuiltContent?.kind === PrebuiltContentKind.SearchPage && prebuiltContent.data.slug === "audio-components" && <div className="mx-auto max-w-6xl px-4 pb-8 text-black dark:text-white"><AudioBuyingGuide /></div>}

@@ -1,4 +1,25 @@
-// Original editorial guidance for one existing search page. Product facts and the shared build plan stay intact.
+// Editorial corrections for selected search pages. Product facts and the shared build plan stay intact.
+
+const OriginalSuitcaseGuide = "Blue suitcases on this page range from about $70 to $495. The collection includes hard-shell carry-ons, expandable checked bags, and a few novelty suitcases with built-in record players.";
+const CorrectedSuitcaseGuide = "Shopping for travel luggage? Compare the carry-on and checked suitcases below. Suitcase-style record players are audio products, not bags for packing. Check each travel bag's dimensions and weight with the retailer before choosing.";
+const OriginalSuitcaseQuestion = "Do built-in tech suitcases affect durability?";
+const OriginalSuitcaseAnswer = "Tech features add weight and moving parts, so check reviews for long-term reliability.";
+
+/** Corrects the observed luggage/audio confusion without overwriting subsequently refreshed guidance. */
+function withSuitcaseClarification(page) {
+  const questionIndex = page.faq.findIndex(({ question, answer }) =>
+    question === OriginalSuitcaseQuestion && answer === OriginalSuitcaseAnswer);
+  if (page.guide[0] !== OriginalSuitcaseGuide || questionIndex < 0) return page;
+
+  return {
+    ...page,
+    guide: [CorrectedSuitcaseGuide, ...page.guide.slice(1)],
+    faq: page.faq.map((entry, index) => index === questionIndex ? {
+      question: "Are suitcase-style record players travel luggage?",
+      answer: "No. In a suitcase record player, the case holds the audio equipment. If you need a bag for a trip, choose a carry-on or checked-luggage listing and check that exact bag's dimensions and weight with the retailer.",
+    } : entry),
+  };
+}
 
 const SterlingSilverRingCopy = {
   title: "Sterling Silver Rings: Compare Styles, Fit & Finish",
@@ -37,6 +58,7 @@ const SterlingSilverRingCopy = {
  * @returns {object} The publication copy, or the original page when it has no editorial replacement.
  */
 export function withAuthoredSearchPageCopy(page) {
+  if (page.slug === "blue-suitcases") return withSuitcaseClarification(page);
   if (page.slug !== "sterling-silver-rings") {
     return page;
   }

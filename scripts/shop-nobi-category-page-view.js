@@ -3,6 +3,7 @@
 
 import { isSafeSlug, isText } from "./shop-nobi-search-page-view.js";
 import { PinBoardNameByTopLevel, readTopLevel } from "../src/utils/shopNobiPinBoard.js";
+import { selectClothingDiscoveries } from "../src/utils/shopNobiClothingDiscovery.js";
 
 const PopularPageLimit = 50;
 
@@ -59,6 +60,7 @@ export function buildCategoryPages(searchPages, categoryLimit) {
   return categoryPages.map(({ topLevel, isTopCategory, ...categoryPage }) => ({
     ...categoryPage,
     subcategories: isTopCategory ? listSubcategories(topLevel, categoryPages) : [],
+    ...(categoryPage.slug === "clothing" ? clothingDiscoveryData(categoryPage.pages) : {}),
   }));
 }
 
@@ -78,7 +80,14 @@ export function buildPopularSearches(searchPages, categoryPages) {
     categories: categoryPages.map((category) => ({ slug: category.slug, name: category.name })),
     pages,
     moreSearches,
+    ...clothingDiscoveryData(searchPages),
   };
+}
+
+/** Adds navigation data only when the actual page plan contains a selected destination. */
+function clothingDiscoveryData(pages) {
+  const clothingDiscoveries = selectClothingDiscoveries(pages);
+  return clothingDiscoveries.length ? { clothingDiscoveries } : {};
 }
 
 /**

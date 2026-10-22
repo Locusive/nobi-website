@@ -7,6 +7,7 @@ import AddYourStoreLink from "../components/shopNobi/AddYourStoreLink";
 import ShopNobiCategoryPageContent from "../components/shopNobi/ShopNobiCategoryPageContent";
 import ShopNobiPopularSearches from "../components/shopNobi/ShopNobiPopularSearches";
 import ShopNobiSearchPageContent from "../components/shopNobi/ShopNobiSearchPageContent";
+import ShopNobiFooter from "../components/shopNobi/ShopNobiFooter";
 import "../components/home/homepage.css";
 import "./ShopPage.css";
 import { useAdoptedAssistantContainer } from "../hooks/useAdoptedAssistantContainer";
@@ -52,6 +53,7 @@ export default function ShopPage({ prebuiltContent: builtContent = null }) {
       {prebuiltContent?.kind === PrebuiltContentKind.SearchPage && prebuiltContent.data.slug === "audio-components" && <div className="mx-auto max-w-6xl px-4 pb-8 text-black dark:text-white"><AudioBuyingGuide /></div>}
       <AddYourStoreLink isLinkHidden={liveResultsHaveDrawn} />
       {place === PrebuiltContentPlace.BelowSearch && <PrebuiltContent content={prebuiltContent} />}
+      <ShopNobiFooter />
     </div>
   );
 }

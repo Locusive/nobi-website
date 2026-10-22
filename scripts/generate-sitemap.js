@@ -11,6 +11,7 @@ import { MindTheColorPath } from "../src/content/mindTheColor.js";
 import { BaseusScreenPath } from "../src/content/baseusScreens.js";
 import { ElectionNightPath } from "../src/content/electionNight.js";
 import { ShopNobiMcpPath } from "../src/content/shopNobiMcp.js";
+import { AboutSeo } from "../src/content/about.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT       = join(__dirname, "..");
@@ -20,6 +21,7 @@ const SITEMAP_FILES = ["sitemap-pages.xml", "sitemap-shop.xml"];
 
 // Static routes — priority and changefreq per page type
 const STATIC_PAGES = [
+  { path: AboutSeo.path, priority: "0.3", changefreq: "monthly" },
   { path: "/tools/gift-budget", priority: "0.6", changefreq: "monthly" },
   { path: "/gift-guides", priority: "0.7", changefreq: "monthly" },
   { path: "/tools/gift-chooser",       priority: "0.6", changefreq: "monthly" },

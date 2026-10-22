@@ -3,7 +3,7 @@ export const ProductSeo = {
   path: "/product",
   title: "Product | Nobi",
   description:
-    "Everything Nobi does: AI site search, automated support, lead capture, search insights, and merchandising, with smaller and beta features listed at the end.",
+    "Everything Nobi does: AI site search, automated support, lead capture, search insights, and merchandising, with smaller and enterprise features listed at the end.",
 };
 
 /** The one-line summary of Nobi used in the Product page's structured data. */

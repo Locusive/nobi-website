@@ -9,7 +9,8 @@ const ALSO_IN_NOBI = [
   { title: "Custom actions", body: "Developers can let Nobi run actions on your site, like opening a booking form." },
 ];
 
-const IN_BETA = [
+// Enterprise features are the ones the Nobi team sets up for a store, unlike the rest of Nobi, which is self-service.
+const ENTERPRISE_FEATURES = [
   { title: "Product recommendations", body: "Related products on product pages and in the cart, chosen for the product being viewed." },
   { title: "Product page Q&A", body: "Past shopper questions and answers, searchable on each product page." },
   { title: "Cart assistant", body: "A message and product suggestions when a shopper adds to cart." },
@@ -26,13 +27,14 @@ function FeatureItem({ title, body }) {
   );
 }
 
-/** One titled column of features. */
-function FeatureColumn({ heading, items }) {
+/** One titled column of features. note is a short line under the title; the space is kept when it is empty so both columns line up. */
+function FeatureColumn({ heading, note, items }) {
   return (
     <div>
-      <h3 style={{ margin: 0, paddingBottom: 14, fontSize: 15, fontWeight: 700, letterSpacing: "0.16em", textTransform: "uppercase", color: "#6d3bff" }}>
+      <h3 style={{ margin: 0, fontSize: 15, fontWeight: 700, letterSpacing: "0.16em", textTransform: "uppercase", color: "#6d3bff" }}>
         {heading}
       </h3>
+      <p style={{ margin: "8px 0 14px", minHeight: 24, fontSize: 15.5, color: "#615b70" }}>{note}</p>
       <ul style={{ listStyle: "none", margin: 0, padding: 0 }}>
         {items.map((item) => (
           <FeatureItem key={item.title} {...item} />
@@ -42,7 +44,7 @@ function FeatureColumn({ heading, items }) {
   );
 }
 
-/** The closing list on the Product page: smaller features, and features still in beta. */
+/** The closing list on the Product page: smaller features, and enterprise features the Nobi team sets up. */
 export default function AlsoInNobi() {
   return (
     <section style={{ background: "#ffffff", padding: "clamp(96px,11vw,150px) clamp(24px,5vw,80px)" }}>
@@ -52,7 +54,7 @@ export default function AlsoInNobi() {
         </h2>
         <div className="nb-grid2" style={{ marginTop: "clamp(48px,6vw,72px)", display: "grid", gridTemplateColumns: "1fr 1fr", gap: "clamp(40px,6vw,96px)" }}>
           <FeatureColumn heading="Also in Nobi" items={ALSO_IN_NOBI} />
-          <FeatureColumn heading="In beta" items={IN_BETA} />
+          <FeatureColumn heading="Enterprise" note="Our team sets these up for you." items={ENTERPRISE_FEATURES} />
         </div>
       </div>
     </section>

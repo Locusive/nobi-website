@@ -2,13 +2,8 @@ import React from "react";
 import { FeatH2, FeatP, Kicker, NOISE_BG } from "../home/featurePanelParts";
 import { findProductSection } from "../../constants/productSections";
 
-/**
- * One full-screen colored section of the Product page, drawn like the homepage feature panels:
- * a label, a large headline and a short paragraph on the left, and a sample screen on the right.
- *
- * sectionId names the entry in PRODUCT_SECTIONS that supplies the anchor and the label.
- * bg is the base color, and radial is the glow layered over it.
- */
+/** One full-screen Product page section in the homepage panel style: text on the left, a sample on the right.
+ *  sectionId picks the PRODUCT_SECTIONS entry for the anchor and label; bg is the color and radial its glow. */
 export default function ProductSection({ sectionId, bg, radial, title, titleMaxCh, textColor, text, sample }) {
   const section = findProductSection(sectionId);
 

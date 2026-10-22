@@ -24,6 +24,64 @@ function mixedSuitcasePage() {
   };
 }
 
+/** Synthetic variants retain the same shopping fields while exercising gemstone/metal ambiguity. */
+function whiteGoldPage() {
+  const fixture = readFixturePageData().pages[0];
+  return {
+    ...fixture, slug: "14k-white-gold-statement-rings", title: "White Gold Statement Rings",
+    query: "14k white gold statement rings",
+    guide: ["14k white gold statement rings on this page are priced from $285 up to $2,309. They showcase bold designs such as clusters, twisted bands, signet shapes and gemstone settings, all crafted in white gold.", "Retain this additional guidance."],
+    faq: [{ question: "What size should I choose?", answer: "Check the exact retailer's measurements." }],
+    products: Array.from({ length: 19 }, (_, index) => ({ ...fixture.products[0],
+      name: index === 12 ? "14K Gold Cluster White Topaz Ring" : `Statement Ring ${index}`,
+      productVariantId: `fixture-ring-${index}`, url: `https://example.com/products/ring-${index}` })),
+  };
+}
+
+test("white-gold clarification agrees across HTML, FAQ schema and hydration without reclassifying any product", async (t) => {
+  const folder = mkdtempSync(new URL("../node_modules/.editorial-test-", import.meta.url));
+  t.after(() => rmSync(folder, { recursive: true, force: true }));
+  writeFileSync(join(folder, "index.html"), '<!doctype html><html><head><!--__PRERENDER_TITLE__--><!--__PRERENDER_DESC__--></head><body><div id="root"></div></body></html>');
+  const { pages } = buildSearchPages([whiteGoldPage(), readFixturePageData().pages[0]], 2);
+  const plan = { searchPages: pages, categoryPages: [], popularSearches: buildPopularSearches(pages, []) };
+  const original = structuredClone(plan);
+  await writePrebuiltPages(plan, folder);
+  const html = readFileSync(join(folder, "shop/s/14k-white-gold-statement-rings.html"), "utf8");
+  const published = readScriptJson(html, "shop-nobi-prebuilt-content").data;
+  const body = readBody(html).replaceAll("&#x27;", "&#39;");
+  assert.ok(!html.includes("all crafted in white gold"));
+  assert.match(published.guide[0], /that name alone does not establish that the ring's metal is white gold/);
+  assert.equal(published.faq.at(-1).question, "Does a white gemstone mean a ring is white gold?");
+  for (const text of [published.guide[0], published.faq.at(-1).question, published.faq.at(-1).answer]) {
+    assert.ok(body.includes(htmlEscape(text)), text);
+  }
+  const schema = readScriptJson(html, "page-schema").find((entry) => entry["@type"] === "FAQPage");
+  assert.deepEqual(schema.mainEntity, published.faq.map(({ question, answer }) =>
+    ({ "@type": "Question", name: question, acceptedAnswer: { "@type": "Answer", text: answer } })));
+  for (const [key, value] of Object.entries(original.searchPages[0])) {
+    if (!["guide", "faq"].includes(key)) assert.deepEqual(published[key], value, key);
+  }
+  assert.equal(published.products.length, 19);
+  assert.deepEqual(published.guide.slice(1), original.searchPages[0].guide.slice(1));
+  assert.deepEqual(published.faq.slice(0, -1), original.searchPages[0].faq);
+  assert.deepEqual(plan, original);
+  const other = readFileSync(join(folder, "shop/s/black-leather-boots.html"), "utf8");
+  assert.deepEqual(readScriptJson(other, "shop-nobi-prebuilt-content").data, original.searchPages[1]);
+});
+
+test("white-gold clarification preserves refreshed guidance and does not duplicate an existing FAQ", () => {
+  const refreshed = whiteGoldPage();
+  refreshed.guide[0] = "New verified metal guidance.";
+  assert.deepEqual(withAuthoredSearchPageCopy(refreshed), refreshed);
+  const page = whiteGoldPage();
+  const question = { question: "Does a white gemstone mean a ring is white gold?", answer: "Existing reviewed answer." };
+  page.faq.push(question);
+  const corrected = withAuthoredSearchPageCopy(page);
+  assert.equal(corrected.faq.length, page.faq.length);
+  assert.deepEqual(corrected.faq.at(-1), question);
+  assert.deepEqual(withAuthoredSearchPageCopy(corrected), corrected);
+});
+
 test("suitcase clarification agrees across HTML, FAQ schema and hydration while retaining every shopping field", async (t) => {
   const folder = mkdtempSync(new URL("../node_modules/.editorial-test-", import.meta.url));
   t.after(() => rmSync(folder, { recursive: true, force: true }));

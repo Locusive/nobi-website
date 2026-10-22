@@ -4,6 +4,23 @@ const OriginalSuitcaseGuide = "Blue suitcases on this page range from about $70 
 const CorrectedSuitcaseGuide = "Shopping for travel luggage? Compare the carry-on and checked suitcases below. Suitcase-style record players are audio products, not bags for packing. Check each travel bag's dimensions and weight with the retailer before choosing.";
 const OriginalSuitcaseQuestion = "Do built-in tech suitcases affect durability?";
 const OriginalSuitcaseAnswer = "Tech features add weight and moving parts, so check reviews for long-term reliability.";
+const OriginalWhiteGoldGuide = "14k white gold statement rings on this page are priced from $285 up to $2,309. They showcase bold designs such as clusters, twisted bands, signet shapes and gemstone settings, all crafted in white gold.";
+const WhiteGoldQuestion = {
+  question: "Does a white gemstone mean a ring is white gold?",
+  answer: "No. The stone's colour and the ring's metal are separate details. Check the exact variant's stated metal and colour rather than relying on the gemstone name or product photograph.",
+};
+
+/** Distinguishes gemstone names from metal specifications without changing any product classifications. */
+function withWhiteGoldClarification(page) {
+  if (page.guide[0] !== OriginalWhiteGoldGuide) return page;
+  const faq = page.faq.some(({ question }) => question === WhiteGoldQuestion.question)
+    ? page.faq : [...page.faq, { ...WhiteGoldQuestion }];
+  return {
+    ...page,
+    guide: ["Looking for white-gold metal? Check the exact variant's metal and colour in the retailer's details before choosing. A listing such as '14K Gold Cluster White Topaz Ring' names a white gemstone; that name alone does not establish that the ring's metal is white gold.", ...page.guide.slice(1)],
+    faq,
+  };
+}
 
 /** Corrects the observed luggage/audio confusion without overwriting subsequently refreshed guidance. */
 function withSuitcaseClarification(page) {
@@ -58,6 +75,7 @@ const SterlingSilverRingCopy = {
  * @returns {object} The publication copy, or the original page when it has no editorial replacement.
  */
 export function withAuthoredSearchPageCopy(page) {
+  if (page.slug === "14k-white-gold-statement-rings") return withWhiteGoldClarification(page);
   if (page.slug === "blue-suitcases") return withSuitcaseClarification(page);
   if (page.slug !== "sterling-silver-rings") {
     return page;

@@ -6,6 +6,7 @@ import Nav from "../components/home/Nav";
 import AddYourStoreLink from "../components/shopNobi/AddYourStoreLink";
 import GiftGuidesLink from "../components/shopNobi/GiftGuidesLink";
 import ShopNobiCategoryPageContent from "../components/shopNobi/ShopNobiCategoryPageContent";
+import ShopNobiClothingDiscovery from "../components/shopNobi/ShopNobiClothingDiscovery";
 import ShopNobiPopularSearches from "../components/shopNobi/ShopNobiPopularSearches";
 import ShopNobiSearchPageContent from "../components/shopNobi/ShopNobiSearchPageContent";
 import ShopNobiFooter from "../components/shopNobi/ShopNobiFooter";
@@ -54,6 +55,7 @@ export default function ShopPage({ prebuiltContent: builtContent = null }) {
       {prebuiltContent?.kind === PrebuiltContentKind.SearchPage && prebuiltContent.data.slug === "audio-components" && <div className="mx-auto max-w-6xl px-4 pb-8 text-black dark:text-white"><AudioBuyingGuide /></div>}
       <AddYourStoreLink isLinkHidden={liveResultsHaveDrawn} />
       {place === PrebuiltContentPlace.BelowSearch && <PrebuiltContent content={prebuiltContent} />}
+      <ShopNobiClothingDiscovery choices={prebuiltContent?.data.clothingDiscoveries} />
       <ShopNobiFooter />
     </div>
   );

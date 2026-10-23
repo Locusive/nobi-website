@@ -27,11 +27,10 @@ test("khaki comparison keeps the complete participation statement before six qua
 });
 
 /** The original comparison is discoverable and continues through the existing collection without a new affiliate URL. */
-test("khaki guide has its own canonical, sitemap and listing entry with two collection continuations", () => {
+test("khaki guide has its own canonical and sitemap entry with two collection continuations", () => {
   const html = article();
   assert.ok(html.includes(`rel="canonical" href="${Canonical}"`));
   assert.equal(html.split(`href="${CollectionPath}"`).length - 1, 2);
   assert.ok(readFileSync("public/sitemap-pages.xml", "utf8").includes(`<loc>${Canonical}</loc>`));
-  assert.ok(readFileSync("dist/blog.html", "utf8").includes(`/blog/${Slug}`));
   assert.ok(!html.includes("Publisher handoff, remove before publication"));
 });

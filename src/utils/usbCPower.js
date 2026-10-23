@@ -28,8 +28,8 @@ export function checkUsbCPower(input) {
     const allocation = values[`allocation${number}`];
     return { number, target, allocation, shortfall: target === null || allocation === null ? null : Math.max(0, target - allocation) };
   });
-  const inconsistent = values.total !== null && devices.every(device => device.allocation !== null)
-    && devices.reduce((sum, device) => sum + device.allocation, 0) > values.total;
+  const knownOutput = devices.reduce((sum, device) => sum + (device.allocation ?? 0), 0);
+  const inconsistent = values.total !== null && knownOutput > values.total;
   const unknown = devices.some(device => device.target === null || device.allocation === null);
   const noPositiveTarget = !devices.some(device => device.target > 0);
   const status = inconsistent ? "inconsistent" : unknown || noPositiveTarget ? "unknown"

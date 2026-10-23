@@ -26,6 +26,15 @@ test("contradictory simultaneous outputs cannot produce a passing number check",
   assert.equal(check({ ...known, total: "" }).status, "shortfall");
   assert.equal(check({ ...known, target1: "0.3", target2: "0", allocation1: "0.1", allocation2: "0.2", total: "0.3" }).status, "shortfall");
 });
+test("known port outputs expose contradictions even when another output is unknown", () => {
+  for (const allocations of [
+    { allocation1: "40", allocation2: "" },
+    { allocation1: "", allocation2: "40" },
+  ]) assert.equal(check({ ...known, ...allocations, total: "35" }).status, "inconsistent");
+  assert.equal(check({ ...known, allocation1: "35", allocation2: "", total: "35" }).status, "unknown");
+  assert.equal(check({ ...known, allocation1: "", allocation2: "", total: "0" }).status, "unknown");
+  assert.equal(check({ ...known, allocation1: "0.1", allocation2: "", total: "0" }).status, "inconsistent");
+});
 test("invalid and out-of-range watts are rejected on every control", () => {
   for (const key of Object.keys(EmptyPowerInput)) {
     for (const value of ["-1", "NaN", "Infinity", "1e2", "3.14", "2W", ".5", null, "10000.1", "9007199254740991"]) {

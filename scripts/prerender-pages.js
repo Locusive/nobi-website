@@ -17,6 +17,7 @@ import { isUtilityUrl } from "./shop-nobi-indexnow.js";
 import { buildUtilityRevision, UtilityRevisionFile } from "./utility-content-revision.js";
 
 import { BaseusScreenSeo } from "../src/content/baseusScreens.js";
+import { DuvetSizeSeo } from "../src/utils/duvetSize.js";
 import { GiftBudgetSeo } from "../src/utils/giftBudget.js";
 import { GiftGuidesSeo } from "../src/content/giftGuides.js";
 import { GiftChooserSeo } from "../src/content/giftChooserProducts.js";
@@ -41,6 +42,7 @@ const product = (name, description, path) => ({
 
 const PAGES = [
   AboutSeo,
+  DuvetSizeSeo,
   GiftBudgetSeo,
   GiftGuidesSeo,
   {

@@ -15,6 +15,7 @@ import { CoveCubbyPath } from "../src/content/coveCubbyComparison.js";
 
 import BaseusTwoScreens from "../src/pages/BaseusTwoScreens.jsx";
 import UsbCPowerCheck from "../src/pages/UsbCPowerCheck.jsx";
+import PhoneCaseCheck from "../src/pages/PhoneCaseCheck.jsx";
 import GiftBudget from "../src/pages/GiftBudget.jsx";
 import GiftGuides from "../src/pages/GiftGuides.jsx";
 import GiftChooser from "../src/pages/GiftChooser.jsx";
@@ -34,6 +35,7 @@ Pages[CoveCubbyPath] = CoveCubbyComparison;
 Pages[MarleySpoonPath] = MarleySpoonCost;
 Pages[BaseusScreenPath] = BaseusTwoScreens;
 Pages["/tools/usb-c-power-check"] = UsbCPowerCheck;
+Pages["/tools/phone-case-check"] = PhoneCaseCheck;
 Pages["/tools/gift-budget"] = GiftBudget;
 Pages["/gift-guides"] = GiftGuides;
 Pages[GiftChooserSeo.path] = GiftChooser;

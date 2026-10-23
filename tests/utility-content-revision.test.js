@@ -6,7 +6,7 @@ import { test } from "node:test";
 import { buildUtilityRevision, readUtilityRevisions, UtilityRevisionFile } from "../scripts/utility-content-revision.js";
 
 const Dist = new URL("../dist/", import.meta.url);
-const UtilityUrls = ["cove-vs-cubby", "marley-spoon-cost", "baseus-two-screens", "mindthecolor-fit", "gift-chooser", "gift-budget", "usb-c-power-check"].map((slug) => `https://nobi.ai/tools/${slug}`);
+const UtilityUrls = ["cove-vs-cubby", "marley-spoon-cost", "baseus-two-screens", "mindthecolor-fit", "gift-chooser", "gift-budget", "usb-c-power-check", "phone-case-check"].map((slug) => `https://nobi.ai/tools/${slug}`);
 
 test("revisions are stable without git and cover rendered facts, metadata, shared bundles and local image bytes", () => {
   const folder = mkdtempSync(join(tmpdir(), "utility-revision-"));

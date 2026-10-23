@@ -23,6 +23,7 @@ export default function ShopNobiSearchPageContent({ page }) {
       {page.guide.map((paragraph, index) => (
         <p key={index} className="mt-3 max-w-3xl text-black/70 dark:text-white/70">{paragraph}</p>
       ))}
+      <GuideSources sources={page.guideSources ?? []} />
       <ul className="mt-6 grid grid-cols-2 gap-6 sm:grid-cols-3 lg:grid-cols-4">
         {page.products.map((product, index) => (
           <ProductCard key={index} product={product} position={index + FirstProductPosition} query={page.query} slug={page.slug} />
@@ -32,6 +33,18 @@ export default function ShopNobiSearchPageContent({ page }) {
       <WebStoryLink storyPath={page.storyPath} />
       <RelatedSearches related={page.related} />
     </main>
+  );
+}
+
+/** Optional references for the exact product facts in authored guidance. */
+function GuideSources({ sources }) {
+  if (sources.length === 0) return null;
+  return (
+    <ul aria-label="Guidance sources" className="mt-3 max-w-3xl text-sm text-black/60 dark:text-white/60">
+      {sources.map(({ label, url }) => (
+        <li key={url}><a href={url} target="_blank" rel="noopener noreferrer nofollow" className="underline underline-offset-2">{label}</a></li>
+      ))}
+    </ul>
   );
 }
 

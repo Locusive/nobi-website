@@ -1,11 +1,11 @@
 /** The Product page's search metadata, shared by the page and the build that prerenders it. */
 export const ProductSeo = {
   path: "/product",
-  title: "Product | Nobi",
+  title: "All Features | Nobi",
   description:
-    "Everything Nobi does: AI site search, automated support, lead capture, search insights, and merchandising, with smaller and enterprise features listed at the end.",
+    "Every Nobi feature in one place: AI search, merchandising and search analytics, an assistant for support and lead capture, and ecommerce features from product pages to the cart.",
 };
 
 /** The one-line summary of Nobi used in the Product page's structured data. */
 export const ProductSchemaSummary =
-  "AI site search for any website, with automated support, lead capture, search insights, and merchandising.";
+  "AI site search for any website, with an AI assistant for support and lead capture, and features for online stores.";

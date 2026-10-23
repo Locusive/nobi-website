@@ -12,6 +12,12 @@
 .nb-nav-links > a:hover { color: #1b1626; }
 .nb-nav-links > a:hover::after { transform: scaleX(1); }
 #nb-see { transition: background .2s ease, box-shadow .2s ease; }
+
+/* Product menu: hover and keyboard focus for its links and its Product button. */
+.nb-menu-trigger { cursor: pointer; }
+.nb-menu-link { transition: background .15s ease; }
+.nb-menu-link:hover { background: #f5f3fb; }
+.nb-menu-link:focus-visible, .nb-menu-trigger:focus-visible { outline: 2px solid #6d3bff; outline-offset: 2px; }
 #nb-see:hover { background: #5a2fe0; box-shadow: 0 16px 36px -10px rgba(76,40,130,0.75); }
 
 #nb-rail { position: fixed; right: 20px; top: 50%; transform: translateY(-50%); z-index: 30; display: flex; flex-direction: column; gap: 11px; align-items: center; transition: opacity .3s ease; }
@@ -127,3 +133,17 @@ details.nb-faq[open] > summary .nb-faq-chev { transform: rotate(180deg); }
 .nb-demo-own-button:disabled { opacity: 0.6; cursor: default; }
 .nb-demo-own-link:focus-visible, .nb-demo-own-button:focus-visible { outline: 3px solid #6d3bff; outline-offset: 2px; }
 .nb-demo-own-error { margin: 0; font-size: 13.5px; color: #c0263b; text-align: center; }
+
+/* Feature pages: hover and keyboard focus for tiles, links and the opening panel's buttons; steps stack on phones. */
+.nb-feature-tile { transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease; }
+.nb-feature-tile:hover { transform: translateY(-3px); box-shadow: 0 22px 40px -26px rgba(60,40,110,0.45); border-color: rgba(109,59,255,0.28) !important; }
+.nb-hero-action { transition: transform .18s ease; }
+.nb-hero-action:hover { transform: translateY(-1px); }
+.nb-feature-tile:focus-visible, .nb-proof-link:focus-visible, .nb-hero-action:focus-visible { outline: 2px solid #ffc07a; outline-offset: 3px; }
+@media (max-width: 820px) {
+  .nb-steps { grid-template-columns: 1fr !important; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .nb-feature-tile, .nb-hero-action, .nb-menu-link { transition: none; }
+  .nb-feature-tile:hover, .nb-hero-action:hover { transform: none; }
+}

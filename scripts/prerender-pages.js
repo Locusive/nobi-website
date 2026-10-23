@@ -11,6 +11,8 @@ import { CANONICAL_DESCRIPTION, LINKEDIN_URL } from "../src/constants/positionin
 import { ShopNobiPageHead } from "../src/utils/shopNobiPage.js";
 import { AboutSeo } from "../src/content/about.js";
 import { ProductSchemaSummary, ProductSeo } from "../src/content/product.js";
+import { FEATURES, buildFeaturePath } from "../src/content/features.js";
+import { FEATURE_PAGES } from "../src/content/featurePages.js";
 import { PRICING_OFFER, PRICING_SEO_DESCRIPTION } from "../src/constants/pricing.js";
 import { CoveCubbySeo } from "../src/content/coveCubbyComparison.js";
 import { MarleySpoonSeo } from "../src/content/marleySpoonCost.js";
@@ -65,6 +67,11 @@ const PAGES = [
     }],
   },
   { ...ProductSeo, schema: [product("Nobi", ProductSchemaSummary, "/product")] },
+  ...FEATURES.map((feature) => {
+    const path = buildFeaturePath(feature.slug);
+    const { seoTitle, seoDescription } = FEATURE_PAGES[feature.slug];
+    return { path, title: seoTitle, description: seoDescription, schema: [product(`Nobi ${feature.name}`, seoDescription, path)] };
+  }),
   ShopNobiPageHead,
   ShopNobiMcpSeo,
   CoveCubbySeo,
@@ -86,10 +93,8 @@ const PAGES = [
   },
 ];
 
-// The old standalone capability pages (better-search, automated-support,
-// ai-agents, custom-actions, lead-capture) were consolidated into /product
-// and now 301-redirect there — see public/_redirects. Don't re-add them
-// here; their prerendered meta would compete with /product's.
+// The old standalone capability pages now 301-redirect to their feature pages under /product (see public/_redirects).
+// Don't re-add the old addresses here; their prerendered meta would compete with the feature pages.
 
 /** Write both Cloudflare URL forms with complete page content. */
 async function main() {

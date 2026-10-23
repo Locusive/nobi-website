@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import ScrollLink from "./ScrollLink";
+import ProductMenu from "./ProductMenu";
+import MobileProductMenu from "./MobileProductMenu";
 import { Menu, X } from "lucide-react";
 import { useDemoForm } from "../../context/DemoFormContext";
 import { trackDemoFormOpened } from "../../utils/usageSignals";
@@ -81,11 +83,7 @@ export default function Nav({ active, pinned = true }) {
             whiteSpace: "nowrap",
           }}
         >
-          {SHOW_PRODUCT_LINK && (
-            <ScrollLink to="/product" style={linkStyle("product")}>
-              Product
-            </ScrollLink>
-          )}
+          {SHOW_PRODUCT_LINK && <ProductMenu linkStyle={linkStyle("product")} />}
           <ScrollLink to="/pricing" style={linkStyle("pricing")}>
             Pricing
           </ScrollLink>
@@ -168,18 +166,12 @@ export default function Nav({ active, pinned = true }) {
               padding: 12,
               boxShadow: "0 18px 44px rgba(60,40,110,0.20)",
               minWidth: 220,
+              maxHeight: "calc(100vh - 110px)",
+              overflowY: "auto",
               zIndex: 5,
             }}
           >
-            {SHOW_PRODUCT_LINK && (
-              <ScrollLink
-                to="/product"
-                onClick={() => setMobileOpen(false)}
-                style={{ ...linkStyle("product"), fontSize: 16, padding: "15px 16px", borderRadius: 12 }}
-              >
-                Product
-              </ScrollLink>
-            )}
+            {SHOW_PRODUCT_LINK && <MobileProductMenu linkStyle={linkStyle("product")} onChoose={() => setMobileOpen(false)} />}
             <ScrollLink
               to="/pricing"
               onClick={() => setMobileOpen(false)}

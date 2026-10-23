@@ -4,6 +4,8 @@ import { StaticRouter } from "react-router-dom";
 import HomePage from "../src/pages/HomePage.jsx";
 import Pricing from "../src/pages/Pricing.jsx";
 import Product from "../src/pages/Product.jsx";
+import { FeaturePageContent } from "../src/pages/FeaturePage.jsx";
+import { FEATURES, buildFeaturePath } from "../src/content/features.js";
 import ShopPage from "../src/pages/ShopPage.jsx";
 import Privacy from "../src/pages/Privacy.jsx";
 import About from "../src/pages/About.jsx";
@@ -38,6 +40,9 @@ Pages[GiftChooserSeo.path] = GiftChooser;
 Pages[MindTheColorPath] = MindTheColorFit;
 Pages[ElectionNightPath] = ElectionNight;
 Pages[ShopNobiMcpPath] = ShopNobiMcp;
+for (const feature of FEATURES) {
+  Pages[buildFeaturePath(feature.slug)] = () => <FeaturePageContent slug={feature.slug} />;
+}
 
 /** Render the same components visitors see, without browser APIs or effects. */
 export function renderPageBody(path) {

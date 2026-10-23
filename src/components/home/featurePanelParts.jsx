@@ -25,10 +25,11 @@ export function Kicker({ children }) {
   );
 }
 
-/** The large panel headline. maxCh caps the line length so the headline wraps into a tight block. */
-export function FeatH2({ children, maxCh }) {
+/** The large panel headline. maxCh caps the line length so the headline wraps into a tight block.
+ *  as picks the heading level, so a page's opening panel can hold its one h1. */
+export function FeatH2({ children, maxCh, as: Heading = "h2" }) {
   return (
-    <h2
+    <Heading
       style={{
         margin: "16px 0 0",
         fontSize: "clamp(40px,5vw,74px)",
@@ -40,7 +41,7 @@ export function FeatH2({ children, maxCh }) {
       }}
     >
       {children}
-    </h2>
+    </Heading>
   );
 }
 

@@ -73,7 +73,7 @@ test("one blank-form submission exposes every required field independently of un
   assert.equal(missingUnit["A.width"], undefined);
   assert.equal(missingUnit["A.length"], undefined);
 });
-test("completion uses fixed fields once, excludes invalid compares and normal automated/local QA", () => {
+test("completion counts real production once and excludes invalid, preview, explicit QA and automated visits", () => {
   const browser = makeBrowser({ pageUrl: "https://nobi.ai/tools/duvet-cover-size?utm_source=google" });
   const record = createDuvetCompletionReporter(browser);
   record({ errors: { width: "missing" } }); assert.equal(browser.beacons.length, 0);
@@ -84,9 +84,21 @@ test("completion uses fixed fields once, excludes invalid compares and normal au
   assert.equal(event.details.toolId, "duvet_cover_size"); assert.equal(event.details.action, "compare_dimensions");
   assert.ok(!JSON.stringify(event).includes('"width"'));
   assert.ok(!JSON.stringify(event).includes('"comparisons"'));
-  for (const options of [{ pageUrl: "http://127.0.0.1/tools/duvet-cover-size" }, { userAgent: "Googlebot/2.1" }, { webdriver: true }]) {
-    const qa = makeBrowser(options); createDuvetCompletionReporter(qa)(result); assert.equal(qa.beacons.length, 0);
+  for (const options of [
+    { pageUrl: "http://127.0.0.1/tools/duvet-cover-size" },
+    { pageUrl: "https://6d59bd66.nobi-website.pages.dev/tools/duvet-cover-size" },
+    { pageUrl: "https://feature-duvet-dimension-checker.nobi-website.pages.dev/tools/duvet-cover-size" },
+    { pageUrl: "https://other.example/tools/duvet-cover-size" },
+    { pageUrl: "http://nobi.ai/tools/duvet-cover-size" },
+    { pageUrl: "https://nobi.ai/tools/duvet-cover-size?nobi_qa=1&utm_source=google" },
+    { pageUrl: "https://www.nobi.ai/tools/duvet-cover-size?nobi_qa=1" },
+    { pageUrl: "https://nobi.ai/tools/duvet-cover-size?nobi_qa=0&nobi_qa=1" },
+    { userAgent: "Googlebot/2.1" }, { webdriver: true },
+  ]) {
+    const qa = makeBrowser(options); createDuvetCompletionReporter(qa)(result); assert.equal(qa.beacons.length, 0, JSON.stringify(options));
   }
+  const www = makeBrowser({ pageUrl: "https://www.nobi.ai/tools/duvet-cover-size?nobi_qa=0" });
+  createDuvetCompletionReporter(www)(result); assert.equal(www.beacons.length, 1);
 });
 test("internal handoff retains incoming acquisition tags and no measurement parameters", () => {
   const path = duvetShoppingPath('?utm_source=google&utm_medium=organic&width=90&result=same');

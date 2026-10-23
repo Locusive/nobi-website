@@ -19,6 +19,7 @@ import { buildUtilityRevision, UtilityRevisionFile } from "./utility-content-rev
 import { BaseusScreenSeo } from "../src/content/baseusScreens.js";
 import { DuvetSizeSeo } from "../src/utils/duvetSize.js";
 import { UsbCPowerSeo } from "../src/utils/usbCPower.js";
+import { PhoneCaseSeo } from "../src/utils/phoneCaseChecklist.js";
 import { GiftBudgetSeo } from "../src/utils/giftBudget.js";
 import { GiftGuidesSeo } from "../src/content/giftGuides.js";
 import { GiftChooserSeo } from "../src/content/giftChooserProducts.js";
@@ -45,6 +46,7 @@ const PAGES = [
   AboutSeo,
   DuvetSizeSeo,
   UsbCPowerSeo,
+  PhoneCaseSeo,
   GiftBudgetSeo,
   GiftGuidesSeo,
   {

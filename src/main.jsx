@@ -29,6 +29,7 @@ const CoveCubbyComparison = lazy(() => import("./pages/CoveCubbyComparison.jsx")
 const BaseusTwoScreens = lazy(() => import("./pages/BaseusTwoScreens.jsx"));
 const DuvetCoverSize = lazy(() => import("./pages/DuvetCoverSize.jsx"));
 const UsbCPowerCheck = lazy(() => import("./pages/UsbCPowerCheck.jsx"));
+const PhoneCaseCheck = lazy(() => import("./pages/PhoneCaseCheck.jsx"));
 const GiftBudget = lazy(() => import("./pages/GiftBudget.jsx"));
 const GiftGuides = lazy(() => import("./pages/GiftGuides.jsx"));
 const GiftChooser = lazy(() => import("./pages/GiftChooser.jsx"));
@@ -132,6 +133,7 @@ function App() {
           <Route path="/tools/baseus-two-screens" element={<BaseusTwoScreens />} />
           <Route path="/tools/duvet-cover-size" element={<DuvetCoverSize />} />
           <Route path="/tools/usb-c-power-check" element={<UsbCPowerCheck />} />
+          <Route path="/tools/phone-case-check" element={<PhoneCaseCheck />} />
           <Route path="/tools/gift-budget" element={<GiftBudget />} />
           <Route path="/gift-guides" element={<GiftGuides />} />
           <Route path="/tools/gift-chooser" element={<GiftChooser />} />

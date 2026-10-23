@@ -65,6 +65,14 @@ test("positive bounded decimal dimensions, explicit units and basis are required
   const partial = input(); partial.covers.push({ id: "B", ...row("80", "") });
   assert.ok(compareDuvetDimensions(partial).errors["B.length"]);
 });
+test("one blank-form submission exposes every required field independently of unit selection", () => {
+  const errors = compareDuvetDimensions(emptyDuvetInput()).errors;
+  assert.deepEqual(Object.keys(errors), ["insert.width", "insert.length", "insert.unit", "insert.basis", "A.width", "A.length", "A.unit", "A.basis"]);
+  const missingUnit = compare(row("90", "94", "")).errors;
+  assert.ok(missingUnit["A.unit"]);
+  assert.equal(missingUnit["A.width"], undefined);
+  assert.equal(missingUnit["A.length"], undefined);
+});
 test("completion uses fixed fields once, excludes invalid compares and normal automated/local QA", () => {
   const browser = makeBrowser({ pageUrl: "https://nobi.ai/tools/duvet-cover-size?utm_source=google" });
   const record = createDuvetCompletionReporter(browser);

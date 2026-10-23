@@ -372,3 +372,13 @@ labels once per page mount after a valid comparison; normal local/crawler QA
 is excluded. The internal shopping link retains existing acquisition tags and
 a fixed tool marker, never dimensions. Event persistence and later report
 completeness remain separate from the local delivery tests.
+
+## USB-C shared power worksheet
+
+`/tools/usb-c-power-check` compares two entered device targets with documented
+simultaneous port outputs in integer tenths of a watt. Unknown outputs remain
+unknown; the stated total never supplies a power split. Source examples apply
+only to Apple’s named 35W dual-port adapter. The worksheet does not certify
+compatibility, fast charging or safety. Inputs stay in component memory, with
+no storage or input telemetry. Static controls remain disabled until JavaScript
+is ready, avoiding a fallback form submission of the entered values.

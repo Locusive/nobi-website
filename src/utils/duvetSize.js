@@ -13,25 +13,26 @@ export function addDuvetCover(covers) {
   return id ? [...covers, { id, ...EmptyMeasurement }].sort((a, b) => a.id.localeCompare(b.id)) : covers;
 }
 
-/** Parse hundredths of an entered unit, then normalize to exact integer micrometres. */
-function normalizeMeasurement(value, unit) {
+/** Validate positive decimal syntax independently of the later unit selection. */
+function readHundredths(value) {
   if (typeof value !== "string" || !/^\d{1,6}(?:\.\d{1,2})?$/.test(value.trim())) return null;
   const [whole, decimal = ""] = value.trim().split(".");
   const hundredths = Number(whole) * 100 + Number(decimal.padEnd(2, "0"));
-  return hundredths > 0 && Object.hasOwn(DuvetUnits, unit) ? hundredths * DuvetUnits[unit] / 100 : null;
+  return hundredths > 0 ? hundredths : null;
 }
 
 /** Validate one complete active row, keeping unknown measurement provenance visible. */
 function readDimensions(row, id, errors) {
   const source = row || {};
-  if (!Object.hasOwn(DuvetUnits, source.unit)) errors[`${id}.unit`] = "Choose inches or centimetres explicitly.";
-  if (!Object.hasOwn(DuvetBases, source.basis)) errors[`${id}.basis`] = "Choose where the measurements came from, or Not sure.";
   const dimensions = {};
   for (const axis of ["width", "length"]) {
-    const normalized = normalizeMeasurement(source[axis], source.unit);
-    if (normalized === null && Object.hasOwn(DuvetUnits, source.unit)) errors[`${id}.${axis}`] = "Enter a positive number, up to six whole digits and two decimals. Use 86.5 for 86½.";
-    dimensions[axis] = normalized;
+    const hundredths = readHundredths(source[axis]);
+    if (hundredths === null) errors[`${id}.${axis}`] = "Enter a positive number, up to six whole digits and two decimals. Use 86.5 for 86½.";
+    dimensions[axis] = hundredths !== null && Object.hasOwn(DuvetUnits, source.unit)
+      ? hundredths * DuvetUnits[source.unit] / 100 : null;
   }
+  if (!Object.hasOwn(DuvetUnits, source.unit)) errors[`${id}.unit`] = "Choose inches or centimetres explicitly.";
+  if (!Object.hasOwn(DuvetBases, source.basis)) errors[`${id}.basis`] = "Choose where the measurements came from, or Not sure.";
   return { ...dimensions, unit: source.unit, basis: source.basis, enteredWidth: source.width, enteredLength: source.length };
 }
 

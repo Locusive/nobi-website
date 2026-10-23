@@ -45,3 +45,37 @@ test("pages in the mature category never reach the build, whatever the API sends
   ];
   assert.deepEqual(keepAllowedPages(pages).map((page) => page?.slug ?? null), ["boots", "no-category", null], "A malformed entry is left for the later checks");
 });
+
+/** Builds the public page shape used by the reversible teak snippet experiment. */
+function makeTeakSnippetPage(changes = {}) {
+  return {
+    slug: "teak-outdoor-furniture-sets",
+    title: "Best Teak Outdoor Furniture Sets from Top Stores",
+    description: "Compare the best teak outdoor furniture sets from top stores in one place, classic durability for outdoor living.",
+    breadcrumbs: [], faq: [], products: [],
+    ...changes,
+  };
+}
+
+test("the observed teak page describes dining and conversation choices in its search snippet", () => {
+  const page = makeTeakSnippetPage();
+  const originalPage = structuredClone(page);
+  const seo = buildSearchPageSeo(page);
+  assert.equal(seo.title, "Teak Outdoor Furniture Sets: Dining & Conversation | Shop Nobi");
+  assert.equal(seo.description, "Compare teak outdoor conversation and sofa sets, plus teak-and-aluminum extendable dining options. Check the listed dimensions and included pieces.");
+  assert.equal(seo.path, "/shop/s/teak-outdoor-furniture-sets");
+  assert.deepEqual(page, originalPage, "The visible heading and source page data remain intact");
+});
+
+test("a different page or refreshed teak copy keeps its own search snippet", () => {
+  for (const changes of [
+    { slug: "teak-garden-furniture" },
+    { title: "New teak dining selection" },
+    { description: "A refreshed selection from the retailer." },
+  ]) {
+    const page = makeTeakSnippetPage(changes);
+    const seo = buildSearchPageSeo(page);
+    assert.equal(seo.title, `${page.title} | Shop Nobi`);
+    assert.equal(seo.description, page.description);
+  }
+});

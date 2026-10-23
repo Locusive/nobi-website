@@ -15,6 +15,24 @@ const ShopNobiTags = { utm_source: SearchPageChannel, ...ShopNobiLinkTags };
 /** A prebuilt card must not carry a stale live-assistant conversation to a store. */
 const ConversationIdParameter = "nobi-conversation-id";
 
+/** One reversible snippet trial, limited to the public copy reviewed on October 22, 2026. */
+const TeakSnippetExperiment = {
+  slug: "teak-outdoor-furniture-sets",
+  originalTitle: "Best Teak Outdoor Furniture Sets from Top Stores",
+  originalDescription: "Compare the best teak outdoor furniture sets from top stores in one place, classic durability for outdoor living.",
+  title: "Teak Outdoor Furniture Sets: Dining & Conversation | Shop Nobi",
+  description: "Compare teak outdoor conversation and sofa sets, plus teak-and-aluminum extendable dining options. Check the listed dimensions and included pieces.",
+};
+
+/** Returns the trial only while its reviewed page copy still matches; refreshed copy takes precedence. */
+function readSnippetExperiment(page) {
+  return page.slug === TeakSnippetExperiment.slug
+    && page.title === TeakSnippetExperiment.originalTitle
+    && page.description === TeakSnippetExperiment.originalDescription
+    ? TeakSnippetExperiment
+    : null;
+}
+
 /**
  * Returns the path of a search page.
  *
@@ -70,6 +88,7 @@ export function describeSearchPage(title) {
  * @returns {{title: string, description: string, path: string, image: string, schema: object[]}} The head values.
  */
 export function buildSearchPageSeo(page) {
+  const snippet = readSnippetExperiment(page);
   const pageUrl = searchPageUrl(page.slug);
   const categoryCrumbs = page.breadcrumbs
     .map((crumb, index) => ({ name: crumb.name, path: readCrumbPath(page, crumb, index) }))
@@ -81,8 +100,8 @@ export function buildSearchPageSeo(page) {
   }
 
   return {
-    title: `${page.title} | Shop Nobi`,
-    description: page.description || describeSearchPage(page.title),
+    title: snippet?.title ?? `${page.title} | Shop Nobi`,
+    description: snippet?.description ?? (page.description || describeSearchPage(page.title)),
     path: searchPagePath(page.slug),
     image: findLargePreviewImage(page.products) ?? ShopNobiImage,
     schema,

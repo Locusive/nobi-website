@@ -14,6 +14,7 @@ import { MarleySpoonPath } from "../src/content/marleySpoonCost.js";
 import { CoveCubbyPath } from "../src/content/coveCubbyComparison.js";
 
 import BaseusTwoScreens from "../src/pages/BaseusTwoScreens.jsx";
+import DuvetCoverSize from "../src/pages/DuvetCoverSize.jsx";
 import UsbCPowerCheck from "../src/pages/UsbCPowerCheck.jsx";
 import PhoneCaseCheck from "../src/pages/PhoneCaseCheck.jsx";
 import GiftBudget from "../src/pages/GiftBudget.jsx";
@@ -34,6 +35,7 @@ Pages["/about"] = About;
 Pages[CoveCubbyPath] = CoveCubbyComparison;
 Pages[MarleySpoonPath] = MarleySpoonCost;
 Pages[BaseusScreenPath] = BaseusTwoScreens;
+Pages["/tools/duvet-cover-size"] = DuvetCoverSize;
 Pages["/tools/usb-c-power-check"] = UsbCPowerCheck;
 Pages["/tools/phone-case-check"] = PhoneCaseCheck;
 Pages["/tools/gift-budget"] = GiftBudget;

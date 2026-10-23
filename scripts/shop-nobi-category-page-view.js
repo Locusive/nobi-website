@@ -4,6 +4,7 @@
 import { isSafeSlug, isText } from "./shop-nobi-search-page-view.js";
 import { PinBoardNameByTopLevel, readTopLevel } from "../src/utils/shopNobiPinBoard.js";
 import { selectClothingDiscoveries } from "../src/utils/shopNobiClothingDiscovery.js";
+import { selectJewelryComparisons } from "../src/utils/shopNobiJewelryComparison.js";
 
 const PopularPageLimit = 50;
 
@@ -61,6 +62,7 @@ export function buildCategoryPages(searchPages, categoryLimit) {
     ...categoryPage,
     subcategories: isTopCategory ? listSubcategories(topLevel, categoryPages) : [],
     ...(categoryPage.slug === "clothing" ? clothingDiscoveryData(categoryPage.pages) : {}),
+    ...(categoryPage.slug === "jewelry" ? { jewelryComparisons: selectJewelryComparisons(searchPages) } : {}),
   }));
 }
 

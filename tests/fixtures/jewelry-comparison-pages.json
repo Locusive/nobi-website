@@ -1,0 +1,186 @@
+{
+  "generatedAt": "2026-10-23T02:00:00Z",
+  "pages": [
+    {
+      "slug": "sterling-silver-rings",
+      "query": "sterling silver rings",
+      "title": "Sterling Silver Rings",
+      "description": "Compare the selected jewelry collection.",
+      "guide": [],
+      "faq": [],
+      "categoryPath": "apparel_accessories.jewelry",
+      "breadcrumbs": [
+        {
+          "name": "Jewelry",
+          "slug": null
+        }
+      ],
+      "relatedSlugs": [],
+      "refreshedAt": "2026-10-18T00:46:48Z",
+      "products": [
+        {
+          "name": "Cirque Ring, Sterling Silver",
+          "url": "https://miansai.com/products/cirque-ring-sterling-silver?variant=31932463317107",
+          "productVariantId": "b1d1c7d6-15c1-4850-a8b0-fcfd5412ac23",
+          "owningMerchantId": "00000000-0000-0000-0000-000000000001",
+          "imageUrl": "https://cdn.example.com/jewelry.jpg",
+          "price": null,
+          "currency": null,
+          "isInStock": true,
+          "paidLink": false
+        }
+      ]
+    },
+    {
+      "slug": "amethyst-jewelry",
+      "query": "amethyst jewelry",
+      "title": "Amethyst Jewelry",
+      "description": "Compare the selected jewelry collection.",
+      "guide": [],
+      "faq": [],
+      "categoryPath": "apparel_accessories.jewelry",
+      "breadcrumbs": [
+        {
+          "name": "Jewelry",
+          "slug": null
+        }
+      ],
+      "relatedSlugs": [],
+      "refreshedAt": "2026-10-18T00:46:48Z",
+      "products": [
+        {
+          "name": "14Kt Gold Amethyst Earring",
+          "url": "https://aimeleondore.com/products/14kt-gold-amethyst-earring?variant=42007967563873",
+          "productVariantId": "a8512cc8-2166-4d3f-aaba-95149c3cf791",
+          "owningMerchantId": "00000000-0000-0000-0000-000000000001",
+          "imageUrl": "https://cdn.example.com/jewelry.jpg",
+          "price": null,
+          "currency": null,
+          "isInStock": true,
+          "paidLink": false
+        }
+      ]
+    },
+    {
+      "slug": "black-stud-earrings",
+      "query": "black stud earrings",
+      "title": "Black Stud Earrings",
+      "description": "Compare the selected jewelry collection.",
+      "guide": [],
+      "faq": [],
+      "categoryPath": "apparel_accessories.jewelry",
+      "breadcrumbs": [
+        {
+          "name": "Jewelry",
+          "slug": null
+        }
+      ],
+      "relatedSlugs": [],
+      "refreshedAt": "2026-10-18T00:46:48Z",
+      "products": [
+        {
+          "name": "Valor Onyx Stud Earring, Sterling Silver",
+          "url": "https://miansai.com/products/valor-onyx-stud-earring-sterling-silver-single-m?variant=40650219651187",
+          "productVariantId": "eeb30098-1057-445f-ab96-a5a481aac82b",
+          "owningMerchantId": "00000000-0000-0000-0000-000000000001",
+          "imageUrl": "https://cdn.example.com/jewelry.jpg",
+          "price": null,
+          "currency": null,
+          "isInStock": true,
+          "paidLink": false
+        }
+      ]
+    },
+    {
+      "slug": "emerald-jewelry",
+      "query": "emerald jewelry",
+      "title": "Emerald Jewelry",
+      "description": "Compare the selected jewelry collection.",
+      "guide": [],
+      "faq": [],
+      "categoryPath": "apparel_accessories.jewelry",
+      "breadcrumbs": [
+        {
+          "name": "Jewelry",
+          "slug": null
+        }
+      ],
+      "relatedSlugs": [],
+      "refreshedAt": "2026-10-18T00:46:48Z",
+      "products": [
+        {
+          "name": "Adina Reyter Emerald & Diamond Clover Hinged Charm",
+          "url": "https://www.saintbernard.com/products/adina-reyter-emerald-diamond-clover-hinged-charm?variant=46436782342198",
+          "productVariantId": "7d3b56be-e365-410b-a63c-66cf09e738c4",
+          "owningMerchantId": "00000000-0000-0000-0000-000000000001",
+          "imageUrl": "https://cdn.example.com/jewelry.jpg",
+          "price": null,
+          "currency": null,
+          "isInStock": true,
+          "paidLink": false
+        }
+      ]
+    },
+    {
+      "slug": "yellow-gold-diamond-earrings",
+      "query": "yellow gold diamond earrings",
+      "title": "Yellow Gold Diamond Earrings",
+      "description": "Compare the selected jewelry collection.",
+      "guide": [],
+      "faq": [],
+      "categoryPath": "apparel_accessories.jewelry",
+      "breadcrumbs": [
+        {
+          "name": "Jewelry",
+          "slug": null
+        }
+      ],
+      "relatedSlugs": [],
+      "refreshedAt": "2026-10-18T00:46:48Z",
+      "products": [
+        {
+          "name": "EF Collection Diamond Mini Huggie Earrings",
+          "url": "https://www.saintbernard.com/products/ef-collection-diamond-mini-huggie-earrings?variant=42560723517494",
+          "productVariantId": "f88a1a66-e510-4b2c-aa14-c7cf1c3053dd",
+          "owningMerchantId": "00000000-0000-0000-0000-000000000001",
+          "imageUrl": "https://cdn.example.com/jewelry.jpg",
+          "price": null,
+          "currency": null,
+          "isInStock": true,
+          "paidLink": false
+        }
+      ]
+    },
+    {
+      "slug": "14k-white-gold-statement-rings",
+      "query": "14k white gold statement rings",
+      "title": "14K White Gold Statement Rings",
+      "description": "Compare the selected jewelry collection.",
+      "guide": [],
+      "faq": [],
+      "categoryPath": "apparel_accessories.jewelry",
+      "breadcrumbs": [
+        {
+          "name": "Jewelry",
+          "slug": null
+        }
+      ],
+      "relatedSlugs": [],
+      "refreshedAt": "2026-10-18T00:46:48Z",
+      "products": [
+        {
+          "name": "Fanned Diamond Statement Ring",
+          "url": "https://ringconcierge.com/products/fanned-diamond-statement-ring?variant=39862140108888",
+          "productVariantId": "55dd523f-9415-4ac3-bd86-71ef0531fca6",
+          "owningMerchantId": "00000000-0000-0000-0000-000000000001",
+          "imageUrl": "https://cdn.example.com/jewelry.jpg",
+          "price": null,
+          "currency": null,
+          "isInStock": true,
+          "paidLink": false
+        }
+      ]
+    }
+  ],
+  "retired": []
+}

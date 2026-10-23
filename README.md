@@ -370,3 +370,11 @@ only to Apple’s named 35W dual-port adapter. The worksheet does not certify
 compatibility, fast charging or safety. Inputs stay in component memory, with
 no storage or input telemetry. Static controls remain disabled until JavaScript
 is ready, avoiding a fallback form submission of the entered values.
+
+## Phone case checklist
+
+`/tools/phone-case-check` records shopper-entered phone and selected case identities,
+self-reported listing evidence and separate optional charging/accessory questions.
+Notes remain in component memory and reset to unanswered; the tool does not match
+model names, certify compatibility, store notes or send a new analytics event.
+Apple examples illustrate named models only. The `/shop` landing page links to it.

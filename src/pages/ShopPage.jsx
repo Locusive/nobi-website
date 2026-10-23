@@ -53,6 +53,7 @@ export default function ShopPage({ prebuiltContent: builtContent = null }) {
       {place === PrebuiltContentPlace.AboveSearch && <PrebuiltContent content={prebuiltContent} />}
       <div ref={slotRef} className={place === PrebuiltContentPlace.BelowSearch ? CategorySearchClass : undefined} />
       {prebuiltContent?.kind === PrebuiltContentKind.SearchPage && prebuiltContent.data.slug === "audio-components" && <div className="mx-auto max-w-6xl px-4 pb-8 text-black dark:text-white"><AudioBuyingGuide /></div>}
+      {pathname === "/shop" && (!prebuiltContent || prebuiltContent.kind === PrebuiltContentKind.PopularSearches) && <p className="mx-auto max-w-6xl px-4 pb-8 text-black dark:text-white"><a className="underline" href="/tools/phone-case-check">Check your exact phone model, case variant and charging needs</a> before choosing.</p>}
       <AddYourStoreLink isLinkHidden={liveResultsHaveDrawn} />
       {place === PrebuiltContentPlace.BelowSearch && <PrebuiltContent content={prebuiltContent} />}
       <ShopNobiClothingDiscovery choices={prebuiltContent?.data.clothingDiscoveries} />

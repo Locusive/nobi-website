@@ -18,6 +18,7 @@ import { buildUtilityRevision, UtilityRevisionFile } from "./utility-content-rev
 
 import { BaseusScreenSeo } from "../src/content/baseusScreens.js";
 import { UsbCPowerSeo } from "../src/utils/usbCPower.js";
+import { PhoneCaseSeo } from "../src/utils/phoneCaseChecklist.js";
 import { GiftBudgetSeo } from "../src/utils/giftBudget.js";
 import { GiftGuidesSeo } from "../src/content/giftGuides.js";
 import { GiftChooserSeo } from "../src/content/giftChooserProducts.js";
@@ -43,6 +44,7 @@ const product = (name, description, path) => ({
 const PAGES = [
   AboutSeo,
   UsbCPowerSeo,
+  PhoneCaseSeo,
   GiftBudgetSeo,
   GiftGuidesSeo,
   {

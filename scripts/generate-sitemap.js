@@ -23,6 +23,7 @@ const SITEMAP_FILES = ["sitemap-pages.xml", "sitemap-shop.xml"];
 const STATIC_PAGES = [
   { path: AboutSeo.path, priority: "0.3", changefreq: "monthly" },
   { path: "/tools/usb-c-power-check", priority: "0.6", changefreq: "monthly" },
+  { path: "/tools/phone-case-check", priority: "0.6", changefreq: "monthly" },
   { path: "/tools/gift-budget", priority: "0.6", changefreq: "monthly" },
   { path: "/gift-guides", priority: "0.7", changefreq: "monthly" },
   { path: "/tools/gift-chooser",       priority: "0.6", changefreq: "monthly" },

@@ -1,5 +1,7 @@
 // Editorial corrections for selected search pages. Product facts and the shared build plan stay intact.
 
+import { withMailboxClarification } from "./shop-nobi-mailbox-copy.js";
+
 const OriginalSuitcaseGuide = "Blue suitcases on this page range from about $70 to $495. The collection includes hard-shell carry-ons, expandable checked bags, and a few novelty suitcases with built-in record players.";
 const CorrectedSuitcaseGuide = "Shopping for travel luggage? Compare the carry-on and checked suitcases below. Suitcase-style record players are audio products, not bags for packing. Check each travel bag's dimensions and weight with the retailer before choosing.";
 const OriginalSuitcaseQuestion = "Do built-in tech suitcases affect durability?";
@@ -75,6 +77,7 @@ const SterlingSilverRingCopy = {
  * @returns {object} The publication copy, or the original page when it has no editorial replacement.
  */
 export function withAuthoredSearchPageCopy(page) {
+  if (page.slug === "mailbox-posts") return withMailboxClarification(page);
   if (page.slug === "14k-white-gold-statement-rings") return withWhiteGoldClarification(page);
   if (page.slug === "blue-suitcases") return withSuitcaseClarification(page);
   if (page.slug !== "sterling-silver-rings") {

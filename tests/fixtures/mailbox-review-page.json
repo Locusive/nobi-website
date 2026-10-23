@@ -1,0 +1,58 @@
+{
+  "guide": [
+    "Mailbox posts on this page cost between $75 and $250. The selection includes wooden styles in cedar or dark cedar, as well as painted metal finishes such as classic white, onyx black, and stone gray.",
+    "Wooden posts are typically made from cedar, which resists rot naturally, while metal posts are often powder-coated for durability and weather resistance. Many items are sold as a post-and-mailbox kit, so the mailbox attaches directly to the post.",
+    "When picking a post, consider the height-standard residential posts are 48-54 inches tall-and the style that matches your home\u2019s exterior. Look for sturdy mounting hardware and a concrete base for stable installation.",
+    "Check if the kit includes a mailbox that fits your local postal regulations, and verify that the finish is UV-protected to maintain its appearance over time."
+  ],
+  "faq": [
+    {
+      "answer": "Standard residential posts are usually 48-54 inches tall; select a height that matches your mailbox and local guidelines.",
+      "question": "What height should I choose for a mailbox post?"
+    },
+    {
+      "answer": "Cedar and treated wood are naturally resistant to rot, and painted finishes add extra protection against the elements.",
+      "question": "Are wooden posts weather-resistant?"
+    },
+    {
+      "answer": "Most posts come with a concrete base or mounting hardware that can be set in a pre-drilled hole and secured with concrete or a ground sleeve.",
+      "question": "How is a post installed?"
+    },
+    {
+      "answer": "Many of these kits include a mailbox that attaches to the post, but always verify the product description to be sure.",
+      "question": "Do I need a separate mailbox?"
+    }
+  ],
+  "products": [
+    {
+      "name": "Atherton Mail Post & XL Mailbox\u2122 Classic White",
+      "productVariantId": "c66cc08c-e5ee-4b2b-bcd8-7dddfef6f19a",
+      "url": "https://www.step2.com/products/atherton-mail-post-xl-mailbox?variant=47636616675615"
+    },
+    {
+      "name": "Highland Mail Post & XL Black Mailbox\u2122 Weathered Cedar",
+      "productVariantId": "d22af276-fec2-4a2b-af16-c7d2e88fa192",
+      "url": "https://www.step2.com/products/highland-mail-post-xl-black-mailbox?variant=47636615397663"
+    },
+    {
+      "name": "Highland Mail Post & XL Black Mailbox\u2122 Dark Cedar",
+      "productVariantId": "fe71561f-d0bb-4097-bf9c-ed309c840503",
+      "url": "https://www.step2.com/products/highland-mail-post-xl-black-mailbox?variant=47636615495967"
+    },
+    {
+      "name": "Town-to-Town XL Post-Mount Mailbox\u2122 White",
+      "productVariantId": "e507999c-cbf3-42d4-b205-f9e609b3933e",
+      "url": "https://www.step2.com/products/town-to-town-xl-post-mount-mailbox?variant=47636613136671"
+    },
+    {
+      "name": "Town-to-Town XL Post-Mount Mailbox\u2122 Black",
+      "productVariantId": "cb954a2d-106e-4b88-a226-335ad8566950",
+      "url": "https://www.step2.com/products/town-to-town-xl-post-mount-mailbox?variant=47636613169439"
+    },
+    {
+      "name": "Atherton Grand Mail Post & XL Mailbox\u2122 Classic White",
+      "productVariantId": "73d28c92-0fbe-4263-9bbd-02ce6f813de9",
+      "url": "https://www.step2.com/products/atherton-grand-mail-post-xl-mailbox?variant=47636616610079"
+    }
+  ]
+}

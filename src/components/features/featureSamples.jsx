@@ -1,7 +1,7 @@
 import { AiSearchSample, SearchAsYouTypeSample, SmartAnswersSample } from "./searchSamples";
 import { InsightsSample, MerchandisingSample } from "./searchControlSamples";
 import { AutomatedSupportSample, CustomActionsSample, LeadCaptureSample, ProactivePromptsSample } from "./assistantSamples";
-import { CartAssistantSample, ProductPageQaSample, ProductRecommendationsSample } from "./ecommerceSamples";
+import { AskAiFiltersSample, CartAssistantSample, ProductPageQaSample, ProductRecommendationsSample } from "./ecommerceSamples";
 
 /** The sample screen each feature page shows, by the feature's slug. */
 export const FEATURE_SAMPLES = {
@@ -14,6 +14,7 @@ export const FEATURE_SAMPLES = {
   "product-page-qa": ProductPageQaSample,
   "product-recommendations": ProductRecommendationsSample,
   "cart-assistant": CartAssistantSample,
+  "ask-ai-filters": AskAiFiltersSample,
   "lead-capture": LeadCaptureSample,
   "proactive-prompts": ProactivePromptsSample,
   "custom-actions": CustomActionsSample,

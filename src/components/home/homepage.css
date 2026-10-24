@@ -156,3 +156,9 @@ details.nb-faq[open] > summary .nb-faq-chev { transform: rotate(180deg); }
 .nb-group-chip-count { display: inline-flex; align-items: center; justify-content: center; min-width: 22px; height: 22px; padding: 0 6px; border-radius: 999px; background: #f1ecff; color: #6d3bff; font-size: 12.5px; font-weight: 700; }
 .nb-group-chip:focus-visible { outline: 2px solid #ffc07a; outline-offset: 3px; }
 section[id] { scroll-margin-top: 92px; }
+
+/* Feature page FAQ: the +/- marker flips open, and the native disclosure triangle is hidden. */
+.nb-faq > summary::-webkit-details-marker { display: none; }
+.nb-faq[open] .nb-faq-mark { transform: rotate(45deg); }
+.nb-faq-mark { transition: transform .18s ease; display: inline-block; }
+.nb-faq > summary:focus-visible { outline: 2px solid #6d3bff; outline-offset: 3px; border-radius: 6px; }

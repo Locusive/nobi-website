@@ -27,12 +27,18 @@ export default function MobileProductMenu({ linkStyle, onChoose }) {
           {FEATURE_GROUPS.map((group) => (
             <div key={group.id} style={{ padding: "8px 0" }}>
               <div style={{ padding: "0 8px 4px", fontSize: 11.5, fontWeight: 700, letterSpacing: "0.16em", textTransform: "uppercase", color: "#6d3bff" }}>{group.name}</div>
-              {listFeaturesInGroup(group.id).map((feature) => (
-                <ScrollLink key={feature.slug} to={buildFeaturePath(feature.slug)} onClick={onChoose} className="nb-menu-link" style={{ display: "flex", alignItems: "center", gap: 8, padding: "10px 8px", borderRadius: 10, fontSize: 15, color: "#1b1626", textDecoration: "none" }}>
-                  {feature.name}
-                  {feature.enterprise && <EnterpriseTag />}
-                </ScrollLink>
-              ))}
+              {listFeaturesInGroup(group.id).map((feature) => {
+                const Icon = feature.icon;
+                return (
+                  <ScrollLink key={feature.slug} to={buildFeaturePath(feature.slug)} onClick={onChoose} className="nb-menu-link" style={{ display: "flex", alignItems: "center", gap: 10, padding: "10px 8px", borderRadius: 10, fontSize: 15, color: "#1b1626", textDecoration: "none" }}>
+                    <span style={{ flex: "none", width: 30, height: 30, borderRadius: 8, background: "#f1ecff", color: "#6d3bff", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                      <Icon size={16} strokeWidth={2.1} />
+                    </span>
+                    {feature.name}
+                    {feature.enterprise && <EnterpriseTag />}
+                  </ScrollLink>
+                );
+              })}
             </div>
           ))}
           <ScrollLink to={ALL_FEATURES_PATH} onClick={onChoose} className="nb-menu-link" style={{ display: "inline-flex", alignItems: "center", gap: 7, margin: "6px 8px 0", padding: "6px 0", fontSize: 15, fontWeight: 700, color: "#6d3bff", textDecoration: "none" }}>

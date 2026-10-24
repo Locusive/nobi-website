@@ -1,6 +1,7 @@
 import React from "react";
 import { Car, CheckCircle2, FileText, Sparkles, UserPlus, Wrench, Zap } from "lucide-react";
 import { ChatBubble, INK, MUTED, NobiReply, SampleCard, VIOLET } from "./sampleParts";
+import { ProductImage } from "./productTiles";
 
 // Sample screens for the assistant features. Each one is a labeled picture, so its sample text is not read as page content.
 
@@ -69,7 +70,9 @@ export function ProactivePromptsSample({ shadow }) {
     <SampleCard label="Example of Nobi starting a conversation with a visitor who is about to leave a sample store's product page" shadow={shadow}>
       <div style={{ position: "relative", height: 380, background: "linear-gradient(180deg,#f7f5fc,#efeaf8)" }}>
         <div style={{ position: "absolute", top: 22, left: 22, right: 22, display: "flex", gap: 16 }}>
-          <img src="/media/prod-2.webp" alt="" style={{ width: 120, height: 150, borderRadius: 14, objectFit: "cover" }} />
+          <div style={{ width: 120, height: 150, flex: "none" }}>
+            <ProductImage category="electronics" ratio="4/5" radius={14} />
+          </div>
           <div style={{ flex: 1, paddingTop: 6 }}>
             <div style={{ height: 12, width: "70%", borderRadius: 6, background: "#ddd6ec" }} />
             <div style={{ height: 10, width: "40%", borderRadius: 6, background: "#e6e0f1", marginTop: 12 }} />
@@ -80,9 +83,9 @@ export function ProactivePromptsSample({ shadow }) {
           <div style={{ display: "flex", alignItems: "center", gap: 7, fontSize: 11.5, fontWeight: 700, letterSpacing: "0.06em", textTransform: "uppercase", color: MUTED }}>
             <Zap size={13} color={VIOLET} /> Shown when the visitor is about to leave
           </div>
-          <div style={{ marginTop: 10, fontSize: 16, lineHeight: 1.5, color: INK }}>Still deciding? I can compare sizes, or find something similar in stock.</div>
+          <div style={{ marginTop: 10, fontSize: 16, lineHeight: 1.5, color: INK }}>Still deciding? I can compare these, or find something similar in stock.</div>
           <div style={{ display: "flex", gap: 8, marginTop: 14 }}>
-            {["Compare sizes", "Show similar"].map((label) => (
+            {["Compare options", "Show similar"].map((label) => (
               <span key={label} style={{ fontSize: 13, fontWeight: 600, color: VIOLET, border: "1px solid rgba(109,59,255,0.3)", borderRadius: 999, padding: "7px 13px" }}>{label}</span>
             ))}
           </div>

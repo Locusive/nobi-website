@@ -53,11 +53,11 @@ function AllFeaturesHero() {
         <span style={{ fontFamily: "'SF Mono',ui-monospace,Menlo,monospace", fontSize: 13, letterSpacing: "0.2em", textTransform: "uppercase", color: "#6d3bff", fontWeight: 600 }}>
           All features
         </span>
-        <h1 style={{ margin: "20px auto 0", maxWidth: "15ch", fontSize: "clamp(42px,6vw,82px)", fontWeight: 800, letterSpacing: "-0.04em", lineHeight: 0.98, color: "#1b1626" }}>
-          One AI, across your whole site
+        <h1 style={{ margin: "20px auto 0", maxWidth: "16ch", fontSize: "clamp(42px,6vw,82px)", fontWeight: 800, letterSpacing: "-0.04em", lineHeight: 0.98, color: "#1b1626" }}>
+          One AI for search, support, and sales
         </h1>
-        <p style={{ margin: "22px auto 0", maxWidth: "46ch", fontSize: "clamp(17px,1.4vw,21px)", lineHeight: 1.5, color: "#57536a" }}>
-          Nobi searches, answers, recommends and captures leads. Here is everything it does.
+        <p style={{ margin: "22px auto 0", maxWidth: "48ch", fontSize: "clamp(17px,1.4vw,21px)", lineHeight: 1.5, color: "#57536a" }}>
+          It finds products, answers questions, recommends the next buy, and captures leads, on one platform.
         </p>
       </div>
       <div style={{ position: "relative", zIndex: 2, maxWidth: 1120, margin: "clamp(44px,5vw,60px) auto 0", display: "flex", flexWrap: "wrap", gap: 20, justifyContent: "center" }}>

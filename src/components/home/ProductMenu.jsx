@@ -7,15 +7,22 @@ import { ALL_FEATURES_PATH, FEATURE_GROUPS, buildFeaturePath, listFeaturesInGrou
 // How long the menu waits after the pointer leaves before closing, so a diagonal move to the panel does not close it.
 const CLOSE_DELAY_MS = 140;
 
-/** One feature in the menu: its name, its tag when it is an enterprise feature, and one line on what it does. */
+/** One feature in the menu: its icon, name, enterprise tag, and one line on what it does. */
 function MenuFeatureLink({ feature, onChoose }) {
+  const Icon = feature.icon;
+
   return (
-    <ScrollLink to={buildFeaturePath(feature.slug)} onClick={onChoose} className="nb-menu-link" style={{ display: "block", padding: "10px 12px", borderRadius: 12, textDecoration: "none" }}>
-      <span style={{ display: "flex", alignItems: "center", gap: 8 }}>
-        <span style={{ fontSize: 15, fontWeight: 600, color: "#1b1626" }}>{feature.name}</span>
-        {feature.enterprise && <EnterpriseTag />}
+    <ScrollLink to={buildFeaturePath(feature.slug)} onClick={onChoose} className="nb-menu-link" style={{ display: "flex", gap: 10, padding: "10px 10px", borderRadius: 12, textDecoration: "none" }}>
+      <span style={{ flex: "none", width: 30, height: 30, borderRadius: 8, background: "#f1ecff", color: "#6d3bff", display: "flex", alignItems: "center", justifyContent: "center" }}>
+        <Icon size={16} strokeWidth={2.1} />
       </span>
-      <span style={{ display: "block", marginTop: 3, fontSize: 13, lineHeight: 1.4, color: "#615b70", whiteSpace: "normal" }}>{feature.menuLine}</span>
+      <span style={{ flex: 1, minWidth: 0, whiteSpace: "normal" }}>
+        <span style={{ display: "flex", alignItems: "center", gap: 6, flexWrap: "wrap", rowGap: 3 }}>
+          <span style={{ fontSize: 14.5, fontWeight: 600, color: "#1b1626", lineHeight: 1.2 }}>{feature.name}</span>
+          {feature.enterprise && <EnterpriseTag />}
+        </span>
+        <span style={{ display: "block", marginTop: 3, fontSize: 12.5, lineHeight: 1.35, color: "#615b70" }}>{feature.menuLine}</span>
+      </span>
     </ScrollLink>
   );
 }
@@ -23,8 +30,8 @@ function MenuFeatureLink({ feature, onChoose }) {
 /** One column of the menu: the group's name, then each of its features. */
 function MenuGroup({ group, onChoose }) {
   return (
-    <div>
-      <div style={{ padding: "0 12px 8px", fontSize: 11.5, fontWeight: 700, letterSpacing: "0.16em", textTransform: "uppercase", color: "#6d3bff" }}>{group.name}</div>
+    <div style={{ minWidth: 0 }}>
+      <div style={{ padding: "0 10px 8px", fontSize: 11.5, fontWeight: 700, letterSpacing: "0.16em", textTransform: "uppercase", color: "#6d3bff" }}>{group.name}</div>
       {listFeaturesInGroup(group.id).map((feature) => (
         <MenuFeatureLink key={feature.slug} feature={feature} onChoose={onChoose} />
       ))}
@@ -32,34 +39,14 @@ function MenuGroup({ group, onChoose }) {
   );
 }
 
-/** A featured group shown in the menu footer: its name, its one line, and a link to its feature. */
-function MenuFeaturedGroup({ group, onChoose }) {
-  const feature = listFeaturesInGroup(group.id)[0];
-
-  return (
-    <ScrollLink to={buildFeaturePath(feature.slug)} onClick={onChoose} className="nb-menu-link" style={{ display: "block", flex: "1 1 240px", padding: "12px 14px", borderRadius: 14, textDecoration: "none", background: "#ffffff", border: "1px solid rgba(20,16,40,0.08)" }}>
-      <span style={{ display: "block", fontSize: 11.5, fontWeight: 700, letterSpacing: "0.16em", textTransform: "uppercase", color: "#6d3bff" }}>{group.name}</span>
-      <span style={{ display: "block", marginTop: 4, fontSize: 14.5, color: "#1b1626", whiteSpace: "normal" }}>{group.summary}</span>
-    </ScrollLink>
-  );
-}
-
-/** The open menu: the main feature groups as columns, with featured groups and the all-features link below. */
+/** The open menu: every feature group as a column, with the all-features link below. */
 function MenuPanel({ id, onChoose }) {
-  const columnGroups = FEATURE_GROUPS.filter((group) => !group.featured);
-  const featuredGroups = FEATURE_GROUPS.filter((group) => group.featured);
-
   return (
-    <div id={id} className="nb-product-menu" style={{ position: "absolute", top: "100%", left: "50%", transform: "translateX(-50%)", paddingTop: 12, width: "min(1040px, calc(100vw - 32px))", zIndex: 10 }}>
+    <div id={id} className="nb-product-menu" style={{ position: "absolute", top: "100%", left: "50%", transform: "translateX(-50%)", paddingTop: 12, width: "min(1180px, calc(100vw - 24px))", zIndex: 10 }}>
       <div style={{ background: "#ffffff", border: "1px solid rgba(20,16,40,0.08)", borderRadius: 24, boxShadow: "0 30px 70px -20px rgba(60,40,110,0.35)", overflow: "hidden" }}>
-        <div style={{ display: "grid", gridTemplateColumns: `repeat(${columnGroups.length},1fr)`, gap: 8, padding: "22px 14px 14px" }}>
-          {columnGroups.map((group) => (
+        <div style={{ display: "grid", gridTemplateColumns: `repeat(${FEATURE_GROUPS.length}, minmax(0, 1fr))`, gap: 4, padding: "22px 12px 14px" }}>
+          {FEATURE_GROUPS.map((group) => (
             <MenuGroup key={group.id} group={group} onChoose={onChoose} />
-          ))}
-        </div>
-        <div style={{ display: "flex", flexWrap: "wrap", gap: 10, padding: "16px 16px 8px" }}>
-          {featuredGroups.map((group) => (
-            <MenuFeaturedGroup key={group.id} group={group} onChoose={onChoose} />
           ))}
         </div>
         <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 16, padding: "14px 26px", background: "#f7f5fc", borderTop: "1px solid rgba(20,16,40,0.06)" }}>

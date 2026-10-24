@@ -50,10 +50,63 @@ export function WorksFor({ examples, background }) {
   );
 }
 
+/** What a feature includes: the distinct capabilities inside it, as a grid of bordered cards. */
+export function WhatsIncluded({ items, background }) {
+  return (
+    <section style={{ background, padding: SECTION_PADDING }}>
+      <div style={{ maxWidth: 1120, margin: "0 auto" }}>
+        <h2 style={BIG_HEADING}>What&rsquo;s included</h2>
+        <div className="nb-grid2" style={{ marginTop: "clamp(40px,4vw,56px)", display: "grid", gridTemplateColumns: "1fr 1fr", gap: 18 }}>
+          {items.map((item) => (
+            <div key={item.title} style={{ display: "flex", gap: 16, padding: "26px 26px 28px", background: "#ffffff", border: "1px solid rgba(20,16,40,0.09)", borderRadius: 20 }}>
+              <span style={{ flex: "none", width: 44, height: 44, borderRadius: 12, background: "#f1ecff", color: "#6d3bff", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                <ArrowRight size={22} strokeWidth={2.4} />
+              </span>
+              <div>
+                <h3 style={{ margin: 0, fontSize: "clamp(18px,1.5vw,22px)", fontWeight: 700, letterSpacing: "-0.015em", lineHeight: 1.2, color: INK }}>{item.title}</h3>
+                <p style={{ margin: "9px 0 0", fontSize: 16, lineHeight: 1.55, color: BODY }}>{item.body}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/** One question and its answer, opening and closing on click. */
+function FaqItem({ question, answer }) {
+  return (
+    <details className="nb-faq" style={{ borderTop: "1px solid rgba(20,16,40,0.12)", padding: "22px 0" }}>
+      <summary style={{ listStyle: "none", cursor: "pointer", display: "flex", justifyContent: "space-between", gap: 20, alignItems: "center", fontSize: "clamp(18px,1.5vw,22px)", fontWeight: 700, letterSpacing: "-0.015em", color: INK }}>
+        {question}
+        <span className="nb-faq-mark" style={{ flex: "none", fontSize: 26, fontWeight: 400, color: "#6d3bff", lineHeight: 1 }}>+</span>
+      </summary>
+      <p style={{ margin: "14px 0 0", maxWidth: "70ch", fontSize: 17, lineHeight: 1.6, color: BODY }}>{answer}</p>
+    </details>
+  );
+}
+
+/** Common questions about a feature. Doubles as text search engines can read. */
+export function FeatureFaq({ faq }) {
+  return (
+    <section style={{ background: "#ffffff", padding: SECTION_PADDING }}>
+      <div style={{ maxWidth: 820, margin: "0 auto" }}>
+        <h2 style={BIG_HEADING}>Common questions</h2>
+        <div style={{ marginTop: "clamp(32px,4vw,48px)" }}>
+          {faq.map((item) => (
+            <FaqItem key={item.question} {...item} />
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 /** The three steps of how a feature works. They are numbered because they happen in that order. */
 export function HowItWorks({ steps }) {
   return (
-    <section style={{ background: "#f7f5fc", padding: SECTION_PADDING }}>
+    <section style={{ background: "#ffffff", padding: SECTION_PADDING }}>
       <div style={{ maxWidth: 1120, margin: "0 auto" }}>
         <h2 style={BIG_HEADING}>How it works</h2>
         <ol className="nb-steps" style={{ listStyle: "none", margin: "clamp(44px,5vw,64px) 0 0", padding: 0, display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: "clamp(28px,4vw,56px)" }}>

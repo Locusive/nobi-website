@@ -25,7 +25,7 @@ function bodyText(html) {
 for (const [path, heading] of [
   ["homepage.html", "Modern site search"],
   ["pricing.html", "Simple, usage-based pricing"],
-  ["product.html", "One AI, across your whole site"],
+  ["product.html", "One AI for search, support, and sales"],
 ]) {
   test(`${path} serves real content, metadata, and valid bundled assets without JavaScript`, () => {
     const html = readPage(path);

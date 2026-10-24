@@ -12,6 +12,7 @@ import { BaseusScreenPath } from "../src/content/baseusScreens.js";
 import { ElectionNightPath } from "../src/content/electionNight.js";
 import { ShopNobiMcpPath } from "../src/content/shopNobiMcp.js";
 import { AboutSeo } from "../src/content/about.js";
+import { FEATURES, buildFeaturePath } from "../src/content/features.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT       = join(__dirname, "..");
@@ -29,6 +30,7 @@ const STATIC_PAGES = [
   { path: "/tools/gift-chooser",       priority: "0.6", changefreq: "monthly" },
   { path: "/",                       priority: "1.0", changefreq: "weekly"  },
   { path: "/product",                priority: "0.9", changefreq: "monthly" },
+  ...FEATURES.map((feature) => ({ path: buildFeaturePath(feature.slug), priority: "0.8", changefreq: "monthly" })),
   { path: "/pricing",                priority: "0.8", changefreq: "monthly" },
   { path: "/faqs",                   priority: "0.8", changefreq: "monthly" },
   { path: "/customers",              priority: "0.8", changefreq: "monthly" },

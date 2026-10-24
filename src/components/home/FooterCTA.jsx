@@ -9,7 +9,11 @@ const PRODUCTS = [
   { img: "/media/prod-3.webp", name: "Knit midi dress", price: "$154", accent: false },
 ];
 
-export default function FooterCTA() {
+const DEFAULT_HEADING = "Turn searches into sales.";
+const DEFAULT_BODY = "Give your visitors search that understands them, and watch more of them convert.";
+
+/** The closing call to action. heading and body let a page that is not about search say something that fits it. */
+export default function FooterCTA({ heading = DEFAULT_HEADING, body = DEFAULT_BODY }) {
   const { onOpen } = useDemoForm();
   const openDemo = () => {
     trackDemoFormOpened();
@@ -31,10 +35,10 @@ export default function FooterCTA() {
           <div style={{ flex: "1 1 400px", minWidth: 280, display: "flex", flexDirection: "column", justifyContent: "center" }}>
             <div style={{ fontSize: 11, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.22em", color: "#c026d3" }}>Ready when you are</div>
             <h2 style={{ margin: "16px 0 0", maxWidth: "16ch", fontSize: "clamp(34px,4.4vw,54px)", fontWeight: 700, letterSpacing: "-0.03em", lineHeight: 1.03, color: "#020617" }}>
-              Turn searches into sales.
+              {heading}
             </h2>
             <p style={{ margin: "20px 0 0", maxWidth: "34ch", fontSize: "clamp(16px,1.3vw,19px)", lineHeight: 1.6, color: "#475569" }}>
-              Give your visitors search that understands them, and watch more of them convert.
+              {body}
             </p>
             <div style={{ marginTop: 32, display: "flex", gap: 12, flexWrap: "wrap" }}>
               <a

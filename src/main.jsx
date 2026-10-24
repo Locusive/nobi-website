@@ -21,6 +21,7 @@ const UNTUCKitCustomer   = lazy(() => import("./pages/customers/UNTUCKit.jsx"));
 const KilteCustomer      = lazy(() => import("./pages/customers/Kilte.jsx"));
 const Pricing            = lazy(() => import("./pages/Pricing.jsx"));
 const Product            = lazy(() => import("./pages/Product.jsx"));
+const FeaturePage        = lazy(() => import("./pages/FeaturePage.jsx"));
 const Webinar            = lazy(() => import("./pages/Webinar.jsx"));
 const WebinarIPullRank   = lazy(() => import("./pages/WebinarIPullRank.jsx"));
 const ShopPage           = lazy(() => import("./pages/ShopPage.jsx"));
@@ -124,6 +125,7 @@ function App() {
             <Route path="/pricing/ideas" element={<Navigate to="/pricing" replace />} />
           )}
           <Route path="/product" element={<Product />} />
+          <Route path="/product/:slug" element={<FeaturePage />} />
           <Route path="/faqs" element={<FAQs />} />
           <Route path="/webinar" element={<Webinar />} />
           <Route path="/webinar/ipullrank" element={<WebinarIPullRank />} />

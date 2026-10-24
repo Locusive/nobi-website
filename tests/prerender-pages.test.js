@@ -3,6 +3,8 @@ import { existsSync, readFileSync, readdirSync } from "node:fs";
 import { join } from "node:path";
 import { test } from "node:test";
 import { getSignupUrl } from "../src/utils/signupUrl.js";
+import { FEATURES, buildFeaturePath } from "../src/content/features.js";
+import { FEATURE_PAGES } from "../src/content/featurePages.js";
 
 const Dist = new URL("../dist/", import.meta.url);
 
@@ -23,7 +25,7 @@ function bodyText(html) {
 for (const [path, heading] of [
   ["homepage.html", "Modern site search"],
   ["pricing.html", "Simple, usage-based pricing"],
-  ["product.html", "One assistant. Every job your website needs done."],
+  ["product.html", "Everything Nobi does"],
 ]) {
   test(`${path} serves real content, metadata, and valid bundled assets without JavaScript`, () => {
     const html = readPage(path);
@@ -70,7 +72,7 @@ for (const [path, label, sampleTexts] of [
     "red dress under $200", "Understood red", "Search anything on your site", "Results ordering", "What is your return window?",
     "crochet dress for a beach vacation",
   ]],
-  ["product.html", "Example of Nobi capturing a lead", ["does this run true to size?", "New lead captured", "Results ordering"]],
+  ["product/lead-capture.html", "Example of Nobi capturing a sales lead", ["Test drive on Saturday", "New leads", "Service team"]],
 ]) {
   test(`${path} marks its product demos as labeled pictures, so their sample text is not read as page content`, () => {
     const html = readPage(path);
@@ -82,6 +84,31 @@ for (const [path, label, sampleTexts] of [
     }
   });
 }
+
+test("every feature has its own prerendered page with its own title, description and one main heading", () => {
+  for (const feature of FEATURES) {
+    const html = readPage(`${buildFeaturePath(feature.slug).slice(1)}.html`);
+    const page = FEATURE_PAGES[feature.slug];
+    assert.ok(html.includes(`<title>${page.seoTitle.replace("&", "&amp;")}</title>`), `Wrong title: ${feature.slug}`);
+    assert.ok(html.includes(`<link rel="canonical" href="https://nobi.ai${buildFeaturePath(feature.slug)}"`), `Wrong canonical: ${feature.slug}`);
+    assert.equal((html.match(/<h1\b/g) || []).length, 1, `One h1 expected: ${feature.slug}`);
+    assert.ok(bodyText(html).includes(page.steps[0].title), `Missing page body: ${feature.slug}`);
+  }
+});
+
+test("the All features page links to every feature page, so crawlers can reach each one", () => {
+  const html = readPage("product.html");
+  for (const feature of FEATURES) {
+    assert.ok(html.includes(`href="${buildFeaturePath(feature.slug)}"`), `Missing link: ${feature.slug}`);
+  }
+});
+
+test("the old capability addresses redirect to pages that exist", () => {
+  const redirects = readFileSync(new URL("../public/_redirects", import.meta.url), "utf8");
+  for (const [, from, to] of redirects.matchAll(/^(\/why-nobi\/\S+|\/lead-capture|\/custom-actions)\s+(\S+)\s+301$/gm)) {
+    assert.ok(existsSync(new URL(`${to.slice(1)}.html`, Dist)), `${from} redirects to a missing page: ${to}`);
+  }
+});
 
 test("the Shop Nobi page shares its own link preview picture, and the other pages keep Nobi's", () => {
   const shopHtml = readPage("shop.html");

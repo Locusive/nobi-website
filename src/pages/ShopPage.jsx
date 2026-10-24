@@ -4,9 +4,7 @@ import { useLocation } from "react-router-dom";
 import AudioBuyingGuide from "../components/shopNobi/AudioBuyingGuide";
 import Nav from "../components/home/Nav";
 import AddYourStoreLink from "../components/shopNobi/AddYourStoreLink";
-import GiftGuidesLink from "../components/shopNobi/GiftGuidesLink";
 import ShopNobiCategoryPageContent from "../components/shopNobi/ShopNobiCategoryPageContent";
-import ShopNobiClothingDiscovery from "../components/shopNobi/ShopNobiClothingDiscovery";
 import ShopNobiPopularSearches from "../components/shopNobi/ShopNobiPopularSearches";
 import ShopNobiSearchPageContent from "../components/shopNobi/ShopNobiSearchPageContent";
 import ShopNobiFooter from "../components/shopNobi/ShopNobiFooter";
@@ -49,14 +47,11 @@ export default function ShopPage({ prebuiltContent: builtContent = null }) {
       <header>
         <Nav active="shop" pinned={false} />
       </header>
-      <GiftGuidesLink />
       {place === PrebuiltContentPlace.AboveSearch && <PrebuiltContent content={prebuiltContent} />}
       <div ref={slotRef} className={place === PrebuiltContentPlace.BelowSearch ? CategorySearchClass : undefined} />
       {prebuiltContent?.kind === PrebuiltContentKind.SearchPage && prebuiltContent.data.slug === "audio-components" && <div className="mx-auto max-w-6xl px-4 pb-8 text-black dark:text-white"><AudioBuyingGuide /></div>}
-      {pathname === "/shop" && (!prebuiltContent || prebuiltContent.kind === PrebuiltContentKind.PopularSearches) && <p className="mx-auto max-w-6xl px-4 pb-8 text-black dark:text-white"><a className="underline" href="/tools/phone-case-check">Check your exact phone model, case variant and charging needs</a> before choosing.</p>}
       <AddYourStoreLink isLinkHidden={liveResultsHaveDrawn} />
       {place === PrebuiltContentPlace.BelowSearch && <PrebuiltContent content={prebuiltContent} />}
-      <ShopNobiClothingDiscovery choices={prebuiltContent?.data.clothingDiscoveries} />
       <ShopNobiFooter />
     </div>
   );

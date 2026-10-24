@@ -32,12 +32,12 @@ test("invalid evidence states and oversized notes fail without coercion or leaki
   const first = emptyCaseChecklist(); first.features.charging.notes = "private";
   assert.equal(emptyCaseChecklist().features.charging.notes, "");
 });
-test("static worksheet delivers sources, unanswered defaults, privacy and a real shop discovery link", () => {
+test("static worksheet delivers sources, unanswered defaults and privacy, and stays unlinked from the shop", () => {
   for (const file of ["dist/tools/phone-case-check.html", "dist/tools/phone-case-check/index.html"]) {
     const html = readFileSync(file, "utf8");
     for (const text of ['href="https://nobi.ai/tools/phone-case-check"', 'name="phone"', 'name="variant"', 'name="listedModels"', 'name="charging.notes"', 'aria-live="polite"', 'Reset all notes', 'does not save or send', 'disabled=""', 'Enable JavaScript', 'mgf24ll/a/iphone-17-clear-case-with-magsafe', 'mgft4ll/a/iphone-17-pro-clear-case-with-magsafe', 'hypothetical', 'not a “best cases” ranking', 'href="/shop"']) assert.ok(html.includes(text), text);
   }
-  assert.ok(readFileSync("dist/shop.html", "utf8").includes('href="/tools/phone-case-check"'));
+  assert.ok(!readFileSync("dist/shop.html", "utf8").includes('href="/tools/phone-case-check"'));
   assert.ok(!readFileSync("dist/shop/s/black-leather-boots.html", "utf8").includes('href="/tools/phone-case-check"'));
   assert.ok(readFileSync("public/sitemap-pages.xml", "utf8").includes('<loc>https://nobi.ai/tools/phone-case-check</loc>'));
 });

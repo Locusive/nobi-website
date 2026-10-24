@@ -29,7 +29,3 @@ test("collection schema names only these existing guides without offers or produ
  assert.deepEqual(schema.hasPart.map(item => item.url), GiftGuides.map(guide => `https://nobi.ai/blog/${guide.slug}`));
  assert.ok(!JSON.stringify(schema).includes('"offers"')); assert.ok(!JSON.stringify(schema).includes('"aggregateRating"'));
 });
-test("Shop Nobi exposes the hub without changing its search initialization", () => {
- const html = readFileSync("dist/shop.html", "utf8");
- assert.ok(html.includes('aria-label="Shopping guides"')); assert.ok(html.includes('href="/gift-guides"'));
-});

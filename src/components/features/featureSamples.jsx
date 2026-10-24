@@ -1,4 +1,4 @@
-import { AiSearchSample, SearchAsYouTypeSample, ShopifySearchPageSample, SiteAnswersSample } from "./searchSamples";
+import { AiSearchSample, SearchAsYouTypeSample, SmartAnswersSample } from "./searchSamples";
 import { InsightsSample, MerchandisingSample } from "./searchControlSamples";
 import { AutomatedSupportSample, CustomActionsSample, LeadCaptureSample, ProactivePromptsSample } from "./assistantSamples";
 import { CartAssistantSample, ProductPageQaSample, ProductRecommendationsSample } from "./ecommerceSamples";
@@ -7,15 +7,14 @@ import { CartAssistantSample, ProductPageQaSample, ProductRecommendationsSample 
 export const FEATURE_SAMPLES = {
   "ai-search": AiSearchSample,
   "search-as-you-type": SearchAsYouTypeSample,
-  "shopify-search-page": ShopifySearchPageSample,
-  "site-answers": SiteAnswersSample,
+  "smart-answers": SmartAnswersSample,
   merchandising: MerchandisingSample,
   insights: InsightsSample,
   "automated-support": AutomatedSupportSample,
+  "product-page-qa": ProductPageQaSample,
+  "product-recommendations": ProductRecommendationsSample,
+  "cart-assistant": CartAssistantSample,
   "lead-capture": LeadCaptureSample,
   "proactive-prompts": ProactivePromptsSample,
   "custom-actions": CustomActionsSample,
-  "product-recommendations": ProductRecommendationsSample,
-  "product-page-qa": ProductPageQaSample,
-  "cart-assistant": CartAssistantSample,
 };

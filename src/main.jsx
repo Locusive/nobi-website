@@ -70,10 +70,8 @@ function App() {
     }
   }, [location.search]);
 
-  // Decide the scroll position on every navigation. Forward navigation (PUSH or
-  // REPLACE) opens a new page at the top. Back and forward (POP) restore where
-  // the visitor was, read from sessionStorage so it survives a full reload too
-  // (e.g. leaving to an external site like Start Free and hitting back).
+  // Decide the scroll position on every navigation: forward (PUSH or REPLACE) opens the new page at the top,
+  // while back and forward (POP) restore where the visitor was, read from sessionStorage so it survives a reload.
   useEffect(() => {
     const saved = navigationType === "POP" ? sessionStorage.getItem(SCROLL_KEY_PREFIX + location.pathname) : null;
     window.scrollTo({ top: saved ? parseInt(saved, 10) : 0, left: 0, behavior: "instant" });

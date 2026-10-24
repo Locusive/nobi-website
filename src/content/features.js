@@ -3,8 +3,8 @@
 
 export const FeatureGroupId = {
   Search: "search",
-  Merchandising: "merchandising",
   Support: "support",
+  Recommendations: "recommendations",
   Engagement: "engagement",
   Insights: "insights",
 };
@@ -15,20 +15,20 @@ export const FEATURE_GROUPS = [
   {
     id: FeatureGroupId.Search,
     name: "Search",
-    summary: "Search that understands what shoppers mean, not just the words they type.",
-    closing: { heading: "Give your visitors search that gets them.", body: "Replace keyword search with AI that understands what shoppers are looking for, and watch more of them convert." },
-  },
-  {
-    id: FeatureGroupId.Merchandising,
-    name: "Merchandising",
-    summary: "Control what shows in results, and put the right products in front of shoppers.",
-    closing: { heading: "Put the right products forward.", body: "Shape your results and recommend what shoppers are most likely to buy, with no code." },
+    summary: "Search that understands what people mean, answers their questions, and shows what you choose.",
+    closing: { heading: "Give your visitors search that gets them.", body: "Replace keyword search with AI that understands what people are looking for, and watch more of them convert." },
   },
   {
     id: FeatureGroupId.Support,
-    name: "Support",
+    name: "Automated support",
     summary: "Answer every question, on every page, from your own content.",
     closing: { heading: "Answer every visitor.", body: "Give visitors answers any time, and a way to reach your team when they need one." },
+  },
+  {
+    id: FeatureGroupId.Recommendations,
+    name: "Recommendations",
+    summary: "Put the right next product in front of shoppers, on the product page and in the cart.",
+    closing: { heading: "Show the right next product.", body: "Recommend what each shopper is most likely to want, where they are deciding." },
   },
   {
     id: FeatureGroupId.Engagement,
@@ -56,18 +56,17 @@ export function buildFeaturePath(slug) {
 /** The features, in menu order within each group. menuLine is the line under the name in the menu.
  *  enterprise marks features the Nobi team sets up for a store; the rest of Nobi is self-service. */
 export const FEATURES = [
-  { slug: "ai-search", group: FeatureGroupId.Search, name: "AI search", menuLine: "Results that match what shoppers mean" },
-  { slug: "search-as-you-type", group: FeatureGroupId.Search, name: "Search as you type", menuLine: "Suggestions and products as they type" },
-  { slug: "shopify-search-page", group: FeatureGroupId.Search, name: "Shopify search page", menuLine: "Nobi runs your full Shopify search page" },
-  { slug: "merchandising", group: FeatureGroupId.Merchandising, name: "Merchandising", menuLine: "Pin, boost, bury and hide results" },
-  { slug: "product-recommendations", group: FeatureGroupId.Merchandising, name: "Product recommendations", menuLine: "Related products on product pages and in the cart", enterprise: true },
-  { slug: "cart-assistant", group: FeatureGroupId.Merchandising, name: "Cart assistant", menuLine: "A message and suggestions in the cart", enterprise: true },
-  { slug: "automated-support", group: FeatureGroupId.Support, name: "Automated support", menuLine: "Answers questions from your own content" },
-  { slug: "site-answers", group: FeatureGroupId.Support, name: "Answers from your site", menuLine: "Cited answers from your pages and FAQs" },
+  { slug: "ai-search", group: FeatureGroupId.Search, name: "AI search", menuLine: "Results that match what people mean" },
+  { slug: "search-as-you-type", group: FeatureGroupId.Search, name: "Typeahead search", menuLine: "Suggestions and products as they type" },
+  { slug: "smart-answers", group: FeatureGroupId.Search, name: "Smart answers", menuLine: "An AI answer, products and pages in one" },
+  { slug: "merchandising", group: FeatureGroupId.Search, name: "Merchandising", menuLine: "Pin, boost, bury and hide results" },
+  { slug: "automated-support", group: FeatureGroupId.Support, name: "Instant answers", menuLine: "Answers questions, hands off to your team" },
   { slug: "product-page-qa", group: FeatureGroupId.Support, name: "Product page Q&A", menuLine: "Searchable shopper questions on each product", enterprise: true },
+  { slug: "product-recommendations", group: FeatureGroupId.Recommendations, name: "Product recommendations", menuLine: "Related products on product pages and in the cart", enterprise: true },
+  { slug: "cart-assistant", group: FeatureGroupId.Recommendations, name: "Cart assistant", menuLine: "A message and suggestions in the cart", enterprise: true },
   { slug: "lead-capture", group: FeatureGroupId.Engagement, name: "Lead capture", menuLine: "Collects contact details and routes every lead" },
   { slug: "proactive-prompts", group: FeatureGroupId.Engagement, name: "Proactive engagement", menuLine: "Reaches out at the right moment" },
-  { slug: "custom-actions", group: FeatureGroupId.Engagement, name: "Custom actions", menuLine: "Runs real actions on your site, like booking" },
+  { slug: "custom-actions", group: FeatureGroupId.Engagement, name: "Custom actions", menuLine: "Runs real actions, like booking a test drive" },
   { slug: "insights", group: FeatureGroupId.Insights, name: "Insights", menuLine: "What customers search for, click and buy" },
 ];
 

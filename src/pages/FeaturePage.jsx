@@ -6,7 +6,7 @@ import Nav from "../components/home/Nav";
 import FooterCTA from "../components/home/FooterCTA";
 import SiteFooter from "../components/home/SiteFooter";
 import FeatureHero from "../components/features/FeatureHero";
-import { FeatureProof, HowItWorks, RelatedFeatures } from "../components/features/FeatureSections";
+import { FeatureProof, HowItWorks, RelatedFeatures, WhyItHelps, WorksFor } from "../components/features/FeatureSections";
 import { FEATURE_SAMPLES } from "../components/features/featureSamples";
 import { PanelTheme } from "../components/features/panelThemes";
 import { FEATURE_GROUPS, buildFeaturePath, findFeature } from "../content/features";
@@ -26,7 +26,9 @@ export function FeaturePageContent({ slug }) {
     <div style={{ fontFamily: "'Schibsted Grotesk','Helvetica Neue',Helvetica,Arial,sans-serif", background: "#ffffff" }}>
       <Nav active="product" />
       <FeatureHero groupName={group.name} feature={feature} page={page} sample={<Sample shadow={PanelTheme[page.theme].shadow} />} />
+      {page.benefits && <WhyItHelps heading="Why it matters" benefits={page.benefits} />}
       <HowItWorks steps={page.steps} />
+      {page.worksFor && <WorksFor examples={page.worksFor} background="#ffffff" />}
       {page.proof && <FeatureProof proof={page.proof} />}
       <RelatedFeatures feature={feature} groupName={group.name} />
       <FooterCTA {...group.closing} />

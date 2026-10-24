@@ -42,30 +42,4 @@ export const ECOMMERCE_FEATURE_PAGES = {
     ],
     proof: { customer: "Lucchese", stat: "8.5x", detail: "return on investment from the cart assistant, with $108K in revenue since it launched.", storyPath: "/customers/lucchese" },
   },
-  "ask-ai-filters": {
-    seoTitle: "Ask AI Filters | Nobi",
-    seoDescription: "Shoppers describe what they want in plain words, and Nobi sets the filters on your collection or search page for them.",
-    theme: "Violet",
-    headline: "Describe it, and the filters set themselves",
-    headlineMaxCh: 13,
-    intro: "Shoppers type what they want, like “red dress, size medium, under $150”, and Nobi sets your page's own filters to match.",
-    steps: [
-      { title: "Our team sets it up", body: "We add the Ask AI field to your collection or search pages." },
-      { title: "A shopper describes what they want", body: "In plain words, the way they would ask a person in your store." },
-      { title: "Your filters update", body: "Nobi turns the request into your page's filters, and the results update." },
-    ],
-  },
-  "quick-add": {
-    seoTitle: "One-Click Add to Cart | Nobi",
-    seoDescription: "Shoppers add products to their cart straight from Nobi search results, without opening the product page.",
-    theme: "Teal",
-    headline: "Add to cart, straight from search",
-    headlineMaxCh: 12,
-    intro: "Shoppers add products to their cart right from the search results. Fewer steps between finding a product and buying it.",
-    steps: [
-      { title: "A shopper finds a product", body: "In Nobi search results or in the assistant." },
-      { title: "They choose an option", body: "Pick a size or color when the product has them." },
-      { title: "It goes in the cart", body: "The product is added without leaving the results." },
-    ],
-  },
 };

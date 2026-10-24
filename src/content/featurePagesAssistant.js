@@ -54,17 +54,4 @@ export const ASSISTANT_FEATURE_PAGES = {
       { title: "Nobi runs it on your site", body: "Your code runs in the visitor's browser, and Nobi tells them it is done." },
     ],
   },
-  "any-language": {
-    seoTitle: "Multilingual AI Assistant | Nobi",
-    seoDescription: "Nobi replies in the language each visitor writes in, with no setup and no separate assistant per language.",
-    theme: "Amber",
-    headline: "Speaks your visitors' language",
-    headlineMaxCh: 12,
-    intro: "Nobi replies in the language each visitor writes in. A question in Spanish gets an answer in Spanish, with no setup.",
-    steps: [
-      { title: "A visitor writes in their language", body: "Spanish, French, German or any other language." },
-      { title: "Nobi answers in the same one", body: "Answers still come from your own pages and products." },
-      { title: "Nothing to set up", body: "There is no separate assistant to build for each language." },
-    ],
-  },
 };

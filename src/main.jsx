@@ -70,15 +70,12 @@ function App() {
     }
   }, [location.search]);
 
-  // Forward navigation scrolls to top at click time (see ScrollLink) — that
-  // happens before the old, still-tall page unmounts, which is what actually
-  // works reliably. This effect only handles browser back/forward (POP):
-  // restore wherever the visitor actually was, from sessionStorage so it
-  // survives a full reload too (e.g. leaving to an external site like
-  // Start Free and hitting the back button).
+  // Decide the scroll position on every navigation. Forward navigation (PUSH or
+  // REPLACE) opens a new page at the top. Back and forward (POP) restore where
+  // the visitor was, read from sessionStorage so it survives a full reload too
+  // (e.g. leaving to an external site like Start Free and hitting back).
   useEffect(() => {
-    if (navigationType !== "POP") return;
-    const saved = sessionStorage.getItem(SCROLL_KEY_PREFIX + location.pathname);
+    const saved = navigationType === "POP" ? sessionStorage.getItem(SCROLL_KEY_PREFIX + location.pathname) : null;
     window.scrollTo({ top: saved ? parseInt(saved, 10) : 0, left: 0, behavior: "instant" });
   }, [location.pathname, navigationType]);
 

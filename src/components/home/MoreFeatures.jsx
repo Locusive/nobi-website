@@ -4,8 +4,8 @@ import ScrollLink from "./ScrollLink";
 import FeatureCard from "../features/FeatureCard";
 import { ALL_FEATURES_PATH } from "../../content/features";
 
-// The features the homepage grid shows. Search, merchandising and site answers already have their own panels above it.
-const GRID_FEATURE_SLUGS = ["automated-support", "lead-capture", "product-recommendations", "proactive-prompts", "search-analytics", "quick-add"];
+// The features the homepage grid shows. The search panels above it already cover AI search, merchandising and site answers.
+const GRID_FEATURE_SLUGS = ["automated-support", "lead-capture", "insights", "product-recommendations", "cart-assistant", "product-page-qa"];
 
 /** The homepage section after the search panels: six more features, with a link to every feature. */
 export default function MoreFeatures() {

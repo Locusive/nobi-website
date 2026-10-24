@@ -1,19 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-// A plain <Link> that scrolls to top as part of the click itself, before
-// navigation happens — not after, in a useEffect reacting to the route
-// change, which proved unreliable on lazy-loaded routes (see main.jsx).
-export default function ScrollLink({ onClick, ...props }) {
-  return (
-    <Link
-      {...props}
-      onClick={(e) => {
-        // scroll-behavior: smooth is set globally — an animated scrollTo(0,0)
-        // gets cut short by the page transition before it finishes. Force instant.
-        window.scrollTo({ top: 0, left: 0, behavior: "instant" });
-        onClick?.(e);
-      }}
-    />
-  );
+// A plain <Link>. Forward navigation scrolls the new page to the top, and the
+// back button restores where you were; both are handled per route in main.jsx.
+// Scrolling here on click broke those: it moved the current tab on a new-tab
+// click, and it overwrote the saved scroll of the page being left.
+export default function ScrollLink(props) {
+  return <Link {...props} />;
 }

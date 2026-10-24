@@ -32,14 +32,34 @@ function MenuGroup({ group, onChoose }) {
   );
 }
 
-/** The open menu: three feature groups side by side, and a link to the page that lists every feature. */
-function MenuPanel({ id, onChoose }) {
+/** A featured group shown in the menu footer: its name, its one line, and a link to its feature. */
+function MenuFeaturedGroup({ group, onChoose }) {
+  const feature = listFeaturesInGroup(group.id)[0];
+
   return (
-    <div id={id} className="nb-product-menu" style={{ position: "absolute", top: "100%", left: "50%", transform: "translateX(-50%)", paddingTop: 12, width: "min(980px, calc(100vw - 32px))", zIndex: 10 }}>
+    <ScrollLink to={buildFeaturePath(feature.slug)} onClick={onChoose} className="nb-menu-link" style={{ display: "block", flex: "1 1 240px", padding: "12px 14px", borderRadius: 14, textDecoration: "none", background: "#ffffff", border: "1px solid rgba(20,16,40,0.08)" }}>
+      <span style={{ display: "block", fontSize: 11.5, fontWeight: 700, letterSpacing: "0.16em", textTransform: "uppercase", color: "#6d3bff" }}>{group.name}</span>
+      <span style={{ display: "block", marginTop: 4, fontSize: 14.5, color: "#1b1626", whiteSpace: "normal" }}>{group.summary}</span>
+    </ScrollLink>
+  );
+}
+
+/** The open menu: the main feature groups as columns, with featured groups and the all-features link below. */
+function MenuPanel({ id, onChoose }) {
+  const columnGroups = FEATURE_GROUPS.filter((group) => !group.featured);
+  const featuredGroups = FEATURE_GROUPS.filter((group) => group.featured);
+
+  return (
+    <div id={id} className="nb-product-menu" style={{ position: "absolute", top: "100%", left: "50%", transform: "translateX(-50%)", paddingTop: 12, width: "min(1040px, calc(100vw - 32px))", zIndex: 10 }}>
       <div style={{ background: "#ffffff", border: "1px solid rgba(20,16,40,0.08)", borderRadius: 24, boxShadow: "0 30px 70px -20px rgba(60,40,110,0.35)", overflow: "hidden" }}>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 8, padding: "22px 14px 14px" }}>
-          {FEATURE_GROUPS.map((group) => (
+        <div style={{ display: "grid", gridTemplateColumns: `repeat(${columnGroups.length},1fr)`, gap: 8, padding: "22px 14px 14px" }}>
+          {columnGroups.map((group) => (
             <MenuGroup key={group.id} group={group} onChoose={onChoose} />
+          ))}
+        </div>
+        <div style={{ display: "flex", flexWrap: "wrap", gap: 10, padding: "16px 16px 8px" }}>
+          {featuredGroups.map((group) => (
+            <MenuFeaturedGroup key={group.id} group={group} onChoose={onChoose} />
           ))}
         </div>
         <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 16, padding: "14px 26px", background: "#f7f5fc", borderTop: "1px solid rgba(20,16,40,0.06)" }}>

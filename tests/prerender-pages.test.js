@@ -72,7 +72,7 @@ for (const [path, label, sampleTexts] of [
     "red dress under $200", "Understood red", "Search anything on your site", "Results ordering", "What is your return window?",
     "crochet dress for a beach vacation",
   ]],
-  ["product/lead-capture.html", "Example of Nobi capturing a sales lead", ["Test drive on Saturday", "New leads", "Service team"]],
+  ["product/lead-capture.html", "Example of the leads Nobi captured on a sample car dealership's site", ["Jordan Fuller", "New leads", "Service team"]],
 ]) {
   test(`${path} marks its product demos as labeled pictures, so their sample text is not read as page content`, () => {
     const html = readPage(path);

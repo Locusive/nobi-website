@@ -1,7 +1,7 @@
 import React from "react";
 import { Car, CheckCircle2, FileText, Sparkles, UserPlus, Wrench, Zap } from "lucide-react";
 import { ChatBubble, INK, MUTED, NobiReply, SampleCard, VIOLET } from "./sampleParts";
-import { ProductImage } from "./productTiles";
+import { ProductImage, SAMPLE_PRODUCT as P } from "./productTiles";
 
 // Sample screens for the assistant features. Each one is a labeled picture, so its sample text is not read as page content.
 
@@ -71,7 +71,7 @@ export function ProactivePromptsSample({ shadow }) {
       <div style={{ position: "relative", height: 380, background: "linear-gradient(180deg,#f7f5fc,#efeaf8)" }}>
         <div style={{ position: "absolute", top: 22, left: 22, right: 22, display: "flex", gap: 16 }}>
           <div style={{ width: 120, height: 150, flex: "none" }}>
-            <ProductImage category="electronics" ratio="4/5" radius={14} />
+            <ProductImage product={P.headphones} ratio="4/5" radius={14} />
           </div>
           <div style={{ flex: 1, paddingTop: 6 }}>
             <div style={{ height: 12, width: "70%", borderRadius: 6, background: "#ddd6ec" }} />

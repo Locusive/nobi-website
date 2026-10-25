@@ -1,7 +1,7 @@
 import React from "react";
 import { CheckCircle2, FileText, Search, Sparkles } from "lucide-react";
 import { INK, MUTED, SampleCard, SampleLabel, VIOLET } from "./sampleParts";
-import { ProductTileRow } from "./productTiles";
+import { ProductTileRow, SAMPLE_PRODUCT as P } from "./productTiles";
 
 // Sample screens for the search features. Each one is a labeled picture, so its sample text is not read as page content.
 
@@ -20,11 +20,7 @@ function SampleSearchBar({ query, typing }) {
 
 /** AI search: a long, plain-language search, what Nobi understood from it, and matching products. */
 export function AiSearchSample({ shadow }) {
-  const products = [
-    { name: "Trail Runner GTX", price: "$145", category: "footwear" },
-    { name: "Summit Hiker Wide", price: "$160", category: "footwear" },
-    { name: "Ridgeline Boot", price: "$138", category: "footwear" },
-  ];
+  const products = [P.hoka, P.allbirds, P.kizik];
 
   return (
     <SampleCard label="Example of Nobi understanding a plain-language search on a sample store" shadow={shadow}>
@@ -42,11 +38,7 @@ export function AiSearchSample({ shadow }) {
 
 /** Typeahead search: suggested searches and products appearing under a half-typed search. */
 export function SearchAsYouTypeSample({ shadow }) {
-  const products = [
-    { name: "AirPods Pro", price: "$249", category: "electronics" },
-    { name: "Studio Buds", price: "$129", category: "electronics" },
-    { name: "Sport Earbuds", price: "$89", category: "electronics" },
-  ];
+  const products = [P.earbuds, P.melobuds, P.headphones];
 
   return (
     <SampleCard label="Example of Nobi suggesting searches and products while a shopper types on a sample store" shadow={shadow}>
@@ -81,10 +73,7 @@ function SourcePill({ title }) {
 
 /** AI answers: one question, answered in plain words, with the products and the pages behind it, all in one. */
 export function SmartAnswersSample({ shadow }) {
-  const products = [
-    { name: "Dawn Patrol Tent", price: "$320", category: "fitness" },
-    { name: "Four-Season Tent", price: "$440", category: "fitness" },
-  ];
+  const products = [P.tentDagger, P.tentChogori];
 
   return (
     <SampleCard label="Example of Nobi answering a question with an AI answer, matching products and the pages it cites, all on one screen" shadow={shadow}>

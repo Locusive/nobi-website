@@ -4,9 +4,9 @@ import { trackDemoFormOpened } from "../../utils/usageSignals";
 import { getSignupUrl } from "../../utils/signupUrl";
 
 const PRODUCTS = [
-  { img: "/media/prod-1.webp", name: "Crochet maxi dress", price: "$168", accent: true },
-  { img: "/media/prod-2.webp", name: "Open-knit cover-up", price: "$132", accent: false },
-  { img: "/media/prod-3.webp", name: "Knit midi dress", price: "$154", accent: false },
+  { img: "/media/samples/jacket-baleaf.jpg", name: "Cloudshield Jacket", price: "$168", accent: true },
+  { img: "/media/samples/shoe-hoka.png", name: "Clifton 11 GTX", price: "$170", accent: false },
+  { img: "/media/samples/backpack-kelty.jpg", name: "Asher Daypack", price: "$78", accent: false },
 ];
 
 const DEFAULT_HEADING = "Turn searches into sales.";
@@ -59,7 +59,7 @@ export default function FooterCTA({ heading = DEFAULT_HEADING, body = DEFAULT_BO
           <div className="nb-feat-demo" style={{ flex: "0 1 460px", minWidth: 300 }}>
             <div role="img" aria-label="Example of Nobi search results on a sample clothing store" style={{ borderRadius: 24, border: "1px solid #efe2f7", background: "#fff", boxShadow: "0 34px 80px -46px rgba(76,40,130,0.5)", overflow: "hidden" }}>
               <div style={{ display: "flex", alignItems: "center", gap: 11, padding: "16px 18px", borderBottom: "1px solid #f1eaf7" }}>
-                <span style={{ fontSize: 14.5, color: "#1b1626" }}>crochet dress for a beach vacation</span>
+                <span style={{ fontSize: 14.5, color: "#1b1626" }}>a waterproof jacket for a rainy hike</span>
                 <span
                   style={{
                     marginLeft: "auto",
@@ -91,7 +91,7 @@ export default function FooterCTA({ heading = DEFAULT_HEADING, body = DEFAULT_BO
                     }}
                   >
                     <div style={{ aspectRatio: "3/4", overflow: "hidden", borderRadius: 10, background: "#f1f5f9" }}>
-                      <img src={p.img} alt="" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "top" }} />
+                      <img src={p.img} alt="" style={{ width: "100%", height: "100%", objectFit: "contain", padding: "10%", boxSizing: "border-box" }} />
                     </div>
                     <div style={{ padding: "8px 4px 2px" }}>
                       <div style={{ fontSize: 12, fontWeight: 600, color: "#0f172a" }}>{p.name}</div>

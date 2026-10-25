@@ -21,6 +21,7 @@ const UNTUCKitCustomer   = lazy(() => import("./pages/customers/UNTUCKit.jsx"));
 const KilteCustomer      = lazy(() => import("./pages/customers/Kilte.jsx"));
 const Pricing            = lazy(() => import("./pages/Pricing.jsx"));
 const Product            = lazy(() => import("./pages/Product.jsx"));
+const FeaturePage        = lazy(() => import("./pages/FeaturePage.jsx"));
 const Webinar            = lazy(() => import("./pages/Webinar.jsx"));
 const WebinarIPullRank   = lazy(() => import("./pages/WebinarIPullRank.jsx"));
 const ShopPage           = lazy(() => import("./pages/ShopPage.jsx"));
@@ -71,15 +72,10 @@ function App() {
     }
   }, [location.search]);
 
-  // Forward navigation scrolls to top at click time (see ScrollLink) — that
-  // happens before the old, still-tall page unmounts, which is what actually
-  // works reliably. This effect only handles browser back/forward (POP):
-  // restore wherever the visitor actually was, from sessionStorage so it
-  // survives a full reload too (e.g. leaving to an external site like
-  // Start Free and hitting the back button).
+  // Decide the scroll position on every navigation: forward (PUSH or REPLACE) opens the new page at the top,
+  // while back and forward (POP) restore where the visitor was, read from sessionStorage so it survives a reload.
   useEffect(() => {
-    if (navigationType !== "POP") return;
-    const saved = sessionStorage.getItem(SCROLL_KEY_PREFIX + location.pathname);
+    const saved = navigationType === "POP" ? sessionStorage.getItem(SCROLL_KEY_PREFIX + location.pathname) : null;
     window.scrollTo({ top: saved ? parseInt(saved, 10) : 0, left: 0, behavior: "instant" });
   }, [location.pathname, navigationType]);
 
@@ -124,6 +120,7 @@ function App() {
             <Route path="/pricing/ideas" element={<Navigate to="/pricing" replace />} />
           )}
           <Route path="/product" element={<Product />} />
+          <Route path="/product/:slug" element={<FeaturePage />} />
           <Route path="/faqs" element={<FAQs />} />
           <Route path="/webinar" element={<Webinar />} />
           <Route path="/webinar/ipullrank" element={<WebinarIPullRank />} />

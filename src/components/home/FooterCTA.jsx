@@ -4,12 +4,16 @@ import { trackDemoFormOpened } from "../../utils/usageSignals";
 import { getSignupUrl } from "../../utils/signupUrl";
 
 const PRODUCTS = [
-  { img: "/media/prod-1.webp", name: "Crochet maxi dress", price: "$168", accent: true },
-  { img: "/media/prod-2.webp", name: "Open-knit cover-up", price: "$132", accent: false },
-  { img: "/media/prod-3.webp", name: "Knit midi dress", price: "$154", accent: false },
+  { img: "/media/samples/jacket-baleaf.jpg", name: "Cloudshield Jacket", price: "$168", accent: true },
+  { img: "/media/samples/shoe-hoka.png", name: "Clifton 11 GTX", price: "$170", accent: false },
+  { img: "/media/samples/backpack-kelty.jpg", name: "Asher Daypack", price: "$78", accent: false },
 ];
 
-export default function FooterCTA() {
+const DEFAULT_HEADING = "Turn searches into sales.";
+const DEFAULT_BODY = "Give your visitors search that understands them, and watch more of them convert.";
+
+/** The closing call to action. heading and body let a page that is not about search say something that fits it. */
+export default function FooterCTA({ heading = DEFAULT_HEADING, body = DEFAULT_BODY }) {
   const { onOpen } = useDemoForm();
   const openDemo = () => {
     trackDemoFormOpened();
@@ -31,10 +35,10 @@ export default function FooterCTA() {
           <div style={{ flex: "1 1 400px", minWidth: 280, display: "flex", flexDirection: "column", justifyContent: "center" }}>
             <div style={{ fontSize: 11, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.22em", color: "#c026d3" }}>Ready when you are</div>
             <h2 style={{ margin: "16px 0 0", maxWidth: "16ch", fontSize: "clamp(34px,4.4vw,54px)", fontWeight: 700, letterSpacing: "-0.03em", lineHeight: 1.03, color: "#020617" }}>
-              Turn searches into sales.
+              {heading}
             </h2>
             <p style={{ margin: "20px 0 0", maxWidth: "34ch", fontSize: "clamp(16px,1.3vw,19px)", lineHeight: 1.6, color: "#475569" }}>
-              Give your visitors search that understands them, and watch more of them convert.
+              {body}
             </p>
             <div style={{ marginTop: 32, display: "flex", gap: 12, flexWrap: "wrap" }}>
               <a
@@ -55,7 +59,7 @@ export default function FooterCTA() {
           <div className="nb-feat-demo" style={{ flex: "0 1 460px", minWidth: 300 }}>
             <div role="img" aria-label="Example of Nobi search results on a sample clothing store" style={{ borderRadius: 24, border: "1px solid #efe2f7", background: "#fff", boxShadow: "0 34px 80px -46px rgba(76,40,130,0.5)", overflow: "hidden" }}>
               <div style={{ display: "flex", alignItems: "center", gap: 11, padding: "16px 18px", borderBottom: "1px solid #f1eaf7" }}>
-                <span style={{ fontSize: 14.5, color: "#1b1626" }}>crochet dress for a beach vacation</span>
+                <span style={{ fontSize: 14.5, color: "#1b1626" }}>a waterproof jacket for a rainy hike</span>
                 <span
                   style={{
                     marginLeft: "auto",
@@ -87,7 +91,7 @@ export default function FooterCTA() {
                     }}
                   >
                     <div style={{ aspectRatio: "3/4", overflow: "hidden", borderRadius: 10, background: "#f1f5f9" }}>
-                      <img src={p.img} alt="" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "top" }} />
+                      <img src={p.img} alt="" style={{ width: "100%", height: "100%", objectFit: "contain", padding: "10%", boxSizing: "border-box" }} />
                     </div>
                     <div style={{ padding: "8px 4px 2px" }}>
                       <div style={{ fontSize: 12, fontWeight: 600, color: "#0f172a" }}>{p.name}</div>

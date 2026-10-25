@@ -12,6 +12,12 @@
 .nb-nav-links > a:hover { color: #1b1626; }
 .nb-nav-links > a:hover::after { transform: scaleX(1); }
 #nb-see { transition: background .2s ease, box-shadow .2s ease; }
+
+/* Product menu: hover and keyboard focus for its links and its Product button. */
+.nb-menu-trigger { cursor: pointer; }
+.nb-menu-link { transition: background .15s ease; }
+.nb-menu-link:hover { background: #f5f3fb; }
+.nb-menu-link:focus-visible, .nb-menu-trigger:focus-visible { outline: 2px solid #6d3bff; outline-offset: 2px; }
 #nb-see:hover { background: #5a2fe0; box-shadow: 0 16px 36px -10px rgba(76,40,130,0.75); }
 
 #nb-rail { position: fixed; right: 20px; top: 50%; transform: translateY(-50%); z-index: 30; display: flex; flex-direction: column; gap: 11px; align-items: center; transition: opacity .3s ease; }
@@ -22,14 +28,24 @@
 .nb-fstage { position: sticky; top: 0; height: 100vh; overflow: hidden; background: #4a2fb8; }
 .nb-feat { position: absolute; inset: 0; display: flex; opacity: 0; overflow-y: auto; transform: translateY(18px); transition: opacity .35s ease, transform .35s ease; will-change: opacity, transform; }
 
+/* Product page sections fill the window on desktop, like the homepage panels. */
+.nb-product-section { min-height: 100vh; }
+
 @media (max-width: 768px) {
   #nb-rail { display: none; }
   .nb-fstack { height: auto !important; }
   .nb-fstage { position: static; height: auto; overflow: visible; }
   .nb-feat { position: relative; inset: auto; opacity: 1 !important; transform: none !important; min-height: 100vh; }
 }
+/* The logo bar is laid out for desktop widths; on a phone the logos wrap closer and the badge text wraps. */
+@media (max-width: 480px) {
+  .nb-proof-logos { gap: 28px 40px !important; }
+  .nb-proof-badge { white-space: normal !important; text-align: center; }
+}
 @media (max-width: 820px) {
   .nb-grid3 { grid-template-columns: 1fr !important; }
+  .nb-grid2 { grid-template-columns: 1fr !important; }
+  .nb-product-section { min-height: 0; }
   .nb-cs-grid { grid-template-columns: 1fr !important; }
   .nb-cs-quote { grid-column: auto !important; }
   .nb-cs-stats { flex-direction: row !important; flex-wrap: wrap !important; gap: 18px 32px !important; }
@@ -106,7 +122,9 @@ details.nb-faq[open] > summary .nb-faq-chev { transform: rotate(180deg); }
 .nb-demo-popover .nb-demo-stores { grid-template-columns: minmax(0, 1fr); max-height: 260px; }
 @media (max-width: 560px) { .nb-demo-hint { display: none; } }
 .nb-demo-own-notice { margin: 12px 0 0; font-size: 13.5px; color: #6b6580; text-align: center; }
-.nb-demo-own-link { margin-top: 20px; border: 0; background: transparent; padding: 4px 2px; font: inherit; font-size: 14.5px; font-weight: 600; color: #6d3bff; text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
+.nb-demo-own-link { margin-top: 22px; display: inline-flex; align-items: center; gap: 8px; border: 0; border-radius: 12px; background: #6d3bff; padding: 13px 22px; font: inherit; font-size: 15px; font-weight: 700; color: #ffffff; cursor: pointer; box-shadow: 0 14px 30px -14px rgba(76,40,130,0.6); transition: background .2s ease, box-shadow .2s ease, transform .18s ease; }
+.nb-demo-own-link::after { content: "→"; font-size: 16px; line-height: 1; }
+.nb-demo-own-link:hover { background: #5a2fe0; box-shadow: 0 18px 38px -14px rgba(76,40,130,0.7); transform: translateY(-1px); }
 .nb-demo-own { margin-top: 22px; width: 100%; max-width: 560px; display: flex; flex-direction: column; gap: 10px; }
 .nb-demo-own-label { font-size: 14px; font-weight: 600; color: #1b1626; text-align: center; }
 .nb-demo-own-message { margin: 0; font-size: 14.5px; line-height: 1.5; color: #57536a; text-align: center; }
@@ -117,3 +135,30 @@ details.nb-faq[open] > summary .nb-faq-chev { transform: rotate(180deg); }
 .nb-demo-own-button:disabled { opacity: 0.6; cursor: default; }
 .nb-demo-own-link:focus-visible, .nb-demo-own-button:focus-visible { outline: 3px solid #6d3bff; outline-offset: 2px; }
 .nb-demo-own-error { margin: 0; font-size: 13.5px; color: #c0263b; text-align: center; }
+
+/* Feature pages: hover and keyboard focus for tiles, links and the opening panel's buttons; steps stack on phones. */
+.nb-feature-tile { transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease; }
+.nb-feature-tile:hover { transform: translateY(-3px); box-shadow: 0 22px 40px -26px rgba(60,40,110,0.45); border-color: rgba(109,59,255,0.28) !important; }
+.nb-hero-action { transition: transform .18s ease; }
+.nb-hero-action:hover { transform: translateY(-1px); }
+.nb-feature-tile:focus-visible, .nb-proof-link:focus-visible, .nb-hero-action:focus-visible { outline: 2px solid #ffc07a; outline-offset: 3px; }
+@media (max-width: 820px) {
+  .nb-steps { grid-template-columns: 1fr !important; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .nb-feature-tile, .nb-hero-action, .nb-menu-link { transition: none; }
+  .nb-feature-tile:hover, .nb-hero-action:hover { transform: none; }
+}
+
+/* All features page: the jump-link chips in the hero, and clearance so anchored sections sit below the fixed nav. */
+.nb-group-chip { display: inline-flex; align-items: center; gap: 9px; padding: 11px 16px; border-radius: 999px; background: #ffffff; border: 1px solid rgba(20,16,40,0.12); color: #1b1626; font-size: 15px; font-weight: 600; text-decoration: none; box-shadow: 0 6px 16px -10px rgba(76,40,130,0.35); transition: border-color .18s ease, transform .18s ease; }
+.nb-group-chip:hover { border-color: rgba(109,59,255,0.45); transform: translateY(-1px); }
+.nb-group-chip-count { display: inline-flex; align-items: center; justify-content: center; min-width: 22px; height: 22px; padding: 0 6px; border-radius: 999px; background: #f1ecff; color: #6d3bff; font-size: 12.5px; font-weight: 700; }
+.nb-group-chip:focus-visible { outline: 2px solid #ffc07a; outline-offset: 3px; }
+section[id] { scroll-margin-top: 92px; }
+
+/* Feature page FAQ: the +/- marker flips open, and the native disclosure triangle is hidden. */
+.nb-faq > summary::-webkit-details-marker { display: none; }
+.nb-faq[open] .nb-faq-mark { transform: rotate(45deg); }
+.nb-faq-mark { transition: transform .18s ease; display: inline-block; }
+.nb-faq > summary:focus-visible { outline: 2px solid #6d3bff; outline-offset: 3px; border-radius: 6px; }

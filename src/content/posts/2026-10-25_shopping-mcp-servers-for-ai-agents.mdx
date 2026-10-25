@@ -1,0 +1,51 @@
+export const meta = {
+  title: "Shopping MCP Servers for AI Agents: Four Options Compared",
+  slug: "shopping-mcp-servers-for-ai-agents",
+  date: "2026-10-25",
+  publishedAt: "2026-10-25",
+  description: "Compare Shop Nobi, Shopify Catalog, ShopSavvy and within for AI-agent product search. See catalog scope, setup, buying handoff and limits.",
+  excerpt: "The right shopping MCP server depends on whose products your agent needs, whether it needs price history, and what happens after a shopper chooses an item.",
+  tags: ["shopping MCP server", "product search MCP", "AI shopping agents"],
+  author: "Nobi Team",
+  featured: false,
+  draft: false,
+};
+
+An AI shopping agent needs product data it can query, not just a list of stores to browse. A shopping MCP server lets an agent call a product-search tool while it is helping a person. The useful question is not which server has the longest tool list. It is whether the server covers the products the person wants and gives the agent a clear path from a result to a real store.
+
+This comparison uses each provider's published documentation as of October 25, 2026. Catalogs, access rules and features can change. None of the four services below should be assumed to have every product on the web or a guaranteed final price.
+
+## Which shopping MCP server fits?
+
+| If your agent needs... | Consider | Why |
+| --- | --- | --- |
+| Product discovery across curated independent online stores | [Shop Nobi](/shop/mcp) | Its public, read-only `search_products` tool returns products with store links; no Nobi account or API key is needed. |
+| Discovery across Shopify merchants, plus product and variant lookup | [Shopify Global Catalog](https://shopify.dev/docs/agents/catalog) | Shopify documents `search_catalog`, `lookup_catalog` and `get_product` for its catalog. |
+| Broad retailer offers and price history for an identified product | [ShopSavvy](https://shopsavvy.com/agents) | Its published tools include product search, retailer offers and price history. |
+| Inventory from participating independent luxury boutiques | [within](https://shopwithin.co/agents) | Its boutique-focused server publishes product search and additional shelf and visual-search tools. |
+
+These are different product scopes, not a ranking by search quality. We have not run a controlled relevance or freshness benchmark across them. Shop Nobi is the Nobi product, so use the linked source pages to check our claims against each alternative.
+
+## Shop Nobi: curated cross-store search
+
+[Shop Nobi's shopping MCP server](/shop/mcp) exposes two tools. `search_products` takes a shopper's plain-language request and returns matching products with the selling store, price, stock signal, image and link to the store's product page. `find_shop_nobi_page` looks for an existing Shop Nobi page on an exact topic. The connection is remote, read-only and requires no Nobi sign-in or key.
+
+It fits an agent helping someone discover products from curated independent stores and then sending that person to the merchant. It does **not** provide a generic REST catalog API, a complete cross-retailer price-history feed, cart creation or checkout. Price and availability can lag behind the merchant, so the store page is the final place to verify a purchase. Some product links may earn Nobi a commission; the agent should keep any returned commission notice next to the relevant link.
+
+## Shopify Global Catalog: Shopify product and variant workflow
+
+[Shopify's catalog documentation](https://shopify.dev/docs/agents/catalog) distinguishes Global Catalog, covering Shopify merchants, from Storefront Catalog, scoped to one store. Its tools support search, lookup by identifier and fuller product and variant details. Shopify documents an agent profile and [rate-limit rules](https://shopify.dev/docs/agents/profiles/auth-and-rate-limiting); an anonymous experiment is different from production integration. Choose this path if Shopify coverage and variant detail are central to the app.
+
+## ShopSavvy: offers and price history
+
+[ShopSavvy's agent documentation](https://shopsavvy.com/agents) describes a public shopping MCP server with search, retailer-offer and price-history tools. That is a better feature fit when the shopper already knows a product and wants to compare offers or past prices. Its published free, no-key tier has request limits; check its current terms before building production traffic on it.
+
+## within: boutique inventory
+
+[within's agent documentation](https://shopwithin.co/agents) describes a public, read-only server for participating independent luxury boutiques, including shelf and visual search. That narrow inventory focus can be useful when a shopper wants boutique fashion. Coverage is limited to participating shops, so check the available locations and products before promising a result.
+
+## A practical way to choose
+
+Start with three real shopper requests that matter to your app: a broad discovery request, a specific product, and one request with a hard constraint such as size or budget. For each server, record whether it returns useful products, whether the result identifies the seller, what stock and price evidence it supplies, and whether the shopper can reach the actual merchant. Keep connection checks and your own test calls separate from genuine shopper use.
+
+If curated independent-store discovery is the fit, [connect Shop Nobi](/shop/mcp) and try a real product request. If the app needs raw catalog ingestion, historical prices, detailed variants or agent checkout, choose a service that explicitly documents those capabilities. Our [product-search API guide](/blog/product-search-api-for-shopping-apps) explains that choice in more detail.

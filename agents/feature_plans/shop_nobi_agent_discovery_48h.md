@@ -8,7 +8,16 @@
 > # Intervention
 > - [x] Add the actual Shop Nobi shopping MCP endpoint and its two tools to agent-readable `llms.txt`, separate from Nobi's business-sales MCP server.
 > - [x] Add a copyable Gemini CLI HTTP setup command to the existing public MCP onboarding page, using the official Gemini CLI syntax.
-> - [ ] Run the normal build and relevant tests, review the exact diff, release by normal feature PR, and verify the live page and `llms.txt` once.
+> - [x] Run the initial normal build and all 313 website tests with zero failures or skips. Opened PR 478 on the isolated feature branch.
+> - [x] Rebuild after the search pages and pass the full 314-test suite with zero failures or skips. The first new assertion exposed a markup-sensitive test expectation, which was corrected and rerun; product copy was unchanged.
+> - [ ] Review the final diff, release by normal feature PR, and verify the live page and `llms.txt` once.
+>
+> # Search-intent pages
+> - [x] Check current search results and official provider docs. Strong honest intent: shopping MCP server, product search MCP, AI shopping agent product search, cross-store search. No query-volume or ranking estimate was established.
+> - [x] Improve the product page for that intent and write two distinct pages: a shopping MCP comparison and an API-versus-MCP shopping-app guide.
+> - [x] Verify both articles render as distinct HTML pages, appear in the sitemap, and include the relevant source and setup links.
+> - [ ] Publish through the same normal PR.
+> - [ ] Evaluate their indexing and qualified organic visits later; search ranking is not expected within this 48-hour window.
 >
 > # Readout
 > - [ ] Compare the next 48-hour UTC window ending Oct 27 at about 23:40 with the baseline using the same reporting view after its refresh lag.

@@ -1,0 +1,47 @@
+export const meta = {
+  title: "Product Search APIs for Shopping Apps: Catalog Search or MCP?",
+  slug: "product-search-api-for-shopping-apps",
+  date: "2026-10-25",
+  publishedAt: "2026-10-25",
+  description: "Choosing product search for a shopping app? Compare own-catalog search APIs with cross-store MCP tools, and see what an AI agent can actually use.",
+  excerpt: "A search API for your own catalog and a shopping MCP server solve different problems. Start with the products your app must find and the purchase handoff it needs.",
+  tags: ["product search API", "shopping apps", "AI shopping agents"],
+  author: "Nobi Team",
+  featured: false,
+  draft: false,
+};
+
+“Product search API” can mean two different things. A retailer may need to search its **own** catalog in a storefront or app. An independent shopping app may need to discover products sold by **many** stores. Before choosing a vendor, decide which catalog you are searching, who controls its records, and whether the result needs to lead to a store page, a cart or checkout.
+
+That distinction matters for AI agents too. An agent can call an API through application code, or it can connect to a server that exposes product-search tools through the Model Context Protocol (MCP). MCP is a tool interface for an agent, not a promise of raw REST data, unlimited volume or purchasing functions.
+
+## Search your own catalog
+
+If you own the product data and need to power a storefront search box, use a system designed to index and query that catalog. For example, [Algolia's indexing documentation](https://www.algolia.com/doc/indexing/import-synchronize-data) describes sending your records into an index, and its [Search API clients](https://www.algolia.com/doc/libraries/java/v4/helpers/) query those indices. You are responsible for getting the right products, variants and availability into the index. This is a different job from asking a public shopping service to discover stores for you.
+
+For Shopify-specific agents, [Shopify Catalog](https://shopify.dev/docs/agents/catalog) offers search across Shopify merchants or a single storefront, with separate tools for search, identifier lookup and detailed product information. Review its [agent authentication and rate-limit guidance](https://shopify.dev/docs/agents/profiles/auth-and-rate-limiting) before using it at production scale.
+
+## Discover products across stores
+
+If your app helps a person shop across stores, evaluate a service on the products it actually covers and the buying handoff it returns. A plain list of links is less useful if the agent cannot tell which store sells a result, what its price is, or where the person should verify it.
+
+[Shop Nobi's shopping MCP server](/shop/mcp) gives an agent read-only `search_products` and `find_shop_nobi_page` tools. The public endpoint is `https://api.nobi.ai/v1/shop/mcp`; it requires no Nobi account or API key. Product results identify the selling store and link to that store's product page. Shop Nobi focuses on curated online stores rather than claiming every retailer. Some returned links may earn Nobi a commission, and the shopper should verify current price, stock and delivery on the merchant's site.
+
+This is **not** a general-purpose REST product catalog API. It does not promise a full export, historical prices, variant lookup, cart creation or checkout. If your application requires those capabilities, use a provider that documents them. [ShopSavvy's agent tools](https://shopsavvy.com/agents), for example, include retailer offers and price history; [Shopify Catalog](https://shopify.dev/docs/agents/catalog) documents product and variant lookup.
+
+## Try a shopping-agent search
+
+With [Gemini CLI's documented HTTP MCP command](https://geminicli.com/docs/tools/mcp-server/) and Gemini CLI already installed, add Shop Nobi:
+
+```sh
+gemini mcp add --transport http shop-nobi https://api.nobi.ai/v1/shop/mcp
+gemini mcp list
+```
+
+Then ask the agent: “Find a linen dress for a summer wedding under $150. Show the selling store and link, and tell me what I still need to check on the store page.” The request describes the shopper's intent; it does not guarantee a matching product exists. The agent's own account, plan and tool-use approvals may still apply. [Claude Code and VS Code setup](/shop/mcp) are also available.
+
+## Evaluate the result, not the connection
+
+A successful MCP connection proves only that the agent can see a tool. Test whether real shopping requests return useful items, whether links work, whether stock or price needs rechecking, and whether shoppers click through to stores. Exclude your own setup calls and directory probes from adoption metrics. If the person never reaches a product or a store, the integration did not solve the shopping task.
+
+For a feature-by-feature selection among public shopping MCP servers, read our [shopping-agent comparison](/blog/shopping-mcp-servers-for-ai-agents). To try the same search in a browser, [open Shop Nobi](/shop).

@@ -20,8 +20,8 @@ function readCode(text) {
 test("the MCP install route serves its own readable content, canonical and sitemap entry without JavaScript", () => {
   const html = readPage("shop/mcp.html");
   assert.equal(html, readPage("shop/mcp/index.html"));
-  assert.match(html, /<h1[^>]*>Connect to Shop Nobi with MCP<\/h1>/);
-  assert.match(html, /<title>Shop Nobi MCP Server: Setup and Tools \| Nobi<\/title>/);
+  assert.match(html, /<h1[^>]*>Shopping MCP server for product search<\/h1>/);
+  assert.match(html, /<title>Shopping MCP Server for AI Agents \| Shop Nobi<\/title>/);
   assert.match(html, /rel="canonical" href="https:\/\/nobi.ai\/shop\/mcp"/);
   assert.equal((html.match(/rel="canonical"/g) || []).length, 1);
   assert.doesNotMatch(html, /noindex|<div id="root"><\/div>/);
@@ -32,6 +32,8 @@ test("the MCP install route serves its own readable content, canonical and sitem
   assert.doesNotMatch(html, /\bindependent (?:online )?stores\b/i);
   assert.ok(html.includes("Search products across online stores."));
   assert.ok(readCode(html).includes("Catalog prices and availability may lag behind the merchant's website."), "The setup explains catalog freshness limits before a shopper relies on results");
+  assert.ok(html.includes('href="/blog/shopping-mcp-servers-for-ai-agents"'));
+  assert.ok(html.includes("not a general REST catalog API"));
 });
 
 test("copyable Claude Code and Gemini CLI instructions configure the actual remote HTTP endpoint without credentials", () => {
@@ -69,4 +71,21 @@ test("the built setup page starts the normal site assistant while shopping route
     assert.equal(options.searchResultsPage === true, shopping, pathname);
     assert.equal(context.window.shopNobiPageConversationId, shopping ? "test-conversation" : null, pathname);
   }
+});
+
+test("shopping-agent buying guides render distinct search intents and honest product boundaries", () => {
+  const comparison = readPage("blog/shopping-mcp-servers-for-ai-agents.html");
+  const apiGuide = readPage("blog/product-search-api-for-shopping-apps.html");
+
+  assert.ok(comparison.includes("Shopping MCP Servers for AI Agents: Four Options Compared"));
+  for (const provider of ["Shop Nobi", "Shopify Global Catalog", "ShopSavvy", "within"])
+    assert.ok(comparison.includes(provider), `Missing comparison provider: ${provider}`);
+  assert.ok(comparison.includes('href="/shop/mcp"'));
+  assert.ok(comparison.includes("does <strong>not</strong> provide a generic REST catalog API"));
+
+  assert.ok(apiGuide.includes("Product Search APIs for Shopping Apps: Catalog Search or MCP?"));
+  assert.ok(apiGuide.includes("This is <strong>not</strong> a general-purpose REST product catalog API"));
+  assert.ok(apiGuide.includes("gemini mcp add --transport http shop-nobi"));
+  assert.ok(apiGuide.includes('href="/shop/mcp"'));
+  assert.ok(apiGuide.includes("Exclude your own setup calls and directory probes"));
 });

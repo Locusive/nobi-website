@@ -34,15 +34,27 @@ test("the MCP install route serves its own readable content, canonical and sitem
   assert.ok(readCode(html).includes("Catalog prices and availability may lag behind the merchant's website."), "The setup explains catalog freshness limits before a shopper relies on results");
 });
 
-test("copyable Claude Code instructions configure the actual remote HTTP endpoint without credentials", () => {
+test("copyable Claude Code and Gemini CLI instructions configure the actual remote HTTP endpoint without credentials", () => {
   const html = readPage("shop/mcp.html");
   const snippets = [...html.matchAll(/<pre><code>([\s\S]*?)<\/code><\/pre>/g)].map(match => readCode(match[1]));
-  assert.equal(snippets.length, 2);
+  assert.equal(snippets.length, 3);
   assert.equal(snippets[0], `claude mcp add --transport http shop-nobi ${Endpoint}`);
   assert.deepEqual(JSON.parse(snippets[1]), { mcpServers: { "shop-nobi": { type: "http", url: Endpoint } } });
+  assert.equal(snippets[2], `gemini mcp add --transport http shop-nobi ${Endpoint}`);
+  assert.ok(html.includes("gemini mcp list") && html.includes('href="https://geminicli.com/docs/tools/mcp-server/"'));
   assert.ok(html.includes("MCP: Add Server") && html.includes(">HTTP</strong>"), "VS Code instructions choose the remote HTTP transport");
   assert.ok(html.includes('href="https://code.claude.com/docs/en/mcp"'));
   assert.ok(html.includes('href="https://code.visualstudio.com/docs/agent-customization/mcp-servers"'));
+});
+
+test("agent-readable llms.txt distinguishes Shop Nobi shopping tools from Nobi's business assistant", () => {
+  const llmsText = readPage("llms.txt");
+  const shopSection = llmsText.split("## Shop Nobi product search for AI agents")[1]?.split("## Contact")[0];
+  assert.ok(shopSection, "Shop Nobi agent section is present");
+  assert.ok(shopSection.includes(`mcp-server: ${Endpoint}`));
+  assert.ok(shopSection.includes("search_products") && shopSection.includes("find_shop_nobi_page"));
+  assert.ok(shopSection.includes("https://nobi.ai/shop/mcp"));
+  assert.ok(shopSection.includes("cannot place orders or take payments"));
 });
 
 test("the built setup page starts the normal site assistant while shopping routes retain product-search mode", () => {

@@ -22,6 +22,7 @@ export const ShopNobiMcpConfig = {
 };
 
 export const ShopNobiMcpCommand = `claude mcp add --transport http shop-nobi ${ShopNobiMcpEndpoint}`;
+export const ShopNobiGeminiCommand = `gemini mcp add --transport http shop-nobi ${ShopNobiMcpEndpoint}`;
 
 /** These are the two tools advertised by the public hosted service. */
 export const ShopNobiMcpTools = [

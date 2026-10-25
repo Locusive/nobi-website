@@ -5,6 +5,7 @@ import {
   ShopNobiMcpCommand,
   ShopNobiMcpConfig,
   ShopNobiMcpEndpoint,
+  ShopNobiGeminiCommand,
   ShopNobiMcpSeo,
   ShopNobiMcpTools,
 } from "../content/shopNobiMcp.js";
@@ -31,6 +32,11 @@ export default function ShopNobiMcp() {
         <p>Alternatively, merge this server into your project's <code>.mcp.json</code>:</p>
         <pre><code>{JSON.stringify(ShopNobiMcpConfig, null, 2)}</code></pre>
         <p>Open <code>/mcp</code> in Claude Code to check the connection and review any client approval. <a href="https://code.claude.com/docs/en/mcp">Claude Code setup reference</a>.</p>
+
+        <h2>Gemini CLI</h2>
+        <p>With Gemini CLI installed, run:</p>
+        <pre><code>{ShopNobiGeminiCommand}</code></pre>
+        <p>Run <code>gemini mcp list</code> to check the connection, then review the client's tool-use prompts. <a href="https://geminicli.com/docs/tools/mcp-server/">Gemini CLI setup reference</a>.</p>
 
         <h2>VS Code</h2>
         <p>Run <code>MCP: Add Server</code> from the Command Palette, choose <strong>HTTP</strong>, enter the server address above and name it <code>shop-nobi</code>. Choose where to save it and review the client prompts. <a href="https://code.visualstudio.com/docs/agent-customization/mcp-servers">VS Code setup reference</a>.</p>

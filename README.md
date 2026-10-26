@@ -163,7 +163,10 @@ Story at `/shop/stories/<slug>`, an AMP story built by
 shows a cover, the guide in pages of at most 180 characters, up to three
 products with nofollow store links, questions that fit, and a last page that
 links back to the search page with `utm_source=google_web_stories`. The search
-page links to its story, and `sitemap-shop.xml` lists the stories. Each store
+CTA on the `sofas` story instead links to the `/shop` search home with
+`utm_campaign=story_to_search` and `utm_content=sofas`, so a visitor must enter
+their own query. Its product links remain available. The search page links to
+its story, and `sitemap-shop.xml` lists the stories. Each store
 link goes through `https://api.nobi.ai/v1/shop/story-go` with the plain store
 link and the story's slug; the API counts the tap and forwards to the store,
 through the store's affiliate link when one pays us. The story's amp-analytics

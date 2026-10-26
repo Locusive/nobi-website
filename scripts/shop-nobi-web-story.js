@@ -7,6 +7,7 @@ import { BaseUrl, CommissionNotice, readStoreLinkRel } from "../src/utils/shopNo
 import { describeSearchPage, formatPrice, searchPageUrl } from "../src/utils/shopNobiSearchPage.js";
 import { webStoryUrl } from "../src/utils/shopNobiWebStory.js";
 import { IndexableRobots, PortraitPosterSize } from "../src/utils/previewImage.js";
+import { readProductPlacement } from "../src/utils/shopNobiProductPlacement.js";
 
 const Publisher = "Nobi";
 // A square copy of the Nobi icon on white, since Google asks for a logo without a see-through background.
@@ -128,7 +129,10 @@ function buildStoryPageId(storyPage, index, plan) {
 
   const productPages = plan.pages.filter((planned) => planned.kind === StoryPageKind.Product);
   const place = productPages.indexOf(storyPage) + 1;
-  return `${StoryPageKind.Product}-${place}-${product.productVariantId}-${product.owningMerchantId}`;
+  const { placementReason } = readProductPlacement(product);
+  const placement = typeof product.storyPaidLink === "boolean"
+    ? `-${product.storyPaidLink ? "affiliate" : "direct"}-${placementReason || "unknown"}` : "";
+  return `${StoryPageKind.Product}-${place}-${product.productVariantId}-${product.owningMerchantId}${placement}`;
 }
 
 /** Renders the layers of one story page for its kind. */
@@ -182,11 +186,14 @@ function renderProduct(product, slug) {
  * @returns {string} The link, and the notice when the link is paid.
  */
 function renderStoreLink(product, slug) {
-  const linkThroughApi = `${StoreLinkRoute}?url=${encodeURIComponent(product.url)}&page=${encodeURIComponent(slug)}`;
+  const { placementReason } = readProductPlacement(product);
+  const placement = placementReason ? `&placementReason=${placementReason}` : "";
+  const linkThroughApi = `${StoreLinkRoute}?url=${encodeURIComponent(product.url)}&page=${encodeURIComponent(slug)}${placement}`;
   const tooltip = `data-tooltip-text="${htmlEscape(readStoreSite(product.url))}"`;
-  const rel = readStoreLinkRel(product.paidLink);
+  const paidLink = typeof product.storyPaidLink === "boolean" ? product.storyPaidLink : product.paidLink;
+  const rel = readStoreLinkRel(paidLink);
   const link = `<a class="store-link" href="${htmlEscape(linkThroughApi)}" ${tooltip} rel="${rel}" target="_blank">${StoreLinkText}</a>`;
-  return product.paidLink ? `${link}<p class="commission-notice">${CommissionNotice}</p>` : link;
+  return paidLink ? `${link}<p class="commission-notice">${CommissionNotice}</p>` : link;
 }
 
 /** Reads the store's site name from its link, such as "lucchese.com", or the link itself when it cannot be read. */

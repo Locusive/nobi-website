@@ -49,6 +49,7 @@ test("a prebuilt click counts the product, page, shopper and acquisition without
           storeName: "Lucchese",
           productPrice: 495,
           positionInGrid: 2,
+          isPaidLink: false,
           linkUrl: TaggedProductUrl,
           pageUrl: PageUrl,
           utm_source: "pinterest",
@@ -139,6 +140,8 @@ test("paid prebuilt clicks use one visit reference per page, preserve the destin
       assert.equal(secondLink, firstLink, "Every click in the page view carries the same visit reference");
       for (const { event } of browser.beacons) {
         assert.equal(event.details.linkUrl, firstLink);
+        assert.equal(event.details.isPaidLink, true);
+        assert.equal(event.details.placementReason, undefined, "An affiliate destination alone does not prove a ranking boost");
         assert.equal(event.details.conversationId, undefined);
         assert.equal(event.details.utm_source, "pinterest");
         assert.equal(event.details.referrer, "https://www.google.com/");
@@ -152,6 +155,21 @@ test("paid prebuilt clicks use one visit reference per page, preserve the destin
     const crawler = makeBrowser({ userAgent: GooglebotAgent });
     assert.equal(clickProduct(crawler, MouseButton.Main, product).link.href, TaggedProductUrl);
     assert.equal(crawler.beacons.length + crawler.fetches.length, 0);
+  }
+});
+
+test("clicks keep the server's ranking decision separate from their actual affiliate destination", () => {
+  for (const [placementReason, paidLink, expectedReason] of [
+    ["affiliate", true, "affiliate"], ["organic", true, "organic"],
+    ["paid_merchant", false, "paid_merchant"], [undefined, false, undefined], ["Boost", false, undefined],
+  ]) {
+    const browser = makeBrowser();
+    const product = { ...Product, paidLink, placementReason,
+      ...(paidLink ? { encodedStoreLink: encodePaidLink(PaidLinks[0].url) } : {}) };
+    clickProduct(browser, MouseButton.Main, product);
+    const { details } = browser.beacons[0].event;
+    assert.equal(details.isPaidLink, paidLink);
+    assert.equal(details.placementReason, expectedReason);
   }
 });
 

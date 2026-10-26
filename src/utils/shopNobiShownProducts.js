@@ -1,4 +1,5 @@
 import { sendShopNobiEvent, ShopNobiMerchantId } from "./shopNobiOutboundClick.js";
+import { readProductPlacement } from "./shopNobiProductPlacement.js";
 
 /** The event the assistant bundle sends for each group of products it shows; the reports read them all under it. */
 const DisplayedProductCollectionEvent = "Displayed Product Collection";
@@ -44,5 +45,6 @@ function buildShownProduct(product) {
     productVariantId: product.productVariantId ?? null,
     ...(otherStoreId ? { owningMerchantId: otherStoreId } : {}),
     isPaidLink: product.paidLink === true,
+    ...readProductPlacement(product),
   };
 }

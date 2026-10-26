@@ -121,11 +121,11 @@ test("the Shop Nobi page shares its own link preview picture, and the other page
 test("pricing shows the bundle slider, bundle table, message rules, trial terms, and FAQ answers, with no calculator", () => {
   const text = bodyText(readPage("pricing.html")).replaceAll("&#x27;", "'");
   for (const fact of [
-    "Message bundles", "500 messages a month", "$0.050 per message", "See all bundles", "Price per message",
-    "100,000", "$2,999", "$0.030", "Custom pricing",
+    "Message bundles", "500 messages a month", "$0.058 per message", "See all bundles", "Price per message",
+    "100,000", "$3,749", "$0.037", "Custom pricing",
     "Have more than 5,000 products, or need dedicated support? We'll set up a custom plan.",
     "What counts as a message", "There is no separate search allowance.", "Showing more results for the same search is free.",
-    "If you go over your bundle", "Keep going", "Stop and hide Nobi", "plus 3 cents for each extra message",
+    "If you go over your bundle", "Keep going", "Stop and hide Nobi", "plus 4 cents for each extra message",
     "A payment method is required to start the 30-day free trial", "100 free messages",
   ]) assert.ok(text.includes(fact), `Missing pricing fact: ${fact}`);
   const trialSummary = "100,000 free messages during your 30-day trial.";
@@ -136,14 +136,23 @@ test("pricing shows the bundle slider, bundle table, message rules, trial terms,
     "2,500 searches", "$0.10", "$0.01", "extra search", "pause until the next billing cycle",
     "Find your price", "Estimate my bill", "What would you like to use Nobi for?",
     "Nobi stops at your bundle's limit", "Volume discounts",
+    "$25 for 500", "$1,599", "$2,999", "3 cents for each",
   ]) assert.ok(!text.includes(oldFact), `Old pricing, calculator, or enterprise card still shown: ${oldFact}`);
 });
 
 test("pricing metadata offers every bundle", () => {
   const html = readPage("pricing.html");
-  assert.ok(html.includes("Monthly message bundles from $25 for 500 messages."));
-  for (const offer of ['"lowPrice":"25"', '"highPrice":"2999"', '"offerCount":11', '"name":"100,000 messages a month"'])
+  assert.ok(html.includes("Monthly message bundles from $29 for 500 messages."));
+  for (const offer of ['"lowPrice":"29"', '"highPrice":"3749"', '"offerCount":11', '"name":"100,000 messages a month"'])
     assert.ok(html.includes(offer), `Missing offer data: ${offer}`);
+});
+
+test("the homepage and product page offers state the smallest bundle's price", () => {
+  for (const page of ["homepage.html", "product.html"]) {
+    const html = readPage(page);
+    assert.ok(html.includes('"price":"29"'), `Missing starting price on ${page}`);
+    assert.ok(!html.includes('"price":"25"'), `Old starting price on ${page}`);
+  }
 });
 
 test("blog and glossary output retain their own content without the homepage", () => {

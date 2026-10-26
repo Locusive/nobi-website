@@ -1,4 +1,4 @@
-import { TRIAL_LIMIT_RULE, TRIAL_SUMMARY } from "./pricing.js";
+import { BUNDLE_RANGE, TRIAL_LIMIT_RULE, TRIAL_SUMMARY } from "./pricing.js";
 
 const FAQ_ITEMS = [
   {
@@ -130,7 +130,7 @@ const FAQ_ITEMS = [
   },
   {
       q: "I have X sessions per month and Y percent of my customers use search. How much would Nobi cost for me?",
-      a: "Every search and every chat question counts as one message. Add up your monthly searches and chat questions, then pick the smallest bundle that holds them. Bundles go from $25 for 500 messages to $2,999 for 100,000 messages. Above 100,000 messages a month, talk to sales for custom pricing.",
+      a: `Every search and every chat question counts as one message. Add up your monthly searches and chat questions, then pick the smallest bundle that holds them. Bundles go ${BUNDLE_RANGE}. Above 100,000 messages a month, talk to sales for custom pricing.`,
       category: "Product",
   },
   {

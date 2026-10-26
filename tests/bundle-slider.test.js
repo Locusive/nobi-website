@@ -9,9 +9,9 @@ import { MESSAGE_BUNDLES } from "../src/constants/pricing.js";
 const RendererEntry = fileURLToPath(new URL("./fixtures/render-bundle-slider.jsx", import.meta.url));
 const RendererFolder = fileURLToPath(new URL("../node_modules/.cache/bundle-slider-test/", import.meta.url));
 const PublishedBundles = [
-  ["500", "$25", "$0.050"], ["1,000", "$45", "$0.045"], ["2,500", "$105", "$0.042"], ["5,000", "$199", "$0.040"],
-  ["10,000", "$379", "$0.038"], ["15,000", "$539", "$0.036"], ["20,000", "$699", "$0.035"], ["30,000", "$999", "$0.033"],
-  ["50,000", "$1,599", "$0.032"], ["75,000", "$2,325", "$0.031"], ["100,000", "$2,999", "$0.030"],
+  ["500", "$29", "$0.058"], ["1,000", "$55", "$0.055"], ["2,500", "$129", "$0.052"], ["5,000", "$249", "$0.050"],
+  ["10,000", "$469", "$0.047"], ["15,000", "$669", "$0.045"], ["20,000", "$869", "$0.043"], ["30,000", "$1,249", "$0.042"],
+  ["50,000", "$1,999", "$0.040"], ["75,000", "$2,899", "$0.039"], ["100,000", "$3,749", "$0.037"],
 ];
 
 let renderBundleSlider;
@@ -44,11 +44,11 @@ function readSlider(html) {
   return { label, price };
 }
 
-test("the slider starts on the $25 bundle", () => {
+test("the slider starts on the $29 bundle", () => {
   const html = renderBundleSlider();
-  assert.ok(html.includes('aria-valuetext="500 messages for $25 a month"'));
+  assert.ok(html.includes('aria-valuetext="500 messages for $29 a month"'));
   assert.ok(html.includes('type="range"') && html.includes('max="11"') && html.includes('value="0"'));
-  assert.deepEqual(readSlider(html), { label: "500 messages a month", price: "$25 / month $0.050 per message" });
+  assert.deepEqual(readSlider(html), { label: "500 messages a month", price: "$29 / month $0.058 per message" });
 });
 
 test("each bundle stop shows its messages, price, and price per message", () => {

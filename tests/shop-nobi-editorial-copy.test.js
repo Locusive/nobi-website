@@ -127,30 +127,35 @@ test("suitcase correction leaves refreshed guidance and other pages intact", () 
   }
 });
 
-test("published ring guidance agrees across the page, metadata and browser data without changing shopping data or other pages", async (t) => {
+for (const scenario of [
+  { slug: "sterling-silver-rings", title: "Sterling Silver Rings: Compare Styles, Fit & Finish",
+    stale: "A secure clasp or shank ensures the ring stays in place." },
+  { slug: "pencil-skirts", title: "Pencil Skirts: Compare Stores, Fabrics & Fit",
+    stale: "Pencil skirts range from $72 to $1290. Wool and leather need dry cleaning." },
+]) test(`${scenario.slug} guidance agrees across HTML, metadata, schema and browser data while retaining shopping data`, async (t) => {
   const folder = mkdtempSync(new URL("../node_modules/.editorial-test-", import.meta.url));
   t.after(() => rmSync(folder, { recursive: true, force: true }));
   writeFileSync(join(folder, "index.html"), '<!doctype html><html><head><!--__PRERENDER_TITLE__--><!--__PRERENDER_DESC__--></head><body><div id="root"></div></body></html>');
   const fixture = readFixturePageData().pages[0];
-  const ring = {
+  const authored = {
     ...fixture,
-    slug: "sterling-silver-rings",
-    title: "Best Sterling Silver Rings from Top Stores",
-    description: "Compare the best sterling silver rings from top stores in one place.",
-    guide: ["A secure clasp or shank ensures the ring stays in place."],
-    faq: [{ question: "Old ring question", answer: "Old ring answer" }],
+    slug: scenario.slug,
+    title: "Old search-page title",
+    description: "Old search-page description",
+    guide: [scenario.stale],
+    faq: [{ question: "Old question", answer: "Old answer" }],
   };
-  const { pages } = buildSearchPages([ring, fixture], 2);
+  const { pages } = buildSearchPages([authored, fixture], 2);
   const plan = { searchPages: pages, categoryPages: [], popularSearches: buildPopularSearches(pages, []) };
   const originalPlan = structuredClone(plan);
 
   await writePrebuiltPages(plan, folder);
 
-  const html = readFileSync(join(folder, "shop/s/sterling-silver-rings.html"), "utf8");
+  const html = readFileSync(join(folder, `shop/s/${scenario.slug}.html`), "utf8");
   const published = readScriptJson(html, "shop-nobi-prebuilt-content").data;
   // React and the head renderer use equivalent numeric apostrophe entities.
   const body = readBody(html).replaceAll("&#x27;", "&#39;");
-  assert.equal(published.title, "Sterling Silver Rings: Compare Styles, Fit & Finish");
+  assert.equal(published.title, scenario.title);
   assert.ok(html.includes(`<title>${htmlEscape(published.title)} | Shop Nobi</title>`));
   assert.ok(html.includes(`<meta name="description" content="${htmlEscape(published.description)}">`));
   assert.ok(body.includes(`>${htmlEscape(published.title)}</h1>`));
@@ -164,8 +169,14 @@ test("published ring guidance agrees across the page, metadata and browser data 
   const schema = readScriptJson(html, "page-schema");
   assert.deepEqual(schema.find((entry) => entry["@type"] === "FAQPage").mainEntity,
     published.faq.map(({ question, answer }) => ({ "@type": "Question", name: question, acceptedAnswer: { "@type": "Answer", text: answer } })));
-  assert.ok(!html.includes("secure clasp"));
-  assert.ok(!html.includes("Old ring answer"));
+  assert.ok(!html.includes(htmlEscape(scenario.stale)));
+  assert.ok(!html.includes("Old answer"));
+  if (scenario.slug === "pencil-skirts") {
+    assert.ok(!html.includes("$72"));
+    assert.ok(!html.includes("need dry cleaning"));
+    assert.match(published.guide.join(" "), /Shop Nobi search box below/);
+    assert.match(published.guide.join(" "), /exact fabric composition, lining and care label/);
+  }
   for (const [key, value] of Object.entries(originalPlan.searchPages[0])) {
     if (!["title", "description", "guide", "faq"].includes(key)) assert.deepEqual(published[key], value, key);
   }
@@ -174,5 +185,5 @@ test("published ring guidance agrees across the page, metadata and browser data 
   const otherHtml = readFileSync(join(folder, "shop/s/black-leather-boots.html"), "utf8");
   assert.deepEqual(readScriptJson(otherHtml, "shop-nobi-prebuilt-content").data, originalPlan.searchPages[1]);
   assert.ok(otherHtml.includes("<title>Black Leather Boots | Shop Nobi</title>"));
-  assert.ok(!otherHtml.includes("Compare Styles, Fit &amp; Finish"));
+  assert.ok(!otherHtml.includes(htmlEscape(scenario.title)));
 });

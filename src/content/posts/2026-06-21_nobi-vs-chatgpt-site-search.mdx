@@ -29,7 +29,7 @@ export const meta = {
  },
  {
  question: "Frequently asked questions about building vs buying a website AI assistant",
- answer: "ChatGPT is capable enough for on-site Q&A - the gap is not model quality but the engineering work you add on top: live catalog grounding, answer monitoring, and search UI. Nobi starts at $25/month for 500 messages, where a search or a chat question each count as one message, with bigger bundles up to 100,000 messages for $2,999 a month and no revenue-share or per-seat fees. A Nobi integration goes live in hours as a theme drop-in; a custom ChatGPT build realistically takes weeks to months depending on catalog size. The biggest risk of building yourself is catalog drift - if the vector index falls behind live inventory, pricing, and policy changes, the assistant gives confidently wrong answers, which is exactly the failure mode that drives visitors away."
+ answer: "ChatGPT is capable enough for on-site Q&A - the gap is not model quality but the engineering work you add on top: live catalog grounding, answer monitoring, and search UI. Nobi starts at $29/month for 500 messages, where a search or a chat question each count as one message, with bigger bundles up to 100,000 messages for $3,749 a month and no revenue-share or per-seat fees. A Nobi integration goes live in hours as a theme drop-in; a custom ChatGPT build realistically takes weeks to months depending on catalog size. The biggest risk of building yourself is catalog drift - if the vector index falls behind live inventory, pricing, and policy changes, the assistant gives confidently wrong answers, which is exactly the failure mode that drives visitors away."
  }
  ],
 };
@@ -72,14 +72,14 @@ export const meta = {
 
 You're looking at ChatGPT - capable model, reasonable API pricing, and your dev team is pretty sure they can wire it to your product catalog. The question isn't whether ChatGPT can do Q&A. It can. The real question is what you're committing to build on top of it: catalog grounding, live-data refresh, answer monitoring, and search UI - all of it ongoing. Get any of that wrong and visitors get confidently wrong answers about prices and stock, which is exactly the kind of interaction that loses customers for good. Here's what each path actually requires:
 
-- **Nobi** - purpose-built, catalog-grounded search and conversational assistant from $25/month for 500 messages (a search or a chat question each count as one message). Quick theme drop-in, live-catalog grounding, built-in analytics, maintenance handled. Right when on-site discovery and converting existing traffic is the bottleneck and you'd rather not own the plumbing.
+- **Nobi** - purpose-built, catalog-grounded search and conversational assistant from $29/month for 500 messages (a search or a chat question each count as one message). Quick theme drop-in, live-catalog grounding, built-in analytics, maintenance handled. Right when on-site discovery and converting existing traffic is the bottleneck and you'd rather not own the plumbing.
 - **Build with ChatGPT** - you own everything: catalog grounding (RAG), retrieval, search UI, latency management, hallucination monitoring, security, and ongoing maintenance as your catalog and the model evolve. Right for engineering teams that want full control or have requirements a packaged tool can't satisfy.
 
 For most website marketing teams, the productized path gets a grounded assistant live in front of visitors faster.
 
 | Option | Primary job | Best for | Pricing (starting) | Standout strength | Key weakness |
 | --- | --- | --- | --- | --- | --- |
-| Nobi | Catalog-grounded product search + conversational shopping assistant + capturing high-intent visitors in one product | Website teams whose bottleneck is on-site discovery and CVR, who want live-catalog-grounded answers without building and maintaining the retrieval pipeline themselves | From $25/mo for 500 messages (a search or a chat question each count as one message) | Inline numbered citations on every answer, twice-daily catalog refresh, and query overrides that lock exact merchant-approved responses to high-stakes questions | No behavioral reranking today; website chat only, no email channel, no in-chat post-purchase transaction execution |
+| Nobi | Catalog-grounded product search + conversational shopping assistant + capturing high-intent visitors in one product | Website teams whose bottleneck is on-site discovery and CVR, who want live-catalog-grounded answers without building and maintaining the retrieval pipeline themselves | From $29/mo for 500 messages (a search or a chat question each count as one message) | Inline numbered citations on every answer, twice-daily catalog refresh, and query overrides that lock exact merchant-approved responses to high-stakes questions | No behavioral reranking today; website chat only, no email channel, no in-chat post-purchase transaction execution |
 | Build with ChatGPT | General-purpose LLM for reasoning, writing, and coding, adaptable to custom assistant and search flows | Engineering teams with dedicated capacity who need custom ranking logic, bespoke UX, or non-standard catalog integration that a packaged widget won't satisfy | OpenAI API token-based pricing; no flat per-feature rate, research current API costs before modeling | Full control over ranking logic, UX, conversation design, and integration surface | Catalog grounding, retrieval, search UI, latency tuning, hallucination monitoring, security review, and ongoing maintenance are all yours to build and sustain |
 
 <BlogQualifier context="building with ChatGPT versus buying a ready-made website assistant" />
@@ -154,7 +154,7 @@ Yes. ChatGPT is a strong general-purpose model for reasoning and Q&A. The gap is
 
 **How much does Nobi cost?**
 
-Nobi starts at $25 a month for 500 messages, where a search or a chat question each count as one message. Bigger bundles cost less per message, up to 100,000 messages for $2,999 a month. No revenue-share and no per-seat fees. Nobi publishes its bundle prices, and a busier month is billed at the bundle that fits.
+Nobi starts at $29 a month for 500 messages, where a search or a chat question each count as one message. Bigger bundles cost less per message, up to 100,000 messages for $3,749 a month. No revenue-share and no per-seat fees. Nobi publishes its bundle prices, and a busier month is billed at the bundle that fits.
 
 **How long does a custom ChatGPT build take versus a Nobi integration?**
 

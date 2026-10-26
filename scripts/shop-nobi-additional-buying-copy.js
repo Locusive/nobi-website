@@ -167,5 +167,61 @@ export const AdditionalBuyingCopy = {
         "answer": "Read which sections are lined and inspect any sheer panels or openings in the description and photos. Follow the exact item's care label, and ask the retailer about any missing coverage or cleaning details."
       }
     ]
+  },
+  "amethyst-earrings": {
+    "title": "Amethyst Earrings: Compare Stones, Styles & Sizes",
+    "description": "Compare amethyst earrings across stores. Check the selected stone description, origin information, dimensions, metal components and whether each listing is a single or pair.",
+    "guide": [
+      "Start with the selected stone option. Listings can use different color and origin descriptions, including green labels and lab-grown descriptions. Read what the seller states for the exact variant; a photo or price does not establish stone identity, origin or treatment.",
+      "Separate studs, hoops and drop earrings before comparing dimensions. Check the overall drop length or hoop size as well as the stone measurements, and confirm whether any pearl or other decorative component is part of the selected design.",
+      "Check whether the price is for a single earring or a pair. Read the materials for the post, back, setting and any finish separately, and confirm the fastening type. If stone details or supporting documentation matter to your choice, ask the seller what information applies to that exact item.",
+      "Use Shop Nobi search for the combination you want, such as a pair of purple amethyst stud earrings under $150. Verify the selected stone option, dimensions, quantity, current price and returns with the retailer, and follow the manufacturer's care guidance for the complete piece."
+    ],
+    "faq": [
+      {
+        "question": "How can I compare natural and lab-grown amethyst listings?",
+        "answer": "Read the origin and treatment information provided for the selected stone, and ask the seller to clarify anything missing. Do not infer those details from the price, color or product photo."
+      },
+      {
+        "question": "Are all amethyst-earring listings sold as pairs?",
+        "answer": "Do not assume a listing is for a pair. Confirm the stated quantity and selected option before comparing prices or ordering."
+      },
+      {
+        "question": "Which measurements matter for amethyst earrings?",
+        "answer": "Compare the overall earring dimensions with the stone dimensions. For drops, check the total length; for hoops, check the stated size. Confirm any missing measurements and the fastening details with the retailer."
+      },
+      {
+        "question": "How should I care for earrings with amethyst and other materials?",
+        "answer": "Follow the manufacturer's instructions for the whole piece, including its stones, metal, finish and any pearls or other components. A stone name alone does not establish a suitable cleaning method."
+      }
+    ]
+  },
+  "emerald-jewelry": {
+    "title": "Emerald Jewelry: Compare Stones, Settings & Fit",
+    "description": "Compare emerald jewelry across stores, from charms and earrings to rings and necklaces. Check the selected stone details, dimensions, included components and seller documentation.",
+    "guide": [
+      "Choose the type of piece first: a charm, stud, hoop, ring, bracelet, hand chain or necklace. Then check the exact stone option. A general title such as cabochon does not by itself identify the selected stone, and a green appearance does not establish that it is emerald.",
+      "Read the seller's stone identity, origin and treatment disclosures for the exact item. If documentation is provided, check what it describes and which item it covers. Price, visible inclusions and product photos are not a substitute for that information.",
+      "Compare the measurements and included components. Confirm single versus pair for earrings, ring size, chain or bracelet length, and whether a charm includes a chain. For a separate charm, check its attachment dimensions against the chain or bracelet you intend to use.",
+      "Try a Shop Nobi search such as an emerald pendant necklace with a chain under $300. Verify the selected stone, metal, dimensions, included chain and return conditions with the retailer. Use the manufacturer's care and wear guidance for the exact piece rather than assuming every emerald design suits the same cleaning method or use."
+    ],
+    "faq": [
+      {
+        "question": "How do I check what stone an emerald-jewelry listing contains?",
+        "answer": "Read the exact selected option's stone description and any origin or treatment disclosures. Ask the seller to clarify missing details or explain documentation. A green color, price or visible inclusions alone does not establish identity or authenticity."
+      },
+      {
+        "question": "Does a cabochon product title mean the stone is emerald?",
+        "answer": "No. Confirm the stone identity in the selected variant's specifications rather than relying on a general cabochon title. Check that the description and any documentation refer to the option you intend to order."
+      },
+      {
+        "question": "Will an emerald charm fit a chain I already own?",
+        "answer": "Compare the charm's stated attachment or bail dimensions with your chain and its end fittings. Confirm whether the listing includes a chain, and ask the retailer about compatibility if the necessary measurements are missing."
+      },
+      {
+        "question": "Can all emerald jewelry be worn and cleaned the same way?",
+        "answer": "No single routine follows from the stone name. Check the manufacturer's instructions for the selected piece, including any guidance for its treatment, setting, metal and other components."
+      }
+    ]
   }
 };

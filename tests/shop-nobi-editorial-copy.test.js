@@ -128,6 +128,8 @@ test("suitcase correction leaves refreshed guidance and other pages intact", () 
 });
 
 for (const scenario of [
+  {"slug": "amethyst-earrings", "title": "Amethyst Earrings: Compare Stones, Styles & Sizes", "stale": "Yes, 14k gold offers a balance of durability and richness, suitable for daily wear."},
+  {"slug": "emerald-jewelry", "title": "Emerald Jewelry: Compare Stones, Settings & Fit", "stale": "Real emeralds usually have natural inclusions called jardin; a reputable seller will provide certification."},
   {"slug": "sundresses", "title": "Sundresses: Compare Lengths, Straps & Fabrics", "stale": "Cotton and linen sundresses can be machine washed on gentle cycle and tumble dried on low."},
   {"slug": "silver-watches", "title": "Silver Watches: Compare Dials, Cases & Fit", "stale": "Most silver watches should be serviced every 3 to 5 years."},
   {"slug": "black-maxi-dresses", "title": "Black Maxi Dresses: Compare Lengths, Fits & Details", "stale": "Any black maxi dress is suitable for formal events."},

@@ -78,12 +78,16 @@ test("shopping-agent buying guides render distinct search intents and honest pro
   const apiGuide = readPage("blog/product-search-api-for-shopping-apps.html");
 
   assert.ok(comparison.includes("Shopping MCP Servers for AI Agents: Four Options Compared"));
+  assert.match(comparison, /<article class="prerendered-article">\s*<h1>Shopping MCP Servers for AI Agents: Four Options Compared<\/h1>/);
+  assert.match(comparison, /rel="canonical" href="https:\/\/nobi.ai\/blog\/shopping-mcp-servers-for-ai-agents"/);
   for (const provider of ["Shop Nobi", "Shopify Global Catalog", "ShopSavvy", "within"])
     assert.ok(comparison.includes(provider), `Missing comparison provider: ${provider}`);
   assert.ok(comparison.includes('href="/shop/mcp"'));
   assert.ok(comparison.includes("does <strong>not</strong> provide a generic REST catalog API"));
 
   assert.ok(apiGuide.includes("Product Search APIs for Shopping Apps: Catalog Search or MCP?"));
+  assert.match(apiGuide, /<article class="prerendered-article">\s*<h1>Product Search APIs for Shopping Apps: Catalog Search or MCP\?<\/h1>/);
+  assert.match(apiGuide, /rel="canonical" href="https:\/\/nobi.ai\/blog\/product-search-api-for-shopping-apps"/);
   assert.ok(apiGuide.includes("This is <strong>not</strong> a general-purpose REST product catalog API"));
   assert.ok(apiGuide.includes("gemini mcp add --transport http shop-nobi"));
   assert.ok(apiGuide.includes('href="/shop/mcp"'));

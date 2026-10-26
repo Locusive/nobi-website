@@ -51,8 +51,20 @@ export const ShopNobiAgentConnections = [
   },
 ];
 
-/** These are the two tools advertised by the public hosted service. */
+/** Framework recipes connect an agent to the server by URL; each links to a runnable example. */
+export const ShopNobiFrameworkRecipes = [
+  { name: "LangChain / LangGraph", description: "Register the server, load its tools, run an agent.", href: "https://github.com/Locusive/shop-nobi-claude-plugin/blob/main/examples/langchain_shop_agent.py" },
+  { name: "LlamaIndex", description: "Load the tools with llama-index-tools-mcp.", href: "https://github.com/Locusive/shop-nobi-claude-plugin/blob/main/examples/llamaindex_shop_agent.py" },
+  { name: "Vercel AI SDK", description: "createMCPClient over Streamable HTTP, then client.tools().", href: "https://github.com/Locusive/shop-nobi-claude-plugin/blob/main/examples/vercel_ai_sdk_shop_agent.ts" },
+  { name: "OpenAI Agents SDK", description: "A hosted MCP tool points the Responses API at the server.", href: "https://github.com/Locusive/shop-nobi-claude-plugin/blob/main/examples/openai_agents_sdk_shop_agent.py" },
+];
+
+/** The tools advertised by the public hosted service. */
 export const ShopNobiMcpTools = [
   { name: "search_products", description: "Search products across online stores." },
   { name: "find_shop_nobi_page", description: "Find an existing Shop Nobi shopping page for an exact topic." },
+  { name: "get_product_details", description: "Get a product's full details: specs, variants, images, price, availability, brand and category." },
+  { name: "compare_products", description: "Compare two or more products side by side on the attributes they share." },
+  { name: "check_price_and_availability", description: "Check the current price, currency and stock for one or more products." },
+  { name: "find_alternatives", description: "Find similar products across stores, excluding the original one." },
 ];

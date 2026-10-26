@@ -28,6 +28,7 @@ export default function SiteFooter() {
           ))}
           {/* A plain link, so the page loads fresh and the assistant starts as Shop Nobi. */}
           <a href="/shop" style={{ color: "inherit", textDecoration: "none" }}>Shop Nobi searches</a>
+          <a href="/shop/mcp" style={{ color: "inherit", textDecoration: "none" }}>Shop Nobi for AI agents</a>
           <a href="https://docs.nobi.ai" style={{ display: "inline-flex", alignItems: "center", gap: 5, color: "inherit", textDecoration: "none" }}>
             Docs
             <ExternalLink size={12} style={{ flex: "none" }} />

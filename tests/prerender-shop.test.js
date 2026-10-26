@@ -146,7 +146,8 @@ test("the visible page shows the products, opening store links in a new tab with
 
 test("breadcrumbs and built related searches keep their existing page links", () => {
   const body = readBody(readOutput("shop/s/black-leather-boots.html"));
-  const pageLinks = [...body.matchAll(/href="(\/shop[^"]*)"/g)].map(([, href]) => href);
+  const pageContent = body.split("<footer")[0];
+  const pageLinks = [...pageContent.matchAll(/href="(\/shop[^"]*)"/g)].map(([, href]) => href);
   assert.deepEqual(pageLinks, ["/shop", "/shop", "/shop/c/shoes", "/shop/s/boots", "/shop/stories/black-leather-boots", "/shop/s/chelsea-boots"]);
 
   const bootsBody = readBody(readOutput("shop/s/boots.html"));

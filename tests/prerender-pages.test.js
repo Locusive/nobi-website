@@ -206,9 +206,12 @@ test("the sitemap index points to the site's own pages and to the Shop Nobi site
   assert.ok(readPage("sitemap-pages.xml").includes("<loc>https://nobi.ai/pricing</loc>"));
 });
 
-test("the site footer links to Shop Nobi", () => {
+test("the site and Shop Nobi footers link to the agent setup page", () => {
   const footer = readPage("homepage.html").split("<footer")[1];
   assert.match(footer, /<a href="\/shop"[^>]*>Shop Nobi searches<\/a>/);
+  assert.match(footer, /<a href="\/shop\/mcp"[^>]*>Shop Nobi for AI agents<\/a>/);
+  const shopFooter = readPage("shop/index.html").split("<footer")[1];
+  assert.match(shopFooter, /<a href="\/shop\/mcp"[^>]*>Use Shop Nobi with AI agents<\/a>/);
 });
 
 test("the privacy policy and terms carry their full text in the HTML, for readers that run no JavaScript", () => {

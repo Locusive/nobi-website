@@ -6,7 +6,6 @@ import {
   ShopNobiMcpCommand, ShopNobiMcpConfig, ShopNobiMcpEndpoint, ShopNobiGeminiCommand,
   ShopNobiMcpSeo, ShopNobiMcpTools,
 } from "../content/shopNobiMcp.js";
-import "./ShopNobiMcp.css";
 
 /** A connection card names its exact setup path without implying a platform partnership. */
 function ConnectionCard({ connection }) {

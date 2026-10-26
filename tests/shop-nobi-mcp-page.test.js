@@ -55,6 +55,14 @@ test("agent connection cards lead to substantiated setup paths in the rendered p
   assert.ok(html.includes("product listings, not service listings"));
 });
 
+test("prerendered agent page loads its layout stylesheet before JavaScript", () => {
+  const html = readPage("shop/mcp.html");
+  const stylesheetPaths = [...html.matchAll(/<link[^>]+rel="stylesheet"[^>]+href="([^"]+)"/g)].map(match => match[1]);
+  assert.ok(stylesheetPaths.length > 0, "The HTML has an initial stylesheet");
+  assert.ok(stylesheetPaths.some(path => readPage(path.replace(/^\//, "")).includes(".snm-hero")),
+    "Agent page CSS is available in initial HTML without JavaScript");
+});
+
 test("copyable Claude Code and Gemini CLI instructions configure the actual remote HTTP endpoint without credentials", () => {
   const html = readPage("shop/mcp.html");
   const snippets = [...html.matchAll(/<pre><code>([\s\S]*?)<\/code><\/pre>/g)].map(match => readCode(match[1]));

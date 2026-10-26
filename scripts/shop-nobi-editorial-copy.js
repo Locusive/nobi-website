@@ -2,6 +2,7 @@
 
 import { withMailboxClarification } from "./shop-nobi-mailbox-copy.js";
 import { ClothingAccessoryCopy } from "./shop-nobi-clothing-accessory-copy.js";
+import { AdditionalBuyingCopy } from "./shop-nobi-additional-buying-copy.js";
 
 const OriginalSuitcaseGuide = "Blue suitcases on this page range from about $70 to $495. The collection includes hard-shell carry-ons, expandable checked bags, and a few novelty suitcases with built-in record players.";
 const CorrectedSuitcaseGuide = "Shopping for travel luggage? Compare the carry-on and checked suitcases below. Suitcase-style record players are audio products, not bags for packing. Check each travel bag's dimensions and weight with the retailer before choosing.";
@@ -99,6 +100,13 @@ const PencilSkirtCopy = {
   ],
 };
 
+const SelectedPageCopy = {
+  ...ClothingAccessoryCopy,
+  ...AdditionalBuyingCopy,
+  "sterling-silver-rings": SterlingSilverRingCopy,
+  "pencil-skirts": PencilSkirtCopy,
+};
+
 /**
  * Applies authored copy only to the selected page's published HTML and embedded browser data.
  * The original plan remains available unchanged to product, feed and Web Story generation.
@@ -110,9 +118,7 @@ export function withAuthoredSearchPageCopy(page) {
   if (page.slug === "mailbox-posts") return withMailboxClarification(page);
   if (page.slug === "14k-white-gold-statement-rings") return withWhiteGoldClarification(page);
   if (page.slug === "blue-suitcases") return withSuitcaseClarification(page);
-  const copy = page.slug === "sterling-silver-rings" ? SterlingSilverRingCopy
-    : page.slug === "pencil-skirts" ? PencilSkirtCopy
-      : Object.hasOwn(ClothingAccessoryCopy, page.slug) ? ClothingAccessoryCopy[page.slug] : null;
+  const copy = Object.hasOwn(SelectedPageCopy, page.slug) ? SelectedPageCopy[page.slug] : null;
   if (!copy) return page;
 
   return {

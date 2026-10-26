@@ -128,6 +128,9 @@ test("suitcase correction leaves refreshed guidance and other pages intact", () 
 });
 
 for (const scenario of [
+  {"slug": "black-stud-earrings", "title": "Black Stud Earrings: Compare Sizes, Materials & Backs", "stale": "Choose earrings labeled nickel-free or made from sterling silver, gold-filled, or surgical steel to avoid reactions."},
+  {"slug": "cream-rugs", "title": "Cream Rugs: Compare Sizes, Patterns & Room Fit", "stale": "Spot clean with a mild detergent and have it professionally cleaned to preserve the sheen."},
+  {"slug": "brown-mini-dresses", "title": "Brown Mini Dresses: Compare Lengths, Shades & Fits", "stale": "Spot clean with a soft brush and avoid soaking; store them on a hanger to keep the shape."},
   { slug: "sterling-silver-rings", title: "Sterling Silver Rings: Compare Styles, Fit & Finish",
     stale: "A secure clasp or shank ensures the ring stays in place." },
   { slug: "pencil-skirts", title: "Pencil Skirts: Compare Stores, Fabrics & Fit",

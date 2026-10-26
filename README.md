@@ -84,6 +84,10 @@ The clothing/accessory copy module also covers seven observed-query pages:
 distinguishes sizing, construction and variant choices, replaces unsupported
 superlatives and care/performance claims, and suggests visitor-entered searches.
 These edits do not certify stock, merchant claims or ranking improvements.
+`shop-nobi-additional-buying-copy.js` covers `black-stud-earrings`,
+`cream-rugs` and `brown-mini-dresses` through the same publication-only path.
+It replaces allergy-prevention and blanket cleaning claims with quantity,
+measurement, component, size-variant and exact-item care checks.
 
 `scripts/shop-nobi-pin-editorial.js` records reviewed page/product/photo pairs,
 with the reason and observed Pin. A reviewed page is omitted from Pinterest if

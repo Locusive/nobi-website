@@ -128,6 +128,9 @@ test("suitcase correction leaves refreshed guidance and other pages intact", () 
 });
 
 for (const scenario of [
+  {"slug": "sundresses", "title": "Sundresses: Compare Lengths, Straps & Fabrics", "stale": "Cotton and linen sundresses can be machine washed on gentle cycle and tumble dried on low."},
+  {"slug": "silver-watches", "title": "Silver Watches: Compare Dials, Cases & Fit", "stale": "Most silver watches should be serviced every 3 to 5 years."},
+  {"slug": "black-maxi-dresses", "title": "Black Maxi Dresses: Compare Lengths, Fits & Details", "stale": "Any black maxi dress is suitable for formal events."},
   {"slug": "black-stud-earrings", "title": "Black Stud Earrings: Compare Sizes, Materials & Backs", "stale": "Choose earrings labeled nickel-free or made from sterling silver, gold-filled, or surgical steel to avoid reactions."},
   {"slug": "cream-rugs", "title": "Cream Rugs: Compare Sizes, Patterns & Room Fit", "stale": "Spot clean with a mild detergent and have it professionally cleaned to preserve the sheen."},
   {"slug": "brown-mini-dresses", "title": "Brown Mini Dresses: Compare Lengths, Shades & Fits", "stale": "Spot clean with a soft brush and avoid soaking; store them on a hanger to keep the shape."},

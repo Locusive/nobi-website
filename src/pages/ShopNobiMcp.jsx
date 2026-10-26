@@ -4,7 +4,7 @@ import { useSEO } from "../hooks/useSEO";
 import {
   ShopNobiAgentConnections, ShopNobiCursorInstallUrl, ShopNobiGeminiExtensionCommand,
   ShopNobiMcpCommand, ShopNobiMcpConfig, ShopNobiMcpEndpoint, ShopNobiGeminiCommand,
-  ShopNobiMcpSeo, ShopNobiMcpTools,
+  ShopNobiMcpSeo, ShopNobiMcpTools, ShopNobiFrameworkRecipes,
 } from "../content/shopNobiMcp.js";
 
 /** A connection card names its exact setup path without implying a platform partnership. */
@@ -66,6 +66,26 @@ export default function ShopNobiMcp() {
         <section className="snm-endpoint" aria-labelledby="snm-endpoint-title">
           <div><h2 id="snm-endpoint-title">Any remote MCP client</h2><p>Use Streamable HTTP with this server address. Discover the live tool schemas with <code>tools/list</code> and approve tool use in your client.</p></div>
           <p className="snm-endpoint-url"><code>{ShopNobiMcpEndpoint}</code></p>
+        </section>
+
+        <section className="snm-connections" id="frameworks" aria-labelledby="snm-frameworks-title">
+          <div className="snm-section-heading">
+            <div><h2 id="snm-frameworks-title">Build with your framework</h2><p>These frameworks speak MCP. Point them at the server address above and its tools appear. Each card links to a runnable example.</p></div>
+            <a href="https://github.com/Locusive/shop-nobi-claude-plugin/tree/main/examples">All examples</a>
+          </div>
+          <div className="snm-connection-grid">
+            {ShopNobiFrameworkRecipes.map(recipe => (
+              <a className="snm-connection" key={recipe.name} href={recipe.href}>
+                <span className="snm-connection-mark" aria-hidden="true">{recipe.name[0]}</span>
+                <span className="snm-connection-copy">
+                  <span className="snm-connection-kind">Recipe</span>
+                  <strong>{recipe.name}</strong>
+                  <span>{recipe.description}</span>
+                </span>
+                <span className="snm-connection-arrow" aria-hidden="true">↗</span>
+              </a>
+            ))}
+          </div>
         </section>
 
         <div className="snm-details">

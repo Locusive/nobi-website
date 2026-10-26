@@ -81,6 +81,10 @@ mcp-server: https://api.nobi.ai/v1/shop/mcp
 Available tools:
 - search_products: Search products across online stores.
 - find_shop_nobi_page: Find an existing Shop Nobi shopping page for an exact topic.
+- get_product_details: Get a product's full details, variants, specs, images, price and availability.
+- compare_products: Compare two or more products side by side on the attributes they share.
+- check_price_and_availability: Check the current price, currency and stock for one or more products.
+- find_alternatives: Find similar products across stores, excluding the original one.
 - Agent-readable response guide: https://nobi.ai/shop-nobi-mcp.md
 - Shop Nobi documentation: https://docs.nobi.ai/shop-nobi/
 

@@ -30,7 +30,7 @@ Arguments: `query` is required nonblank text, up to 500 characters. `limit` is o
 
 On success, check `isError === false` and read `structuredContent.products`. Clients that only read text can parse JSON from `content[0].text`. The `products` array may be empty.
 
-Each product contains `name` (string), `store` (string or null), `price` (number or null), `currency` (string), `inStock` (boolean), `imageUrl` (string or null), `url` (string or null), `paidLink` (boolean), and `linkLabel` (string or null). The `url`, when present, is a Nobi click link that forwards to the seller's product page, not a raw merchant URL. Never invent a missing price, seller, image, or link. Show `linkLabel` beside its link when supplied, especially for a paid link. Verify final price, stock, and delivery on the seller's site.
+Each product contains `id` (string, the stable id used by the detail, compare, price, and alternatives tools), `name` (string), `store` (string or null), `price` (number or null), `currency` (string), `inStock` (boolean), `imageUrl` (string or null), `url` (string or null), `paidLink` (boolean), and `linkLabel` (string or null). The `url`, when present, is a Nobi click link that forwards to the seller's product page, not a raw merchant URL. Never invent a missing price, seller, image, or link. Show `linkLabel` beside its link when supplied, especially for a paid link. Verify final price, stock, and delivery on the seller's site.
 
 This parser handles both structured and text-only MCP clients. It does not treat an error or a temporary busy message as a genuine zero-result search:
 
@@ -50,6 +50,30 @@ function readSearchResult(result) {
 Arguments: `topic` is required nonblank text, up to 200 characters. Example: `{"topic":"linen dresses"}`. This tool finds an existing page for an exact product topic; it does not search products.
 
 On success, `structuredContent.found` is a boolean. `structuredContent.page` is null if `found` is false. Otherwise the page has `title` (string), `description` (string or null), `url` (string), and `exactMatch` (true). Do not substitute a broader page when no exact page exists.
+
+## `get_product_details`
+
+Arguments: `id` is the required product id from a `search_products` result. This tool returns one product's full details.
+
+On success, read `structuredContent.product`: `id`, `name`, `store`, `price` (number or null), `currency`, `compareAtPrice` (number or null), `inStock` (boolean), `inventoryQuantity` (number or null), `brand` (string or null), `categoryPath` (string or null), `imageUrls` (array of strings), `specs` (array of `{name, value}` attribute pairs, which vary by product), and `variants` (the product's variant options). There are no reviews or ratings; the stores' catalogs hold none.
+
+## `compare_products`
+
+Arguments: `ids` is a required array of two or more product ids from `search_products` results.
+
+On success, read `structuredContent.comparison`: `attributes` (an array of `{name, values}`, where `values` lines up each product's value for a shared attribute such as price, brand, color or material) and `products` (the products compared). Only attributes at least one product provides are included.
+
+## `check_price_and_availability`
+
+Arguments: `ids` is a required array of one or more product ids from `search_products` results.
+
+On success, read `structuredContent.products`: each has `id`, `price` (number or null), `currency`, `inStock` (boolean), and `inventoryQuantity` (number or null). Prices and stock are refreshed from the store; there is no price history.
+
+## `find_alternatives`
+
+Arguments: `id` is the required product id from a `search_products` result. `maxPrice` (number) and `limit` (integer) are optional.
+
+On success, read `structuredContent.products`: the same product shape as `search_products`, excluding the original listing and collapsing the same product sold by more than one store.
 
 ## Errors and limits
 

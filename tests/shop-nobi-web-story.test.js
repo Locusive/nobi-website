@@ -140,6 +140,22 @@ test("store links are nofollow and untagged, and the last page links back to the
   assert.match(html, /<amp-story-page-outlink layout="nodisplay"><a href="[^"]+">[^<]+<\/a><\/amp-story-page-outlink>\n<\/amp-story-page>\n<\/amp-story>/);
 });
 
+test("the sofas story invites a real search while retaining its product links", async () => {
+  const html = await renderStory(makePage({ slug: "sofas", title: "Sofas" }));
+  const links = [...html.matchAll(/<a\b([^>]*)>([^<]*)<\/a>/g)];
+  const storeLinks = links.filter(([, attributes]) => attributes.includes("store.example"));
+  const searchLink = links.find(([, attributes]) => attributes.includes("nobi.ai/shop?"));
+
+  assert.equal(storeLinks.length, 3);
+  assert.ok(storeLinks.every(([, attributes]) => attributes.includes('rel="nofollow noopener"')));
+  assert.deepEqual(searchLink?.slice(1), [
+    ' href="https://nobi.ai/shop?utm_source=google_web_stories&amp;utm_medium=referral&amp;utm_campaign=story_to_search&amp;utm_content=sofas"',
+    "Search for your sofa",
+  ]);
+  assert.match(html, /Search Shop Nobi for the style, size and budget you want/);
+  assert.ok(!html.includes("/shop?q="), "The landing must wait for a visitor-entered search");
+});
+
 test("a store link goes through the API, which counts the tap and adds its conversation, and its tooltip names the store", async () => {
   const html = await renderStory(makePage());
   const firstStoreLink = [...html.matchAll(/<a class="store-link"([^>]*)>/g)][0][1];

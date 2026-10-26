@@ -132,6 +132,14 @@ for (const scenario of [
     stale: "A secure clasp or shank ensures the ring stays in place." },
   { slug: "pencil-skirts", title: "Pencil Skirts: Compare Stores, Fabrics & Fit",
     stale: "Pencil skirts range from $72 to $1290. Wool and leather need dry cleaning." },
+  {"slug": "red-blouses", "title": "Red Blouses: Compare Shades, Styles & Stores", "stale": "Hand wash or use a gentle cycle with cold water and line dry to preserve the sheen."},
+  {"slug": "navy-cardigans", "title": "Navy Cardigans: Compare Knits, Lengths & Layers", "stale": "Cashmere provides the most warmth and softness, while cotton blends are lighter and easier to care for."},
+  {"slug": "multicolor-sweaters", "title": "Multicolor Sweaters: Compare Patterns, Knits & Fit", "stale": "Fair Isle knits are usually made from wool or wool blends, providing good insulation for cooler weather."},
+  {"slug": "gray-cargo-pants", "title": "Gray Cargo Pants: Compare Fits, Pockets & Lengths", "stale": "quick-dry and UPF fabrics are great for hiking"},
+  {"slug": "green-wallets", "title": "Green Wallets: Compare Cardholders, Bifolds & Zip Styles", "stale": "RFID protection is useful for safeguarding your cards from electronic skimming."},
+  {"slug": "pink-swim-trunks", "title": "Pink Swim Trunks: Compare Lengths, Liners & Prints", "stale": "Polyester and nylon blends dry fastest and resist chlorine damage."},
+  {"slug": "blue-navy-blouses", "title": "Navy & Blue Blouses: Compare Shades, Fabrics & Fits", "stale": "choose a silk blend for more durability"},
+
 ]) test(`${scenario.slug} guidance agrees across HTML, metadata, schema and browser data while retaining shopping data`, async (t) => {
   const folder = mkdtempSync(new URL("../node_modules/.editorial-test-", import.meta.url));
   t.after(() => rmSync(folder, { recursive: true, force: true }));
@@ -165,6 +173,10 @@ for (const scenario of [
   for (const { question, answer } of published.faq) {
     assert.ok(body.includes(htmlEscape(question)));
     assert.ok(body.includes(htmlEscape(answer)));
+  }
+  if (!["sterling-silver-rings", "pencil-skirts"].includes(scenario.slug)) {
+    assert.match(published.guide.join(" "), /Shop Nobi search/);
+    assert.ok(!published.title.includes("Best "));
   }
   const schema = readScriptJson(html, "page-schema");
   assert.deepEqual(schema.find((entry) => entry["@type"] === "FAQPage").mainEntity,

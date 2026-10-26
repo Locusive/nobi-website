@@ -1,0 +1,115 @@
+/** Authored buying guidance for existing pages selected from observed search queries. */
+export const ClothingAccessoryCopy = {
+  "red-blouses": {
+    title: "Red Blouses: Compare Shades, Styles & Stores",
+    description: "Find red blouses across stores. Compare solid and printed styles, sleeve lengths, fabric details and sizing, then refine your search with Shop Nobi.",
+    guide: [
+      "Start with the shade and pattern: a solid red blouse, wine-red tie-neck top and red gingham blouse are different looks. Check the selected color name and photos rather than assuming every listing is a plain bright red.",
+      "For a blouse to tuck in, compare the hem length with a cropped or peplum style. For statement sleeves or a bow neckline, check the product photos and closure details. Use garment measurements to compare fit across stores.",
+      "Confirm the intended age range and sizing before comparing prices; this selection includes adult styles and children's clothing. Read the exact fabric composition, lining and care label. A silk blouse should not automatically be hand washed or machine washed.",
+      "Use the Shop Nobi search box to describe your preferred blouse, such as a solid red long-sleeve blouse under $150. Open a result to confirm its size, fabric, current price and return conditions with the retailer.",
+    ],
+    faq: [
+      { question: "Where can I compare red blouses online?", answer: "Browse the store listings here, then open the styles you like to compare measurements and purchase terms. For narrower options, enter the shade, sleeve length, size and budget you want in Shop Nobi search." },
+      { question: "How do I choose between a peplum and a straight blouse?", answer: "Compare the waist shape and hem length in the garment photos and measurements. Check whether you want to wear the blouse tucked in, loose or with a shaped waist before choosing." },
+      { question: "Are all these blouses solid red?", answer: "No. The selection includes prints and combinations such as gingham, plaid and black with red. Confirm the color and pattern for the exact variant you select." },
+      { question: "Can I wash a red silk blouse at home?", answer: "Follow the care label for the exact blouse or ask its retailer. The word silk alone does not establish a safe washing, drying or cleaning method." },
+    ],
+  },
+  "navy-cardigans": {
+    title: "Navy Cardigans: Compare Knits, Lengths & Layers",
+    description: "Compare navy cardigans across stores, from cropped and sleeveless styles to shawl collars. Check fabric composition, measurements and care before choosing.",
+    guide: [
+      "Choose the layer you need first: a cropped cardigan, a sleeveless knit and a full-sleeve shawl-collar cardigan cover different needs. Compare body length, sleeve length and neckline before comparing prices.",
+      "For a cardigan over a shirt, check chest and arm measurements with the layer you intend to wear underneath. For a cardigan worn buttoned as a top, inspect the neckline, closure and fit notes. Adult and children's listings use different size systems.",
+      "Compare the exact fiber percentages, knit construction and care label. Cotton, cashmere and cashmere blends appear in this selection, but a fiber name alone cannot rank warmth, softness or ease of care for the finished garments.",
+      "Try a specific Shop Nobi search such as a navy cropped cardigan with buttons under $200. Check the selected retailer's available size, care instructions and returns before ordering.",
+    ],
+    faq: [
+      { question: "How do I choose a navy cardigan for layering?", answer: "Compare the neckline, sleeve shape and garment measurements with the shirt or top you plan to wear underneath. Decide whether you want a cropped, longer, sleeveless or full-sleeve style." },
+      { question: "Is cashmere always warmer than cotton?", answer: "Do not rank the finished cardigans by fiber name alone. Compare the retailer's knit-weight and construction details, fiber percentages and intended use for the exact garments." },
+      { question: "Are the navy cardigans all adult sizes?", answer: "No. This selection includes adult and children's listings. Check the intended wearer and the retailer's size chart rather than comparing size labels across brands." },
+      { question: "How should I clean a cashmere cardigan?", answer: "Use the care label for the selected cardigan. Do not assume that every cashmere garment or blend allows hand washing or a machine's gentle cycle." },
+    ],
+  },
+  "multicolor-sweaters": {
+    title: "Multicolor Sweaters: Compare Patterns, Knits & Fit",
+    description: "Explore multicolor sweaters across stores. Compare stripes, argyle and graphic knits, then check fit, fiber composition and the exact garment's care label.",
+    guide: [
+      "Pick the pattern you want to build an outfit around: stripes, argyle, Fair Isle or a larger graphic motif. Compare the main colors and pattern scale in the selected garment's photos, including the back and sleeves when shown.",
+      "Separate pullovers from quarter-zips and sweater jackets before comparing fit. Check neckline, body length and sleeve measurements. The listings include adult and children's styles, so confirm the size system and intended wearer.",
+      "Read the fiber composition and care instructions for each sweater. A Fair Isle pattern does not specify the fiber, and a multicolor design does not tell you whether the garment is machine washable or suitable for a particular temperature.",
+      "Narrow the options with a Shop Nobi search such as a multicolor striped cotton crewneck under $150. Confirm the exact colors, size, composition and return conditions at the retailer before buying.",
+    ],
+    faq: [
+      { question: "What styles of multicolor sweater can I compare?", answer: "Look at striped, argyle, Fair Isle and graphic designs, then choose between pullovers, quarter-zips and sweater jackets. Check the individual listing for the pattern and garment type you want." },
+      { question: "Does Fair Isle mean a sweater is wool?", answer: "A pattern name does not establish fiber composition. Read the material label for the exact sweater rather than assuming its yarn, weight or warmth from the design." },
+      { question: "How do I compare a loose-fit sweater with a fitted one?", answer: "Use garment chest, body and sleeve measurements plus the retailer's fit notes. A size label alone does not tell you how much room the finished sweater has." },
+      { question: "Can I machine wash a multicolor sweater?", answer: "Follow the exact garment's care label for washing and drying. Pattern, color and fiber name alone do not establish which cleaning method is safe." },
+    ],
+  },
+  "gray-cargo-pants": {
+    title: "Gray Cargo Pants: Compare Fits, Pockets & Lengths",
+    description: "Compare gray cargo pants, joggers and capris across stores. Check inseam, waistband, pocket closures and activity-specific details before choosing a pair.",
+    guide: [
+      "First separate full-length cargo pants from capris, joggers and cargo sweatpants. Compare the inseam, ankle opening and rise so a similar-looking photo does not hide a different cut or length.",
+      "Choose pockets for what you carry: check their placement, dimensions and closures rather than the pocket count alone. Compare an elastic or drawstring waistband with belt loops, and use the exact garment's waist and hip measurements.",
+      "For hiking or snow use, check the selected product's stated features rather than treating every cargo pant as outdoor equipment. A quick-dry, UPF or snow-related claim belongs only to the item whose retailer specifies it. Confirm adult or child sizing and the selected gray shade.",
+      "Use Shop Nobi search to describe the cut and use you need, such as gray straight-leg cargo pants with zip pockets under $100. Check the resulting product's measurements, fabric, care and return terms at the store.",
+    ],
+    faq: [
+      { question: "How do I choose between cargo pants, capris and joggers?", answer: "Compare inseam and ankle construction. Check whether you want a full-length leg, a cropped length or an elastic cuff, then confirm those details in the retailer's measurements." },
+      { question: "Are all gray cargo pants suitable for hiking?", answer: "No. This selection spans everyday, fashion and activity-specific styles. Verify the features needed for your activity on the exact retailer listing; cargo pockets alone do not establish weather protection or performance." },
+      { question: "What cargo-pocket details should I compare?", answer: "Check pocket placement, usable dimensions and whether each pocket is open, zipped or secured by a flap. Consider what you intend to carry instead of choosing only by the total number of pockets." },
+      { question: "Do gray and charcoal listings have the same color?", answer: "Do not assume the shade is identical. Check the chosen variant's color name and photos; slate, charcoal and lighter gray labels can differ between brands." },
+    ],
+  },
+  "green-wallets": {
+    title: "Green Wallets: Compare Cardholders, Bifolds & Zip Styles",
+    description: "Compare green wallets by dimensions, card layout, cash and coin storage, and closure. Check the exact material and any RFID claim with the retailer.",
+    guide: [
+      "Choose a format around what you carry: a slim card wallet, a bifold or trifold, a zip wallet, or a larger travel wallet. Compare closed dimensions with the pocket or bag where it will go.",
+      "Count the cards, notes and coins you need to carry, then check the interior layout. Look for the bill compartment, coin pocket and ID window you actually need; a product photo of the exterior does not establish capacity.",
+      "Compare the selected color and material description. Leather, rubber and other constructions appear in this selection, but material names do not establish waterproofing. If RFID blocking matters to you, check that the exact model claims it and what the retailer says it covers.",
+      "Try a Shop Nobi search such as a green leather bifold wallet with a coin pocket under $100. Verify dimensions, current price and return terms at the retailer, especially before ordering personalization.",
+    ],
+    faq: [
+      { question: "How do I choose a green wallet for a small pocket?", answer: "Compare closed dimensions and the layout for the cards and cash you carry. A slim cardholder may have a different capacity from a bifold, trifold or zip-around wallet; check the exact model." },
+      { question: "Do all green wallets have RFID blocking?", answer: "No. Check the selected model's specifications for an explicit RFID-blocking claim and its stated scope. A color, material or brand name does not establish that feature." },
+      { question: "Is a zip wallet better than a bifold?", answer: "Choose around access and storage needs. Compare the closure, dimensions, bill compartment and coin storage for each model rather than treating one format as universally better." },
+      { question: "Are leather or rubber wallets waterproof?", answer: "Do not infer waterproofing from the material alone. Check the exact product's stated water protection and care guidance, including any restrictions for seams, closures and finishes." },
+    ],
+  },
+  "pink-swim-trunks": {
+    title: "Pink Swim Trunks: Compare Lengths, Liners & Prints",
+    description: "Find pink swim trunks across stores. Compare men's and boys' sizing, inseam, lining, waistband and prints, then refine your search with Shop Nobi.",
+    guide: [
+      "Start by separating men's and boys' trunks, then choose a solid pink, color-block or printed style. A similar color or product name does not mean two listings use the same sizing or construction.",
+      "Compare the listed inseam rather than estimating length from a model photo. This selection includes styles labeled 2-inch, 5-inch, 5.5-inch and 7-inch; confirm the exact variant and size at the store.",
+      "Check whether the chosen version is lined, the liner type, waistband adjustment and pocket closures. Do not assume chlorine resistance, drying speed or sun protection from a polyester or nylon label; read the specific product's stated features and care instructions.",
+      "Use Shop Nobi search for the details that matter, such as men's pink swim trunks with a 5-inch inseam and lining under $100. Confirm the selected size, liner and swimwear return policy before ordering.",
+    ],
+    faq: [
+      { question: "How do I compare swim-trunk lengths?", answer: "Compare the listed inseam for each exact style and size. The selection includes different labeled lengths, so check the retailer's measurements rather than judging solely from photos." },
+      { question: "Are lined and unlined swim trunks the same product?", answer: "They can be separate versions with similar names. Read the selected listing for lining and liner type, and confirm that the variant you order has the construction you want." },
+      { question: "Does nylon or polyester guarantee chlorine resistance?", answer: "No guarantee follows from the fiber name alone. Check the retailer's product-specific claims and follow the care instructions for that swimsuit." },
+      { question: "Are these pink swim trunks all men's sizes?", answer: "No. Men's and boys' listings appear in this selection. Check the intended age range, waist measurements and size chart before comparing options or prices." },
+    ],
+  },
+  "blue-navy-blouses": {
+    title: "Navy & Blue Blouses: Compare Shades, Fabrics & Fits",
+    description: "Compare navy and blue blouses across stores. Distinguish solid navy from prints and lighter blues, then check fit, lining, fabric and care details.",
+    guide: [
+      "If you want navy specifically, check the exact color rather than treating every blue blouse as a match. This selection also includes lighter blue, denim and printed styles; compare the selected variant's name and photos.",
+      "Choose the silhouette before comparing brands: a slim blouse, a relaxed frill-sleeve style and a trapezoid blouse have different shapes. Compare shoulder, chest, sleeve and hem measurements, including whether the garment is intended to fit loosely.",
+      "Check the fabric composition, lining and care label. For an organza or other light-looking blouse, inspect lining and coverage details rather than assuming opacity. Adult and children's listings may appear together, so confirm the wearer and size chart.",
+      "Refine the selection with a Shop Nobi search such as a solid navy long-sleeve blouse for work under $200. Open the result to verify the exact shade, fit and purchase conditions with its retailer.",
+    ],
+    faq: [
+      { question: "Are all these blue blouses navy?", answer: "No. The selection includes navy alongside other blues, denim and prints. Check the color name and photos for the variant you intend to buy." },
+      { question: "How do I compare slim and relaxed blouses?", answer: "Use the garment measurements and the retailer's fit notes. Check chest, shoulder, sleeve and body length rather than assuming the same letter size fits the same way across cuts." },
+      { question: "How can I check whether a blouse needs a layer underneath?", answer: "Look for lining and coverage information in the exact product description and photos, or ask the retailer. A fabric name or color alone does not establish opacity." },
+      { question: "Is a silk blend always easier to care for?", answer: "Do not assume that a blend is more durable or easier to clean. Check the exact fiber percentages, construction and care label for the blouse you select." },
+    ],
+  },
+};

@@ -148,6 +148,7 @@ function buildProduct(product) {
     currency: CurrencyPattern.test(product.currency ?? "") ? product.currency : null,
     isInStock: product.isInStock === true,
     ...readPaidLinks(product),
+    ...(typeof product.storyPaidLink === "boolean" ? { storyPaidLink: product.storyPaidLink } : {}),
     ...readProductPlacement(product),
     ...readProductIds(product),
   };

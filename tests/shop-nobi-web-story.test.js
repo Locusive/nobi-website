@@ -184,17 +184,21 @@ test("page text is escaped everywhere it appears", async () => {
 
 test("story links and product impressions retain known placement and affiliate destination independently", async () => {
   for (const placementReason of ["affiliate", "paid_merchant", "organic", undefined, "Boost"]) {
-    const page = makePage();
-    page.products[0] = { ...page.products[0], productVariantId: "variant-id", owningMerchantId: "store-id",
-      paidLink: true, placementReason };
-    const html = await renderStory(page);
-    const knownReason = ["affiliate", "paid_merchant", "organic"].includes(placementReason);
-    const suffix = knownReason ? `-affiliate-${placementReason}` : "";
-    assert.ok(html.includes(`id="product-1-variant-id-store-id${suffix}"`));
-    const href = [...html.matchAll(/<a class="store-link" href="([^"]+)"/g)][0][1].replaceAll("&amp;", "&");
-    const address = new URL(href);
-    assert.equal(address.searchParams.get("placementReason"), knownReason ? placementReason : null);
-    assert.equal(address.searchParams.get("url"), page.products[0].url);
-    assert.equal(address.searchParams.get("page"), page.slug);
+    for (const storyPaidLink of [true, false, undefined]) {
+      const page = makePage();
+      page.products[0] = { ...page.products[0], productVariantId: "variant-id", owningMerchantId: "store-id",
+        paidLink: true, storyPaidLink, placementReason };
+      const html = await renderStory(page);
+      const knownReason = ["affiliate", "paid_merchant", "organic"].includes(placementReason);
+      const suffix = typeof storyPaidLink === "boolean"
+        ? `-${storyPaidLink ? "affiliate" : "direct"}-${knownReason ? placementReason : "unknown"}` : "";
+      assert.ok(html.includes(`id="product-1-variant-id-store-id${suffix}"`));
+      const firstLink = [...html.matchAll(/<a class="store-link" href="([^"]+)"([^>]+)>/g)][0];
+      const address = new URL(firstLink[1].replaceAll("&amp;", "&"));
+      assert.equal(address.searchParams.get("placementReason"), knownReason ? placementReason : null);
+      assert.equal(address.searchParams.get("url"), page.products[0].url);
+      assert.equal(address.searchParams.get("page"), page.slug);
+      assert.equal(firstLink[2].includes("sponsored"), storyPaidLink !== false);
+    }
   }
 });

@@ -130,7 +130,8 @@ function buildStoryPageId(storyPage, index, plan) {
   const productPages = plan.pages.filter((planned) => planned.kind === StoryPageKind.Product);
   const place = productPages.indexOf(storyPage) + 1;
   const { placementReason } = readProductPlacement(product);
-  const placement = placementReason ? `-${product.paidLink === true ? "affiliate" : "direct"}-${placementReason}` : "";
+  const placement = typeof product.storyPaidLink === "boolean"
+    ? `-${product.storyPaidLink ? "affiliate" : "direct"}-${placementReason || "unknown"}` : "";
   return `${StoryPageKind.Product}-${place}-${product.productVariantId}-${product.owningMerchantId}${placement}`;
 }
 
@@ -189,9 +190,10 @@ function renderStoreLink(product, slug) {
   const placement = placementReason ? `&placementReason=${placementReason}` : "";
   const linkThroughApi = `${StoreLinkRoute}?url=${encodeURIComponent(product.url)}&page=${encodeURIComponent(slug)}${placement}`;
   const tooltip = `data-tooltip-text="${htmlEscape(readStoreSite(product.url))}"`;
-  const rel = readStoreLinkRel(product.paidLink);
+  const paidLink = typeof product.storyPaidLink === "boolean" ? product.storyPaidLink : product.paidLink;
+  const rel = readStoreLinkRel(paidLink);
   const link = `<a class="store-link" href="${htmlEscape(linkThroughApi)}" ${tooltip} rel="${rel}" target="_blank">${StoreLinkText}</a>`;
-  return product.paidLink ? `${link}<p class="commission-notice">${CommissionNotice}</p>` : link;
+  return paidLink ? `${link}<p class="commission-notice">${CommissionNotice}</p>` : link;
 }
 
 /** Reads the store's site name from its link, such as "lucchese.com", or the link itself when it cannot be read. */

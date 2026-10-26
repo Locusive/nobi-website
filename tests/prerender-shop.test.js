@@ -13,9 +13,12 @@ let distDir;
 test("built products retain only known placement decisions without inventing decisions for old page data", () => {
   const source = readFixturePageData().pages[0];
   const reasons = ["affiliate", "paid_merchant", "organic", undefined, "Boost"];
-  const page = { ...source, products: reasons.map(placementReason => ({ ...source.products[0], placementReason })) };
+  const storyPaidLinks = [true, false, undefined, "true", null];
+  const page = { ...source, products: reasons.map((placementReason, index) => ({ ...source.products[0], placementReason,
+    storyPaidLink: storyPaidLinks[index] })) };
   const { pages } = buildSearchPages([page], 1);
   assert.deepEqual(pages[0].products.map(product => product.placementReason), reasons.slice(0, 3).concat([undefined, undefined]));
+  assert.deepEqual(pages[0].products.map(product => product.storyPaidLink), [true, false, undefined, undefined, undefined]);
 });
 
 function readOutput(path) {

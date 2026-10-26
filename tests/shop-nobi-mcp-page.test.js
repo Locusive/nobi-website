@@ -31,10 +31,28 @@ test("the MCP install route serves its own readable content, canonical and sitem
     assert.ok(html.includes(text), `Missing useful setup or disclosure text: ${text}`);
   assert.doesNotMatch(html, /\bindependent (?:online )?stores\b/i);
   assert.ok(html.includes("Search products across online stores."));
-  assert.ok(readCode(html).includes("Catalog prices and availability may lag behind the merchant's website."), "The setup explains catalog freshness limits before a shopper relies on results");
+  assert.ok(readCode(html).includes("Check price, stock and delivery at the store."), "The setup explains catalog freshness limits before a shopper relies on results");
   assert.ok(html.includes('href="/blog/shopping-mcp-servers-for-ai-agents"'));
   assert.ok(html.includes('href="/shop-nobi-mcp.md"'));
   assert.ok(html.includes("not a general REST catalog API"));
+});
+
+test("agent connection cards lead to substantiated setup paths in the rendered page", () => {
+  const html = readPage("shop/mcp.html");
+  for (const [name, anchor, logo] of [
+    ["Claude Code", "claude-code", "claude-logo.svg"],
+    ["Gemini CLI", "gemini-cli", "agent-integrations/gemini.svg"],
+    ["Cursor", "cursor", "agent-integrations/cursor.svg"],
+  ]) {
+    assert.ok(html.includes(`href="#${anchor}"`) && html.includes(`id="${anchor}"`), `${name} card reaches its instructions`);
+    assert.ok(html.includes(logo), `${name} has an integration mark`);
+  }
+  assert.ok(html.includes("gemini extensions install https://github.com/Locusive/shop-nobi-gemini-extension"));
+  assert.ok(html.includes("cursor.com/install-mcp?name=shop-nobi"));
+  assert.ok(html.includes("a Cursor marketplace listing has not been verified"));
+  assert.ok(html.includes('href="https://docs.nobi.ai/shop-nobi-connector/"'));
+  assert.ok(html.includes('href="https://docs.nobi.ai/shop-nobi-mcp-response/"'));
+  assert.ok(html.includes("product listings, not service listings"));
 });
 
 test("copyable Claude Code and Gemini CLI instructions configure the actual remote HTTP endpoint without credentials", () => {
@@ -63,9 +81,11 @@ test("agent-readable llms.txt distinguishes Shop Nobi shopping tools from Nobi's
 
 test("agent-readable Markdown states the current tool contract and nullable fields", () => {
   const guide = readPage("shop-nobi-mcp.md");
-  for (const text of [Endpoint, "search_products", "find_shop_nobi_page", "structuredContent.products", "content[0].text", "price", "null", "paidLink", "linkLabel", "isError", "https://docs.nobi.ai/shop-nobi/"])
+  for (const text of [Endpoint, "search_products", "find_shop_nobi_page", "structuredContent.products", "content[0].text", "price", "null", "paidLink", "linkLabel", "isError", "https://docs.nobi.ai/shop-nobi-mcp-response/"])
     assert.ok(guide.includes(text), `Missing MCP guide fact: ${text}`);
   assert.ok(guide.includes("product index, not the whole web"));
+  assert.ok(guide.includes("function readSearchResult(result)"));
+  assert.ok(guide.includes("status: \"unavailable\""));
 });
 
 test("the built setup page starts the normal site assistant while shopping routes retain product-search mode", () => {

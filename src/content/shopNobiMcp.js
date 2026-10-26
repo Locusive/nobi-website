@@ -3,6 +3,8 @@ import { IndexableRobots } from "../utils/previewImage.js";
 
 export const ShopNobiMcpPath = "/shop/mcp";
 export const ShopNobiMcpEndpoint = "https://api.nobi.ai/v1/shop/mcp";
+export const ShopNobiCursorInstallUrl = "https://cursor.com/install-mcp?name=shop-nobi&config=eyJ0eXBlIjoiaHR0cCIsInVybCI6Imh0dHBzOi8vYXBpLm5vYmkuYWkvdjEvc2hvcC9tY3AifQ%3D%3D";
+export const ShopNobiGeminiExtensionCommand = "gemini extensions install https://github.com/Locusive/shop-nobi-gemini-extension";
 
 /** Shared page metadata keeps the initial HTML and browser route consistent. */
 export const ShopNobiMcpSeo = {
@@ -23,6 +25,31 @@ export const ShopNobiMcpConfig = {
 
 export const ShopNobiMcpCommand = `claude mcp add --transport http shop-nobi ${ShopNobiMcpEndpoint}`;
 export const ShopNobiGeminiCommand = `gemini mcp add --transport http shop-nobi ${ShopNobiMcpEndpoint}`;
+
+/** Each card names an available connection route, not a partnership or marketplace listing. */
+export const ShopNobiAgentConnections = [
+  {
+    name: "Claude Code",
+    kind: "Plugin",
+    description: "A product-search skill and the hosted Shop Nobi tools.",
+    logo: "/media/claude-logo.svg",
+    anchor: "#claude-code",
+  },
+  {
+    name: "Gemini CLI",
+    kind: "Extension",
+    description: "Install the public extension to connect the hosted tools.",
+    logo: "/media/agent-integrations/gemini.svg",
+    anchor: "#gemini-cli",
+  },
+  {
+    name: "Cursor",
+    kind: "MCP connection",
+    description: "Add the server directly; a marketplace listing is not available yet.",
+    logo: "/media/agent-integrations/cursor.svg",
+    anchor: "#cursor",
+  },
+];
 
 /** These are the two tools advertised by the public hosted service. */
 export const ShopNobiMcpTools = [

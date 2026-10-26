@@ -72,15 +72,17 @@ Available tools:
 - ask_question: Ask questions about Nobi — pricing, features, how it works, or anything else.
 - book_demo: Request a demo with the Nobi team.
 
-## Shop Nobi product search for AI agents
+## Shop Nobi search engine for AI agents
 
-Shop Nobi has a separate, public read-only MCP server for product search across online stores. It requires no Nobi sign-in or API key. Agents can use it to answer a shopper's product request or find a Shop Nobi shopping page. It cannot place orders or take payments. Product prices and availability may lag behind the merchant's website.
+Shop Nobi is an online search engine. Its separate, public read-only MCP tools currently search product listings across curated online stores; they do not yet search service listings or other kinds of offerings. They require no Nobi sign-in or API key. Agents can use them to answer a product request or find a Shop Nobi page. They cannot place orders or take payments. Product prices and availability may lag behind the merchant's website.
 
 mcp-server: https://api.nobi.ai/v1/shop/mcp
 
 Available tools:
 - search_products: Search products across online stores.
 - find_shop_nobi_page: Find an existing Shop Nobi shopping page for an exact topic.
+- Agent-readable response guide: https://nobi.ai/shop-nobi-mcp.md
+- Shop Nobi documentation: https://docs.nobi.ai/shop-nobi/
 
 Setup and commission disclosure: https://nobi.ai/shop/mcp
 

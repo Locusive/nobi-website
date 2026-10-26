@@ -7,8 +7,8 @@ export const ShopNobiMcpEndpoint = "https://api.nobi.ai/v1/shop/mcp";
 /** Shared page metadata keeps the initial HTML and browser route consistent. */
 export const ShopNobiMcpSeo = {
   path: ShopNobiMcpPath,
-  title: "Shopping MCP Server for AI Agents | Shop Nobi",
-  description: "Search products across curated online stores with Shop Nobi's read-only shopping MCP server. Remote HTTP endpoint, no Nobi account or API key.",
+  title: "Shop Nobi Search Engine for AI Agents | MCP",
+  description: "Connect an AI agent to the Shop Nobi online search engine. Its public, read-only MCP tools currently search product listings across curated stores.",
   image: ShopNobiImage,
   robots: IndexableRobots,
   schema: [{ "@context": "https://schema.org", "@type": "WebPage", name: "Shop Nobi MCP setup", url: `https://nobi.ai${ShopNobiMcpPath}` }],

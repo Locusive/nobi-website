@@ -20,8 +20,8 @@ function readCode(text) {
 test("the MCP install route serves its own readable content, canonical and sitemap entry without JavaScript", () => {
   const html = readPage("shop/mcp.html");
   assert.equal(html, readPage("shop/mcp/index.html"));
-  assert.match(html, /<h1[^>]*>Shopping MCP server for product search<\/h1>/);
-  assert.match(html, /<title>Shopping MCP Server for AI Agents \| Shop Nobi<\/title>/);
+  assert.match(html, /<h1[^>]*>Connect agents to the Shop Nobi search engine<\/h1>/);
+  assert.match(html, /<title>Shop Nobi Search Engine for AI Agents \| MCP<\/title>/);
   assert.match(html, /rel="canonical" href="https:\/\/nobi.ai\/shop\/mcp"/);
   assert.equal((html.match(/rel="canonical"/g) || []).length, 1);
   assert.doesNotMatch(html, /noindex|<div id="root"><\/div>/);
@@ -33,6 +33,7 @@ test("the MCP install route serves its own readable content, canonical and sitem
   assert.ok(html.includes("Search products across online stores."));
   assert.ok(readCode(html).includes("Catalog prices and availability may lag behind the merchant's website."), "The setup explains catalog freshness limits before a shopper relies on results");
   assert.ok(html.includes('href="/blog/shopping-mcp-servers-for-ai-agents"'));
+  assert.ok(html.includes('href="/shop-nobi-mcp.md"'));
   assert.ok(html.includes("not a general REST catalog API"));
 });
 
@@ -51,12 +52,20 @@ test("copyable Claude Code and Gemini CLI instructions configure the actual remo
 
 test("agent-readable llms.txt distinguishes Shop Nobi shopping tools from Nobi's business assistant", () => {
   const llmsText = readPage("llms.txt");
-  const shopSection = llmsText.split("## Shop Nobi product search for AI agents")[1]?.split("## Contact")[0];
+  const shopSection = llmsText.split("## Shop Nobi search engine for AI agents")[1]?.split("## Contact")[0];
   assert.ok(shopSection, "Shop Nobi agent section is present");
   assert.ok(shopSection.includes(`mcp-server: ${Endpoint}`));
   assert.ok(shopSection.includes("search_products") && shopSection.includes("find_shop_nobi_page"));
   assert.ok(shopSection.includes("https://nobi.ai/shop/mcp"));
   assert.ok(shopSection.includes("cannot place orders or take payments"));
+  assert.ok(shopSection.includes("https://nobi.ai/shop-nobi-mcp.md"));
+});
+
+test("agent-readable Markdown states the current tool contract and nullable fields", () => {
+  const guide = readPage("shop-nobi-mcp.md");
+  for (const text of [Endpoint, "search_products", "find_shop_nobi_page", "structuredContent.products", "content[0].text", "price", "null", "paidLink", "linkLabel", "isError", "https://docs.nobi.ai/shop-nobi/"])
+    assert.ok(guide.includes(text), `Missing MCP guide fact: ${text}`);
+  assert.ok(guide.includes("product index, not the whole web"));
 });
 
 test("the built setup page starts the normal site assistant while shopping routes retain product-search mode", () => {

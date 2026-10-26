@@ -28,7 +28,7 @@ These are different product scopes, not a ranking by search quality. We have not
 
 ## Shop Nobi: curated cross-store search
 
-[Shop Nobi's shopping MCP server](/shop/mcp) exposes two tools. `search_products` takes a shopper's plain-language request and returns matching products with the selling store, price, stock signal, image and link to the store's product page. `find_shop_nobi_page` looks for an existing Shop Nobi page on an exact topic. The connection is remote, read-only and requires no Nobi sign-in or key.
+[Shop Nobi's online search engine](/shop/mcp) exposes two public MCP tools today. `search_products` takes a plain-language product request and returns matching listings; seller, price, stock signal, image and click-through link are included when available. `find_shop_nobi_page` looks for an existing Shop Nobi page on an exact topic. These tools currently search products, not services or other offerings. The connection is remote, read-only and requires no Nobi sign-in or key.
 
 It fits an agent helping someone discover products from curated independent stores and then sending that person to the merchant. It does **not** provide a generic REST catalog API, a complete cross-retailer price-history feed, cart creation or checkout. Price and availability can lag behind the merchant, so the store page is the final place to verify a purchase. Some product links may earn Nobi a commission; the agent should keep any returned commission notice next to the relevant link.
 

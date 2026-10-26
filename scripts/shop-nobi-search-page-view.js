@@ -3,6 +3,7 @@
 
 import { removeTrackingTags } from "../src/utils/shopNobiPage.js";
 import { encodePaidLink } from "../src/utils/shopNobiPaidLink.js";
+import { readProductPlacement } from "../src/utils/shopNobiProductPlacement.js";
 
 const SlugPattern = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 const CurrencyPattern = /^[A-Z]{3}$/;
@@ -147,6 +148,7 @@ function buildProduct(product) {
     currency: CurrencyPattern.test(product.currency ?? "") ? product.currency : null,
     isInStock: product.isInStock === true,
     ...readPaidLinks(product),
+    ...readProductPlacement(product),
     ...readProductIds(product),
   };
 }

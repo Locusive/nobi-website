@@ -181,3 +181,20 @@ test("page text is escaped everywhere it appears", async () => {
   assert.ok(!html.includes("<script>alert"));
   assert.ok(html.includes("<title>&lt;script&gt;alert(&quot;boot&quot;)&lt;/script&gt; &amp; Boots</title>"));
 });
+
+test("story links and product impressions retain known placement and affiliate destination independently", async () => {
+  for (const placementReason of ["affiliate", "paid_merchant", "organic", undefined, "Boost"]) {
+    const page = makePage();
+    page.products[0] = { ...page.products[0], productVariantId: "variant-id", owningMerchantId: "store-id",
+      paidLink: true, placementReason };
+    const html = await renderStory(page);
+    const knownReason = ["affiliate", "paid_merchant", "organic"].includes(placementReason);
+    const suffix = knownReason ? `-affiliate-${placementReason}` : "";
+    assert.ok(html.includes(`id="product-1-variant-id-store-id${suffix}"`));
+    const href = [...html.matchAll(/<a class="store-link" href="([^"]+)"/g)][0][1].replaceAll("&amp;", "&");
+    const address = new URL(href);
+    assert.equal(address.searchParams.get("placementReason"), knownReason ? placementReason : null);
+    assert.equal(address.searchParams.get("url"), page.products[0].url);
+    assert.equal(address.searchParams.get("page"), page.slug);
+  }
+});

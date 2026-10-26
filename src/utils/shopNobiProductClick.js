@@ -1,4 +1,6 @@
 import { handleShopNobiOutboundClick } from "./shopNobiOutboundClick.js";
+import { readProductPlacement } from "./shopNobiProductPlacement.js";
+import { decodePaidLink } from "./shopNobiPaidLink.js";
 
 /**
  * Preserve the existing standalone product click contract, with the real variant and store when the page knows them.
@@ -8,6 +10,8 @@ export function handleProductLinkClick(event, { product, position, query, slug, 
   const details = {
     entryPoint, query, productName: product.name, storeName: product.storeName,
     productPrice: product.price, positionInGrid: position,
+    isPaidLink: product.paidLink === true && Boolean(decodePaidLink(product.encodedStoreLink)),
+    ...readProductPlacement(product),
   };
   if (product.productVariantId) {
     details.productVariantId = product.productVariantId;

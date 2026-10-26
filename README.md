@@ -74,6 +74,10 @@ description, guide and FAQs together to rendered HTML, metadata, structured data
 and embedded browser content. Product facts, shopping links and snapshot dates
 stay intact. The shared source plan, Pinterest feeds and Web Stories retain
 their existing copy; the replacement applies only to this search page.
+The same publication path supplies the `pencil-skirts` buying guide, replacing
+the fixed price-range and general fabric-care advice with exact-item checks and
+an invitation to enter preferences in the existing search box. Catalog prices,
+product links, snapshot dates, feeds and Stories are unchanged.
 
 `scripts/shop-nobi-pin-editorial.js` records reviewed page/product/photo pairs,
 with the reason and observed Pin. A reviewed page is omitted from Pinterest if

@@ -90,7 +90,7 @@ export default function Nav({ active, pinned = true }) {
           <a href={ShopNobiPath} style={linkStyle("shop")}>
             Shop Nobi
           </a>
-          <a href="/shop/mcp" style={linkStyle("agents")}>For agents</a>
+          <a href="/shop/mcp" style={linkStyle("agents")}>For Agents</a>
         </div>
 
         <span className="nb-nav-pipe" style={{ width: 1, height: 18, background: "rgba(20,16,40,0.16)", flex: "none" }} />
@@ -187,7 +187,7 @@ export default function Nav({ active, pinned = true }) {
               Shop Nobi
             </a>
             <a href="/shop/mcp" style={{ ...linkStyle("agents"), fontSize: 16, padding: "15px 16px", borderRadius: 12 }}>
-              Shop Nobi for agents
+              For Agents
             </a>
             <span
               onClick={() => {

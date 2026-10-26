@@ -21,7 +21,7 @@ export const meta = {
  },
  {
  question: "1. Nobi",
- answer: "Nobi reads queries written in trip language and matches them against catalog spec fields plus supporting content like sizing charts, fit guides, return policies, and care instructions. For an outdoor brand, a shopper typing 'waterproof shell for backpacking in 30 degree rain' gets a product set with a cited explanation of why each one fits, drawn from the actual rain ratings, fabric specs, and seasonal use notes on the product pages. Pricing is published, starting at $25 a month for 500 messages, where a search or a chat question each count as one message."
+ answer: "Nobi reads queries written in trip language and matches them against catalog spec fields plus supporting content like sizing charts, fit guides, return policies, and care instructions. For an outdoor brand, a shopper typing 'waterproof shell for backpacking in 30 degree rain' gets a product set with a cited explanation of why each one fits, drawn from the actual rain ratings, fabric specs, and seasonal use notes on the product pages. Pricing is published, starting at $29 a month for 500 messages, where a search or a chat question each count as one message."
  },
  {
  question: "2. Algolia",
@@ -107,7 +107,7 @@ export const meta = {
 
 Outdoor shoppers search in trip terms - "two-person tent for shoulder-season backpacking," "rain shell that won't soak through in the Cascades," "boots that won't blister on a thru-hike" - while the catalog is written in fill power, denier ratings, and Gore-Tex membrane codes. Get the translation wrong and the shopper bounces to a competitor that surfaces the right gear faster, or returns the wrong piece after a wet trip and stops buying from you. The search has to read the actual spec fields - weight, waterproof rating, temperature rating, fabric construction - and map them to use-case queries without a merchandiser writing a synonym rule for every trip type. These are the five tools outdoor brands actually put on the shortlist:
 
-- **Nobi** - AI site search plus a shopping assistant that answers spec questions ("is this waterproof down to 20F?") with cited sources, from $25/mo for 500 messages. Pick when shoppers query in trip language and your catalog speaks in fabric codes.
+- **Nobi** - AI site search plus a shopping assistant that answers spec questions ("is this waterproof down to 20F?") with cited sources, from $29/mo for 500 messages. Pick when shoppers query in trip language and your catalog speaks in fabric codes.
 - **Algolia** - developer-first search API with NeuralSearch on higher tiers, free Build plan plus usage-based scaling. Pick when an in-house engineering team will own ranking on weight, fit, and temperature attributes.
 - **Klevu** - AI matching plus "did you mean" tuned for Shopify catalogs, quote-only (third-party sources cite plans in the $499-$1,598/mo range). Pick when long, conversational queries on a Shopify store are the main miss.
 - **Constructor** - semantic search with personalized session-signal ranking across category, browse, and search, revenue-share starting mid-five-figures annually. Pick when a large-volume outdoor retailer needs the whole site reordering by in-session behavior.
@@ -115,7 +115,7 @@ Outdoor shoppers search in trip terms - "two-person tent for shoulder-season bac
 
 | Product | Primary job | Best for | Pricing (starting) | Standout strength | Key weakness |
 | --- | --- | --- | --- | --- | --- |
-| Nobi | AI site search plus shopping assistant grounded in your catalog and policy docs | Outdoor brands whose shoppers query by trip, weather, or activity rather than fabric or model name | From $25/mo for 500 messages (a search or a chat question each count as one message) | Cited shopping-assistant answers refreshed twice daily, so updated sizing charts and weather ratings reach shoppers within hours | Curates the search results page, not category or collection pages, so brands needing site-wide merchandising will still want a separate tool |
+| Nobi | AI site search plus shopping assistant grounded in your catalog and policy docs | Outdoor brands whose shoppers query by trip, weather, or activity rather than fabric or model name | From $29/mo for 500 messages (a search or a chat question each count as one message) | Cited shopping-assistant answers refreshed twice daily, so updated sizing charts and weather ratings reach shoppers within hours | Curates the search results page, not category or collection pages, so brands needing site-wide merchandising will still want a separate tool |
 | [Algolia](https://algolia.com) | Developer-first search API with optional semantic layer (NeuralSearch) | Outdoor brands with a dedicated frontend and backend engineering team that wants to own ranking on weight, fit, and temperature attributes | Free Build tier (10K requests/mo); usage-based scaling above, with NeuralSearch gated to the Elevate enterprise tier; typical mid-market pay-as-you-go usage runs well under $500/mo, scaling to thousands at very high query volumes or on Elevate | Sub-50ms response and granular API control over how spec attributes are weighted | Relevance is only as good as the engineering hours you can spend tuning it; NeuralSearch is gated to the Elevate tier |
 | [Klevu](https://klevu.com) | AI search and merchandising packaged for Shopify | Shopify-based outdoor brands whose biggest miss is long, conversational queries that keyword search drops | Quote-only; third-party sources cite plans in the $499-$1,598/mo range, with enterprise quoted by store size | AI matching catches conversational queries and "did you mean" handles typos in technical model names | Now part of Athos Commerce alongside Searchspring and Intelligent Reach; personalization requires the Expert tier - Essential and Advanced plans don't include it |
 | [Constructor](https://constructor.io) | Semantic product discovery with personalized ranking across the full site | Large-volume outdoor retailers with a data team and merchandising needs across category, browse, and search | Revenue-share, no published list price; mid-five-figures and up annually | Personalized session-signal ranking reorders results in real time based on in-session clicks and views | Revenue-share pricing scales with GMV, so a successful traffic or conversion campaign raises the bill without a corresponding change to the contract |
@@ -135,7 +135,7 @@ We started with the set of competitors Nobi tracks for ecommerce site search and
 
 The first bar was real AI or semantic capability, not keyword matching dressed up in new marketing language. A search tool for outdoor brands has to read trip-language queries and map them to spec attributes - "warm sleeping bag for fall camping" has to find products tagged by fill power and temperature rating, even when the shopper never types those words. All five tools clear that bar, though they get there differently. Nobi and Fast Simon ship semantic ranking on by default. Algolia gives engineers the API to build it. Klevu's AI matching reads catalog data to bridge shopper phrasing and product titles. Constructor learns from clickstream behavior and uses that to rank.
 
-The second bar was a pricing model an outdoor brand can actually plan around. Nobi publishes its bundles, starting at $25/month for 500 messages, where a search or a chat question each count as one message. Fast Simon publishes Shopify app tiers starting at $39.99/month. Algolia publishes a free Build plan and usage-based tiers above it. Klevu doesn't publish list prices on athoscommerce.com, though third-party sources cite plans in the $499-$1,598/month range as a planning anchor, and Constructor runs on revenue-share with no published list price.
+The second bar was a pricing model an outdoor brand can actually plan around. Nobi publishes its bundles, starting at $29/month for 500 messages, where a search or a chat question each count as one message. Fast Simon publishes Shopify app tiers starting at $39.99/month. Algolia publishes a free Build plan and usage-based tiers above it. Klevu doesn't publish list prices on athoscommerce.com, though third-party sources cite plans in the $499-$1,598/month range as a planning anchor, and Constructor runs on revenue-share with no published list price.
 
 The third bar was install path: a [Shopify-native drop-in](https://nobi.ai/blog/best-ai-search-shopify-plus) or an API a developer can integrate without a months-long services engagement. All five qualify on at least one of those paths.
 
@@ -145,7 +145,7 @@ Nobi reads queries in trip language and matches them against your catalog's spec
 
 **Best for:** Outdoor brands whose shoppers query by activity, weather, or trip type while the catalog is written in fabric codes, fill weights, and waterproof ratings.
 
-**Pricing:** Nobi starts at $25 a month for 500 messages, where a search or a chat question each count as one message. Bigger bundles cost less per message, up to 100,000 messages for $2,999 a month.
+**Pricing:** Nobi starts at $29 a month for 500 messages, where a search or a chat question each count as one message. Bigger bundles cost less per message, up to 100,000 messages for $3,749 a month.
 
 **Pros:**
 - Inline citation pills on every answer - hovering shows the source document, date, and exact excerpt, and a sources sidebar lists every reference so shoppers can verify spec claims like temperature ratings or material composition before buying
@@ -254,7 +254,7 @@ Nobi reads queries in trip language and matches them against your catalog's spec
 
 Match the tool to the actual job your catalog has, not to the brand with the loudest pitch.
 
-If shoppers query in trip and weather language and you want a fast install with cited shopping-assistant answers, start with Nobi. Bundles from $25/month for 500 messages, with every price published up to 100,000 messages, keep the bill predictable while you scale.
+If shoppers query in trip and weather language and you want a fast install with cited shopping-assistant answers, start with Nobi. Bundles from $29/month for 500 messages, with every price published up to 100,000 messages, keep the bill predictable while you scale.
 
 If you have a dedicated search engineering team that wants to own how weight, fill power, and waterproof ratings get ranked, pick Algolia. Usage-based pricing with NeuralSearch gated to the Elevate tier is the trade-off.
 
@@ -269,7 +269,7 @@ If your bottleneck is visual collection curation rather than semantic relevance,
 
 ---
 
-Trip-language search against a technical outdoor catalog is a specific problem, and most site search wasn't built for it. The same challenge shows up for [sporting goods brands](/blog/best-ai-search-for-sporting-goods-brands) whose shoppers query by activity rather than SKU. If that's the gap you're trying to close, you can see how Nobi works at nobi.ai, or start a 30-day free trial - no sales call required. After the trial, pricing starts at $25/mo.
+Trip-language search against a technical outdoor catalog is a specific problem, and most site search wasn't built for it. The same challenge shows up for [sporting goods brands](/blog/best-ai-search-for-sporting-goods-brands) whose shoppers query by activity rather than SKU. If that's the gap you're trying to close, you can see how Nobi works at nobi.ai, or start a 30-day free trial - no sales call required. After the trial, pricing starts at $29/mo.
 
 <div className="my-8 flex justify-center">
  <a

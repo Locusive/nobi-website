@@ -13,7 +13,7 @@ import { AboutSeo } from "../src/content/about.js";
 import { ProductSchemaSummary, ProductSeo } from "../src/content/product.js";
 import { FEATURES, buildFeaturePath } from "../src/content/features.js";
 import { FEATURE_PAGES } from "../src/content/featurePages.js";
-import { PRICING_OFFER, PRICING_SEO_DESCRIPTION } from "../src/constants/pricing.js";
+import { PRICING_OFFER, PRICING_SEO_DESCRIPTION, STARTING_OFFER } from "../src/constants/pricing.js";
 import { CoveCubbySeo } from "../src/content/coveCubbyComparison.js";
 import { MarleySpoonSeo } from "../src/content/marleySpoonCost.js";
 import { isUtilityUrl } from "./shop-nobi-indexnow.js";
@@ -41,7 +41,7 @@ const SITE = { "@context": "https://schema.org", "@type": "WebSite", name: "Nobi
 const product = (name, description, path) => ({
   "@context": "https://schema.org", "@type": "Product", name, description,
   brand: { "@type": "Brand", name: "Nobi" }, url: `${BASE}${path}`,
-  offers: { "@type": "Offer", price: "25", priceCurrency: "USD", availability: "https://schema.org/InStock" },
+  offers: STARTING_OFFER,
 });
 
 const PAGES = [
@@ -57,7 +57,7 @@ const PAGES = [
       "@context": "https://schema.org", "@type": "SoftwareApplication", name: "Nobi",
       applicationCategory: "BusinessApplication", operatingSystem: "Web",
       description: CANONICAL_DESCRIPTION, url: BASE,
-      offers: { "@type": "Offer", price: "25", priceCurrency: "USD", availability: "https://schema.org/InStock" },
+      offers: STARTING_OFFER,
     }],
   },
   {

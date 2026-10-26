@@ -1,0 +1,69 @@
+.snm-page { color: #1b1626; background: #fff; }
+.snm-page a { text-underline-offset: 3px; }
+.snm-hero, .snm-connections, .snm-endpoint, .snm-details, .snm-contract, .snm-bottom-note { max-width: 1160px; margin-inline: auto; }
+.snm-hero { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(320px, .9fr); gap: clamp(36px, 6vw, 88px); align-items: center; padding: 44px 24px 92px; }
+.snm-disclosure { font-size: 12px; color: #716a7e; margin: 0 0 38px; }
+.snm-overline { color: #6d3bff; font-size: 16px; font-weight: 700; margin: 0 0 18px; }
+.snm-hero h1 { max-width: 720px; font-size: clamp(42px, 5.2vw, 72px); line-height: 1.06; letter-spacing: -.048em; font-weight: 700; margin: 0 0 25px; }
+.snm-intro { max-width: 650px; font-size: clamp(17px, 1.7vw, 20px); line-height: 1.58; color: #514b5c; margin: 0; }
+.snm-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 26px; margin: 30px 0 18px; }
+.snm-actions a { font-size: 15px; font-weight: 700; }
+.snm-primary-action { display: inline-block; padding: 13px 22px; border-radius: 999px; background: #6d3bff; color: #fff; text-decoration: none; }
+.snm-primary-action:hover { background: #5627e7; }
+.snm-secondary-action { color: #4023a6; }
+.snm-hero-note { color: #716a7e; font-size: 14px; line-height: 1.5; margin: 0; }
+.snm-example { background: #100a24; color: #fff; border-radius: 26px; padding: clamp(25px, 3vw, 42px); box-shadow: 0 26px 60px -42px #100a24; }
+.snm-example-title { display: flex; align-items: center; gap: 10px; font-size: 13px; color: #cfc3e9; }
+.snm-example-dot { width: 8px; height: 8px; border-radius: 50%; background: #a58cff; }
+.snm-example p { font-size: clamp(20px, 2.2vw, 27px); line-height: 1.35; letter-spacing: -.02em; margin: 20px 0 24px; }
+.snm-example-divider { height: 1px; background: #453b5c; margin-bottom: 26px; }
+.snm-example code { display: inline-block; margin: 16px 0 19px; color: #c7b7ff; font-size: 17px; }
+.snm-example-fields { display: flex; gap: 8px; flex-wrap: wrap; font-size: 12px; font-weight: 600; }
+.snm-example-fields span { color: #fff; background: #2a2041; border-radius: 7px; padding: 7px 10px; }
+.snm-example small { display: block; color: #beb4cf; font-size: 12px; line-height: 1.5; margin-top: 22px; }
+.snm-connections { padding: 0 24px 82px; scroll-margin-top: 120px; }
+.snm-section-heading { display: flex; justify-content: space-between; align-items: end; gap: 24px; margin-bottom: 28px; }
+.snm-section-heading h2, .snm-endpoint h2, .snm-contract h2 { font-size: clamp(29px, 3vw, 40px); line-height: 1.15; letter-spacing: -.035em; margin: 0 0 10px; }
+.snm-section-heading p, .snm-endpoint p, .snm-contract p { color: #5e586c; line-height: 1.6; margin: 0; }
+.snm-section-heading a { flex: none; color: #5b30d9; font-weight: 700; }
+.snm-connection-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+.snm-connection { display: flex; flex-direction: column; min-height: 254px; padding: 25px; border: 1px solid #ddd7ea; border-radius: 18px; text-decoration: none; color: inherit; background: #fff; }
+.snm-connection:hover { border-color: #845dff; box-shadow: 0 12px 30px -26px #3e1ca0; }
+.snm-connection-mark { display: flex; align-items: center; width: 95px; height: 48px; margin-bottom: 26px; }
+.snm-connection-mark img { max-width: 100%; max-height: 38px; object-fit: contain; object-position: left center; }
+.snm-connection-copy { display: flex; flex-direction: column; gap: 5px; flex: 1; }
+.snm-connection-kind { color: #6d3bff; font-size: 12px; font-weight: 700; }
+.snm-connection-copy strong { font-size: 23px; letter-spacing: -.025em; }
+.snm-connection-copy > span:last-child { color: #605a6b; font-size: 14px; line-height: 1.5; }
+.snm-connection-arrow { align-self: flex-end; color: #6d3bff; font-size: 20px; line-height: 1; }
+.snm-platform-note { color: #716a7e; font-size: 13px; margin: 15px 0 0; }
+.snm-endpoint { display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 30px; padding: 32px; border-radius: 20px; background: #f1ecff; }
+.snm-endpoint h2 { font-size: 28px; }
+.snm-endpoint-url { padding: 18px 20px; border: 1px solid #d2c4ff; background: #fff; border-radius: 10px; overflow-wrap: anywhere; }
+.snm-endpoint-url code { color: #4023a6; font-size: 14px; }
+.snm-details { padding: 85px 24px 30px; }
+.snm-detail { display: grid; grid-template-columns: minmax(200px, .7fr) minmax(0, 1.3fr); gap: 45px; padding: 38px 0; border-top: 1px solid #e5e0ec; scroll-margin-top: 130px; }
+.snm-detail-heading span { color: #6d3bff; font-weight: 700; font-size: 14px; }
+.snm-detail h2 { font-size: clamp(24px, 2.5vw, 32px); line-height: 1.18; letter-spacing: -.03em; margin: 8px 0 0; }
+.snm-detail-body { min-width: 0; color: #514b5c; line-height: 1.65; overflow-wrap: anywhere; }
+.snm-detail-body p { margin: 0 0 14px; }
+.snm-detail-body a, .snm-contract-links a, .snm-bottom-note a { color: #5930d4; font-weight: 600; }
+.snm-detail-body code, .snm-endpoint code, .snm-contract code { overflow-wrap: anywhere; }
+.snm-detail-body pre { background: #100a24; color: #fff; border-radius: 10px; overflow-x: auto; padding: 18px; font-size: 13px; line-height: 1.5; margin: 16px 0 20px; }
+.snm-inline-action { display: inline-block; }
+.snm-contract { display: grid; grid-template-columns: 1.3fr .7fr; gap: 50px; padding: 38px 24px; border-top: 1px solid #e5e0ec; }
+.snm-contract ul { padding-left: 20px; line-height: 1.8; }
+.snm-contract-links { display: flex; flex-direction: column; align-items: flex-start; gap: 14px; padding-top: 7px; }
+.snm-bottom-note { color: #716a7e; font-size: 13px; line-height: 1.6; padding: 0 24px 80px; }
+.snm-page a:focus-visible { outline: 3px solid #6d3bff; outline-offset: 4px; border-radius: 3px; }
+@media (max-width: 820px) {
+  .snm-hero, .snm-endpoint, .snm-detail, .snm-contract { grid-template-columns: 1fr; }
+  .snm-hero { padding-top: 20px; padding-bottom: 70px; }
+  .snm-connection-grid { grid-template-columns: 1fr; }
+  .snm-connection { min-height: 0; }
+  .snm-section-heading { align-items: flex-start; flex-direction: column; }
+  .snm-endpoint { margin: 0 18px; }
+  .snm-details { padding-top: 55px; }
+  .snm-detail { gap: 18px; }
+}
+@media (prefers-reduced-motion: reduce) { .snm-page { scroll-behavior: auto; } }

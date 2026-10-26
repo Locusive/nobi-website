@@ -2,7 +2,7 @@
 
 Shop Nobi is an online search engine. Its public MCP connection currently searches product listings from curated online stores. It is read-only and does not search service listings, place orders, or take payments.
 
-HTML documentation: https://docs.nobi.ai/shop-nobi/
+HTML documentation: https://docs.nobi.ai/shop-nobi-mcp-response/
 
 ## Connect
 
@@ -12,6 +12,13 @@ HTML documentation: https://docs.nobi.ai/shop-nobi/
 - Client approval: depends on the MCP client
 
 Discover the live tool schemas with `tools/list`. For installation examples, see https://nobi.ai/shop/mcp.
+
+### Client setup paths
+
+- Claude Code plugin and direct MCP setup: https://docs.nobi.ai/shop-nobi-connector/
+- Gemini CLI extension: `gemini extensions install https://github.com/Locusive/shop-nobi-gemini-extension`
+- Cursor direct MCP connection: https://nobi.ai/shop/mcp#cursor. The direct link installs the connection, not a marketplace plugin.
+- Other remote MCP clients: use the server address above with Streamable HTTP.
 
 ## `search_products`
 
@@ -24,6 +31,19 @@ Arguments: `query` is required nonblank text, up to 500 characters. `limit` is o
 On success, check `isError === false` and read `structuredContent.products`. Clients that only read text can parse JSON from `content[0].text`. The `products` array may be empty.
 
 Each product contains `name` (string), `store` (string or null), `price` (number or null), `currency` (string), `inStock` (boolean), `imageUrl` (string or null), `url` (string or null), `paidLink` (boolean), and `linkLabel` (string or null). The `url`, when present, is a Nobi click link that forwards to the seller's product page, not a raw merchant URL. Never invent a missing price, seller, image, or link. Show `linkLabel` beside its link when supplied, especially for a paid link. Verify final price, stock, and delivery on the seller's site.
+
+This parser handles both structured and text-only MCP clients. It does not treat an error or a temporary busy message as a genuine zero-result search:
+
+```js
+function readSearchResult(result) {
+  if (result.isError) throw new Error(result.content?.[0]?.text || "Search failed");
+  const text = result.content?.find(item => item.type === "text")?.text;
+  const data = result.structuredContent ?? (text ? JSON.parse(text) : null);
+  if (!Array.isArray(data?.products)) throw new Error("Search result has no products array");
+  if (data.products.length === 0 && data.message) return { status: "unavailable", message: data.message };
+  return { status: "ok", products: data.products };
+}
+```
 
 ## `find_shop_nobi_page`
 

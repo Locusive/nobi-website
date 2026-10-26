@@ -45,6 +45,8 @@ import "./index.css";
 // Keep the static checklist styled before its lazy route loads, including without JavaScript.
 import "./pages/ElectionNight.css";
 import "./pages/GiftChooser.css";
+// The prerendered agent connection page needs its layout before the lazy route loads.
+import "./pages/ShopNobiMcp.css";
 
 const SCROLL_KEY_PREFIX = "nobi-scroll:";
 

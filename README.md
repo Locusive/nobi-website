@@ -85,7 +85,8 @@ distinguishes sizing, construction and variant choices, replaces unsupported
 superlatives and care/performance claims, and suggests visitor-entered searches.
 These edits do not certify stock, merchant claims or ranking improvements.
 `shop-nobi-additional-buying-copy.js` covers `black-stud-earrings`,
-`cream-rugs` and `brown-mini-dresses` through the same publication-only path.
+`cream-rugs`, `brown-mini-dresses`, `sundresses`, `silver-watches` and
+`black-maxi-dresses` through the same publication-only path.
 It replaces allergy-prevention and blanket cleaning claims with quantity,
 measurement, component, size-variant and exact-item care checks.
 

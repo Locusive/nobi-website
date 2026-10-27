@@ -128,6 +128,8 @@ test("suitcase correction leaves refreshed guidance and other pages intact", () 
 });
 
 for (const scenario of [
+  {"slug": "diamond-bangles", "title": "Diamond Bangles: Compare Sizes, Closures & Stone Details", "stale": "Open bangles slide on easily but may feel looser; hinged bangles provide a more secure fit but require a small opening to get on."},
+  {"slug": "aquamarine-rings", "title": "Aquamarine Rings: Compare Shapes, Settings & Ring Sizes", "stale": "A well-cut aquamarine will show vivid blue-green color, so look for reputable sellers that provide clear photos and certification."},
   {"slug": "blue-navy-casual-dresses", "title": "Navy & Blue Casual Dresses: Compare Shapes, Lengths & Details", "stale": "Dark colors like navy tend to hide light stains better than bright colors."},
   {"slug": "green-maxi-dresses", "title": "Green Maxi Dresses: Compare Shades, Lengths & Coverage", "stale": "Turn it inside out and wash on a gentle cycle with cold water to protect the print, then line dry."},
   {"slug": "navy-suits", "title": "Navy Suits: Compare Cuts, Lengths & Ordering Options", "stale": "Look for a full canvas or half-canvas construction if you want a suit that can be resoled later."},

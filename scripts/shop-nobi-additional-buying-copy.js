@@ -1,5 +1,61 @@
-/** Item-specific comparison guidance for existing jewelry, watch, rug and dress search pages. */
+/** Item-specific comparison guidance for existing jewelry, watch, rug, dress and footwear search pages. */
 export const AdditionalBuyingCopy = {
+  "brown-suede-boots": {
+    "title": "Brown Suede Boots: Compare Materials, Shapes & Fit",
+    "description": "Compare brown suede boots across stores, including Chelsea, lace-up, western and platform styles. Check genuine or faux suede, dimensions and exact-item care.",
+    "guide": [
+      "Separate genuine suede, faux suede and waxed suede before comparing options. Read the selected boot's upper-material description, not just the color or style name. Check the close-up photos and color label for chocolate, espresso, toffee or another brown shade.",
+      "Choose the shape you want: Chelsea, lace-up, desert, western or platform. Compare shaft height, opening or calf circumference, heel height and platform height where provided. Confirm the intended wearer, size system and width; a size number alone is not a cross-brand fit guarantee.",
+      "Compare the outsole, lining and fastening details for the exact pair. A lug sole, waxed finish or faux-suede upper does not by itself establish waterproofing, slip resistance or longer wear. For wet-weather use, look for an explicit manufacturer specification and its limitations.",
+      "Try a Shop Nobi search such as brown suede Chelsea boots with a low heel under $500. Open the shortlisted pairs to confirm measurements, available sizes, current price and returns. Follow the maker's care instructions before applying any protector, cleaner or conditioner."
+    ],
+    "faq": [
+      {
+        "question": "How do I tell whether a boot is genuine or faux suede?",
+        "answer": "Read the upper-material composition for the exact selected pair. Genuine, faux and waxed suede descriptions should not be treated as interchangeable; ask the retailer if the material is unclear."
+      },
+      {
+        "question": "What measurements matter for brown suede boots?",
+        "answer": "Along with foot size and width, compare shaft height, opening or calf circumference, heel height and any platform height. Check the retailer's measurement method and fit notes for the intended wearer."
+      },
+      {
+        "question": "Are faux-suede boots automatically more water-resistant?",
+        "answer": "Do not assume water resistance from the material name. Check the exact boot's manufacturer specifications, including any waterproofing claim and its limits, before choosing it for wet conditions."
+      },
+      {
+        "question": "Should I spray every suede boot with protector?",
+        "answer": "Use only care products and methods recommended for the exact upper and finish. Read the maker's instructions before applying a spray or conditioner; a product suitable for one suede finish may not suit another."
+      }
+    ]
+  },
+  "brown-boots": {
+    "title": "Brown Boots: Compare Shaft Heights, Heels & Fits",
+    "description": "Browse brown boots across stores, from western and Chelsea styles to lace-up and knee-high designs. Compare shaft dimensions, heel heights, materials and sizing.",
+    "guide": [
+      "Start with the silhouette and intended use: western or barn-style boots, Chelsea boots, lace-up styles, platforms and knee-high boots are different choices. Decide how high you want the shaft and heel before narrowing by price. A style name alone does not certify suitability for work, riding or winter conditions.",
+      "For tall boots, compare the stated shaft height and calf or opening circumference with the clothing you plan to wear. Check whether the fastening is a zip, laces, elastic panel or pull-on opening. For platforms, compare the platform and heel measurements separately rather than judging height from a photo.",
+      "Check the intended wearer, size system, width and exact upper, lining and outsole materials. Lined styles are not automatically waterproof or temperature-rated. Comfort and fit cannot be established from a product photo or a general claim about sturdy soles; review the retailer's fit guidance and return conditions.",
+      "Enter your preferences in Shop Nobi search, such as brown knee-high boots with a low heel under $200, or men's brown western boots in a wide fit. Confirm the selected variant's measurements, current price, available size and care instructions at the store before ordering."
+    ],
+    "faq": [
+      {
+        "question": "How do I compare knee-high and mid-calf brown boots?",
+        "answer": "Check the actual shaft-height measurement and where the maker measures from, then compare calf or opening circumference. Knee-high and mid-calf labels alone do not establish how a boot will fit your leg."
+      },
+      {
+        "question": "Do lined brown boots work for snow and rain?",
+        "answer": "Lining alone does not establish waterproofing, traction or a temperature rating. Check the manufacturer's stated conditions of use and the exact pair's specifications before relying on it for winter weather."
+      },
+      {
+        "question": "How can I narrow brown boots by fit?",
+        "answer": "Specify the intended wearer, size, width and preferred shaft and heel height in your search. Compare each retailer's size chart and fit notes, and check return conditions before trying a pair."
+      },
+      {
+        "question": "Can I use the same conditioner on every brown boot?",
+        "answer": "Follow the exact pair's care instructions for its upper, finish and trims. Do not apply leather or suede products solely because a boot is brown or has a platform; confirm compatibility with the manufacturer first."
+      }
+    ]
+  },
   "black-stud-earrings": {
     "title": "Black Stud Earrings: Compare Sizes, Materials & Backs",
     "description": "Compare black stud earrings across stores. Check whether each listing is a single or pair, the stud dimensions, post and back materials, and closure details.",

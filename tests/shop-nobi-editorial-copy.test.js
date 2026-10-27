@@ -128,6 +128,9 @@ test("suitcase correction leaves refreshed guidance and other pages intact", () 
 });
 
 for (const scenario of [
+  {"slug": "brown-suede-boots", "title": "Brown Suede Boots: Compare Materials, Shapes & Fit", "stale": "Faux suede is more water-resistant and easier to clean, though it may not have the same softness as real suede."},
+  {"slug": "brown-boots", "title": "Brown Boots: Compare Shaft Heights, Heels & Fits", "stale": "Clean the surface with a soft brush and use appropriate leather or suede conditioners to keep the material supple."},
+
   {"slug": "pink-hoodies", "title": "Pink Hoodies: Compare Shades, Sizes & Zip Styles", "stale": "Use a gentle cycle with cold water and tumble dry low or air dry to preserve the quilting."},
   {"slug": "charcoal-hoodies", "title": "Charcoal Hoodies: Compare Fits, Fabrics & Details", "stale": "Hand wash or use a gentle cycle with cold water and lay flat to dry to maintain softness."},
   {"slug": "amethyst-earrings", "title": "Amethyst Earrings: Compare Stones, Styles & Sizes", "stale": "Yes, 14k gold offers a balance of durability and richness, suitable for daily wear."},

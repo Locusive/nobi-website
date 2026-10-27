@@ -128,6 +128,8 @@ test("suitcase correction leaves refreshed guidance and other pages intact", () 
 });
 
 for (const scenario of [
+  {"slug": "pink-hoodies", "title": "Pink Hoodies: Compare Shades, Sizes & Zip Styles", "stale": "Use a gentle cycle with cold water and tumble dry low or air dry to preserve the quilting."},
+  {"slug": "charcoal-hoodies", "title": "Charcoal Hoodies: Compare Fits, Fabrics & Details", "stale": "Hand wash or use a gentle cycle with cold water and lay flat to dry to maintain softness."},
   {"slug": "amethyst-earrings", "title": "Amethyst Earrings: Compare Stones, Styles & Sizes", "stale": "Yes, 14k gold offers a balance of durability and richness, suitable for daily wear."},
   {"slug": "emerald-jewelry", "title": "Emerald Jewelry: Compare Stones, Settings & Fit", "stale": "Real emeralds usually have natural inclusions called jardin; a reputable seller will provide certification."},
   {"slug": "sundresses", "title": "Sundresses: Compare Lengths, Straps & Fabrics", "stale": "Cotton and linen sundresses can be machine washed on gentle cycle and tumble dried on low."},

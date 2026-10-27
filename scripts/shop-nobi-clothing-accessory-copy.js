@@ -112,4 +112,60 @@ export const ClothingAccessoryCopy = {
       { question: "Is a silk blend always easier to care for?", answer: "Do not assume that a blend is more durable or easier to clean. Check the exact fiber percentages, construction and care label for the blouse you select." },
     ],
   },
+  "pink-hoodies": {
+    "title": "Pink Hoodies: Compare Shades, Sizes & Zip Styles",
+    "description": "Compare pink hoodies across stores, from neon to powder pink. Check adult or child sizing, zip versus pullover construction, garment measurements and exact care.",
+    "guide": [
+      "Choose the intended wearer before comparing sizes. Check whether each listing uses adult or child sizing and use that style's size chart. Compare chest width, body length and sleeve measurements where provided; the same letter size is not a reliable match across ranges.",
+      "Choose the shade and design you want: neon, powder, light or another pink, with a plain finish, print or trim. Check the selected color name and close-up photos. A general pink category does not guarantee that two stores show the same shade.",
+      "Compare zip-up and pullover construction, hood details, pockets and the stated fit. Read the fiber composition separately from descriptions such as waffle, fleece or quilted. Check any lining or filling details and follow the exact garment's care label, including instructions for trims.",
+      "Try a Shop Nobi search such as an adult neon-pink zip hoodie under $200. Open a result to confirm the selected size, shade, measurements, current price and return conditions. Check whether any matching trousers are sold separately."
+    ],
+    "faq": [
+      {
+        "question": "How do I avoid confusing adult and child hoodie sizes?",
+        "answer": "Check the listing's intended wearer and size chart before selecting a size. Compare the provided chest, body and sleeve measurements rather than treating an adult small and a child small as equivalent."
+      },
+      {
+        "question": "How do I find a neon rather than pale pink hoodie?",
+        "answer": "Include neon pink in your search, then check the selected color label and photos for each result. Shade names differ between brands, so ask the retailer if the exact color is important."
+      },
+      {
+        "question": "What should I compare between a zip-up and pullover hoodie?",
+        "answer": "Check how far the zip opens, the pocket layout, hood details and garment measurements. Compare the exact fabric, lining or filling information rather than using the fastening style as a warmth rating."
+      },
+      {
+        "question": "Can I machine wash every quilted pink hoodie?",
+        "answer": "Follow the care label for the exact garment and its trims. A quilted appearance alone does not establish whether machine washing, tumble drying or a particular temperature is suitable."
+      }
+    ]
+  },
+  "charcoal-hoodies": {
+    "title": "Charcoal Hoodies: Compare Fits, Fabrics & Details",
+    "description": "Compare charcoal hoodies across stores. Check adult and child sizing, heather or faded shades, garment measurements, zip or pullover details and exact fabric care.",
+    "guide": [
+      "Start with the intended wearer and fit. Check whether the listing is for men, women or children, then compare the exact style's size chart and chest, body and sleeve measurements. Read the retailer's relaxed or fitted description alongside those measurements.",
+      "Compare the selected shade and finish. Charcoal heather, charcoal fade and printed charcoal styles can look different. Check the color option, photos and trim details rather than assuming every charcoal listing is the same solid dark gray.",
+      "Read the fabric percentages, lining and any filling description for the exact hoodie. Compare zip-up versus pullover access, pocket closures and hood construction. Do not assign a warmth or performance rating from a fiber name or fastening alone; use any specific product information the retailer provides.",
+      "Use Shop Nobi search to describe your choice, such as a women's charcoal zip hoodie with pockets under $200. Confirm the selected size, composition, measurements and return conditions at the retailer. Follow the exact care label, especially for wool blends, cashmere or decorative details."
+    ],
+    "faq": [
+      {
+        "question": "Are charcoal heather and charcoal fade the same color?",
+        "answer": "Treat them as separate retailer color descriptions. Check the selected option and photos to compare a mixed, faded, printed or solid appearance; the names are not a shared color standard."
+      },
+      {
+        "question": "Does a zip-up hoodie keep you warmer than a pullover?",
+        "answer": "The fastening alone does not establish warmth. Compare the specific garment's fabric, lining, filling and fit information, including any stated performance claims, rather than assuming one closure is warmer."
+      },
+      {
+        "question": "How should I compare merino, cashmere and cotton hoodies?",
+        "answer": "Read the exact fiber percentages, construction and care label, then compare garment measurements and the features you need. A fiber name alone does not establish how every finished hoodie will feel, perform or need cleaning."
+      },
+      {
+        "question": "Can I use one washing method for every charcoal hoodie?",
+        "answer": "Follow the selected garment's own care label and any instructions for its trim, lining or embellishments. Do not apply general cashmere or merino advice to every blend or finished design."
+      }
+    ]
+  },
 };

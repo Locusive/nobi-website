@@ -127,6 +127,9 @@ export default function ShopNobiMcp() {
         <section className="snm-contract">
           <div><h2>What the tools return</h2><p>Ask for a product in ordinary language. <code>search_products</code> can return names, stores, prices and links when available. <code>find_shop_nobi_page</code> can return an existing Shop Nobi page for an exact product topic.</p>
             <ul>{ShopNobiMcpTools.map(tool => <li key={tool.name}><code>{tool.name}</code>: {tool.description}</li>)}</ul>
+            <h3>Shopify IDs require the merchant domain</h3>
+            <p>When sending a Shopify product or variant ID, include the selling merchant's domain as <code>storeDomain</code>, such as <code>example.com</code>. Use <code>sourceProductId</code> for a Shopify product and <code>sourceVariantId</code> for a Shopify variant only when the live <code>tools/list</code> schema supports them. A known Nobi <code>merchantId</code> can provide equivalent merchant context.</p>
+            <p>Nobi <code>id</code>, <code>productId</code> and <code>variantId</code> identify our own catalog records. Never put Shopify IDs or SKUs in those fields. If the schema accepts only <code>id</code>, use the Nobi variant ID returned by search. See the response guide for complete examples.</p>
           </div>
           <div className="snm-contract-links">
             <a href="https://docs.nobi.ai/shop-nobi-mcp-response/">Response format and errors</a>

@@ -53,9 +53,25 @@ On success, `structuredContent.found` is a boolean. `structuredContent.page` is 
 
 ## `get_product_details`
 
-Arguments: `id` is the required product id from a `search_products` result. This tool returns one product's full details.
+Arguments: the legacy `id` is the opaque Nobi variant identifier from a `search_products` result, not a Shopify ID or SKU. Discover the live schema before using expanded selectors. This tool returns catalog details and variant choices.
 
 On success, read `structuredContent.product`: `id`, `name`, `store`, `price` (number or null), `currency`, `compareAtPrice` (number or null), `inStock` (boolean), `inventoryQuantity` (number or null), `brand` (string or null), `categoryPath` (string or null), `imageUrls` (array of strings), `specs` (array of `{name, value}` attribute pairs, which vary by product), and `variants` (the product's variant options). There are no reviews or ratings; the stores' catalogs hold none.
+
+### Shopify IDs require the merchant domain
+
+When sending a Shopify product or variant ID, include the selling merchant's domain as `storeDomain`, such as `example.com`. Use `sourceProductId` for a Shopify product and `sourceVariantId` for a Shopify variant only when the live `tools/list` schema supports them. A known Nobi `merchantId` can supply equivalent merchant context. Never put Shopify IDs or SKUs into Nobi `id`, `productId` or `variantId` fields. If the schema accepts only `id`, use the Nobi variant ID returned by search.
+
+Where the source-ID arguments are advertised, send exactly one selector together with the actual merchant hostname:
+
+```json
+{"sourceProductId":"123456789","storeDomain":"example.com"}
+```
+
+```json
+{"sourceVariantId":"987654321","storeDomain":"example.com"}
+```
+
+These are illustrative IDs and a placeholder domain, not catalog records. Nobi product IDs identify parents; Nobi variant IDs identify specific choices. Parent lookup returns variant options without choosing a variant's price or stock. SKU lookup also requires merchant context and refuses ambiguous matches.
 
 ## `compare_products`
 

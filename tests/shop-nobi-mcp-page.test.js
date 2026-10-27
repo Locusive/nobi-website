@@ -139,3 +139,21 @@ test("shopping-agent buying guides render distinct search intents and honest pro
   assert.ok(apiGuide.includes('href="/shop/mcp"'));
   assert.ok(apiGuide.includes("Exclude your own setup calls and directory probes"));
 });
+
+
+test("every published MCP usage guide pairs Shopify identifiers with merchant context", () => {
+  for (const file of ["shop/mcp.html", "shop-nobi-mcp.md", "llms.txt", "blog/product-search-api-for-shopping-apps.html", "blog/shopping-mcp-servers-for-ai-agents.html"]) {
+    const text = readCode(readPage(file).replace(/<[^>]*>/g, " "));
+    for (const argument of ["Shopify", "storeDomain", "sourceProductId", "sourceVariantId", "tools/list"])
+      assert.ok(text.includes(argument), `${file} lacks merchant-scoped guidance: ${argument}`);
+  }
+  const guide = readPage("shop-nobi-mcp.md");
+  const examples = [...guide.matchAll(/```json\n([\s\S]*?)\n```/g)]
+    .map(match => JSON.parse(match[1]))
+    .filter(example => example.sourceProductId || example.sourceVariantId);
+  assert.equal(examples.length, 2);
+  for (const example of examples) {
+    assert.equal(example.storeDomain, "example.com");
+    assert.equal(["sourceProductId", "sourceVariantId"].filter(key => key in example).length, 1);
+  }
+});

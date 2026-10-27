@@ -28,9 +28,11 @@ These are different product scopes, not a ranking by search quality. We have not
 
 ## Shop Nobi: curated cross-store search
 
-[Shop Nobi's online search engine](/shop/mcp) exposes two public MCP tools today. `search_products` takes a plain-language product request and returns matching listings; seller, price, stock signal, image and click-through link are included when available. `find_shop_nobi_page` looks for an existing Shop Nobi page on an exact topic. These tools currently search products, not services or other offerings. The connection is remote, read-only and requires no Nobi sign-in or key.
+[Shop Nobi's online search engine](/shop/mcp) exposes six public MCP tools. `search_products` takes a plain-language product request and returns matching listings; seller, price, stock signal, image and click-through link are included when available. `find_shop_nobi_page` looks for an existing Shop Nobi page on an exact topic. `get_product_details` reads descriptions and variant choices; `compare_products` compares catalog listings; `check_price_and_availability` checks their catalog price and stock; `find_alternatives` finds similar listings. These tools currently search products, not services or other offerings. The connection is remote, read-only and requires no Nobi sign-in or key.
 
 It fits an agent helping someone discover products from curated independent stores and then sending that person to the merchant. It does **not** provide a generic REST catalog API, a complete cross-retailer price-history feed, cart creation or checkout. Price and availability can lag behind the merchant, so the store page is the final place to verify a purchase. Some product links may earn Nobi a commission; the agent should keep any returned commission notice next to the relevant link.
+
+When sending a Shopify product or variant ID, include the selling merchant's domain as `storeDomain`, such as `example.com`. Use `sourceProductId` for a Shopify product and `sourceVariantId` for a Shopify variant only when the live `tools/list` schema supports them. A known Nobi `merchantId` can supply equivalent merchant context. Never put Shopify IDs or SKUs into Nobi `id`, `productId` or `variantId` fields. If the schema accepts only `id`, use the Nobi variant ID returned by search.
 
 ## Shopify Global Catalog: Shopify product and variant workflow
 
@@ -48,4 +50,4 @@ It fits an agent helping someone discover products from curated independent stor
 
 Start with three real shopper requests that matter to your app: a broad discovery request, a specific product, and one request with a hard constraint such as size or budget. For each server, record whether it returns useful products, whether the result identifies the seller, what stock and price evidence it supplies, and whether the shopper can reach the actual merchant. Keep connection checks and your own test calls separate from genuine shopper use.
 
-If curated independent-store discovery is the fit, [connect Shop Nobi](/shop/mcp) and try a real product request. If the app needs raw catalog ingestion, historical prices, detailed variants or agent checkout, choose a service that explicitly documents those capabilities. Our [product-search API guide](/blog/product-search-api-for-shopping-apps) explains that choice in more detail.
+If curated independent-store discovery is the fit, [connect Shop Nobi](/shop/mcp) and try a real product request. If the app needs raw catalog ingestion, historical prices or agent checkout, choose a service that explicitly documents those capabilities. Our [product-search API guide](/blog/product-search-api-for-shopping-apps) explains that choice in more detail.

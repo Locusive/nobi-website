@@ -85,6 +85,8 @@ Available tools:
 - compare_products: Compare two or more products side by side on the attributes they share.
 - check_price_and_availability: Check the current price, currency and stock for one or more products.
 - find_alternatives: Find similar products across stores, excluding the original one.
+When sending a Shopify product or variant ID, include the selling merchant's domain as `storeDomain`, such as `example.com`. Use `sourceProductId` for a Shopify product and `sourceVariantId` for a Shopify variant only when the live `tools/list` schema supports them. A known Nobi `merchantId` can supply equivalent merchant context. Never put Shopify IDs or SKUs into Nobi `id`, `productId` or `variantId` fields. If the schema accepts only `id`, use the Nobi variant ID returned by search.
+
 - Agent-readable response guide: https://nobi.ai/shop-nobi-mcp.md
 - Shop Nobi documentation: https://docs.nobi.ai/shop-nobi/
 

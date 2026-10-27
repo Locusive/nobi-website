@@ -225,6 +225,13 @@ any stale `nobi-conversation-id`. A paid link, on search pages
 and in stories, gets `rel="sponsored"` and a small "We may earn a commission"
 notice under it (`CommissionNotice` in `src/utils/shopNobiPage.js`).
 
+Every published Shop Nobi search page includes its eligible displayed product
+photos in `sitemap-shop.xml`, deduplicated per page and capped at 1,000 images.
+Existing merchant restrictions and unsafe-image filtering apply before sitemap
+generation. Categories, Stories and image-free pages keep their normal URL
+entries without product-image tags. Image discovery and indexing are not guaranteed;
+Google documents Search Console verification for externally hosted image domains.
+
 Every entry in `sitemap-shop.xml` has a lastmod: the page's refresh time, or the
 time the API built the data when a page has none.
 

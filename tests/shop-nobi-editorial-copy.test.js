@@ -128,6 +128,8 @@ test("suitcase correction leaves refreshed guidance and other pages intact", () 
 });
 
 for (const scenario of [
+  {"slug": "blue-navy-casual-dresses", "title": "Navy & Blue Casual Dresses: Compare Shapes, Lengths & Details", "stale": "Dark colors like navy tend to hide light stains better than bright colors."},
+  {"slug": "green-maxi-dresses", "title": "Green Maxi Dresses: Compare Shades, Lengths & Coverage", "stale": "Turn it inside out and wash on a gentle cycle with cold water to protect the print, then line dry."},
   {"slug": "navy-suits", "title": "Navy Suits: Compare Cuts, Lengths & Ordering Options", "stale": "Look for a full canvas or half-canvas construction if you want a suit that can be resoled later."},
   {"slug": "blue-navy-suits", "title": "Blue & Navy Suits: Compare Shades, Patterns & Pieces", "stale": "Linen or lightweight wool blends keep you cool while maintaining a sharp appearance."},
 

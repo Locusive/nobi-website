@@ -1,5 +1,61 @@
 /** Authored buying guidance for existing pages selected from observed search queries. */
 export const ClothingAccessoryCopy = {
+  "blue-navy-casual-dresses": {
+    "title": "Navy & Blue Casual Dresses: Compare Shapes, Lengths & Details",
+    "description": "Compare navy and blue casual dresses across stores: active, bubble, shirt, knit and printed styles. Check garment length, lining, closures and selected sizing.",
+    "guide": [
+      "Start with the shape you want: this selection includes an active dress, a drop-waist bubble dress, collared and pleated knits, belted shirt dresses, floral mini and midi styles, swing dresses and a strapless option. An active-style name does not establish built-in shorts, pockets or support; check those features in the exact listing.",
+      "Use the garment's stated length and the retailer's measurement method to compare a mini with a midi or a swing silhouette. Check bust, waist and hip measurements and the intended wearer's size chart. For a belted dress, confirm whether the belt is included; for a button-front or strapless style, inspect the fastening and bodice fit.",
+      "Separate plain navy from deep-blue floral, navy-and-red plaid and two-tone blue designs. Inspect the selected color's front and back photos, plus lining and opacity information where provided. A dark shade does not establish stain resistance, and a fabric name alone does not establish warmth or breathability.",
+      "Try a Shop Nobi search such as a navy button-front midi dress with sleeves under $150. Include your preferred length, neckline, size and budget, then check the exact material composition, available size, care label and returns at the retailer. Do not assume every dress on this page has the same care requirements."
+    ],
+    "faq": [
+      {
+        "question": "How do I compare a navy active dress with a casual shirt dress?",
+        "answer": "Choose by the details you need, not the style label alone. For an active dress, verify any shorts, pockets and support. For a shirt dress, check sleeve length, buttons, belt inclusion and garment measurements."
+      },
+      {
+        "question": "Are these dresses all plain navy?",
+        "answer": "No. The selection also includes blue floral prints, navy-and-red plaid and a two-tone maritime-navy/marina-blue option. Confirm the exact variant's color and pattern before ordering."
+      },
+      {
+        "question": "How can I tell where a mini or midi dress will fall?",
+        "answer": "Use the stated garment length and how the retailer measured it, alongside its size and model-height information where supplied. Mini and midi labels alone do not establish the hem position on you."
+      },
+      {
+        "question": "Does a navy dress hide stains or need less care?",
+        "answer": "Navy is a color description, not a stain-resistance or easy-care specification. Follow the exact garment's care label and check its fabric, lining and trim before cleaning."
+      }
+    ]
+  },
+  "green-maxi-dresses": {
+    "title": "Green Maxi Dresses: Compare Shades, Lengths & Coverage",
+    "description": "Compare green maxi dresses in seafoam, matcha, olive and brighter shades. Check prints, garment length, lining, cutouts, necklines and exact-item care.",
+    "guide": [
+      "Choose whether you want solid green or a pattern with green in it. This selection includes seafoam palm prints, matcha embroidery, green gingham, green-and-white rugby stripes, green-and-coral floral prints and olive tropical cutouts. Compare the selected color name and photos rather than assuming every dress is the same green.",
+      "Compare the stated garment length and measurement method with your preferred hem position and shoes. Check bust, waist and hip measurements, the size chart and model-height information where supplied. A maxi label does not guarantee floor length on every wearer, and a smocked waist does not replace a size check.",
+      "For coverage, compare the crochet halter, cutout, sleeveless, short-sleeve and collared options. Read the lining information and inspect front and back photos, including any openings or slits. Confirm strap adjustment and fastening details where relevant; do not infer opacity from the dress's color or photos alone.",
+      "Use Shop Nobi search for a specific choice, such as an olive green maxi dress with sleeves under $100, or a green floral maxi with a lined skirt. Verify the exact variant's measurements, material composition, care label and current purchase terms at the store. Cotton, jersey, crochet and printed fabrics do not share one safe washing, drying or ironing method."
+    ],
+    "faq": [
+      {
+        "question": "How do I choose a green maxi dress that will not drag?",
+        "answer": "Compare the actual garment length, how it is measured and your intended shoes, using the retailer's size and model-height information where available. Ask about the exact selected size if the length is missing; maxi alone is insufficient."
+      },
+      {
+        "question": "Is a green crochet or cutout maxi dress fully lined?",
+        "answer": "Check the individual dress's lining description and front/back photos. A crochet or cutout style can have different coverage from a solid panel, so ask the retailer about any area that is unclear."
+      },
+      {
+        "question": "Are these green maxi dresses all solid colors?",
+        "answer": "No. The selection includes solid shades along with palm, floral, gingham, stripe and embroidered designs. Compare the chosen variant's base color and pattern before matching it to an outfit or event."
+      },
+      {
+        "question": "Can I machine wash or iron a printed green maxi dress?",
+        "answer": "Follow the exact item's care label for washing, drying and pressing, including any lining or trim. Neither the green color nor a cotton, jersey or synthetic label alone establishes safe settings."
+      }
+    ]
+  },
   "navy-suits": {
     "title": "Navy Suits: Compare Cuts, Lengths & Ordering Options",
     "description": "Compare navy suits across stores. Check short, regular and long sizing, single or double-breasted cuts, fabric and jacket construction, and made-to-order terms.",

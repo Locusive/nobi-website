@@ -1,5 +1,33 @@
 /** Authored buying guidance for existing pages selected from observed search queries. */
 export const ClothingAccessoryCopy = {
+  "yellow-midi-dresses": {
+  "title": "Yellow Midi Dresses: Compare Shades, Bodices & Lengths",
+  "description": "Compare yellow midi dresses across stores: floral satin, striped cotton, knits and taffeta. Check garment length, lining, strapless fit and nursing-access details.",
+  "guide": [
+    "Choose the shade and pattern first. This selection includes pale yellow, daffodil, sunshine stripes, yellow florals and a greige/yellow option. Compare the selected color label and front and back photos rather than assuming every result is a solid bright yellow dress.",
+    "Compare the bodice and neckline: tank, bow-strap, blouson-sleeve, strapless bustier and cutout styles appear here. For a strapless dress, check the fastening, exact bust and waist measurements and any stated internal support. Do not assume boning, elastic or a secure fit from the strapless label alone.",
+    "Check the stated garment length and measurement method to judge where the midi hem may fall on you. Compare lining, coverage, slits and the exact fiber composition alongside the satin, cotton, knit or taffeta description. For the explicitly labeled maternity and nursing dress, verify its size guidance and how nursing access works in the selected style.",
+    "Try a Shop Nobi search such as a pale-yellow cotton midi dress with straps under $150. Include your preferred shade, sleeve or strap style, size and budget, then confirm the selected variant, garment measurements, care label and returns at the retailer. Fabric names alone do not establish cooling performance or one safe cleaning method."
+  ],
+  "faq": [
+    {
+      "question": "Are all these yellow midi dresses the same shade?",
+      "answer": "No. The selection includes pale yellow, daffodil, stripes, floral prints and a greige/yellow option. Check the selected color name and photos; category membership does not establish an exact shade match."
+    },
+    {
+      "question": "How do I check the fit of a strapless midi dress?",
+      "answer": "Compare the exact bust and waist measurements, fastening and any documented internal support. Check the retailer's fit and return guidance rather than assuming that all strapless dresses have boning or will stay in place the same way."
+    },
+    {
+      "question": "How can I compare a tiered midi with a straight or knit midi?",
+      "answer": "Compare the garment length, waist placement, skirt shape, slits and size measurements. Use those details to choose the silhouette you want; a tiered construction does not guarantee a particular fit or hem position."
+    },
+    {
+      "question": "Can I use the same care method for satin and taffeta dresses?",
+      "answer": "Follow the exact garment's care label, including instructions for its lining and trim. Satin and taffeta descriptions do not by themselves establish fiber content or whether hand washing, machine washing or dry cleaning is suitable."
+    }
+  ]
+},
   "blue-navy-casual-dresses": {
     "title": "Navy & Blue Casual Dresses: Compare Shapes, Lengths & Details",
     "description": "Compare navy and blue casual dresses across stores: active, bubble, shirt, knit and printed styles. Check garment length, lining, closures and selected sizing.",

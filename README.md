@@ -78,9 +78,9 @@ The same publication path supplies the `pencil-skirts` buying guide, replacing
 the fixed price-range and general fabric-care advice with exact-item checks and
 an invitation to enter preferences in the existing search box. Catalog prices,
 product links, snapshot dates, feeds and Stories are unchanged.
-The clothing/accessory copy module also covers thirteen observed-query pages:
+The clothing/accessory copy module also covers fourteen observed-query pages:
 `red-blouses`, `navy-cardigans`, `multicolor-sweaters`, `gray-cargo-pants`,
-`green-wallets`, `pink-swim-trunks`, `blue-navy-blouses`, `pink-hoodies` and
+`yellow-midi-dresses`, `green-wallets`, `pink-swim-trunks`, `blue-navy-blouses`, `pink-hoodies` and
 `charcoal-hoodies`, `navy-suits`, `blue-navy-suits`, `blue-navy-casual-dresses`
 and `green-maxi-dresses`. Their guidance
 distinguishes sizing, construction and variant choices, replaces unsupported

@@ -128,6 +128,7 @@ test("suitcase correction leaves refreshed guidance and other pages intact", () 
 });
 
 for (const scenario of [
+  {"slug": "yellow-midi-dresses", "title": "Yellow Midi Dresses: Compare Shades, Bodices & Lengths", "stale": "Taffeta usually requires gentle hand washing or dry cleaning to maintain its sheen."},
   {"slug": "diamond-bangles", "title": "Diamond Bangles: Compare Sizes, Closures & Stone Details", "stale": "Open bangles slide on easily but may feel looser; hinged bangles provide a more secure fit but require a small opening to get on."},
   {"slug": "aquamarine-rings", "title": "Aquamarine Rings: Compare Shapes, Settings & Ring Sizes", "stale": "A well-cut aquamarine will show vivid blue-green color, so look for reputable sellers that provide clear photos and certification."},
   {"slug": "blue-navy-casual-dresses", "title": "Navy & Blue Casual Dresses: Compare Shapes, Lengths & Details", "stale": "Dark colors like navy tend to hide light stains better than bright colors."},

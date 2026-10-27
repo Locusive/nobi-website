@@ -6,16 +6,17 @@ import { searchPagePath, searchPageUrl } from "../src/utils/shopNobiSearchPage.j
 import { categoryPageUrl } from "../src/utils/shopNobiCategoryPage.js";
 import { isSafeSlug } from "./shop-nobi-search-page-view.js";
 import { webStoryUrl } from "../src/utils/shopNobiWebStory.js";
-import { ImagePilotSlugs } from "./shop-nobi-image-pilot.js";
 
 const LlmsTxtPageLimit = 100;
+const SitemapImageLimitPerPage = 1000;
 const RedirectTargetPattern = /^\/[A-Za-z0-9\-._~/]*$/;
 // The W3C time forms sitemaps accept, such as "2026-10-11" or "2026-10-11T08:02:11Z".
 const SitemapTimePattern = /^\d{4}-\d{2}-\d{2}(?:T\d{2}:\d{2}(?::\d{2}(?:\.\d+)?)?(?:Z|[+-]\d{2}:\d{2}))?$/;
 
 /**
  * Builds sitemap-shop.xml, listing every category page, search page and web story with the time it was last
- * refreshed. A page without a valid refresh time gets the fallback time, so every entry has a lastmod.
+ * refreshed, including eligible displayed product photos for every search page.
+ * A page without a valid refresh time gets the fallback time, so every entry has a lastmod.
  *
  * @param {object[]} categoryPages The built category pages.
  * @param {object[]} searchPages The built search pages.
@@ -27,7 +28,7 @@ export function buildShopNobiSitemap(categoryPages, searchPages, stories, fallba
   const pageEntries = [
     ...categoryPages.map((category) => ({ url: categoryPageUrl(category.slug), refreshedAt: category.refreshedAt })),
     ...searchPages.map((page) => ({ url: searchPageUrl(page.slug), refreshedAt: page.refreshedAt,
-      images: ImagePilotSlugs.has(page.slug) ? [...new Set((page.products ?? []).map(product => product.imageUrl).filter(Boolean))] : [] })),
+      images: [...new Set((page.products ?? []).map(product => product.imageUrl).filter(Boolean))].slice(0, SitemapImageLimitPerPage) })),
     ...stories.map(({ page }) => ({ url: webStoryUrl(page.slug), refreshedAt: page.refreshedAt })),
   ];
   const entries = pageEntries.map((entry) => {

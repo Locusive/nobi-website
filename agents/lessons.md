@@ -17,3 +17,7 @@
 
 # Lessons
 Before asking Shanif for Search Console access or exports, inspect his signed-in Chrome work tabs and account selector. Prior connector/default-account denial is not proof that the authorized browser cannot read the property. Browser IDs may change on kernel reset; match profile rather than assuming yesterday's ID.
+
+## Rollout scope
+
+- When Shanif asks to expand a small pilot to all eligible pages, carry out the expansion. Do not retain a comparison group as an unrequested gate. Update measurement assumptions and retain factual eligibility checks.

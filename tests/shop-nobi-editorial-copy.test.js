@@ -128,6 +128,9 @@ test("suitcase correction leaves refreshed guidance and other pages intact", () 
 });
 
 for (const scenario of [
+  {"slug": "gold-bracelets", "title": "Gold Bracelets: Compare Materials, Chain Styles & Fit", "stale": "Solid gold pieces are stamped with a karat mark like 14K, while plated items may only say gold-filled or have no stamp."},
+  {"slug": "blossom-jewelry", "title": "Blossom Jewelry: Compare Floral Earrings, Necklaces & Rings", "stale": "Choose ones made from nickel-free gold or sterling silver to reduce irritation."},
+
   {"slug": "gold-white-bangles", "title": "White Gold Bangles: Compare Designs, Dimensions & Options", "stale": "The pieces are made from solid gold, often set with white diamonds or other clear stones that give a bright contrast."},
   {"slug": "purple-violet-jewelry", "title": "Purple & Violet Jewelry: Compare Stones, Color & Pieces", "stale": "Choose pieces labeled as nickel-free or made from hypoallergenic metals like titanium or sterling silver."},
   {"slug": "amethyst-jewelry", "title": "Amethyst Jewelry: Compare Rings, Earrings & Stone Details", "stale": "Amethyst is a natural purple variety of quartz, though some lower-priced items may use lab-grown stones."},

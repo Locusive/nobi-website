@@ -1,5 +1,61 @@
 /** Item-specific comparison guidance for existing jewelry, watch, rug, dress and footwear search pages. */
 export const AdditionalBuyingCopy = {
+  "gold-bracelets": {
+    "title": "Gold Bracelets: Compare Materials, Chain Styles & Fit",
+    "description": "Compare gold bracelet listings across stores: herringbone, bead, stretch, bangle and cord designs. Check exact metal, width, length, fastening and included pieces.",
+    "guide": [
+      "Start with the bracelet construction you want. This selection includes beaded and moon-cut designs, a 4.5mm herringbone chain, Liquid Gold and stretch designs, a molten bangle, an adjustable cord bracelet and a bracelet set. A design name such as Liquid Gold does not specify the metal composition or how the bracelet fastens.",
+      "Compare the exact material statement, not just the gold color. Some titles explicitly specify 14K gold; other listings need further retailer details. Solid gold, gold-filled and gold-plated are different descriptions, so do not treat them as interchangeable. A stamp or category label alone is not independent verification of composition; check the complete specification for the selected variant.",
+      "Use wrist measurements alongside the bracelet length, width, inner diameter and adjustment range supplied by the retailer. A stretch bracelet, rigid bangle and clasped chain can fit differently. Check the fastening and whether the price covers one bracelet or a set; the Poppy listing is explicitly a bracelet set.",
+      "Try a Shop Nobi search such as a 14K gold herringbone bracelet around 4mm wide under $1000. Include the material, length, style and budget you want, then verify the exact variant, clasp, care and return terms. Follow the maker's instructions for water exposure and storage rather than assuming every gold-colored bracelet is suitable for swimming."
+    ],
+    "faq": [
+      {
+        "question": "Does gold in the product name mean solid gold?",
+        "answer": "No. Check the selected variant's complete material description. Gold color, a Liquid Gold design name or this category does not establish solid-gold construction. Compare solid gold, gold-filled and gold-plated descriptions separately."
+      },
+      {
+        "question": "How should I compare a bangle with a chain or stretch bracelet?",
+        "answer": "Check the inner dimensions for a bangle and the stated length or adjustment range for a chain or stretch design. Compare those measurements with your wrist and the maker's fitting instructions; design names alone do not establish fit."
+      },
+      {
+        "question": "Is the listed price for one bracelet or a set?",
+        "answer": "Check the selected listing. This page includes a Poppy Gold Bracelet Set alongside individual bracelet designs, so compare the number of pieces and their specifications before comparing prices."
+      },
+      {
+        "question": "Can I wear these gold bracelets while swimming?",
+        "answer": "Check the manufacturer's care instructions for the exact metal, coating, cord, fastening and any stones. Gold color or a karat label alone does not establish that the complete bracelet is suitable for pool or sea exposure."
+      }
+    ]
+  },
+  "blossom-jewelry": {
+    "title": "Blossom Jewelry: Compare Floral Earrings, Necklaces & Rings",
+    "description": "Compare blossom jewelry across stores, from flower hoops and studs to pearl rings, cuffs and squash blossom necklaces. Check dimensions, materials and exact condition.",
+    "guide": [
+      "Choose the motif and piece before comparing prices. This selection mixes flower hoops, abstract flower earrings, blossom studs, pearl rings and a cuff with squash blossom necklaces. Blossom is a design term here, not one uniform material, collection or jewelry maker.",
+      "Compare scale and fastening using the actual measurements. For studs and hoops, check width, drop, post or clip construction, weight where supplied, and whether the listing includes a pair. For a necklace, compare the chain or bead length and pendant dimensions; for rings and cuffs, check the exact size and adjustment policy.",
+      "Read every component description. The listing names include lapis and pearl, mother of pearl, a sterling squash blossom piece and a specific 18K yellow-gold plum blossom design. Those materials do not apply to the entire selection. If you avoid a particular metal, request the exact post, back, hook and coating specifications rather than assuming a floral design or broad metal label is suitable for sensitive ears.",
+      "Try a Shop Nobi search such as mother-of-pearl flower stud earrings under $300. Include the piece, motif, material, size and budget you want. For the listing described as vintage Navajo sterling squash blossom, check the seller's maker attribution, provenance, condition photos, repairs and return terms; Shop Nobi has not independently authenticated that description. Use the exact maker's care guidance for mixed materials instead of one cleaning routine for all blossom jewelry."
+    ],
+    "faq": [
+      {
+        "question": "Is all blossom jewelry from the same brand?",
+        "answer": "No. This page groups blossom and floral designs from different retailers and makers. Confirm the brand and exact item in each listing; a shared motif does not mean the pieces belong to one collection."
+      },
+      {
+        "question": "What should I compare between flower studs and statement earrings?",
+        "answer": "Compare the stated width, drop, fastening and weight where available, plus whether the price includes a pair. Check the actual dimensions rather than treating Mini or Blossom as standardized sizes."
+      },
+      {
+        "question": "Are these earrings suitable for sensitive ears?",
+        "answer": "Suitability depends on the exact components and what you need to avoid. Ask the retailer for post, hook, back and coating details; neither a gold-colored appearance nor a general sterling or gold description guarantees suitability for everyone."
+      },
+      {
+        "question": "What should I check before buying the vintage squash blossom listing?",
+        "answer": "Review the seller's stated maker attribution and provenance, detailed condition photos, repairs, measurements and return policy. The listing title is the seller's description, not independent authentication by Shop Nobi."
+      }
+    ]
+  },
   "gold-white-bangles": {
   "title": "White Gold Bangles: Compare Designs, Dimensions & Options",
   "description": "Compare Suzanne Kalan bangle listings for white-gold searches. Check the selected metal, thin or Milli dimensions, diamond layout, closure and exact size.",

@@ -90,7 +90,7 @@ These edits do not certify stock, merchant claims or ranking improvements.
 `cream-rugs`, `brown-mini-dresses`, `sundresses`, `silver-watches` and
 `black-maxi-dresses`, `amethyst-earrings`, `emerald-jewelry`, `brown-suede-boots`
 `brown-boots`, `diamond-bangles`, `aquamarine-rings`, `mens-signet-rings`, `amethyst-jewelry`, `gold-white-bangles` and
-`purple-violet-jewelry` through the same
+`purple-violet-jewelry`, `gold-bracelets` and `blossom-jewelry` through the same
 publication-only path.
 It replaces allergy-prevention and blanket cleaning claims with quantity,
 measurement, component, size-variant and exact-item care checks.

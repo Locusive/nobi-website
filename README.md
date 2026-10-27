@@ -91,7 +91,7 @@ These edits do not certify stock, merchant claims or ranking improvements.
 `black-maxi-dresses`, `amethyst-earrings`, `emerald-jewelry`, `brown-suede-boots`
 `brown-boots`, `diamond-bangles`, `aquamarine-rings`, `mens-signet-rings`, `amethyst-jewelry`, `gold-white-bangles` and
 `purple-violet-jewelry`, `gold-bracelets`, `blossom-jewelry`, `saw-accessories`,
-`table-saw-accessories`, `miter-saw-accessories` and `ecru-puzzles` through the same
+`table-saw-accessories`, `miter-saw-accessories`, `ecru-puzzles` and `red-electric-guitars` through the same
 publication-only path.
 It replaces allergy-prevention and blanket cleaning claims with quantity,
 measurement, component, size-variant and exact-item care checks. Saw guides
@@ -100,6 +100,8 @@ compatibility; they provide buying comparisons, not cutting or setup instruction
 The Ecru clarification uses the [maker FAQ](https://www.artifactpuzzles.com/pages/faq)
 and [collection](https://www.artifactpuzzles.com/collections/ecru-puzzles) to distinguish
 the named puzzle line from a color and separate difficulty from piece count.
+Red electric guitar guidance distinguishes exact finish from a builder name,
+compares condition and specifications, and avoids unsupported tone or tuning promises.
 
 `scripts/shop-nobi-pin-editorial.js` records reviewed page/product/photo pairs,
 with the reason and observed Pin. A reviewed page is omitted from Pinterest if

@@ -89,7 +89,8 @@ These edits do not certify stock, merchant claims or ranking improvements.
 `shop-nobi-additional-buying-copy.js` covers `black-stud-earrings`,
 `cream-rugs`, `brown-mini-dresses`, `sundresses`, `silver-watches` and
 `black-maxi-dresses`, `amethyst-earrings`, `emerald-jewelry`, `brown-suede-boots`
-`brown-boots`, `diamond-bangles`, `aquamarine-rings`, `mens-signet-rings` and `amethyst-jewelry` through the same
+`brown-boots`, `diamond-bangles`, `aquamarine-rings`, `mens-signet-rings`, `amethyst-jewelry`, `gold-white-bangles` and
+`purple-violet-jewelry` through the same
 publication-only path.
 It replaces allergy-prevention and blanket cleaning claims with quantity,
 measurement, component, size-variant and exact-item care checks.

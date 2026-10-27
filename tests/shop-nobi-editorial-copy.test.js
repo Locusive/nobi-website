@@ -128,6 +128,8 @@ test("suitcase correction leaves refreshed guidance and other pages intact", () 
 });
 
 for (const scenario of [
+  {"slug": "gold-white-bangles", "title": "White Gold Bangles: Compare Designs, Dimensions & Options", "stale": "The pieces are made from solid gold, often set with white diamonds or other clear stones that give a bright contrast."},
+  {"slug": "purple-violet-jewelry", "title": "Purple & Violet Jewelry: Compare Stones, Color & Pieces", "stale": "Choose pieces labeled as nickel-free or made from hypoallergenic metals like titanium or sterling silver."},
   {"slug": "amethyst-jewelry", "title": "Amethyst Jewelry: Compare Rings, Earrings & Stone Details", "stale": "Amethyst is a natural purple variety of quartz, though some lower-priced items may use lab-grown stones."},
   {"slug": "mens-signet-rings", "title": "Men's Signet Rings: Compare Faces, Metals & Sizes", "stale": "Titanium is lightweight and highly resistant to scratches and corrosion."},
   {"slug": "yellow-midi-dresses", "title": "Yellow Midi Dresses: Compare Shades, Bodices & Lengths", "stale": "Taffeta usually requires gentle hand washing or dry cleaning to maintain its sheen."},

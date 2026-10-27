@@ -14,3 +14,6 @@
 ## Shopping-page publication
 
 - A correct database row and successful deployment do not prove the static page consumed the current API export. The API can serve its previous answer while rebuilding. Validate its generation time before prerendering, preserve legitimate cached ages, and verify actual canonical output after release. Do not label an unretained historical payload as directly observed.
+
+# Lessons
+Before asking Shanif for Search Console access or exports, inspect his signed-in Chrome work tabs and account selector. Prior connector/default-account denial is not proof that the authorized browser cannot read the property. Browser IDs may change on kernel reset; match profile rather than assuming yesterday's ID.

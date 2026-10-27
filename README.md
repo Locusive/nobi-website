@@ -52,6 +52,17 @@ table, the pricing facts, and existing page regressions.
 
 ## Shop Nobi search pages
 
+Generic `Best ...` search-page titles (including the `from Top Stores` suffix) are replaced at publication
+with catalog-backed titles and descriptions by `scripts/shop-nobi-catalog-copy.js`.
+The copy names the displayed listing count and up to two actual retailers, and
+only invites price comparison when multiple displayed records have prices and
+currencies. Empty pages describe guidance and search without claiming inventory.
+Reviewed editorial overrides retain their copy. The same publication data supplies
+HTML, metadata and browser hydration; source guides, product ordering, product
+facts, affiliate links, Pinterest feeds and Stories are unchanged. This is a
+site-wide rollout, not a controlled click-through experiment, and it does not
+guarantee Google's chosen title/snippet or indexing.
+
 `scripts/prerender-shop.js` builds one page per Shop Nobi search at
 `/shop/s/<slug>`, with the products in the HTML, one page per top category at
 `/shop/c/<slug>`, and a list of popular searches on `/shop`. It also writes

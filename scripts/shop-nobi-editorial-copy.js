@@ -3,6 +3,7 @@
 import { withMailboxClarification } from "./shop-nobi-mailbox-copy.js";
 import { ClothingAccessoryCopy } from "./shop-nobi-clothing-accessory-copy.js";
 import { AdditionalBuyingCopy } from "./shop-nobi-additional-buying-copy.js";
+import { withCatalogSearchCopy } from "./shop-nobi-catalog-copy.js";
 
 const OriginalSuitcaseGuide = "Blue suitcases on this page range from about $70 to $495. The collection includes hard-shell carry-ons, expandable checked bags, and a few novelty suitcases with built-in record players.";
 const CorrectedSuitcaseGuide = "Shopping for travel luggage? Compare the carry-on and checked suitcases below. Suitcase-style record players are audio products, not bags for packing. Check each travel bag's dimensions and weight with the retailer before choosing.";
@@ -108,18 +109,18 @@ const SelectedPageCopy = {
 };
 
 /**
- * Applies authored copy only to the selected page's published HTML and embedded browser data.
+ * Applies authored copy, then catalog-backed defaults for generic unreviewed search pages.
  * The original plan remains available unchanged to product, feed and Web Story generation.
  *
  * @param {object} page The normalized search page, including its existing products and links.
- * @returns {object} The publication copy, or the original page when it has no editorial replacement.
+ * @returns {object} The publication copy, retaining reviewed overrides and unchanged product data.
  */
 export function withAuthoredSearchPageCopy(page) {
   if (page.slug === "mailbox-posts") return withMailboxClarification(page);
   if (page.slug === "14k-white-gold-statement-rings") return withWhiteGoldClarification(page);
   if (page.slug === "blue-suitcases") return withSuitcaseClarification(page);
   const copy = Object.hasOwn(SelectedPageCopy, page.slug) ? SelectedPageCopy[page.slug] : null;
-  if (!copy) return page;
+  if (!copy) return withCatalogSearchCopy(page);
 
   return {
     ...page,

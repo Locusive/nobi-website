@@ -62,7 +62,11 @@ test("mailbox correction preserves refreshed wording, unrelated pages and repeat
   assert.deepEqual(corrected.faq[0], page.faq[0]);
   assert.deepEqual(withAuthoredSearchPageCopy(corrected), corrected);
   page.slug = "another-mailbox-page";
-  assert.deepEqual(withAuthoredSearchPageCopy(page), page);
+  const other = withAuthoredSearchPageCopy(page);
+  // Generic metadata can improve, but mailbox-specific guidance must not leak onto another page.
+  for (const [key, value] of Object.entries(page)) {
+    if (!["title", "description"].includes(key)) assert.deepEqual(other[key], value, key);
+  }
 });
 
 test("refreshed material guidance does not acquire a manufacturer citation for text we did not author", () => {

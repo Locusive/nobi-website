@@ -1,5 +1,61 @@
 /** Item-specific comparison guidance for existing jewelry, watch, rug, dress and footwear search pages. */
 export const AdditionalBuyingCopy = {
+  "diamond-bangles": {
+    "title": "Diamond Bangles: Compare Sizes, Closures & Stone Details",
+    "description": "Compare diamond bangle listings by inner dimensions, open or hinged design, stated metal and stone specifications. Check the selected size and purchase terms.",
+    "guide": [
+      "Start with the bangle's fit and opening. The listings include open, hinged and bypass designs, plus a separately labeled large size. Compare the inner diameter or circumference using the jeweler's measuring instructions, and check the opening and clasp details for the exact piece. Do not assume an open bangle can be bent to fit or that a hinge alone makes a bracelet secure.",
+      "Separate the metal specification from the stones. Compare the stated 14K or 18K gold and yellow, white or mixed-metal description. For the diamonds, ask whether the quoted carat weight is for all stones together or an individual stone, and read any stated origin, color, clarity and grading documentation. A weight or price alone is not a measure of sparkle or overall quality.",
+      "This selection currently lists pieces from Schiffman's Jewelers, including Identity, Copley, Duet and other designs. Compare the width, profile and stone layout as well as the selected size; similar names can refer to different pieces. Verify the current price, order contents, delivery and return conditions directly with the jeweler.",
+      "Use Shop Nobi search to describe a narrower preference, such as a white gold diamond hinged bangle in a small size under $5000. Check whether a result meets each requirement before choosing. Ask the jeweler about cleaning, clasp inspection and adjustment for that exact design instead of applying one cleaning or resizing rule to every bangle."
+    ],
+    "faq": [
+      {
+        "question": "How do I choose the right diamond bangle size?",
+        "answer": "Compare the stated inner diameter or circumference with the jeweler's sizing method, plus the opening and closure design. Confirm the exact size variant before ordering; a large label or product photo alone is not a fit measurement."
+      },
+      {
+        "question": "Does a higher diamond carat weight mean a better bangle?",
+        "answer": "Carat weight alone does not establish appearance or quality. Check whether it is total weight or one stone's weight, then compare stone sizes, layout, stated color and clarity, origin and any grading documentation."
+      },
+      {
+        "question": "Can I bend an open diamond bangle to fit my wrist?",
+        "answer": "Do not assume the design is adjustable. Ask the jeweler whether adjustment is permitted for that exact piece and who should perform it before trying to change its shape."
+      },
+      {
+        "question": "Do these listings prove every diamond is natural?",
+        "answer": "The word diamond or a photo alone is insufficient to verify origin. Read the jeweler's explicit natural or laboratory-grown description and any supporting documentation for the selected item."
+      }
+    ]
+  },
+  "aquamarine-rings": {
+    "title": "Aquamarine Rings: Compare Shapes, Settings & Ring Sizes",
+    "description": "Compare aquamarine rings across stores, from cabochon and pear designs to signet, dome and pav\u00e9 styles. Check stone dimensions, metal, sizing and resize terms.",
+    "guide": [
+      "Choose the ring shape and stone arrangement first. This selection includes a cabochon with brown diamonds, a pear-shaped duo rose-cut design, a dome birthstone ring, a signet and an eye-shaped pav\u00e9 style. Compare the stone dimensions, number of stones and height of the setting where supplied, rather than treating all aquamarine rings as the same silhouette.",
+      "Read the aquamarine and accent-stone descriptions separately from the metal specification. Confirm the selected metal, stone identity and any stated treatments or origin with the retailer. Compare clear photos of the actual item where available; a vivid blue-green photo does not establish cut quality, authenticity or a particular stone's value.",
+      "Check the selected ring size and sizing system before ordering. For wider bands or raised settings, use the retailer's fit guidance and dimensions. Ask whether that exact design can be resized, the permitted size range, cost and turnaround, and whether resizing changes its return eligibility. Do not assume every gold or pav\u00e9 ring can be altered.",
+      "Try a Shop Nobi search such as an aquamarine ring in yellow gold under $1000, or a pear aquamarine ring in size 7. Compare each result's actual measurements and materials, then confirm available sizes, current price and purchase terms at the store. Follow the retailer's care instructions for the complete ring, including accent stones and settings."
+    ],
+    "faq": [
+      {
+        "question": "What should I compare between a cabochon and a pear aquamarine ring?",
+        "answer": "Compare the actual stone shape, surface, dimensions and setting in each listing. Check the number of stones and how high the ring sits; a style name does not provide those measurements or establish quality."
+      },
+      {
+        "question": "Does a vivid blue photo prove an aquamarine is high quality?",
+        "answer": "No. Ask for the selected stone's stated identity, dimensions, treatment information and any relevant documentation. Product photography alone does not establish authenticity, cut quality or value."
+      },
+      {
+        "question": "Can an aquamarine ring be resized after I buy it?",
+        "answer": "Get the retailer's answer for the exact design and selected size before ordering. Confirm the allowed size range, price, turnaround and return implications; do not assume all gold bands or pav\u00e9 settings can be resized."
+      },
+      {
+        "question": "How should I clean a ring with aquamarine and diamond accents?",
+        "answer": "Use the care instructions for the entire selected ring, including its metal, stones, treatments and settings. Ask the retailer before using chemicals, heat or a cleaning device when those instructions are unclear."
+      }
+    ]
+  },
   "brown-suede-boots": {
     "title": "Brown Suede Boots: Compare Materials, Shapes & Fit",
     "description": "Compare brown suede boots across stores, including Chelsea, lace-up, western and platform styles. Check genuine or faux suede, dimensions and exact-item care.",

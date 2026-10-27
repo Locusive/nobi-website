@@ -1,5 +1,33 @@
 /** Item-specific comparison guidance for existing jewelry, watch, rug, dress and footwear search pages. */
 export const AdditionalBuyingCopy = {
+  "amethyst-jewelry": {
+  "title": "Amethyst Jewelry: Compare Rings, Earrings & Stone Details",
+  "description": "Compare amethyst rings and earrings across stores, including geometric rings, single studs and pearl combinations. Check dimensions, quantity, sizing and stone details.",
+  "guide": [
+    "Choose the piece before comparing prices. This selection centers on rings and earrings: angled, rectangular, geometric and baguette rings, a citrine wrap ring, triangle earrings, a rosecut stud and a pearl combination. Check whether an earring is sold singly or as a pair; the Nuhte listing explicitly says single.",
+    "For a ring, compare the selected ring size, face dimensions, band width and stated resizing policy. A wrap shape does not establish that a ring is adjustable. For an earring, compare drop length, width, fastening and weight where supplied. Check these measurements alongside the photos to judge the scale you want.",
+    "Read the exact metal and stone description. Some listing names specify 14Kt, 18k or 22K gold, while others need further details from the retailer. Confirm the stated amethyst identity, origin, treatments if disclosed, and any accompanying citrine or pearl. Price, purple color and a product photo do not establish whether a stone is natural or laboratory-grown.",
+    "Try a Shop Nobi search such as a pair of amethyst drop earrings in yellow gold under $500. Include the piece, quantity, metal, dimensions or ring size, and budget you need. Confirm the selected option, delivery and return terms with the retailer. Follow care instructions for the complete piece, especially a mixed-stone or pearl design, rather than applying one cleaning rule to every amethyst listing."
+  ],
+  "faq": [
+    {
+      "question": "Are the amethyst earrings sold as singles or pairs?",
+      "answer": "Check the quantity on each exact listing. One Nuhte earring is explicitly sold as a single; a photo or the general earrings category does not establish what every order includes."
+    },
+    {
+      "question": "Does a lower price mean the amethyst is laboratory-grown?",
+      "answer": "No. Price alone does not establish origin. Read the retailer's stone description and any supplied documentation, or ask for clarification when natural or laboratory-grown origin matters to your choice."
+    },
+    {
+      "question": "Is an amethyst wrap ring adjustable?",
+      "answer": "Verify the exact design's size range and adjustment instructions. A wrap silhouette alone is not confirmation that you can bend or resize the ring."
+    },
+    {
+      "question": "Can I clean an amethyst-and-pearl piece like a plain amethyst ring?",
+      "answer": "Use the maker's care guidance for that complete piece, including its pearls, other stones, metal and finish. Do not assume that a cleaning method suitable for one component is appropriate for the whole design."
+    }
+  ]
+},
   "mens-signet-rings": {
   "title": "Men's Signet Rings: Compare Faces, Metals & Sizes",
   "description": "Compare men's signet rings across stores: plain gold faces, initials, icons, gemstones and diamond-set designs. Check face dimensions, ring size and customization terms.",

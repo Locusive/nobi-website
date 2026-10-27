@@ -1,5 +1,33 @@
 /** Item-specific comparison guidance for existing product search pages. */
 export const AdditionalBuyingCopy = {
+  "ecru-puzzles": {
+    "title": "Ecru Puzzles: Compare Wooden Jigsaws, Artwork & Difficulty",
+    "description": "Explore Ecru wooden jigsaw puzzles from Artifact Puzzles. Compare artwork, stated difficulty, piece count, finished dimensions and mystery formats before choosing.",
+    "guide": [
+      "Ecru is a puzzle line from Artifact Puzzles, not a promise that the artwork has a beige background. The maker's FAQ describes the line as having matte images and closer-cut pieces. Every listing shown here is from Artifact Puzzles, so this is a comparison within that assortment rather than a ranking across stores.",
+      "Choose artwork you want to spend time with. The current listings include forest and cottage scenes, Coffee And Snacks, Library Of Spells And Sorcery, Meditating Skeleton, Blue Tiles and Concert of Birds. Compare the exact artist and title so a similarly named puzzle or an older product URL does not lead you to assume the wrong image.",
+      "Check the stated difficulty separately from piece count. The maker offers distinct difficulty and piece-count filters, along with cut-design categories. Compare the exact puzzle's finished dimensions, piece design and difficulty description with the space and challenge you want; price or piece count alone does not establish that it is suitable for a beginner.",
+      "Try a Shop Nobi search such as an Ecru wooden forest jigsaw under $100, adding your preferred difficulty or finished size. Mystery Puzzle #30 and #31 appear in this selection; the maker describes mystery puzzles as hiding the image for an added challenge. Check the exact format, package contents and maker age guidance before buying a gift. Artifact Puzzles recommends its puzzles for adults and teens aged 15 or older, rather than small children."
+    ],
+    "faq": [
+      {
+        "question": "Does Ecru mean all these puzzles have a neutral background?",
+        "answer": "No. Ecru is the Artifact Puzzles line name. Its maker describes matte images and closer-cut pieces; compare each listing's artwork instead of expecting one background color."
+      },
+      {
+        "question": "How can I choose an Ecru puzzle for a beginner?",
+        "answer": "Use the exact listing's difficulty description as well as piece count, finished size and cut design. The maker separates difficulty and piece-count filters, so a lower price or fewer pieces alone does not establish an easy puzzle."
+      },
+      {
+        "question": "What is different about an Ecru Mystery Puzzle?",
+        "answer": "Artifact Puzzles describes mystery puzzles as withholding the image to add a challenge. Confirm the exact mystery listing and packaging details before choosing it for someone who expects a reference picture."
+      },
+      {
+        "question": "Are these wooden puzzles intended for young children?",
+        "answer": "The maker's FAQ recommends adults and teens aged 15 or older and warns about small pieces. Follow the current manufacturer age guidance for the exact puzzle rather than assuming that a wooden jigsaw is a children's toy."
+      }
+    ]
+  },
   "saw-accessories": {
     "title": "Saw Accessories: Compare Gauges, Fences, Sleds & Guides",
     "description": "Compare saw accessory listings by purpose and exact tool compatibility: alignment gauges, fences, sleds, track guides and add-ons. Check model requirements and included parts.",

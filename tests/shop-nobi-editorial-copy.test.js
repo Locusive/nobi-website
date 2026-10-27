@@ -128,6 +128,7 @@ test("suitcase correction leaves refreshed guidance and other pages intact", () 
 });
 
 for (const scenario of [
+  {"slug": "ecru-puzzles", "title": "Ecru Puzzles: Compare Wooden Jigsaws, Artwork & Difficulty", "stale": "All are wooden jigsaw puzzles, featuring a light-neutral ecru background that lets the artwork stand out."},
   {"slug": "saw-accessories", "title": "Saw Accessories: Compare Gauges, Fences, Sleds & Guides", "stale": "Durable accessories improve cut accuracy and safety."},
   {"slug": "table-saw-accessories", "title": "Table Saw Accessories: Compare Sleds, Fences & Add-ons", "stale": "A sled provides a stable platform that can be set at any angle, giving better control for angled cuts."},
   {"slug": "miter-saw-accessories", "title": "Miter Saw Accessories: Compare Station Fences, Stops & Kits", "stale": "A solid, well-engineered accessory reduces wobble and improves accuracy."},

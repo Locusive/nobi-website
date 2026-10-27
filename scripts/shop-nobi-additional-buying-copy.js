@@ -1,5 +1,33 @@
 /** Item-specific comparison guidance for existing product search pages. */
 export const AdditionalBuyingCopy = {
+  "mens-diamond-bracelets": {
+    "title": "Men's Diamond Bracelets: Compare Links, Stones & Fit",
+    "description": "Compare men's diamond bracelet listings from Shay Jewelry. Check link design, stone and metal disclosures, length, width, closure and selected-variant terms.",
+    "guide": [
+      "These listings are all from Shay Jewelry, with single-link, flat-link, thread, stretch, partial pave and fuller pave designs. Compare the exact design rather than treating this page as a ranking across stores. Flat link describes a link style, while pave describes stone setting; a bracelet title can include both.",
+      "Read the metal and stone details for the selected option. Do not assume every bracelet contains only white diamonds: this selection includes a Black Diamond & Green Garnet Two Tone Pave Essential Link Bracelet. Check the stated metal composition, diamond origin, treatments and total stone weight in the individual listing, asking the seller about missing information rather than treating the category title as verification.",
+      "Compare bracelet length, link width and thickness, then check the seller's sizing instructions and available adjustments. Mini, Medium, Jumbo, Mega, Essential and Stretch are product names here, not standardized measurements. Inspect the exact closure or stretch construction and any service or resizing terms; a style label does not establish comfort or a secure fit for your wrist.",
+      "Try a Shop Nobi search such as a men's diamond link bracelet under $10,000, adding your wrist measurement, preferred metal and partial or full pave design. Confirm the selected size, price and included items on the seller page. Listings labeled Ready To Ship still require checking that the specific option is available and confirming dispatch, delivery and return terms. Follow the maker's care instructions for the exact bracelet and all of its components."
+    ],
+    "faq": [
+      {
+        "question": "Can a diamond bracelet have both flat links and pave stones?",
+        "answer": "Yes. This selection includes Partial Pave Flat Mini Link and Mini Flat Pave Diamond Link titles. Compare the link shape and the amount or placement of stone setting separately, using the exact product photos and description."
+      },
+      {
+        "question": "Are all of these bracelets set only with white diamonds?",
+        "answer": "No. A listed design explicitly includes black diamond and green garnet. Read the selected bracelet's stone description and ask about origin, treatments and total weight where those details matter to your choice."
+      },
+      {
+        "question": "What information should I check if I have a known metal sensitivity?",
+        "answer": "Ask the seller for the composition of every part that touches your skin, including the clasp and any surface coating. A gold label alone does not establish that a particular bracelet is suitable for you; do not treat this category page as an allergy-safety certification."
+      },
+      {
+        "question": "Does Ready To Ship in a bracelet title guarantee my delivery date?",
+        "answer": "No. Check availability for the exact size and metal option, the seller's dispatch estimate, destination shipping and return terms. A title or catalog price is not a delivery commitment."
+      }
+    ]
+  },
   "red-electric-guitars": {
     "title": "Red Electric Guitars: Compare Finishes, Models & Condition",
     "description": "Explore red electric guitar listings from The Music Zoo. Compare exact finish, model year, condition, neck measurements, electronics and included accessories.",

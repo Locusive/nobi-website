@@ -1,5 +1,33 @@
 /** Item-specific comparison guidance for existing product search pages. */
 export const AdditionalBuyingCopy = {
+  "red-electric-guitars": {
+    "title": "Red Electric Guitars: Compare Finishes, Models & Condition",
+    "description": "Explore red electric guitar listings from The Music Zoo. Compare exact finish, model year, condition, neck measurements, electronics and included accessories.",
+    "guide": [
+      "Start with the finish on the exact instrument. These listings include Metallic Red, Gloss Red, Racing Red, Candy Apple Red, Cherry Red, Wine Red, Persimmon Red and Dark Red Stain. The Charvel Dinky listing names builder Red Dave Nichols but specifies Vintage White: a red word in the title does not make that guitar red.",
+      "All listings shown here are from The Music Zoo. Compare the particular instrument and seller description rather than treating this page as a ranking across retailers. The selection includes titles dated 1978, 1982, 1986, 1988, 1993 and 2025; a year in the title does not establish its condition, originality or service history.",
+      "For an older or previously owned instrument, look for clear photos and the seller's account of fret wear, repairs, replaced pickups, refinishing and other modifications. Ask about anything omitted. Compare the stated neck profile, nut width, scale length, fretboard radius and weight with an instrument you already find comfortable; a model name alone does not establish the fit.",
+      "Compare the listed pickup models, switching options and exact bridge hardware without assuming a particular sound or tuning performance from the finish or brand. Check whether the case, tremolo arm and other accessories are included, along with return and shipping terms. Try a Shop Nobi search such as a red electric guitar under $2,000 with a case, adding your preferred model, neck dimensions or bridge type. Confirm each requirement on the selected seller listing."
+    ],
+    "faq": [
+      {
+        "question": "Why does a Vintage White Charvel appear on a red-guitar page?",
+        "answer": "Its listing includes the builder name Red Dave Nichols, while the stated finish is Vintage White. Check the exact finish field and instrument photos rather than relying on this search category or a single word in the title."
+      },
+      {
+        "question": "How should I compare red finishes between these guitars?",
+        "answer": "Compare the exact named finish and photos of the instrument being sold. Candy Apple Red, Wine Red, Cherry Red and Dark Red Stain are different listing descriptions, not a promise of one matching shade across brands."
+      },
+      {
+        "question": "What should I check on a guitar with an older year in its title?",
+        "answer": "Read its stated condition and ask about fret wear, repairs, replaced parts, refinishing and service history. Check what the seller documents about the actual instrument; the model year alone does not establish originality or condition."
+      },
+      {
+        "question": "Can this page tell me which guitar will sound or feel best?",
+        "answer": "No. Compare the exact neck measurements, weight, pickup models, controls and bridge specifications with your needs. Ask the seller for missing details and review return terms; brand, color and price alone do not establish your preferred sound or fit."
+      }
+    ]
+  },
   "ecru-puzzles": {
     "title": "Ecru Puzzles: Compare Wooden Jigsaws, Artwork & Difficulty",
     "description": "Explore Ecru wooden jigsaw puzzles from Artifact Puzzles. Compare artwork, stated difficulty, piece count, finished dimensions and mystery formats before choosing.",

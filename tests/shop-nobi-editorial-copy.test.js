@@ -128,6 +128,9 @@ test("suitcase correction leaves refreshed guidance and other pages intact", () 
 });
 
 for (const scenario of [
+  {"slug": "navy-suits", "title": "Navy Suits: Compare Cuts, Lengths & Ordering Options", "stale": "Look for a full canvas or half-canvas construction if you want a suit that can be resoled later."},
+  {"slug": "blue-navy-suits", "title": "Blue & Navy Suits: Compare Shades, Patterns & Pieces", "stale": "Linen or lightweight wool blends keep you cool while maintaining a sharp appearance."},
+
   {"slug": "brown-suede-boots", "title": "Brown Suede Boots: Compare Materials, Shapes & Fit", "stale": "Faux suede is more water-resistant and easier to clean, though it may not have the same softness as real suede."},
   {"slug": "brown-boots", "title": "Brown Boots: Compare Shaft Heights, Heels & Fits", "stale": "Clean the surface with a soft brush and use appropriate leather or suede conditioners to keep the material supple."},
 

@@ -1,5 +1,61 @@
 /** Authored buying guidance for existing pages selected from observed search queries. */
 export const ClothingAccessoryCopy = {
+  "navy-suits": {
+    "title": "Navy Suits: Compare Cuts, Lengths & Ordering Options",
+    "description": "Compare navy suits across stores. Check short, regular and long sizing, single or double-breasted cuts, fabric and jacket construction, and made-to-order terms.",
+    "guide": [
+      "Compare the jacket cut and length first. This selection includes single-breasted and double-breasted styles, plus listings labeled short or long. Check jacket chest, shoulder, sleeve and body measurements alongside trouser waist, rise and inseam where supplied; the same size label does not ensure the same fit across brands.",
+      "Read the cloth description separately from the jacket's internal construction. Names such as wool canvas, flannel, high-twist wool, birdseye and sharkskin do not by themselves establish full-canvas or half-canvas jacket construction. Ask the retailer for that specification rather than inferring it from the price, shoulder appearance or a fabric name.",
+      "Check whether the selected option is ready-made or made to order and exactly which pieces it includes. Confirm the delivery estimate, measurements required, alteration arrangements and return conditions before ordering. Do not assume a made-to-order listing is ready for an upcoming event.",
+      "Try a Shop Nobi search such as a navy single-breasted suit in a long size under $1500. Compare the exact fiber composition, cloth weight and lining when provided, then verify the selected size, current price and care instructions at the store. A cloth name alone is not a year-round comfort guarantee."
+    ],
+    "faq": [
+      {
+        "question": "Does wool canvas mean a navy suit is fully canvassed?",
+        "answer": "Do not infer jacket construction from a cloth name. Look for an explicit full-canvas, half-canvas or other construction description for the jacket, or ask the retailer before choosing."
+      },
+      {
+        "question": "How do I choose short, regular or long suit sizing?",
+        "answer": "Compare the retailer's jacket body and sleeve measurements with its fit guide, along with chest and shoulder sizing. Check trouser measurements separately and ask which alterations are possible for that suit."
+      },
+      {
+        "question": "What should I check before buying a made-to-order navy suit?",
+        "answer": "Confirm the required measurements, included pieces, production and delivery estimates, alteration policy and return terms. Check these for the selected configuration before relying on a delivery date for an event."
+      },
+      {
+        "question": "Can price or a shoulder photo establish how a suit is constructed?",
+        "answer": "No. Ask for the jacket's stated construction rather than using price or appearance as proof. Separately confirm which alterations or repairs the retailer offers for that suit."
+      }
+    ]
+  },
+  "blue-navy-suits": {
+    "title": "Blue & Navy Suits: Compare Shades, Patterns & Pieces",
+    "description": "Compare solid navy, brighter blue, plaid and striped suits across stores. Check the selected cloth, included jacket and trousers, fit options and delivery terms.",
+    "guide": [
+      "Choose the shade and pattern before comparing prices: solid navy, brighter blue, blue plaid and navy stripe are different options in this selection. Check the selected cloth and color label, close-up photos and any available swatch rather than treating every blue suit as the same shade.",
+      "Read exactly what is included. A configurable listing for suits and sportcoats can offer different purchases, while a suit set may specify its jacket and trousers. Confirm the chosen configuration, quantity and whether trouser sizing is selectable separately; a listing title or photo alone does not establish the contents of your order.",
+      "Compare athletic or classic fit descriptions against actual jacket and trouser measurements. Check the front fastening, lapel shape, jacket length and trouser cut you prefer. For short, long or made-to-order options, confirm the measurement process, lead time and alteration or return terms before buying for a dated occasion.",
+      "Use Shop Nobi search to describe the full outfit you want, such as a solid navy two-piece suit under $1000, or a blue plaid suit in an athletic fit. Compare fiber composition, cloth weight and lining where provided rather than treating wool or linen as a guarantee of comfort in a particular climate. Verify the selected pieces, price and care instructions at the retailer."
+    ],
+    "faq": [
+      {
+        "question": "Are all these blue suits solid navy?",
+        "answer": "No. The selection includes solid navy, brighter blues, plaid and stripe options. Check the selected fabric and color label, and request a swatch where available if matching a specific shade matters."
+      },
+      {
+        "question": "Does a suit listing always include trousers?",
+        "answer": "Check the exact option and order contents. Some configurable listings cover both suits and sportcoats, so verify whether your selection includes a jacket, trousers or other pieces before comparing prices."
+      },
+      {
+        "question": "How should I compare an athletic-fit suit with a classic fit?",
+        "answer": "Use the retailer's jacket and trouser measurements and fit guide rather than the label alone. Compare chest, shoulders, jacket length, waist, rise and inseam where supplied, and check available alterations."
+      },
+      {
+        "question": "Will a linen or wool-blend suit always keep me cool?",
+        "answer": "The fiber label alone cannot establish comfort for a specific climate or wearer. Compare the exact cloth weight, weave, lining and fit information, and ask the retailer about the selected suit's intended conditions of use."
+      }
+    ]
+  },
   "red-blouses": {
     title: "Red Blouses: Compare Shades, Styles & Stores",
     description: "Find red blouses across stores. Compare solid and printed styles, sleeve lengths, fabric details and sizing, then refine your search with Shop Nobi.",

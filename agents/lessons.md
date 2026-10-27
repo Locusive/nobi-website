@@ -21,3 +21,6 @@ Before asking Shanif for Search Console access or exports, inspect his signed-in
 ## Rollout scope
 
 - When Shanif asks to expand a small pilot to all eligible pages, carry out the expansion. Do not retain a comparison group as an unrequested gate. Update measurement assumptions and retain factual eligibility checks.
+- For broad snippet changes, use displayed catalog facts and preserve reviewed authored copy. Audit every current title pattern rather than assuming one template covers the entire catalog. Distinguish removed known tests from unclassified agent activity; an unfamiliar client is not automatically a test.
+
+- Acquisition proposals need evidence of a meaningful audience and an attainable route to it. A directory accepting submissions does not establish traffic potential; do not turn weak research into an access request or active experiment.

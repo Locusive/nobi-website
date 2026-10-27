@@ -10,6 +10,27 @@ import { readFixturePageData } from "./shop-nobi-pages-server.js";
 import { readBody, readScriptJson } from "./shop-nobi-test-build.js";
 import { withAuthoredSearchPageCopy } from "../scripts/shop-nobi-editorial-copy.js";
 
+test("generic catalog copy agrees across published title, description and hydration", async (t) => {
+  const folder = mkdtempSync(new URL("../node_modules/.catalog-copy-test-", import.meta.url));
+  t.after(() => rmSync(folder, { recursive: true, force: true }));
+  writeFileSync(join(folder, "index.html"), '<!doctype html><html><head><!--__PRERENDER_TITLE__--><!--__PRERENDER_DESC__--></head><body><div id="root"></div></body></html>');
+  const source = { ...readFixturePageData().pages[0], title: "Best Black Leather Boots from Top Stores" };
+  const { pages } = buildSearchPages([source], 1);
+  const plan = { searchPages: pages, categoryPages: [], popularSearches: buildPopularSearches(pages, []) };
+  const original = structuredClone(plan);
+  await writePrebuiltPages(plan, folder);
+  const html = readFileSync(join(folder, `shop/s/${source.slug}.html`), "utf8");
+  const published = readScriptJson(html, "shop-nobi-prebuilt-content").data;
+  assert.match(published.title, /^Black Leather Boots: Compare/);
+  assert.ok(html.includes(`<title>${htmlEscape(published.title)} | Shop Nobi</title>`));
+  assert.ok(html.includes(`content="${htmlEscape(published.description)}"`));
+  assert.ok(readBody(html).includes(htmlEscape(published.title)));
+  for (const [key, value] of Object.entries(original.searchPages[0])) {
+    if (!["title", "description"].includes(key)) assert.deepEqual(published[key], value, key);
+  }
+  assert.deepEqual(plan, original);
+});
+
 /** A synthetic mixed listing exercises all retained shopping fields without copying a live catalogue. */
 function mixedSuitcasePage() {
   const fixture = readFixturePageData().pages[0];

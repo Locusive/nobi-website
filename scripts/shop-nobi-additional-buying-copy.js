@@ -1,5 +1,61 @@
 /** Item-specific comparison guidance for existing jewelry, watch, rug, dress and footwear search pages. */
 export const AdditionalBuyingCopy = {
+  "gold-white-bangles": {
+  "title": "White Gold Bangles: Compare Designs, Dimensions & Options",
+  "description": "Compare Suzanne Kalan bangle listings for white-gold searches. Check the selected metal, thin or Milli dimensions, diamond layout, closure and exact size.",
+  "guide": [
+    "The current selection comes from Suzanne Kalan and includes Golden, Mini, Thin, Bold and Milli designs. Compare the stated width, thickness and inner dimensions instead of treating those design names as standardized sizes. This is one retailer's selection, not a ranking across the market.",
+    "Open the exact variant to confirm the metal and color you want. A general Gold or Golden product name does not establish white gold, and this category alone is not proof of composition. Check the stated karat, finish and any accompanying stone specifications before comparing prices.",
+    "Compare half-pave, full-pave, half-baguette, full-baguette, cluster and inlay descriptions against the photos and specifications. Confirm where stones are placed, the stated total diamond weight and the bangle's width. A design name or higher price does not establish more comfortable wear or better quality.",
+    "Try a Shop Nobi search such as a thin white-gold diamond bangle in a small size under $10000. Include the width, closure and budget you need, then verify the exact inner measurements, fastening, available size and return terms at the retailer. Check care and stacking guidance for the selected finish and setting rather than assuming every bangle can be adjusted."
+  ],
+  "faq": [
+    {
+      "question": "Are all these bangle listings confirmed to be white gold?",
+      "answer": "Confirm the selected metal option in each retailer listing. Gold or Golden in a design name does not specify white gold, and a category label does not verify the composition of every variant."
+    },
+    {
+      "question": "What should I compare between Mini, Thin and Milli bangles?",
+      "answer": "Use the stated width, thickness, inner dimensions and weight where supplied. These are design names, so do not treat them as a common size scale or a guarantee of how a bangle will fit."
+    },
+    {
+      "question": "How do I compare half-pave and full-baguette designs?",
+      "answer": "Look at the stated stone layout, coverage, total weight and bangle dimensions. Confirm the exact design in the photos and product specifications rather than using the name alone to infer stone quantity or quality."
+    },
+    {
+      "question": "Can I resize or bend a bangle for a better fit?",
+      "answer": "Check the manufacturer's sizing and adjustment policy for the exact design before trying. Confirm the inner dimensions and closure type; a thin appearance does not establish that a bangle is flexible or resizable."
+    }
+  ]
+},
+  "purple-violet-jewelry": {
+  "title": "Purple & Violet Jewelry: Compare Stones, Color & Pieces",
+  "description": "Compare purple and violet jewelry across stores: stone pendants, crystal earrings, enamel, coated hoops and beads. Check color, materials, quantity and dimensions.",
+  "guide": [
+    "Choose the kind of purple detail you want. This selection mixes named stones such as amethyst, tanzanite and violet sapphire with crystal, enamel, color-coated hoops and beaded designs. Purple describes an appearance; it does not mean that every piece contains amethyst or that a deeper shade is higher quality.",
+    "Compare the complete piece and what is included. A necklace charm may require a separately purchased chain, while a cord necklace has a different construction from a chain pendant. Check each exact listing for chain or cord inclusion, necklace length, pendant dimensions and fastening. For studs, verify whether the price covers one earring or a pair.",
+    "Read the metal and finish information for the parts that touch you, including posts, hooks and backs. Gold-colored, plated, gold-filled and solid-gold descriptions are not interchangeable. If you need to avoid a particular metal, ask the retailer for the exact component specifications; a color or general hypoallergenic label does not establish suitability for everyone.",
+    "Try a Shop Nobi search such as a pair of purple crystal drop earrings under $150. Include the piece, material, quantity, length and budget you want. Confirm the selected color, measurements, exact materials and return terms, then use the maker's care instructions for all components, including coatings, cord, enamel or stones."
+  ],
+  "faq": [
+    {
+      "question": "Does purple jewelry always contain amethyst?",
+      "answer": "No. These listings include amethyst, tanzanite, violet sapphire, crystal, enamel, coated hoops and beads. Read the exact material and stone description rather than identifying a stone by its color."
+    },
+    {
+      "question": "Does a darker violet stone mean better quality?",
+      "answer": "Color alone does not establish quality or identity. Compare the retailer's specific stone information, dimensions, condition and any supplied documentation for the exact piece."
+    },
+    {
+      "question": "Does a necklace charm come with a chain?",
+      "answer": "Check what is included in the selected listing. A charm title alone does not establish chain inclusion; confirm the bail opening, chain or cord length and any separately sold components."
+    },
+    {
+      "question": "How do I compare the materials in purple earrings?",
+      "answer": "Check the body, post or hook, back, coating and any stone descriptions separately. If you avoid a specific metal, request those component details instead of relying only on a general material or hypoallergenic label."
+    }
+  ]
+},
   "amethyst-jewelry": {
   "title": "Amethyst Jewelry: Compare Rings, Earrings & Stone Details",
   "description": "Compare amethyst rings and earrings across stores, including geometric rings, single studs and pearl combinations. Check dimensions, quantity, sizing and stone details.",

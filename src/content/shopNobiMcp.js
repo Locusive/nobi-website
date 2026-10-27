@@ -3,7 +3,9 @@ import { IndexableRobots } from "../utils/previewImage.js";
 
 export const ShopNobiMcpPath = "/shop/mcp";
 export const ShopNobiMcpEndpoint = "https://api.nobi.ai/v1/shop/mcp";
-export const ShopNobiCursorInstallUrl = "https://cursor.com/install-mcp?name=shop-nobi&config=eyJ0eXBlIjoiaHR0cCIsInVybCI6Imh0dHBzOi8vYXBpLm5vYmkuYWkvdjEvc2hvcC9tY3AifQ%3D%3D";
+/** Tags website-published connections independently of the reported AI client. */
+export const ShopNobiMcpConnectionUrl = `${ShopNobiMcpEndpoint}?source=nobi_website`;
+export const ShopNobiCursorInstallUrl = "https://cursor.com/install-mcp?name=shop-nobi&config=eyJ0eXBlIjoiaHR0cCIsInVybCI6Imh0dHBzOi8vYXBpLm5vYmkuYWkvdjEvc2hvcC9tY3A%2Fc291cmNlPW5vYmlfd2Vic2l0ZSJ9";
 export const ShopNobiGeminiExtensionCommand = "gemini extensions install https://github.com/Locusive/shop-nobi-gemini-extension";
 
 /** Shared page metadata keeps the initial HTML and browser route consistent. */
@@ -19,12 +21,12 @@ export const ShopNobiMcpSeo = {
 /** Claude Code accepts this remote HTTP server in a project's .mcp.json. */
 export const ShopNobiMcpConfig = {
   mcpServers: {
-    "shop-nobi": { type: "http", url: ShopNobiMcpEndpoint },
+    "shop-nobi": { type: "http", url: ShopNobiMcpConnectionUrl },
   },
 };
 
-export const ShopNobiMcpCommand = `claude mcp add --transport http shop-nobi ${ShopNobiMcpEndpoint}`;
-export const ShopNobiGeminiCommand = `gemini mcp add --transport http shop-nobi ${ShopNobiMcpEndpoint}`;
+export const ShopNobiMcpCommand = `claude mcp add --transport http shop-nobi '${ShopNobiMcpConnectionUrl}'`;
+export const ShopNobiGeminiCommand = `gemini mcp add --transport http shop-nobi '${ShopNobiMcpConnectionUrl}'`;
 
 /** Each card names an available connection route, not a partnership or marketplace listing. */
 export const ShopNobiAgentConnections = [

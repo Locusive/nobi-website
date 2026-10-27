@@ -3,7 +3,7 @@ import PageLayout from "../components/PageLayout";
 import { useSEO } from "../hooks/useSEO";
 import {
   ShopNobiAgentConnections, ShopNobiCursorInstallUrl, ShopNobiGeminiExtensionCommand,
-  ShopNobiMcpCommand, ShopNobiMcpConfig, ShopNobiMcpEndpoint, ShopNobiGeminiCommand,
+  ShopNobiMcpCommand, ShopNobiMcpConfig, ShopNobiMcpConnectionUrl, ShopNobiGeminiCommand,
   ShopNobiMcpSeo, ShopNobiMcpTools, ShopNobiFrameworkRecipes,
 } from "../content/shopNobiMcp.js";
 
@@ -65,7 +65,7 @@ export default function ShopNobiMcp() {
 
         <section className="snm-endpoint" aria-labelledby="snm-endpoint-title">
           <div><h2 id="snm-endpoint-title">Any remote MCP client</h2><p>Use Streamable HTTP with this server address. Discover the live tool schemas with <code>tools/list</code> and approve tool use in your client.</p></div>
-          <p className="snm-endpoint-url"><code>{ShopNobiMcpEndpoint}</code></p>
+          <p className="snm-endpoint-url"><code>{ShopNobiMcpConnectionUrl}</code></p>
         </section>
 
         <section className="snm-connections" id="frameworks" aria-labelledby="snm-frameworks-title">

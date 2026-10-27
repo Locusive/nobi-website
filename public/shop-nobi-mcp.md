@@ -7,7 +7,7 @@ HTML documentation: https://docs.nobi.ai/shop-nobi-mcp-response/
 ## Connect
 
 - Transport: remote Streamable HTTP
-- Server: `https://api.nobi.ai/v1/shop/mcp`
+- Server: `https://api.nobi.ai/v1/shop/mcp?source=nobi_website`
 - Shop Nobi authentication: none
 - Client approval: depends on the MCP client
 

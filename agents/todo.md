@@ -55,3 +55,15 @@ See `agents/feature_plans/funfact_trivia_gift_guide.md`. No catalogue, source-qu
 - [ ] Obtain distinct review of the actual diff and normal feature PR/check gates before release. No admin/selfapproval/skipped tests or fixture deployment.
 - [ ] Normal production build must use the existing full live-source build path. No catalog/model refresh,private export,account/security change,paid/outreach/social initiative or protected-source workaround.
 - [ ] Verify deployed output and applicable engine notification receipts once after release. Compare later complete Google windows; no promised traffic/rank uplift or status-only polling.
+
+
+## Shop Nobi website MCP source tags
+
+- [x] Apply the approved single website publishing-source parameter in a dedicated worktree.
+- [x] Build actual output and pass existing local MCP page tests without external-model calls.
+- [x] Verify canonical/product copy preservation and report actual release triggers.
+- [x] Root reviewed and authorized normal feature release.
+- [ ] Verify actual Cloudflare preview, merge and production connection destinations.
+
+Plan: agents/feature_plans/shop_nobi_source_tags.md
+Notion: https://www.notion.so/406c7ba9c3dd81ea99b2cc433bfdcb7c

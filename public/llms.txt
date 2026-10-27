@@ -76,7 +76,7 @@ Available tools:
 
 Shop Nobi is an online search engine. Its separate, public read-only MCP tools currently search product listings across curated online stores; they do not yet search service listings or other kinds of offerings. They require no Nobi sign-in or API key. Agents can use them to answer a product request or find a Shop Nobi page. They cannot place orders or take payments. Product prices and availability may lag behind the merchant's website.
 
-mcp-server: https://api.nobi.ai/v1/shop/mcp
+mcp-server: https://api.nobi.ai/v1/shop/mcp?source=nobi_website
 
 Available tools:
 - search_products: Search products across online stores.

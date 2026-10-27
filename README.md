@@ -91,12 +91,15 @@ These edits do not certify stock, merchant claims or ranking improvements.
 `black-maxi-dresses`, `amethyst-earrings`, `emerald-jewelry`, `brown-suede-boots`
 `brown-boots`, `diamond-bangles`, `aquamarine-rings`, `mens-signet-rings`, `amethyst-jewelry`, `gold-white-bangles` and
 `purple-violet-jewelry`, `gold-bracelets`, `blossom-jewelry`, `saw-accessories`,
-`table-saw-accessories` and `miter-saw-accessories` through the same
+`table-saw-accessories`, `miter-saw-accessories` and `ecru-puzzles` through the same
 publication-only path.
 It replaces allergy-prevention and blanket cleaning claims with quantity,
 measurement, component, size-variant and exact-item care checks. Saw guides
 distinguish accessory systems from add-ons and category placement from verified
 compatibility; they provide buying comparisons, not cutting or setup instructions.
+The Ecru clarification uses the [maker FAQ](https://www.artifactpuzzles.com/pages/faq)
+and [collection](https://www.artifactpuzzles.com/collections/ecru-puzzles) to distinguish
+the named puzzle line from a color and separate difficulty from piece count.
 
 `scripts/shop-nobi-pin-editorial.js` records reviewed page/product/photo pairs,
 with the reason and observed Pin. A reviewed page is omitted from Pinterest if

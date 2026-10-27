@@ -56,10 +56,20 @@ Generic `Best ...` search-page titles (including the `from Top Stores` suffix) a
 with catalog-backed titles and descriptions by `scripts/shop-nobi-catalog-copy.js`.
 The copy names the displayed listing count and up to two actual retailers, and
 only invites price comparison when multiple displayed records have prices and
-currencies. Empty pages describe guidance and search without claiming inventory.
-Reviewed editorial overrides retain their copy. The same publication data supplies
-HTML, metadata and browser hydration; source guides, product ordering, product
-facts, affiliate links, Pinterest feeds and Stories are unchanged. This is a
+currencies. The shared `shop-nobi-publication-quality.js` rule also removes fixed
+monetary assertions from source guide sentences and FAQs and supplies a price
+summary computed from the displayed records. Mixed currencies are not combined
+into a range. Clear visitor-entered search examples retain their budget amounts.
+When publication filters remove records, dependent source guide/FAQ copy is
+withheld because it may describe products no longer shown. Empty pages offer a
+search path, have matching noindex metadata in HTML and the browser, and are
+omitted from the search sitemap and llms.txt links. Populated pages return to
+normal publication automatically on a later build when their listings return.
+Reviewed editorial guidance remains subject to the same publication checks.
+This is not a general fact-check of qualitative product advice. The same
+publication data supplies HTML, metadata, FAQ schema and browser hydration;
+source guides, product ordering, product facts, affiliate links, Pinterest feeds
+and Stories are unchanged. This is a
 site-wide rollout, not a controlled click-through experiment, and it does not
 guarantee Google's chosen title/snippet or indexing.
 

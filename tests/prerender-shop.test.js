@@ -41,8 +41,13 @@ test("each page is written once, as <slug>.html, and a page with an unsafe slug 
   assert.ok(!existsSync(join(distDir, "shop/escape.html")) && !existsSync(join(distDir, "shop/s/escape.html")));
 });
 
-test("the head carries the page's own title, description, canonical, robots and link previews, escaped", () => {
-  const html = readOutput("shop/s/black-leather-boots.html");
+test("the head carries the page's own title, description, canonical, robots and link previews, escaped", async (t) => {
+  const data = readFixturePageData();
+  data.pages[0].products = data.pages[0].products.slice(0, 2);
+  const folder = makeDistCopy();
+  t.after(() => rmSync(folder, { recursive: true, force: true }));
+  await prerenderWith({ body: data }, folder);
+  const html = readFileSync(join(folder, "shop/s/black-leather-boots.html"), "utf8");
   const description = "Black leather boots for work &amp; weekends, from &quot;classic&quot; ropers to &lt;lace-ups&gt;.";
   for (const tag of [
     "<title>Black Leather Boots | Shop Nobi</title>",
@@ -61,32 +66,44 @@ test("the head carries the page's own title, description, canonical, robots and 
   for (const repeatable of ['rel="canonical"', 'name="robots"', 'id="page-schema"', "<title>", 'name="description"']) {
     assert.equal(html.split(repeatable).length - 1, 1, `Expected one ${repeatable}`);
   }
+  const body = readBody(html);
+  assert.ok(body.includes("Leather &lt;boots&gt; last for years with care."));
+  assert.ok(body.includes("Pick a pair that fits your work &amp; weekends."));
+  assert.ok(body.indexOf("Leather &lt;boots&gt;") < body.indexOf("Pick a pair"));
+  assert.ok(!body.includes('class="mt-3 max-w-3xl text-black/70 dark:text-white/70"></p>'), "Blank guide paragraphs stay omitted");
 });
 
-test("under the heading come the updated date, the description and the guide, escaped, in that order", () => {
+test("filtered listings replace inventory-dependent guidance consistently in the page and metadata", () => {
   const body = readBody(readOutput("shop/s/black-leather-boots.html"));
   const expectedTop = [
     '<h1 class="mt-4 text-3xl font-semibold">Black Leather Boots</h1>',
     '<p class="mt-1 text-sm text-black/50 dark:text-white/50">Updated October 11, 2026</p>',
     '<p class="mt-2 max-w-3xl text-black/70 dark:text-white/70">',
-    "Black leather boots for work &amp; weekends, from &quot;classic&quot; ropers to &lt;lace-ups&gt;.</p>",
-    '<p class="mt-3 max-w-3xl text-black/70 dark:text-white/70">Leather &lt;boots&gt; last for years with care.</p>',
-    '<p class="mt-3 max-w-3xl text-black/70 dark:text-white/70">Pick a pair that fits your work &amp; weekends.</p>',
+    "3 product listings are displayed. Confirm the selected variant&#x27;s current price, availability and purchase terms with the retailer.</p>",
+    '<p class="mt-3 max-w-3xl text-black/70 dark:text-white/70">Check each product card for its listed price and currency. Confirm the selected variant&#x27;s current price, availability and purchase terms with the retailer.</p>',
+    '<p class="mt-3 max-w-3xl text-black/70 dark:text-white/70">Use the search box below to describe your preferred features, size and budget and look for other options.</p>',
     '<ul class="mt-6 grid',
   ].join("");
-  assert.ok(body.includes(expectedTop), "A blank guide paragraph is skipped");
+  assert.ok(body.includes(expectedTop));
+  const html = readOutput("shop/s/black-leather-boots.html");
+  assert.ok(html.includes('<meta name="description" content="3 product listings are displayed.'));
+  assert.ok(!body.includes("Leather &lt;boots&gt; last for years with care."));
+  assert.ok(!body.includes(">Questions</h2>"));
+  assert.ok(!readScriptJson(html, "page-schema").some(entry => entry["@type"] === "FAQPage"));
 });
 
-test("a page with a blank or missing description, and no guide or questions, gets the standard description and no extras", () => {
-  for (const [slug, title] of [["chelsea-boots", "Chelsea Boots"], ["boots", "Boots"]]) {
-    const description = `${title} from the best stores online, in one search. Shop Nobi is a search engine: you buy directly from the store.`;
-    assert.ok(readOutput(`shop/s/${slug}.html`).includes(`<meta name="description" content="${description}">`), slug);
-  }
-
+test("missing descriptions use a fallback for populated pages while empty pages disclose no listings and stay unindexed", () => {
+  const description = "Chelsea Boots from the best stores online, in one search. Shop Nobi is a search engine: you buy directly from the store.";
+  assert.ok(readOutput("shop/s/chelsea-boots.html").includes(`<meta name="description" content="${description}">`));
+  const emptyHtml = readOutput("shop/s/boots.html");
+  assert.ok(emptyHtml.includes('<meta name="description" content="No product listings are displayed for boots. Enter your preferences in Shop Nobi to search for other options.">'));
+  assert.ok(emptyHtml.includes('<meta name="robots" content="noindex, nofollow">'));
   const body = readBody(readOutput("shop/s/boots.html"));
   const expectedTop = [
-    '<h1 class="mt-4 text-3xl font-semibold">Boots</h1>',
+    '<h1 class="mt-4 text-3xl font-semibold">boots: Search Products</h1>',
     '<p class="mt-1 text-sm text-black/50 dark:text-white/50">Updated October 9, 2026</p>',
+    '<p class="mt-2 max-w-3xl text-black/70 dark:text-white/70">No product listings are displayed for boots. Enter your preferences in Shop Nobi to search for other options.</p>',
+    '<p class="mt-3 max-w-3xl text-black/70 dark:text-white/70">No product listings are displayed on this page. Use the search box below to describe what you need and look for other options.</p>',
     '<ul class="mt-6 grid',
   ].join("");
   assert.ok(body.includes(expectedTop));
@@ -94,8 +111,13 @@ test("a page with a blank or missing description, and no guide or questions, get
   assert.equal(readScriptJson(readOutput("shop/s/boots.html"), "page-schema").length, 2, "No FAQPage without questions");
 });
 
-test("questions show after the products, and the structured data carries them as an FAQPage", () => {
-  const html = readOutput("shop/s/black-leather-boots.html");
+test("questions on unfiltered pages show after products and agree with FAQ structured data", async (t) => {
+  const data = readFixturePageData();
+  data.pages[0].products = data.pages[0].products.slice(0, 2);
+  const folder = makeDistCopy();
+  t.after(() => rmSync(folder, { recursive: true, force: true }));
+  await prerenderWith({ body: data }, folder);
+  const html = readFileSync(join(folder, "shop/s/black-leather-boots.html"), "utf8");
   const body = readBody(html);
   const questions = '<h2 class="text-lg font-semibold">Questions</h2><div class="mt-4"><h3 class="font-medium">'
     + "Are leather boots &lt;waterproof&gt;?</h3>"
@@ -297,13 +319,14 @@ test("the Shop Nobi sitemap lists each built category page, search page and web 
   for (const path of ["shop/s/black-leather-boots", "shop/c/shoes", "shop/stories/black-leather-boots"]) {
     assert.ok(shopSitemap.includes(`<loc>https://nobi.ai/${path}</loc>\n    <lastmod>2026-10-11T08:02:11Z</lastmod>`), path);
   }
-  assert.equal(shopSitemap.split("<url>").length - 1, 5, "One category page, three search pages and one story");
-  assert.equal(shopSitemap.split("<lastmod>").length - 1, 5, "Every entry has a lastmod");
+  assert.equal(shopSitemap.split("<url>").length - 1, 4, "One category page, two populated search pages and one story");
+  assert.equal(shopSitemap.split("<lastmod>").length - 1, 4, "Every entry has a lastmod");
   assert.ok(!shopSitemap.includes("neon-boots"));
+  assert.ok(!shopSitemap.includes("<loc>https://nobi.ai/shop/s/boots</loc>"), "Empty search pages stay out of the sitemap");
 });
 
 test("a sitemap entry without a valid refresh time gets the fallback time as its lastmod", () => {
-  const pages = [null, "", "October 11", "2026-10-11T08:02:11Z"].map((refreshedAt, index) => ({ slug: `page-${index}`, refreshedAt }));
+  const pages = [null, "", "October 11", "2026-10-11T08:02:11Z"].map((refreshedAt, index) => ({ slug: `page-${index}`, refreshedAt, products: [{ name: "Item" }] }));
   const sitemap = buildShopNobiSitemap([], pages, [], "2026-10-12T08:10:00Z");
   const lastModifiedTimes = [...sitemap.matchAll(/<lastmod>([^<]+)<\/lastmod>/g)].map(([, time]) => time);
   assert.deepEqual(lastModifiedTimes, ["2026-10-12T08:10:00Z", "2026-10-12T08:10:00Z", "2026-10-12T08:10:00Z", "2026-10-11T08:02:11Z"]);
@@ -371,6 +394,7 @@ test("llms.txt keeps its own text and gains a Shop Nobi section with links to th
   assert.ok(llmsText.startsWith(readOriginal("llms.txt").trimEnd()));
   assert.ok(llmsText.includes("## Shop Nobi"));
   assert.ok(llmsText.includes("- [Black Leather Boots](https://nobi.ai/shop/s/black-leather-boots)"));
+  assert.ok(!llmsText.includes("https://nobi.ai/shop/s/boots)"), "Empty search pages stay out of machine-readable discovery");
 });
 
 test("when the file limit is reached, category room comes first and unbuilt pages stay out of static listings", async () => {

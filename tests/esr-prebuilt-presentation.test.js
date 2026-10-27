@@ -77,9 +77,10 @@ test("exclude ESR copy and price records from actual HTML, hydration, ItemList, 
   assert.equal(findLargePreviewImage(page.products), findLargePreviewImage(OtherProducts));
 });
 
-test("retain generic guide, FAQ and canonical board identity while selecting only remaining Story and Pin products", () => {
-  assert.deepEqual(page.guide, Fixture.page.guide);
-  assert.deepEqual(page.faq, Fixture.page.faq);
+test("replace dependent guidance while retaining canonical board identity and remaining Story and Pin products", () => {
+  assert.match(page.guide[0], /16 displayed.*\$14\.99 to \$188\.00 \(USD\)/);
+  assert.doesNotMatch(page.guide.join(" "), /\$139\.99/);
+  assert.deepEqual(page.faq, []);
   const story = planWebStory(page);
   assert.ok(story);
   assert.ok(story.pages.filter((frame) => frame.kind === "product").every((frame) => frame.product.owningMerchantId !== MerchantId));
@@ -102,7 +103,9 @@ test("publish no ESR product or image-dependent derivative when the source page 
     assert.equal(planWebStory(emptyPage), null);
     assert.ok(!buildPinFeedFiles([emptyPage])[0].content.includes("<item>"));
     assertNoHeldProduct(outputText(folder));
-    assert.deepEqual(emptyPage.guide, Fixture.page.guide, "A rights hold does not blindly rewrite generic editorial copy.");
+    assert.match(emptyPage.guide[0], /No product listings are displayed/);
+    assert.deepEqual(emptyPage.faq, []);
+    assert.match(onlyHtml, /name="robots" content="noindex, nofollow"/);
   } finally {
     rmSync(folder, { recursive: true, force: true });
   }

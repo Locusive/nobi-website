@@ -24,3 +24,8 @@ Before asking Shanif for Search Console access or exports, inspect his signed-in
 - For broad snippet changes, use displayed catalog facts and preserve reviewed authored copy. Audit every current title pattern rather than assuming one template covers the entire catalog. Distinguish removed known tests from unclassified agent activity; an unfamiliar client is not automatically a test.
 
 - Acquisition proposals need evidence of a meaningful audience and an attainable route to it. A directory accepting submissions does not establish traffic potential; do not turn weak research into an access request or active experiment.
+
+## Continuing authorized growth work
+
+- Completing a batch or rejecting a weak experiment is not completion of an ongoing authorized task. Continue useful finite work without requiring another user prompt.
+- A request for all pages requires auditing every publication path, including stale body copy on populated pages. Do not confuse site-wide metadata coverage with site-wide editorial review.

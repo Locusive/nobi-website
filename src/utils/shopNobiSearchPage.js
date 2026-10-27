@@ -85,6 +85,7 @@ export function buildSearchPageSeo(page) {
     description: page.description || describeSearchPage(page.title),
     path: searchPagePath(page.slug),
     image: findLargePreviewImage(page.products) ?? ShopNobiImage,
+    noindex: page.products.length === 0,
     schema,
   };
 }

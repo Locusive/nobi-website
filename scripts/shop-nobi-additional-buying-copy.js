@@ -1,5 +1,89 @@
-/** Item-specific comparison guidance for existing jewelry, watch, rug, dress and footwear search pages. */
+/** Item-specific comparison guidance for existing product search pages. */
 export const AdditionalBuyingCopy = {
+  "saw-accessories": {
+    "title": "Saw Accessories: Compare Gauges, Fences, Sleds & Guides",
+    "description": "Compare saw accessory listings by purpose and exact tool compatibility: alignment gauges, fences, sleds, track guides and add-ons. Check model requirements and included parts.",
+    "guide": [
+      "Start with the job and the saw you already own. This selection mixes Saw Gauge and Align-A-Saw listings, rip fences, taper and joinery sleds, ThinRip guides, a magnetic band-saw template guide, a miter-saw fence system and track-saw accessories. These are different accessory types, not interchangeable upgrades for every saw.",
+      "Match the exact saw, fence, track or accessory system to the manufacturer's compatibility information. The Versa-Fence upgrade and dado nut explicitly name SawStop, while the extension kit names the Pro-Series Universal Track Saw Kit. Neither a shared brand nor Universal in a title proves compatibility with your particular equipment.",
+      "Check what the selected purchase includes. A storage-tray add-on, extension kit or dado nut is not a complete fence or saw system. Compare required base equipment, included mounting parts, dimensions and the selected variant before comparing prices. Do not use a general category label or a single throat-depth measurement as a fit check.",
+      "Try a Shop Nobi search such as a fence face upgrade for my exact SawStop model under $200, replacing the model description with your own equipment. Include the accessory purpose, model and budget. Verify the maker's compatibility list, instructions and return terms before purchase; this comparison does not establish safe setup or guarantee cutting accuracy."
+    ],
+    "faq": [
+      {
+        "question": "Can every accessory on this page be used with the same saw?",
+        "answer": "No compatibility is established by appearing together here. The listings include table-saw, band-saw, miter-station and track-system items. Check the exact equipment and manufacturer requirements for each selected accessory."
+      },
+      {
+        "question": "How do I compare a gauge, fence and sled?",
+        "answer": "Choose the intended task first, then read each maker's description and supported equipment. A measuring or alignment product, a fence component and a sled are different purchases; compare required equipment and included parts rather than price alone."
+      },
+      {
+        "question": "Does Universal mean the accessory fits my setup?",
+        "answer": "Treat it as part of the product name, not verified fit. Confirm your exact saw or track system and the listed dimensions, mounting requirements and exclusions with the manufacturer."
+      },
+      {
+        "question": "Will these accessories improve safety or blade life?",
+        "answer": "This page has not verified those outcomes. Use the saw and accessory manufacturers' instructions for the exact combination, and do not infer safety, blade life or accuracy from price, material or a listing title."
+      }
+    ]
+  },
+  "table-saw-accessories": {
+    "title": "Table Saw Accessories: Compare Sleds, Fences & Add-ons",
+    "description": "Compare Woodpeckers table-saw accessory listings, from taper and joinery sleds to fence upgrades, gauges and replacement parts. Check exact compatibility and package contents.",
+    "guide": [
+      "This selection is from Woodpeckers and includes taper, joinery, box-joint and miter sleds; auxiliary rip fences; ThinRip guides; alignment gauges; and fence upgrades. Select the type of accessory for your intended task before comparing the named designs. This is one retailer's assortment, not a market-wide ranking.",
+      "Separate complete accessories from supporting parts. The listings include an Exact-90 flip stop, a Versa-Fence storage-tray add-on, replacement parts and a Joinery Sled Sacrificial Fence 3-Pack. Check the required parent product and the selected option so a lower-priced component is not mistaken for a complete sled or fence.",
+      "For the Versa-Fence face upgrade that names SawStop, verify the specific supported saw and fence configuration. For other products, check the manufacturer's exact model, mounting and dimension requirements. The page category, an aluminum construction claim or a throat-plate measurement alone does not establish compatibility with a portable or stationary saw.",
+      "Try a Shop Nobi search such as a box-joint sled for my exact table-saw model under $700, supplying your actual model and existing fence or gauge system. Compare the stated capacity, adjustment range, included parts and return terms. Follow the manufacturer's instructions; do not assume a sled adjusts to any angle or that an auxiliary fence alone provides every support your task needs."
+    ],
+    "faq": [
+      {
+        "question": "Are all these listings complete table-saw accessories?",
+        "answer": "No. The assortment also contains a flip stop, storage-tray add-on, replacement parts and sacrificial fences. Read the selected option and package contents, including any parent system you must already own."
+      },
+      {
+        "question": "How do I check whether a fence upgrade fits?",
+        "answer": "Match the exact saw and existing fence system to the manufacturer's compatibility information and mounting requirements. A product category or throat-plate size alone is not a fit determination."
+      },
+      {
+        "question": "Can every sled be adjusted to any angle?",
+        "answer": "Do not assume that. Compare the stated purpose, capacity and adjustment range of the exact sled, along with its required saw configuration and instructions."
+      },
+      {
+        "question": "Are these suitable for a portable table saw?",
+        "answer": "Check support for the exact portable model and configuration with the accessory manufacturer. Low weight or aluminum construction is not evidence that the mounting, dimensions or intended use are compatible."
+      }
+    ]
+  },
+  "miter-saw-accessories": {
+    "title": "Miter Saw Accessories: Compare Station Fences, Stops & Kits",
+    "description": "Compare miter-station fence kits, stops and crown-molding jig listings. Distinguish station equipment from miter gauges, sleds and hand-saw sets; verify exact compatibility.",
+    "guide": [
+      "Decide whether you need equipment for a miter-saw station or another product that uses the word miter. This page includes 24-, 36- and 48-inch station fence kits, a StealthStop miter-saw fence and stop system, EZ-Wings fence sets and crown-molding jigs. It also contains miter bars, gauges, sleds, a slot nut and a razor-saw/miter set; their presence here does not establish that they attach to a powered miter saw.",
+      "Compare the station kit and selected size. The Universal Precision Miter Station Fence Kit listings name 24, 36 and 48 inches, while the EZ-Wings listings explicitly say Set of 2. Verify what the stated dimension measures, the number of pieces, the required station system and whether stops or mounting hardware are included. A longer named option is not proof that it fits your bench or saw.",
+      "For a crown-molding jig, check the exact maker and model, including Crown45 or Crown-Pro KMA2800 in these listings. Read the manufacturer's supported equipment, capacity and instructions. Do not apply a fence-kit fit rule to a jig or use a category label as permission to attach a miter bar or sled to your saw.",
+      "Try a Shop Nobi search such as a 36-inch miter-station fence kit under $250 compatible with my existing station, replacing that phrase with your exact station and saw model. Compare the selected kit contents, fit requirements and return policy. Use the maker's setup instructions rather than treating this buying comparison as cutting or calibration guidance."
+    ],
+    "faq": [
+      {
+        "question": "Does every listing here fit a powered miter saw?",
+        "answer": "No. The page also contains miter-slot components, gauges, sleds and a razor-saw/miter set. Confirm the intended equipment and exact compatibility in each manufacturer listing before purchase."
+      },
+      {
+        "question": "What is different about the 24-, 36- and 48-inch fence kits?",
+        "answer": "Those are the named size options shown here. Check what the measurement describes and compare included pieces, stops, hardware and station requirements; the title alone does not establish the complete package or fit."
+      },
+      {
+        "question": "Do the EZ-Wings fence listings contain one fence?",
+        "answer": "The listed 24- and 48-inch EZ-Wings fence products explicitly say Set of 2. Verify the selected option, compatible station and other required components before comparing their prices with single kits or accessories."
+      },
+      {
+        "question": "Does Universal guarantee compatibility with my miter saw?",
+        "answer": "No fit guarantee is established by that name. Check the manufacturer's exact station and saw requirements, dimensions, mounting provisions and exclusions for the selected kit."
+      }
+    ]
+  },
   "gold-bracelets": {
     "title": "Gold Bracelets: Compare Materials, Chain Styles & Fit",
     "description": "Compare gold bracelet listings across stores: herringbone, bead, stretch, bangle and cord designs. Check exact metal, width, length, fastening and included pieces.",

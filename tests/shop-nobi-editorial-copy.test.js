@@ -128,6 +128,10 @@ test("suitcase correction leaves refreshed guidance and other pages intact", () 
 });
 
 for (const scenario of [
+  {"slug": "saw-accessories", "title": "Saw Accessories: Compare Gauges, Fences, Sleds & Guides", "stale": "Durable accessories improve cut accuracy and safety."},
+  {"slug": "table-saw-accessories", "title": "Table Saw Accessories: Compare Sleds, Fences & Add-ons", "stale": "A sled provides a stable platform that can be set at any angle, giving better control for angled cuts."},
+  {"slug": "miter-saw-accessories", "title": "Miter Saw Accessories: Compare Station Fences, Stops & Kits", "stale": "A solid, well-engineered accessory reduces wobble and improves accuracy."},
+
   {"slug": "gold-bracelets", "title": "Gold Bracelets: Compare Materials, Chain Styles & Fit", "stale": "Solid gold pieces are stamped with a karat mark like 14K, while plated items may only say gold-filled or have no stamp."},
   {"slug": "blossom-jewelry", "title": "Blossom Jewelry: Compare Floral Earrings, Necklaces & Rings", "stale": "Choose ones made from nickel-free gold or sterling silver to reduce irritation."},
 

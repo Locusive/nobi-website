@@ -1,5 +1,33 @@
 /** Item-specific comparison guidance for existing product search pages. */
 export const AdditionalBuyingCopy = {
+  "yellow-gold-diamond-earrings": {
+    "title": "Yellow Gold Diamond Earrings: Compare Studs, Huggies & Drops",
+    "description": "Compare yellow gold diamond earring listings by selected metal, stone details, single or pair quantity, dimensions, backs and drop length before buying.",
+    "guide": [
+      "Choose the shape first: this selection includes mini huggies, chevron and baguette huggies, fleur and bar studs, chain studs, hoops and longer drops. Compare the exact design and dimensions instead of treating all diamond earrings as interchangeable. Listings here come from Saint Bernard, Jennifer Meyer, Logan Hollowell, EF Collection and Stone and Strand.",
+      "Confirm the selected metal color and composition on the seller page. A yellow-gold category label does not verify the gold purity or the material of the posts and backs. Ask about any missing component or coating details, especially when you already know you need to avoid a particular material; do not use color or a gold label as an assurance of suitability for sensitive ears.",
+      "Check whether the price covers one earring or a pair. The selection includes a singular Diamond Loop Hoop Earring title as well as plural titles, but neither wording alone confirms package contents. Compare hoop inner diameter, width, post or closure type, and total drop length. For a chain stud, confirm the number of piercings required and how the chain attaches rather than assuming it works like a conventional stud.",
+      "Read the stated diamond origin, treatments, color, clarity and weight basis, asking for documentation where available. A .40CTW title is a reason to confirm whether the stated weight covers the pair or another selling unit, not to assume each stone has that weight. Try a Shop Nobi search such as yellow gold diamond huggie earrings sold as a pair under $1,000, adding your preferred dimensions. Confirm the selected option, current price, delivery and return terms, and follow the maker's care instructions for the exact piece."
+    ],
+    "faq": [
+      {
+        "question": "Does a yellow-gold listing establish the material of the posts and backs?",
+        "answer": "No. Check the stated gold composition and the materials of the posts, backs, hinges and any coatings for the selected option. Ask the seller about missing details rather than inferring every component from the category label."
+      },
+      {
+        "question": "How can I compare a single diamond earring with a pair?",
+        "answer": "Confirm the quantity included in each selected option before comparing prices. Then compare dimensions, metal and stone specifications on the same basis; a singular or plural product title alone does not establish what the package contains."
+      },
+      {
+        "question": "What does the .40CTW listing tell me about diamond weight?",
+        "answer": "Check the seller's definition and whether the stated total covers one earring, a pair or another selling unit. Do not treat that title as the weight of each individual diamond; ask for the breakdown if it matters to your comparison."
+      },
+      {
+        "question": "What should I compare between huggies, chain studs and drop earrings?",
+        "answer": "Check inner hoop diameter and closure for a huggie, chain attachment and piercing requirements for a chain stud, and overall length and weight for a drop. Names such as mini or jumbo are not standardized measurements, and photos alone do not establish how a piece will fit your ear."
+      }
+    ]
+  },
   "mens-diamond-bracelets": {
     "title": "Men's Diamond Bracelets: Compare Links, Stones & Fit",
     "description": "Compare men's diamond bracelet listings from Shay Jewelry. Check link design, stone and metal disclosures, length, width, closure and selected-variant terms.",

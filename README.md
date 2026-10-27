@@ -91,7 +91,8 @@ These edits do not certify stock, merchant claims or ranking improvements.
 `black-maxi-dresses`, `amethyst-earrings`, `emerald-jewelry`, `brown-suede-boots`
 `brown-boots`, `diamond-bangles`, `aquamarine-rings`, `mens-signet-rings`, `amethyst-jewelry`, `gold-white-bangles` and
 `purple-violet-jewelry`, `gold-bracelets`, `blossom-jewelry`, `saw-accessories`,
-`table-saw-accessories`, `miter-saw-accessories`, `ecru-puzzles`, `red-electric-guitars` and `mens-diamond-bracelets` through the same
+`table-saw-accessories`, `miter-saw-accessories`, `ecru-puzzles`, `red-electric-guitars`, `mens-diamond-bracelets` and
+`yellow-gold-diamond-earrings` through the same
 publication-only path.
 It replaces allergy-prevention and blanket cleaning claims with quantity,
 measurement, component, size-variant and exact-item care checks. Saw guides
@@ -104,6 +105,8 @@ Red electric guitar guidance distinguishes exact finish from a builder name,
 compares condition and specifications, and avoids unsupported tone or tuning promises.
 Men's diamond bracelet guidance separates link shape from stone coverage and
 replaces universal stone, allergy and care claims with exact-item disclosures.
+Yellow gold diamond earring comparisons clarify selling quantity, component
+materials, dimensions, piercing requirements and the stated stone-weight basis.
 
 `scripts/shop-nobi-pin-editorial.js` records reviewed page/product/photo pairs,
 with the reason and observed Pin. A reviewed page is omitted from Pinterest if

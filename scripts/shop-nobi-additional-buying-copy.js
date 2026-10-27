@@ -1,5 +1,33 @@
 /** Item-specific comparison guidance for existing jewelry, watch, rug, dress and footwear search pages. */
 export const AdditionalBuyingCopy = {
+  "mens-signet-rings": {
+  "title": "Men's Signet Rings: Compare Faces, Metals & Sizes",
+  "description": "Compare men's signet rings across stores: plain gold faces, initials, icons, gemstones and diamond-set designs. Check face dimensions, ring size and customization terms.",
+  "guide": [
+    "Start with the face you want: a plain gold design, an initial or icon, a chrysocolla-malachite center, or a diamond-set face. This selection includes pinky-ring, knife-edge, mosaic-center and oval-pave designs. Compare face width, length and profile height where stated, since the product photo alone does not show how large the ring will look on your hand.",
+    "Separate the stated metal from its finish and stone details. Gold, white-gold and titanium descriptions appear here; verify the exact selected listing rather than treating a color as proof of metal content. For a diamond or gemstone design, check the stated stone identity, origin, dimensions and any total-weight information. Those details do not by themselves establish quality or a durability guarantee.",
+    "Choose the finger first, then follow that retailer's ring-size system and measuring guidance. Check band width, available sizes and whether the exact design can be resized. A pinky-ring label does not establish your size. For an initial or engraving request, confirm the offered choices, character limits, production time and return terms before ordering.",
+    "Try a Shop Nobi search such as a gold signet pinky ring with an initial under $2000. Include the metal, face design, ring size and budget you want. Open each result to check the current selected option, delivery and returns, and follow care instructions for that complete ring, including its stones and surface finish. A ready-to-ship product name is not a current stock guarantee."
+  ],
+  "faq": [
+    {
+      "question": "Can every signet ring be engraved or personalized?",
+      "answer": "No customization is established by the signet label alone. Check whether the exact design offers engraving or initial choices, which surfaces can be changed, and any production-time or return restrictions."
+    },
+    {
+      "question": "How do I compare a plain face with a diamond or gemstone face?",
+      "answer": "Compare face dimensions and profile height first, then the stated metal, stone identity and setting details. Check whether any quoted diamond weight is a total for the ring rather than the weight of one stone."
+    },
+    {
+      "question": "Does a pinky signet ring use a special size?",
+      "answer": "Choose the size for the finger you plan to wear it on using the retailer's own size guide. Confirm the sizing system, band width and resizing policy; the pinky label does not specify a measurement."
+    },
+    {
+      "question": "Is a titanium signet ring scratch-proof or always resizable?",
+      "answer": "Do not assume either from the metal name. Check the manufacturer's information for the exact ring and finish, its care instructions and whether resizing or another size-exchange option is offered."
+    }
+  ]
+},
   "diamond-bangles": {
     "title": "Diamond Bangles: Compare Sizes, Closures & Stone Details",
     "description": "Compare diamond bangle listings by inner dimensions, open or hinged design, stated metal and stone specifications. Check the selected size and purchase terms.",

@@ -6,6 +6,7 @@ import { searchPagePath, searchPageUrl } from "../src/utils/shopNobiSearchPage.j
 import { categoryPageUrl } from "../src/utils/shopNobiCategoryPage.js";
 import { isSafeSlug } from "./shop-nobi-search-page-view.js";
 import { webStoryUrl } from "../src/utils/shopNobiWebStory.js";
+import { ImagePilotSlugs } from "./shop-nobi-image-pilot.js";
 
 const LlmsTxtPageLimit = 100;
 const RedirectTargetPattern = /^\/[A-Za-z0-9\-._~/]*$/;
@@ -25,17 +26,20 @@ const SitemapTimePattern = /^\d{4}-\d{2}-\d{2}(?:T\d{2}:\d{2}(?::\d{2}(?:\.\d+)?
 export function buildShopNobiSitemap(categoryPages, searchPages, stories, fallbackLastModified) {
   const pageEntries = [
     ...categoryPages.map((category) => ({ url: categoryPageUrl(category.slug), refreshedAt: category.refreshedAt })),
-    ...searchPages.map((page) => ({ url: searchPageUrl(page.slug), refreshedAt: page.refreshedAt })),
+    ...searchPages.map((page) => ({ url: searchPageUrl(page.slug), refreshedAt: page.refreshedAt,
+      images: ImagePilotSlugs.has(page.slug) ? [...new Set((page.products ?? []).map(product => product.imageUrl).filter(Boolean))] : [] })),
     ...stories.map(({ page }) => ({ url: webStoryUrl(page.slug), refreshedAt: page.refreshedAt })),
   ];
   const entries = pageEntries.map((entry) => {
     const lastModified = readValidTime(entry.refreshedAt) ?? fallbackLastModified;
-    return `  <url>\n    <loc>${htmlEscape(entry.url)}</loc>\n    <lastmod>${htmlEscape(lastModified)}</lastmod>\n  </url>`;
+    // Products have already passed the same URL and merchant-rights checks used by the rendered page.
+    const images = (entry.images ?? []).map(url => `\n    <image:image><image:loc>${htmlEscape(url)}</image:loc></image:image>`).join("");
+    return `  <url>\n    <loc>${htmlEscape(entry.url)}</loc>\n    <lastmod>${htmlEscape(lastModified)}</lastmod>${images}\n  </url>`;
   });
 
   return [
     `<?xml version="1.0" encoding="UTF-8"?>`,
-    `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">`,
+    `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">`,
     ...entries,
     `</urlset>`,
   ].join("\n") + "\n";

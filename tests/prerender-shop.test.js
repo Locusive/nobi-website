@@ -309,6 +309,35 @@ test("a sitemap entry without a valid refresh time gets the fallback time as its
   assert.deepEqual(lastModifiedTimes, ["2026-10-12T08:10:00Z", "2026-10-12T08:10:00Z", "2026-10-12T08:10:00Z", "2026-10-11T08:02:11Z"]);
 });
 
+test("the image pilot publishes only displayed treatment photos and preserves comparisons and rights holds", async () => {
+  const source = readFixturePageData().pages[0];
+  const product = { ...source.products[0], imageUrl: "https://cdn.example.com/black.jpg?width=1200&height=1200" };
+  const products = [product, product,
+    { ...product, imageUrl: "javascript:alert(1)" },
+    { ...product, owningMerchantId: "962fb5d1-9238-4ecf-bc36-0ddc304be721", imageUrl: "https://cdn.example.com/cuckoo.jpg" },
+    { ...product, owningMerchantId: "e43e55da-830c-4dc3-82f5-c8995273b2b2", imageUrl: "https://cdn.example.com/esr.jpg" }];
+  const pages = [
+    { ...source, slug: "black-guitars", products },
+    { ...source, slug: "white-guitars", products: [product] },
+    { ...source, slug: "mens-gray-chinos", products: [] },
+  ];
+  const folder = makeDistCopy();
+  try {
+    await prerenderWith({ body: { generatedAt: new Date().toISOString(), pages, retired: [] } }, folder);
+    const sitemap = readFileSync(join(folder, "sitemap-shop.xml"), "utf8");
+    const entries = sitemap.split("<url>").slice(1);
+    assert.ok(sitemap.includes('xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"'));
+    assert.equal(sitemap.split("<image:image>").length - 1, 1, "Deduplicate; do not add comparisons, categories, stories or empty pages");
+    const treatment = entries.find(entry => entry.includes("<loc>https://nobi.ai/shop/s/black-guitars</loc>"));
+    assert.ok(treatment.includes("<image:loc>https://cdn.example.com/black.jpg?width=1200&amp;height=1200</image:loc>"));
+    assert.ok(!sitemap.includes("cuckoo.jpg") && !sitemap.includes("esr.jpg") && !sitemap.includes("javascript:"));
+    const comparison = readScriptJson(readFileSync(join(folder, "shop/s/white-guitars.html"), "utf8"), "shop-nobi-prebuilt-content");
+    assert.equal(comparison.data.products[0].imageUrl, product.imageUrl, "Comparison photograph still renders normally");
+  } finally {
+    rmSync(folder, { recursive: true, force: true });
+  }
+});
+
 test("the pin feed uses specific eligible product copy and leaves the canonical pages and board routes intact", () => {
   const feed = readOutput("shop/pins.xml");
   const items = feed.split("<item>").slice(1);

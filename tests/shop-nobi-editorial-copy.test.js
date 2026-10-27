@@ -128,6 +128,7 @@ test("suitcase correction leaves refreshed guidance and other pages intact", () 
 });
 
 for (const scenario of [
+  {"slug": "yellow-gold-diamond-earrings", "title": "Yellow Gold Diamond Earrings: Compare Studs, Huggies & Drops", "stale": "generally hypoallergenic"},
   {"slug": "mens-diamond-bracelets", "title": "Men's Diamond Bracelets: Compare Links, Stones & Fit", "stale": "18k gold is generally hypoallergenic"},
   {"slug": "red-electric-guitars", "title": "Red Electric Guitars: Compare Finishes, Models & Condition", "stale": "Look for a solid body with quality tonewoods such as alder, mahogany or ash for sustain"},
   {"slug": "ecru-puzzles", "title": "Ecru Puzzles: Compare Wooden Jigsaws, Artwork & Difficulty", "stale": "All are wooden jigsaw puzzles, featuring a light-neutral ecru background that lets the artwork stand out."},

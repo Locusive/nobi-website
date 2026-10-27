@@ -30,7 +30,9 @@ Arguments: `query` is required nonblank text, up to 500 characters. `limit` is o
 
 On success, check `isError === false` and read `structuredContent.products`. Clients that only read text can parse JSON from `content[0].text`. The `products` array may be empty.
 
-Each product contains `id` (string, the stable id used by the detail, compare, price, and alternatives tools), `name` (string), `store` (string or null), `price` (number or null), `currency` (string), `inStock` (boolean), `imageUrl` (string or null), `url` (string or null), `paidLink` (boolean), and `linkLabel` (string or null). The `url`, when present, is a Nobi click link that forwards to the seller's product page, not a raw merchant URL. Never invent a missing price, seller, image, or link. Show `linkLabel` beside its link when supplied, especially for a paid link. Verify final price, stock, and delivery on the seller's site.
+Each product contains `id` (string, the selected Nobi variant ID used by the detail, compare, price, and alternatives tools), `name` (string), `store` (string or null), `price` (number or null), `currency` (string), `inStock` (boolean), `imageUrl` (string or null), `url` (string or null), `paidLink` (boolean), and `linkLabel` (string or null). The `url`, when present, is a Nobi click link that forwards to the seller's product page, not a raw merchant URL. Never invent a missing price, seller, image, or link. Show `linkLabel` beside its link when supplied, especially for a paid link. Verify final price, stock, and delivery on the seller's site.
+
+In the expanded schema, search results also include `variantId` (the same Nobi variant ID as `id`), `productId` (its Nobi parent ID), `merchantId` (the selling merchant's Nobi UUID), `sourceProductId` and `sourceVariantId` (nullable merchant-source IDs). Discover `tools/list` before relying on these fields.
 
 This parser handles both structured and text-only MCP clients. It does not treat an error or a temporary busy message as a genuine zero-result search:
 
@@ -53,9 +55,11 @@ On success, `structuredContent.found` is a boolean. `structuredContent.page` is 
 
 ## `get_product_details`
 
-Arguments: the legacy `id` is the opaque Nobi variant identifier from a `search_products` result, not a Shopify ID or SKU. Discover the live schema before using expanded selectors. This tool returns catalog details and variant choices.
+Arguments: supply exactly one selector advertised by the live schema: `id` (legacy Nobi variant ID), `variantId` (Nobi variant), `productId` (Nobi parent), `sourceVariantId`, `sourceProductId`, `sku`, or `productUrl`. Nobi IDs accept the returned Base62 value or a canonical UUID. Source IDs and SKUs also require `storeDomain` or a known Nobi `merchantId`. `productUrl` must match a stored HTTPS catalog destination and is never fetched. An ambiguous URL is refused; use a known merchant ID to disambiguate a shared store hostname.
 
-On success, read `structuredContent.product`: `id`, `name`, `store`, `price` (number or null), `currency`, `compareAtPrice` (number or null), `inStock` (boolean), `inventoryQuantity` (number or null), `brand` (string or null), `categoryPath` (string or null), `imageUrls` (array of strings), `specs` (array of `{name, value}` attribute pairs, which vary by product), and `variants` (the product's variant options). There are no reviews or ratings; the stores' catalogs hold none.
+On success, read `structuredContent.product`: `id`, `name`, `store`, `price` (number or null), `currency`, `compareAtPrice` (number or null), `inStock` (boolean or null for a parent), `inventoryQuantity` (number or null), `brand` (string or null), `categoryPath` (string or null), `imageUrls` (array of strings), `specs` (array of `{name, value}` attribute pairs, which vary by product), and `variants` (the product's variant options). There are no reviews or ratings; the stores' catalogs hold none.
+
+The structured result also has `found`; when false, `product` is null. In expanded details, `productId` and `merchantId` identify the parent and merchant, and `sourceProductId` and `sourceVariantId` retain source identities. A parent selection leaves `id`, `variantId`, `sourceVariantId`, price, currency, compare-at price, stock and inventory null, with empty selected-variant specs. It returns every current variant choice, including out-of-stock choices. Each choice has its Nobi variant `id`, nullable `sourceVariantId`, name, price, currency, stock, inventory and specs. Select that choice with `variantId`.
 
 ### Shopify IDs require the merchant domain
 
@@ -77,7 +81,7 @@ These are illustrative IDs and a placeholder domain, not catalog records. Nobi p
 
 Arguments: `ids` is a required array of two or more product ids from `search_products` results.
 
-On success, read `structuredContent.comparison`: `attributes` (an array of `{name, values}`, where `values` lines up each product's value for a shared attribute such as price, brand, color or material) and `products` (the products compared). Only attributes at least one product provides are included.
+On success, read `structuredContent.comparison`: `attributes` (an array of attribute-name strings) and `products` (the compared variant rows, each with `id`, `name`, `store` and a `values` array of `{name, value}` attribute pairs). Only attributes at least one product provides are included.
 
 ## `check_price_and_availability`
 

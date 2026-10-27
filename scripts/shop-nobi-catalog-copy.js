@@ -12,18 +12,12 @@ const DescriptionLengthTarget = 200;
  * @returns {object} Publication copy, or the original page when its title is not generic.
  */
 export function withCatalogSearchCopy(page) {
+  if ((page.products ?? []).length === 0) return withEmptySearchCopy(page);
   const match = GenericTitlePattern.exec(page.title);
   if (!match) return page;
 
   const topic = match[1].trim();
   const products = page.products ?? [];
-  if (products.length === 0) {
-    return {
-      ...page,
-      title: `${topic}: Buying Guide & Search`,
-      description: `Explore the buying guide for ${topic}. No product listings are displayed on this page; enter your preferences in Shop Nobi to search.`,
-    };
-  }
 
   const stores = uniqueStoreNames(products);
   const hasComparablePrices = products.filter(product => Number.isFinite(product.price) && product.price > 0 && product.currency).length > 1;
@@ -47,4 +41,17 @@ function uniqueStoreNames(products) {
     if (name && !names.has(name.toLocaleLowerCase("en-US"))) names.set(name.toLocaleLowerCase("en-US"), name);
   }
   return [...names.values()];
+}
+
+/** Removes inventory-dependent copy whenever no publishable listings remain, including authored pages. */
+export function withEmptySearchCopy(page) {
+  const topic = GenericTitlePattern.exec(page.title)?.[1]?.trim() || page.query?.trim() || page.title;
+  return {
+    ...page,
+    title: `${topic}: Search Products`,
+    description: `No product listings are displayed for ${topic}. Enter your preferences in Shop Nobi to search for other options.`,
+    guide: ["No product listings are displayed on this page. Use the search box below to describe what you need and look for other options."],
+    faq: [],
+    guideSources: [],
+  };
 }

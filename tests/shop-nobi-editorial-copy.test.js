@@ -10,11 +10,17 @@ import { readFixturePageData } from "./shop-nobi-pages-server.js";
 import { readBody, readScriptJson } from "./shop-nobi-test-build.js";
 import { withAuthoredSearchPageCopy } from "../scripts/shop-nobi-editorial-copy.js";
 
+/** Isolates editorial-copy checks from the separate unsafe-product publication tests. */
+function readCleanFixturePage() {
+  const page = readFixturePageData().pages[0];
+  return { ...page, products: page.products.slice(0, 2) };
+}
+
 test("generic catalog copy agrees across published title, description and hydration", async (t) => {
   const folder = mkdtempSync(new URL("../node_modules/.catalog-copy-test-", import.meta.url));
   t.after(() => rmSync(folder, { recursive: true, force: true }));
   writeFileSync(join(folder, "index.html"), '<!doctype html><html><head><!--__PRERENDER_TITLE__--><!--__PRERENDER_DESC__--></head><body><div id="root"></div></body></html>');
-  const source = { ...readFixturePageData().pages[0], title: "Best Black Leather Boots from Top Stores" };
+  const source = { ...readCleanFixturePage(), title: "Best Black Leather Boots from Top Stores" };
   const { pages } = buildSearchPages([source], 1);
   const plan = { searchPages: pages, categoryPages: [], popularSearches: buildPopularSearches(pages, []) };
   const original = structuredClone(plan);
@@ -33,7 +39,7 @@ test("generic catalog copy agrees across published title, description and hydrat
 
 /** A synthetic mixed listing exercises all retained shopping fields without copying a live catalogue. */
 function mixedSuitcasePage() {
-  const fixture = readFixturePageData().pages[0];
+  const fixture = readCleanFixturePage();
   return {
     ...fixture, slug: "blue-suitcases", title: "Blue Suitcases", query: "blue suitcases",
     guide: ["Blue suitcases on this page range from about $70 to $495. The collection includes hard-shell carry-ons, expandable checked bags, and a few novelty suitcases with built-in record players.", "Keep the remaining guidance."],
@@ -47,7 +53,7 @@ function mixedSuitcasePage() {
 
 /** Synthetic variants retain the same shopping fields while exercising gemstone/metal ambiguity. */
 function whiteGoldPage() {
-  const fixture = readFixturePageData().pages[0];
+  const fixture = readCleanFixturePage();
   return {
     ...fixture, slug: "14k-white-gold-statement-rings", title: "White Gold Statement Rings",
     query: "14k white gold statement rings",
@@ -63,7 +69,7 @@ test("white-gold clarification agrees across HTML, FAQ schema and hydration with
   const folder = mkdtempSync(new URL("../node_modules/.editorial-test-", import.meta.url));
   t.after(() => rmSync(folder, { recursive: true, force: true }));
   writeFileSync(join(folder, "index.html"), '<!doctype html><html><head><!--__PRERENDER_TITLE__--><!--__PRERENDER_DESC__--></head><body><div id="root"></div></body></html>');
-  const { pages } = buildSearchPages([whiteGoldPage(), readFixturePageData().pages[0]], 2);
+  const { pages } = buildSearchPages([whiteGoldPage(), readCleanFixturePage()], 2);
   const plan = { searchPages: pages, categoryPages: [], popularSearches: buildPopularSearches(pages, []) };
   const original = structuredClone(plan);
   await writePrebuiltPages(plan, folder);
@@ -107,7 +113,7 @@ test("suitcase clarification agrees across HTML, FAQ schema and hydration while 
   const folder = mkdtempSync(new URL("../node_modules/.editorial-test-", import.meta.url));
   t.after(() => rmSync(folder, { recursive: true, force: true }));
   writeFileSync(join(folder, "index.html"), '<!doctype html><html><head><!--__PRERENDER_TITLE__--><!--__PRERENDER_DESC__--></head><body><div id="root"></div></body></html>');
-  const fixture = readFixturePageData().pages[0];
+  const fixture = readCleanFixturePage();
   const { pages } = buildSearchPages([mixedSuitcasePage(), fixture], 2);
   const plan = { searchPages: pages, categoryPages: [], popularSearches: buildPopularSearches(pages, []) };
   const original = structuredClone(plan);
@@ -136,7 +142,7 @@ test("suitcase clarification agrees across HTML, FAQ schema and hydration while 
   assert.deepEqual(readScriptJson(other, "shop-nobi-prebuilt-content").data, original.searchPages[1]);
 });
 
-test("suitcase correction leaves refreshed guidance and other pages intact", () => {
+test("suitcase-specific clarification preserves refreshed guidance and other pages while normalizing prices", () => {
   for (const change of [
     (page) => { page.guide[0] = "Freshly reviewed luggage guidance."; },
     (page) => { page.faq[1].answer = "Freshly reviewed answer."; },
@@ -144,7 +150,21 @@ test("suitcase correction leaves refreshed guidance and other pages intact", () 
   ]) {
     const page = mixedSuitcasePage();
     change(page);
-    assert.deepEqual(withAuthoredSearchPageCopy(page), page);
+    const original = structuredClone(page);
+    const published = withAuthoredSearchPageCopy(page);
+    assert.deepEqual(published.faq, page.faq, "Do not replace refreshed answers or another page's questions");
+    assert.deepEqual(published.products, page.products);
+    assert.equal(published.title, page.title);
+    assert.equal(published.description, page.description);
+    assert.ok(published.guide.includes("Keep the remaining guidance."));
+    assert.doesNotMatch(published.guide.join(" "), /record players are audio products, not bags for packing/);
+    if (page.guide[0] === "Freshly reviewed luggage guidance.") {
+      assert.deepEqual(published.guide, page.guide);
+    } else {
+      assert.doesNotMatch(published.guide.join(" "), /range from about \$70 to \$495/);
+      assert.match(published.guide[0], /16 displayed listings with prices.*\$495\.00/);
+    }
+    assert.deepEqual(page, original);
   }
 });
 
@@ -201,7 +221,7 @@ for (const scenario of [
   const folder = mkdtempSync(new URL("../node_modules/.editorial-test-", import.meta.url));
   t.after(() => rmSync(folder, { recursive: true, force: true }));
   writeFileSync(join(folder, "index.html"), '<!doctype html><html><head><!--__PRERENDER_TITLE__--><!--__PRERENDER_DESC__--></head><body><div id="root"></div></body></html>');
-  const fixture = readFixturePageData().pages[0];
+  const fixture = readCleanFixturePage();
   const authored = {
     ...fixture,
     slug: scenario.slug,

@@ -27,7 +27,7 @@ const SitemapTimePattern = /^\d{4}-\d{2}-\d{2}(?:T\d{2}:\d{2}(?::\d{2}(?:\.\d+)?
 export function buildShopNobiSitemap(categoryPages, searchPages, stories, fallbackLastModified) {
   const pageEntries = [
     ...categoryPages.map((category) => ({ url: categoryPageUrl(category.slug), refreshedAt: category.refreshedAt })),
-    ...searchPages.map((page) => ({ url: searchPageUrl(page.slug), refreshedAt: page.refreshedAt,
+    ...searchPages.filter((page) => page.products?.length > 0).map((page) => ({ url: searchPageUrl(page.slug), refreshedAt: page.refreshedAt,
       images: [...new Set((page.products ?? []).map(product => product.imageUrl).filter(Boolean))].slice(0, SitemapImageLimitPerPage) })),
     ...stories.map(({ page }) => ({ url: webStoryUrl(page.slug), refreshedAt: page.refreshedAt })),
   ];
@@ -100,11 +100,12 @@ export function countRedirectRules(redirectsText) {
  * @returns {string} The new llms.txt.
  */
 export function appendLlmsTxtSection(llmsText, pages) {
-  if (pages.length === 0) {
+  const populatedPages = pages.filter((page) => page.products?.length > 0);
+  if (populatedPages.length === 0) {
     return llmsText;
   }
 
-  const links = pages
+  const links = populatedPages
     .slice(0, LlmsTxtPageLimit)
     .map((page) => `- [${escapeLinkText(page.title)}](${searchPageUrl(page.slug)})`);
   const section = [

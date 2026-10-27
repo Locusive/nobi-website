@@ -82,7 +82,9 @@ test("published mailbox HTML, hydration and FAQ agree while the source plan and 
   const folder = mkdtempSync(new URL("../node_modules/.mailbox-test-", import.meta.url));
   t.after(() => rmSync(folder, { recursive: true, force: true }));
   writeFileSync(join(folder, "index.html"), '<!doctype html><html><head><!--__PRERENDER_TITLE__--><!--__PRERENDER_DESC__--></head><body><div id="root"></div></body></html>');
-  const { pages } = buildSearchPages([observedMailboxPage(), readFixturePageData().pages[0]], 2);
+  const otherSource = readFixturePageData().pages[0];
+  otherSource.products = otherSource.products.slice(0, 2);
+  const { pages } = buildSearchPages([observedMailboxPage(), otherSource], 2);
   const plan = { searchPages: pages, categoryPages: [], popularSearches: buildPopularSearches(pages, []) };
   const original = structuredClone(plan);
   await writePrebuiltPages(plan, folder);

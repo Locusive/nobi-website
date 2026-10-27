@@ -82,6 +82,8 @@ function isUsablePage(page) {
 
 /** Builds the page data for one page. */
 function buildSearchPage(page, links) {
+  const sourceProducts = Array.isArray(page.products) ? page.products : [];
+  const products = sourceProducts.map(buildProduct).filter(Boolean);
   return {
     slug: page.slug,
     query: isText(page.query) ? page.query : page.title,
@@ -94,7 +96,8 @@ function buildSearchPage(page, links) {
     faq: buildFaq(page),
     breadcrumbs: buildBreadcrumbs(page, links.builtSlugs),
     related: buildRelatedPages(page, links),
-    products: (Array.isArray(page.products) ? page.products : []).map(buildProduct).filter(Boolean),
+    products,
+    ...(products.length !== sourceProducts.length ? { publicationFilteredProducts: true } : {}),
   };
 }
 

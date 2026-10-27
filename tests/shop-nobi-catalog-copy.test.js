@@ -25,7 +25,7 @@ test("catalog copy describes actual listings and deduplicates store names withou
 });
 
 for (const [name, products, title, description] of [
-  ["empty", [], "Scarves: Buying Guide & Search", "No product listings are displayed"],
+  ["empty", [], "Scarves: Search Products", "No product listings are displayed"],
   ["single", [{ storeName: "Store A", price: 10, currency: "USD" }], "Scarves: View Product Details", "Browse 1 listing for Scarves, including options from Store A."],
   ["missing prices", [{ storeName: "" }, { storeName: null }], "Scarves: Compare Product Details", "Browse 2 listings for Scarves. Check product details with the retailer."],
   ["invalid prices", [{ price: -1, currency: "USD" }, { price: NaN, currency: "USD" }, { price: 12 }], "Scarves: Compare Product Details", "Browse 3 listings"],
@@ -44,10 +44,10 @@ test("long store labels are omitted rather than truncating a seller name", () =>
 });
 
 test("specific authored titles and reviewed editorial overrides retain their copy", () => {
-  assert.equal(withCatalogSearchCopy({ ...pageWith([]), title: "Best Scarves" }).title, "Scarves: Buying Guide & Search");
-  const authored = { ...pageWith([]), title: "Scarves: Choose Fabric & Length" };
+  assert.equal(withCatalogSearchCopy({ ...pageWith([]), title: "Best Scarves" }).title, "Scarves: Search Products");
+  const authored = { ...pageWith([{ name: "Scarf" }]), title: "Scarves: Choose Fabric & Length" };
   assert.strictEqual(withCatalogSearchCopy(authored), authored);
-  const reviewed = withAuthoredSearchPageCopy({ ...pageWith([]), slug: "pencil-skirts", title: "Best Pencil Skirts from Top Stores" });
+  const reviewed = withAuthoredSearchPageCopy({ ...pageWith([{ name: "Skirt" }]), slug: "pencil-skirts", title: "Best Pencil Skirts from Top Stores" });
   assert.equal(reviewed.title, "Pencil Skirts: Compare Stores, Fabrics & Fit");
   assert.match(reviewed.description, /Compare fabric, length, size guidance/);
 });

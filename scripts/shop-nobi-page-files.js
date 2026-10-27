@@ -64,9 +64,10 @@ function readShell(distDir) {
  * which reads a search page's search from it, always finds it.
  */
 function renderPrebuiltPage(content, shell, body) {
+  const seo = buildPrebuiltContentSeo(content);
   const head = content.kind === PrebuiltContentKind.PopularSearches
     ? ShopNobiPageHead
-    : { ...buildPrebuiltContentSeo(content), robots: IndexableRobots, feed: ShopNobiPinFeed };
+    : { ...seo, robots: seo.noindex ? "noindex, nofollow" : IndexableRobots, feed: ShopNobiPinFeed };
   const html = renderPage(head, shell, body);
   const contentElement = `<script type="application/json" id="${PrebuiltContentElementId}">${toScriptJson(content)}</script>`;
   return html.replace("<head>", () => `<head>\n    ${contentElement}`);

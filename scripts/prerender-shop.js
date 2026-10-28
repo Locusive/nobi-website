@@ -7,6 +7,8 @@ import { fileURLToPath } from "url";
 import { fetchSearchPagesData, readApiBaseUrl } from "./shop-nobi-search-pages-api.js";
 import { buildSearchPages, selectUsablePages } from "./shop-nobi-search-page-view.js";
 import { buildCategoryPages, buildPopularSearches, countCategories, linkCategoryPages } from "./shop-nobi-category-page-view.js";
+import { buildBodumProductPage } from "./shop-nobi-bodum-product.js";
+import { BodumPath } from "../src/utils/shopNobiProductPage.js";
 import { writePrebuiltPages } from "./shop-nobi-page-files.js";
 import { writeFlatPageFile } from "./page-html.js";
 import { linkWebStories, planWebStories } from "./shop-nobi-web-story-plan.js";
@@ -36,9 +38,19 @@ export async function prerenderShopNobiSearchPages({
   fileLimit = DistFileLimit,
   redirectRuleLimit = RedirectRuleLimit,
   fetchImageSize = fetchImageSizeOnline,
+  fetchOffer = fetch,
+  now = Date.now,
+  privateDocumentPath,
 }) {
   const { generatedAt, pages: fetchedPages, retired } = await fetchSearchPagesData(apiBaseUrl);
-  const plan = await planPages(fetchedPages, countFileRoom(distDir, fileLimit), fetchImageSize);
+  const fileRoom = countFileRoom(distDir, fileLimit);
+  if (fileRoom < 1) throw new Error("No file room for the known product fallback");
+  const plan = await planPages(fetchedPages, Math.max(0, fileRoom - 1), fetchImageSize);
+  plan.productPage = await buildBodumProductPage(plan.searchPages, { fetchOffer, now, rawPages: fetchedPages });
+  if (plan.productPage.products.length) {
+    plan.searchPages = plan.searchPages.map(page => page.slug === 'french-presses'
+      ? { ...page, productComparisonPath: BodumPath } : page);
+  }
   if (plan.leftOutCount > 0) {
     console.warn(`prerender-shop: left out ${plan.leftOutCount} page(s) to stay within ${fileLimit} files.`);
   }
@@ -49,13 +61,13 @@ export async function prerenderShopNobiSearchPages({
     console.warn(`prerender-shop: skipped ${plan.smallPosterCount} web story(ies) whose pictures are too small for a poster.`);
   }
 
-  await writePrebuiltPages(plan, distDir);
+  await writePrebuiltPages(plan, distDir, { privateDocumentPath });
   writeWebStories(distDir, plan.stories);
 
   const redirectLines = buildRetiredRedirects(retired, plan.searchPages);
   // The data's own time keeps a fallback lastmod the same across rebuilds of the same data.
   const fallbackLastModified = readValidTime(generatedAt) ?? new Date().toISOString();
-  const sitemap = buildShopNobiSitemap(plan.categoryPages, plan.searchPages, plan.stories, fallbackLastModified);
+  const sitemap = buildShopNobiSitemap(plan.categoryPages, plan.searchPages, plan.stories, fallbackLastModified, plan.productPage);
   writeFileSync(join(distDir, ShopNobiSitemapFile), sitemap);
   writePinFeeds(distDir, plan.searchPages);
   updateFile(join(distDir, "_redirects"), (text) => appendRedirects(text, redirectLines, redirectRuleLimit));
@@ -122,7 +134,7 @@ function updateFile(path, change) {
 async function main() {
   const apiBaseUrl = readApiBaseUrl(process.env);
   try {
-    const count = await prerenderShopNobiSearchPages({ apiBaseUrl, distDir: Dist });
+    const count = await prerenderShopNobiSearchPages({ apiBaseUrl, distDir: Dist, privateDocumentPath: new URL("../generated/bodum-document.js", import.meta.url) });
     console.log(`prerender-shop: wrote ${count} Shop Nobi search page(s) from ${apiBaseUrl}`);
   } catch (error) {
     console.error(`prerender-shop: failed, so the build stops: ${error.message}`);

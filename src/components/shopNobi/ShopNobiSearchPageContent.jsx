@@ -38,6 +38,7 @@ export default function ShopNobiSearchPageContent({ page }) {
         ))}
       </ul>
       {productsFirst && <section className="mt-10" aria-label="Buying guidance"><BuyingGuide page={page} /></section>}
+      {page.productComparisonPath && <p className="mt-6"><a className="underline" href={page.productComparisonPath}>Compare sellers for the Bodum Tribute 34 oz French press</a></p>}
       <Questions faq={page.faq} />
       <WebStoryLink storyPath={page.storyPath} />
       <RelatedSearches related={page.related} />

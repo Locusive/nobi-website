@@ -150,7 +150,7 @@ export function addShopNobiTags(storeUrl) {
 export function tagProductLinkOnClick(event, product, visit) {
   const paidStoreLink = visit.isPerson ? decodePaidLink(product.encodedStoreLink) : null;
   if (paidStoreLink === null) {
-    event.currentTarget.href = tagPlainStoreLink(product.url);
+    event.currentTarget.href = readMatchingDirectLink(product) ?? tagPlainStoreLink(product.url);
     return;
   }
 
@@ -162,4 +162,14 @@ function tagPlainStoreLink(storeUrl) {
   const address = new URL(addShopNobiTags(storeUrl));
   address.searchParams.delete(ConversationIdParameter);
   return address.toString();
+}
+
+/** Accepts a preserved direct catalog link only when removing its tags yields this exact product URL. */
+function readMatchingDirectLink(product) {
+  if (!product.taggedStoreLink) return null;
+  try {
+    const address = new URL(product.taggedStoreLink);
+    for (const key of [...address.searchParams.keys()]) if (key.startsWith('utm_')) address.searchParams.delete(key);
+    return address.href === product.url ? product.taggedStoreLink : null;
+  } catch { return null; }
 }

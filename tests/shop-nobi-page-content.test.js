@@ -16,14 +16,16 @@ const OtherBundleEvents = ["nobi-analytics", "nobi-send-message"];
 const BuiltShopPage = new URL("../dist/shop/index.html", import.meta.url);
 
 /** Runs the built /shop page's setup script, which runs before the bundle loads, in a stand-in window. */
-function openBuiltShopPage() {
+function openBuiltShopPage({ path = "/shop/s/linen-dresses", content = null } = {}) {
   const html = readFileSync(BuiltShopPage, "utf8");
   const scripts = [...html.matchAll(/<script>([\s\S]*?)<\/script>/g)].map(([, code]) => code);
   const pageSetup = scripts.find((code) => code.includes("readNobiAssistantOptions"));
   const pageWindow = new EventTarget();
-  pageWindow.location = { pathname: "/shop/s/linen-dresses" };
+  pageWindow.location = { pathname: path };
   pageWindow.crypto = { randomUUID: () => "7d2c5a8e-4b1f-4c3d-9e6a-2f8b1c0d3e4f" };
-  vm.runInNewContext(pageSetup, { window: pageWindow });
+  vm.runInNewContext(pageSetup + "\nwindow.assistantOptions = readNobiAssistantOptions();", {
+    window: pageWindow, document: { getElementById: () => content ? { textContent: JSON.stringify(content) } : null },
+  });
   return pageWindow;
 }
 
@@ -43,16 +45,18 @@ function followPage(kind, bundleWindow = new EventTarget()) {
   };
 }
 
-test("a search page keeps its products above the live search until live products are drawn", () => {
-  const page = followPage(PrebuiltContentKind.SearchPage);
-  assert.equal(page.place(), PrebuiltContentPlace.AboveSearch);
+test("search and product pages keep their products above the live search until live products are drawn", () => {
+  for (const kind of [PrebuiltContentKind.SearchPage, PrebuiltContentKind.ProductPage]) {
+    const page = followPage(kind);
+    assert.equal(page.place(), PrebuiltContentPlace.AboveSearch);
 
-  page.mountAssistant();
-  OtherBundleEvents.forEach(page.fire);
-  assert.equal(page.place(), PrebuiltContentPlace.AboveSearch, "A refused or failed search draws nothing, so the products stay");
+    page.mountAssistant();
+    OtherBundleEvents.forEach(page.fire);
+    assert.equal(page.place(), PrebuiltContentPlace.AboveSearch, "A refused or failed search draws nothing, so the products stay");
 
-  page.fire(LiveProductsDrawn);
-  assert.equal(page.place(), PrebuiltContentPlace.Hidden);
+    page.fire(LiveProductsDrawn);
+    assert.equal(page.place(), PrebuiltContentPlace.Hidden);
+  }
 });
 
 test("a category page keeps its heading and searches under the search box until the shopper's search draws products", () => {
@@ -82,4 +86,18 @@ test("live products the bundle draws before ShopPage, a lazy route, listens stil
 
   const page = followPage(PrebuiltContentKind.SearchPage, pageWindow);
   assert.equal(page.place(), PrebuiltContentPlace.Hidden);
+});
+
+
+test("search and product pages hand off their existing query without opening the empty autofocus state", () => {
+  for (const [kind, slug] of [[PrebuiltContentKind.SearchPage, "s/linen-dresses"], [PrebuiltContentKind.ProductPage, "p/bodum-tribute-12076-57us-34oz"]]) {
+    const path = `/shop/${slug}`;
+    const content = { kind, path, data: { query: "already displayed product" } };
+    const opened = openBuiltShopPage({ path, content });
+    assert.equal(opened.assistantOptions.openingQuery, content.data.query);
+    assert.equal(opened.assistantOptions.openingConversationId, opened.shopNobiPageConversationId);
+    for (const invalid of [{ ...content, path: "/different" }, { ...content, kind: PrebuiltContentKind.CategoryPage }, null]) {
+      assert.equal(openBuiltShopPage({ path, content: invalid }).assistantOptions.openingQuery, undefined);
+    }
+  }
 });

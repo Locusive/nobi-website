@@ -1,25 +1,32 @@
 // Renders the prebuilt Shop Nobi pages and writes them into the build output: each search page and category
 // page as one file, and /shop again with its popular searches.
 
-import { readFileSync, existsSync } from "fs";
-import { join } from "path";
+import { readFileSync, existsSync, writeFileSync, mkdirSync } from "fs";
+import { join, dirname } from "path";
+import { fileURLToPath } from "url";
 import { renderPage, toScriptJson, writeFlatPageFile, writePageFiles } from "./page-html.js";
 import { loadPageRenderer } from "./page-renderer.js";
 import { ShopNobiPageHead, ShopNobiPinFeed } from "../src/utils/shopNobiPage.js";
 import { searchPagePath } from "../src/utils/shopNobiSearchPage.js";
 import { categoryPagePath } from "../src/utils/shopNobiCategoryPage.js";
 import { buildPrebuiltContentSeo, PrebuiltContentElementId, PrebuiltContentKind } from "../src/utils/shopNobiPrebuiltContent.js";
+import { BodumPath, withoutProductPrices } from "../src/utils/shopNobiProductPage.js";
 import { IndexableRobots } from "../src/utils/previewImage.js";
 import { withAuthoredSearchPageCopy } from "./shop-nobi-editorial-copy.js";
 
 /**
- * Writes every prebuilt page in the plan. Nothing is written when there are no search pages.
+ * Writes planned search/category pages and the known-product fallback, when present.
  *
  * @param {{searchPages: object[], categoryPages: object[], popularSearches: object}} plan What to build.
  * @param {string} distDir The build output folder.
  */
-export async function writePrebuiltPages(plan, distDir) {
-  if (plan.searchPages.length === 0) {
+export async function writePrebuiltPages(plan, distDir, { privateDocumentPath = null } = {}) {
+  const documentPath = privateDocumentPath instanceof URL ? fileURLToPath(privateDocumentPath) : privateDocumentPath;
+  if (documentPath) {
+    mkdirSync(dirname(documentPath), { recursive: true });
+    writeFileSync(documentPath, "export default null;\n");
+  }
+  if (plan.searchPages.length === 0 && !plan.productPage) {
     return;
   }
 
@@ -44,6 +51,18 @@ export async function writePrebuiltPages(plan, distDir) {
     const html = renderContent(content);
     writeFlatPageFile(distDir, content.path, html);
   }
+
+  if (plan.productPage) {
+    const content = { kind: PrebuiltContentKind.ProductPage, path: BodumPath, data: plan.productPage };
+    const fallback = { ...content, data: withoutProductPrices(content.data) };
+    // Only the unpriced document is publicly addressable as a static asset. Fresh HTML is bundled into the Function.
+    writeFlatPageFile(distDir, BodumPath, renderContent(fallback));
+    const privateDocument = { html: renderContent(content), offersCheckedAt: content.data.offersCheckedAt,
+      offersExpireAt: content.data.offersExpireAt };
+    if (documentPath) writeFileSync(documentPath, `export default ${JSON.stringify(privateDocument)};\n`);
+  }
+
+  if (plan.searchPages.length === 0) return;
 
   const shopNobiContent = { kind: PrebuiltContentKind.PopularSearches, path: ShopNobiPageHead.path, data: plan.popularSearches };
   const shopNobiHtml = renderContent(shopNobiContent);

@@ -587,3 +587,39 @@ intended use from category labels. Children’s necklace guidance requires maker
 age and sizing information rather than a universal chain length. The shared
 rendered tests cover both batches, including filtered and empty publication;
 product cards, source data, feeds and landing assignment remain unchanged.
+
+### One-model Bodum product comparison
+
+`/shop/p/bodum-tribute-12076-57us-34oz` compares the reviewed Bodum Tribute
+12076-57US, 34 oz seller variants. The normal current page export supplies
+eligible identities and original outbound links. Its stored snapshot amounts
+are not considered fresh offer observations. Only this page makes four bounded,
+anonymous build-time GETs: each reviewed retailer's product JSON and currency
+JSON. Exact IDs, SKU, title, capacity, USD, positive integer cents and single-unit
+purchase terms must match. Errors and mismatches remove that seller option.
+No merchant reads happen when the export lacks its exact eligible row.
+
+A successful observation lasts 24 hours. Public static HTML always contains the
+useful no-price fallback. Prerendering generates `generated/bodum-document.js`
+outside `dist`; the narrow Pages Function imports that private document and
+serves prices only within their observation window. Known aliases redirect to
+the canonical route, and Function responses use `no-store` without validators.
+Expired or invalid observations use the static fallback; browser display and
+JSON-LD also expire while a page remains open. An empty eligible catalog leaves
+a zero-seller `noindex` product page without sitemap or internal discovery links.
+
+Two fresh matching offers produce one Product with AggregateOffer. There are no
+invented reviews, availability guarantees or delivered-price claims. The initial
+catalog links are direct tagged retailer links with `paidLink:false`; this test
+measures visits and merchant click-outs, not established commissions. Existing
+paid-link handling remains intact if future catalog records supply earning links.
+The French-press category retains its products, ordering and landing assignment.
+
+Offline coverage in `tests/shop-nobi-bodum-product.test.js` exercises source
+validation, actual prerendering, removed identities, static/private separation,
+expiry, aliases, HEAD/conditional headers, hydration and outbound attribution.
+Run the full suite with the existing local page-data fixture server, never live
+model-backed search. A normal `npm run build` generates the private document;
+then `WRANGLER_SEND_METRICS=false npx --no-install wrangler pages dev dist
+--ip 127.0.0.1 --port 4820 --compatibility-date 2026-10-28` previews the actual
+Function. Vite alone serves the intentionally unpriced static fallback.

@@ -14,8 +14,8 @@ export const BuiltDist = fileURLToPath(new URL("../dist/", import.meta.url));
 // The build's own run adds to _redirects and llms.txt, so the copies start from the originals in public/.
 const OriginalPublic = fileURLToPath(new URL("../public/", import.meta.url));
 export const ListingFiles = ["_redirects", "llms.txt"];
-/** The files a copy holds before any page is built: the shell, the listing files, the sitemap and the pin feeds. */
-export const FileCountBeforePages = 1 + ListingFiles.length + 1 + listPinFeedFiles().length;
+/** The files a copy holds before any page is built: the shell, the listing files, the sitemap, pin feeds and the reserved known-product fallback. */
+export const FileCountBeforePages = 1 + ListingFiles.length + 1 + listPinFeedFiles().length + 1;
 
 /** Copies the built shell and the original listing files into a new folder, so each run starts clean. */
 export function makeDistCopy() {

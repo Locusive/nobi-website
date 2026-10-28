@@ -89,12 +89,13 @@ pages start with `#ad` and the commission disclosure. Canonical GUIDs stay the
 same; refresh times do not become publication dates. This does not change search
 ranking, website cards, SEO previews or Web Stories.
 
-`scripts/shop-nobi-editorial-copy.js` supplies original buying guidance for the
-existing `sterling-silver-rings` page. The page writer applies its title,
+`scripts/shop-nobi-editorial-copy.js` combines reviewed, page-specific buying
+guidance dictionaries, including the original `sterling-silver-rings` guide.
+The page writer applies each selected page's title,
 description, guide and FAQs together to rendered HTML, metadata, structured data
 and embedded browser content. Product facts, shopping links and snapshot dates
 stay intact. The shared source plan, Pinterest feeds and Web Stories retain
-their existing copy; the replacement applies only to this search page.
+their existing copy; replacements apply only to the explicitly selected search pages.
 The same publication path supplies the `pencil-skirts` buying guide, replacing
 the fixed price-range and general fabric-care advice with exact-item checks and
 an invitation to enter preferences in the existing search box. Catalog prices,
@@ -128,6 +129,17 @@ Men's diamond bracelet guidance separates link shape from stone coverage and
 replaces universal stone, allergy and care claims with exact-item disclosures.
 Yellow gold diamond earring comparisons clarify selling quantity, component
 materials, dimensions, piercing requirements and the stated stone-weight basis.
+
+The care, material, apparel, equipment and jewelry guide modules correct specific
+observed claims against retained catalog records. The fit modules distinguish
+product names from compatible models, material labels from care instructions,
+and accessories from complete products. The accessory-identity module separates
+bag charms from jewelry, selected metal construction from a color or karat label,
+and exact sizing services from blanket resizing promises. These corrections do
+not authenticate materials, establish skin suitability, or certify fresh stock.
+The parameterized guide-review test checks removal of recorded defects and
+agreement between visible copy, FAQ schema and browser hydration while retaining
+product records, query and snapshot date.
 
 `scripts/shop-nobi-pin-editorial.js` records reviewed page/product/photo pairs,
 with the reason and observed Pin. A reviewed page is omitted from Pinterest if

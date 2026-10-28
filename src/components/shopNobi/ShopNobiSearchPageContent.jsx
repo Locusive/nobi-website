@@ -51,13 +51,13 @@ function BuyingGuide({ page }) {
     {page.guide.map((paragraph, index) => (
       <p key={index} className="mt-3 max-w-3xl text-black/70 dark:text-white/70">{paragraph}</p>
     ))}
-    <StandComparison comparison={page.comparison} />
+    <ProductComparison comparison={page.comparison} />
     <GuideSources sources={page.guideSources ?? []} />
   </>;
 }
 
 /** An optional semantic comparison stays inside the guide's existing experiment placement. */
-function StandComparison({ comparison }) {
+function ProductComparison({ comparison }) {
   if (!comparison?.rows?.length) return null;
   return (
     <div className="mt-5 max-w-full rounded-lg border border-black/10 dark:border-white/20">
@@ -71,7 +71,7 @@ function StandComparison({ comparison }) {
         <table className="w-full min-w-[40rem] text-left text-sm">
           <caption className="sr-only">{comparison.caption}</caption>
           <thead className="bg-black/5 dark:bg-white/10">
-            <tr>{["Model", "Setup", "Adjustment", "Device-fit check"].map(label => <th key={label} scope="col" className="p-3 font-semibold">{label}</th>)}</tr>
+            <tr>{(comparison.columns ?? ["Model", "Setup", "Adjustment", "Device-fit check"]).map(label => <th key={label} scope="col" className="p-3 font-semibold">{label}</th>)}</tr>
           </thead>
           <tbody>
             {comparison.rows.map(row => (

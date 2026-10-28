@@ -159,6 +159,12 @@ The parameterized guide-review test checks removal of recorded defects and
 agreement between visible copy, FAQ schema and browser hydration while retaining
 product records, query and snapshot date.
 
+The equipment-claim module also covers bicycle chains, hubs and shifters, tent footprints,
+snowboard binding parts, camping lanterns, earplugs, electric massagers and beige/brown
+electric guitars. Its buying guidance separates complete products from accessories,
+exact compatibility from broad category names, and finish labels from materials. It
+does not supply servicing procedures or unsupported safety and performance promises.
+
 `scripts/shop-nobi-pin-editorial.js` records reviewed page/product/photo pairs,
 with the reason and observed Pin. A reviewed page is omitted from Pinterest if
 its chosen product or photo changes or becomes unavailable, until another hero

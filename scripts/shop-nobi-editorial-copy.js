@@ -1,3 +1,4 @@
+import { EquipmentClaimGuideCopy } from "./shop-nobi-equipment-claim-guide-copy.js";
 import { CatalogFitGuideCopy } from "./shop-nobi-catalog-fit-guide-copy.js";
 import { PublishedClaimCopy } from "./shop-nobi-published-claim-copy.js";
 import { withHandLotionComparison } from "./shop-nobi-hand-lotion-comparison.js";
@@ -125,6 +126,7 @@ const PencilSkirtCopy = {
 };
 
 const SelectedPageCopy = {
+  ...EquipmentClaimGuideCopy,
   ...ClothingAccessoryCopy,
   ...AdditionalBuyingCopy,
   ...CareGuideCopy,

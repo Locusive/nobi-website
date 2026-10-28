@@ -54,6 +54,8 @@ table, the pricing facts, and existing page regressions.
 
 Generic `Best ...` search-page titles (including the `from Top Stores` suffix) are replaced at publication
 with catalog-backed titles and descriptions by `scripts/shop-nobi-catalog-copy.js`.
+Related-search labels also remove that generic ranking wording at publication, retaining
+custom labels, link order, destinations and original query fallbacks.
 The copy names the displayed listing count and up to two actual retailers, and
 only invites price comparison when multiple displayed records have prices and
 currencies. The shared `shop-nobi-publication-quality.js` rule also removes fixed

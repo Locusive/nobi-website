@@ -4,7 +4,7 @@ import { withPublicationQuality } from "./shop-nobi-publication-quality.js";
 import { withMailboxClarification } from "./shop-nobi-mailbox-copy.js";
 import { ClothingAccessoryCopy } from "./shop-nobi-clothing-accessory-copy.js";
 import { AdditionalBuyingCopy } from "./shop-nobi-additional-buying-copy.js";
-import { withCatalogSearchCopy, withEmptySearchCopy } from "./shop-nobi-catalog-copy.js";
+import { withCatalogSearchCopy, withEmptySearchCopy, withRelatedSearchCopy } from "./shop-nobi-catalog-copy.js";
 import { CareGuideCopy } from "./shop-nobi-care-guide-copy.js";
 import { MaterialGuideCopy } from "./shop-nobi-material-guide-copy.js";
 import { JewelryGuideCopy } from "./shop-nobi-jewelry-guide-copy.js";
@@ -143,7 +143,7 @@ const SelectedPageCopy = {
  * @returns {object} The publication copy, retaining reviewed overrides and unchanged product data.
  */
 export function withAuthoredSearchPageCopy(page) {
-  const published = applyAuthoredCopy(page);
+  const published = withRelatedSearchCopy(applyAuthoredCopy(page));
   return published.products?.length ? withPublicationQuality(published) : published;
 }
 

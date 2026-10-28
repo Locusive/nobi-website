@@ -451,3 +451,10 @@ The shared editorial selector applies their metadata, visible guidance and FAQs
 together. Publication filters still take priority: empty or filtered listings
 cannot resurrect dependent inventory claims. These reviewed pages are a bounded
 batch, not a claim that every catalog guide has been fact-checked.
+
+The reviewed apparel and household comparison dictionaries add twenty targeted
+guide/FAQ corrections through `shop-nobi-editorial-copy.js`. They distinguish
+product types, exact composition, documented performance and model compatibility.
+Product records, ranking, earning links and source queries remain unchanged.
+`tests/shop-nobi-guide-review.test.js` checks removal of each retained legacy
+claim and consistency across visible HTML, FAQ schema and browser data.

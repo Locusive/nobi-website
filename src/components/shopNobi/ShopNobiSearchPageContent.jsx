@@ -3,6 +3,7 @@ import { handleProductLinkClick } from "../../utils/shopNobiProductClick";
 import { FirstProductPosition, sendSearchPageShownProducts } from "../../utils/shopNobiShownProducts";
 import { formatPrice, readCrumbPath, readRelatedSearchPath } from "../../utils/shopNobiSearchPage";
 import { CommissionNotice, readStoreLinkRel } from "../../utils/shopNobiPage";
+import { focusLandingSearch, landingVariant, LiveSearchAnchor, participatesInLandingExperiment, ProductsFirstVariant } from "../../utils/shopNobiLandingExperiment";
 
 /**
  * The products of a prebuilt Shop Nobi search page, which visitors see until live products replace them, and which a
@@ -11,6 +12,8 @@ import { CommissionNotice, readStoreLinkRel } from "../../utils/shopNobiPage";
  * @param {{page: object}} props The search page data.
  */
 export default function ShopNobiSearchPageContent({ page }) {
+  const inExperiment = participatesInLandingExperiment(page);
+  const productsFirst = inExperiment && landingVariant(page.slug) === ProductsFirstVariant;
   // Keyed on the slug, so the page records its products once however often it renders.
   useEffect(() => sendSearchPageShownProducts(page), [page.slug]);
 
@@ -20,20 +23,36 @@ export default function ShopNobiSearchPageContent({ page }) {
       <h1 className="mt-4 text-3xl font-semibold">{page.title}</h1>
       {page.updatedDate && <p className="mt-1 text-sm text-black/50 dark:text-white/50">Updated {page.updatedDate}</p>}
       {page.description && <p className="mt-2 max-w-3xl text-black/70 dark:text-white/70">{page.description}</p>}
-      {page.guide.map((paragraph, index) => (
-        <p key={index} className="mt-3 max-w-3xl text-black/70 dark:text-white/70">{paragraph}</p>
-      ))}
-      <GuideSources sources={page.guideSources ?? []} />
+      {productsFirst && (
+        <p className="mt-4">
+          <a href={`#${LiveSearchAnchor}`} onClick={event => focusLandingSearch(event, page.slug)}
+            className="inline-block rounded-full border border-black/20 px-4 py-2 text-sm font-medium hover:bg-black/5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 dark:border-white/30 dark:hover:bg-white/10">
+            Search for something more specific
+          </a>
+        </p>
+      )}
+      {!productsFirst && <BuyingGuide page={page} />}
       <ul className="mt-6 grid grid-cols-2 gap-6 sm:grid-cols-3 lg:grid-cols-4">
         {page.products.map((product, index) => (
-          <ProductCard key={index} product={product} position={index + FirstProductPosition} query={page.query} slug={page.slug} />
+          <ProductCard key={index} product={product} position={index + FirstProductPosition} query={page.query} slug={page.slug} landingExperiment={inExperiment} />
         ))}
       </ul>
+      {productsFirst && <section className="mt-10" aria-label="Buying guidance"><BuyingGuide page={page} /></section>}
       <Questions faq={page.faq} />
       <WebStoryLink storyPath={page.storyPath} />
       <RelatedSearches related={page.related} />
     </main>
   );
+}
+
+/** Preserve all authored guidance and its sources when the experiment moves it below the products. */
+function BuyingGuide({ page }) {
+  return <>
+    {page.guide.map((paragraph, index) => (
+      <p key={index} className="mt-3 max-w-3xl text-black/70 dark:text-white/70">{paragraph}</p>
+    ))}
+    <GuideSources sources={page.guideSources ?? []} />
+  </>;
 }
 
 /** Optional references for the exact product facts in authored guidance. */
@@ -73,10 +92,10 @@ function Breadcrumbs({ page }) {
  * One product: its picture, name, store and price, linking to the store's page in a new tab. A click sets the link to
  * open and is counted. A link that earns a commission has a small notice under it.
  */
-function ProductCard({ product, position, query, slug }) {
+function ProductCard({ product, position, query, slug, landingExperiment }) {
   const price = formatPrice(product.price, product.currency);
   const commissionNotice = product.commissionNotice || (product.paidLink ? CommissionNotice : null);
-  const handleClick = (event) => handleProductLinkClick(event, { product, position, query, slug });
+  const handleClick = (event) => handleProductLinkClick(event, { product, position, query, slug, landingExperiment });
 
   return (
     <li>

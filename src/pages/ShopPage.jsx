@@ -1,5 +1,6 @@
 // src/pages/ShopPage.jsx
-import React, { useMemo, useRef } from "react";
+import React, { useEffect, useMemo, useRef } from "react";
+import { LiveSearchAnchor, watchLandingOutcomes } from "../utils/shopNobiLandingExperiment";
 import { useLocation } from "react-router-dom";
 import AudioBuyingGuide from "../components/shopNobi/AudioBuyingGuide";
 import Nav from "../components/home/Nav";
@@ -38,6 +39,8 @@ export default function ShopPage({ prebuiltContent: builtContent = null }) {
   const { pathname } = useLocation();
   const embeddedContent = useMemo(() => readEmbeddedPrebuiltContent(pathname), [pathname]);
   const prebuiltContent = builtContent || embeddedContent;
+  useEffect(() => prebuiltContent?.kind === PrebuiltContentKind.SearchPage
+    ? watchLandingOutcomes(prebuiltContent.data) : undefined, [prebuiltContent]);
   const place = choosePrebuiltContentPlace(prebuiltContent?.kind, { assistantHasMounted, liveResultsHaveDrawn });
 
   useSEO(prebuiltContent ? buildPrebuiltContentSeo(prebuiltContent) : ShopNobiPageSeo);
@@ -48,7 +51,7 @@ export default function ShopPage({ prebuiltContent: builtContent = null }) {
         <Nav active="shop" pinned={false} />
       </header>
       {place === PrebuiltContentPlace.AboveSearch && <PrebuiltContent content={prebuiltContent} />}
-      <div ref={slotRef} className={place === PrebuiltContentPlace.BelowSearch ? CategorySearchClass : undefined} />
+      <div id={LiveSearchAnchor} ref={slotRef} className={place === PrebuiltContentPlace.BelowSearch ? CategorySearchClass : undefined} />
       {prebuiltContent?.kind === PrebuiltContentKind.SearchPage && prebuiltContent.data.slug === "audio-components" && <div className="mx-auto max-w-6xl px-4 pb-8 text-black dark:text-white"><AudioBuyingGuide /></div>}
       <AddYourStoreLink isLinkHidden={liveResultsHaveDrawn} />
       {place === PrebuiltContentPlace.BelowSearch && <PrebuiltContent content={prebuiltContent} />}

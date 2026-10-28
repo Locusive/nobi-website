@@ -1,5 +1,6 @@
 import { sendShopNobiEvent, ShopNobiMerchantId } from "./shopNobiOutboundClick.js";
 import { readProductPlacement } from "./shopNobiProductPlacement.js";
+import { landingEventDetails, participatesInLandingExperiment } from "./shopNobiLandingExperiment.js";
 
 /** The event the assistant bundle sends for each group of products it shows; the reports read them all under it. */
 const DisplayedProductCollectionEvent = "Displayed Product Collection";
@@ -30,6 +31,7 @@ export function sendSearchPageShownProducts(page, browser = globalThis) {
     collectionSize: page.products.length,
     shownProductsStartPosition: FirstProductPosition,
     shownProducts: page.products.map(buildShownProduct),
+    ...(participatesInLandingExperiment(page) ? landingEventDetails(page.slug, browser) : {}),
   }, browser);
 }
 

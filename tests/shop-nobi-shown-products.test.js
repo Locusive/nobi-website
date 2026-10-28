@@ -48,6 +48,9 @@ test("a page view lists every product in order, and start position + list index 
       pageSlug: "black-leather-boots",
       collectionName: "Prebuilt search page",
       collectionSize: 4,
+      experimentId: "shop-landing-products-v1",
+      experimentVariant: "guide-first",
+      landingVisitId: shown.event.details.landingVisitId,
       shownProductsStartPosition: 1,
       shownProducts: [
         { productVariantId: RoperVariantId, owningMerchantId: LuccheseId, isPaidLink: true, placementReason: "organic" },

@@ -458,3 +458,33 @@ product types, exact composition, documented performance and model compatibility
 Product records, ranking, earning links and source queries remain unchanged.
 `tests/shop-nobi-guide-review.test.js` checks removal of each retained legacy
 claim and consistency across visible HTML, FAQ schema and browser data.
+### Landing-page product-click experiment
+
+Populated prebuilt search pages participate in `shop-landing-products-v1`.
+A stable slug hash assigns each page to the existing guide-first layout or to
+products-first with an early same-page search jump. Crawlers and browsers see
+the same layout. Guide text, metadata, product ordering and earning links stay
+unchanged. The jump focuses the existing live-search input without submitting
+any query or navigating away from the original acquisition URL.
+
+The existing product-display and prebuilt-click events carry `experimentId`,
+`experimentVariant`, `pageSlug` and `landingVisitId`. The visit ID belongs to the
+loaded document, does not identify a person, and needs no persistent storage.
+A `nobi-analytics` listener remains mounted after live results replace the
+prebuilt grid. It sends separate `Shop Nobi Landing Outcome` events for live
+product-click intentions and submitted messages, never a duplicate legacy click/search.
+Live click intentions count toward the primary measure only when joined to an
+accepted canonical click with matching conversation, product and shopper within
+a bounded time window. Unmatched intentions remain diagnostic. A message can
+be a question, so message submission is not labeled a completed product search.
+`Shop Nobi Refine Search` records successful focus of the search input. Existing
+local/bot/automation suppression and smoke-test tagging apply to all events.
+
+Read raw event partitions, not the current reporting view (which drops product
+exposures and referrer fields). Count exposed visits with either kind of product
+click, divided by exposed visits; retain separate prebuilt and live outcomes.
+Filter known operator/test visits, retain missing-provenance counts, and never
+call client-supplied Google referrers verified people. Compare complete periods,
+page/query mix and cohort exposure; this is a page-level observational split,
+not visitor randomization or a revenue result. The plan is in
+`agents/feature_plans/shop_landing_product_conversion.md`.

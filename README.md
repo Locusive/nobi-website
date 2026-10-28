@@ -518,3 +518,11 @@ call client-supplied Google referrers verified people. Compare complete periods,
 page/query mix and cohort exposure; this is a page-level observational split,
 not visitor randomization or a revenue result. The plan is in
 `agents/feature_plans/shop_landing_product_conversion.md`.
+
+### Teak set comparison
+
+The existing teak outdoor furniture page compares three reviewed Outer models by
+package contents, layout and ordering checks. Manufacturer model facts require exact
+catalog identities; filtered or removed products cannot retain their comparison rows
+or sources. No selected cushion color, current stock or offer is inferred. The catalog
+records, search query, earning links and landing experiment remain unchanged.

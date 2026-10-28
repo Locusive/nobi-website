@@ -442,3 +442,12 @@ self-reported listing evidence and separate optional charging/accessory question
 Notes remain in component memory and reset to unanswered; the tool does not match
 model names, certify compatibility, store notes or send a new analytics event.
 Apple examples illustrate named models only. The `/shop` landing page links to it.
+
+### Reviewed guide and FAQ corrections
+
+`shop-nobi-care-guide-copy.js` and `shop-nobi-material-guide-copy.js` contain
+page-specific corrections for care, fiber composition, product format and sizing.
+The shared editorial selector applies their metadata, visible guidance and FAQs
+together. Publication filters still take priority: empty or filtered listings
+cannot resurrect dependent inventory claims. These reviewed pages are a bounded
+batch, not a claim that every catalog guide has been fact-checked.

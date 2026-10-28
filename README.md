@@ -623,3 +623,15 @@ model-backed search. A normal `npm run build` generates the private document;
 then `WRANGLER_SEND_METRICS=false npx --no-install wrangler pages dev dist
 --ip 127.0.0.1 --port 4820 --compatibility-date 2026-10-28` previews the actual
 Function. Vite alone serves the intentionally unpriced static fallback.
+
+### Travel and gemstone guide corrections
+
+Five existing guides (`suitcases`, `hunting-shooting-jackets`,
+`14k-yellow-gold-huggie-earrings`, `ruby-rings`, and `ruby-earrings`) use reviewed
+copy from `scripts/shop-nobi-travel-gemstone-guide-copy.js`. The guides compare
+model measurements, intended use, package quantity and disclosed stone details
+without inferring weather performance, comfortable fit or gemstone authenticity.
+The existing publication filter still withholds guide and FAQ copy when products
+are removed. Product cards, ordering, prices, links and experiment assignments
+are unchanged. The consolidated published-claims matrices cover these five pages
+alongside the previous thirty, including filtered and empty states.

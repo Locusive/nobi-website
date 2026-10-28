@@ -139,3 +139,9 @@ See `agents/feature_plans/shop_guide_carry_care.md`. These ten pages are a finit
 - [x] Offline full tests and render receipts.
 - [ ] Root independent review and preview.
 - [ ] Root release and live verification.
+
+## NOBI-2886 travel and gemstone guides
+- [x] Evidence and publication baseline.
+- [x] Five practical guide corrections.
+- [x] Consolidated offline verification and preservation audit.
+- [ ] Root review and release.

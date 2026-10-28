@@ -29,3 +29,7 @@ Before asking Shanif for Search Console access or exports, inspect his signed-in
 
 - Completing a batch or rejecting a weak experiment is not completion of an ongoing authorized task. Continue useful finite work without requiring another user prompt.
 - A request for all pages requires auditing every publication path, including stale body copy on populated pages. Do not confuse site-wide metadata coverage with site-wide editorial review.
+
+## Continuing work and scope claims
+- A shared all-page metadata/publication correction is not a full editorial rewrite. Track remaining body-copy review separately and do not call it complete.
+- When the user authorizes persistent work and asks to restart reminders, verify the existing cadence and resume an actual finite implementation in the same turn; a plan or timer alone is not delivery.

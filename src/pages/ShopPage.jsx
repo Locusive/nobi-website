@@ -53,6 +53,7 @@ export default function ShopPage({ prebuiltContent: builtContent = null }) {
       {place === PrebuiltContentPlace.AboveSearch && <PrebuiltContent content={prebuiltContent} />}
       <div id={LiveSearchAnchor} ref={slotRef} className={place === PrebuiltContentPlace.BelowSearch ? CategorySearchClass : undefined} />
       {prebuiltContent?.kind === PrebuiltContentKind.SearchPage && prebuiltContent.data.slug === "audio-components" && <div className="mx-auto max-w-6xl px-4 pb-8 text-black dark:text-white"><AudioBuyingGuide /></div>}
+      {prebuiltContent?.kind === PrebuiltContentKind.SearchPage && prebuiltContent.data.slug === "duvet-covers" && <p className="mx-auto max-w-6xl px-4 pb-8 text-black dark:text-white"><a className="underline" href="/tools/duvet-cover-size">Compare cover and insert dimensions</a> before choosing an exact size.</p>}
       <AddYourStoreLink isLinkHidden={liveResultsHaveDrawn} />
       {place === PrebuiltContentPlace.BelowSearch && <PrebuiltContent content={prebuiltContent} />}
       <ShopNobiFooter />

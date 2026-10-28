@@ -455,6 +455,18 @@ unfinished. This page does not change it. Run `node --test
 tests/mindthecolor-fit.test.js tests/mindthecolor-offer-click.test.js`, then the
 full offline suite for the built page, discovery metadata and existing regressions.
 
+## Duvet dimension comparison
+
+`/tools/duvet-cover-size` compares one insert with up to three covers. Entered
+hundredths of an inch or centimetre normalize to integer micrometres, preserving
+exact cross-unit equality and nonzero differences. Outputs compare each axis,
+without a fit tolerance, automatic rotation or product ranking. Inputs remain
+in component memory. The existing event sender receives only fixed completion
+labels once per page mount after a valid comparison; normal local/crawler QA
+is excluded. The internal shopping link retains existing acquisition tags and
+a fixed tool marker, never dimensions. Event persistence and later report
+completeness remain separate from the local delivery tests.
+
 ## USB-C shared power worksheet
 
 `/tools/usb-c-power-check` compares two entered device targets with documented

@@ -119,6 +119,16 @@ const ReviewedTopics = [
   ["18k-white-gold-earrings", /finish/i, "No, white gold is gold alloyed with white metals and plated, while platinum is a naturally white, denser metal."],
   ["blue-green-stud-earrings", /material/i, "Nickel-free options like surgical-steel, titanium or 14-karat gold are usually safest."],
   ["belts", /material/i, "Real leather feels soft, has a natural grain, and develops a patina over time, unlike synthetic leather which feels plasticky."],
+  ["bag-clips", /clean/i, "Most plastic clips are dishwasher safe, but check the manufacturer’s care instructions."],
+  ["beige-pillowcases-and-shams", /dimension/i, "Replacing them every 6-12 months helps maintain hygiene and comfort."],
+  ["burgundy-handbags", /hardware/i, "Apply a light coating of leather conditioner and avoid exposing the bag to moisture that can tarnish metal parts."],
+  ["canvas-handbags", /trim/i, "Plain canvas can absorb moisture, but many bags are treated with a water-repellent coating or have leather trims that help protect the interior."],
+  ["canvas-sneakers-athletic-shoes", /activity/i, "The running-style shoes have cushioned midsoles and supportive outsoles, making them appropriate for jogging and gym workouts."],
+  ["briefcases", /compartment/i, "The wheels and retractable handle should be kept clean and lubricated to stay smooth."],
+  ["duffle-bags", /weather/i, "Choose a water-resistant nylon or apply a spray coating, and keep seams sealed to prevent moisture entry."],
+  ["black-golf-bags", /weight/i, "Stand bags usually have a built-in frame that adds weight, while cart bags are lighter but rely on a golf cart for support."],
+  ["brown-shoelaces", /length/i, "Measure the number of eyelets and add a few inches; most brands list recommended lengths."],
+  ["black-business-card-cases", /capacity/i, "Full-grain leather is the most durable, while saffiano leather offers scratch resistance and a sleek look."],
 ];
 
 test("reviewed guides replace unsafe source advice consistently in visible HTML, schema and hydration", async t => {

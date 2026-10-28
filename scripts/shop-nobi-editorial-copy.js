@@ -17,6 +17,7 @@ import { HouseholdComparisonGuideCopy } from "./shop-nobi-household-comparison-g
 import { ApparelFitGuideCopy } from "./shop-nobi-apparel-fit-guide-copy.js";
 import { EquipmentFitGuideCopy } from "./shop-nobi-equipment-fit-guide-copy.js";
 import { AccessoryIdentityGuideCopy } from "./shop-nobi-accessory-identity-guide-copy.js";
+import { CarryCareGuideCopy } from "./shop-nobi-carry-care-guide-copy.js";
 
 const OriginalSuitcaseGuide = "Blue suitcases on this page range from about $70 to $495. The collection includes hard-shell carry-ons, expandable checked bags, and a few novelty suitcases with built-in record players.";
 const CorrectedSuitcaseGuide = "Shopping for travel luggage? Compare the carry-on and checked suitcases below. Suitcase-style record players are audio products, not bags for packing. Check each travel bag's dimensions and weight with the retailer before choosing.";
@@ -129,6 +130,7 @@ const SelectedPageCopy = {
   ...ApparelFitGuideCopy,
   ...EquipmentFitGuideCopy,
   ...AccessoryIdentityGuideCopy,
+  ...CarryCareGuideCopy,
   "sterling-silver-rings": SterlingSilverRingCopy,
   "pencil-skirts": PencilSkirtCopy,
 };

@@ -13,6 +13,17 @@ import { readBody, readScriptJson } from "./shop-nobi-test-build.js";
 
 const Fixture = JSON.parse(readFileSync(new URL("./fixtures/published-claim-pages.json", import.meta.url), "utf8"));
 const DecisionTopics = {
+  "earplugs": ["attenuation", "replacement", "bundle"],
+  "electric-massagers": ["eye", "attachment", "power"],
+  "beige-electric-guitars": ["finish", "condition", "pickup"],
+  "brown-electric-guitars": ["mahogany", "construction", "finish"],
+  "bicycle-chains": ["lock", "connector", "length"],
+  "bicycle-hubs": ["front", "spoke-hole", "dynamo"],
+  "bicycle-shifters": ["friction", "brake", "side"],
+  "snowboard-binding-parts": ["re:flex", "step on", "quantity"],
+  "tent-footprints": ["bundle", "version", "coverage"],
+  "camping-lanterns": ["candle", "runtime", "conditions"],
+
   "mens-leather-sneakers-athletic-shoes": ["activity", "upper", "width"],
   "tan-clothing": ["game bag", "lining", "finish"],
   "pearl-shirts-and-tops": ["color", "snap", "trim"],
@@ -41,8 +52,8 @@ function normalize(page) {
 }
 
 test("audited page corrections remove the identified claims and preserve every retained shopping record", () => {
-  assert.equal(Fixture.pages.length, 20);
-  assert.equal(Fixture.pages.reduce((sum, page) => sum + page.products.length, 0), 329);
+  assert.equal(Fixture.pages.length, 30);
+  assert.equal(Fixture.pages.reduce((sum, page) => sum + page.products.length, 0), 470);
   for (const source of Fixture.pages) {
     const page = normalize(source);
     const snapshot = structuredClone(page);

@@ -97,7 +97,8 @@ function buildSearchPage(page, links) {
     breadcrumbs: buildBreadcrumbs(page, links.builtSlugs),
     related: buildRelatedPages(page, links),
     products,
-    ...(products.length !== sourceProducts.length ? { publicationFilteredProducts: true } : {}),
+    ...(page.publicationFilteredProducts === true || products.length !== sourceProducts.length
+      ? { publicationFilteredProducts: true } : {}),
   };
 }
 

@@ -70,6 +70,7 @@ for (const [scenario, alter, expectedRows] of [
   ["no reviewed models", page => { page.products = page.products.filter(product => !ReviewedNames.includes(product.name)); }, 0],
   ["empty page", page => { page.products = []; }, 0],
   ["filtered listing", page => { page.products[0].url = "javascript:alert(1)"; }, 0],
+  ["upstream-filtered listings", page => { page.publicationFilteredProducts = true; }, 0],
 ]) {
   test(`laptop comparison publication preserves source data and agrees across HTML and hydration with ${scenario}`, async t => {
     const folder = mkdtempSync(new URL("../node_modules/.laptop-comparison-", import.meta.url));

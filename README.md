@@ -445,7 +445,7 @@ Apple examples illustrate named models only. The `/shop` landing page links to i
 
 ### Reviewed guide and FAQ corrections
 
-The care, material, jewelry, apparel and equipment `shop-nobi-*-guide-copy.js` modules contain
+The care, material, jewelry, apparel, equipment and safety `shop-nobi-*-guide-copy.js` modules contain
 page-specific corrections for care, fiber composition, product format and sizing.
 The shared editorial selector applies their metadata, visible guidance and FAQs
 together. Publication filters still take priority: empty or filtered listings

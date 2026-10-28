@@ -57,9 +57,10 @@ function uniqueStoreNames(products) {
 
 /** Removes inventory-dependent copy whenever no publishable listings remain, including authored pages. */
 export function withEmptySearchCopy(page) {
+  const { comparison, ...emptyPage } = page;
   const topic = GenericTitlePattern.exec(page.title)?.[1]?.trim() || page.query?.trim() || page.title;
   return {
-    ...page,
+    ...emptyPage,
     title: `${topic}: Search Products`,
     description: `No product listings are displayed for ${topic}. Enter your preferences in Shop Nobi to search for other options.`,
     guide: ["No product listings are displayed on this page. Use the search box below to describe what you need and look for other options."],

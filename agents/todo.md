@@ -126,3 +126,6 @@ See `agents/feature_plans/shop_guide_carry_care.md`. These ten pages are a finit
 
 ## Related search labels
 - [ ] Complete agents/feature_plans/shop_related_search_labels.md and keep production verification separate from merge.
+
+## Laptop stand comparison
+- [ ] Complete agents/feature_plans/shop_laptop_stand_comparison.md; keep7/28-day measurement pending until due.

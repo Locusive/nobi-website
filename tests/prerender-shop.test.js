@@ -188,32 +188,50 @@ test("breadcrumbs and built related searches keep their existing page links", ()
   assert.ok(bootsBody.includes('<a href="/shop/c/shoes" class="hover:underline">Shoes</a>'), "Even when the crumb has no search page");
 });
 
-test("related searches outside the build limit launch the original query instead of a missing page", async () => {
-  const data = readFixturePageData();
-  const query = '  boots & bags / "weekend" + <travel>  ';
-  data.pages[0].relatedSlugs = ["chelsea-boots", "boots", "chelsea-boots", "not-a-live-page"];
-  data.pages[1].query = query;
-  data.pages[2].query = "  ";
-  const folder = makeDistCopy();
-  try {
-    const categoryAndOnePage = 2;
-    const count = await prerenderWith({ body: data }, folder, { fileLimit: FileCountBeforePages + categoryAndOnePage });
-    assert.equal(count, 1, "Only the source search page is built");
-    const body = readBody(readFileSync(join(folder, "shop/s/black-leather-boots.html"), "utf8"));
-    const relatedStart = body.indexOf(">Related searches</h2>");
-    const related = body.slice(relatedStart, body.indexOf("</section>", relatedStart));
-    const links = [...related.matchAll(/<a href="([^"]+)"[^>]*>([^<]+)<\/a>/g)];
-    assert.deepEqual(links.map(([, , title]) => title), ["Chelsea Boots", "Boots"], "Unknown and duplicate suggestions are omitted");
-    const addresses = links.map(([, href]) => new URL(href, "https://nobi.ai"));
-    assert.deepEqual(addresses.map((url) => url.pathname), ["/shop", "/shop"]);
-    assert.deepEqual(addresses.map((url) => [...url.searchParams.keys()]), [["q"], ["q"]]);
-    assert.deepEqual(addresses.map((url) => url.searchParams.get("q")), [query.trim(), "Boots"], "Use the original query, falling back to the title for a blank query");
-    assert.ok(!related.includes('href="/shop/s/chelsea-boots"'), "Do not link to an unbuilt page");
-    assert.ok(!related.includes("<travel>"), "Query markup stays encoded in the address");
-  } finally {
-    rmSync(folder, { recursive: true, force: true });
-  }
-});
+for (const builtDestinations of [true, false]) {
+  test(`related labels remove generic ranking claims and preserve ${builtDestinations ? "built links" : "original search fallbacks"}`, async () => {
+    const data = readFixturePageData();
+    const query = '  boots & bags / "weekend" + <travel>  ';
+    data.pages[0].relatedSlugs = ["chelsea-boots", "boots", "custom-boots", "chelsea-boots", "not-a-live-page"];
+    data.pages[1].title = 'Best Chelsea & <Travel> Boots from Top Stores';
+    data.pages[1].query = query;
+    data.pages[2].title = "Best Boots";
+    data.pages[2].query = "  ";
+    data.pages.push({ ...data.pages[2], slug: "custom-boots", title: "Boots: Fit & <Style>", query: "custom boots" });
+    const original = structuredClone(data);
+    const folder = makeDistCopy();
+    try {
+      const limits = builtDestinations ? {} : { fileLimit: FileCountBeforePages + 2 };
+      const count = await prerenderWith({ body: data }, folder, limits);
+      assert.equal(count, builtDestinations ? 4 : 1);
+      const html = readFileSync(join(folder, "shop/s/black-leather-boots.html"), "utf8");
+      const body = readBody(html);
+      const relatedStart = body.indexOf(">Related searches</h2>");
+      const related = body.slice(relatedStart, body.indexOf("</section>", relatedStart));
+      const links = [...related.matchAll(/<a href="([^"]+)"[^>]*>([^<]+)<\/a>/g)];
+      assert.deepEqual(links.map(([, , title]) => title), ["Chelsea &amp; &lt;Travel&gt; Boots", "Boots", "Boots: Fit &amp; &lt;Style&gt;"], "Labels are escaped, custom wording survives, and duplicate/unknown suggestions are omitted");
+      const addresses = links.map(([, href]) => new URL(href, "https://nobi.ai"));
+      assert.deepEqual(addresses.map(url => url.pathname), builtDestinations
+        ? ["/shop/s/chelsea-boots", "/shop/s/boots", "/shop/s/custom-boots"] : ["/shop", "/shop", "/shop"]);
+      assert.deepEqual(addresses.map(url => [...url.searchParams.keys()]), builtDestinations ? [[], [], []] : [["q"], ["q"], ["q"]]);
+      const queries = [query.trim(), "Best Boots", "custom boots"];
+      if (!builtDestinations) {
+        assert.deepEqual(addresses.map(url => url.searchParams.get("q")), queries, "Blank queries still fall back to the original source title, not the cleaned label");
+        assert.ok(!related.includes('href="/shop/s/chelsea-boots"'), "Do not link to an unbuilt page");
+      }
+      assert.ok(!related.includes("<travel>") && !related.includes("<Travel>") && !related.includes("<Style>"), "Labels and query markup remain escaped");
+      const hydrated = readScriptJson(html, "shop-nobi-prebuilt-content").data.related;
+      assert.deepEqual(hydrated, ["chelsea-boots", "boots", "custom-boots"].map((slug, index) => ({
+        slug: builtDestinations ? slug : null,
+        title: ["Chelsea & <Travel> Boots", "Boots", "Boots: Fit & <Style>"][index],
+        query: queries[index],
+      })), "Hydration carries the same labels and destinations as rendered HTML");
+      assert.deepEqual(data, original, "The source data is unchanged");
+    } finally {
+      rmSync(folder, { recursive: true, force: true });
+    }
+  });
+}
 
 test("every link to a store in the prebuilt pages carries rel=nofollow", () => {
   const pages = ["shop/s/black-leather-boots.html", "shop/s/chelsea-boots.html", "shop/s/boots.html", "shop/c/shoes.html", "shop.html"];

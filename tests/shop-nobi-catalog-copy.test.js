@@ -51,3 +51,23 @@ test("specific authored titles and reviewed editorial overrides retain their cop
   assert.equal(reviewed.title, "Pencil Skirts: Compare Stores, Fabrics & Fit");
   assert.match(reviewed.description, /Compare fabric, length, size guidance/);
 });
+
+for (const [name, slug, products] of [
+  ["empty", "scarves", []],
+  ["reviewed", "pencil-skirts", [{ name: "Skirt" }]],
+]) {
+  test(`related labels are corrected on ${name} pages without changing shopping data`, () => {
+    const page = { ...pageWith(products), slug, related: [
+      { slug: "boots", title: "Best Boots from Top Stores", query: "winter boots" },
+      { slug: null, title: "Scarves: Fabric & Length", query: "scarves" },
+    ] };
+    const original = structuredClone(page);
+    const published = withAuthoredSearchPageCopy(page);
+    assert.deepEqual(published.related, [
+      { slug: "boots", title: "Boots", query: "winter boots" },
+      page.related[1],
+    ]);
+    assert.strictEqual(published.products, page.products);
+    assert.deepEqual(page, original);
+  });
+}

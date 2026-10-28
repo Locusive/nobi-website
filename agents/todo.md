@@ -123,3 +123,6 @@ See agents/feature_plans/shop_guide_next_corrections.md. The ongoing goal is not
 ## Carrying and household guide corrections
 
 See `agents/feature_plans/shop_guide_carry_care.md`. These ten pages are a finite step in the ongoing SEO audit, not completion of the growth goal.
+
+## Related search labels
+- [ ] Complete agents/feature_plans/shop_related_search_labels.md and keep production verification separate from merge.

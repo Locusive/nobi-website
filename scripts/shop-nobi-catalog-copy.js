@@ -33,6 +33,18 @@ export function withCatalogSearchCopy(page) {
   return { ...page, title: `${topic}: ${action}`, description };
 }
 
+/** Removes generic ranking claims from related labels without changing their original search queries or routes. */
+export function withRelatedSearchCopy(page) {
+  let changed = false;
+  const related = (page.related ?? []).map(entry => {
+    const topic = GenericTitlePattern.exec(entry.title)?.[1]?.trim();
+    if (!topic) return entry;
+    changed = true;
+    return { ...entry, title: topic };
+  });
+  return changed ? { ...page, related } : page;
+}
+
 /** Keeps distinct displayed store labels in result order, without counting spelling-case duplicates. */
 function uniqueStoreNames(products) {
   const names = new Map();

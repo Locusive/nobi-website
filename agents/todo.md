@@ -145,3 +145,9 @@ See `agents/feature_plans/shop_guide_carry_care.md`. These ten pages are a finit
 - [x] Five practical guide corrections.
 - [x] Consolidated offline verification and preservation audit.
 - [ ] Root review and release.
+
+## NOBI-2886 apparel and jewelry guides
+- [x] Exact claims, catalog evidence and baseline.
+- [x] Five practical guide corrections; phone page already withheld.
+- [x] Consolidated tests, full offline suite and preservation audit.
+- [ ] Root visual review and release.

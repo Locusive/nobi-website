@@ -1,3 +1,4 @@
+import { ApparelPearlGuideCopy } from "./shop-nobi-apparel-pearl-guide-copy.js";
 import { TravelGemstoneGuideCopy } from "./shop-nobi-travel-gemstone-guide-copy.js";
 import { EquipmentClaimGuideCopy } from "./shop-nobi-equipment-claim-guide-copy.js";
 import { CatalogFitGuideCopy } from "./shop-nobi-catalog-fit-guide-copy.js";
@@ -127,6 +128,7 @@ const PencilSkirtCopy = {
 };
 
 const SelectedPageCopy = {
+  ...ApparelPearlGuideCopy,
   ...TravelGemstoneGuideCopy,
   ...EquipmentClaimGuideCopy,
   ...ClothingAccessoryCopy,

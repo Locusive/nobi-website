@@ -635,3 +635,14 @@ The existing publication filter still withholds guide and FAQ copy when products
 are removed. Product cards, ordering, prices, links and experiment assignments
 are unchanged. The consolidated published-claims matrices cover these five pages
 alongside the previous thirty, including filtered and empty states.
+
+### Apparel and pearl/silver guide corrections
+
+`shop-nobi-apparel-pearl-guide-copy.js` supplies reviewed guidance for women's
+white sweatpants, sterling silver bracelets, pearl rings, men's parkas and men's
+blue T-shirts. It compares fit, disclosed construction, components and care
+instructions without universal performance or material assurances. The existing
+publication filter, product records, shopping links and experiment assignments
+remain unchanged. The consolidated published-claims matrices now cover forty
+pages, including filtered and empty states. Clear phone cases were excluded
+because existing publication filtering already withholds their guide and FAQ.

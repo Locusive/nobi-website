@@ -115,3 +115,7 @@ A saved production collection exposure retained all four experiment fields. The 
 - [ ] Read the 28-day window, October 29 through November 25 UTC, on November 26 plus reporting lag.
 
 Those are follow-up experiment measurements, not unfinished launch implementation. Keep the Marketing scorecard current. Exclude known operator visits, including utm_source=nobi_operator and campaign landing_release_20261028, if they are subsequently retained.
+
+## Continue SEO alongside acquisition experiments
+
+See agents/feature_plans/shop_guide_next_corrections.md. The ongoing goal is not completed by this batch.

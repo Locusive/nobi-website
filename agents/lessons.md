@@ -37,3 +37,7 @@ Before asking Shanif for Search Console access or exports, inspect his signed-in
 ## October 28: missing operator events are not an execution blocker
 
 If tagged operator visits are absent, inspect retained production events and the ingestion/filter contracts before calling verification blocked. Internal or automated activity may intentionally be suppressed. An accepted production exposure with the expected fields can prove persistence without manufacturing a shopper click or weakening protections. Distinguish launch verification from future experiment results; continue available authorized work instead of turning a missing test receipt into a request for unnecessary user action.
+
+## October 28: preserve both ongoing growth tracks
+
+The user explicitly wants ongoing SEO optimization and high-potential acquisition experiments at the same time. A content batch, implementation release or single experiment is a milestone, not completion of that goal. Keep the broad goal active and continue the next justified finite task; research acquisition in parallel rather than substituting conversion tweaks for new traffic.

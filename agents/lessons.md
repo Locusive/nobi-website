@@ -33,3 +33,7 @@ Before asking Shanif for Search Console access or exports, inspect his signed-in
 ## Continuing work and scope claims
 - A shared all-page metadata/publication correction is not a full editorial rewrite. Track remaining body-copy review separately and do not call it complete.
 - When the user authorizes persistent work and asks to restart reminders, verify the existing cadence and resume an actual finite implementation in the same turn; a plan or timer alone is not delivery.
+
+## October 28: missing operator events are not an execution blocker
+
+If tagged operator visits are absent, inspect retained production events and the ingestion/filter contracts before calling verification blocked. Internal or automated activity may intentionally be suppressed. An accepted production exposure with the expected fields can prove persistence without manufacturing a shopper click or weakening protections. Distinguish launch verification from future experiment results; continue available authorized work instead of turning a missing test receipt into a request for unnecessary user action.

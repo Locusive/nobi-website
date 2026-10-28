@@ -1,3 +1,4 @@
+import { CatalogFitGuideCopy } from "./shop-nobi-catalog-fit-guide-copy.js";
 import { PublishedClaimCopy } from "./shop-nobi-published-claim-copy.js";
 import { withHandLotionComparison } from "./shop-nobi-hand-lotion-comparison.js";
 import { withBrownShirtComparison } from "./shop-nobi-brown-shirt-comparison.js";
@@ -140,6 +141,7 @@ const SelectedPageCopy = {
   ...AccessoryIdentityGuideCopy,
   ...CarryCareGuideCopy,
   ...PublishedClaimCopy,
+  ...CatalogFitGuideCopy,
   "sterling-silver-rings": SterlingSilverRingCopy,
   "pencil-skirts": PencilSkirtCopy,
 };

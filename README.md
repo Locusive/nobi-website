@@ -573,3 +573,11 @@ unsupported health, weather, durability and universal care claims with
 page-specific selection criteria. It adds no product specifications, ratings
 or inventory assertions. Normal empty/filtered publication rules still apply;
 product records, prices, links, order and landing assignment stay unchanged.
+
+The separate `shop-nobi-catalog-fit-guide-copy.js` batch corrects ten more
+existing pages. It distinguishes replacement storage lids from complete units,
+Pearl names from decoration, selected colors and pack contents, and exact
+intended use from category labels. Children’s necklace guidance requires maker
+age and sizing information rather than a universal chain length. The shared
+rendered tests cover both batches, including filtered and empty publication;
+product cards, source data, feeds and landing assignment remain unchanged.

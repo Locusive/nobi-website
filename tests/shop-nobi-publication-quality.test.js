@@ -20,14 +20,15 @@ function sourcePage() {
     products: [{ ...source.products[0], name: "ESR Case", owningMerchantId: "e43e55da-830c-4dc3-82f5-c8995273b2b2" }] };
 }
 
-test("rights filtering clears unsupported copy and empty discovery, then restores populated publication", async t => {
+test("local or upstream filtering clears unsupported copy and empty discovery, then restores populated publication", async t => {
   const folder = mkdtempSync(new URL("../node_modules/.publication-quality-", import.meta.url));
   t.after(() => rmSync(folder, { recursive: true, force: true }));
   writeFileSync(join(folder, "index.html"), '<html><head><!--__PRERENDER_TITLE__--><!--__PRERENDER_DESC__--></head><body><div id="root"></div></body></html>');
   const source = sourcePage();
   const allowed = { ...readFixturePageData().pages[0].products[0], name: "Pink Case", price: 48, currency: "USD" };
-  for (const [state, products] of [["empty", source.products], ["partial", [...source.products, allowed]], ["restored", [allowed]]]) {
-    const raw = { ...source, products };
+  for (const [state, products] of [["empty", source.products], ["partial", [...source.products, allowed]], ["upstream", [allowed]], ["upstream-empty", []], ["restored", [allowed]]]) {
+    const raw = { ...source, products, publicationFilteredProducts: state.startsWith("upstream") };
+    const empty = state === "empty" || state === "upstream-empty";
     if (state === "restored") { raw.guide = ["Check the exact phone model before choosing."]; raw.faq = []; }
     const original = structuredClone(raw);
     const page = buildSearchPages([raw], 1).pages[0];
@@ -35,17 +36,17 @@ test("rights filtering clears unsupported copy and empty discovery, then restore
     const html = readFileSync(join(folder, "shop/s/phone-cases.html"), "utf8");
     const published = readScriptJson(html, "shop-nobi-prebuilt-content").data;
     assert.doesNotMatch(html, /ESR|HaloLock|\$23|\$69/);
-    assert.equal(buildSearchPageSeo(published).noindex, state === "empty");
-    assert.ok(html.includes(`name="robots" content="${state === "empty" ? "noindex, nofollow" : "index, follow, max-image-preview:large"}"`));
+    assert.equal(buildSearchPageSeo(published).noindex, empty);
+    assert.ok(html.includes(`name="robots" content="${empty ? "noindex, nofollow" : "index, follow, max-image-preview:large"}"`));
     const sitemap = buildShopNobiSitemap([], [page], [], "2026-10-27");
     const llms = appendLlmsTxtSection("Original text", [page]);
-    assert.equal(sitemap.includes("/phone-cases"), state !== "empty");
-    assert.equal(llms.includes("/phone-cases"), state !== "empty");
-    if (state === "empty") {
+    assert.equal(sitemap.includes("/phone-cases"), !empty);
+    assert.equal(llms.includes("/phone-cases"), !empty);
+    if (empty) {
       assert.match(published.description, /No product listings/);
       assert.equal(published.faq.length, 0);
       assert.ok(!readScriptJson(html, "page-schema").some(entry => entry["@type"] === "FAQPage"));
-    } else if (state === "partial") {
+    } else if (state === "partial" || state === "upstream") {
       assert.match(published.guide[0], /\$48\.00 \(USD\)/);
       assert.equal(published.faq.length, 0);
     } else assert.deepEqual(published.guide, raw.guide);

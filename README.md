@@ -538,3 +538,7 @@ control each row and source, preserving product cards and landing allocation.
 ### Men’s silver chain model comparison
 
 `shop-nobi-silver-chain-comparison.js` distinguishes sterling-silver and steel base metals, plating, chain construction and model length options using three manufacturer sources. Exact catalog identity gates and publication-filter suppression match the existing comparisons. Product cards and landing experiment allocation remain unchanged; the table does not guarantee pendant compatibility, durability or stock.
+
+### Brown shirt model comparison
+
+`shop-nobi-brown-shirt-comparison.js` compares documented fabric composition, cut and model-specific care for three shirts. Exact identity gates and publication-filter suppression preserve the existing comparison contract. All product records, source context and landing experiment allocation remain unchanged; model facts do not promise current stock, comfort or durability.

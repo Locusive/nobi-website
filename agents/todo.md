@@ -119,3 +119,7 @@ Those are follow-up experiment measurements, not unfinished launch implementatio
 ## Continue SEO alongside acquisition experiments
 
 See agents/feature_plans/shop_guide_next_corrections.md. The ongoing goal is not completed by this batch.
+
+## Carrying and household guide corrections
+
+See `agents/feature_plans/shop_guide_carry_care.md`. These ten pages are a finite step in the ongoing SEO audit, not completion of the growth goal.

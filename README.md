@@ -534,3 +534,7 @@ count, dimensions and specific care instructions. Dinner and cocktail formats re
 distinct; linen composition does not imply common washing or drying instructions.
 Unknown Matouk shape details are omitted. Exact identity and publication-filter gates
 control each row and source, preserving product cards and landing allocation.
+
+### Men’s silver chain model comparison
+
+`shop-nobi-silver-chain-comparison.js` distinguishes sterling-silver and steel base metals, plating, chain construction and model length options using three manufacturer sources. Exact catalog identity gates and publication-filter suppression match the existing comparisons. Product cards and landing experiment allocation remain unchanged; the table does not guarantee pendant compatibility, durability or stock.

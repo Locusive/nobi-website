@@ -21,7 +21,7 @@ export const meta = {
  },
  {
  question: "1. Nobi",
- answer: "Nobi is AI-powered site search paired with a shopping assistant grounded in sources you connect - product pages, spec PDFs, compatibility guides, and policy docs. For electronics, a shopper asking whether a soundbar handles Dolby Atmos or whether a USB-C hub passes 100W to an M3 MacBook Pro gets an answer pulled from your catalog, with the specific source cited. Pricing starts at $25/month for 500 messages, where a search or a chat question each count as one message, with no revenue-share or tiered AI feature gating. The install is a small theme tweak, not a multi-month rollout."
+ answer: "Nobi is AI-powered site search paired with a shopping assistant grounded in sources you connect - product pages, spec PDFs, compatibility guides, and policy docs. For electronics, a shopper asking whether a soundbar handles Dolby Atmos or whether a USB-C hub passes 100W to an M3 MacBook Pro gets an answer pulled from your catalog, with the specific source cited. Pricing starts at $29/month for 500 messages, where a search or a chat question each count as one message, with no revenue-share or tiered AI feature gating. The install is a small theme tweak, not a multi-month rollout."
  },
  {
  question: "2. Algolia",
@@ -101,7 +101,7 @@ Electronics shoppers search by spec. Someone buying a TV types "65-inch QLED, Do
 
 The platforms that handle spec-driven search well are different from [general-purpose site search](/blog/best-ai-search-ecommerce-2026). Four make the shortlist for electronics retailers:
 
-- **Nobi**: site search + conversational shopping assistant that grounds spec and compatibility answers in your live catalog; from $25/mo for 500 messages. Pick when compatibility questions are stalling conversions.
+- **Nobi**: site search + conversational shopping assistant that grounds spec and compatibility answers in your live catalog; from $29/mo for 500 messages. Pick when compatibility questions are stalling conversions.
 - **Algolia**: developer-first search API with sub-50ms results and API-level spec-attribute control; free Build tier, NeuralSearch gated to Elevate enterprise tier. Pick when a dedicated search engineer owns the ranking layer end-to-end.
 - **Constructor**: full-site behavioral product discovery with real-time session-signal reranking; revenue-share, no published list price. Pick when site-wide merchandising and behavioral personalization are the headline job.
 - **Klevu**: AI-powered Shopify search that catches long, spec-heavy queries without manual synonym lists; $499–$1,598/mo (third-party sources). Pick when spec vocabulary mismatch is driving zero results on your Shopify store.
@@ -110,7 +110,7 @@ Match the tool to the actual bottleneck, not the longest feature list.
 
 | Product | Primary job | Best for | Pricing (starting) | Standout strength | Key weakness |
 | --- | --- | --- | --- | --- | --- |
-| Nobi | Site search + conversational spec Q&A | Electronics brands where compatibility questions and spec queries stall the sale | From $25/mo for 500 messages (a search or a chat question each count as one message) | Grounded compatibility answers with inline citations; no manual rule tuning | Not API-first, can't custom-weight spec attributes in the ranking layer |
+| Nobi | Site search + conversational spec Q&A | Electronics brands where compatibility questions and spec queries stall the sale | From $29/mo for 500 messages (a search or a chat question each count as one message) | Grounded compatibility answers with inline citations; no manual rule tuning | Not API-first, can't custom-weight spec attributes in the ranking layer |
 | [Algolia](https://algolia.com) | Developer-configured search API | Engineering teams needing full API control over spec-attribute ranking logic | Free Build tier (10K searches/mo, 1M records); NeuralSearch gated to Elevate enterprise tier | Sub-50ms response times with API-level control over every spec facet | No native answer engine, compatibility questions still route to support |
 | [Constructor](https://constructor.io) | Full-site behavioral product discovery | Large electronics retailers with a data team needing site-wide personalization | Revenue-share; no published list price, scales with GMV | Real-time behavioral reranking across search, browse, and category pages | Revenue-share costs hard to forecast at peak; weeks-to-months implementation |
 | [Klevu](https://klevu.com) | AI-powered site search with merchandising UI | Shopify electronics brands where long spec queries produce zero results | $499–$1,598/mo (third-party sources); contact Athos Commerce for current rates | AI matching catches long, descriptive spec queries without manual synonym lists | Personalization only in Expert tier; Essential and Advanced tiers don't include it |
@@ -141,7 +141,7 @@ Constructor's pricing is revenue-share tied to GMV, with no published rate. For 
 
 Klevu offers three tiers (Essential, Advanced, Expert), all quoted by demo rather than listed publicly. The AI matching layer closes vocabulary gaps on spec queries without requiring hand-built synonym lists. Personalization features are Expert-tier only, so the tier you actually need may cost more than the entry price suggests.
 
-Nobi uses message bundles. It starts at $25 a month for 500 messages, where a search or a chat question each count as one message, up to 100,000 messages for $2,999 a month. No revenue-share, no tiered AI feature gating. Every answer comes from the sources you connect and cites the specific document and excerpt - less room for fabricated spec claims than a model running on stale training data. The install is a small theme tweak, not a multi-month rollout.
+Nobi uses message bundles. It starts at $29 a month for 500 messages, where a search or a chat question each count as one message, up to 100,000 messages for $3,749 a month. No revenue-share, no tiered AI feature gating. Every answer comes from the sources you connect and cites the specific document and excerpt - less room for fabricated spec claims than a model running on stale training data. The install is a small theme tweak, not a multi-month rollout.
 
 ## 1. Nobi
 
@@ -149,7 +149,7 @@ Nobi is AI-powered site search paired with a shopping assistant, all grounded in
 
 **Best for:** Electronics brands where compatibility questions and spec Q&A stall purchases and the team doesn't want to build and maintain a rule set for every query variant.
 
-**Pricing:** Nobi starts at $25 a month for 500 messages, where a search or a chat question each count as one message. Bigger bundles cost less per message, up to 100,000 messages for $2,999 a month.
+**Pricing:** Nobi starts at $29 a month for 500 messages, where a search or a chat question each count as one message. Bigger bundles cost less per message, up to 100,000 messages for $3,749 a month.
 
 **Pros:**
 - No manual search-rule maintenance required. The engine handles vocabulary mismatch between how shoppers phrase queries and how catalog titles are written, without a hand-built synonym list for every variant
@@ -234,7 +234,7 @@ The right tool depends on whether your primary bottleneck is spec vocabulary mis
 
 Klevu closes the vocabulary gap without manual synonym lists. A shopper querying "USB-C hub with 100W pass-through" finds the right product even when the catalog title uses marketer language rather than spec language. The install ships in days, and the Smart Merchandising dashboard handles pinned results without engineering tickets. Pick it when spec vocabulary mismatch is your primary CVR leak on Shopify.
 
-Nobi grounds every answer in the sources you connect (product pages, spec PDFs, compatibility guides) and cites the exact document and excerpt behind each answer. A shopper asking whether a USB hub passes full power to a specific laptop gets a direct answer, not another results page. That citation layer matters: a buyer who can verify a compatibility claim on the spot is less likely to return an item because the answer turned out wrong. At $25/month for 500 messages, piloting it alongside an existing search setup costs less than a full migration before you've confirmed the Q&A gap is your actual bottleneck.
+Nobi grounds every answer in the sources you connect (product pages, spec PDFs, compatibility guides) and cites the exact document and excerpt behind each answer. A shopper asking whether a USB hub passes full power to a specific laptop gets a direct answer, not another results page. That citation layer matters: a buyer who can verify a compatibility claim on the spot is less likely to return an item because the answer turned out wrong. At $29/month for 500 messages, piloting it alongside an existing search setup costs less than a full migration before you've confirmed the Q&A gap is your actual bottleneck.
 
 Constructor's session-signal personalization runs across category, browse, and search together - the right fit when merchandising needs to move across the full site. The trade-off is real: revenue-share pricing, a multi-week rollout, and a data team you'll need to keep the ranker sharp. It makes economic sense only at meaningful GMV and catalog depth.
 
@@ -271,7 +271,7 @@ Nobi's conversational assistant answers post-purchase questions from your connec
 
 ---
 
-Nobi pulls spec and compatibility answers directly from your live electronics catalog. Plans start at $25/month, or book a demo to see the citation layer work against your own products.
+Nobi pulls spec and compatibility answers directly from your live electronics catalog. Plans start at $29/month, or book a demo to see the citation layer work against your own products.
 
 <div className="my-8 flex justify-center">
  <a

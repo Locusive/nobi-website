@@ -140,6 +140,22 @@ test("store links are nofollow and untagged, and the last page links back to the
   assert.match(html, /<amp-story-page-outlink layout="nodisplay"><a href="[^"]+">[^<]+<\/a><\/amp-story-page-outlink>\n<\/amp-story-page>\n<\/amp-story>/);
 });
 
+test("the sofas story invites a real search while retaining its product links", async () => {
+  const html = await renderStory(makePage({ slug: "sofas", title: "Sofas" }));
+  const links = [...html.matchAll(/<a\b([^>]*)>([^<]*)<\/a>/g)];
+  const storeLinks = links.filter(([, attributes]) => attributes.includes("store.example"));
+  const searchLink = links.find(([, attributes]) => attributes.includes("nobi.ai/shop?"));
+
+  assert.equal(storeLinks.length, 3);
+  assert.ok(storeLinks.every(([, attributes]) => attributes.includes('rel="nofollow noopener"')));
+  assert.deepEqual(searchLink?.slice(1), [
+    ' href="https://nobi.ai/shop?utm_source=google_web_stories&amp;utm_medium=referral&amp;utm_campaign=story_to_search&amp;utm_content=sofas"',
+    "Search for your sofa",
+  ]);
+  assert.match(html, /Search Shop Nobi for the style, size and budget you want/);
+  assert.ok(!html.includes("/shop?q="), "The landing must wait for a visitor-entered search");
+});
+
 test("a store link goes through the API, which counts the tap and adds its conversation, and its tooltip names the store", async () => {
   const html = await renderStory(makePage());
   const firstStoreLink = [...html.matchAll(/<a class="store-link"([^>]*)>/g)][0][1];
@@ -180,4 +196,25 @@ test("page text is escaped everywhere it appears", async () => {
 
   assert.ok(!html.includes("<script>alert"));
   assert.ok(html.includes("<title>&lt;script&gt;alert(&quot;boot&quot;)&lt;/script&gt; &amp; Boots</title>"));
+});
+
+test("story links and product impressions retain known placement and affiliate destination independently", async () => {
+  for (const placementReason of ["affiliate", "paid_merchant", "organic", undefined, "Boost"]) {
+    for (const storyPaidLink of [true, false, undefined]) {
+      const page = makePage();
+      page.products[0] = { ...page.products[0], productVariantId: "variant-id", owningMerchantId: "store-id",
+        paidLink: true, storyPaidLink, placementReason };
+      const html = await renderStory(page);
+      const knownReason = ["affiliate", "paid_merchant", "organic"].includes(placementReason);
+      const suffix = typeof storyPaidLink === "boolean"
+        ? `-${storyPaidLink ? "affiliate" : "direct"}-${knownReason ? placementReason : "unknown"}` : "";
+      assert.ok(html.includes(`id="product-1-variant-id-store-id${suffix}"`));
+      const firstLink = [...html.matchAll(/<a class="store-link" href="([^"]+)"([^>]+)>/g)][0];
+      const address = new URL(firstLink[1].replaceAll("&amp;", "&"));
+      assert.equal(address.searchParams.get("placementReason"), knownReason ? placementReason : null);
+      assert.equal(address.searchParams.get("url"), page.products[0].url);
+      assert.equal(address.searchParams.get("page"), page.slug);
+      assert.equal(firstLink[2].includes("sponsored"), storyPaidLink !== false);
+    }
+  }
 });

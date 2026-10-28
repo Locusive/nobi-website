@@ -3,6 +3,8 @@ import { existsSync, readFileSync, readdirSync } from "node:fs";
 import { join } from "node:path";
 import { test } from "node:test";
 import { getSignupUrl } from "../src/utils/signupUrl.js";
+import { FEATURES, buildFeaturePath } from "../src/content/features.js";
+import { FEATURE_PAGES } from "../src/content/featurePages.js";
 
 const Dist = new URL("../dist/", import.meta.url);
 
@@ -23,7 +25,7 @@ function bodyText(html) {
 for (const [path, heading] of [
   ["homepage.html", "Modern site search"],
   ["pricing.html", "Simple, usage-based pricing"],
-  ["product.html", "One assistant. Every job your website needs done."],
+  ["product.html", "One AI for search, support, and sales"],
 ]) {
   test(`${path} serves real content, metadata, and valid bundled assets without JavaScript`, () => {
     const html = readPage(path);
@@ -68,9 +70,9 @@ function readPicturesAsLabels(html) {
 for (const [path, label, sampleTexts] of [
   ["homepage.html", "Example of Nobi search results on a sample clothing store", [
     "red dress under $200", "Understood red", "Search anything on your site", "Results ordering", "What is your return window?",
-    "crochet dress for a beach vacation",
+    "a waterproof jacket for a rainy hike",
   ]],
-  ["product.html", "Example of Nobi capturing a lead", ["does this run true to size?", "New lead captured", "Results ordering"]],
+  ["product/lead-capture.html", "Example of the leads Nobi captured on a sample car dealership", ["Jordan Fuller", "New leads", "Service team"]],
 ]) {
   test(`${path} marks its product demos as labeled pictures, so their sample text is not read as page content`, () => {
     const html = readPage(path);
@@ -83,6 +85,31 @@ for (const [path, label, sampleTexts] of [
   });
 }
 
+test("every feature has its own prerendered page with its own title, description and one main heading", () => {
+  for (const feature of FEATURES) {
+    const html = readPage(`${buildFeaturePath(feature.slug).slice(1)}.html`);
+    const page = FEATURE_PAGES[feature.slug];
+    assert.ok(html.includes(`<title>${page.seoTitle.replace("&", "&amp;")}</title>`), `Wrong title: ${feature.slug}`);
+    assert.ok(html.includes(`<link rel="canonical" href="https://nobi.ai${buildFeaturePath(feature.slug)}"`), `Wrong canonical: ${feature.slug}`);
+    assert.equal((html.match(/<h1\b/g) || []).length, 1, `One h1 expected: ${feature.slug}`);
+    assert.ok(bodyText(html).includes(page.steps[0].title), `Missing page body: ${feature.slug}`);
+  }
+});
+
+test("the All features page links to every feature page, so crawlers can reach each one", () => {
+  const html = readPage("product.html");
+  for (const feature of FEATURES) {
+    assert.ok(html.includes(`href="${buildFeaturePath(feature.slug)}"`), `Missing link: ${feature.slug}`);
+  }
+});
+
+test("the old capability addresses redirect to pages that exist", () => {
+  const redirects = readFileSync(new URL("../public/_redirects", import.meta.url), "utf8");
+  for (const [, from, to] of redirects.matchAll(/^(\/why-nobi\/\S+|\/lead-capture|\/custom-actions)\s+(\S+)\s+301$/gm)) {
+    assert.ok(existsSync(new URL(`${to.slice(1)}.html`, Dist)), `${from} redirects to a missing page: ${to}`);
+  }
+});
+
 test("the Shop Nobi page shares its own link preview picture, and the other pages keep Nobi's", () => {
   const shopHtml = readPage("shop.html");
   assert.ok(shopHtml.includes('<meta property="og:image" content="https://nobi.ai/shop-nobi-og-image.png">'));
@@ -94,11 +121,11 @@ test("the Shop Nobi page shares its own link preview picture, and the other page
 test("pricing shows the bundle slider, bundle table, message rules, trial terms, and FAQ answers, with no calculator", () => {
   const text = bodyText(readPage("pricing.html")).replaceAll("&#x27;", "'");
   for (const fact of [
-    "Message bundles", "500 messages a month", "$0.050 per message", "See all bundles", "Price per message",
-    "100,000", "$2,999", "$0.030", "Custom pricing",
+    "Message bundles", "500 messages a month", "$0.058 per message", "See all bundles", "Price per message",
+    "100,000", "$3,749", "$0.037", "Custom pricing",
     "Have more than 5,000 products, or need dedicated support? We'll set up a custom plan.",
     "What counts as a message", "There is no separate search allowance.", "Showing more results for the same search is free.",
-    "If you go over your bundle", "Keep going", "Stop and hide Nobi", "plus 3 cents for each extra message",
+    "If you go over your bundle", "Keep going", "Stop and hide Nobi", "plus 4 cents for each extra message",
     "A payment method is required to start the 30-day free trial", "100 free messages",
   ]) assert.ok(text.includes(fact), `Missing pricing fact: ${fact}`);
   const trialSummary = "100,000 free messages during your 30-day trial.";
@@ -109,14 +136,23 @@ test("pricing shows the bundle slider, bundle table, message rules, trial terms,
     "2,500 searches", "$0.10", "$0.01", "extra search", "pause until the next billing cycle",
     "Find your price", "Estimate my bill", "What would you like to use Nobi for?",
     "Nobi stops at your bundle's limit", "Volume discounts",
+    "$25 for 500", "$1,599", "$2,999", "3 cents for each",
   ]) assert.ok(!text.includes(oldFact), `Old pricing, calculator, or enterprise card still shown: ${oldFact}`);
 });
 
 test("pricing metadata offers every bundle", () => {
   const html = readPage("pricing.html");
-  assert.ok(html.includes("Monthly message bundles from $25 for 500 messages."));
-  for (const offer of ['"lowPrice":"25"', '"highPrice":"2999"', '"offerCount":11', '"name":"100,000 messages a month"'])
+  assert.ok(html.includes("Monthly message bundles from $29 for 500 messages."));
+  for (const offer of ['"lowPrice":"29"', '"highPrice":"3749"', '"offerCount":11', '"name":"100,000 messages a month"'])
     assert.ok(html.includes(offer), `Missing offer data: ${offer}`);
+});
+
+test("the homepage and product page offers state the smallest bundle's price", () => {
+  for (const page of ["homepage.html", "product.html"]) {
+    const html = readPage(page);
+    assert.ok(html.includes('"price":"29"'), `Missing starting price on ${page}`);
+    assert.ok(!html.includes('"price":"25"'), `Old starting price on ${page}`);
+  }
 });
 
 test("blog and glossary output retain their own content without the homepage", () => {
@@ -179,9 +215,12 @@ test("the sitemap index points to the site's own pages and to the Shop Nobi site
   assert.ok(readPage("sitemap-pages.xml").includes("<loc>https://nobi.ai/pricing</loc>"));
 });
 
-test("the site footer links to Shop Nobi", () => {
+test("the site and Shop Nobi footers link to the agent setup page", () => {
   const footer = readPage("homepage.html").split("<footer")[1];
   assert.match(footer, /<a href="\/shop"[^>]*>Shop Nobi searches<\/a>/);
+  assert.match(footer, /<a href="\/shop\/mcp"[^>]*>Shop Nobi for AI agents<\/a>/);
+  const shopFooter = readPage("shop/index.html").split("<footer")[1];
+  assert.match(shopFooter, /<a href="\/shop\/mcp"[^>]*>Use Shop Nobi with AI agents<\/a>/);
 });
 
 test("the privacy policy and terms carry their full text in the HTML, for readers that run no JavaScript", () => {

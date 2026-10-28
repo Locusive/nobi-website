@@ -1,6 +1,7 @@
 import React from "react";
 import { useSEO } from "../hooks/useSEO";
 import { CANONICAL_DESCRIPTION, LINKEDIN_URL } from "../constants/positioning";
+import { STARTING_OFFER } from "../constants/pricing";
 
 import "../components/home/homepage.css";
 import Nav from "../components/home/Nav";
@@ -42,7 +43,7 @@ export default function HomePage() {
         "operatingSystem": "Web",
         "description": CANONICAL_DESCRIPTION,
         "url": "https://nobi.ai",
-        "offers": { "@type": "Offer", "price": "25", "priceCurrency": "USD", "availability": "https://schema.org/InStock" },
+        "offers": STARTING_OFFER,
       },
     ],
   });

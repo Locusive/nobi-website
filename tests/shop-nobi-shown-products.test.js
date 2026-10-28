@@ -19,10 +19,10 @@ const Page = {
   slug: "black-leather-boots",
   query: "black leather boots",
   products: [
-    { name: "Roper Boot", url: "https://lucchese.com/products/roper", paidLink: true, productVariantId: RoperVariantId, owningMerchantId: LuccheseId },
+    { name: "Roper Boot", url: "https://lucchese.com/products/roper", paidLink: true, placementReason: "organic", productVariantId: RoperVariantId, owningMerchantId: LuccheseId },
     { name: "Cowboy Boot", url: "https://example.com/products/cowboy", paidLink: false },
-    { name: "Harness Boot", url: "https://frye.example/products/harness", paidLink: false, productVariantId: HarnessVariantId, owningMerchantId: FryeId },
-    { name: "Gift Card", url: "https://nobi.ai/gift-card", paidLink: false, productVariantId: GiftCardVariantId, owningMerchantId: ShopNobiId },
+    { name: "Harness Boot", url: "https://frye.example/products/harness", paidLink: false, placementReason: "paid_merchant", productVariantId: HarnessVariantId, owningMerchantId: FryeId },
+    { name: "Gift Card", url: "https://nobi.ai/gift-card", paidLink: false, placementReason: "invalid", productVariantId: GiftCardVariantId, owningMerchantId: ShopNobiId },
   ],
 };
 
@@ -48,11 +48,14 @@ test("a page view lists every product in order, and start position + list index 
       pageSlug: "black-leather-boots",
       collectionName: "Prebuilt search page",
       collectionSize: 4,
+      experimentId: "shop-landing-products-v1",
+      experimentVariant: "guide-first",
+      landingVisitId: shown.event.details.landingVisitId,
       shownProductsStartPosition: 1,
       shownProducts: [
-        { productVariantId: RoperVariantId, owningMerchantId: LuccheseId, isPaidLink: true },
+        { productVariantId: RoperVariantId, owningMerchantId: LuccheseId, isPaidLink: true, placementReason: "organic" },
         { productVariantId: null, isPaidLink: false },
-        { productVariantId: HarnessVariantId, owningMerchantId: FryeId, isPaidLink: false },
+        { productVariantId: HarnessVariantId, owningMerchantId: FryeId, isPaidLink: false, placementReason: "paid_merchant" },
         { productVariantId: GiftCardVariantId, isPaidLink: false },
       ],
       pageUrl: PageUrl,

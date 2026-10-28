@@ -8,13 +8,15 @@ import { isSafeSlug } from "./shop-nobi-search-page-view.js";
 import { webStoryUrl } from "../src/utils/shopNobiWebStory.js";
 
 const LlmsTxtPageLimit = 100;
+const SitemapImageLimitPerPage = 1000;
 const RedirectTargetPattern = /^\/[A-Za-z0-9\-._~/]*$/;
 // The W3C time forms sitemaps accept, such as "2026-10-11" or "2026-10-11T08:02:11Z".
 const SitemapTimePattern = /^\d{4}-\d{2}-\d{2}(?:T\d{2}:\d{2}(?::\d{2}(?:\.\d+)?)?(?:Z|[+-]\d{2}:\d{2}))?$/;
 
 /**
  * Builds sitemap-shop.xml, listing every category page, search page and web story with the time it was last
- * refreshed. A page without a valid refresh time gets the fallback time, so every entry has a lastmod.
+ * refreshed, including eligible displayed product photos for every search page.
+ * A page without a valid refresh time gets the fallback time, so every entry has a lastmod.
  *
  * @param {object[]} categoryPages The built category pages.
  * @param {object[]} searchPages The built search pages.
@@ -25,17 +27,20 @@ const SitemapTimePattern = /^\d{4}-\d{2}-\d{2}(?:T\d{2}:\d{2}(?::\d{2}(?:\.\d+)?
 export function buildShopNobiSitemap(categoryPages, searchPages, stories, fallbackLastModified) {
   const pageEntries = [
     ...categoryPages.map((category) => ({ url: categoryPageUrl(category.slug), refreshedAt: category.refreshedAt })),
-    ...searchPages.map((page) => ({ url: searchPageUrl(page.slug), refreshedAt: page.refreshedAt })),
+    ...searchPages.filter((page) => page.products?.length > 0).map((page) => ({ url: searchPageUrl(page.slug), refreshedAt: page.refreshedAt,
+      images: [...new Set((page.products ?? []).map(product => product.imageUrl).filter(Boolean))].slice(0, SitemapImageLimitPerPage) })),
     ...stories.map(({ page }) => ({ url: webStoryUrl(page.slug), refreshedAt: page.refreshedAt })),
   ];
   const entries = pageEntries.map((entry) => {
     const lastModified = readValidTime(entry.refreshedAt) ?? fallbackLastModified;
-    return `  <url>\n    <loc>${htmlEscape(entry.url)}</loc>\n    <lastmod>${htmlEscape(lastModified)}</lastmod>\n  </url>`;
+    // Products have already passed the same URL and merchant-rights checks used by the rendered page.
+    const images = (entry.images ?? []).map(url => `\n    <image:image><image:loc>${htmlEscape(url)}</image:loc></image:image>`).join("");
+    return `  <url>\n    <loc>${htmlEscape(entry.url)}</loc>\n    <lastmod>${htmlEscape(lastModified)}</lastmod>${images}\n  </url>`;
   });
 
   return [
     `<?xml version="1.0" encoding="UTF-8"?>`,
-    `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">`,
+    `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">`,
     ...entries,
     `</urlset>`,
   ].join("\n") + "\n";
@@ -95,11 +100,12 @@ export function countRedirectRules(redirectsText) {
  * @returns {string} The new llms.txt.
  */
 export function appendLlmsTxtSection(llmsText, pages) {
-  if (pages.length === 0) {
+  const populatedPages = pages.filter((page) => page.products?.length > 0);
+  if (populatedPages.length === 0) {
     return llmsText;
   }
 
-  const links = pages
+  const links = populatedPages
     .slice(0, LlmsTxtPageLimit)
     .map((page) => `- [${escapeLinkText(page.title)}](${searchPageUrl(page.slug)})`);
   const section = [

@@ -21,7 +21,7 @@ export const meta = {
  },
  {
  question: "1. Nobi",
- answer: "Nobi connects to your help articles, policy pages, FAQ routes, and PDFs, then attaches a numbered citation pill to every answer showing the source document name, date, and exact excerpt. A second AI review checks each draft answer against the cited content before it goes out, and connected sources refresh twice a day so documentation updates reach live answers within hours. Query overrides let you pin exact company-approved responses to specific questions with no paraphrasing. Pricing starts at $25/month for 500 messages, where a search or a chat question each count as one message."
+ answer: "Nobi connects to your help articles, policy pages, FAQ routes, and PDFs, then attaches a numbered citation pill to every answer showing the source document name, date, and exact excerpt. A second AI review checks each draft answer against the cited content before it goes out, and connected sources refresh twice a day so documentation updates reach live answers within hours. Query overrides let you pin exact company-approved responses to specific questions with no paraphrasing. Pricing starts at $29/month for 500 messages, where a search or a chat question each count as one message."
  },
  {
  question: "2. Algolia",
@@ -99,14 +99,14 @@ export const meta = {
 
 SaaS teams adding AI search to a knowledge base face a specific failure mode: a bot that invents a plausible answer about a free-versus-paid feature gate marks the question resolved while the user is still stuck and back 48 hours later. Wrong answers about tier limits, billing policy, or API scope don't just create support load; they quietly damage trial-to-paid conversion before the sales team ever hears from the account. The tool has to ground every answer in your actual documentation, expose citations the user can verify, and let you pin exact approved text to high-stakes questions so the model can't paraphrase something consequential. Four tools come up most often when SaaS product and support teams put this shortlist together:
 
-- **Nobi** - AI search and knowledge base Q&A with inline numbered citation pills and an optional second AI review that checks each answer against the source, from $25/mo for 500 messages. Pick when grounded, verifiable answers and hallucination controls are the job.
+- **Nobi** - AI search and knowledge base Q&A with inline numbered citation pills and an optional second AI review that checks each answer against the source, from $29/mo for 500 messages. Pick when grounded, verifiable answers and hallucination controls are the job.
 - **Algolia** - developer-first search API with sub-50ms response times and full API-level ranking control. Free tier (10K searches/mo); usage-based above that. Pick when a dedicated search engineer owns the ranking layer end-to-end.
 - **Coveo** - enterprise AI search unifying developer docs, support portals, and internal knowledge on one ML-relevance engine. Base $600/mo; annual contracts often reach $50K+. Pick when cross-surface unification at enterprise scale is the job.
 - **Yext** - structured knowledge graph answers syndicated to Google AI Overviews and other AI search surfaces. Quote-only; per-location pricing. Pick when propagating verified answers across external AI search engines matters as much as your owned KB.
 
 | Product | Primary job | Best for | Pricing (starting) | Standout strength | Key weakness |
 | --- | --- | --- | --- | --- | --- |
-| Nobi | AI search + KB Q&A with citation grounding | SaaS support and product teams needing grounded, cited answers from docs without a dedicated search engineering team | From $25/mo for 500 messages (a search or a chat question each count as one message) | Numbered citation pills + optional second AI review that checks each answer against the source | Analytics focus on search/CVR metrics, not purpose-built for ticket-deflection rate or CSAT reporting |
+| Nobi | AI search + KB Q&A with citation grounding | SaaS support and product teams needing grounded, cited answers from docs without a dedicated search engineering team | From $29/mo for 500 messages (a search or a chat question each count as one message) | Numbered citation pills + optional second AI review that checks each answer against the source | Analytics focus on search/CVR metrics, not purpose-built for ticket-deflection rate or CSAT reporting |
 | [Algolia](https://algolia.com) | Search API and indexing infrastructure | Engineering teams with dedicated search developer bandwidth wanting full API control over ranking logic | Free (10K searches/mo, 1M records); usage-based above that; NeuralSearch on Elevate tier only | Sub-50ms response times; granular API-level control over rules, ranking, and rendering | No native answer engine; KB Q&A requires a separate integration on top |
 | [Coveo](https://coveo.com) | Enterprise AI search across docs, support, and workplace | Enterprise B2B SaaS teams unifying developer docs, support portals, and internal knowledge under one ML-relevance engine | Base $600/mo; annual licensing commonly $50K+; all-in often $100K+ | ML relevance spans docs, support, and workplace in a single engine with shared analytics | Sales-led procurement; implementation and services add substantially to first-year cost |
 | [Yext](https://yext.com) | Knowledge graph answers and listings management | DevRel and product teams syndicating structured FAQ and policy answers to Google AI Overviews and external AI surfaces | Quote-only; per-location and per-module pricing | Structured answers feed Google AI Overviews and AI search engines directly from one source of truth | Not purpose-built for technical documentation with code samples, API hierarchies, or version changelogs |
@@ -129,7 +129,7 @@ Nobi grounds every answer in the documentation you connect (help articles, polic
 
 **Best for:** SaaS support and product teams who need grounded, cited answers from their knowledge base and want accuracy controls that non-technical teams can configure.
 
-**Pricing:** Nobi starts at $25 a month for 500 messages, where a search or a chat question each count as one message. Bigger bundles cost less per message, up to 100,000 messages for $2,999 a month.
+**Pricing:** Nobi starts at $29 a month for 500 messages, where a search or a chat question each count as one message. Bigger bundles cost less per message, up to 100,000 messages for $3,749 a month.
 
 **Pros:**
 - A second AI review checks each draft answer against the raw content from the cited sources before it sends; answers the review flags don't reach the user

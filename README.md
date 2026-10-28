@@ -52,6 +52,45 @@ table, the pricing facts, and existing page regressions.
 
 ## Shop Nobi search pages
 
+Generic `Best ...` search-page titles (including the `from Top Stores` suffix) are replaced at publication
+with catalog-backed titles and descriptions by `scripts/shop-nobi-catalog-copy.js`.
+Related-search labels also remove that generic ranking wording at publication, retaining
+custom labels, link order, destinations and original query fallbacks.
+The copy names the displayed listing count and up to two actual retailers, and
+only invites price comparison when multiple displayed records have prices and
+currencies. The shared `shop-nobi-publication-quality.js` rule also removes fixed
+monetary assertions from source guide sentences and FAQs and supplies a price
+summary computed from the displayed records. Mixed currencies are not combined
+into a range. Clear visitor-entered search examples retain their budget amounts.
+When publication filters remove records, dependent source guide/FAQ copy is
+withheld because it may describe products no longer shown. Empty pages offer a
+search path, have matching noindex metadata in HTML and the browser, and are
+omitted from the search sitemap and llms.txt links. Populated pages return to
+normal publication automatically on a later build when their listings return.
+Reviewed editorial guidance remains subject to the same publication checks.
+This is not a general fact-check of qualitative product advice. The same
+publication data supplies HTML, metadata, FAQ schema and browser hydration;
+source guides, product ordering, product facts, affiliate links, Pinterest feeds
+and Stories are unchanged. This is a
+site-wide rollout, not a controlled click-through experiment, and it does not
+guarantee Google's chosen title/snippet or indexing.
+
+The existing `laptop-stands` page also has a concise manufacturer-specification
+comparison in its buying guide. `scripts/shop-nobi-laptop-comparison.js` requires
+the exact reviewed listing name, brand, merchant, product ID and variant URL for
+each row. A changed or removed listing loses its row and source; empty or
+publication-filtered pages show no comparison. Prices and stock remain in the
+unchanged product cards. The optional semantic table scrolls on narrow screens
+and follows the guide's existing landing-experiment position. These specifications
+are attributed references, not hands-on performance rankings.
+
+The `womens-khaki-pants` page uses the same comparison layout with clothing-specific
+headers. Its four reviewed models distinguish petite/tall hiking cuts, cotton-twill
+wide-leg trousers and cotton reverse-sateen double-front pants. The unresolved
+25-inch travel color is excluded from the comparison. Exact identity guards and
+publication-filter suppression apply; no size availability, office suitability
+or universal best ranking is inferred.
+
 `scripts/prerender-shop.js` builds one page per Shop Nobi search at
 `/shop/s/<slug>`, with the products in the HTML, one page per top category at
 `/shop/c/<slug>`, and a list of popular searches on `/shop`. It also writes
@@ -68,12 +107,57 @@ pages start with `#ad` and the commission disclosure. Canonical GUIDs stay the
 same; refresh times do not become publication dates. This does not change search
 ranking, website cards, SEO previews or Web Stories.
 
-`scripts/shop-nobi-editorial-copy.js` supplies original buying guidance for the
-existing `sterling-silver-rings` page. The page writer applies its title,
+`scripts/shop-nobi-editorial-copy.js` combines reviewed, page-specific buying
+guidance dictionaries, including the original `sterling-silver-rings` guide.
+The page writer applies each selected page's title,
 description, guide and FAQs together to rendered HTML, metadata, structured data
 and embedded browser content. Product facts, shopping links and snapshot dates
 stay intact. The shared source plan, Pinterest feeds and Web Stories retain
-their existing copy; the replacement applies only to this search page.
+their existing copy; replacements apply only to the explicitly selected search pages.
+The same publication path supplies the `pencil-skirts` buying guide, replacing
+the fixed price-range and general fabric-care advice with exact-item checks and
+an invitation to enter preferences in the existing search box. Catalog prices,
+product links, snapshot dates, feeds and Stories are unchanged.
+The clothing/accessory copy module also covers fourteen observed-query pages:
+`red-blouses`, `navy-cardigans`, `multicolor-sweaters`, `gray-cargo-pants`,
+`yellow-midi-dresses`, `green-wallets`, `pink-swim-trunks`, `blue-navy-blouses`, `pink-hoodies` and
+`charcoal-hoodies`, `navy-suits`, `blue-navy-suits`, `blue-navy-casual-dresses`
+and `green-maxi-dresses`. Their guidance
+distinguishes sizing, construction and variant choices, replaces unsupported
+superlatives and care/performance claims, and suggests visitor-entered searches.
+These edits do not certify stock, merchant claims or ranking improvements.
+`shop-nobi-additional-buying-copy.js` covers `black-stud-earrings`,
+`cream-rugs`, `brown-mini-dresses`, `sundresses`, `silver-watches` and
+`black-maxi-dresses`, `amethyst-earrings`, `emerald-jewelry`, `brown-suede-boots`
+`brown-boots`, `diamond-bangles`, `aquamarine-rings`, `mens-signet-rings`, `amethyst-jewelry`, `gold-white-bangles` and
+`purple-violet-jewelry`, `gold-bracelets`, `blossom-jewelry`, `saw-accessories`,
+`table-saw-accessories`, `miter-saw-accessories`, `ecru-puzzles`, `red-electric-guitars`, `mens-diamond-bracelets` and
+`yellow-gold-diamond-earrings` through the same
+publication-only path.
+It replaces allergy-prevention and blanket cleaning claims with quantity,
+measurement, component, size-variant and exact-item care checks. Saw guides
+distinguish accessory systems from add-ons and category placement from verified
+compatibility; they provide buying comparisons, not cutting or setup instructions.
+The Ecru clarification uses the [maker FAQ](https://www.artifactpuzzles.com/pages/faq)
+and [collection](https://www.artifactpuzzles.com/collections/ecru-puzzles) to distinguish
+the named puzzle line from a color and separate difficulty from piece count.
+Red electric guitar guidance distinguishes exact finish from a builder name,
+compares condition and specifications, and avoids unsupported tone or tuning promises.
+Men's diamond bracelet guidance separates link shape from stone coverage and
+replaces universal stone, allergy and care claims with exact-item disclosures.
+Yellow gold diamond earring comparisons clarify selling quantity, component
+materials, dimensions, piercing requirements and the stated stone-weight basis.
+
+The care, material, apparel, equipment and jewelry guide modules correct specific
+observed claims against retained catalog records. The fit modules distinguish
+product names from compatible models, material labels from care instructions,
+and accessories from complete products. The accessory-identity module separates
+bag charms from jewelry, selected metal construction from a color or karat label,
+and exact sizing services from blanket resizing promises. These corrections do
+not authenticate materials, establish skin suitability, or certify fresh stock.
+The parameterized guide-review test checks removal of recorded defects and
+agreement between visible copy, FAQ schema and browser hydration while retaining
+product records, query and snapshot date.
 
 `scripts/shop-nobi-pin-editorial.js` records reviewed page/product/photo pairs,
 with the reason and observed Pin. A reviewed page is omitted from Pinterest if
@@ -163,7 +247,10 @@ Story at `/shop/stories/<slug>`, an AMP story built by
 shows a cover, the guide in pages of at most 180 characters, up to three
 products with nofollow store links, questions that fit, and a last page that
 links back to the search page with `utm_source=google_web_stories`. The search
-page links to its story, and `sitemap-shop.xml` lists the stories. Each store
+CTA on the `sofas` story instead links to the `/shop` search home with
+`utm_campaign=story_to_search` and `utm_content=sofas`, so a visitor must enter
+their own query. Its product links remain available. The search page links to
+its story, and `sitemap-shop.xml` lists the stories. Each store
 link goes through `https://api.nobi.ai/v1/shop/story-go` with the plain store
 link and the story's slug; the API counts the tap and forwards to the store,
 through the store's affiliate link when one pays us. The story's amp-analytics
@@ -188,6 +275,13 @@ click opens the plain link with Shop Nobi's tags. Plain prebuilt links remove
 any stale `nobi-conversation-id`. A paid link, on search pages
 and in stories, gets `rel="sponsored"` and a small "We may earn a commission"
 notice under it (`CommissionNotice` in `src/utils/shopNobiPage.js`).
+
+Every published Shop Nobi search page includes its eligible displayed product
+photos in `sitemap-shop.xml`, deduplicated per page and capped at 1,000 images.
+Existing merchant restrictions and unsafe-image filtering apply before sitemap
+generation. Categories, Stories and image-free pages keep their normal URL
+entries without product-image tags. Image discovery and indexing are not guaranteed;
+Google documents Search Console verification for externally hosted image domains.
 
 Every entry in `sitemap-shop.xml` has a lastmod: the page's refresh time, or the
 time the API built the data when a page has none.
@@ -390,3 +484,73 @@ self-reported listing evidence and separate optional charging/accessory question
 Notes remain in component memory and reset to unanswered; the tool does not match
 model names, certify compatibility, store notes or send a new analytics event.
 Apple examples illustrate named models only. The `/shop` landing page links to it.
+
+### Reviewed guide and FAQ corrections
+
+The care, material, jewelry, apparel, equipment and safety `shop-nobi-*-guide-copy.js` modules contain
+page-specific corrections for care, fiber composition, product format and sizing.
+The shared editorial selector applies their metadata, visible guidance and FAQs
+together. Publication filters still take priority: empty or filtered listings
+cannot resurrect dependent inventory claims. These reviewed pages are a bounded
+batch, not a claim that every catalog guide has been fact-checked.
+
+The reviewed apparel and household comparison dictionaries add twenty targeted
+guide/FAQ corrections through `shop-nobi-editorial-copy.js`. They distinguish
+product types, exact composition, documented performance and model compatibility.
+Product records, ranking, earning links and source queries remain unchanged.
+`tests/shop-nobi-guide-review.test.js` checks removal of each retained legacy
+claim and consistency across visible HTML, FAQ schema and browser data.
+### Landing-page product-click experiment
+
+Populated prebuilt search pages participate in `shop-landing-products-v1`.
+A stable slug hash assigns each page to the existing guide-first layout or to
+products-first with an early same-page search jump. Crawlers and browsers see
+the same layout. Guide text, metadata, product ordering and earning links stay
+unchanged. The jump focuses the existing live-search input without submitting
+any query or navigating away from the original acquisition URL.
+
+The existing product-display and prebuilt-click events carry `experimentId`,
+`experimentVariant`, `pageSlug` and `landingVisitId`. The visit ID belongs to the
+loaded document, does not identify a person, and needs no persistent storage.
+A `nobi-analytics` listener remains mounted after live results replace the
+prebuilt grid. It sends separate `Shop Nobi Landing Outcome` events for live
+product-click intentions and submitted messages, never a duplicate legacy click/search.
+Live click intentions count toward the primary measure only when joined to an
+accepted canonical click with matching conversation, product and shopper within
+a bounded time window. Unmatched intentions remain diagnostic. A message can
+be a question, so message submission is not labeled a completed product search.
+`Shop Nobi Refine Search` records successful focus of the search input. Existing
+local/bot/automation suppression and smoke-test tagging apply to all events.
+
+Read raw event partitions, not the current reporting view (which drops product
+exposures and referrer fields). Count exposed visits with either kind of product
+click, divided by exposed visits; retain separate prebuilt and live outcomes.
+Filter known operator/test visits, retain missing-provenance counts, and never
+call client-supplied Google referrers verified people. Compare complete periods,
+page/query mix and cohort exposure; this is a page-level observational split,
+not visitor randomization or a revenue result. The plan is in
+`agents/feature_plans/shop_landing_product_conversion.md`.
+
+### Teak set comparison
+
+The existing teak outdoor furniture page compares three reviewed Outer models by
+package contents, layout and ordering checks. Manufacturer model facts require exact
+catalog identities; filtered or removed products cannot retain their comparison rows
+or sources. No selected cushion color, current stock or offer is inferred. The catalog
+records, search query, earning links and landing experiment remain unchanged.
+
+### Cloth napkin comparison
+
+The existing cloth napkin page compares three exact catalog models by format, set
+count, dimensions and specific care instructions. Dinner and cocktail formats remain
+distinct; linen composition does not imply common washing or drying instructions.
+Unknown Matouk shape details are omitted. Exact identity and publication-filter gates
+control each row and source, preserving product cards and landing allocation.
+
+### Men’s silver chain model comparison
+
+`shop-nobi-silver-chain-comparison.js` distinguishes sterling-silver and steel base metals, plating, chain construction and model length options using three manufacturer sources. Exact catalog identity gates and publication-filter suppression match the existing comparisons. Product cards and landing experiment allocation remain unchanged; the table does not guarantee pendant compatibility, durability or stock.
+
+### Brown shirt model comparison
+
+`shop-nobi-brown-shirt-comparison.js` compares documented fabric composition, cut and model-specific care for three shirts. Exact identity gates and publication-filter suppression preserve the existing comparison contract. All product records, source context and landing experiment allocation remain unchanged; model facts do not promise current stock, comfort or durability.

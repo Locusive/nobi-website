@@ -1,6 +1,29 @@
+import { withBrownShirtComparison } from "./shop-nobi-brown-shirt-comparison.js";
+import { withSilverChainComparison } from "./shop-nobi-silver-chain-comparison.js";
+import { withClothNapkinComparison } from "./shop-nobi-cloth-comparison.js";
+import { withTeakSetComparison } from "./shop-nobi-teak-comparison.js";
 // Editorial corrections for selected search pages. Product facts and the shared build plan stay intact.
 
+import { withPublicationQuality } from "./shop-nobi-publication-quality.js";
+import { withKhakiPantsComparison } from "./shop-nobi-khaki-comparison.js";
+import { withLaptopStandComparison } from "./shop-nobi-laptop-comparison.js";
 import { withMailboxClarification } from "./shop-nobi-mailbox-copy.js";
+import { ClothingAccessoryCopy } from "./shop-nobi-clothing-accessory-copy.js";
+import { AdditionalBuyingCopy } from "./shop-nobi-additional-buying-copy.js";
+import { withCatalogSearchCopy, withEmptySearchCopy, withRelatedSearchCopy } from "./shop-nobi-catalog-copy.js";
+import { CareGuideCopy } from "./shop-nobi-care-guide-copy.js";
+import { MaterialGuideCopy } from "./shop-nobi-material-guide-copy.js";
+import { JewelryGuideCopy } from "./shop-nobi-jewelry-guide-copy.js";
+import { ApparelGuideCopy } from "./shop-nobi-apparel-guide-copy.js";
+import { EquipmentGuideCopy } from "./shop-nobi-equipment-guide-copy.js";
+import { ApparelSafetyGuideCopy } from "./shop-nobi-apparel-safety-guide-copy.js";
+import { HouseholdSafetyGuideCopy } from "./shop-nobi-household-safety-guide-copy.js";
+import { ApparelComparisonGuideCopy } from "./shop-nobi-apparel-comparison-guide-copy.js";
+import { HouseholdComparisonGuideCopy } from "./shop-nobi-household-comparison-guide-copy.js";
+import { ApparelFitGuideCopy } from "./shop-nobi-apparel-fit-guide-copy.js";
+import { EquipmentFitGuideCopy } from "./shop-nobi-equipment-fit-guide-copy.js";
+import { AccessoryIdentityGuideCopy } from "./shop-nobi-accessory-identity-guide-copy.js";
+import { CarryCareGuideCopy } from "./shop-nobi-carry-care-guide-copy.js";
 
 const OriginalSuitcaseGuide = "Blue suitcases on this page range from about $70 to $495. The collection includes hard-shell carry-ons, expandable checked bags, and a few novelty suitcases with built-in record players.";
 const CorrectedSuitcaseGuide = "Shopping for travel luggage? Compare the carry-on and checked suitcases below. Suitcase-style record players are audio products, not bags for packing. Check each travel bag's dimensions and weight with the retailer before choosing.";
@@ -69,25 +92,86 @@ const SterlingSilverRingCopy = {
   ],
 };
 
+const PencilSkirtCopy = {
+  title: "Pencil Skirts: Compare Stores, Fabrics & Fit",
+  description: "Find pencil skirts across stores. Compare fabric, length, size guidance and care requirements, then check the selected skirt's price and return terms with the retailer.",
+  guide: [
+    "Looking for a place to buy a pencil skirt? Compare the retailer listings below, then open the skirt you like to check the selected size, color, current price and purchase terms. These are catalog options to compare, not a hands-on ranking.",
+    "Start with how you will wear it. For a work outfit, compare the listed length, waistband and slit or closure details. For an occasion outfit, compare the finish and embellishment as well as the fit. Use the retailer's garment measurements and size guide rather than assuming the same size fits across brands.",
+    "Check the exact fabric composition, lining and care label. A fabric name alone does not tell you whether the finished skirt stretches, feels comfortable or can be machine washed. Follow the instructions for the selected garment instead of a general rule for wool, leather or cotton.",
+    "Want to narrow the options? Use the Shop Nobi search box below and describe your budget, preferred length, fabric and occasion. Before ordering, confirm availability, shipping costs and whether your selected item can be returned or exchanged.",
+  ],
+  faq: [
+    {
+      question: "Where can I buy pencil skirts online?",
+      answer: "Compare the stores and pencil-skirt listings on this page, then follow the product link to the retailer. Confirm the exact size, color and current purchase terms there. You can also enter your budget and preferences in the Shop Nobi search box to look for a closer match.",
+    },
+    {
+      question: "What should I compare before choosing a pencil skirt?",
+      answer: "Compare garment measurements, length, waistband, slit or closure details, fabric composition, lining and care instructions. Check the retailer's size guide and return terms for the exact item.",
+    },
+    {
+      question: "Does a pencil skirt need stretch?",
+      answer: "Stretch is one detail to check alongside the cut and garment measurements. Read the exact fabric composition and fit description; a product photo or fabric name does not establish how the skirt will fit or move on you.",
+    },
+    {
+      question: "Can I wash a pencil skirt at home?",
+      answer: "Check the selected garment's care label or ask the retailer. Follow those instructions for washing, drying or professional cleaning; do not infer the method from the main fabric alone.",
+    },
+  ],
+};
+
+const SelectedPageCopy = {
+  ...ClothingAccessoryCopy,
+  ...AdditionalBuyingCopy,
+  ...CareGuideCopy,
+  ...MaterialGuideCopy,
+  ...JewelryGuideCopy,
+  ...ApparelGuideCopy,
+  ...EquipmentGuideCopy,
+  ...ApparelSafetyGuideCopy,
+  ...HouseholdSafetyGuideCopy,
+  ...ApparelComparisonGuideCopy,
+  ...HouseholdComparisonGuideCopy,
+  ...ApparelFitGuideCopy,
+  ...EquipmentFitGuideCopy,
+  ...AccessoryIdentityGuideCopy,
+  ...CarryCareGuideCopy,
+  "sterling-silver-rings": SterlingSilverRingCopy,
+  "pencil-skirts": PencilSkirtCopy,
+};
+
 /**
- * Applies authored copy only to the selected page's published HTML and embedded browser data.
+ * Applies authored copy, then catalog-backed defaults for generic unreviewed search pages.
  * The original plan remains available unchanged to product, feed and Web Story generation.
  *
  * @param {object} page The normalized search page, including its existing products and links.
- * @returns {object} The publication copy, or the original page when it has no editorial replacement.
+ * @returns {object} The publication copy, retaining reviewed overrides and unchanged product data.
  */
 export function withAuthoredSearchPageCopy(page) {
+  const published = withRelatedSearchCopy(applyAuthoredCopy(page));
+  return published.products?.length ? withPublicationQuality(published) : published;
+}
+
+/** Selects reviewed copy before checking its price and publication consistency. */
+function applyAuthoredCopy(page) {
+  if ((page.products ?? []).length === 0) return withEmptySearchCopy(page);
+  if (page.slug === "laptop-stands") return withLaptopStandComparison(page);
+  if (page.slug === "womens-khaki-pants") return withKhakiPantsComparison(page);
+  if (page.slug === "teak-outdoor-furniture-sets") return withTeakSetComparison(page);
+  if (page.slug === "brown-button-down-shirts") return withBrownShirtComparison(page);
+  if (page.slug === "mens-silver-chain-necklaces") return withSilverChainComparison(page);
+  if (page.slug === "cloth-napkins") return withClothNapkinComparison(page);
   if (page.slug === "mailbox-posts") return withMailboxClarification(page);
   if (page.slug === "14k-white-gold-statement-rings") return withWhiteGoldClarification(page);
   if (page.slug === "blue-suitcases") return withSuitcaseClarification(page);
-  if (page.slug !== "sterling-silver-rings") {
-    return page;
-  }
+  const copy = Object.hasOwn(SelectedPageCopy, page.slug) ? SelectedPageCopy[page.slug] : null;
+  if (!copy) return withCatalogSearchCopy(page);
 
   return {
     ...page,
-    ...SterlingSilverRingCopy,
-    guide: [...SterlingSilverRingCopy.guide],
-    faq: SterlingSilverRingCopy.faq.map((entry) => ({ ...entry })),
+    ...copy,
+    guide: [...copy.guide],
+    faq: copy.faq.map((entry) => ({ ...entry })),
   };
 }

@@ -55,3 +55,80 @@ See `agents/feature_plans/funfact_trivia_gift_guide.md`. No catalogue, source-qu
 - [ ] Obtain distinct review of the actual diff and normal feature PR/check gates before release. No admin/selfapproval/skipped tests or fixture deployment.
 - [ ] Normal production build must use the existing full live-source build path. No catalog/model refresh,private export,account/security change,paid/outreach/social initiative or protected-source workaround.
 - [ ] Verify deployed output and applicable engine notification receipts once after release. Compare later complete Google windows; no promised traffic/rank uplift or status-only polling.
+
+
+## Shop Nobi website MCP source tags
+
+- [x] Apply the approved single website publishing-source parameter in a dedicated worktree.
+- [x] Build actual output and pass existing local MCP page tests without external-model calls.
+- [x] Verify canonical/product copy preservation and report actual release triggers.
+- [x] Root reviewed and authorized normal feature release.
+- [ ] Verify actual Cloudflare preview, merge and production connection destinations.
+
+Plan: agents/feature_plans/shop_nobi_source_tags.md
+Notion: https://www.notion.so/406c7ba9c3dd81ea99b2cc433bfdcb7c
+
+
+<toggle heading="h1">
+All-page image sitemap rollout
+
+- [x] Remove the fixed cohort and retain displayed-product eligibility, URL escaping and per-page deduplication.
+- [x] Update publication regression and per-page image-limit coverage; preserve other page output.
+- [x] Run the full local fixture suite and review current diff (365 passed, zero skips).
+- [ ] Release without GitHub CI.
+- [ ] Verify live XML coverage, image counts and byte size; update Notion and daily measurements.
+</toggle>
+
+
+## NOBI-2894 landing conversion experiment
+
+<toggle heading="h1">Landing experiment
+
+- [x] Inspect existing search flow and raw event persistence.
+- [x] Deterministically assign populated search pages to original or products-first layout, same in HTML and browser.
+- [x] Keep guide text, metadata, product order and earning links intact.
+- [x] Add early same-page search jump on treatment, focus existing input without submitting a query.
+</toggle>
+
+<toggle heading="h1">Measurement
+
+- [x] Share page-visit ID, experiment and variant between collection exposure and product clicks.
+- [x] Capture live search/click outcomes through existing bundle events, without duplicating legacy clicks.
+- [x] Save bounded raw-event baseline/readout SQL, preserving unknown traffic provenance.
+- [x] Record release and the dates of complete seven/28day observation windows. Page cohorts are observational; no guaranteed significance at low traffic.
+</toggle>
+
+<toggle heading="h1">Release
+
+- [x] Local tests and real-catalog rendering, desktop/mobile visual check.
+- [x] Independent review; inspect triggers; PR merge and Cloudflare release with no GitHub CI.
+- [x] Verify production and save/re-fetch Notion evidence.
+</toggle>
+
+## Launch verification completed October 28, 2026
+
+PR 517 is merged and production deployment 6115f9f4-5173-44d2-a8e0-b47cd2a47e6f succeeded for e2a7ec23dd78578cc276f35494e469be1708009b. All 384 local tests and independent review passed. Public Chrome checks confirmed treatment/control placement and focus without a search.
+
+A saved production collection exposure retained all four experiment fields. The released readout SQL executed successfully on actual production data, identifying that exposure and zero clicks. This partial-day diagnostic verifies persistence and reporting, not outside adoption, a conversion result or revenue. The exclusion flag and traffic provenance remain unknown; no controlled production product click was submitted. Click attribution is covered by local behavior tests and the 38-row, 11-assertion measurement fixture.
+
+- [ ] Read the first complete seven-day window, October 29 through November 4 UTC, on November 5 plus reporting lag.
+- [ ] Read the 28-day window, October 29 through November 25 UTC, on November 26 plus reporting lag.
+
+Those are follow-up experiment measurements, not unfinished launch implementation. Keep the Marketing scorecard current. Exclude known operator visits, including utm_source=nobi_operator and campaign landing_release_20261028, if they are subsequently retained.
+
+## Continue SEO alongside acquisition experiments
+
+See agents/feature_plans/shop_guide_next_corrections.md. The ongoing goal is not completed by this batch.
+
+## Carrying and household guide corrections
+
+See `agents/feature_plans/shop_guide_carry_care.md`. These ten pages are a finite step in the ongoing SEO audit, not completion of the growth goal.
+
+## Related search labels
+- [ ] Complete agents/feature_plans/shop_related_search_labels.md and keep production verification separate from merge.
+
+## Laptop stand comparison
+- [ ] Complete agents/feature_plans/shop_laptop_stand_comparison.md; keep7/28-day measurement pending until due.
+
+## Women’s khaki pants comparison
+- [ ] Complete agents/feature_plans/shop_khaki_pants_comparison.md; parent owns release and live verification.

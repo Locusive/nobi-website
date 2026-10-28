@@ -16,6 +16,7 @@ export default function ProofBar() {
           Trusted by modern teams
         </span>
         <div
+          className="nb-proof-logos"
           style={{
             marginTop: 24,
             width: "100%",
@@ -32,6 +33,7 @@ export default function ProofBar() {
           ))}
         </div>
         <div
+          className="nb-proof-badge"
           style={{
             marginTop: 38,
             display: "inline-flex",

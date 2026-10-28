@@ -6,8 +6,20 @@ import { buildShopNobiSitemap, countRedirectRules } from "../scripts/shop-nobi-s
 import { FileCountBeforePages, makeDistCopy, prerenderWith, readBody, readOriginal, readScriptJson } from "./shop-nobi-test-build.js";
 import { readFixturePageData } from "./shop-nobi-pages-server.js";
 import { decodePaidLink } from "../src/utils/shopNobiPaidLink.js";
+import { buildSearchPages } from "../scripts/shop-nobi-search-page-view.js";
 
 let distDir;
+
+test("built products retain only known placement decisions without inventing decisions for old page data", () => {
+  const source = readFixturePageData().pages[0];
+  const reasons = ["affiliate", "paid_merchant", "organic", undefined, "Boost"];
+  const storyPaidLinks = [true, false, undefined, "true", null];
+  const page = { ...source, products: reasons.map((placementReason, index) => ({ ...source.products[0], placementReason,
+    storyPaidLink: storyPaidLinks[index] })) };
+  const { pages } = buildSearchPages([page], 1);
+  assert.deepEqual(pages[0].products.map(product => product.placementReason), reasons.slice(0, 3).concat([undefined, undefined]));
+  assert.deepEqual(pages[0].products.map(product => product.storyPaidLink), [true, false, undefined, undefined, undefined]);
+});
 
 function readOutput(path) {
   return readFileSync(join(distDir, path), "utf8");
@@ -29,8 +41,13 @@ test("each page is written once, as <slug>.html, and a page with an unsafe slug 
   assert.ok(!existsSync(join(distDir, "shop/escape.html")) && !existsSync(join(distDir, "shop/s/escape.html")));
 });
 
-test("the head carries the page's own title, description, canonical, robots and link previews, escaped", () => {
-  const html = readOutput("shop/s/black-leather-boots.html");
+test("the head carries the page's own title, description, canonical, robots and link previews, escaped", async (t) => {
+  const data = readFixturePageData();
+  data.pages[0].products = data.pages[0].products.slice(0, 2);
+  const folder = makeDistCopy();
+  t.after(() => rmSync(folder, { recursive: true, force: true }));
+  await prerenderWith({ body: data }, folder);
+  const html = readFileSync(join(folder, "shop/s/black-leather-boots.html"), "utf8");
   const description = "Black leather boots for work &amp; weekends, from &quot;classic&quot; ropers to &lt;lace-ups&gt;.";
   for (const tag of [
     "<title>Black Leather Boots | Shop Nobi</title>",
@@ -49,32 +66,44 @@ test("the head carries the page's own title, description, canonical, robots and 
   for (const repeatable of ['rel="canonical"', 'name="robots"', 'id="page-schema"', "<title>", 'name="description"']) {
     assert.equal(html.split(repeatable).length - 1, 1, `Expected one ${repeatable}`);
   }
+  const body = readBody(html);
+  assert.ok(body.includes("Leather &lt;boots&gt; last for years with care."));
+  assert.ok(body.includes("Pick a pair that fits your work &amp; weekends."));
+  assert.ok(body.indexOf("Leather &lt;boots&gt;") < body.indexOf("Pick a pair"));
+  assert.ok(!body.includes('class="mt-3 max-w-3xl text-black/70 dark:text-white/70"></p>'), "Blank guide paragraphs stay omitted");
 });
 
-test("under the heading come the updated date, the description and the guide, escaped, in that order", () => {
+test("filtered listings replace inventory-dependent guidance consistently in the page and metadata", () => {
   const body = readBody(readOutput("shop/s/black-leather-boots.html"));
   const expectedTop = [
     '<h1 class="mt-4 text-3xl font-semibold">Black Leather Boots</h1>',
     '<p class="mt-1 text-sm text-black/50 dark:text-white/50">Updated October 11, 2026</p>',
     '<p class="mt-2 max-w-3xl text-black/70 dark:text-white/70">',
-    "Black leather boots for work &amp; weekends, from &quot;classic&quot; ropers to &lt;lace-ups&gt;.</p>",
-    '<p class="mt-3 max-w-3xl text-black/70 dark:text-white/70">Leather &lt;boots&gt; last for years with care.</p>',
-    '<p class="mt-3 max-w-3xl text-black/70 dark:text-white/70">Pick a pair that fits your work &amp; weekends.</p>',
+    "3 product listings are displayed. Confirm the selected variant&#x27;s current price, availability and purchase terms with the retailer.</p>",
+    '<p class="mt-3 max-w-3xl text-black/70 dark:text-white/70">Check each product card for its listed price and currency. Confirm the selected variant&#x27;s current price, availability and purchase terms with the retailer.</p>',
+    '<p class="mt-3 max-w-3xl text-black/70 dark:text-white/70">Use the search box below to describe your preferred features, size and budget and look for other options.</p>',
     '<ul class="mt-6 grid',
   ].join("");
-  assert.ok(body.includes(expectedTop), "A blank guide paragraph is skipped");
+  assert.ok(body.includes(expectedTop));
+  const html = readOutput("shop/s/black-leather-boots.html");
+  assert.ok(html.includes('<meta name="description" content="3 product listings are displayed.'));
+  assert.ok(!body.includes("Leather &lt;boots&gt; last for years with care."));
+  assert.ok(!body.includes(">Questions</h2>"));
+  assert.ok(!readScriptJson(html, "page-schema").some(entry => entry["@type"] === "FAQPage"));
 });
 
-test("a page with a blank or missing description, and no guide or questions, gets the standard description and no extras", () => {
-  for (const [slug, title] of [["chelsea-boots", "Chelsea Boots"], ["boots", "Boots"]]) {
-    const description = `${title} from the best stores online, in one search. Shop Nobi is a search engine: you buy directly from the store.`;
-    assert.ok(readOutput(`shop/s/${slug}.html`).includes(`<meta name="description" content="${description}">`), slug);
-  }
-
+test("missing descriptions use a fallback for populated pages while empty pages disclose no listings and stay unindexed", () => {
+  const description = "Chelsea Boots from the best stores online, in one search. Shop Nobi is a search engine: you buy directly from the store.";
+  assert.ok(readOutput("shop/s/chelsea-boots.html").includes(`<meta name="description" content="${description}">`));
+  const emptyHtml = readOutput("shop/s/boots.html");
+  assert.ok(emptyHtml.includes('<meta name="description" content="No product listings are displayed for boots. Enter your preferences in Shop Nobi to search for other options.">'));
+  assert.ok(emptyHtml.includes('<meta name="robots" content="noindex, nofollow">'));
   const body = readBody(readOutput("shop/s/boots.html"));
   const expectedTop = [
-    '<h1 class="mt-4 text-3xl font-semibold">Boots</h1>',
+    '<h1 class="mt-4 text-3xl font-semibold">boots: Search Products</h1>',
     '<p class="mt-1 text-sm text-black/50 dark:text-white/50">Updated October 9, 2026</p>',
+    '<p class="mt-2 max-w-3xl text-black/70 dark:text-white/70">No product listings are displayed for boots. Enter your preferences in Shop Nobi to search for other options.</p>',
+    '<p class="mt-3 max-w-3xl text-black/70 dark:text-white/70">No product listings are displayed on this page. Use the search box below to describe what you need and look for other options.</p>',
     '<ul class="mt-6 grid',
   ].join("");
   assert.ok(body.includes(expectedTop));
@@ -82,8 +111,13 @@ test("a page with a blank or missing description, and no guide or questions, get
   assert.equal(readScriptJson(readOutput("shop/s/boots.html"), "page-schema").length, 2, "No FAQPage without questions");
 });
 
-test("questions show after the products, and the structured data carries them as an FAQPage", () => {
-  const html = readOutput("shop/s/black-leather-boots.html");
+test("questions on unfiltered pages show after products and agree with FAQ structured data", async (t) => {
+  const data = readFixturePageData();
+  data.pages[0].products = data.pages[0].products.slice(0, 2);
+  const folder = makeDistCopy();
+  t.after(() => rmSync(folder, { recursive: true, force: true }));
+  await prerenderWith({ body: data }, folder);
+  const html = readFileSync(join(folder, "shop/s/black-leather-boots.html"), "utf8");
   const body = readBody(html);
   const questions = '<h2 class="text-lg font-semibold">Questions</h2><div class="mt-4"><h3 class="font-medium">'
     + "Are leather boots &lt;waterproof&gt;?</h3>"
@@ -146,39 +180,58 @@ test("the visible page shows the products, opening store links in a new tab with
 
 test("breadcrumbs and built related searches keep their existing page links", () => {
   const body = readBody(readOutput("shop/s/black-leather-boots.html"));
-  const pageLinks = [...body.matchAll(/href="(\/shop[^"]*)"/g)].map(([, href]) => href);
-  assert.deepEqual(pageLinks, ["/shop", "/shop", "/shop/c/shoes", "/shop/s/boots", "/shop/stories/black-leather-boots", "/shop/s/chelsea-boots"]);
+  const pageContent = body.split("<footer")[0];
+  const pageLinks = [...pageContent.matchAll(/href="(\/shop[^"]*)"/g)].map(([, href]) => href);
+  assert.deepEqual(pageLinks, ["/shop", "/shop/mcp", "/shop", "/shop/c/shoes", "/shop/s/boots", "/shop/stories/black-leather-boots", "/shop/s/chelsea-boots"]);
 
   const bootsBody = readBody(readOutput("shop/s/boots.html"));
   assert.ok(bootsBody.includes('<a href="/shop/c/shoes" class="hover:underline">Shoes</a>'), "Even when the crumb has no search page");
 });
 
-test("related searches outside the build limit launch the original query instead of a missing page", async () => {
-  const data = readFixturePageData();
-  const query = '  boots & bags / "weekend" + <travel>  ';
-  data.pages[0].relatedSlugs = ["chelsea-boots", "boots", "chelsea-boots", "not-a-live-page"];
-  data.pages[1].query = query;
-  data.pages[2].query = "  ";
-  const folder = makeDistCopy();
-  try {
-    const categoryAndOnePage = 2;
-    const count = await prerenderWith({ body: data }, folder, { fileLimit: FileCountBeforePages + categoryAndOnePage });
-    assert.equal(count, 1, "Only the source search page is built");
-    const body = readBody(readFileSync(join(folder, "shop/s/black-leather-boots.html"), "utf8"));
-    const relatedStart = body.indexOf(">Related searches</h2>");
-    const related = body.slice(relatedStart, body.indexOf("</section>", relatedStart));
-    const links = [...related.matchAll(/<a href="([^"]+)"[^>]*>([^<]+)<\/a>/g)];
-    assert.deepEqual(links.map(([, , title]) => title), ["Chelsea Boots", "Boots"], "Unknown and duplicate suggestions are omitted");
-    const addresses = links.map(([, href]) => new URL(href, "https://nobi.ai"));
-    assert.deepEqual(addresses.map((url) => url.pathname), ["/shop", "/shop"]);
-    assert.deepEqual(addresses.map((url) => [...url.searchParams.keys()]), [["q"], ["q"]]);
-    assert.deepEqual(addresses.map((url) => url.searchParams.get("q")), [query.trim(), "Boots"], "Use the original query, falling back to the title for a blank query");
-    assert.ok(!related.includes('href="/shop/s/chelsea-boots"'), "Do not link to an unbuilt page");
-    assert.ok(!related.includes("<travel>"), "Query markup stays encoded in the address");
-  } finally {
-    rmSync(folder, { recursive: true, force: true });
-  }
-});
+for (const builtDestinations of [true, false]) {
+  test(`related labels remove generic ranking claims and preserve ${builtDestinations ? "built links" : "original search fallbacks"}`, async () => {
+    const data = readFixturePageData();
+    const query = '  boots & bags / "weekend" + <travel>  ';
+    data.pages[0].relatedSlugs = ["chelsea-boots", "boots", "custom-boots", "chelsea-boots", "not-a-live-page"];
+    data.pages[1].title = 'Best Chelsea & <Travel> Boots from Top Stores';
+    data.pages[1].query = query;
+    data.pages[2].title = "Best Boots";
+    data.pages[2].query = "  ";
+    data.pages.push({ ...data.pages[2], slug: "custom-boots", title: "Boots: Fit & <Style>", query: "custom boots" });
+    const original = structuredClone(data);
+    const folder = makeDistCopy();
+    try {
+      const limits = builtDestinations ? {} : { fileLimit: FileCountBeforePages + 2 };
+      const count = await prerenderWith({ body: data }, folder, limits);
+      assert.equal(count, builtDestinations ? 4 : 1);
+      const html = readFileSync(join(folder, "shop/s/black-leather-boots.html"), "utf8");
+      const body = readBody(html);
+      const relatedStart = body.indexOf(">Related searches</h2>");
+      const related = body.slice(relatedStart, body.indexOf("</section>", relatedStart));
+      const links = [...related.matchAll(/<a href="([^"]+)"[^>]*>([^<]+)<\/a>/g)];
+      assert.deepEqual(links.map(([, , title]) => title), ["Chelsea &amp; &lt;Travel&gt; Boots", "Boots", "Boots: Fit &amp; &lt;Style&gt;"], "Labels are escaped, custom wording survives, and duplicate/unknown suggestions are omitted");
+      const addresses = links.map(([, href]) => new URL(href, "https://nobi.ai"));
+      assert.deepEqual(addresses.map(url => url.pathname), builtDestinations
+        ? ["/shop/s/chelsea-boots", "/shop/s/boots", "/shop/s/custom-boots"] : ["/shop", "/shop", "/shop"]);
+      assert.deepEqual(addresses.map(url => [...url.searchParams.keys()]), builtDestinations ? [[], [], []] : [["q"], ["q"], ["q"]]);
+      const queries = [query.trim(), "Best Boots", "custom boots"];
+      if (!builtDestinations) {
+        assert.deepEqual(addresses.map(url => url.searchParams.get("q")), queries, "Blank queries still fall back to the original source title, not the cleaned label");
+        assert.ok(!related.includes('href="/shop/s/chelsea-boots"'), "Do not link to an unbuilt page");
+      }
+      assert.ok(!related.includes("<travel>") && !related.includes("<Travel>") && !related.includes("<Style>"), "Labels and query markup remain escaped");
+      const hydrated = readScriptJson(html, "shop-nobi-prebuilt-content").data.related;
+      assert.deepEqual(hydrated, ["chelsea-boots", "boots", "custom-boots"].map((slug, index) => ({
+        slug: builtDestinations ? slug : null,
+        title: ["Chelsea & <Travel> Boots", "Boots", "Boots: Fit & <Style>"][index],
+        query: queries[index],
+      })), "Hydration carries the same labels and destinations as rendered HTML");
+      assert.deepEqual(data, original, "The source data is unchanged");
+    } finally {
+      rmSync(folder, { recursive: true, force: true });
+    }
+  });
+}
 
 test("every link to a store in the prebuilt pages carries rel=nofollow", () => {
   const pages = ["shop/s/black-leather-boots.html", "shop/s/chelsea-boots.html", "shop/s/boots.html", "shop/c/shoes.html", "shop.html"];
@@ -284,16 +337,57 @@ test("the Shop Nobi sitemap lists each built category page, search page and web 
   for (const path of ["shop/s/black-leather-boots", "shop/c/shoes", "shop/stories/black-leather-boots"]) {
     assert.ok(shopSitemap.includes(`<loc>https://nobi.ai/${path}</loc>\n    <lastmod>2026-10-11T08:02:11Z</lastmod>`), path);
   }
-  assert.equal(shopSitemap.split("<url>").length - 1, 5, "One category page, three search pages and one story");
-  assert.equal(shopSitemap.split("<lastmod>").length - 1, 5, "Every entry has a lastmod");
+  assert.equal(shopSitemap.split("<url>").length - 1, 4, "One category page, two populated search pages and one story");
+  assert.equal(shopSitemap.split("<lastmod>").length - 1, 4, "Every entry has a lastmod");
   assert.ok(!shopSitemap.includes("neon-boots"));
+  assert.ok(!shopSitemap.includes("<loc>https://nobi.ai/shop/s/boots</loc>"), "Empty search pages stay out of the sitemap");
 });
 
 test("a sitemap entry without a valid refresh time gets the fallback time as its lastmod", () => {
-  const pages = [null, "", "October 11", "2026-10-11T08:02:11Z"].map((refreshedAt, index) => ({ slug: `page-${index}`, refreshedAt }));
+  const pages = [null, "", "October 11", "2026-10-11T08:02:11Z"].map((refreshedAt, index) => ({ slug: `page-${index}`, refreshedAt, products: [{ name: "Item" }] }));
   const sitemap = buildShopNobiSitemap([], pages, [], "2026-10-12T08:10:00Z");
   const lastModifiedTimes = [...sitemap.matchAll(/<lastmod>([^<]+)<\/lastmod>/g)].map(([, time]) => time);
   assert.deepEqual(lastModifiedTimes, ["2026-10-12T08:10:00Z", "2026-10-12T08:10:00Z", "2026-10-12T08:10:00Z", "2026-10-11T08:02:11Z"]);
+});
+
+test("the sitemap publishes displayed photos on all search pages while preserving rights holds", async () => {
+  const source = readFixturePageData().pages[0];
+  const product = { ...source.products[0], imageUrl: "https://cdn.example.com/black.jpg?width=1200&height=1200" };
+  const products = [product, product,
+    { ...product, imageUrl: "javascript:alert(1)" },
+    { ...product, owningMerchantId: "962fb5d1-9238-4ecf-bc36-0ddc304be721", imageUrl: "https://cdn.example.com/cuckoo.jpg" },
+    { ...product, owningMerchantId: "e43e55da-830c-4dc3-82f5-c8995273b2b2", imageUrl: "https://cdn.example.com/esr.jpg" }];
+  const pages = [
+    { ...source, slug: "black-guitars", products },
+    { ...source, slug: "white-guitars", products: [product] },
+    { ...source, slug: "mens-gray-chinos", products: [] },
+    { ...source, slug: "new-category-page", products: [product] },
+  ];
+  const folder = makeDistCopy();
+  try {
+    await prerenderWith({ body: { generatedAt: new Date().toISOString(), pages, retired: [] } }, folder);
+    const sitemap = readFileSync(join(folder, "sitemap-shop.xml"), "utf8");
+    const entries = sitemap.split("<url>").slice(1);
+    assert.ok(sitemap.includes('xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"'));
+    assert.equal(sitemap.split("<image:image>").length - 1, 3, "Deduplicate within each page; omit categories, stories and empty pages");
+    for (const slug of ["black-guitars", "white-guitars", "new-category-page"]) {
+      const entry = entries.find(entry => entry.includes(`<loc>https://nobi.ai/shop/s/${slug}</loc>`));
+      assert.ok(entry.includes("<image:loc>https://cdn.example.com/black.jpg?width=1200&amp;height=1200</image:loc>"), slug);
+    }
+    assert.ok(!sitemap.includes("cuckoo.jpg") && !sitemap.includes("esr.jpg") && !sitemap.includes("javascript:"));
+    const comparison = readScriptJson(readFileSync(join(folder, "shop/s/white-guitars.html"), "utf8"), "shop-nobi-prebuilt-content");
+    assert.equal(comparison.data.products[0].imageUrl, product.imageUrl, "Expanding sitemap coverage preserves the displayed photograph");
+  } finally {
+    rmSync(folder, { recursive: true, force: true });
+  }
+});
+
+test("image sitemap caps each page at 1000 distinct displayed photos", () => {
+  const products = Array.from({ length: 1001 }, (_, index) => ({ imageUrl: `https://cdn.example.com/${index}.jpg` }));
+  const sitemap = buildShopNobiSitemap([], [{ slug: "large-collection", products: [products[0], ...products] }], [], "2026-10-27");
+  assert.equal(sitemap.split("<image:image>").length - 1, 1000);
+  assert.ok(sitemap.includes("/999.jpg</image:loc>"));
+  assert.ok(!sitemap.includes("/1000.jpg"));
 });
 
 test("the pin feed uses specific eligible product copy and leaves the canonical pages and board routes intact", () => {
@@ -318,6 +412,7 @@ test("llms.txt keeps its own text and gains a Shop Nobi section with links to th
   assert.ok(llmsText.startsWith(readOriginal("llms.txt").trimEnd()));
   assert.ok(llmsText.includes("## Shop Nobi"));
   assert.ok(llmsText.includes("- [Black Leather Boots](https://nobi.ai/shop/s/black-leather-boots)"));
+  assert.ok(!llmsText.includes("https://nobi.ai/shop/s/boots)"), "Empty search pages stay out of machine-readable discovery");
 });
 
 test("when the file limit is reached, category room comes first and unbuilt pages stay out of static listings", async () => {

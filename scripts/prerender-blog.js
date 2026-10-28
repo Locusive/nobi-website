@@ -458,7 +458,7 @@ function prerenderOne(meta, slug, shell, bodyHtml) {
   if (bodyHtml) {
     html = html.replace(
       '<div id="root"></div>',
-      `<div id="root"><article class="prerendered-article">\n${bodyHtml}\n</article></div>`
+      `<div id="root"><article class="prerendered-article">\n<h1>${htmlEscape(meta.title || "Nobi")}</h1>\n${bodyHtml}\n</article></div>`
     );
   }
 

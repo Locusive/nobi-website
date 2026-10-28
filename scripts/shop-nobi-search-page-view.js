@@ -3,6 +3,7 @@
 
 import { removeTrackingTags } from "../src/utils/shopNobiPage.js";
 import { encodePaidLink } from "../src/utils/shopNobiPaidLink.js";
+import { readProductPlacement } from "../src/utils/shopNobiProductPlacement.js";
 
 const SlugPattern = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 const CurrencyPattern = /^[A-Z]{3}$/;
@@ -81,6 +82,8 @@ function isUsablePage(page) {
 
 /** Builds the page data for one page. */
 function buildSearchPage(page, links) {
+  const sourceProducts = Array.isArray(page.products) ? page.products : [];
+  const products = sourceProducts.map(buildProduct).filter(Boolean);
   return {
     slug: page.slug,
     query: isText(page.query) ? page.query : page.title,
@@ -93,7 +96,9 @@ function buildSearchPage(page, links) {
     faq: buildFaq(page),
     breadcrumbs: buildBreadcrumbs(page, links.builtSlugs),
     related: buildRelatedPages(page, links),
-    products: (Array.isArray(page.products) ? page.products : []).map(buildProduct).filter(Boolean),
+    products,
+    ...(page.publicationFilteredProducts === true || products.length !== sourceProducts.length
+      ? { publicationFilteredProducts: true } : {}),
   };
 }
 
@@ -147,6 +152,8 @@ function buildProduct(product) {
     currency: CurrencyPattern.test(product.currency ?? "") ? product.currency : null,
     isInStock: product.isInStock === true,
     ...readPaidLinks(product),
+    ...(typeof product.storyPaidLink === "boolean" ? { storyPaidLink: product.storyPaidLink } : {}),
+    ...readProductPlacement(product),
     ...readProductIds(product),
   };
 }

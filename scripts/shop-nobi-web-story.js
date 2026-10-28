@@ -7,14 +7,19 @@ import { BaseUrl, CommissionNotice, readStoreLinkRel } from "../src/utils/shopNo
 import { describeSearchPage, formatPrice, searchPageUrl } from "../src/utils/shopNobiSearchPage.js";
 import { webStoryUrl } from "../src/utils/shopNobiWebStory.js";
 import { IndexableRobots, PortraitPosterSize } from "../src/utils/previewImage.js";
+import { readProductPlacement } from "../src/utils/shopNobiProductPlacement.js";
 
 const Publisher = "Nobi";
 // A square copy of the Nobi icon on white, since Google asks for a logo without a see-through background.
 const PublisherLogoUrl = `${BaseUrl}/shop-nobi-story-logo.png`;
 const StoryTags = { utm_source: "google_web_stories", utm_medium: "referral", utm_campaign: "shop_nobi" };
+const SearchCtaStorySlug = "sofas";
+const SearchCtaTags = { ...StoryTags, utm_campaign: "story_to_search", utm_content: SearchCtaStorySlug };
 const CoverLabel = "Shop Nobi guide";
 const EndText = "The full page has every pick, the whole guide and more questions.";
 const BackLinkText = "See every pick";
+const SearchEndText = "Looking for a different fit? Search Shop Nobi for the style, size and budget you want.";
+const SearchLinkText = "Search for your sofa";
 const StoreLinkText = "See it at the store";
 // The API counts the tap under a new conversation and forwards to the store link with it, since AMP cannot add one.
 const StoreLinkRoute = "https://api.nobi.ai/v1/shop/story-go";
@@ -128,7 +133,10 @@ function buildStoryPageId(storyPage, index, plan) {
 
   const productPages = plan.pages.filter((planned) => planned.kind === StoryPageKind.Product);
   const place = productPages.indexOf(storyPage) + 1;
-  return `${StoryPageKind.Product}-${place}-${product.productVariantId}-${product.owningMerchantId}`;
+  const { placementReason } = readProductPlacement(product);
+  const placement = typeof product.storyPaidLink === "boolean"
+    ? `-${product.storyPaidLink ? "affiliate" : "direct"}-${placementReason || "unknown"}` : "";
+  return `${StoryPageKind.Product}-${place}-${product.productVariantId}-${product.owningMerchantId}${placement}`;
 }
 
 /** Renders the layers of one story page for its kind. */
@@ -182,11 +190,14 @@ function renderProduct(product, slug) {
  * @returns {string} The link, and the notice when the link is paid.
  */
 function renderStoreLink(product, slug) {
-  const linkThroughApi = `${StoreLinkRoute}?url=${encodeURIComponent(product.url)}&page=${encodeURIComponent(slug)}`;
+  const { placementReason } = readProductPlacement(product);
+  const placement = placementReason ? `&placementReason=${placementReason}` : "";
+  const linkThroughApi = `${StoreLinkRoute}?url=${encodeURIComponent(product.url)}&page=${encodeURIComponent(slug)}${placement}`;
   const tooltip = `data-tooltip-text="${htmlEscape(readStoreSite(product.url))}"`;
-  const rel = readStoreLinkRel(product.paidLink);
+  const paidLink = typeof product.storyPaidLink === "boolean" ? product.storyPaidLink : product.paidLink;
+  const rel = readStoreLinkRel(paidLink);
   const link = `<a class="store-link" href="${htmlEscape(linkThroughApi)}" ${tooltip} rel="${rel}" target="_blank">${StoreLinkText}</a>`;
-  return product.paidLink ? `${link}<p class="commission-notice">${CommissionNotice}</p>` : link;
+  return paidLink ? `${link}<p class="commission-notice">${CommissionNotice}</p>` : link;
 }
 
 /** Reads the store's site name from its link, such as "lucchese.com", or the link itself when it cannot be read. */
@@ -200,11 +211,22 @@ function readStoreSite(storeUrl) {
 
 /** Renders the last page, whose swipe-up link opens the full search page. */
 function renderEnd(page) {
-  const backLink = `<a href="${htmlEscape(taggedSearchPageUrl(page.slug))}">${BackLinkText}</a>`;
+  const isSearchTest = page.slug === SearchCtaStorySlug;
+  const destination = isSearchTest ? taggedStorySearchHomeUrl() : taggedSearchPageUrl(page.slug);
+  const linkText = isSearchTest ? SearchLinkText : BackLinkText;
+  const bodyText = isSearchTest ? SearchEndText : EndText;
+  const backLink = `<a href="${htmlEscape(destination)}">${linkText}</a>`;
   return [
-    textLayer(`<p class="label">${htmlEscape(page.title)}</p><p class="text">${EndText}</p>`),
+    textLayer(`<p class="label">${htmlEscape(page.title)}</p><p class="text">${bodyText}</p>`),
     `<amp-story-page-outlink layout="nodisplay">${backLink}</amp-story-page-outlink>`,
   ].join("\n");
+}
+
+/** Links the one test story to the search home without submitting a query for the visitor. */
+function taggedStorySearchHomeUrl() {
+  const address = new URL("/shop", BaseUrl);
+  Object.entries(SearchCtaTags).forEach(([key, value]) => address.searchParams.set(key, value));
+  return address.toString();
 }
 
 /** Wraps text in a centered layer on the dark background. */

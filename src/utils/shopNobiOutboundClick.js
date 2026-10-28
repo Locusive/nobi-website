@@ -58,11 +58,11 @@ function readVisit(slug, browser) {
     return { isPerson: false, conversationId: null, clickId: null };
   }
 
-  return { isPerson: true, conversationId: null, clickId: buildClickId(slug, readVisitId(browser)) };
+  return { isPerson: true, conversationId: null, clickId: buildClickId(slug, readPageVisitId(browser)) };
 }
 
-/** Reads the page view's visit id, making it at the first click so the build never makes one. */
-function readVisitId(browser) {
+/** Reads the document visit id on exposure or click; server rendering never calls this function. */
+export function readPageVisitId(browser) {
   browser[PageVisitIdKey] ??= createVisitId();
   return browser[PageVisitIdKey];
 }

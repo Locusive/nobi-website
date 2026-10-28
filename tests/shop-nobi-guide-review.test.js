@@ -109,6 +109,16 @@ const ReviewedTopics = [
   ["electrical-switches", /finish/i, "Yes, a paintable finish is available for switches that you want to match a custom color."],
   ["power-electrical-supplies", /voltage/i, "Select a supply that meets or exceeds the total wattage of the devices you plan to connect."],
   ["hydration-system-accessories", /temperature/i, "Most soft flasks are designed for cold drinks; for hot liquids use insulated hard bottles."],
+  ["brown-gold-charms", /bag/i, "Most are designed for standard charm bracelets, but larger or heavier charms may need a sturdier chain."],
+  ["14k-gold-vermeil-jewelry", /construction/i, "Look for a hallmark indicating 14k gold over sterling silver and a weight that feels solid rather than lightweight plating."],
+  ["18k-white-gold-pendant-necklaces", /construction/i, "The product description should state the karat; plated pieces usually mention “gold-filled” or “plated” instead of a karat."],
+  ["14k-white-gold-rings", /resiz/i, "Yes, a jeweler can resize it, though very small or intricate designs may be more challenging."],
+  ["18k-white-gold-eternity-rings", /weight/i, "A higher total carat weight provides more brilliance, but the band’s thickness and comfort fit are also important for everyday wear."],
+  ["14k-rose-gold-signet-rings", /engrav/i, "Yes, 14k rose gold is strong enough for daily use and resists tarnish better than higher karat gold."],
+  ["black-gold-rings", /construction/i, "Solid gold rings are usually marked with a karat stamp like 14k or 18k and feel heavier than plated pieces."],
+  ["18k-white-gold-earrings", /finish/i, "No, white gold is gold alloyed with white metals and plated, while platinum is a naturally white, denser metal."],
+  ["blue-green-stud-earrings", /material/i, "Nickel-free options like surgical-steel, titanium or 14-karat gold are usually safest."],
+  ["belts", /material/i, "Real leather feels soft, has a natural grain, and develops a patina over time, unlike synthetic leather which feels plasticky."],
 ];
 
 test("reviewed guides replace unsafe source advice consistently in visible HTML, schema and hydration", async t => {

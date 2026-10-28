@@ -13,6 +13,16 @@ import { readBody, readScriptJson } from "./shop-nobi-test-build.js";
 
 const Fixture = JSON.parse(readFileSync(new URL("./fixtures/published-claim-pages.json", import.meta.url), "utf8"));
 const DecisionTopics = {
+  "mens-leather-sneakers-athletic-shoes": ["activity", "upper", "width"],
+  "tan-clothing": ["game bag", "lining", "finish"],
+  "pearl-shirts-and-tops": ["color", "snap", "trim"],
+  "kids-diamond-necklaces": ["age", "chain", "stone"],
+  "yellow-bracelets": ["ceramic", "closure", "color"],
+  "black-undershirts": ["pack", "neckline", "wool"],
+  "blue-navy-sandals": ["heel", "strap", "finish"],
+  "outdoor-storage-boxes": ["replacement lid", "internal dimensions", "seating"],
+  "vanilla-perfume-cologne": ["format", "volume", "application"],
+  "linen-sheet-sets": ["pocket depth", "pillowcase", "blend"],
   "duvet-covers": ["dimensions", "closure", "care"],
   "custom-print-mobile-phone-cases": ["phone model", "ready-printed", "printing"],
   "kids-shorts": ["set", "waist", "size"],
@@ -31,7 +41,8 @@ function normalize(page) {
 }
 
 test("audited page corrections remove the identified claims and preserve every retained shopping record", () => {
-  assert.equal(Fixture.pages.reduce((sum, page) => sum + page.products.length, 0), 163);
+  assert.equal(Fixture.pages.length, 20);
+  assert.equal(Fixture.pages.reduce((sum, page) => sum + page.products.length, 0), 329);
   for (const source of Fixture.pages) {
     const page = normalize(source);
     const snapshot = structuredClone(page);
@@ -54,7 +65,8 @@ test("all corrected pages agree across rendered metadata, guidance, FAQ schema a
   const folder = mkdtempSync(new URL("../node_modules/.published-claims-", import.meta.url));
   t.after(() => rmSync(folder, { recursive: true, force: true }));
   writeFileSync(join(folder, "index.html"), '<html><head><!--__PRERENDER_TITLE__--><!--__PRERENDER_DESC__--></head><body><div id="root"></div></body></html>');
-  const pages = buildSearchPages(Fixture.pages, 10).pages;
+  const pages = buildSearchPages(Fixture.pages, Fixture.pages.length).pages;
+  assert.equal(pages.length, Fixture.pages.length);
   const plan = { searchPages: pages, categoryPages: [], popularSearches: buildPopularSearches(pages, []) };
   const snapshot = structuredClone(plan);
   const { renderPrebuiltPageBody } = await loadPageRenderer();
@@ -91,7 +103,8 @@ test("filtered and empty versions cannot retain the authored claims or FAQ schem
       else if (mode === "upstream filtered") page.publicationFilteredProducts = true;
       else page.products[0].url = "javascript:alert(1)";
     }
-    const pages = buildSearchPages(sources, 10).pages;
+    const pages = buildSearchPages(sources, sources.length).pages;
+    assert.equal(pages.length, Fixture.pages.length);
     await writePrebuiltPages({ searchPages: pages, categoryPages: [], popularSearches: buildPopularSearches(pages, []) }, folder);
     for (const page of pages) {
       const html = readFileSync(join(folder, `shop/s/${page.slug}.html`), "utf8");

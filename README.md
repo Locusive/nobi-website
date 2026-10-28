@@ -84,6 +84,13 @@ unchanged product cards. The optional semantic table scrolls on narrow screens
 and follows the guide's existing landing-experiment position. These specifications
 are attributed references, not hands-on performance rankings.
 
+The `womens-khaki-pants` page uses the same comparison layout with clothing-specific
+headers. Its four reviewed models distinguish petite/tall hiking cuts, cotton-twill
+wide-leg trousers and cotton reverse-sateen double-front pants. The unresolved
+25-inch travel color is excluded from the comparison. Exact identity guards and
+publication-filter suppression apply; no size availability, office suitability
+or universal best ranking is inferred.
+
 `scripts/prerender-shop.js` builds one page per Shop Nobi search at
 `/shop/s/<slug>`, with the products in the HTML, one page per top category at
 `/shop/c/<slug>`, and a list of popular searches on `/shop`. It also writes

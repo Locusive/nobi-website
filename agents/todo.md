@@ -129,3 +129,6 @@ See `agents/feature_plans/shop_guide_carry_care.md`. These ten pages are a finit
 
 ## Laptop stand comparison
 - [ ] Complete agents/feature_plans/shop_laptop_stand_comparison.md; keep7/28-day measurement pending until due.
+
+## Women’s khaki pants comparison
+- [ ] Complete agents/feature_plans/shop_khaki_pants_comparison.md; parent owns release and live verification.

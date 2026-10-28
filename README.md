@@ -564,3 +564,12 @@ references disappear when an identity changes or publication filtering applies.
 Product cards, prices, links, ordering and landing-experiment allocation remain
 unchanged. Manufacturer descriptions are dated evidence, not clinical tests or
 current stock assurances.
+
+## Audited product guidance
+
+`shop-nobi-published-claim-copy.js` corrects ten existing bedding, phone-case,
+children's apparel, jewelry, bowl, footwear and bath-soak pages. It replaces
+unsupported health, weather, durability and universal care claims with
+page-specific selection criteria. It adds no product specifications, ratings
+or inventory assertions. Normal empty/filtered publication rules still apply;
+product records, prices, links, order and landing assignment stay unchanged.

@@ -1,3 +1,4 @@
+import { withHandLotionComparison } from "./shop-nobi-hand-lotion-comparison.js";
 import { withBrownShirtComparison } from "./shop-nobi-brown-shirt-comparison.js";
 import { withSilverChainComparison } from "./shop-nobi-silver-chain-comparison.js";
 import { withClothNapkinComparison } from "./shop-nobi-cloth-comparison.js";
@@ -156,6 +157,7 @@ export function withAuthoredSearchPageCopy(page) {
 /** Selects reviewed copy before checking its price and publication consistency. */
 function applyAuthoredCopy(page) {
   if ((page.products ?? []).length === 0) return withEmptySearchCopy(page);
+  if (page.slug === "hand-lotion") return withHandLotionComparison(page);
   if (page.slug === "laptop-stands") return withLaptopStandComparison(page);
   if (page.slug === "womens-khaki-pants") return withKhakiPantsComparison(page);
   if (page.slug === "teak-outdoor-furniture-sets") return withTeakSetComparison(page);

@@ -554,3 +554,13 @@ control each row and source, preserving product cards and landing allocation.
 ### Brown shirt model comparison
 
 `shop-nobi-brown-shirt-comparison.js` compares documented fabric composition, cut and model-specific care for three shirts. Exact identity gates and publication-filter suppression preserve the existing comparison contract. All product records, source context and landing experiment allocation remain unchanged; model facts do not promise current stock, comfort or durability.
+
+## Hand lotion comparison
+
+The existing hand-lotion page compares two exact reviewed models by labeled
+volume, scent description and labeled hand or hand-and-body use. It replaces
+unsupported price-to-richness and botanical-benefit claims. Model rows and
+references disappear when an identity changes or publication filtering applies.
+Product cards, prices, links, ordering and landing-experiment allocation remain
+unchanged. Manufacturer descriptions are dated evidence, not clinical tests or
+current stock assurances.

@@ -75,6 +75,15 @@ and Stories are unchanged. This is a
 site-wide rollout, not a controlled click-through experiment, and it does not
 guarantee Google's chosen title/snippet or indexing.
 
+The existing `laptop-stands` page also has a concise manufacturer-specification
+comparison in its buying guide. `scripts/shop-nobi-laptop-comparison.js` requires
+the exact reviewed listing name, brand, merchant, product ID and variant URL for
+each row. A changed or removed listing loses its row and source; empty or
+publication-filtered pages show no comparison. Prices and stock remain in the
+unchanged product cards. The optional semantic table scrolls on narrow screens
+and follows the guide's existing landing-experiment position. These specifications
+are attributed references, not hands-on performance rankings.
+
 `scripts/prerender-shop.js` builds one page per Shop Nobi search at
 `/shop/s/<slug>`, with the products in the HTML, one page per top category at
 `/shop/c/<slug>`, and a list of popular searches on `/shop`. It also writes

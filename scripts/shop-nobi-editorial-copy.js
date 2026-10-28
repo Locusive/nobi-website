@@ -1,6 +1,7 @@
 // Editorial corrections for selected search pages. Product facts and the shared build plan stay intact.
 
 import { withPublicationQuality } from "./shop-nobi-publication-quality.js";
+import { withLaptopStandComparison } from "./shop-nobi-laptop-comparison.js";
 import { withMailboxClarification } from "./shop-nobi-mailbox-copy.js";
 import { ClothingAccessoryCopy } from "./shop-nobi-clothing-accessory-copy.js";
 import { AdditionalBuyingCopy } from "./shop-nobi-additional-buying-copy.js";
@@ -150,6 +151,7 @@ export function withAuthoredSearchPageCopy(page) {
 /** Selects reviewed copy before checking its price and publication consistency. */
 function applyAuthoredCopy(page) {
   if ((page.products ?? []).length === 0) return withEmptySearchCopy(page);
+  if (page.slug === "laptop-stands") return withLaptopStandComparison(page);
   if (page.slug === "mailbox-posts") return withMailboxClarification(page);
   if (page.slug === "14k-white-gold-statement-rings") return withWhiteGoldClarification(page);
   if (page.slug === "blue-suitcases") return withSuitcaseClarification(page);

@@ -51,8 +51,42 @@ function BuyingGuide({ page }) {
     {page.guide.map((paragraph, index) => (
       <p key={index} className="mt-3 max-w-3xl text-black/70 dark:text-white/70">{paragraph}</p>
     ))}
+    <StandComparison comparison={page.comparison} />
     <GuideSources sources={page.guideSources ?? []} />
   </>;
+}
+
+/** An optional semantic comparison stays inside the guide's existing experiment placement. */
+function StandComparison({ comparison }) {
+  if (!comparison?.rows?.length) return null;
+  return (
+    <div className="mt-5 max-w-full rounded-lg border border-black/10 dark:border-white/20">
+      <div className="p-4">
+        <h2 className="text-lg font-semibold">{comparison.caption}</h2>
+        <p className="mt-1 text-sm text-black/60 dark:text-white/60">{comparison.note}</p>
+        <p className="mt-2 text-sm text-black/60 dark:text-white/60 sm:hidden">Scroll sideways to compare all details.</p>
+      </div>
+      <div role="region" aria-label={comparison.caption} tabIndex={0}
+        className="max-w-full overflow-x-auto rounded-b-lg focus-visible:outline focus-visible:outline-2">
+        <table className="w-full min-w-[40rem] text-left text-sm">
+          <caption className="sr-only">{comparison.caption}</caption>
+          <thead className="bg-black/5 dark:bg-white/10">
+            <tr>{["Model", "Setup", "Adjustment", "Device-fit check"].map(label => <th key={label} scope="col" className="p-3 font-semibold">{label}</th>)}</tr>
+          </thead>
+          <tbody>
+            {comparison.rows.map(row => (
+              <tr key={row.model} className="border-t border-black/10 align-top dark:border-white/20">
+                <th scope="row" className="p-3 font-medium">{row.model}</th>
+                <td className="p-3">{row.setup}</td>
+                <td className="p-3">{row.adjustment}</td>
+                <td className="p-3">{row.fit}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
 }
 
 /** Optional references for the exact product facts in authored guidance. */

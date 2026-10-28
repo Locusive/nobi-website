@@ -1,7 +1,9 @@
 // src/pages/ShopPage.jsx
-import React, { useEffect, useMemo, useRef } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { LiveSearchAnchor, watchLandingOutcomes } from "../utils/shopNobiLandingExperiment";
 import { useLocation } from "react-router-dom";
+import ShopNobiProductPageContent from "../components/shopNobi/ShopNobiProductPageContent";
+import { hasCurrentProductOffers, withoutProductPrices } from "../utils/shopNobiProductPage";
 import AudioBuyingGuide from "../components/shopNobi/AudioBuyingGuide";
 import Nav from "../components/home/Nav";
 import AddYourStoreLink from "../components/shopNobi/AddYourStoreLink";
@@ -38,7 +40,16 @@ export default function ShopPage({ prebuiltContent: builtContent = null }) {
   const liveResultsHaveDrawn = useLiveResultsHaveDrawn();
   const { pathname } = useLocation();
   const embeddedContent = useMemo(() => readEmbeddedPrebuiltContent(pathname), [pathname]);
-  const prebuiltContent = builtContent || embeddedContent;
+  const originalContent = builtContent || embeddedContent;
+  const [offerClock, setOfferClock] = useState(Date.now);
+  const isProductPage = originalContent?.kind === PrebuiltContentKind.ProductPage;
+  const prebuiltContent = isProductPage && !hasCurrentProductOffers(originalContent.data, offerClock)
+    ? { ...originalContent, data: withoutProductPrices(originalContent.data) } : originalContent;
+  useEffect(() => {
+    if (!isProductPage || !hasCurrentProductOffers(originalContent.data)) return undefined;
+    const timer = setTimeout(() => setOfferClock(Date.now()), Date.parse(originalContent.data.offersExpireAt) - Date.now() + 1);
+    return () => clearTimeout(timer);
+  }, [originalContent, isProductPage]);
   useEffect(() => prebuiltContent?.kind === PrebuiltContentKind.SearchPage
     ? watchLandingOutcomes(prebuiltContent.data) : undefined, [prebuiltContent]);
   const place = choosePrebuiltContentPlace(prebuiltContent?.kind, { assistantHasMounted, liveResultsHaveDrawn });
@@ -66,6 +77,7 @@ function PrebuiltContent({ content }) {
   if (!content) {
     return <LoadingMessage />;
   }
+  if (content.kind === PrebuiltContentKind.ProductPage) return <ShopNobiProductPageContent page={content.data} />;
   if (content.kind === PrebuiltContentKind.SearchPage) {
     return <ShopNobiSearchPageContent page={content.data} />;
   }

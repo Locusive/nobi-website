@@ -132,3 +132,10 @@ See `agents/feature_plans/shop_guide_carry_care.md`. These ten pages are a finit
 
 ## Women’s khaki pants comparison
 - [ ] Complete agents/feature_plans/shop_khaki_pants_comparison.md; parent owns release and live verification.
+
+## NOBI2901 Bodum comparison
+- [x] Source and freshness analysis approved.
+- [x] Implement one guarded product route.
+- [x] Offline full tests and render receipts.
+- [ ] Root independent review and preview.
+- [ ] Root release and live verification.

@@ -1,6 +1,7 @@
 // The build embeds each prebuilt Shop Nobi page's data in its HTML as {kind, path, data}, so ShopPage can
 // show and describe the same content in the browser until live products take its place.
 
+import { buildProductPageSeo, hasCurrentProductOffers, withoutProductPrices } from "./shopNobiProductPage.js";
 import { ShopNobiPageSeo } from "./shopNobiPage.js";
 import { buildSearchPageSeo } from "./shopNobiSearchPage.js";
 import { buildCategoryPageSeo } from "./shopNobiCategoryPage.js";
@@ -11,6 +12,7 @@ export const PrebuiltContentElementId = "shop-nobi-prebuilt-content";
 /** The kinds of prebuilt content. index.html checks for "search-page". */
 export const PrebuiltContentKind = {
   SearchPage: "search-page",
+  ProductPage: "product-page",
   CategoryPage: "category-page",
   PopularSearches: "popular-searches",
 };
@@ -46,7 +48,11 @@ export function readEmbeddedPrebuiltContent(pathname) {
 
   const content = JSON.parse(element.textContent);
   const currentPath = pathname.replace(/(.)\/+$/, "$1");
-  return content.path === currentPath ? content : null;
+  if (content.path !== currentPath) return null;
+  if (content.kind === PrebuiltContentKind.ProductPage && !hasCurrentProductOffers(content.data)) {
+    return { ...content, data: withoutProductPrices(content.data) };
+  }
+  return content;
 }
 
 /**
@@ -65,7 +71,7 @@ export function choosePrebuiltContentPlace(kind, { assistantHasMounted, liveResu
     return PrebuiltContentPlace.BelowSearch;
   }
 
-  const isSearchPage = kind === PrebuiltContentKind.SearchPage;
+  const isSearchPage = kind === PrebuiltContentKind.SearchPage || kind === PrebuiltContentKind.ProductPage;
   return isSearchPage || !assistantHasMounted ? PrebuiltContentPlace.AboveSearch : PrebuiltContentPlace.Hidden;
 }
 
@@ -104,6 +110,7 @@ export function watchForLiveResults(target, onDrawn) {
  * @returns {object} The values for useSEO.
  */
 export function buildPrebuiltContentSeo(content) {
+  if (content.kind === PrebuiltContentKind.ProductPage) return buildProductPageSeo(content.data);
   if (content.kind === PrebuiltContentKind.SearchPage) {
     return buildSearchPageSeo(content.data);
   }

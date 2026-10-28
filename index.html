@@ -56,7 +56,7 @@
         var options = { accountId: '9282b7cb-66ce-4d53-8c37-c291352ef03d', searchResultsPage: true, hideQuickAdd: true };
         var prebuiltContent = document.getElementById('shop-nobi-prebuilt-content');
         var content = prebuiltContent && JSON.parse(prebuiltContent.textContent);
-        if (content && content.kind === 'search-page' && content.path === path.replace(/\/+$/, '')) {
+        if (content && (content.kind === 'search-page' || content.kind === 'product-page') && content.path === path.replace(/\/+$/, '')) {
           options.openingQuery = content.data.query;
           options.openingConversationId = window.shopNobiPageConversationId;
         }

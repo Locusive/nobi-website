@@ -1,6 +1,8 @@
 // Builds the files that list the Shop Nobi pages: the Shop Nobi
 // sitemap, the redirects for retired pages, and the llms.txt section.
 
+import { BodumPath } from "../src/utils/shopNobiProductPage.js";
+import { BaseUrl } from "../src/utils/shopNobiPage.js";
 import { htmlEscape } from "./prerender-blog.js";
 import { searchPagePath, searchPageUrl } from "../src/utils/shopNobiSearchPage.js";
 import { categoryPageUrl } from "../src/utils/shopNobiCategoryPage.js";
@@ -24,8 +26,9 @@ const SitemapTimePattern = /^\d{4}-\d{2}-\d{2}(?:T\d{2}:\d{2}(?::\d{2}(?:\.\d+)?
  * @param {string} fallbackLastModified The lastmod for a page without a valid refresh time.
  * @returns {string} The sitemap XML.
  */
-export function buildShopNobiSitemap(categoryPages, searchPages, stories, fallbackLastModified) {
+export function buildShopNobiSitemap(categoryPages, searchPages, stories, fallbackLastModified, productPage = null) {
   const pageEntries = [
+    ...(productPage?.products.length ? [{ url: `${BaseUrl}${BodumPath}`, refreshedAt: productPage.offersCheckedAt }] : []),
     ...categoryPages.map((category) => ({ url: categoryPageUrl(category.slug), refreshedAt: category.refreshedAt })),
     ...searchPages.filter((page) => page.products?.length > 0).map((page) => ({ url: searchPageUrl(page.slug), refreshedAt: page.refreshedAt,
       images: [...new Set((page.products ?? []).map(product => product.imageUrl).filter(Boolean))].slice(0, SitemapImageLimitPerPage) })),

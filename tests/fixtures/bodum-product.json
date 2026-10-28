@@ -1,0 +1,173 @@
+{
+  "generatedAt": "2026-10-28T21:04:02Z",
+  "page": {
+    "slug": "french-presses",
+    "query": "french presses",
+    "title": "Best French Presses from Top Stores",
+    "description": "Compare the best french presses from top stores in one place.",
+    "guide": [
+      "French presses listed here range from $20 to $140. Common materials are double-walled stainless steel, glass, and ceramic, with many offering a polished or brushed finish.",
+      "When picking a press, consider capacity, 8-cup models are typical for home use-and whether the wall is insulated to keep coffee hot longer. A sturdy metal filter and a comfortable plunger are also important.",
+      "Cleaning is easier with removable filters and dishwasher-safe parts. If you prefer a lighter press, glass models are lighter but can be more fragile than steel."
+    ],
+    "faq": [
+      {
+        "answer": "A standard ratio is about 1\u202foz (28\u202fg) of coffee to 8\u202foz of water.",
+        "question": "How much coffee should I use per cup in a French press?"
+      },
+      {
+        "answer": "Yes, the vacuum layer reduces heat loss, keeping coffee warm for longer.",
+        "question": "Does a double-walled press keep coffee hotter?"
+      },
+      {
+        "answer": "It works for loose-leaf tea, but the metal filter may let small particles through.",
+        "question": "Can I use a French press for tea?"
+      }
+    ],
+    "categoryPath": "home_garden.kitchen_dining.kitchen_appliances.coffee_machines.french_presses",
+    "breadcrumbs": [
+      {
+        "name": "Kitchen & Dining",
+        "slug": null
+      },
+      {
+        "name": "Kitchen Appliances",
+        "slug": null
+      },
+      {
+        "name": "Coffee Machines",
+        "slug": "coffee-machines"
+      },
+      {
+        "name": "French Presses",
+        "slug": "french-presses"
+      }
+    ],
+    "relatedSlugs": [
+      "coffee-machines",
+      "coffee-filters",
+      "gray-coffee-machines",
+      "white-coffee-machines",
+      "espresso-machines",
+      "hot-drink-makers"
+    ],
+    "refreshedAt": "2026-10-17T08:23:01Z",
+    "products": [
+      {
+        "url": "https://seattlecoffeegear.com/products/bodum-tribute-double-wall-french-press?variant=53465563562291",
+        "name": "Bodum Tribute Double Wall French Press",
+        "brand": "Bodum",
+        "price": 39.99,
+        "currency": "USD",
+        "imageUrl": "https://cdn.shopify.com/s/files/1/0831/7573/5603/files/12076-57_2__1.webp?v=1782918975",
+        "isInStock": true,
+        "storeName": "Seattle Coffee Gear",
+        "owningMerchantId": "a4d716d5-f252-49b4-ba1a-e64dd17a04ee",
+        "productVariantId": "c76e9271-1ea1-4fbd-8d6d-4b0046d20aa9",
+        "storeLink": "https://seattlecoffeegear.com/products/bodum-tribute-double-wall-french-press?variant=53465563562291&utm_source=shop_nobi&utm_medium=referral&utm_campaign=shop_nobi&utm_term=french+presses",
+        "storyStoreLink": "https://seattlecoffeegear.com/products/bodum-tribute-double-wall-french-press?variant=53465563562291&utm_source=google_web_stories&utm_medium=referral&utm_campaign=shop_nobi&utm_term=french+presses",
+        "paidLink": false,
+        "storyPaidLink": false
+      },
+      {
+        "url": "https://www.kitchenkapers.com/products/bodum-tribute-double-wall-ss-8-cup-french-press?variant=44936103723204",
+        "name": "Bodum Tribute Double Wall French Press",
+        "brand": "Bodum",
+        "price": 49.95,
+        "currency": "USD",
+        "imageUrl": "https://cdn.shopify.com/s/files/1/2373/0269/files/12076-57_1_1-resized.jpg?v=1749773244",
+        "isInStock": true,
+        "storeName": "Kitchen Kapers",
+        "owningMerchantId": "e310fff6-9a8c-4654-8e78-eca20e7d28a5",
+        "productVariantId": "f01d6eb1-68ad-48d8-9225-59756887fa98",
+        "storeLink": "https://www.kitchenkapers.com/products/bodum-tribute-double-wall-ss-8-cup-french-press?variant=44936103723204&utm_source=shop_nobi&utm_medium=referral&utm_campaign=shop_nobi&utm_term=french+presses",
+        "storyStoreLink": "https://www.kitchenkapers.com/products/bodum-tribute-double-wall-ss-8-cup-french-press?variant=44936103723204&utm_source=google_web_stories&utm_medium=referral&utm_campaign=shop_nobi&utm_term=french+presses",
+        "paidLink": false,
+        "storyPaidLink": false
+      }
+    ],
+    "publicationFilteredProducts": false
+  },
+  "merchantProducts": [
+    {
+      "id": 10212922884403,
+      "title": "Bodum Tribute Double Wall French Press",
+      "vendor": "Bodum",
+      "handle": "bodum-tribute-double-wall-french-press",
+      "description": "<p>Never worry about breaking your French press again with the Bodum Tribute Double Wall French Press. Built from insulated double wall stainless steel, the Bodum Tribute offers classic press-style coffee in a solid and sturdy package. A slightly shorter press length and mesh-and-silicone filter promises cleaner cups than traditional presses. 34 ounce max capacity.</p>",
+      "requires_selling_plan": false,
+      "variants": [
+        {
+          "id": 53465563562291,
+          "title": "Default Title",
+          "option1": "Default Title",
+          "option2": null,
+          "option3": null,
+          "sku": "CFP861P0400",
+          "requires_shipping": true,
+          "taxable": true,
+          "featured_image": null,
+          "available": true,
+          "name": "Bodum Tribute Double Wall French Press",
+          "public_title": null,
+          "options": [
+            "Default Title"
+          ],
+          "price": 3999,
+          "weight": 907,
+          "compare_at_price": null,
+          "inventory_management": "shopify",
+          "barcode": null,
+          "quantity_rule": {
+            "min": 1,
+            "max": null,
+            "increment": 1
+          },
+          "quantity_price_breaks": [],
+          "requires_selling_plan": false,
+          "selling_plan_allocations": []
+        }
+      ]
+    },
+    {
+      "id": 8287876513988,
+      "title": "Bodum Tribute Double Wall French Press",
+      "vendor": "Bodum",
+      "handle": "bodum-tribute-double-wall-ss-8-cup-french-press",
+      "description": "<p>The Bodum Tribute Double Wall French Press perfects our favorite brewing method with excellent heat retention and a premium stainless design that brings a little personality to the breakfast table. The TRIBUTE PRESSO is based on Bodum's iconic french press brewing system, which delivers a full-flavored extraction, while its unique double-wall construction ensures your coffee stays hotter for longer. Beloved by coffee connoisseurs for its simplicity of brewing and purity of taste, the French press brewing system transforms hot water and coarsely ground beans into that most flavorsome of drinks in just four short minutes. All without using wasteful paper filters, plastic capsules and the other trappings of modern coffee brewing. Combining classic French press taste with a bold, modern style, the TRIBUTE PRESSO coffee maker allows you to brew and entertain in style. It also makes a great gift for the environmentally conscious coffee lover in your life.</p>\n<p><strong>Features of the Bodum Tribute Double Wall French Press include:</strong></p>\n<ul>\n<li>French press functionality with a durable stainless steel double wall construction for greater heat retention</li>\n<li>34 oz. capacity brews about 8 European cups (4 oz)/ 4 US cups (8 oz)</li>\n<li>Silicone and mesh plunger prevents scratching, offers a more complete filtration, and reduces sediment</li>\n<li>Black plastic handle that\u2019s cool to touch and comfortable to use</li>\n<li>Environmentally friendly method of brewing \u2013 no paper filters or plastic capsules required</li>\n<li>Easy to use and easy to clean</li>\n</ul>",
+      "requires_selling_plan": false,
+      "variants": [
+        {
+          "id": 44936103723204,
+          "title": "Default Title",
+          "option1": "Default Title",
+          "option2": null,
+          "option3": null,
+          "sku": "46151",
+          "requires_shipping": true,
+          "taxable": true,
+          "featured_image": null,
+          "available": true,
+          "name": "Bodum Tribute Double Wall French Press",
+          "public_title": null,
+          "options": [
+            "Default Title"
+          ],
+          "price": 4995,
+          "weight": 0,
+          "compare_at_price": 5995,
+          "inventory_management": "shopify",
+          "barcode": "699965450656",
+          "quantity_rule": {
+            "min": 1,
+            "max": null,
+            "increment": 1
+          },
+          "quantity_price_breaks": [],
+          "requires_selling_plan": false,
+          "selling_plan_allocations": []
+        }
+      ]
+    }
+  ]
+}

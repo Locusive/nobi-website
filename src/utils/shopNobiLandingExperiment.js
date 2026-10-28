@@ -29,12 +29,19 @@ export function landingEventDetails(slug, browser = globalThis) {
 
 /** Focus the existing search input without navigating away, changing acquisition tags or running a search. */
 export function focusLandingSearch(event, slug, browser = globalThis) {
+  if (focusSearchInput(event, browser)) {
+    sendShopNobiEvent("Shop Nobi Refine Search", landingEventDetails(slug, browser), browser);
+  }
+}
+
+/** Focuses the visitor's search box without submitting or assigning an experiment event. */
+export function focusSearchInput(event, browser = globalThis) {
   const input = browser.document.querySelector(`#${LiveSearchAnchor} [data-testid="message-input"]`);
-  if (!input) return; // The native anchor still works while the assistant loads.
+  if (!input) return false; // Native anchor works while the assistant loads.
   event.preventDefault();
   input.focus({ preventScroll: true });
   input.scrollIntoView({ behavior: "auto", block: "center" });
-  sendShopNobiEvent("Shop Nobi Refine Search", landingEventDetails(slug, browser), browser);
+  return true;
 }
 
 /**

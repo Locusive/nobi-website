@@ -1,3 +1,4 @@
+import { withClothNapkinComparison } from "./shop-nobi-cloth-comparison.js";
 import { withTeakSetComparison } from "./shop-nobi-teak-comparison.js";
 // Editorial corrections for selected search pages. Product facts and the shared build plan stay intact.
 
@@ -156,6 +157,7 @@ function applyAuthoredCopy(page) {
   if (page.slug === "laptop-stands") return withLaptopStandComparison(page);
   if (page.slug === "womens-khaki-pants") return withKhakiPantsComparison(page);
   if (page.slug === "teak-outdoor-furniture-sets") return withTeakSetComparison(page);
+  if (page.slug === "cloth-napkins") return withClothNapkinComparison(page);
   if (page.slug === "mailbox-posts") return withMailboxClarification(page);
   if (page.slug === "14k-white-gold-statement-rings") return withWhiteGoldClarification(page);
   if (page.slug === "blue-suitcases") return withSuitcaseClarification(page);

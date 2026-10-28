@@ -526,3 +526,11 @@ package contents, layout and ordering checks. Manufacturer model facts require e
 catalog identities; filtered or removed products cannot retain their comparison rows
 or sources. No selected cushion color, current stock or offer is inferred. The catalog
 records, search query, earning links and landing experiment remain unchanged.
+
+### Cloth napkin comparison
+
+The existing cloth napkin page compares three exact catalog models by format, set
+count, dimensions and specific care instructions. Dinner and cocktail formats remain
+distinct; linen composition does not imply common washing or drying instructions.
+Unknown Matouk shape details are omitted. Exact identity and publication-filter gates
+control each row and source, preserving product cards and landing allocation.

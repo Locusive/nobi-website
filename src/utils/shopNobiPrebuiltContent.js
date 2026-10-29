@@ -57,7 +57,8 @@ export function readEmbeddedPrebuiltContent(pathname) {
 
 /**
  * Chooses where the prebuilt content shows. Search pages keep it above the live search and category pages below the
- * search box until live products are drawn. Other content leaves when the assistant arrives.
+ * search box until live products are drawn. Root browse links move below the mounted assistant; only the loading
+ * message leaves when the assistant arrives.
  *
  * @param {string | undefined} kind The prebuilt content's kind, or undefined when the page has none.
  * @param {{assistantHasMounted: boolean, liveResultsHaveDrawn: boolean}} progress How far the live search has got.
@@ -67,7 +68,7 @@ export function choosePrebuiltContentPlace(kind, { assistantHasMounted, liveResu
   if (liveResultsHaveDrawn) {
     return PrebuiltContentPlace.Hidden;
   }
-  if (kind === PrebuiltContentKind.CategoryPage) {
+  if (kind === PrebuiltContentKind.CategoryPage || (kind === PrebuiltContentKind.PopularSearches && assistantHasMounted)) {
     return PrebuiltContentPlace.BelowSearch;
   }
 

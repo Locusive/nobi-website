@@ -280,7 +280,11 @@ page. Older embedded data falls back to the related search's title.
 In the browser, a search page keeps its prebuilt products above the live search,
 and a category page keeps its searches under the search box, until the assistant
 bundle draws live products. A refused or failed live search therefore leaves the
-prebuilt content in place. A click on a prebuilt product sends the API the same
+prebuilt content in place. On `/shop`, browse links remain below the idle assistant
+without hiding its headline or suggestions. Twelve categories are expanded;
+native disclosures retain the remaining category and search links in the HTML.
+The mounted browse section uses an H2 instead of repeating the initial page intro.
+Only a live product draw hides this navigation. A click on a prebuilt product sends the API the same
 "Click On Search Result" event as a live product, with the same entry point,
 "AI Search Bar". Prebuilt clicks omit the conversation ID so the API records them
 without waiting for a live conversation to be saved. This also means a prebuilt

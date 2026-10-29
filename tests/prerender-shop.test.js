@@ -467,11 +467,12 @@ test("each category with enough search pages gets one page listing them, with it
   assert.deepEqual(searchLinks, expectedLinks);
 });
 
-test("/shop lists the category pages and the most searched pages until the live search arrives", () => {
+test("/shop writes matching root routes with browsable category links and disclosed searches", () => {
   const html = readOutput("shop.html");
   assert.equal(html, readOutput("shop/index.html"));
   const body = readBody(html);
-  assert.ok(body.includes('<h2 class="mt-8 text-lg font-semibold">Popular searches</h2>'));
+  assert.match(body, /<h2[^>]*>Browse products<\/h2>/);
+  assert.match(body, /<details[^>]*><summary[^>]*>Popular searches \(3\)<\/summary>/);
   assert.ok(body.includes('<a href="/shop/c/shoes" class="hover:underline">Shoes</a>'));
   const slugs = ["black-leather-boots", "chelsea-boots", "boots"];
   assert.ok(slugs.every((slug) => body.includes(`<a href="/shop/s/${slug}" class="hover:underline">`)));

@@ -91,6 +91,13 @@ are permitted only for those exact records; this does not widen the suede or
 waterproof rules. Other custom titles and cited source guidance are preserved. The rule does not match
 broad care or water-related keywords or change reviewed guides, other FAQs, or
 product data. Unfamiliar wording remains subject to separate review.
+Six reviewed lens FAQs and seven related guide paragraphs receive exact-source
+corrections in `shop-nobi-blue-light-guidance.js`. The guidance separates tint,
+prescription design, filtering and anti-reflective coatings without promising
+eye-strain or sleep benefits. It runs after wearable guidance, preserving that
+correction on metal vision-care pages. Original slug, title and complete text
+must match; cited, authored, empty and filtered pages remain protected. No new
+public citations or product fields are introduced.
 The generic branch also corrects 37 reviewed wearable guide paragraphs through
 `shop-nobi-wearable-material-guidance.js`. Each replacement requires its exact
 original slug, title and whole paragraph. Tailored copy retains useful fit,

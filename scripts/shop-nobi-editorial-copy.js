@@ -1,3 +1,4 @@
+import { withSteelWatchComparison } from "./shop-nobi-steel-watch-comparison.js";
 import { withChukkaGuidance, ChukkaRevision } from "./shop-nobi-chukka-guidance.js";
 import { withGarmentCareGuidance, GarmentCareRevision } from "./shop-nobi-garment-care-guidance.js";
 import { withDetergentDoseGuidance, DetergentDoseRevision } from "./shop-nobi-detergent-dose-guidance.js";
@@ -203,6 +204,7 @@ export function withAuthoredSearchPageCopy(page) {
 /** Selects reviewed copy before checking its price and publication consistency. */
 function applyAuthoredCopy(page, revisions) {
   if ((page.products ?? []).length === 0) return withEmptySearchCopy(page);
+  if (page.slug === "steel-analog-watches") return withSteelWatchComparison(page);
   if (page.slug === "leather-lifestyle-sneakers") return withLeatherSneakerShoppingAnswer(page);
   if (page.slug === "red-wallets") return withRedWalletComparison(page);
   if (page.slug === "hand-lotion") return withHandLotionComparison(page);

@@ -679,3 +679,13 @@ normal filtered/empty publication rules. Size, upper, construction and care
 guidance replaces unsupported material-quality, rain and resoling assurances.
 The same three published-claims matrices now cover forty-nine pages, including
 renamed and removed retailer examples; product records and destinations stay intact.
+
+### Material and intended-use shopping guides
+
+`shop-nobi-material-use-guide-copy.js` supplies eight existing guides with
+practical comparisons of bag compartments and finishes, jewelry components,
+bedding pieces, child sizing and office-mat uses. The copy avoids general
+skin-safety, environmental, weather-performance and treatment assurances.
+Product identities, order, prices, paid links, images, disclosures and landing
+assignments stay unchanged. The same three published-claims matrices cover
+these additions, including filtered and empty publication.

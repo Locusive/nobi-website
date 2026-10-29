@@ -1,6 +1,7 @@
 // Recorded substantive source revisions in UTC; Ecru uses its retained production release receipt.
 // Provenance: agents/editorial-revision-source-inventory.json. Never use build time or module mtime.
 export const AuthoredRevisionBySlug = {
+  "brown-suede-boots": "2026-10-29T14:38:38Z",
   "steel-analog-watches": "2026-10-29T13:44:52Z",
   "100-cashmere-clothing": "2026-10-28T00:13:26Z",
   "100-cashmere-sweaters": "2026-10-28T00:13:26Z",
@@ -113,7 +114,6 @@ export const AuthoredRevisionBySlug = {
   "brown-maxi-dresses": "2026-10-28T17:56:58Z",
   "brown-mini-dresses": "2026-10-26T23:39:04Z",
   "brown-shoelaces": "2026-10-28T18:30:50Z",
-  "brown-suede-boots": "2026-10-27T00:35:12Z",
   "brown-work-boots": "2026-10-28T00:22:47Z",
   "bulb-planting-tools": "2026-10-28T15:04:30Z",
   "burgundy-handbags": "2026-10-28T18:30:50Z",

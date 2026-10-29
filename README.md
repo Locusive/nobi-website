@@ -653,6 +653,16 @@ control each row and source, preserving product cards and landing allocation.
 
 `shop-nobi-brown-shirt-comparison.js` compares documented fabric composition, cut and model-specific care for three shirts. Exact identity gates and publication-filter suppression preserve the existing comparison contract. All product records, source context and landing experiment allocation remain unchanged; model facts do not promise current stock, comfort or durability.
 
+### Brown suede boot comparison
+
+`shop-nobi-brown-suede-comparison.js` compares the reviewed Bedell, Javier and Remy
+variants by silhouette, suede construction, entry details, sole and stated heel
+height. Exact name, brand, merchant, variant and literal URL must match for each
+row and source. Filtered or empty output suppresses the comparison. Brand size
+systems remain separate; the table makes no stock, traction or durability promise.
+All product records, links, ordering, catalog dates and landing allocation remain
+unchanged. The existing revision mechanism records this substantive copy change.
+
 ## Hand lotion comparison
 
 The existing hand-lotion page compares two exact reviewed models by labeled

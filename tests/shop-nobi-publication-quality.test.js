@@ -14,7 +14,8 @@ import { readScriptJson, readBody } from "./shop-nobi-test-build.js";
 const SuedeCarePairs = JSON.parse(readFileSync(new URL("./fixtures/shop-nobi-suede-care-pairs.json", import.meta.url), "utf8"));
 const ReviewedSuedeAnswer = "Before applying a protective treatment, check the maker’s care instructions for the exact suede item, including its finish, lining and trim. Use only cleaning tools and treatments the maker permits for that model; a suede label alone does not establish water or stain protection.";
 const WaterproofPairs = JSON.parse(readFileSync(new URL("./fixtures/shop-nobi-waterproof-faq-pairs.json", import.meta.url), "utf8"));
-const ReviewedFaqPairs = [...SuedeCarePairs.map(pair => ({ ...pair, expectedAnswer: ReviewedSuedeAnswer })), ...WaterproofPairs];
+const SilverPairs = JSON.parse(readFileSync(new URL("./fixtures/shop-nobi-silver-faq-pairs.json", import.meta.url), "utf8"));
+const ReviewedFaqPairs = [...SuedeCarePairs.map(pair => ({ ...pair, expectedAnswer: ReviewedSuedeAnswer })), ...WaterproofPairs, ...SilverPairs];
 
 /** Raw records exercise the actual rights filter and publication renderer together. */
 function sourcePage() {
@@ -117,14 +118,14 @@ test("weight units remain guidance while explicit sterling amounts are replaced"
 /** Generic source copy with reviewed pairs and an unrelated FAQ; two pairs may share one page. */
 function genericFaqPage(pairs) {
   const raw = { ...readFixturePageData().pages[0], slug: pairs[0].slug,
-    title: "Best Jackets and Accessories from Top Stores",
+    title: pairs[0].title ?? "Best Jackets and Accessories from Top Stores",
     products: [readFixturePageData().pages[0].products[0]], guide: ["Compare the closure and listed measurements."],
     faq: [...pairs.map(({ question, answer }) => ({ question, answer })),
       { question: "Which size should I choose?", answer: "Compare your measurements with the maker’s size guide for the exact model." }] };
   return buildSearchPages([raw], 1).pages[0];
 }
 
-test("all reviewed care and waterproof pairs agree across visible HTML, schema and hydration while preserving other content", async t => {
+test("all reviewed care, waterproof and silver pairs agree across visible HTML, schema and hydration while preserving other content", async t => {
   const folder = mkdtempSync(new URL("../node_modules/.faq-publication-", import.meta.url));
   t.after(() => rmSync(folder, { recursive: true, force: true }));
   writeFileSync(join(folder, "index.html"), '<html><head><!--__PRERENDER_TITLE__--><!--__PRERENDER_DESC__--></head><body><div id="root"></div></body></html>');
@@ -153,7 +154,11 @@ test("all reviewed care and waterproof pairs agree across visible HTML, schema a
 });
 
 test("exact FAQ corrections preserve unfamiliar or authored copy and retain empty or filtered suppression", () => {
-  for (const pair of [ReviewedFaqPairs[0], ...WaterproofPairs]) {
+  const excluded = genericFaqPage([{ slug: "mens-earrings", title: "Best Men's Earrings from Top Stores",
+    question: "What metal is best for everyday wear?",
+    answer: "Sterling silver and gold vermeil are popular for daily use because they are durable and less likely to cause irritation." }]);
+  assert.deepEqual(withAuthoredSearchPageCopy(excluded).faq, excluded.faq, "Unreviewed compound-topic guidance remains unchanged");
+  for (const pair of [ReviewedFaqPairs[0], ...WaterproofPairs, ...SilverPairs]) {
     const base = genericFaqPage([pair]);
     const faq = base.faq[0];
     const negatives = [
@@ -167,6 +172,23 @@ test("exact FAQ corrections preserve unfamiliar or authored copy and retain empt
     for (const { label, ...change } of negatives) {
       const page = { ...base, ...change };
       assert.deepEqual(withAuthoredSearchPageCopy(page).faq, page.faq, `${pair.slug}: ${label}`);
+    }
+    if (SilverPairs.includes(pair)) {
+      for (const change of [
+        { slug: "unreviewed-silver-jewelry" },
+        { slug: undefined, title: undefined },
+        { title: "Best Silver Jewelry from Top Stores" },
+        { title: `${pair.title} Updated` },
+        { slug: SilverPairs.find(other => other.slug !== pair.slug).slug },
+      ]) {
+        const page = { ...base, ...change };
+        assert.deepEqual(withAuthoredSearchPageCopy(page).faq, page.faq, `${pair.slug}: exact source identity required`);
+      }
+      if (!pair.title.endsWith(" from Top Stores")) {
+        const oldPairs = [ReviewedFaqPairs[0], ...WaterproofPairs].map(({ question, answer }) => ({ question, answer }));
+        const page = { ...base, faq: oldPairs };
+        assert.deepEqual(withAuthoredSearchPageCopy(page).faq, oldPairs, `${pair.slug}: silver exception does not widen prior FAQ rules`);
+      }
     }
     const authored = { ...base, slug: "beige-shoulder-bags" };
     assert.deepEqual(withAuthoredSearchPageCopy(authored), withAuthoredSearchPageCopy({ ...authored, faq: [] }), "Reviewed page copy takes precedence over source pairs");

@@ -72,7 +72,12 @@ The generic-copy branch replaces 16 reviewed exact suede-care FAQ pairs and thre
 waterproof-selection FAQ pairs on uncited `Best ... from Top Stores` source pages.
 The tailored answers ask shoppers to check exact-model care or waterproof
 specifications instead of assuming protection from a material or finish alone.
-Custom titles and cited source guidance are preserved. The rule does not match
+Thirty-four reviewed jewelry FAQ pairs containing unsupported skin-suitability
+assurances also receive exact-item composition guidance. The everyday-wear question
+retains ring fit, finish and care advice. Each correction requires its original
+slug, title and complete question/answer pair. Titles without `from Top Stores`
+are permitted only for those exact records; this does not widen the suede or
+waterproof rules. Other custom titles and cited source guidance are preserved. The rule does not match
 broad care or water-related keywords or change reviewed guides, other FAQs, or
 product data. Unfamiliar wording remains subject to separate review.
 This is not a general fact-check of qualitative product advice. The same

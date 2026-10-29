@@ -1,3 +1,4 @@
+import { AppliancePlayGuideCopy } from "./shop-nobi-appliance-play-guide-copy.js";
 import { withRedWalletComparison } from "./shop-nobi-red-wallet-comparison.js";
 import { BagSweatpantGuideCopy } from "./shop-nobi-bag-sweatpant-guide-copy.js";
 import { ApparelPearlGuideCopy } from "./shop-nobi-apparel-pearl-guide-copy.js";
@@ -130,6 +131,7 @@ const PencilSkirtCopy = {
 };
 
 const SelectedPageCopy = {
+  ...AppliancePlayGuideCopy,
   ...BagSweatpantGuideCopy,
   ...ApparelPearlGuideCopy,
   ...TravelGemstoneGuideCopy,

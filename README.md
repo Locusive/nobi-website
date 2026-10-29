@@ -658,3 +658,14 @@ filtered or empty. Product cards and tracked retailer destinations are unchanged
 guidance without universal spray, durability, wicking or washing claims. The
 same three published-claims matrices cover all forty-three reviewed pages,
 including wallet identity mutations and filtered/empty publication.
+
+### Appliance, eyewear and family-accessory guides
+
+`shop-nobi-appliance-play-guide-copy.js` supplies reviewed guidance for espresso
+accessories, men's black sunglasses, stroller accessories, water tables and rice
+cookers. The copy distinguishes model compatibility, condition, package contents
+and measurements without universal replacement, performance or certification
+claims. Water-play basins are explicitly separated from the retained wooden
+furniture listing. All product records, paid destinations, CUCKOO disclosures and
+image restrictions remain unchanged. The existing three published-claims
+matrices cover forty-eight pages, including filtered and empty publication.

@@ -14,6 +14,25 @@ const CuckooMerchantId = "962fb5d1-9238-4ecf-bc36-0ddc304be721";
 const CuckooCommissionNotice = "Disclosure: Compensated Affiliate.";
 // ESR product material and price authority is unresolved; hold its records only in prebuilt publication.
 const EsrMerchantId = "e43e55da-830c-4dc3-82f5-c8995273b2b2";
+// Selected retailer options were verified as blue/red rather than green; this is not a color classifier.
+const GreenRefillMembershipRevision = "2026-10-29T06:57:18Z";
+const GreenRefillMembershipHolds = [
+  {
+    "productVariantId": "8b2ff94f-ea24-4a49-b100-316a962ffa67",
+    "owningMerchantId": "6f5d6fee-60e6-4def-a76e-6a7b5a3ab936",
+    "url": "https://yosekastationery.com/products/blen-multi-pen-refill?variant=44109079970005"
+  },
+  {
+    "productVariantId": "295b9d3e-5b76-4562-805b-bd579a799e71",
+    "owningMerchantId": "6f5d6fee-60e6-4def-a76e-6a7b5a3ab936",
+    "url": "https://yosekastationery.com/products/anterique-stationers-gp1-gel-pen-refill-0-5mm?variant=53088642891989"
+  },
+  {
+    "productVariantId": "a2f15394-eb68-4a27-a99e-82efd187070a",
+    "owningMerchantId": "5aa170d5-12f1-4bbd-8926-33d5ea684392",
+    "url": "https://camdenrose.com/products/greenfield-pen-ink-cartridges?variant=46756494016744"
+  }
+];
 
 /**
  * Returns whether a slug is safe to use in a file name and an address.
@@ -83,7 +102,8 @@ function isUsablePage(page) {
 /** Builds the page data for one page. */
 function buildSearchPage(page, links) {
   const sourceProducts = Array.isArray(page.products) ? page.products : [];
-  const products = sourceProducts.map(buildProduct).filter(Boolean);
+  const matchedProducts = sourceProducts.filter(product => !isHeldGreenRefill(page.slug, product));
+  const products = matchedProducts.map(buildProduct).filter(Boolean);
   return {
     slug: page.slug,
     query: isText(page.query) ? page.query : page.title,
@@ -97,6 +117,8 @@ function buildSearchPage(page, links) {
     breadcrumbs: buildBreadcrumbs(page, links.builtSlugs),
     related: buildRelatedPages(page, links),
     products,
+    ...(matchedProducts.length !== sourceProducts.length
+      ? { publicationMembershipRevisedAt: GreenRefillMembershipRevision } : {}),
     ...(page.publicationFilteredProducts === true || products.length !== sourceProducts.length
       ? { publicationFilteredProducts: true } : {}),
   };
@@ -126,6 +148,14 @@ function buildRelatedPages(page, links) {
         query: isText(related.query) ? related.query.trim() : related.title.trim(),
       };
     });
+}
+
+/** Holds only the reviewed page membership while preserving the same variant on other pages. */
+function isHeldGreenRefill(slug, product) {
+  return slug === "green-pen-ink-refills" && GreenRefillMembershipHolds.some(held =>
+    held.productVariantId === product?.productVariantId
+    && held.owningMerchantId === product?.owningMerchantId
+    && held.url === product?.url);
 }
 
 /** Builds a safe prebuilt card, holding ESR and keeping CUCKOO text-only. */

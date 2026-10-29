@@ -192,6 +192,9 @@ export function withAuthoredSearchPageCopy(page) {
     : authored;
   const related = withDatedRelatedSearchCopy(metadata, revisions);
   const published = related.products?.length ? withPublicationQuality(related) : related;
+  if (page.publicationMembershipRevisedAt && published.products?.length) {
+    recordEditorialRevision(revisions, page, published, page.publicationMembershipRevisedAt);
+  }
   const qualityChanged = JSON.stringify(editorialFragments(related)) !== JSON.stringify(editorialFragments(published));
   return withPublicationDates(page, published, revisions, qualityChanged);
 }

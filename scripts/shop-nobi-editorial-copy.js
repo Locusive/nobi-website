@@ -1,3 +1,4 @@
+import { withLeatherSneakerShoppingAnswer } from "./shop-nobi-leather-sneaker-answer.js";
 import { AppliancePlayGuideCopy } from "./shop-nobi-appliance-play-guide-copy.js";
 import { withRedWalletComparison } from "./shop-nobi-red-wallet-comparison.js";
 import { BagSweatpantGuideCopy } from "./shop-nobi-bag-sweatpant-guide-copy.js";
@@ -172,6 +173,7 @@ export function withAuthoredSearchPageCopy(page) {
 /** Selects reviewed copy before checking its price and publication consistency. */
 function applyAuthoredCopy(page) {
   if ((page.products ?? []).length === 0) return withEmptySearchCopy(page);
+  if (page.slug === "leather-lifestyle-sneakers") return withLeatherSneakerShoppingAnswer(page);
   if (page.slug === "red-wallets") return withRedWalletComparison(page);
   if (page.slug === "hand-lotion") return withHandLotionComparison(page);
   if (page.slug === "laptop-stands") return withLaptopStandComparison(page);

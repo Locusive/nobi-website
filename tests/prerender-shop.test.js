@@ -467,17 +467,34 @@ test("each category with enough search pages gets one page listing them, with it
   assert.deepEqual(searchLinks, expectedLinks);
 });
 
-test("/shop writes matching root routes with browsable category links and disclosed searches", () => {
-  const html = readOutput("shop.html");
-  assert.equal(html, readOutput("shop/index.html"));
-  const body = readBody(html);
-  assert.match(body, /<h2[^>]*>Browse products<\/h2>/);
-  assert.match(body, /<details[^>]*><summary[^>]*>Popular searches \(3\)<\/summary>/);
-  assert.ok(body.includes('<a href="/shop/c/shoes" class="hover:underline">Shoes</a>'));
-  const slugs = ["black-leather-boots", "chelsea-boots", "boots"];
-  assert.ok(slugs.every((slug) => body.includes(`<a href="/shop/s/${slug}" class="hover:underline">`)));
-  assert.ok(!body.includes("Loading Shop Nobi"));
-  assert.equal(readScriptJson(html, "shop-nobi-prebuilt-content").kind, "popular-searches");
+test("root and category HTML use concise topics while preserving custom labels, hrefs and embedded data", async () => {
+  const folder = makeDistCopy();
+  const fixture = readFixturePageData();
+  const titles = ["Best Boots & Shoes from Top Stores", "Best Chelsea Boots", "Boots: Compare Fit"];
+  fixture.pages = fixture.pages.slice(0, 3).map((page, index) => ({ ...page, title: titles[index] }));
+  fixture.pages.push({ ...fixture.pages[0], slug: "gift-ideas", title: "Best Gifts from Top Stores", categoryPath: null, breadcrumbs: [] });
+  const original = structuredClone(fixture);
+  try {
+    await prerenderWith({ body: fixture }, folder);
+    const html = readFileSync(join(folder, "shop.html"), "utf8");
+    assert.equal(html, readFileSync(join(folder, "shop/index.html"), "utf8"));
+    const body = readBody(html);
+    assert.match(body, /<h2[^>]*>Browse products<\/h2>/);
+    assert.match(body, /<details[^>]*><summary[^>]*>Popular searches \(4\)<\/summary>/);
+    assert.ok(body.includes('<a href="/shop/c/shoes" class="hover:underline">Shoes</a>'));
+    const categoryHtml = readFileSync(join(folder, "shop/c/shoes.html"), "utf8");
+    const expected = fixture.pages.map((page, index) => ({ slug: page.slug, title: ["Boots & Shoes", "Chelsea Boots", "Boots: Compare Fit", "Gifts"][index] }));
+    const links = markup => [...markup.matchAll(/<a href="(\/shop\/s\/[^"]+)" class="hover:underline">([^<]+)<\/a>/g)].map(([, href, title]) => [href, title]);
+    const visible = entries => entries.map(({ slug, title }) => [`/shop/s/${slug}`, title.replaceAll("&", "&amp;")]);
+    assert.deepEqual(links(body), visible(expected));
+    assert.deepEqual(links(readBody(categoryHtml)), visible(expected.slice(0, 3)));
+    const rootData = readScriptJson(html, "shop-nobi-prebuilt-content");
+    assert.equal(rootData.kind, "popular-searches");
+    assert.deepEqual(rootData.data.pages, expected);
+    assert.deepEqual(readScriptJson(categoryHtml, "shop-nobi-prebuilt-content").data.pages, expected.slice(0, 3));
+    assert.ok(!body.includes("Loading Shop Nobi"));
+    assert.deepEqual(fixture, original);
+  } finally { rmSync(folder, { recursive: true, force: true }); }
 });
 
 test("redirects for retired pages stop at the rule limit, keeping the first ones in the file", async () => {

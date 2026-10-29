@@ -1,6 +1,7 @@
 // Groups the built search pages into category pages by their first breadcrumb, and picks the links /shop shows.
 // A category with too few search pages folds them into its top category's page instead.
 
+import { readGenericSearchTopic } from "./shop-nobi-search-topic.js";
 import { isSafeSlug, isText } from "./shop-nobi-search-page-view.js";
 import { PinBoardNameByTopLevel, readTopLevel } from "../src/utils/shopNobiPinBoard.js";
 import { selectClothingDiscoveries } from "../src/utils/shopNobiClothingDiscovery.js";
@@ -196,9 +197,9 @@ function addToCategory(categoryBySlug, category, page) {
   }
 }
 
-/** Returns the slug and title a link to a search page needs. */
+/** Keeps the existing route and uses a concise topic only for recognized generic titles. */
 function toLink(page) {
-  return { slug: page.slug, title: page.title };
+  return { slug: page.slug, title: readGenericSearchTopic(page.title) || page.title };
 }
 
 /** Makes a slug from a name: accents dropped, lowercase, other characters turned into single dashes. */

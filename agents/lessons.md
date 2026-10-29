@@ -41,3 +41,7 @@ If tagged operator visits are absent, inspect retained production events and the
 ## October 28: preserve both ongoing growth tracks
 
 The user explicitly wants ongoing SEO optimization and high-potential acquisition experiments at the same time. A content batch, implementation release or single experiment is a milestone, not completion of that goal. Keep the broad goal active and continue the next justified finite task; research acquisition in parallel rather than substituting conversion tweaks for new traffic.
+
+## October 28: verify the work profile before declaring account access blocked
+
+A saved Chrome browser ID is not proof of the current work profile. Inspect the inventory and select profileName nobi.ai before account tasks. Google account selection is separate: the work profile can contain shanif@nobi.ai and shanif@locusive.com with different property permissions. A passkey prompt in the personal Chrome profile does not establish that Search Console is blocked in the work profile. Verify the authorized work-profile session before asking the user to sign in.

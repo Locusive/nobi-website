@@ -46,6 +46,8 @@ import { EquipmentFitGuideCopy } from "./shop-nobi-equipment-fit-guide-copy.js";
 import { AccessoryIdentityGuideCopy } from "./shop-nobi-accessory-identity-guide-copy.js";
 import { CarryCareGuideCopy } from "./shop-nobi-carry-care-guide-copy.js";
 
+const GenericMetadataCompletionRevision = "2026-10-29T05:38:40Z";
+
 const OriginalSuitcaseGuide = "Blue suitcases on this page range from about $70 to $495. The collection includes hard-shell carry-ons, expandable checked bags, and a few novelty suitcases with built-in record players.";
 const CorrectedSuitcaseGuide = "Shopping for travel luggage? Compare the carry-on and checked suitcases below. Suitcase-style record players are audio products, not bags for packing. Check each travel bag's dimensions and weight with the retailer before choosing.";
 const OriginalSuitcaseQuestion = "Do built-in tech suitcases affect durability?";
@@ -183,7 +185,11 @@ export function withAuthoredSearchPageCopy(page) {
   const revisions = [];
   const authored = applyAuthoredCopy(page, revisions);
   if (page.products?.length) recordEditorialRevision(revisions, page, authored, AuthoredRevisionBySlug[page.slug]);
-  const related = recordEditorialRevision(revisions, authored, withRelatedSearchCopy(authored), "2026-10-28T18:43:06Z");
+  // Clarification branches keep their reviewed bodies but can still carry generic source metadata.
+  const metadata = authored.products?.length
+    ? recordEditorialRevision(revisions, authored, withCatalogSearchCopy(authored), GenericMetadataCompletionRevision)
+    : authored;
+  const related = withDatedRelatedSearchCopy(metadata, revisions);
   const published = related.products?.length ? withPublicationQuality(related) : related;
   const qualityChanged = JSON.stringify(editorialFragments(related)) !== JSON.stringify(editorialFragments(published));
   return withPublicationDates(page, published, revisions, qualityChanged);
@@ -228,7 +234,8 @@ function applyAuthoredCopy(page, revisions) {
     if (detergentGuidance !== formulationGuidance) {
       recordEditorialRevision(revisions, withPublicationQuality(formulationGuidance), withPublicationQuality(detergentGuidance), DetergentDoseRevision);
     }
-    return recordEditorialRevision(revisions, detergentGuidance, withCatalogSearchCopy(detergentGuidance), "2026-10-27T17:35:31Z");
+    return recordEditorialRevision(revisions, detergentGuidance, withCatalogSearchCopy(detergentGuidance),
+      hasCapitalizedGenericSuffix(detergentGuidance.title) ? GenericMetadataCompletionRevision : "2026-10-27T17:35:31Z");
   }
 
   return {
@@ -237,4 +244,20 @@ function applyAuthoredCopy(page, revisions) {
     guide: [...copy.guide],
     faq: copy.faq.map((entry) => ({ ...entry })),
   };
+}
+
+/** Identifies only the newly supported suffix spelling while preserving the original exact prefix. */
+function hasCapitalizedGenericSuffix(title) {
+  return Boolean(/^Best (.+?) From Top Stores$/.exec(title)?.[1]?.trim());
+}
+
+/** Dates each newly supported related-label fragment without redating existing normalized links. */
+function withDatedRelatedSearchCopy(page, revisions) {
+  const related = recordEditorialRevision(revisions, page, withRelatedSearchCopy(page), "2026-10-28T18:43:06Z");
+  for (const [index, entry] of (page.related ?? []).entries()) {
+    if (hasCapitalizedGenericSuffix(entry.title)) {
+      recordEditorialRevision(revisions, { related: [entry] }, { related: [related.related[index]] }, GenericMetadataCompletionRevision);
+    }
+  }
+  return related;
 }

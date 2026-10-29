@@ -69,7 +69,8 @@ test("white-gold clarification agrees across HTML, FAQ schema and hydration with
   const folder = mkdtempSync(new URL("../node_modules/.editorial-test-", import.meta.url));
   t.after(() => rmSync(folder, { recursive: true, force: true }));
   writeFileSync(join(folder, "index.html"), '<!doctype html><html><head><!--__PRERENDER_TITLE__--><!--__PRERENDER_DESC__--></head><body><div id="root"></div></body></html>');
-  const { pages } = buildSearchPages([whiteGoldPage(), readCleanFixturePage()], 2);
+  const source = { ...whiteGoldPage(), title: "Best 14k White Gold Statement Rings from Top Stores" };
+  const { pages } = buildSearchPages([source, readCleanFixturePage()], 2);
   const plan = { searchPages: pages, categoryPages: [], popularSearches: buildPopularSearches(pages, []) };
   const original = structuredClone(plan);
   await writePrebuiltPages(plan, folder);
@@ -86,8 +87,12 @@ test("white-gold clarification agrees across HTML, FAQ schema and hydration with
   assert.deepEqual(schema.mainEntity, published.faq.map(({ question, answer }) =>
     ({ "@type": "Question", name: question, acceptedAnswer: { "@type": "Answer", text: answer } })));
   for (const [key, value] of Object.entries(original.searchPages[0])) {
-    if (!["guide", "faq"].includes(key)) assert.deepEqual(published[key], value, key);
+    if (!["guide", "faq", "title", "description"].includes(key)) assert.deepEqual(published[key], value, key);
   }
+  assert.match(published.title, /^14k White Gold Statement Rings: Compare/);
+  assert.ok(html.includes(`<title>${htmlEscape(published.title)} | Shop Nobi</title>`));
+  assert.ok(html.includes(`content="${htmlEscape(published.description)}"`));
+  assert.equal(published.editorialModifiedAt, "2026-10-29T05:38:40Z");
   assert.equal(published.products.length, 19);
   assert.deepEqual(published.guide.slice(1), original.searchPages[0].guide.slice(1));
   assert.deepEqual(published.faq.slice(0, -1), original.searchPages[0].faq);
@@ -114,7 +119,8 @@ test("suitcase clarification agrees across HTML, FAQ schema and hydration while 
   t.after(() => rmSync(folder, { recursive: true, force: true }));
   writeFileSync(join(folder, "index.html"), '<!doctype html><html><head><!--__PRERENDER_TITLE__--><!--__PRERENDER_DESC__--></head><body><div id="root"></div></body></html>');
   const fixture = readCleanFixturePage();
-  const { pages } = buildSearchPages([mixedSuitcasePage(), fixture], 2);
+  const source = { ...mixedSuitcasePage(), title: "Best Blue Suitcases from Top Stores" };
+  const { pages } = buildSearchPages([source, fixture], 2);
   const plan = { searchPages: pages, categoryPages: [], popularSearches: buildPopularSearches(pages, []) };
   const original = structuredClone(plan);
   await writePrebuiltPages(plan, folder);
@@ -132,8 +138,12 @@ test("suitcase clarification agrees across HTML, FAQ schema and hydration while 
   assert.deepEqual(faq.mainEntity, published.faq.map(({ question, answer }) =>
     ({ "@type": "Question", name: question, acceptedAnswer: { "@type": "Answer", text: answer } })));
   for (const [key, value] of Object.entries(original.searchPages[0])) {
-    if (!["guide", "faq"].includes(key)) assert.deepEqual(published[key], value, key);
+    if (!["guide", "faq", "title", "description"].includes(key)) assert.deepEqual(published[key], value, key);
   }
+  assert.match(published.title, /^Blue Suitcases: Compare/);
+  assert.ok(html.includes(`<title>${htmlEscape(published.title)} | Shop Nobi</title>`));
+  assert.ok(html.includes(`content="${htmlEscape(published.description)}"`));
+  assert.equal(published.editorialModifiedAt, "2026-10-29T05:38:40Z");
   assert.equal(published.products.length, 16);
   assert.deepEqual(published.guide.slice(1), original.searchPages[0].guide.slice(1));
   assert.deepEqual(published.faq[0], original.searchPages[0].faq[0]);

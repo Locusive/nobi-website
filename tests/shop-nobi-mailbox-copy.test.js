@@ -95,13 +95,17 @@ test("published mailbox HTML, hydration and FAQ agree while the source plan and 
   for (const text of [...published.guide, ...published.faq.flatMap(({ question, answer }) => [question, answer])]) {
     assert.ok(body.includes(htmlEscape(text)), text);
   }
+  assert.match(published.title, /^Mailbox Posts: Compare/);
+  assert.ok(html.includes(`<title>${htmlEscape(published.title)} | Shop Nobi</title>`));
+  assert.ok(html.includes(`content="${htmlEscape(published.description)}"`));
+  assert.equal(published.editorialModifiedAt, "2026-10-29T05:38:40Z");
   assert.ok(published.guideSources?.length === 1);
   assert.ok(body.includes(`href="${htmlEscape(published.guideSources[0].url)}"`));
   const faq = readScriptJson(html, "page-schema").find((entry) => entry["@type"] === "FAQPage");
   assert.deepEqual(faq.mainEntity, published.faq.map(({ question, answer }) =>
     ({ "@type": "Question", name: question, acceptedAnswer: { "@type": "Answer", text: answer } })));
   for (const [key, value] of Object.entries(original.searchPages[0])) {
-    if (!["guide", "faq"].includes(key)) assert.deepEqual(published[key], value, key);
+    if (!["guide", "faq", "title", "description"].includes(key)) assert.deepEqual(published[key], value, key);
   }
   assert.deepEqual(plan, original);
   const other = readFileSync(join(folder, "shop/s/black-leather-boots.html"), "utf8");

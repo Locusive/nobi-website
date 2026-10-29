@@ -43,11 +43,33 @@ test("long store labels are omitted rather than truncating a seller name", () =>
   assert.equal(result.description, "Browse 1 listing for Scarves. Check product details with the retailer.");
 });
 
-test("specific authored titles and reviewed editorial overrides retain their copy", () => {
+test("generic metadata completion preserves custom metadata, refreshed guidance and all shopping fields", () => {
   assert.equal(withCatalogSearchCopy({ ...pageWith([]), title: "Best Scarves" }).title, "Scarves: Search Products");
-  const authored = { ...pageWith([{ name: "Scarf" }]), title: "Scarves: Choose Fabric & Length" };
-  assert.strictEqual(withCatalogSearchCopy(authored), authored);
-  const reviewed = withAuthoredSearchPageCopy({ ...pageWith([{ name: "Skirt" }]), slug: "pencil-skirts", title: "Best Pencil Skirts from Top Stores" });
+  for (const slug of ["scarves", "mailbox-posts", "14k-white-gold-statement-rings", "blue-suitcases"]) {
+    for (const [title, expected] of [
+      ["Best Scarves from Top Stores", "Scarves: View Product Details"],
+      ["Best Scarves From Top Stores", "Scarves: View Product Details"],
+      ...["Best From Top Stores", "Best  From Top Stores", "Best   From Top Stores"].map(title => [title, "From Top Stores: View Product Details"]),
+      ["Scarves: Choose Fabric & Length", "Scarves: Choose Fabric & Length"],
+      ["best Scarves From Top Stores", "best Scarves From Top Stores"],
+      ["BEST Scarves From Top Stores", "BEST Scarves From Top Stores"],
+      ["The Best Scarves From Top Stores", "The Best Scarves From Top Stores"],
+      ["Best Scarves FROM Top Stores", "Scarves FROM Top Stores: View Product Details"],
+      ["Best Scarves From top stores", "Scarves From top stores: View Product Details"],
+    ]) {
+      const page = { ...pageWith([{ name: "Scarf" }]), slug, title, description: "Reviewed custom description.",
+        guide: ["Freshly verified material guidance."], faq: [{ question: "Which variant?", answer: "Check the maker's size chart." }],
+        guideSources: [{ label: "Maker", url: "https://example.com/material" }] };
+      const original = structuredClone(page);
+      const published = withAuthoredSearchPageCopy(page);
+      assert.equal(published.title, expected, `${slug}: ${title}`);
+      if (title === expected) assert.equal(published.description, page.description);
+      for (const key of ["guide", "faq", "guideSources", "products"]) assert.deepEqual(published[key], page[key]);
+      assert.deepEqual(withAuthoredSearchPageCopy(published), published);
+      assert.deepEqual(page, original);
+    }
+  }
+  const reviewed = withAuthoredSearchPageCopy({ ...pageWith([{ name: "Skirt" }]), slug: "pencil-skirts", title: "Best Pencil Skirts From Top Stores" });
   assert.equal(reviewed.title, "Pencil Skirts: Compare Stores, Fabrics & Fit");
   assert.match(reviewed.description, /Compare fabric, length, size guidance/);
 });
@@ -55,6 +77,15 @@ test("specific authored titles and reviewed editorial overrides retain their cop
 test("related labels reuse exact generic topics on empty and reviewed pages without changing queries or inputs", () => {
   const labels = [
     ["Best Boots from Top Stores", "Boots"],
+    ["Best Boots From Top Stores", "Boots"],
+    ["BEST Boots From Top Stores", "BEST Boots From Top Stores"],
+    ["best Boots From Top Stores", "best Boots From Top Stores"],
+    ["The Best Boots From Top Stores", "The Best Boots From Top Stores"],
+    ["Best Boots FROM Top Stores", "Boots FROM Top Stores"],
+    ["Best Boots From top stores", "Boots From top stores"],
+    ["Best From Top Stores", "From Top Stores"],
+    ["Best  From Top Stores", "From Top Stores"],
+    ["Best   From Top Stores", "From Top Stores"],
     ["Best Linen & Cotton Shirts", "Linen & Cotton Shirts"],
     ["Best   Scarves  from Top Stores", "Scarves"],
     ["Scarves: Fabric & Length", "Scarves: Fabric & Length"],

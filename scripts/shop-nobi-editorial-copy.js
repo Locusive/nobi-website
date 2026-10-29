@@ -1,3 +1,4 @@
+import { withCosmeticFormulationGuidance, CosmeticFormulationRevision } from "./shop-nobi-cosmetic-formulation-guidance.js";
 import { withTextileMaterialGuidance, TextileMaterialRevision } from "./shop-nobi-textile-material-guidance.js";
 import { withBlueLightGuidance, BlueLightGuidanceRevision } from "./shop-nobi-blue-light-guidance.js";
 import { withWearableMaterialGuidance, WearableMaterialRevision } from "./shop-nobi-wearable-material-guidance.js";
@@ -218,7 +219,11 @@ function applyAuthoredCopy(page, revisions) {
     if (textileGuidance !== lensGuidance) {
       recordEditorialRevision(revisions, withPublicationQuality(lensGuidance), withPublicationQuality(textileGuidance), TextileMaterialRevision);
     }
-    return recordEditorialRevision(revisions, textileGuidance, withCatalogSearchCopy(textileGuidance), "2026-10-27T17:35:31Z");
+    const formulationGuidance = withCosmeticFormulationGuidance(textileGuidance);
+    if (formulationGuidance !== textileGuidance) {
+      recordEditorialRevision(revisions, withPublicationQuality(textileGuidance), withPublicationQuality(formulationGuidance), CosmeticFormulationRevision);
+    }
+    return recordEditorialRevision(revisions, formulationGuidance, withCatalogSearchCopy(formulationGuidance), "2026-10-27T17:35:31Z");
   }
 
   return {

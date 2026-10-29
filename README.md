@@ -113,6 +113,13 @@ from an organic, cotton, fleece or down-alternative label. Adult baby-tee stylin
 is distinguished from infant clothing. Existing source protections, product
 data and prior corrections remain unchanged. Only surviving corrected text
 contributes the rule’s static editorial revision.
+Three reviewed cosmetic pages receive five exact paragraph and nine FAQ
+corrections in `shop-nobi-cosmetic-formulation-guidance.js`. The copy separates
+product labels from unverified sourcing, skin-suitability or performance claims
+and directs shoppers to exact-formula ingredients and instructions. Existing
+buying advice and all product data are preserved. Original source identity and
+whole-text gates retain authored/cited/empty/filtered protections; only surviving
+new fragments contribute a static editorial revision.
 This is not a general fact-check of qualitative product advice. The same
 publication data supplies HTML, metadata, FAQ schema and browser hydration;
 source guides, product ordering, product facts, affiliate links, Pinterest feeds

@@ -1,3 +1,4 @@
+import { withChukkaGuidance, ChukkaRevision } from "./shop-nobi-chukka-guidance.js";
 import { withGarmentCareGuidance, GarmentCareRevision } from "./shop-nobi-garment-care-guidance.js";
 import { withDetergentDoseGuidance, DetergentDoseRevision } from "./shop-nobi-detergent-dose-guidance.js";
 import { withCosmeticFormulationGuidance, CosmeticFormulationRevision } from "./shop-nobi-cosmetic-formulation-guidance.js";
@@ -242,8 +243,12 @@ function applyAuthoredCopy(page, revisions) {
     if (garmentGuidance !== detergentGuidance) {
       recordEditorialRevision(revisions, withPublicationQuality(detergentGuidance), withPublicationQuality(garmentGuidance), GarmentCareRevision);
     }
-    return recordEditorialRevision(revisions, garmentGuidance, withCatalogSearchCopy(garmentGuidance),
-      hasCapitalizedGenericSuffix(garmentGuidance.title) ? GenericMetadataCompletionRevision : "2026-10-27T17:35:31Z");
+    const chukkaGuidance = withChukkaGuidance(garmentGuidance);
+    if (chukkaGuidance !== garmentGuidance) {
+      recordEditorialRevision(revisions, withPublicationQuality(garmentGuidance), withPublicationQuality(chukkaGuidance), ChukkaRevision);
+    }
+    return recordEditorialRevision(revisions, chukkaGuidance, withCatalogSearchCopy(chukkaGuidance),
+      hasCapitalizedGenericSuffix(chukkaGuidance.title) ? GenericMetadataCompletionRevision : "2026-10-27T17:35:31Z");
   }
 
   return {

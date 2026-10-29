@@ -135,6 +135,12 @@ dry-clean permission from a fiber name. The existing exact-passage helper
 protects custom, cited, empty and filtered pages; only surviving changed text
 contributes the rule's revision date. Products and earning links remain intact.
 
+The brown-chukka page has three reviewed paragraphs and three FAQ answers
+corrected through the same exact-passage helper. It distinguishes named upper
+finishes and model-specific weather/fit checks without promising rain protection,
+break-in outcomes or walking comfort. The styling FAQ, computed price summary
+and all product records remain unchanged; only surviving corrections revise its date.
+
 The single laundry-detergent page has two reviewed paragraphs and two FAQs
 corrected by `shop-nobi-detergent-dose-guidance.js`. Formula-specific dosing,
 washer and fabric instructions replace universal half-dose and compatibility

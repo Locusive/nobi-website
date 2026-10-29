@@ -689,3 +689,12 @@ skin-safety, environmental, weather-performance and treatment assurances.
 Product identities, order, prices, paid links, images, disclosures and landing
 assignments stay unchanged. The same three published-claims matrices cover
 these additions, including filtered and empty publication.
+
+### Fit, configuration and care shopping guides
+
+`shop-nobi-fit-care-guide-copy.js` supplies five existing guides for pencil
+cases, red outerwear, red shoulder bags, black office furniture and blue
+athletic shorts. The copy compares actual measurements, formats, closures,
+configuration and garment care rather than inferring reliability or performance.
+All product records and publication gates remain unchanged. The same three
+published-claims matrices cover these additions alongside prior corrections.

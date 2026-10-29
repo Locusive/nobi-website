@@ -1,3 +1,4 @@
+import { FitCareGuideCopy } from "./shop-nobi-fit-care-guide-copy.js";
 import { MaterialUseGuideCopy } from "./shop-nobi-material-use-guide-copy.js";
 import { withLeatherSneakerShoppingAnswer } from "./shop-nobi-leather-sneaker-answer.js";
 import { AppliancePlayGuideCopy } from "./shop-nobi-appliance-play-guide-copy.js";
@@ -133,6 +134,7 @@ const PencilSkirtCopy = {
 };
 
 const SelectedPageCopy = {
+  ...FitCareGuideCopy,
   ...MaterialUseGuideCopy,
   ...AppliancePlayGuideCopy,
   ...BagSweatpantGuideCopy,

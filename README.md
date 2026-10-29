@@ -120,6 +120,12 @@ and directs shoppers to exact-formula ingredients and instructions. Existing
 buying advice and all product data are preserved. Original source identity and
 whole-text gates retain authored/cited/empty/filtered protections; only surviving
 new fragments contribute a static editorial revision.
+The single laundry-detergent page has two reviewed paragraphs and two FAQs
+corrected by `shop-nobi-detergent-dose-guidance.js`. Formula-specific dosing,
+washer and fabric instructions replace universal half-dose and compatibility
+assurances. The detergent and cosmetic rules share `shop-nobi-exact-guidance.js`,
+which retains exact source-identity and complete-text gates. Each rule keeps its
+own revision date, and existing product cards and other advice remain unchanged.
 This is not a general fact-check of qualitative product advice. The same
 publication data supplies HTML, metadata, FAQ schema and browser hydration;
 source guides, product ordering, product facts, affiliate links, Pinterest feeds

@@ -83,6 +83,69 @@ test("local or upstream filtering clears unsupported copy and empty discovery, t
   }
 });
 
+test("verified non-green refill membership is page-specific and filtered output agrees across HTML, schema and hydration", async t => {
+  const raw = JSON.parse(readFileSync(new URL("./fixtures/shop-nobi-green-refill-page.json", import.meta.url), "utf8"));
+  const heldIds = new Set(["8b2ff94f-ea24-4a49-b100-316a962ffa67", "a2f15394-eb68-4a27-a99e-82efd187070a", "295b9d3e-5b76-4562-805b-bd579a799e71"]);
+  const held = raw.products.filter(product => heldIds.has(product.productVariantId));
+  const original = structuredClone(raw);
+  const general = buildSearchPages([{ ...raw, slug: "pen-ink-refills" }], 1).pages[0];
+  const expectedProducts = general.products.filter(product => !heldIds.has(product.productVariantId));
+  assert.equal(expectedProducts.length, 9);
+  // Positive green and unresolved options survive together; names and images are not color classifiers.
+  for (const product of held) {
+    for (const [label, change] of [
+      ["other variant", { productVariantId: "00000000-0000-0000-0000-000000000001" }],
+      ["other merchant", { owningMerchantId: "00000000-0000-0000-0000-000000000002" }],
+      ["changed URL", { url: `${product.url}&updated=1` }],
+      ["missing identity", { productVariantId: undefined }],
+    ]) {
+      const page = buildSearchPages([{ ...raw, products: [{ ...product, ...change }] }], 1).pages[0];
+      assert.equal(page.products.length, 1, label);
+      assert.notEqual(page.publicationFilteredProducts, true, label);
+      assert.equal(page.publicationMembershipRevisedAt, undefined, label);
+      assert.notEqual(withAuthoredSearchPageCopy(page).editorialModifiedAt, "2026-10-29T06:57:18Z", label);
+    }
+  }
+  const folder = mkdtempSync(new URL("../node_modules/.refill-membership-", import.meta.url));
+  t.after(() => rmSync(folder, { recursive: true, force: true }));
+  writeFileSync(join(folder, "index.html"), '<html><head><!--__PRERENDER_TITLE__--><!--__PRERENDER_DESC__--></head><body><div id="root"></div></body></html>');
+  for (const [slug, products, count, filtered] of [
+    [raw.slug, raw.products, 9, true],
+    [raw.slug, held, 0, true],
+    [raw.slug, raw.products.filter(product => !heldIds.has(product.productVariantId)), 9, false],
+    ["pen-ink-refills", raw.products, 12, false],
+    ["blue-writing-instrument-accessories", raw.products, 12, false],
+  ]) {
+    const page = buildSearchPages([{ ...raw, slug, products }], 1).pages[0];
+    assert.equal(page.products.length, count);
+    assert.equal(page.publicationFilteredProducts === true, filtered);
+    assert.equal(page.publicationMembershipRevisedAt, filtered ? "2026-10-29T06:57:18Z" : undefined);
+    if (count === 9) assert.deepEqual(page.products, expectedProducts, "All retained fields and order survive");
+    if (count === 12) assert.deepEqual(page.products, general.products, "Other pages preserve the same variants");
+    await writePrebuiltPages({ searchPages: [page], categoryPages: [], popularSearches: { pages: [], moreSearches: [], categories: [] } }, folder);
+    const html = readFileSync(join(folder, `shop/s/${slug}.html`), "utf8");
+    const published = readScriptJson(html, "shop-nobi-prebuilt-content").data;
+    assert.deepEqual(published.products, page.products);
+    assert.equal(published.refreshedAt, raw.refreshedAt);
+    assert.equal(published.editorialModifiedAt === "2026-10-29T06:57:18Z", filtered && count > 0);
+    if (count === 0) assert.equal(published.editorialModifiedAt, undefined);
+    assert.equal(buildSearchPageSeo(published).noindex, count === 0);
+    const schema = readScriptJson(html, "page-schema");
+    if (filtered) {
+      assert.deepEqual(published.faq, []);
+      assert.ok(!schema.some(entry => entry["@type"] === "FAQPage"));
+      assert.doesNotMatch(html, /44109079970005|46756494016744|53088642891989|Most green inks dry|Green shades vary/);
+      if (count) {
+        assert.match(published.description, /^9 product listings are displayed/);
+        assert.match(published.guide[0], /9 displayed listings with prices/);
+        assert.deepEqual(withAuthoredSearchPageCopy(published), published);
+      }
+    } else assert.deepEqual(published.faq, raw.faq);
+    assert.ok(html.includes(`<link rel="canonical" href="https://nobi.ai/shop/s/${slug}">`));
+  }
+  assert.deepEqual(raw, original, "Raw catalog input is immutable");
+});
+
 test("all guide positions and FAQs lose fixed assertions while preserving measurements and search instructions", () => {
   const page = buildSearchPages([{ ...sourcePage(), products: [readFixturePageData().pages[0].products[0]] }], 1).pages[0];
   page.guide = ["These 20 displayed boots range from $8.90 to $1,460. Check the 30-inch shaft.",

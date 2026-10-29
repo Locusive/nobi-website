@@ -79,6 +79,14 @@ search path, have matching noindex metadata in HTML and the browser, and are
 omitted from the search sitemap and llms.txt links. Populated pages return to
 normal publication automatically on a later build when their listings return.
 Reviewed editorial guidance remains subject to the same publication checks.
+The green ink/refill page also withholds three independently verified non-green
+retailer options at normalization. Each hold requires the exact page, merchant,
+variant ID and literal URL. Other pages and unresolved color options are retained;
+this is not a keyword-based color filter or a catalog mutation. The existing
+filtered-output path rebuilds counts/prices and withholds dependent guide/FAQ
+claims. Only an actual exact hold carries a membership revision into surviving
+publication text; the original catalog refresh timestamp stays unchanged. Empty
+output remains undated. It does not certify every remaining listing's ink color.
 The generic-copy branch replaces 16 reviewed exact suede-care FAQ pairs and three
 waterproof-selection FAQ pairs on uncited `Best ... from Top Stores` source pages.
 The tailored answers ask shoppers to check exact-model care or waterproof

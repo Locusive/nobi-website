@@ -151,3 +151,7 @@ See `agents/feature_plans/shop_guide_carry_care.md`. These ten pages are a finit
 - [x] Five practical guide corrections; phone page already withheld.
 - [x] Consolidated tests, full offline suite and preservation audit.
 - [ ] Root visual review and release.
+
+## NOBI-2886 green refill membership
+- [x] Implement exact holds and verify output preservation.
+- [ ] Parent review and release.

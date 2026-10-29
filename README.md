@@ -277,9 +277,14 @@ search falls outside the build's file limit, its link opens `/shop?q=...` with
 the original query instead of becoming plain text or pointing to an unbuilt
 page. Older embedded data falls back to the related search's title.
 Root and category navigation use the same exact generic-title topic parser as
-related search labels: `Best Boots from Top Stores` becomes `Boots`. Custom
-labels, routes and ordering remain unchanged; destination copy and editorial
-dates are not regenerated to change a navigation label.
+related search labels: `Best Boots from Top Stores` and `Best Boots From Top Stores`
+become `Boots`. The initial `Best ` and `Top Stores` casing remain exact; custom
+labels, routes and ordering stay unchanged. Still-generic populated metadata is
+normalized after authored clarification selection, preserving those guides and
+FAQs. Newly recognized metadata and related-label fragments receive their own
+recorded editorial revision only when they survive final publication. Existing
+normalized text retains its earlier revision; navigation does not trigger a
+blanket date refresh.
 
 In the browser, a search page keeps its prebuilt products above the live search,
 and a category page keeps its searches under the search box, until the assistant

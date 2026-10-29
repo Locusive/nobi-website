@@ -60,7 +60,7 @@ test("a category still too thin, or with an unknown top category, gets no page, 
 
 test("root and category navigation retain ordering and custom titles while shortening generic labels", () => {
   const boots = buildPages(51, "Shoes", "apparel_accessories.shoes", "boots").map((page, index) => ({
-    ...page, title: index === 0 ? "Shoes: Compare Fit & Use" : `Best Shoes ${index}${index % 2 ? " from Top Stores" : ""}`,
+    ...page, title: index === 0 ? "Shoes: Compare Fit & Use" : `Best Shoes ${index}${index % 3 === 0 ? " From Top Stores" : index % 2 ? " from Top Stores" : ""}`,
     query: `original shoes query ${index}`, refreshedAt: "2026-10-28T21:04:02Z",
   }));
   const giftIdeas = { slug: "gift-ideas", title: "Best Gifts & Games from Top Stores", query: "gift ideas", breadcrumbs: [] };

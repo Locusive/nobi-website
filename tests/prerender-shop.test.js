@@ -470,7 +470,7 @@ test("each category with enough search pages gets one page listing them, with it
 test("root and category HTML use concise topics while preserving custom labels, hrefs and embedded data", async () => {
   const folder = makeDistCopy();
   const fixture = readFixturePageData();
-  const titles = ["Best Boots & Shoes from Top Stores", "Best Chelsea Boots", "Boots: Compare Fit"];
+  const titles = ["Best Boots & Shoes From Top Stores", "Best Chelsea Boots", "Boots: Compare Fit"];
   fixture.pages = fixture.pages.slice(0, 3).map((page, index) => ({ ...page, title: titles[index] }));
   fixture.pages.push({ ...fixture.pages[0], slug: "gift-ideas", title: "Best Gifts from Top Stores", categoryPath: null, breadcrumbs: [] });
   const original = structuredClone(fixture);

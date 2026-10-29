@@ -285,8 +285,11 @@ test("exact copy corrections preserve unfamiliar or authored content and retain 
 /** Builds normalized generic content without causing any network or model calls. */
 function revisionPage(overrides = {}) {
   const source = readFixturePageData().pages[0];
-  return buildSearchPages([{ ...source, slug: "revision-check", title: "Best Wallets from Top Stores",
-    guide: ["Compare pocket layouts."], faq: [], relatedSlugs: [], products: source.products.slice(0, 2), ...overrides }], 1).pages[0];
+  const { related, ...sourceOverrides } = overrides;
+  const page = buildSearchPages([{ ...source, slug: "revision-check", title: "Best Wallets from Top Stores",
+    guide: ["Compare pocket layouts."], faq: [], relatedSlugs: [], products: source.products.slice(0, 2), ...sourceOverrides }], 1).pages[0];
+  // Related entries are already normalized inputs to publication; the raw API fixture uses relatedSlugs instead.
+  return related ? { ...page, related } : page;
 }
 
 test("editorial dates follow actual surviving changes and preserve the catalog timestamp", () => {
@@ -294,6 +297,16 @@ test("editorial dates follow actual surviving changes and preserve the catalog t
   const waterproof = { question: "What makes a windbreaker waterproof?", answer: "A windbreaker with a DWR coating or laminated membrane repels rain while staying lightweight." };
   const silver = { question: "Is sterling silver hypoallergenic?", answer: "Yes, pure sterling silver is generally safe for most skin types, though some people react to alloy metals." };
   const scenarios = [
+    ...["mailbox-posts", "14k-white-gold-statement-rings", "blue-suitcases"].map(slug => ({ slug, title: "Best Example Products from Top Stores", expected: "2026-10-29T05:38:40Z" })),
+    ...["Best From Top Stores", "Best  From Top Stores", "Best   From Top Stores"].map(title => ({ title, expected: "2026-10-27T17:35:31Z" })),
+    { title: "Custom independent title", related: [{ slug: "edge", title: "Best From Top Stores", query: "original query" }], expected: "2026-10-28T18:43:06Z" },
+    { title: "Best Example Products From Top Stores", expected: "2026-10-29T05:38:40Z" },
+    { title: "Custom independent title", related: [{ slug: "beige-coats", title: "Best Beige Coats From Top Stores", query: "beige coats" }], expected: "2026-10-29T05:38:40Z" },
+    { title: "Custom independent title", related: [{ slug: "boots", title: "Best Boots from Top Stores", query: "boots" }], expected: "2026-10-28T18:43:06Z" },
+    { title: "Custom independent title", related: [{ slug: "coats", title: "Coats", query: "coats" }], expected: undefined },
+    { title: "Best Example Products From Top Stores", publicationFilteredProducts: true, expected: "2026-10-29T05:38:40Z" },
+    { title: "Best Example Products From Top Stores", products: [], expected: undefined },
+    { title: "Best Example Products from Top Stores", expected: "2026-10-27T17:35:31Z" },
     ...DetergentFaqPairs.map(pair => ({ slug: pair.slug, title: pair.title, faq: [{ question: pair.question, answer: pair.answer }], expected: DetergentRevision })),
     ...CosmeticFaqPairs.map(pair => ({ slug: pair.slug, title: pair.title, faq: [{ question: pair.question, answer: pair.answer }], expected: CosmeticRevision })),
     ...TextileFaqPairs.map(pair => ({ slug: pair.slug, title: pair.title, faq: [{ question: pair.question, answer: pair.answer }], expected: TextileRevision })),
@@ -335,6 +348,8 @@ function withoutRevisionDates(page) {
 test("suppressed FAQ or comparison fragments cannot supply dates, while final removals are dated", () => {
   const page = revisionPage({ title: "Custom title", guide: [], faq: [] });
   const changes = [
+    { description: "Reviewed new description." },
+    { related: [{ slug: "beige-coats", title: "Beige Coats", query: "beige coats" }] },
     { guide: ["Reviewed exact-model material guidance."] },
     { faq: [{ question: "Reviewed question", answer: "Reviewed answer" }] },
     { comparison: { caption: "Reviewed models", note: "Model facts", columns: ["Model"], rows: [{ model: "A" }] },

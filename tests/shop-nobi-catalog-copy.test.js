@@ -52,22 +52,24 @@ test("specific authored titles and reviewed editorial overrides retain their cop
   assert.match(reviewed.description, /Compare fabric, length, size guidance/);
 });
 
-for (const [name, slug, products] of [
-  ["empty", "scarves", []],
-  ["reviewed", "pencil-skirts", [{ name: "Skirt" }]],
-]) {
-  test(`related labels are corrected on ${name} pages without changing shopping data`, () => {
-    const page = { ...pageWith(products), slug, related: [
-      { slug: "boots", title: "Best Boots from Top Stores", query: "winter boots" },
-      { slug: null, title: "Scarves: Fabric & Length", query: "scarves" },
-    ] };
+test("related labels reuse exact generic topics on empty and reviewed pages without changing queries or inputs", () => {
+  const labels = [
+    ["Best Boots from Top Stores", "Boots"],
+    ["Best Linen & Cotton Shirts", "Linen & Cotton Shirts"],
+    ["Best   Scarves  from Top Stores", "Scarves"],
+    ["Scarves: Fabric & Length", "Scarves: Fabric & Length"],
+    ["The Best Boots for Walking", "The Best Boots for Walking"],
+    ["best Boots from Top Stores", "best Boots from Top Stores"],
+    ["Best   ", "Best   "],
+  ];
+  for (const [name, slug, products] of [["empty", "scarves", []], ["reviewed", "pencil-skirts", [{ name: "Skirt" }]]]) {
+    const page = { ...pageWith(products), slug, related: labels.map(([title], index) => ({
+      slug: index % 2 ? null : `topic-${index}`, title, query: `original query ${index}`,
+    })) };
     const original = structuredClone(page);
     const published = withAuthoredSearchPageCopy(page);
-    assert.deepEqual(published.related, [
-      { slug: "boots", title: "Boots", query: "winter boots" },
-      page.related[1],
-    ]);
+    assert.deepEqual(published.related, page.related.map((entry, index) => ({ ...entry, title: labels[index][1] })), name);
     assert.strictEqual(published.products, page.products);
     assert.deepEqual(page, original);
-  });
-}
+  }
+});

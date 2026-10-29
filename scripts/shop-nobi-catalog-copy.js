@@ -1,6 +1,6 @@
 // Publication copy for the API's generic search-page titles, derived only from displayed records.
 
-const GenericTitlePattern = /^Best (.+?)(?: from Top Stores)?$/;
+import { readGenericSearchTopic } from "./shop-nobi-search-topic.js";
 const NamedStoreLimit = 2;
 const DescriptionLengthTarget = 200;
 
@@ -13,10 +13,8 @@ const DescriptionLengthTarget = 200;
  */
 export function withCatalogSearchCopy(page) {
   if ((page.products ?? []).length === 0) return withEmptySearchCopy(page);
-  const match = GenericTitlePattern.exec(page.title);
-  if (!match) return page;
-
-  const topic = match[1].trim();
+  const topic = readGenericSearchTopic(page.title);
+  if (topic === null) return page;
   const products = page.products ?? [];
 
   const stores = uniqueStoreNames(products);
@@ -37,7 +35,7 @@ export function withCatalogSearchCopy(page) {
 export function withRelatedSearchCopy(page) {
   let changed = false;
   const related = (page.related ?? []).map(entry => {
-    const topic = GenericTitlePattern.exec(entry.title)?.[1]?.trim();
+    const topic = readGenericSearchTopic(entry.title);
     if (!topic) return entry;
     changed = true;
     return { ...entry, title: topic };
@@ -58,7 +56,7 @@ function uniqueStoreNames(products) {
 /** Removes inventory-dependent copy whenever no publishable listings remain, including authored pages. */
 export function withEmptySearchCopy(page) {
   const { comparison, ...emptyPage } = page;
-  const topic = GenericTitlePattern.exec(page.title)?.[1]?.trim() || page.query?.trim() || page.title;
+  const topic = readGenericSearchTopic(page.title) || page.query?.trim() || page.title;
   return {
     ...emptyPage,
     title: `${topic}: Search Products`,

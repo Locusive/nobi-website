@@ -276,6 +276,10 @@ Related searches keep their existing prebuilt page links. If a known related
 search falls outside the build's file limit, its link opens `/shop?q=...` with
 the original query instead of becoming plain text or pointing to an unbuilt
 page. Older embedded data falls back to the related search's title.
+Root and category navigation use the same exact generic-title topic parser as
+related search labels: `Best Boots from Top Stores` becomes `Boots`. Custom
+labels, routes and ordering remain unchanged; destination copy and editorial
+dates are not regenerated to change a navigation label.
 
 In the browser, a search page keeps its prebuilt products above the live search,
 and a category page keeps its searches under the search box, until the assistant

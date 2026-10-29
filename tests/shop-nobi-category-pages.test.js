@@ -58,20 +58,28 @@ test("a category still too thin, or with an unknown top category, gets no page, 
   assert.ok(["sign-0", "sign-1", "neon-0"].every((slug) => shopSlugs.includes(slug)));
 });
 
-test("/shop shows every category page, the first 50 search pages, and the pages on no category page", () => {
-  const boots = buildPages(51, "Shoes", "apparel_accessories.shoes", "boots");
-  const giftIdeas = { slug: "gift-ideas", title: "Gift Ideas", breadcrumbs: [] };
-  const rings = buildPages(1, "Jewelry", "apparel_accessories.jewelry", "rings");
+test("root and category navigation retain ordering and custom titles while shortening generic labels", () => {
+  const boots = buildPages(51, "Shoes", "apparel_accessories.shoes", "boots").map((page, index) => ({
+    ...page, title: index === 0 ? "Shoes: Compare Fit & Use" : `Best Shoes ${index}${index % 2 ? " from Top Stores" : ""}`,
+    query: `original shoes query ${index}`, refreshedAt: "2026-10-28T21:04:02Z",
+  }));
+  const giftIdeas = { slug: "gift-ideas", title: "Best Gifts & Games from Top Stores", query: "gift ideas", breadcrumbs: [] };
+  const rings = buildPages(1, "Jewelry", "apparel_accessories.jewelry", "rings").map(page => ({ ...page, title: "Rings: Compare Metals" }));
   const searchPages = [...boots, giftIdeas, ...rings];
+  const original = structuredClone(searchPages);
   const categoryPages = buildCategoryPages(searchPages, NoLimit);
-
   const popularSearches = buildPopularSearches(searchPages, categoryPages);
 
   assert.deepEqual(popularSearches.categories, [{ slug: "shoes", name: "Shoes" }]);
-  assert.equal(popularSearches.pages.length, 50);
-  assert.deepEqual(popularSearches.pages[0], { slug: "boots-0", title: "Shoes 0" });
-  const moreSearches = [{ slug: "gift-ideas", title: "Gift Ideas" }, { slug: "rings-0", title: "Jewelry 0" }];
-  assert.deepEqual(popularSearches.moreSearches, moreSearches, "The jewelry category is too thin even with its top category");
+  assert.equal(categoryPages[0].refreshedAt, boots[0].refreshedAt);
+  const expectedBootLinks = boots.map((page, index) => ({ slug: page.slug, title: index === 0 ? page.title : `Shoes ${index}` }));
+  assert.deepEqual(categoryPages[0].pages, expectedBootLinks);
+  assert.deepEqual(popularSearches.pages, expectedBootLinks.slice(0, 50));
+  assert.deepEqual(popularSearches.moreSearches, [
+    { slug: "gift-ideas", title: "Gifts & Games" },
+    { slug: "rings-0", title: "Rings: Compare Metals" },
+  ], "Uncategorized links keep their routes and order");
+  assert.deepEqual(searchPages, original, "Titles, queries and all source records remain untouched");
 });
 
 test("a search page's first breadcrumb names and links the category page it is on, or links nowhere", () => {

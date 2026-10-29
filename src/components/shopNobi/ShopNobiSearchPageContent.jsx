@@ -21,7 +21,8 @@ export default function ShopNobiSearchPageContent({ page }) {
     <main className="mx-auto max-w-6xl px-4 py-8 text-black dark:text-white">
       <Breadcrumbs page={page} />
       <h1 className="mt-4 text-3xl font-semibold">{page.title}</h1>
-      {page.updatedDate && <p className="mt-1 text-sm text-black/50 dark:text-white/50">Updated {page.updatedDate}</p>}
+      {page.updatedDate && <p className="mt-1 text-sm text-black/50 dark:text-white/50">Catalog refreshed {page.updatedDate}</p>}
+      {page.editorialUpdatedDate && <p className="mt-1 text-sm text-black/50 dark:text-white/50">Content revised {page.editorialUpdatedDate}</p>}
       {page.description && <p className="mt-2 max-w-3xl text-black/70 dark:text-white/70">{page.description}</p>}
       {productsFirst && (
         <p className="mt-4">

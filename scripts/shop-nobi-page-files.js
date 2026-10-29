@@ -19,6 +19,7 @@ import { withAuthoredSearchPageCopy } from "./shop-nobi-editorial-copy.js";
  *
  * @param {{searchPages: object[], categoryPages: object[], popularSearches: object}} plan What to build.
  * @param {string} distDir The build output folder.
+ * @returns {Promise<object[]>} The actual published search pages, shared with the search sitemap.
  */
 export async function writePrebuiltPages(plan, distDir, { privateDocumentPath = null } = {}) {
   const documentPath = privateDocumentPath instanceof URL ? fileURLToPath(privateDocumentPath) : privateDocumentPath;
@@ -27,7 +28,7 @@ export async function writePrebuiltPages(plan, distDir, { privateDocumentPath = 
     writeFileSync(documentPath, "export default null;\n");
   }
   if (plan.searchPages.length === 0 && !plan.productPage) {
-    return;
+    return [];
   }
 
   const shell = readShell(distDir);
@@ -37,11 +38,12 @@ export async function writePrebuiltPages(plan, distDir, { privateDocumentPath = 
     return renderPrebuiltPage(content, shell, body);
   };
 
-  for (const page of plan.searchPages) {
+  const publishedSearchPages = plan.searchPages.map(withAuthoredSearchPageCopy);
+  for (const page of publishedSearchPages) {
     const content = {
       kind: PrebuiltContentKind.SearchPage,
       path: searchPagePath(page.slug),
-      data: withAuthoredSearchPageCopy(page),
+      data: page,
     };
     const html = renderContent(content);
     writeFlatPageFile(distDir, content.path, html);
@@ -62,11 +64,12 @@ export async function writePrebuiltPages(plan, distDir, { privateDocumentPath = 
     if (documentPath) writeFileSync(documentPath, `export default ${JSON.stringify(privateDocument)};\n`);
   }
 
-  if (plan.searchPages.length === 0) return;
+  if (plan.searchPages.length === 0) return [];
 
   const shopNobiContent = { kind: PrebuiltContentKind.PopularSearches, path: ShopNobiPageHead.path, data: plan.popularSearches };
   const shopNobiHtml = renderContent(shopNobiContent);
   writePageFiles(distDir, shopNobiContent.path, shopNobiHtml);
+  return publishedSearchPages;
 }
 
 /** Reads the built client shell. */

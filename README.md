@@ -52,6 +52,17 @@ table, the pricing facts, and existing page regressions.
 
 ## Shop Nobi search pages
 
+Published search pages keep the API's catalog refresh timestamp separate from recorded editorial revisions.
+`shop-nobi-editorial-revision-dates.js` records substantive source revisions by slug; generic rules retain
+independent revision dates. Dates are in UTC and are not an inventory check or a claim of public release time.
+Ecru and the silver FAQ rule use their verified deployment receipts for known release dates. Only changed editorial fragments that
+survive final publication contribute a date; suppressed or unmatched guidance does not make a page newer.
+The sitemap uses the later valid catalog or editorial date from the same published data as HTML.
+Visible labels distinguish “Catalog refreshed” and “Content revised”. Stories, categories and product-offer
+check dates keep their separate meanings. Never set all dates to the build time or a shared module's mtime.
+When materially revising an authored entry or rule, update its recorded revision and provenance; a no-op
+rebuild or date-only edit is not a new content revision. The offline tests cover suppression and stability.
+
 Generic `Best ...` search-page titles (including the `from Top Stores` suffix) are replaced at publication
 with catalog-backed titles and descriptions by `scripts/shop-nobi-catalog-copy.js`.
 Related-search labels also remove that generic ranking wording at publication, retaining
@@ -301,8 +312,8 @@ generation. Categories, Stories and image-free pages keep their normal URL
 entries without product-image tags. Image discovery and indexing are not guaranteed;
 Google documents Search Console verification for externally hosted image domains.
 
-Every entry in `sitemap-shop.xml` has a lastmod: the page's refresh time, or the
-time the API built the data when a page has none.
+Search entries in `sitemap-shop.xml` use their resolved catalog/editorial modification date.
+Other entries retain their own refresh/offer-check timestamp, with the API export time as a fallback.
 
 The last build step, `scripts/submit-indexnow.js`, tells IndexNow (Bing, Yandex
 and the other engines that share it) about new or changed Shop Nobi pages from

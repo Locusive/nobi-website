@@ -285,3 +285,11 @@ export function withGenericCareCopy(page) {
   });
   return changed ? { ...page, faq } : page;
 }
+
+/** Returns the recorded revision for a reviewed replacement answer, not other FAQ text. */
+export function genericCareRevision(answer) {
+  if (answer === SuedeCareAnswer) return "2026-10-29T01:26:57Z";
+  if (WaterproofSelectionPairs.some(pair => pair.replacement === answer)) return "2026-10-29T01:41:28Z";
+  if (answer === SilverSelectionAnswer || SilverSelectionPairs.some(pair => pair.replacement === answer)) return "2026-10-29T02:32:22Z";
+  return null;
+}

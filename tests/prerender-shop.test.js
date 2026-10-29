@@ -6,6 +6,8 @@ import { buildShopNobiSitemap, countRedirectRules } from "../scripts/shop-nobi-s
 import { FileCountBeforePages, makeDistCopy, prerenderWith, readBody, readOriginal, readScriptJson } from "./shop-nobi-test-build.js";
 import { readFixturePageData } from "./shop-nobi-pages-server.js";
 import { decodePaidLink } from "../src/utils/shopNobiPaidLink.js";
+import { withAuthoredSearchPageCopy } from "../scripts/shop-nobi-editorial-copy.js";
+import { selectChangedUrls, readSitemapEntries } from "../scripts/shop-nobi-indexnow.js";
 import { buildSearchPages } from "../scripts/shop-nobi-search-page-view.js";
 
 let distDir;
@@ -77,7 +79,8 @@ test("filtered listings replace inventory-dependent guidance consistently in the
   const body = readBody(readOutput("shop/s/black-leather-boots.html"));
   const expectedTop = [
     '<h1 class="mt-4 text-3xl font-semibold">Black Leather Boots</h1>',
-    '<p class="mt-1 text-sm text-black/50 dark:text-white/50">Updated October 11, 2026</p>',
+    '<p class="mt-1 text-sm text-black/50 dark:text-white/50">Catalog refreshed October 11, 2026</p>',
+    '<p class="mt-1 text-sm text-black/50 dark:text-white/50">Content revised October 27, 2026</p>',
     '<p class="mt-2 max-w-3xl text-black/70 dark:text-white/70">',
     "3 product listings are displayed. Confirm the selected variant&#x27;s current price, availability and purchase terms with the retailer.</p>",
     '<p class="mt-3 max-w-3xl text-black/70 dark:text-white/70">Check each product card for its listed price and currency. Confirm the selected variant&#x27;s current price, availability and purchase terms with the retailer.</p>',
@@ -101,7 +104,7 @@ test("missing descriptions use a fallback for populated pages while empty pages 
   const body = readBody(readOutput("shop/s/boots.html"));
   const expectedTop = [
     '<h1 class="mt-4 text-3xl font-semibold">boots: Search Products</h1>',
-    '<p class="mt-1 text-sm text-black/50 dark:text-white/50">Updated October 9, 2026</p>',
+    '<p class="mt-1 text-sm text-black/50 dark:text-white/50">Catalog refreshed October 9, 2026</p>',
     '<p class="mt-2 max-w-3xl text-black/70 dark:text-white/70">No product listings are displayed for boots. Enter your preferences in Shop Nobi to search for other options.</p>',
     '<p class="mt-3 max-w-3xl text-black/70 dark:text-white/70">No product listings are displayed on this page. Use the search box below to describe what you need and look for other options.</p>',
     '<ul class="mt-6 grid',
@@ -334,8 +337,9 @@ test("retired pages redirect permanently, except ones that are live again or hav
 
 test("the Shop Nobi sitemap lists each built category page, search page and web story", () => {
   const shopSitemap = readOutput("sitemap-shop.xml");
-  for (const path of ["shop/s/black-leather-boots", "shop/c/shoes", "shop/stories/black-leather-boots"]) {
-    assert.ok(shopSitemap.includes(`<loc>https://nobi.ai/${path}</loc>\n    <lastmod>2026-10-11T08:02:11Z</lastmod>`), path);
+  for (const [path, date] of [["shop/s/black-leather-boots", "2026-10-27T20:22:16Z"],
+    ["shop/c/shoes", "2026-10-11T08:02:11Z"], ["shop/stories/black-leather-boots", "2026-10-11T08:02:11Z"]]) {
+    assert.ok(shopSitemap.includes(`<loc>https://nobi.ai/${path}</loc>\n    <lastmod>${date}</lastmod>`), path);
   }
   assert.equal(shopSitemap.split("<url>").length - 1, 4, "One category page, two populated search pages and one story");
   assert.equal(shopSitemap.split("<lastmod>").length - 1, 4, "Every entry has a lastmod");
@@ -515,4 +519,29 @@ test("a top category's page shows its category pages under Browse by category, t
   } finally {
     rmSync(folder, { recursive: true, force: true });
   }
+});
+
+
+test("authored HTML and sitemap share revision dates without changing catalog, category or story dates", async t => {
+  const data = readFixturePageData();
+  data.pages[0] = { ...data.pages[0], slug: "ecru-jigsaw-puzzles", products: data.pages[0].products.slice(0, 2) };
+  const folder = makeDistCopy();
+  t.after(() => rmSync(folder, { recursive: true, force: true }));
+  await prerenderWith({ body: data }, folder);
+  const html = readFileSync(join(folder, "shop/s/ecru-jigsaw-puzzles.html"), "utf8");
+  const published = readScriptJson(html, "shop-nobi-prebuilt-content").data;
+  assert.equal(published.refreshedAt, data.pages[0].refreshedAt);
+  assert.equal(published.editorialModifiedAt, "2026-10-29T02:07:49Z");
+  assert.ok(html.includes("Catalog refreshed October 11, 2026"));
+  assert.ok(html.includes("Content revised October 29, 2026"));
+  const sitemap = readFileSync(join(folder, "sitemap-shop.xml"), "utf8");
+  const entries = readSitemapEntries(sitemap);
+  assert.equal(entries.get("https://nobi.ai/shop/s/ecru-jigsaw-puzzles"), published.lastModifiedAt);
+  assert.equal(entries.get("https://nobi.ai/shop/c/shoes"), data.pages[0].refreshedAt);
+  assert.equal(entries.has("https://nobi.ai/shop/stories/ecru-jigsaw-puzzles"), false, "An editorial revision does not create an unselected Story");
+  const prior = new Map(entries);
+  prior.set("https://nobi.ai/shop/s/ecru-jigsaw-puzzles", data.pages[0].refreshedAt);
+  assert.deepEqual(selectChangedUrls(prior, entries), ["https://nobi.ai/shop/s/ecru-jigsaw-puzzles"]);
+  const page = withAuthoredSearchPageCopy(published);
+  assert.equal(page.lastModifiedAt, published.lastModifiedAt, "Rebuilding identical content does not refresh its date");
 });

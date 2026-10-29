@@ -61,13 +61,13 @@ export async function prerenderShopNobiSearchPages({
     console.warn(`prerender-shop: skipped ${plan.smallPosterCount} web story(ies) whose pictures are too small for a poster.`);
   }
 
-  await writePrebuiltPages(plan, distDir, { privateDocumentPath });
+  const publishedSearchPages = await writePrebuiltPages(plan, distDir, { privateDocumentPath });
   writeWebStories(distDir, plan.stories);
 
   const redirectLines = buildRetiredRedirects(retired, plan.searchPages);
   // The data's own time keeps a fallback lastmod the same across rebuilds of the same data.
   const fallbackLastModified = readValidTime(generatedAt) ?? new Date().toISOString();
-  const sitemap = buildShopNobiSitemap(plan.categoryPages, plan.searchPages, plan.stories, fallbackLastModified, plan.productPage);
+  const sitemap = buildShopNobiSitemap(plan.categoryPages, publishedSearchPages, plan.stories, fallbackLastModified, plan.productPage);
   writeFileSync(join(distDir, ShopNobiSitemapFile), sitemap);
   writePinFeeds(distDir, plan.searchPages);
   updateFile(join(distDir, "_redirects"), (text) => appendRedirects(text, redirectLines, redirectRuleLimit));

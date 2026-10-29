@@ -120,6 +120,13 @@ and directs shoppers to exact-formula ingredients and instructions. Existing
 buying advice and all product data are preserved. Original source identity and
 whole-text gates retain authored/cited/empty/filtered protections; only surviving
 new fragments contribute a static editorial revision.
+Nine reviewed garment pages receive nine exact FAQ corrections and one
+blazer paragraph correction in `shop-nobi-garment-care-guidance.js`. Care advice
+uses the selected garment's label, lining and trim instead of granting wash or
+dry-clean permission from a fiber name. The existing exact-passage helper
+protects custom, cited, empty and filtered pages; only surviving changed text
+contributes the rule's revision date. Products and earning links remain intact.
+
 The single laundry-detergent page has two reviewed paragraphs and two FAQs
 corrected by `shop-nobi-detergent-dose-guidance.js`. Formula-specific dosing,
 washer and fabric instructions replace universal half-dose and compatibility

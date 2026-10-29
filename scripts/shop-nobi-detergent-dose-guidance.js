@@ -1,0 +1,37 @@
+import { withExactGuidePassages } from "./shop-nobi-exact-guidance.js";
+
+export const DetergentDoseRevision = "2026-10-29T04:36:30Z";
+
+const ReviewedPages = [
+  {
+    "slug": "laundry-detergent",
+    "title": "Best Laundry Detergent from Top Stores",
+    "paragraphs": [
+      {
+        "paragraph": "Laundry detergents on this page are priced from $12.98 up to $43.00. The selection includes scented blends, fragrance-free formulas, concentrated liquids, and specialty washes for activewear or delicate fabrics. Brands use natural extracts like lavender, chamomile, and citrus, as well as enzyme-rich formulas for deep cleaning.",
+        "replacement": "Laundry detergents on this page are priced from $12.98 up to $43.00. The listings include scented and fragrance-free formulas, concentrates, and an activewear-labeled wash. Compare the exact formula and intended use: a fragrance name does not identify its ingredients, and an activewear label does not establish compatibility with every fabric."
+      },
+      {
+        "paragraph": "When selecting a detergent think about your washing habits. Concentrated liquids are cost-effective and work well in high-efficiency machines. Fragrance-free options are ideal for sensitive skin, while scented varieties add a fresh scent to linens. Some formulas are tailored for activewear, helping to remove sweat and odor without damaging performance fabrics.",
+        "replacement": "Compare bottle size with the stated number of loads and recommended dose for your usual load size. A concentrate is not automatically cheaper per wash; use the same dosing basis when comparing prices. Check washer compatibility and garment care instructions, and compare fragrance-free and scented options according to your preferences."
+      }
+    ],
+    "faq": [
+      {
+        "question": "Can I use a high-efficiency detergent in a regular washer?",
+        "answer": "Yes, high-efficiency detergents are low-sudsing and safe for both HE and standard machines.",
+        "expectedAnswer": "Check whether the exact detergent lists your washer type and follow its dose instructions. Where the formula supports both HE and standard machines, the amounts may differ; the HE label alone is not a universal dosing instruction."
+      },
+      {
+        "question": "Do concentrated detergents require less product per load?",
+        "answer": "They are formulated to be diluted, so you typically use half the amount of a standard liquid detergent.",
+        "expectedAnswer": "Follow the specific formula’s directions for your load size and washer. There is no universal half-dose rule, and do not pre-dilute unless the directions say to. For value comparisons, use the stated loads at that dose rather than comparing bottle volume alone."
+      }
+    ]
+  }
+];
+
+/** Applies exact reviewed detergent dosing and formula-selection guidance. */
+export function withDetergentDoseGuidance(page) {
+  return withExactGuidePassages(page, ReviewedPages);
+}

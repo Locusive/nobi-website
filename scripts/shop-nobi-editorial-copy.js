@@ -1,3 +1,5 @@
+import { withRedWalletComparison } from "./shop-nobi-red-wallet-comparison.js";
+import { BagSweatpantGuideCopy } from "./shop-nobi-bag-sweatpant-guide-copy.js";
 import { ApparelPearlGuideCopy } from "./shop-nobi-apparel-pearl-guide-copy.js";
 import { TravelGemstoneGuideCopy } from "./shop-nobi-travel-gemstone-guide-copy.js";
 import { EquipmentClaimGuideCopy } from "./shop-nobi-equipment-claim-guide-copy.js";
@@ -128,6 +130,7 @@ const PencilSkirtCopy = {
 };
 
 const SelectedPageCopy = {
+  ...BagSweatpantGuideCopy,
   ...ApparelPearlGuideCopy,
   ...TravelGemstoneGuideCopy,
   ...EquipmentClaimGuideCopy,
@@ -167,6 +170,7 @@ export function withAuthoredSearchPageCopy(page) {
 /** Selects reviewed copy before checking its price and publication consistency. */
 function applyAuthoredCopy(page) {
   if ((page.products ?? []).length === 0) return withEmptySearchCopy(page);
+  if (page.slug === "red-wallets") return withRedWalletComparison(page);
   if (page.slug === "hand-lotion") return withHandLotionComparison(page);
   if (page.slug === "laptop-stands") return withLaptopStandComparison(page);
   if (page.slug === "womens-khaki-pants") return withKhakiPantsComparison(page);

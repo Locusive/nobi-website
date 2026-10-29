@@ -646,3 +646,15 @@ publication filter, product records, shopping links and experiment assignments
 remain unchanged. The consolidated published-claims matrices now cover forty
 pages, including filtered and empty states. Clear phone cases were excluded
 because existing publication filtering already withholds their guide and FAQ.
+
+### Wallet organization and carrying-clothing guides
+
+`shop-nobi-red-wallet-comparison.js` adds a model-level wallet table for three
+exact reviewed catalog identities. It compares sourced card pockets and closures,
+omitting disputed dimensions and unverified Bosca/Zegna color mappings. Rows and
+references disappear when the corresponding identity changes or publication is
+filtered or empty. Product cards and tracked retailer destinations are unchanged.
+`shop-nobi-bag-sweatpant-guide-copy.js` adds practical shoulder-bag and sweatpant
+guidance without universal spray, durability, wicking or washing claims. The
+same three published-claims matrices cover all forty-three reviewed pages,
+including wallet identity mutations and filtered/empty publication.

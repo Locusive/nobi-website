@@ -13,6 +13,9 @@ import { readBody, readScriptJson } from "./shop-nobi-test-build.js";
 
 const Fixture = JSON.parse(readFileSync(new URL("./fixtures/published-claim-pages.json", import.meta.url), "utf8"));
 const DecisionTopics = {
+  "red-wallets": ["card pockets", "bill", "variant"],
+  "beige-shoulder-bags": ["strap drop", "lining", "finish"],
+  "mens-black-sweatpants": ["inseam", "waistband", "detergent"],
   "womens-white-sweatpants": ["brand", "inseam", "waistband"],
   "sterling-silver-bracelets": ["length", "finish", "charm"],
   "pearl-rings": ["mother-of-pearl", "size", "stack"],
@@ -61,9 +64,53 @@ function normalize(page) {
   return buildSearchPages([structuredClone(page)], 1).pages[0];
 }
 
+/** Exercise exact model gates on an already-published page so stale derived facts cannot survive. */
+function checkWalletIdentityGates(page, published) {
+  const names = ["Bosca Monfrini ITALIA Slim 8-Slot Men's Pocket Wallet", "Ermenegildo Zegna Printed Calfskin Leather Zip Around Wallet", "The Sak Iris Wallet"];
+  assert.equal(published.comparison.rows.length, 3);
+  assert.equal(published.guideSources.length, 4);
+  assert.match(published.comparison.rows[0].setup, /8 card pockets/);
+  assert.match(published.comparison.rows[1].setup, /does not disclose a count/);
+  assert.match(published.comparison.rows[2].setup, /4 card pockets/);
+  assert.match(published.comparison.note, /not a verified red variant/);
+  for (const [index, name] of names.entries()) {
+    for (const field of ["removed", "name", "brand", "productVariantId", "owningMerchantId", "url", "variant query"]) {
+      const changed = structuredClone(published);
+      const product = changed.products.find(item => item.name === name);
+      if (field === "removed") changed.products = changed.products.filter(item => item !== product);
+      else if (field === "variant query") product.url = product.url.replace(/variant=\d+/, "variant=999");
+      else product[field] += "-changed";
+      const result = withAuthoredSearchPageCopy(changed);
+      assert.deepEqual(result.comparison.rows, published.comparison.rows.filter((_, row) => row !== index), `${name}: ${field}`);
+      const excluded = index === 0 ? [0, 1] : [index + 1];
+      assert.deepEqual(result.guideSources, published.guideSources.filter((_, source) => !excluded.includes(source)));
+      assert.strictEqual(result.products, changed.products);
+    }
+  }
+  checkWalletRefreshStates(page, published, names);
+}
+
+/** Model facts ignore price/stock updates, deduplicate references, and disappear with their listings. */
+function checkWalletRefreshStates(page, published, names) {
+  const duplicate = { ...page, products: [...page.products, page.products.find(product => product.name === names[0])] };
+  const result = withAuthoredSearchPageCopy(duplicate);
+  assert.deepEqual(result.comparison, published.comparison);
+  assert.deepEqual(result.guideSources, published.guideSources);
+  assert.strictEqual(result.products, duplicate.products);
+  const refreshed = structuredClone(page);
+  refreshed.products.forEach(product => { product.price += 1; product.isInStock = false; });
+  assert.deepEqual(withAuthoredSearchPageCopy(refreshed).comparison, published.comparison);
+  for (const products of [[], published.products.filter(product => !names.includes(product.name))]) {
+    const withoutModels = withAuthoredSearchPageCopy({ ...published, products });
+    assert.equal(withoutModels.comparison, undefined);
+    assert.equal(withoutModels.guideSources?.length ?? 0, 0);
+    assert.strictEqual(withoutModels.products, products);
+  }
+}
+
 test("audited page corrections remove the identified claims and preserve every retained shopping record", () => {
-  assert.equal(Fixture.pages.length, 40);
-  assert.equal(Fixture.pages.reduce((sum, page) => sum + page.products.length, 0), 647);
+  assert.equal(Fixture.pages.length, 43);
+  assert.equal(Fixture.pages.reduce((sum, page) => sum + page.products.length, 0), 696);
   for (const source of Fixture.pages) {
     const page = normalize(source);
     const snapshot = structuredClone(page);
@@ -74,6 +121,7 @@ test("audited page corrections remove the identified claims and preserve every r
     }
     for (const topic of DecisionTopics[page.slug]) assert.ok(text.toLowerCase().includes(topic), `${page.slug}: ${topic}`);
     assert.equal(published.faq.length, 4);
+    if (page.slug === "red-wallets") checkWalletIdentityGates(page, published);
     assert.strictEqual(published.products, page.products);
     assert.deepEqual(published.related.map(({ slug, query }) => ({ slug, query })), page.related.map(({ slug, query }) => ({ slug, query })));
     for (const key of ["slug", "query", "refreshedAt", "categoryPath", "breadcrumbs"]) assert.deepEqual(published[key], page[key], key);
@@ -108,6 +156,12 @@ test("all corrected pages agree across rendered metadata, guidance, FAQ schema a
     assert.deepEqual(faq.mainEntity.map(entry => ({ question: entry.name, answer: entry.acceptedAnswer.text })), published.faq);
     assert.ok(html.includes(renderPrebuiltPageBody(content)), `${page.slug}: browser and static render agree`);
     assert.deepEqual(published.products, page.products);
+    if (page.slug === "red-wallets") {
+      assert.equal(published.comparison.rows.length, 3);
+      assert.ok(body.includes('<table') && body.includes('role="region"'));
+      for (const row of published.comparison.rows) for (const value of Object.values(row)) assert.ok(body.includes(htmlEscape(value)), value);
+      for (const source of published.guideSources) assert.ok(body.includes(`href="${htmlEscape(source.url)}" target="_blank" rel="noopener noreferrer nofollow"`));
+    }
     assert.equal(body.includes('href="/tools/duvet-cover-size"'), page.slug === "duvet-covers");
   }
   assert.deepEqual(plan, snapshot, "Publication leaves the plan used by feeds and Stories unchanged");
@@ -130,6 +184,8 @@ test("filtered and empty versions cannot retain the authored claims or FAQ schem
     for (const page of pages) {
       const html = readFileSync(join(folder, `shop/s/${page.slug}.html`), "utf8");
       const published = readScriptJson(html, "shop-nobi-prebuilt-content").data;
+      assert.equal(published.comparison, undefined, `${mode}: no stale comparison`);
+      assert.equal(published.guideSources?.length ?? 0, 0, `${mode}: no stale references`);
       assert.deepEqual(published.faq, [], `${mode}: ${page.slug}`);
       assert.ok(!readScriptJson(html, "page-schema").some(entry => entry["@type"] === "FAQPage"));
       assert.deepEqual(published.products, page.products);

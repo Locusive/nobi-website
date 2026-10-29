@@ -705,3 +705,13 @@ athletic shorts. The copy compares actual measurements, formats, closures,
 configuration and garment care rather than inferring reliability or performance.
 All product records and publication gates remain unchanged. The same three
 published-claims matrices cover these additions alongside prior corrections.
+### Ecru jigsaw puzzle line
+
+`shop-nobi-ecru-jigsaw-copy.js` explains Artifact Puzzles’ Ecru line using its
+official FAQ and collection references. It distinguishes the line’s matte images
+and closer piece cuts from a beige artwork filter, then helps shoppers compare
+piece count, difficulty, cut design and finished dimensions. No named product,
+stock, price or mystery-puzzle feature is asserted in the guide. All twenty
+retained cards, source records, destinations and landing assignment remain intact.
+The existing three published-claims matrices cover the page and its filtered
+and empty states; references are withheld with suppressed guidance.

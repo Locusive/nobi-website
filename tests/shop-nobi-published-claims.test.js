@@ -13,6 +13,7 @@ import { readBody, readScriptJson } from "./shop-nobi-test-build.js";
 
 const Fixture = JSON.parse(readFileSync(new URL("./fixtures/published-claim-pages.json", import.meta.url), "utf8"));
 const DecisionTopics = {
+  "ecru-jigsaw-puzzles": ["matte", "closely cut", "difficulty", "finished dimensions"],
   "pencil-cases": ["interior", "closure", "100 pens"],
   "mens-red-coats-and-jackets": ["lining", "hood", "layers"],
   "red-shoulder-bags": ["strap drop", "convertible", "hardware"],
@@ -156,8 +157,8 @@ function checkRetailerExamples(page, published) {
 }
 
 test("audited page corrections remove the identified claims and preserve every retained shopping record", () => {
-  assert.equal(Fixture.pages.length, 62);
-  assert.equal(Fixture.pages.reduce((sum, page) => sum + page.products.length, 0), 1024);
+  assert.equal(Fixture.pages.length, 63);
+  assert.equal(Fixture.pages.reduce((sum, page) => sum + page.products.length, 0), 1044);
   for (const source of Fixture.pages) {
     const page = normalize(source);
     const snapshot = structuredClone(page);
@@ -168,6 +169,16 @@ test("audited page corrections remove the identified claims and preserve every r
     }
     for (const topic of DecisionTopics[page.slug]) assert.ok(text.toLowerCase().includes(topic), `${page.slug}: ${topic}`);
     assert.equal(published.faq.length, 4);
+    if (page.slug === "ecru-jigsaw-puzzles") {
+      assert.deepEqual(published.guideSources.map(source => source.url), [
+        "https://www.artifactpuzzles.com/pages/faq", "https://www.artifactpuzzles.com/collections/ecru-puzzles",
+      ]);
+      for (const product of page.products) assert.ok(!text.includes(product.name), "Line guidance does not depend on a named listing");
+      const fewer = withAuthoredSearchPageCopy({ ...published, products: page.products.slice(1) });
+      assert.deepEqual(fewer.guide, published.guide, "Removing one listing cannot stale model-independent line facts");
+      assert.deepEqual(fewer.faq, published.faq);
+      assert.deepEqual(fewer.products, page.products.slice(1));
+    }
     if (page.slug === "red-wallets") checkWalletIdentityGates(page, published);
     if (page.slug === "leather-lifestyle-sneakers") checkRetailerExamples(page, published);
     assert.strictEqual(published.products, page.products);
@@ -208,8 +219,8 @@ test("all corrected pages agree across rendered metadata, guidance, FAQ schema a
       assert.equal(published.comparison.rows.length, 3);
       assert.ok(body.includes('<table') && body.includes('role="region"'));
       for (const row of published.comparison.rows) for (const value of Object.values(row)) assert.ok(body.includes(htmlEscape(value)), value);
-      for (const source of published.guideSources) assert.ok(body.includes(`href="${htmlEscape(source.url)}" target="_blank" rel="noopener noreferrer nofollow"`));
     }
+    for (const source of published.guideSources ?? []) assert.ok(body.includes(`href="${htmlEscape(source.url)}" target="_blank" rel="noopener noreferrer nofollow"`));
     assert.equal(body.includes('href="/tools/duvet-cover-size"'), page.slug === "duvet-covers");
   }
   assert.deepEqual(plan, snapshot, "Publication leaves the plan used by feeds and Stories unchanged");

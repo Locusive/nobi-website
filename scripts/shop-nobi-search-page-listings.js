@@ -30,7 +30,7 @@ export function buildShopNobiSitemap(categoryPages, searchPages, stories, fallba
   const pageEntries = [
     ...(productPage?.products.length ? [{ url: `${BaseUrl}${BodumPath}`, refreshedAt: productPage.offersCheckedAt }] : []),
     ...categoryPages.map((category) => ({ url: categoryPageUrl(category.slug), refreshedAt: category.refreshedAt })),
-    ...searchPages.filter((page) => page.products?.length > 0).map((page) => ({ url: searchPageUrl(page.slug), refreshedAt: page.refreshedAt,
+    ...searchPages.filter((page) => page.products?.length > 0).map((page) => ({ url: searchPageUrl(page.slug), refreshedAt: readValidTime(page.lastModifiedAt) ?? page.refreshedAt,
       images: [...new Set((page.products ?? []).map(product => product.imageUrl).filter(Boolean))].slice(0, SitemapImageLimitPerPage) })),
     ...stories.map(({ page }) => ({ url: webStoryUrl(page.slug), refreshedAt: page.refreshedAt })),
   ];

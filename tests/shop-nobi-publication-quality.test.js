@@ -1,3 +1,4 @@
+import { recordEditorialRevision, withPublicationDates } from "../scripts/shop-nobi-publication-dates.js";
 import assert from "node:assert/strict";
 import { test } from "node:test";
 import { mkdtempSync, readFileSync, rmSync, writeFileSync } from "node:fs";
@@ -138,7 +139,7 @@ test("all reviewed care, waterproof and silver pairs agree across visible HTML, 
     const published = withAuthoredSearchPageCopy(page);
     const otherFaq = page.faq.slice(pairs.length);
     const untouched = withAuthoredSearchPageCopy({ ...page, faq: otherFaq });
-    assert.deepEqual({ ...published, faq: published.faq.slice(pairs.length) }, untouched, `${page.slug}: only matching answers change`);
+    assert.deepEqual(withoutRevisionDates({ ...published, faq: published.faq.slice(pairs.length) }), withoutRevisionDates(untouched), `${page.slug}: only matching answers and their revision dates change`);
     assert.deepEqual(withAuthoredSearchPageCopy(published), published, `${page.slug}: idempotent`);
     const html = readFileSync(join(folder, `shop/s/${page.slug}.html`), "utf8");
     for (const [faqIndex, pair] of pairs.entries()) {
@@ -198,4 +199,71 @@ test("exact FAQ corrections preserve unfamiliar or authored copy and retain empt
       assert.ok(!published.guide.join(" ").includes(pair.expectedAnswer));
     }
   }
+});
+
+/** Builds normalized generic content without causing any network or model calls. */
+function revisionPage(overrides = {}) {
+  const source = readFixturePageData().pages[0];
+  return buildSearchPages([{ ...source, slug: "revision-check", title: "Best Wallets from Top Stores",
+    guide: ["Compare pocket layouts."], faq: [], relatedSlugs: [], products: source.products.slice(0, 2), ...overrides }], 1).pages[0];
+}
+
+test("editorial dates follow actual surviving changes and preserve the catalog timestamp", () => {
+  const suede = { question: "How do I care for suede boots?", answer: "Use a soft brush to remove dirt and apply a suede protector spray to guard against stains." };
+  const waterproof = { question: "What makes a windbreaker waterproof?", answer: "A windbreaker with a DWR coating or laminated membrane repels rain while staying lightweight." };
+  const silver = { question: "Is sterling silver hypoallergenic?", answer: "Yes, pure sterling silver is generally safe for most skin types, though some people react to alloy metals." };
+  const scenarios = [
+    { faq: [suede], expected: "2026-10-29T01:26:57Z" },
+    { faq: [waterproof], expected: "2026-10-29T01:41:28Z" },
+    { slug: "mens-silver-necklaces", title: "Best Men's Silver Necklaces from Top Stores", faq: [silver], expected: "2026-10-29T02:32:22Z" },
+    { faq: [{ ...suede, answer: "Unreviewed wording." }], expected: "2026-10-27T17:35:31Z" },
+    { faq: [waterproof], publicationFilteredProducts: true, expected: "2026-10-27T20:22:16Z" },
+    { title: "Custom independent title", expected: undefined },
+    { slug: "ecru-jigsaw-puzzles", expected: "2026-10-29T02:07:49Z" },
+    { slug: "ecru-jigsaw-puzzles", products: [], expected: undefined },
+    { slug: "green-wallets", expected: "2026-10-26T23:31:10Z" },
+  ];
+  for (const { expected, ...overrides } of scenarios) {
+    const page = revisionPage(overrides);
+    const snapshot = structuredClone(page);
+    const published = withAuthoredSearchPageCopy(page);
+    assert.equal(published.editorialModifiedAt, expected, JSON.stringify(overrides));
+    assert.equal(published.refreshedAt, page.refreshedAt);
+    assert.deepEqual(published.products, page.products);
+    assert.deepEqual(page, snapshot);
+    const reordered = { ...published, faq: published.faq.map(({ question, answer }) => ({ answer, question })) };
+    assert.equal(withAuthoredSearchPageCopy(reordered).editorialModifiedAt, expected, "Object-key order is not a revision");
+    assert.equal(withAuthoredSearchPageCopy(published).editorialModifiedAt, published.editorialModifiedAt, "Repeated publication cannot invent a later revision");
+    if (page.products.length) assert.deepEqual(withAuthoredSearchPageCopy(published), published);
+    const newer = withAuthoredSearchPageCopy({ ...page, refreshedAt: "2026-11-01T00:00:00Z" });
+    assert.equal(newer.lastModifiedAt ?? newer.refreshedAt, "2026-11-01T00:00:00Z");
+  }
+});
+
+/** Existing content-preservation assertions ignore only the independently asserted date fields. */
+function withoutRevisionDates(page) {
+  const { editorialModifiedAt, editorialUpdatedDate, lastModifiedAt, ...content } = page;
+  return content;
+}
+
+
+test("suppressed FAQ or comparison fragments cannot supply dates, while final removals are dated", () => {
+  const page = revisionPage({ title: "Custom title", guide: [], faq: [] });
+  const changes = [
+    { faq: [{ question: "Reviewed question", answer: "Reviewed answer" }] },
+    { comparison: { caption: "Reviewed models", note: "Model facts", columns: ["Model"], rows: [{ model: "A" }] },
+      guideSources: [{ label: "Maker", url: "https://example.com/model" }] },
+  ];
+  for (const change of changes) {
+    const revisions = [];
+    const changed = recordEditorialRevision(revisions, page, { ...page, ...change }, "2026-10-29T03:00:00Z");
+    assert.equal(withPublicationDates(page, changed, revisions).editorialModifiedAt, "2026-10-29T03:00:00Z");
+    assert.equal(withPublicationDates(page, { ...page }, revisions).editorialModifiedAt, undefined);
+  }
+  const raw = revisionPage({ title: "Custom title", faq: [{ question: "What does it cost?", answer: "It costs $40." }] });
+  const result = withAuthoredSearchPageCopy(raw);
+  assert.deepEqual(result.faq, []);
+  assert.equal(result.editorialModifiedAt, "2026-10-27T20:22:16Z");
+  const unknown = recordEditorialRevision([], page, { ...page, title: "Changed" }, "unknown");
+  assert.equal(withPublicationDates(page, unknown, []).editorialModifiedAt, undefined);
 });

@@ -1,3 +1,5 @@
+import { AuthoredRevisionBySlug } from "./shop-nobi-editorial-revision-dates.js";
+import { editorialFragments, recordEditorialRevision, withPublicationDates } from "./shop-nobi-publication-dates.js";
 import { EcruJigsawCopy } from "./shop-nobi-ecru-jigsaw-copy.js";
 import { FitCareGuideCopy } from "./shop-nobi-fit-care-guide-copy.js";
 import { MaterialUseGuideCopy } from "./shop-nobi-material-use-guide-copy.js";
@@ -17,7 +19,7 @@ import { withClothNapkinComparison } from "./shop-nobi-cloth-comparison.js";
 import { withTeakSetComparison } from "./shop-nobi-teak-comparison.js";
 // Editorial corrections for selected search pages. Product facts and the shared build plan stay intact.
 
-import { withGenericCareCopy } from "./shop-nobi-generic-care-copy.js";
+import { withGenericCareCopy, genericCareRevision } from "./shop-nobi-generic-care-copy.js";
 import { withPublicationQuality } from "./shop-nobi-publication-quality.js";
 import { withKhakiPantsComparison } from "./shop-nobi-khaki-comparison.js";
 import { withLaptopStandComparison } from "./shop-nobi-laptop-comparison.js";
@@ -173,12 +175,17 @@ const SelectedPageCopy = {
  * @returns {object} The publication copy, retaining reviewed overrides and unchanged product data.
  */
 export function withAuthoredSearchPageCopy(page) {
-  const published = withRelatedSearchCopy(applyAuthoredCopy(page));
-  return published.products?.length ? withPublicationQuality(published) : published;
+  const revisions = [];
+  const authored = applyAuthoredCopy(page, revisions);
+  if (page.products?.length) recordEditorialRevision(revisions, page, authored, AuthoredRevisionBySlug[page.slug]);
+  const related = recordEditorialRevision(revisions, authored, withRelatedSearchCopy(authored), "2026-10-28T18:43:06Z");
+  const published = related.products?.length ? withPublicationQuality(related) : related;
+  const qualityChanged = JSON.stringify(editorialFragments(related)) !== JSON.stringify(editorialFragments(published));
+  return withPublicationDates(page, published, revisions, qualityChanged);
 }
 
 /** Selects reviewed copy before checking its price and publication consistency. */
-function applyAuthoredCopy(page) {
+function applyAuthoredCopy(page, revisions) {
   if ((page.products ?? []).length === 0) return withEmptySearchCopy(page);
   if (page.slug === "leather-lifestyle-sneakers") return withLeatherSneakerShoppingAnswer(page);
   if (page.slug === "red-wallets") return withRedWalletComparison(page);
@@ -193,7 +200,13 @@ function applyAuthoredCopy(page) {
   if (page.slug === "14k-white-gold-statement-rings") return withWhiteGoldClarification(page);
   if (page.slug === "blue-suitcases") return withSuitcaseClarification(page);
   const copy = Object.hasOwn(SelectedPageCopy, page.slug) ? SelectedPageCopy[page.slug] : null;
-  if (!copy) return withCatalogSearchCopy(withGenericCareCopy(page));
+  if (!copy) {
+    const cared = withGenericCareCopy(page);
+    for (const entry of cared.faq) {
+      recordEditorialRevision(revisions, { faq: page.faq }, { faq: [entry] }, genericCareRevision(entry.answer));
+    }
+    return recordEditorialRevision(revisions, cared, withCatalogSearchCopy(cared), "2026-10-27T17:35:31Z");
+  }
 
   return {
     ...page,

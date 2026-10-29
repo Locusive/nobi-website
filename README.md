@@ -91,6 +91,14 @@ are permitted only for those exact records; this does not widen the suede or
 waterproof rules. Other custom titles and cited source guidance are preserved. The rule does not match
 broad care or water-related keywords or change reviewed guides, other FAQs, or
 product data. Unfamiliar wording remains subject to separate review.
+The generic branch also corrects 37 reviewed wearable guide paragraphs through
+`shop-nobi-wearable-material-guidance.js`. Each replacement requires its exact
+original slug, title and whole paragraph. Tailored copy retains useful fit,
+component and finish comparisons while removing unsupported skin, safety or
+performance assurances. All FAQs and other paragraphs remain unchanged. Authored,
+cited, empty and filtered pages keep their existing protections. The static
+source revision is recorded only when new text survives final publication; it
+does not change the catalog refresh timestamp or date unmatched pages.
 This is not a general fact-check of qualitative product advice. The same
 publication data supplies HTML, metadata, FAQ schema and browser hydration;
 source guides, product ordering, product facts, affiliate links, Pinterest feeds

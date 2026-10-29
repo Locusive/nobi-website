@@ -1,3 +1,4 @@
+import { withWearableMaterialGuidance, WearableMaterialRevision } from "./shop-nobi-wearable-material-guidance.js";
 import { AuthoredRevisionBySlug } from "./shop-nobi-editorial-revision-dates.js";
 import { editorialFragments, recordEditorialRevision, withPublicationDates } from "./shop-nobi-publication-dates.js";
 import { EcruJigsawCopy } from "./shop-nobi-ecru-jigsaw-copy.js";
@@ -205,7 +206,8 @@ function applyAuthoredCopy(page, revisions) {
     for (const entry of cared.faq) {
       recordEditorialRevision(revisions, { faq: page.faq }, { faq: [entry] }, genericCareRevision(entry.answer));
     }
-    return recordEditorialRevision(revisions, cared, withCatalogSearchCopy(cared), "2026-10-27T17:35:31Z");
+    const materialGuidance = recordEditorialRevision(revisions, cared, withWearableMaterialGuidance(cared), WearableMaterialRevision);
+    return recordEditorialRevision(revisions, materialGuidance, withCatalogSearchCopy(materialGuidance), "2026-10-27T17:35:31Z");
   }
 
   return {

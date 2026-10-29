@@ -106,6 +106,13 @@ performance assurances. All FAQs and other paragraphs remain unchanged. Authored
 cited, empty and filtered pages keep their existing protections. The static
 source revision is recorded only when new text survives final publication; it
 does not change the catalog refresh timestamp or date unmatched pages.
+Ten reviewed textile paragraphs and nine related FAQs receive exact-source
+corrections in `shop-nobi-textile-material-guidance.js`. These retain useful
+fiber, fill, fit and care-label comparisons without inferring skin suitability
+from an organic, cotton, fleece or down-alternative label. Adult baby-tee styling
+is distinguished from infant clothing. Existing source protections, product
+data and prior corrections remain unchanged. Only surviving corrected text
+contributes the rule’s static editorial revision.
 This is not a general fact-check of qualitative product advice. The same
 publication data supplies HTML, metadata, FAQ schema and browser hydration;
 source guides, product ordering, product facts, affiliate links, Pinterest feeds

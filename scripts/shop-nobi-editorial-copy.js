@@ -1,3 +1,4 @@
+import { withTextileMaterialGuidance, TextileMaterialRevision } from "./shop-nobi-textile-material-guidance.js";
 import { withBlueLightGuidance, BlueLightGuidanceRevision } from "./shop-nobi-blue-light-guidance.js";
 import { withWearableMaterialGuidance, WearableMaterialRevision } from "./shop-nobi-wearable-material-guidance.js";
 import { AuthoredRevisionBySlug } from "./shop-nobi-editorial-revision-dates.js";
@@ -213,7 +214,11 @@ function applyAuthoredCopy(page, revisions) {
       // Fixed-price sentences are removed before publication; date the surviving guidance.
       recordEditorialRevision(revisions, withPublicationQuality(materialGuidance), withPublicationQuality(lensGuidance), BlueLightGuidanceRevision);
     }
-    return recordEditorialRevision(revisions, lensGuidance, withCatalogSearchCopy(lensGuidance), "2026-10-27T17:35:31Z");
+    const textileGuidance = withTextileMaterialGuidance(lensGuidance);
+    if (textileGuidance !== lensGuidance) {
+      recordEditorialRevision(revisions, withPublicationQuality(lensGuidance), withPublicationQuality(textileGuidance), TextileMaterialRevision);
+    }
+    return recordEditorialRevision(revisions, textileGuidance, withCatalogSearchCopy(textileGuidance), "2026-10-27T17:35:31Z");
   }
 
   return {

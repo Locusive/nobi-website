@@ -155,3 +155,7 @@ See `agents/feature_plans/shop_guide_carry_care.md`. These ten pages are a finit
 ## NOBI-2886 green refill membership
 - [x] Implement exact holds and verify output preservation.
 - [ ] Parent review and release.
+
+## NOBI-2886 brown chukka guidance
+- [x] Implement exact copy and complete offline verification.
+- [ ] Parent review and release.

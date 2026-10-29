@@ -35,9 +35,13 @@ const GarmentGuidance = JSON.parse(readFileSync(new URL("./fixtures/shop-nobi-ga
 const GarmentRevision = "2026-10-29T06:00:45Z";
 const GarmentFaqPairs = GarmentGuidance.flatMap(page => page.faq.map(pair => ({ ...pair, slug: page.slug, title: page.title })));
 const GarmentParagraphs = GarmentGuidance.flatMap(page => page.paragraphs.map(paragraph => ({ ...paragraph, slug: page.slug, title: page.title, revision: GarmentRevision })));
-const MultiParagraphGuidance = [...BlueLightGuidance, ...CosmeticGuidance, ...DetergentGuidance, ...GarmentGuidance];
+const ChukkaGuidance = JSON.parse(readFileSync(new URL("./fixtures/shop-nobi-chukka-guidance.json", import.meta.url), "utf8"));
+const ChukkaRevision = "2026-10-29T07:12:32Z";
+const ChukkaFaqPairs = ChukkaGuidance.flatMap(page => page.faq.map(pair => ({ ...pair, slug: page.slug, title: page.title })));
+const ChukkaParagraphs = ChukkaGuidance.flatMap(page => page.paragraphs.map(paragraph => ({ ...paragraph, slug: page.slug, title: page.title, revision: ChukkaRevision })));
+const MultiParagraphGuidance = [...BlueLightGuidance, ...CosmeticGuidance, ...DetergentGuidance, ...GarmentGuidance, ...ChukkaGuidance];
 const ReviewedParagraphs = [...WearableParagraphs, ...TextileGuidance];
-const ReviewedFaqPairs = [...SuedeCarePairs.map(pair => ({ ...pair, expectedAnswer: ReviewedSuedeAnswer })), ...WaterproofPairs, ...SilverPairs, ...BlueLightGuidance, ...TextileFaqPairs, ...CosmeticFaqPairs, ...DetergentFaqPairs, ...GarmentFaqPairs];
+const ReviewedFaqPairs = [...SuedeCarePairs.map(pair => ({ ...pair, expectedAnswer: ReviewedSuedeAnswer })), ...WaterproofPairs, ...SilverPairs, ...BlueLightGuidance, ...TextileFaqPairs, ...CosmeticFaqPairs, ...DetergentFaqPairs, ...GarmentFaqPairs, ...ChukkaFaqPairs];
 
 /** Raw records exercise the actual rights filter and publication renderer together. */
 function sourcePage() {
@@ -278,7 +282,7 @@ test("reviewed FAQs and guide paragraphs agree across visible HTML, schema and h
 });
 
 test("exact copy corrections preserve unfamiliar or authored content and retain empty or filtered suppression", () => {
-  for (const wearable of [...ReviewedParagraphs, ...BlueLightParagraphs, ...CosmeticParagraphs, ...DetergentParagraphs, ...GarmentParagraphs]) {
+  for (const wearable of [...ReviewedParagraphs, ...BlueLightParagraphs, ...CosmeticParagraphs, ...DetergentParagraphs, ...GarmentParagraphs, ...ChukkaParagraphs]) {
     const base = genericFaqPage([], wearable);
     for (const change of [
       { slug: "unreviewed-material-page" },
@@ -307,7 +311,7 @@ test("exact copy corrections preserve unfamiliar or authored content and retain 
     question: "What metal is best for everyday wear?",
     answer: "Sterling silver and gold vermeil are popular for daily use because they are durable and less likely to cause irritation." }]);
   assert.deepEqual(withAuthoredSearchPageCopy(excluded).faq, excluded.faq, "Unreviewed compound-topic guidance remains unchanged");
-  for (const pair of [ReviewedFaqPairs[0], ...WaterproofPairs, ...SilverPairs, ...BlueLightGuidance, ...TextileFaqPairs, ...CosmeticFaqPairs, ...DetergentFaqPairs, ...GarmentFaqPairs]) {
+  for (const pair of [ReviewedFaqPairs[0], ...WaterproofPairs, ...SilverPairs, ...BlueLightGuidance, ...TextileFaqPairs, ...CosmeticFaqPairs, ...DetergentFaqPairs, ...GarmentFaqPairs, ...ChukkaFaqPairs]) {
     const base = genericFaqPage([pair]);
     const faq = base.faq[0];
     const negatives = [
@@ -322,7 +326,7 @@ test("exact copy corrections preserve unfamiliar or authored content and retain 
       const page = { ...base, ...change };
       assert.deepEqual(withAuthoredSearchPageCopy(page).faq, page.faq, `${pair.slug}: ${label}`);
     }
-    if (SilverPairs.includes(pair) || BlueLightGuidance.includes(pair) || TextileFaqPairs.includes(pair) || CosmeticFaqPairs.includes(pair) || DetergentFaqPairs.includes(pair) || GarmentFaqPairs.includes(pair)) {
+    if (SilverPairs.includes(pair) || BlueLightGuidance.includes(pair) || TextileFaqPairs.includes(pair) || CosmeticFaqPairs.includes(pair) || DetergentFaqPairs.includes(pair) || GarmentFaqPairs.includes(pair) || ChukkaFaqPairs.includes(pair)) {
       for (const change of [
         { slug: "unreviewed-silver-jewelry" },
         { slug: undefined, title: undefined },
@@ -374,6 +378,7 @@ test("editorial dates follow actual surviving changes and preserve the catalog t
     { title: "Best Example Products From Top Stores", publicationFilteredProducts: true, expected: "2026-10-29T05:38:40Z" },
     { title: "Best Example Products From Top Stores", products: [], expected: undefined },
     { title: "Best Example Products from Top Stores", expected: "2026-10-27T17:35:31Z" },
+    ...ChukkaFaqPairs.map(pair => ({ slug: pair.slug, title: pair.title, faq: [{ question: pair.question, answer: pair.answer }], expected: ChukkaRevision })),
     ...GarmentFaqPairs.map(pair => ({ slug: pair.slug, title: pair.title, faq: [{ question: pair.question, answer: pair.answer }], expected: GarmentRevision })),
     ...DetergentFaqPairs.map(pair => ({ slug: pair.slug, title: pair.title, faq: [{ question: pair.question, answer: pair.answer }], expected: DetergentRevision })),
     ...CosmeticFaqPairs.map(pair => ({ slug: pair.slug, title: pair.title, faq: [{ question: pair.question, answer: pair.answer }], expected: CosmeticRevision })),

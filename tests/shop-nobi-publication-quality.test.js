@@ -17,7 +17,10 @@ const ReviewedSuedeAnswer = "Before applying a protective treatment, check the m
 const WaterproofPairs = JSON.parse(readFileSync(new URL("./fixtures/shop-nobi-waterproof-faq-pairs.json", import.meta.url), "utf8"));
 const SilverPairs = JSON.parse(readFileSync(new URL("./fixtures/shop-nobi-silver-faq-pairs.json", import.meta.url), "utf8"));
 const WearableParagraphs = JSON.parse(readFileSync(new URL("./fixtures/shop-nobi-wearable-material-paragraphs.json", import.meta.url), "utf8"));
-const ReviewedFaqPairs = [...SuedeCarePairs.map(pair => ({ ...pair, expectedAnswer: ReviewedSuedeAnswer })), ...WaterproofPairs, ...SilverPairs];
+const BlueLightGuidance = JSON.parse(readFileSync(new URL("./fixtures/shop-nobi-blue-light-guidance.json", import.meta.url), "utf8"));
+const BlueLightRevision = "2026-10-29T03:43:17Z";
+const BlueLightParagraphs = BlueLightGuidance.flatMap(page => page.paragraphs.map(paragraph => ({ ...paragraph, slug: page.slug, title: page.title, revision: BlueLightRevision })));
+const ReviewedFaqPairs = [...SuedeCarePairs.map(pair => ({ ...pair, expectedAnswer: ReviewedSuedeAnswer })), ...WaterproofPairs, ...SilverPairs, ...BlueLightGuidance];
 
 /** Raw records exercise the actual rights filter and publication renderer together. */
 function sourcePage() {
@@ -118,34 +121,48 @@ test("weight units remain guidance while explicit sterling amounts are replaced"
 });
 
 /** Generic source copy with reviewed pairs and an unrelated FAQ; two pairs may share one page. */
-function genericFaqPage(pairs, wearable = null) {
+function genericFaqPage(pairs, wearable = null, lens = null) {
   const raw = { ...readFixturePageData().pages[0], slug: wearable?.slug ?? pairs[0].slug,
     title: wearable?.title ?? pairs[0].title ?? "Best Jackets and Accessories from Top Stores",
     products: [readFixturePageData().pages[0].products[0]],
-    guide: [...(wearable ? [wearable.paragraph] : []), "Compare the closure and listed measurements."],
+    guide: [...(wearable ? [wearable.paragraph] : []), ...(lens?.paragraphs.map(entry => entry.paragraph) ?? []), "Compare the closure and listed measurements."],
     faq: [...pairs.map(({ question, answer }) => ({ question, answer })),
       { question: "Which size should I choose?", answer: "Compare your measurements with the maker’s size guide for the exact model." }] };
   return buildSearchPages([raw], 1).pages[0];
 }
 
-test("reviewed FAQs and wearable paragraphs agree across visible HTML, schema and hydration while preserving other content", async t => {
+test("reviewed FAQs and guide paragraphs agree across visible HTML, schema and hydration while preserving other content", async t => {
   const folder = mkdtempSync(new URL("../node_modules/.faq-publication-", import.meta.url));
   t.after(() => rmSync(folder, { recursive: true, force: true }));
   writeFileSync(join(folder, "index.html"), '<html><head><!--__PRERENDER_TITLE__--><!--__PRERENDER_DESC__--></head><body><div id="root"></div></body></html>');
   const slugs = [...new Set([...ReviewedFaqPairs, ...WearableParagraphs].map(entry => entry.slug))];
   const groups = slugs.map(slug => ReviewedFaqPairs.filter(pair => pair.slug === slug));
   const paragraphs = slugs.map(slug => WearableParagraphs.find(entry => entry.slug === slug));
-  const pages = groups.map((pairs, index) => genericFaqPage(pairs, paragraphs[index]));
+  const lenses = slugs.map(slug => BlueLightGuidance.find(entry => entry.slug === slug));
+  const pages = groups.map((pairs, index) => genericFaqPage(pairs, paragraphs[index], lenses[index]));
   const originals = structuredClone(pages);
   await writePrebuiltPages({ searchPages: pages, categoryPages: [], popularSearches: { pages: [], moreSearches: [], categories: [] } }, folder);
   for (const [index, page] of pages.entries()) {
     const pairs = groups[index];
     const published = withAuthoredSearchPageCopy(page);
     const wearable = paragraphs[index];
+    const lens = lenses[index];
     const otherFaq = page.faq.slice(pairs.length);
     const otherGuide = wearable ? page.guide.slice(1) : page.guide;
     const untouched = withAuthoredSearchPageCopy({ ...page, faq: otherFaq, guide: otherGuide });
-    assert.deepEqual(withoutRevisionDates({ ...published, faq: published.faq.slice(pairs.length),
+    if (lens) {
+      assert.deepEqual(withoutRevisionDates({ ...published, guide: [], faq: published.faq.slice(pairs.length) }),
+        withoutRevisionDates({ ...untouched, guide: [] }), `${page.slug}: non-copy fields and other FAQs preserved`);
+      assert.equal(published.guide.at(-1), "Compare the closure and listed measurements.");
+      assert.equal(published.editorialModifiedAt, BlueLightRevision);
+      if (lens.paragraphs.length) {
+        const guideOnly = withAuthoredSearchPageCopy({ ...page, faq: [] });
+        assert.equal(guideOnly.editorialModifiedAt, BlueLightRevision, `${page.slug}: surviving guide alone supplies revision`);
+        const unmatchedFaq = withAuthoredSearchPageCopy({ ...page, faq: [{ question: lens.question, answer: "Check the exact lens option." }] });
+        assert.equal(unmatchedFaq.editorialModifiedAt, BlueLightRevision);
+        assert.deepEqual(unmatchedFaq.faq, [{ question: lens.question, answer: "Check the exact lens option." }]);
+      }
+    } else assert.deepEqual(withoutRevisionDates({ ...published, faq: published.faq.slice(pairs.length),
       guide: wearable ? published.guide.slice(1) : published.guide }), withoutRevisionDates(untouched), `${page.slug}: only exact reviewed copy and its dates change`);
     assert.deepEqual(withAuthoredSearchPageCopy(published), published, `${page.slug}: idempotent`);
     const html = readFileSync(join(folder, `shop/s/${page.slug}.html`), "utf8");
@@ -153,11 +170,16 @@ test("reviewed FAQs and wearable paragraphs agree across visible HTML, schema an
       assert.equal(published.guide[0], wearable.replacement);
       assert.ok(readBody(html).replaceAll("&#x27;", "&#39;").includes(wearable.replacement.replaceAll("'", "&#39;")), `${page.slug}: visible guide`);
       assert.ok(!html.includes(wearable.paragraph), `${page.slug}: obsolete paragraph absent`);
-      assert.equal(published.editorialModifiedAt, "2026-10-29T03:14:04Z");
+      assert.equal(published.editorialModifiedAt, lens ? BlueLightRevision : "2026-10-29T03:14:04Z");
       assert.equal(published.refreshedAt, page.refreshedAt);
       assert.ok(html.includes("Content revised"));
       const newerCatalog = withAuthoredSearchPageCopy({ ...page, refreshedAt: "2026-11-01T00:00:00Z" });
       assert.equal(newerCatalog.lastModifiedAt, "2026-11-01T00:00:00Z");
+    }
+    for (const paragraph of lens?.paragraphs ?? []) {
+      assert.ok(published.guide.includes(paragraph.visibleReplacement), `${page.slug}: exact useful lens guidance`);
+      assert.ok(readBody(html).replaceAll("&#x27;", "&#39;").includes(paragraph.visibleReplacement.replaceAll("'", "&#39;")), `${page.slug}: visible lens guidance`);
+      assert.ok(!html.includes(paragraph.paragraph), `${page.slug}: obsolete full paragraph absent`);
     }
     for (const [faqIndex, pair] of pairs.entries()) {
       assert.equal(published.faq[faqIndex].answer, pair.expectedAnswer, page.slug);
@@ -172,7 +194,7 @@ test("reviewed FAQs and wearable paragraphs agree across visible HTML, schema an
 });
 
 test("exact copy corrections preserve unfamiliar or authored content and retain empty or filtered suppression", () => {
-  for (const wearable of WearableParagraphs) {
+  for (const wearable of [...WearableParagraphs, ...BlueLightParagraphs]) {
     const base = genericFaqPage([], wearable);
     for (const change of [
       { slug: "unreviewed-material-page" },
@@ -186,22 +208,22 @@ test("exact copy corrections preserve unfamiliar or authored content and retain 
     ]) {
       const page = { ...base, ...change };
       const published = withAuthoredSearchPageCopy(page);
-      assert.deepEqual(published.guide, page.guide, `${wearable.slug}: unmatched guidance preserved`);
-      assert.notEqual(published.editorialModifiedAt, "2026-10-29T03:14:04Z", `${wearable.slug}: no-op has no new revision`);
+      assert.deepEqual(published.guide, withPublicationQuality(page).guide, `${wearable.slug}: unmatched guidance preserved`);
+      assert.notEqual(published.editorialModifiedAt, wearable.revision ?? "2026-10-29T03:14:04Z", `${wearable.slug}: no-op has no new revision`);
     }
     const authored = { ...base, slug: "beige-shoulder-bags" };
     assert.deepEqual(withAuthoredSearchPageCopy(authored), withAuthoredSearchPageCopy({ ...authored, guide: [] }), "Reviewed guide takes precedence");
     for (const change of [{ products: [] }, { publicationFilteredProducts: true }]) {
       const published = withAuthoredSearchPageCopy({ ...base, ...change });
       assert.ok(!published.guide.includes(wearable.replacement));
-      assert.notEqual(published.editorialModifiedAt, "2026-10-29T03:14:04Z", "Withheld guidance has no new revision");
+      assert.notEqual(published.editorialModifiedAt, wearable.revision ?? "2026-10-29T03:14:04Z", "Withheld guidance has no new revision");
     }
   }
   const excluded = genericFaqPage([{ slug: "mens-earrings", title: "Best Men's Earrings from Top Stores",
     question: "What metal is best for everyday wear?",
     answer: "Sterling silver and gold vermeil are popular for daily use because they are durable and less likely to cause irritation." }]);
   assert.deepEqual(withAuthoredSearchPageCopy(excluded).faq, excluded.faq, "Unreviewed compound-topic guidance remains unchanged");
-  for (const pair of [ReviewedFaqPairs[0], ...WaterproofPairs, ...SilverPairs]) {
+  for (const pair of [ReviewedFaqPairs[0], ...WaterproofPairs, ...SilverPairs, ...BlueLightGuidance]) {
     const base = genericFaqPage([pair]);
     const faq = base.faq[0];
     const negatives = [
@@ -216,7 +238,7 @@ test("exact copy corrections preserve unfamiliar or authored content and retain 
       const page = { ...base, ...change };
       assert.deepEqual(withAuthoredSearchPageCopy(page).faq, page.faq, `${pair.slug}: ${label}`);
     }
-    if (SilverPairs.includes(pair)) {
+    if (SilverPairs.includes(pair) || BlueLightGuidance.includes(pair)) {
       for (const change of [
         { slug: "unreviewed-silver-jewelry" },
         { slug: undefined, title: undefined },
@@ -255,6 +277,7 @@ test("editorial dates follow actual surviving changes and preserve the catalog t
   const waterproof = { question: "What makes a windbreaker waterproof?", answer: "A windbreaker with a DWR coating or laminated membrane repels rain while staying lightweight." };
   const silver = { question: "Is sterling silver hypoallergenic?", answer: "Yes, pure sterling silver is generally safe for most skin types, though some people react to alloy metals." };
   const scenarios = [
+    ...BlueLightGuidance.map(pair => ({ slug: pair.slug, title: pair.title, faq: [{ question: pair.question, answer: pair.answer }], expected: BlueLightRevision })),
     { faq: [suede], expected: "2026-10-29T01:26:57Z" },
     { faq: [waterproof], expected: "2026-10-29T01:41:28Z" },
     { slug: "mens-silver-necklaces", title: "Best Men's Silver Necklaces from Top Stores", faq: [silver], expected: "2026-10-29T02:32:22Z" },

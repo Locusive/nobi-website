@@ -68,6 +68,12 @@ search path, have matching noindex metadata in HTML and the browser, and are
 omitted from the search sitemap and llms.txt links. Populated pages return to
 normal publication automatically on a later build when their listings return.
 Reviewed editorial guidance remains subject to the same publication checks.
+The generic-copy branch also replaces 16 reviewed exact suede-care FAQ question/answer
+pairs on uncited `Best ... from Top Stores` source pages with model-specific care
+checks. Custom titles and cited source guidance are preserved. It does not match
+broad care keywords or
+change reviewed editorial guides, other FAQs, or product data. Unfamiliar wording
+remains subject to separate review.
 This is not a general fact-check of qualitative product advice. The same
 publication data supplies HTML, metadata, FAQ schema and browser hydration;
 source guides, product ordering, product facts, affiliate links, Pinterest feeds

@@ -16,6 +16,7 @@ import { withClothNapkinComparison } from "./shop-nobi-cloth-comparison.js";
 import { withTeakSetComparison } from "./shop-nobi-teak-comparison.js";
 // Editorial corrections for selected search pages. Product facts and the shared build plan stay intact.
 
+import { withGenericCareCopy } from "./shop-nobi-generic-care-copy.js";
 import { withPublicationQuality } from "./shop-nobi-publication-quality.js";
 import { withKhakiPantsComparison } from "./shop-nobi-khaki-comparison.js";
 import { withLaptopStandComparison } from "./shop-nobi-laptop-comparison.js";
@@ -190,7 +191,7 @@ function applyAuthoredCopy(page) {
   if (page.slug === "14k-white-gold-statement-rings") return withWhiteGoldClarification(page);
   if (page.slug === "blue-suitcases") return withSuitcaseClarification(page);
   const copy = Object.hasOwn(SelectedPageCopy, page.slug) ? SelectedPageCopy[page.slug] : null;
-  if (!copy) return withCatalogSearchCopy(page);
+  if (!copy) return withCatalogSearchCopy(withGenericCareCopy(page));
 
   return {
     ...page,

@@ -669,3 +669,13 @@ claims. Water-play basins are explicitly separated from the retained wooden
 furniture listing. All product records, paid destinations, CUCKOO disclosures and
 image restrictions remain unchanged. The existing three published-claims
 matrices cover forty-eight pages, including filtered and empty publication.
+
+### Leather sneaker shopping answers
+
+`shop-nobi-leather-sneaker-answer.js` answers where-to-find questions using the
+first displayed model from up to three distinct retailers, in existing card
+order. Examples refresh with the displayed records and remain subject to the
+normal filtered/empty publication rules. Size, upper, construction and care
+guidance replaces unsupported material-quality, rain and resoling assurances.
+The same three published-claims matrices now cover forty-nine pages, including
+renamed and removed retailer examples; product records and destinations stay intact.

@@ -13,6 +13,7 @@ import { readBody, readScriptJson } from "./shop-nobi-test-build.js";
 
 const Fixture = JSON.parse(readFileSync(new URL("./fixtures/published-claim-pages.json", import.meta.url), "utf8"));
 const DecisionTopics = {
+  "leather-lifestyle-sneakers": ["retailer", "size", "upper"],
   "espresso-kitchen-appliance-accessories": ["dose", "adapter", "model"],
   "mens-black-sunglasses": ["bridge", "polarization", "specification"],
   "baby-stroller-accessories": ["folded dimensions", "attachment", "load"],
@@ -113,9 +114,37 @@ function checkWalletRefreshStates(page, published, names) {
   }
 }
 
+/** Shopping answers follow displayed records across removals and renamed models or retailers. */
+function checkRetailerExamples(page, published) {
+  const first = "Double L Lace Up Sneakers at Lucchese";
+  const second = "Leather Lace-Up Sneakers at UNTUCKit";
+  const third = "VEJA Women's V-90 Leather Sneaker at Saint Bernard";
+  assert.ok(published.guide[0].includes(`${first}; ${second}; ${third}.`));
+  assert.ok(!published.guide[0].includes("Scotch and Soda"), "At most three distinct retailers are introduced");
+  const renamed = structuredClone(page.products[0]);
+  renamed.name = 'New <Model> & Style';
+  renamed.storeName = 'Updated & Store';
+  const cases = [
+    { products: page.products.slice(1), present: ["Double L lace Up Sneaker at Lucchese", second, third], absent: [first] },
+    { products: page.products.filter(product => product.storeName !== "Lucchese"), present: [second, third, "Plakka Leather Sneakers at Scotch and Soda"], absent: [first, "Lucchese"] },
+    { products: [renamed], present: ['New <Model> & Style at Updated & Store'], absent: [first, second, third] },
+    { products: [page.products[2], page.products[3]], present: [second], absent: [first, third, "Contrast Leather Lace-Up Sneakers"] },
+  ];
+  for (const { products, present, absent } of cases) {
+    const source = { ...published, products };
+    const snapshot = structuredClone(source);
+    const result = withAuthoredSearchPageCopy(source);
+    for (const text of present) assert.ok(result.guide[0].includes(text), text);
+    for (const text of absent) assert.ok(!JSON.stringify([result.guide, result.faq]).includes(text), text);
+    assert.equal(result.faq[0].answer, result.guide[0]);
+    assert.strictEqual(result.products, products);
+    assert.deepEqual(source, snapshot);
+  }
+}
+
 test("audited page corrections remove the identified claims and preserve every retained shopping record", () => {
-  assert.equal(Fixture.pages.length, 48);
-  assert.equal(Fixture.pages.reduce((sum, page) => sum + page.products.length, 0), 784);
+  assert.equal(Fixture.pages.length, 49);
+  assert.equal(Fixture.pages.reduce((sum, page) => sum + page.products.length, 0), 801);
   for (const source of Fixture.pages) {
     const page = normalize(source);
     const snapshot = structuredClone(page);
@@ -127,6 +156,7 @@ test("audited page corrections remove the identified claims and preserve every r
     for (const topic of DecisionTopics[page.slug]) assert.ok(text.toLowerCase().includes(topic), `${page.slug}: ${topic}`);
     assert.equal(published.faq.length, 4);
     if (page.slug === "red-wallets") checkWalletIdentityGates(page, published);
+    if (page.slug === "leather-lifestyle-sneakers") checkRetailerExamples(page, published);
     assert.strictEqual(published.products, page.products);
     assert.deepEqual(published.related.map(({ slug, query }) => ({ slug, query })), page.related.map(({ slug, query }) => ({ slug, query })));
     for (const key of ["slug", "query", "refreshedAt", "categoryPath", "breadcrumbs"]) assert.deepEqual(published[key], page[key], key);

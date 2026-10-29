@@ -1,0 +1,20 @@
+[
+  {
+    "slug": "hunting-clothing",
+    "question": "Do hunting jackets need a waterproof rating?",
+    "answer": "A water-resistant or waxed finish helps keep you dry in rain or snow without adding bulk.",
+    "expectedAnswer": "If rain protection is a requirement, compare the exact hunting jacket’s stated waterproof performance and intended conditions. Check seam and closure details, then fit over your layers; a waxed or water-resistant finish alone does not answer those questions."
+  },
+  {
+    "slug": "mens-black-windbreakers",
+    "question": "What makes a windbreaker waterproof?",
+    "answer": "A windbreaker with a DWR coating or laminated membrane repels rain while staying lightweight.",
+    "expectedAnswer": "Check the exact windbreaker’s manufacturer specifications for waterproof performance and its seam and closure construction. A DWR label or a fabric name alone does not establish that the whole jacket is waterproof."
+  },
+  {
+    "slug": "womens-navy-jackets",
+    "question": "What material is best for a waterproof jacket?",
+    "answer": "Waxed cotton or treated leather provides water resistance while still looking stylish.",
+    "expectedAnswer": "For a waterproof jacket, compare the maker’s stated waterproof performance for the exact model, including its seam and closure construction. Do not choose by waxed cotton or leather alone; check the intended conditions and fit over your layers."
+  }
+]

@@ -1,5 +1,5 @@
-// Writes public/sitemap-pages.xml (the site's own pages) and public/sitemap.xml,
-// the index that points to it and to sitemap-shop.xml from prerender-shop.js.
+// Writes public/sitemap-pages.xml and the two indexes over it: public/sitemap.xml for crawlers,
+// which also lists sitemap-shop.xml, and public/sitemap-kb.xml for Nobi's own knowledge base.
 import { readFileSync, writeFileSync, readdirSync } from "fs";
 import { join, dirname } from "path";
 import { fileURLToPath } from "url";
@@ -19,8 +19,14 @@ const ROOT       = join(__dirname, "..");
 const today      = new Date().toISOString().slice(0, 10);
 const BASE_URL   = "https://nobi.ai";
 const SITEMAP_FILES = ["sitemap-pages.xml", "sitemap-shop.xml"];
+// The index Nobi's own knowledge base reads: the site's pages plus the product docs on their own
+// subdomain, never the shop pages. A crawler ignores an off-host entry, so robots.txt omits it.
+const KNOWLEDGE_BASE_SITEMAP_URLS = [
+  `${BASE_URL}/sitemap-pages.xml`,
+  "https://docs.nobi.ai/sitemap.xml",
+];
 
-// Static routes — priority and changefreq per page type
+// Static routes, with priority and changefreq per page type
 const STATIC_PAGES = [
   { path: AboutSeo.path, priority: "0.3", changefreq: "monthly" },
   { path: "/tools/duvet-cover-size", priority: "0.6", changefreq: "monthly" },
@@ -127,14 +133,18 @@ function generateSitemap() {
   ].join("\n") + "\n";
 
   writeFileSync(join(ROOT, "public/sitemap-pages.xml"), xml);
-  writeFileSync(join(ROOT, "public/sitemap.xml"), buildSitemapIndex());
+  writeFileSync(
+    join(ROOT, "public/sitemap.xml"),
+    buildSitemapIndex(SITEMAP_FILES.map((file) => `${BASE_URL}/${file}`))
+  );
+  writeFileSync(join(ROOT, "public/sitemap-kb.xml"), buildSitemapIndex(KNOWLEDGE_BASE_SITEMAP_URLS));
   console.log(`✓ sitemap-pages.xml: ${STATIC_PAGES.length} static + ${blogEntries.length} blog + ${glossaryEntries.length} glossary (${urls.length} total)`);
 }
 
-/** Builds the sitemap index that points crawlers to each sitemap file. */
-function buildSitemapIndex() {
-  const entries = SITEMAP_FILES.map(
-    (file) => `  <sitemap>\n    <loc>${BASE_URL}/${file}</loc>\n    <lastmod>${today}</lastmod>\n  </sitemap>`
+/** Builds a sitemap index that points a crawler at each of the given sitemap URLs. */
+function buildSitemapIndex(sitemapUrls) {
+  const entries = sitemapUrls.map(
+    (url) => `  <sitemap>\n    <loc>${url}</loc>\n    <lastmod>${today}</lastmod>\n  </sitemap>`
   );
   return [
     `<?xml version="1.0" encoding="UTF-8"?>`,

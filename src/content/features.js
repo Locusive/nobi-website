@@ -1,4 +1,4 @@
-import { BarChart3, Filter, Keyboard, LifeBuoy, Lightbulb, MessageCircle, Search, ShoppingCart, SlidersHorizontal, Sparkles, UserPlus, Workflow, Zap } from "lucide-react";
+import { BarChart3, Filter, Keyboard, LifeBuoy, Lightbulb, MessageCircle, Plug, Search, ShoppingCart, SlidersHorizontal, Sparkles, UserPlus, Workflow, Zap } from "lucide-react";
 
 // Every Nobi feature the website shows. The Product menu, feature pages, All features page and prerender build read it.
 // Every claim was checked against the Nobi code; check again before changing one.
@@ -8,6 +8,7 @@ export const FeatureGroupId = {
   Support: "support",
   Ecommerce: "ecommerce",
   Engagement: "engagement",
+  Connectors: "connectors",
   Insights: "insights",
 };
 
@@ -37,6 +38,12 @@ export const FEATURE_GROUPS = [
     name: "Leads & engagement",
     summary: "Start the conversation at the right moment, and turn it into a lead.",
     closing: { heading: "Turn visitors into conversations.", body: "Reach out at the right moment, answer what they ask, and send every lead to the right team." },
+  },
+  {
+    id: FeatureGroupId.Connectors,
+    name: "AI connectors",
+    summary: "Put your store inside ChatGPT and Claude, under your own name.",
+    closing: { heading: "Be the store the assistant recommends.", body: "Shoppers are asking ChatGPT and Claude what to buy. Make sure the answer is yours." },
   },
   {
     id: FeatureGroupId.Insights,
@@ -69,6 +76,7 @@ export const FEATURES = [
   { slug: "lead-capture", group: FeatureGroupId.Engagement, name: "Lead capture", icon: UserPlus, menuLine: "Collects contact details and routes every lead" },
   { slug: "proactive-prompts", group: FeatureGroupId.Engagement, name: "Proactive outreach", icon: Zap, menuLine: "Reaches out at the right moment" },
   { slug: "custom-actions", group: FeatureGroupId.Engagement, name: "Custom actions", icon: Workflow, menuLine: "Runs real actions, like booking a test drive" },
+  { slug: "ai-connectors", group: FeatureGroupId.Connectors, name: "ChatGPT & Claude connectors", icon: Plug, menuLine: "Your store, inside ChatGPT and Claude", enterprise: true },
   { slug: "insights", group: FeatureGroupId.Insights, name: "Insights", icon: BarChart3, menuLine: "What customers search for, click and buy" },
 ];
 

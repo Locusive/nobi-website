@@ -1,6 +1,5 @@
-// Writes public/sitemap-pages.xml (the site's own pages), public/sitemap.xml, the index that
-// points to it and to sitemap-shop.xml from prerender-shop.js, and public/sitemap-kb.xml, the
-// index Nobi's own knowledge base reads.
+// Writes public/sitemap-pages.xml and the two indexes over it: public/sitemap.xml for crawlers,
+// which also lists sitemap-shop.xml, and public/sitemap-kb.xml for Nobi's own knowledge base.
 import { readFileSync, writeFileSync, readdirSync } from "fs";
 import { join, dirname } from "path";
 import { fileURLToPath } from "url";
@@ -20,16 +19,14 @@ const ROOT       = join(__dirname, "..");
 const today      = new Date().toISOString().slice(0, 10);
 const BASE_URL   = "https://nobi.ai";
 const SITEMAP_FILES = ["sitemap-pages.xml", "sitemap-shop.xml"];
-// The index Nobi's own knowledge base reads. It leaves the shop pages out, because they were
-// deliberately removed from that knowledge base, and it adds the product docs, which sit on their
-// own subdomain. A crawler ignores a sitemap entry on another host, so robots.txt never names this
-// file; only the knowledge base indexer is pointed at it.
+// The index Nobi's own knowledge base reads: the site's pages plus the product docs on their own
+// subdomain, never the shop pages. A crawler ignores an off-host entry, so robots.txt omits it.
 const KNOWLEDGE_BASE_SITEMAP_URLS = [
   `${BASE_URL}/sitemap-pages.xml`,
   "https://docs.nobi.ai/sitemap.xml",
 ];
 
-// Static routes — priority and changefreq per page type
+// Static routes, with priority and changefreq per page type
 const STATIC_PAGES = [
   { path: AboutSeo.path, priority: "0.3", changefreq: "monthly" },
   { path: "/tools/duvet-cover-size", priority: "0.6", changefreq: "monthly" },

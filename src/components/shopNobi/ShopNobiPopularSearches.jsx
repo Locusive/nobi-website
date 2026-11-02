@@ -6,21 +6,19 @@ import { ShopNobiPageSeo } from "../../utils/shopNobiPage";
 const VisibleCategoryCount = 12;
 
 /**
- * Browse links stay beneath the idle assistant. Native disclosures keep every destination in the HTML
- * without presenting thousands of expanded links. Before the assistant mounts, the page retains its introduction.
+ * Browse links the prerendered /shop page carries for crawlers and for visitors without the assistant. Native
+ * disclosures keep every destination in the HTML without presenting thousands of expanded links.
  *
- * @param {{popularSearches: {categories: object[], pages: object[], moreSearches: object[]}, compact?: boolean}} props The links and mounted presentation.
+ * @param {{popularSearches: {categories: object[], pages: object[], moreSearches: object[]}}} props The links.
  */
-export default function ShopNobiPopularSearches({ popularSearches, compact = false }) {
+export default function ShopNobiPopularSearches({ popularSearches }) {
   const { categories, pages, moreSearches } = popularSearches;
 
   return (
     <section aria-labelledby="shop-nobi-browse-heading" className="mx-auto max-w-6xl px-4 py-8 text-black dark:text-white">
-      {!compact && <>
-        <h1 className="text-3xl font-semibold">Shop Nobi</h1>
-        <p className="mt-2 max-w-3xl text-black/70 dark:text-white/70">{ShopNobiPageSeo.description}</p>
-      </>}
-      <h2 id="shop-nobi-browse-heading" className={`${compact ? "" : "mt-8 "}text-lg font-semibold`}>Browse products</h2>
+      <h1 className="text-3xl font-semibold">Shop Nobi</h1>
+      <p className="mt-2 max-w-3xl text-black/70 dark:text-white/70">{ShopNobiPageSeo.description}</p>
+      <h2 id="shop-nobi-browse-heading" className="mt-8 text-lg font-semibold">Browse products</h2>
       <CategoryLinks categories={categories.slice(0, VisibleCategoryCount)} />
       <BrowseDisclosure label="More categories" count={Math.max(0, categories.length - VisibleCategoryCount)}>
         <CategoryLinks categories={categories.slice(VisibleCategoryCount)} />

@@ -144,7 +144,7 @@ test("reviewed guides replace unsafe source advice consistently in visible HTML,
   }));
   const pages = buildSearchPages(sourcePages, sourcePages.length).pages;
   const original = structuredClone(pages);
-  await writePrebuiltPages({ searchPages: pages, categoryPages: [], popularSearches: { pages: [], moreSearches: [], categories: [] } }, folder);
+  await writePrebuiltPages({ searchPages: pages, categoryPages: [] }, folder);
   for (const [index, [slug, topic, stale = "Unsafe legacy blanket guidance."]] of ReviewedTopics.entries()) {
     const html = readFileSync(join(folder, `shop/s/${slug}.html`), "utf8");
     const published = readScriptJson(html, "shop-nobi-prebuilt-content").data;

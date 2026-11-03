@@ -3,7 +3,6 @@ import { mkdtempSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { test } from "node:test";
 import { buildSearchPages } from "../scripts/shop-nobi-search-page-view.js";
-import { buildPopularSearches } from "../scripts/shop-nobi-category-page-view.js";
 import { withAuthoredSearchPageCopy } from "../scripts/shop-nobi-editorial-copy.js";
 import { writePrebuiltPages } from "../scripts/shop-nobi-page-files.js";
 import { loadPageRenderer } from "../scripts/page-renderer.js";
@@ -195,7 +194,7 @@ test("all corrected pages agree across rendered metadata, guidance, FAQ schema a
   writeFileSync(join(folder, "index.html"), '<html><head><!--__PRERENDER_TITLE__--><!--__PRERENDER_DESC__--></head><body><div id="root"></div></body></html>');
   const pages = buildSearchPages(Fixture.pages, Fixture.pages.length).pages;
   assert.equal(pages.length, Fixture.pages.length);
-  const plan = { searchPages: pages, categoryPages: [], popularSearches: buildPopularSearches(pages, []) };
+  const plan = { searchPages: pages, categoryPages: [] };
   const snapshot = structuredClone(plan);
   const { renderPrebuiltPageBody } = await loadPageRenderer();
   await writePrebuiltPages(plan, folder);
@@ -239,7 +238,7 @@ test("filtered and empty versions cannot retain the authored claims or FAQ schem
     }
     const pages = buildSearchPages(sources, sources.length).pages;
     assert.equal(pages.length, Fixture.pages.length);
-    await writePrebuiltPages({ searchPages: pages, categoryPages: [], popularSearches: buildPopularSearches(pages, []) }, folder);
+    await writePrebuiltPages({ searchPages: pages, categoryPages: [] }, folder);
     for (const page of pages) {
       const html = readFileSync(join(folder, `shop/s/${page.slug}.html`), "utf8");
       const published = readScriptJson(html, "shop-nobi-prebuilt-content").data;

@@ -14,7 +14,6 @@ export const PrebuiltContentKind = {
   SearchPage: "search-page",
   ProductPage: "product-page",
   CategoryPage: "category-page",
-  PopularSearches: "popular-searches",
 };
 
 /** Where ShopPage shows the prebuilt content: above the live search, below it, or not at all. */
@@ -57,7 +56,7 @@ export function readEmbeddedPrebuiltContent(pathname) {
 
 /**
  * Chooses where the prebuilt content shows. Search pages keep it above the live search and category pages below the
- * search box until live products are drawn. Root browse links and the loading message leave when the assistant arrives.
+ * search box until live products are drawn. The /shop loading message leaves when the assistant arrives.
  *
  * @param {string | undefined} kind The prebuilt content's kind, or undefined when the page has none.
  * @param {{assistantHasMounted: boolean, liveResultsHaveDrawn: boolean}} progress How far the live search has got.

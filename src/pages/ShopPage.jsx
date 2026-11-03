@@ -8,7 +8,6 @@ import AudioBuyingGuide from "../components/shopNobi/AudioBuyingGuide";
 import Nav from "../components/home/Nav";
 import AddYourStoreLink from "../components/shopNobi/AddYourStoreLink";
 import ShopNobiCategoryPageContent from "../components/shopNobi/ShopNobiCategoryPageContent";
-import ShopNobiPopularSearches from "../components/shopNobi/ShopNobiPopularSearches";
 import ShopNobiSearchPageContent from "../components/shopNobi/ShopNobiSearchPageContent";
 import ShopNobiFooter from "../components/shopNobi/ShopNobiFooter";
 import "../components/home/homepage.css";
@@ -81,10 +80,7 @@ function PrebuiltContent({ content }) {
   if (content.kind === PrebuiltContentKind.SearchPage) {
     return <ShopNobiSearchPageContent page={content.data} />;
   }
-  if (content.kind === PrebuiltContentKind.CategoryPage) {
-    return <ShopNobiCategoryPageContent category={content.data} />;
-  }
-  return <ShopNobiPopularSearches popularSearches={content.data} />;
+  return <ShopNobiCategoryPageContent category={content.data} />;
 }
 
 /** Shown on /shop until the live search arrives. */

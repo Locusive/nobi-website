@@ -4,7 +4,6 @@ import { join } from "node:path";
 import { test } from "node:test";
 import { writePrebuiltPages } from "../scripts/shop-nobi-page-files.js";
 import { buildSearchPages } from "../scripts/shop-nobi-search-page-view.js";
-import { buildPopularSearches } from "../scripts/shop-nobi-category-page-view.js";
 import { htmlEscape } from "../scripts/prerender-blog.js";
 import { readFixturePageData } from "./shop-nobi-pages-server.js";
 import { readBody, readScriptJson } from "./shop-nobi-test-build.js";
@@ -22,7 +21,7 @@ test("generic catalog copy agrees across published title, description and hydrat
   writeFileSync(join(folder, "index.html"), '<!doctype html><html><head><!--__PRERENDER_TITLE__--><!--__PRERENDER_DESC__--></head><body><div id="root"></div></body></html>');
   const source = { ...readCleanFixturePage(), title: "Best Black Leather Boots from Top Stores" };
   const { pages } = buildSearchPages([source], 1);
-  const plan = { searchPages: pages, categoryPages: [], popularSearches: buildPopularSearches(pages, []) };
+  const plan = { searchPages: pages, categoryPages: [] };
   const original = structuredClone(plan);
   await writePrebuiltPages(plan, folder);
   const html = readFileSync(join(folder, `shop/s/${source.slug}.html`), "utf8");
@@ -71,7 +70,7 @@ test("white-gold clarification agrees across HTML, FAQ schema and hydration with
   writeFileSync(join(folder, "index.html"), '<!doctype html><html><head><!--__PRERENDER_TITLE__--><!--__PRERENDER_DESC__--></head><body><div id="root"></div></body></html>');
   const source = { ...whiteGoldPage(), title: "Best 14k White Gold Statement Rings from Top Stores" };
   const { pages } = buildSearchPages([source, readCleanFixturePage()], 2);
-  const plan = { searchPages: pages, categoryPages: [], popularSearches: buildPopularSearches(pages, []) };
+  const plan = { searchPages: pages, categoryPages: [] };
   const original = structuredClone(plan);
   await writePrebuiltPages(plan, folder);
   const html = readFileSync(join(folder, "shop/s/14k-white-gold-statement-rings.html"), "utf8");
@@ -121,7 +120,7 @@ test("suitcase clarification agrees across HTML, FAQ schema and hydration while 
   const fixture = readCleanFixturePage();
   const source = { ...mixedSuitcasePage(), title: "Best Blue Suitcases from Top Stores" };
   const { pages } = buildSearchPages([source, fixture], 2);
-  const plan = { searchPages: pages, categoryPages: [], popularSearches: buildPopularSearches(pages, []) };
+  const plan = { searchPages: pages, categoryPages: [] };
   const original = structuredClone(plan);
   await writePrebuiltPages(plan, folder);
   const html = readFileSync(join(folder, "shop/s/blue-suitcases.html"), "utf8");
@@ -241,7 +240,7 @@ for (const scenario of [
     faq: [{ question: "Old question", answer: "Old answer" }],
   };
   const { pages } = buildSearchPages([authored, fixture], 2);
-  const plan = { searchPages: pages, categoryPages: [], popularSearches: buildPopularSearches(pages, []) };
+  const plan = { searchPages: pages, categoryPages: [] };
   const originalPlan = structuredClone(plan);
 
   await writePrebuiltPages(plan, folder);

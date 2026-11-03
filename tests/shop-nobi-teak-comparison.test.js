@@ -5,7 +5,6 @@ import { test } from "node:test";
 import { buildSearchPages } from "../scripts/shop-nobi-search-page-view.js";
 import { withAuthoredSearchPageCopy } from "../scripts/shop-nobi-editorial-copy.js";
 import { writePrebuiltPages } from "../scripts/shop-nobi-page-files.js";
-import { buildPopularSearches } from "../scripts/shop-nobi-category-page-view.js";
 import { loadPageRenderer } from "../scripts/page-renderer.js";
 import { htmlEscape } from "../scripts/prerender-blog.js";
 import { landingVariant } from "../src/utils/shopNobiLandingExperiment.js";
@@ -82,7 +81,7 @@ test("teak comparison renders set-content labels, references and matching hydrat
     const source = sourcePage();
     alter(source);
     const page = normalize(source);
-    const plan = { searchPages: [page], categoryPages: [], popularSearches: buildPopularSearches([page], []) };
+    const plan = { searchPages: [page], categoryPages: [] };
     const snapshot = structuredClone(plan);
     await writePrebuiltPages(plan, folder);
     const html = readFileSync(join(folder, 'shop/s/teak-outdoor-furniture-sets.html'), 'utf8');

@@ -237,7 +237,7 @@ for (const builtDestinations of [true, false]) {
 }
 
 test("every link to a store in the prebuilt pages carries rel=nofollow", () => {
-  const pages = ["shop/s/black-leather-boots.html", "shop/s/chelsea-boots.html", "shop/s/boots.html", "shop/c/shoes.html", "shop.html"];
+  const pages = ["shop/s/black-leather-boots.html", "shop/s/chelsea-boots.html", "shop/s/boots.html", "shop/c/shoes.html"];
   for (const page of pages) {
     const links = [...readBody(readOutput(page)).matchAll(/<a\b([^>]*)>/g)].map(([, attributes]) => attributes);
     const storeLinks = links.filter((attributes) => /href="https?:/.test(attributes) && !/href="https:\/\/[a-z.]*nobi\.ai/.test(attributes));
@@ -467,7 +467,7 @@ test("each category with enough search pages gets one page listing them, with it
   assert.deepEqual(searchLinks, expectedLinks);
 });
 
-test("root and category HTML use concise topics while preserving custom labels, hrefs and embedded data", async () => {
+test("category HTML uses concise topics while preserving custom labels, hrefs and embedded data, and /shop is left alone", async () => {
   const folder = makeDistCopy();
   const fixture = readFixturePageData();
   const titles = ["Best Boots & Shoes From Top Stores", "Best Chelsea Boots", "Boots: Compare Fit"];
@@ -476,23 +476,14 @@ test("root and category HTML use concise topics while preserving custom labels, 
   const original = structuredClone(fixture);
   try {
     await prerenderWith({ body: fixture }, folder);
-    const html = readFileSync(join(folder, "shop.html"), "utf8");
-    assert.equal(html, readFileSync(join(folder, "shop/index.html"), "utf8"));
-    const body = readBody(html);
-    assert.match(body, /<h2[^>]*>Browse products<\/h2>/);
-    assert.match(body, /<details[^>]*><summary[^>]*>Popular searches \(4\)<\/summary>/);
-    assert.ok(body.includes('<a href="/shop/c/shoes" class="hover:underline">Shoes</a>'));
+    assert.ok(!existsSync(join(folder, "shop.html")) && !existsSync(join(folder, "shop/index.html")),
+      "The Shop Nobi root page keeps the content prerender-pages gave it");
     const categoryHtml = readFileSync(join(folder, "shop/c/shoes.html"), "utf8");
     const expected = fixture.pages.map((page, index) => ({ slug: page.slug, title: ["Boots & Shoes", "Chelsea Boots", "Boots: Compare Fit", "Gifts"][index] }));
     const links = markup => [...markup.matchAll(/<a href="(\/shop\/s\/[^"]+)" class="hover:underline">([^<]+)<\/a>/g)].map(([, href, title]) => [href, title]);
     const visible = entries => entries.map(({ slug, title }) => [`/shop/s/${slug}`, title.replaceAll("&", "&amp;")]);
-    assert.deepEqual(links(body), visible(expected));
     assert.deepEqual(links(readBody(categoryHtml)), visible(expected.slice(0, 3)));
-    const rootData = readScriptJson(html, "shop-nobi-prebuilt-content");
-    assert.equal(rootData.kind, "popular-searches");
-    assert.deepEqual(rootData.data.pages, expected);
     assert.deepEqual(readScriptJson(categoryHtml, "shop-nobi-prebuilt-content").data.pages, expected.slice(0, 3));
-    assert.ok(!body.includes("Loading Shop Nobi"));
     assert.deepEqual(fixture, original);
   } finally { rmSync(folder, { recursive: true, force: true }); }
 });

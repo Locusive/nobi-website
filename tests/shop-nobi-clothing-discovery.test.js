@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
-import { buildCategoryPages, buildPopularSearches } from "../scripts/shop-nobi-category-page-view.js";
+import { buildCategoryPages } from "../scripts/shop-nobi-category-page-view.js";
 import { selectClothingDiscoveries } from "../src/utils/shopNobiClothingDiscovery.js";
 import { readFixturePageData } from "./shop-nobi-pages-server.js";
 
@@ -21,7 +21,6 @@ test("clothing discovery selects built destinations in editorial order, omits mi
   assert.deepEqual(selectClothingDiscoveries([]), []);
   const categories = buildCategoryPages(pages, 10);
   assert.equal(categories[0].clothingDiscoveries.length, 6);
-  assert.equal(buildPopularSearches(pages, categories).clothingDiscoveries.length, 6);
   const furniture = pages.map((page) => ({ ...page, breadcrumbs: [{ name: "Chairs" }], categoryPath: "furniture.chairs" }));
   assert.ok(!Object.hasOwn(buildCategoryPages(furniture, 10)[0], "clothingDiscoveries"));
 });

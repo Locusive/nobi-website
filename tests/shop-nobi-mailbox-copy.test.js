@@ -4,7 +4,6 @@ import { join } from "node:path";
 import { test } from "node:test";
 import { withAuthoredSearchPageCopy } from "../scripts/shop-nobi-editorial-copy.js";
 import { buildSearchPages } from "../scripts/shop-nobi-search-page-view.js";
-import { buildPopularSearches } from "../scripts/shop-nobi-category-page-view.js";
 import { writePrebuiltPages } from "../scripts/shop-nobi-page-files.js";
 import { htmlEscape } from "../scripts/prerender-blog.js";
 import { readFixturePageData } from "./shop-nobi-pages-server.js";
@@ -85,7 +84,7 @@ test("published mailbox HTML, hydration and FAQ agree while the source plan and 
   const otherSource = readFixturePageData().pages[0];
   otherSource.products = otherSource.products.slice(0, 2);
   const { pages } = buildSearchPages([observedMailboxPage(), otherSource], 2);
-  const plan = { searchPages: pages, categoryPages: [], popularSearches: buildPopularSearches(pages, []) };
+  const plan = { searchPages: pages, categoryPages: [] };
   const original = structuredClone(plan);
   await writePrebuiltPages(plan, folder);
   const html = readFileSync(join(folder, "shop/s/mailbox-posts.html"), "utf8");

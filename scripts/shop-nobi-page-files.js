@@ -1,12 +1,12 @@
 // Renders the prebuilt Shop Nobi pages and writes them into the build output: each search page and category
-// page as one file, and /shop again with its popular searches.
+// page as one file.
 
 import { readFileSync, existsSync, writeFileSync, mkdirSync } from "fs";
 import { join, dirname } from "path";
 import { fileURLToPath } from "url";
-import { renderPage, toScriptJson, writeFlatPageFile, writePageFiles } from "./page-html.js";
+import { renderPage, toScriptJson, writeFlatPageFile } from "./page-html.js";
 import { loadPageRenderer } from "./page-renderer.js";
-import { ShopNobiPageHead, ShopNobiPinFeed } from "../src/utils/shopNobiPage.js";
+import { ShopNobiPinFeed } from "../src/utils/shopNobiPage.js";
 import { searchPagePath } from "../src/utils/shopNobiSearchPage.js";
 import { categoryPagePath } from "../src/utils/shopNobiCategoryPage.js";
 import { buildPrebuiltContentSeo, PrebuiltContentElementId, PrebuiltContentKind } from "../src/utils/shopNobiPrebuiltContent.js";
@@ -17,7 +17,7 @@ import { withAuthoredSearchPageCopy } from "./shop-nobi-editorial-copy.js";
 /**
  * Writes planned search/category pages and the known-product fallback, when present.
  *
- * @param {{searchPages: object[], categoryPages: object[], popularSearches: object}} plan What to build.
+ * @param {{searchPages: object[], categoryPages: object[]}} plan What to build.
  * @param {string} distDir The build output folder.
  * @returns {Promise<object[]>} The actual published search pages, shared with the search sitemap.
  */
@@ -64,11 +64,6 @@ export async function writePrebuiltPages(plan, distDir, { privateDocumentPath = 
     if (documentPath) writeFileSync(documentPath, `export default ${JSON.stringify(privateDocument)};\n`);
   }
 
-  if (plan.searchPages.length === 0) return [];
-
-  const shopNobiContent = { kind: PrebuiltContentKind.PopularSearches, path: ShopNobiPageHead.path, data: plan.popularSearches };
-  const shopNobiHtml = renderContent(shopNobiContent);
-  writePageFiles(distDir, shopNobiContent.path, shopNobiHtml);
   return publishedSearchPages;
 }
 
@@ -87,9 +82,7 @@ function readShell(distDir) {
  */
 function renderPrebuiltPage(content, shell, body) {
   const seo = buildPrebuiltContentSeo(content);
-  const head = content.kind === PrebuiltContentKind.PopularSearches
-    ? ShopNobiPageHead
-    : { ...seo, robots: seo.noindex ? "noindex, nofollow" : IndexableRobots, feed: ShopNobiPinFeed };
+  const head = { ...seo, robots: seo.noindex ? "noindex, nofollow" : IndexableRobots, feed: ShopNobiPinFeed };
   const html = renderPage(head, shell, body);
   const contentElement = `<script type="application/json" id="${PrebuiltContentElementId}">${toScriptJson(content)}</script>`;
   return html.replace("<head>", () => `<head>\n    ${contentElement}`);

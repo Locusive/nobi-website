@@ -6,7 +6,7 @@ import { join, dirname } from "path";
 import { fileURLToPath } from "url";
 import { fetchSearchPagesData, readApiBaseUrl } from "./shop-nobi-search-pages-api.js";
 import { buildSearchPages, selectUsablePages } from "./shop-nobi-search-page-view.js";
-import { buildCategoryPages, buildPopularSearches, countCategories, linkCategoryPages } from "./shop-nobi-category-page-view.js";
+import { buildCategoryPages, countCategories, linkCategoryPages } from "./shop-nobi-category-page-view.js";
 import { buildBodumProductPage } from "./shop-nobi-bodum-product.js";
 import { BodumPath } from "../src/utils/shopNobiProductPage.js";
 import { writePrebuiltPages } from "./shop-nobi-page-files.js";
@@ -90,8 +90,7 @@ async function planPages(fetchedPages, fileRoom, fetchImageSize) {
   const { stories, leftOutCount: leftOutStoryCount, smallPosterCount } = storyPlan;
   const categoryLinkedPages = linkCategoryPages(unlinkedPages, categoryPages);
   const searchPages = linkWebStories(categoryLinkedPages, stories);
-  const popularSearches = buildPopularSearches(searchPages, categoryPages);
-  return { searchPages, categoryPages, popularSearches, stories, leftOutCount, leftOutStoryCount, smallPosterCount };
+  return { searchPages, categoryPages, stories, leftOutCount, leftOutStoryCount, smallPosterCount };
 }
 
 /** Returns how many page files fit after the files already built, the Shop Nobi sitemap and the pin feeds. */

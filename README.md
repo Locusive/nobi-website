@@ -310,10 +310,9 @@ blanket date refresh.
 In the browser, a search page keeps its prebuilt products above the live search,
 and a category page keeps its searches under the search box, until the assistant
 bundle draws live products. A refused or failed live search therefore leaves the
-prebuilt content in place. On `/shop`, browse links are prerendered for crawlers and
-for visitors without the assistant: twelve categories are expanded and native
-disclosures retain the remaining category and search links in the HTML. The
-assistant replaces them when it mounts. A click on a prebuilt product sends the API the same
+prebuilt content in place. `/shop` itself carries no prebuilt links: crawlers reach
+every search and category page through `sitemap-shop.xml` and `llms.txt`, so the
+root page shows only the live search. A click on a prebuilt product sends the API the same
 "Click On Search Result" event as a live product, with the same entry point,
 "AI Search Bar". Prebuilt clicks omit the conversation ID so the API records them
 without waiting for a live conversation to be saved. This also means a prebuilt

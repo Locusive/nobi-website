@@ -2,7 +2,6 @@ import assert from "node:assert/strict";
 import { test } from "node:test";
 import {
   buildCategoryPages,
-  buildPopularSearches,
   FewestSearchPagesPerCategory,
   linkCategoryPages,
 } from "../scripts/shop-nobi-category-page-view.js";
@@ -41,24 +40,24 @@ test("a category with enough search pages gets its own page, and a thinner one g
   assert.deepEqual(categoryPages[0].subcategories, []);
 });
 
-test("a category still too thin, or with an unknown top category, gets no page, no sitemap entry, and stays on /shop", () => {
+test("a category too thin, or with an unknown top category, gets no page while its search pages stay in the sitemap", () => {
   const signs = buildPages(FewestSearchPagesPerCategory - 1, "Signage", "business_industrial.signage", "sign");
   const neon = buildPages(1, "Neon Signs", "constructor.neon", "neon");
   const chairs = buildPages(FewestSearchPagesPerCategory, "Chairs", "furniture.chairs", "chair");
   const searchPages = [...chairs, ...signs, ...neon];
 
   const categoryPages = buildCategoryPages(searchPages, NoLimit);
-  const popularSearches = buildPopularSearches(searchPages, categoryPages);
-  const sitemap = buildShopNobiSitemap(categoryPages, [], [], "2026-10-11T08:10:00Z");
+  const listed = searchPages.map((page) => ({ ...page, products: [{ imageUrl: "https://example.com/boot.jpg" }] }));
+  const sitemap = buildShopNobiSitemap(categoryPages, listed, [], "2026-10-11T08:10:00Z");
 
   assert.deepEqual(listCategorySlugs(categoryPages), [["chairs", ["chair-0", "chair-1", "chair-2"]]]);
   assert.ok(!sitemap.includes("/shop/c/signage") && !sitemap.includes("/shop/c/business-industrial"));
-  assert.deepEqual(popularSearches.categories, [{ slug: "chairs", name: "Chairs" }]);
-  const shopSlugs = [...popularSearches.pages, ...popularSearches.moreSearches].map((page) => page.slug);
-  assert.ok(["sign-0", "sign-1", "neon-0"].every((slug) => shopSlugs.includes(slug)));
+  assert.ok(sitemap.includes("/shop/c/chairs"));
+  const uncategorized = ["sign-0", "sign-1", "neon-0"];
+  assert.ok(uncategorized.every((slug) => sitemap.includes(`/shop/s/${slug}`)), "Pages off every category page stay crawlable");
 });
 
-test("root and category navigation retain ordering and custom titles while shortening generic labels", () => {
+test("category navigation retains ordering and custom titles while shortening generic labels", () => {
   const boots = buildPages(51, "Shoes", "apparel_accessories.shoes", "boots").map((page, index) => ({
     ...page, title: index === 0 ? "Shoes: Compare Fit & Use" : `Best Shoes ${index}${index % 3 === 0 ? " From Top Stores" : index % 2 ? " from Top Stores" : ""}`,
     query: `original shoes query ${index}`, refreshedAt: "2026-10-28T21:04:02Z",
@@ -68,17 +67,11 @@ test("root and category navigation retain ordering and custom titles while short
   const searchPages = [...boots, giftIdeas, ...rings];
   const original = structuredClone(searchPages);
   const categoryPages = buildCategoryPages(searchPages, NoLimit);
-  const popularSearches = buildPopularSearches(searchPages, categoryPages);
 
-  assert.deepEqual(popularSearches.categories, [{ slug: "shoes", name: "Shoes" }]);
+  assert.deepEqual(categoryPages.map((category) => category.slug), ["shoes"]);
   assert.equal(categoryPages[0].refreshedAt, boots[0].refreshedAt);
   const expectedBootLinks = boots.map((page, index) => ({ slug: page.slug, title: index === 0 ? page.title : `Shoes ${index}` }));
   assert.deepEqual(categoryPages[0].pages, expectedBootLinks);
-  assert.deepEqual(popularSearches.pages, expectedBootLinks.slice(0, 50));
-  assert.deepEqual(popularSearches.moreSearches, [
-    { slug: "gift-ideas", title: "Gifts & Games" },
-    { slug: "rings-0", title: "Rings: Compare Metals" },
-  ], "Uncategorized links keep their routes and order");
   assert.deepEqual(searchPages, original, "Titles, queries and all source records remain untouched");
 });
 

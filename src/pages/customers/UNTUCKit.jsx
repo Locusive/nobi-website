@@ -155,7 +155,7 @@ export default function UNTUCKitCustomer() {
               <div className="space-y-4">
                 <p className="text-sm font-semibold uppercase tracking-[0.18em] text-slate-400">About UNTUCKit</p>
                 <p className="text-base text-slate-600 leading-relaxed">
-                  UNTUCKit is a men's and women's clothing brand known for shirts designed to be worn untucked. Built around a simple idea (that casual dress clothes should actually fit and look good), they've grown into a major direct-to-consumer brand with a strong online presence.
+                  UNTUCKit is a men's and women's apparel brand known for shirts designed to be worn untucked. It started with a simple fix to a common problem: most casual, collared shirts are cut too long to look right untucked, so they look sloppy. UNTUCKit shirts are built at the perfect untucked length with an impeccable fit throughout so you can look sharp and feel comfortable. What began online has grown into a major omnichannel brand, with more than 70 stores across the U.S. in addition to a very robust e-commerce business.
                 </p>
               </div>
               <div className="space-y-4">

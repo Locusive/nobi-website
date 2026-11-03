@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { useSEO } from "../../hooks/useSEO";
+import { UntuckitStorySeo } from "../../content/customerStories.js";
 import { motion } from "framer-motion";
 import PageLayout from "../../components/PageLayout";
 import { getSignupUrl } from "../../utils/signupUrl";
@@ -100,11 +101,7 @@ function StatCallout({ value, label }) {
 export default function UNTUCKitCustomer() {
   const { onOpen } = useDemoForm();
 
-  useSEO({
-    title: "UNTUCKit + Nobi: +21.3% Revenue Per Searcher | Case Study",
-    description: "A two-month pilot. A clear result. UNTUCKit saw +17.1% conversion rate lift and +21.3% revenue per searcher, then went all in on Nobi.",
-    path: "/customers/untuckit",
-  });
+  useSEO(UntuckitStorySeo);
 
   return (
     <PageLayout>

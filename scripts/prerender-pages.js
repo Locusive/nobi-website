@@ -30,6 +30,7 @@ import { GiftChooserSeo } from "../src/content/giftChooserProducts.js";
 import { MindTheColorSeo } from "../src/content/mindTheColor.js";
 import { ElectionNightSeo } from "../src/content/electionNight.js";
 import { ShopNobiMcpSeo } from "../src/content/shopNobiMcp.js";
+import { CUSTOMER_STORY_PAGES } from "../src/content/customerStories.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const DIST = join(__dirname, "..", "dist");
@@ -86,6 +87,8 @@ const PAGES = [
   GiftChooserSeo,
   MindTheColorSeo,
   ElectionNightSeo,
+  // The customer stories carry their own title, summary and picture, so a shared link shows the story and not the home page.
+  ...CUSTOMER_STORY_PAGES,
   // Legal pages carry their full text in the HTML, so app directories and crawlers that run no JavaScript can read them.
   {
     path: "/privacy", title: "Privacy Policy | Nobi",

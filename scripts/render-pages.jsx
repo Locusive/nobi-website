@@ -25,6 +25,12 @@ import GiftChooser from "../src/pages/GiftChooser.jsx";
 import { GiftChooserSeo } from "../src/content/giftChooserProducts.js";
 import { BaseusScreenPath } from "../src/content/baseusScreens.js";
 
+import CustomerStories from "../src/pages/customers/index.jsx";
+import UNTUCKitCustomer from "../src/pages/customers/UNTUCKit.jsx";
+import LuccheseCustomer from "../src/pages/customers/Lucchese.jsx";
+import KilteCustomer from "../src/pages/customers/Kilte.jsx";
+import { CustomerStoriesSeo, UntuckitStorySeo, LuccheseStorySeo, KilteStorySeo } from "../src/content/customerStories.js";
+
 import MindTheColorFit from "../src/pages/MindTheColorFit.jsx";
 import { MindTheColorPath } from "../src/content/mindTheColor.js";
 import ElectionNight from "../src/pages/ElectionNight.jsx";
@@ -46,6 +52,10 @@ Pages[GiftChooserSeo.path] = GiftChooser;
 Pages[MindTheColorPath] = MindTheColorFit;
 Pages[ElectionNightPath] = ElectionNight;
 Pages[ShopNobiMcpPath] = ShopNobiMcp;
+Pages[CustomerStoriesSeo.path] = CustomerStories;
+Pages[UntuckitStorySeo.path] = UNTUCKitCustomer;
+Pages[LuccheseStorySeo.path] = LuccheseCustomer;
+Pages[KilteStorySeo.path] = KilteCustomer;
 for (const feature of FEATURES) {
   Pages[buildFeaturePath(feature.slug)] = () => <FeaturePageContent slug={feature.slug} />;
 }

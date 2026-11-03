@@ -1,8 +1,8 @@
 import { useEffect } from "react";
 import { IndexableRobots } from "../utils/previewImage.js";
+import { DefaultPreviewImage, previewImageUrl } from "../content/previewCards.js";
 
 const BASE_URL = "https://nobi.ai";
-const DEFAULT_IMAGE = `${BASE_URL}/og-image.png`;
 
 function upsertMeta(selector, value) {
   if (!value) return;
@@ -55,7 +55,8 @@ export function useSEO({ title, description, path, image, type = "website", sche
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     const canonical = path ? `${BASE_URL}${path}` : null;
-    const ogImage = image || DEFAULT_IMAGE;
+    // A page can name its own picture; otherwise it uses the card drawn for its path, and failing that the Nobi one.
+    const ogImage = image || previewImageUrl(path) || DefaultPreviewImage;
 
     if (title) document.title = title;
     upsertMeta('meta[name="description"]', description);

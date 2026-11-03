@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="cardTitle cardSummary">
+  <title id="cardTitle">Phone Case Model &amp; Charging Checklist</title>
+  <desc id="cardSummary">Check the exact phone model and selected case variant, then record separate charging and accessory evidence.</desc>
+  <defs>
+    <linearGradient id="wash" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="0.55" stop-color="#f8fafc"/>
+      <stop offset="1" stop-color="#eef2ff"/>
+    </linearGradient>
+    <linearGradient id="rail" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ec4899"/>
+      <stop offset="0.5" stop-color="#8b5cf6"/>
+      <stop offset="1" stop-color="#38bdf8"/>
+    </linearGradient>
+  </defs>
+  <style>text{font-family:'Avenir Next','Avenir','Helvetica Neue',Helvetica,Arial,sans-serif}</style>
+  <rect width="1200" height="630" fill="url(#wash)"/>
+  <rect x="0" y="0" width="14" height="630" fill="url(#rail)"/>
+  <text x="164" y="118" font-size="34" font-weight="800" fill="#0f172a" letter-spacing="1.5">NOBI</text>
+  <text x="88" y="214" font-size="23" font-weight="700" fill="#7c3aed" letter-spacing="3.4">FREE TOOL</text>
+  <text x="88" y="268" font-size="62" font-weight="750" fill="#0f172a">Phone Case Model &amp; Charging</text>
+  <text x="88" y="344" font-size="62" font-weight="750" fill="#0f172a">Checklist</text>
+  <text x="88" y="446" font-size="27" font-weight="500" fill="#475569">Check the exact phone model and selected case variant, then record separate</text>
+  <text x="88" y="486" font-size="27" font-weight="500" fill="#475569">charging and accessory evidence.</text>
+  <text x="88" y="572" font-size="24" font-weight="600" fill="#475569">nobi.ai/tools/phone-case-check</text>
+</svg>

@@ -4,9 +4,9 @@
 import { writeFileSync, mkdirSync } from "fs";
 import { join, dirname } from "path";
 import { stripHomepageMeta, htmlEscape } from "./prerender-blog.js";
+import { DefaultPreviewImage, previewImageUrl } from "../src/content/previewCards.js";
 
 const BaseUrl = "https://nobi.ai";
-const DefaultImage = `${BaseUrl}/og-image.png`;
 const EmptyRoot = '<div id="root"></div>';
 
 /**
@@ -22,8 +22,8 @@ export function toScriptJson(value) {
 /** Builds the canonical, link preview, structured data and robots tags for one page. */
 function buildHead(page) {
   const url = page.path === "/" ? BaseUrl : `${BaseUrl}${page.path}`;
-  // A page can bring its own link preview picture; the rest use the Nobi one.
-  const image = page.image || DefaultImage;
+  // A page can bring its own link preview picture; otherwise it uses the card drawn for its path, then the Nobi one.
+  const image = page.image || previewImageUrl(page.path) || DefaultPreviewImage;
   const tags = [
     `<link rel="canonical" href="${htmlEscape(url)}">`,
     `<meta property="og:type" content="website">`,

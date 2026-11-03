@@ -66,14 +66,14 @@ export default function ShopPage({ prebuiltContent: builtContent = null }) {
       {prebuiltContent?.kind === PrebuiltContentKind.SearchPage && prebuiltContent.data.slug === "audio-components" && <div className="mx-auto max-w-6xl px-4 pb-8 text-black dark:text-white"><AudioBuyingGuide /></div>}
       {prebuiltContent?.kind === PrebuiltContentKind.SearchPage && prebuiltContent.data.slug === "duvet-covers" && <p className="mx-auto max-w-6xl px-4 pb-8 text-black dark:text-white"><a className="underline" href="/tools/duvet-cover-size">Compare cover and insert dimensions</a> before choosing an exact size.</p>}
       <AddYourStoreLink isLinkHidden={liveResultsHaveDrawn} />
-      {place === PrebuiltContentPlace.BelowSearch && <PrebuiltContent content={prebuiltContent} assistantHasMounted={assistantHasMounted} />}
+      {place === PrebuiltContentPlace.BelowSearch && <PrebuiltContent content={prebuiltContent} />}
       <ShopNobiFooter />
     </div>
   );
 }
 
 /** Shows the prebuilt content for its kind, or a loading message when the page has none. */
-function PrebuiltContent({ content, assistantHasMounted = false }) {
+function PrebuiltContent({ content }) {
   if (!content) {
     return <LoadingMessage />;
   }
@@ -84,7 +84,7 @@ function PrebuiltContent({ content, assistantHasMounted = false }) {
   if (content.kind === PrebuiltContentKind.CategoryPage) {
     return <ShopNobiCategoryPageContent category={content.data} />;
   }
-  return <ShopNobiPopularSearches popularSearches={content.data} compact={assistantHasMounted} />;
+  return <ShopNobiPopularSearches popularSearches={content.data} />;
 }
 
 /** Shown on /shop until the live search arrives. */

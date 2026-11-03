@@ -14,7 +14,7 @@ const Privacy = () => {
     {/* Page Heading and Intro */}
     <h1 className="text-3xl font-bold mb-4">Privacy Policy</h1>
     <p className="text-sm text-gray-500 mb-8">
-      Effective October&nbsp;11,&nbsp;2026. This Privacy Policy explains how Nobi
+      Effective November&nbsp;3,&nbsp;2026. This Privacy Policy explains how Nobi
       collects, uses, and shares information.  If you have questions, email{" "}
       <a href="mailto:privacy@nobi.ai" className="text-blue-600 underline">
         privacy@nobi.ai
@@ -198,6 +198,11 @@ const Privacy = () => {
       <ul className="list-disc list-inside space-y-2 mb-4">
         <li>To show you search results and answer your messages.</li>
         <li>To improve our search and the order of results.</li>
+        <li>
+          To train, evaluate and improve our own machine learning models,
+          including the models behind our search, our ranking and the answers
+          and page text we write.
+        </li>
         <li>To count clicks for stores, so they know how many visits came from Shop Nobi.</li>
         <li>To prevent abuse, such as bots and automated scraping.</li>
       </ul>

@@ -48,12 +48,11 @@ function followPage(kind, bundleWindow = new EventTarget()) {
   };
 }
 
-test("prebuilt content follows the assistant lifecycle, and the assistant replaces the root browse links", () => {
+test("prebuilt content follows the assistant lifecycle, and /shop keeps no content of its own once it arrives", () => {
   for (const [kind, beforeMount, afterMount] of [
     [PrebuiltContentKind.SearchPage, PrebuiltContentPlace.AboveSearch, PrebuiltContentPlace.AboveSearch],
     [PrebuiltContentKind.ProductPage, PrebuiltContentPlace.AboveSearch, PrebuiltContentPlace.AboveSearch],
     [PrebuiltContentKind.CategoryPage, PrebuiltContentPlace.BelowSearch, PrebuiltContentPlace.BelowSearch],
-    [PrebuiltContentKind.PopularSearches, PrebuiltContentPlace.AboveSearch, PrebuiltContentPlace.Hidden],
     [undefined, PrebuiltContentPlace.AboveSearch, PrebuiltContentPlace.Hidden],
   ]) {
     const page = followPage(kind);
@@ -117,33 +116,13 @@ function browseHrefs(html) {
   return [...html.matchAll(/href="(\/shop\/[sc]\/[^" ]+)"/g)].map((match) => match[1]);
 }
 
-test("actual root rendering retains every browse destination in native disclosures until the assistant mounts", () => {
-  for (const count of [0, 3, 15]) {
-    const categories = Array.from({ length: count }, (_, index) => ({ slug: `category-${index}`, name: `Category ${index}` }));
-    const pages = count ? [{ slug: "linen-shirts", title: "Linen & cotton shirts" }] : [];
-    const moreSearches = count ? [{ slug: "desk-lamps", title: "Desk lamps" }] : [];
-    const content = { kind: PrebuiltContentKind.PopularSearches, path: "/shop", data: { categories, pages, moreSearches } };
-    const expected = [...categories.map(({ slug }) => `/shop/c/${slug}`), ...pages.concat(moreSearches).map(({ slug }) => `/shop/s/${slug}`)];
-    const html = renderShopPage(content, { assistantHasMounted: false, liveResultsHaveDrawn: false });
-    assert.deepEqual(browseHrefs(html), expected);
-    assert.equal((html.match(/<h1\b/g) || []).length, 1);
-    assert.match(html, /<h2[^>]*>Browse products<\/h2>/);
-    assert.ok(!html.includes("shop-nobi-category-search"), "Root hero and suggestions retain their normal styles");
-    const disclosures = [...html.matchAll(/<details([^>]*)>([\s\S]*?)<\/details>/g)];
-    assert.equal(disclosures.length, count ? (count > 12 ? 3 : 2) : 0);
-    disclosures.forEach(([, attributes, body]) => {
-      assert.ok(!/\bopen(?:=|\s|$)/.test(attributes));
-      assert.match(body, /^<summary[^>]*>[^<]+<\/summary>/);
-      assert.ok(browseHrefs(body).length > 0);
-    });
-    assert.equal(browseHrefs(html.replace(/<details[\s\S]*?<\/details>/g, "")).length, Math.min(12, count));
-    assert.ok(html.indexOf('aria-labelledby="shop-nobi-browse-heading"') < html.indexOf('id="shop-nobi-live-search"'));
-    if (count) assert.ok(html.includes("Linen &amp; cotton shirts"));
-
+test("the /shop root carries no browse links of its own at any point in the assistant's arrival", () => {
+  for (const assistantHasMounted of [false, true]) {
     for (const liveResultsHaveDrawn of [false, true]) {
-      const mounted = renderShopPage(content, { assistantHasMounted: true, liveResultsHaveDrawn });
-      assert.deepEqual(browseHrefs(mounted), []);
-      assert.ok(!mounted.includes("Browse products"), "The mounted assistant replaces the browse links");
+      const html = renderShopPage(null, { assistantHasMounted, liveResultsHaveDrawn });
+      assert.deepEqual(browseHrefs(html), [], "The root page links no prebuilt page");
+      assert.ok(!html.includes("Browse products") && !html.includes("shop-nobi-browse-heading"));
+      assert.ok(!html.includes("<details"), "No disclosures remain on the root page");
     }
   }
 });

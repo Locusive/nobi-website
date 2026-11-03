@@ -64,7 +64,7 @@ test("local or upstream filtering clears unsupported copy and empty discovery, t
     if (state === "restored") { raw.guide = ["Check the exact phone model before choosing."]; raw.faq = []; }
     const original = structuredClone(raw);
     const page = buildSearchPages([raw], 1).pages[0];
-    await writePrebuiltPages({ searchPages: [page], categoryPages: [], popularSearches: { pages: [], moreSearches: [], categories: [] } }, folder);
+    await writePrebuiltPages({ searchPages: [page], categoryPages: [] }, folder);
     const html = readFileSync(join(folder, "shop/s/phone-cases.html"), "utf8");
     const published = readScriptJson(html, "shop-nobi-prebuilt-content").data;
     assert.doesNotMatch(html, /ESR|HaloLock|\$23|\$69/);
@@ -126,7 +126,7 @@ test("verified non-green refill membership is page-specific and filtered output 
     assert.equal(page.publicationMembershipRevisedAt, filtered ? "2026-10-29T06:57:18Z" : undefined);
     if (count === 9) assert.deepEqual(page.products, expectedProducts, "All retained fields and order survive");
     if (count === 12) assert.deepEqual(page.products, general.products, "Other pages preserve the same variants");
-    await writePrebuiltPages({ searchPages: [page], categoryPages: [], popularSearches: { pages: [], moreSearches: [], categories: [] } }, folder);
+    await writePrebuiltPages({ searchPages: [page], categoryPages: [] }, folder);
     const html = readFileSync(join(folder, `shop/s/${slug}.html`), "utf8");
     const published = readScriptJson(html, "shop-nobi-prebuilt-content").data;
     assert.deepEqual(published.products, page.products);
@@ -225,7 +225,7 @@ test("reviewed FAQs and guide paragraphs agree across visible HTML, schema and h
   const multipleGuides = slugs.map(slug => MultiParagraphGuidance.find(entry => entry.slug === slug));
   const pages = groups.map((pairs, index) => genericFaqPage(pairs, paragraphs[index], multipleGuides[index]));
   const originals = structuredClone(pages);
-  await writePrebuiltPages({ searchPages: pages, categoryPages: [], popularSearches: { pages: [], moreSearches: [], categories: [] } }, folder);
+  await writePrebuiltPages({ searchPages: pages, categoryPages: [] }, folder);
   for (const [index, page] of pages.entries()) {
     const pairs = groups[index];
     const published = withAuthoredSearchPageCopy(page);

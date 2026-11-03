@@ -7,7 +7,6 @@ import { PinBoardNameByTopLevel, readTopLevel } from "../src/utils/shopNobiPinBo
 import { selectClothingDiscoveries } from "../src/utils/shopNobiClothingDiscovery.js";
 import { selectJewelryComparisons } from "../src/utils/shopNobiJewelryComparison.js";
 
-const PopularPageLimit = 50;
 
 /** The fewest search pages a category page lists. A thinner category's pages go to its top category's page. */
 export const FewestSearchPagesPerCategory = 3;
@@ -65,26 +64,6 @@ export function buildCategoryPages(searchPages, categoryLimit) {
     ...(categoryPage.slug === "clothing" ? clothingDiscoveryData(categoryPage.pages) : {}),
     ...(categoryPage.slug === "jewelry" ? { jewelryComparisons: selectJewelryComparisons(searchPages) } : {}),
   }));
-}
-
-/**
- * Picks the links /shop shows: every category page, the first search pages, and the pages on no category page.
- *
- * @param {object[]} searchPages The built search pages, most searched first.
- * @param {object[]} categoryPages The built category pages.
- * @returns {{categories: object[], pages: object[], moreSearches: object[]}} The links.
- */
-export function buildPopularSearches(searchPages, categoryPages) {
-  const pages = searchPages.slice(0, PopularPageLimit).map(toLink);
-  const shownSlugs = new Set(pages.map((page) => page.slug));
-  categoryPages.forEach((category) => category.pages.forEach((page) => shownSlugs.add(page.slug)));
-  const moreSearches = searchPages.filter((page) => !shownSlugs.has(page.slug)).map(toLink);
-  return {
-    categories: categoryPages.map((category) => ({ slug: category.slug, name: category.name })),
-    pages,
-    moreSearches,
-    ...clothingDiscoveryData(searchPages),
-  };
 }
 
 /** Adds navigation data only when the actual page plan contains a selected destination. */

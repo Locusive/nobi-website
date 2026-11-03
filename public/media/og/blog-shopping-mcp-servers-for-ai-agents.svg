@@ -18,8 +18,9 @@
   <rect x="0" y="0" width="14" height="630" fill="url(#rail)"/>
   <text x="164" y="118" font-size="34" font-weight="800" fill="#0f172a" letter-spacing="1.5">NOBI</text>
   <text x="88" y="214" font-size="23" font-weight="700" fill="#7c3aed" letter-spacing="3.4">BLOG</text>
-  <text x="88" y="268" font-size="62" font-weight="750" fill="#0f172a">Shopping MCP servers for AI agents</text>
-  <text x="88" y="370" font-size="27" font-weight="500" fill="#475569">Compare Shop Nobi, Shopify Catalog, ShopSavvy and within. See catalog scope,</text>
-  <text x="88" y="410" font-size="27" font-weight="500" fill="#475569">setup, buying handoff and limits.</text>
+  <text x="88" y="268" font-size="62" font-weight="750" fill="#0f172a">Shopping MCP servers for AI</text>
+  <text x="88" y="344" font-size="62" font-weight="750" fill="#0f172a">agents</text>
+  <text x="88" y="446" font-size="27" font-weight="500" fill="#475569">Compare Shop Nobi, Shopify Catalog, ShopSavvy and within. See catalog scope,</text>
+  <text x="88" y="486" font-size="27" font-weight="500" fill="#475569">setup, buying handoff and limits.</text>
   <text x="88" y="572" font-size="24" font-weight="600" fill="#475569">nobi.ai/blog/shopping-mcp-servers-for-ai-agents</text>
 </svg>

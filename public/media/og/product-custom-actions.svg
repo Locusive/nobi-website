@@ -19,7 +19,7 @@
   <text x="164" y="118" font-size="34" font-weight="800" fill="#0f172a" letter-spacing="1.5">NOBI</text>
   <text x="88" y="214" font-size="23" font-weight="700" fill="#7c3aed" letter-spacing="3.4">FEATURE</text>
   <text x="88" y="268" font-size="62" font-weight="750" fill="#0f172a">Custom Actions</text>
-  <text x="88" y="370" font-size="27" font-weight="500" fill="#475569">Developers can give Nobi actions to run on your site, like opening a booking form, so</text>
-  <text x="88" y="410" font-size="27" font-weight="500" fill="#475569">visitors get things done in the conversation.</text>
+  <text x="88" y="370" font-size="27" font-weight="500" fill="#475569">Developers can give Nobi actions to run on your site, like opening a booking form,</text>
+  <text x="88" y="410" font-size="27" font-weight="500" fill="#475569">so visitors get things done in the conversation.</text>
   <text x="88" y="572" font-size="24" font-weight="600" fill="#475569">nobi.ai/product/custom-actions</text>
 </svg>

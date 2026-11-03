@@ -7,12 +7,15 @@ const BaseUrl = "https://nobi.ai";
 export const DefaultPreviewImage = `${BaseUrl}/og-image.png`;
 
 const feature = (headline, summary) => ({ eyebrow: "Feature", headline, summary });
-const story = (headline, summary) => ({ eyebrow: "Customer story", headline, summary });
+const story = (headline, summary, logo) => ({ eyebrow: "Customer story", headline, summary, logo });
 const tool = (headline, summary) => ({ eyebrow: "Free tool", headline, summary });
 const post = (headline, summary) => ({ eyebrow: "Blog", headline, summary });
 
 // Each page's card, by path. The summaries are the pages' own meta descriptions, cut to read at preview size.
 // After adding or changing one, run scripts/render-preview-images.mjs and commit the picture it draws.
+
+// A page that already has a hero or one big main picture should name it as heroImage instead, and it is shared as
+// it is. Blog posts do this through their frontmatter, and Shop Nobi pages through their first product's picture.
 export const PREVIEW_CARDS = Object.freeze({
   "/pricing": {
     eyebrow: "Pricing",
@@ -42,15 +45,18 @@ export const PREVIEW_CARDS = Object.freeze({
   },
   "/customers/untuckit": story(
     "UNTUCKit: +21.3% revenue per searcher",
-    "A two-month pilot. A clear result. UNTUCKit saw +17.1% conversion rate lift, then went all in on Nobi."
+    "A two-month pilot. A clear result. UNTUCKit saw +17.1% conversion rate lift, then went all in on Nobi.",
+    "media/logos/untuckit.svg"
   ),
   "/customers/lucchese": story(
     "Lucchese generated $1M+ with Nobi",
-    "$1M+ incremental revenue, 33x ROI, +22.9% checkout completion. How Lucchese transformed search with Nobi."
+    "$1M+ incremental revenue, 33x ROI, +22.9% checkout completion. How Lucchese transformed search with Nobi.",
+    "media/logos/lucchese.svg"
   ),
   "/customers/kilte": story(
     "Kilte: 21.7% more conversions",
-    "Kilte uses evocative color names like Cappuccino and Ivory. Nobi maps them to what shoppers actually search for."
+    "Kilte uses evocative color names like Cappuccino and Ivory. Nobi maps them to what shoppers actually search for.",
+    "media/logos/kilte.webp"
   ),
 
   "/product": {
@@ -186,14 +192,19 @@ export function previewCardSlug(path) {
 }
 
 /**
- * Returns the address of a page's own link preview picture.
+ * Returns the address of a page's own link preview picture. A page that already has a hero or main picture names it
+ * as heroImage and shares that; the rest share the card drawn for them.
  *
  * @param {string} [path] The page path.
- * @returns {string | null} The picture's address, or null when the page has no card of its own.
+ * @returns {string | null} The picture's address, or null when the page has no picture of its own.
  */
 export function previewImageUrl(path) {
-  if (!path || !PREVIEW_CARDS[path]) {
+  const card = path ? PREVIEW_CARDS[path] : null;
+  if (!card) {
     return null;
+  }
+  if (card.heroImage) {
+    return card.heroImage.startsWith("http") ? card.heroImage : `${BaseUrl}/${card.heroImage.replace(/^\//, "")}`;
   }
   return `${BaseUrl}/media/og/${previewCardSlug(path)}.png`;
 }

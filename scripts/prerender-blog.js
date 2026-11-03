@@ -32,6 +32,7 @@ import { readFileSync, writeFileSync, readdirSync, mkdirSync, existsSync } from 
 import { join, dirname } from "path";
 import { fileURLToPath } from "url";
 import vm from "vm";
+import { previewImageUrl } from "../src/content/previewCards.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT      = join(__dirname, "..");
@@ -282,8 +283,9 @@ export function renderBodyHtml(mdxPath) {
 // carry either a relative `/media/...` path or a fully-qualified
 // `https://storage.googleapis.com/...` URL; both are valid. og:image
 // requires absolute.
-function resolveImage(heroImage) {
-  if (!heroImage) return `${BASE_URL}/og-image.png`;
+function resolveImage(heroImage, slug) {
+  // A post with no picture of its own falls back to the card drawn for it, and only then to the Nobi picture.
+  if (!heroImage) return previewImageUrl(`/blog/${slug}`) || `${BASE_URL}/og-image.png`;
   if (/^https?:\/\//i.test(heroImage)) return heroImage;
   return `${BASE_URL}${heroImage}`;
 }
@@ -298,7 +300,7 @@ function buildSchemas(meta, slug) {
     "headline": meta.title,
     "datePublished": meta.date,
     "dateModified": meta.lastUpdated || meta.publishedAt || meta.date,
-    "image": resolveImage(meta.heroImage),
+    "image": resolveImage(meta.heroImage, slug),
     "author": { "@type": "Person", "name": meta.author || "Nobi Team" },
     "publisher": { "@type": "Organization", "name": "Nobi", "url": "https://nobi.ai" },
     "mainEntityOfPage": { "@type": "WebPage", "@id": `${BASE_URL}/blog/${slug}` },
@@ -360,7 +362,7 @@ function buildHeadInjection(meta, slug) {
   const url = `${BASE_URL}/blog/${slug}`;
   const title = meta.title ? `${meta.title} | Nobi` : "Nobi";
   const description = meta.description || meta.excerpt || "";
-  const image = resolveImage(meta.heroImage);
+  const image = resolveImage(meta.heroImage, slug);
   const schemas = buildSchemas(meta, slug);
 
   // The article's <title> and <meta name="description"> are written

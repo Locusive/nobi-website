@@ -232,6 +232,54 @@ test("the privacy policy and terms carry their full text in the HTML, for reader
   assert.ok(terms.includes("Shop Nobi"), "The terms text is in the page");
 });
 
+test("the terms let agents search through our connector and forbid keeping the results or building another product from them", () => {
+  const terms = bodyText(readPage("terms.html"));
+  assert.ok(terms.includes("through a connection we publish for that purpose"), "the connector stays a permitted way in");
+  assert.ok(terms.includes("What you may not build from Shop Nobi"), "the restrictions have their own heading");
+  for (const restriction of [
+    "Store, cache, index or otherwise keep Shop Nobi",
+    "Build or add to a database, catalog, product feed, index",
+    "as material for another product",
+    "Train, fine-tune, evaluate, benchmark or otherwise develop any machine learning",
+    "Carry out text or data mining on Shop Nobi",
+  ]) {
+    assert.ok(terms.includes(restriction), `The terms say: ${restriction}`);
+  }
+});
+
+test("the terms hold an agent to identifying itself, claim our usage data for model training, and let us block abuse", () => {
+  const terms = bodyText(readPage("terms.html"));
+  for (const clause of [
+    "Identify itself in every request, naming itself in the request",
+    "Answer truthfully when asked whether it is a person",
+    "Usage Data is ours",
+    "fine-tune, evaluate and benchmark machine learning and artificial intelligence models",
+    "This covers everything we collect through Shop Nobi",
+    "slow, suspend or block your access",
+  ]) {
+    assert.ok(terms.includes(clause), `The terms say: ${clause}`);
+  }
+});
+
+test("the terms number their sections in order and every entry in the contents has a target", () => {
+  const html = readPage("terms.html");
+  const numbers = [...html.matchAll(/<h2[^>]*>(\d+)\)/g)].map((match) => Number(match[1]));
+  assert.ok(numbers.length > 20, "every section carries its number");
+  assert.deepEqual(numbers, numbers.map((_, index) => index + 1), "the numbers run in order with no gap or repeat");
+  const contentsStart = html.indexOf("Contents");
+  const contents = html.slice(contentsStart, html.indexOf("</nav>", contentsStart));
+  const anchors = [...contents.matchAll(/href="#([^"]+)"/g)].map((match) => match[1]);
+  assert.equal(anchors.length, numbers.length, "the contents list every section");
+  for (const anchor of anchors) {
+    assert.ok(html.includes(`id="${anchor}"`), `The contents link #${anchor} points at a section`);
+  }
+});
+
+test("the privacy policy tells shoppers we train models on what Shop Nobi collects", () => {
+  const privacy = bodyText(readPage("privacy.html"));
+  assert.ok(privacy.includes("To train, evaluate and improve our own machine learning models"), "the training purpose is disclosed");
+});
+
 test("the homepage store demo sits between the customer logos and the features, starts on Lucchese and is ready to search", () => {
   const html = readPage("homepage.html");
   const sectionStart = html.indexOf('id="store-demo"');

@@ -60,7 +60,7 @@ test("gift guides drop stale or undated sources instead of displaying old picks"
 });
 
 test("the editorial topics have distinct slugs and purchase guidance for every source", () => {
-  assert.equal(GiftGuideTopics.length, 128);
+  assert.equal(GiftGuideTopics.length, 129);
   assert.equal(new Set(GiftGuideTopics.map((topic) => topic.slug)).size, GiftGuideTopics.length);
   for (const topic of GiftGuideTopics) {
     assert.ok(topic.intro.length >= 140, `short intro: ${topic.slug}`);
@@ -119,6 +119,24 @@ test("cat-lover guide uses ten exact gifts for the recipient and withholds missi
   const build = (input) => buildGiftGuides(input, "2026-11-05T21:00:00Z").find((item) => item.slug === topic.slug);
   assert.equal(build(pages).products.length, 10);
   assert.equal(build(pages.map((page, index) => index ? page : { ...page, products: [] })), undefined);
+});
+
+test("travel-backpack guide matches all ten exact variants, including catalog rows without an internal ID", () => {
+  const topic = GiftGuideTopics.find((item) => item.slug === "best-travel-backpack");
+  assert.equal(topic.picks.length, 10);
+  const pages = topic.sources.map((slug) => ({ slug, query: slug, refreshedAt: "2026-11-05T23:00:00Z", products: [] }));
+  topic.picks.forEach((pick) => pages[0].products.push(product(pick.id, "Travel store", {
+    productVariantId: pick.id,
+    url: pick.url || `https://merchant.example/${pick.id}`,
+  })));
+  const build = (input) => buildGiftGuides(input, "2026-11-05T23:30:00Z").find((item) => item.slug === topic.slug);
+  const guide = build(pages);
+  assert.equal(guide.products.length, 10);
+  assert.equal(new Set(guide.products.map((item) => item.productVariantId || item.url)).size, 10);
+  const changedUrl = pages.map((page, index) => index === 0
+    ? { ...page, products: page.products.map((item, productIndex) => productIndex === 0 ? { ...item, url: `${item.url}&wrong-variant=1` } : item) }
+    : page);
+  assert.equal(build(changedUrl), undefined);
 });
 
 test("cowboy-dad picks exclude a women's boot misclassified by the source page", () => {

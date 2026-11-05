@@ -23,14 +23,18 @@ export function buildGiftGuides(searchPages, generatedAt = null) {
       if (sourcePages.length !== topic.sources.length) return [];
       const sourceProducts = sourcePages.flatMap((page) => page.products.map((product) => ({ ...product, sourceQuery: page.query, sourceSlug: page.slug })));
       const products = topic.picks.map((pick) => {
-        const product = sourceProducts.find((item) => item.productVariantId === pick.id);
+        // Some current catalog listings have no internal variant ID. An exact seller-variant URL
+        // keeps those researched picks dynamic without substituting a different color or size.
+        const product = sourceProducts.find((item) => pick.id
+          ? item.productVariantId === pick.id
+          : Boolean(pick.url) && item.url === pick.url);
         return product && product.isInStock && product.name && product.url && product.imageUrl
           ? { ...product, editorialHeading: pick.heading, editorialWhy: pick.why,
             editorialCheck: pick.check, editorialDetail: pick.detail, editorialSource: pick.source }
           : null;
       });
       // An authored top-ten must never silently turn into a different or shorter list.
-      if (products.some((product) => !product) || new Set(products.map((product) => product.productVariantId)).size !== topic.picks.length) return [];
+      if (products.some((product) => !product) || new Set(products.map((product) => product.productVariantId || product.url)).size !== topic.picks.length) return [];
       return [{ ...topic, path: `/gift-guides/${topic.slug}`, products, generatedAt,
         refreshedAt: sourcePages.map((page) => page.refreshedAt).filter(Boolean).sort().at(-1) ?? null,
         lastModifiedAt: [FirstPublishedAt, EditorialRevisedAt, topic.authoredAt, ...sourcePages.map((page) => page.refreshedAt).filter(Boolean)].filter(Boolean).sort().at(-1),

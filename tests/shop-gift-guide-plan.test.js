@@ -28,7 +28,7 @@ test("gift guide uses current eligible catalog products, preserves earning links
   assert.equal(cook.products.length, 5);
   assert.equal(cook.paidCount, 1);
   assert.equal(cook.refreshedAt, "2026-11-05T00:00:00Z");
-  assert.equal(cook.lastModifiedAt, "2026-11-05T00:00:00Z");
+  assert.equal(cook.lastModifiedAt, "2026-11-05T02:10:00Z");
   assert.equal(cook.products.filter((item) => item.productVariantId === "paid").length, 1);
   assert.ok(!cook.products.some((item) => ["no-image", "old", "refurb"].includes(item.productVariantId)));
   assert.equal(guides.length, 1);

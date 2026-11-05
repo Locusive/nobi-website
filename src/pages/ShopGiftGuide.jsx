@@ -27,7 +27,7 @@ export default function ShopGiftGuide({ guide: serverGuide = null }) {
       {guide.editorial && <section className="sgg-method"><h2>How we chose these boots</h2><p>{guide.methodology}</p></section>}
       {guide.editorial && <nav className="sgg-jump" aria-label="Jump to a boot"><span>Explore the picks</span><div>{guide.products.map((product, index) => <a key={product.productVariantId} href={`#pick-${index + 1}`}>{product.editorialHeading.split(" — ")[0]}</a>)}</div></nav>}
       <section className="sgg-advice" aria-labelledby="sgg-advice-heading"><div><p className="sgg-kicker">The buying brief</p><h2 id="sgg-advice-heading">How to choose well</h2></div><ol>{(guide.editorial ? guide.buyingGuide : ShopGiftGuideAdvice[guide.slug] || []).map((tip, index) => <li key={tip}><span>{String(index + 1).padStart(2, "0")}</span>{tip}</li>)}</ol></section>
-      <div className="sgg-section-heading"><p>Selected from Shop Nobi</p><h2>{guide.editorial ? "The ten boots" : "Ideas worth a closer look"}</h2><span>{guide.editorial ? "10 individually reviewed picks" : `${guide.products.length} catalog matches`}</span></div>
+      <div className="sgg-section-heading"><p>Selected from Shop Nobi</p><h2>{guide.editorial ? "The ten boots" : "Ideas worth a closer look"}</h2><span>{guide.editorial ? "10 researched picks" : `${guide.products.length} catalog matches`}</span></div>
       <ol className="sgg-list">
         {guide.products.map((product, index) => {
           const price = formatPrice(product.price, product.currency);
@@ -57,7 +57,7 @@ export default function ShopGiftGuide({ guide: serverGuide = null }) {
           <div className="sgg-search-row"><input id="sgg-search-input" name="q" type="search" required placeholder={`e.g. ${guide.products[0]?.sourceQuery || "a thoughtful gift"}`} autoComplete="off" /><button type="submit">Search Shop Nobi <span aria-hidden="true">↗</span></button></div>
           <input type="hidden" name="utm_source" value="gift_guide" /><input type="hidden" name="utm_campaign" value={guide.slug} />
         </form>
-        <p className="sgg-disclosure">Selections reflect current Shop Nobi catalog matches and variety across stores; we have not tested these products hands-on. Some links may earn Shop Nobi a commission. Confirm details, total cost, delivery and returns with the seller.</p></footer>
+        <p className="sgg-disclosure">Selections reflect current Shop Nobi catalog matches and variety across stores; we have not tested these products hands-on. {guide.paidCount > 0 ? "Some links may earn Shop Nobi a commission." : "The current picks use standard store links."} Confirm details, total cost, delivery and returns with the seller.</p></footer>
     </main>
   </PageLayout>;
 }

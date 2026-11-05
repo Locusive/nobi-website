@@ -19,23 +19,6 @@ export function buildGiftGuides(searchPages, generatedAt = null) {
   const bySlug = new Map(searchPages.map((page) => [page.slug, page]));
   return GiftGuideTopics.flatMap((topic) => {
     const sourcePages = topic.sources.map((slug) => bySlug.get(slug)).filter((page) => page && isRecentSource(page, asOf));
-    if (topic.editorial) {
-      if (sourcePages.length !== topic.sources.length) return [];
-      const sourceProducts = sourcePages.flatMap((page) => page.products.map((product) => ({ ...product, sourceQuery: page.query, sourceSlug: page.slug })));
-      const products = topic.picks.map((pick) => {
-        const product = sourceProducts.find((item) => item.productVariantId === pick.id);
-        return product && product.isInStock && product.name && product.url && product.imageUrl
-          ? { ...product, editorialHeading: pick.heading, editorialWhy: pick.why,
-            editorialCheck: pick.check, editorialDetail: pick.detail, editorialSource: pick.source }
-          : null;
-      });
-      // An authored top-ten must never silently turn into a different or shorter list.
-      if (products.some((product) => !product) || new Set(products.map((product) => product.productVariantId)).size !== topic.picks.length) return [];
-      return [{ ...topic, path: `/gift-guides/${topic.slug}`, products, generatedAt,
-        refreshedAt: sourcePages.map((page) => page.refreshedAt).filter(Boolean).sort().at(-1) ?? null,
-        lastModifiedAt: [FirstPublishedAt, EditorialRevisedAt, ...sourcePages.map((page) => page.refreshedAt).filter(Boolean)].sort().at(-1),
-        paidCount: products.filter((product) => product.paidLink && product.encodedStoreLink).length }];
-    }
     const pools = sourcePages.map((page) => page.products
       .filter((product) => product.isInStock && product.name && product.url && product.imageUrl)
       .filter((product) => !/\b(refurbished|renewed|open box)\b/i.test(product.name))

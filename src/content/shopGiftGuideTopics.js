@@ -1,6 +1,7 @@
 import { ExtraGiftGuideTopics } from "./shopGiftGuideExtraTopics.js";
 import { ExtraGiftGuideSourceCopy } from "./shopGiftGuideExtraCopy.js";
 import { MoreGiftGuideTopics } from "./shopGiftGuideMoreTopics.js";
+import { ScaleGiftGuideTopics } from "./shopGiftGuideScaleTopics.js";
 
 // Each guide has a distinct shopper and a concrete reason to compare its source categories.
 // Product choices come from the live Shop Nobi page feed at build time, not this file.
@@ -19,6 +20,7 @@ export const GiftGuideTopics = [
   { slug: "gifts-for-a-holiday-host", title: "Thanksgiving host gift ideas", intro: "A small host gift can be useful long after Thanksgiving dinner. Table linens, candles and serving pieces are easier to carry than a large kitchen appliance; choose something that suits the host's space and taste.", sources: ["cloth-napkins", "candles", "serving-trays", "coasters"], why: "A thoughtful object for hosting or the home", check: "Check size, care and delivery timing with the retailer." },
   ...ExtraGiftGuideTopics,
   ...MoreGiftGuideTopics,
+  ...ScaleGiftGuideTopics,
 ];
 
 // Category-level editorial notes are shared by guides that draw from the same catalog search.

@@ -16,7 +16,7 @@ export default function ShopGiftGuide({ guide: serverGuide = null }) {
   const editorialSingular = guide.subjectSingular || "item";
   const updated = guide.generatedAt && !Number.isNaN(Date.parse(guide.generatedAt))
     ? new Date(guide.generatedAt).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric", timeZone: "UTC" }) : null;
-  return <PageLayout active="shop">
+  return <PageLayout active="shop" contentTop={guide.editorial ? 80 : 128} background={guide.editorial ? "#f4f2ec" : undefined}>
     <main className={`sgg${guide.editorial ? " sgg-editorial" : ""}`}>
       <nav aria-label="Breadcrumb" className="sgg-breadcrumb"><a href="/shop">Shop Nobi</a><span>›</span><a href="/gift-guides">Guides</a><span>›</span><span>{guide.title}</span></nav>
       <header className="sgg-header">

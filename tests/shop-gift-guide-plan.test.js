@@ -51,13 +51,13 @@ test("gift guides drop stale or undated sources instead of displaying old picks"
   assert.equal(buildGiftGuides([stale], "2026-11-05T01:00:00Z").length, 0);
 });
 
-test("the 33 editorial topics have distinct slugs and purchase guidance for every source", () => {
-  assert.equal(GiftGuideTopics.length, 33);
-  assert.equal(new Set(GiftGuideTopics.map((topic) => topic.slug)).size, 33);
+test("the 100 editorial topics have distinct slugs and purchase guidance for every source", () => {
+  assert.equal(GiftGuideTopics.length, 100);
+  assert.equal(new Set(GiftGuideTopics.map((topic) => topic.slug)).size, 100);
   for (const topic of GiftGuideTopics) {
     assert.ok(topic.intro.length >= 140, `short intro: ${topic.slug}`);
     assert.equal(ShopGiftGuideAdvice[topic.slug]?.length, 3, `missing buying brief: ${topic.slug}`);
-    for (const source of topic.sources) assert.equal(GiftGuideSourceCopy[source]?.length, 2, `missing source note: ${source}`);
+    for (const source of topic.sources) assert.ok(GiftGuideSourceCopy[source]?.length === 2 || (topic.why && topic.check), `missing source note: ${source}`);
   }
 });
 

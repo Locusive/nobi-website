@@ -1,7 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { buildGiftGuides } from "../scripts/shop-gift-guide-plan.js";
-import { giftGuideSeo } from "../src/utils/shopGiftGuide.js";
+import { giftGuidePriceContext, giftGuideSeo } from "../src/utils/shopGiftGuide.js";
 import { GiftGuideTopics, GiftGuideSourceCopy } from "../src/content/shopGiftGuideTopics.js";
 import { ShopGiftGuideAdvice } from "../src/content/shopGiftGuideAdvice.js";
 
@@ -28,7 +28,7 @@ test("gift guide uses current eligible catalog products, preserves earning links
   assert.equal(cook.products.length, 5);
   assert.equal(cook.paidCount, 1);
   assert.equal(cook.refreshedAt, "2026-11-05T00:00:00Z");
-  assert.equal(cook.lastModifiedAt, "2026-11-05T02:10:00Z");
+  assert.equal(cook.lastModifiedAt, "2026-11-05T03:20:00Z");
   assert.equal(cook.products.filter((item) => item.productVariantId === "paid").length, 1);
   assert.ok(!cook.products.some((item) => ["no-image", "old", "refurb"].includes(item.productVariantId)));
   assert.equal(guides.length, 1);
@@ -36,6 +36,14 @@ test("gift guide uses current eligible catalog products, preserves earning links
   const seo = giftGuideSeo(cook);
   assert.equal(seo.path, "/gift-guides/gifts-for-home-cooks");
   assert.equal(seo.schema[0].mainEntity.itemListElement.length, 5);
+});
+
+test("product rows compare only known prices in the same currency", () => {
+  const picks = [{ price: 25, currency: "USD" }, { price: 40, currency: "USD" }, { price: 50, currency: "EUR" }];
+  assert.match(giftGuidePriceContext(picks[0], picks), /No other USD pick/);
+  assert.match(giftGuidePriceContext(picks[1], picks), /1 of the 1 other USD picks/);
+  assert.equal(giftGuidePriceContext(picks[2], picks), null);
+  assert.equal(giftGuidePriceContext({ price: null, currency: "USD" }, picks), null);
 });
 
 test("gift guides drop stale or undated sources instead of displaying old picks", () => {

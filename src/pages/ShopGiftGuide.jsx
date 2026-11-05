@@ -4,7 +4,7 @@ import { useSEO } from "../hooks/useSEO.js";
 import { handleProductLinkClick } from "../utils/shopNobiProductClick.js";
 import { formatPrice } from "../utils/shopNobiSearchPage.js";
 import { readStoreLinkRel } from "../utils/shopNobiPage.js";
-import { giftGuideProductName, giftGuideSeo, readEmbeddedGiftGuide } from "../utils/shopGiftGuide.js";
+import { giftGuidePriceContext, giftGuideProductName, giftGuideSeo, readEmbeddedGiftGuide } from "../utils/shopGiftGuide.js";
 import { ShopGiftGuideAdvice } from "../content/shopGiftGuideAdvice.js";
 import "./ShopGiftGuide.css";
 
@@ -31,11 +31,14 @@ export default function ShopGiftGuide({ guide: serverGuide = null }) {
           const handleClick = (event) => handleProductLinkClick(event, { product, position: index + 1,
             query: guide.title, slug: guide.slug, entryPoint: "Gift Guide" });
           const displayName = giftGuideProductName(product);
+          const priceContext = giftGuidePriceContext(product, guide.products);
+          const buyingChecks = ShopGiftGuideAdvice[guide.slug] || [];
+          const buyingCheck = buyingChecks[index % buyingChecks.length] || product.editorialCheck;
           return <li className="sgg-item" key={product.productVariantId || product.url}>
             <div className="sgg-ordinal">{String(index + 1).padStart(2, "0")}</div>
             <div className="sgg-picture"><img src={product.imageUrl} alt={displayName} loading={index < 2 ? "eager" : "lazy"} /></div>
             <div className="sgg-item-copy"><p className="sgg-store">{product.storeName || "Retailer"}</p><h3>{displayName}</h3>
-              <p>{product.editorialWhy}.</p><p className="sgg-check"><strong>Check before buying:</strong> {product.editorialCheck}</p>
+              {priceContext && <p>{priceContext}</p>}<p className="sgg-check"><strong>Check before buying:</strong> {buyingCheck}</p>
               <div className="sgg-actions"><a href={product.url} target="_blank" rel={readStoreLinkRel(product.paidLink)} onClick={handleClick} onAuxClick={handleClick}>See it at the store <span aria-hidden="true">↗</span></a>{price && <span>{price} at last catalog check</span>}</div>
               {product.paidLink && <small>Affiliate link · Shop Nobi may earn a commission</small>}
             </div>

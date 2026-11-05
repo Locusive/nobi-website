@@ -1,11 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import PageLayout from "../components/PageLayout.jsx";
 import { useSEO } from "../hooks/useSEO.js";
 import { GiftGuides, GiftGuidesSeo } from "../content/giftGuides.js";
 import { GiftGuideTopics } from "../content/shopGiftGuideTopics.js";
 
-/** A small shopper-facing directory of existing original guides, with no new product or availability claims. */
+/** Shopper-facing directory of original guides and current catalog edits. */
 export default function GiftGuidesPage() {
+  const [filter, setFilter] = useState("");
+  const matching = GiftGuideTopics.filter((topic) => topic.title.toLowerCase().includes(filter.trim().toLowerCase()));
+  const recipientGuides = matching.filter((topic) => !topic.slug.startsWith("best-"));
+  const productGuides = matching.filter((topic) => topic.slug.startsWith("best-"));
   useSEO(GiftGuidesSeo);
   return (
     <PageLayout active="shop">
@@ -28,18 +32,24 @@ export default function GiftGuidesPage() {
             ))}
           </section>
           <section aria-label="Shop Nobi product gift guides" className="mt-12">
-            <h2 className="text-2xl font-semibold">Browse gifts by interest</h2>
-            <p className="mt-2 max-w-2xl text-black/70 dark:text-white/70">Product ideas selected from Shop Nobi’s current catalog, with a few things to check before ordering.</p>
-            <ul className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-              {GiftGuideTopics.map((topic) => <li key={topic.slug}><a className="block rounded-xl border border-black/10 p-5 text-lg font-medium hover:border-purple-500 dark:border-white/20" href={`/gift-guides/${topic.slug}`}>{topic.title} <span aria-hidden="true">↗</span></a></li>)}
-            </ul>
+            <h2 className="text-2xl font-semibold">Explore {GiftGuideTopics.length} product guides</h2>
+            <p className="mt-2 max-w-2xl text-black/70 dark:text-white/70">Find a person, activity or product category. Each guide has current Shop Nobi catalog options and buying checks to make the choice easier.</p>
+            <label className="mt-6 block max-w-lg text-sm font-semibold" htmlFor="gift-guide-filter">Find a guide</label>
+            <input id="gift-guide-filter" type="search" value={filter} onChange={(event) => setFilter(event.target.value)} placeholder="Try cook, hiking, boots or jewelry" className="mt-2 w-full max-w-lg rounded-xl border border-black/20 bg-white px-4 py-3 text-base text-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-purple-600 dark:border-white/30" />
+            {!matching.length && <p className="mt-5 text-black/70 dark:text-white/70">No guide matches that phrase. Try a broader interest or <a className="underline" href="/shop">search Shop Nobi</a> directly.</p>}
+            {[{ title: "For a person or activity", guides: recipientGuides }, { title: "By product category", guides: productGuides }].filter((group) => group.guides.length).map((group) => <div className="mt-9" key={group.title}>
+              <h3 className="border-b border-black/10 pb-3 text-lg font-semibold dark:border-white/20">{group.title} <span className="font-normal text-black/50 dark:text-white/50">({group.guides.length})</span></h3>
+              <ul className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+                {group.guides.map((topic) => <li key={topic.slug}><a className="block h-full rounded-xl border border-black/10 p-5 text-lg font-medium hover:border-purple-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-purple-600 dark:border-white/20" href={`/gift-guides/${topic.slug}`}>{topic.title} <span aria-hidden="true">↗</span></a></li>)}
+              </ul>
+            </div>)}
           </section>
           <section aria-labelledby="gift-examples-heading" className="mt-10 rounded-2xl border border-purple-200 p-6 dark:border-purple-900">
             <h2 id="gift-examples-heading" className="text-xl font-semibold">Prefer a few concrete starting points?</h2>
             <p className="mt-2 text-black/70 dark:text-white/70">The <a href="/tools/gift-chooser" className="underline underline-offset-4 focus-visible:outline focus-visible:outline-2 focus-visible:outline-purple-600">gift chooser</a> has a small set of reviewed coffee, painting and charging examples you can narrow by budget and preferences.</p>
           </section>
           <p className="mt-6">Include the extras: <a href="/tools/gift-budget" className="underline underline-offset-4">calculate your gift budget after estimated fees</a>.</p>
-          <p className="mt-8 max-w-3xl text-sm text-black/60 dark:text-white/70">These guides use source information checked October 19, 2026. Confirm current product details, total cost, delivery and returns with the retailer. Some guides include affiliate links; we may earn a commission from qualifying purchases.</p>
+          <p className="mt-8 max-w-3xl text-sm text-black/60 dark:text-white/70">Featured articles carry their own source dates; product picks are rebuilt from the Shop Nobi catalog. Confirm current product details, total cost, delivery and returns with the retailer. Some links may earn us a commission.</p>
         </div>
       </div>
     </PageLayout>

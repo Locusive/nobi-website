@@ -4,7 +4,7 @@ const MaxProducts = 8;
 const MinProducts = 5;
 const FirstPublishedAt = "2026-11-05T00:00:00Z";
 // Bump this when authored guide copy or selection rules change so existing guides re-enter IndexNow.
-const EditorialRevisedAt = "2026-11-05T02:10:00Z";
+const EditorialRevisedAt = "2026-11-05T03:20:00Z";
 const MaxSourceAgeDays = 30;
 
 function isRecentSource(page, asOf) {

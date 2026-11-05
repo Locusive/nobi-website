@@ -18,7 +18,7 @@ test("both built URL forms contain the actual guide links, title and canonical w
   assert.ok(html.includes('rel="canonical" href="https://nobi.ai/gift-guides"'));
   for (const guide of GiftGuides) assert.ok(html.includes(`href="/blog/${guide.slug}"`));
   assert.ok(html.includes('href="/tools/gift-chooser"'));
-  assert.ok(html.includes("we may earn a commission"));
+  assert.ok(html.includes("Some links may earn us a commission"));
   assert.ok(!html.includes('schema.org/InStock'));
  }
  const sitemap = readFileSync("public/sitemap-pages.xml", "utf8");

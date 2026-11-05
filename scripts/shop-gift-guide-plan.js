@@ -33,7 +33,7 @@ export function buildGiftGuides(searchPages, generatedAt = null) {
       if (products.some((product) => !product) || new Set(products.map((product) => product.productVariantId)).size !== topic.picks.length) return [];
       return [{ ...topic, path: `/gift-guides/${topic.slug}`, products, generatedAt,
         refreshedAt: sourcePages.map((page) => page.refreshedAt).filter(Boolean).sort().at(-1) ?? null,
-        lastModifiedAt: [FirstPublishedAt, EditorialRevisedAt, ...sourcePages.map((page) => page.refreshedAt).filter(Boolean)].sort().at(-1),
+        lastModifiedAt: [FirstPublishedAt, EditorialRevisedAt, topic.authoredAt, ...sourcePages.map((page) => page.refreshedAt).filter(Boolean)].filter(Boolean).sort().at(-1),
         paidCount: products.filter((product) => product.paidLink && product.encodedStoreLink).length }];
     }
     const pools = sourcePages.map((page) => page.products

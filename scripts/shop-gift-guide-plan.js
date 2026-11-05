@@ -20,6 +20,7 @@ export function buildGiftGuides(searchPages, generatedAt = null) {
     const pools = sourcePages.map((page) => page.products
       .filter((product) => product.isInStock && product.name && product.url && product.imageUrl)
       .filter((product) => !/\b(refurbished|renewed|open box)\b/i.test(product.name))
+      .filter((product) => !(topic.excludeProductNameFragments ?? []).some((fragment) => product.name.toLowerCase().includes(fragment.toLowerCase())))
       .map((product) => ({ ...product, sourceQuery: page.query, sourceSlug: page.slug,
         editorialWhy: GiftGuideSourceCopy[page.slug]?.[0] ?? topic.why,
         editorialCheck: GiftGuideSourceCopy[page.slug]?.[1] ?? topic.check })));

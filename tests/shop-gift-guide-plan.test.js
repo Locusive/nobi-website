@@ -60,3 +60,15 @@ test("the 33 editorial topics have distinct slugs and purchase guidance for ever
     for (const source of topic.sources) assert.equal(GiftGuideSourceCopy[source]?.length, 2, `missing source note: ${source}`);
   }
 });
+
+test("cowboy-dad picks exclude a women's boot misclassified by the source page", () => {
+  const pages = [
+    { slug: "mens-cowboy-boots", query: "men's cowboy boots", refreshedAt: "2026-11-04T00:00:00Z", products: [
+      product("wrong", "A", { name: "Acne Studios Black Leather Cowboy Boots (CD0024-900410-BLACK)" }),
+      ...[1, 2, 3, 4, 5].map((id) => product(`mens-boot-${id}`, `Boot store ${id}`)),
+    ] },
+  ];
+  const guide = buildGiftGuides(pages, "2026-11-05T01:00:00Z").find((item) => item.slug === "gifts-for-a-cowboy-dad");
+  assert.ok(guide);
+  assert.ok(guide.products.every((item) => item.productVariantId !== "wrong"));
+});

@@ -2,10 +2,12 @@ import { ExtraGiftGuideTopics } from "./shopGiftGuideExtraTopics.js";
 import { ExtraGiftGuideSourceCopy } from "./shopGiftGuideExtraCopy.js";
 import { MoreGiftGuideTopics } from "./shopGiftGuideMoreTopics.js";
 import { ScaleGiftGuideTopics } from "./shopGiftGuideScaleTopics.js";
+import { LeatherTotesPilot } from "./shopLeatherTotesPilot.js";
 
 // Each guide has a distinct shopper and a concrete reason to compare its source categories.
 // Product choices come from the live Shop Nobi page feed at build time, not this file.
 export const GiftGuideTopics = [
+  LeatherTotesPilot,
   { slug: "gifts-for-home-cooks", title: "Gifts for home cooks", intro: "For someone who enjoys making dinner as much as eating it, start with tools they can use in the kitchen they already have. A cookbook or well-made utensil is easier to give than a large appliance; reserve the rice cooker for someone who makes rice often and has counter space.", sources: ["cookbooks", "olive-kitchen-tools-and-utensils", "rice-cookers"], why: "A practical addition to a cooking routine", check: "Check dimensions, care instructions and appliance compatibility with the retailer." },
   { slug: "gifts-for-painters", title: "Gifts for painters", intro: "A painter's supplies are personal. Brush shape, handle length and medium matter more than an impressive-looking set. These are starting points to discuss with the artist before buying.", sources: ["paint-brushes", "palette-knives"], why: "Useful tools for an established painting practice", check: "Confirm the brush or knife shape and the artist's preferred medium." },
   { slug: "gifts-for-mechanical-keyboard-fans", title: "Gifts for mechanical keyboard fans", intro: "Keyboard enthusiasts notice layout and feel. Compare the board's size, switch options and keycap compatibility so the gift fits the desk they already have.", sources: ["keyboards", "keycaps"], why: "A desk setup item with room for personal choice", check: "Verify layout, switch type and keycap compatibility before ordering." },

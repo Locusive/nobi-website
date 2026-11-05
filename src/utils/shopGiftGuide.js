@@ -4,6 +4,7 @@ import { IndexableRobots } from "./previewImage.js";
 export const GiftGuideDataId = "shop-nobi-gift-guide-data";
 
 export function giftGuideProductName(product) {
+  if (product.editorialHeading) return product.editorialHeading.split(" — ")[0];
   const rawBrand = product.brand && !/-inc\b/i.test(product.brand) ? product.brand : product.storeName;
   const brand = typeof rawBrand === "string" ? rawBrand.trim() : "";
   return brand && !product.name.toLowerCase().includes(brand.toLowerCase()) ? `${brand} ${product.name}` : product.name;

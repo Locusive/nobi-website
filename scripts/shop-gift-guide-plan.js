@@ -3,12 +3,20 @@ import { GiftGuideTopics, GiftGuideSourceCopy } from "../src/content/shopGiftGui
 const MaxProducts = 8;
 const MinProducts = 5;
 const FirstPublishedAt = "2026-11-05T00:00:00Z";
+const MaxSourceAgeDays = 30;
+
+function isRecentSource(page, asOf) {
+  const refreshed = Date.parse(page.refreshedAt);
+  return Number.isFinite(refreshed) && refreshed <= asOf
+    && asOf - refreshed <= MaxSourceAgeDays * 24 * 60 * 60 * 1000;
+}
 
 /** Select current catalog matches in search order, spreading picks across a guide's categories and stores. */
 export function buildGiftGuides(searchPages, generatedAt = null) {
+  const asOf = Number.isFinite(Date.parse(generatedAt)) ? Date.parse(generatedAt) : Date.now();
   const bySlug = new Map(searchPages.map((page) => [page.slug, page]));
   return GiftGuideTopics.flatMap((topic) => {
-    const sourcePages = topic.sources.map((slug) => bySlug.get(slug)).filter(Boolean);
+    const sourcePages = topic.sources.map((slug) => bySlug.get(slug)).filter((page) => page && isRecentSource(page, asOf));
     const pools = sourcePages.map((page) => page.products
       .filter((product) => product.isInStock && product.name && product.url && product.imageUrl)
       .filter((product) => !/\b(refurbished|renewed|open box)\b/i.test(product.name))

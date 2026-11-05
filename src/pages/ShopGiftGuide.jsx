@@ -39,7 +39,12 @@ export default function ShopGiftGuide({ guide: serverGuide = null }) {
           </li>;
         })}
       </ol>
-      <footer className="sgg-footer"><h2>Want to compare more?</h2><p>Search Shop Nobi for the exact style, size or feature the recipient prefers.</p><a href={`/shop?${new URLSearchParams({ q: guide.products[0]?.sourceQuery || guide.title, utm_source: "gift_guide", utm_campaign: guide.slug })}`}>Search more options</a>
+      <footer className="sgg-footer"><h2>Still looking for the right gift?</h2><p>Tell Shop Nobi what you want to find. Try a style, size, material or budget that these picks missed.</p>
+        <form action="/shop" method="get" className="sgg-search-form" role="search">
+          <label htmlFor="sgg-search-input">Search for more options</label>
+          <div className="sgg-search-row"><input id="sgg-search-input" name="q" type="search" required placeholder={`e.g. ${guide.products[0]?.sourceQuery || "a thoughtful gift"}`} autoComplete="off" /><button type="submit">Search Shop Nobi <span aria-hidden="true">↗</span></button></div>
+          <input type="hidden" name="utm_source" value="gift_guide" /><input type="hidden" name="utm_campaign" value={guide.slug} />
+        </form>
         <p className="sgg-disclosure">Selections reflect current Shop Nobi catalog matches and variety across stores; we have not tested these products hands-on. Some links may earn Shop Nobi a commission. Confirm details, total cost, delivery and returns with the seller.</p></footer>
     </main>
   </PageLayout>;

@@ -37,7 +37,7 @@ export function giftGuideSeo(guide) {
   return {
     path: guide.path,
     title: `${guide.title} | Shop Nobi`,
-    description: guide.intro,
+    description: guide.seoDescription || guide.intro,
     image: guide.products.find((product) => product.imageUrl)?.imageUrl || ShopNobiImage,
     robots: IndexableRobots,
     schema: [{

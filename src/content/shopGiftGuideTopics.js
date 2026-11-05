@@ -2,6 +2,7 @@ import { ExtraGiftGuideTopics } from "./shopGiftGuideExtraTopics.js";
 import { ExtraGiftGuideSourceCopy } from "./shopGiftGuideExtraCopy.js";
 import { MoreGiftGuideTopics } from "./shopGiftGuideMoreTopics.js";
 import { ScaleGiftGuideTopics } from "./shopGiftGuideScaleTopics.js";
+import { WomensCowboyBootsPilot } from "./shopWomensCowboyBootsPilot.js";
 
 // Each guide has a distinct shopper and a concrete reason to compare its source categories.
 // Product choices come from the live Shop Nobi page feed at build time, not this file.
@@ -21,6 +22,7 @@ export const GiftGuideTopics = [
   ...ExtraGiftGuideTopics,
   ...MoreGiftGuideTopics,
   ...ScaleGiftGuideTopics,
+  WomensCowboyBootsPilot,
 ];
 
 // Category-level editorial notes are shared by guides that draw from the same catalog search.

@@ -11,6 +11,11 @@ import { buildBodumProductPage } from "./shop-nobi-bodum-product.js";
 import { BodumPath } from "../src/utils/shopNobiProductPage.js";
 import { writePrebuiltPages } from "./shop-nobi-page-files.js";
 import { writeFlatPageFile } from "./page-html.js";
+import { renderPage, toScriptJson } from "./page-html.js";
+import { loadPageRenderer } from "./page-renderer.js";
+import { buildGiftGuides } from "./shop-gift-guide-plan.js";
+import { GiftGuideTopics } from "../src/content/shopGiftGuideTopics.js";
+import { giftGuideSeo, GiftGuideDataId } from "../src/utils/shopGiftGuide.js";
 import { linkWebStories, planWebStories } from "./shop-nobi-web-story-plan.js";
 import { renderWebStory } from "./shop-nobi-web-story.js";
 import { webStoryPath } from "../src/utils/shopNobiWebStory.js";
@@ -45,7 +50,9 @@ export async function prerenderShopNobiSearchPages({
   const { generatedAt, pages: fetchedPages, retired } = await fetchSearchPagesData(apiBaseUrl);
   const fileRoom = countFileRoom(distDir, fileLimit);
   if (fileRoom < 1) throw new Error("No file room for the known product fallback");
-  const plan = await planPages(fetchedPages, Math.max(0, fileRoom - 1), fetchImageSize);
+  // Preserve the legacy small-file build behavior; production reserves space only when core pages still have room.
+  const guideRoom = fileRoom > 1 + GiftGuideTopics.length + 20 ? GiftGuideTopics.length : 0;
+  const plan = await planPages(fetchedPages, Math.max(0, fileRoom - 1 - guideRoom), fetchImageSize);
   plan.productPage = await buildBodumProductPage(plan.searchPages, { fetchOffer, now, rawPages: fetchedPages });
   if (plan.productPage.products.length) {
     plan.searchPages = plan.searchPages.map(page => page.slug === 'french-presses'
@@ -62,17 +69,33 @@ export async function prerenderShopNobiSearchPages({
   }
 
   const publishedSearchPages = await writePrebuiltPages(plan, distDir, { privateDocumentPath });
+  const giftGuides = buildGiftGuides(publishedSearchPages, generatedAt).slice(0, guideRoom);
+  await writeGiftGuides(distDir, giftGuides);
   writeWebStories(distDir, plan.stories);
 
   const redirectLines = buildRetiredRedirects(retired, plan.searchPages);
   // The data's own time keeps a fallback lastmod the same across rebuilds of the same data.
   const fallbackLastModified = readValidTime(generatedAt) ?? new Date().toISOString();
-  const sitemap = buildShopNobiSitemap(plan.categoryPages, publishedSearchPages, plan.stories, fallbackLastModified, plan.productPage);
+  const sitemap = buildShopNobiSitemap(plan.categoryPages, publishedSearchPages, plan.stories, fallbackLastModified, plan.productPage, giftGuides);
   writeFileSync(join(distDir, ShopNobiSitemapFile), sitemap);
   writePinFeeds(distDir, plan.searchPages);
   updateFile(join(distDir, "_redirects"), (text) => appendRedirects(text, redirectLines, redirectRuleLimit));
   updateFile(join(distDir, "llms.txt"), (text) => appendLlmsTxtSection(text, plan.searchPages));
   return plan.searchPages.length;
+}
+
+/** Publish only guides with current eligible products, using the same server-rendered body a visitor sees. */
+async function writeGiftGuides(distDir, giftGuides) {
+  if (!giftGuides.length) return;
+  const shell = readFileSync(join(distDir, "index.html"), "utf8");
+  const { renderGiftGuideBody } = await loadPageRenderer();
+  for (const guide of giftGuides) {
+    const seo = giftGuideSeo(guide);
+    const html = renderPage(seo, shell, renderGiftGuideBody(guide));
+    const data = `<script type="application/json" id="${GiftGuideDataId}">${toScriptJson(guide)}</script>`;
+    writeFlatPageFile(distDir, guide.path, html.replace("<head>", `<head>\n    ${data}`));
+  }
+  console.log(`prerender-shop: wrote ${giftGuides.length} gift guide(s) with current catalog products.`);
 }
 
 /**

@@ -21,6 +21,7 @@ import UsbCPowerCheck from "../src/pages/UsbCPowerCheck.jsx";
 import PhoneCaseCheck from "../src/pages/PhoneCaseCheck.jsx";
 import GiftBudget from "../src/pages/GiftBudget.jsx";
 import GiftGuides from "../src/pages/GiftGuides.jsx";
+import ShopGiftGuide from "../src/pages/ShopGiftGuide.jsx";
 import GiftChooser from "../src/pages/GiftChooser.jsx";
 import { GiftChooserSeo } from "../src/content/giftChooserProducts.js";
 import { BaseusScreenPath } from "../src/content/baseusScreens.js";
@@ -78,4 +79,8 @@ export function renderPrebuiltPageBody(content) {
       <ShopPage prebuiltContent={content} />
     </StaticRouter>
   );
+}
+
+export function renderGiftGuideBody(guide) {
+  return renderToStaticMarkup(<StaticRouter location={guide.path}><ShopGiftGuide guide={guide} /></StaticRouter>);
 }

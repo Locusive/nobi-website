@@ -33,6 +33,7 @@ const UsbCPowerCheck = lazy(() => import("./pages/UsbCPowerCheck.jsx"));
 const PhoneCaseCheck = lazy(() => import("./pages/PhoneCaseCheck.jsx"));
 const GiftBudget = lazy(() => import("./pages/GiftBudget.jsx"));
 const GiftGuides = lazy(() => import("./pages/GiftGuides.jsx"));
+const ShopGiftGuide = lazy(() => import("./pages/ShopGiftGuide.jsx"));
 const GiftChooser = lazy(() => import("./pages/GiftChooser.jsx"));
 const MarleySpoonCost = lazy(() => import("./pages/MarleySpoonCost.jsx"));
 const MindTheColorFit = lazy(() => import("./pages/MindTheColorFit.jsx"));
@@ -46,6 +47,7 @@ import "./index.css";
 // Keep the static checklist styled before its lazy route loads, including without JavaScript.
 import "./pages/ElectionNight.css";
 import "./pages/GiftChooser.css";
+import "./pages/ShopGiftGuide.css";
 // The prerendered agent connection page needs its layout before the lazy route loads.
 import "./pages/ShopNobiMcp.css";
 
@@ -135,6 +137,7 @@ function App() {
           <Route path="/tools/phone-case-check" element={<PhoneCaseCheck />} />
           <Route path="/tools/gift-budget" element={<GiftBudget />} />
           <Route path="/gift-guides" element={<GiftGuides />} />
+          <Route path="/gift-guides/:slug" element={<ShopGiftGuide />} />
           <Route path="/tools/gift-chooser" element={<GiftChooser />} />
           <Route path="/tools/mindthecolor-fit" element={<MindTheColorFit />} />
           <Route path="/election-night-survival-kit" element={<ElectionNight />} />

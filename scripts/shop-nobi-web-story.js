@@ -227,7 +227,7 @@ function renderEnd(page, options = {}) {
 /** Tags a full editorial guide so visits from its story can be measured separately. */
 function taggedStoryDestination(path) {
   const address = new URL(path, BaseUrl);
-  Object.entries({ ...StoryTags, utm_campaign: "editorial_guide_story" })
+  Object.entries({ ...StoryTags, utm_source: "shop_nobi_web_story", utm_campaign: "editorial_guide_story" })
     .forEach(([key, value]) => address.searchParams.set(key, value));
   return address.toString();
 }

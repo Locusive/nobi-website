@@ -39,7 +39,7 @@ test("a published researched guide has a short story that leads to its full arti
   assert.equal(plan.pages.filter((part) => part.kind === "product").length, 3);
   const html = renderWebStory(page, plan, { endUrl: stories[0].guide.path });
   assert.match(html, /canonical" href="https:\/\/nobi.ai\/shop\/stories\/guide-best-leather-bags/);
-  assert.match(html, /gift-guides\/best-leather-bags\?utm_source=google_web_stories/);
+  assert.match(html, /gift-guides\/best-leather-bags\?utm_source=shop_nobi_web_story/);
   assert.match(html, /utm_campaign=editorial_guide_story/);
   assert.match(html, /Read the full buying guide/);
   assert.equal((html.match(/v1\/shop\/story-go/g) ?? []).length, 3);

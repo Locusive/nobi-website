@@ -3,6 +3,8 @@ import { GiftGuideTopics, GiftGuideSourceCopy } from "../src/content/shopGiftGui
 const MaxProducts = 8;
 const MinProducts = 5;
 const FirstPublishedAt = "2026-11-05T00:00:00Z";
+// Bump this when authored guide copy or selection rules change so existing guides re-enter IndexNow.
+const EditorialRevisedAt = "2026-11-05T02:10:00Z";
 const MaxSourceAgeDays = 30;
 
 function isRecentSource(page, asOf) {
@@ -47,7 +49,7 @@ export function buildGiftGuides(searchPages, generatedAt = null) {
     if (products.length < MinProducts) return [];
     return [{ ...topic, path: `/gift-guides/${topic.slug}`, products, generatedAt,
       refreshedAt: sourcePages.map((page) => page.refreshedAt).filter(Boolean).sort().at(-1) ?? null,
-      lastModifiedAt: [FirstPublishedAt, ...sourcePages.map((page) => page.refreshedAt).filter(Boolean)].sort().at(-1),
+      lastModifiedAt: [FirstPublishedAt, EditorialRevisedAt, ...sourcePages.map((page) => page.refreshedAt).filter(Boolean)].sort().at(-1),
       paidCount: products.filter((product) => product.paidLink && product.encodedStoreLink).length }];
   });
 }

@@ -27,7 +27,8 @@ const StoreLinkRoute = "https://api.nobi.ai/v1/shop/story-go";
 const StoryViewRoute = "https://api.nobi.ai/v1/shop/story-view";
 const StoryPageIdVariable = "${storyPageId}";
 // Beacons only, so the story never waits on the API.
-const BeaconTransport = { beacon: true, xhrpost: true, image: false };
+// Keep AMP's document referrer in the POST body, not in a logged URL.
+const BeaconTransport = { beacon: true, xhrpost: true, useBody: true, image: false };
 // AMP requires this exact style block, which hides the page until the AMP script starts.
 const AmpBoilerplate = "<style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>";
 const StoryStyle = [
@@ -105,6 +106,7 @@ function renderViewTracking(slug) {
   const storyViewUrl = `${StoryViewRoute}?page=${encodeURIComponent(slug)}&storyPage=${StoryPageIdVariable}`;
   const config = {
     requests: { storyView: storyViewUrl },
+    extraUrlParams: { documentReferrer: "${documentReferrer}" },
     triggers: { pageInView: { on: "story-page-visible", request: "storyView" } },
     transport: BeaconTransport,
   };

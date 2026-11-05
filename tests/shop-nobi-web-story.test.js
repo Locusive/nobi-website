@@ -127,6 +127,13 @@ test("the story is an AMP story with the metadata Google requires and a canonica
   assert.equal(html.split("<amp-story-page ").length - 1, 8);
 });
 
+test("the story sends the AMP document referrer only in the view beacon body", async () => {
+  const html = await renderStory(makePage());
+  assert.match(html, /"extraUrlParams":\{"documentReferrer":"\$\{documentReferrer\}"\}/);
+  assert.match(html, /"transport":\{"beacon":true,"xhrpost":true,"useBody":true,"image":false\}/);
+  assert.ok(!html.includes("story-view?documentReferrer="));
+});
+
 test("store links are nofollow and untagged, and the last page links back to the search page with the story's tags", async () => {
   const html = await renderStory(makePage());
   const links = [...html.matchAll(/<a\b([^>]*)>/g)].map(([, attributes]) => attributes);

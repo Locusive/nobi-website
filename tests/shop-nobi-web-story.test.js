@@ -185,8 +185,9 @@ test("each page in view goes to the API, and a product page's id names its place
   const config = JSON.parse(html.match(/<amp-analytics><script type="application\/json">(.*?)<\/script><\/amp-analytics>/)[1]);
   assert.deepEqual(config, {
     requests: { storyView: "https://api.nobi.ai/v1/shop/story-view?page=boots&storyPage=${storyPageId}" },
+    extraUrlParams: { documentReferrer: "${documentReferrer}" },
     triggers: { pageInView: { on: "story-page-visible", request: "storyView" } },
-    transport: { beacon: true, xhrpost: true, image: false },
+    transport: { beacon: true, xhrpost: true, useBody: true, image: false },
   });
   assert.ok(html.includes('custom-element="amp-analytics"'));
   const pageIds = [...html.matchAll(/<amp-story-page id="([^"]+)">/g)].map(([, id]) => id);

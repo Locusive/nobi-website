@@ -2,6 +2,7 @@ import React from "react";
 import PageLayout from "../components/PageLayout.jsx";
 import { useSEO } from "../hooks/useSEO.js";
 import { GiftGuides, GiftGuidesSeo } from "../content/giftGuides.js";
+import { GiftGuideTopics } from "../content/shopGiftGuideTopics.js";
 
 /** A small shopper-facing directory of existing original guides, with no new product or availability claims. */
 export default function GiftGuidesPage() {
@@ -25,6 +26,13 @@ export default function GiftGuidesPage() {
                 <p className="mt-auto pt-6 text-sm"><strong>Ask first:</strong> {guide.question}</p>
               </article>
             ))}
+          </section>
+          <section aria-label="Shop Nobi product gift guides" className="mt-12">
+            <h2 className="text-2xl font-semibold">Browse gifts by interest</h2>
+            <p className="mt-2 max-w-2xl text-black/70 dark:text-white/70">Product ideas selected from Shop Nobi’s current catalog, with a few things to check before ordering.</p>
+            <ul className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+              {GiftGuideTopics.map((topic) => <li key={topic.slug}><a className="block rounded-xl border border-black/10 p-5 text-lg font-medium hover:border-purple-500 dark:border-white/20" href={`/gift-guides/${topic.slug}`}>{topic.title} <span aria-hidden="true">↗</span></a></li>)}
+            </ul>
           </section>
           <section aria-labelledby="gift-examples-heading" className="mt-10 rounded-2xl border border-purple-200 p-6 dark:border-purple-900">
             <h2 id="gift-examples-heading" className="text-xl font-semibold">Prefer a few concrete starting points?</h2>

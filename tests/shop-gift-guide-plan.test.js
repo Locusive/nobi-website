@@ -4,6 +4,8 @@ import { buildGiftGuides } from "../scripts/shop-gift-guide-plan.js";
 import { giftGuidePriceContext, giftGuideSeo } from "../src/utils/shopGiftGuide.js";
 import { GiftGuideTopics, GiftGuideSourceCopy } from "../src/content/shopGiftGuideTopics.js";
 import { ShopGiftGuideAdvice } from "../src/content/shopGiftGuideAdvice.js";
+import { readFileSync } from "node:fs";
+import { buildSearchPages } from "../scripts/shop-nobi-search-page-view.js";
 
 const product = (id, storeName, extra = {}) => ({ productVariantId: id, name: `Product ${id}`,
   url: `https://merchant.example/${id}`, imageUrl: `https://merchant.example/${id}.jpg`,
@@ -60,13 +62,31 @@ test("gift guides drop stale or undated sources instead of displaying old picks"
 });
 
 test("the editorial topics have distinct slugs and purchase guidance for every source", () => {
-  assert.equal(GiftGuideTopics.length, 119);
+  assert.equal(GiftGuideTopics.length, 120);
   assert.equal(new Set(GiftGuideTopics.map((topic) => topic.slug)).size, GiftGuideTopics.length);
   for (const topic of GiftGuideTopics) {
     assert.ok(topic.intro.length >= 140, `short intro: ${topic.slug}`);
+    if (topic.editorial) {
+      assert.equal(topic.buyingGuide.length, 3);
+      assert.equal(topic.picks.length, 10);
+      continue;
+    }
     assert.equal(ShopGiftGuideAdvice[topic.slug]?.length, 3, `missing buying brief: ${topic.slug}`);
     for (const source of topic.sources) assert.ok(GiftGuideSourceCopy[source]?.length === 2 || (topic.why && topic.check), `missing source note: ${source}`);
   }
+});
+
+test("brown suede editorial pilot retains ten exact reviewed products and Lucchese", () => {
+  const fixture = JSON.parse(readFileSync(new URL("./fixtures/brown-suede-boots.json", import.meta.url), "utf8"));
+  const page = buildSearchPages([fixture.page], 1).pages[0];
+  const pilot = buildGiftGuides([page], fixture.generatedAt).find((guide) => guide.slug === "best-brown-suede-boots");
+  assert.ok(pilot);
+  assert.equal(pilot.products.length, 10);
+  assert.equal(pilot.products.filter((product) => product.storeName === "Lucchese").length, 2);
+  assert.equal(new Set(pilot.products.map((product) => product.productVariantId)).size, 10);
+  assert.ok(pilot.products.every((product) => product.editorialHeading && product.editorialWhy && product.editorialCheck && product.imageUrl && product.url));
+  const unavailable = { ...page, products: page.products.filter((product) => product.productVariantId !== pilot.products[0].productVariantId) };
+  assert.ok(!buildGiftGuides([unavailable], fixture.generatedAt).some((guide) => guide.slug === pilot.slug));
 });
 
 test("cowboy-dad picks exclude a women's boot misclassified by the source page", () => {

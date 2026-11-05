@@ -18,6 +18,7 @@ import { GiftGuideTopics } from "../src/content/shopGiftGuideTopics.js";
 import { giftGuideSeo, GiftGuideDataId } from "../src/utils/shopGiftGuide.js";
 import { linkWebStories, planWebStories } from "./shop-nobi-web-story-plan.js";
 import { renderWebStory } from "./shop-nobi-web-story.js";
+import { planEditorialGuideStories } from "./shop-nobi-editorial-stories.js";
 import { webStoryPath } from "../src/utils/shopNobiWebStory.js";
 import { fetchImageSize as fetchImageSizeOnline } from "./image-size.js";
 import { buildPinFeedFiles, listPinFeedFiles } from "./shop-nobi-pin-feed.js";
@@ -51,8 +52,10 @@ export async function prerenderShopNobiSearchPages({
   const fileRoom = countFileRoom(distDir, fileLimit);
   if (fileRoom < 1) throw new Error("No file room for the known product fallback");
   // Preserve the legacy small-file build behavior; production reserves space only when core pages still have room.
-  const guideRoom = fileRoom > 1 + GiftGuideTopics.length + 20 ? GiftGuideTopics.length : 0;
-  const plan = await planPages(fetchedPages, Math.max(0, fileRoom - 1 - guideRoom), fetchImageSize);
+  const editorialCount = GiftGuideTopics.filter((topic) => topic.editorial).length;
+  const guideRoom = fileRoom > 1 + GiftGuideTopics.length + editorialCount + 20 ? GiftGuideTopics.length : 0;
+  const editorialStoryRoom = guideRoom ? editorialCount : 0;
+  const plan = await planPages(fetchedPages, Math.max(0, fileRoom - 1 - guideRoom - editorialStoryRoom), fetchImageSize);
   plan.productPage = await buildBodumProductPage(plan.searchPages, { fetchOffer, now, rawPages: fetchedPages });
   if (plan.productPage.products.length) {
     plan.searchPages = plan.searchPages.map(page => page.slug === 'french-presses'
@@ -70,13 +73,18 @@ export async function prerenderShopNobiSearchPages({
 
   const publishedSearchPages = await writePrebuiltPages(plan, distDir, { privateDocumentPath });
   const giftGuides = buildGiftGuides(publishedSearchPages, generatedAt).slice(0, guideRoom);
-  await writeGiftGuides(distDir, giftGuides);
+  const editorialStories = await planEditorialGuideStories(giftGuides, fetchImageSize);
+  const storySlugs = new Set(editorialStories.map(({ guide }) => guide.slug));
+  const linkedGuides = giftGuides.map((guide) => storySlugs.has(guide.slug)
+    ? { ...guide, storyPath: webStoryPath(`guide-${guide.slug}`) } : guide);
+  await writeGiftGuides(distDir, linkedGuides);
   writeWebStories(distDir, plan.stories);
+  writeEditorialStories(distDir, editorialStories);
 
   const redirectLines = buildRetiredRedirects(retired, plan.searchPages);
   // The data's own time keeps a fallback lastmod the same across rebuilds of the same data.
   const fallbackLastModified = readValidTime(generatedAt) ?? new Date().toISOString();
-  const sitemap = buildShopNobiSitemap(plan.categoryPages, publishedSearchPages, plan.stories, fallbackLastModified, plan.productPage, giftGuides);
+  const sitemap = buildShopNobiSitemap(plan.categoryPages, publishedSearchPages, plan.stories, fallbackLastModified, plan.productPage, linkedGuides, editorialStories);
   writeFileSync(join(distDir, ShopNobiSitemapFile), sitemap);
   writePinFeeds(distDir, plan.searchPages);
   updateFile(join(distDir, "_redirects"), (text) => appendRedirects(text, redirectLines, redirectRuleLimit));
@@ -129,6 +137,14 @@ function writeWebStories(distDir, stories) {
     writeFlatPageFile(distDir, webStoryPath(page.slug), renderWebStory(page, plan));
   }
   console.log(`prerender-shop: wrote ${stories.length} web story(ies).`);
+}
+
+/** Keeps each preview on its own story URL and sends its final swipe to the full guide. */
+function writeEditorialStories(distDir, stories) {
+  for (const { page, plan, guide } of stories) {
+    writeFlatPageFile(distDir, webStoryPath(page.slug), renderWebStory(page, plan, { endUrl: guide.path }));
+  }
+  console.log(`prerender-shop: wrote ${stories.length} editorial guide web story(ies).`);
 }
 
 /** Writes the Pinterest feeds of search pages and their list. */

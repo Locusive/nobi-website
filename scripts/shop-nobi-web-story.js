@@ -27,7 +27,8 @@ const StoreLinkRoute = "https://api.nobi.ai/v1/shop/story-go";
 const StoryViewRoute = "https://api.nobi.ai/v1/shop/story-view";
 const StoryPageIdVariable = "${storyPageId}";
 // Beacons only, so the story never waits on the API.
-const BeaconTransport = { beacon: true, xhrpost: true, image: false };
+// Keep AMP's document referrer in the POST body, not in a logged URL.
+const BeaconTransport = { beacon: true, xhrpost: true, useBody: true, image: false };
 // AMP requires this exact style block, which hides the page until the AMP script starts.
 const AmpBoilerplate = "<style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>";
 const StoryStyle = [
@@ -52,10 +53,10 @@ const StoryStyle = [
  * @param {{posterUrl: string, pages: object[]}} plan The story plan from planWebStory.
  * @returns {string} The AMP story HTML.
  */
-export function renderWebStory(page, plan) {
+export function renderWebStory(page, plan, options = {}) {
   const title = htmlEscape(page.title);
   const description = htmlEscape(page.description || describeSearchPage(page.title));
-  const storyPages = plan.pages.map((storyPage, index) => renderStoryPage(storyPage, index, page, plan));
+  const storyPages = plan.pages.map((storyPage, index) => renderStoryPage(storyPage, index, page, plan, options));
   return [
     "<!doctype html>",
     '<html amp lang="en">',
@@ -105,6 +106,7 @@ function renderViewTracking(slug) {
   const storyViewUrl = `${StoryViewRoute}?page=${encodeURIComponent(slug)}&storyPage=${StoryPageIdVariable}`;
   const config = {
     requests: { storyView: storyViewUrl },
+    extraUrlParams: { documentReferrer: "${documentReferrer}" },
     triggers: { pageInView: { on: "story-page-visible", request: "storyView" } },
     transport: BeaconTransport,
   };
@@ -115,9 +117,9 @@ function renderViewTracking(slug) {
  * Renders one story page with an id made of its kind and position. A product page's id also names its place among the
  * story's products, its product variant and its store, which is how the API learns which product a shopper saw.
  */
-function renderStoryPage(storyPage, index, page, plan) {
+function renderStoryPage(storyPage, index, page, plan, options) {
   const id = buildStoryPageId(storyPage, index, plan);
-  const layers = renderLayers(storyPage, page, plan);
+  const layers = renderLayers(storyPage, page, plan, options);
   return `<amp-story-page id="${id}">\n${layers}\n</amp-story-page>`;
 }
 
@@ -140,7 +142,7 @@ function buildStoryPageId(storyPage, index, plan) {
 }
 
 /** Renders the layers of one story page for its kind. */
-function renderLayers(storyPage, page, plan) {
+function renderLayers(storyPage, page, plan, options) {
   const title = htmlEscape(page.title);
   switch (storyPage.kind) {
     case StoryPageKind.Cover:
@@ -152,7 +154,7 @@ function renderLayers(storyPage, page, plan) {
     case StoryPageKind.Question:
       return textLayer(`<h2>${htmlEscape(storyPage.question)}</h2><p class="text">${htmlEscape(storyPage.answer)}</p>`);
     default:
-      return renderEnd(page);
+      return renderEnd(page, options);
   }
 }
 
@@ -210,16 +212,24 @@ function readStoreSite(storeUrl) {
 }
 
 /** Renders the last page, whose swipe-up link opens the full search page. */
-function renderEnd(page) {
+function renderEnd(page, options = {}) {
   const isSearchTest = page.slug === SearchCtaStorySlug;
-  const destination = isSearchTest ? taggedStorySearchHomeUrl() : taggedSearchPageUrl(page.slug);
-  const linkText = isSearchTest ? SearchLinkText : BackLinkText;
-  const bodyText = isSearchTest ? SearchEndText : EndText;
+  const destination = options.endUrl ? taggedStoryDestination(options.endUrl) : isSearchTest ? taggedStorySearchHomeUrl() : taggedSearchPageUrl(page.slug);
+  const linkText = options.endUrl ? "Read the full buying guide" : isSearchTest ? SearchLinkText : BackLinkText;
+  const bodyText = options.endUrl ? "See all ten picks, why each made the list, and what to check before buying." : isSearchTest ? SearchEndText : EndText;
   const backLink = `<a href="${htmlEscape(destination)}">${linkText}</a>`;
   return [
     textLayer(`<p class="label">${htmlEscape(page.title)}</p><p class="text">${bodyText}</p>`),
     `<amp-story-page-outlink layout="nodisplay">${backLink}</amp-story-page-outlink>`,
   ].join("\n");
+}
+
+/** Tags a full editorial guide so visits from its story can be measured separately. */
+function taggedStoryDestination(path) {
+  const address = new URL(path, BaseUrl);
+  Object.entries({ ...StoryTags, utm_source: "shop_nobi_web_story", utm_campaign: "editorial_guide_story" })
+    .forEach(([key, value]) => address.searchParams.set(key, value));
+  return address.toString();
 }
 
 /** Links the one test story to the search home without submitting a query for the visitor. */

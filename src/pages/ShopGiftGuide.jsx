@@ -22,6 +22,7 @@ export default function ShopGiftGuide({ guide: serverGuide = null }) {
       <header className="sgg-header">
         <div className="sgg-header-copy"><p className="sgg-kicker">{guide.editorial ? "The Shop Nobi buying edit" : "The Shop Nobi gift edit"}</p><h1>{guide.title}</h1><p className="sgg-intro">{guide.intro}</p>
           <p className="sgg-meta">{updated ? `Guide assembled from the Shop Nobi catalog ${updated}. ` : ""}Individual listings may be older; confirm prices and availability at the store.</p>
+          {guide.storyPath && <p className="sgg-meta"><a href={guide.storyPath}>See a short preview as a Web Story</a></p>}
         </div>
         {guide.editorial ? <aside className="sgg-cover"><img src={guide.products[0].imageUrl} alt={giftGuideProductName(guide.products[0])} /><p>Featured: {giftGuideProductName(guide.products[0])}</p></aside>
           : <aside className="sgg-note"><span>Before you choose</span><p>Start with the recipient’s habits. Check fit, materials and returns with the seller.</p></aside>}

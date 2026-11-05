@@ -3,6 +3,12 @@ import { IndexableRobots } from "./previewImage.js";
 
 export const GiftGuideDataId = "shop-nobi-gift-guide-data";
 
+export function giftGuideProductName(product) {
+  const rawBrand = product.brand && !/-inc\b/i.test(product.brand) ? product.brand : product.storeName;
+  const brand = typeof rawBrand === "string" ? rawBrand.trim() : "";
+  return brand && !product.name.toLowerCase().includes(brand.toLowerCase()) ? `${brand} ${product.name}` : product.name;
+}
+
 export function readEmbeddedGiftGuide(pathname) {
   if (typeof document === "undefined") return null;
   const element = document.getElementById(GiftGuideDataId);
@@ -25,7 +31,7 @@ export function giftGuideSeo(guide) {
       "@context": "https://schema.org", "@type": "CollectionPage", name: guide.title,
       description: guide.intro, url,
       mainEntity: { "@type": "ItemList", itemListElement: guide.products.map((product, index) => ({
-        "@type": "ListItem", position: index + 1, name: product.name, url: product.url,
+        "@type": "ListItem", position: index + 1, name: giftGuideProductName(product), url: product.url,
       })) },
     }],
   };

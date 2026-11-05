@@ -31,9 +31,9 @@ export function buildGiftGuides(searchPages, generatedAt = null) {
         if (!pool.length || products.length >= MaxProducts) continue;
         const candidates = pool.splice(0, Math.min(pool.length, 8)).filter((product) => !seen.has(product.productVariantId || product.url));
         candidates.sort((a, b) => {
-          const as = storeCounts.get(a.storeName) ?? 0;
-          const bs = storeCounts.get(b.storeName) ?? 0;
-          return as - bs;
+          const as = (a.paidLink && a.encodedStoreLink ? 1 : 0) - (storeCounts.get(a.storeName) ?? 0);
+          const bs = (b.paidLink && b.encodedStoreLink ? 1 : 0) - (storeCounts.get(b.storeName) ?? 0);
+          return bs - as;
         });
         const chosen = candidates[0];
         pool.unshift(...candidates.slice(1));

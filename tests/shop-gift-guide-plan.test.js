@@ -2,6 +2,8 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { buildGiftGuides } from "../scripts/shop-gift-guide-plan.js";
 import { giftGuideSeo } from "../src/utils/shopGiftGuide.js";
+import { GiftGuideTopics, GiftGuideSourceCopy } from "../src/content/shopGiftGuideTopics.js";
+import { ShopGiftGuideAdvice } from "../src/content/shopGiftGuideAdvice.js";
 
 const product = (id, storeName, extra = {}) => ({ productVariantId: id, name: `Product ${id}`,
   url: `https://merchant.example/${id}`, imageUrl: `https://merchant.example/${id}.jpg`,
@@ -9,14 +11,14 @@ const product = (id, storeName, extra = {}) => ({ productVariantId: id, name: `P
 
 test("gift guide uses current eligible catalog products, preserves earning links, and omits sparse topics", () => {
   const pages = [
-    { slug: "copper-cookware", query: "copper cookware", refreshedAt: "2026-11-04T00:00:00Z", products: [
+    { slug: "cookbooks", query: "cookbooks", refreshedAt: "2026-11-04T00:00:00Z", products: [
       product("paid", "A", { paidLink: true, encodedStoreLink: "abc" }),
       product("no-image", "A", { imageUrl: null }),
       product("old", "A", { isInStock: false }),
       product("refurb", "A", { name: "Refurbished saucepan" }),
       product("plain", "B"),
     ] },
-    { slug: "rice-cookers", query: "rice cookers", refreshedAt: "2026-11-05T00:00:00Z", products: [
+    { slug: "olive-kitchen-tools-and-utensils", query: "kitchen tools", refreshedAt: "2026-11-05T00:00:00Z", products: [
       product("rice-one", "C"), product("rice-two", "D"), product("rice-three", "E"), product("paid", "A"),
     ] },
   ];
@@ -39,7 +41,7 @@ test("gift guide uses current eligible catalog products, preserves earning links
 test("gift guides drop stale or undated sources instead of displaying old picks", () => {
   const fresh = { slug: "rice-cookers", query: "rice cookers", refreshedAt: "2026-11-04T00:00:00Z",
     products: [1, 2, 3, 4, 5].map((id) => product(`fresh-${id}`, `Store ${id}`)) };
-  const stale = { slug: "copper-cookware", query: "copper cookware", refreshedAt: "2026-09-01T00:00:00Z",
+  const stale = { slug: "cookbooks", query: "cookbooks", refreshedAt: "2026-09-01T00:00:00Z",
     products: [1, 2, 3, 4, 5].map((id) => product(`old-${id}`, `Store ${id}`)) };
   const guide = buildGiftGuides([stale, fresh], "2026-11-05T01:00:00Z")
     .find((item) => item.slug === "gifts-for-home-cooks");
@@ -47,4 +49,14 @@ test("gift guides drop stale or undated sources instead of displaying old picks"
   assert.equal(guide.products.length, 5);
   assert.ok(guide.products.every((item) => item.productVariantId.startsWith("fresh-")));
   assert.equal(buildGiftGuides([stale], "2026-11-05T01:00:00Z").length, 0);
+});
+
+test("the 33 editorial topics have distinct slugs and purchase guidance for every source", () => {
+  assert.equal(GiftGuideTopics.length, 33);
+  assert.equal(new Set(GiftGuideTopics.map((topic) => topic.slug)).size, 33);
+  for (const topic of GiftGuideTopics) {
+    assert.ok(topic.intro.length >= 140, `short intro: ${topic.slug}`);
+    assert.equal(ShopGiftGuideAdvice[topic.slug]?.length, 3, `missing buying brief: ${topic.slug}`);
+    for (const source of topic.sources) assert.equal(GiftGuideSourceCopy[source]?.length, 2, `missing source note: ${source}`);
+  }
 });

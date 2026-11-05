@@ -1,3 +1,5 @@
+import { MoreGiftGuideTopics } from "./shopGiftGuideMoreTopics.js";
+
 // Each decision guide addresses a different purchase risk; no hands-on testing is implied.
 export const ShopGiftGuideAdvice = {
   "gifts-for-home-cooks": ["Choose the gap in their kitchen: a cookbook for new ideas, a utensil for a familiar task, or a rice cooker for someone who makes rice often.", "Ask what tools they already love. A large set can duplicate good cookware and occupy scarce storage.", "For electrical equipment, verify voltage, counter footprint and the retailer's return policy."],
@@ -33,4 +35,5 @@ export const ShopGiftGuideAdvice = {
   "gifts-for-a-cowboy-dad": ["Ask how he already wears western clothing. Boot width, shirt cut and belt length are all personal.", "If exact fit is unknown, make the choice together or favor a store with easy returns.", "Compare denim weight and leather care rather than guessing from color alone."],
   "gifts-for-music-lovers": ["Start with the listening setup. Turntables need compatible output and space; speakers need the right connection.", "Headphones are a fit and comfort choice, especially for long sessions.", "Check power, cables and return terms before adding a device to an existing system."],
   "housewarming-gifts-for-new-homeowners": ["A new home may still be taking shape, so avoid assuming the size or palette of a room.", "A tray or throw can move around; a lamp needs a specific place and electrical fit.", "Measure when possible, check care instructions and choose simple returns."],
+  ...Object.fromEntries(MoreGiftGuideTopics.map(({ slug, advice }) => [slug, advice])),
 };

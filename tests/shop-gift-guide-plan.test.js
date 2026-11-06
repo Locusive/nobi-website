@@ -377,7 +377,7 @@ test("women's bathrobe guide requires ten exact available seller variants", () =
   assert.equal(build(pages[0].products.slice(1)), undefined);
 });
 
-test("pearl-earring guide keeps ten exact seller pairs and withholds a vanished variant", () => {
+test("pearl-earring guide keeps ten exact seller variants and withholds a vanished variant", () => {
   const topic = GiftGuideTopics.find((item) => item.slug === "best-pearl-earrings");
   assert.equal(topic.picks.length, 10);
   assert.equal(new Set(topic.picks.map((pick) => pick.id || pick.url)).size, 10);

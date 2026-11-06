@@ -1,7 +1,7 @@
 // Desk-researched picks. The build requires each exact seller variant in the current Shop Nobi catalog.
 export const BestWalletsForWomenGuide = {
   slug: "best-wallets-for-women",
-  authoredAt: "2026-11-06T04:20:00Z",
+  authoredAt: "2026-11-06T03:13:00Z",
   title: "The Best Wallets for Women: 10 Picks for Cards, Cash, Travel, and Going Out",
   seoDescription: "Compare ten women's wallets by shape and use: compact bifolds, a card case, a continental, a travel wallet, a wristlet and more. See what each holds and what to check before buying.",
   intro: "The most useful wallet depends on what you carry and which bag you carry it in. A four-slot card case can be ideal for errands but frustrating on a trip; a continental wallet organizes more cash and receipts but takes up more space. We chose ten current Shop Nobi listings with different shapes and jobs, then checked the linked seller variants and published specifications. These are researched choices, not products we handled or durability-tested. Color, price and availability can change, so confirm the seller's current listing before checkout.",

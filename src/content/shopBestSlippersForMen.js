@@ -3,7 +3,7 @@ export const BestSlippersForMenGuide = {
   slug: "best-slippers-for-men",
   authoredAt: "2026-11-06T01:45:00Z",
   title: "The Best Slippers for Men: 10 Picks for the Way He Lives at Home",
-  seoDescription: "Compare ten men's slippers by lining, sole, foot coverage and fit, from flexible indoor moccasins to rubber-soled house shoes and washable-feeling knit styles.",
+  seoDescription: "Compare ten men's slippers by lining, sole, foot coverage and fit, from flexible indoor moccasins to rubber-soled house shoes and machine-washable knit styles.",
   intro: "A slipper that is perfect beside the bed can be miserable during a trip to the driveway. Soft leather soles bend naturally but need dry indoor floors; rubber soles tolerate more movement; open-back scuffs are convenient until the wearer wants a secure heel. We picked ten current Shop Nobi pairs for distinct routines, checking the exact seller variants and reading their construction details. We have not worn them, assessed support or measured grip. If this is a gift, start with the recipient's shoe size and whether he actually wants an indoor-only slipper or a house shoe that follows him outside.",
   sources: ["mens-slippers", "slippers"],
   editorial: true,

@@ -26,7 +26,7 @@ export function buildGiftGuides(searchPages, generatedAt = null) {
         // Some current catalog listings have no internal variant ID. An exact seller-variant URL
         // keeps those researched picks dynamic without substituting a different color or size.
         const product = sourceProducts.find((item) => pick.id
-          ? item.productVariantId === pick.id
+          ? item.productVariantId === pick.id && (!pick.url || item.url === pick.url)
           : Boolean(pick.url) && item.url === pick.url);
         return product && product.isInStock && product.name && product.url && product.imageUrl
           ? { ...product, editorialHeading: pick.heading, editorialWhy: pick.why,

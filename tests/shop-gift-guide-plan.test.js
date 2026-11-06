@@ -60,7 +60,7 @@ test("gift guides drop stale or undated sources instead of displaying old picks"
 });
 
 test("the editorial topics have distinct slugs and purchase guidance for every source", () => {
-  assert.equal(GiftGuideTopics.length, 165);
+  assert.equal(GiftGuideTopics.length, 166);
   assert.equal(new Set(GiftGuideTopics.map((topic) => topic.slug)).size, GiftGuideTopics.length);
   for (const topic of GiftGuideTopics) {
     assert.ok(topic.intro.length >= 140, `short intro: ${topic.slug}`);
@@ -526,6 +526,22 @@ test("women's wallet guide chooses ten distinct exact wallet listings", () => {
   assert.equal(build(page.products).products.length, 10);
   assert.equal(build(page.products.slice(1)), undefined);
   assert.equal(build(page.products.map((item, index) => index === 0 ? { ...item, url: `${item.url}&wrong-variant=1` } : item)), undefined);
+});
+
+test("teacher gift guide requires ten different exact available listings", () => {
+  const topic = GiftGuideTopics.find((item) => item.slug === "best-gifts-for-teachers");
+  assert.ok(topic);
+  assert.equal(topic.picks.length, 10);
+  assert.equal(new Set(topic.picks.map((pick) => pick.id)).size, 10);
+  assert.equal(new Set(topic.picks.map((pick) => pick.url)).size, 10);
+  assert.ok(topic.picks.every((pick) => pick.why && pick.check && pick.source === pick.url));
+  const page = { slug: topic.sources[0], query: "teacher gifts", refreshedAt: "2026-11-06T03:15:00Z",
+    products: topic.picks.map((pick, index) => product(pick.id, `Store ${index}`, { url: pick.source })) };
+  const build = (products) => buildGiftGuides(topic.sources.map((slug) => ({ ...page, slug, products })), "2026-11-06T03:30:00Z")
+    .find((guide) => guide.slug === topic.slug);
+  assert.equal(build(page.products).products.length, 10);
+  assert.equal(build(page.products.slice(1)), undefined);
+  assert.equal(build(page.products.map((item, index) => index === 0 ? { ...item, url: `${item.url}&wrong=1` } : item)), undefined);
 });
 
 test("women's wool coat guide selects ten exact variants and withholds a missing coat", () => {

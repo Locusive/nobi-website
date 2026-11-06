@@ -44,6 +44,7 @@ import { BestToiletryBagsForTravelGuide } from "./shopBestToiletryBagsForTravel.
 import { BestDuvetCoversGuide } from "./shopBestDuvetCovers.js";
 import { BestRaincoatsForWomenGuide } from "./shopBestRaincoatsForWomen.js";
 import { BestWalletsForWomenGuide } from "./shopBestWalletsForWomen.js";
+import { BestGiftsForTeachersGuide } from "./shopBestGiftsForTeachers.js";
 import { BestWoolCoatsForWomenGuide } from "./shopBestWoolCoatsForWomen.js";
 import { BestWinterGlovesForWomenGuide } from "./shopBestWinterGlovesForWomen.js";
 import { BestWinterHatsForWomenGuide } from "./shopBestWinterHatsForWomen.js";
@@ -94,6 +95,7 @@ export const GiftGuideTopics = [
   BestDuvetCoversGuide,
   BestRaincoatsForWomenGuide,
   BestWalletsForWomenGuide,
+  BestGiftsForTeachersGuide,
   BestWoolCoatsForWomenGuide,
   BestWinterGlovesForWomenGuide,
   BestWinterHatsForWomenGuide,

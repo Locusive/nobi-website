@@ -60,7 +60,7 @@ test("gift guides drop stale or undated sources instead of displaying old picks"
 });
 
 test("the editorial topics have distinct slugs and purchase guidance for every source", () => {
-  assert.equal(GiftGuideTopics.length, 145);
+  assert.equal(GiftGuideTopics.length, 146);
   assert.equal(new Set(GiftGuideTopics.map((topic) => topic.slug)).size, GiftGuideTopics.length);
   for (const topic of GiftGuideTopics) {
     assert.ok(topic.intro.length >= 140, `short intro: ${topic.slug}`);
@@ -80,6 +80,21 @@ test("gifts for cooks guide requires all ten selected catalog variants", () => {
   assert.equal(topic.picks.length, 10);
   assert.equal(new Set(topic.picks.map((pick) => pick.id)).size, 10);
   const pages = topic.sources.map((slug) => ({ slug, query: slug, refreshedAt: "2026-11-05T00:00:00Z", products: [] }));
+  topic.picks.forEach((pick, index) => pages[index].products.push(product(pick.id, `Store ${index}`)));
+  const build = (input) => buildGiftGuides(input, "2026-11-06T02:00:00Z").find((item) => item.slug === topic.slug);
+  const guide = build(pages);
+  assert.equal(guide.products.length, 10);
+  assert.ok(guide.products.every((item) => item.editorialWhy && item.editorialCheck && item.editorialSource));
+  assert.equal(build(pages.map((page, index) => index === 0 ? { ...page, products: [] } : page)), undefined);
+});
+
+test("gifts for bakers guide requires ten distinct current catalog variants", () => {
+  const topic = GiftGuideTopics.find((item) => item.slug === "best-gifts-for-bakers");
+  assert.ok(topic);
+  assert.equal(topic.picks.length, 10);
+  assert.equal(new Set(topic.picks.map((pick) => pick.id)).size, 10);
+  assert.equal(new Set(topic.sources).size, 10);
+  const pages = topic.sources.map((slug) => ({ slug, query: slug, refreshedAt: "2026-11-06T01:34:53Z", products: [] }));
   topic.picks.forEach((pick, index) => pages[index].products.push(product(pick.id, `Store ${index}`)));
   const build = (input) => buildGiftGuides(input, "2026-11-06T02:00:00Z").find((item) => item.slug === topic.slug);
   const guide = build(pages);

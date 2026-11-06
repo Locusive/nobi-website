@@ -38,6 +38,7 @@ import { BestGiftsForTeaLoversGuide } from "./shopBestGiftsForTeaLovers.js";
 import { BestWinterCoatsForMenGuide } from "./shopBestWinterCoatsForMen.js";
 import { BestBathTowelsGuide } from "./shopBestBathTowels.js";
 import { BestCashmereSweatersForWomenGuide } from "./shopBestCashmereSweatersForWomen.js";
+import { BestGiftsForRunnersGuide } from "./shopBestGiftsForRunners.js";
 import { BestBathrobesForWomenGuide } from "./shopBestBathrobesForWomen.js";
 import { BestToiletryBagsForTravelGuide } from "./shopBestToiletryBagsForTravel.js";
 
@@ -80,6 +81,7 @@ export const GiftGuideTopics = [
   BestWinterCoatsForMenGuide,
   BestBathTowelsGuide,
   BestCashmereSweatersForWomenGuide,
+  BestGiftsForRunnersGuide,
   BestBathrobesForWomenGuide,
   BestToiletryBagsForTravelGuide,
   { slug: "gifts-for-home-cooks", title: "Gifts for home cooks", intro: "For someone who enjoys making dinner as much as eating it, start with tools they can use in the kitchen they already have. A cookbook or well-made utensil is easier to give than a large appliance; reserve the rice cooker for someone who makes rice often and has counter space.", sources: ["cookbooks", "olive-kitchen-tools-and-utensils", "rice-cookers"], why: "A practical addition to a cooking routine", check: "Check dimensions, care instructions and appliance compatibility with the retailer." },

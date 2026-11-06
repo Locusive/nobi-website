@@ -60,7 +60,7 @@ test("gift guides drop stale or undated sources instead of displaying old picks"
 });
 
 test("the editorial topics have distinct slugs and purchase guidance for every source", () => {
-  assert.equal(GiftGuideTopics.length, 159);
+  assert.equal(GiftGuideTopics.length, 160);
   assert.equal(new Set(GiftGuideTopics.map((topic) => topic.slug)).size, GiftGuideTopics.length);
   for (const topic of GiftGuideTopics) {
     assert.ok(topic.intro.length >= 140, `short intro: ${topic.slug}`);
@@ -482,4 +482,19 @@ test("runner gift guide requires ten distinct current seller variants", () => {
   assert.ok(guide.products.every((item, index) => item.url === topic.picks[index].source && item.editorialWhy && item.editorialCheck));
   assert.equal(build(page.products.slice(1)), undefined);
   assert.equal(build(page.products.map((item, index) => index === 0 ? { ...item, url: `${item.url}&wrong-variant=1` } : item)), undefined);
+});
+
+test("women's raincoat guide selects ten exact variants and withholds a missing coat", () => {
+  const topic = GiftGuideTopics.find((item) => item.slug === "best-raincoats-for-women");
+  assert.ok(topic);
+  assert.equal(topic.picks.length, 10);
+  assert.equal(new Set(topic.picks.map((pick) => pick.id)).size, 10);
+  assert.ok(topic.picks.every((pick) => pick.why && pick.check && pick.source));
+  const page = { slug: "womens-raincoats", query: "women's raincoats", refreshedAt: "2026-11-06T02:50:00Z",
+    products: topic.picks.slice(0, 9).map((pick, index) => product(pick.id, `Store ${index}`, { url: pick.source })) };
+  const otherPage = { ...page, slug: "raincoats", products: [product(topic.picks[9].id, "Amaree's", { url: topic.picks[9].source })] };
+  const build = (products) => buildGiftGuides([{ ...page, products }, otherPage], "2026-11-06T03:05:00Z")
+    .find((guide) => guide.slug === topic.slug);
+  assert.equal(build(page.products).products.length, 10);
+  assert.equal(build(page.products.slice(1)), undefined);
 });

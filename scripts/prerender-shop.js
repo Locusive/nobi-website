@@ -19,6 +19,7 @@ import { giftGuideSeo, GiftGuideDataId } from "../src/utils/shopGiftGuide.js";
 import { linkWebStories, planWebStories } from "./shop-nobi-web-story-plan.js";
 import { renderWebStory } from "./shop-nobi-web-story.js";
 import { planEditorialGuideStories } from "./shop-nobi-editorial-stories.js";
+import { buildEditorialFeed } from "./shop-nobi-editorial-feed.js";
 import { webStoryPath } from "../src/utils/shopNobiWebStory.js";
 import { fetchImageSize as fetchImageSizeOnline } from "./image-size.js";
 import { buildPinFeedFiles, listPinFeedFiles } from "./shop-nobi-pin-feed.js";
@@ -78,6 +79,8 @@ export async function prerenderShopNobiSearchPages({
   const linkedGuides = giftGuides.map((guide) => storySlugs.has(guide.slug)
     ? { ...guide, storyPath: webStoryPath(`guide-${guide.slug}`) } : guide);
   await writeGiftGuides(distDir, linkedGuides);
+  const editorialFeed = buildEditorialFeed(linkedGuides, editorialStories);
+  if (editorialFeed) writeFileSync(join(distDir, "shop-nobi-editorial.xml"), editorialFeed);
   writeWebStories(distDir, plan.stories);
   writeEditorialStories(distDir, editorialStories);
 

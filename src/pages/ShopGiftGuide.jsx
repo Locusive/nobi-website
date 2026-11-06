@@ -16,12 +16,21 @@ export default function ShopGiftGuide({ guide: serverGuide = null }) {
   const editorialSingular = guide.subjectSingular || "item";
   const updated = guide.generatedAt && !Number.isNaN(Date.parse(guide.generatedAt))
     ? new Date(guide.generatedAt).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric", timeZone: "UTC" }) : null;
+  const preserveIncomingSource = (event) => {
+    const incoming = new URLSearchParams(window.location.search);
+    if (incoming.get("utm_source") !== "flipboard") return;
+    const form = event.currentTarget;
+    form.elements.namedItem("utm_source").value = "flipboard";
+    form.elements.namedItem("utm_medium").value = "referral";
+    form.elements.namedItem("utm_campaign").value = "editorial_pilot";
+    form.elements.namedItem("utm_content").value = guide.slug;
+  };
   return <PageLayout active="shop" contentTop={guide.editorial ? 80 : 128} background={guide.editorial ? "#f4f2ec" : undefined}>
     <main className={`sgg${guide.editorial ? " sgg-editorial" : ""}`}>
       <nav aria-label="Breadcrumb" className="sgg-breadcrumb"><a href="/shop">Shop Nobi</a><span>›</span><a href="/gift-guides">Guides</a><span>›</span><span>{guide.title}</span></nav>
       <header className="sgg-header">
         <div className="sgg-header-copy"><p className="sgg-kicker">{guide.editorial ? "The Shop Nobi buying edit" : "The Shop Nobi gift edit"}</p><h1>{guide.title}</h1><p className="sgg-intro">{guide.intro}</p>
-          <p className="sgg-meta">{updated ? `Guide assembled from the Shop Nobi catalog ${updated}. ` : ""}Individual listings may be older; confirm prices and availability at the store.</p>
+          <p className="sgg-meta">{guide.editorial ? "By the Shop Nobi Editorial Team. " : ""}{updated ? `Guide assembled from the Shop Nobi catalog ${updated}. ` : ""}Individual listings may be older; confirm prices and availability at the store.</p>
           {guide.storyPath && <p className="sgg-meta"><a href={guide.storyPath}>See a short preview as a Web Story</a></p>}
         </div>
         {guide.editorial ? <aside className="sgg-cover"><img src={guide.products[0].imageUrl} alt={giftGuideProductName(guide.products[0])} /><p>Featured: {giftGuideProductName(guide.products[0])}</p></aside>
@@ -56,10 +65,10 @@ export default function ShopGiftGuide({ guide: serverGuide = null }) {
         })}
       </ol>
       <footer className="sgg-footer"><h2>{guide.editorial ? `Didn't find your ${editorialSingular}?` : "Still looking for the right gift?"}</h2><p>Tell Shop Nobi what you want to find. Try a style, size, material or budget that these picks missed.</p>
-        <form action="/shop" method="get" className="sgg-search-form" role="search">
+        <form action="/shop" method="get" className="sgg-search-form" role="search" onSubmit={preserveIncomingSource}>
           <label htmlFor="sgg-search-input">Search for more options</label>
           <div className="sgg-search-row"><input id="sgg-search-input" name="q" type="search" required placeholder={`e.g. ${guide.searchExample || guide.products[0]?.sourceQuery || "a thoughtful gift"}`} autoComplete="off" /><button type="submit">Search Shop Nobi <span aria-hidden="true">↗</span></button></div>
-          <input type="hidden" name="utm_source" value="gift_guide" /><input type="hidden" name="utm_campaign" value={guide.slug} />
+          <input type="hidden" name="utm_source" defaultValue="gift_guide" /><input type="hidden" name="utm_medium" defaultValue="referral" /><input type="hidden" name="utm_campaign" defaultValue={guide.slug} /><input type="hidden" name="utm_content" defaultValue="" />
         </form>
         <p className="sgg-disclosure">Selections reflect current Shop Nobi catalog matches and variety across stores; we have not tested these products hands-on. {guide.paidCount > 0 ? "Some links may earn Shop Nobi a commission." : "The current picks use standard store links."} Confirm details, total cost, delivery and returns with the seller.</p></footer>
     </main>

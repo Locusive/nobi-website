@@ -60,7 +60,7 @@ test("gift guides drop stale or undated sources instead of displaying old picks"
 });
 
 test("the editorial topics have distinct slugs and purchase guidance for every source", () => {
-  assert.equal(GiftGuideTopics.length, 135);
+  assert.equal(GiftGuideTopics.length, 136);
   assert.equal(new Set(GiftGuideTopics.map((topic) => topic.slug)).size, GiftGuideTopics.length);
   for (const topic of GiftGuideTopics) {
     assert.ok(topic.intro.length >= 140, `short intro: ${topic.slug}`);
@@ -205,6 +205,20 @@ test("coffee grinder guide requires ten exact variants and withholds a missing g
     .find((item) => item.slug === topic.slug);
   assert.equal(build(products).products.length, 10);
   assert.equal(build(products.slice(1)), undefined);
+});
+
+test("espresso guide requires ten exact current variants and does not substitute open-box machines", () => {
+  const topic = GiftGuideTopics.find((item) => item.slug === "best-espresso-machines");
+  assert.equal(topic.picks.length, 10);
+  assert.equal(new Set(topic.picks.map((pick) => pick.id)).size, 10);
+  const base = { query: "espresso machines", refreshedAt: "2026-11-06T01:00:00Z" };
+  const products = topic.picks.map((pick, index) => product(pick.id, `Store ${index}`, { url: pick.source }));
+  const build = (items) => buildGiftGuides(topic.sources.map((slug, index) => ({ ...base, slug,
+    products: index === 0 ? items : [] })), "2026-11-06T01:06:00Z")
+    .find((item) => item.slug === topic.slug);
+  assert.equal(build(products).products.length, 10);
+  assert.equal(build(products.slice(1)), undefined);
+  assert.equal(build([...products.slice(1), product("open-box", "Discount", { name: "Open-box espresso machine" })]), undefined);
 });
 
 test("cowboy-dad picks exclude a women's boot misclassified by the source page", () => {

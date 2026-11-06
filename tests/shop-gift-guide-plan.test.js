@@ -60,7 +60,7 @@ test("gift guides drop stale or undated sources instead of displaying old picks"
 });
 
 test("the editorial topics have distinct slugs and purchase guidance for every source", () => {
-  assert.equal(GiftGuideTopics.length, 168);
+  assert.equal(GiftGuideTopics.length, 169);
   assert.equal(new Set(GiftGuideTopics.map((topic) => topic.slug)).size, GiftGuideTopics.length);
   for (const topic of GiftGuideTopics) {
     assert.ok(topic.intro.length >= 140, `short intro: ${topic.slug}`);
@@ -613,4 +613,19 @@ test("men's sweater guide requires ten exact seller variants", () => {
   assert.equal(build(pages).products.length, 10);
   assert.equal(build(pages.map((page) => ({ ...page,
     products: page.products.filter((item) => item.productVariantId !== topic.picks[0].id) }))), undefined);
+});
+
+test("kitchen organizer guide requires ten exact current items without substitution", () => {
+  const topic = GiftGuideTopics.find((item) => item.slug === "best-kitchen-organizers");
+  assert.ok(topic);
+  assert.equal(topic.picks.length, 10);
+  assert.equal(new Set(topic.picks.map((pick) => pick.id)).size, 10);
+  assert.ok(topic.picks.every((pick) => pick.why && pick.check && pick.source === pick.url));
+  const page = { slug: "kitchen-organizers", query: "kitchen organizers", refreshedAt: "2026-11-06T03:30:00Z",
+    products: topic.picks.map((pick, index) => product(pick.id, `Store ${index}`, { url: pick.url })) };
+  const build = (products) => buildGiftGuides([{ ...page, products }], "2026-11-06T03:45:00Z")
+    .find((guide) => guide.slug === topic.slug);
+  assert.equal(build(page.products).products.length, 10);
+  assert.equal(build(page.products.slice(1)), undefined);
+  assert.equal(build(page.products.map((item, index) => index === 0 ? { ...item, url: `${item.url}&wrong=1` } : item)), undefined);
 });

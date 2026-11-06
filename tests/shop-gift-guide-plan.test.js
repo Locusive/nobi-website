@@ -60,7 +60,7 @@ test("gift guides drop stale or undated sources instead of displaying old picks"
 });
 
 test("the editorial topics have distinct slugs and purchase guidance for every source", () => {
-  assert.equal(GiftGuideTopics.length, 167);
+  assert.equal(GiftGuideTopics.length, 168);
   assert.equal(new Set(GiftGuideTopics.map((topic) => topic.slug)).size, GiftGuideTopics.length);
   for (const topic of GiftGuideTopics) {
     assert.ok(topic.intro.length >= 140, `short intro: ${topic.slug}`);
@@ -596,4 +596,21 @@ test("women's winter glove guide requires ten distinct current glove variants", 
     .find((guide) => guide.slug === topic.slug);
   assert.equal(build(pages).products.length, 10);
   assert.equal(build(pages.map((page) => ({ ...page, products: page.products.filter((item) => item.productVariantId !== topic.picks[0].id) }))), undefined);
+});
+
+test("men's sweater guide requires ten exact seller variants", () => {
+  const topic = GiftGuideTopics.find((item) => item.slug === "best-sweaters-for-men");
+  assert.ok(topic);
+  assert.equal(topic.picks.length, 10);
+  assert.equal(new Set(topic.picks.map((pick) => pick.id)).size, 10);
+  assert.ok(topic.picks.every((pick) => pick.why && pick.check && /variant=\d+/.test(pick.source)));
+  const pages = topic.sources.map((slug) => ({ slug, query: "men's sweaters",
+    refreshedAt: "2026-11-06T03:30:00Z", products: [] }));
+  topic.picks.forEach((pick, index) => pages[index % pages.length].products.push(
+    product(pick.id, `Store ${index}`, { url: pick.source })));
+  const build = (input) => buildGiftGuides(input, "2026-11-06T03:40:00Z")
+    .find((guide) => guide.slug === topic.slug);
+  assert.equal(build(pages).products.length, 10);
+  assert.equal(build(pages.map((page) => ({ ...page,
+    products: page.products.filter((item) => item.productVariantId !== topic.picks[0].id) }))), undefined);
 });

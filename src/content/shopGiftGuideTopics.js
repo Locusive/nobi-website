@@ -30,6 +30,7 @@ import { BestScentedCandlesGuide } from "./shopBestScentedCandles.js";
 import { BestSlippersForMenGuide } from "./shopBestSlippersForMen.js";
 import { BestGiftsForBakersGuide } from "./shopBestGiftsForBakers.js";
 import { BestCookwareSetsGuide } from "./shopBestCookwareSets.js";
+import { BestCoffeeMugsGuide } from "./shopBestCoffeeMugs.js";
 import { BestPajamasForWomenGuide } from "./shopBestPajamasForWomen.js";
 import { BestLeatherBeltsForMenGuide } from "./shopBestLeatherBeltsForMen.js";
 import { BestGiftsForTeaLoversGuide } from "./shopBestGiftsForTeaLovers.js";
@@ -68,6 +69,7 @@ export const GiftGuideTopics = [
   BestSlippersForMenGuide,
   BestGiftsForBakersGuide,
   BestCookwareSetsGuide,
+  BestCoffeeMugsGuide,
   BestPajamasForWomenGuide,
   BestLeatherBeltsForMenGuide,
   BestGiftsForTeaLoversGuide,

@@ -4,7 +4,7 @@ import { useSEO } from "../hooks/useSEO.js";
 import { handleProductLinkClick } from "../utils/shopNobiProductClick.js";
 import { formatPrice } from "../utils/shopNobiSearchPage.js";
 import { readStoreLinkRel } from "../utils/shopNobiPage.js";
-import { giftGuidePriceContext, giftGuideProductName, giftGuideSeo, readEmbeddedGiftGuide } from "../utils/shopGiftGuide.js";
+import { giftGuidePriceContext, giftGuideProductName, giftGuideSearchAttribution, giftGuideSeo, readEmbeddedGiftGuide } from "../utils/shopGiftGuide.js";
 import { ShopGiftGuideAdvice } from "../content/shopGiftGuideAdvice.js";
 import "./ShopGiftGuide.css";
 
@@ -17,13 +17,12 @@ export default function ShopGiftGuide({ guide: serverGuide = null }) {
   const updated = guide.generatedAt && !Number.isNaN(Date.parse(guide.generatedAt))
     ? new Date(guide.generatedAt).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric", timeZone: "UTC" }) : null;
   const preserveIncomingSource = (event) => {
-    const incoming = new URLSearchParams(window.location.search);
-    if (incoming.get("utm_source") !== "flipboard") return;
+    const attribution = giftGuideSearchAttribution(window.location.search, guide.slug);
+    if (!attribution) return;
     const form = event.currentTarget;
-    form.elements.namedItem("utm_source").value = "flipboard";
-    form.elements.namedItem("utm_medium").value = "referral";
-    form.elements.namedItem("utm_campaign").value = "editorial_pilot";
-    form.elements.namedItem("utm_content").value = guide.slug;
+    for (const [key, value] of Object.entries(attribution)) {
+      form.elements.namedItem(`utm_${key}`).value = value;
+    }
   };
   return <PageLayout active="shop" contentTop={guide.editorial ? 80 : 128} background={guide.editorial ? "#f4f2ec" : undefined}>
     <main className={`sgg${guide.editorial ? " sgg-editorial" : ""}`}>

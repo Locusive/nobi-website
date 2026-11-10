@@ -91,7 +91,7 @@ function buildEvent(eventName, authoredDetails, browser) {
 }
 
 /** Reads the traffic tags in the page address, such as utm_source. */
-function readTrafficTags(pageUrl) {
+export function readTrafficTags(pageUrl) {
   const pageParameters = new URL(pageUrl).searchParams;
   const presentTags = TrafficTags.filter((tag) => pageParameters.has(tag));
   return Object.fromEntries(presentTags.map((tag) => [tag, pageParameters.get(tag)]));

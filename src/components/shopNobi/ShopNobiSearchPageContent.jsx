@@ -1,4 +1,5 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import { readTrafficTags } from "../../utils/shopNobiOutboundClick";
 import { handleProductLinkClick } from "../../utils/shopNobiProductClick";
 import { FirstProductPosition, sendSearchPageShownProducts } from "../../utils/shopNobiShownProducts";
 import { formatPrice, readCrumbPath, readRelatedSearchPath } from "../../utils/shopNobiSearchPage";
@@ -12,6 +13,8 @@ import { landingVariant, participatesInLandingExperiment, ProductsFirstVariant, 
  * @param {{page: object}} props The search page data.
  */
 export default function ShopNobiSearchPageContent({ page }) {
+  const [incomingTrafficTags, setIncomingTrafficTags] = useState({});
+  useEffect(() => setIncomingTrafficTags(readTrafficTags(window.location.href)), []);
   const inExperiment = participatesInLandingExperiment(page);
   const productsFirst = inExperiment && landingVariant(page.slug) === ProductsFirstVariant;
   // Keyed on the slug, so the page records its products once however often it renders.
@@ -36,6 +39,7 @@ export default function ShopNobiSearchPageContent({ page }) {
             Search Shop Nobi
           </button>
         </div>
+        {Object.entries(incomingTrafficTags).map(([name, value]) => <input key={name} type="hidden" name={name} value={value} readOnly />)}
       </form>
       {!productsFirst && <BuyingGuide page={page} />}
       <ul className="mt-6 grid grid-cols-2 gap-6 sm:grid-cols-3 lg:grid-cols-4">

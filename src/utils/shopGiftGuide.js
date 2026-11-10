@@ -3,6 +3,21 @@ import { IndexableRobots } from "./previewImage.js";
 
 export const GiftGuideDataId = "shop-nobi-gift-guide-data";
 
+export function giftGuideSearchAttribution(search, slug) {
+  const incoming = new URLSearchParams(search);
+  const source = incoming.get("utm_source");
+  if (!source) return null;
+  if (source === "flipboard") return {
+    source, medium: "referral", campaign: "editorial_pilot", content: slug,
+  };
+  return {
+    source,
+    medium: incoming.get("utm_medium") || "referral",
+    campaign: incoming.get("utm_campaign") || slug,
+    content: incoming.get("utm_content") || slug,
+  };
+}
+
 export function giftGuideProductName(product) {
   if (product.editorialHeading) return product.editorialHeading.split(" — ")[0];
   const rawBrand = product.brand && !/-inc\b/i.test(product.brand) ? product.brand : product.storeName;

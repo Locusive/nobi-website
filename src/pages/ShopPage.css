@@ -9,3 +9,9 @@
 .shop-nobi-category-search [data-testid="search-suggestions"] {
   display: none;
 }
+
+/* Search landings already have their own visible form and live results slot. The site-wide floating bar
+   obscures the page and can advertise an unrelated example query over the current product topic. */
+body:has(.shop-nobi-search-landing) #nobi-app-container [id^="Chatbot_userInputContainer"] {
+  display: none !important;
+}

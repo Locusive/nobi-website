@@ -21,7 +21,7 @@ export default function ShopNobiSearchPageContent({ page }) {
   useEffect(() => sendSearchPageShownProducts(page), [page.slug]);
 
   return (
-    <main className="mx-auto max-w-6xl px-4 py-8 text-black dark:text-white">
+    <main className="shop-nobi-search-landing mx-auto max-w-6xl px-4 py-8 text-black dark:text-white">
       <Breadcrumbs page={page} />
       <h1 className="mt-4 text-3xl font-semibold">{page.title}</h1>
       {page.updatedDate && <p className="mt-1 text-sm text-black/50 dark:text-white/50">Catalog refreshed {page.updatedDate}</p>}

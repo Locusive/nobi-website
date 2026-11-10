@@ -4,6 +4,7 @@ export const LandingExperimentId = "shop-landing-products-v1";
 export const ProductsFirstVariant = "products-first";
 export const GuideFirstVariant = "guide-first";
 export const LiveSearchAnchor = "shop-nobi-live-search";
+export const InlineSearchExperimentId = "shop-inline-search-v1";
 
 /** Stable page-level allocation, identical for crawlers, HTML and browser renders. */
 export function landingVariant(slug) {
@@ -32,6 +33,14 @@ export function focusLandingSearch(event, slug, browser = globalThis) {
   if (focusSearchInput(event, browser)) {
     sendShopNobiEvent("Shop Nobi Refine Search", landingEventDetails(slug, browser), browser);
   }
+}
+
+/** Record a deliberate visitor-entered search before the browser opens /shop?q=... . */
+export function recordLandingSearchSubmit(slug, browser = globalThis) {
+  sendShopNobiEvent("Shop Nobi Landing Search Submitted", {
+    ...landingEventDetails(slug, browser),
+    inlineSearchExperimentId: InlineSearchExperimentId,
+  }, browser);
 }
 
 /** Focuses the visitor's search box without submitting or assigning an experiment event. */

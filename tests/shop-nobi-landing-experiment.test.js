@@ -4,7 +4,7 @@ import { loadPageRenderer } from '../scripts/page-renderer.js';
 import { makeBrowser } from './fixtures/shop-nobi-click-browser.js';
 import { handleProductLinkClick } from '../src/utils/shopNobiProductClick.js';
 import { sendSearchPageShownProducts } from '../src/utils/shopNobiShownProducts.js';
-import { focusLandingSearch, landingVariant, LandingExperimentId, watchLandingOutcomes } from '../src/utils/shopNobiLandingExperiment.js';
+import { focusLandingSearch, landingVariant, LandingExperimentId, InlineSearchExperimentId, recordLandingSearchSubmit, watchLandingOutcomes } from '../src/utils/shopNobiLandingExperiment.js';
 
 const Product = { name: 'Catalog product', url: 'https://example.com/item', productVariantId: 'known-variant', price: 10, currency: 'USD' };
 const Page = { slug: 'boots', query: 'boots', title: 'Boots', description: 'Compare boots.', guide: ['Retained buying guidance.'], guideSources: [], faq: [], breadcrumbs: [], related: [], products: [Product] };
@@ -91,6 +91,15 @@ test('refinement focuses existing input without search submission or URL changes
   }
 });
 
+test('inline search submission records its own measurable action before navigation', () => {
+  const browser = eventBrowser();
+  recordLandingSearchSubmit(Page.slug, browser);
+  assert.equal(browser.beacons.length, 1);
+  assert.equal(browser.beacons[0].event.name, 'Shop Nobi Landing Search Submitted');
+  assert.equal(browser.beacons[0].event.details.inlineSearchExperimentId, InlineSearchExperimentId);
+  assert.equal(browser.beacons[0].event.details.pageSlug, Page.slug);
+});
+
 test('both built cohorts preserve products and guidance, treatment moves guidance after products with a same-page search path', async () => {
   const renderer = await loadPageRenderer();
   const render = renderer.renderPrebuiltPageBody;
@@ -120,7 +129,10 @@ test('both built cohorts preserve products and guidance, treatment moves guidanc
     assert.match(html, /<p class="[^"]*sm:hidden">Scroll sideways to compare all details\.<\/p>/);
     assert.equal((html.match(/scope="col"/g) ?? []).length, 4);
     assert.ok(html.includes('scope="row"'));
-    assert.equal(html.includes('Search for something more specific'),treatment);
+    assert.ok(!html.includes('Search for something more specific'), 'The inline search replaces the old focus-only CTA');
+    assert.match(html, /<form[^>]+action="\/shop"[^>]+method="get"/);
+    assert.match(html, /<input[^>]+name="q"[^>]+type="search"[^>]+required=""/);
+    assert.ok(html.includes('Search Shop Nobi'));
     assert.ok(html.includes('id="shop-nobi-live-search"'));
     assert.ok(html.includes('href="https://example.com/item"'));
   }

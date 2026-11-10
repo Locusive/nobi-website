@@ -3,11 +3,20 @@ import { test } from 'node:test';
 import { loadPageRenderer } from '../scripts/page-renderer.js';
 import { makeBrowser } from './fixtures/shop-nobi-click-browser.js';
 import { handleProductLinkClick } from '../src/utils/shopNobiProductClick.js';
+import { readTrafficTags } from '../src/utils/shopNobiOutboundClick.js';
 import { sendSearchPageShownProducts } from '../src/utils/shopNobiShownProducts.js';
 import { focusLandingSearch, landingVariant, LandingExperimentId, InlineSearchExperimentId, recordLandingSearchSubmit, watchLandingOutcomes } from '../src/utils/shopNobiLandingExperiment.js';
 
 const Product = { name: 'Catalog product', url: 'https://example.com/item', productVariantId: 'known-variant', price: 10, currency: 'USD' };
 const Page = { slug: 'boots', query: 'boots', title: 'Boots', description: 'Compare boots.', guide: ['Retained buying guidance.'], guideSources: [], faq: [], breadcrumbs: [], related: [], products: [Product] };
+
+test('a saved-page search can carry its incoming campaign into the live search', () => {
+  assert.deepEqual(readTrafficTags('https://nobi.ai/shop/s/laptop-backpacks?utm_source=threads&utm_medium=organic_social&utm_campaign=work_gym_backpack_reply_20261110&admin=1'), {
+    utm_source: 'threads',
+    utm_medium: 'organic_social',
+    utm_campaign: 'work_gym_backpack_reply_20261110',
+  });
+});
 
 /** Add the actual EventTarget contract to the transport fixture. */
 function eventBrowser(options) {

@@ -3,7 +3,7 @@ import { handleProductLinkClick } from "../../utils/shopNobiProductClick";
 import { FirstProductPosition, sendSearchPageShownProducts } from "../../utils/shopNobiShownProducts";
 import { formatPrice, readCrumbPath, readRelatedSearchPath } from "../../utils/shopNobiSearchPage";
 import { CommissionNotice, readStoreLinkRel } from "../../utils/shopNobiPage";
-import { focusLandingSearch, landingVariant, LiveSearchAnchor, participatesInLandingExperiment, ProductsFirstVariant } from "../../utils/shopNobiLandingExperiment";
+import { landingVariant, participatesInLandingExperiment, ProductsFirstVariant, recordLandingSearchSubmit } from "../../utils/shopNobiLandingExperiment";
 
 /**
  * The products of a prebuilt Shop Nobi search page, which visitors see until live products replace them, and which a
@@ -24,14 +24,19 @@ export default function ShopNobiSearchPageContent({ page }) {
       {page.updatedDate && <p className="mt-1 text-sm text-black/50 dark:text-white/50">Catalog refreshed {page.updatedDate}</p>}
       {page.editorialUpdatedDate && <p className="mt-1 text-sm text-black/50 dark:text-white/50">Content revised {page.editorialUpdatedDate}</p>}
       {page.description && <p className="mt-2 max-w-3xl text-black/70 dark:text-white/70">{page.description}</p>}
-      {productsFirst && (
-        <p className="mt-4">
-          <a href={`#${LiveSearchAnchor}`} onClick={event => focusLandingSearch(event, page.slug)}
-            className="inline-block rounded-full border border-black/20 px-4 py-2 text-sm font-medium hover:bg-black/5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 dark:border-white/30 dark:hover:bg-white/10">
-            Search for something more specific
-          </a>
-        </p>
-      )}
+      <form action="/shop" method="get" onSubmit={() => recordLandingSearchSubmit(page.slug)}
+        className="mt-5 max-w-3xl rounded-xl border border-black/10 bg-black/[0.025] p-4 dark:border-white/20 dark:bg-white/[0.04]">
+        <label htmlFor="shop-landing-query" className="block text-sm font-semibold">Looking for something else?</label>
+        <p className="mt-1 text-sm text-black/60 dark:text-white/60">Describe the product, brand, size, or budget you want. Search across stores.</p>
+        <div className="mt-3 flex flex-col gap-2 sm:flex-row">
+          <input id="shop-landing-query" name="q" type="search" required maxLength={500}
+            placeholder="Describe what you want to find"
+            className="min-w-0 flex-1 rounded-lg border border-black/20 bg-white px-3 py-2 text-base text-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 dark:border-white/30" />
+          <button type="submit" className="rounded-lg bg-[#6940e8] px-5 py-2 text-sm font-semibold text-white hover:bg-[#5832ca] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2">
+            Search Shop Nobi
+          </button>
+        </div>
+      </form>
       {!productsFirst && <BuyingGuide page={page} />}
       <ul className="mt-6 grid grid-cols-2 gap-6 sm:grid-cols-3 lg:grid-cols-4">
         {page.products.map((product, index) => (

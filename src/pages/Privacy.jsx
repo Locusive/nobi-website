@@ -14,7 +14,7 @@ const Privacy = () => {
     {/* Page Heading and Intro */}
     <h1 className="text-3xl font-bold mb-4">Privacy Policy</h1>
     <p className="text-sm text-gray-500 mb-8">
-      Effective November&nbsp;3,&nbsp;2026. This Privacy Policy explains how Nobi
+      Effective November&nbsp;10,&nbsp;2026. This Privacy Policy explains how Nobi
       collects, uses, and shares information.  If you have questions, email{" "}
       <a href="mailto:privacy@nobi.ai" className="text-blue-600 underline">
         privacy@nobi.ai
@@ -32,6 +32,11 @@ const Privacy = () => {
       <p className="mb-4">
         We also run Shop Nobi, a free shopping search at nobi.ai/shop. The
         “Shop Nobi” section below explains how we handle shoppers’ information.
+      </p>
+      <p className="mb-4">
+        We also operate merchant-branded AI connectors, including the Lucchese
+        connector for ChatGPT. The “AI connectors operated by Nobi” section
+        below explains how this policy applies when you use those connectors.
       </p>
     </section>
 
@@ -158,6 +163,115 @@ const Privacy = () => {
           acquisition or asset sale.
         </li>
       </ul>
+    </section>
+
+    <section className="mb-10" id="ai-connectors">
+      <h2 className="text-2xl font-semibold mb-2">AI connectors operated by Nobi</h2>
+      <p className="mb-4">
+        This section covers Nobi-operated connectors in ChatGPT and other AI
+        applications, including Shop Nobi and merchant-branded connectors such
+        as Lucchese. Locusive, Inc. d/b/a Nobi operates the connector service.
+        A merchant-branded connector searches that merchant’s catalog and
+        published information. The rest of this policy also applies to Nobi’s
+        processing of connector data.
+      </p>
+
+      <h3 className="text-xl font-semibold mb-2">Information received and returned</h3>
+      <ul className="list-disc list-inside space-y-2 mb-4">
+        <li>
+          <strong>Tool inputs:</strong> the search terms, questions, product
+          identifiers or product links, filters and preferences that your AI
+          application sends to a connector tool. This can include details such
+          as size, color, material or budget. We receive the information sent
+          with tool calls, rather than automatic access to your entire ChatGPT
+          account or unrelated conversations.
+        </li>
+        <li>
+          <strong>Results and conversation records:</strong> searches, questions,
+          answers, products shown, document excerpts and source links. Results
+          are returned to the AI application so it can respond to you. We store
+          search and conversation records to provide the service, continue
+          follow-up requests and report on its use.
+        </li>
+        <li>
+          <strong>Identifiers and technical information:</strong> visitor,
+          conversation and connection-session identifiers; the calling
+          application’s name and version; request times, tool names, network
+          addresses, request headers and referral or source tags. The network
+          address may belong to the AI application’s servers. Visitor and
+          conversation identifiers help associate follow-up calls. Product
+          links may record a click before directing you to the merchant.
+        </li>
+        <li>
+          <strong>Optional support requests:</strong> when you ask a merchant
+          to contact you, a support tool can collect your name, email address,
+          optional phone number and the message you want sent. Nobi records
+          the request and sends it to the merchant’s designated team. You can
+          use product search and questions without submitting a support request.
+        </li>
+      </ul>
+      <p className="mb-4">
+        The Lucchese connector does not access your order history, saved
+        payment details or Lucchese account, and does not place orders or take
+        payments. Do not include passwords, payment-card details, government
+        identifiers or sensitive health information in connector inputs.
+      </p>
+
+      <h3 className="text-xl font-semibold mb-2">Purposes and recipients</h3>
+      <p className="mb-4">
+        We use connector information to find products, answer questions,
+        continue conversations, deliver requested support, measure usage and
+        product clicks, evaluate and improve search and answer quality, and
+        detect abuse and troubleshoot errors. Nobi personnel and service
+        providers supporting hosting, databases, analytics, AI processing and
+        email delivery process information for these purposes. AI providers
+        process the search or question content needed to produce results and
+        answers. Our providers include Google Cloud, OpenAI, Groq and SambaNova;
+        which providers receive a request depends on the tool and configuration.
+      </p>
+      <p className="mb-4">
+        For merchant-branded connectors, the merchant can access its search,
+        conversation and usage records through Nobi’s service and receives
+        support requests you submit. OpenAI receives the results returned to
+        ChatGPT and handles its own copy of your chat and tool activity under
+        its policies. Merchant websites receive information when you open
+        their links or load images they host, and their policies apply to
+        those visits and to their handling of support requests. For Lucchese,
+        see its{" "}
+        <a href="https://www.lucchese.com/pages/privacy-policy" className="text-blue-600 underline">
+          privacy policy
+        </a>. Nobi does not sell connector personal information.
+      </p>
+
+      <h3 className="text-xl font-semibold mb-2">Retention</h3>
+      <p className="mb-4">
+        Connector search, conversation, support and analytics records currently
+        have no fixed automatic expiration date. They remain stored unless
+        deleted following a verified privacy request or another data-cleanup
+        process. Our default Google Cloud operational log retention is 30 days;
+        copies recorded in our analytics database follow the retention described
+        in the preceding sentence. Backup copies persist until overwritten by
+        the backup rotation. Information may be retained where required by law
+        or to resolve disputes or security incidents. OpenAI, other AI
+        applications and merchants control retention of copies they hold.
+      </p>
+
+      <h3 className="text-xl font-semibold mb-2">Your controls and privacy requests</h3>
+      <p className="mb-4">
+        You can stop new connector requests by disconnecting or disabling the
+        connector in your AI application. Disconnecting does not itself erase
+        records already held by Nobi. You can request access, correction or
+        deletion by emailing{" "}
+        <a href="mailto:privacy@nobi.ai" className="text-blue-600 underline">
+          privacy@nobi.ai
+        </a>. Tell us which connector you used and approximately when. If
+        available, include the visitor or conversation identifier, or the email
+        address used for a support request, so we can locate the relevant data.
+        We may need to verify that the records belong to you. Do not send your
+        full chat history or account password. To manage copies held by
+        ChatGPT or a merchant, use that service’s privacy controls or contact
+        the merchant. The rights described elsewhere in this policy also apply.
+      </p>
     </section>
 
     {/* Shop Nobi */}

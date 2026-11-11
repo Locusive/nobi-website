@@ -5,7 +5,7 @@ import { makeBrowser } from './fixtures/shop-nobi-click-browser.js';
 import { handleProductLinkClick } from '../src/utils/shopNobiProductClick.js';
 import { readTrafficTags } from '../src/utils/shopNobiOutboundClick.js';
 import { sendSearchPageShownProducts } from '../src/utils/shopNobiShownProducts.js';
-import { focusLandingSearch, landingVariant, LandingExperimentId, InlineSearchExperimentId, recordLandingSearchSubmit, watchLandingOutcomes } from '../src/utils/shopNobiLandingExperiment.js';
+import { focusLandingSearch, landingVariant, LandingExperimentId, InlineSearchExperimentId, MidGridSearchExperimentId, midGridSearchVariant, MidGridSearchVariant, TopOnlySearchVariant, recordLandingSearchSubmit, watchLandingOutcomes } from '../src/utils/shopNobiLandingExperiment.js';
 
 const Product = { name: 'Catalog product', url: 'https://example.com/item', productVariantId: 'known-variant', price: 10, currency: 'USD' };
 const Page = { slug: 'boots', query: 'boots', title: 'Boots', description: 'Compare boots.', guide: ['Retained buying guidance.'], guideSources: [], faq: [], breadcrumbs: [], related: [], products: [Product] };
@@ -50,6 +50,8 @@ test('exposure, prebuilt click and live outcomes share a visit and retain acquis
     assert.equal(detail.landingVisitId, details[0].landingVisitId);
     assert.equal(detail.experimentId, LandingExperimentId);
     assert.equal(detail.experimentVariant, landingVariant(Page.slug));
+    assert.equal(detail.midGridSearchExperimentId, MidGridSearchExperimentId);
+    assert.equal(detail.midGridSearchVariant, midGridSearchVariant(Page.slug));
     assert.equal(detail.pageSlug, Page.slug);
     assert.equal(detail.utm_source, 'pinterest');
     assert.equal(detail.referrer, 'https://www.google.com/');
@@ -107,6 +109,29 @@ test('inline search submission records its own measurable action before navigati
   assert.equal(browser.beacons[0].event.name, 'Shop Nobi Landing Search Submitted');
   assert.equal(browser.beacons[0].event.details.inlineSearchExperimentId, InlineSearchExperimentId);
   assert.equal(browser.beacons[0].event.details.pageSlug, Page.slug);
+  assert.equal(browser.beacons[0].event.details.promptPlacement, 'top');
+  recordLandingSearchSubmit(Page.slug, browser, 'mid-grid');
+  assert.equal(browser.beacons[1].event.details.promptPlacement, 'mid-grid');
+});
+
+test('the extra search prompt has a stable, separate page allocation and preserves product links', async () => {
+  const renderer = await loadPageRenderer();
+  const slugs = Array.from({length: 80}, (_, i) => `catalog-topic-${i}`);
+  const cells = new Set(slugs.map(slug => `${landingVariant(slug)}:${midGridSearchVariant(slug)}`));
+  assert.equal(cells.size, 4);
+  const products = Array.from({length: 8}, (_, i) => ({...Product, name: `Product ${i + 1}`}));
+  for (const variant of [MidGridSearchVariant, TopOnlySearchVariant]) {
+    const slug = slugs.find(candidate => midGridSearchVariant(candidate) === variant);
+    const html = renderer.renderPrebuiltPageBody({kind:'search-page', path:`/shop/s/${slug}`, data:{...Page,slug,products}});
+    assert.equal((html.match(/action="\/shop"/g) ?? []).length, variant === MidGridSearchVariant ? 2 : 1);
+    assert.equal((html.match(/href="https:\/\/example.com\/item"/g) ?? []).length, products.length);
+    assert.equal((html.match(/id="shop-landing-query-mid-grid"/g) ?? []).length, variant === MidGridSearchVariant ? 1 : 0);
+    assert.equal((html.match(/id="shop-landing-query-top"/g) ?? []).length, 1);
+    if (variant === MidGridSearchVariant) {
+      assert.ok(html.indexOf('Product 4') < html.indexOf('Not quite what you had in mind?'));
+      assert.ok(html.indexOf('Not quite what you had in mind?') < html.indexOf('Product 5'));
+    }
+  }
 });
 
 test('both built cohorts preserve products and guidance, treatment moves guidance after products with a same-page search path', async () => {

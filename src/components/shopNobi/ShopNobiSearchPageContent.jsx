@@ -4,7 +4,7 @@ import { handleProductLinkClick } from "../../utils/shopNobiProductClick";
 import { FirstProductPosition, sendSearchPageShownProducts } from "../../utils/shopNobiShownProducts";
 import { formatPrice, readCrumbPath, readRelatedSearchPath } from "../../utils/shopNobiSearchPage";
 import { CommissionNotice, readStoreLinkRel } from "../../utils/shopNobiPage";
-import { landingVariant, participatesInLandingExperiment, ProductsFirstVariant, recordLandingSearchSubmit } from "../../utils/shopNobiLandingExperiment";
+import { landingVariant, midGridSearchVariant, MidGridSearchVariant, participatesInLandingExperiment, ProductsFirstVariant, recordLandingSearchSubmit } from "../../utils/shopNobiLandingExperiment";
 
 /**
  * The products of a prebuilt Shop Nobi search page, which visitors see until live products replace them, and which a
@@ -17,6 +17,7 @@ export default function ShopNobiSearchPageContent({ page }) {
   useEffect(() => setIncomingTrafficTags(readTrafficTags(window.location.href)), []);
   const inExperiment = participatesInLandingExperiment(page);
   const productsFirst = inExperiment && landingVariant(page.slug) === ProductsFirstVariant;
+  const midGridSearch = inExperiment && page.products.length > 4 && midGridSearchVariant(page.slug) === MidGridSearchVariant;
   // Keyed on the slug, so the page records its products once however often it renders.
   useEffect(() => sendSearchPageShownProducts(page), [page.slug]);
 
@@ -27,25 +28,13 @@ export default function ShopNobiSearchPageContent({ page }) {
       {page.updatedDate && <p className="mt-1 text-sm text-black/50 dark:text-white/50">Catalog refreshed {page.updatedDate}</p>}
       {page.editorialUpdatedDate && <p className="mt-1 text-sm text-black/50 dark:text-white/50">Content revised {page.editorialUpdatedDate}</p>}
       {page.description && <p className="mt-2 max-w-3xl text-black/70 dark:text-white/70">{page.description}</p>}
-      <form action="/shop" method="get" onSubmit={() => recordLandingSearchSubmit(page.slug)}
-        className="mt-5 max-w-3xl rounded-xl border border-black/10 bg-black/[0.025] p-4 dark:border-white/20 dark:bg-white/[0.04]">
-        <label htmlFor="shop-landing-query" className="block text-sm font-semibold">Looking for something else?</label>
-        <p className="mt-1 text-sm text-black/60 dark:text-white/60">Describe the product, brand, size, or budget you want. Search across stores.</p>
-        <div className="mt-3 flex flex-col gap-2 sm:flex-row">
-          <input id="shop-landing-query" name="q" type="search" required maxLength={500}
-            placeholder="Describe what you want to find"
-            className="min-w-0 flex-1 rounded-lg border border-black/20 bg-white px-3 py-2 text-base text-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 dark:border-white/30" />
-          <button type="submit" className="rounded-lg bg-[#6940e8] px-5 py-2 text-sm font-semibold text-white hover:bg-[#5832ca] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2">
-            Search Shop Nobi
-          </button>
-        </div>
-        {Object.entries(incomingTrafficTags).map(([name, value]) => <input key={name} type="hidden" name={name} value={value} readOnly />)}
-      </form>
+      <SearchPrompt slug={page.slug} placement="top" incomingTrafficTags={incomingTrafficTags} />
       {!productsFirst && <BuyingGuide page={page} />}
       <ul className="mt-6 grid grid-cols-2 gap-6 sm:grid-cols-3 lg:grid-cols-4">
-        {page.products.map((product, index) => (
-          <ProductCard key={index} product={product} position={index + FirstProductPosition} query={page.query} slug={page.slug} landingExperiment={inExperiment} />
-        ))}
+        {page.products.flatMap((product, index) => [
+          <ProductCard key={`product-${index}`} product={product} position={index + FirstProductPosition} query={page.query} slug={page.slug} landingExperiment={inExperiment} />,
+          ...(midGridSearch && index === 3 ? [<li key="mid-grid-search" className="col-span-2 sm:col-span-3 lg:col-span-4"><SearchPrompt slug={page.slug} placement="mid-grid" incomingTrafficTags={incomingTrafficTags} /></li>] : []),
+        ])}
       </ul>
       {productsFirst && <section className="mt-10" aria-label="Buying guidance"><BuyingGuide page={page} /></section>}
       {page.productComparisonPath && <p className="mt-6"><a className="underline" href={page.productComparisonPath}>Compare sellers for the Bodum Tribute 34 oz French press</a></p>}
@@ -53,6 +42,27 @@ export default function ShopNobiSearchPageContent({ page }) {
       <WebStoryLink storyPath={page.storyPath} />
       <RelatedSearches related={page.related} />
     </main>
+  );
+}
+
+function SearchPrompt({ slug, placement, incomingTrafficTags }) {
+  const inputId = `shop-landing-query-${placement}`;
+  const midGrid = placement === "mid-grid";
+  return (
+    <form action="/shop" method="get" onSubmit={() => recordLandingSearchSubmit(slug, globalThis, placement)}
+      className="mt-5 max-w-3xl rounded-xl border border-black/10 bg-black/[0.025] p-4 dark:border-white/20 dark:bg-white/[0.04]">
+      <label htmlFor={inputId} className="block text-sm font-semibold">{midGrid ? "Not quite what you had in mind?" : "Looking for something else?"}</label>
+      <p className="mt-1 text-sm text-black/60 dark:text-white/60">{midGrid ? "Tell Shop Nobi the size, style, material, or budget that matters to you." : "Describe the product, brand, size, or budget you want. Search across stores."}</p>
+      <div className="mt-3 flex flex-col gap-2 sm:flex-row">
+        <input id={inputId} name="q" type="search" required maxLength={500}
+          placeholder="Describe what you want to find"
+          className="min-w-0 flex-1 rounded-lg border border-black/20 bg-white px-3 py-2 text-base text-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 dark:border-white/30" />
+        <button type="submit" className="rounded-lg bg-[#6940e8] px-5 py-2 text-sm font-semibold text-white hover:bg-[#5832ca] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2">
+          Search Shop Nobi
+        </button>
+      </div>
+      {Object.entries(incomingTrafficTags).map(([name, value]) => <input key={name} type="hidden" name={name} value={value} readOnly />)}
+    </form>
   );
 }
 

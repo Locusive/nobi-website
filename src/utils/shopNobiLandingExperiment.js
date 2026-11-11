@@ -5,6 +5,16 @@ export const ProductsFirstVariant = "products-first";
 export const GuideFirstVariant = "guide-first";
 export const LiveSearchAnchor = "shop-nobi-live-search";
 export const InlineSearchExperimentId = "shop-inline-search-v1";
+export const MidGridSearchExperimentId = "shop-mid-grid-search-v1";
+export const MidGridSearchVariant = "mid-grid-search";
+export const TopOnlySearchVariant = "top-only-search";
+
+/** Independent of the earlier product/guide-order allocation. */
+export function midGridSearchVariant(slug) {
+  let hash = 2166136261;
+  for (const character of `mid-grid-search|${slug}`) hash = Math.imul(hash ^ character.charCodeAt(0), 16777619);
+  return ((hash >>> 16) & 1) === 0 ? MidGridSearchVariant : TopOnlySearchVariant;
+}
 
 /** Stable page-level allocation, identical for crawlers, HTML and browser renders. */
 export function landingVariant(slug) {
@@ -23,6 +33,8 @@ export function landingEventDetails(slug, browser = globalThis) {
   return {
     experimentId: LandingExperimentId,
     experimentVariant: landingVariant(slug),
+    midGridSearchExperimentId: MidGridSearchExperimentId,
+    midGridSearchVariant: midGridSearchVariant(slug),
     landingVisitId: readPageVisitId(browser),
     pageSlug: slug,
   };
@@ -36,10 +48,11 @@ export function focusLandingSearch(event, slug, browser = globalThis) {
 }
 
 /** Record a deliberate visitor-entered search before the browser opens /shop?q=... . */
-export function recordLandingSearchSubmit(slug, browser = globalThis) {
+export function recordLandingSearchSubmit(slug, browser = globalThis, promptPlacement = "top") {
   sendShopNobiEvent("Shop Nobi Landing Search Submitted", {
     ...landingEventDetails(slug, browser),
     inlineSearchExperimentId: InlineSearchExperimentId,
+    promptPlacement,
   }, browser);
 }
 

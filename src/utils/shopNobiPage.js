@@ -8,7 +8,7 @@ import { IndexableRobots } from "./previewImage.js";
 export const BaseUrl = "https://nobi.ai";
 
 /** The link preview picture for every Shop Nobi page. */
-export const ShopNobiImage = `${BaseUrl}/shop-nobi-og-image.png`;
+export const ShopNobiImage = `${BaseUrl}/shop-nobi-og-search-20261114.png`;
 
 /** The /shop head values. ShopPage and the build both use them, so React keeps what the build wrote. */
 export const ShopNobiPageSeo = {

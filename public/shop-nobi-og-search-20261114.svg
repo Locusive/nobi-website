@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-label="Shop Nobi product search preview">
+  <defs>
+    <linearGradient id="mark" x1="0" y1="1" x2="1" y2="0">
+      <stop offset="0" stop-color="#7644ec"/>
+      <stop offset="1" stop-color="#e356a7"/>
+    </linearGradient>
+    <linearGradient id="canvas" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f6f3e9"/>
+      <stop offset="1" stop-color="#e8eee9"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="160%">
+      <feDropShadow dx="0" dy="18" stdDeviation="25" flood-color="#243a32" flood-opacity="0.13"/>
+    </filter>
+  </defs>
+  <rect width="1200" height="630" fill="url(#canvas)"/>
+  <circle cx="1165" cy="-105" r="345" fill="#dce7df" opacity="0.75"/>
+  <circle cx="60" cy="675" r="300" fill="#e8ddd9" opacity="0.7"/>
+  <rect x="68" y="68" width="1064" height="494" rx="36" fill="#ffffff" filter="url(#shadow)"/>
+  <g transform="translate(120 114)">
+    <rect x="0" y="0" width="42" height="42" rx="11" fill="url(#mark)"/>
+    <rect x="10" y="10" width="22" height="22" rx="5" fill="white"/>
+    <text x="57" y="33" font-family="Arial,Helvetica,sans-serif" font-size="30" font-weight="800" fill="#1d2b29">NOBI</text>
+  </g>
+  <text x="120" y="254" font-family="Georgia,Times New Roman,serif" font-size="62" font-weight="700" fill="#20362e">Find the right</text>
+  <text x="120" y="327" font-family="Georgia,Times New Roman,serif" font-size="62" font-weight="700" fill="#20362e">product.</text>
+  <text x="121" y="380" font-family="Arial,Helvetica,sans-serif" font-size="23" fill="#52655c">Search products across stores in one place.</text>
+  <text x="121" y="418" font-family="Arial,Helvetica,sans-serif" font-size="23" fill="#52655c">Compare options. Buy from the store.</text>
+  <rect x="120" y="468" width="225" height="48" rx="24" fill="#203f34"/>
+  <text x="151" y="499" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="700" fill="white">nobi.ai/shop</text>
+  <g transform="translate(665 134)">
+    <rect width="405" height="372" rx="24" fill="#eef3ef"/>
+    <rect x="26" y="31" width="353" height="60" rx="17" fill="white" stroke="#cad8ce" stroke-width="2"/>
+    <circle cx="59" cy="61" r="13" fill="none" stroke="#496757" stroke-width="3"/>
+    <path d="M69 71l10 10" stroke="#496757" stroke-width="3" stroke-linecap="round"/>
+    <text x="96" y="68" font-family="Arial,Helvetica,sans-serif" font-size="18" fill="#8c9a90">Search what you need...</text>
+    <text x="31" y="141" font-family="Arial,Helvetica,sans-serif" font-size="16" font-weight="700" fill="#496757">EXPLORE PRODUCTS</text>
+    <g font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="600" fill="#30483b">
+      <rect x="27" y="164" width="351" height="55" rx="14" fill="white"/>
+      <text x="51" y="199">Travel backpacks</text>
+      <path d="M345 189l9 6-9 6" fill="none" stroke="#7e9786" stroke-width="2"/>
+      <rect x="27" y="229" width="351" height="55" rx="14" fill="white"/>
+      <text x="51" y="264">Work bags</text>
+      <path d="M345 254l9 6-9 6" fill="none" stroke="#7e9786" stroke-width="2"/>
+      <rect x="27" y="294" width="351" height="55" rx="14" fill="white"/>
+      <text x="51" y="329">Espresso machines</text>
+      <path d="M345 319l9 6-9 6" fill="none" stroke="#7e9786" stroke-width="2"/>
+    </g>
+  </g>
+</svg>

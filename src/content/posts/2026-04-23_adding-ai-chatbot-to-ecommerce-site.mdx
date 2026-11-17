@@ -3,6 +3,7 @@ export const meta = {
  slug: "adding-ai-chatbot-to-ecommerce-site",
  date: "2026-04-23",
  publishedAt: "2026-04-23",
+ lastUpdated: "2026-11-17",
  description: "A step-by-step guide for marketing managers: picking a shopping assistant platform, rolling it out on Shopify, measuring revenue, and knowing when to skip.",
  excerpt: "A step-by-step guide for marketing managers: picking a shopping assistant platform, rolling it out on Shopify, measuring revenue, and knowing when to skip.",
  tags: ["how-to", "sales assistance", "ecommerce", "ecommerce search"],
@@ -17,7 +18,7 @@ export const meta = {
  },
  {
  question: "How much does a shopping assistant cost, and what pricing models should you expect?",
- answer: "Pricing comes in three shapes: flat subscription with published usage pricing, visitor- or GMV-indexed quotes that scale with traffic or revenue, and helpdesk-bundled pricing that gates AI behind higher tiers. Nobi publishes bundle prices, from $29/month for 500 messages, where a search or a chat question each count as one message, and a busier month is billed at the bundle that fits. Rep AI is visitor-indexed at $12 per 1,000 visitors on Pay As You Grow. Tidio sells the chat widget ($24/month Starter) and Lyro AI as a separate add-on ($32.50/month for 50 AI conversations). Gorgias bundles chat into a ticketing platform with per-ticket overages of $0.36 to $0.40 once limits are exceeded. Before signing anywhere, model your six-month bill at projected traffic, since GMV-indexed quotes and per-ticket overages can look cheap at tier one and balloon by month three."
+ answer: "Compare each plan's billing unit: assistant messages, website sessions, quiz credits, or helpdesk tickets. Nobi publishes bundles from $29/month for 500 messages, where a search or a chat question each count as one message. For up to 3,000 monthly website sessions, Rep AI starts at $19/month for Support, $39/month for Sales, and $46/month for Concierge; annual billing makes these $15, $29, and $37 per month respectively. Rep AI's omnichannel AI and Rep Inbox helpdesk are priced separately. Tidio sells the chat widget and Lyro AI as separate products, while Gorgias uses ticket tiers and overages. Model your projected usage, channels, and agent costs before choosing."
  },
  {
  question: "Which shopping assistant platforms should marketing managers shortlist?",
@@ -49,7 +50,7 @@ export const meta = {
   "headline": "How to Implement a Shopping Assistant for Ecommerce Success",
   "description": "A step-by-step guide for marketing managers: picking a shopping assistant platform, rolling it out on Shopify, measuring revenue, and knowing when to skip.",
   "datePublished": "2026-04-23",
-  "dateModified": "2026-07-17",
+  "dateModified": "2026-11-17",
   "author": {
     "@type": "Person",
     "name": "Shanif Dhanani",
@@ -98,21 +99,24 @@ Worth naming up front where a shopping assistant isn't the right category - the 
 
 ## How much does a shopping assistant cost, and what pricing models should you expect?
 
-Shopping assistant pricing breaks into three categories, and the one you pick matters less than whether you model your actual volume before signing.
+Shopping assistant plans use different billing units. Model your actual volume before signing:
 
-1. Flat subscription with published usage pricing is the most predictable.
-2. Custom GMV-indexed quotes scale your bill with revenue rather than assistant-influenced sessions.
-3. Helpdesk-bundled pricing puts chat inside a broader ticketing platform, usually with AI features gated behind higher tiers.
+1. Message bundles count searches or assistant questions.
+2. Website-session tiers scale with storefront traffic.
+3. Quiz-credit tiers count quiz interactions or completions.
+4. Helpdesk plans charge for tickets, agents, and any AI add-ons.
 
-**Flat subscription with published usage pricing** is the most predictable model. Nobi is an example here: it starts at $29 a month for 500 messages, where a search or a chat question each count as one message. If a store goes over its bundle, it can keep going and pay for the bundle that fits that month, or have Nobi stop and hide until next month. [Rep AI's](https://hellorep.ai) Pay As You Grow tier also fits this shape - $12 per 1,000 visitors with no revenue share.
+**Message bundles** price the assistant's usage directly. Nobi starts at $29 a month for 500 messages, where a search or a chat question each count as one message. If a store goes over its bundle, it can keep going and pay for the bundle that fits that month, or have Nobi stop and hide until next month.
 
-**Store-size or GMV-indexed quotes** scale the bill with your revenue rather than with actual assistant sessions. [Rep AI's](https://hellorep.ai) Pro tiers run $280-$740/month at ~125K monthly sessions, with Enterprise custom above ~500K. [Octane AI](https://octaneai.com) publishes three tiers - Basic at $50/month for 400 credits, Plus at $200/month for 2,200 credits, Enterprise at $500+/month - with custom Enterprise pricing for larger stores. The variable bill here tracks revenue more than actual assistant usage, which can surprise at the six-month mark.
+**Website-session tiers** scale with storefront traffic. For up to 3,000 monthly website sessions, [Rep AI's published plans](https://www.hellorep.ai/pricing) start at $19/month for Support, $39/month for Sales, and $46/month for Concierge (sales and support together). With annual billing, the monthly equivalents are $15, $29, and $37 respectively. Stores above 500,000 sessions receive custom pricing. There is a 14-day free trial. Omnichannel AI and Rep Inbox are priced separately.
+
+**Quiz-credit tiers** measure a different kind of interaction. [Octane AI](https://octaneai.com) publishes Basic at $50/month for 400 credits, Plus at $200/month for 2,200 credits, and Enterprise at $500+/month. Compare the included quiz usage with your expected completions rather than treating credits as website sessions.
 
 **Helpdesk-bundled pricing** puts chat inside a broader ticketing platform. [Gorgias](https://gorgias.com) uses a ticket-based model from $10/month Starter up to $900/month Advanced, with overage charges of $0.36-$0.40 per ticket once you exceed your monthly limit, plus a custom Enterprise option. [Tidio](https://tidio.com) separates the two products: the chat widget is a standalone monthly plan ($24/month Starter, $49/month Growth, with a free tier for piloting) and Lyro AI is a separate add-on starting at $32.50/month for 50 AI conversations.
 
 **Post-acquisition outlier:** [Alby](https://alby.com) doesn't fit any of the above cleanly. Bluecore acquired Alby in November 2024 and its standalone pricing is no longer published; Alby's PDP Q&A is effectively bundled into Bluecore's contract, so the pricing conversation happens at the Bluecore level rather than line-item per feature.
 
-Before you sign anywhere, model your six-month bill at projected traffic. GMV-indexed quotes and per-ticket overages can look cheap at tier one and balloon by month three.
+Before you sign anywhere, model your six-month bill at projected traffic and usage. Include channel add-ons, helpdesk agent charges, and overages as well as the base plan.
 
 ## Which shopping assistant platforms should marketing managers shortlist?
 
@@ -143,6 +147,8 @@ Nobi handles search, conversational shopping, and automatic shopper Q&A on one w
 </div>
 
 [Rep AI](https://hellorep.ai) is built around a no-code Flow Studio for scripted campaign chat - think Black Friday promo flows, product-launch walk-throughs, and abandoned-cart rescue sequences that marketing ops can design and ship without engineering. It also supports live-agent drop-in mid-thread (a human can jump into an AI session while the AI continues) and a Post-Order Tasks Agent for shopper self-serve on cancellations, returns, and tracking. It installs on Shopify with one click.
+
+Rep AI also answers on email, Instagram, Facebook Messenger, and WhatsApp through its omnichannel AI add-on. It hands conversations to Gorgias, Zendesk, and other connected helpdesks, and offers its own helpdesk, Rep Inbox, for agent-side tickets. See [Rep AI's channel and helpdesk details](https://www.hellorep.ai/pricing) for availability and separate pricing.
 
 [Octane AI](https://octaneai.com) is a product-quiz platform for Shopify, strong in beauty and CPG, where the quiz itself is the hero discovery surface. Pricing starts at $50/month (Basic, 400 credits) and scales to Plus at $200/month and Enterprise at $500+/month. Pick it when a quiz funnel is the conversion mechanic.
 
